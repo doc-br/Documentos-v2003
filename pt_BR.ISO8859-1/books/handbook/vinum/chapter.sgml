@@ -182,7 +182,7 @@
     
     <para>
       <figure id="vinum-striped">
-        <title>Striped Organization</title>
+        <title>Organização Striped</title>
 	<graphic fileref="vinum/vinum-striped">
       </figure>
     </para>
@@ -192,8 +192,8 @@
     <title>Integridade de dados</title>
 
       <para>O outro problema com os discos atuais é que eles não são
-      confiáveis.  Apesar que a confiança nos discos cresceu
-      tremendamente nos últimos anos, esses ainda são um dos componentes
+      confiáveis.  Apesar do crescimento significativo na credibilidade
+      dos discos nos últimos anos, esses ainda são um dos componentes
       do núcleo de servidor com a maior possibilidade de falhar.  E
       quando eles falham, os resultados podem ser catastróficos:
       substituir um disco e recuperar seus dados pode levar dias.</para>
@@ -209,13 +209,13 @@
 	<primary>RAID-1</primary>
       </indexterm>
       
-      <para>O método tradicional de acessar esse problema tem sido o
+      <para>O método tradicional de abordar esse problema tem sido o
       <emphasis>espelhamento</emphasis>, mantendo duas cópias dos dados
-      em dois lugares fisicos distintos.  desde da aparição dos níveis
+      em dois lugares fisicos distintos.  Desde da aparição dos níveis
       de <acronym>RAID</acronym>, essa técnica de espelhamento também é
       chamada de <acronym>RAID nível 1</acronym> ou
-      <acronym>RAID-1</acronym>.  qualquer escrita feita no volume
-      é escrita nas duas localidades; a leitura pode ser feita a partir
+      <acronym>RAID-1</acronym>.  Qualquer escrita feita no volume
+      é realizada nas duas localidades; a leitura pode ser feita a partir
       de uma delas, então se o disco falhar, os dados ainda estarão
       disponíveis no outro.</para>
       
@@ -228,7 +228,7 @@
 	  </listitem>
 
 	  <listitem>
-	    <para>O impácto de mémoria.  A escrita deve ser feita para
+	    <para>O impacto de performance.  A escrita deve ser feita para
 	    os dois discos, devido a isso eles usam duas vezes mais
 	    largura de banda do que um volume não espelhado.  Na leitura
 	    não há queda de performance: chega até a parecer que está
@@ -237,77 +237,78 @@
 	</itemizedlist>
 
       <para><indexterm><primary>RAID-5</primary></indexterm>Uma solução
-      alternativa é <emphasis>parity</emphasis>, implementada nos níveis
+      alternativa é a <emphasis>paridade</emphasis>, implementada nos níveis
       2, 3, 4 e 5 do <acronym>RAID</acronym>.  Entre esses,
       <acronym>RAID-5</acronym> é o mais interessante.  Como
-      implementado no vinum, é uma variante na organização strip onde
-      dedica um bloco de cada strip à parity dos outros blocos.  Um
-      <acronym>RAID-5</acronym> plex é parecido com um vinum striped
-      plex, exceto que ele implementa o <acronym>RAID-5</acronym> pois
-      ele inclui um parity bloco em cada stripe.  Como exigido pelo
-      <acronym>RAID-5</acronym>, o local do bloco parity muda de um
-      stripe para o outro.  Os números nos blocos de dados indica o
-      número relativo do bloco.</para>
+      implementado no vinum, é uma variante na organização
+      <foreignphrase>striped</foreignphrase> onde dedica um bloco de
+      cada fatia à paridade dos outros blocos.  Conforme implementado no
+      Vinum, um plex <acronym>RAID-5</acronym> é parecido com um plex
+      <foreignphrase>striped</foreignphrase>, exceto que ele implementa
+      o <acronym>RAID-5</acronym> incluindo um bloco de paridade em
+      cada fatia.  Como exigido pelo <acronym>RAID-5</acronym>, o local
+      do bloco de paridade muda de uma fatia para a outra.  Os números nos
+      blocos de dados indicam o número relativo do bloco.</para>
 
       <para>
 	<figure id="vinum-raid5-org">
-	  <title> Organização RAID-5</title>
+	  <title>Organização RAID-5</title>
 	  <graphic fileref="vinum/vinum-raid5-org">
 	</figure>
       </para>
 
       <para>Comparado com espelhamento, <acronym>RAID-5</acronym> tem a
-      vantagem de requer significativamente menos espaço de
-      armazenameto.  O acesso à leitura é parecida com a utilizada nas
-      organizações striped, mas o acesso à escrita é bem reduzida, chega
-      a até 25% da performance de leitura aproximadamente.  Se uma
-      partição falha, o array pode continuar a operar em um modo de 
-      despreza: a leitura das partições acessiveis restantes continua
-      normalmente, mas a leitura da partição danificada é recalculada
-      pelo bloco correspondente de todos as partições restantes.</para>
+      vantagem de requerer significativamente menos espaço de
+      armazenameto.  O acesso de leitura é parecido com o utilizado nas
+      organizações <foreignphrase>striped</foreignphrase>, mas o acesso
+      à escrita é bem reduzido, chega a até 25% da performance de
+      leitura aproximadamente.  Se uma partição falha, o vetor pode
+      continuar a operar em modo degradado: a leitura das partições
+      acessíveis restantes continua normalmente, mas a leitura da
+      partição danificada é recalculada pelo bloco correspondente de
+      todos os discos restantes.</para>
   </sect1>
 
   <sect1 id="vinum-objects">
     <title>Objetos do Vinum</title>
       <para>Para que o Vinum possa solucionar esse problema, ele
-      implementa um quarto nível em hierarquia de objetos:</para>
-      
+      implementa uma hierarquia de objetos em quatro níveis:</para>
 
       <itemizedlist>
 	<listitem>
-	  <para>O objeto mais visivel é o disco vitual, chamado de
+	  <para>O objeto mais visível é o disco virtual, chamado de
 	  <emphasis>volume</emphasis>.  Volumes tem essencialmente as
-	  mesmas propriedades de uma partição &unix;, mas tem umas
-	  pequenas diferenças.  Eles não tem nenhuma limitação de
-	  tamanho.</para>
+	  mesmas propriedades de uma partição &unix;, contudo tem
+	  algumas pequenas diferenças.  Eles não tem nenhuma limitação
+	  de tamanho.</para>
 	</listitem>
 
 	<listitem>
 	  <para>Volumes são compostos de <emphasis>plexes</emphasis>, no
 	  qual representa o espaço total de adressamento de um volume.
 	  Dessa forma, esse nível na hierarquia fornece redundância.
-	  Pense em plexes como uma partição individual em um array
-	  clonado, cada um ontendo os mesmos dados.</para>
+	  Pense em plexes como uma partição individual em um vetor
+	  clonado, cada um contendo os mesmos dados.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Desde que o Vinum existe no sistema de armazenamento de
+	  <para>Desde que o Vinum exista no sistema de armazenamento de
 	  discos &unix;, seria possível usar partições &unix; como um
-	  bloco de construção para plexes de multiplos discos, mas no
+	  bloco de construção para plexes de múltiplos discos, mas no
 	  final isso acaba sendo muito inflexível: o número de partições
 	  de um disco &unix; é limitado.  Ao contrário, Vinum subdivide
-	  uma única partição &unix; (os <emphasis>discos de
-	  vinum</emphasis>) em contínuas areas chamadas
-	  <emphasis>subdiscos</emphasis>, no qual é usado como blocas de
-	  construção para plexes.</para>
+	  uma única partição &unix; (os <emphasis>discos do
+	  vinum</emphasis>) em areas contínuas chamadas
+	  <emphasis>subdiscos</emphasis>, os quais são usados como
+	  blocos de construção para plexes.</para>
 	</listitem>
       
 	<listitem>
-	  <para>Subdiscos residem em discos de Vinum.  atualmente
-	  partições &unix;.  com a exceção de uma pequea área no começo
-	  do disco, no qual é usado para armazenamento de configurações
-	  e informações sobre o estado, o disco todo fica disponível
-	  para armazenamento de dados.</para>
+	  <para>Subdiscos residem em discos do Vinum.  Atualmente
+	  partições &unix;.  Com a exceção de uma pequea área no começo
+	  do disco, a qual é usada para armazenamento de informações de
+	  configuração e estado, o disco todo fica disponível para
+	  armazenamento de dados.</para>
 	</listitem>
       </itemizedlist>
 
@@ -315,7 +316,7 @@
       fornecem a funcionalidade requerida pelo Vinum.</para>
 
     <sect2>
-      <title>Conciderações de um tamanho de volume</title>
+      <title>Considerações de um tamanho de volume</title>
 
       <para>Plexes podem ter muitos subdiscos espalhados por todas as 
       partições nas configurações de vinum.  Como resultado, o tamanho
@@ -456,10 +457,10 @@
       
 
       <programlisting>
-    drive a device /dev/da3h
-    volume myvol
-      plex org concat
-        sd length 512m drive a</programlisting>
+        drive a device /dev/da3h
+        volume myvol
+          plex org concat
+            sd length 512m drive a</programlisting>
 
       <para>Esse arquivo descreve quatro objetos do Vinum:</para>
       
