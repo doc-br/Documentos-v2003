@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: doc/en_US.ISO8859-1/books/handbook/mail/chapter.sgml,v 1.88 2003/11/23 17:52:12 ceri Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/mail/chapter.sgml,v 1.2 2003/12/10 15:11:19 jmelo Exp $
 -->
 
 <chapter id="mail">
@@ -48,7 +48,7 @@
       </listitem>
 
       <listitem>
-	<para>Como bloquear spammer de usar ilegalmente seu servidor de correio como relay.  </para>
+	<para>Como bloquear <literal>spammer</literal> de usar ilegalmente seu servidor de correio como relay.  </para>
       </listitem>
 
       <listitem>
@@ -72,97 +72,94 @@
       </listitem>
     </itemizedlist>
 
-    <para>Antes de ler este cap&iacute;tulo voc&ecirc; deve:  </para>
+    <para>Antes de ler este cap&iacute;tulo voc&ecirc; deve ter:  </para>
 
     <itemizedlist>
       <listitem>
-	<para>Properly set up your network connection
-	  (<xref linkend="advanced-networking">).</para>
+	<para>Configurado corretamente sua conex&atilde;o de rede
+	  (<xref linkend="rede-avan&ccedil;ada">).  </para>
       </listitem>
 
       <listitem>
-	<para>Properly set up the DNS information for your mail host
-	  (<xref linkend="advanced-networking">).</para>
+	<para>Configurado corretamente as informa&ccedil;&otilde;es do DNS para seu host de correio
+	  (<xref linkend="rede-avan&ccedil;ada">).</para>
       </listitem>
 
       <listitem>
-	<para>Know how to install additional third-party software
-	  (<xref linkend="ports">).</para></listitem>
+	<para>Saber como instalar software adicional de terceiros
+	  (<xref linkend="ports">).  </para></listitem>
     </itemizedlist>
   </sect1>
 
   <sect1 id="mail-using">
-    <title>Using Electronic Mail</title>
+    <title>Usando o correio eletr&ocirc;nico</title>
     <indexterm><primary>POP</primary></indexterm>
     <indexterm><primary>IMAP</primary></indexterm>
     <indexterm><primary>DNS</primary></indexterm>
 
-    <para>There are five major parts involved in an email exchange.  They
-      are: <link linkend="mail-mua">the user program</link>, <link
-      linkend="mail-mta">the server daemon</link>, <link
-      linkend="mail-dns">DNS</link>, <link linkend="mail-receive">a POP or
-      IMAP daemon</link>, and of course, <link linkend="mail-host">the
-      mailhost itself</link>.</para>
+    <para>Existe cinco principais partes envolvidas na troca de email.  Elas s&atilde;o:  
+      <link linkend="mail-mua">O programa do usu&aacute;rio</link>, <link
+      linkend="mail-mta">O daemon do servidor</link>, <link
+      linkend="mail-dns">DNS</link>, <link linkend="mail-receive">o POP ou 
+      o daemon do IMAP </link>, e &eacute; claro, <link linkend="mail-host">o 
+      pr&oacute;rio servidor de email</link>.</para>
 
     <sect2 id="mail-mua">
-      <title>The User Program</title>
+      <title>O programa de usu&aacute;rio</title>
 
-      <para>This includes command line programs such as
+      <para>Isto inclue programas de linha de comando como
         <application>mutt</application>, <application>pine</application>,
-	<application>elm</application>, and
-	<application>mail</application>, and GUI programs such as
+	<application>elm</application>, e
+	<application>mail</application>, e programas GUI como
 	<application>balsa</application>,
-	<application>xfmail</application> to name a few, and something
-	more <quote>sophisticated</quote> like a WWW browser.  These
-	programs simply pass off the email transactions to the local <link
-	linkend="mail-host"><quote>mailhost</quote></link>, either by
-	calling one of the <link linkend="mail-mta">server daemons</link>
-	available or delivering it over TCP.</para>
+	<application>xfmail</application> para falar de alguns, e muito 
+	mais <quote>sofisticados</quote> como o navegador WWW.  Estes 
+	programas simplesmente passam as transa&ccedil;&otilde;es de email para o <link linkend="mail-host"><quote>servidor de email</quote></link> local,
+	chamando qualquer um dos <link linkend="mail-mta">daemons do servidor</link> dispon&iacute;vel ou entregando atrav&eacute;s de TCP.  </para>
     </sect2>
 
     <sect2 id="mail-mta">
-      <title>Mailhost Server Daemon</title>
+      <title>Daemon do servidor de email</title>
       <indexterm>
-        <primary>mail server daemons</primary>
+        <primary>daemons do servidor de email</primary>
         <secondary><application>sendmail</application></secondary>
       </indexterm>
       <indexterm>
-        <primary>mail server daemons</primary>
+        <primary>daemons do servidor de email</primary>
         <secondary><application>postfix</application></secondary>
       </indexterm>
       <indexterm>
-        <primary>mail server daemons</primary>
+        <primary>daemons do servidor de email</primary>
         <secondary><application>qmail</application></secondary>
       </indexterm>
       <indexterm>
-        <primary>mail server daemons</primary>
+        <primary>daemons do servidor de email</primary>
         <secondary><application>exim</application></secondary>
       </indexterm>
 
-      <para>This is usually <application>sendmail</application> (by
-        default with FreeBSD) or one of the other mail server daemons such
-	as <application>qmail</application>,
-	<application>postfix</application>, or
-	<application>exim</application>.  There are others, but those are
-	the most widely used.</para>
+      <para>Geralmente &eacute; o <application>sendmail</application> (por
+        padr&atilde;o no FreeBSD) ou um dos outros daemons de servidores de emails como
+	<application>qmail</application>,
+	<application>postfix</application>, ou
+	<application>exim</application>.  Existem outros por&eacute;m estes s&atilde;o os mais usados.  </para>
 
-      <para>The server daemon usually has two functions&mdash;it looks
-        after receiving incoming mail and delivers outgoing mail.  It does
-	not allow you to connect to it via POP or IMAP to read your mail.
-	You need an additional <link linkend="mail-receive">daemon</link>
-	for that.</para>
+      <para>O servidor daemon normalmente tem duas fun&ccedil;&otilde;es&mdash;ele olha
+        depois de receber um mail que chegou e entrega a mensagem.  Ele n&atilde;o
+	permite que voc&ecirc; conecte a ele via POP ou IMAP para ler sua mensagem.  
+	Voc&ecirc; precisa de um <link linkend="mail-receive">daemon</link> adicional
+	para isso.</para>
 
-      <para>Be aware that some older versions of
-        <application>sendmail</application> have some serious security
-	problems, however as long as you run a current version of it you
-	should not have any problems.  As always, it is a good idea to
-	stay up-to-date with any software you run.</para>
+      <para>Esteja ciente de que algumas vers&otilde;es antigas do
+        <application>sendmail</application> tem s&eacute;rios problemas de
+	seguran&ccedil;a, entretanto se voc&ecirc; manter rodando uma vers&atilde;o sempre atual,
+	voc&ecirc; n&atilde;o dever&aacute; ter problemas.  &Eacute; uma boa ideia sempre manter atualizado
+	qualquer aplicativo que voc&ecirc; rode.  </para>
     </sect2>
 
     <sect2 id="mail-dns">
-      <title>Email and DNS</title>
+      <title>Email e DNS</title>
 
-      <para>The Domain Name System (DNS) and its daemon
+      <para>O sistema de nome de dom&iacute;nios (DNS) e seu daemon
         <command>named</command> play a large role in the delivery of
 	email.  In order to deliver mail from your site to another, the
 	server daemon will look up the site in the DNS to determine the
