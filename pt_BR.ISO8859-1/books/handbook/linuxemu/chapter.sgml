@@ -1747,7 +1747,7 @@ export PATH</programlisting>
 	  Recompile seu sistema e seu <foreignphrase>kernel</foreignphrase> 
 	  ap&oacute;s editar seu arquivo de configura&ccedil;&atilde;o de 
 	  <foreignphrase>kernel</foreignphrase>.  Aqui voc&ecirc; tamb&eacute;m 
-	  deve incluir seus <link linkend="kerneltuning">parametros de kernel</link>
+	  deve incluir seus <link linkend="kerneltuning">par&acirc;metros de kernel</link>
 	  que s&atilde;o necess&aacute;rios tanto para o <application>&sap.r3;</application>
 	  como para o <application>&oracle;</application>.</para>
       </sect3>
@@ -1790,56 +1790,65 @@ export PATH</programlisting>
 
 
       <sect3 id="installingnecessaryrpms">
-	<title>Installing the Necessary RPMs</title>
+	<title>Instalando os RPMs Necess&aacute;rios</title>
 	<indexterm><primary>RPMs</primary></indexterm>
 
-	<para>To start the <command>R3SETUP</command> program, PAM support is needed.
-	  During the first <application>&sap;</application> Installation on FreeBSD 4.3-STABLE we
-	  tried to install PAM with all the required packages and
-	  finally forced the installation of the PAM package, which
-	  worked. For <application>&sap.r3; 4.6C SR2</application> we
-	  directly forced the installation of the PAM RPM, which also
-	  works, so it seems the dependent packages are not needed:</para>
+	<para>Para inicializar o programa <command>R3SETUP</command>, 
+	  o suporte a PAM &eacute; necess&aacute;rio.
+	  Durante a primeira instala&ccedil;&atilde;o do 
+	  <application>&sap;</application> no FreeBSD 4.3-STABLE 
+	  n&oacute;s tentamos instalar o PAM com todos os pacotes 
+	  requeridos e finalmente for&ccedil;amos a instala&ccedil;&atilde;o 
+	  do pacote PAM, que funcionou.  Para o 
+	  <application>&sap.r3; 4.6C SR2</application> n&oacute;s 
+	  for&ccedil;amos diretamente a instala&ccedil;&atilde;o do RPM do 
+	  PAM, que tamb&eacute;m funcionou, causando a impress&atilde;o de 
+	  que os pacotes dependentes n&atilde;o s&atilde;o necess&aacute;rios:</para>
 
 
 <screen>&prompt.root; <userinput>rpm -i --ignoreos --nodeps --root /compat/linux --dbpath /var/lib/rpm \
 pam-0.68-7.i386.rpm</userinput></screen>
 
-	<para>For <application>&oracle; 8.0.5</application> to run the
-	  intelligent agent, we also had to install the RedHat Tcl package
-	  <filename>tcl-8.0.5-30.i386.rpm</filename> (otherwise the
-	  relinking during <application>&oracle;</application> installation
-	  will not work).  There are some other issues regarding
-	  relinking of <application>&oracle;</application>, but that is
-	  a <application>&oracle;</application> Linux issue, not FreeBSD specific.</para>
+	<para>Para o <application>&oracle; 8.0.5</application> executar o 
+	  <foreignphrase>intelligent agent<foreignphrase>, n&oacute;s 
+	  tamb&eacute;m tivemos que instalar o pacote Tcl RedHat  
+	  <filename>tcl-8.0.5-30.i386.rpm</filename> (caso contr&aacute;rio 
+	  o religamento durante a instala&ccedil;&atilde;o do 
+	  <application>&oracle;</application> n&atilde;o funcionaria).  
+	  Existem outras quest&otilde;es a respeito da religa&ccedil;&atilde;o 
+	  do <application>&oracle;</application>, mas isso &eacute; uma 
+	  quest&atilde;o do <application>&oracle;</application> para Linux, 
+	  e n&atilde;o espec&iacute;fica do FreeBSD.</para>
 
       </sect3>
 
       <sect3 id="linuxprocandfallbackelfbrand">
-	<title>Some Additional Hints</title>
+	<title>Algumas Dicas Adicionais</title>
 
-	<para>It might also be a good idea to add <literal>linprocfs</literal>
-	  to <filename>/etc/fstab</filename>, for more informations, see the &man.linprocfs.5; manual page.
-	  Another parameter to set is <literal>kern.fallback_elf_brand=3</literal>
-	  which is done in the file <filename>/etc/sysctl.conf</filename>.</para>
+	<para>Tamb&eacute;m pode ser uma boa id&eacute;ia adicionar o 
+	  <literal>linprocfs</literal> ao 
+	  <filename>/etc/fstab</filename>, para mais informa&ccedil;&otilde;es 
+	  veja a p&aacute;gina de manual &man.linprocfs.5;.  Outro par&acirc;metro 
+	  a ser configurado &eacute; o <literal>kern.fallback_elf_brand=3</literal>
+	  que &eacute; feito no arquivo <filename>/etc/sysctl.conf</filename>.</para>
       </sect3>
     </sect2>
 
     <sect2 id="creatingsapr3env">
-      <title>Creating the &sap.r3; Environment</title>
+      <title>Criando o Ambiente &sap.r3;</title>
 
       <sect3 id="filesystemsandmountpoints">
-	<title>Creating the Necessary File Systems and Mountpoints</title>
+	<title>Criando os Sistemas de Arquivo e Pontos de Montagem Necess&aacute;rios</title>
 
-	<para>For a simple installation, it is sufficient to create the
-          following file systems:</para>
+	<para>Para uma instala&ccedil;&atilde;o simples, &eacute; suficiente 
+	  criar os seguintes sistemas de arquivo:</para>
 
 	<informaltable>
 	  <tgroup cols="2">
 	    <thead>
 	      <row>
-		<entry>mount point</entry>
-		<entry>size in GB</entry>
+		<entry>Ponto de Montagem</entry>
+		<entry>tamanho em GB</entry>
 	      </row>
 	    </thead>
 	    <tbody>
@@ -1861,18 +1870,17 @@ pam-0.68-7.i386.rpm</userinput></screen>
 	  </tgroup>
 	</informaltable>
 
-	<para>It is also necessary to created some links. Otherwise
-	  the <application>&sap;</application> Installer will complain, as it is checking the
-	  created links:</para>
+	<para>Tamb&eacute;m &eacute; necess&aacute;rio criar algumas liga&ccedil;&otilde;es.  
+	  Caso contr&aacute;rio o Instalador <application>&sap;</application> reclamar&aacute; 
+	  ao verific&aacute;-las:</para>
 
 	<screen>&prompt.root; <userinput>ln -s /compat/linux/oracle /oracle</userinput>
 &prompt.root; <userinput>ln -s /compat/linux/sapmnt /sapmnt</userinput>
 &prompt.root; <userinput>ln -s /compat/linux/usr/sap /usr/sap</userinput></screen>
 
-	<para>Possible error message during installation (here with
-	  System <emphasis>PRD</emphasis> and the
-	  <application>&sap.r3; 4.6C SR2</application>
-	  installation):</para>
+	<para>Poss&iacute;veis erros durante a instala&ccedil;&atilde;o 
+	  (aqui com o Sistema <emphasis>PRD</emphasis> e o 
+	  <application>&sap.r3; 4.6C SR2</application>):</para>
 
 	<screen>INFO 2002-03-19 16:45:36 R3LINKS_IND_IND SyLinkCreate:200
     Checking existence of symbolic link /usr/sap/PRD/SYS/exe/dbg to
@@ -1890,28 +1898,30 @@ ERROR 2002-03-19 16:45:36 R3LINKS_IND_IND Ins_SetupLinks:0
       </sect3>
 
       <sect3 id="creatingusersanddirectories">
-	<title>Creating Users and Directories</title>
+	<title>Criando Usu&aacute;rios e Diret&oacute;rios</title>
 
-	<para><application>&sap.r3;</application> needs two users and
-	  three groups. The user names depend on the
-	  <application>&sap;</application> system ID (SID) which consists
-	  of three letters. Some of these SIDs are reserved
-	  by <application>&sap;</application> (for example
-	  <literal>SAP</literal> and <literal>NIX</literal>. For a
-	  complete list please see the <application>&sap;</application> documentation).  For the IDES
-	  installation we used <literal>IDS</literal>, for the
-	  4.6C SR2 installation <literal>PRD</literal>, as that system
-	  is intended for production use.  We have
-	  therefore the following groups (group IDs might differ, these
-	  are just the values we used with our installation):</para>
+	<para><application>&sap.r3;</application> precisa de dois 
+	  usu&aacute;rios e tr&ecirc;s grupos.  O nome do usu&aacute;rio 
+	  depende do ID de sistema (SID) do <application>&sap;</application>, 
+	  que consistem em tr&ecirc;s letras.  Algumas destas SIDs s&atilde;o 
+	  reservadas pelo <application>&sap;</application> (por  exemplo
+	  <literal>SAP</literal> e <literal>NIX</literal>. Para uma lista 
+	  completa por favor veja a documenta&ccedil;&atilde;o do 
+	  <application>&sap;</application>).  Para a instala&ccedil;&atilde;o 
+	  do IDES n&oacute;s usamos <literal>IDS</literal>, para a 
+	  instala&ccedil;&atilde;o do 4.6C SR2 <literal>PRD</literal>, pois 
+	  &eacute; inten&ccedil;&atilde;o fazer com que o sistema seja de 
+	  produ&ccedil;&atilde;o.  Por esta raz&atilde;o criamos os 
+	  seguintes grupos (IDs de grupo podem ser diferentes, estes s&atilde;o 
+	  apenas os valores que usamos na nossa instala&ccedil;&atilde;o):</para>
 
         <informaltable>
           <tgroup cols="3">
           <thead>
           <row>
-            <entry>group ID</entry>
-            <entry>group name</entry>
-            <entry>description</entry>
+            <entry>ID do grupo</entry>
+            <entry>nome do groupo</entry>
+            <entry>descri&ccedil;&atilde;o</entry>
           </row>
           </thead>
           <tbody>
@@ -1934,24 +1944,26 @@ ERROR 2002-03-19 16:45:36 R3LINKS_IND_IND Ins_SetupLinks:0
           </tgroup>
         </informaltable>
 
-        <para>For a default <application>&oracle;</application> installation, only group
-          <groupname>dba</groupname> is used. As
-          <groupname>oper</groupname> group, one also uses group
-          <groupname>dba</groupname> (see <application>&oracle;</application> and
-          <application>&sap;</application> documentation for further information).</para>
+        <para>Para uma instala&ccedil;&atilde;o padr&atilde;o do 
+	  <application>&oracle;</application> apenas o grupo 
+          <groupname>dba</groupname> &eacute; usado.  Assim como o grupo 
+          <groupname>oper</groupname> um tamb&eacute;m usa o grupo 
+          <groupname>dba</groupname> (veja a documenta&ccedil;&atilde;o do 
+	  <application>&oracle;</application> e do 
+          <application>&sap;</application> para mais informa&ccedil;&otilde;es).</para>
 
-        <para>We also need the following users:</para>
+        <para>Tamb&eacute;m precisamos dos seguintes usu&aacute;rios:</para>
 
         <informaltable>
           <tgroup cols="6">
           <thead>
           <row>
-            <entry>user ID</entry>
-            <entry>user name</entry>
-            <entry>generic name</entry>
-            <entry>group</entry>
-            <entry>additional groups</entry>
-            <entry>description</entry>
+            <entry>ID do usu&aacute;rio</entry>
+            <entry>nome do usu&aacute;rio</entry>
+            <entry>nome gen&eacute;rico</entry>
+            <entry>grupo</entry>
+            <entry>grupos adicionais</entry>
+            <entry>descri&ccedil;&atilde;o</entry>
           </row>
           </thead>
           <tbody>
@@ -1975,9 +1987,10 @@ ERROR 2002-03-19 16:45:36 R3LINKS_IND_IND Ins_SetupLinks:0
           </tgroup>
         </informaltable>
 
-        <para>Adding the users with &man.adduser.8;
-          requires the following (please note shell and home
-          directory) entries for <quote>&sap; Administrator</quote>:</para>
+        <para>Adicionar os usu&aacute;rios com &man.adduser.8;
+          requer as seguintes entradas (por favor note o <literal>shell</literal> 
+	  e o diret&oacute;rio <literal>home</literal>) para o 
+          <quote>&sap; Administrator</quote>:</para>
 
         <programlisting>Name: <replaceable>sid</replaceable>adm
 Password: ******
@@ -1989,7 +2002,7 @@ Groups: sapsys dba
 HOME: /home/<replaceable>sid</replaceable>adm
 Shell: bash  (/compat/linux/bin/bash)</programlisting>
 
-        <para>and for <quote>&oracle; Administrator</quote>:</para>
+        <para>e para o <quote>&oracle; Administrator</quote>:</para>
 
         <programlisting>Name: ora<replaceable>sid</replaceable> 
 Password: ****** 
@@ -2001,23 +2014,25 @@ Groups: dba
 HOME: /oracle/<replaceable>sid</replaceable> 
 Shell: bash  (/compat/linux/bin/bash)</programlisting>
 
-        <para>This should also include group
-          <groupname>oper</groupname> in case you are using both
-          groups <groupname>dba</groupname> and
+        <para>Isto tamb&eacute;m deve incluir o grupo 
+          <groupname>oper</groupname> caso voc&ecirc; esteja 
+          usando ambos os grupos <groupname>dba</groupname> e
           <groupname>oper</groupname>.</para>
 
       </sect3>
 
       <sect3 id="creatingdirectories">
-        <title>Creating Directories</title>
+        <title>Criando Diret&oacute;rios</title>
 
-        <para>These directories are usually created as separate
-          file systems.  This depends entirely on your requirements.  We
-          choose to create them as simple directories, as they are all
-          located on the same RAID 5 anyway:</para>
+        <para>Estes diret&oacute;rios normalmente s&atilde;o criados 
+	  como sistemas de arquivos distintos.  Isto depende completamente 
+	  das suas necessidades.  N&oacute;s escolhemos cri&aacute;-los 
+	  simplesmente como diret&oacute;rios, pois, de qualquer forma,
+	  est&atilde;o todos localizados no mesmo RAID 5:</para>
 
-        <para>First we will set owners and rights of some directories (as
-          user <username>root</username>):</para>
+        <para>Primeiro vamos configurar os propriet&aacute;rios e os 
+	  direitos de alguns diret&oacute;rios (como usu&aacute;rio 
+          <username>root</username>):</para>
 
         <screen>&prompt.root; <userinput>chmod 775 /oracle</userinput>
 &prompt.root; <userinput>chmod 777 /sapmnt</userinput>
@@ -2025,9 +2040,9 @@ Shell: bash  (/compat/linux/bin/bash)</programlisting>
 &prompt.root; <userinput>chown <replaceable>sid</replaceable>adm:sapsys /compat/linux/usr/sap</userinput>
 &prompt.root; <userinput>chmod 775 /compat/linux/usr/sap</userinput></screen>
 
-        <para>Second we will create directories as user 
-	  <username>ora<replaceable>sid</replaceable></username>. These
-          will all be subdirectories of 
+        <para>Segundo, vamos criar diret&oacute;rios como usu&aacute;rio 
+	  <username>ora<replaceable>sid</replaceable></username>. Estes 
+          ser&atilde;o subdiret&oacute;rios de 
 	  <filename>/oracle/<replaceable>SID</replaceable></filename>:</para>
 
         <screen>&prompt.root; <userinput>su - ora<replaceable>sid</replaceable></userinput>
@@ -2037,8 +2052,8 @@ Shell: bash  (/compat/linux/bin/bash)</programlisting>
 &prompt.root; <userinput>mkdir saparch sapreorg</userinput>
 &prompt.root; <userinput>exit</userinput></screen>
 
-	<para>For the <application>&oracle; 8.1.7</application> installation
-	  some additional directories are needed:</para>
+	<para>Para o <application>&oracle; 8.1.7</application> alguns 
+	  diret&oacute;rios adicionais s&atilde;o necess&aacute;rios:</para>
 
 	<screen>&prompt.root; <userinput>su - ora<replaceable>sid</replaceable></userinput>
 &prompt.root; <userinput>cd /oracle</userinput>
@@ -2049,11 +2064,11 @@ Shell: bash  (/compat/linux/bin/bash)</programlisting>
 &prompt.root; <userinput>cd /oracle/<replaceable>SID</replaceable></userinput>
 &prompt.root; <userinput>mkdir 817_32</userinput></screen>
 
-	<note><para>The directory <filename>client/80x_32</filename> is used
-	  with exactly this name. Do not replace the <emphasis>x</emphasis>
-	  with some number or anything.</para></note>
+	<note><para>O diret&oacute;rio <filename>client/80x_32</filename> &eacute; 
+	  usado exatamente com este nome.  N&atilde;o substitua o <emphasis>x</emphasis>
+	  com um n&uacute;mero ou qualquer outra coisa.</para></note>
 
-        <para>In the third step we create directories as user 
+        <para>No terceiro passo criaremos diret&oacute;rios como o usu&aacute;rio 
 	  <username><replaceable>sid</replaceable>adm</username>:</para>
 
         <screen>&prompt.root; <userinput>su - <replaceable>sid</replaceable>adm</userinput>
@@ -2064,21 +2079,23 @@ Shell: bash  (/compat/linux/bin/bash)</programlisting>
       </sect3>
 
       <sect3 id="entriesinslashetcslashservices">
-        <title>Entries in <filename>/etc/services</filename></title>
+        <title>Entradas em <filename>/etc/services</filename></title>
 
-        <para><application>&sap.r3;</application> requires some entries in file
-          <filename>/etc/services</filename>, which will not be set
-          correctly during installation under FreeBSD.  Please add the
-          following entries (you need at least those entries
-          corresponding to the instance number &mdash; in this case,
-          <literal>00</literal>.  It will do no harm adding all
-          entries from <literal>00</literal> to
-          <literal>99</literal> for <literal>dp</literal>,
-          <literal>gw</literal>, <literal>sp</literal> and
-          <literal>ms</literal>). If you are going to use a <application>SAProuter</application>
-	  or need to access <application>&sap;</application> OSS, you also need <literal>99</literal>,
-	  as port 3299 is usually used for the <application>SAProuter</application> process on the
-	  target system:</para>
+        <para><application>&sap.r3;</application> requer algumas entradas no 
+          <filename>/etc/services</filename>, que n&atilde;o ser&atilde;o 
+	  configuradas corretamente na instala&ccedil;&atilde;o do FreeBSD.  
+          Por favor adicione as seguintes entradas (voc&ecirc; precisa pelo 
+	  menos das entradas correspondentes ao n&uacute;mero da instancia 
+	  &mdash; neste caso, <literal>00</literal>.  Inserir todas as 
+          entradas de <literal>00</literal> &agrave; 
+          <literal>99</literal> para <literal>dp</literal>,
+          <literal>gw</literal>, <literal>sp</literal> e
+          <literal>ms</literal> n&atilde;o causar&aacute; problemas).  
+	  Se voc&ecirc; for utilizar o <application>SAProuter</application>
+	  ou precise acessar o <application>&sap;</application> OSS, 
+	  voc&ecirc; tamb&eacute;m precisa do <literal>99</literal>,
+	  uma vez que a porta 3299 &eacute; usada para o processo do 
+	  <application>SAProuter</application> no sistema de destino:</para>
 
         <programlisting>
 sapdp00    3200/tcp # SAP Dispatcher.      3200 + Instance-Number
