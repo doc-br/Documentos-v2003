@@ -455,24 +455,22 @@ Goodbye!
       de um e-mail de boas vindas para o usuário adicionado. Nós salvamos as configurações,
       criamos uma conta para <username>jru</username>, e certificamos que 
       <username>jry</username> está dentro do grupo <username>wheel</username> (de 
-      mode que possa supor o papel de <username>root</username> com o comando &man.su.1;.)</par>
-
+      mode que possa supor o papel de <username>root</username> com o comando &man.su.1;.)</para>
       <note>
-	<para>The password you type in is not echoed, nor are asterisks
-	  displayed.  Make sure you do not mistype the password twice.
-	  </para>
+        <para>A senha que você digita não é ecoada, nem é mostrado asteriscos.
+        Certifique-se que você não digite erradamente a senha duas vezes.
+        </para>
       </note>
 
       <note>
-	<para>Just use &man.adduser.8; without arguments
-	  from now on, and you will not have to go through changing the
-	  defaults.  If the program asks you to change the defaults,
-	  exit the program, and try the <option>-s</option>
-	  option.</para>
+	<para>Use exatamente &man.adduser.8; sem argumentos de agora em diante,
+        e você não terá que fazer mudaças padrões. Se o programa pedir que você
+        mude os padrões, saida do programa, e tente a opção <option>-s</option>.</para>
       </note>
+
 
       <example>
-	<title>Adding a user on &os;&nbsp;5.X</title>
+	<title>Adicionando um usuário em um  &os;&nbsp;5.X</title>
 
 	<screen>&prompt.root; <userinput>adduser</userinput>
 Username: <userinput>jru</userinput>
@@ -511,66 +509,59 @@ Goodbye!
 
       <indexterm><primary><command>rmuser</command></primary></indexterm>
       <indexterm>
-        <primary>accounts</primary>
-        <secondary>removing</secondary>
+        <primary>contas</primary>
+        <secondary>removendo</secondary>
       </indexterm>
 
-      <para>You can use &man.rmuser.8; to
-	completely remove a user from the system.
-	&man.rmuser.8; performs the following
-	steps:</para>
+      <para>Você pode usar o &man.rmuser.8; to remover completamente um usuário
+        do sistema. &man.rmuser.8; executa as seguintes etapas:</para>
 
       <procedure>
 	<step>
-	  <para>Removes the user's &man.crontab.1; entry (if
-	    any).</para>
+          <para>Remove as entradas &man.crontab.1; do usuário (se tiver algum).</para>
 	</step>
 	<step>
-	  <para>Removes any &man.at.1; jobs belonging to the
-	    user.</para>
+          <para>Remove todos os trabalhos &man.at.1; que pertence ao usuário.</para>
 	</step>
 	<step>
-	  <para>Kills all processes owned by the user.</para>
+          <para>Mata todos os processos controlados pelo usuário.</para>
 	</step>
 	<step>
-	  <para>Removes the user from the system's local password
-	    file.</para>
+          <para>Remove o usuário do arquivo de senha local do sistema</para>
 	</step>
 	<step>
-	  <para>Removes the user's home directory (if it is owned by
-	    the user).</para>
+          <para>Remove o diretório home do usuário (se este for controlado pelo usuário)</para>
 	</step>
 	<step>
-	  <para>Removes the incoming mail files belonging to the user
-	    from <filename>/var/mail</filename>.</para>
+          <para>Remove o arquivo de entrada de e-mail que pertence ao usuário em 
+            <filename>/var/mail</filename>.</para>
 	</step>
 	<step>
-	  <para>Removes all files owned by the user from temporary
-	    file storage areas such as <filename>/tmp</filename>.</para>
+          <para>Remove todos os arquivos controlados pelo usuário na area 
+            temporária de gravação de arquivos como <filename>/tmp</filename>.</para>
 	</step>
 	<step>
-	  <para>Finally, removes the username from all groups to which
-	    it belongs in <filename>/etc/group</filename>.
+          <para>Finalmente, remove o nome do usuário de todos os grupos que ele 
+            pertence em <filename>/etc/group</filename>.
 	    
-	    <note>
-	      <para>If a group becomes empty and the group name is the
-		same as the username, the group is removed; this
-		complements the per-user unique groups created by
-		&man.adduser.8;.</para>
-	    </note>
+            <note>
+              <para>Se um grupo ficar vazio e o nome do grupo é o mesmo que 
+                o nome do usuário, o grupo será removido; isto complementa 
+               os grupos originais por usuário que é criado pelo &man.adduser.8;.</para>
+            </note>
+
 	  </para>
 	</step>
       </procedure>
 
-      <para>&man.rmuser.8; cannot be used to remove
-	superuser accounts, since that is almost always an indication
-	of massive destruction.</para>
-
-      <para>By default, an interactive mode is used, which attempts to
-	make sure you know what you are doing.</para>
+      <para>&man.rmuser.8; não pode ser usado para remover contas de super usuários,
+        desde aquela é quase sempre uma indicação da destruição maciça.</para> 
+   
+      <para>Por padrão, um modo interatico é usado, que tenta se certificar você 
+        para saber o que você está fazendo.</para>
 
       <example>
-	<title><command>rmuser</command> Interactive Account Removal</title>
+	<title><command>rmuser</command> Remoção interativa de contas</title>
 
 	<screen>&prompt.root; <userinput>rmuser jru</userinput>
 Matching password entry:
@@ -591,27 +582,24 @@ Removing files belonging to jru from /var/tmp/vi.recover: done.
       <title><command>chpass</command></title>
 
       <indexterm><primary><command>chpass</command></primary></indexterm>
-      <para>&man.chpass.1; changes user database
-	information such as passwords, shells, and personal
-	information.</para>
+       <para>&man.chpass.1; altera informações da base de dados do usuário tais como 
+        senhas, shells e informações pessoais.</para>
 
-      <para>Only system administrators, as the superuser, may change
-	other users' information and passwords with 
-	&man.chpass.1;.</para>
+       <para>Apenas administradores do sistema, como o super usuário, podem alterar
+         informações e senhas de outros usuários com &man.chpass.1;.</para>
 
-      <para>When passed no options, aside from an optional username,
-	&man.chpass.1; displays an editor
-	containing user information.  When the user exists from the
-	editor, the user database is updated with the new
-	information.</para>
+      <para>Quando passado sem opções, com exceção de um usuário opcional, 
+        &man.chpass.1; abrirá um editor contendo as informações do usuário. 
+        Quando o usuário exite do editor, a base de dados do usuário será 
+        atualizada com as novas informações.</para>
 
       <note>
-	<para>In &os;&nbsp;5.X, you will be asked for your password
-	 after exiting the editor if you are not the superuser.</para>
+        <para>Em &os;&nbsp;5.X, você irá ser questionado sua senha depois que 
+          sair do editor se você não for um super usuário.</para>
       </note>
 
       <example>
-	<title>Interactive <command>chpass</command> by Superuser</title>
+	<title>Interativo <command>chpass</command> pelo super usuário</title>
 
 	<screen>#Changing user database information for jru.
 Login: jru
@@ -630,11 +618,11 @@ Home Phone:
 Other information:</screen>
       </example>
 
-      <para>The normal user can change only a small subset of this
-	information, and only for themselves.</para>
+      <para>O usuário normal pode alterar somente um subconjunto pequeno
+        destas informações, e somente para eles.</para>
 
       <example>
-	<title>Interactive <command>chpass</command> by Normal User</title>
+	<title>Interativo <command>chpass</command> pelo usuário normal</title>
 
 	<screen>#Changing user database information for jru.
 Shell: /usr/local/bin/zsh
@@ -646,37 +634,34 @@ Other information:</screen>
       </example>
 
       <note>
-	<para>&man.chfn.1; and &man.chsh.1; are
-	  just links to &man.chpass.1;, as 
-	  are &man.ypchpass.1;,
-	  &man.ypchfn.1;, and
-	  &man.ypchsh.1;.  NIS support is automatic, so
-	  specifying the <literal>yp</literal> before the command is
-	  not necessary.  If this is confusing to you, do not worry, NIS will
-	  be covered in <xref linkend="advanced-networking">.</para>
-      </note>
+        <para>&man.chfn.1; e &man.chsh.1; são justamente links para &man.chpass.1;,
+          como são &man.ypchpass.1;, &man.ypchfn.1;, e &man.ypchsh.1;. suporte a NIS 
+          é automático, assim especificar <literal>yp</literal> antes do comando não
+          é necessário. Se isto está confuso para você, não se preocupe, NIS será coberto
+          em <xref linkend="advanced-networking">.</para>
+       </note>
+
+
     </sect2>
     <sect2 id="users-passwd">
       <title><command>passwd</command></title>
 
       <indexterm><primary><command>passwd</command></primary></indexterm>
       <indexterm>
-        <primary>accounts</primary>
-        <secondary>changing password</secondary>
+        <primary>contas</primary>
+        <secondary>alterando a senha</secondary>
       </indexterm>
-      <para>&man.passwd.1; is the usual way to
-	change your own password as a user, or another user's password
-	as the superuser.</para>
+       <para>&man.passwd.1; é a maneira usual para mudar sua própria senha
+        como um usuário, ou a senha de um outro usuário como o super usuário.</para>
 
       <note>
-	<para>Users must type in their original password before
-	  changing their password, to prevent an unauthorized person
-	  from changing their password when the user is away from
-	  their console.</para>
+         <para>Os usuários devem digitar dentro sua senha original antes de mudar
+           sua senha, para impedir que uma pessoa desautorizada mude sua senha 
+           quando o usuário está ausente de seu console.</para>
       </note>
 
       <example>
-	<title>Changing Your Password</title>
+	<title>Alterando sua senha</title>
 
 	<screen>&prompt.user; <userinput>passwd</userinput>
 Changing local password for jru.
@@ -688,7 +673,7 @@ passwd: done</screen>
       </example>
 
       <example>
-	<title>Changing Another User's Password as the Superuser</title>
+        <title>Alterando a senha de outro usuário como o super usuário</title>
 
         <screen>&prompt.root; <userinput>passwd jru</userinput>
 Changing local password for jru.
@@ -699,10 +684,8 @@ passwd: done</screen>
       </example>
 
       <note>
-	<para>As with &man.chpass.1;,
-	  &man.yppasswd.1; is just a link to
-	  &man.passwd.1;, so NIS works with either
-	  command.</para>
+        <para>Como com &man.chpass.1;, &man.yppasswd.1; são justamente um link para
+           &man.passwd.1;, assim o NIS trabalha com um ou outro comando.</para>
       </note>
     </sect2>
 
@@ -718,41 +701,47 @@ passwd: done</screen>
 	suitable for use in shell scripts, but new users may find it
 	more complicated than the other commands presented
 	here.</para>
+       
+      <para>&man.pw.8; é um comando utilitário para criar, remover, alterar e 
+        mostrar usuários e grupos. Isto funciona como um <HAHA>front end</HAHA>
+        para os arquivos do sistema de usuários e grupos. &man.pw.8 tem um
+        conjunto muito completo de opções e comandos que faz apropriado para o
+        uso em scripts shell, mas os usuários novos podem encontar mais 
+        complicações do que os outros comandos apresentados aqui.</para>
     </sect2>
 
 
   </sect1>
 
   <sect1 id="users-limiting">
-    <title>Limiting Users</title>
+    <title>Limitando usuários</title>
 
-    <indexterm><primary>limiting users</primary></indexterm>
+    <indexterm><primary>limitando usuários</primary></indexterm>
     <indexterm>
-      <primary>accounts</primary>
-      <secondary>limiting</secondary>
+      <primary>contas</primary>
+      <secondary>limitando</secondary>
     </indexterm>
-    <para>If you have users, the ability to limit their system use may
-      have come to mind.  FreeBSD provides
-      several ways an administrator can limit the amount of system
-      resources an individual may use.  These limits are
-      divided into two sections: disk quotas, and other resource
-      limits.</para>
+   
+    <para>Se você tiver usuários, a abilidade de limitar seu uso do sistema pode
+      ter vindo em sua mente. FreeBSD fornece diversas maneiras que um 
+      administrador pode limitar a quantidade de recursos do sistema que um 
+      indivíduo pode usar. Estes limites são divididos em duas seções: quotas
+      do disco, e outros limites de recursos.</para>
 
     <indexterm><primary>quotas</primary></indexterm>
     <indexterm>
-      <primary>limiting users</primary>
+      <primary>limitando usuários</primary>
       <secondary>quotas</secondary>
     </indexterm>
-    <indexterm><primary>disk quotas</primary></indexterm>
-    <para>Disk quotas limit disk usage to users, and
-      they
-      provide a way to quickly check that usage without
-      calculating it every time.  Quotas are discussed in <xref
-      linkend="quotas">.</para>
+    <indexterm><primary>quotas de disco</primary></indexterm>
+    
+    <para>As quotas de disco limitam o uso do disco aos usuários, e 
+      fornecem uma maneira de verificar rapidamente esse uso sem calculá-lo
+      todas as vezes. As quotas sÀo discutidas em <xref linkend="quotas">.</para>
 
-    <para>The other resource limits include ways to limit the amount of
-      CPU, memory, and other resources a user may consume.  These are
-      defined using login classes and are discussed here.</para>
+    <para>Os outros limites de recurso incluem maneiras de limitar a quantidade
+      de uso do CPU, memória e outros recursos que um usuário pode consumit. Estes
+      são definidos usando classes do início de uma sessão e discutidos aqui.</para>
 
     <indexterm>
       <primary><filename>/etc/login.conf</filename></primary>
