@@ -51,132 +51,135 @@
     <secondary>Software</secondary></indexterm>
    
     <para><emphasis>Vinum</emphasis> o chamado <emphasis>Gerenciador
-	de Volumes</emphasis>, o disco virtual que trata destes
-	três problemas.  Tomemos em maior detalhe.  Várias soluções para
-	estes problemas tem sido propostas e implementadas:</para>
+	de Volumes</emphasis> é o disco virtual que trata destes
+	três problemas, vamos analiza-los com mais detalhes.  Soluções
+	para estes problemas tem sido propostas e 
+	implementadas:</para>
 
-    <para>Disks are getting bigger, but so are data storage
-      requirements.  Often you will find you want a file system that
-      is bigger than the disks you have available.  Admittedly, this
-      problem is not as acute as it was ten years ago, but it still
-      exists.  Some systems have solved this by creating an abstract
-      device which stores its data on a number of disks.</para>
+    <para>os discos estão ficando maiores, mas os requisitos para
+    armazenamento de dados também.  frequentemente você vai querer um
+    sistema de arquivos maior do que o disco que você tem disponível.
+    Reconhecidamente, este problema já não é tão agudo com era a dez
+    anos atrás, mas ele ainda existe.  alguns sistemas resolveram isso
+    criando um dispositivo abstrato onde armazena seus dados em um
+    número de discos.</para>
   </sect1>
 
   <sect1 id="vinum-access-bottlenecks">
-    <title>Access Bottlenecks</title>
+    <title>Gargalo de acesso</title>
 
-    <para>Modern systems frequently need to access data in a highly
-      concurrent manner.  For example, large FTP or HTTP servers can
-      maintain thousands of concurrent sessions and have multiple
-      100&nbsp;Mbit/s connections to the outside world, well beyond
-      the sustained transfer rate of most disks.</para>
+    <para>Sistemas modernos frequentemente precisam acessar dados de uma
+    maneira incrívelmente rápida.  Por exemplo, grandes servidores de
+    FTP e HTTP podem manter milhares de sessões ao mesmo tempo e podem
+    ter multiplas conexões de 100&nbsp;Mbit/s com o mundo externo, bem
+    além das taxas de transmisão da maioria dos discos.</para>
+    
+    <para>Os discos atuais podem transferir dados sequêncialmente em até
+    70&nbsp;MB/s, mas esse valor este valor é de pouca importância em um
+    ambiente onde muitos processos independentes acessam  um disco, onde
+    eles talvez atinjam apenas uma fração desse valor.  Nesses casos é
+    mais importante observar o problema do ponto de vista do subsystem:
+    o parametro importante é a carga que uma transferência coloca no
+    subsystem, em outras palavras, o tempo em que a transferência ocupa
+    os discos envolvidos.</para>
+       
+    <para>Em qualquer disco de transferência, o disco deve primeiramente
+    posicionar as cabeças de leitura e esperar até que o primeiro setor
+    passe em baixo delas e depois sim executar a transferência.  Esses
+    atos podem ser considerados com se fossem atômicos: não faz o menor
+    sentido interromper eles.</para>
+    
+    <para><anchor id="vinum-latency"> considere uma transferência
+    típica de aproximadamente 10&nbsp;kB: a geração atual de discos de
+    alta performance podem posicionar as cabeças em uma média de
+    3.5&nbsp;ms.  Os discos mais rápidos giram em 15,000&nbsp;rpm,
+    então, a rotação latente média (metade de uma revolução) é de
+    2&nbsp;ms.  Em 70&nbsp;MB/s, a transferência propriamente dita, leva
+    em torno de 150&nbsp;&mu;s, o que é quase nada comprado com o
+    tempo de posicionamento.  Em tal caso, a taxa efetiva de
+    transferência fica um pouco maior que 1&nbsp;MB/s e é altamente
+    dependente no tamanho do que vai ser transferido, é claro.</para>
 
-    <para>Current disk drives can transfer data sequentially at up to
-      70&nbsp;MB/s, but this value is of little importance in an
-      environment where many independent processes access a drive,
-      where they may achieve only a fraction of these values.  In such
-      cases it is more interesting to view the problem from the
-      viewpoint of the disk subsystem: the important parameter is the
-      load that a transfer places on the subsystem, in other words the
-      time for which a transfer occupies the drives involved in the
-      transfer.</para>
+    <para>A solução óbvia e tradicional para esse gargalo é <quote>more
+    spindles</quote>: ele usa vários discos pequenos  com a mesma
+    capacidade de armazenamento em vez de usar um outro disco grande.
+    Cada disco é capaz de se posicionar e transferir dados de maneira
+    independente, então o ritmo de transferência efetivo, cresce a uma
+    taxa próxima ao número de discos usados.</para>
 
-    <para>In any disk transfer, the drive must first position the
-      heads, wait for the first sector to pass under the read head,
-      and then perform the transfer.  These actions can be considered
-      to be atomic: it does not make any sense to interrupt
-      them.</para>
-
-    <para><anchor id="vinum-latency"> Consider a typical transfer of
-      about 10&nbsp;kB: the current generation of high-performance
-      disks can position the heads in an average of 3.5&nbsp;ms.  The
-      fastest drives spin at 15,000&nbsp;rpm, so the average
-      rotational latency (half a revolution) is 2&nbsp;ms.  At
-      70&nbsp;MB/s, the transfer itself takes about 150&nbsp;&mu;s,
-      almost nothing compared to the positioning time.  In such a
-      case, the effective transfer rate drops to a little over
-      1&nbsp;MB/s and is clearly highly dependent on the transfer
-      size.</para>
-
-    <para>The traditional and obvious solution to this bottleneck is
-      <quote>more spindles</quote>: rather than using one large disk,
-      it uses several smaller disks with the same aggregate storage
-      space.  Each disk is capable of positioning and transferring
-      independently, so the effective throughput increases by a factor
-      close to the number of disks used.
-    </para>
-
-    <para>The exact throughput improvement is, of course, smaller than
-      the number of disks involved: although each drive is capable of
-      transferring in parallel, there is no way to ensure that the
-      requests are evenly distributed across the drives.  Inevitably
-      the load on one drive will be higher than on another.</para>
-
+    <para>O ritmo de transferência exato é, claramente, menor que o
+    número de discos envolvidos: apesar de cada disco é capaz de relizar
+    transferencias em paralelo, não existe nenhuma forma de se assegurar
+    que as solicitações estão distribuidas de maneira uniforme entre os
+    discos.  Inevitavelmente a carga no disco será maior do que no
+    outro.</para> 
+    
     <indexterm>
-      <primary>disk concatenation</primary>
+      <primary>concatenação de dicos</primary>
     </indexterm>
     <indexterm>
       <primary>Vinum</primary>
-      <secondary>concatenation</secondary>
+      <secondary>concatenação</secondary>
     </indexterm>
 
-    <para>The evenness of the load on the disks is strongly dependent
-      on the way the data is shared across the drives.  In the
-      following discussion, it is convenient to think of the disk
-      storage as a large number of data sectors which are addressable
-      by number, rather like the pages in a book.  The most obvious
-      method is to divide the virtual disk into groups of consecutive
-      sectors the size of the individual physical disks and store them
-      in this manner, rather like taking a large book and tearing it
-      into smaller sections.  This method is called
-      <emphasis>concatenation</emphasis> and has the advantage that
-      the disks are not required to have any specific size
-      relationships.  It works well when the access to the virtual
-      disk is spread evenly about its address space.  When access is
-      concentrated on a smaller area, the improvement is less marked.
-      <xref linkend="vinum-concat"> illustrates the sequence in which
-      storage units are allocated in a concatenated
-      organization.</para>
-
+    <para>A igualdade da carga nos discos é fortemente dependente do
+    modo em que os dados são compartilhados entre eles.  No
+    próximo debate, seria conveniente visualizar um disco como se fosse
+    um grande número de setores de dados mapeados numericamente, como as
+    páginas de um livro.  o método mais simples seria dividir o disco
+    virtual em pequenos grupos de setores consecutivos do tamanho do
+    disco fisico individual e depois armzena-los desse jeito, semelhante
+    a pegar um livro grande e dividi-lo em pequenas sessões.  Esse étodo
+    é chamado de <emphasis>concatenação</emphasis> e tem a vantagem que
+    os discos não precisam ter nenhum tipo de relacionamento quanto a
+    tamanho.  Funciona bem quando o acesso ao disco virtual é dividido
+    de maneira igual entre os seus espaços mapeados.  quando o acesso é
+    concentrado um uma área menor, o aumento no desempenho é menos
+    acentuado. <xref linkend="vinum-concat"> Ilustra a sequência na qual
+    as unidades de armazenamento são alocadas em uma organização
+    concatenada.</para>
+    
     <para>
       <figure id="vinum-concat">
-	<title>Concatenated Organization</title>
+	<title>Organização concatenada</title>
 	<graphic fileref="vinum/vinum-concat">
       </figure>
     </para>
 
     <indexterm>
-      <primary>disk striping</primary>
+      <primary>particionamento de discos</primary>
     </indexterm>
     <indexterm>
       <primary>Vinum</primary>
-      <secondary>striping</secondary>
+      <secondary>particionamento</secondary>
     </indexterm>
 
-    <para>An alternative mapping is to divide the address space into
-      smaller, equal-sized components and store them sequentially on
-      different devices.  For example, the first 256 sectors may be
-      stored on the first disk, the next 256 sectors on the next disk
-      and so on.  After filling the last disk, the process repeats
-      until the disks are full.  This mapping is called
-      <emphasis>striping</emphasis> or <acronym>RAID-0</acronym>
+    <para>Um mapeamento alternativo é dividir o address space em
+    componentes menores, de tamanhos iguais e armazena-los
+    sequencialmente em discos diferentes.  Por exemplo, os primeiros 256
+    setores poderiam ser armazenados no primeiro disco, os 256 setores
+    seguintes no próximo disco e assim por diante.  Depois de preencher
+    o último disco processo se repete até que os discos estejam cheios.
+    Esse mapemento é chamado de <emphasis>striping</emphasis> ou
+    <acronym>RAID-0</acronym>.
 
+    
     <footnote>
       <indexterm><primary>RAID</primary></indexterm>
     
-      <para><acronym>RAID</acronym> stands for <emphasis>Redundant
-      Array of Inexpensive Disks</emphasis> and offers various forms
-      of fault tolerance, though the latter term is somewhat
-      misleading: it provides no redundancy.</para> </footnote>.
+      <para><acronym>RAID</acronym> significa <emphasis>Array redundante
+      de discos baratos</emphasis> e oferece várias formas de tolerancia
+      de erros, apesar de que um termo um pouco equivocado, pois não
+      fornece redundância.</para> </footnote>.
+      
 
-    Striping requires somewhat more effort to locate the data, and it
-    can cause additional I/O load where a transfer is spread over
-    multiple disks, but it can also provide a more constant load
-    across the disks.  <xref linkend="vinum-striped"> illustrates the
-    sequence in which storage units are allocated in a striped
-    organization.</para>
-
+    O striping exige um esforço grande para localizar os dados e
+    isso causa carga adicional de I/O onde a tranferência é distribuida
+    para diversos discos, mas pode também fornecer uma carga constante
+    entre os discos.  <xref linkend="vinum-striped"> ilustra  sequência
+    em que as unidades de armazenamento são alocadas em uma organização
+    striped.</para>
+    
     <para>
       <figure id="vinum-striped">
         <title>Striped Organization</title>
@@ -186,17 +189,17 @@
   </sect1>
 
   <sect1 id="vinum-data-integrity">
-    <title>Data Integrity</title>
+    <title>Integridade de dados</title>
 
-      <para>The final problem with current disks is that they are
-	unreliable.  Although disk drive reliability has increased
-	tremendously over the last few years, they are still the most
-	likely core component of a server to fail.  When they do, the
-	results can be catastrophic: replacing a failed disk drive and
-	restoring data to it can take days.</para>
-
+      <para>O outro problema com os discos atuais é que eles não são
+      confiáveis.  Apesar que a confiança nos discos cresceu
+      tremendamente nos últimos anos, esses ainda são um dos componentes
+      do núcleo de em servidor com a maior possibilidade de falhar.  E
+      quando eles falham, os resultados podem ser catastróficos:
+      substituir um disco e recuperar seus dados pode levar dias.</para>
+      
       <indexterm>
-	<primary>disk mirroring</primary>
+	<primary>espelhamento de disco</primary>
       </indexterm>
       <indexterm>
 	<primary>Vinum</primary>
@@ -206,55 +209,61 @@
 	<primary>RAID-1</primary>
       </indexterm>
       
-      <para>The traditional way to approach this problem has been
-	<emphasis>mirroring</emphasis>, keeping two copies of the data
-	on different physical hardware.  Since the advent of the
-	<acronym>RAID</acronym> levels, this technique has also been
-	called <acronym>RAID level 1</acronym> or
-	<acronym>RAID-1</acronym>.  Any write to the volume writes to
-	both locations; a read can be satisfied from either, so if one
-	drive fails, the data is still available on the other
-	drive.</para>
-    
-      <para>Mirroring has two problems:</para>
+      <para>O método tradicional de acessar esse problema tem sido o
+      <emphasis>espelhamento</emphasis>, mantendo duas cópias dos dados
+      em dois lugares fisicos distintos.  desde da aparição dos níveis
+      de <acronym>RAID</acronym>, essa técnica de espelhamento também é
+      chamada de <acronym>RAID nível 1</acronym> ou
+      <acronym>RAID-1</acronym>.  qualquer escrita feita no volume
+      é escrita nas duas localidades; a leitura pode ser feita a partir
+      de uma delas, então se o disco falhar, os dados ainda estarão
+      disponíveis no outro.</para>
+      
+      <para>Espelhamento tem dois problemas:</para>
     
 	<itemizedlist>
 	  <listitem>
-	    <para>The price.  It requires twice as much disk storage as
-	      a non-redundant solution.</para>
+	    <para>O preço.  Exige duas vezes mais armazenamento de disco
+	    do que uma solução sem redundância.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>The performance impact.  Writes must be performed to
-	      both drives, so they take up twice the bandwidth of a
-	      non-mirrored volume.  Reads do not suffer from a
-	      performance penalty: it even looks as if they are
-	      faster.</para>
+	    <para>O impácto de mémoria.  A escrita deve ser feita para
+	    os dois discos, devido a isso eles usam duas vezes mais
+	    largura de banda do que um volume não espelhado.  Na leitura
+	    não há queda de performance: chega até a parecer que está
+	    mais rápido.</para>
 	  </listitem>
 	</itemizedlist>
 
-      <para><indexterm><primary>RAID-5</primary></indexterm>An
-	alternative solution is <emphasis>parity</emphasis>,
-	implemented in the <acronym>RAID</acronym> levels 2, 3, 4 and
-	5.  Of these, <acronym>RAID-5</acronym> is the most
-	interesting. As implemented in Vinum, it is a variant on a
-	striped organization which dedicates one block of each stripe
-	to parity of the other blocks. As implemented by Vinum, a
-	<acronym>RAID-5</acronym> plex is similar to a striped plex,
-	except that it implements <acronym>RAID-5</acronym> by
-	including a parity block in each stripe.  As required by
-	<acronym>RAID-5</acronym>, the location of this parity block
-	changes from one stripe to the next.  The numbers in the data
-	blocks indicate the relative block numbers.</para>
+      <para><indexterm><primary>RAID-5</primary></indexterm>Uma solução
+      alternativa é <emphasis>parity</emphasis>, implementada nos níveis
+      2, 3, 4 e 5 do <acronym>RAID</acronym>.  Entre esses,
+      <acronym>RAID-5</acronym> é o mais interessante.  Como
+      implementado no vinum, é uma variante na organização strip onde
+      dedica um bloco de cada strip à parity dos outros blocos.  Um
+      <acronym>RAID-5</acronym> plex é parecido com um vinum striped
+      plex, exceto que ele implementa o <acronym>RAID-5</acronym> pois
+      ele inclui um parity bloco em cada stripe.  Como exigido pelo
+      <acronym>RAID-5</acronym>, o local do bloco parity muda de um
+      stripe para o outro.  Os números nos blocos de dados indica o
+      número relativo do bloco.</para>
 
       <para>
 	<figure id="vinum-raid5-org">
-	  <title>RAID-5 Organization</title>
+	  <title> Organização RAID-5</title>
 	  <graphic fileref="vinum/vinum-raid5-org">
 	</figure>
       </para>
 
-      <para>Compared to mirroring, <acronym>RAID-5</acronym> has the
+      <para>Comparado com espelhamento, <acronym>RAID-5</acronym> tem a
+      vantagem de requer significativamente menos espaço de
+      armazenameto.  O acesso à leitura é parecida com a utilizada nas
+      organizações striped, mas o acesso à escrita é bem reduzida, chega
+      a ate 25% da performance de leitura aproximadamente.  se um disco
+      falha, 
+      
+      Compared to mirroring, <acronym>RAID-5</acronym> has the
 	advantage of requiring significantly less storage space.  Read
 	access is similar to that of striped organizations, but write
 	access is significantly slower, approximately 25% of the read
@@ -314,32 +323,33 @@
 	functionality required of Vinum.</para>
 
     <sect2>
-      <title>Volume Size Considerations</title>
+      <title>Conciderações de um tamanho de volume</title>
 
-      <para>Plexes can include multiple subdisks spread over all
-	drives in the Vinum configuration.  As a result, the size of
-	an individual drive does not limit the size of a plex, and
-	thus of a volume.</para>
+      <para>Plexes podem ter muitos subdiscos espalhados por todas as 
+      partições nas configurações de vinum.  Como resultado, o tamanho
+      de uma prtição original não limta o tamanho nem de um plex e nem
+      de um volume.</para>
     </sect2>
     
     <sect2>
-      <title>Redundant Data Storage</title>
-      <para>Vinum implements mirroring by attaching multiple plexes to
-	a volume.  Each plex is a representation of the data in a
-	volume.  A volume may contain between one and eight
-	plexes.</para>
-
-      <para>Although a plex represents the complete data of a volume,
-	it is possible for parts of the representation to be
-	physically missing, either by design (by not defining a
-	subdisk for parts of the plex) or by accident (as a result of
-	the failure of a drive).  As long as at least one plex can
-	provide the data for the complete address range of the volume,
-	the volume is fully functional.</para>
+      <title>Redundância de armazenamento de dados</title>
+      <para>Vinum implementa espelhamento anexando multiplos plexes a um
+      volume.  Cada plex é a representação dos dados de um volume.  Um
+      volume pode conter entre um e oito plexes.</para>
+      
+      <para>Apesar de um plex repesentar os dados completos de um
+      volume, é possivel que partes da representação esteja fisicamente
+      faltando, ou por planejamento (por não definir um subdisco como
+      parte de um plex), ou por acidente (como resultado de uma falha no
+      disco).  Se que pelo menos um plex possa fornecer dados para a
+      extenção completa de endereço do volume, o sistema é completamente
+      funcional.</para>
     </sect2>
     
     <sect2>
-      <title>Performance Issues</title>
+      <title>'
+      
+      Performance Issues</title>
 
       <para>Vinum implements both concatenation and striping at the
 	plex level:</para>
@@ -1129,7 +1139,7 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 
       <itemizedlist>
 	<listitem>
-	  <para>o volume raiz não pode estar parido ou em RAID-5.</para>
+	  <para>o volume raiz não pode estar partido ou em RAID-5.</para>
 	</listitem>
 
 	<listitem>
