@@ -13,7 +13,7 @@
     <sect2>
       <title>Distribui&ccedil;&otilde;es em pacotes</title>
 
-      <para>O FreeBSD &eacute; dispon&iacute;vel no Brasil como um pacote (com os CDs e 
+      <para>O FreeBSD &eacute; dispon&iacute;vel como um pacote (com os CDs mais 
 	programas e documenta&ccedil;&atilde;o adicionais):</para>
 
       <itemizedlist>
@@ -37,7 +37,7 @@
       <title>Conjuntos de CDs</title>
 
       <para>Conjuntos de CDs com o FreeBSD, tal como nos reposit&oacute;rios oficiais, sem
-        qualquer adicional, tamb&eacute;m s&atilde;o dispon&iacute;veis no Brasil:</para>
+        qualquer adicional, tamb&eacute;m s&atilde;o dispon&iacute;veis:</para>
 
     <itemizedlist>
       <listitem>
@@ -828,138 +828,136 @@
     <title>Usando o CVSup</title>
     
     <sect2 id="cvsup-intro">
-      <title>Introduction</title>
+      <title>Introdu&ccedil;&atilde;o</title>
       
-      <para><application>CVSup</application> is a software package for
-	distributing and updating source trees from a master CVS
-	repository on a remote server host.  The FreeBSD sources are
-	maintained in a CVS repository on a central development machine
-	in California.  With <application>CVSup</application>, FreeBSD
-	users can easily keep their own source trees up to date.</para>
+      <para>O <application>CVSup</application> &eacute; um
+	 <foreignphrase>software</foreignphrase>
+	para distribuir e atualizar &aacute;rvores de fontes a partir de um reposit&oacute;rio 	
+	CVS central num servidor local.  Os fontes do pr&oacute;prio FreeBSD s&atilde;o
+	mantidos num reposit&oacute;rio central de desenvolvimento na Calif&oacute;rnia
+	Com o <application>CVSup</application>, usu&aacute;rios do FreeBSD
+	podem facilmente manter suas pr&oacute;prias  &aacute;rvores de fontes 
+	atualizadas.</para>
       
-      <para><application>CVSup</application> uses the so-called
-	<emphasis>pull</emphasis> model of updating.  Under the pull
-	model, each client asks the server for updates, if and when they
-	are wanted.  The server waits passively for update requests from
-	its clients.  Thus all updates are instigated by the client.
-	The server never sends unsolicited updates.  Users must either
-	run the <application>CVSup</application> client manually to get
-	an update, or they must set up a <command>cron</command> job to
-	run it automatically on a regular basis.</para>
+      <para><application>CVSup</application> usa o chamado modelo 
+	<emphasis>pull ( puxe, puxar )</emphasis> de atualiza&ccedil;&atilde;o.  Neste 
+	modelo cada cliente solicita atualiza&ccedil;&otilde;es ao servidor quando as deseja.  O
+	servidor central aguarda por solicita&ccedil;&otilde;es dos clientes. Todas as 
+	atualiza&ccedil;&otilde;es s&atilde;o sempre iniciadas pelo cliente. O servidor central
+	nunca envia atualiza&ccedil;&otilde;es n&atilde;o solicitadas.  Os usu&aacute;rios
+	devem executar o m&oacute;dulo <application>CVSup</application> cliente
+	manualmente para obter a atualiza&ccedil;&atilde;o desejada ou podem preparar um
+	comando <command>cron</command> que enviar&aacute; autom&aacute;tica e
+	regularmente suas solicita&ccedil;&otilde;es de atualiza&ccedil;&atilde;es como 
+	programadas.</para>
       
-      <para>The term <application>CVSup</application>, capitalized just
-	so, refers to the entire software package.  Its main components
-	are the client <command>cvsup</command> which runs on each
-	user's machine, and the server <command>cvsupd</command> which
-	runs at each of the FreeBSD mirror sites.</para>
+      <para>O termo <application>CVSup</application>, refere-se a todo o 
+	<foreignphrase>software</foreignphrase>.  Seus principais componentes s&atilde;o
+	o <command>cvsup</command> cliente, que roda na m&aacute;quina do usu&aacute;rio 
+	e o <command>cvsupd</command> servidor, que roda em cada um dos 
+	s&iacute;tios onde existe um reposit&oacute;rio CVS.</para>
 
-      <para>As you read the FreeBSD documentation and mailing lists, you
-	may see references to <application>sup</application>.
-	<application>Sup</application> was the predecessor of
-	<application>CVSup</application>, and it served a similar
-	purpose.  <application>CVSup</application> is used much in the
-	same way as sup and, in fact, uses configuration files which are
-	backward-compatible with <command>sup</command>'s.
-	<application>Sup</application> is no longer used in the FreeBSD
-	project, because <application>CVSup</application> is both faster
-	and more flexible.</para>
+      <para>Lendo documenta&ccedil;&otilde;es do FreeBSD ou listas de <quote>email</quote> 
+	voc&ecirc; pode encontrar refer&ecirc;ncias ao <application>sup</application>.
+	<application>Sup</application> foi o predecessor do
+	<application>CVSup</application>, tinha a mesma finalidade.
+	<application>CVSup</application> &eacute; usado do mesmo modo que o sup e de
+	fato, usa os mesmos arquivos de configura&ccedil;&atilde;o do
+	<command>sup</command>.
+	O <application>Sup</application> n&atilde;o &eacute; mais usado no projeto FreeBSD
+	porque o <application>CVSup</application> &eacute; mais r&aacue;pido e mais 
+	flex&iacute;vel.</para>
     </sect2>
 
     <sect2 id="cvsup-install">
-      <title>Installation</title>
+      <title>Instala&ccedil;&atilde;o</title>
       
-      <para>The easiest way to install <application>CVSup</application>
-	is to use the precompiled <filename role="package">net/cvsup</filename> package
-	from the FreeBSD <link linkend="ports">packages collection</link>.
-	If you prefer to build <application>CVSup</application> from
-	source, you can use the <filename role="package">net/cvsup</filename>
-	port instead.  But be forewarned: the
-	<filename role="package">net/cvsup</filename> port depends on the Modula-3
-	system, which takes a substantial amount of time and
-	disk space to download and build.</para>
+      <para>O modo mais f&aacute;cil de instalar o <application>CVSup</application>
+	&eacute; usando o pacote <filename role="package">net/cvsup</filename> pr&eacute; 
+	compilado do FreeBSD que faz parte da <link linkend="ports">packages collection</link>.
+	Se voc&ecirc; preferir compilar o <application>CVSup</application> a partir de seus
+	fontes, voc&ecirc; tamb&eacute;m pode usar o <filename role="package">net/cvsup</filename> encontrado no <quote>ports</quote> mas lembre-se que o
+	<application>CVSup</application> depende do sistema Modula-3 e levar&aacute;
+	muito tempo e gastar&aacute; um bocado de espa&ccedil;o em disco baix&aacute;-lo e compila-lo.</para>
 
 	<note>
-	  <para>If you are going to be using
-	  <application>CVSup</application> on a machine which will not have
-	  <application>&xfree86;</application> installed, such as a server, be
-	  sure to use the port which does not include the
+	  <para>Se voc&ecirc; est&aacute; pretendendo usar o 
+	  <application>CVSup</application> numa m&aacute;quina que n&atilde;o tem o
+	  <application>&xfree86;</application> instalado, como um servidor, por exemplo,
+	 voc&ecirc;  deve lembrar-se de usar o <quote>ports</quote> que n&atilde;o use a
 	  <application>CVSup</application> <acronym>GUI</acronym>,
 	  <filename role="package">net/cvsup-without-gui</filename>.</para>
 	</note>
       
-      <para>If you do not know anything about 
-	<application>CVSup</application> at all and want a
-	single package which will install it, set up the configuration
-	file and start the transfer via a pointy-clicky type of
-	interface, then get the <filename
-	role="package">net/cvsupit</filename>
-	package.  Just hand it to &man.pkg.add.1; and it will lead you
-	through the configuration process in a menu-oriented
-	fashion.</para>
+      <para>Se voc&ecirc; ainda n&atilde;o conhece o <application>CVSup</application>
+	 e tudo o que voc&ecirc; deseja &eacute; um pacote simples para instal&aacute;-lo,
+	prepare o arquivo de configura&ccedil;&atilde;o e inicie a transfer&ecirc;cia 
+	atrav&eacute;s de um tipo de interface <quote>apontar e clicar</quote>, pegue 
+	ent&atilde;o o pacote <filename role="package">net/cvsupit</filename>.  
+	Ent&atilde;o o &man.pkg.add.1; guiar&aacute; voc&ecirc; pelo processo
+	de configura&ccedil;&atilde;o atrav&eacute;s de uma interface orientada a menus
+	.</para>
     </sect2>
 
     <sect2 id="cvsup-config">
-      <title>CVSup Configuration</title>
+      <title>Configura&ccedil;&atilde;o do CVSup</title>
       
-      <para><application>CVSup</application>'s operation is controlled
-	by a configuration file called the <filename>supfile</filename>.
-	There are some sample <filename>supfiles</filename> in the
-	directory <ulink type="html"
-	  url="file://localhost/usr/share/examples/cvsup/"><filename>/usr/share/examples/cvsup/</filename></ulink>.</para>
+      <para>A opera&ccedil;&atilde;o do <application>CVSup</application> &eacute; controlada
+	por um arquivo de configura&ccedil;&atilde;o chamado <filename>supfile</filename>.
+	Existem alguns exemplos de <filename>supfiles</filename> no diret&oacute;rio 
+	<ulink type="html" url="file://localhost/usr/share/examples/cvsup/"><filename>/usr/share/examples/cvsup/</filename></ulink>.</para>
       
-      <para>The information in a <filename>supfile</filename> answers
-	the following questions for <application>CVSup</application>:</para>
+      <para>A informa&ccedil;&atilde;o contida no <filename>supfile</filename> responde ao
+	<application>CVSup</application> as seguintes quest&otilde;es:</para>
       
       <itemizedlist>
 	<listitem>
-	  <para><link linkend="cvsup-config-files">Which files do you
-	      want to receive?</link></para>
+	  <para><link linkend="cvsup-config-files">Que arquivos voc&ecirc; quer
+	      receber ?</link></para>
 	</listitem>
 	
 	<listitem>
-	  <para><link linkend="cvsup-config-vers">Which versions of them
-	      do you want?</link></para>
+	  <para><link linkend="cvsup-config-vers">Que vers&otilde;es desses 
+	      arquivos voc&ecirc; quer ?</link></para>
 	</listitem>
 	
 	<listitem>
-	  <para><link linkend="cvsup-config-where">Where do you want to
-	      get them from?</link></para>
+	  <para><link linkend="cvsup-config-where">De onde voc&ecirc; quer
+	      peg&aacute;-los ?</link></para>
 	</listitem>
 	
 	<listitem>
-	  <para><link linkend="cvsup-config-dest">Where do you want to
-	      put them on your own machine?</link></para>
+	  <para><link linkend="cvsup-config-dest">Onde voc&ecirc; quer coloc&aacute;-los
+	      em sua m&aacute;quina ?</link></para>
 	</listitem>
 	
 	<listitem>
-	  <para><link linkend="cvsup-config-status">Where do you want to
-	      put your status files?</link></para>
+	  <para><link linkend="cvsup-config-status">Onde voc&ecirc; quer colocar os 
+	   arquivos de <foreignphrase>status</foreignphrase> ?</link></para>
 	</listitem>
       </itemizedlist>
 
-      <para>In the following sections, we will construct a typical
-	<filename>supfile</filename> by answering each of these
-	questions in turn.  First, we describe the overall structure of
-	a <filename>supfile</filename>.</para>
+      <para>Nas se&ccedil;&otilde;es seguintes construiremos um
+	<filename>supfile</filename> t&iacute;pico respondendo a cada uma dessas
+	quest&otilde;es.  Primeiro descreveremos a estrutura geral de um 
+	 <filename>supfile</filename>.</para>
 
-      <para>A <filename>supfile</filename> is a text file.  Comments
-	begin with <literal>#</literal> and extend to the end of the
-	line.  Lines that are blank and lines that contain only
-	comments are ignored.</para>
+      <para>Um <filename>supfile</filename> &eacute; um arquivo texto.  Coment&aacute;rios
+	come&ccedil; com <literal>#</literal> e v&atilde;o at&eacute; o fim da linha.  
+	Linha em branco e linhas somente com coment&aacute;rios s&atilde;o ignoradas
+	.</para>
       
-      <para>Each remaining line describes a set of files that the user
-	wishes to receive.  The line begins with the name of a
-	<quote>collection</quote>, a logical grouping of files defined by
-	the server. The name of the collection tells the server which
-	files you want.  After the collection name come zero or more
-	fields, separated by white space.  These fields answer the
-	questions listed above.  There are two types of fields: flag
-	fields and value fields.  A flag field consists of a keyword
-	standing alone, e.g., <literal>delete</literal> or
-	<literal>compress</literal>.  A value field also begins with a
-	keyword, but the keyword is followed without intervening white
-	space by <literal>=</literal> and a second word.  For example,
-	<literal>release=cvs</literal> is a value field.</para>
+      <para>Cada linha descreve um conjunto de arquivos que o usu&aacute;rio quer
+	receber.  Uma linha come&ccedil;a com um nome de
+	<quote>collection</quote>, um grupo l&oacute;gico de arquivos definidos pelo
+	servidor. O nome do <foreignphrase>collection</foreignphrase> diz ao servidor que
+	arquivos voc&ecirc; quer.  Depois do nome do <foreignphrase>collection</foreignphrase>  
+	v&ecirc;m zero ou mais campos separados por espa&ccedil;.o.  Estes campos respondem
+	 as quest&otilde;es listadas acima.  Existem dois tipos de campos: indicadores e valores.
+	   Um indicador consiste de uma palavra-chave isolada, como, <literal>delete</literal> ou
+	<literal>compress</literal>.  Um valor tamb&eacute; consiste de uma palavra-chave, 
+	 mas seguida pelo literal <literal>=</literal> e uma segunda palavra.  Por exemplo,
+	<literal>release=cvs</literal>, &eacute; um campo valor.</para>
       
       <para>A <filename>supfile</filename> typically specifies more than
 	one collection to receive.  One way to structure a
