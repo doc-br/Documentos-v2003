@@ -2538,14 +2538,15 @@ nameserver 128.32.136.12</programlisting>
       </sect3>
 
       <sect3>
-	<title>Making a SLIP Connection</title>
+	<title>Criando uma Conexão SLIP</title>
 	<indexterm><primary>SLIP</primary><secondary>connecting with</secondary></indexterm>
 	<procedure>
 	  <step>
-	    <para>Dial up, type <command>slip</command> at the prompt,
-	      enter your machine name and password.  What is required to
-	      be entered depends on your environment.  If you use
-	      kermit, you can try a script like this:</para>
+	    <para>Discar, digitar <command>slip</command> no prompt,
+	      digitar o nome da sua máquina e a senha. O que é 
+	      necessário para estabelecer a conexão varia de acordo
+	      com seu ambiente. Se você usa kermit, pode tentar
+	      um script como o abaixo:</para>
 
 	    <programlisting># kermit setup
 set modem hayes
@@ -2555,89 +2556,89 @@ set parity none
 set flow rts/cts
 set terminal bytesize 8
 set file type binary
-# The next macro will dial up and login
+# A próxima macro vai discar e logar
 define slip dial 643-9600, input 10 =&gt;, if failure stop, -
 output slip\x0d, input 10 Username:, if failure stop, -
 output silvia\x0d, input 10 Password:, if failure stop, -
 output ***\x0d, echo \x0aCONNECTED\x0a</programlisting>
 
-	    <para>Of course, you have to change the hostname and password
-	      to fit yours.  After doing so, you can just type
-	      <command>slip</command> from the kermit prompt to
-	      connect.</para>
+	<para>É claro que você precisar troar o hostname e a senha.
+	  Depois de fazer isso você pode digitar <command>slip</command>
+	  do prompt do kermit para se conectar.</para>
 
 	    <note>
-	      <para>Leaving your password in plain text anywhere in the
-		filesystem is generally a <emphasis>bad</emphasis> idea.
-		Do it at your own risk.</para>
+	      <para>Dexiar sua senha em texto puro no sistema de arquivos
+	        geralmente é uma <emphasis>má</emphasis> idéia.</para>
 	    </note>
 	  </step>
 
 	  <step>
-	    <para>Leave the kermit there (you can suspend it by
-	      <keycombo>
-		<keycap>Ctrl</keycap>
-		<keycap>z</keycap>
-	      </keycombo>) and as <username>root</username>, type:</para>
+	    <para>Deixe o kermit lá (você pode suspendê-lo com um
+                   <keycombo>
+                   <keycap>Ctrl</keycap>
+                   <keycap>z</keycap>
+	      </keycombo>) e, como <username>root</username>, digite:</para>
 
 	    <screen>&prompt.root; <userinput>slattach -h -c -s 115200 /dev/modem</userinput></screen>
 
-	    <para>If you are able to <command>ping</command> hosts on the
-	      other side of the router, you are connected!  If it does not
-	      work, you might want to try <option>-a</option> instead of
-	      <option>-c</option> as an argument to
-	      <command>slattach</command>.</para>
+	<para>Se você conseguir <literal>pingar</literal> alguma máquina
+	  no outro ládo do roteador, você está conectado! Se isso não
+	  funcionar você pode tentar usar a opção <option>-a</option>
+	  em vez de <option>-c</option> como um argumento para
+	  <command>slattach</command>.</para>
 	  </step>
 	</procedure>
       </sect3>
 
       <sect3>
-	<title>How to Shutdown the Connection</title>
+	<title>Como Desligar uma Conexão</title>
 
-	<para>Do the following:</para>
+	<para>Faça o seguinte:</para>
 
 	<screen>&prompt.root; <userinput>kill -INT `cat /var/run/slattach.modem.pid`</userinput></screen>
 
-	<para>to kill <command>slattach</command>.  Keep in mind you must be
-	  <username>root</username> to do the above.  Then go back to
-	  kermit (by running <command>fg</command> if you suspended it) and
-	  exit from
-	  it (<command>q</command>).</para>
+	<para>para matar o <command>slattach</command>.  Tenha em mente
+	 que você precisar ser <username>root</username> para realizar 
+	 esta operação.  Volte para o kermit (através da execução do
+	 comando <command>fg</command> se você suspendeu ele) e saia
+	 dele (com o comando <command>q</command>).</para>
 
-	<para>The <command>slattach</command> manual page says you have
-	  to use <command>ifconfig sl0 down</command>
-	  to mark the interface down, but this does not
-	  seem to make any difference for me.
-	  (<command>ifconfig sl0</command> reports the same thing.)</para>
 
-	<para>Some times, your modem might refuse to drop the carrier
-	  (mine often does).  In that case, simply start kermit and quit
-	  it again.  It usually goes out on the second try.</para>
+	<para>O página manual do <command>slattach</command> diz que você
+	  tem de usar <command>ifconfig sl0 down</command> para marcar
+	  a interface como desligada, mas isso não parece fazer nenhuma
+	  diferença para mim. (<command>ifconfig sl0</command> diz
+	  a mesma coisa.)</para>
+
+	<para>Algumas vezes, seu modem pode se recusar a liberar
+	  a linha (o meu faz isso as vezes).  Nesse caso, simplesmente
+	  inicie o kermit e saia novamente.  Ele geralmente libera
+	  a linha na segunda tentativa.</para>
       </sect3>
 
       <sect3>
-	<title>Troubleshooting</title>
+	<title>Resolução de Problemas</title>
 
-	<para>If it does not work, feel free to ask me.  The things that
-	  people tripped over so far:</para>
+	<para>Se isso não funcionar, sinta-se livre para me perguntar.  As
+	  coisas que as pessoas têm feito até agora:</para>
 
 	<itemizedlist>
 	  <listitem>
-	    <para>Not using <option>-c</option> or <option>-a</option> in
-	      <command>slattach</command> (This should not be fatal,
-	      but some users have reported that this solves their
-	      problems.)</para>
+	    <para>Não usar <option>-c</option> ou <option>-a</option> no
+	      <command>slattach</command> (Isso não deve ser fatal,
+	      mas alguns usuários tem informado que isso resolve
+	      os problemas deles).</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>Using <option>s10</option> instead of
-	      <option>sl0</option> (might be hard to see the difference on
-	      some fonts).</para>
+	    <para>Usar <option>s10</option> em vez de <option>sl0</option>
+	    (pode ser difícil de ver a diferença em algumas fontes).</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>Try <command>ifconfig sl0</command> to see your
-	      interface status.  For example, you might get:</para>
+	    <para>Tente <command>ifconfig sl0</command> para ver
+	      o status da sua interface.  Por exemplo, você pode
+	      ver:</para>
 
 	    <screen>&prompt.root; <userinput>ifconfig sl0</userinput>
 sl0: flags=10&lt;POINTOPOINT&gt;
@@ -2645,10 +2646,10 @@ sl0: flags=10&lt;POINTOPOINT&gt;
 	  </listitem>
 
 	  <listitem>
-	    <para>If you get <errorname>no route to host</errorname>
-	    messages from ping, there may be a problem with your
-	    routing table.  You can use the <command>netstat -r</command>
-	    command to display the current routes :</para>
+	    <para>Se você ver  <errorname>no route to host</errorname>
+	      do ping, pode haver um problema com sua tabela de roteamento.
+	      Você pode usar o comando <command>netstat -r</command> para
+	      mostra as rotas correntes:</para>
 
 	    <screen>&prompt.root; <userinput>netstat -r</userinput>
 Routing tables
@@ -2665,9 +2666,9 @@ inr-3.Example.ED water.CS.Example.E UH	  1	0 sl0 -      -
 water.CS.Example localhost.Example.  UGH	34 47641234 lo0 -       0.438
 (root node)</screen>
 
-	    <para>The preceding examples are from a relatively busy system.
-	      The numbers on your system will vary depending on
-	      network activity.</para>
+	  <para>Os exemplos anteriores são de um sistema relativamente
+	    carregado. Os números no seu sistema vão variar dependendo
+	    da atividade de rede.</para>
 
 	  </listitem>
 	</itemizedlist>
@@ -2675,13 +2676,13 @@ water.CS.Example localhost.Example.  UGH	34 47641234 lo0 -       0.438
     </sect2>
 
     <sect2 id="slips">
-      <title>Setting Up a SLIP Server</title>
+      <title>Configurando um Servidor SLIP</title>
       <indexterm><primary>SLIP</primary><secondary>server</secondary></indexterm>
 
-      <para>This document provides suggestions for setting up SLIP Server
-	services on a FreeBSD system, which typically means configuring
-	your system to automatically startup connections upon login for
-	remote SLIP clients.</para>
+	<para>Esse documento fornece sugestões para se ajustar um
+	 servidor SLIP em um sistema FreeBSD, o que tipicamente significa
+	 configurar o sistema para que inicie as conexões automaticamente
+	 assim que ocorrer o login de clientes remotos.</para>
 
       <!-- Disclaimer is not necessarily relevant
       <para>The author has written this document based
@@ -2692,99 +2693,95 @@ water.CS.Example localhost.Example.  UGH	34 47641234 lo0 -       0.438
       -->
 
       <sect3 id="slips-prereqs">
-	<title>Prerequisites</title>
+	<title>Pré-requisitos</title>
 	<indexterm><primary>TCP/IP networking</primary></indexterm>
-	<para>This section is very technical in nature, so background
-	  knowledge is required.  It is assumed that you are familiar with
-	  the TCP/IP network protocol, and in particular, network and node
-	  addressing, network address masks, subnetting, routing, and
-	  routing protocols, such as RIP.  Configuring SLIP services on a
-	  dial-up server requires a knowledge of these concepts, and if
-	  you are not familiar with them, please read a copy of either
-	  Craig Hunt's <emphasis>TCP/IP Network Administration</emphasis>
-	  published by O'Reilly &amp; Associates, Inc. (ISBN Number
-	  0-937175-82-X), or Douglas Comer's books on the TCP/IP
-	  protocol.</para>
+	<para>Essa seção é bastante técnica em sua natureza, portanto
+	  conhecimento sobre o assunto é requerido.  Assumimos que você
+	  esteja familiar com a suíte de protocolos TCP/IP, e em
+	  particular, endereçamento, máscaras de rede, <literal>subnetting</literal>,
+	  roteamento e protocolos de roteamento, como o RIP.  Configurar
+	  serviços SLIP em um servidor de acesso discado requer conhecimento
+	  de todos esses conceitos, e se você não está familiar com eles,
+	  por favor leia o livro <emphasis>TCP/IP Network Administration</emphasis>
+	  de Craig Hunt publicado pela O'Reilly &amp; Associates, Inc. (
+	  ISBN 0-937175-82-X), ou os livros de Douglas Comer sobre TCP/IP.</para>
 
 	<indexterm><primary>modem</primary></indexterm>
-	<para>It is further assumed that you have already set up your
-	  modem(s) and configured the appropriate system files to allow
-	  logins through your modems.  If you have not prepared your
-	  system for this yet, please see the tutorial for configuring
-	  dialup services; if you have a World-Wide Web browser available,
-	  browse the list of tutorials at <ulink
-	  url="../../../../index.html">http://www.FreeBSD.org/</ulink>.
-	  You may also want to check the manual pages for &man.sio.4; for
-	  information on the serial port device driver and &man.ttys.5;,
-	  &man.gettytab.5;, &man.getty.8;, &amp; &man.init.8; for
-	  information relevant to configuring the system to accept logins
-	  on modems, and perhaps &man.stty.1; for information on setting
-	  serial port parameters (such as <literal>clocal</literal> for
-	  directly-connected serial interfaces).</para>
+	<para>É assumido que você já ajustou seu modem(s) e 
+	 configurou os arquivos do sistema apropriados para permitir
+	 logins através de seus modems.  Se você não preparou o
+	 sistema ainda para isso, por favor veja o tutorial sobre
+	 como configurar serviços de acesso discado; se você tem
+	 um navegador disponível, navegue pela lista de tutoriais 
+	 disponíveis em <ulink url="../../../../index.html">http://www.FreeBSD.org/</ulink>.
+	 Você também pode verificar as páginas manuais &man.sio.4; para
+	 informações sobre o driver de dispositivo para portas seriais e
+	 &man.ttys.5;, &man.gettytab.5;, &man.getty.8;, &amp; &man.init.8;
+	 para informação sobre como configurar o sistema para aceitar 
+	 logins de modems, e talvez &man.stty.1; para informações
+	 sobre como ajustar os parâmetros da porta serial (como
+	 <literal>clocal</literal> para interfaces seriais diretamente
+	 conectadas).</para>
       </sect3>
 
       <sect3>
-	<title>Quick Overview</title>
+	<title>Rápida Introduão</title>
 
-	<para>In its typical configuration, using FreeBSD as a SLIP server
-	  works as follows:  a SLIP user dials up your FreeBSD SLIP Server
-	  system and logs in with a special SLIP login ID that uses
-	  <filename>/usr/sbin/sliplogin</filename> as the special user's
-	  shell.  The <command>sliplogin</command> program browses the
-	  file <filename>/etc/sliphome/slip.hosts</filename> to find a
-	  matching line for the special user, and if it finds a match,
-	  connects the serial line to an available SLIP interface and then
-	  runs the shell script
-	  <filename>/etc/sliphome/slip.login</filename> to configure the
-	  SLIP interface.</para>
+	<para>Na configuração típica, usar o FreeBSD como um servidor
+	  SLIP funciona da seguinte forma: um usuário SLIP disca para
+	  seu servidor SLIP e se autentica com um login especial SLIP 
+	  que usa <filename>/usr/sbin/sliplogin</filename> como sua
+	  shell.  O programa <command>sliplogin</command> navega pelo
+	  arquivo <filename>/etc/sliphome/slip.hosts</filename> para
+	  achar uma linha que contenha esse usuário, e se ele encontra,
+	  conecta a linha serial com uma interface SLIP disponível
+	  e então roda o script shell <filename>/etc/sliphome/slip.login</filename>
+	  para configurar a interface SLIP.</para>
 
 	<sect4>
-	  <title>An Example of a SLIP Server Login</title>
+	  <title>Exemplo de um Login</title>
 
-	  <para>For example, if a SLIP user ID were
-	    <username>Shelmerg</username>, <username>Shelmerg</username>'s
-	    entry in <filename>/etc/master.passwd</filename> would look
-	    something like this:</para>
+	  <para>Por exemplo, se um usuário SLIP fosse <username>Shelmerg</username>, 
+	    a entrada de <username>Shelmerg</username> no arquivo
+	    <filename>/etc/master.passwd</filename> iria ser parecida
+	    com isso:</para>
 
 	  <programlisting>Shelmerg:password:1964:89::0:0:Guy Helmer - SLIP:/usr/users/Shelmerg:/usr/sbin/sliplogin</programlisting>
 
-	  <para>When <username>Shelmerg</username> logs in,
-	    <command>sliplogin</command> will search
-	    <filename>/etc/sliphome/slip.hosts</filename> for a line that
-	    had a matching user ID; for example, there may be a line in
-	    <filename>/etc/sliphome/slip.hosts</filename> that
-	    reads:</para>
+	<para>Quando <username>Shelmerg</username> entrasse,
+	  <command>sliplogin</command> iria procurar por uma
+	  linha em <filename>/etc/sliphome/slip.hosts</filename>
+	  que contivesse o usuário; por exemplo, pode haver uma
+	  linha no <filename>/etc/sliphome/slip.hosts</filename>
+	  que fosse assim:</para>
 
 	  <programlisting>Shelmerg	dc-slip sl-helmer       0xfffffc00		  autocomp</programlisting>
 
-	  <para><command>sliplogin</command> will find that matching line,
-	    hook the serial line into the next available SLIP interface,
-	    and then execute <filename>/etc/sliphome/slip.login</filename>
-	    like this:</para>
+	<para><command>sliplogin</command> vai encontrar essa linha,
+	  ligar a linha serial à próxima interface SLIP disponível e
+	  então executar <filename>/etc/sliphome/slip.login</filename>
+	  desta forma:</para>
 
 	  <programlisting>/etc/sliphome/slip.login 0 19200 Shelmerg dc-slip sl-helmer 0xfffffc00 autocomp</programlisting>
 
-	  <para>If all goes well,
-	    <filename>/etc/sliphome/slip.login</filename> will issue an
-	    <command>ifconfig</command> for the SLIP interface to which
-	    <command>sliplogin</command> attached itself (slip interface
-	    0, in the above example, which was the first parameter in the
-	    list given to <filename>slip.login</filename>) to set the
-	    local IP address (<hostid>dc-slip</hostid>), remote IP address
-	    (<hostid>sl-helmer</hostid>), network mask for the SLIP
-	    interface (<hostid role="netmask">0xfffffc00</hostid>), and
-	    any additional flags (<literal>autocomp</literal>).  If
-	    something goes wrong, <command>sliplogin</command> usually
-	    logs good informational messages via the
-	    <literal>daemon</literal> syslog facility, which usually logs
-	    to <filename>/var/log/messages</filename> (see the manual
-	    pages for &man.syslogd.8; and &man.syslog.conf.5; and perhaps
-	    check <filename>/etc/syslog.conf</filename> to see to what
-	    <command>syslogd</command> is logging and where it is
-	    logging to).</para>
+	<para>Se tudo correr bem, <filename>/etc/sliphome/slip.login</filename>
+	  irá executar o <command>ifconfig</command> para a interface SLIP
+	  a qual <command>sliplogin</command> se ligou (interface 0,
+	  no exemplo acima, que era o primeiro parâmetro na lista
+	  dada a <filename>slip.login</filename>) para ajustar o 
+	  endereço IP local (<hostid>dc-slip</hostid>), o endereço
+	  IP remoto (<hostid>sl-helmer</hostid>), a máscara de rede
+	   (<hostid role="netmask">0xfffffc00</hostid>), e qualquer
+	   flag adicional (<literal>autocomp</literal>).  Se alguma
+	   coisa acontecer de errado, <command>sliplogin</command>
+	   geralmente grava uma mensagem em <filename>/var/log/messages</filename> 
+	   (veja a página manual do &man.syslogd.8; e &man.syslog.conf.5; e
+	   talvez verifique o <filename>/etc/syslog.conf</filename> para
+	   ver o que o <command>syslogd</command> está gravando e onde
+	   ele está gravando).</para>
 
-	  <para>OK, enough of the examples &mdash; let us dive into
-	    setting up the system.</para>
+	<para>OK, chega de exemplos &mdash; vamos ajustar o 
+	  sistema.</para>
 	</sect4>
       </sect3>
 
