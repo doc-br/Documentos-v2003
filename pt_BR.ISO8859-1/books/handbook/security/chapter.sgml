@@ -584,8 +584,8 @@
 	de senhas criptografadas, comprometendo potencialmente
 	qualquer conta com senha.  Alternativamente um invasor que
 	viole o grupo <literal>kmem</literal> pode monitorar keystrokes 
-	enviadas através dos terminais <literal>pty<literal>, incluindo
-	<literal>pty's<literal> usados por usuários que fazem login 
+	enviadas através dos terminais <literal>pty</literal>, incluindo
+	<literal>pty's</literal> usados por usuários que fazem login 
 	através de métodos seguros.  Um invasor que viole o grupo 
 	<groupname>tty</groupname> pode escrever para quase todos os
 	tty de usuário.  Se um usuário estiver executando um programa ou 
@@ -625,46 +625,50 @@
 	arquivo mesmo se o atacante não pode obter acesso de escrita
 	root.</para>
 
-      <para>Your security scripts should always check for and report
-	changes to the password file (see the <link
-	  linkend="security-integrity">Checking file integrity</link> section
-	below).</para>
+      <para>Seus scripts de segurança devem sempre verificar e relatar
+	mudanças ao arquivo de senhas (veja a seção <link
+	  linkend="security-integrity">Verificando integridade de 
+	  arquivos</link> abaixo).</para>
     </sect2>
 
     <sect2>
-      <title>Securing the Kernel Core, Raw Devices, and
-	Filesystems</title>
+      <title>Protegendo o Kernel Core, Raw Devices, e sistemas de arquivos</title>
 
-      <para>If an attacker breaks <username>root</username> he can do
-        just about anything, but
-	there are certain conveniences.  For example, most modern kernels
-	have a packet sniffing device driver built in.  Under FreeBSD it
-	is called the <devicename>bpf</devicename> device.  An intruder
-	will commonly attempt to run a packet sniffer on a compromised
-	machine.  You do not need to give the intruder the capability and
-	most systems do not have the need for the
-	<devicename>bpf</devicename> device compiled in.</para>
+      <para>Se um atacante violar o <username>root</username> ele pode
+	fazer quase que qualquer coisa, mas há certas conveniências.
+	Por exemplo, a maioria dos <literal>kernels</literal> modernos
+	tem um controlador de dispositivo de farejar
+	(<foreignphrase>sniffing</foreignphrase>) pacotes embutido.  
+	Sob FreeBSD é chamado dispositivo <devicename>bpf</devicename>.  
+	Um invasor tentará geralmente executar um farejador 
+	(<foreignphrase>sniffer</foreignphrase>) de pacotes em
+	uma máquina comprometida.  Você não necessita dar ao invasor
+	esta capacidade e a maioria dos sistemas não tem a necessidade
+	para o dispositivo <devicename>bpf</devicename> compilado.</para>
 
       <indexterm>
         <primary><command>sysctl</command></primary>
       </indexterm>
-      <para>But even if you turn off the <devicename>bpf</devicename>
-	device, you still have
-	<devicename>/dev/mem</devicename> and 
-	<devicename>/dev/kmem</devicename>
-	to worry about.  For that matter, the intruder can still write to
-	raw disk devices.  Also, there is another kernel feature called
-	the module loader, &man.kldload.8;.  An enterprising intruder can
-	use a KLD module to install his own <devicename>bpf</devicename>
-	device, or other sniffing
-	device, on a running kernel.  To avoid these problems you have to
-	run the kernel at a higher secure level, at least securelevel 1.
-	The securelevel can be set with a <command>sysctl</command> on
-	the <varname>kern.securelevel</varname> variable.  Once you have
-	set the securelevel to 1, write access to raw devices will be
-	denied and special <command>chflags</command> flags,
-	such as <literal>schg</literal>,
-	will be enforced.  You must also ensure that the
+      <para>Mas mesmo se você desligar o dispositivo 
+	<devicename>bpf</devicename>, você ainda tem  
+	<devicename>/dev/mem</devicename> e 
+	<devicename>/dev/kmem</devicename> para preocupar-se.  
+	De qualquer forma, o invasor pode ainda escrever em
+	raw disk devices.  Também, há outra característica no 
+	<literal>kernel</literal> chamada carregador de módulo, 
+	&man.kldload.8;.  Um invasor ousado pode usar um módulo
+	KLD para instalar seu próprio dispositivo 
+	<devicename>bpf</devicename>, ou outro dispositivo de
+	farejar (<foreignphrase>sniffing</foreignphrase>), em um
+	<literal>kernel</literal> funcionando.  Para evitar estes
+	problemas você tem que executar o kernel em um nível
+	de segurança mais elevado, pelo menos securelevel 1.
+	O securelevel pode ser ajustado com <command>sysctl</command> na
+	variável <varname>kern.securelevel</varname>.  Uma vez
+	que você ajustou o securelevel para 1, acesso de escrita
+	a raw devices estarão negados e sinalizações especiais 
+	<command>chflags</command>, tais como <literal>schg</literal>,
+	serão reforçadas.  You must also ensure that the
 	<literal>schg</literal> flag is set on critical startup binaries,
 	directories, and script files &ndash; everything that gets run up
 	to the point where the securelevel is set.  This might be overdoing
