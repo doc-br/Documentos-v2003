@@ -14,7 +14,7 @@
 <!ENTITY % authors PUBLIC "-//FreeBSD//ENTITIES DocBook Author Entities//EN"> %authors;
 <!ENTITY % teams PUBLIC "-//FreeBSD//ENTITIES DocBook Team Entities//EN">
 %teams;
-<!ENTITY % mailing-lists PUBLIC "-//FreeBSD//ENTITIES DocBook Mailing List Entities//PTBR">
+<!ENTITY % mailing-lists PUBLIC "-//FreeBSD//ENTITIES DocBook Mailing List Entities//EN">
 %mailing-lists;
 
 ]>
@@ -375,7 +375,7 @@ lib/X11/oneko/mouse.xpm
     <chapter id="slow">
       <title>Slow Porting</title>
 
-      <para>Ok, assim n&atilde;o eraauilo simple, e o port necessita algumas
+      <para>Ok, assim n&atilde;o era aquilo simples, e o port necessita algumas
         modifica&ccedil;&otilde;es para funcionar.  Nesta se&ccedil;&atilde;o, n&oacute;s explicaremos,
         passo a passo, como modifica-lo para funcionar com os paradigmas
         do ports.</para>
@@ -464,7 +464,7 @@ lib/X11/oneko/mouse.xpm
           </step>
         </procedure>
 
-        <para>The above s&atilde;o as a&ccedil;&otilde;es actions.  Adicionalmente, voc&ecirc; pode definir
+        <para>Acimas s&atilde;o as a&ccedil;&otilde;es.  Adicionalmente, voc&ecirc; pode definir
           targets
           <maketarget>pre-<replaceable>something</replaceable></maketarget> ou
           <maketarget>post-<replaceable>something</replaceable></maketarget>,
@@ -664,386 +664,384 @@ lib/X11/oneko/mouse.xpm
     <chapter id="makefile">
       <title>Configurando o Makefile</title>
 
-      <para>Configurando o <filename>Makefile</filename> e pretty simple, , e novamente n&oacute;s sugerimos
+      <para>Configurando o <filename>Makefile</filename> e bastante simples, e novamente n&oacute;s sugerimos
         que voc&ecirc; olhe em exemplos existentes antes de iniciar. Tamb&eacute;m, h&aacute; 
-        that you look at existing examples before starting. Also, there is a
-        <link linkend="porting-samplem">sample Makefile</link> in this
-        handbook, so take a look and please follow the ordering of variables
-        and sections in that template to make your port easier for others to
-        read.</para>
+        <link linkend="porting-samplem">exemplo de Makefile</link> neste
+        manual, assim de um olhada e por favor siga as orderns das vari&aacute;veis
+        ae se&ccedil;&otilde;es naquele template para fazer seu port facilmente para outros
+        lerem.</para>
 
-      <para>Now, consider the following problems in sequence as you design
-        your new <filename>Makefile</filename>:</para>
+      <para>Agora, considerando os seguintes problemas em sequence como voc&ecirc; design
+        seu novo <filename>Makefile</filename>:</para>
 
       <sect1 id="makefile-source">
-        <title>The original source</title>
+        <title>>O fonte original</title>
 
-        <para>Does it live in <makevar>DISTDIR</makevar> as a standard
-	  gzip'd tarball named something like
-	  <filename>foozolix-1.2.tar.gz</filename>? If so, you can go on
-	  to the next step.  If not, you should look at overriding any of
-	  the <makevar>DISTNAME</makevar>, <makevar>EXTRACT_CMD</makevar>,
+        <para>Ele mora em <makevar>DISTDIR</makevar> como em um padr&atilde;o
+	  gzip'd tarball chamado algo como
+	  <filename>foozolix-1.2.tar.gz</filename>? Se sim, voc&ecirc; pode ir ao
+	  ao pr&oacute;ximo passo.  Se n&atilde;o, voc&ecirc; deve olhar em sobrescrevendo qualquer das
+	  vari&aacute;veis <makevar>DISTNAME</makevar>, <makevar>EXTRACT_CMD</makevar>,
 	  <makevar>EXTRACT_BEFORE_ARGS</makevar>,
 	  <makevar>EXTRACT_AFTER_ARGS</makevar>,
-	  <makevar>EXTRACT_SUFX</makevar>, or <makevar>DISTFILES</makevar>
-	  variables, depending on how alien a format your port's
-	  distribution file is.  (The most common case is
-	  <literal>EXTRACT_SUFX=.tar.Z</literal>, when the tarball is
-	  condensed by regular <command>compress</command>, not
+	  <makevar>EXTRACT_SUFX</makevar>, ou <makevar>DISTFILES</makevar>,
+	  dependendo em como alien um formato a seu arquivo distribui&ccedil;&atilde;o
+	  &eacute;.  (O mais caso comum &eacute;
+	  <literal>EXTRACT_SUFX=.tar.Z</literal>, quando o tarball est&aacute;
+	  condensado regularmente <command>compress</command>, n&atilde;o
 	  <command>gzip</command>.)</para>
 
-        <para>In the worst case, you can simply create your own
-	  <maketarget>do-extract</maketarget> target to override the
-	  default, though this should be rarely, if ever,
-	  necessary.</para>
+        <para>No pior caso, voc&ecirc; pode simplesmente criar seu pr&oacute;prio
+	  <maketarget>do-extract</maketarget> target para sobrescrever o
+	  default, embora este deve ser raramente, se for,
+	  necess&aacute;rio.</para>
       </sect1>
     
     <sect1 id="makefile-naming">
-      <title>Naming</title>
+      <title>Nomeando</title>
 
-      <para>The first part of the port's <filename>Makefile</filename> names
-	the port, describes its version number, and lists it in the correct
-	category.</para>
+      <para>A primeira parte do <filename>Makefile</filename> do port nomeia
+	o port, descreve seu n&uacute;mero da vers&atilde;o, e lista-os na categoria
+	correta.</para>
 
       <sect2>
         <title><makevar>PORTNAME</makevar> and <makevar>PORTVERSION</makevar></title>
 
-        <para>You should set <makevar>PORTNAME</makevar> to the
-          base name of your port, and <makevar>PORTVERSION</makevar>
-          to the version number of the port.</para>
+        <para>Voc&ecirc; deve definir <makevar>PORTNAME</makevar> ao
+          nome da base de seu port, e <makevar>PORTVERSION</makevar>
+          ao n&uacute;mero da vers&atilde;o do port.</para>
       </sect2>
 
       <sect2>
-	<title><makevar>PORTREVISION</makevar> and
+	<title><makevar>PORTREVISION</makevar> e
 	  <makevar>PORTEPOCH</makevar></title>
 
 	<sect3>
 	  <title><makevar>PORTREVISION</makevar></title>
 
-	  <para>The <makevar>PORTREVISION</makevar> variable is a
-	    monotonically increasing value which is reset to 0 with
-	    every increase of <makevar>PORTVERSION</makevar> (i.e.
-	    every time a new official vendor release is made), and
-	    appended to the package name if non-zero.
-	    <makevar>PORTREVISION</makevar> is increased each time a
-	    change is made to the FreeBSD port which significantly
-	    affects the content or structure of the derived
-	    package.</para>
+	  <para>A vari&aacute;vel <makevar>PORTREVISION</makevar> &eacute; uma
+	    monotonically aumentando o valor qual &eacute; redefinido a 0 com
+	    cada aumento da <makevar>PORTVERSION</makevar> (ex.
+	    cada vez que um oficial vendor release &eacute; feita), e
+	    appended ao nome do pacote se n&atilde;o-zero.
+	    <makevar>PORTREVISION</makevar> &eacute; aumentado cada vez que
+	    uma mudan&ccedil;a &eacute; feita ao port do FreeBSD qual significantemente
+	    afeta o conte&uacute;do ou estutura dos pacotes
+	    derivados.</para>
 
-	  <para>Examples of when <makevar>PORTREVISION</makevar>
-	    should be bumped:</para>
+	  <para>Exemplos de quando <makevar>PORTREVISION</makevar>
+	    deve ser bumped:</para>
 
 	  <itemizedlist>
 	    <listitem>
-	      <para>Addition of patches to correct security
-		vulnerabilities, bugs, or to add new functionality to
-		the FreeBSD port.</para>
+	      <para>Adi&ccedil;&atilde;o de patches para corrigir as vulnerabilidades
+		de seguran&ccedil;a, bugs, ou para adicionar novas funcionalidades ao
+		port do FreeBSD.</para>
 	    </listitem>
 
 	    <listitem>
-	      <para>Changes to the port <filename>Makefile</filename> to enable or disable
-		compile-time options in the package.</para>
+	      <para>Mudan&ccedil;as ao <filename>Makefile</filename> do port para abilitar ou disabilitar
+		op&ccedil;&otilde;es no tempo de compila&ccedil;&atilde;o no pacote.</para>
 	    </listitem>
 
 	    <listitem>
-	      <para>Changes in the packing list or the install-time
-		behavior of the package (e.g. change to a script
-		which generates initial data for the package, like ssh
-		host keys).</para>
+	      <para>Mudan&ccedil;as na lista de empacotamento ou no tempo-da-instala&ccedil;&atilde;o
+		comportamento do pacote (ex. mudan&ccedil;a ao script
+		qual gera initial data para o pacote, como chaves ssh do
+		host).</para>
 	    </listitem>
 
 	    <listitem>
-	      <para>Version bump of a port's shared library dependency
-		(in this case, someone trying to install the old
-		package after installing a newer version of the
-		dependency will fail since it will look for the old
-		libfoo.x instead of libfoo.(x+1)).</para>
+	      <para>Version bump de umas dependencias da biblioteca
+		compartilhada do port (neste caso, alguem tentando instalar o pacote
+		antigo depois da instalado uma nova vers&atilde;o da
+		dependencia falhar&aacute; desde que ele procurar o antigo
+		libfoo.x ao inv&eacute;s de libfoo.(x+1)).</para>
 	    </listitem>
 
 	    <listitem>
-	      <para>Silent changes to the port distfile which have
-		significant functional differences, i.e. changes to
-		the distfile requiring a correction to
-		<filename>distinfo</filename> with no corresponding change to
-		<makevar>PORTVERSION</makevar>, where a <command>diff
-		-ru</command> of the old and new versions shows
-		non-trivial changes to the code.</para>
+	      <para>Silent changes ao distfile do port qual tem
+		significantes diferen&ccedil;as funcionais, ex. mudan&ccedil;as ao
+		distfile necessitando de uma corre&ccedil;&atilde;o ao
+		<filename>distinfo</filename> com mudan&ccedil;a n&atilde;o correspondente ao
+		<makevar>PORTVERSION</makevar>, onde um <command>diff
+		-ru</command> do antigo e novas vers&otilde;es mostra
+		mudan&ccedil;as n&atilde;o-triviais ao c&oacute;digo.</para>
 	    </listitem>
 	  </itemizedlist>
 
-	  <para>Examples of changes which do not require a
+	  <para>Exemplos de mudan&ccedil;as qual n&atilde;o necessitam uma
 	    <makevar>PORTREVISION</makevar> bump:</para>
 
 	  <itemizedlist>
 	    <listitem>
-	      <para>Style changes to the port skeleton with no
-		functional change to what appears in the resulting
-		package.</para>
+	      <para>Mudan&ccedil;as de estilo ao esqueleto do port com mudan&ccedil;as
+		n&atilde;o funcionais para que apare&ccedil;am no pacote
+		resultante.</para>
 	    </listitem>
 
 	    <listitem>
-	      <para>Changes to <makevar>MASTER_SITES</makevar> or
-		other functional changes to the port which do not
-		affect the resulting package.</para>
+	      <para>Mudan&ccedil;as ao <makevar>MASTER_SITES</makevar> ou
+		outras mudan&ccedil;as funcionais ao port qual n&atilde;o
+		afeta o pacote resultante.</para>
 	    </listitem>
 
 	    <listitem>
-	      <para>Trivial patches to the distfile such as correction
-		of typos, which are not important enough that users of
-		the package should go to the trouble of
+	      <para>Trivial patches ao distfile como corre&ccedil;&atilde;o
+		de typos, qual n&atilde;o s&atilde;o suficiente importante que usu&aacute;rios
+		do pacote devem ir a problemas de
 		upgrading.</para>
 	    </listitem>
 
 	    <listitem>
-	      <para>Build fixes which cause a package to become
-		compilable where it was previously failing (as long as
-		the changes do not introduce any functional change on
-		any other platforms on which the port did previously
-		build). Since <makevar>PORTREVISION</makevar> reflects
-		the content of the package, if no package was
-		previously buildable then there is no need to increase
-		<makevar>PORTREVISION</makevar> to mark a
-		change.</para>
+	      <para>Build fixes qual causa uma pacote torna-se
+		compil&aacute;vel onde ele estava anteriormente falhando (as long as
+		as mudan&ccedil;as n&atilde;o introduziram quaisquer mudan&ccedil;as funcionais em
+		quaisquer outras platformas em qual o port foi construido
+		anteriormente). Desde <makevar>PORTREVISION</makevar> reflita
+		o conte&uacute;do do pacote, se nenhum pacote foi
+		anteriormente contrutivel ent&atilde;o n&atilde;o h&aacute; necessidade para aumentar
+		<makevar>PORTREVISION</makevar> para marcar uma
+		mudan&ccedil;a.</para>
 	    </listitem>
 	  </itemizedlist>
 
-	  <para>A rule of thumb is to ask yourself whether a change
-	    committed to a port is something which someone, somewhere,
+	  <para>Uma regra do thumb &eacute; perguntar a si mesmo se uma mudan&ccedil;a
+	    committed a um port &eacute; algo qual alguem, algum local,
 	    would benefit from having (either because of an
 	    enhancement, fix, or by virtue that the new package will
 	    actually work for them). If yes, the
 	    <makevar>PORTREVISION</makevar> should be bumped so that
 	    automated tools (e.g.  &man.pkg.version.1;)
-	    will highlight the fact that a new package is
-	    available.</para>
+	    ir&aacute; highlight o fata que um novo pacote est&aacute;
+	    dispon&iacute;vel.</para>
 	</sect3>
 
 	<sect3>
 	  <title><makevar>PORTEPOCH</makevar></title>
 
-	  <para>From time to time a software vendor or FreeBSD porter
-	    will do something silly and release a version of their
-	    software which is actually numerically less than the
-	    previous version. An example of this is a port which goes
-	    from foo-20000801 to foo-1.0 (the former will be
-	    incorrectly treated as a newer version since 20000801 is a
-	    numerically greater value than 1).</para>
+	  <para>De tempos em tempos um software vendor ou porter do FreeBSD
+	    far&aacute; algo silly e release uma vers&atilde;o de seus
+	    software qual est&aacute; atualmente numericamente abaixo da
+	    vers&atilde;o anterior. Um exemplo disto &eacute; um port qual foi
+	    de foo-20000801 para foo-1.0 (o former ser&aacute;
+	    tratado incorretamente como uma vers&atilde;o mais nova desde 20000801 &eacute; um
+	    valor numericamente superior que 1).</para>
 
-	  <para>In situations such as this, the
-	    <makevar>PORTEPOCH</makevar> version should be increased.
-	    If <makevar>PORTEPOCH</makevar> is nonzero it is appended
-	    to the package name as described in section 0 above.
-	    <makevar>PORTEPOCH</makevar> is never decreased or reset
-	    to zero, because that would cause comparison to a package
-	    from an earlier epoch to fail (i.e. the package would not
-	    be detected as out of date): the new version number (e.g.
-	    <literal>1.0,1</literal> in the above example) is still
-	    numerically less than the previous version (20000801), but
-	    the <literal>,1</literal> suffix is treated specially by
-	    automated tools and found to be greater than the implied
-	    suffix <literal>,0</literal> on the earlier package.</para>
+	  <para>Em situa&ccedil;&otilde;es como esta, a vers&atilde;o
+	    <makevar>PORTEPOCH</makevar> deve ser aumentada.
+	    Se <makevar>PORTEPOCH</makevar> &eacute; n&atilde;o-zero ele &eacute; appended
+	    ao nome do pacote como descrito na se&ccedil;&atilde;o 0 acima.
+	    <makevar>PORTEPOCH</makevar> nunca &eacute; diminuido ou redefinido
+	    a zero, porque aquilo causaria compara&ccedil;&atilde;o a um pacote
+	    de um anterior epoch a falhar (ex. o pacote n&atilde;o seria
+	    detectado como fora de data): o novo numero de vers&atilde;o (ex.
+	    <literal>1.0,1</literal> no exemplo acima) &eacute; ainda
+	    numericamente menor que a vers&atilde;o anterior (2000801), mas
+	    ferramentas automatizadas e encontradas para ser maior que o implied
+	    sufixo <literal>,0</literal> no pacote anterior.</para>
 
-	  <para>It is expected that <makevar>PORTEPOCH</makevar> will
-	    not be used for the majority of ports, and that sensible
-	    use of <makevar>PORTVERSION</makevar> can often pre-empt
-	    it becoming necessary if a future release of the software
-	    should change the version structure. However, care is
-	    needed by FreeBSD porters when a vendor release is made
-	    without an official version number &mdash; such as a code
-	    <quote>snapshot</quote> release.  The temptation is to label the
-	    release with the release date, which will cause problems
-	    as in the example above when a new <quote>official</quote> release is
-	    made.</para>
+	  <para>&Eacute; esperado que <makevar>PORTEPOCH</makevar> n&atilde;o ser&aacute;
+	    usado pela maioria dos ports, e que sensivel
+	    uso do <makevar>PORTVERSION</makevar> pode frequentemente pre-empt
+	    ele tornando-se necess&aacute;rio se uma futura release do software
+	    deve mudar a estrutura da vers&atilde;o. However, care is
+	    necess&aacute;rio pelos porters do FreeBSD quando um vendor release &eacute; feito
+	    sem um n&uacute;mero de vers&atilde;o oficial &mdash; como um c&oacute;digo
+	    <quote>snapshot</quote> release.  A tenta&ccedil;&atilde;o &eacute; rotular a
+	    release com a data da release, qual causar&aacute; problemas
+	    assim no exemplo acima quando uma nova release <quote>oficial</quote> &eacute;
+	    feita.</para>
 
-	  <para>For example, if a snapshot release is made on the date
-	    20000917, and the previous version of the software was
-	    version 1.2, the snapshot release should be given a
-	    <makevar>PORTVERSION</makevar> of 1.2.20000917 or similar,
-	    not 20000917, so that the succeeding release, say 1.3, is
-	    still a numerically greater value.</para>
+	  <para>Por exemplo, se um snapshot release &eacute; feita na data
+	    20000917, e a vers&atilde;o anterior do software foi a
+	    vers&atilde;o 1.2, a snapshot release deve ser dada a
+	    <makevar>PORTVERSION</makevar> de 1.2.20000917 ou similar,
+	    n&atilde;o 20000917, assim que a posterior release, diz 1.3, &eacute;
+	    ainda um valor numericamente superior.</para>
 	</sect3>
 
 	<sect3>
-	  <title>Example of <makevar>PORTREVISION</makevar> and
-	    <makevar>PORTEPOCH</makevar> usage</title>
+	  <title>Exemplo de uso do <makevar>PORTREVISION</makevar> e
+	    <makevar>PORTEPOCH</makevar></title>
 
-	  <para>The <literal>gtkmumble</literal> port, version
-	    <literal>0.10</literal>, is committed to the ports
-	    collection:</para>
+	  <para>O port <literal>gtkmumble</literal>, vers&atilde;o
+	    <literal>0.10</literal>, &eacute; committed a cole&ccedil;&atilde;o de
+	    ports:</para>
 
 	  <programlisting>PORTNAME=	gtkmumble
 PORTVERSION=	0.10</programlisting>
 
-	  <para><makevar>PKGNAME</makevar> becomes
+	  <para><makevar>PKGNAME</makevar> torna-se
 	    <literal>gtkmumble-0.10</literal>.</para>
 
-	  <para>A security hole is discovered which requires a local
-	    FreeBSD patch. <makevar>PORTREVISION</makevar> is bumped
-	    accordingly.</para>
+	  <para>Um buraco na seguran&ccedil;a &eacute; descoberto qual necessita um patch
+	    local do FreeBSD. <makevar>PORTREVISION</makevar> &eacute; bumped
+	    de modo devido.</para>
 
 	  <programlisting>PORTNAME=	gtkmumble
 PORTVERSION=	0.10
 PORTREVISION=	1</programlisting>
 
-	  <para><makevar>PKGNAME</makevar> becomes
+	  <para><makevar>PKGNAME</makevar> torna-se
 	    <literal>gtkmumble-0.10_1</literal></para>
 
-	  <para>A new version is released by the vendor, numbered <literal>0.2</literal>
+	  <para>Uma nova vers&atilde;o &eacute; released pelo vendor, numerada <literal>0.2</literal>
 	    (it turns out the author actually intended
-	    <literal>0.10</literal> to actually mean
-	    <literal>0.1.0</literal>, not <quote>what comes after
-	      0.9</quote> - oops, too late now). Since the new minor
-	    version <literal>2</literal> is numerically less than the
-	    previous version <literal>10</literal> the
-	    <makevar>PORTEPOCH</makevar> must be bumped to manually
-	    force the new package to be detected as <quote>newer</quote>. Since it
-	    is a new vendor release of the code,
-	    <makevar>PORTREVISION</makevar> is reset to 0 (or removed
-	    from the <filename>Makefile</filename>).</para>
+	    <literal>0.10</literal> para atualmente mean
+	    <literal>0.1.0</literal>, n&atilde;o <quote>que vem depois
+	      0.9</quote> - oops, t&atilde;o tarde agora). Desde o novo minor
+	    version <literal>2</literal> &eacute; numericamente abaixo que a
+	    vers&atilde;o anterior <literal>10</literal> o
+	    <makevar>PORTEPOCH</makevar> tem que ser bumped para for&ccedil;ar
+	    manualmente o novo pacote ser apagado como <quote>newer</quote>. Desde que ele
+	    &eacute; um novo vendor release do c&oacute;digo,
+	    <makevar>PORTREVISION</makevar> &eacute; redefinido a 0 (ou removido
+	    do <filename>Makefile</filename>).</para>
 
 	  <programlisting>PORTNAME=	gtkmumble
 PORTVERSION=	0.2
 PORTEPOCH=	1</programlisting>
 
-	  <para><makevar>PKGNAME</makevar> becomes
+	  <para><makevar>PKGNAME</makevar> torna-se
 	    <literal>gtkmumble-0.2,1</literal></para>
 
-	  <para>The next release is 0.3. Since
-	    <makevar>PORTEPOCH</makevar> never decreases, the version
-	    variables are now:</para>
+	  <para>A pr&oacute;xima release &eacute; 0.3. Desde
+	    <makevar>PORTEPOCH</makevar> nunca diminuiu, as vari&aacute;veis
+	     vers&atilde;o s&atilde;o agora:</para>
 	    
 	  <programlisting>PORTNAME=	gtkmumble
 PORTVERSION=	0.3
 PORTEPOCH=	1</programlisting>
 
-	  <para><makevar>PKGNAME</makevar> becomes
+	  <para><makevar>PKGNAME</makevar> torna-se
 	    <literal>gtkmumble-0.3,1</literal></para>
 
           <note>
-            <para>If <makevar>PORTEPOCH</makevar> were reset
-              to <literal>0</literal> with this upgrade, someone who had
-              installed the <literal>gtkmumble-0.10_1</literal> package would not detect
-              the <literal>gtkmumble-0.3</literal> package as newer, since
-              <literal>3</literal> is still numerically less than
+            <para>Se <makevar>PORTEPOCH</makevar> foi redefinido
+              a <literal>0</literal> com esta melhoria, alguem que tinha
+              instalado o pacote <literal>gtkmumble-0.10_1</literal> n&atilde;o detectaria
+              o pacote <literal>gtkmumble-0.3</literal> como mais novo, desde
+              <literal>3</literal> &eacute; ainda numericmente menor que
               <literal>10</literal>.</para>
 	  </note>
         </sect3>
       </sect2>
 
       <sect2>
-        <title><makevar>PKGNAMEPREFIX</makevar> and <makevar>PKGNAMESUFFIX</makevar></title>
+        <title><makevar>PKGNAMEPREFIX</makevar> e <makevar>PKGNAMESUFFIX</makevar></title>
 
-	<para>Two optional variables, <makevar>PKGNAMEPREFIX</makevar> and
-	  <makevar>PKGNAMESUFFIX</makevar>, are combined with
-	  <makevar>PORTNAME</makevar> and
-	  <makevar>PORTVERSION</makevar> to 
-          form <makevar>PKGNAME</makevar> as
+	<para>Duas vari&aacute;veis opcionais, <makevar>PKGNAMEPREFIX</makevar> e
+	  <makevar>PKGNAMESUFFIX</makevar>, s&atilde;o combinadas com
+	  <makevar>PORTNAME</makevar> e
+	  <makevar>PORTVERSION</makevar> ao 
+          form <makevar>PKGNAME</makevar> assim
           <literal>${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}-${PORTVERSION}</literal>.
-          Make sure this conforms to our <link
-          linkend="porting-pkgname">guidelines for a good package
-          name</link>.  In particular, you are not allowed to use a
-          hyphen (<literal>-</literal>) in
-          <makevar>PORTVERSION</makevar>.  Also, if the package name
-          has the <replaceable>language-</replaceable> or the
+          Certifique-se que este conforms ao nossa orienta&ccedil;&atilde;o <link
+          linkend="porting-pkgname"> para um bom nome de
+          pacote</link>.  Em particular, voce n&atilde;o est&aacute; permitido a usar um
+          h&iacute;fen (<literal>-</literal>) em
+          <makevar>PORTVERSION</makevar>.  Tamb&eacute;m, se o nome do pacote
+          tem a <replaceable>language-</replaceable> ou o
           <replaceable>-compiled.specifics</replaceable> part, use
-          <makevar>PKGNAMEPREFIX</makevar> and
-          <makevar>PKGNAMESUFFIX</makevar>, respectively.  Do not make
-          them part of <makevar>PORTNAME</makevar>.</para>
+          <makevar>PKGNAMEPREFIX</makevar> e
+          <makevar>PKGNAMESUFFIX</makevar>, respectivamentes.  N&atilde;o fa&ccedil;a-os
+          parte do <makevar>PORTNAME</makevar>.</para>
       </sect2>
 
     <sect2 id="porting-pkgname">
       <title>Package Naming Conventions</title>
 
-      <para>The following are the conventions you should follow in naming your
-        packages.  This is to have our package directory easy to scan, as
-        there are already lots and lots of packages and users are going to
-        turn away if they hurt their eyes!</para>
+      <para>Os seguintes s&atilde;o as conven&ccedil;&otilde;es que voce deve seguir nomeando seus
+        pacotes.  Isto &eacute; ter nosso diret&oacute;rio de pacote f&aacute;cil de scan, como
+        h&aacute; j&aacute; muitos e muitos de pacotes e usu&aacute;rios are going to
+        turn away se eles ferirem seus olhos!</para>
 
-      <para>The package name should look like
+      <para>O nome do pacote deve parecer como
         <filename><replaceable><optional>language<optional>_region</optional></optional>-name<optional><optional>-</optional>compiled.specifics</optional>-version.numbers</replaceable></filename>.</para>
 
-      <para>The package name is defined as
+      <para>O nome do pacote &eacute; definido como
         <literal>${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}-${PORTVERSION}</literal>.
-        Make sure to set the variables to conform to that format.</para>
+        Certifique-se de definir as vari&aacute;veis to conform a aquele fornato.</para>
 
       <orderedlist>
         <listitem>
-          <para>FreeBSD strives to support the native language of its users.
-            The <replaceable>language-</replaceable> part should be a two
-            letter abbreviation of the natural language defined by ISO-639 if
-            the port is specific to a certain language.  Examples are
-            <literal>ja</literal> for Japanese, <literal>ru</literal> for
-            Russian, <literal>vi</literal> for Vietnamese,
-            <literal>zh</literal> for Chinese, <literal>ko</literal> for
-            Korean and <literal>de</literal> for German.</para>
+          <para>FreeBSD strives suportar a lingua nativa de seus usu&aacute;rios.
+            A parte <replaceable>language-</replaceable> deve ser a abrevia&ccedil;&atilde;o
+            de duas letras da lingua natural definida pelo ISO-639 se
+            o port &eacute; especifico a uma certa lingua.  Exemplos s&atilde;o
+            <literal>ja</literal> para Japones, <literal>ru</literal> para
+            Russo, <literal>vi</literal> para Vietnames,
+            <literal>zh</literal> para Chines, <literal>ko</literal> para
+            Koreano e <literal>de</literal> para Alem&atilde;o.</para>
 
-	  <para>If the port is specific to a certain region within the
-            language area, add the two letter country code as well.
+	  <para>Se o port &eacute; especifica a certa regi&atilde;o within the
+            language area, adicione as duas letras do c&oacute;digo do pa&iacute;s bem assim.
             Examples are <literal>en_US</literal> for US English and
-            <literal>fr_CH</literal> for Swiss French.</para>
+            <literal>fr_CH</literal> para Swiss French.</para>
 
-          <para>The <replaceable>language-</replaceable> part should
-            be set in the <makevar>PKGNAMEPREFIX</makevar> variable.</para>
+          <para>A parte <replaceable>language-</replaceable> deve
+            ser definida na vari&aacute;vel <makevar>PKGNAMEPREFIX</makevar>.</para>
         </listitem>
 
         <listitem>
-          <para>The first letter of <filename>name</filename> part
-            should be lowercase.  (The rest of the name can contain
-            capital letters, so use your own discretion when you are
-            converting a software name that has some capital letters in it.)
-            There is a tradition of naming <literal>perl 5</literal> modules by
-            prepending <literal>p5-</literal> and converting the double-colon
-            separator to a hyphen; for example, the
-            <literal>Data::Dumper</literal> module becomes
-            <literal>p5-Data-Dumper</literal>.  If the software in question
-            has numbers, hyphens, or underscores in its name, you may include
-            them as well (like <literal>kinput2</literal>).</para>
+          <para>A primeira letra da parte do <filename>nome</filename>
+            deve ser lowercase.  (O resto do nome pode conter
+            letras capitais, assim use sua pr&oacute;pria descri&ccedil;&atilde;o quando voce est&aacute;
+            convertendo um nome de software que tem algumas letras capitais nela.)
+            H&aacute; uma tradi&ccedil;&atilde;o de nameamento de m&oacute;dulos <literal>perl 5</literal> por
+            prepending <literal>p5-</literal> e convertendo o separador
+            dois-pontos a um h&iacute;fen; por exemplo, o
+            m&oacute;dulo <literal>Data::Dumper</literal> torna-se
+            <literal>p5-Data-Dumper</literal>.  Se o software em question
+            tem n&uacute;meros, h&iacute;fens, ou underscores em seu nome, voce pode incluir-los
+            bem assim (como <literal>kinput2</literal>).</para>
         </listitem>
 
         <listitem>
-          <para>If the port can be built with different <link
-              linkend="porting-masterdir">hardcoded defaults</link> (usually
-            part of the directory name in a family of ports), the
-            <replaceable>-compiled.specifics</replaceable> part should state
-            the compiled-in defaults (the hyphen is optional).  Examples are
-            papersize and font units.</para>
+          <para>Se o port pode ser construido com diferentes <link
+              linkend="porting-masterdir">hardcoded defaults</link> (normalmente
+            parte do nome do diret&oacute;rio na familia do ports), a
+            parte <replaceable>-compiled.specifics</replaceable> deve state
+            the compiled-in defaults (o h&iacute;fen &eacute; opcional).  Exemplos s&atilde;o
+            tamanho de papel e unidades de fontes.</para>
 
-          <para>The <replaceable>-compiled.specifics</replaceable> part
-            should be set in the <makevar>PKGNAMESUFFIX</makevar>
-            variable.</para>
+          <para>A parte <replaceable>-compiled.specifics</replaceable>
+            deve ser definido na vari&aacute;vel
+            <makevar>PKGNAMESUFFIX</makevar>.</para>
         </listitem>
 
         <listitem>
-          <para>The version string should follow a dash
-            (<literal>-</literal>) and be a period-separated list of
-            integers and single lowercase alphabetics.  In particular,
-            it is not permissible to have another dash inside the
-            version string.  The only exception is the string
-            <literal>pl</literal> (meaning <quote>patchlevel</quote>), which can be
-            used <emphasis>only</emphasis> when there are no major and
-            minor version numbers in the software.  If the software
-            version has strings like <quote>alpha</quote>, <quote>beta</quote>, <quote>rc</quote>, or <quote>pre</quote>, take
-            the first letter and put it immediately after a period.
-            If the version string continues after those names, the
-            numbers should follow the single alphabet without an extra
-            period between them.</para>
+          <para>A string davers&atilde;o deve seguir um dash
+            (<literal>-</literal>) e ser um separada-po-periodo lista de
+            inteiros e single lowercase alphabetics.  Em particular,
+            it n&atilde;o &eacute; permissible ter um outro dash dentro da string
+            da vers&atilde;o.  A &uacute;nica exece&ccedil;&atilde;o &eacute; a string
+            <literal>pl</literal> (meaning <quote>patchlevel</quote>), qual pode ser
+            usada <emphasis>somente</emphasis> quando n&atilde;o h&aacute; numeros de vers&atilde;o
+            maior e menor no software.  Se a vers&atilde;o
+            do software tem strings como <quote>alpha</quote>, <quote>beta</quote>, <quote>rc</quote>, ou <quote>pre</quote>, pegue
+            a primeira letra e coloque-a imediatamente depois de um periodo.
+            Se a string da vers&atilde;o continua depois daqueles nomes, os
+            numeros devem seguir o alfabeto somente sem um periodo extra
+            entre eles.</para>
 
-          <para>The idea is to make it easier to sort ports by looking
-            at the version string.  In particular, make sure version
-            number components are always delimited by a period, and
-            if the date is part of the string, use the
+          <para>A id&eacute;ia &eacute; faze-lo mais f&aacute;cil para sort os ports por looking
+            at a string da vers&atilde;o.  Em particular, certifique-se que o numero da vers&atilde;o
+            dos componentes est&atilde;o sempre delimitados por um periodo, e
+            se a data &eacute; parte  da string, use o formato
             <literal><replaceable>yyyy</replaceable>.<replaceable>mm</replaceable>.<replaceable>dd</replaceable></literal>
-            format, not
+            , n&atilde;o
             <literal><replaceable>dd</replaceable>.<replaceable>mm</replaceable>.<replaceable>yyyy</replaceable></literal>
-            or the non-Y2K compliant
+            ou a n&atilde;o-Y2K compliant
             <literal><replaceable>yy</replaceable>.<replaceable>mm</replaceable>.<replaceable>dd</replaceable></literal>
             format.</para>
         </listitem>
       </orderedlist>
 
-      <para>Here are some (real) examples on how to convert the name
-        as called by the software authors to a suitable package
-        name:</para>
+      <para>Aqui est&aacute; alguns exemplos (reais) em como converter o nome
+        assim chamado pelos autores do software a um nome de pacote
+         suitable:</para>
 
       <informaltable frame="none">
         <tgroup cols="6">
@@ -1183,11 +1181,11 @@ PORTEPOCH=	1</programlisting>
         </tgroup>
       </informaltable>
 
-      <para>If there is absolutely no trace of version information in the
-        original source and it is unlikely that the original author will ever
-        release another version, just set the version string to
-        <literal>1.0</literal> (like the <literal>piewm</literal> example above).  Otherwise, ask
-        the original author or use the date string
+      <para>Se h&aacute; absolutamnete nenhum tra&ccedil;o da informa&ccedil;&atilde;o da vers&atilde;o no
+        fonte original e ele &eacute; unlikely original que o autor will ever
+        release uma outra vers&atilde;o, s&oacute; defina a string da vers&atilde;o a
+        <literal>1.0</literal> (como o <literal>piewm</literal> exemplo above).  Otherwise, pergunte
+        o autor do original ou use a string da data
         (<literal><replaceable>yyyy</replaceable>.<replaceable>mm</replaceable>.<replaceable>dd</replaceable></literal>)
 	as the version.</para>
     </sect2>
