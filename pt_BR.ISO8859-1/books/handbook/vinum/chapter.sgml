@@ -319,7 +319,7 @@
       <title>Considerações de um tamanho de volume</title>
 
       <para>Plexes podem ter muitos subdiscos espalhados por todas as 
-      partições nas configurações de vinum.  Como resultado, o tamanho
+      partições nas configurações do vinum.  Como resultado, o tamanho
       de uma prtição original não limta o tamanho nem de um plex e nem
       de um volume.</para>
     </sect2>
@@ -665,7 +665,7 @@
 
       <para>
 	<figure id="vinum-striped-vol">
-	  <title>Um volume de vinum Striped</title>
+	  <title>Um volume do vinum Striped</title>
 	  <graphic fileref="vinum/vinum-striped-vol">
 	</figure>
       </para>
@@ -710,7 +710,7 @@
 
       <para>
 	<figure id="vinum-raid10-vol">
-	  <title>Um volume de vinum striped espelhado</title>
+	  <title>Um volume do vinum striped espelhado</title>
 	  <graphic fileref="vinum/vinum-raid10-vol">
         </figure>
       </para>
@@ -876,7 +876,7 @@
     brwxr-xr--  1 root  wheel   25, 0x20200002 Apr 13 16:46 s64.p0.s2
     brwxr-xr--  1 root  wheel   25, 0x20300002 Apr 13 16:46 s64.p0.s3</programlisting>
 
-    <para>Apesar de não ser recomendado alocalçao de nomes específicos
+    <para>Apesar de não ser recomendado alocação de nomes específicos
     para plexes e subdiscos, os discos do Vinum devem ser nomeados.
     Isso torna possível mover um disco para uma outra localidade e ainda
     sim reconhace-lo automaticamente.  Os nomes dos discos podem conter
@@ -1076,7 +1076,7 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 	  <para>Vinum deve ser iniciado cedo pois ele precisa suprir o
 	  volume para os arquivos de sistemas raiz.  Por padrão, a parte
 	  do kernel do vinum não esta procurando por discos que possam
-	  conter informações de volume de vinum até que o administrador
+	  conter informações de volume do vinum até que o administrador
 	  (ou um dos scripts de inicialização) lance o comando
 	  <command>vinum start</command>.</para>
 	  
@@ -1217,9 +1217,9 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 	 
 
 	  <para>Dessa forma, uma nova partição <literal>"a"</literal>
-	  será formada e irá envolver as partições de vinum nesse
+	  será formada e irá envolver as partições do vinum nesse
 	  dipositivo.  Note que o <command>disklabel</command> só vai
-	  permitir isso se as partições de vinum tiverem sido
+	  permitir isso se as partições do vinum tiverem sido
 	  propriamente marcadas usando o <literal>"vinum"</literal>
 	  fstype.</para>
 	</step>
@@ -1237,7 +1237,7 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 
       <para>deve ser lembrado que todos os arquivos que contém
       informações de controle, devem ser relacionadas com o sistema de
-      arquivos raiz no volume de vinum onde, quando setando um novo
+      arquivos raiz no volume do vinum onde, quando setando um novo
       volume raiz do vinum, talves não seja igual ao que esta em uso.
       Então, em particular, os arquivos <filename>/etc/fstab</filename>
       e <filename>/boot/loader.conf</filename> irão precisar de
@@ -1302,7 +1302,7 @@ Subdisk root.p1.s0:
       <para>Pode ser observado que o parâmetro <literal>"size"</literal>
       para a partição <literal>"a"</literal> falsa bate com o valor
       esboçado acima, enquanto o parâmetro <literal>"offset"</literal> é
-      a soma do offset dentro da partição de vinum
+      a soma do offset dentro da partição do vinum
       <literal>"h"</literal>, e o offset dessa partição dentro do
       dispositivo (ou fatia).  Essa é a configuração típica necessária
       para evitar os problemas descitos em <xref
