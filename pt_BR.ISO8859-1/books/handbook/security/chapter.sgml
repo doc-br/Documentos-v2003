@@ -140,9 +140,9 @@
       qualquer mecanismo de segurança.  Por exemplo, faria pouco sentido
       definir o flag <literal>schg</literal> (veja &man.chflags.1;) em
       cada binário do sistema, porque enquanto isto pode temporariamente
-      proteger os binários, irá impedir que um invasor que obteve acesso 
+      proteger os binários, irá impedir que um intruso que obteve acesso 
       ao seu sistema faça um alteração que seria facilmente detectada e
-      levar seus mecanismos de segurança a nunca detectarem o invasor ou
+      levar seus mecanismos de segurança a nunca detectarem o intruso ou
       e a falha que foi explorada.</para>
 
     <para>Segurança de sistema tambem está relacionada com várias formas 
@@ -393,7 +393,7 @@
 	um &man.ksu.1; para <username>root</username> sem ter que 
 	colocar qualquer um no grupo <groupname>wheel</groupname>.  
 	Esta pode ser a melhor solução visto que o mecanismo 
-	<groupname>wheel</groupname> ainda permite que um invasor
+	<groupname>wheel</groupname> ainda permite que um intruso
 	viole o <username>root</username> se conseguir seu arquivo de
 	senhas e invadir uma conta do sistema.  Enquanto ter o
 	mecanismo <groupname>wheel</groupname> é melhor do que nada,
@@ -578,19 +578,19 @@
 	binários suid que ninguém usa.
 	Um servidor sem monitor geralmente não necessita um binário 
 	<application>xterm</application>.  Binários sgid podem ser
-	quase sempre perigosos.  Se um invasor puder violar um 
-	binário sgid-kmem, o invasor provavelmente será capaz de
+	quase sempre perigosos.  Se um intruso puder violar um 
+	binário sgid-kmem, o intruso provavelmente será capaz de
 	ler o <filename>/dev/kmem</filename> e assim ler o arquivo
 	de senhas criptografadas, comprometendo potencialmente
-	qualquer conta com senha.  Alternativamente um invasor que
+	qualquer conta com senha.  Alternativamente um intruso que
 	viole o grupo <literal>kmem</literal> pode monitorar keystrokes 
 	enviadas através dos terminais <literal>pty</literal>, incluindo
 	<literal>pty's</literal> usados por usuários que fazem login 
-	através de métodos seguros.  Um invasor que viole o grupo 
+	através de métodos seguros.  Um intruso que viole o grupo 
 	<groupname>tty</groupname> pode escrever para quase todos os
 	tty de usuário.  Se um usuário estiver executando um programa ou 
 	emulador no terminal com característica de simulação de teclado, 
-	o invasor pode gerar potencialmente um data stream que ocasiona
+	o intruso pode gerar potencialmente um data stream que ocasiona
 	o terminal do usuário a executar um comando, que é então executado
 	como esse usuário.</para>
     </sect2>
@@ -621,7 +621,7 @@
 	o acesso daquelas contas.  Mesmo que o arquivo de senhas
 	criptografadas (<filename>/etc/spwd.db</filename>) possa
 	somente ser lido pelo <username>root</username>, pode ser
-	possível para um invasor obter acesso de leitura a esse
+	possível para um intruso obter acesso de leitura a esse
 	arquivo mesmo se o atacante não pode obter acesso de escrita
 	root.</para>
 
@@ -640,9 +640,9 @@
 	tem um controlador de dispositivo de farejar
 	(<foreignphrase>sniffing</foreignphrase>) pacotes embutido.  
 	Sob FreeBSD é chamado dispositivo <devicename>bpf</devicename>.  
-	Um invasor tentará geralmente executar um farejador 
+	Um intruso tentará geralmente executar um farejador 
 	(<foreignphrase>sniffer</foreignphrase>) de pacotes em
-	uma máquina comprometida.  Você não necessita dar ao invasor
+	uma máquina comprometida.  Você não necessita dar ao intruso
 	esta capacidade e a maioria dos sistemas não tem a necessidade
 	para o dispositivo <devicename>bpf</devicename> compilado.</para>
 
@@ -653,10 +653,10 @@
 	<devicename>bpf</devicename>, você ainda tem  
 	<devicename>/dev/mem</devicename> e 
 	<devicename>/dev/kmem</devicename> para preocupar-se.  
-	De qualquer forma, o invasor pode ainda escrever em
+	De qualquer forma, o intruso pode ainda escrever em
 	raw disk devices.  Também, há outra característica no 
 	<literal>kernel</literal> chamada carregador de módulo, 
-	&man.kldload.8;.  Um invasor ousado pode usar um módulo
+	&man.kldload.8;.  Um intruso ousado pode usar um módulo
 	KLD para instalar seu próprio dispositivo 
 	<devicename>bpf</devicename>, ou outro dispositivo de
 	farejar (<foreignphrase>sniffing</foreignphrase>), em um
@@ -669,17 +669,17 @@
 	variável <varname>kern.securelevel</varname>.  Uma vez
 	que você ajustou o <literal>securelevel</literal> para 1, 
 	acesso de escrita a raw devices estarão negados e 
-	sinalizações especiais <command>chflags</command>, tais 
+	flags especiais <command>chflags</command>, tais 
 	como <literal>schg</literal>,
 	serão reforçadas.  Você deve também assegurar que a
-	sinalização <literal>schg</literal> eseja ajustada em binários
+	flag <literal>schg</literal> eseja ajustada em binários
 	criticos de inicialização, diretórios, e arquivos 
 	<literal>script</literal> &ndash; tudo que começa a executar
 	até o ponto onde o <literal>securelevel</literal> é ajustado.  
 	Isto pode ser um exagero, e atualizar o sistema é muito mais
 	difícil quando você opera em um nível de segurança elevado.  
 	Você pode acertar e executar o sistema em um nível de
-	segurança elevado mas não ajustar a sinalização
+	segurança elevado mas não ajustar a flag
 	<literal>schg</literal> para cada arquivo e diretório do sistema
 	under the sun.  Outra possibilidade é  simplesmente
 	montar o <filename>/</filename> e <filename>/usr</filename> apenas
@@ -772,7 +772,7 @@
       <para>Se você tiver uma grande quantidade de espaço em disco, 
 	isto pode demorar muito para executar através em cada
 	arquivo naquela partição.  Neste caso, ajustando as
-	sinalizações do montagem para desabilitar binários
+	flags do montagem para desabilitar binários
 	suid e dispositivos naquelas partições são uma boa idéia.  
 	As opções <literal>nodev</literal> e
 	<literal>nosuid</literal> (veja &man.mount.8;) são as que
@@ -785,14 +785,14 @@
 	uma característica relativamente de baixo overhead  do
 	sistema operacional que pode ajudar como um mecanismo
 	de avaliação post-break-in.  É especialmente útil
-	em rastrear como um invasor violou realmente um sistema, 
+	em rastrear como um intruso violou realmente um sistema, 
 	assumindo que o arquivo ainda esteja intacto depois 
 	que a invasão ocorrer.</para>
 
       <para>Finalmente, scripts de segurança devem processar os
 	arquivos de log, e os logs deles mesmos devem ser gerados
 	em maneira tão segura como for possível &ndash; syslog remoto 
-	pode ser muito útil.  Um invasor tenta cobrir seus rastros, e
+	pode ser muito útil.  Um intruso tenta cobrir seus rastros, e
 	o arquivos de log são críticos ao administrador do sistema
 	que tentat rastrear a hora e método da invasão inicial.  
 	Uma maneira de manter um registro permanente do arquivo de
@@ -810,30 +810,31 @@
 	convenience, and can add security features that
 	<emphasis>do</emphasis> effect convenience with some added thought.
 	Até mais importante, um administrador de segurança deve misturar
-	um pedaço &ndash; se você usar recomendações tais como
+	uma parte &ndash; se você usar recomendações tais como
 	aquelas dadas por este documento literalmente, você da
-	suas metodologias para a perspectiva que o atacante tem 
-	também acesso a este documento.</para>
+	suas metodologias para a perspectiva do atacante que  
+	também tem acesso a este documento.</para>
     </sect2>
 
     <sect2>
-      <title>Denial of Service Attacks</title>
-      <indexterm><primary>Denial of Service (DoS)</primary></indexterm>
+      <title>Ataques de Negação de Serviço</title>
+      <indexterm><primary>Negação de Serviço (DoS)</primary></indexterm>
 
-      <para>This section covers Denial of Service attacks.  A DoS attack
-	is typically a packet attack.  While there is not much you can do
-	about modern spoofed packet attacks that saturate your network,
-	you can generally limit the damage by ensuring that the attacks
-	cannot take down your servers.</para>
+      <para>Esta seção cobre Ataques de Negação de Serviço.  Um ataque
+	DoS é tipicamente um ataque de pacote.  Enquanto não há
+	muito o que você pode fazer sobre ataques modernos de pacotes 
+	falsificados <foreignphrase>spoofed</foreignphrase>
+	que saturam sua rede, você pode geralmente limitar os danos
+	assegurando que os ataques não possam derrubar seus servidores.</para>
 
       <orderedlist>
 	<listitem>
-	  <para>Limiting server forks.</para>
+	  <para>Limitando server forks.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Limiting springboard attacks (ICMP response attacks, ping
-	    broadcast, etc.).</para>
+	  <para>Limitando ataques springboard (ataques de resposta ICMP, 
+	ping broadcast, etc.).</para>
 	</listitem>
 
 	<listitem>
@@ -841,94 +842,103 @@
 	</listitem>
       </orderedlist>
 
-      <para>A common DoS attack is against a forking server that attempts
-	to cause the server to eat processes, file descriptors, and memory,
-	until the machine dies.  <application>inetd</application>
-	(see &man.inetd.8;) has several
-	options to limit this sort of attack.  It should be noted that
-	while it is possible to prevent a machine from going down, it is
-	not generally possible to prevent a service from being disrupted
-	by the attack.  Read the <application>inetd</application> manual
-	page carefully and pay
-	specific attention to the <option>-c</option>, <option>-C</option>,
-	and <option>-R</option> options.  Note that spoofed-IP attacks
-	will circumvent the <option>-C</option> option to 
-	<application>inetd</application>, so
-	typically a combination of options must be used.  Some standalone
-	servers have self-fork-limitation parameters.</para>
+      <para>Um ataque DoS comum é contra a forking server que tenta
+	fazer com que o servidor coma processos, descritores de
+	arquivos e memória, até que a máquina morra.  O  
+	<application>inetd</application>
+	(veja &man.inetd.8;) tem diversas opções para limitar este
+	tipo de ataque.  Deve-se notar que enquanto é possível
+	impedir que uma máquina caia, não é geralmente possível impedir
+	que um serviço seja interrompido pelo ataque.  Leia a página de 
+	manual <application>inetd</application> cuidadosamente e
+	preste atenção específica para as opções <option>-c</option>, 
+	<option>-C</option>, e <option>-R</option>.  Note que
+	ataques de IP falsificados <foreignphrase>spoofed</foreignphrase> 
+	vão enganar a opção <option>-C</option> para o 
+	<application>inetd</application>, assim tipicamente uma
+	combinação de opções deve ser usada.  Alguns serviços 
+	standalone tem parâmetros self-fork-limitation.</para>
 
-      <para><application>Sendmail</application> has its
-	<option>-OMaxDaemonChildren</option> option, which tends to work
-	much better than trying to use sendmail's load limiting options
-	due to the load lag.  You should specify a
-	<literal>MaxDaemonChildren</literal> parameter, when you start
-	<application>sendmail</application>, high enough to handle your
-	expected load, but not so high that the computer cannot handle that
-	number of <application>sendmails</application> without falling on
-	its face.  It is also prudent to run sendmail in queued mode
-	(<option>-ODeliveryMode=queued</option>) and to run the daemon
-	(<command>sendmail -bd</command>) separate from the queue-runs
-	(<command>sendmail -q15m</command>).  If you still want real-time
-	delivery you can run the queue at a much lower interval, such as
-	<option>-q1m</option>, but be sure to specify a reasonable
-	<literal>MaxDaemonChildren</literal> option for
-	<emphasis>that</emphasis> sendmail to prevent cascade failures.</para>
+      <para>O <application>sendmail</application> tem sua opção
+	<option>-OMaxDaemonChildren</option>, que tende a funcionar
+	muito melhor do que tentando usar opções de limite de carga do 
+	sendmail devido ao atraso de carga.  Você deve especificar
+	um parâmetro <literal>MaxDaemonChildren</literal>, quando
+	você inicia o <application>sendmail</application>, 
+	alto o bastante para segurar sua carga esperada, mas não tão
+	alto que o computador não pode segurar esse número de 
+	<application>sendmails</application> sem cair.  É também
+	prudente executar o sendmail no modo de fila
+	(<option>-ODeliveryMode=queued</option>) e executar o daemon
+	(<command>sendmail -bd</command>) separado da execução de filas
+	(<command>sendmail -q15m</command>).  Se você ainda quiser 
+	entrega em tempo real você pode executar a fila em um intervalo
+	mais baixo, como <option>-q1m</option>, mas esteja certo 
+	de especificar uma opção <literal>MaxDaemonChildren</literal> 
+	razoável para <emphasis>esse</emphasis> sendmail para impedir
+	falhas em cascata.</para>
 
-      <para><application>Syslogd</application> can be attacked directly
-	and it is strongly recommended that you use the <option>-s</option>
-	option whenever possible, and the <option>-a</option> option
-	otherwise.</para>
+      <para>O <application>syslogd</application> pode ser atacado
+	diretamente e recomenda-se fortemente que você use a opção
+	<option>-s</option> sempre que possível, e a opção 
+	<option>-a</option> de qualquer forma.</para>
 
-      <para>You should also be fairly careful with connect-back services
-	such as <application>tcpwrapper</application>'s reverse-identd,
-	which can be attacked directly.  You generally do not want to use
-	the reverse-ident feature of
-	<application>tcpwrappers</application> for this reason.</para>
+      <para>Você deve também ser bastante cauteloso com serviços 
+	connect-back tais como o identd reverso do 
+	<application>tcpwrapper</application>, que pode ser atacado
+	diretamente.  Você geralmente não precisa usar a característica
+	indent reverso do <application>tcpwrappers</application> por
+	esta razão.</para>
 
-      <para>It is a very good idea to protect internal services from
-	external access by firewalling them off at your border routers.
-	The idea here is to prevent saturation attacks from outside your
-	LAN, not so much to protect internal services from network-based
-	<username>root</username> compromise.
-	Always configure an exclusive firewall, i.e.,
-	<quote>firewall everything <emphasis>except</emphasis> ports A, B,
-	C, D, and M-Z</quote>.  This way you can firewall off all of your
-	low ports except for certain specific services such as
-	<application>named</application> (if you are primary for a zone),
+      <para>É uma idéia muito boa proteger serviços internos do acesso
+	externo por firewalling mantendo-os fora em seus roteadores de borda.
+	A idéia aqui é impedir ataques de saturação de fora da sua LAN,
+	não para proteger serviços internos de um comprometimento 
+	<username>root</username> baseado em rede.
+	Configure sempre um firewall exclusivo, isto é,
+	<quote>firewall em tudo <emphasis>exceto</emphasis> nas 
+	portas A, B, C, D, e M-Z</quote>.  Esta maneira você pode
+	firewall em todas as suas portas baixas exceto para determinados
+	serviços específicos tais como <application>named</application> 
+	(se você é primario para uma zona),
 	<application>ntalkd</application>,
-	<application>sendmail</application>, and other Internet-accessible
-	services.  If you try to configure the firewall the other way
-	&ndash; as an inclusive or permissive firewall, there is a good
-	chance that you will forget to <quote>close</quote> a couple of
-	services, or that you will add a new internal service and forget
-	to update the firewall.  You can still open up the high-numbered
-	port range on the firewall, to allow permissive-like operation,
-	without compromising your low ports.  Also take note that FreeBSD
-	allows you to control the range of port numbers used for dynamic
-	binding, via the various <varname>net.inet.ip.portrange</varname>
-	<command>sysctl</command>'s (<command>sysctl -a | fgrep
-	portrange</command>), which can also ease the complexity of your
-	firewall's configuration.  For example, you might use a normal
-	first/last range of 4000 to 5000, and a hiport range of 49152 to
-	65535, then block off everything under 4000 in your firewall
-	(except for certain specific Internet-accessible ports, of
-	course).</para>
+	<application>sendmail</application>, e outros serviços acessíveis
+	via Internet.  Se você tentar configurar o firewall de outra
+	maneira &ndash; como um firewall inclusivo ou permissivo, 
+	há uma boa possibilidade que você esqueça de <quote>fechar</quote> 
+	um par de serviços, ou que você adicioine um novo serviço interno
+	e esqueça de atualizar o firewall.  Você pode ainda abrir
+	um range de portas altas no firewall, para permitir 
+	operações como permissivas, sem comprometer suas portas baixas.  
+	Também tome nota que o FreeBSD permit você controlar o range de
+	portas usado por conexões dinâmicas, através de varios 
+	<command>sysctl</command>'s
+	<varname>net.inet.ip.portrange</varname>  
+	(<command>sysctl -a | fgrep
+	portrange</command>), que pode também facilitar a complexidade
+	da configuração do seu firewall.  Por exemplo, você pode
+	usar um range normal first/last de 4000 a 5000, e
+	um range hiport de 49152 a 65535, e bloquear tudo abaixo de 4000
+	no seu firewall (exceto para determinados portas de acesso 
+	específicas a Internet, naturalmente).</para>
 
       <indexterm><primary>ICMP_BANDLIM</primary></indexterm>
 
-      <para>Another common DoS attack is called a springboard attack
-	&ndash; to attack a server in a manner that causes the server to
-	generate responses which overloads the server, the local
-	network, or some other machine.  The most common attack of this
-	nature is the <emphasis>ICMP ping broadcast attack</emphasis>.
-	The attacker spoofs ping packets sent to your LAN's broadcast
-	address with the source IP address set to the actual machine they
-	wish to attack.  If your border routers are not configured to
-	stomp on ping's to broadcast addresses, your LAN winds up
-	generating sufficient responses to the spoofed source address to
-	saturate the victim, especially when the attacker uses the same
-	trick on several dozen broadcast addresses over several dozen
-	different networks at once.  Broadcast attacks of over a hundred
+      <para>Um outro ataque DoS comum é chamado um ataque springboard
+	&ndash; para atacar um servidor de uma maneira que faça o
+	servidor gerar respostas que sobrecarregue o servidor, a
+	rede local, ou alguma outra máquina.  O ataque mais comum
+	desta natureza é o <emphasis>ICMP ping broadcast attack</emphasis>.
+	O atacante falsifica <foreignphrase>spoofs</foreignphrase> 
+	pacotes ping enviados para o endereço de broadcast da sua LAN com o 
+	endereço IP de origem atribuido a máquina real que ele deseja atacar.  
+	Se seus roteadores de borda não estiverem configurados para
+	parar ping para endereços de broadcast, sua LAN enrosca
+	gerando respostas suficientes ao endereço de origem falsificado 
+	<foreignphrase>spoofed</foreignphrase> para saturar a vítima, 
+	especialmente quando o atacante usa o mesmo truque em
+	diferentes dúzias de endereços broadcast em cima de diferentes
+	dúzias de redes de uma vez.  Broadcast attacks of over a hundred
 	and twenty megabits have been measured.  A second common
 	springboard attack is against the ICMP error reporting system.
 	By constructing packets that generate ICMP error responses, an
