@@ -37,7 +37,7 @@
 
     <itemizedlist>
       <listitem>
-	<para>Como ajustar PPP em modo usuário.</para>
+	<para>Como ajustar PPP em modo usuario.</para>
       </listitem>
       <listitem>
 	<para>Como ajustar PPP em modo kernel.</para>
@@ -57,7 +57,7 @@
 
     <indexterm id="ppp-ppp-user">
       <primary>PPP</primary>
-      <secondary>PPP em modo usuário</secondary>
+      <secondary>PPP em modo usuario</secondary>
     </indexterm>      
     <indexterm id="ppp-ppp-kernel">
       <primary>PPP</primary>
@@ -246,7 +246,7 @@
 
       <sect3>
 	<title>Criando nós para dispositivos PPP</title>
-	<indexterm><secondary>Criando nós para dispositivos </secondary><primary>PPP</primary></indexterm>
+	<indexterm><secondary>Criando nos para dispositivos </secondary><primary>PPP</primary></indexterm>
 
         <para>Em circunstâncias normais a maioria dos usuários irão apenas 
           precisar de um dispositivo <devicename>tun</devicename>
@@ -280,7 +280,7 @@
       <sect3>
         <title>Configuração automática do <application>PPP</application></title>
 
-	<indexterm><secondary>Configuração</secondary><primary>PPP</primary></indexterm>
+	<indexterm><secondary>Configuracao</secondary><primary>PPP</primary></indexterm>
         <para>Tanto <command>ppp</command> quanto <command>pppd</command>
 	  (a implementação do PPP em modo kernel) usam os arquivos 
 	  de configuração localizados no diretório <filename>/etc/ppp</filename>.
@@ -341,121 +341,122 @@
 	      <term>Linha 2:</term>
 
 	      <listitem>
-		<para>Enables logging parameters.  When the configuration
-		  is working satisfactorily, this line should be reduced
-                  to saying
+                <para>
+		<para>Ativa parâmetros de logging. Quando a configuração estiver
+		  funcionando de acordo, essa linha deve ser reduzida para algo
+		  como
 
 	          <programlisting>set log phase tun</programlisting>
 
-                  in order to avoid excessive log file sizes.</para>
+                  para evitar arquivo de log com tamanho excessivo.</para>
 	      </listitem>
 	    </varlistentry>
 
 	    <varlistentry>
-	      <term>Line 3:</term>
+	      <term>Linha 3:</term>
 
 	      <listitem>
-		<para>Tells PPP how to identify itself to the peer.
-                  PPP identifies itself to the peer if it has any trouble
-                  negotiating and setting up the link, providing information
-                  that the peers administrator may find useful when
-                  investigating such problems.</para>
+	        <para>Diz ao PPP como se identificar para a ponta remota.
+		  PPP se identifica com a ponta remota se ele tem qualquer
+		  problema na negociação e no ajuste do <literal>link</literal>,
+		  provendo informações que o administrador remoto pode achar
+		  útil na investigação de problemas.</para>
 	      </listitem>
 	    </varlistentry>
 
 	    <varlistentry>
-	      <term>Line 4:</term>
+	      <term>Linha 4:</term>
 
 	      <listitem>
-		<para>Identifies the device to which the modem is
-		  connected.  <devicename>COM1</devicename> is
-		  <devicename>/dev/cuaa0</devicename> and
-		  <devicename>COM2</devicename> is
-		  <devicename>/dev/cuaa1</devicename>.</para>
+	        <para>Identifica o dispositivo ao qual o modem está conectado.
+		  <devicename>COM1</devicename> é <devicename>/dev/cuaa0</devicename>
+		  e <devicename>COM2</devicename> é <devicename>/dev/cuaa1</devicename>.</para>
 	      </listitem>
 	    </varlistentry>
 
 	    <varlistentry>
-	      <term>Line 5:</term>
+	      <term>Linha 5:</term>
 
 	      <listitem>
-		<para>Sets the speed you want to connect at.  If 115200
-		  does not work (it should with any reasonably new modem),
-		  try 38400 instead.</para>
+	        <para>Define a velocidade que você deseja se conectar. Se 115200
+		  não funciona (deveria com qualquer modem relativamente novo)
+		  tente 38400.</para>
 	      </listitem>
 	    </varlistentry>
 
 	    <varlistentry>
-	      <term>Line 6 & 7:</term>
+	      <term>Linhas 6 & 7:</term>
 
 	      <indexterm><primary>PPP</primary><secondary>user PPP</secondary></indexterm>
 	      <listitem>
-		<para>The dial string.  User PPP uses an expect-send
-		  syntax similar to the &man.chat.8; program.  Refer to
-		  the manual page for information on the features of this
-		  language.</para>
+		<para>A string the discagem. PPP em modo usuário usa uma <literal>string</literal>
+		  similar ao programa &man.chat.8;.  Veja a página manual para informações
+		  sobre as funcionalidades dessa linguagem.</para>
 
-		<para>Note that this command continues onto the next line
-                   for readability.  Any command in
-                   <filename>ppp.conf</filename> may do this if the last
-                   character on the line is a ``\'' character.</para>
+		<para>Note que esse comando continua na próxima linha por questões
+		   de legibilidade. Qualquer comando no <filename>ppp.conf</filename>
+		   pode fazer isso se o último caracter na linha é o caracter
+		   ``\''.</para>
 	      </listitem>
 	    </varlistentry>
 
 	    <varlistentry>
-	      <term>Line 8:</term>
+	      <term>Linha 8:</term>
 
 	      <listitem>
-		<para>Sets the idle timeout for the link.  180 seconds
-		  is the default, so this line is purely cosmetic.</para>
+	        <par>Define o tempo máximo de inatividade do link. 180 segundos
+		  é o padrão e essa linha serve apenas para reforçar isso.</para>
 	      </listitem>
 	    </varlistentry>
 
 	    <varlistentry>
-	      <term>Line 9:</term>
+	      <term>Linha 9:</term>
 
 	      <listitem>
-		<para>Tells PPP to ask the peer to confirm the local
-		  resolver settings.  If you run a local name server, this
-                  line should be commented out or removed.</para>
+	        <para>Diz ao PPP para que ele peça a ponta remota que confirme
+		  as configurações do <foreignphrase>resolver<foreignphrase> 
+		  local. Se você roda um servidor de nomes, essa linha
+		  deve ser comentada ou removida.</para>
 	      </listitem>
 	    </varlistentry>
 
 	    <varlistentry>
-	      <term>Line 10:</term>
+	      <term>Linha 10:</term>
 
 	      <listitem>
-		<para>A blank line for readability.  Blank lines are ignored
-		by PPP.</para>
+	        <para>Uma linha em branco para ligibilidade. Linhas em branco
+		são ignorados pelo PPP.</para>
 	      </listitem>
 	    </varlistentry>
 
 	    <varlistentry>
-	      <term>Line 11:</term>
+	      <term>Linha 11:</term>
 
 	      <listitem>
+	        <para>Identifica uma entrada para um provedor chamado
 		<para>Identifies an entry for a provider called
-		  <quote>provider</quote>.  This could be changed
-                    to the name of your <acronym>ISP</acronym> so
-                    that later you can use the <option>load ISP</option>
-                    to start the connection.</para>
+		  <quote>provider</quote>.  Isso deve ser trocado pelo
+	            nome do seu provedor para que mais tarde você
+		    possa utilizar a opção <option>load ISP</option>
+		    para iniciar a conexão.</para>
 	      </listitem>
 	    </varlistentry>
 
 	    <varlistentry>
-	      <term>Line 12:</term>
+	      <term>Linha 12:</term>
 
 	      <listitem>
-		<para>Sets the phone number for this provider.  Multiple
-		  phone numbers may be specified using the colon
-		  (<literal>:</literal>) or pipe character
-		  (<literal>|</literal>)as a separator.  The difference
-		  between the two separators is described in &man.ppp.8;.
-		  To summarize, if you want to rotate through the numbers,
-		  use a colon.  If you want to always attempt to dial the
-		  first number first and only use the other numbers if the
-		  first number fails, use the pipe character.  Always
-		  quote the entire set of phone numbers as shown.</para>
+	        <para>Define o número telefônico para esse provedor. Vários
+		  números podem ser especificados usando dois pontos
+		  (<literal>:</literal>) ou o caracter
+		  <foreignphrase>pipe</foreignphrase> (<literal>|</literal>) 
+		  como separação. A diferença entre os dois separadores está
+		  descrita em &man.ppp.8;.  Resumindo, se você deseja que todos
+		  os números sejam utilizados de forma rotatória utilize os dois
+		  pontos. Se você quer que o PPP sempre tente o primeiro número e
+		  só utilize os próximo caso o primeiro falhe, utilize o 
+		  <foreignphrase>pipe</foreignphrase>. Sempre coloque os números
+		  entre aspas.</para>
 	    
 	      <para>You must enclose the phone number in quotation marks
 		(<literal>"</literal>) if there is any intention on using
