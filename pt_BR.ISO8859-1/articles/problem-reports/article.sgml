@@ -11,7 +11,7 @@
   <articleinfo>
     <title>Escrevendo relat&oacute;rios de problema no FreeBSD</title>
 
-    <pubdate>$FreeBSD: articles/problem-reports/article.sgml,v 1.8 2003/12/11 15:40:47 ebrandi Exp $</pubdate>
+    <pubdate>$FreeBSD: articles/problem-reports/article.sgml,v 1.9 2003/12/11 15:54:29 ebrandi Exp $</pubdate>
 
     <legalnotice id="trademarks" role="trademarks">
       &tm-attrib.freebsd;
@@ -266,77 +266,85 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Do not leave the <quote>Synopsis</quote>
-            line empty.</emphasis>  The PRs go both onto a mailing list
-            that goes all over the world (where the <quote>Synopsis</quote> is used
-            for the <literal>Subject:</literal> line), but also into a
-            database.  Anyone who comes along later and browses the
-            database by synopsis, and finds a PR with a blank subject
-            line, tends just to skip over it.  Remember that PRs stay
-            in this database until they are closed by someone; an
-            anonymous one will usually just disappear in the
-            noise.</para>
+          <para><emphasis>N&atilde;o deixe a linha de <quote>sin&oacute;pse</quote>
+	  em branco.</emphasis>  Os PRs s&atilde;o enviados para listas de
+	  discuss&atilde;o no mundo todo (nas quais a <quote>Sin&oacute;pse</quote>
+	  &eacute; utilizada como linha de <literal>Subject:</literal>, al&eacute;m
+	  de serem armazenados em um banco de dados.  Qualquer pessoa
+	  que vier a navegar no banco de dados pelas sin&oacute;pses, e
+	  encontrar um PR com a linha de assunto em branco, tende a
+	  pul&aacute;-lo.  Lembre-se que os PRs permanencem na base de dados
+	  at&eacute; que sejam fechados por algu&eacute;m; os an&ocirc;nimos normalmente
+	  ir&atilde;o desaparecer em meio ao ruido.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>Avoid using a weak <quote>Synopsis</quote>
-            line.</emphasis>  You should not assume that anyone reading
-            your PR has any context for your submission, so the more
-            you provide, the better.  For instance, what part of the
-            system does the problem apply to?  Do you only see the
-            problem while installing, or while running?  To
-            illustrate, instead of <literal>Synopsis: portupgrade is
-            broken</literal>, see how much more informative this
-            seems: <literal>Synopsis: port sysutils/portupgrade
-            coredumps on -current</literal>.  (In the case of ports,
-            it is especially helpful to have both the category and
-            portname in the <quote>Synopsis</quote> line.)</para>
+          <para><emphasis>Evite utilizar uma <quote>sin&oacute;pse</quote>
+            fraca.</emphasis>  Voc&ecirc; n&atilde;o pode assumir que algu&eacute;m que
+	    esteja lendo o seu PR conhe&ccedil;a todo o contexto que que
+	    gerou o seu envio, assim quanto mais voc&ecirc; fornecer,
+	    melhor.  Por exemplo, a que parte do sistema o problema
+	    se aplica?  Voc&ecirc; v&ecirc; o problema apenas ao instalar ou ao
+	    executar?  Para ilustrar, ao inv&eacute;s de <literal>Synopsis:
+	    o portupgrade est&aacute; quebrado</literal>, veja o qu&atilde;o mais
+	    informativo &eacute; este outro exemplo: <literal>Synopsis: 
+	    port sysutils/portupgrade gerando coredumps no -current
+	    </literal>.  (No caso de um port, &eacute; especialmente util ter
+	    a categoria e o nome do port na linha de
+	    <quote>sin&oacute;pse</quote>.)</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>If you have a patch, say so.</emphasis>
-            A PR with a patch included is much more likely to be
-            looked at than one without.  If you are including one,
-            put the string <literal>[patch]</literal> at the
-            beginning of the <quote>Synopsis</quote>.  (Although it is
-            not mandatory to use that exact string, by convention,
-            that is the one that is used.)</para>
+          <para><emphasis>Se voc&ecirc; possui um patch, mencione-o.</emphasis>
+	    Um PR que inclui um patch &eacute; muito mais prov&aacute;vel de ser
+	    olhado do que um sem.  Se voc&ecirc; estiver incluindo um,
+	    coloque a palavra <literal>[patch]</literal> no inicio da
+	    linha de <quote>sin&oacute;pse</quote>.  (Embora n&atilde;o seja
+	    obrig&aacute;torio utilizar esta palavra exata, por conven&ccedil;&atilde;o, &eacute;
+	    ela que &eacute; utilizada.)</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>If you are a maintainer, say so.</emphasis>
-            If you are maintaining a part of the source code (for
-            instance, a port), you might consider adding the string
-            <literal>[maintainer update]</literal> at the beginning of
-            your synopsis line and/or set the <quote>Class</quote> of
-            your PR to <literal>maintainer-update</literal>.  This way
-            any committer that handles your PR will not have to check
-            with the <filename>Makefile</filename> of the PR every
-            time the PR is viewed to make sure this is an update sent
-            by the maintainer of the port.</para>
+          <para><emphasis>
+	    Se voc&ecirc; &eacute; um <literal>maintainer</literal>,
+	    diga-o.</emphasis>  Se voc&ecirc; est&aacute; mantendo uma parte do
+	    c&oacute;digo fonte (por exemplo, um port), voc&ecirc; deve considerar
+	    a possibilidade de incluir as palavras
+	    <literal>[maintainer update]</literal> no inicio da linha
+	    de <quote>sin&oacute;pse</quote> e/ou definir a
+	    <quote>classe</quote> do seu PR para
+	    <literal>maintainer-update</literal>.  Desta forma
+	    qualquer committer que manusear o seu PR n&atilde;o ter&aacute; de
+	    verificar com o <filename>Makefile</filename>  do PR cada
+	    vez que um PR for visto, para ter certeza que a
+	    atualiza&ccedil;&atilde;o foi enviada pelo <literal>maintainer</literal>
+	    do port.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>Be specific.</emphasis>
-            The more information you supply about what problem you
-            are having, the better your chance of getting a response.
-            You should include such things as what version you are
-            running (there is a place to put that, see below);
-            which architecture you are running on;
-            whether you are running from a release CDROM, or from
-            a system maintained by &man.cvsup.1; (and, if so, how
-            recently you updated); and, if a kernel problem,
-            if you have read <literal>src/UPDATING</literal>
-            (someone is guaranteed to ask).  You do not necessarily
-            have to provide your kernel configuration, which ports
-            you have available, and a core dump (including these
-            by default only tends to fill up the database), but you
-            should be prepared to make them available, either
-            privately or publicly, if so asked.</para>
+          <para><emphasis>Seja espec&iacute;fico.</emphasis>
+	    Quanto mais informa&ccedil;&otilde;es voc&ecirc; enviar sobre o problema que
+	    voc&ecirc; est&aacute; tendo, melhor &eacute; a sua chance de obter uma
+	    resposta.  Voc&ecirc; deve incluir items tais como a vers&atilde;o
+	    voc&ecirc; est&aacute; executando (Existe um lugar para colocar isso,
+	    veja abaixo); qual a arquitetura que voce esta utilizando;
+	    se voc&ecirc; est&aacute; utilizando uma vers&atilde;o release obtida apartir
+	    de um CDROM, ou se est&aacute; utilizando um sistema mantido pelo
+	    &man.cvsup.1; (e, se for o caso, o qu&atilde;o recentemente ele
+	    foi atualizado); e, se se for um problema de kernel, se
+	    voc&ecirc; leu o arquivo <literal>src/UPDATING</literal> (com
+	    certeza algu&eacute;m iria perguntar).  Voc&ecirc; n&atilde;o tem que
+	    necessariamente fornecer a sua configura&ccedil;&atilde;o do kernel, que
+	    ports voc&ecirc; tem instalado, e um arquivo de coredump
+	    (inclui-los por padr&atilde;o, apenas iria encher o banco de
+	    dados), mas voc&ecirc; deve ficar preparado para
+	    disponibiliz&aacute;-lo, de forma privada ou publica, se ele for
+	    solicitado.</para>
+	   
         </listitem>
 
         <listitem>
-          <para><emphasis>Avoid vague requests for features.</emphasis>
+          <para><emphasis>Evite pedidos vagos de novas funcionalidades.</emphasis>
             PRs of the form <quote>someone should really implement something
             that does so-and-so</quote> are less likely to get results than
             very specific requests.  Remember, the source is available
