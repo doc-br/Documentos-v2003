@@ -743,15 +743,16 @@ lsof: /usr/ports/sysutils/lsof</screen>
       (utilit&aacute;rio de sistema) pode ser encontrado no diret&oacute;rio
       <filename>/usr/ports/sysutils/lsof</filename>.</para>
 
-      <para>Yet another way to find a particular port is by using the
-        ports collection's built-in search mechanism.  To use the
-        search feature, you will need to be in the
-        <filename>/usr/ports</filename> directory.  Once in that
-        directory, run <command>make search
-        name=<replaceable>program-name</replaceable></command> where
-        <replaceable>program-name</replaceable> is the name of the
-        program you want to find.  For example, if you were looking
-        for <command>lsof</command>:</para>
+      <para>
+	Outra forma de procurar um port em particular &eacute; atrav&eacute;s da
+	utiliza&ccedil;&atilde;o do mecanismo interno de busca disponibilizado pelo
+	sistema de ports. Para usar o reurso de busca, voce tem que
+	estar dentro do diret&oacute;rio <filename>/usr/ports</filename>. Uma
+	vez dentro do diret&oacute;rio, execute o comando <command>make
+	search name=<replaceable>nome_do_programa</replaceable></command>
+	onde <replaceable>nome_do_programa</replaceable> &eacute; o nome do
+	aplicativo que vc est&aacute; procurando. Por exemplo, se voc&ecirc;
+	estiver procurando pelo command>lsof</command>:</para>
 
       <screen>&prompt.root; <userinput>cd /usr/ports</userinput>
 &prompt.root; <userinput>make search name=lsof</userinput>
@@ -763,71 +764,80 @@ Index:  sysutils
 B-deps: 
 R-deps: </screen>
 
-      <para>The part of the output you want to pay particular
-        attention to is the <quote>Path:</quote> line, since that
-        tells you where to find the port.  The other information
-        provided is not needed in order to install the port, so it
-        will not be covered here.</para>
+      <para>
+	A parte da sa&iacute;da na qual voc&ecirc; deve prestar um aten&ccedil;&atilde;o especial
+	&eacute; a linha iniciada com <quote>Path:</quote>, uma vez que &eacute; ela
+	que diz onde encontrar o port. As outras informa&ccedil;&otilde;es exibidas
+	n&atilde;o s&atilde;o necess&aacute;rias para a instala&ccedil;&atilde;o do aplicativo pelo
+	ports, e portanto n&atilde;o ser&atilde;o comentadas aqui.</para>
 
-      <para>For more in-depth searching you can also use <command>make
-       search key=<replaceable>string</replaceable></command> where
-       <replaceable>string</replaceable> is some text to search for.
-       This searches port names, comments, descriptions and
-       dependencies and can be used to find ports which relate to a
-       particular subject if you don't know the name of the program
-       you are looking for.</para>
+      <para>
+	Para uma busca mais profunda voce pode utilizar <command>make
+	search key=<replaceable>string</replaceable></command> , onde
+	<replaceable>string</replaceable> &eacute; a palavra chave que deseja
+	procurar. Esta busca ir&aacute; varrer os nomes dos ports, os
+	coment&aacute;rios, as descri&ccedil;&otilde;es, as depend&ecirc;ncias e pode pode ser
+	utilizada para buscar um aplicativo que esteja relacionado a
+	um assunto em particular caso voc&ecirc; n&atilde;o saiba o nome do
+	aplicativo pelo qual voc&ecirc; est&aacute; procurando.</para>
 
-      <para>In both of these cases, the search string is case-insensitive.
-       Searching for <quote>LSOF</quote> will yield the same results as 
-       searching for <quote>lsof</quote>.</para>
+      <para>Em ambos os casos descritos acima,i o argumento da busca &eacute;
+      <literal>case-insensitive</literal>. A busca por <quote>LSOF</quote>
+      ir&aacute; apresentar o mesmo resultado que uma busca por <quote>lsof
+      </quote>.</para>
 
       <note>
-        <para>You must be logged in as <username>root</username> to install
-          ports.</para>
+        <para>Voce Precisa estar logado como <username>root</username> para 
+	instalar um aplicativo pelo ports.</para>
       </note>
 
-      <para>Now that you have found a port you would like to install,
-        you are ready to do the actual installation.  The port
-        includes instructions on how to build source code, but does not include the
-        actual source code.  You can get the source code from a CD-ROM
-        or from the Internet.  Source code is distributed in whatever
-        manner the software author desires.  Frequently this is a
-        tarred and gzipped file, but it might be compressed with some
-        other tool or even uncompressed.  The program source code,
-        whatever form it comes in, is called a
-        <quote>distfile</quote>.  You can get the distfile from a
-        CD-ROM or from the Internet.</para>
-
+      <para>
+	Agora que voc&ecirc; ja encontrou um aplicativo que gostaria de
+	instalar, voc&ecirc; j&aacute; est&aacute; pronto para executar a instala&ccedil;&atilde;o. O
+	port inclui instru&ccedil;&otilde;es sobre como compilar o c&oacute;digo fonte,
+	por&eacute;m n&atilde;o inclui o c&oacute;digo fonte propriamente dito. Voc&ecirc;
+	pode obter o c&oacute;digo fonte apartir de um CDROM ou apartir da
+	internet. O c&oacute;digo fonte &eacute; distribuido da forma como o autor
+	do software desejar, normalmente o formaro utilizado &eacute; um
+	tarball compactado com o utilit&aacute;rio gzip, por&eacute;m ele pode estar
+	compactado com outro utilit&aacute;rio ou mesmo estar descompactado.
+	O c&oacute;digo fonte de um software, independente de como ele for
+	distribuido, &eacute; chamado de <quote>distfile</quote>. Voce pode
+	obter o <quote>distfile</quote> apartir de um CDROM ou da
+	internet.</para>
+      
       <sect3 id="ports-cd">
-        <title>Installing Ports from a CD-ROM</title>
+        <title>Instalando um aplicativo atrav&eacute;s do ports via CDROM</title>
 
         <indexterm>
           <primary>ports</primary>
           <secondary>installing from CD-ROM</secondary>
         </indexterm>
-        <para>The FreeBSD Project's official CD-ROM images no longer
-	  include distfiles.  They take up a lot of room that is
-	  better used for precompiled packages.  CD-ROM products such as
-	  the FreeBSD PowerPak do include distfiles, and you can
-	  order these sets from a vendor such as the <ulink
-	  url="http://www.freebsdmall.com/">FreeBSD Mall</ulink>.
-	  This section assumes you have such a FreeBSD CD-ROM
-	  set.</para>
-
-        <para>Place your FreeBSD CD-ROM in the drive.  Mount it on
-	  <filename>/cdrom</filename>.  (If you use a different mount
-	  point, the install will not work.)  To begin, change to the
-	  directory for the port you want to install:</para>
-
+        <para>
+	  Os ISOs oficiais distribuidos pelo projeto FreeBSD n&atilde;o
+	  incluem nenhum distfile. Eles ocupariam muito espa&ccedil;o, o qual
+	  &eacute; melhor utilizado pelos pacotes pr&eacute;-compilados. Os CDROMs
+	  da linha PowerPack incluem distifiles, e voce pode
+	  comprar este conjunto de CDs em vendedores como a <ulink
+	  url="http://www.freebsdmall.com/">FreeBSD Mall</ulink>. Esta
+	  sess&atilde;o assume que voc&ecirc; possui este conjunto de CDs.</para>
+	
+        <para>
+	  Insira o CDROM do FreeBSD no drive. Monte-o como
+	  <filename>/cdrom</filename>. Se voc&ecirc; utilizar um ponto de
+	  montagem diferente o processo de instala&ccedil;&atilde;o n&atilde;o ir&aacute;
+	  funcionar. Para iniciar, va para o diret&oacute;rio do ports que
+	  voc&ecirc; deseja instalar:</para>
+	
         <screen>&prompt.root; <userinput>cd /usr/ports/sysutils/lsof</userinput></screen>
 
-        <para>Once inside the <filename>lsof</filename> directory,
-	  you will see the port
-	  skeleton.  The next step is to compile, or <quote>build</quote>, the
-	  port.  This is done by simply typing <command>make</command> at
-	  the prompt.  Once you have done so, you should see something
-	  like this:</para>
-
+        <para>
+	  Uma vez dentro do diret&oacute;rio <filename>lsof</filename>, voc&ecirc;
+	  ir&aacute; ver o esqueleto do port. O pr&oacute;ximo passo &eacute; compilar, ou
+	  construir, o port. Isto &eacute; realizado pela simples execu&ccedil;&atilde;o do
+	  comando <command>make</command>. Ao executar o comando, voc&ecirc;
+	  ir&aacute; visualizar uma saida semelhante a esta:</para>
+	  
         <screen>&prompt.root; <userinput>make</userinput>
 &gt;&gt; lsof_4.57D.freebsd.tar.gz doesn't seem to exist in /usr/ports/distfiles/.
 &gt;&gt; Attempting to fetch from file:/cdrom/ports/distfiles/.
@@ -848,11 +858,12 @@ R-deps: </screen>
 ...
 &prompt.root;</screen>
 
-        <para>Notice that once the compile is complete you are
-	  returned to your prompt.  The next step is to install the
-	  port.  In order to install it, you simply need to tack one word
-	  onto the <command>make</command> command, and that word is
-	  <command>install</command>:</para>
+        <para>
+	  Observe que ap&oacute;s completar o processo de compila&ccedil;&atilde;o voc&ecirc; ir&aacute;
+	  voltar para o prompt. O pr&oacute;ximo passo &eacute; instalar o port.
+	  Para instal&aacute;-lo, basta adicionat a palavra
+	  <command>install</command> ao comando
+	  <command>make</command>, como mostrado abaixo:</para>
 
         <screen>&prompt.root; <userinput>make install</userinput>
 ===&gt;  Installing for lsof-4.57
@@ -867,63 +878,72 @@ R-deps: </screen>
       increased privileges.
 &prompt.root;</screen>
 
-        <para>Once you are returned to your prompt, you should be able to
-          run the application you just installed.  Since 
-	  <command>lsof</command> is a
-	  program that runs with increased privileges, a security
-	  warning is shown.  During the building and installation of
-	  ports, you should take heed of any other warnings that
-	  may appear.</para>
+        <para>
+	  Uma vez que voc&ecirc; tenha retornado ao prompt, voc&ecirc; j&aacute; deve ser
+	  capaz de executar a aplica&ccedil;&atilde;o que acabou de instalar.
+	  Como o aplicativo <command>lsof</command> executa com
+	  privil&eacute;gios altos, um aviso de seguran&ccedil;a &eacute; exibido. Durante
+	  o processo de compila&ccedil;&atilde;o e de instala&ccedil;&atilde;o, outros avisos
+	  podem ser exibidos.</para>
 
         <note>
-          <para>You can save an extra step by just running <command>make
-            install</command> instead of <command>make</command> and
-	    <command>make install</command> as two separate steps.</para>
+          <para>
+	    Voce pode economizar um passo executando diretamente o
+	    comando <command>make install</command>, ao inv&eacute;s de
+	    executar o comando <command>make</command> seguido do
+	    comando <command>make install</command> como duas etapas
+	    separadas.</para>
 	</note>
 
 	<note>
-	  <para>Some shells keep a cache of the commands that are
-	    available in the directories listed in the
-	    <envar>PATH</envar> environment variable, to speed up
-	    lookup operations for the executable file of these
-	    commands.  If you are using one of these shells, you might
-	    have to use the <command>rehash</command> command after
-	    installing a port, before the newly installed commands can
-	    be used.  This is true for both shells that are part of
-	    the base-system (such as <command>tcsh</command>) and
-	    shells that are available as ports (for instance,
-	    <filename role="package">shells/zsh</filename>).</para>
+	  <para>
+	    Alguns <literal>shells</literal> mantem um
+	    <literal>cache</literal> dos comandos disponiveis nos
+	    diret&oacute;rios listados na v&aacute;riavel de ambiente
+	    <envar>PATH</envar>, com o objetivo de agilizar o processo
+	    de busca para a execu&ccedil;&atilde;o desdes comandos. Se voce estiver
+	    utilizando um destes <literal>shells</literal>, voc&ecirc; ter&aacute;
+	    que executar o comando <command>rehash</command> logo ap&oacute;s
+	    a instala&ccedil;&atilde;o do ports, antes que voce possa utilizar o
+	    aplicativo rec&eacute;m instalado. Esta opera&ccedil;&atilde;o &eacute; necess&aacute;ria com
+	    todos os shells disponibilizados na base do sistema (como
+	    por exemplo o <command>tcsh</command>) e com alguns dos
+	    disponibilizados no ports (por exemplo, <filename
+	    role="package">shells/zsh</filename>).</para>
 	</note>
 
         <note>
-          <para>Please be aware that the licenses of a few ports do
-            not allow for inclusion on the CD-ROM.  This could be
-            because a registration form needs to be filled out before
-            downloading or redistribution is not allowed, or for
-            another reason.  If you wish to install a port not
-            included on the CD-ROM, you will need to be online in
-            order to do so (see the <link linkend="ports-inet">next
-            section</link>).</para>
+          <para>
+	    Por favor esteja ciente de que a licensa de alguns
+	    aplicativos n&atilde;o permite a inclus&atilde;o dos mesmos em um
+	    CDROM. Isto pode ocorrer devido a necessidade de se
+	    preencher algum formul&aacute;rio antes de se fazer o download ou
+	    ent&atilde;o porque a redistribui&ccedil;&atilde;o n&atilde;o &eacute; permitida, ou por
+	    qualquer outra raz&atilde;o. Se voc&ecirc; deseja instalar um ports
+	    cujo distfile n&atilde;o esteja presente no CDROM, voc&ecirc; ter&aacute; que
+	    estar online para instal&aacute;-lo (consulte a <link
+	    linkend="ports-inet">pr&oacute;xima sess&atilde;o</link>.</para>
 	</note>
       </sect3>
 
       <sect3 id="ports-inet">
-      <title>Installing Ports from the Internet</title>
+      <title>Instalando um aplicativo atrav&eacute;s do ports via Internet</title>
 
-        <para>As with the last section, this section makes an
-          assumption that you have a working Internet connection.  If
-          you do not, you will need to perform the <link
-          linkend="ports-cd">CD-ROM installation</link>, or put a copy
-          of the distfile into
-          <filename>/usr/ports/distfiles</filename> manually.</para>
+        <para>
+	  Como na ultima sess&atilde;o, est&aacute; sess&atilde;o assume que voc&ecirc; possui
+	  uma conex&atilde;o internet funcional. Se voc&ecirc; n&atilde;o possuir, voc&ecirc;
+	  ter&aacute; que executar a <link linkend="ports-cd">instala&ccedil;&atilde;o
+	  apartir do CDROM</link>, ou ent&atilde;o colocar manualmente uma c&oacute;pia do
+	  distifile do port desejado no diret&oacute;rio
+	  <filename>/usr/ports/distfiles</filename>.</para>
+	
+        <para>
+	  A instala&ccedil;&atilde;o de um port apartir da internet &eacute; realizada de
+	  forma id&ecirc;ntica a instala&ccedil;&atilde;o apartir do CDROM, a unica
+	  diferen&ccedil;a entre as duas &eacute; que agora o distfile ser&aacute; obtido
+	  da internet ao inv&eacute;s de ser lido do CDROM.</para>
 
-        <para>Installing a port from the Internet is done exactly the
-	  same way as it would be if you were installing from a
-	  CD-ROM.  The only difference between the two is that the
-	  distfile is downloaded from the Internet instead of read
-	  from the CD-ROM.</para>
-
-        <para>The steps involved are identical:</para>
+        <para>Os passos envolvidos s&atilde;o id&ecirc;nticos:</para>
 
         <screen>&prompt.root; <userinput>make install</userinput>
 &gt;&gt; lsof_4.57D.freebsd.tar.gz doesn't seem to exist in /usr/ports/distfiles/.
@@ -957,174 +977,200 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
       increased privileges.
 &prompt.root;</screen>
 
-        <para>As you can see, the only difference is the line that tells
-	  you where the system is fetching the port distfile from.</para>
+        <para>
+	  Como voce pode ver a &uacute;nica diferen&ccedil;a &eacute; a linha que informa
+	  que o sistema esta fazendo o download do distfile.</para>
 
-	<para>The ports system uses &man.fetch.1; to download the
-	  files, which honors various environment variables, including
-	  <envar>FTP_PASSIVE_MODE</envar>, <envar>FTP_PROXY</envar>,
-	  and <envar>FTP_PASSWORD</envar>.  You may need to set one or
-	  more of these if you are behind a firewall, or need to use
-	  an FTP/HTTP proxy.  See &man.fetch.3; for the complete
-	  list.</para>
+	<para>
+	  O sistema de ports utiliza o &man.fetch.1; para fazer
+	  download dos arquivos, o qual considera varias vari&aacute;veis de
+	  ambiente, incluindo <envar>FTP_PASSIVE_MODE</envar>,
+	  <envar>FTP_PROXY</envar>, e <envar>FTP_PASSWORD</envar>.
+	  Voc&ecirc; pode precisar definir uma ou mais delas caso esteja
+	  atr&aacute;s de um firewall, ou mesmo fazer uso de um proxy
+	  FTP/HTTP, Consulte &man.fetch.3; para visualizar a lista de
+	  todas as vari&aacute;veis.</para>
+	
+	<para>
+	  Para os usu&aacute;rios que n&atilde;o podem ficar conectados o tempo
+	  todo, &eacute; oferecido o comando <command>make
+	  <maketarget>fetch</maketarget></command> como op&ccedil;&atilde;o. Ao
+	  executar este comando na raiz da &aacute;rvore do ports
+	  (<filename>/usr/ports</filename>), ele ir&aacute; fazer o download
+	  de todos os distifiles necess&aacute;rios para o uso do ports para
+	  voc&ecirc;. Este comando tamb&eacute;m funciona para as demais categorias
+	  do segundo nivel (por exemplo,
+	  filename>/usr/ports/net</filename>). Observe que se um port
+	  depender de uma biblioteca ou de outros ports para funcionar, 
+	  o comando acima n&atilde;o ir&aacute; fazer o download do distifile destes ports. 
+	  Se voc&ecirc; desejar que seja efetuado o download do distfile de todas 
+	  as dependencias, substitua a op&ccedil;&atilde;o <maketarget>fetch</maketarget> por
+	  <maketarget>fetch-recursive</maketarget>.
+	
+	<note>
+	<para>
+	  Voc&ecirc; pode compilar todos os ports de uma determinada
+	  categoria, ou mesmo todos os ports, executando o comando
+	  <command>make</command> na raiz da &aacute;rvore do ports,
+	  exatamente como mencionado acima para o <command>make 
+	  <makevar>fetch</makevar></command>. Isto &eacute; perigoso, pois
+	  alguns ports n&atilde;o podem co-existir no mesmo sistema. Em
+	  outros casos, alguns ports podem instalar 2 arquivos
+	  diferentes com o mesmo nome, um sobrescrevendo o arquivo do
+	  outro.</para></note>
 
-	<para>For users which cannot be connected all the time, the
-	  <command>make <maketarget>fetch</maketarget></command> option is
-	  provided.  Just run this command at the top level directory
-	  (<filename>/usr/ports</filename>) and the required files
-	  will be downloaded for you.  This command will also work in
-	  the lower level categories, for example:
-	  <filename>/usr/ports/net</filename>.
-	  Note that if a port depends on libraries or other ports this will
-	  <emphasis>not</emphasis> fetch the distfiles of those ports too.
-	  Replace <maketarget>fetch</maketarget> with
-	  <maketarget>fetch-recursive</maketarget>
-	  if you want to fetch all the dependencies of a port too.</para>
-
-	<note><para>You can build all the ports in a category or as a
-	  whole by running <command>make</command> in the top level
-	  directory, just like the aforementioned <command>make
-	  <makevar>fetch</makevar></command> method.  This is
-	  dangerous, however, as some ports cannot co-exist.  In other
-	  cases, some ports can install two different files with the
-	  same filename.</para></note>
-
-	<para>In some rare cases, users may need to acquire the
-	  tarballs from a site other than the
-	  <makevar>MASTER_SITES</makevar> (the location where files
-	  are downloaded from).  You can override the
-	  <makevar>MASTER_SITES</makevar> option with the following
-	  command:</para>
+	<para>
+	  Em alguns casos raros, os usu&aacute;rios podem precisar obter os
+	  tarballs, apartir de um site diferente do especificado no
+	  <makevar>MASTER_SITES</makevar> (local de onde os distfiles
+	  s&atilde;o obtidos). Voce pode sobrescrever o valor da op&ccedil;&atilde;o
+	  <makevar>MASTER_SITES</makevar> com o seguinte
+	  comando:</para>
 
 	<screen>&prompt.root; <userinput>cd /usr/ports/<replaceable>directory</replaceable></userinput></screen>
 	<screen>&prompt.root; <userinput>make MASTER_SITE_OVERRIDE= \
 	ftp://ftp.FreeBSD.org/pub/FreeBSD/ports/distfiles/ fetch</userinput></screen>
 
-	<para>In this example we change the
-	  <makevar>MASTER_SITES</makevar> option to <hostid
-	  role="fqdn">ftp.FreeBSD.org/pub/FreeBSD/ports/distfiles/</hostid>.</para>
+	<para>NO exemplo acima, n&oacute;s alteramos a op&ccedil;&atilde;o <makevar>MASTER_SITES
+	</makevar> para <hostid role="fqdn">ftp.FreeBSD.org/pub/FreeBSD/ports/distfiles/</hostid>.</para>
 
-	<note><para>Some ports allow (or even require) you to provide build options
-	  which can enable/disable parts of the application which are
-	  unneeded, certain security options, and other
-	  customizations.  A few which come to mind are <filename
-	  role="package">www/mozilla</filename>, <filename
-	  role="package">security/gpgme</filename>, and <filename
-	  role="package">mail/sylpheed-claws</filename>.  A message
-	  will be displayed when options such as these are
-	  available.</para></note>
+	<note>
+	<para>
+	 Alguns ports permitem (ou mesmo precisam) que voc&ecirc; forne&ccedil;a
+	 algumas op&ccedil;&otilde;es no momento da compila&ccedil;&atilde;o, com o objetido de
+	 habilitar ou desabilitar partes da aplica&ccedil;&atilde;o que n&atilde;o s&atilde;o
+	 necess&aacute;rias, op&ccedil;&otilde;es de seguran&ccedil;a e outras customiza&ccedil;&otilde;es.
+	 Alguns ports onde ocorrem isso, e que vem a mente no momento
+	 s&atilde;o <filename role="package">www/mozilla</filename>, <filename
+	 role="package">security/gpgme</filename>, e <filename
+	 role="package">mail/sylpheed-claws</filename>. Uma mensagem &eacute;
+	 exibida quando este tipo de op&ccedil;&otilde;es estiverem dispon&iacute;veis.
+	 </para></note>
       </sect3>
 
       <sect3>
-        <title>Overriding the Default Ports Directories</title>
+        <title>Sobrescrevendo o diret&oacute;rio default do Ports</title>
 
-	<para>Sometimes it is useful (or mandatory) to use a different
-	  distfiles and ports directory.  The
-	  <makevar>PORTSDIR</makevar> and <makevar>PREFIX</makevar>
-	  variables can override the default directories.  For
-	  example:</para>
+	<para>
+	Algumas vezes &eacute; &uacute;til (ou obrigat&oacute;rio) utilizar diferentes
+	distfiles e diretorios de ports. As vari&aacute;veis
+	<makevar>PORTSDIR</makevar> e <makevar>PREFIX</makevar> podem
+	sobrescrever os diret&oacute;rios default. Por exemplo:</para>
 
 	<screen>&prompt.root; <userinput>make PORTSDIR=/usr/home/example/ports install</userinput></screen>
 
-	<para>will compile the port in
-	    <filename>/usr/home/example/ports</filename> and install
-	    everything under <filename>/usr/local</filename>.</para>
-
+	<para>Ir&aacute; compilar o port dispon&iacute;vel no diret&oacute;rio
+	<filename>/usr/home/example/ports</filename> e instalar tudo
+	sob o diret&oacute;rio <filename>/usr/local</filename>.</para>
+	
 	<screen>&prompt.root; <userinput>make PREFIX=/usr/home/example/local install</userinput></screen>
 
-	<para>will compile it in <filename>/usr/ports</filename> and
-	  install it in
-	  <filename>/usr/home/example/local</filename>.</para>
-
-	<para>And of course,</para>
+	<para>Ir&aacute; compilar o port em <filename>/usr/ports</filename> e
+	instalar tudo em
+	<filename>/usr/home/example/local</filename>.</para>
+	
+	<para> E &eacute; claro,</para>
 
 	<screen>&prompt.root; <userinput>make PORTSDIR=../ports PREFIX=../local install</userinput></screen>
 
-	<para>will combine the two (it is too long to completely write
-	  on this page, but it should give you the general
-	  idea).</para>
-
-	<para>Alternatively, these variables can also be set as part
-	  of your environment.  Read the manual page for your shell
-	  for instructions on doing so.</para>
+	<para>
+	  Ir&aacute; combinar os dois (&eacute; muito longo para escrever nesta
+	  pagina, mas j&aacute; deu para voc&ecirc; ter uma id&eacute;ia geral de como
+	  isso funciona).</para>
+	
+	<para>
+	  Alternativamente, estas variaveis podem fazer parte do seu
+	  ambiente. Leia o manual do seu shell para ver instru&ccedil;&otilde;es de
+	  como fazer desta forma.</para>
       </sect3>
 
       <sect3>
-	<title>Dealing with <command>imake</command></title>
+	<title>Lidando com o <command>imake</command></title>
 
-	<para>Some ports that use <command>imake</command> (a part of
-	  the X Windows System) do not work well with
-	  <makevar>PREFIX</makevar>, and will insist on installing
-	  under <filename>/usr/X11R6</filename>.  Similarly, some Perl
-	  ports ignore <makevar>PREFIX</makevar> and install in the
-	  Perl tree.  Making these ports respect
-	  <makevar>PREFIX</makevar> is a difficult or impossible
-	  job.</para>
+	<para>
+	  Alguns ports que fazem uso do <command>imake</command> (uma
+	  parte do Sistema X Windows) n&atilde;o funiona bem com a vari&aacute;vel
+	  <makevar>PREFIX</makevar>,e ir&aacute; insistir em instalar o
+	  aplicativo sob <filename>/usr/X11R6</filename>. De forma
+	  semelhante, alguns ports Perl ignoram a vari&aacute;vel
+	  <makevar>PREFIX</makevar> e se instalam sob a &aacute;rvore do
+	  Perl. Fazer estes ports respeitarem a vari&aacute;vel
+	  <makevar>PREFIX</makevar> &eacute; um trabalho dificil, sen&atilde;o
+	  impossivel.</para>
 
       </sect3>
     </sect2>
 
     <sect2 id="ports-removing">
-      <title>Removing Installed Ports</title>
+      <title>Desinstalando um Ports</title>
 
       <indexterm>
         <primary>ports</primary>
         <secondary>removing</secondary>
       </indexterm>
-      <para>Now that you know how to install ports, you are probably
-        wondering how to remove them, just in case you install one and
-	later on decide that you installed the wrong port.  
-        We will remove our previous example (which was 
-	<command>lsof</command> for
-        those of you not paying attention).  As with installing ports,
-	the first thing you must do is change to the port directory,
-	<filename>/usr/ports/sysutils/lsof</filename>.  After you change
-	directories, you are ready to uninstall <command>lsof</command>.
-	This is done with
-	the <command>make deinstall</command> command:</para>
+      <para>
+	Agora que voc&ecirc; sabe como instalar um ports, voc&ecirc; prov&aacute;velmente
+	est&aacute; se perguntando como remove-lo do sistema, apenas para o
+	caso de voc&ecirc; instalar um e mais tarde descobrir que instalaou
+	o port errado. N&oacute;s iremos remover o nosso exemplo anterior
+	(era o <command>lsof</command> caso n&atilde;o tenha prestado
+	aten&ccedil;&atilde;o). Assim como na instala&ccedil;&atilde;o, voc&ecirc; primeiro deve entrar
+	no diret&oacute;rio do port, no nosso caso
+	<filename>/usr/ports/sysutils/lsof</filename>. Depois que voc&ecirc;
+	tiver entrado no diret&oacute;rio, voc&ecirc; estar&aacute; pronto para
+	desinstalar o <command>lsof</command>. O que &eacute; feito atrav&eacute;s
+	do comando <command>make deinstall</command>:</para>
 
       <screen>&prompt.root; <userinput>cd /usr/ports/sysutils/lsof</userinput>
 &prompt.root; <userinput>make deinstall</userinput>
 ===&gt;  Deinstalling for lsof-4.57</screen>
 
-      <para>That was easy enough.  You have removed
-	<command>lsof</command>
-        from your system.  If you would like to reinstall it, you can do
-	so by running <command>make reinstall</command> from the
-        <filename>/usr/ports/sysutils/lsof</filename> directory.</para>
+      <para>
+	Simples assim, voce j&aacute; removeu o <command>lsof</command> do
+	seu sistema. Se voc&ecirc; desejar reinstal&aacute;-lo, basta executar o
+	comando <command>make reinstall</command> dentro do diret&oacute;rio
+	<filename>/usr/ports/sysutils/lsof</filename>.</para>
 
-      <para>The <command>make deinstall</command> and <command>make
-        reinstall</command> sequence does not work once you have run
-        <command>make clean</command>.  If you want to deinstall a
-        port after cleaning, use &man.pkg.delete.1; as
-        discussed in the <link linkend="packages-using">Packages
-        section of the Handbook</link>.</para>
+      <para>
+	Os comandos <command>make deinstall</command> e <command>make
+	reinstall</command>, n&atilde;o ir&atilde;o funcionar depois que voce
+	executar o comando <command>make clean</command>. Se voce
+	desejar desinstalar um ports depois de ter limpado o diret&oacute;rio
+	de trabalho, utilize o comando &man.pkg.delete.1; como
+	mostrado na <link linkend="packages-using">Sess&atilde;o sobre
+	pacotes do Handbook</link>.</para>
+      
     </sect2>
 
     <sect2 id="ports-disk-space">
-      <title>Ports and Disk Space</title>
+      <title>Ports e espa&ccedil;o em disco</title>
 
       <indexterm>
         <primary>ports</primary>
         <secondary>disk-space</secondary>
       </indexterm>
-      <para>Using the ports collection can defiantly eat up your disk
-	space.  For this reason you should always remember to clean up
-	the work directories using the <command>make
-	<makevar>clean</makevar></command> option.  This will remove
-	the <filename>work</filename> directory after a port has been
-	built, and installed.  You can also remove the tar files from
-	the <filename>distfiles</filename> directory, and remove the
-	installed ports when their use has delimited.</para>
-
-      <para>Some users choose to limit the port categories by placing an entry
-	in the <filename>refuse</filename> file.  This way when they run the
-	<application>CVSup</application> application, it will not download the
-	files in that category.</para>
+      <para>
+	Utilizar a cole&ccedil;&atilde;o de ports pode definitivamente devorar
+	espa&ccedil;o do seu HDD. Por esta raz&atilde;o voc&ecirc; precisa se lembrar de
+	limpar o diret&oacute;rio de trabalho utilizando o comando
+	<command>make <makevar>clean</makevar></command>. Ao
+	execut&aacute;-lo ele ir&aacute; remover o diret&oacute;rio
+	<filename>work</filename> depois do port ter sido compilado e
+	instalado. Voc&ecirc; tamb&eacute;m pode remover os arquivos tarballs do
+	diret&oacute;rio <filename>distfiles</filename>, al&eacute;m de remover os
+	aplicativos instalados quando eles n&atilde;o tiverem mais
+	utilidade.</para>
+	 
+      <para>
+	Alguns usu&aacute;rios preferem limitar as categorias do port,
+	colocando uma entrada no arquivo <filename>refuse</filename>.
+	Desta forma quando eles executam o
+	<application>CVSup</application>, ele n&atilde;o ir&aacute; fazer o download
+	de nenhum arquivo desta categoria.</para>
     </sect2>
 
     <sect2 id="ports-upgrading">
-      <title>Upgrading Ports</title>
+      <title>Atualizando um aplicativo instalado via Ports</title>
 
       <indexterm>
 	<primary>portupgrade</primary>
@@ -1133,29 +1179,35 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
 	<primary>ports</primary>
 	<secondary>upgrading</secondary>
       </indexterm>
-      <para>Keeping your ports up to date can be a tedious job.  For
-	instance, to upgrade a port you would go to the ports
-	directory, build the port, deinstall the old port, install the
-	new port, and then clean up after the build.  Imagine doing
-	that for five ports, tedious right?  This was a large problem
-	for system administrators to deal with, and now we have
-	utilities which do this for us.  For instance the <filename
-	role="port">sysutils/portupgrade</filename> utility will do
-	everything for you!  Just install it like you would any other
-	port, using the <command>make <makevar>install
-	clean</makevar></command> command.</para>
-
-      <para>Now create a database with the <command>pkgdb -F</command>
-	command.  This will read the list of installed ports and
-	create a database file in the <filename>/var/db/pkg</filename>
-	directory.  Now when you run <command>portupgrade
-	-a</command>, it will read this and the ports
-	<filename>INDEX</filename> file.  Finally,
-	<command>portupgrade</command> will begin to download, build,
-	backup, install, and clean the ports which have been updated.
-	Other utilities exist which will do this, check out the
-	<filename>ports/sysutils</filename> directory and see what you
-	come up with.</para>
+      <para>
+	Manter um aplicativo atualizado pode ser uma tarefa tediosa.
+	Pois para atualizar um aplicativo voc&ecirc; precisa ir ao diret&oacute;rio
+	do ports, compilar o port, desinstalar a vers&atilde;o antiga do
+	port, instalar a nova vers&atilde;o e ent&atilde;o limpar o diret&oacute;rio de
+	trabalho ap&oacute;s a compila&ccedil;&atilde;o. Imagine fazer isso para 5
+	aplicativos, entediante certo ? Este &eacute; um dos grandes problemas 
+	com que um administrador de sistema tem que lidar, mas agora
+	temos um utilit&aacute;rio para fazer este trabalho para n&oacute;s. Por
+	exemplo o utilit&aacute;rio <filename role="port">sysutils/portupgrade
+	</filename> ir&aacute; fazer tudo para voc&ecirc;. Instale-o da mesma forma
+	como faz com qualquer outro port, usando o comando
+	<command>make <makevar>install
+	clean</makevar></command>.</para>
+	
+      <para>
+	Agora crie o banco de dados com o comando <command>pkgdb
+	-F</command>. Este comando ir&aacute; ler a lista de ports instados
+	em seu sistema e ir&aacute; criar um banco de dados com informa&ccedil;&otilde;es
+	dos mesmos no diret&oacute;rio <filename>/var/db/pkg</filename>.
+	Agora quando voc&ecirc; executar <command>portupgrade -a</command>,
+	ele ir&aacute; ler este banco de dados e o arquivo
+	<filename>INDEX</filename> na raiz da &aacute;rvore do ports.
+	Em seguida o <command>portupgrade</command> ir&aacute; iniciar o
+	processo de download, compila&ccedil;&atilde;o, backup, instala&ccedil;&atilde;o e limpeza
+	dos aplicativos que precisarem de atualiza&ccedil;&atilde;o. Existem outros
+	utilit&aacute;rios que fazem um trabalho semelhante, verifique as
+	demais op&ccedil;&otilde;es no diret&oacute;rio <filename>ports/sysutils</filename>.
+	</para>
     </sect2>
   </sect1>
 
