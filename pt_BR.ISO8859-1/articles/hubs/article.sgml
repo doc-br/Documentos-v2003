@@ -598,34 +598,38 @@ cvspserver stream tcp nowait root /usr/bin/cvs cvs -f -l -R -T /anoncvstmp --all
           FreeBSD-archive release=all preserve
           </programlisting>
 
-          It seems <application>CVSup</application> would be the best
-          way to mirror the archive in terms of efficiency, but
-          it is only available from few sites.
+          <para>Parece que o <application>CVSup</application>
+	  seria a melhor forma de espelhar o arquivo em termos de
+	  efici&ecirc;ncia, mas infelizmente ele est&aacute; dispon&iacute;vel em apenas 
+	  alguns sites.</para>
+	  
           <note id="mirror-cvsup-s-option">
-            <para>
-              Please have look at the <application>CVSup</application> documentation
-              like &man.cvsup.1; and consider using the <option>-s</option>
-              option, as it can reduce the amount of work to be done
-              a lot.
-            </para>
+            <para>Por favor consulte a documenta&ccedil;&atilde;o do
+	    <application>CVSup</application>, como por exemplo a
+	    &man.cvsup.1; e considere o uso da op&ccedil;&atilde;o <option>-s</option>
+	    uma vez que ela pode reduzir em muito o trabalho a ser
+	    realizado.</para>
           </note>
-        </para>
+
       </sect3>
     </sect2>
     <sect2 id="mirror-cvs">
-      <title>Mirroring the CVS repository</title>
-      <para>
-        Again you have various possibilities, but the most
-        recommended one is to use <link linkend="mirror-cvs-cvsup">CVSup</link>.
-      </para>
+      <title>Espelhando o reposit&oacute;rio CVS</title>
+
+      <para>De novo voc&ecirc; possui v&aacute;rias possibilidades para realizar
+	esta tarefa, mas o mais recomendado &eacute; utilizar o 
+        <link linkend="mirror-cvs-cvsup">CVSup</link>.</para>
+
       <sect3 id="mirror-cvs-cvsup">
-        <title>Using CVSup</title>
-        <para>
-          <application>CVSup</application> was already described to some
-          detail in <xref linkend="mirror-serv-cvsup"> and <xref linkend="mirror-ftp-cvsup">.
-        </para>
-        <para>
-          Here we just describe an example to set up the <filename>supfile</filename>:
+        <title>Utilizando o CVSup</title>
+
+        <para>O <application>CVSup</application> j&aacute; foi descrito em algum 
+	  detalhe na <xref linkend="mirror-serv-cvsup"> e na <xref 
+	  linkend="mirror-ftp-cvsup">.</para>
+
+        <para>Abaixo voc&ecirc; encontra um exemplo de
+	<filename>supfile</filename> para realizar esta tarefa:</para>
+
           <programlisting>
           #
           # FreeBSD CVS supfile from master server
@@ -643,50 +647,53 @@ cvspserver stream tcp nowait root /usr/bin/cvs cvs -f -l -R -T /anoncvstmp --all
           cvs-all
           </programlisting>
 
-          You should also have a look at <filename>/usr/share/examples/cvsup</filename>
-        </para>
+	<para>Voc&ecirc; tamb&eacute;m deve dar uma olhada em <filename>
+	/usr/share/examples/cvsup</filename>.</para>
+
         <note>
-          <para>
-            Please do not forget to consider the hint
-            mentioned in <link linkend="mirror-cvsup-s-option">this note</link>
-            above.
-          </para>
+          <para>Por favor n&atilde;o esque&ccedil;a de considerar a dica mencionada
+	   na <link linkend="mirror-cvsup-s-option">nota
+	   acima</link>.</para>
         </note>
+
       </sect3>
       <sect3 id="mirror-cvs-other">
-        <title>Using other methods</title>
-        <para>
-          Using other methods than <application>CVSup</application> is
-          generally not recommended. We describe them in short here 
-          anyway. Since most sites offer the CVS repository as
-          part of the FTP fileset under the path
-          <filename>/pub/FreeBSD/development/FreeBSD-CVS</filename>,
-          the following methods could be used.
-          <itemizedlist>
+        <title>Utilizando outros m&eacute;todos</title>
+
+        <para>Geralmente n&atilde;o se recomenda o uso de outros m&eacute;todos que
+	  n&atilde;o o <application>CVSup</application>. De qualquer forma,
+	  vamos descrever rapidamente como fazer.  Uma vez que a
+	  maioria dos sites oferecem o reposit&oacute;rio CVS como parte da
+	  &aacute;rea de FTP, sob o caminho <filename>
+	  /pub/FreeBSD/development/FreeBSD-CVS</filename>, os
+	  seguintes m&eacute;todos podem ser utilizados.</para>
+          
+	  <itemizedlist>
             <listitem><para><application>FTP</application></para></listitem>
             <listitem><para><application>RSYNC</application></para></listitem>
-            <listitem><para>maybe even <application>HTTP</application></para></listitem>
+            <listitem><para>e talvez <application>HTTP</application></para></listitem>
           </itemizedlist>
 
-          If you find a site that supports it, you could use
-          <filename role="package">net/sup</filename>.  But it is inferior to <application>CVSup</application>
-          and its deficiencies caused John Polstra to develop
-          <application>CVSup</application> in the first place, so
-          it is clearly not recommended.
-
+	  <para>Se voc&ecirc; encontrar um site que suporte, voc&ecirc; pode
+	  utilizar o <filename role="package">net/sup</filename>.  Mas
+	  ele &eacute; inferior ao <application>CVSup</application> e foram
+	  as suas defici&ecirc;ncias que levaram o John Polstra a
+	  desenvolver o <application>CVSup</application>, ent&atilde;o o seu 
+	  uso &eacute; claramente n&atilde;o recomendado.</para>
+	  
           <important>
-            <para>
-              You can <emphasis>NOT</emphasis> use AnonCVS to 
-              mirror the CVS repository since CVS does not allow
-              you to access the repository itself, but only checked
-              out versions of the modules.
-            </para>
+            <para>Voc&ecirc; <emphasis>n&atilde;o deve</emphasis> utilizar o
+	      AnonCVS para espelhar o reposit&oacute;rio CVS, uma vez que o
+	      CVS n&atilde;o permite que voc&ecirc; acesse o reposit&oacute;rio
+	      propriamente dito (arquivos ",v"), mas sim apenas as
+	      vers&otilde;es limpas dos modulos.</para>
           </important>
-        </para>
+
       </sect3>
     </sect2>
     <sect2 id="mirror-www">
-      <title>Mirroring the WWW pages</title>
+      <title>Espelhando as p&aacute;ginas WWW</title>
+
       <para>
         The best way is to check out the <emphasis>www</emphasis>
         distribution from CVS. If you have a local mirror of the
