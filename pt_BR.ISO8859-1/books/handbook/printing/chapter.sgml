@@ -3246,67 +3246,88 @@ exit 0</programlisting>
           <primary>accounting</primary>
           <secondary>printer</secondary>
         </indexterm>
----
-        <para>In order for <command>lpf</command> to do page accounting
-          correctly, it needs correct values filled in for the
-          <literal>pw</literal> and <literal>pl</literal> capabilities in the
-          <filename>/etc/printcap</filename> file.  It uses these values to
-          determine how much text can fit on a page and how many pages were in
-          a user's job.  For more information on printer accounting, see <link
-            linkend="printing-advanced-acct">Accounting for Printer
-            Usage</link>.</para>
+			<para>
+				Para que o <command>lpf</command> fa&ccedil;a a estatistica
+			corretamente, ele necessita dos valores preencidos corretamente nas
+			op&ccedil;&otilde;ess <literal>pw</literal> e <literal>pl</literal>
+			no arquivo <filename>/etc/printcap</filename>.  Ele utiliza esses
+			valores para determinar como o texto poder&aacute; caber na 
+			p&aacute;gina que quantas p&aacute;ginas estar&atilde;o no 
+			trabalho de impress&atilde;o do usu&aacute;rio.  Para mais 
+			informa&ccedil;&otilde;es, veja a se&ccedil;&atilde;o
+         <link linkend="printing-advanced-acct">
+				Estatisticas do Uso da Impressora
+			</link>.
+			</para>
       </sect3>
     </sect2>
     
     <sect2 id="printing-advanced-header-pages">
       <title>P&aacute;ginas de Cabe&ccedil;alhos</title>
       
-      <para>If you have <emphasis>lots</emphasis> of users, all of them using
-        various printers, then you probably want to consider <emphasis>header
-          pages</emphasis> as a necessary evil.</para>
+		<para>
+			Se voc&ecirc; tiver <emphasis>muitos</emphasis> usu&aacute;rios,
+		todos eles usuando v&aacute;rias impressoras, voc&ecirc; provavelmente
+		dever&aacute; considerar as <emphasis>p&aacute;gians de 
+		cabe&ccedil;alho</emphasis> como um mal necess&aacute;rio.
+		</para>
           
       <indexterm>
         <primary>banner pages</primary>
 	<see>header pages</see>
       </indexterm>
       <indexterm><primary>header pages</primary></indexterm>
-      <para>Header pages, also known as <emphasis>banner</emphasis> or
-        <emphasis>burst pages</emphasis> identify to whom <foreignphrase>jobs</foreignphrase> belong after
-        they are printed.  They are usually printed in large, bold letters,
-        perhaps with decorative borders, so that in a stack of printouts they
-        stand out from the real documents that comprise users' <foreignphrase>jobs</foreignphrase>.  They
-        enable users to locate their <foreignphrase>jobs</foreignphrase> quickly.  The obvious drawback to a
-        header page is that it is yet one more sheet that has to be printed
-        for every job, their ephemeral usefulness lasting not more than a few
-        minutes, ultimately finding themselves in a recycling bin or rubbish
-        heap.  (Note that header pages go with each job, not each file in a
-        job, so the paper waste might not be that bad.)</para>
+		<para>
+			P&aacute;ginas de Cabe&ccedil;alho, tamb&eacute;m conhecida como
+		<emphasis>banner</emphasis> ou <emphasis>burst pages</emphasis> 
+		identifica de quem &eacute; o trabalho de impress&atilde;o depois dele
+		ser impresso.  Ela &eacute; geralmente impressa grande, com letras
+		em negrito, e as vezes com bordas decorativas, para que em um pilha
+		de impress&atilde;o eles possam ser identificados e entregues ao
+		usu&aacute;rio correto.
+			As p&aacute;ginas de cabe&ccedil;alho s&atilde;o impressas uma
+		por trabalho de impress&atilde;o e n&atilde;o uma por arquivo impresso.
+		</para>
           
-      <para>The <application>LPD</application> system can provide header
-	pages automatically for your
-        printouts <emphasis>if</emphasis> your printer can directly print
-       plain text.  If you have a &postscript; printer, you will need an
-        external program to generate the header page; see <link
-          linkend="printing-advanced-header-pages-ps">Header Pages on
-          &postscript; Printers</link>.</para>
-      
+      <para>
+			O sistema <application>LPD</application> pode providenciar 
+		automaticamente p&aacute;ginas de cabe&ccedil;alho para suas 
+		sa&iacute;das <emphasis>se</emphasis> sua impressora puder imprimir
+		texto puro.  Se voc&ecirc; tiver uma impressora &postscript;, voc&ecirc;
+		necessitara de um programa externo para gerar essas p&aacute;ginas;
+		veja a se&ccedil;&atilde;o <link
+          linkend="printing-advanced-header-pages-ps">
+				P&aacute;ginas de Cabe&ccedil;alho em Impressoras
+          &postscript; </link>.
+		</para>
+
           <sect3 id="printing-advanced-header-pages-enabling">
 			<title>
-				Habilitanto P&aacute;ginas de Cabe&ccedil;alho
+				Habilitando P&aacute;ginas de Cabe&ccedil;alho
 			</title>
 
-        <para>In the <link linkend="printing-simple">Simple Printer
-            Setup</link> section, we turned off header pages by specifying
-          <literal>sh</literal> (meaning <quote>suppress header</quote>) in the
-          <filename>/etc/printcap</filename> file.  To enable header pages for
-          a printer, just remove the <literal>sh</literal> capability.</para>
+		<para>
+			Na se&ccedil;&atilde;o <link linkend="printing-simple">
+				Configura&ccedil;&atilde;o Simples da Impressora
+      </link>, nos desligamos a impress&atilde;o das p&aacute;ginas de 
+		cabe&ccedil;alho, atrav&eacute;s da op&ccedil;&atilde;o
+		<literal>sh</literal> ( que significa <quote>suppress header</quote>)
+		no arquivo <filename>/etc/printcap</filename>.  Para habilitar a 
+		impress&atilde;o, basta a remo&ccedil;&atilde;o da op&ccedil;&atilde;o
+		<literal>sh</literal>.
+		</para>
 
-        <para>Sounds too easy, right?</para>
+      <para>
+			Isso parece t&atilde;o f&aacute;cil, correto?
+		<para>
 
-        <para>You are right.  You <emphasis>might</emphasis> have to provide
-          an output filter to send initialization strings to the printer.
-          Here is an example output filter for Hewlett Packard PCL-compatible
-          printers:</para>
+      <para>
+			E voc&ecirc; esta certo.  Voc&ecirc; <emphasis>deve</emphasis> ter
+		providenciado um filtro de sa&iacute;da para enviar os dados de 
+		inicializa&ccedil;&atilde;o para a impressora.  Aqui um est&aacute;
+		um exemplo de filtro de sa&iacute;da para uma impressora
+      Hewlett Packard PCL-compat&iacute;vel:
+		</para>
 
         <programlisting>#!/bin/sh
 #
@@ -3316,14 +3337,19 @@ exit 0</programlisting>
 printf "\033&amp;k2G" || exit 2
 exec /usr/libexec/lpr/lpf</programlisting>
             
-        <para>Specify the path to the output filter in the
-          <literal>of</literal> capability.  See the <link
-            linkend="printing-advanced-of">Output Filters</link> section for more
-          information.</para>
+		<para>
+			especificando odiret&oacute;rio para o filtro de sa&iacute;da na
+		op&ccedil;&atilde; <literal>of</literal>.  veja na se&ccedil;&atilde;o
+		<link linkend="printing-advanced-of">Filtros de Sa&iacute;da</link>
+		para maiores informa&ccedil;&otilde;es.
+		</para>
             
-        <para>Here is an example <filename>/etc/printcap</filename> file for
-          the printer <literal>teak</literal> that we introduced earlier; we
-          enabled header pages and added the above output filter:</para>
+		<para>
+			Aqui um exemplo do arquivo <filename>/etc/printcap</filename> para
+		a impressora <literal>teak</literal> que foi introduzida recentemente;
+		nos habilitamos a p&aacute;gina de cabe&ccedil;alho e adicionamos
+		o filtro de sa&iacute;da descrito acima:
+		</para>
 
         <programlisting>#
 #  /etc/printcap for host orchid
@@ -3334,32 +3360,45 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
         :vf=/usr/local/libexec/hpvf:\
         :of=/usr/local/libexec/hpof:</programlisting>
             
-        <para>Now, when users print <foreignphrase>jobs</foreignphrase> to <literal>teak</literal>, they get
-          a header page with each job.  If users want to spend time searching
-          for their printouts, they can suppress header pages by submitting
-          the job with <command>lpr -h</command>; see the <link
-            linkend="printing-lpr-options-misc">Header Page Options</link> section for
-          more &man.lpr.1; options.</para>
+		<para>
+			Agora, quando os usu&aacute;rios imprimirem os seus trabalhos para a
+		impressora <literal>teak</literal>, eles ter&atilde;o uma 
+		p&aacute;gina de cabe&ccedil;alho para cada job impresso.  Se os 
+		usu&aacute;rios querem perder tempo procurando os seus trabalhos de
+		impressora, eles podem suprimir essas p&aacute;gians com o comando
+		<command>lpr -h</command>; veja a se&ccedil;&atilde;o <link
+            linkend="printing-lpr-options-misc">
+			Op&ccedil;&atilde;oes de P&aacute;ginas de Cabe&ccedil;alho
+		</link> para outras op&ccedil;&otilde;ess veja &man.lpr.1; .
+		</para>
 
-        <note>
-          <para><application>LPD</application> prints a form feed character
-	    after the header page. If
-            your printer uses a different character or sequence of characters
-            to eject a page, specify them with the <literal>ff</literal>
-            capability in <filename>/etc/printcap</filename>.</para>
+     <note>
+		<para>
+			O <application>LPD</application> imprime o caracter de
+		alimenta&ccedil;&atilde;o de p&aacute;gina (form feed) logo apos a 
+		p&aacute;gina de cabe&ccedil;alho.  Se sua impressora utiliza um 
+		caracter diferente ou sequencia de caracteres para ejetar uma 
+		p&aacute;gina, especifique-o na op&ccedil;&atilde;o
+		<literal>ff</literal> no arquivo <filename>/etc/printcap</filename>.
+			</para>
         </note>
       </sect3>
       
       <sect3 id="printing-advanced-header-pages-controlling">
         <title>Controlando P&aacute;ginas de Cabe&ccedil;alho</title>
 
-        <para>By enabling header pages, <application>LPD</application> will
-	  produce a <emphasis>long
-            header</emphasis>, a full page of large letters identifying the
-          user, host, and job.  Here is an example (kelly printed the job
-          named outline from host <hostid>rose</hostid>):</para>
+			<para>
+				Uma vez habilidada a p&aacute;gina de cabe&ccedil;alho, o
+		<application>LPD</application> ir&aacute; produzir um 
+		<emphasis>longo cabe&ccedil;alho</emphasis>, uma p&aacute;gina 
+		completa com letras grandes identificando o usu&aacute;rio, 
+		m&aacute;quina, e o trabalho de impress&atilde;o.  Aqui est&aacute;
+		um exemplo (kelly imprimiu um trabalho de impress&atilde;oi entitulado
+		de outline a partir da m&aacute;quina <hostid>rose</hostid>):
+			</para>
             
-        <programlisting>      k                   ll       ll
+        <programlisting>
+      k                   ll       ll
       k                    l        l
       k                    l        l
       k   k     eeee       l        l     y    y
@@ -3407,37 +3446,60 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
                                               Job:  outline
                                               Date: Sun Sep 17 11:04:58 1995</programlisting>
 
-        <para><application>LPD</application> appends a form feed after this
-	  text so the job starts on a
-          new page (unless you have <literal>sf</literal> (suppress form
-          feeds) in the destination printer's entry in
-          <filename>/etc/printcap</filename>).</para>
+			<para>
+				O <application>LPD</application> adiciona uma 
+			alimenta&ccedil;&atilde;o de p&aacute;gina logo apos o texto ser 
+			impresso, ent&atilde;o inicia em uma nova p&aacute;gina o trabalho
+			de impress&atilde;o ( a menos que se tenha definido a 
+			op&ccedil;&atilde;o <literal>sf</literal> (suprimir a 
+			alimenta&ccedil;&atilde;o de p&aacute;gina) na impressora destinada
+			no arquivo <filename>/etc/printcap</filename>).
+			</para>
             
-        <para>If you prefer, <application>LPD</application> can make a 
-	  <emphasis>short header</emphasis>;
-          specify <literal>sb</literal> (short banner) in the
-          <filename>/etc/printcap</filename> file. The header page will look
-          like this:</para>
+			<para>
+				Se voc&ecirc; preferir, o <application>LPD</application> pode
+			fazer uma <emphasis>p&aacute;gina pequena</emphasis>; 
+			especificando a op&ccedil;&atilde;o <literal>sb</literal> 
+			(short banner) no arquivo <filename>/etc/printcap</filename>. 
+			A p&aacute;gina de cabe&ccedil;alho ir&aacute; parecer como esta:
+			</para>
             
         <programlisting>rose:kelly  Job: outline  Date: Sun Sep 17 11:07:51 1995</programlisting>
 
-        <para>Also by default, <application>LPD</application> prints the
-	  header page first, then the job.
-          To reverse that, specify <literal>hl</literal> (header last) in
-          <filename>/etc/printcap</filename>.</para>
+			<para>
+				Tamb&eacute;m poe padr&atilde;o, o <application>LPD</application> 
+			imprime a p&aacute;gina de cabe&ccedil;alho primeiro, e ent&atilde;o
+			o trabalho de impress&atilde;o.
+				Para reverter isso, especifique a op&ccedil;&atilde;o
+         <literal>hl</literal> (header last) no arquivo 
+          <filename>/etc/printcap</filename>.
+			</para>
       </sect3>
       
       <sect3 id="printing-advanced-header-pages-accounting">
-        <title>Accounting for Header Pages</title>
+			<title>
+				Estat&iacute;sticas para P&aacute;ginas de Cabe&ccedil;alho
+			</title>
 
-        <para>Using <application>LPD</application>'s built-in header pages
-	  enforces a particular paradigm
-          when it comes to printer accounting: header pages must be
-          <emphasis>free of charge</emphasis>.</para>
+			<para>
+				Usando o <application>LPD</application> para imprimir as 
+			p&aacute;ginas de cabe&ccedil;alho, leva-nos a um paradigma,
+			nos devemos contar as p&aacute;gians de cabe&ccedil;alho para fazer
+			as estat&iacute;stica, ou devemos 
+          <emphasis>deix-la de fora</emphasis>.
+			</para>
             
-        <para>Why?</para>
+        <para>Por que?</para>
 
-        <para>Because the output filter is the only external program that will
+			<para>
+				Por que o filtro de sa&iacute;da &eacute; um programa externo
+			que ter&aacute; controle quando a p&aacute;gina de cabe&ccedil;alho
+			&eacute; impressa 
+			
+
+---
+
+			Because the output filter is the only external program that will
           have control when the header page is printed that could do
           accounting, and it is not provided with any <emphasis>user or
             host</emphasis> information or an accounting file, so it has no
@@ -5479,40 +5541,48 @@ exit 2</programlisting>
 	    the location of the next character to print to the left edge
 	    of the paper.</para>
 
-	  <para>Here is what FreeBSD wants your printer to do:</para>
+		<para>
+			Aqui est&aacute; o que o FreeBSD espera que sua impressora
+		fa&ccedil;a:
+		</para>
 
 	  <informaltable frame="none">
 	    <tgroup cols="2">
 	      <tbody>
 		<row>
-		  <entry>Printer received CR</entry>
-		  <entry>Printer prints CR</entry>
+		  <entry>A impressora Recebeu CR</entry>
+		  <entry>A impressora Imprimiu CR</entry>
 		</row>
 
 		<row>
-		  <entry>Printer received LF</entry>
-		  <entry>Printer prints CR + LF</entry>
+		  <entry>A impressora Recebeu LF</entry>
+		  <entry>A impressora imprimiu CR + LF</entry>
 		</row>
 	      </tbody>
 	    </tgroup>
 	  </informaltable>
 
-	  <para>Here are some ways to achieve this:</para>
+		<para>
+			Aqui, algumas maneiras para solucionar isto:
+		</para>
 
 	  <itemizedlist>
 	    <listitem>
-	      <para>Use the printer's configuration switches or control
-		panel to alter its interpretation of these characters.
-		Check your printer's manual to find out how to do
-		this.</para>
+			<para>
+				Use as chaves de configura&ccedil;&atilde;o, no painel de controle
+		da impressora para alterar a interpreta&ccedil;&atilde;o desses 
+		caracteres.  Verifique o manual da sua impressora para encontrar como
+		fazer isso.
+			</para>
 
 	      <note>
-	        <para>If you boot your system into other operating systems
-		  besides FreeBSD, you may have to
-		  <emphasis>reconfigure</emphasis> the printer to use a an
-		  interpretation for CR and LF characters that those other
-		  operating systems use.  You might prefer one of the other
-		  solutions, below.</para>
+	        <para>
+					Se voc&ecirc; utiliza um outro sistema operacional al&eacute;m
+		do FreeBSD, voc&ecirc; deve <emphasis>reconfigurar</emphasis> a 
+		impressora parausar a interpreta&ccedil;&atilde;o dos caracteres CR e
+		LF desse sistema.  Voc&ecirc; deve dar preferencia a outras 
+		solu&ccedil;&otilde;es, como mostrada abaixo.
+				</para>
 	      </note>
 	    </listitem>
 
@@ -5539,7 +5609,7 @@ exit 2</programlisting>
 
 	      <indexterm><primary>PCL</primary></indexterm>
 		<para>
-			Aqui tem um exemplo de filktro texto para as impressoras que 
+			Aqui tem um exemplo de filtro texto para as impressoras que 
 		reconhecem os c&oacute;digos da linguagem PCL da Hewlett Packard.  Esse
 		filtro faz a impressora tratar os caracteres LF como sendo uma 
 		seg&utrema;&ecirc;ncia de LF + CR; entao ele envia o arquivo; 
