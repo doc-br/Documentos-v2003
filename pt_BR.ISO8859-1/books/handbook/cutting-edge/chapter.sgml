@@ -706,76 +706,78 @@
     </sect2>
 
     <sect2 id="makeworld-singleuser">
-      <title>Drop to Single User Mode</title>
+      <title>V&aacute; para o Modo Mono Usu&aacute;rio</title>
       <indexterm><primary>single-user mode</primary></indexterm>
 
-      <para>You may want to compile the system in single user mode.  Apart
-	from the obvious benefit of making things go slightly faster,
-	reinstalling the system will touch a lot of important system
-	files, all the standard system binaries, libraries, include files
-	and so on.  Changing these on a running system (particularly if
-	you have active users on the system at the time) is asking for
-	trouble.</para>
+      <para>Voc&ecirc; pode querer compilar o sistema no modo mono usu&aacute;rio.  
+	Sem mencionar o benef&iacute;cio &oacute;bvio de fazer com que as coisas 
+	andem mais r&aacute;pido, a reinstala&ccedil;&atilde;o do sistema tocar&aacute; em v&aacute;rios 
+	arquivos de sistema importantes, todos os bin&aacute;rios padr&atilde;o de 
+	sistema, bibliotecas, arquivos de inclus&atilde;o e assim por diante.  
+	Modific&aacute;-los com o sistema no ar (particularmente se voc&ecirc; possuir 
+	usu&aacute;rios ativos neste per&iacute;odo) &eacute; ca&ccedil;ar problema.</para>
 
       <indexterm><primary>multi-user mode</primary></indexterm>
-      <para>Another method is to compile the system in multi-user mode, and
-        then drop into single user mode for the installation.  If you would
-        like to do it this way, simply hold off on the following steps until
-        the build has completed.  You can postpone dropping to single user
-	mode until you have to <maketarget>installkernel</maketarget> or
+      <para>Outro m&eacute;todo &eacute; compilar o sistema em modo multi-usu&aacute;rio, e ent&atilde;o 
+	ir para o modo mono usu&aacute;rio para a instala&ccedil;&atilde;o.  Se voc&ecirc; quer fazer 
+	desta maneira, simplesmente siga os passos a seguir at&eacute; que a 
+	constru&ccedil;&atilde;o do sistema tenha sido completada.  Voc&ecirc; pode deixar para 
+	ir para o modo mono usu&aacute;rio em uma outra hora at&eacute; que voc&ecirc; tenha que 
+	fazer o <maketarget>installkernel</maketarget> ou o 
 	<maketarget>installworld</maketarget>.</para>
 
-      <para>As the superuser, you can execute:</para>
+      <para>Como super usu&aacute;rio, voc&ecirc; pode executar:</para>
 
       <screen>&prompt.root; <userinput>shutdown now</userinput></screen>
 
-      <para>from a running system, which will drop it to single user
-	mode.</para>
+      <para>de um sistema em execu&ccedil;&atilde;o, que ir&aacute; para o modo mono usu&aacute;rio. 
+	</para>
 
-      <para>Alternatively, reboot the system, and at the boot prompt,
-        enter the <option>-s</option> flag.  The system will then boot
-	single user.  At the shell prompt you should then run:</para>
+      <para>Alternativamente, reinicialize o sistema, e na linha de comando, 
+        entre com a op&ccedil;&atilde;o <option>-s</option>.  O sistema iniciar&aacute; em modo 
+	mono usu&aacute;rio.  Na linha de comando execute:</para>
 
       <screen>&prompt.root; <userinput>fsck -p</userinput>
 &prompt.root; <userinput>mount -u /</userinput>
 &prompt.root; <userinput>mount -a -t ufs</userinput>
 &prompt.root; <userinput>swapon -a</userinput></screen>
 
-      <para>This checks the file systems, remounts <filename>/</filename>
-	read/write, mounts all the other UFS file systems referenced in
-	<filename>/etc/fstab</filename> and then turns swapping on.</para>
+      <para>Isto verifica todos os sistemas de arquivo, remonta o 
+	<filename>/</filename> para leitura/escrita, monta todos os outros 
+	sistemas de arquivo UFS referenciados em <filename>/etc/fstab
+	</filename> e liga o swap.</para>
 
 
         <note>
-          <para>If your CMOS clock is set to local time and not to GMT
-	    (this is true if the output of the &man.date.1; command
-	    does not show the correct time and zone),
-            you may also need to run the following command:</para>
+          <para>Se o seu rel&oacute;gio de CMOS est&aacute; configurado para a hora local 
+	    e n&atilde;o para GMT (isto &eacute; verdadeiro se a sa&iacute;da do comando &man.date.1; 
+	    n&atilde;o mostrar a zona e a hora corretamente), voc&ecirc; pode ter que 
+	    executar o seguinte comando:</para>
 <screen>&prompt.root; <userinput>adjkerntz -i</userinput></screen>
 
-          <para>This will make sure that your local time-zone settings
-            get set up correctly &mdash; without this, you may later run into some
-            problems.
+          <para>Isto ceritificar&aacute; que as suas configura&ccedil;&otilde;es locais de zona/tempo 
+	    sejam configuradas corretamente &mdash; sem isto, voc&ecirc; pode ter 
+	    alguns problemas mais tarde.
           </para>
         </note>
 
     </sect2>
 
     <sect2>
-      <title>Remove <filename>/usr/obj</filename></title>
+      <title>Remova o <filename>/usr/obj</filename></title>
 
-      <para>As parts of the system are rebuilt they are placed in
-	directories which (by default) go under
-	<filename>/usr/obj</filename>.  The directories shadow those under
+      <para>Na medida em que partes do sistema v&atilde;o sendo reconstruidas 
+	s&atilde;o colocadas em diret&oacute;rios que (por padr&atilde;o) est&atilde;o abaixo de 
+	<filename>/usr/obj</filename>.  A sombra daqueles que est&atilde;o em 
 	<filename>/usr/src</filename>.</para>
 
-      <para>You can speed up the <quote>make world</quote> process, and
-	possibly save yourself some dependency headaches by removing this
-	directory as well.</para>
+      <para>Voc&ecirc; pode acelerar o processo do <quote>make world</quote>, e
+	poss&iacute;velmente evitar algumas dores de cabe&ccedil;a de depend&ecirc;ncia 
+	removendo este diret&oacute;rio.</para>
 
-      <para>Some files below <filename>/usr/obj</filename> may have the
-	immutable flag set (see &man.chflags.1; for more information)
-	which must be removed first.</para>
+      <para>Alguns arquivos abaixo de <filename>/usr/obj</filename> podem 
+	ter a op&ccedil;&atilde;o imut&aacute;vel configurada (veja &man.chflags.1; para mais 
+	informa&ccedil;&otilde;es) que deve ser removida antes.</para>
 
       <screen>&prompt.root; <userinput>cd /usr/obj</userinput>
 &prompt.root; <userinput>chflags -R noschg *</userinput>
@@ -783,22 +785,24 @@
     </sect2>
 
     <sect2>
-      <title>Recompile the Source</title>
+      <title>Recompile o Fonte</title>
 
       <sect3>
-	<title>Saving the Output</title>
+	<title>Gravando a Sa&iacute;da</title>
 
-	<para>It is a good idea to save the output you get from running
-	  &man.make.1; to another file.  If something goes wrong you will
-	  have a copy of the error message.  While this might not help you
-	  in diagnosing what has gone wrong, it can help others if you post
-	  your problem to one of the &os; mailing lists.</para>
+	<para>&Eacute; uma boa id&eacute;ia gravar a sa&iacute;da que voc&ecirc; tem do comando 
+	  &man.make.1; em outro arquivo.  Se alguma coisa der errado 
+	  voc&ecirc; ter&aacute; uma c&oacute;pia da mensagem de erro.  Enquanto isto n&atilde;o 
+	  possa te ajudar a diagnosticar o que deu errado, pode ajudar 
+	  outros se voc&ecirc; postar seu problema em uma das listas de 
+	  discuss&atilde;o do &os;.</para>
 
-	<para>The easiest way to do this is to use the &man.script.1;
-	  command, with a parameter that specifies the name of the file to
-	  save all output to.  You would do this immediately before
-	  rebuilding the world, and then type <userinput>exit</userinput>
-	  when the process has finished.</para>
+	<para>A maneira mais f&aacute;cil de fazer isso &eacute; usar o comando 
+	  &man.script.1;, com um par&acirc;metro que especifica o nome do 
+	  arquivo onde toda a sa&iacute;da ser&aacute; gravada.  Voc&ecirc; pode fazer isto 
+	  imediatamente antes de reconstruir todo o sistema, e ent&atilde;o 
+	  digitar <userinput>exit</userinput> quando o processo 
+	  terminar.</para>
 
 	<screen>&prompt.root; <userinput>script /var/tmp/mw.out</userinput>
 Script started, output file is /var/tmp/mw.out	 
@@ -807,11 +811,12 @@ Script started, output file is /var/tmp/mw.out
 &prompt.root; <userinput>exit</userinput>
 Script done, &hellip;</screen>
 
-	<para>If you do this, <emphasis>do not</emphasis> save the output
-	  in <filename>/tmp</filename>.  This directory may be cleared
-	  next time you reboot.  A better place to store it is in
-	  <filename>/var/tmp</filename> (as in the previous example) or
-	  in <username>root</username>'s home directory.</para>
+	<para>Se voc&ecirc; fizer isto, <emphasis>n&atilde;o</emphasis> grave a sa&iacute;da 
+	  no diret&oacute;rio <filename>/tmp/</filename>.  Este diret&oacute;rio pode 
+	  ser apagado na pr&oacute;xima vez que voc&ecirc; reinicializar o sistema.  
+	  Um lugar melhor para gravar &eacute; <filename>/var/tmp/</filename> 
+	  (como no exemplo anterior) ou no diret&oacute;rio inicial do 
+	  <username>root</username>.</para>
       </sect3>
 
       <sect3 id="make-buildworld">
