@@ -701,29 +701,26 @@ options          FFS_ROOT     #FFS usable as root device [keep this!]</programli
     <programlisting>options          MFS          #Memory Filesystem
 options          MD_ROOT      #MD is a potential root device</programlisting>
 
-    <para>Isto &eacute; o mapeamento da mem&oacute;ria do Sistema de arquivos. Este &eacute; basicamente um disco de RAM
-      para armazenamento r&aacute;pido de arquivos tempor&aacute;rios, &uacute;til se voc&ecirc; tiver um grande
-      espa&ccedil;o de troca que voc&ecirc; queira para ter vantagem. Um lugar perfeito 
-      para mountar uma parti&ccedil;&atilde;o MFS &eacute; no diret&oacute;rio <filename>/tmp</filename>,
-      desde que muitos programas e dados tempor&aacute;rios sejam armazenados aqui. Para mountar
-      uma MFS RAM disk no <filename>/tmp</filename>, adicione a seguinte linha no
-      <filename>/etc/fstab</filename>:</para>
+    <para>Trata-se basicamente de um espaço em memória mapeado para armazenamento rápido de arquivos temporários, se você
+	tiver uma boa quantidade de memória real e virtual, pode forçar a utilização deste recurso em outros
+	pontos também.  Uma idéia interessante é montar como MFS o diretório <filename>/tmp</filename>, se houver
+	necessidade de muito desempenho nesta unidade. Neste caso, adicione por exemplo a seguinte linha
+	no arquivo <filename>/etc/fstab</filename>:</para>
 
     <informalexample>
       <programlisting>/dev/ad1s2b	/tmp mfs rw 0 0</programlisting>
     </informalexample>
 
-    <para>Agora voc&ecirc; necessita simplesmente reiniciar, ou rodar o comando
+    <para>Agora basta reiniciar seu sistema ou rodar o comando
       <command>mount /tmp</command>.</para>
 
-    <note><para>No &os; 5.X, &man.md.4;-backed UFS sistema de arquivos s&atilde;o
-      usados para sistema de arquivos de mem&oacute;ria melhor que MFS. Informa&ccedil;&atilde;o  
-      de configura&ccedil;&atilde;o do sistema de arquivos de mem&oacute;ria-suportandos pode ser encontrada no manual
-      em &man.mdconfig.8; e &man.mdmfs.8;, e no <xref linkend="disks-virtual">. Em consequ&ecirc;ncia, a op&ccedil;&atilde;o
-      <literal>MFS</literal> n&atilde;o &eacute; mais suportada.</para></note>
+    <note><para>No &os; 5.X, a opção &man.md.4; é usada com grande vantagem sobre MFS.  Mais informações sobre
+	a configuração de sistemas de arquivo em memória, podem ser obtidas nos manuais
+	&man.mdconfig.8; e &man.mdmfs.8;, e também na <xref linkend="disks-virtual">. Consequentemente, 
+	a opção <literal>MFS</literal> n&atilde;o &eacute; mais suportada na série 5.X.</para></note>
 
     <indexterm>
-      <primary>Op&ccedil;&otilde;es do kernel options</primary>
+      <primary>Op&ccedil;&otilde;es do kernel</primary>
       <secondary>NFS</secondary>
     </indexterm>
     <indexterm>
@@ -733,9 +730,8 @@ options          MD_ROOT      #MD is a potential root device</programlisting>
     <programlisting>options          NFS          #Network Filesystem
 options          NFS_ROOT     #NFS usable as root device, NFS required</programlisting>
 
-    <para>O sistema de arquivos de rede. A menos que voc&ecirc; n&atilde;o planeje mountar parti&ccedil;&otilde;es
-      do Unix &unix; arquivo do servidor sobre TCP/IP, voc&ecirc; pode comentar esta
-      linha.</para>
+    <para>Trata-se do sistema de arquivos de rede.  A menos que voc&ecirc; n&atilde;o planeje montar parti&ccedil;&otilde;es
+      &unix; sob rede TCP/IP, comente esta linha.</para>
 
     <indexterm>
       <primary>Op&ccedil;&otilde;es do kernel</primary>
@@ -743,39 +739,37 @@ options          NFS_ROOT     #NFS usable as root device, NFS required</programl
     </indexterm>
     <programlisting>options          MSDOSFS      #MSDOS Filesystem</programlisting>
 
-    <para>Sistema de arquivos &ms-dos;. A menos que voc&ecirc; planeje mountar uma parti&ccedil;&atilde;o no seu disco formatada em DOS
-      na hora da inicializa&ccedil;&atilde;o, voc&ecirc; pode com seguran&ccedil;a comentar isto.
-      Isto ser&aacute; carregado automaticamente na primeira vez que voc&ecirc; mountar uma parti&ccedil;&atilde;o DOS,
-      como descrito acima. Tamb&eacute;m, o excelente software
-      <application>mtools</application> (na cole&ccedil;&atilde;o do ports)
-      permite que voc&ecirc; acesse disquetes DOS sem ter que mount&aacute;-los e
-      desmont&aacute;-los (e n&atilde;o requer <literal>MSDOSFS</literal>).</para>
+    <para>Trata-se do sistema de arquivos &ms-dos;.  Se você não pretende montar partições formatadas em DOS, pode
+	seguramente retirar esta opção.  Se você tiver necessidade de montar sistemas DOS posteriormente, o módulo
+	será automaticamente carregado.  O ótimo conjunto de programas <application>mtools</application> (disponível na Coleção de Ports)
+	permite que voc&ecirc; acesse disquetes DOS sem ter que mount&aacute;-los e desmont&aacute;-los (e n&atilde;o
+	requer <literal>MSDOSFS</literal>).</para>
 
     <programlisting>options          CD9660       #ISO 9660 Filesystem
 options          CD9660_ROOT  #CD-ROM usable as root, CD9660 required</programlisting>
 
-    <para>O sistema de arquivos ISO 9660 &eacute; para CDROMs. Comentando isto se voc&ecirc;  
-      n&atilde;o tiver um drive de CDROM ou somente montar dados de CDs ocasionalmente (desde que
-      seja carregado dinamicamente na primeira vez que voc&ecirc; montar um CD de dados).
-      CDs de audio n&atilde;o necessitam desde Sistema de Arquivos.</para>
+    <para>O sistema de arquivos ISO 9660 &eacute; utilizado em CDROMs.  Pode ser interessante comentar
+	esta opção se você não tem um dispositivo óptico de leitura de CDROM, ou se tem a necessidade
+	ocasional de montar CDs de dados (uma vez que o módulo correspondendo pode ser carregado dinamicamente
+	quando for necessário montar um CD de dados).  CDs de áudio não necessitam deste suporte.</para>
 
     <programlisting>options          PROCFS       #Process filesystem</programlisting>
 
-    <para>O sistema de arquivos process. Este sistema de arquivo &eacute; <quote>pretendido</quote>
-      mountar em <filename>/proc</filename> que permite
-      programas como &man.ps.1; para voc&ecirc; ter mais informa&ccedil;&otilde;es de qual
-      processo est&aacute; rodando. No &os; 5.X, o uso do <literal>PROCFS</literal>
-      n&atilde;o &eacute; mais requerido por v&aacute;rias circunst&acirc;ncias, a maioria
-      erros e ferramentas de monitoramento tem que ser adaptado para rodar sobre
-      <literal>PROCFS</literal>. Em adi&ccedil;&atilde;o, 5.X-CURRENT kernel
-      que usam <literal>PROCFS</literal> devem agora tamb&eacute;m incluir
+    <para>Trata-se do sistema de arquivo de processos.  Este sistema de arquivo tem a função de criar
+	e montar o ambiente <filename>/proc</filename> que permite o uso de 
+      programas como &man.ps.1; para voc&ecirc; ter mais informa&ccedil;&otilde;es sobre quais
+      processos est&aacute; rodando.  No &os; 5.X, o uso do <literal>PROCFS</literal>
+      n&atilde;o &eacute; mais necessário por vários motivos, visto que a maioria
+      das ferramentas de monitoramento tem que ser adaptadas para rodar sobre
+      <literal>PROCFS</literal>. Em adi&ccedil;&atilde;o, o kernel 5.X-CURRENT
+      que usa <literal>PROCFS</literal> deve agora tamb&eacute;m incluir
       suporte para <literal>PSEUDOFS</literal>:</para>
 
     <programlisting>options          PSEUDOFS     #Pseudo-filesystem framework</programlisting>
 
-    <para><literal>PSEUDOFS</literal> n&atilde;o est&aacute; dispon&iacute;vel nos &os; 4.X.
-      Ao contr&aacute;rio dos &os; 4.X, as novas instala&ccedil;&otilde;es do &os; 5.X n&atilde;o montar&aacute;
-      o processo do sistema de arquivos por padr&atilde;o.</para>
+    <para><literal>PSEUDOFS</literal> n&atilde;o est&aacute; dispon&iacute;vel sob &os; 4.X.
+      Ao contr&aacute;rio do &os; 4.X, as novas instala&ccedil;&otilde;es do &os; 5.X n&atilde;o montam, por padrão,
+	o sistema de arquivos de processos.</para>
 
     <programlisting>options          COMPAT_43    #Compatible with BSD 4.3 [KEEP THIS!]</programlisting>
 
@@ -784,104 +778,101 @@ options          CD9660_ROOT  #CD-ROM usable as root, CD9660 required</programli
 
     <programlisting>options          COMPAT_FREEBSD4     #Compatible with &os;4</programlisting>
 
-    <para>Esta op&ccedil;&atilde;o &eacute; requerida no &os;&nbsp;5.X &i386; e Sistemas Alpha
-      para suporte aplicativos compilados ou outras vers&otilde;es do &os;
-      que usam outro sistema de interfaces de chamadas. Recomenda-se que esta op&ccedil;&atilde;o
+    <para>Esta op&ccedil;&atilde;o &eacute; necessária no &os;&nbsp;5.X &i386; e Sistemas Alpha
+      para suporte à aplicativos compilados em outras vers&otilde;es do &os;,
+      que usa outro sistema de interfaces de chamadas. Recomenda-se que esta op&ccedil;&atilde;o
       seja usada sobre todos &i386; e sistemas Alpha que podem
       rodar outros aplicativos; plataformas que ganham suporte somente em
-      5.X, tal como ia64 e &sparc64;, n&atilde;o requer est&aacute; op&ccedil;&atilde;o.</para>
+      5.X, tal como ia64 e &sparc64;, n&atilde;o tem esta necessidade.</para>
 
     <programlisting>options          SCSI_DELAY=15000    #Delay (in ms) before probing SCSI</programlisting>
 
-    <para>Isso faz com que o kernel pare por 15 segundos antes de experimentar
-      cada dispositivo SCSI em seu sistema. Se voc&ecirc; somente tiver IDE hard drives,
-      voc&ecirc; poder&aacute; ignorar isto, voc&ecirc; provavelmente queira baixar este n&uacute;mero,
-      talvez a 5 segundos, para acelerar a inicializa&ccedil;&atilde;o. Naturalmente, se
-      voc&ecirc; fizer isto, e &os; tenha problema em reconhecer seus dispositivos SCSI,
-      voc&ecirc; ter&aacute; que levant&aacute;-lo de maneira alternativa.</para>
+    <para>Isso faz com que o kernel pare por 15 segundos antes de procurar pelos
+      dispositivos SCSI em seu sistema.  Se você dispor apenas de discos IDE,
+      pode ignorar esta opção;  em discos SCSI, pode ser interessante baixar
+	à até 5 segundos, para acelerar a inicializa&ccedil;&atilde;o. Naturalmente, se
+      depois disso o &os; tiver problemas para reconhecer algum dispositivo SCSI, suba este valor
+	novamente.</para>
 
     <programlisting>options          UCONSOLE            #Allow users to grab the console</programlisting>
 
-    <para>Permite que usu&aacute;rios peguem a console, que &eacute; usado por usu&aacute;rios do X.
-      Por exemplo, voc&ecirc; pode criar um <application>xterm</application> da console
-      para digitar<command>xterm
-      -C</command>, que indica tudo em &man.write.1;,
+    <para>Permite que a console usada por aplicações gráficas sejam acessadas por outros usuários.  Por exemplo,
+	se você criar um terminal <application>xterm</application> com <command>xterm
+      -C</command>, tudo que estiver sendo feito pelo &man.write.1;,
       &man.talk.1;, e todas as outras mensagens que voc&ecirc; receber, assim como
-      algumas mensagens de console emitidas pelo kernel.</para>
+      algumas mensagens de console emitidas pelo kernel, serão capturadas.</para>
 
     <note><para>No &os; 5.X, <literal>UCONSOLE</literal> n&atilde;o &eacute;
-      mais requerido.</para></note>
+      mais necessária.</para></note>
 
     <programlisting>options          USERCONFIG          #boot -c editor</programlisting>
 
-    <para>Esta op&ccedil;&atilde;o permite a voc&ecirc; carregar e editar as configura&ccedil;&otilde;es do menu de inicializa&ccedil;&atilde;o.</para>
+    <para>Esta op&ccedil;&atilde;o permite carregar e editar as configura&ccedil;&otilde;es do menu de inicializa&ccedil;&atilde;o.</para>
 
     <programlisting>options          VISUAL_USERCONFIG   #visual boot -c editor</programlisting>
 
-    <para>Esta op&ccedil;&atilde;o permite a voc&ecirc; carregar e editar as configura&ccedil;&otilde;es do menu de inicializa&ccedil;&atilde;o em modo 
+    <para>Esta op&ccedil;&atilde;o permite carregar e editar as configura&ccedil;&otilde;es do menu de inicializa&ccedil;&atilde;o em modo 
 	gr&aacute;fico. 
     </para>
 
-      <note><para>Do &os; versions 5.0 e posteriores, o op&ccedil;&atilde;o <literal>USERCONFIG</literal> foi
-	colocada em favor do novo m&eacute;todo &man.device.hints.5;.
-	Para maiores informa&ccedil;&otilde;es sobre &man.device.hints.5; por favor
-	visite <xref linkend="device-hints">.</para></note>
+      <note><para>À partir do&os; 5.0, a op&ccedil;&atilde;o <literal>USERCONFIG</literal> foi
+	substituída pelo novo m&eacute;todo &man.device.hints.5;.
+	Para maiores informa&ccedil;&otilde;es sobre &man.device.hints.5; por gentileza,
+	visite a <xref linkend="device-hints">.</para></note>
 
     <programlisting>options          KTRACE              #ktrace(1) support</programlisting>
 
-    <para>Isto permite seguir o processo do kernel, que &eacute; usado na
-      verifica&ccedil;&atilde;o dos erros.</para>
+    <para>Esta opção permite rastrear os processos do kernel, que são usados em rotinas de verificação
+	e tratamento de erros.</para>
 
     <programlisting>options          SYSVSHM             #SYSV-style shared memory</programlisting>
 
-    <para>Est&aacute; op&ccedil;&atilde;o fornece compartilhamento de mem&oacute;ria para o Sistema V. O uso
-      mais comum deste &eacute; o XSHM extens&atilde;o em X, com muitos
-      programas de gr&aacute;ficos-intensivos que dar&atilde;o automaticamente vantagem para acr&eacute;scimo de velocidade.
-      Se voc&ecirc; usa X, voc&ecirc; dever&aacute; definitivamente incluir
-      este.</para>
+    <para>Est&aacute; op&ccedil;&atilde;o fornece compartilhamento de mem&oacute;ria no estilo <emphasis>System V</emphasis>. O uso
+      mais comum deste, são as extensões XSHM do X, com muitos
+	programas de gr&aacute;ficos-intensivos que obterão automaticamente vantagens e acr&eacute;scimo de velocidade.
+      Se voc&ecirc; usa X, mantenha esta opção ativa.</para>
 
     <programlisting>options          SYSVSEM             #SYSV-style semaphores</programlisting>
 
-    <para>Suporte para Sistemas V de sinaliza&ccedil;&atilde;o. Geralmente menos usado mas somente
-      adicionado cem alguns bytes para o kernel.</para>
+    <para>Suporte à semáforos padrão <emphasis>System V</emphasis>. Geralmente são pouco usados, e adicionam algumas
+	centenas de bytes no tamanho total do kernel.</para>
 
     <programlisting>options          SYSVMSG             #SYSV-style message queues</programlisting>
 
-    <para>Suporte para Sistema V mensagens. Novamente, somente adicionado cem alguns 
-      bytes no kernel.</para>
+    <para>Suporte mensagens interprocessos em padrão <emphasis>System V</emphasis>.  Mais uma vez, também requer poucas
+	centenas de bytes no kernel.</para>
 
     <note>
-      <para>O comando &man.ipcs.1; listar&aacute; algum processo usando alguma facilidade
-	deste Sistema V.</para>
+      <para>O comando &man.ipcs.1; listar&aacute; algum processo que estiver fazendo uso de alguma funcionalidade
+	padrão System V.</para>
     </note>
 
     <programlisting>options 	P1003_1B		#Posix P1003_1B real-time extensions
 options 	_KPOSIX_PRIORITY_SCHEDULING</programlisting>
 
-    <para>Extens&otilde;es em tempo real adicionadas em 1993 no &posix;. Determinadas
-      aplica&ccedil;&otilde;es da cole&ccedil;&atilde;o do ports usam isto
+    <para>Extens&otilde;es em tempo real adicionadas em 1993 ao padrão &posix;. Determinadas
+      aplica&ccedil;&otilde;es da cole&ccedil;&atilde;o do ports usam estes recursos
       (tal como <application>&staroffice;</application>).</para>
 
     <note><para>No &os; 5.X, todas estas funcionalidades agora s&atilde;o
       fornecidos pela op&ccedil;&atilde;o <literal>_KPOSIX_PRIORITY_SCHEDULING</literal>,
-      e <literal>P1003_1B</literal> n&atilde;o &eacute; 
-      requirido.</para></note>
+      e <literal>P1003_1B</literal> n&atilde;o &eacute; mais necessária.</para></note>
 
     <indexterm>
       <primary>Op&ccedil;&atilde;o do kernel</primary>
       <secondary>ICMP_BANDLIM</secondary>
     </indexterm>
     <indexterm>
-      <primary>Negando Servi&ccedil;o (DoS)</primary>
+      <primary>Negação de Servi&ccedil;o (DoS)</primary>
     </indexterm>
     <programlisting>options		ICMP_BANDLIM		#Rate limit bad replies</programlisting>
 
-    <para>Est&aacute; op&ccedil;&atilde;o permite limitar largura de resposta de erro de ICMP. Voc&ecirc;
-      tipicamente quer est&aacute; op&ccedil;&atilde;o para lhe ajudar a proteger a m&aacute;quina 
-      negando do ataques de servi&ccedil;o pacotes.</para>
+    <para>Est&aacute; op&ccedil;&atilde;o permite limitar a quantidade de resposta de erros de ICMP.  Normalmente
+	esta opção auxilia a proteção do sistema contra ataques do tipo degação de serviço por pacotes ICMP.  É
+	recomendado manter esta opção.</para>
 
-    <note><para>No &os; 5.X, est&aacute; caracter&iacute;stica &eacute; habilitada por padr&atilde;o e
-      a op&ccedil;&atilde;o <literal>ICMP_BANDLIM</literal> n&atilde;o &eacute; requerida.
+    <note><para>No &os; 5.X, esta caracter&iacute;stica &eacute; habilitada por padr&atilde;o e
+      a op&ccedil;&atilde;o <literal>ICMP_BANDLIM</literal> n&atilde;o &eacute; mais necessária.
       </para></note>
 
     <indexterm>
@@ -892,74 +883,70 @@ options 	_KPOSIX_PRIORITY_SCHEDULING</programlisting>
 #options        SMP                     # Symmetric MultiProcessor Kernel
 #options        APIC_IO                 # Symmetric (APIC) I/O</programlisting>
 
-    <para>Acima ambos s&atilde;o requeridos para suporte a SMP.</para>
+    <para>Ambas opções acima são necessárias para suporte à multiprocessamento simétrico (<acronym>SMP</acronym>).</para>
 
     <programlisting>device          isa</programlisting>
 
-    <para>Todos os PCs com &os; suportam uma desta. Se voc&ecirc; tiver um
-      IBM PS/2 (Micro Channel Architecture), o &os; fornece algum
-      limite suporte por tempo. Para maiores informa&ccedil;&otilde;es sobre o suporte
-      MCA, veja
+    <para>Todos os PCs com &os; suportam esta opção.  Caso seu computador seja um
+      IBM PS/2 (Arquitetura Micro Canal), o &os; fornece um suporte um pouco limitado.
+	Para maiores informa&ccedil;&otilde;es sobre este, veja a opcão MCA, em
       <filename>/usr/src/sys/i386/conf/LINT</filename>.</para>
 
     <programlisting>device          eisa</programlisting>
 
-    <para>Inclua este se voc&ecirc; tiver uma placa-m&atilde;e EISA. Isto habilita
-      auto-detecta&ccedil;&atilde;o e suporte a configura&ccedil;&atilde;o para todos os dispositivos sobre o EISA
-      bus.</para>
+    <para>Inclua esta opção caso sua placa-mãe seja EISA.  Esta opção habilita a auto-detecção e suporte 
+	a configura&ccedil;&atilde;o de todos os dispositivos sobre o barramento EISA.</para>
 
     <programlisting>device          pci</programlisting>
 
-    <para>Inclua este se voc&ecirc; tiver uma placa-m&atilde;e PCI. Isto habilita
-      auto-detecta&ccedil;&atilde;o de cart&otilde;es PCI e passando da PCI para ISA
-      bus.</para>
+    <para>Inclua este opção se sua placa-mãe suporta PCI.  Esta opção habilita a auto-detecção e suporte
+	a configura&ccedil;&atilde;o demplacas PCI e os que estiverem em transição do barramento ISA para PCI.</para>
 
     <programlisting>device          agp</programlisting>
 
-    <para>Inclua isto se voc&ecirc; tiver um cart&atilde;o  AGP no sistema. Isto
-      habilitar&aacute; suporte para AGP, e AGP GART para placas que
-      tem estas caracter&iacute;sticas.</para>
+    <para>Inclua esta opção se você dispor de uma placa de AGP em seu sistema.  Esta opção habilita suporte à
+	AGP e AGP GART em placas com estes recursos.</para>
 
     <programlisting># Floppy drives
 device          fdc0        at isa? port IO_FD1 irq 6 drq 2
 device          fd0         at fdc0 drive 0
 device          fd1         at fdc0 drive 1</programlisting>
 
-    <para>Este &eacute; o controlador de disco flex&iacute;vel. <literal>fd0</literal> &eacute;
+    <para>Trata-se do controlador de disco flex&iacute;vel. <literal>fd0</literal> &eacute;
       o drive flex&iacute;vel <devicename>A:</devicename>, e
       <literal>fd1</literal> &eacute; o drive <devicename>B:</devicename>.</para>
 
     <programlisting>device          ata</programlisting>
 
     <para>Este driver suporta todos dispositivos ATA e de ATAPI. Voc&ecirc; necessitar&aacute; somente
-      uma <literal>device ata</literal> linha para o kernel detectar todos os dispositivos 
-      PCI ATA/ATAPI sobre uma m&aacute;quina moderna.</para>
+      uma linha com a entrada <literal>device ata</literal> para que o kernel detecte todos os dispositivos 
+      PCI ATA/ATAPI em uma m&aacute;quina moderna.</para>
 
     <programlisting>device          atadisk                 # ATA disk drives</programlisting>
 
-    <para>Isto &eacute; necess&aacute;rio em conjunto com a <literal>device ata</literal> para
-      ATA disk drives.</para>
+    <para>Esta opção é necessário em conjunto com a <literal>device ata</literal> para dispositivos de 
+	controle de discos ATA.</para>
 
     <programlisting><anchor id="kernelconfig-atapi">
 device          atapicd                 # ATAPI CDROM drives</programlisting>
 
-    <para>Isto &eacute; necess&aacute;rio em conjunto com <literal>device ata</literal> para
-      ATAPI CDROM drives.</para>
+    <para>Esta opção é necessário em conjunto com a <literal>device ata</literal> para dispositivos de
+	de controle de drives de CD ATAPI.</para>
 
     <programlisting>device          atapifd                 # ATAPI floppy drives</programlisting>
 
-    <para>Isto &eacute; necess&aacute;rio em conjunto com <literal>device ata</literal> para
-      ATAPI floppy drives.</para>
+    <para>Esta opção é necessário em conjunto com a <literal>device ata</literal> para controle dispositivos
+	de unidades de disquetes ATAPI.</para>
 
     <programlisting>device          atapist                 # ATAPI tape drives</programlisting>
 
-    <para>Isto &eacute; necess&aacute;rio junto com <literal>device ata</literal> para
-      ATAPI tape drives.</para>
+    <para>Esta opção é necessário em conjunto com a <literal>device ata</literal> para dispositivos de
+	de controle de dispositivos de fitas ATAPI.</para>
 
     <programlisting>options         ATA_STATIC_ID           #Static device numbering</programlisting>
 
-    <para>Isto faz o controle est&aacute;tico de n&uacute;mero (parecendo o velho driver) ou
-      os n&uacute;meros de dispositivos s&atilde;o alocados dinamicamente.</para>
+    <para>Isto faz o controle est&aacute;tico de n&uacute;mero, no padrão antigo, ou
+      os n&uacute;meros de dispositivos que s&atilde;o alocados dinâmicamente.</para>
 
     <programlisting># ATA and ATAPI devices
 device          ata0        at isa? port IO_WD1 irq 14
