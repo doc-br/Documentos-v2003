@@ -1994,8 +1994,8 @@ nameserver <replaceable>y.y.y.y</replaceable></programlisting>
     <sect2>
       <title>Configurando o Kernel</title>
 
-	<para>Não é necessária nenhuma configuração no kernel para o PPPoE. Se
-	  o suporte a netgraph não estiver compilado no kernel ele será 
+	<para>Não é necessária nenhuma configuração no kernel para o PPPoE.  Se
+	  o suporte a netgraph não estiver compilado no kernel ele será
 	  carregado dinamicamente pelo <application>ppp</application>.</para>
     </sect2>
 
@@ -2043,27 +2043,27 @@ ppp_profile="nome_do_provedor"</programlisting>
       <title>Usando uma Service Tag no PPPoE</title>
 
 	<para>Algumas vezes será necessário usar uma <literal>service</literal>
-	  <literal>tag</literal> para estabelecer sua conexão. Service tags são
+	  <literal>tag</literal> para estabelecer sua conexão.  Service tags são
 	  usadas para distingüir entre diferentes serviços de PPPoE em uma
 	  dada rede.</para>
 
 	<para>Você deve ter recebido qualquer informação que é requerida
-	  do seu provedor para service tags. Se você não tiver, pergunte 
+	  do seu provedor para service tags.  Se você não tiver, pergunte
 	  a equipe técnica do seu provedor.</para>
 
 	<para>Como uma último recurso você pode tentar o método sugerido
 	  pelo programa <ulink url="http://www.roaringpenguin.com/pppoe/">Roaring Penguin
 	  PPPoE</ulink> que pode ser localizado na coleção de <link
 	  linkend="ports">ports</link>.  Tenha em mente que isso pode desprogramar
-	  seu modem e deixá-lo inutilizável. Portanto pense duas vezes antes de
-	  fazer isto. Simplementes instale o programa fornecido com seu
-	  modem pelo provedor. Então acesse o menu <guimenu>System</guimenu>
-	  pelo programa.  O nome do seu perfil deve estar listado. Ele geralmente é <emphasis>provedor</emphasis>.</para>
+	  seu modem e deixá-lo inutilizável.  Portanto pense duas vezes antes de
+	  fazer isto.  Simplementes instale o programa fornecido com seu
+	  modem pelo provedor.  Então acesse o menu <guimenu>System</guimenu>
+	  pelo programa.  O nome do seu perfil deve estar listado.  Ele geralmente é <emphasis>provedor</emphasis>.</para>
 
 	<para>O perfil (service tag) será utilizado na configuração
 	  do PPPoE no<filename>ppp.conf</filename> como a parte do
 	  provedor no comando <command>set device</command> (veja
-	  &man.ppp.8; para maiores detalhes). Ele deve se parecer
+	  &man.ppp.8; para maiores detalhes).  Ele deve se parecer
 	  com:</para>
 
       <programlisting>set device PPPoE:<replaceable>xl1</replaceable>:<replaceable>ISP</replaceable></programlisting>
@@ -2096,23 +2096,23 @@ ppp_profile="nome_do_provedor"</programlisting>
 
       <title>PPPoE com um &tm.3com; <trademark class="registered">HomeConnect</trademark> ADSL Modem Dual Link</title>
 
-	<para>Este modem não segue o <ulink 
+	<para>Este modem não segue o <ulink
 	  url="http://www.faqs.org/rfcs/rfc2516.html">RFC 2516</ulink>
 	(<emphasis>A Method for transmitting PPP over Ethernet
 	(PPPoE)</emphasis>, escrito por L.  Mamakos, K.  Lidl, J.  Evarts,
-	D.  Carrel, D.  Simone, and R.  Wheeler). Em vez disso, códigos 
+	D.  Carrel, D.  Simone, and R.  Wheeler).  Em vez disso, códigos
 	diferentes para os pacotes são utilizados em vez de quadros Ethernet.
 	Por favor reclame com a <ulink url="http://www.3com.com/">3Com</ulink>
 	se você acha que ele deveria seguir a especificação PPPoE.</para>
 
 	<para>Para que o FreeBSD seja capaz de se comunicar com este
-	  dispositivo uma sysctl precisa ser ajustada. Isso pode ser
+	  dispositivo uma sysctl precisa ser ajustada.  Isso pode ser
 	  feito automaticamente na inicialização do sistema atrave
 	  da atualização do arquivo de configuração <filename>/etc/sysctl.conf</filename>:</para>
 
 	<programlisting>net.graph.nonstandard_pppoe=1</programlisting>
 
-	<para>ou pode ser utilizado o comando 
+	<para>ou pode ser utilizado o comando
 	  <command>sysctl net.graph.nonstandard_pppoe=1</command> para
 	  um efeito imediato.</para>
 
@@ -2141,12 +2141,12 @@ ppp_profile="nome_do_provedor"</programlisting>
 	<para>Suporte PPPoA para este dispositivo é fornecido como
 	  um port no FreeBSD pois o <literal>firmware</literal> é
 	  fornecido através de um <ulink url="http://www.speedtouchdsl.com/disclaimer_lx.htm">
-	  acordo de licenciamento</ulink> com a 
+	  acordo de licenciamento</ulink> com a
 	  Alcatel e não pode ser distribuído livremente com o
 	  sistema base do FreeBSD.</para>
 
 	<para>Para instalar o programa simplesmente use a coleção
-	  de <link linkend="ports">ports</link>. Instale o port
+	  de <link linkend="ports">ports</link>.  Instale o port
 	  <filename role="package">net/pppoa</filename> e
 	  siga as instruções fornecidas.</para>
 
@@ -2156,7 +2156,7 @@ ppp_profile="nome_do_provedor"</programlisting>
 	  que essa transferência aconteça no momento que o dispositivo
 	  foi ligado na porta USB.  A seguinte informação pode ser adicionada
 	  ao arquivo <filename>/etc/usbd.conf</filename> para ativar
-	  essa transferência automática. O arquivo precisar ser
+	  essa transferência automática.  O arquivo precisar ser
 	  editado como o usuário <username>root</username>.</para>
 
       <programlisting>device "Alcatel SpeedTouch USB"
@@ -2171,8 +2171,8 @@ ppp_profile="nome_do_provedor"</programlisting>
      <programlisting>usbd_enable="YES"</programlisting>
 
 	<para>Também é possível ajustar o <application>ppp</application>
-	  para discar na inicilização do sistema. Para fazer isso adicione
-	  as seguintes linhas no <filename>/etc/rc.conf</filename>. Denovo,
+	  para discar na inicilização do sistema.  Para fazer isso adicione
+	  as seguintes linhas no <filename>/etc/rc.conf</filename>.  Denovo,
 	  para realizar este procedimento você deverá estar <literal>logado</literal>
 	  como <username>root</username>.</para>
 
@@ -2191,28 +2191,28 @@ ppp_profile="adsl"</programlisting>
 
 	<para>Você pode usar o <application>mpd</application> para se
 	  conectar a uma variedade de serviços, em particular serviços
-	  PPTP. Você pode achar o <application>mpd</application> na
+	  PPTP.  Você pode achar o <application>mpd</application> na
 	  coleção de ports, <filename role="package">net/mpd</filename>.
 	  Muitos modems ADSL requerem a criação de um túnel PPTP entre
-	  o modem e o computador. Um desses modems é o Alcatel &speedtouch;
+	  o modem e o computador.  Um desses modems é o Alcatel &speedtouch;
 	  Home.</para>
 
 	<para>Primeiro você precisar instalar o port e então você
 	  pode configurar o <application>mpd</application> para
-	  os seus requerimentos e as definições do provedor. O
-	  port poe um conjunto de arquivos de configuração de 
+	  os seus requerimentos e as definições do provedor.  O
+	  port poe um conjunto de arquivos de configuração de
 	  exemplo, que são bem documentados, em
 	  <filename><replaceable>PREFIX</replaceable>/etc/mpd/</filename>.
 	  Note que <replaceable>PREFIX</replaceable> significa
-	  o diretório em que seus ports são instalados. O padrão
-	  é <filename>/usr/local</filename>. Um guia completo de
+	  o diretório em que seus ports são instalados.  O padrão
+	  é <filename>/usr/local</filename>.  Um guia completo de
 	  como configurar o <application>mpd</application> em
 	  HTML fica disponível assim que o port for instalado.
-	  Ele é colocado em 
+	  Ele é colocado em
 	  <filename><replaceable>PREFIX</replaceable>/share/mpd/</filename>.
 	  Aqui vai um exemplo de configuração para se conectar a
-	  um serviço ADSL com o <application>mpd</application>. A
-	  configuração esta espalhada por dois arquivos. Primeiro
+	  um serviço ADSL com o <application>mpd</application>.  A
+	  configuração esta espalhada por dois arquivos.  Primeiro
 	  o <filename>mpd.conf</filename>:</para>
 
       <programlisting>default:
@@ -2251,7 +2251,7 @@ adsl:
     </calloutlist>
 
 	<para>O arquivo <filename>mpd.links</filename> contém informações
-	  sobre o link, ou links, que você deseja estabelecer. Um exemplo
+	  sobre o link, ou links, que você deseja estabelecer.  Um exemplo
 	  para acompanhar o exemplo acima é dado abaixo:</para>
 
     <programlisting>adsl:
@@ -2268,7 +2268,7 @@ adsl:
 	<para>O endereço IP do computador que está rodando o mpd.</para>
       </callout>
       <callout arearefs="co-mpd-ex-peer">
-      	<para>O endereço IP do seu modem ADSL. Para o Alcatel
+      	<para>O endereço IP do seu modem ADSL.  Para o Alcatel
 	  &speedtouch; Home o padrão é <hostid role="ipaddr">
 	  10.0.0.138</hostid>.</para>
       </callout>
@@ -2295,15 +2295,15 @@ ng0: flags=88d1&lt;UP,POINTOPOINT,RUNNING,NOARP,SIMPLEX,MULTICAST&gt; mtu 1500
       <title>Usando o ptpclient</title>
 	
 	<para>É também possível usar o FreeBSD para se conectar a
-	  outros serviços de ADSL usando o 
+	  outros serviços de ADSL usando o
 	  <filename role="package">net/pptpclient</filename>.</para>
 	
 	<para>Para usar o <filename role="package">net/pptpclient</filename>
 	  para se conectar ao serviço ADSL, instale o port ou pacote
-	  e edite o arquivo <filename>/etc/ppp/ppp.conf</filename>. Você
+	  e edite o arquivo <filename>/etc/ppp/ppp.conf</filename>.  Você
 	  precisará estar como <username>root</username> para realizar
 	  estas duas operações.  Uma seção de exemplo do
-	  <filename>ppp.conf</filename> é dada abaixo. Para maiores
+	  <filename>ppp.conf</filename> é dada abaixo.  Para maiores
 	  informações sobre as opções do <filename>ppp.conf</filename>
 	  consulte a página manual, &man.ppp.8;.</para>
 
@@ -2329,7 +2329,7 @@ ng0: flags=88d1&lt;UP,POINTOPOINT,RUNNING,NOARP,SIMPLEX,MULTICAST&gt; mtu 1500
    	<para>Como você precisar por a senha da sua conta no
 	  <filename>ppp.conf</filename> em texto puro você
 	  deve ter certeza de que nínguem conseguirá ler o
-	  conteúdo deste arquivo. A seguinte série de comandos
+	  conteúdo deste arquivo.  A seguinte série de comandos
 	  irá fazer com que o arquivo seja apenas lido pelo
 	  <username>root</username>.  Veja as páginas manuais
 	  do &man.chmod.1; e &man.chown.8; para mais informações.</para>
@@ -2338,9 +2338,9 @@ ng0: flags=88d1&lt;UP,POINTOPOINT,RUNNING,NOARP,SIMPLEX,MULTICAST&gt; mtu 1500
 &prompt.root; <userinput>chmod 600 /etc/ppp/ppp.conf</userinput></screen>
    </warning>
 
-	<para>Isso irá abrir um túnel para uma sessão PPP com seu 
-	roteador DSL. Modems ADSL com interfaces Ethernet possuem um
-	endereço de IP local ao qual você pode se conectar. No
+	<para>Isso irá abrir um túnel para uma sessão PPP com seu
+	roteador DSL.  Modems ADSL com interfaces Ethernet possuem um
+	endereço de IP local ao qual você pode se conectar.  No
 	caso do Alcatel &speedtouch; Home este endereço é o
 	<hostid role="ipaddr">10.0.0.138</hostid>.  A documentação
 	do seu roteador deve lhe dizer qual endereço o dispositivo
@@ -2371,7 +2371,7 @@ tun0: flags=8051&lt;UP,POINTOPOINT,RUNNING,MULTICAST&gt; mtu 1500
 	  do roteador, que geralmente é acessível através de
 	  <application>telnet</application> ou com um navegador.
 	  Se você ainda não puder se conectar examine a saída do
-	  comando <command>pptp</command> e o conteúdo do 
+	  comando <command>pptp</command> e o conteúdo do
 	  arquivo de log do <application>ppp</application> em
 	  <filename>/var/log/ppp.log</filename> para encontrar
 	  algumas pistas.</para>
