@@ -908,7 +908,7 @@
 
 	<sect4 id="printing-testing">
 	  <title>
-		Testanto a Comuni&ccedil;&atilde;oca com a Impressora
+		Testanto a Comunica&ccedil;&atilde;o com a Impressora
 	</title>
 
 	  <para>
@@ -923,9 +923,9 @@
 	  <para>
 		Para fazer o teste da impressora, nos precisamos enviar
 	algum testo para a impressora.  Para impressoras que podem imprimir
-	caracteres diretamente, o programa &man.lptest.1; 
-	&eacute; perfeito: ele gera todos os 96 imprim&iacute;veis da
-	tabela ASCII em 96 linhas.
+	caracteres diretamente, o programa &man.lptest.1; &eacute; perfeito: 
+	ele gera todos os 96 caracteres imprim&iacute;veis da tabela ASCII 
+	em 96 linhas.
 	    </para>
 
 	  <indexterm><primary>PostScript</primary></indexterm>
@@ -1238,114 +1238,134 @@ showpage</programlisting>
 	    <para>
 		Instalar um filtro de entrada para texto puro; veja
 	a se&ccedil;&atilde;o <link linkend="printing-textfilter">
-	Instalando o Filtro de Texto </link> para mais detalhes
+	Instalando o Filtro de Texto </link> para mais detalhes:
 		</para>
 	  </step>
 
 	  <step>
-	    <para>Test the setup by printing something with the
-	      &man.lpr.1; command.  More details are available in the
-	      <link linkend="printing-trying">Trying It Out</link> and
-	      <link
-	      linkend="printing-troubleshooting">Troubleshooting</link>
-	      sections.</para>
+	    <para>Testanto a configura&ccedil;&atilde;o, imprimindo alguma
+	coisa com o comando &man.lpr.1;.  Mais detalhes est&aacute;o 
+	dispon&iacute;veis em 
+		<link linkend="printing-trying">
+			<foreignphrase>Trying It Out</foreignphrase>
+		</link> e
+	      <link linkend="printing-troubleshooting">
+			Localiza&ccedil;&atilde;o de Defeitos
+		</link>
+	      </para>
 	  </step>
 	</procedure>
 
 	<note>
-	  <para>Language-based printers, such as &postscript; printers,
-	    cannot directly print plain text.  The simple setup outlined
-	    above and described in the following sections assumes that if
-	    you are installing such a printer you will print only files
-	    that the printer can understand.</para>
+	  <para>Impressora baseada em linguagem, como impressoras 
+	&postscript;, n&atilde;o podem imprimir diretamente texto puro.
+	A simples configura&ccedil;&atilde;o descrita acima e descrita
+	nas se&ccedil;&otilde;es seguintes assume que se voc&ecirc; 
+	est&aacute; instalando uma impressora que voc&ecirc; s&oacute;
+	ir&aacute; imprimir arquivos que ela possa entender.</para>
 	</note>
 
-	<para>Users often expect that they can print plain text to any of
-	  the printers installed on your system.  Programs that interface
-	  to <application>LPD</application> to do their printing usually
-	  make the same assumption.
-	  If you are installing such a printer and want to be able to
-	  print <foreignphrase>jobs</foreignphrase> in the printer language <emphasis>and</emphasis>
-	  print plain text <foreignphrase>jobs</foreignphrase>, you are strongly urged to add an
-	  additional step to the simple setup outlined above: install an
-	  automatic plain-text-to-&postscript; (or other printer language)
-	  conversion program.  The section entitled <link
-	  linkend="printing-advanced-if-conversion">Accommodating Plain
-	  Text Jobs on &postscript; Printers</link> tells how to do
-	  this.</para>
+	<para>
+	Usu&aacute;rios geralmente tem espectativa que eles podem imprimir
+	texto puro para qualquer impressora instaladas em seu sistema.  
+	Programas que faz interface entre o <application>LPD</application> 
+	e a impressora.
+	Se voc&ecirc; est&aacute; instalando a impressora e gostaria de 
+	habilitar os <foreignphrase>jobs</foreignphrase> na linguagem da 
+	impressora <emphasis>e</emphasis> texto puro, voc&ecirc; ser&aacute;
+	fortemente encorajado a adicionar mais um passo ao esquema acima;
+	instalar um programa de convers&atilde;o de textopuro para &postscript;
+	( ou outra linguagem de impressora ).  A se&ccedil;&atilde;o 
+	entitulada como <link linkend="printing-advanced-if-conversion">
+	Acomodando <foreignphrase>Jobs</foreignphrase> de Texto Puro
+	em impressoras &postscript;</&ccedil;</link> mostra como faze-lo.
+	</para>
 
 	<sect4 id="printing-naming">
-	  <title>Naming the Printer</title>
+	  <title>Nomeando a Impressora</title>
+	<para>
+		O primeiro e mais simples passo &eacute; escolher o nome
+	para a sua impressora.  Isso &eacute;; voc&ecirc; deve escolher um
+	nome funcional e cuidadosamente escolhido, deve tamb&eacute;m escolher
+	apelidos para a sua impressora.
+	</para>
 
-	  <para>The first (easy) step is to pick a name for your printer
-	    It really does not matter whether you choose functional or
-	    whimsical names since you can also provide a number of aliases
-	    for the printer.</para>
+	<para>
+		Pelo menos uma das impressoras especificadas no arquivo
+	<filename>/etc/printcap</filename> deve ser um apelido para 
+	<literal>lp</literal>.  Essa &eacute; o nome padr&atilde;o para
+	a impressora.  Se o usu&aacute;rio n&atilde;o a vari&aacute;vel
+	do ambiente <envar>PRINTER</envar> definida ou n&atilde;o 
+	especificar o nome da impressora na linha de comando de qualquer
+	aplicativo que use <application>LPD</application>, ent&atilde;o
+	a impressora <literal>lp</literal>  ser&aacute; usada como
+	padr&atilde;o.
+	</para>
 
-	  <para>At least one of the printers specified in the
-	    <filename>/etc/printcap</filename> should have the alias
-	    <literal>lp</literal>.  This is the default printer's name.
-	    If users do not have the <envar>PRINTER</envar> environment
-	    variable nor specify a printer name on the command line of any
-	    of the <application>LPD</application> commands, 
-	    then <literal>lp</literal> will be the
-	    default printer they get to use.</para>
+	<para>
+		Tamb&eacute;m &eacute; uma pr&aacute;tica comum fazer
+	um apelido para um nome que define completamente a impressora, 
+	incluindo a marca e o modelo.
+	</para>
 
-	  <para>Also, it is common practice to make the last alias for a
-	    printer be a full description of the printer, including make
-	    and model.</para>
+	<para>
+		Uma vez que voc&ecirc; j&aacute; tenha escolhido um nome e
+	alguns apelidos, coloque eles no arquivo 
+	<filename>/etc/printcap</filename>.  O nome da impressora deve estar 
+	na columa mais a esquerda.  Separando cada apelido com uma barra 
+	vertical (pipe) e terminar com o caracter : (dois pontos)
+	</para>
 
-	  <para>Once you have picked a name and some common aliases, put
-	    them in the <filename>/etc/printcap</filename> file.  The name
-	    of the printer should start in the leftmost column.  Separate
-	    each alias with a vertical bar and put a colon after the last
-	    alias.</para>
-
-	  <para>In the following example, we start with a skeletal
-	    <filename>/etc/printcap</filename> that defines two printers
-	    (a Diablo 630 line printer and a Panasonic KX-P4455 &postscript;
-	    laser printer):</para>
+	<para>
+		O exemplo a seguir &eacute; um esqueleto para o arquivo 
+	<filename>/etc/printcap</filename>  que define duas impressoras
+	( uma Diablo 630 matricial e uma Panasonic KX-P4455 &postscript;
+	que &eacute; uma impressora &agrave; laser):
+	</para>
 
 	  <programlisting>#
 #  /etc/printcap for host rose
 #
 rattan|line|diablo|lp|Diablo 630 Line Printer:
 
-bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:</programlisting>
+bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:
+	</programlisting>
 
-	  <para>In this example, the first printer is named
-	    <literal>rattan</literal> and has as aliases
-	    <literal>line</literal>, <literal>diablo</literal>,
-	    <literal>lp</literal>, and <literal>Diablo 630 Line
-	    Printer</literal>.  Since it has the alias
-	    <literal>lp</literal>, it is also the default printer.  The
-	    second is named <literal>bamboo</literal>, and has as aliases
-	    <literal>ps</literal>, <literal>PS</literal>,
-	    <literal>S</literal>, <literal>panasonic</literal>, and
-	    <literal>Panasonic KX-P4455 PostScript v51.4</literal>.</para>
+	  <para>
+		Nesse exemplo, a primeira impressora &eacute; chamada de 
+	<literal>rattan</literal> e possui como apelido <literal>line</literal>,
+	<literal>diablo</literal>, <literal>lp</literal>, e 
+	<literal>Diablo 630 Line Printer</literal>.  Como ela tem como 
+	apelido <literal>lp</literal>, ela &eacute; a impressora padr&atilde;o
+	para o sistema.  E a segfunda e chamada de <literal>bamboo</literal>, 
+	e tem como apelidos <literal>ps</literal>, <literal>PS</literal>,
+	<literal>S</literal>, <literal>panasonic</literal>, e
+	<literal>Panasonic KX-P4455 PostScript v51.4</literal>.</para>
 	</sect4>
 
 	<sect4 id="printing-no-header-pages">
-	  <title>Suppressing Header Pages</title>
+	  <title>Suprimindo a P&aacute;gina de Cabe&ccedil;alho </title>
 	  <indexterm>
       <primary>printing</primary>
       <secondary>header pages</secondary>
     </indexterm>
 
-	  <para>The <application>LPD</application> spooling system will 
-	    by default print a
-	    <emphasis>header page</emphasis> for each job.  The header
-	    page contains the user name who requested the job, the host
-	    from which the job came, and the name of the job, in nice
-	    large letters.  Unfortunately, all this extra text gets in the
-	    way of debugging the simple printer setup, so we will suppress
-	    header pages.</para>
-
-	  <para>To suppress header pages, add the <literal>sh</literal>
-	    capability to the entry for the printer in
-	    <filename>/etc/printcap</filename>.  Here is an example
-	    <filename>/etc/printcap</filename> with <literal>sh</literal>
-	    added:</para>
+	  <para>para o sistema de spooling <application>LPD</application>
+	por padr&atilde;o imprime uma 
+	<emphasis>p&aacute;gina de cabe&ccedil;alho</emphasis> para cada
+	<foreignphrase>job</foreignphrase>.  A p&aacute;gina de 
+	cabe&ccedil;alho cont&eacute;m o nome do usu&aacute;rio que pediu
+	o servi&ccedil;o, a m&aacute;quina de onde o pedido originou, e o
+	nome do <foreignphrase>job</foreignphrase>, em letras grandes.  
+	Para testes iremos desativar a p&aacute;gina de cabe&ccedil;alho.
+	</para>
+	 <para>
+		Para desabilitar a p&aacute;gina de cabe&ccedil;alho, 
+	adicione a entrada <literal>sh</literal> no arquivo
+	<filename>/etc/printcap</filename>.  Segue um exemplo do arquivo
+	<filename>/etc/printcap</filename> com essa op&ccedil;&atilde;o 
+	<literal>sh</literal> desabilitada.
+	</para>
 
 	  <programlisting>#
 #  /etc/printcap for host rose - no header pages anywhere
@@ -1356,53 +1376,69 @@ rattan|line|diablo|lp|Diablo 630 Line Printer:\
 bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
         :sh:</programlisting>
 
-	  <para>Note how we used the correct format: the first line starts
-	    in the leftmost column, and subsequent lines are indented with
-	    a single TAB.  Every line in an entry except the last ends in
-	    a backslash character.</para>
+	  <para>
+		Note como usamos o correto formato: A primeira linha inicia
+	na columa mais &agrave; esquerda, e as linhas subseguentes s&atilde;o
+	alinhadas com uma caracter TAB simples.  Cada linha, exceto a 
+	ultima, termina com uma barra invertida (\).
+	</para>
 	</sect4>
 
 	<sect4 id="printing-spooldir">
-	  <title>Making the Spooling Directory</title>
+	  <title>Criando o Diret&oacute;rio de Spooling</title>
 	  <indexterm><primary>printer spool</primary></indexterm>
 	  <indexterm><primary>print <foreignphrase>jobs</foreignphrase></primary></indexterm>
 
-	  <para>The next step in the simple <foreignphrase>spooler</foreignphrase> setup is to make a
-	    <emphasis>spooling directory</emphasis>, a directory where
-	    print <foreignphrase>jobs</foreignphrase> reside until they are printed, and where a number
-	    of other <foreignphrase>spooler</foreignphrase> support files live.</para>
+	  <para>
+		O pr&oacute;ximo passo na configura&ccedil;&atilde;o
+	simples do <foreignphrase>spooler</foreignphrase>  &eacute; criar
+	o <emphasis>diret&oacute;rio de 
+	<foreignphrase>spooling</foreignphrase></emphasis>, &eacute; o
+	diret&oacute;rio onde o <foreignphrase>jobs</foreignphrase> 
+	mant&eacute;m o que ser&aacute; impresso, e outros arquivos de
+	suporte do <foreignphrase>spooler</foreignphrase>.
+	</para>
 
-	  <para>Because of the variable nature of spooling directories, it
-	    is customary to put these directories under
-	    <filename>/var/spool</filename>.  It is not necessary to
-	    backup the contents of spooling directories, either.
-	    Recreating them is as simple as running &man.mkdir.1;.</para>
+	  <para>
+		Por causa da varia&ccedil;&atilde;o natural do 
+	diret&oacute;rio de <foreignphrase>spooling</foreignphrase>, ele 
+	&eacute; colocado sob o diret&oacute;rio 
+	<filename>/var/spool</filename>.  N&atilde;o &eacute; 
+	necess&aacute;rio realizar <foreignphrase>backups</foreignphrase>
+	do conte&uacute;ido deste diret&oacute;rio.  Voc&ecirc; pode
+	recria-lo com o comando &man.mkdir.1;.</para>
 
-	  <para>It is also customary to make the directory with a name
-	    that is identical to the name of the printer, as shown
-	    below:</para>
+	  <para>Ele tamb&eacute;m cria o diret&oacute;rio com o nome 
+	identico da impressora, como &eacute; mostrado abaixo:
+	    </para>
 
 	  <screen>&prompt.root; <userinput>mkdir /var/spool/<replaceable>printer-name</replaceable></userinput></screen>
 
-	  <para>However, if you have a lot of printers on your network,
-	    you might want to put the spooling directories under a single
-	    directory that you reserve just for printing with 
-	    <application>LPD</application>.  We
-	    will do this for our two example printers
-	    <literal>rattan</literal> and
-	    <literal>bamboo</literal>:</para>
+	  <para>
+		Entretando, se voc&ecirc; possui uma grande quantidade de
+	impressoras na sua rede, voc&ecirc; gostaria de colocar o 
+	diret&oacute;rio de <foreignphrase>spooling</foreignphrase> em 
+	um &uacute;nico diret&oacute;rio que voc&ecirc; reservou para a 
+	impress&atilde;o com <application>LPD</application>.  N&oacute;s 
+	iremos fazer isso com exemplo de duas impressoras
+	<literal>rattan</literal> e <literal>bamboo</literal>:</para>
 
 	  <screen>&prompt.root; <userinput>mkdir /var/spool/lpd</userinput>
 &prompt.root; <userinput>mkdir /var/spool/lpd/rattan</userinput>
 &prompt.root; <userinput>mkdir /var/spool/lpd/bamboo</userinput></screen>
 
 	  <note>
-	    <para>If you are concerned about the privacy of <foreignphrase>jobs</foreignphrase> that
-	      users print, you might want to protect the spooling
-	      directory so it is not publicly accessible.  Spooling
-	      directories should be owned and be readable, writable, and
-	      searchable by user daemon and group daemon, and no one else.
-	      We will do this for our example printers:</para>
+	    <para>
+		Se est&aacute; preocupado com a privacidade dos 
+	<foreignphrase>jobs</foreignphrase> que seus usuarios es&atilde;o 
+	imprimindo, voc&ecirc; talvez queira proteger o diret&oacute;rio
+	de <foreignphrase>spooling</foreignphrase> que n&atilde;o teria
+	acesso p&uacute;blico.  O diret&oacute;rio de 
+	<foreignphrase>spooling</foreignphrase> deve ter como dono o
+	usu&aacute;rio e grupo deamon e dever&aacute; ser acessivel para 
+	leitura, escrita e execu&ccedil;&atilde;o e para mais ninguem.
+	  Veja o pr&oacute;ximo exemplo onde ser&aacute; feito isso:
+	</para>
 
 	    <screen>&prompt.root; <userinput>chown daemon:daemon /var/spool/lpd/rattan</userinput>
 &prompt.root; <userinput>chown daemon:daemon /var/spool/lpd/bamboo</userinput>
@@ -1410,11 +1446,13 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 &prompt.root; <userinput>chmod 770 /var/spool/lpd/bamboo</userinput></screen>
 	  </note>
 
-	  <para>Finally, you need to tell <application>LPD</application>
-	    about these directories
-	    using the <filename>/etc/printcap</filename> file.  You
-	    specify the pathname of the spooling directory with the
-	    <literal>sd</literal> capability:</para>
+	  <para>
+		Finalmnente, voc&ecirc; dever&aacute; informar ao
+	<application>LPD</application> sobre este diretorio, usando
+	o arquivo <filename>/etc/printcap</filename>.  Voc&ecirc; especifica
+	o nome do diret&oacute;rio de <foreignphrase>spooling</foreignphrase>
+	com a op&ccedil;&atilde;o <literal>sd</literal>:
+	</para>
 
 	  <programlisting>#
 #  /etc/printcap for host rose - added spooling directories
@@ -1425,37 +1463,50 @@ rattan|line|diablo|lp|Diablo 630 Line Printer:\
 bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
         :sh:sd=/var/spool/lpd/bamboo:</programlisting>
 
-	  <para>Note that the name of the printer starts in the first
-	    column but all other entries describing the printer should be
-	    indented with a tab and each line escaped with a
-	    backslash.</para>
+	  <para>
+		Note que o nome da impressora inicia na primeira coluna 
+	mas as outras entradas dever&aacute; ser alinhada com um caracter
+	TAB e cada linha dever&aacute; terminar com uma barra invertida (\)
+	</para>
 
-	  <para>If you do not specify a spooling directory with
-	    <literal>sd</literal>, the spooling system will use
-	    <filename>/var/spool/lpd</filename> as a default.</para>
+	  <para>
+		Se voc&ecirc; n&atilde;o especificar o diret&oacute;rio de 
+	<foreignphrase>spooling</foreignphrase> com <literal>sd</literal>, 
+	o sistema de <foreignphrase>spooling</foreignphrase> ir&aacute;
+	usar o diret&oacute;rio padr&atilde;o
+	<filename>/var/spool/lpd</filename>
+	</para>
 	</sect4>
 
 	<sect4 id="printing-device">
-	  <title>Identifying the Printer Device</title>
+	<title>Identificando o Dispositivo de Impress&atilde;o </title>
 
-	  <para>In the <link linkend="printing-dev-ports">Adding
-	    <filename>/dev</filename> Entries for the Ports</link>
-	    section, we identified which entry in the
-	    <filename>/dev</filename> directory FreeBSD will use to
-	    communicate with the printer.  Now, we tell 
-	    <application>LPD</application> that
-	    information.  When the spooling system has a job to print, it
-	    will open the specified device on behalf of the filter program
-	    (which is responsible for passing data to the printer).</para>
+	  <para>
+		Na se&ccedil;&atilde;o 
+	<link linkend="printing-dev-ports">Adicionando Entradas no
+	<filename>/dev</filename>Para Portas</link>, nos identificamos qual
+	entrada no diret&oacute;rio <filename>/dev</filename> o FreeBSD 
+	ir&aacute; usar para comunicar com a impressora.  Agora, n&oacute;s
+	iremos informar ao <application>LPD</application> qual porta
+	usar.  Quando o sistema de <foreignphrase>spooling</foreignphrase>
+	tem um <foreignphrase>job</foreignphrase> para imprimir, ele 
+	ir&aacute; abrir o dispositivo especificado no suporte do 
+	programa de filtro ( o qual &eacute; respons&aacute;vel por
+	passar os dados para a impressora).
+	</para>
 
-	  <para>List the <filename>/dev</filename> entry pathname in the
-	    <filename>/etc/printcap</filename> file using the
-	    <literal>lp</literal> capability.</para>
+	  <para>
+		Listar as entradas do diret&oacute;rio
+	 <filename>/dev</filename>  no arquivo 
+	<filename>/etc/printcap</filename> usando a op&ccedil;&atilde;o
+	<literal>lp</literal>.</para>
 
-	  <para>In our running example, let us assume that
-	    <literal>rattan</literal> is on the first parallel port, and
-	    <literal>bamboo</literal> is on a sixth serial port; here are
-	    the additions to <filename>/etc/printcap</filename>:</para>
+	  <para>
+		Em nosso exemplo executado, n&oacute;s assumimos que a 
+	impressora <literal>rattan</literal> est&aacute; na primeira 
+	porta paralela e a impressora <literal>bamboo</literal> est&aacute;
+	na sexta porta serial; Segue aqui as adi&ccedil;&otilde;ess ao 
+	arquivo <filename>/etc/printcap</filename>:</para>
 
 	  <programlisting>#
 #  /etc/printcap for host rose - identified what devices to use
@@ -1466,96 +1517,121 @@ rattan|line|diablo|lp|Diablo 630 Line Printer:\
 
 bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
         :sh:sd=/var/spool/lpd/bamboo:\
-        :lp=/dev/ttyd5:</programlisting>
+        :lp=/dev/ttyd5:
+	</programlisting>
 
-	  <para>If you do not specify the <literal>lp</literal> capability
-	    for a printer in your <filename>/etc/printcap</filename> file,
-	    <application>LPD</application> uses <filename>/dev/lp</filename>
-	    as a default.
-	    <filename>/dev/lp</filename> currently does not exist in
-	    FreeBSD.</para>
+	  <para>
+		Se voc&ecirc;  n&atilde;o especificar a op&ccedil;&atilde;o
+	<literal>lp</literal> para a impressora em seu arquivo
+	<filename>/etc/printcap</filename>, o <application>LPD</application> 
+	ir&aacute; utilizar <filename>/dev/lp</filename> como padr&atilde;o.
+	A entrada <filename>/dev/lp</filename> n&atilde;o mais existe no
+	FreeBSD.
+	</para>
 
-	  <para>If the printer you are installing is connected to a
-	    parallel port, skip to the section entitled, <link
-	    linkend="printing-textfilter">Installing the Text
-	    Filter</link>.  Otherwise, be sure to follow the instructions
-	    in the next section.</para>
+	<para>
+		Se a impressora que voc&ecirc; est&aacute; instalando &eacute;
+	conectada na porta paralela, pule para a se&ccedil;&atilde;o
+	entitulada como <link linkend="printing-textfilter">INstalando
+	o Filtro de exto </link>.  Caso contr&aacute;rio, siga as 
+	instru&ccedil;&otilde;es na pr&oacute;xima se&ccedil;&atilde;o
+	</para>
 	</sect4>
 
 	<sect4 id="printing-commparam">
-	  <title>Configuring Spooler Communication Parameters</title>
-	  <indexterm>
-      <primary>printers</primary>
-      <secondary>serial</secondary>
-    </indexterm>
+	<title>
+		Configurando Parametros de Comunica&ccedil;&atilde;o do 
+		<foreignphrase>spooling</foreignphrase>
+	</title>
+	<indexterm>
+		<primary>printers</primary>
+		<secondary>serial</secondary>
+	</indexterm>
 
-	  <para>For printers on serial ports, <application>LPD</application>
-	    can set up the bps rate,
-	    parity, and other serial communication parameters on behalf of
-	    the filter program that sends data to the printer.  This is
-	    advantageous since:</para>
+	<para>
+		Para impressoras na porta serial, no 
+	<application>LPD</application> podemos ajustar a taxa de bps,
+	a paridade, e outros parametros da porta serial com o apoio do 
+	programa de filtro que envia dados para a impressora.  Isso pode 
+	ser uma grande vantagem deste que:
+	</para>
 
 	  <itemizedlist>
 	    <listitem>
-	      <para>It lets you try different communication parameters by
-		simply editing the <filename>/etc/printcap</filename>
-		file; you do not have to recompile the filter
-		program.</para>
+		<para>
+			Permite tentar diferentes configura&ccedil;&otilde;es
+	de parametros para a comunica&ccedil;&atilde;o, simplesmente 
+	editando o arquivo <filename>/etc/printcap</filename>; voc&ecirc; 
+	n&atilde;o precisa recompilar o programa de filtro.
+		</para>
 	    </listitem>
 
 	    <listitem>
-	      <para>It enables the spooling system to use the same filter
-		program for multiple printers which may have different
-		serial communication settings.</para>
+	      <para>
+			Ele habilita o sistema de 
+	<foreignphrase>spooling</foreignphrase> para usar o mesmo programa
+	de filtro para multiplas impressoras, as quais t&ecirc;m diferentes
+	configura&ccedil;&otilde;ess de comunica&ccedil;&atilde;o serial.
+		</para>
 	    </listitem>
 	  </itemizedlist>
 
-	  <para>The following <filename>/etc/printcap</filename>
-	    capabilities control serial communication parameters of the
-	    device listed in the <literal>lp</literal> capability:</para>
-
+	<para>
+		O seguinte arquivo <filename>/etc/printcap</filename>
+	habilidade de controlar os par&acirc;metro da comunica&ccedil;&atilde;o
+	serial do dispositivos listados na habilidade <literal>lp</literal>:
+	</para>
 	  <variablelist>
 	    <varlistentry>
 	      <term><literal>br#<replaceable>bps-rate</replaceable></literal></term>
 
 	      <listitem>
-		<para>Sets the communications speed of the device to
-		  <replaceable>bps-rate</replaceable>, where
-		  <replaceable>bps-rate</replaceable> can be 50, 75, 110,
-		  134, 150, 200, 300, 600, 1200, 1800, 2400, 4800, 9600,
-		  19200, 38400, 57600, or 115200 bits-per-second.</para>
+		<para>
+			Configura a velocidade de comunica&ccedil;&atilde;o
+	com o dispositivo para <replaceable>bps-rate</replaceable>, onde
+	<replaceable>bps-rate</replaceable> pode ser 50, 75, 110, 134, 150, 
+	200, 300, 600, 1200, 1800, 2400, 4800, 9600, 19200, 38400, 57600, 
+	ou 115200 bits-per-second.
+		</para>
 	      </listitem>
 	    </varlistentry>
 
 	    <varlistentry>
-	      <term><literal>ms#<replaceable>stty-mode</replaceable></literal></term>
+		<term>
+		<literal>ms#<replaceable>stty-mode</replaceable></literal>
+		</term>
 
 	      <listitem>
-		<para>Sets the options for the terminal device after
-		  opening the device.  &man.stty.1; explains the
-		  available options.</para>
+		<para>
+			Configura a op&ccedil;&atilde;o do dispositivo
+	terminal depois de aberto o dispositivo.  &man.stty.1; explica
+	a op&ccedil;&otilde;es dispon&iacute;veis
+		</para>
 	      </listitem>
 	    </varlistentry>
 	  </variablelist>
 
-	  <para>When <application>LPD</application> opens the device
-	    specified by the <literal>lp</literal> capability, it sets
-	    the characteristics of the device to those specified with
-	    the <literal>ms#</literal> capability.  Of particular
-	    interest will be the <literal>parenb</literal>,
-	    <literal>parodd</literal>, <literal>cs5</literal>,
-	    <literal>cs6</literal>, <literal>cs7</literal>,
-	    <literal>cs8</literal>, <literal>cstopb</literal>,
-	    <literal>crtscts</literal>, and <literal>ixon</literal>
-	    modes, which are explained in the &man.stty.1;
-	    manual page.</para>
+	  <para>Quando o  <application>LPD</application> abre o dispositivo
+	especificado pela op&ccedil;&atilde;o <literal>lp</literal>, ele
+	configuira as caracter&iacute;sticas do dispositivos para
+	aquelas especificadas na op&ccedil;&atilde;o <literal>ms#</literal>.
+	De particular interesse podemos destacar os seguintes 
+	modos <literal>parenb</literal>, <literal>parodd</literal>, 
+	<literal>cs5</literal>, <literal>cs6</literal>, <literal>cs7</literal>,
+	<literal>cs8</literal>, <literal>cstopb</literal>,
+	 <literal>crtscts</literal>, e <literal>ixon</literal> os quais 
+	ser&atilde;o explicados na p&aacute;gina do manual &man.stty.1;
+	</para>
 
-	  <para>Let us add to our example printer on the sixth serial
-	    port.  We will set the bps rate to 38400.  For the mode,
-	    we will set no parity with <literal>-parenb</literal>,
-	    8-bit characters with <literal>cs8</literal>,
-	    no modem control with <literal>clocal</literal> and
-	    hardware flow control with <literal>crtscts</literal>:</para>
+	<para>
+		Vamos mostra um exemplo de configura&ccedil;&atilde;o de
+	uma impressora serial conectada na sexta porta serial.  Nos iremos
+	configurar com a taxa de bps para 38400.  Para o modo n&oacute;s
+	iremos configurar sem paridade com a op&ccedil;&atilde;o
+	<literal>-parenb</literal>, caracteres de 8-bit <literal>cs8</literal>,
+	sem controle de modem <literal>clocal</literal> e <foreignphrase>
+	hardware flow control</foreignphrase> <literal>crtscts</literal>:
+	</para>
 
 	  <programlisting>bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
         :sh:sd=/var/spool/lpd/bamboo:\
@@ -1563,44 +1639,53 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 	</sect4>
 
 	<sect4 id="printing-textfilter">
-	  <title>Installing the Text Filter</title>
+	  <title>Instalando um Filtro de Texto</title>
 	  <indexterm>
 	    <primary>printing</primary>
 	    <secondary>filters</secondary>
 	  </indexterm>
 
-	  <para>We are now ready to tell <application>LPD</application>
-	    what text filter to use to
-	    send <foreignphrase>jobs</foreignphrase> to the printer.  A <emphasis>text filter</emphasis>,
-	    also known as an <emphasis>input filter</emphasis>, is a
-	    program that <application>LPD</application> runs when it 
-	    has a job to print.  When <application>LPD</application>
-	    runs the text filter for a printer, it sets the filter's
-	    standard input to the job to print, and its standard output to
-	    the printer device specified with the <literal>lp</literal>
-	    capability.  The filter is expected to read the job from
-	    standard input, perform any necessary translation for the
-	    printer, and write the results to standard output, which will
-	    get printed.  For more information on the text filter, see
-	    the <link linkend="printing-advanced-filters">Filters</link>
-	    section.</para>
+	<para>
+		N&oacute;s j&aacute; estamos prontos para informar ao
+	<application>LPD</application> qual o filtro de texto que queremos
+	utilizar para enviar <foreignphrase>jobs</foreignphrase> para a
+	impressora.  Um <emphasis>filtro de texto</emphasis>, tamb&eacute;m
+	conhecido como <emphasis>filtro de entrada</emphasis>, &eacute; um
+	programam que &eacute; execudado pelo <application>LPD</application> 
+	quando um tem <foreignphrase>job</foreignphrase> para ser impresso.
+	Quando <application>LPD</application> executa o filtro de texto para
+	a impressora,  ele configura a entrada padr&atilde;o do filtro para
+	<foreignphrase>job</foreignphrase> a ser impresso, e a sua sa&iacute;da
+	padr&atilde;o &eacute; enviada para a impressora especificada em 
+	<literal>lp</literal>.  O filtro est&aacute; pronto para receber
+	o <foreignphrase>job</foreignphrase> pela entrada padr&atilde;o, 
+	executando a necess&aacute;ria tradu&ccedil;&atilde;o para a 
+	impressora, e escrevendo o resultado na sa&iacute;da padr&atilde;o,
+	a qual ser&aacute; enviada &agrave; impressora.  Para maiores 
+	informa&ccedil;&otilde;es, consulte a se&ccedil;&atilde;o de 
+	<link linkend="printing-advanced-filters">Filters</link>
+	</para>
+	<para>
+		Para essa configura&ccedil;&atilde;o simples, o filtro pode ser
+	um pequeno <foreignphrase>shell script</foreignphrase> que execute 
+	o comando <command>/bin/cat</command> para enviar o
+	<foreignphrase>job</foreignphrase> para a impressora.  O FreeBSD
+	vem com um outro filtro chamado de <filename>lpf</filename> 
+	pega os caracteres de <foreignphrase>backspacing</foreignphrase>
+	e sublinhados que algumas imporessoras n&atilde;o conseguem 
+	manipula-los, voc&ecirc; pode ent&atilde;o utilizar outro
+	programa de filtro que desejar.  O filtro <command>lpf</command>
+	e descrito em detalhes na sec&ccedil;&atilde;o entitulada como
+	<link linkend="printing-advanced-lpf">lpf: Um Filtro de Texto</link>.
+	</para>
 
-	  <para>For our simple printer setup, the text filter can be a
-	    small shell script that just executes
-	    <command>/bin/cat</command> to send the job to the printer.
-	    FreeBSD comes with another filter called
-	    <filename>lpf</filename> that handles backspacing and
-	    underlining for printers that might not deal with such
-	    character streams well.  And, of course, you can use any other
-	    filter program you want.  The filter <command>lpf</command> is
-	    described in detail in section entitled <link
-	    linkend="printing-advanced-lpf">lpf: a Text
-	    Filter</link>.</para>
-
-	  <para>First, let us make the shell script
-	    <filename>/usr/local/libexec/if-simple</filename> be a simple
-	    text filter.  Put the following text into that file with your
-	    favorite text editor:</para>
+	  <para>
+		Primeiro, iremos criar um 
+	<foreignphrase>shell script</foreignphrase> chamado de 
+	<filename>/usr/local/libexec/if-simple</filename> para ser um 
+	filtro de texto simples.  Coloque o seguinte texto dentro dele,
+	utilizando o seu editor de texto favorito:
+	</para>
 
 	  <programlisting>#!/bin/sh
 #
@@ -1612,15 +1697,19 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 /bin/cat &amp;&amp; exit 0
 exit 2</programlisting>
 
-	  <para>Make the file executable:</para>
+	<para>
+		Deixe o arquivo com permiss&atilde;o de execu&ccedil;&atilde;o
+	</para>
 
 	  <screen>&prompt.root; <userinput>chmod 555 /usr/local/libexec/if-simple</userinput></screen>
 
-	  <para>And then tell LPD to use it by specifying it with the
-	    <literal>if</literal> capability in
-	    <filename>/etc/printcap</filename>.  We will add it to the two
-	    printers we have so far in the example
-	    <filename>/etc/printcap</filename>:</para>
+	<para>
+		E ent&atilde;o diga ao <application>LPD</application>
+	que utilize esse filtro, especificando a op&ccedil;&atilde;o
+	<literal>if</literal> dentro do arquivo
+	<filename>/etc/printcap</filename>.  N&oacute;s iremos adicionar
+	duas impressoras como no exemplo do
+	<filename>/etc/printcap</filename>:</para>
 
 	  <programlisting>#
 #  /etc/printcap for host rose - added text filter
@@ -1636,58 +1725,80 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 	</sect4>
 
 	<sect4>
-	  <title>Turn on <application>LPD</application></title>
+	  <title>Ligando o <application>LPD</application></title>
 
-	  <para>&man.lpd.8; is run from <filename>/etc/rc</filename>,
-	    controlled by the <literal>lpd_enable</literal> variable.  This
-	    variable defaults to <literal>NO</literal>.  If you have not done
-	    so already, add the line:</para>
+	<para>
+		&man.lpd.8; Ele &eacute; executado atraves do arquivo
+	<filename>/etc/rc</filename>, controlado pela vari&aacute;vel
+	<literal>lpd_enable</literal>.  O valor padr&atilde;o para esta
+	vari&aacute;vel &eacute; <literal>NO</literal>.  Se voc&ecirc; ainda
+	n&atilde;o o fez, adicione a linha
+	</para>
 
 	  <programlisting>lpd_enable="YES"</programlisting>
 
-	  <para>to <filename>/etc/rc.conf</filename>, and then either restart
-	    your machine, or just run &man.lpd.8;.</para>
+	<para>
+		ao arquivo <filename>/etc/rc.conf</filename>, e ent&atilde;o
+	reinicie a sua m&aacute;quina, ou et&atilde;o execute simplesmente
+	&man.lpd.8;.
+	</para>
 
 	  <screen>&prompt.root; <userinput>lpd</userinput></screen>
 	</sect4>
 	
 	<sect4 id="printing-trying">
-	  <title>Trying It Out</title>
+	  <title>Tente Isso</title>
 
-	  <para>You have reached the end of the simple 
-	    <application>LPD</application> setup.
-	    Unfortunately, congratulations are not quite yet in order,
-	    since we still have to test the setup and correct any
-	    problems.  To test the setup, try printing something.  To
-	    print with the <application>LPD</application> system, you 
-	    use the command &man.lpr.1;,
-	    which submits a job for printing.</para>
+	<para>
+		voc&ecirc; chegou ao fim da configura&ccedil;&atilde;o
+	simples do <application>LPD</application>.  Infelismente, ainda
+	n&atilde;o &eacute; hora de <foreignphrase>cantar vit&oacute;ria
+	</foreignphrase>, uma vez que ainda n&atilde;o testamos a 
+	configura&ccedil;&atilde;o e corre&ccedil;&atilde;o de algum
+	problema.  Para testar a configura&ccedil;&atilde;o, tente
+	imprimir algo.  Para imprimir com o sistema 
+	<application>LPD</application>, voc&ecirc; usa o comando
+	&man.lpr.1;, o oqual envia o <foreignphrase>job</foreignphrase>
+	para a impressora.
+	</para>
+	<para>
+		Voc&ecirc; pode combinar &man.lpr.1; com o programa
+	&man.lptest.1;, introduzido na sec&ccedil;&atilde;o
+	<link linkend="printing-testing">Verificando a 
+	comunica&ccedil;&atilde;o com a Impressora </link> para gerar 
+	texto para texte.
+	</para>
+	<para>
+		<emphasis>
+		Para testar a configura&ccedil;&atilde;o simples do
+	<application>LPD</application>
+		</emphasis>
+	</para>
 
-	  <para>You can combine &man.lpr.1; with the &man.lptest.1;
-	    program, introduced in section <link
-	    linkend="printing-testing">Checking Printer
-	    Communications</link> to generate some test text.</para>
+	<para>Digite:</para>
 
-	  <para><emphasis>To test the simple <application>LPD</application>
-	      setup:</emphasis></para>
-
-	  <para>Type:</para>
-
-	  <screen>&prompt.root; <userinput>lptest 20 5 | lpr -P<replaceable>printer-name</replaceable></userinput></screen>
+	  <screen>&prompt.root; <userinput>lptest 20 5 | lpr -P<replaceable>Nome-da-impressora</replaceable></userinput></screen>
 	  
-	  <para>Where <replaceable>printer-name</replaceable> is a the
-	    name of a printer (or an alias) specified in
-	    <filename>/etc/printcap</filename>.  To test the default
-	    printer, type &man.lpr.1; without any <option>-P</option>
-	    argument.  Again, if you are testing a printer that expects
-	    &postscript;, send a &postscript; program in that language instead
-	    of using &man.lptest.1;.  You can do so by putting the program
-	    in a file and typing <command>lpr 
-	    <replaceable>file</replaceable></command>.</para>
+	<para>
+		Onde <replaceable>Nome-da-impressora</replaceable> &eacute; 
+	o nome dado &agrave; impressora (ou um de seus apelidos) no arquivo
+	<filename>/etc/printcap</filename>.  Para testar a impressora
+	padr&atilde;o do sistema, digite &man.lpr.1; sem op&ccedil;&otilde;es
+	<option>-P</option>.  Novamente, se voc&ecirc; est&aacute; testando
+	a impressora que espera &postscript;, utilize um programa que
+	gere uma sa&iacute;da &postscript; ao inv&eacute;s de utilizar
+	o &man.lptest.1;.  Voc&ecirc; pode colocar um c&oacute;digo 
+	&postscript; dentro de um arquivo e digitar <command>lpr 
+	    <replaceable>nome do arquivo</replaceable></command>.
+	</para>
 
-	  <para>For a &postscript; printer, you should get the results of
-	    the program.  If you are using &man.lptest.1;, then your
-	    results should look like the following:</para>
+	<para>
+		Para uma impressora &postscript;, voc&ecirc; deve saber
+	qual foi os dados enviados do programa para a impressora, para saber
+	se este foi impressor corretamente.  Se voc&ecirc; estiver usando
+	o &man.lptest.1;, voc&ecirc; deve ter como resultado algo
+	semelhante &agrave;:
+	</para>
 
 	  <programlisting>!"#$%&amp;'()*+,-./01234
 "#$%&amp;'()*+,-./012345
@@ -1695,22 +1806,31 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 $%&amp;'()*+,-./01234567
 %&amp;'()*+,-./012345678</programlisting>
 
-	  <para>To further test the printer, try downloading larger
-	    programs (for language-based printers) or running
-	    &man.lptest.1; with different arguments.  For example,
-	    <command>lptest 80 60</command> will produce 60 lines of 80
-	    characters each.</para>
+	<para>
+		Para facilitar o teste de impress&atilde;o, tente fazer a
+	transfer&ecirc;ncia de um arquivo grande ( para a linguagem
+	da impressora ) ou executar &man.lptest.1; com diferentes argumentos.
+	  Por exemplo, <command>lptest 80 60</command> ir&aacute; produzir
+	60 linhas com 80 caracteres cada.
+	</para>
 
-	  <para>If the printer did not work, see the <link
-	    linkend="printing-troubleshooting">Troubleshooting</link>
-	    section.</para>
+	<para>
+		Se a impressora n&atilde;o funcionar, veja a 
+	se&ccedil;&atilde;o entitulada 
+	<link 
+		linkend="printing-troubleshooting">
+		Localiza&ccedil;&atilde;o de  Defeitos
+	</link>
+	</para>
 	</sect4>
       </sect3>
     </sect2>
   </sect1>
   
   <sect1 id="printing-advanced">
-    <title>Advanced Printer Setup</title>
+	<title>
+		Configura&ccedil;&atilde;o Avan&ccedil;ada de Impressora
+	</title>
     
     <para>This section describes filters for printing specially formatted
       files, header pages, printing across networks, and restricting and
@@ -4099,7 +4219,7 @@ total                     337.00  154   $  6.74</screen>
   </sect1>
 
   <sect1 id="printing-using">
-    <title>Using Printers</title>
+    <title>Usando as Impessoras</title>
     
     <indexterm>
       <primary>printers</primary>
@@ -4829,7 +4949,10 @@ cfA013rose dequeued
   </sect1>
   
   <sect1 id="printing-lpd-alternatives">
-    <title>Alternatives to the Standard Spooler</title>
+	<title>
+		Alternativas para o <foreignphrase>Spooler</foreignphrase> 
+		Padr&atilde;o
+	</title>
     
     <para>If you have been reading straight through this manual, by now you
       have learned just about everything there is to know about the 
@@ -4883,7 +5006,9 @@ cfA013rose dequeued
   </sect1>
 
   <sect1 id="printing-troubleshooting">
-    <title>Troubleshooting</title>
+	<title>
+		Troubleshooting
+	</title>
 
     <para>After performing the simple test with &man.lptest.1;, you might
       have gotten one of the following results instead of the correct
@@ -5112,11 +5237,13 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 	    </listitem>
 
 	    <listitem>
-	      <para>If the printer supports carrier flow control, specify
+		<para>
+			If the printer supports carrier flow control, specify
 		the <literal>crtscts</literal> mode in the 
 		<literal>ms#</literal> capability.
 		Make sure the cable connecting the printer to the computer
-		is correctly wired for carrier flow control.</para>
+		is correctly wired for carrier flow control.
+		</para>
 	    </listitem>
 	  </itemizedlist>
 	</listitem>
@@ -5126,16 +5253,19 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 	<term>It printed garbage.</term>
 
 	<listitem>
-	  <para>The printer printed what appeared to be random garbage,
-	    but not the desired text.</para>
+	<para>
+		A impressora aparentemente imprime lixo rand&ocirc;mico
+	e n&atilde;o o texto solicitado.
+	</para>
 
-	  <para>This is usually another symptom of incorrect
-	    communications parameters with a serial printer.  Double-check
-	    the bps rate in the <literal>br</literal> capability, and the
-	    parity setting in the
-	    <literal>ms#</literal> capability; make sure the printer is
-	    using the same settings as specified in the
-	    <filename>/etc/printcap</filename> file.</para>
+	<para>
+		Esse &eacute; outro sintoma de par&acirc;metros
+	incorretos da comunica&ccedil;&atilde;o com a impressora serial.
+	Verifique novamente os valores nas op&ccedil;&otilde;es da taxa
+	bps ( <literal>br</literal> ) e da paridade ( <literal>ms#</literal> );
+	tenha certeza das configura&ccedil;&otilde;es especificadas no
+	arquivo <filename>/etc/printcap</filename>.
+	</para>
 	</listitem>
       </varlistentry>
 
@@ -5143,13 +5273,16 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 	<term>Nothing happened.</term>
 
 	<listitem>
-	  <para>If nothing happened, the problem is probably within
-	    FreeBSD and not the hardware.  Add the log file
-	    (<literal>lf</literal>) capability to the entry for the
-	    printer you are debugging in the
-	    <filename>/etc/printcap</filename> file.  For example, here is
-	    the entry for <literal>rattan</literal>, with the
-	    <literal>lf</literal> capability:</para>
+	<para>
+		Se nada acontecer, o problema, provavelmente, est&aacute;
+	dentro do FreeBSD e n&atilde;o no 
+	<foreignphrase>hardware</foreignphrase>.  Adicione a 
+	op&ccedil;&atilde;o (<literal>lf</literal>) no arquivo 
+	<filename>/etc/printcap</filename> na impressora que voc&ecirc;
+	est&aacute; verificando.  No nosso exemplo, estamos utilizando a 
+	impressora <literal>rattan</literal>, com a op&ccedil;&atilde;o
+	<literal>lf</literal>:
+	</para>
 
 	  <programlisting>rattan|line|diablo|lp|Diablo 630 Line Printer:\
         :sh:sd=/var/spool/lpd/rattan:\
@@ -5157,15 +5290,19 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
         :if=/usr/local/libexec/if-simple:\
         :lf=/var/log/rattan.log</programlisting>
 
-	  <para>Then, try printing again.  Check the log file (in our
-	    example, <filename>/var/log/rattan.log</filename>) to see any
-	    error messages that might appear.  Based on the messages you
-	    see, try to correct the problem.</para>
+	<para>
+		Ent&atilde;o, tente novamente.  Verifique o arquivo de
+	<foreignphrase>log</foreignphrase> ( no nosso exemplo,
+	<filename>/var/log/rattan.log</filename>) para ver qualquer 
+	mensagem de erro que possa aparecer.  Baseado nessas mensagens, 
+	voc&ecirc; poder&aacute; corrigir o problema.
+	</para>
 
-	  <para>
-		Se voc&ecirc; n&atilde;o especificar a capacidade
+	<para>
+		Se voc&ecirc; n&atilde;o especificar a op&ccedil;&atilde;o
 	<literal>lf</literal> o <application>LPD</application> usar&aacute; 
-	    <filename>/dev/console</filename> como padr&atilde;o.</para>
+	<filename>/dev/console</filename> como padr&atilde;o.
+	</para>
 	</listitem>
       </varlistentry>
     </variablelist>
