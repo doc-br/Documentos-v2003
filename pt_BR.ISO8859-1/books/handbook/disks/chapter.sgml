@@ -112,7 +112,7 @@
 	  </row>
 	  <row>
 	    <entry>Drives de Flash </entry>
-	    <entry><literal>fla</literal> for &diskonchip; Flash device</entry>
+	    <entry><literal>fla</literal> para &diskonchip; dispositivo Flash </entry>
 	  </row>
 	  <row>
 	    <entry>Drives RAID </entry>
@@ -317,37 +317,38 @@ particao(s)
 	<title>Dedicado</title>
 	<indexterm><primary>OS/2</primary></indexterm>
 
-	<para>not be sharing the new drive with another operating
-	  system, you may use the <literal>dedicated</literal> mode.  Remember
-	  this mode can confuse Microsoft operating systems; however, no damage
-	  will be done by them.  IBM's &os2; however, will
-	  <quote>appropriate</quote> any partition it finds which it does not
-	  understand.</para>
+	<para>Se voce nao for compartilhar o novo disco com outro sistema
+          operacional, voce pode utilizar o modo <literal>dedicado</literal>. 
+          Lembre-se que este modo pode confundir os sistemas operacionais
+          da Microsoft; no entanto, nenhum dano sera feito a eles.
+	  O &os2; da IBM, contudo <quote>apropriarar-se</quote> de qualquer 
+          particao encontrada que ele nao compreenda.</para>
 	
 	<screen>&prompt.root; <userinput>dd if=/dev/zero of=/dev/da1 bs=1k count=1</userinput>
 &prompt.root; <userinput>disklabel -Brw da1 auto</userinput>
-&prompt.root; <userinput>disklabel -e da1</userinput>				# create the `e' partition
+&prompt.root; <userinput>disklabel -e da1</userinput>				# cria a particao `e' 
 &prompt.root; <userinput>newfs -d0 /dev/da1e</userinput>
 &prompt.root; <userinput>mkdir -p /1</userinput>
-&prompt.root; <userinput>vi /etc/fstab</userinput>				# add an entry for /dev/da1e
+&prompt.root; <userinput>vi /etc/fstab</userinput>				# insere uma entrada para /dev/da1e
 &prompt.root; <userinput>mount /1</userinput></screen>
       
-	<para>An alternate method is:</para>
+	<para>Um metodo alternativo e:</para>
       
 	<screen>&prompt.root; <userinput>dd if=/dev/zero of=/dev/da1 count=2</userinput>
 &prompt.root; <userinput>disklabel /dev/da1 | disklabel -BrR da1 /dev/stdin</userinput>
 &prompt.root; <userinput>newfs /dev/da1e</userinput>
 &prompt.root; <userinput>mkdir -p /1</userinput>
-&prompt.root; <userinput>vi /etc/fstab</userinput>					# add an entry for /dev/da1e
+&prompt.root; <userinput>vi /etc/fstab</userinput>					# insere uma entrada para /dev/da1e
 &prompt.root; <userinput>mount /1</userinput></screen>
 
-	<note><para>Since &os;&nbsp;5.1-RELEASE, the &man.bsdlabel.8;
-	  utility replaces the old &man.disklabel.8; program.  With
-	  &man.bsdlabel.8; a number of obsolete options and parameters
-	  have been retired; in the examples above the option
-	  <option>-r</option> should be removed with &man.bsdlabel.8;.
-	  For more information, please refer to the &man.bsdlabel.8;
-	  manual page.</para></note>
+	<note><para>Desde o  &os;&nbsp;5.1-RELEASE, o utilitario 
+	&man.bsdlabel.8;  substitui o antigo programa &man.disklabel.8;.  
+	Com o comando &man.bsdlabel.8; foram retiradas um grande
+	numero de opcoes e paramentros que se tornaram obsoletos;
+	  nos exemplos acima, a opcao 
+	  <option>-r</option> deve ser removida com o &man.bsdlabel.8;.
+	  Para mais informacoes , refira-se ao manual &man.bsdlabel.8; .
+	  </para></note>
       </sect3>
     </sect2>
   </sect1>
@@ -381,120 +382,127 @@ particao(s)
   <primary>RAID</primary><secondary>CCD</secondary>
 </indexterm>
 
-	<title>Concatenated Disk Driver (CCD) Configuration</title>
-	<para>When choosing a mass storage solution the most important
-	  factors to consider are speed, reliability, and cost.  It is 
-	  rare to have all three in balance; normally a fast, reliable mass
-	  storage device is expensive, and to cut back on cost either speed
-	  or reliability must be sacrificed.</para>
+	<title>Configuracao do Driver de Concatenacao de Disco (CCD)</title>
+	<para>Quando escolher uma solucao de armazenamento de massa,
+	os aspectos  mais importantes a considerar sao velocidade,
+	confiabilidade e custo.  E raro termos um equilibrio
+	entre os tres; normalmente , um dispositivo de armazenamento de
+	massa rapido e confiavel tem um custo mais elevado e
+	economizando fatalmente sacrificara ou velocidade ou
+	confiabilidade do dispositivo.</para>
 
-          <para>In designing the system described below, cost was chosen
-          as  the most important factor, followed by speed, then reliability.
-          Data transfer speed for this system is ultimately
-          constrained by the network.  And while reliability is very important,
-          the CCD drive described below serves online data that is already
-          fully backed up on CD-R's and can easily be replaced.</para>  
+          <para>No projero do sistema abaixo, o custo foi 
+	  escolhido como o fator mais importante , seguido pela
+	  velocidade , e entao, confiabilidade.
+          A velocidade de transferencia para este sistema is ultimately
+          constrained pela rede.  E enquanto a confiabilidade e muito
+	  importante, o drive CCD descrito abaixo serve dados online
+	  que ja foram backupeados em CD-Rs e podem ser facilmente 
+	  substituidos.</para>  
 
-          <para>Defining your own requirements is the first step
-          in choosing a mass storage solution.  If your requirements prefer
-          speed or reliability over cost, your solution will differ from
-          the system described in this section.</para>
+          <para>Definindo seus proprios requisitos e o primeiro passo
+	  na escolha de uma solucao de armazenamento de massa.
+          Se seus requisitos priorizam velocidade ou confiabilidade
+          sobre o custo, sua solucao diferira do sistema descrito
+	  nesta secao.</para>
 
 
 	<sect4 id="ccd-installhw">
-	  <title>Installing the Hardware</title>
+	  <title>Instalando o Hardware</title>
 
-	  <para>In addition to the IDE system disk, three Western 
-            Digital 30GB, 5400 RPM IDE disks form the core
-            of the CCD disk described below providing approximately
-	    90GB of online storage.  Ideally,
-	    each IDE disk would have its own IDE controller
-	    and cable, but to minimize cost, additional 
-	    IDE controllers were not used.  Instead the disks were
-	    configured with jumpers so that each IDE controller has
-            one master, and one slave.</para>
+	  <para>Alem do disco de sistema IDE, tres discos Western 
+            Digital 30GB, 5400 RPM IDE compoem o centro dos discos
+	    CCD descritos abaixo, fornecendo aproximadamente
+	    90GB de armazenamento online .  Idealmente, cada disco
+	    IDE teria seu proprio cabo e controladora, porem, 
+	    para minimizar os custos, controladoras adicionais nao
+	    foram utilizadas.  Ao inves disso, os discos foram 
+	    configurados com os jumpers de forma que cada controladora
+	    IDE tenha um dispositivo master e um slave.</para>
 
-	  <para>Upon reboot, the system BIOS was configured to
-	    automatically detect the disks attached.  More importantly,
-	    FreeBSD detected them on reboot:</para>
+	  <para>Upon reboot, a BIOS do sistema foi configurada para
+	  automaticamente detectar os discos que estao conectados.
+	      O mais importante e que o FreeBSD detectou-os no
+	    reboot:</para>
 
 	  <programlisting>ad0: 19574MB &lt;WDC WD205BA&gt; [39770/16/63] at ata0-master UDMA33
 ad1: 29333MB &lt;WDC WD307AA&gt; [59598/16/63] at ata0-slave UDMA33
 ad2: 29333MB &lt;WDC WD307AA&gt; [59598/16/63] at ata1-master UDMA33
 ad3: 29333MB &lt;WDC WD307AA&gt; [59598/16/63] at ata1-slave UDMA33</programlisting>
 
- 	  <note><para>If FreeBSD does not detect all the disks, ensure
- 	    that you have jumpered them correctly.  Most IDE drives
- 	    also have a <quote>Cable Select</quote> jumper.  This is
- 	    <emphasis>not</emphasis> the jumper for the master/slave
- 	    relationship.  Consult the drive documentation for help in
- 	    identifying the correct jumper.</para></note>
+ 	  <note><para>Se o FreeBSD nao detectar todos os discos,
+ 	    assegure que voce os tenha jumpeado corretamente.
+	    Muitos drives IDE tambem tem um jumper de 
+	    <quote>selecao de cabos</quote>. Este <emphasis>nao</emphasis> 
+	    e o jumper para a relacao master/slave.
+ 	     Consulte a documentacao do drive para auxilio na
+	     identificacao do jumper correto</para></note>.
  
- 	  <para>Next, consider how to attach them as part of the file
- 	    system.  You should research both &man.vinum.8; (<xref
- 	    linkend="vinum-vinum">) and &man.ccd.4;.  In this
- 	    particular configuration, &man.ccd.4; was chosen.</para>
+ 	  <para>Em seguida, avalie como voce ira conecta-los como
+	  parte do sistema de arquivo. Voce deve pesquisar ambos
+	  &man.vinum.8; (<xref linkend="vinum-vinum">) e &man.ccd.4;. 
+	  Nesta configuracao particular, o &man.ccd.4; foi escolhido.</para>
 	</sect4>
 
 	<sect4 id="ccd-setup">
-	  <title>Setting Up the CCD</title>
+	  <title>Configurando o CCD</title>
 
- 	  <para>The driver &man.ccd.4; allows you to take
-  	    several identical disks and concatenate them into one
-  	    logical file system.  In order to use
- 	    &man.ccd.4;, you need a kernel with
- 	    &man.ccd.4; support built in.
- 	    Add this line to your kernel configuration file, rebuild, and 
- 	    reinstall the kernel:</para>
+ 	  <para>O driver &man.ccd.4; permite tomar varios discos
+	  identicos e concantena-los em um unico sistema de arquivos
+	  logico.  De forma a utilizar o &man.ccd.4;, voce precisa 
+	  de um kernel que tenha o &man.ccd.4; compilado.
+ 	    Adicione esta linha ao seu arquivo de configuracao do kernel,
+	    recompile e reinstale o kernel:</para>
 
 	  <programlisting>pseudo-device   ccd     4</programlisting>
 
-	  <para>On 5.X systems, you have to use instead the following
-	    line:</para>
+	  <para>Em sistemas 5.X , voce deve adicionar a linha
+	  seguinte:</para>
 
 	  <programlisting>device   ccd</programlisting>
 
-	  <note><para>In FreeBSD&nbsp;5.X, it is not necessary to specify
-	    a number of &man.ccd.4; devices, as the &man.ccd.4; device driver is now
-	    self-cloning &mdash; new device instances will automatically be
-	    created on demand.</para></note>
+	  <note><para>No FreeBSD&nbsp;5.X, nao e necessario definir
+	    um numero de dispositivos do &man.ccd.4;, pois os drivers
+	    dos dispositivos do &man.ccd.4; clonam a si mesmos&mdash; 
+	    novas instancias dos dispositivos 
+	    serao criados automaticamente por demanda.</para></note>
 
-	  <para>The &man.ccd.4; support can also be
-	    loaded as a kernel loadable module in FreeBSD 3.0 or
-	    later.</para>
+	  <para>O suporte do &man.ccd.4; tambem pode ser 
+	    carregado como um modulo do kernel no FreeBSD 3.0 ou
+	    mais recente.</para>
 
- 	  <para>To set up &man.ccd.4;, you must first use
- 	    &man.disklabel.8; to label the disks:</para>
+ 	  <para>Para setar o  &man.ccd.4;, voce precisa primeiro
+	    usar o &man.disklabel.8; para rotular os discos:</para>
 
 	  <programlisting>disklabel -r -w ad1 auto
 disklabel -r -w ad2 auto
 disklabel -r -w ad3 auto</programlisting>
 
- 	  <para>This creates a disklabel for <devicename>ad1c</devicename>, <devicename>ad2c</devicename> and <devicename>ad3c</devicename> that
-  	    spans the entire disk.</para>
+ 	  <para>Este cria um rotulo de disco para <devicename>ad1c</devicename>, <devicename>ad2c</devicename> e <devicename>ad3c</devicename> que
+  	    se extende pelo disco inteiro.</para>
 
-	  <note><para>Since &os;&nbsp;5.1-RELEASE, the &man.bsdlabel.8;
-	    utility replaces the old &man.disklabel.8; program.  With
-	    &man.bsdlabel.8; a number of obsolete options and parameters
-	    have been retired; in the examples above the option
-	    <option>-r</option> should be removed.  For more
-	    information, please refer to the &man.bsdlabel.8;
-	    manual page.</para></note>
+	  <note><para>Desde o  &os;&nbsp;5.1-RELEASE, o utilitario
+	    &man.bsdlabel.8; substituiu o antigo programa 
+	    &man.disklabel.8;. Com o &man.bsdlabel.8; , um grande
+	    numero de opcoes e paramentros ja obsoletos foram
+	    removidos; nos exemplos acima, a opcao <option>-r</option> 
+	    deve ser removida. Para mais informacoes, consulte a
+	    pagina do manual do &man.bsdlabel.8; .</para></note>
 
- 	  <para>The next step is to change the disk label type.  You
- 	    can use &man.disklabel.8; to edit the
- 	    disks:</para>
+ 	  <para>O proximo passo e mudar o tipo do rotulo do disco.
+ 	    Voce pode utilizar o &man.disklabel.8; para editar os
+	    discos:</para>
 
 	  <programlisting>disklabel -e ad1
 disklabel -e ad2
 disklabel -e ad3</programlisting>
 
- 	  <para>This opens up the current disk label on each disk with
+ 	  <para> This opens up the current disk label on each disk with
  	    the editor specified by the <envar>EDITOR</envar>
  	    environment variable, typically &man.vi.1;.</para>
 
-	  <para>An unmodified disk label will look something like
-	    this:</para>
+	  <para>Um rotulo de disco nao modificado ira se parecer com
+	  algo assim:</para>
 
 	  <programlisting>8 partitions:
 #        size   offset    fstype   [fsize bsize bps/cpg]
@@ -606,7 +614,7 @@ sh MAKEDEV ccd0</programlisting>
       </sect3>
 
       <sect3 id="vinum">
-	<title>The Vinum Volume Manager</title>
+	<title>O Gerenciador de Volume Vinum</title>
 
 <indexterm><primary>RAID</primary><secondary>software</secondary></indexterm>
 <indexterm>
@@ -614,16 +622,17 @@ sh MAKEDEV ccd0</programlisting>
   <secondary>Vinum</secondary>
 </indexterm>
 
-	<para>The Vinum Volume Manager is a block device driver which
-	  implements virtual disk drives.  It isolates disk hardware
-	  from the block device interface and maps data in ways which
-	  result in an increase in flexibility, performance and
-	  reliability compared to the traditional slice view of disk
-	  storage.  &man.vinum.8; implements the RAID-0, RAID-1 and
-	  RAID-5 models, both individually and in combination.</para>
+	<para>O Gerenciador de Volume Vinum e um driver de dispositivo 
+	de bloco que implementa disco virtuais.  Ele isola o hardware 
+	do disco da interface do driver do dispositivo de bloco e mapeia 
+	os dados de forma que resulte em um aumento de flexibilidade,
+	performance e confiabilidade comparado com a visao do
+	armazenamento de disco tradicional.  &man.vinum.8; 
+	implementa os modelos RAID-0, RAID-1 e RAID-5 , ambos 
+	individualmente e em combinacao.</para>
 
-	<para>See <xref linkend="vinum-vinum"> for more
-	  information about &man.vinum.8;.</para>
+	<para>Veja <xref linkend="vinum-vinum"> para mais 
+	  informacoes a respeito do &man.vinum.8;.</para>
       </sect3>
     </sect2>
 
@@ -635,10 +644,11 @@ sh MAKEDEV ccd0</programlisting>
 	<secondary>hardware</secondary>
       </indexterm>
 
-      <para>FreeBSD also supports a variety of hardware <acronym>RAID</acronym>
-        controllers.  These devices control a <acronym>RAID</acronym> subsystem
-        without the need for FreeBSD specific software to manage the
-        array.</para>
+      <para>O FreeBSD tambem suporta uma grande variedade de controladoras
+      <acronym>RAID</acronym>.
+        Estes dispositivos controlam um subsistema <acronym>RAID</acronym>
+        sem a necessidade para o FreeBSD de ter softwares especificos
+	para gerenciar o array.</para>
 
       <para>Using an on-card <acronym>BIOS</acronym>, the card controls most  of the disk operations
 	itself.  The following is a brief setup description using a <acronym>Promise IDE RAID</acronym>
