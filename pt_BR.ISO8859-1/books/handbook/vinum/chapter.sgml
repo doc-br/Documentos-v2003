@@ -1251,8 +1251,8 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
     <sect2>
       <title>Example of a Vinum-based Root setup</title>
 
-      <para>After the Vinum root volume has been set up, the output of
-	<command>vinum l -rv root</command> could look like:</para>
+      <para>Depois que o volume raiz do Vinum estiver ativado, a saida
+      de <command>vinum l -rv root</command> poderia parecer com:</para>
 
       <para>
 	<screen>
@@ -1271,17 +1271,18 @@ Subdisk root.p1.s0:
 	</screen>
       </para>
 
-      <para>The values to note are <literal>135680</literal> for the
-	offset (relative to partition
-	<devicename>/dev/da0h</devicename>).  This translates to 265
-	512-byte disk blocks in <command>disklabel</command>'s terms.
-	Likewise, the size of this root volume is 245760 512-byte
-	blocks.	 <devicename>/dev/da1h</devicename>, containing the
-	second replica of this root volume, has a symmetric
-	setup.</para>
+      <para>Os valores a serem notados são <literal>135680</literal>
+      para o offset (relativo à partição
+      <devicename>/dev/da0h</devicename>).  Isso traduz a 265 blocos de
+      disco de 512-byte em termos de <command>disklabel</command>.  Da
+      mesma forma, o tamanho desse volume raiz é de 245760 blocos de
+      512-byte.  <devicename>/dev/da1h</devicename>, contendo a segunda
+      réplica desse volume raiz, tem uma configuração simérica.</para>
+      
 
-      <para>The disklabel for these devices might look like:</para>
-
+      <para>O disklabel para esses dispositivos devem se parecer
+      com:</para>
+      
       <para>
 	<screen>
 ...
@@ -1293,22 +1294,24 @@ Subdisk root.p1.s0:
 	</screen>
       </para>
 
-      <para>It can be observed that the <literal>"size"</literal>
-	parameter for the faked <literal>"a"</literal> partition
-	matches the value outlined above, while the
-	<literal>"offset"</literal> parameter is the sum of the offset
-	within the Vinum partition <literal>"h"</literal>, and the
-	offset of this partition within the device (or slice).	This
-	is a typical setup that is necessary to avoid the problem
-	described in <xref linkend="vinum-root-panic">.	 It can also
-	be seen that the entire <literal>"a"</literal> partition is
-	completely within the <literal>"h"</literal> partition
-	containing all the Vinum data for this device.</para>
-
-      <para>Note that in the above example, the entire device is
-	dedicated to Vinum, and there is no leftover pre-Vinum root
-	partition, since this has been a newly set-up disk that was
-	only meant to be part of a Vinum configuration, ever.</para>
+      <para>Pode ser observado que o parâmetro <literal>"size"</literal>
+      para a partição <literal>"a"</literal> falsa bate com o valor
+      esboçado acima, enquanto o parâmetro <literal>"offset"</literal> é
+      a soma do offset dentro da partição de vinum
+      <literal>"h"</literal>, e o offset dessa partição dentro do
+      dispositivo (ou fatia).  Essa é a configuração típica necessária
+      para evitar os problemas descitos em <xref
+      linkend="vinum-root-panic">.  Pode também ser visto que toda
+      partição <literal>"a"</literal> etsá completamente dentro da
+      partição <literal>"h"</literal> contendo todos os dados do vinum
+      para esse dispositivo.</para> 
+     
+    
+      <para>Note que no exemplo acima, o dispositivo inteiro esta
+      dedicado ao vinum, e não há nenhum resto de partição raiz
+      pre-vinum, partindo de que esse foi um disco com configurações
+      novas e foi apenas pretendido a ser parte de uma configuração de
+      vinum, sempre.</para>
     </sect2>
 
     <sect2>
