@@ -74,31 +74,31 @@
       por carregar o sistema operacional. Para fazer isto, na BIOS aparece o
       hard disk para o Master Boot Record (MBR), que deve ser alocado sobre um
       local espec&iacute;fico do disco. A BIOS tem bastante mudan&ccedil;as que podem ser feitas para carregar e
-      rodar a MBR, e assume que a MBR pode ent&atilde;o carregar a saida do resto das
-      tarefas involvidas na inicializa&ccedil;&atilde;o do sistema operacional.</para>
+      rodar a MBR, e assume que a MBR pode ent&atilde;o carregar a sa&iacute;da do resto das
+      tarefas envolvidas na inicializa&ccedil;&atilde;o do sistema operacional.</para>
 
     <indexterm>
       <primary>BIOS</primary>
       <secondary>Basic Input/Output System - BIOS</secondary>
     </indexterm>
 
-    <para>Se voc&Ecirc; tiver somente um sistema operacional instalado no seu disco ent&atilde;o
+    <para>Se voc&ecirc; tiver somente um sistema operacional instalado no seu disco ent&atilde;o a
       MBR padr&atilde;o ser&aacute; suficiente. Esta MBR procurar&aacute; pela primeira parti&ccedil;&atilde;o inicializ&aacute;vel
       no disco, e entao roda o c&oacute;digo nesta parti&ccedil;&atilde;o para carregar o
       restante do sistema operacional.</para>
 
     <para>Se voc&ecirc; tiver instalado v&aacute;rios sistemas operacionais em seus discos ent&atilde;o
-      voc&ecirc; pode instalar uma MBR diferente, um que pode mostrar uma lista de
-      diferentes sistemas operacionais, e permite a voc&ecirc; escolher um para carregar.
+      voc&ecirc; pode instalar uma MBR diferente, que possa mostrar uma lista de
+      diferentes sistemas operacionais, e permitir a voc&ecirc; escolher um para carregar.
       FreeBSD vem com um MBR que pode ser instalado, e outros
       sistemas operacionais vendidos fornecem MBRs alternativos.</para>
 
-    <para>O restante do sistema bootstrap do FreeBSD e divido em tr&ecirc;s
-      est&aacute;gios. O primeiro est&aacute;gio e executado pela MBR, que sabe apenas iniciar
+    <para>O restante do sistema bootstrap do FreeBSD &eacute; divido em tr&ecirc;s
+      est&aacute;gios. O primeiro est&aacute;gio &eacute; executado pela MBR, que sabe apenas iniciar
       o computador em um estado espec&iacute;fico e rodar o segundo est&aacute;gio. O
       segundo est&aacute;gio pode fazer mais um peda&ccedil;o em pouco tempo, depois roda o terceiro est&aacute;gio.
       O terceiro est&aacute;gio terminar&aacute; a tarefa de carregar o sistema operacional. O
-      trabalho e dividido dentro destes tr&ecirc;s est&aacute;gios porque o padr&atilde;o do PC imp&otilde;e
+      trabalho &eacute; dividido dentro destes tr&ecirc;s est&aacute;gios porque o padr&atilde;o do PC imp&otilde;e
       limites sobre o tamanho dos programas que podem ser rodados nos est&aacute;gios 1 e
       2. Encadear as tarefas permite que o FreeBSD forne&ccedil;a um carregador mais
       flex&iacute;vel.</para>
@@ -106,32 +106,32 @@
     <indexterm><primary>kernel</primary></indexterm>
     <indexterm><primary><command>init</command></primary></indexterm>
 
-    <para>O kernel ent&atilde;o e inicializado &eacute; esta inicializa&ccedil;&atilde;o testa os dispositivos,
+    <para>O kernel ent&atilde;o &eacute; inicializado e come&ccedil;a a testar os dispositivos,
       e ent&atilde;o inicializa estes para o uso. Uma vez que o processo de inicializa&ccedil;&atilde;o do kernel
-      e terminado, o kernel passa o controle do processo para
+      &eacute; terminado, o kernel passa o controle do processo para
       &man.init.8;, qual se certifica que os discos est&atilde;o em um estado aproveitavel.
-      &man.init.8; come&ccedil;a ent&atilde;o a configura&ccedil;&atilde;o user-level que
-      mounta o sistema de arquivos, seta e levanta drivers de rede para comunica&ccedil;&atilde;o com
+      &man.init.8; come&ccedil;a ent&atilde;o a configura&ccedil;&atilde;o a n&iacute;vel-de-usu&aacute;rio que
+      monta o sistema de arquivos, seta e levanta drivers de rede para comunica&ccedil;&atilde;o com
       a mesma, e normalmente inicia todos os processos que
       s&atilde;o rodados sobre um sistema FreeBSD na inicializa&ccedil;&atilde;o.</para>
   </sect1>
 
   <sect1 id="boot-blocks">
-    <title>A MBR, e est&aacute;gios da inicializa&ccedil;&atilde;o Um, Dois, e Tr&ecirc;s</title>
+    <title>A MBR, e os est&aacute;gios de inicializa&ccedil;&atilde;o Um, Dois, e Tr&ecirc;s</title>
 
     <sect2 id="boot-boot0">
       <title>MBR, <filename>/boot/boot0</filename></title>
       <indexterm><primary>Master Boot Record (MBR)</primary></indexterm>
 
       <para>A MBR do FreeBSD &eacute; localizada no <filename>/boot/boot0</filename>.
-	Esta &eacute; uma <emphasis>copia</emphasis> do MBR, por que a real MBR deve
+	Esta &eacute; uma <emphasis>c&oacute;pia</emphasis> do MBR, por que a real MBR deve
 	ficar em uma parte especial do disco, fora da &aacute;rea do FreeBSD.</para>
 
       <para><filename>boot0</filename> &eacute; muito simples, visto que o
 	programa dentro da <abbrev>MBR</abbrev> pode ter no m&aacute;ximo 512 bytes.
 	Se voc&ecirc; tiver instalado na MBR o FreeBSD e instalado
-	multiplos sistemas operacionais em seu HD ent&atilde;o voc&ecirc; vera um
-	menu similar a este um na hora da inicializa&ccedil;&atilde;o:</para>
+	m&uacute;ltiplos sistemas operacionais em seu HD ent&atilde;o voc&ecirc; vera um
+	menu similar a este na hora da inicializa&ccedil;&atilde;o:</para>
 
       <example id="boot-boot0-example">
 	<title><filename>boot0</filename> Screenshot</title>
@@ -147,18 +147,18 @@ Default: F2</screen>
 
       <para>Outros sistemas operacionais, em particular &windows;&nbsp;95, tem conhecimento que
 	sobscrevem informa&ccedil;&otilde;es j&aacute; existentes na MBR com suas pr&oacute;prias. Se isto acontecer a voc&ecirc;,
-	ou voc&ecirc; queira substituir sua existente MBR com o FreeBSD MBR ent&atilde;o use
+	ou voc&ecirc; queira substituir sua MBR existente com o FreeBSD MBR ent&atilde;o use
 	o seguinte comando:</para>
 
       <screen>&prompt.root; <userinput>fdisk -B -b /boot/boot0 <replaceable>device</replaceable></userinput></screen>
 
-      <para>Como <replaceable>dispositivo</replaceable> que voc&ecirc;
+      <para>Onde <replaceable>device</replaceable> &eacute; o dispositivo que voc&ecirc;
 	carrega, como <devicename>ad0</devicename> para o primeiro disco IDE,
 	<devicename>ad2</devicename> para o primeiro disco IDE da segunda
 	controladora IDE, <devicename>da0</devicename> para o primeiro disco SCSI,
 	e assim por diante.</para>
 
-      <para>Se voc&ecirc; for um usuario Linux, entretanto, e preferir que o
+      <para>Se voc&ecirc; for um usu&aacute;rio Linux, entretanto, e preferir que o
 	<application>LILO</application> controle o processo de inicializa&ccedil;&atilde;o, voc&ecirc; pode
 	editar o arquivo <filename>/etc/lilo.conf</filename> para FreeBSD, ou
 	selecionar <option>Leave The Master Boot Record Untouched</option>
@@ -173,40 +173,40 @@ table=/dev/hdb
 loader=/boot/chain.b
 label=FreeBSD</programlisting>
 
-      <para>Qual permitir&aacute; a inicializa&ccedil;&atilde;o do FreeBSD e Linux via
+      <para>o qual permitir&aacute; a inicializa&ccedil;&atilde;o do FreeBSD e Linux via
 	<application>LILO</application>. Em outro exemplo, n&oacute;s usamos
 	<replaceable>XY</replaceable> para determinar o n&uacute;mero do drive e da
 	parti&ccedil;&atilde;o. Se estiver usando um drive <acronym>SCSI</acronym>, voc&ecirc;
 	ir&aacute; querer mudar o <replaceable>/dev/hdXY</replaceable> para leitura
 	algo similar a <replaceable>/dev/sdXY</replaceable>,
-	novamente usando a sintase <replaceable>XY</replaceable>. O
+	novamente usando a sintaxe <replaceable>XY</replaceable>. O
 	<option>loader=/boot/chain.b</option> pode ser omitido se voc&ecirc; tiver
 	ambos os sistemas operacionais na mesma parti&ccedil;&atilde;o. Voc&ecirc; pode agora rodar
 	<command>/sbin/lilo -v</command> para executar suas novas altera&ccedil;&otilde;es no
-	sistema, este deve ser verificado com messagens na tela.</para>
+	sistema, este deve ser verificado com mensagens na tela.</para>
     </sect2>
   
     <sect2 id="boot-boot1">
       <title>Est&aacute;gio Um, <filename>/boot/boot1</filename>, e Est&aacute;gio Dois,
 	<filename>/boot/boot2</filename></title>
       
-      <para>Conceitual o primeiro e segundo est&aacute;gios s&atilde;o parte do mesmo
-	programa, sobre a mesma &aacute;rea do disco. Por que do espa&ccedil;o contido
+      <para>Conceitualmente o primeiro e segundo est&aacute;gios s&atilde;o parte do mesmo
+	programa, sobre a mesma &aacute;rea do disco. Devido o espa&ccedil;o contido
 	eles foram divididos em duas partes, mas voc&ecirc; deve instal&aacute;-los juntos.</para>
 
       <para>Eles s&atilde;o encontrados no setor de inicializa&ccedil;&atilde;o, 
-	que e onde <link
+	que &eacute; onde <link
 	  linkend="boot-boot0">boot0</link>, ou alguns outros programas na
 	<abbrev>MBR</abbrev> espera encontrar um programa para rodar
 	continuar o processo de carga. O arquivo no diret&oacute;rio
-	<filename>/boot</filename> s&atilde;o copiados dos arquivos reais,
+	<filename>/boot</filename> s&atilde;o c&oacute;pias dos arquivos reais,
 	que s&atilde;o armazenados fora do sistema de arquivos do FreeBSD.</para>
 
       <para><filename>boot1</filename> &eacute; muito simples, este tamb&eacute;m pode
 	somente ter o tamanho m&aacute;ximo de 512 bytes,
 	e sabemos que justamente para o
 	<firstterm>disklabel</firstterm> do FreeBSD, com informa&ccedil;&otilde;es armazenadas
-	no silindro, para procurar e executar o <filename>boot2</filename>.</para>
+	no <foreignphrase>slice</foreignphrase>, para procurar e executar o <filename>boot2</filename>.</para>
       
       <para><filename>boot2</filename> e ligeiramente mais sofisticado, e compreende
 	bastante o sistema de arquivos do FreeBSD para procurar arquivos nele, e pode
