@@ -626,85 +626,100 @@ pseudo-device   md              # memory disk</programlisting>
     <sect2>
       <title>Instalacao de aplicativos via ports</title>
 
-      <para>Before discussing the changes necessary to successfully use the
-	ports tree, a reminder is necessary regarding the read-only nature of
-	your filesystems on the flash media.  Since they are read-only, you
-	will need to temporarily mount them read-write using the mount syntax
-	shown in <xref linkend="ro-fs">.  You should always remount those
-	filesystems read-only when you are done with any maintenance -
-	unnecessary writes to the flash media could considerably shorten its
-	lifespan.</para>
-
-      <para>To make it possible to enter a ports directory and successfully
-	run <command>make install</command>, it is necessary for the file
-	<filename>/var/db/port.mkversion</filename> to exist, and that it has
-	a correct date in it.  Further, we must create a packages directory on
-	a non-memory filesystem that will keep track of our packages across
-	reboots. Because it is necessary to mount your filesystems as
-	read-write for the installation of a package anyway, it is sensible to
-	assume that an area on the flash media can also be used for package
-	information to be written to.</para>
-
-      <para>First, create a package database directory.  This is normally in
-	<filename>/var/db/pkg</filename>, but we cannot place it there as it
-	will disappear every time the system is booted.</para>
-
+      <para>Antes de iniciar a discussao sobre as alteracoes
+	necessarias para usar com sucesso a arvore do ports, eh
+	necessario um lembrete a respeito da natureza de apenas
+	leitura do seu sistema de arquivos na sua unidade de memoria
+	flash.  Uma vez que ele e montado em modo de apenas leitura,
+	voce ira precisar monta-lo temporariamente em modo de leitura
+	e escrita usando a sintaxe de comando mostrada na sessao 
+	<xref linkend="ro-fs">.  Voce deve sempre remontar esses
+	sistemas de arquivos em modo de apenas leitura sempre que
+	finalizar qualquer tipo de manutencao - operacoes de escrita
+	desnecessarias a sua uinidade de memoria flash pode encurtar
+	conmsideravelmente a vida util da mesma.</para>
+	
+      <para>Para que seja possivel entrar no diretorio de um port e
+	executar com sucesso o comando <command>make install</command>, 
+	e necessario que o arquivo <filename>/var/db/port.mkversion
+	</filename> exista, e que contenha a data correta.  Alem
+	disso, nos precisamos criar um diretorio para os pacotes em um
+	sistema de arquivo que nao seja montado em memoria RAM, o qual
+	ira manter o registro dos nossos pacotes entre um boot e
+	outro.  Por causa disso eh necessario montar o seu sistema de
+	arquivos em modo leitura e escrita sempre que que for
+	necessario instalar algum aplicativo, de forma que eh correto
+	assumir que teremos que reservar uma area em nossa unidade
+	flash na qual as informacoes dos pacotes serao
+	gravadas.</para>
+	
+      <para>Primeiro, crie um diretorio para conter o banco de dados
+	dos pacotes.  Ele normalmente fica localizado no <filename>
+	/var/db/pkg</filename>, mas nos nao podemos coloca-lo ali, pois
+	do contrario ele ira desaparecer sempre que o sistema for
+	resetado. Desta forma precisamos coloca-lo em um local seguro,
+	por exemplo:</para>
+      
       <screen>&prompt.root; <userinput>mkdir /etc/pkg</userinput></screen>
 
-      <para>Now, add a line to <filename>/etc/rc.diskless2</filename> that
-	links the <filename>/etc/pkg</filename> directory to
-	<filename>/var/db/pkg</filename>.  An example:</para>
+      <para>Agora, adicione uma linha ao <filename>/etc/rc.diskless2
+	</filename> a qual cria um link simbolico do
+	<filename>/var/db/pkg</filename> para o diretorio 
+	<filename>/etc/pkg </filename>.  Algo como:</para>
 
       <screen>&prompt.root; <userinput>ln -s /etc/pkg /var/db/pkg</userinput></screen>
       
-      <para>Add another line in <filename>/etc/rc.diskless2</filename> that
-	creates and populates
+      <para>Adicione uma outra linha no <filename>/etc/rc.diskless2
+	</filename> a qual cria e povoa o arquivo 
 	<filename>/var/db/port.mkversion</filename></para>
 
       <screen>&prompt.root; <userinput>touch /var/db/port.mkversion</userinput>
 &prompt.root; <userinput>chmod 0644 /var/db/port.mkversion</userinput>
 &prompt.root; <userinput>echo <replaceable>20010412</replaceable> >> /var/db/port.mkversion</userinput></screen>
 
-      <para>where <replaceable>20010412</replaceable> is a date that is
-	appropriate for your particular release of FreeBSD</para>
+      <para>onde <replaceable>20010412</replaceable> deve ser a data
+	apropriada para a sua versao especifica do FreeBSD.</para>
 
-      <para>Now, any time that you mount your filesystems as read-write and
-	install a package, the <command>make install</command> will work
-	because it finds a suitable
-	<filename>/var/db/port.mkversion</filename>, and package information
-	will be written successfully to <filename>/etc/pkg</filename> (because
-	the filesystem will, at that time, be mounted read-write) which will
-	always be available to the operating system as
-	<filename>/var/db/pkg</filename>.</para>
+      <para>Agora, sempre que voce montar o seu sistema de arquivo em
+      	modo de leitura e escrita e instalar um pacote, o comando 
+	<command>make install</command> ira funcionar corretamente,
+	pois ele ira encontrar um <filename>/var/db/port.mkversion
+	</filename> adequado, e as informacoes do pacote serao
+	gravadas com sucesso no <filename>/etc/pkg</filename> (porque
+	o sistema de arquivo estara, neste momento, montado em modo de
+	leitura e escrita) o qual estara sempre disponivel para o
+	sistema operacional como <filename>/var/db/pkg</filename>.</para>
     </sect2>
 
     <sect2>
       <title>Web Server Apache</title>
 
-      <para>Apache keeps pid files and logs in
+      <para>O apache mantem seus arquivos de processo (pids) e logs no
 	<filename><replaceable>apache_install</replaceable>/logs</filename>.
-	Since this directory doubtless exists on a read-only filesystem, this
-	will not work.  It is necessary to add a new directory to the
-	<filename>/etc/rc.diskless2</filename> list of directories to create
-	in <filename>/var</filename>, to link
-	<filename><replaceable>apache_install</replaceable>/logs</filename> to
-	<filename>/var/log/apache</filename>.  It is also necessary to set
-	permissions and ownership on this new directory.</para>
+	Uma vez que este diretorio fica localizado no sistema de
+	arquivo montado em modo de apenas leitura, ele nao ira
+	funcionar.  E necessario adicionar um novo diretorio a lista
+	de diretorios que o <filename>/etc/rc.diskless2</filename>
+	cria no <filename>/var</filename>, para linkar o  
+	<filename><replaceable>apache_install</replaceable>/logs</filename>
+	para o <filename>/var/log/apache</filename>.  Tambem sera 
+	necessario configurar as permissoes e o proprietario deste
+	novo diretorio.</para>
 
-      <para>First, add the directory <literal>log/apache</literal> to the list
-	of directories to be created in
+      <para>Primeiro, adicione o diretorio <literal>log/apache</literal> 
+	a lista de diretorios a serem criados pelo 
 	<filename>/etc/rc.diskless2</filename>.</para>
       
-      <para>Second, add these commands to
-	<filename>/etc/rc.diskless2</filename> after the directory creation
-	section:</para>
+      <para>Segundo, adicione os comandos abaixo ao 
+	<filename>/etc/rc.diskless2</filename> logo depois da sessao 
+	de criacao dos diretorios:</para>
 
       <screen>&prompt.root; <userinput>chmod 0774 /var/log/apache</userinput>
 &prompt.root; <userinput>chown nobody:nobody /var/log/apache</userinput></screen>
 
-      <para>Finally, remove the existing
-	<filename><replaceable>apache_install</replaceable>/logs</filename>
-	directory, and replace it with a link:</para>
+      <para>Finalmente, remova o diretorio <filename><replaceable>apache_install
+	</replaceable>/logs</filename>, e o substitua por um link
+	simbolico:</para>
 
       <screen>&prompt.root; <userinput>rm -rf (apache_install)/logs</userinput>
 &prompt.root; <userinput>ln -s /var/log/apache (apache_install)/logs</userinput></screen>
