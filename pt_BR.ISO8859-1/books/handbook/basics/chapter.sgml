@@ -2148,91 +2148,98 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
     </informaltable>
 
     <indexterm><primary>Bourne shells</primary></indexterm>
-    <para>Setting an environment variable differs somewhat from
-      shell to shell.  For example, in the C-Style shells such as
-      <command>tcsh</command> and <command>csh</command>, you would use
-      <command>setenv</command> to set environment variables.
-      Under Bourne shells such as <command>sh</command> and
-      <command>bash</command>, you would use
-      <command>export</command> to set your current environment
-      variables.  For example, to set or modify the
-      <envar>EDITOR</envar> environment variable, under <command>csh</command> or 
-      <command>tcsh</command> a
-      command like this would set <envar>EDITOR</envar> to
-      <filename>/usr/local/bin/emacs</filename>:</para>
+    <para>Ajustar as variáveis de ambiente é tarefa que se
+	difere de algumas formas entre as várias <foreignphrase>shells</foreignphrase>
+	disponíveis.  Por exemplo, nas <foreignphrase>shells</foreignphrase>
+	baseadas nalinguagem C, como o <command>tcsh</command> e
+	o <command>csh</command>, você usaria o <command>setenv</command>
+	para justar as variáveis de ambiente.  Sobre um interpretador
+	estilo <foreignphrase>Bourne shell</foreignphrase> como o
+	próprio <command>sh</command> e o conhecido <command>bash</command>,
+	você usaria o <command>export</command> para definir a variável
+	de ambiente.  Por exemplo, para definir ou modificar o valor da
+	variável de ambiente <envar>EDITOR</envar>, sob <command>csh</command> ou 
+	<command>tcsh</command>, para definir a variável
+	<envar>EDITOR</envar> com o valor
+	<filename>/usr/local/bin/emacs</filename>, você faria
+	algo como:</para>
 
     <screen>&prompt.user; <userinput>setenv EDITOR /usr/local/bin/emacs</userinput></screen>
 
-    <para>Under Bourne shells:</para>
+    <para>Enquanto sob uma <foreignphrase>Bourne shell</foreignphrase> seria:</para>
 
     <screen>&prompt.user; <userinput>export EDITOR="/usr/local/bin/emacs"</userinput></screen>
 
-    <para>You can also make most shells expand the environment variable by
-      placing a <literal>$</literal> character in front of it on the
-      command line.  For example, <command>echo $TERM</command> would
-      print out whatever <envar>$TERM</envar> is set to, because the shell
-      expands <envar>$TERM</envar> and passes it on to <command>echo</command>.</para>
+    <para>Ainda é possível fazer a maioria dos interpretadores expandirem
+	a variável, simplesmente adicionado o carácter
+	<literal>$</literal> na frente da própria variável.  Por exemplo,
+	<command>echo $TERM</command> imprimiria todo o conteúdo da variável
+	<envar>$TERM</envar>, por quê o interpretador interpreta a variável
+	<envar>$TERM</envar> como seu valor, e o passa para o <command>echo</command>.</para>
 
-    <para>Shells treat a lot of special characters, called meta-characters
-      as special representations of data.  The most common one is the
-      <literal>*</literal> character, which represents any number of
-      characters in a filename.  These special meta-characters can be used
-      to do filename globbing.  For example, typing in
-      <command>echo *</command> is almost the same as typing in
-      <command>ls</command> because the shell takes all the files that
-      match <literal>*</literal> and puts them on the command line for
-      <command>echo</command> to see.</para>
+    <para>Os interpretadores de comandos cuidam ainda de uma série
+	de caracteres especiais, chamados de meta-caracteres,
+	como representações especiais de dados.  O caracter mais comum
+	é o <literal>*</literal>, que representa qualquer conjunto de caracteres
+	em um nome de arquivo.  Os meta-caractéres especiais podem
+	ser usados como substituição de arquivos.  Por exemplo,
+	o comando <command>echo *</command> tem resultado similar à saída
+	de um <command>ls</command> pois o interpretador de comandos pega
+	todos os arquivos que batem com <literal>*</literal> e os coloca na
+	linha de comando de forma que o <command>echo</command> possa
+	encherga-los.</para>
 
-    <para>To prevent the shell from interpreting these special characters,
-      they can be escaped from the shell by putting a backslash
-      (<literal>\</literal>) character in front of them.  <command>echo
-      $TERM</command> prints whatever your terminal is set to.
-      <command>echo \$TERM</command> prints <envar>$TERM</envar> as
-      is.</para>
+    <para>Para evitar que a <foreignphrase>shell</foreignphrase> 
+	interprete estes caracteres especiais, pode-se utiliza-los
+	como exclusão, inserindo uma barra invertinda (<literal>\</literal>)
+	na frente deles. <command>echo $TERM</command> imprime em que 
+	terminal você está, enquanto <command>echo \$TERM</command>
+	imprime <envar>$TERM</envar> exatamente.</para>
 
     <sect2 id="changing-shells">
-      <title>Changing Your Shell</title>
+      <title>Modificando sua <foreignphrase>Shell</foreignphrase></title>
 
-      <para>The easiest way to change your shell is to use the
-	<command>chsh</command> command.  Running <command>chsh</command> will
-	place you into the editor that is in your <envar>EDITOR</envar>
-	environment variable; if it is not set, you will be placed in
-	<command>vi</command>.  Change the <quote>Shell:</quote> line
-	accordingly.</para>
+      <para>A forma mais fácil de modificar seu interpretador de
+	comandos é usar o comando <command>chsh</command>.  Executar o
+	<command>chsh</command> te colocará no editor definido
+	na variável de ambiente <envar>EDITOR</envar>; se esta variável
+	não estiver definida, você será colocado no <command>vi</command>.
+	Modifique a linha <quote>Shell:</quote> de acordo
+	com suas necessidades.</para>
 
-      <para>You can also give <command>chsh</command> the
-	<option>-s</option> option; this will set your shell for you,
-	without requiring you to enter an editor.  
-	For example, if you wanted to
-	change your shell to <command>bash</command>, the following should do the
-	trick:</para>
+      <para>Você pode ainda usar o <command>chsh</command> com
+	a opção <option>-s</option>; assim você pode ajustar sua
+	<foreignphrase>shell</foreignphrase> sem entrar no editor.
+	Por exemplo, se a intenção era modificar
+	seu interpretador para usar o <command>bash</command>,
+	o truqye pode ser feito da seguinte forma:</para>
 	
       <screen>&prompt.user; <userinput>chsh -s /usr/local/bin/bash</userinput></screen>
 
-      <para>Running <command>chsh</command> with no parameters and editing
-	the shell from there would work also.</para>
+      <para>Utilizar o <command>chsh</command> sem parâmetros e editar a
+	<foreignphrase>shell</foreignphrase> também funcionaria.</para>
 
       <note>
-	<para>The shell that you wish to use <emphasis>must</emphasis> be
-	  present in the <filename>/etc/shells</filename> file.  If you
-	  have installed a shell from the <link linkend="ports">ports
-	  collection</link>, then this should have been done for you
-	  already.  If you installed the shell by hand, you must do
-	  this.</para>
+	<para>O interpretador de comandos que você deseja
+	utilizar <emphasis>deve</emphasis> estar listado no
+	arquivo <filename>/etc/shells</filename>.  Se você
+	instalou o interpretador à partir da
+	<link linkend="ports">Coleção de Ports</link>, isso já foi
+	feito.  Se você instalou na mão, você mesmo deve faze-lo.</para>
      
-      <para>For example, if you installed <command>bash</command> by hand
-	and placed it into <filename>/usr/local/bin</filename>, you would
-	want to:</para>
+      <para>Por exemplo, se você instalou o <command>bash</command>
+	manualmente e o colocou no <filename>/usr/local/bin</filename>,
+	você vai querer fazer o seguinte:</para>
 
       <screen>&prompt.root; <userinput>echo &quot;/usr/local/bin/bash&quot; &gt;&gt; /etc/shells</userinput></screen>
 
-       <para>Then rerun <command>chsh</command>.</para>
+       <para>Em seguida, execute novamente o <command>chsh</command>.</para>
      </note>
    </sect2>
   </sect1>
 
   <sect1 id="editors">
-    <title>Text Editors</title>
+    <title>Editores de Texto</title>
     <indexterm><primary>text editors</primary></indexterm>
     <indexterm><primary>editors</primary></indexterm>
 
