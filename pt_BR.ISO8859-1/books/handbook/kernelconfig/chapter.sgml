@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.23 2003/12/10 16:21:19 surf Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.24 2003/12/10 19:56:56 surf Exp $
 -->
 
 <chapter id="kernelconfig">
@@ -1252,35 +1252,34 @@ pseudo-device   pty           # Pseudo-ttys (telnet etc)</programlisting>
     <programlisting>pseudo-device   gif     4     # IPv6 and IPv4 tunneling</programlisting>
 
     <para>Isto implementa IPv6 sobre IPv4 tunneling, IPv4 over IPv6 tunneling,
-      IPv4 over IPv4 tunneling, and IPv6 over IPv6 tunneling.  Beginning with
-      &os;&nbsp;4.4 the <literal>gif</literal> device is
-      <quote>auto-cloning</quote>, and you should use the first example
-      (without the number after <literal>gif</literal>).  Earlier versions of
-      &os; require the number.</para>
+      IPv4 sobre IPv4 tunneling, e IPv6 sobre IPv6 tunneling. Começando com
+      &os;&nbsp;4.4 o <literal>gif</literal> dispositivo é
+      <quote>auto-cloning</quote>, e você deve usar o primeiro exemplo
+      (sem o número depois do <literal>gif</literal>). Versões mais avançadas do
+      &os; requerem o número.</para>
 
     <programlisting>pseudo-device   faith   1     # IPv6-to-IPv4 relaying (translation)</programlisting>
 
-    <para>This pseudo-device captures packets that are sent to it and
-      diverts them to the IPv4/IPv6 translation daemon.</para>
+    <para>Esta pseudo-device captura os pacotes que são emitidos e
+      desvía-os ao daemon da tradução IPv4/IPv6.</para>
 
-    <programlisting># The `bpf' pseudo-device enables the Berkeley Packet Filter.
-# Be aware of the administrative consequences of enabling this!
+    <programlisting># O `bpf' pseudo-device permite o filtro de pacotes Berkeley.
+# Esteja ciente das consequencias administrativas ao habilitar isto!
 pseudo-device   bpf           # Berkeley packet filter</programlisting>
 
-    <para>This is the Berkeley Packet Filter.  This pseudo-device allows
-      network interfaces to be placed in promiscuous mode, capturing every
-      packet on a broadcast network (e.g., an Ethernet).  These packets
-      can be captured to disk and or examined with the &man.tcpdump.1;
-      program.</para>
+    <para>Este é o filtro de pacotes  Berkeley. Esta pseudo-device permite
+      que as interfaces da rede sejam colocadas em modo promiscuous, capturando cada
+      pacote sobre um broadcast da rede (por exemplo uma Ethernet). Estes pacotes
+      podem ser capturados para disco e ou examinados com o programa &man.tcpdump.1;.</para>
 
     <note>
-      <para>The <literal>bpf pseudo-device</literal> is also used by
-	&man.dhclient.8; to obtain the IP address of the default router
-	(gateway) and so on.  If you use DHCP, leave this
-	uncommented.</para>
+      <para>O <literal>bpf pseudo-device</literal> é usado também por
+	&man.dhclient.8; para obter o endereço IP de roteador padrão
+	(gateway) e assim por diante. Se você usa DHCP, deixe isto
+	descomentado.</para>
     </note>
 
-    <programlisting># USB support
+    <programlisting># Suporte USB
 #device         uhci          # UHCI PCI-&gt;USB interface
 #device         ohci          # OHCI PCI-&gt;USB interface
 #device         usb           # USB Bus (required)
@@ -1295,10 +1294,10 @@ pseudo-device   bpf           # Berkeley packet filter</programlisting>
 #device         cue           # CATC USB ethernet
 #device         kue           # Kawasaki LSI USB ethernet</programlisting>
 
-    <para>Support for various USB devices.</para>
+    <para>Suporte para varios dispositivos USB.</para>
 
-    <para>For more information and additional devices supported by
-      &os;, see
+    <para>Para maiores e adicionais informações sobre dispositivos suportados pelo 
+      &os;, veja
       <filename>/usr/src/sys/i386/conf/LINT</filename>.</para>
 
       <sect2>
