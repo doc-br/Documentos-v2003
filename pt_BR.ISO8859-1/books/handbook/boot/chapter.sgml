@@ -208,14 +208,14 @@ label=FreeBSD</programlisting>
 	<firstterm>disklabel</firstterm> do FreeBSD, com informa&ccedil;&otilde;es armazenadas
 	no <foreignphrase>slice</foreignphrase>, para procurar e executar o <filename>boot2</filename>.</para>
       
-      <para><filename>boot2</filename> e ligeiramente mais sofisticado, e compreende
+      <para><filename>boot2</filename> &eacute; ligeiramente mais sofisticado, e compreende
 	bastante o sistema de arquivos do FreeBSD para procurar arquivos nele, e pode
-	fornecer uma simples interface para escolher o kernel ou o carregador para
+	fornecer uma rela&ccedil;&atilde;o simples para escolher o kernel ou o carregador para
 	executar.</para>
 
       <para>Desde o <link linkend="boot-loader">carregador</link>
 	mais sofisticado, &eacute; forncecido uma boa ajuda na
-	configuracao de inicializacao, <filename>boot2</filename> usualmente executa
+	configura&ccedil;&atilde;o de inicializa&ccedil;&atilde;o, <filename>boot2</filename> usualmente executa
 	isto, mas previamente isto
 	era tarefa para executar diretamente no kernel.</para>
 
@@ -233,7 +233,7 @@ boot:</screen>
       
       <screen>&prompt.root; <userinput>disklabel -B <replaceable>diskslice</replaceable></userinput></screen>
 
-      <para>Onde <replaceable>diskslice</replaceable> &eacute; o disco e silindro
+      <para>Onde <replaceable>diskslice</replaceable> &eacute; o disco e <foreignphrase>slice</foreignphrase>
 	da sua inicializa&ccedil;&atilde;o, tal como <devicename>ad0s1</devicename> para o primeiro
 	HD sobre a IDE.</para>
 
@@ -241,8 +241,8 @@ boot:</screen>
 	<title>Modalidade Perigosamente Dedicada</title>
 
 	<para>Se voc&ecirc; usar apenas o nome do disco, tal como
-	  <devicename>ad0</devicename>, no &man.disklabel.8; comando voc&ecirc;
-	  ira criar um disco perigosamente dedicado, sem parti&ccedil;&otilde;es. Isto n&atilde;o
+	  <devicename>ad0</devicename>, no comando &man.disklabel.8; voc&ecirc;
+	  ir&aacute; criar um disco perigosamente dedicado, sem parti&ccedil;&otilde;es. Isto n&atilde;o
 	  devera ser o que voc&ocirc; quer fazer, assim que voc&ecirc; verificar o dobro
 	  do &man.disklabel.8; depois voc&ecirc; dever&aacute; pressionar
 	  <keycap>Return</keycap>.</para>
@@ -250,40 +250,40 @@ boot:</screen>
     </sect2>
 
   <sect2 id="boot-loader">
-    <title>Est&aacute;gio tres, <filename>/boot/loader</filename></title>
+    <title>Est&aacute;gio tr&ecirc;s, <filename>/boot/loader</filename></title>
 
     <indexterm><primary>boot-loader</primary></indexterm>
-    <para>A inicializa&ccedil;&atilde;o e o est&aacute;gio final dos tres-est&aacute;gios
+    <para>A inicializa&ccedil;&atilde;o e o est&aacute;gio final dos tr&ecirc;s-est&aacute;gios
       de bootstrap, &eacute; localizado no sistema de arquivos, usualmente como
       <filename>/boot/loader</filename>.</para>
       
-    <para>A inicializacao e usada como um metodo amig&aacute;vel para
+    <para>A inicializa&ccedil;&atilde;o &eacute; usada como um m&eacute;todo amig&aacute;vel para
       configura&ccedil;&atilde;o, usando um jogo de comandos internos f&aacute;cil-para-usar,
       voltado por um interpretador mais poderoso, com um jogo de comandos mais complexo.</para> 
 
     <sect3 id="boot-loader-flow">
       <title>Fluxo de programa do carregador</title>
       
-      <para>Durante a initializa&ccedil;&atilde;o, o carregador sodar&aacute; para uma
-	console e para discos, e figura de saida de que os discos s&atilde;o 
+      <para>Durante a initializa&ccedil;&atilde;o, o carregador sondar&aacute; para um
+	console e para discos, e figura de sa&iacute;da de que os discos s&atilde;o 
 	carregados. Isto setar&aacute; vari&aacute;veis conformemente, e um
-	interpretador e iniciado onde os comandos do usu&aacute;rio podem ser passados de 
+	interpretador &eacute; iniciado onde os comandos do usu&aacute;rio podem ser passados de 
         um script ou interativamente.</para>
       <indexterm><primary>carregados</primary></indexterm>
       <indexterm><primary>carregados na configura&ccedil;&atilde;o</primary></indexterm>
 
-      <para>Ent&atilde;o o carregador ler&aacute; ent&atilde;o o
-	<filename>/boot/loader.rc</filename>, que por padr&atilde;o le
+      <para>Ent&atilde;o o carregador ir&aacute; ler o
+	<filename>/boot/loader.rc</filename>, que por padr&atilde;o l&ecirc;
 	dentro de  <filename>/boot/defaults/loader.conf</filename> que
-	seta padr&otilde;es para vari&aacute;veis e leen em 
-	<filename>/boot/loader.conf</filename> as mudan&ccedil;a destas vari&aacute;veis locais.
-	<filename>loader.rc</filename> eles atuam
+	seta padr&otilde;es para vari&aacute;veis e leem o 
+	<filename>/boot/loader.conf</filename> para as mudan&ccedil;a destas vari&aacute;veis locais.
+	<filename>loader.rc</filename> age ent&atilde;o
 	sobre estas vari&aacute;veis, carregando qualquer m&oacute;dulo e kernel que s&atilde;o
 	selecionados.</para>
 
-      <para>Finalmente, por padr&atilde;o, o carregador emite uma espera de  10 segundos
-	para precionar alguma tecla, e carregar o kernel se este n&atilde;o for interrompido.
-	Se interrompido, ao usu&aacute;rio &eacute; apresentado um alerta no prompt que e para
+      <para>Finalmente, por padr&atilde;o, o carregador emite uma espera de 10 segundos
+	para pressionar alguma tecla, e carregar o kernel se este n&atilde;o for interrompido.
+	Se interrompido, ao usu&aacute;rio &eacute; apresentado um alerta no prompt que &eacute; para
 	entender o help do comando setado, onde o usu&aacute;rio pode
 	ajustar vari&aacute;veis, descarregar todos os m&oacute;dulos, carregar m&oacute;dulos, e eles
 	finalmente carregar ou reiniciar.</para>
@@ -293,18 +293,18 @@ boot:</screen>
     <sect3 id="boot-loader-commands">
       <title>Comandos Carregando e Compilando</title>
       
-      <para>Estes s&atilde;o os comandos mais comum usados na carga do sistema. Para uma
+      <para>Estes s&atilde;o os comandos mais comuns usados no carregamento do sistema. Para uma
         completa discuss&atilde;o de todas avalia&ccedil;&otilde;es dos comandos, por favor veja
         &man.loader.8;.</para>
 
       <variablelist>
 	<varlistentry>
-	  <term>auto carregamento <replaceable>segundos</replaceable></term>
+	  <term>autoboot <replaceable>seconds</replaceable></term>
 
 	  <listitem>
 	    <para>O processo de carregamento do kernel n&atilde;o &eacute; interrompido
 	      durante o tempo concedido, em segundos. Isto mostra uma
-	      contagem regrassiva, e o tempo padr&atilde;o concedido e 10
+	      contagem regrassiva, e o tempo padr&atilde;o concedido &eacute; 10
 	      segundos.</para>
 	  </listitem>
 	</varlistentry>
@@ -317,7 +317,7 @@ boot:</screen>
 	  <listitem>
 	    <para>Imediatamente o processo de carregamento do kernel, com as
 	      op&ccedil;&otilde;es dadas, se existir, e com o nome do kernel dado,
-	      se isto for.</para>
+	      se for.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -329,7 +329,7 @@ boot:</screen>
 	      m&oacute;dulos baseados em vari&aacute;veis como que acontece no boot.
 	      Isto somente faz sentido se voc&ecirc; primeiramente
 	      <command>descarregar</command>, e alterar algumas
-	      vari&aacute;veis, do <envar>kernel</envar> mais frequente.</para>
+	      vari&aacute;veis, do <envar>kernel</envar> mais freq&uuml;ente.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -338,10 +338,10 @@ boot:</screen>
 	    <optional><replaceable>t&oacute;pico</replaceable></optional></term>
 
 	  <listitem>
-	    <para>Mensagens de ajuda soa lidas em
+	    <para>Mensagens de ajuda s&atilde;o lidas em
 	      <filename>/boot/loader.help</filename>. Se o t&oacute;pico
 	      dado for <literal>index</literal>, ent&atilde;o a lista de
-	      t&oacute;picos dispon&iacute;veis e dada.</para>
+	      t&oacute;picos dispon&iacute;veis &eacute; dada.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -352,7 +352,7 @@ boot:</screen>
 	  <listitem>
 	    <para>Processa o arquivo com o nome dado ao mesmo. O
 	      arquivos &eacute; lido, e interpretado linha por linha. Um
-	      erro immediatamente para o comando de inclus&atilde;o.</para>
+	      erro imediatamente para o comando de inclus&atilde;o.</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
@@ -361,8 +361,8 @@ boot:</screen>
 	    <replaceable>filename</replaceable></term>
 
 	  <listitem>
-	    <para>Carregar o kernel, kernel modular, ou arquivo do
-	      tipo preparado, com o nome dado. Alguns argumentos
+	    <para>Carrega o kernel, o m&oacute;dulo do kernel, ou arquivo do
+	      tipo dado, com o nome dado. Todos argumentos
 	      depois do nome do arquivo s&atilde;o passados para o arquivo.</para>
 	  </listitem>
 	</varlistentry>
@@ -372,8 +372,8 @@ boot:</screen>
 
 	  <listitem>
 	    <para>Mostra uma lista de arquivos dentro dos caminhos dados, ou
-	      o diret&oacute;rio do root, se o caminho n&atilde;o &eacute; especificado. Se &eacute; especificado
-	      <option>-l</option>, tamanho do arquivo ser&aacute;
+	      o diret&oacute;rio do root, se o caminho n&atilde;o &eacute; especificado. Se <option>-l</option>, 
+              &eacute; especificada o tamanho do arquivo ser&aacute;
 	      mostrado tamb&eacute;m.</para>
 	  </listitem>
 	</varlistentry>
@@ -441,7 +441,7 @@ boot:</screen>
       <itemizedlist>
 	<indexterm><primary>single-user mode</primary></indexterm>
 	<listitem>
-	  <para>Para simplesmente carregar seu kernel usual, mas em modo usuario-singular:</para>
+	  <para>Para simplesmente carregar seu kernel usual, mas em modo mono-usu&aacute;rio:</para>
 
 	  <screen><userinput>boot -s</userinput></screen>
 	</listitem>
@@ -490,10 +490,10 @@ boot:</screen>
       <secondary>intera&ccedil;&atilde;o do boot</secondary>
     </indexterm>
     
-    <para>Uma vez que o kernel e carregado pelo either <link
+    <para>Uma vez que o kernel &eacute; carregado pelo carregador <link
 	linkend="boot-loader">loader</link> (como usado) ou <link
 	linkend="boot-boot1">boot2</link> (passando o carregador), isto
-      examina suas boot flags, se existir, e ajusta seu comportamento como
+      examina suas op&ccedil;&atilde;o de boot, se existir, e ajusta seu comportamento como
       necess&aacute;rio.</para>
 
     <sect2 id="boot-kernel-bootflags">
@@ -503,7 +503,7 @@ boot:</screen>
       </indexterm>
       <title>Kernel Boot Flags</title>
 
-      <para>Est&atilde;o aqui as boot flags mais comuns:</para>
+      <para>Est&atilde;o aqui as op&ccedil;&atilde;o de boot mais comuns:</para>
 
       <variablelist id="boot-kernel-bootflags-list">
 	<varlistentry>
@@ -535,7 +535,7 @@ boot:</screen>
 	  <term><option>-s</option></term>
 
 	  <listitem>
-	    <para>boot dentro usando o modo single-user</para>
+	    <para>boot em modo mono-usu&aacute;rio</para>
 	  </listitem>
 	</varlistentry>
 
@@ -549,12 +549,12 @@ boot:</screen>
       </variablelist>
 
       <note>
-	<para>Existem outras boot flags, leia &man.boot.8; para maiores
+	<para>Existem outras op&ccedil;&atilde;oes de boot, leia &man.boot.8; para maiores
 	  informa&ccedil;&otilde;es sobre elas.</para></note>
     </sect2>
 
 <!--    <sect2 id="boot-kernel-userconfig">
-      <title>UserConfig: o configurador do  Boot-time do Kernel</title>
+      <title>UserConfig: o configurador do Boot-time do Kernel</title>
       
       <para> </para>
     </sect2> -->
@@ -594,7 +594,7 @@ boot:</screen>
       inicializa&ccedil;&atilde;o.</para>
 
     <para>Uma vez que o sistema &eacute; carregado, o comando &man.kenv.1; pode ser usado para
-      dump de todas as vari&aacute;veis.</para>
+      obter todas as vari&aacute;veis.</para>
 
     <para>A sintaxe para o arquivo <filename>/boot/device.hints</filename> &eacute; uma vari&aacute;vel por linha, usando
       a mistura padr&atilde;o <quote>#</quote> como marcadores do coment&aacute;rio. Linhas s&atilde;o
@@ -602,20 +602,20 @@ boot:</screen>
 
     <screen><userinput>hint.driver.unit.keyword="<replaceable>value</replaceable>"</userinput></screen>
 
-    <para>A sintaxe para o est&aacute;gio 3 do boot loader e:</para>
+    <para>A sintaxe para o est&aacute;gio 3 do boot loader &eacute;:</para>
     <screen><userinput>set hint.driver.unit.keyword=<replaceable>value</replaceable></userinput></screen>
 
     <para><literal>driver</literal> &eacute; o nome do dispositivo, <literal>unit</literal>
-      &eacute; o numero do driver dispositivo, e <literal>keyword</literal> &eacute; a sugest&atilde;o
+      &eacute; o n&uacute;mero do driver do dispositivo, e <literal>keyword</literal> &eacute; a sugest&atilde;o
       keyword. O keyword pode consistir nas seguintes op&ccedil;&otilde;es:</para>
 
     <itemizedlist>
       <listitem>
-	<para><literal>at</literal>: especifica o dispositivo para o qual e anexado.</para>
+	<para><literal>at</literal>: especifica o dispositivo para o qual &eacute; anexado.</para>
       </listitem>
 
       <listitem>
-	<para><literal>port</literal>: especifica o endere&ccedil;o de inicio do <acronym>I/O</acronym>
+	<para><literal>port</literal>: especifica o endere&ccedil;o de in&iacute;cio do <acronym>I/O</acronym>
 	  para ser usado.</para>
       </listitem>
 
@@ -633,7 +633,7 @@ boot:</screen>
       </listitem>
 
       <listitem>
-	<para><literal>flags</literal>: seta varia&ccedil;&otilde;es de bits de flags para o dispositivos.</para>
+	<para><literal>flags</literal>: seta varia&ccedil;&otilde;es de bits de op&ccedil;&otilde;es para o dispositivos.</para>
       </listitem>
 
       <listitem>
@@ -642,9 +642,8 @@ boot:</screen>
     </itemizedlist>
 
     <para>Os drivers do dispositivo podem ou n&atilde;o aceitar (se requerido) mais hints n&atilde;o listadas aqui, veja
-      a p&aacute;gina do manual deles &eacute; recomendado. Para maiores informa&ccedil;&otilde;es, consulte o
-      &man.device.hints.5;, &man.kenv.1;, &man.loader.conf.5;, e &man.loader.8;
-      p&aacute;ginas de manuais.</para>
+      a p&aacute;gina do manual deles &eacute; recomendado. Para maiores informa&ccedil;&otilde;es, consulte as p&aacute;ginas
+      de manuais &man.device.hints.5;, &man.kenv.1;, &man.loader.conf.5;, e &man.loader.8;.</para>
   </sect1>
 
   <sect1 id="boot-init">
@@ -666,36 +665,36 @@ boot:</screen>
 	sistema de arquivos dispon&iacute;veis sobre o sistema s&atilde;o consistentes. Se eles
 	n&atilde;o s&atilde;o, &man.fsck.8; e n&atilde;o podem reparar
 	as inconsist&ecirc;ncias, &man.init.8; deixe o sistema
-	em <link linkend="boot-singleuser">modo single-user</link>
+	em <link linkend="boot-singleuser">modo mono-usu&aacute;rio</link>
 	para que o administrador do sistema tome cuidado dos problemas
 	diretamente.</para>
     </sect2>
 
     <sect2 id="boot-singleuser">
-      <title>Single-User Mode</title>
+      <title>Modo Mono-usu&aacute;rio</title>
       <indexterm><primary>single-user mode</primary></indexterm>
       <indexterm><primary>console</primary></indexterm>
       
       <para>Este modo pode ser acessado <link
 	  linkend="boot-autoreboot">automaticamente na sequ&ecirc;ncia da reinicializa&ccedil;&atilde;o
 	  </link>, ou pelo usu&aacute;rio na inicializa&ccedil;&atilde;o com a op&ccedil;&atilde;o
-	<option>-s</option> ou configura&ccedil;&atilde;o do
-	<envar>boot_single</envar> vari&aacute;vel dentro do
+	<option>-s</option> ou setando a vari&aacute;vel
+	<envar>boot_single</envar> dentro do
 	<command>loader</command>.</para>
 
       <para>Isto pode ser utilizado chamando
 	&man.shutdown.8; sem utilizar as op&ccedil;&otilde;es de rebootar
 	(<option>-r</option>) ou parar (<option>-h</option>),
-	do <link linkend="boot-multiuser">modo multi-user
+	do <link linkend="boot-multiuser">modo multi-usu&aacute;rio
 	 </link>.</para>
 
-      <para>Se a <literal>console</literal> do sistema for setada
+      <para>Se o <literal>console</literal> do sistema for setada
 	para <literal>insecure</literal> em <filename>/etc/ttys</filename>,
-	ent&atilde;o os prompts do sistema depois do password do <username>root</username>
-	e inicializado o modo single-user.</para>
+	ent&atilde;o o sistema alerta para a senha de <username>root</username>
+	antes de inicializar em modo mono-usu&aacute;rio.</para>
 
       <example id="boot-insecure-console">
-	<title>Um Insecure Console em <filename>/etc/ttys</filename></title>
+	<title>Um Console Insecure em <filename>/etc/ttys</filename></title>
 
 	<programlisting># name  getty                           type    status          comments
 #
@@ -705,10 +704,10 @@ console none                            unknown off insecure</programlisting>
       </example>
 
       <note>
-	<para>Uma console <literal>insecure</literal> significa que voc&ecirc;
+	<para>Um console <literal>insecure</literal> significa que voc&ecirc;
 	  considera sua seguran&ccedil;a f&iacute;sica para a console ser
-	  insecure, e quiser para fazer isto somente quem saiba a senha do
-	  <username>root</username> pode usar o modo single-user, e isto
+	  insecure, e quer certificar que somente &aacute;lguem que saiba a senha de
+	  <username>root</username> pode usar o modo mono-usu&aacute;rio, e isto
 	  n&atilde;o significa que voc&ecirc; pode rodar sua console insecurely. Assim,
 	  se voc&ecirc; quiser seguran&ccedil;a, escolha <literal>insecure</literal>,
 	  n&atilde;o <literal>secure</literal>.</para>
@@ -716,33 +715,32 @@ console none                            unknown off insecure</programlisting>
     </sect2>
     
     <sect2 id="boot-multiuser">
-      <title>Multi-User Mode</title>
+      <title>Modo Multi-Usu&aacute;rio</title>
       <indexterm><primary>multi-user mode</primary></indexterm>
       
       <para>Se &man.init.8; encontra seus arquivos de sistema para ser
 	em ordem, ou uma vez que o usu&aacute;rio terminou em <link
-	  linkend="boot-singleuser">modo single-user</link>, o
-	sistema entra em modo  multi-user, onde come&ccedil;a a
+	  linkend="boot-singleuser">modo mono-usu&aacute;rio</link>, o
+	sistema entra em modo  multi-usu&aacute;rio, onde come&ccedil;a a
 	configura&ccedil;&atilde;o dos recursos do sistema.</para>
 
       <sect3 id="boot-rc">
       <indexterm><primary>arquivos rc</primary></indexterm>
-	<title>Recursos de Configura&ccedil;&atilde;o (rc)</title>
+	<title>Configura&ccedil;&atilde;o de recursos (rc)</title>
 
-	<para>O recurso de configura&ccedil;&atilde;o do sistema le dentro
+	<para>O sistema de configura&ccedil;&atilde;o de recurso l&ecirc; as
 	  configura&ccedil;&otilde;es padr&otilde;es do
 	  <filename>/etc/defaults/rc.conf</filename>, e o
 	  sistema-especifica detalhes do
 	  <filename>/etc/rc.conf</filename>, e ent&atilde;o procede a
-	  mountagem do sistema de arquivos mencionados em
-	  <filename>/etc/fstab</filename>, iniciando os servicos da rede,
+	  montagem do sistema de arquivos mencionados em
+	  <filename>/etc/fstab</filename>, iniciando os servi&ccedil;os de rede,
 	  inicializando v&aacute;rios daemons do sistema, e
 	  finalmente executando os scripts de inicializa&ccedil;&atilde;o de pacotes instalados
 	  localmente.</para>
 
-	<para>A p&aacute;gina do manual &man.rc.8; &eacute; uma boa refer&ecirc;ncia para o recurso de
-	  configura&ccedil;&atilde;o do sistema, como s&atilde;o examinados os scripts
-	  themselves.</para>
+	<para>A p&aacute;gina do manual &man.rc.8; &eacute; uma boa refer&ecirc;ncia para a
+	  configura&ccedil;&atilde;o de recursos do sistema, como s&atilde;o examinados os scripts.</para>
       </sect3>
     </sect2>
   </sect1>
@@ -756,25 +754,25 @@ console none                            unknown off insecure</programlisting>
     <para>Sob controle o shutdown, via &man.shutdown.8;,
       &man.init.8; tentar&aacute; rodar o script
       <filename>/etc/rc.shutdown</filename>, e ent&atilde;o proceder o envio de
-      todos os processos do <literal>TERM</literal>, e subsequente 
+      todos os processos de <literal>TERM</literal>, e subsequente 
       do <literal>KILL</literal> tamb&eacute;m alguns que n&atilde;o terminarem 
-      timely.</para>
+      oportunamente.</para>
 
-    <para>Para suportar baixar uma maquina FreeBSD sobre arquiteturas e sistemas
-      que suportam power management, simplesmente use o comando
-      <command>shutdown -p now</command> para turnar power off
-      imediatamente. Para justamente reboot o sistema FreeBSD, use
-      <command>shutdown -r now</command>. Voc&ecirc; necessitar&aacute; ser
+    <para>Para desligar uma m&aacute;quina FreeBSD sobre arquiteturas de sistemas
+      que suportam gerenciamento de energia, simplesmente use o comando
+      <command>shutdown -p now</command> para desligar
+      imediatamente. Para apenas reinicializar o FreeBSD, use
+      <command>shutdown -r now</command>. Voc&ecirc; precisa ser
       <username>root</username> ou um membro do
       grupo <groupname>operator</groupname> para rodar &man.shutdown.8;.
-      O &man.halt.8; e comandos &man.reboot.8; podem at&eacute; ser usados,
+      Os comandos &man.halt.8; e &man.reboot.8; podem at&eacute; ser usados,
       consultando por favor seus manuais de refer&ecirc;ncia e &man.shutdown.8; 
       para maiores informa&ccedil;&otilde;es.</para>
 
     <note>
-      <para>Power management requer &man.acpi.4; suporte no kernel
-	ou carregar algum m&oacute;dulo para FreeBSD&nbsp;5.X e &man.apm.4;
-	suporte para FreeBSD&nbsp;4.X.</para>
+      <para>Gerenciamento de energia requer suporte &man.acpi.4; no kernel
+	ou carregar algum m&oacute;dulo para FreeBSD&nbsp;5.X e suporte &man.apm.4;
+	para FreeBSD&nbsp;4.X.</para>
     </note>
 
   </sect1>
