@@ -19,7 +19,7 @@
   <title>Usuários e Administração Básica de contas</title>
   
   <sect1 id="users-synopsis">
-    <title>Synopsis</title>
+    <title>Sinópse</title>
     
     <para>O FreeBSD permite várias pessoas usarem o computador ao mesmo tempo.
       Obviamente, somente um daqueles usuários pode sentar-se na frente da tela e 
@@ -38,89 +38,90 @@
       </listitem>
 
       <listitem>
-	<para>Como fazer para adicionar um usuário.</para>
+	<para>Como adicionar uma conta de  usuário.</para>
       </listitem>
 
       <listitem>
-	<para>Como fazer para remover um usuário.</para>
+	<para>Como remover uma conta de usuário.</para>
       </listitem>
 
       <listitem>
-	<para>Como fazer para alterar os detalhes de uma conta de usuário, como o nome 
+	<para>Como alterar os detalhes de uma conta de usuário, como o nome 
         completo do usuario, ou a shell preferida.</para>
       </listitem>
 
       <listitem>
-	<para>How to set limits on a per-account basis, to control the
-	  resources such as memory and CPU time that accounts and groups of
-	  accounts are allowed to access.</para>
+	<para>Como se ajustar os limites básicos por conta, para controlar os 
+        recursos tais como memória e tempo de uso do CPU que usuários e grupos 
+        de contas podem acessar.</para>
       </listitem>
 
       <listitem>
-	<para>How to use groups to make account management easier.</para>
+	<para>Como usar grupos para facilitar a administração de contas.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Before reading this chapter, you should:</para>
+    <para>Antes de ler este capítulo, você deve::</para>
 
     <itemizedlist>
       <listitem>
-	<para>Understand the basics of &unix; and FreeBSD (<xref
+	<para>Entender o básico de &unix, e FreeBSD (<xref
 	    linkend="basics">).</para>
       </listitem>
     </itemizedlist>
   </sect1>
 
   <sect1 id="users-introduction">
-    <title>Introduction</title>
+    <title>Introdução</title>
 
-    <para>All access to the system is achieved via accounts, and all
-      processes are run by users, so user and account management are
-      of integral importance on FreeBSD systems.</para>
-
-    <para>Every account on a FreeBSD system has certain information associated
-      with it to identify the account.</para>
+    <para>Todo o acesso ao sistema é conseguido atravéz das contas, e
+      todos os processos são executados por usuários, assim usuários e 
+      administração de contas são integralmente importantes em sistemas FreeBSD.</para>
+    
+    <para>Todas as contas em um sistema FreeBSD tem determinadas informações
+       associada a ela para indenticiar a conta.</para>
 
     <variablelist>
       <varlistentry>
-	<term>User name</term>
+	<term>Nome do usuário</term>
+
+        <listitem>
+          <para>O nome do usuário será digitado no prompt <prompt>login:</prompt>.
+            Os nomes de usuários devem ser unicos em um computador, você não pode
+            ter dois usuários com o mesmo nome. Há um número de regras para criar
+            nomes válidos de usuários, documentadas em &man.passwd.5;; você usuaria
+            tipicamente nomes de usuários que consistem em oito ou poucos caracteres 
+            todos minusculos.</para>
+	</listitem>
+      </varlistentry>         
+
+
+      <varlistentry>
+	<term>Senha</term>
 
 	<listitem>
-	  <para>The user name as it would be typed at the
-	    <prompt>login:</prompt> prompt.  User names must be unique across
-	    the computer; you may not have two users with the same
-	    user name.  There are a number of rules for creating valid user
-	    names, documented in &man.passwd.5;; you would typically use user
-	    names that consist of eight or fewer all lower case
-	    characters.</para>
-	</listitem>
+          <para>Cada conta tem uma senha associada com ela. A Senha pode ser
+             vazia, neste caso nenhuma senha será solicitada para acessar o 
+             sistema. Isso é normalmente uma idéia muito ruim; todas as contas
+             devem ter uma senha.</para>
+         </listitem>
       </varlistentry>
 
       <varlistentry>
-	<term>Password</term>
+	<term>Usuário ID (UID)</term>
 
 	<listitem>
-	  <para>Each account has a password associated with it.  The password
-	    may be blank, in which case no password will be required to access
-	    the system.  This is normally a very bad idea; every account
-	    should have a password.</para>
+	  <para>O UID é um número de 0 até 65536 usado para identificar de forma 
+            única os usuários no sistema. Internamento o FreeBSD usa o UID 
+            para identificar usuários&mdash; qualquer comando do FreeBSD será
+            liberado para um usuário específico convertendo seu UID depois de 
+            utilizar o comando. Isso que dizer que você pode ter contas com 
+            diferentes nomes de usuários com o mesmo UID. Tanto quanto para 
+            o FreeBSD são um usuário apenas. É improvável que você necessitará 
+            sempre fazer isto. 
 	</listitem>
       </varlistentry>
 
-      <varlistentry>
-	<term>User ID (UID)</term>
-
-	<listitem>
-	  <para>The UID is a number from 0 to 65536 used to uniquely identify
-	    the user to the system.  Internally, FreeBSD uses the UID to
-	    identify users&mdash;any FreeBSD commands that allow you to
-	    specify a user name will convert it to the UID before working with
-	    it.  This means that you can have several accounts with different
-	    user names but the same UID.  As far as FreeBSD is concerned these
-	    accounts are one user.  It is unlikely you will ever need to do
-	    this.</para>
-	</listitem>
-      </varlistentry>
 
       <varlistentry>
 	<term>Group ID (GID)</term>
