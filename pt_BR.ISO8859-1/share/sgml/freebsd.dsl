@@ -3,7 +3,7 @@
      The FreeBSD Brazilian Portuguese Documentation Project
 
      Original revision: 1.14
-     $FreeBSD: doc/pt_BR.ISO8859-1/share/sgml/freebsd.dsl,v 1.1 2002/01/28 19:46:10 lioux Exp $
+     $FreeBSD: doc/pt_BR.ISO8859-1/share/sgml/freebsd.dsl,v 1.2 2002/08/27 14:11:55 blackend Exp $
 -->
 
 <!DOCTYPE style-sheet PUBLIC "-//James Clark//DTD DSSSL Style Sheet//EN" [
@@ -69,10 +69,18 @@
         (define %refentry-xref-link% #t)
 
         <!-- Specify how to generate the man page link HREF -->
-        (define ($create-refentry-xref-link$ refentrytitle manvolnum)
-	  (string-append "http://www.FreeBSD.org/cgi/man.cgi?query="
-			 refentrytitle "&" "sektion=" manvolnum))
-      ]]>
+        (define ($create-refentry-xref-link$ #!optional (n (current-node)))
+          (let* ((r (select-elements (children n) (normalize "refentrytitle")))
+                 (m (select-elements (children n) (normalize "manvolnum")))
+                 (v (attribute-string (normalize "vendor") n))
+                 (u (string-append "http://www.FreeBSD.org/cgi/man.cgi?query="
+                         (data r) "&" "sektion=" (data m))))
+            (case v
+              (("xfree86") (string-append u "&" "manpath=XFree86+4.0.2"))
+              (("netbsd")  (string-append u "&" "manpath=NetBSD+1.5"))
+              (("ports")   (string-append u "&" "manpath=FreeBSD+Ports"))
+              (else u))))
+     ]]>
 
       <!-- More aesthetically pleasing chapter headers for print output --> 
 
