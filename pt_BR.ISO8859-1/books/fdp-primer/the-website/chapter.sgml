@@ -36,20 +36,20 @@
   <sect1 id="the-website-prep">
     <title>Prepara&ccedil;&atilde;o</title>
     
-    <para>Pegue 200MB livre no disco. Voc&ecirce; ira precisar de espa&ccedil;o em disco para as ferramentas SGML, 
+    <para>Pegue 200MB livre no disco. Voc&ecirc; ir&aacute; precisar de espa&ccedil;o em disco para as ferramentas SGML, 
       um subconjunto da &aacute;rvore do CVS, espa&ccedil;o provis&oacute;rio para compila&ccedil;&atilde; e 
-      web pages instaladas. Se voc&ecirce j&aacute; tem instalado as ferramentas SGML e a &aacute;rvore 
+      web pages instaladas. Se voc&ecirc; j&aacute; tem instalado as ferramentas SGML e a &aacute;rvore 
       do CVS, voc&ecirc precisar&aacute; apenas ~100MB livres no disco.</para>
  
     <note>
-      <para>Certifique-se que seus ports de documenta&ccedil;&atilde; est&atilde;o atualizados! Quando na
+      <para>Certifique-se que seus ports de documenta&ccedil;&atilde;o est&atilde;o atualizados! Quando na
         d&uacute;vida, remova o outro ports usando o comando &man.pkg.delete.1; antes de instalar o ports.
-        Por exemplo, n&oacute;s atualmente dependemos do jade-1.2, e se voc&ecirce; tem instalado o jade-1.1. por favor fa&ccedil;a:</para>
+        Por exemplo, n&oacute;s atualmente dependemos do jade-1.2, e se voc&ecirc; tem instalado o jade-1.1. por favor fa&ccedil;a:</para>
 
       <screen>&prompt.root; <userinput>pkg_delete jade-1.1</userinput></screen>
     </note>
 
-    <para>Configure a reposit&oacute;rio CVS. Voc&ecircle; precisa dos diret&oacute;rios www, doc e ports dentro da 
+    <para>Configure a reposit&oacute;rio CVS. Voc&ecirc; precisa dos diret&oacute;rios www, doc e ports dentro da 
      sua &aacute;rvore do CVS (mais o CVSROOT &eacute; claro). Por favor leia o como fazer Introdu&ccedil;&atilde;o ao CVSup <ulink url="../handbook/synching.html#CVSUP">http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/synching.html#CVSUP</ulink> espelho uma &aacute;vore do CVS ou partes de uma &aacute;rvore do CVS.</para>
     
     <para>O essencial do cvsup seria: <literal>www</literal>,
@@ -105,8 +105,8 @@
     
     <procedure>
       <step>
-	<para>Se voc&ecircle; se mover para fora do diret&oacute;rio  <filename>en</filename>
-	  volte para atr&aacutez dele.</para>
+	<para>Se voc&ecirc; se mover para fora do diret&oacute;rio  <filename>en</filename>
+	  volte para dentro dele.</para>
 	
 	  <screen>&prompt.root; <userinput>cd <replaceable>path</replaceable>/www/en</userinput></screen>
       </step>
@@ -120,8 +120,8 @@
       </step>
 
       <step>
-	<para>Se voc&ecircle; instalar previamente as web pages dentro diret&oacute;rio o processo de instala&ccedil;&atilde;
-         n&atilde;o ter&aacute; deletado qualquer paginas velhas ou fora da data. Por exemplo, se voc&ecircle; compilar e instalar
+	<para>Se voc&ecirc; instalar previamente as web pages dentro diret&oacute;rio o processo de instala&ccedil;&atilde;
+         n&atilde;o ter&aacute; deletado qualquer p&aacute;ginas velhas ou fora da data. Por exemplo, se voc&ecirc; compilar e instalar
          uma nova c&oacute;pia do site todos os dias, este comando ir&aacute; procurar e deletar todos os arquivos que nao tem
          atualiza&ccedil;&otilde;es em tres dias.</para>
 
@@ -154,7 +154,7 @@
 	  
 	  <screen>&prompt.root; <userinput>make ENGLISH_ONLY=YES all install</userinput></screen>
 
-	  <para>Se voc&ecircle; quiser unset a vari&aacute;vel
+	  <para>Se voc&ecirc; quiser unset a vari&aacute;vel
 	    <makevar>ENGLISH_ONLY</makevar> e compile todas as paginas, incluindo
 	    tradu&ccedil;&otilde;es, sete a vari&aacute;vel <makevar>ENGLISH_ONLY</makevar>
 	    para um valor vazio.</para>
@@ -169,7 +169,7 @@
 	<listitem>
 	  <para>Se setada e n&atilde;o vazia, o makefiles ira compila e instalar
 	    apenas as HTML pages do diret&oacute;rio www. Todos os documentos do
-	    diret&oacute;rio doc (Handbook, FAQ, Tutorais) ser&aatilde;o ignorados..
+	    diret&oacute;rio doc (Handbook, FAQ, Tutorais) ser&atilde;o ignorados..
 	    E.g.:</para>
 	  
 	  <screen>&prompt.root; <userinput>make WEB_ONLY=YES all install</userinput></screen>
@@ -181,18 +181,18 @@
 	
 	<listitem>
 	  <para>Se setada, o makefiles n&atilde;o fara checkout dos arquivos do ports do 
-	    cvs repository. Inv&eacute;z disso, voc&ecircle; poder&aacute; copiar os arquivos do 
+	    cvs repository. Inv&eacute;z disso, voc&ecirc; poder&aacute; copiar os arquivos do 
 	    <filename>/usr/ports</filename> (ou a onde a vari&aacute;vel 
 	    <envar>PORTSBASE</envar> apontar).</para>
 	</listitem>
       </varlistentry>
     </variablelist>
     
-    <para><envar>CVSROOT</envar> &eacute; uma vari&aacute;vel de ambiente. Voc&ecircle; deve configurar atrav&eacute;z
+    <para><envar>CVSROOT</envar> &eacute; uma vari&aacute;vel de ambiente. Voc&ecirc; deve configurar atrav&eacute;z
       da linha de comando ou dos seus arquivos escondidos (~/.profile).</para>
     
     <para><makevar>WEB_ONLY</makevar>, <makevar>ENGLISH_ONLY</makevar> and
-      <makevar>NOPORTSCVS</makevar> s&atilde;o vari&aacute;veis do makefile. Voc&ecircle; pode setar as
+      <makevar>NOPORTSCVS</makevar> s&atilde;o vari&aacute;veis do makefile. Voc&ecirc; pode setar as
       vari&aacute;veis em <filename>/etc/make.conf</filename>,
       <filename>Makefile.inc</filename> ou como vari&aacute;veis de ambiente com
       os comandos de linha ou em seus arquivos escondindos.</para>
