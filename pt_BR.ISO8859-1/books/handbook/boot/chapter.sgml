@@ -145,59 +145,58 @@ F5 Drive 1
 Default: F2</screen>
       </example>
 
-      <para>Other operating systems, in particular &windows;&nbsp;95, have been known
-	to overwrite an existing MBR with their own.  If this happens to you,
-	or you want to replace your existing MBR with the FreeBSD MBR then use
-	the following command:</para>
+      <para>Outros sistemas operacionais, em particular &windows;&nbsp;95, tem conhecimento que
+	sobscrevem informacoes ja existentes na MBR com suas proprias. Se isto acontecer a voce,
+	ou voce queira substituir sua existente MBR com o FreeBSD MBR entao use
+	o seguinte comando:</para>
 
       <screen>&prompt.root; <userinput>fdisk -B -b /boot/boot0 <replaceable>device</replaceable></userinput></screen>
 
-      <para>Where <replaceable>device</replaceable> is the device that you
-	boot from, such as <devicename>ad0</devicename> for the first IDE
-	disk, <devicename>ad2</devicename> for the first IDE disk on a second
-	IDE controller, <devicename>da0</devicename> for the first SCSI disk,
-	and so on.</para>
+      <para>Como <replaceable>dispositivo</replaceable> e o dispositivo de que voce
+	carrega, como <devicename>ad0</devicename> para o primeiro disco IDE,
+	<devicename>ad2</devicename> para o primeiro disco IDE da segunda
+	controladora IDE, <devicename>da0</devicename> para o primeiro disco SCSI,
+	e assim por diante.</para>
 
-      <para>If you are a Linux user, however, and prefer that
-	<application>LILO</application> control the boot process, you can
-	edit the <filename>/etc/lilo.conf</filename> file for FreeBSD, or
-	select <option>Leave The Master Boot Record Untouched</option>
-	during the FreeBSD installation process.  If you have installed the
-	FreeBSD boot manager, you can boot back into Linux and modify the
-	<application>LILO</application> configuration file
-	<filename>/etc/lilo.conf</filename> and add the following
-	option:</para>
+      <para>Se voce for um usuario  Linux, entretanto, e preferir que
+	<application>LILO</application> controle o processo de inicializacao, voce pode
+	editar o arquivo <filename>/etc/lilo.conf</filename> para FreeBSD, ou
+	selecionar <option>Leave The Master Boot Record Untouched</option>
+	durante o processo de instalacao do FreeBSD. Se voce tiver instalado o
+	gerenciador de boot do FreeBSD, voce pode carregar dentro do Linux e modificar o
+	<application>LILO</application> no arquivo de configuracao
+	<filename>/etc/lilo.conf</filename> e adicionar a seguinte
+	opcao:</para>
 
       <programlisting>other=/dev/hdXY
 table=/dev/hdb
 loader=/boot/chain.b
 label=FreeBSD</programlisting>
 
-      <para>which will permit the booting of FreeBSD and Linux via
-	<application>LILO</application>.  In our example, we use
-	<replaceable>XY</replaceable> to determine drive number and
-	partition.  If you are using a <acronym>SCSI</acronym> drive, you
-	will want to change <replaceable>/dev/hdXY</replaceable> to read
-	something similar to <replaceable>/dev/sdXY</replaceable>, which
-	again uses the <replaceable>XY</replaceable> syntax.  The
-	<option>loader=/boot/chain.b</option> can be omitted if you have
-	both operating systems on the same drive.  You can now run
-	<command>/sbin/lilo -v</command> to commit your new changes to the
-	system, this should be verified with screen messages.</para>
+      <para>Qual permitira a inicializacao do FreeBSD e Linux via
+	<application>LILO</application>. Em outro exemplo, nos usamos
+	<replaceable>XY</replaceable> para determinar o numero do drive e
+	particao. Se estiver usando um drive <acronym>SCSI</acronym>, voce
+	ira querer mudar o <replaceable>/dev/hdXY</replaceable> para leitura
+	algo similar a <replaceable>/dev/sdXY</replaceable>, com
+	novamente usando a sintase <replaceable>XY</replaceable>. O
+	<option>loader=/boot/chain.b</option> pode ser omitido se voce tiver
+	ambos os sistemas operacionais na mesma particao. Voce pode agora rodar
+	<command>/sbin/lilo -v</command> para executar suas novas alteracoes no
+	sistema, este deve ser verificado com messagens na tela.</para>
     </sect2>
   
     <sect2 id="boot-boot1">
-      <title>Stage One, <filename>/boot/boot1</filename>, and Stage Two,
+      <title>Estagio Um, <filename>/boot/boot1</filename>, e Estagio Dois,
 	<filename>/boot/boot2</filename></title>
       
-      <para>Conceptually the first and second stages are part of the same
-	program, on the same area of the disk.  Because of space constraints
-	they have been split into two, but you would always install them
-	together.</para>
+      <para>Conceitual o primeiro e segundo estagios sao parte do mesmo
+	programa, sobre a mesma area do disco. Por que do espaco contido
+	eles foram divididos em duas partes, mas voce deve instala-los juntos.</para>
 
-      <para>They are found on the boot sector of
-	the boot slice, which is where <link
-	  linkend="boot-boot0">boot0</link>, or any other program on the
+      <para>Eles sao encontrados no setor de inicializacao, 
+	que e onde <link
+	  linkend="boot-boot0">boot0</link>, ou alguns outros programas na
 	<abbrev>MBR</abbrev> expects to find the program to run to
 	continue the boot process.  The files in the
 	<filename>/boot</filename> directory are copies of the real files,
