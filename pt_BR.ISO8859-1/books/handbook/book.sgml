@@ -1,0 +1,251 @@
+<!--
+     The FreeBSD Documentation Project
+
+     $FreeBSD: doc/en_US.ISO8859-1/books/handbook/book.sgml,v 1.142 2003/09/18 16:43:34 ceri Exp $
+-->
+
+<!DOCTYPE BOOK PUBLIC "-//FreeBSD//DTD DocBook V4.1-Based Extension//EN" [
+<!ENTITY % man PUBLIC "-//FreeBSD//ENTITIES DocBook Manual Page Entities//EN">
+%man;
+
+<!ENTITY % bookinfo PUBLIC "-//FreeBSD//ENTITIES DocBook BookInfo Entities//EN">
+%bookinfo;
+
+<!ENTITY % freebsd PUBLIC "-//FreeBSD//ENTITIES DocBook Miscellaneous FreeBSD Entities//EN">
+%freebsd;
+
+<!ENTITY % chapters SYSTEM "chapters.ent"> %chapters;
+<!ENTITY % authors PUBLIC "-//FreeBSD//ENTITIES DocBook Author Entities//EN">
+%authors;
+<!ENTITY % teams PUBLIC "-//FreeBSD//ENTITIES DocBook Team Entities//EN">
+%teams;
+<!ENTITY % mailing-lists PUBLIC "-//FreeBSD//ENTITIES DocBook Mailing List Entities//EN"> %mailing-lists;
+<!ENTITY % newsgroups PUBLIC "-//FreeBSD//ENTITIES DocBook Newsgroup Entities//EN"> %newsgroups;
+<!ENTITY % trademarks PUBLIC "-//FreeBSD//ENTITIES DocBook Trademark Entities//EN">
+%trademarks;
+<!ENTITY % txtfiles SYSTEM "txtfiles.ent"> %txtfiles;
+
+<!ENTITY % not.published "INCLUDE">
+
+<!ENTITY % chap.introduction "IGNORE">
+<!ENTITY % chap.install "IGNORE">
+<!ENTITY % chap.basics "IGNORE">
+<!ENTITY % chap.ports "IGNORE">
+<!ENTITY % chap.config "IGNORE">
+<!ENTITY % chap.boot "IGNORE">
+<!ENTITY % chap.users "IGNORE">
+<!ENTITY % chap.kernelconfig "IGNORE">
+<!ENTITY % chap.security "IGNORE">
+<!ENTITY % chap.printing "IGNORE">
+<!ENTITY % chap.disks "IGNORE">
+<!ENTITY % chap.vinum "IGNORE">
+<!ENTITY % chap.x11 "IGNORE">
+<!ENTITY % chap.l10n "IGNORE">
+<!ENTITY % chap.multimedia "IGNORE">
+<!ENTITY % chap.desktop "IGNORE">
+<!ENTITY % chap.serialcomms "IGNORE">
+<!ENTITY % chap.ppp-and-slip "IGNORE">
+<!ENTITY % chap.advanced-networking "IGNORE">
+<!ENTITY % chap.mail "IGNORE">
+<!ENTITY % chap.cutting-edge "IGNORE">
+<!ENTITY % chap.linuxemu "IGNORE">
+<!ENTITY % chap.mirrors "IGNORE">
+<!ENTITY % chap.bibliography "IGNORE">
+<!ENTITY % chap.eresources "IGNORE">
+<!ENTITY % chap.pgpkeys "IGNORE">
+<!ENTITY % chap.index "IGNORE">
+<!ENTITY % chap.freebsd-glossary "IGNORE">
+
+<!ENTITY % pgpkeys SYSTEM "../../../share/pgpkeys/pgpkeys.ent"> %pgpkeys;
+]>
+
+<book>
+  <bookinfo>
+    <title>FreeBSD Handbook</title>
+    
+    <corpauthor>The FreeBSD Documentation Project</corpauthor>
+    
+    <pubdate>February 1999</pubdate>
+    
+    <copyright>
+      <year>1995</year>
+      <year>1996</year>
+      <year>1997</year>
+      <year>1998</year>
+      <year>1999</year>
+      <year>2000</year>
+      <year>2001</year>
+      <year>2002</year>
+      <year>2003</year>
+      <holder>The FreeBSD Documentation Project</holder>
+    </copyright>
+
+    &bookinfo.legalnotice;
+
+    <legalnotice id="trademarks" role="trademarks">
+      &tm-attrib.freebsd;
+      &tm-attrib.3com;
+      &tm-attrib.3ware;
+      &tm-attrib.arm;
+      &tm-attrib.adaptec;
+      &tm-attrib.adobe;
+      &tm-attrib.apple;
+      &tm-attrib.corel;
+      &tm-attrib.creative;
+      &tm-attrib.heidelberger;
+      &tm-attrib.ibm;
+      &tm-attrib.ieee;
+      &tm-attrib.intel;
+      &tm-attrib.intuit;
+      &tm-attrib.linux;
+      &tm-attrib.lsilogic;
+      &tm-attrib.m-systems;
+      &tm-attrib.macromedia;
+      &tm-attrib.microsoft;
+      &tm-attrib.netscape;
+      &tm-attrib.opengroup;
+      &tm-attrib.oracle;
+      &tm-attrib.powerquest;
+      &tm-attrib.realnetworks;
+      &tm-attrib.redhat;
+      &tm-attrib.sap;
+      &tm-attrib.sun;
+      &tm-attrib.symantec;
+      &tm-attrib.themathworks;
+      &tm-attrib.thomson;
+      &tm-attrib.usrobotics;
+      &tm-attrib.vmware;
+      &tm-attrib.waterloomaple;
+      &tm-attrib.wolframresearch;
+      &tm-attrib.xfree86;
+      &tm-attrib.xiph;
+      &tm-attrib.general;
+    </legalnotice>
+    
+    <abstract>
+      <para>Welcome to FreeBSD! This handbook covers the installation and day
+	to day use of <emphasis>FreeBSD &rel2.current;-RELEASE</emphasis>
+	and <emphasis>FreeBSD &rel.current;-RELEASE</emphasis>.
+	This manual is a <emphasis>work in progress</emphasis> and is the work
+	of many individuals.  Many sections do not yet exist and some of those
+	that do exist need to be updated.  If you are interested in helping
+	with this project, send email to the &a.doc;.  The latest version of
+	this document is always available from the <ulink
+	  url="../../../../index.html">FreeBSD web site</ulink>.
+	It may also be downloaded in a variety of formats and compression
+	options from the <ulink 
+          url="ftp://ftp.FreeBSD.org/pub/FreeBSD/doc/">FreeBSD FTP 
+          server</ulink> or one of the numerous <link
+	  linkend="mirrors-ftp">mirror sites</link>.  If you would prefer
+	  to have a hard copy of the handbook, you can purchase one at the
+	  <ulink
+	  url="http://www.freebsdmall.com/">FreeBSD Mall</ulink>.  You
+	  may also want to <ulink
+	  url="../../../../search/index.html">search the
+	  handbook</ulink>.</para>
+    </abstract>
+  </bookinfo>
+
+  &chap.preface;
+
+  <part id="getting-started">
+    <title>Getting Started</title>
+    
+    <partintro>
+      <para>This part of the FreeBSD Handbook is for users and
+	administrators who are new to FreeBSD.  These chapters:</para>
+
+      <itemizedlist>
+	<listitem>
+	  <para>Introduce you to FreeBSD.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Guide you through the installation process.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Teach you &unix; basics and fundamentals.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Show you how to install the wealth of third party
+	    applications available for FreeBSD.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Introduce you to X, the &unix; windowing system, and
+	    detail how to configure a desktop environment that makes you
+	    more productive.</para>
+	</listitem>
+      </itemizedlist>
+
+      <para>We have tried to keep the number of forward references in
+	the text to a minimum so that you can read this section of the
+	Handbook from front to back with the minimum page flipping
+	required.</para>
+    </partintro>
+
+    <![ %chap.introduction;             [ &chap.introduction;         ]]>
+    <![ %chap.install;                  [ &chap.install;              ]]>
+    <![ %chap.basics;                   [ &chap.basics;               ]]>
+    <![ %chap.ports;                    [ &chap.ports;                ]]>
+    <![ %chap.x11;                      [ &chap.x11;                  ]]>
+  </part>
+  
+  <part id="system-administration">
+    <title>System Administration</title>
+
+    <partintro>
+      <para>The remaining chapters of the FreeBSD Handbook cover all
+	aspects of FreeBSD system administration.  Each chapter
+	starts by describing what you will learn as a result of reading
+	the chapter, and also details what you are expected to know
+	before tackling the material.</para>
+
+      <para>These chapters are designed to be read when
+	you need the information.  You do not have to read them in any
+	particular order, nor do you need to read all of them before you
+	can begin using FreeBSD.</para>
+    </partintro>
+
+    <![ %chap.config;                   [ &chap.config;               ]]>
+    <![ %chap.boot;                     [ &chap.boot;                 ]]>
+    <![ %chap.users;                    [ &chap.users;                ]]>
+    <![ %chap.kernelconfig;             [ &chap.kernelconfig;         ]]>
+    <![ %chap.security;                 [ &chap.security;             ]]>
+    <![ %chap.printing;                 [ &chap.printing;             ]]>
+    <![ %chap.disks;                    [ &chap.disks;                ]]>
+    <![ %chap.vinum;                    [ &chap.vinum;                ]]>
+    <![ %chap.l10n;                     [ &chap.l10n;                 ]]>
+    <![ %chap.desktop;                  [ &chap.desktop;              ]]>
+    <![ %chap.multimedia;               [ &chap.multimedia;           ]]>
+    <![ %chap.serialcomms;              [ &chap.serialcomms;          ]]>
+    <![ %chap.ppp-and-slip;             [ &chap.ppp-and-slip;         ]]>
+    <![ %chap.advanced-networking;      [ &chap.advanced-networking;  ]]>
+    <![ %chap.mail;                     [ &chap.mail;                 ]]>
+    <![ %chap.cutting-edge;             [ &chap.cutting-edge;         ]]>
+    <![ %chap.linuxemu;                 [ &chap.linuxemu;             ]]>
+  </part>
+  
+  <part id="appendices">
+    <title>Appendices</title>
+    
+    <![ %chap.mirrors;                  [ &chap.mirrors;              ]]>
+    <![ %chap.bibliography;             [ &chap.bibliography;         ]]>
+    <![ %chap.eresources;               [ &chap.eresources;           ]]>
+    <![ %chap.pgpkeys;                  [ &chap.pgpkeys;              ]]>
+  </part>
+  <![ %chap.freebsd-glossary;         [ &bookinfo.freebsd-glossary; ]]>
+  <![ %chap.index;                    [ &chap.index;                ]]>
+  &chap.colophon;
+</book>
+
+<!-- 
+     Local Variables:
+     mode: sgml
+     sgml-indent-data: t
+     sgml-omittag: nil
+     sgml-always-quote-attributes: t
+     End:
+-->
