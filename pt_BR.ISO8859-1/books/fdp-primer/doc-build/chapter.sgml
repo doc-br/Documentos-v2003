@@ -31,105 +31,105 @@
 -->
 
 <chapter id="doc-build">
-  <title>O processo de construção da documentação</title>
+  <title>O processo de constru&ccedil;&atilde;o da documenta&ccedil;&atilde;o</title>
 
-  <para>A principal finalidade desse capitulo é explicar claramente <emphasis>como
-    o processo de criação da documentação é organizado</emphasis>, e
-    <emphasis>e como fazer modificações a este processo</emphasis>.
+  <para>A principal finalidade desse capitulo &eacute; explicar claramente <emphasis>como
+    o processo de cria&ccedil;&atilde;o da documenta&ccedil;&atilde;o &eacute; organizado</emphasis>, e
+    <emphasis>e como fazer modifica&ccedil;&otilde;es a este processo</emphasis>.
     </para>
 
-  <para>Depois de finalizar a leitura deste capítulo você deverá:</para>
+  <para>Depois de finalizar a leitura deste cap&iacute;tulo voc&ecirc; dever&aacute;:</para>
 
   <itemizedlist>
     <listitem>
-      <para>Saber o que você precisa para construir a documentação FDP, em
-	adição ao que foi mencionado no <link
-	linkend="tools">capítulo Ferramentas SGML</link>.</para>
+      <para>Saber o que voc&ecirc; precisa para construir a documenta&ccedil;&atilde;o FDP, em
+	adi&ccedil;&atilde;o ao que foi mencionado no <link
+	linkend="tools">cap&iacute;tulo Ferramentas SGML</link>.</para>
     </listitem>
 
     <listitem>
-      <para>Poder ler e entender as instruções do 
-	<application>make</application> que estão presentes em cada 
-	documento <filename>Makefile</filename>, assim como uma visão 
+      <para>Poder ler e entender as instru&ccedil;&otilde;es do 
+	<application>make</application> que est&atilde;o presentes em cada 
+	documento <filename>Makefile</filename>, assim como uma vis&atilde;o 
 	geral do <filename>doc.project.mk</filename> .</para>
     </listitem>
  
     <listitem>
-      <para>Poder customizar o processo de construção usando
-	<application>make</application> variáveis e
+      <para>Poder customizar o processo de constru&ccedil;&atilde;o usando
+	<application>make</application> vari&aacute;veis e
 	<application>make</application> alvos.</para>
     </listitem>
   </itemizedlist>
 
   <sect1>
-    <title>Ferramentas para construção da documentação do FreeBSD</title>
+    <title>Ferramentas para constru&ccedil;&atilde;o da documenta&ccedil;&atilde;o do FreeBSD</title>
 
-    <para>Aqui estão suas ferramentas.  Use-as da maneira que você puder.</para>
+    <para>Aqui est&atilde;o suas ferramentas.  Use-as da maneira que voc&ecirc; puder.</para>
 
     <itemizedlist>
       <listitem>
-	<para>A primeira ferramenta que você precisará é o
+	<para>A primeira ferramenta que voc&ecirc; precisar&aacute; &eacute; o
 	  <application>make</application>, mais especificamente o
 	  <application>Berkeley Make</application>.</para>
       </listitem>
 
       <listitem>
-	<para>A construção de pacotes do FreeBSD é segurado pelo
-	  <application>pkg_create</application>.  Se você não estã usando
-	  FreeBSD, você terá que viver sem pacotes,ou
-	  compile o source você mesmo.</para>
+	<para>A constru&ccedil;&atilde;o de pacotes do FreeBSD &eacute; segurado pelo
+	  <application>pkg_create</application>.  Se voc&ecirc; n&atilde;o est&atilde; usando
+	  FreeBSD, voc&ecirc; ter&aacute; que viver sem pacotes,ou
+	  compile o source voc&ecirc; mesmo.</para>
       </listitem>
 
       <listitem>
-	<para>O <application>gzip</application> é necessário para criar versões 
+	<para>O <application>gzip</application> &eacute; necess&aacute;rio para criar vers&otilde;es 
 	  compactadas do documento.
 	  O compressor <application>bzip2</application> e
-	  os arquivos <application>zip</application> também são suportados.
-	  O <application>tar</application> é suportado, mas a construção de 
+	  os arquivos <application>zip</application> tamb&eacute;m s&atilde;o suportados.
+	  O <application>tar</application> &eacute; suportado, mas a constru&ccedil;&atilde;o de 
 	  pacotes necessita dele.</para>
       </listitem>
 
       <listitem>
-	<para>O <application>install</application> é o método padrão 
-	  para instalar a documentação.  Entretanto, há alternativas.</para>
+	<para>O <application>install</application> &eacute; o m&eacute;todo padr&atilde;o 
+	  para instalar a documenta&ccedil;&atilde;o.  Entretanto, h&aacute; alternativas.</para>
       </listitem>
     </itemizedlist>
 
     <note>
-      <para>É improvável você nao encontrar esses ultimos dois,
-	ele são mencionados para integridade.</para>
+      <para>&Eacute; improv&aacute;vel voc&ecirc; nao encontrar esses ultimos dois,
+	ele s&atilde;o mencionados para integridade.</para>
     </note>
   </sect1>
 
   <sect1>
-    <title>Entendendo Makefiles na árvore da documentção</title>
+    <title>Entendendo Makefiles na &aacute;rvore da documenta&ccedil;&atilde;o</title>
 
-    <para>Há três tipos principais de <filename>Makefile</filename>s 
-      na árvore do  projeto de documentção do FreeBSD.</para>
+    <para>H&aacute; tr&ecirc;s tipos principais de <filename>Makefile</filename>s 
+      na &aacute;rvore do  projeto de document&ccedil;&atilde;o do FreeBSD.</para>
 
     <itemizedlist>
       <listitem>
-	<para><link linkend="sub-make">Subdiretório
+	<para><link linkend="sub-make">Subdiret&oacute;rio
 	  <filename>Makefile</filename>s</link> simplesmente passa
-	  comandos para aqueles directório abaixo dele.</para>
+	  comandos para aqueles direct&oacute;rio abaixo dele.</para>
       </listitem>
 
       <listitem>
-	<para><link linkend="doc-make">Documentação
+	<para><link linkend="doc-make">Documenta&ccedil;&atilde;o
 	  <filename>Makefile</filename>s</link> descreve o(s)
-	  documento(s) que deve ser produzida a partir desde diretório.</para>
+	  documento(s) que deve ser produzida a partir desde diret&oacute;rio.</para>
       </listitem>
 
       <listitem>
 	<para><link linkend="make-includes"><application>Make</application>
-	  includes</link> é que executa a produção do documento,
-	  e geralmente a do formulário.
+	  includes</link> &eacute; que executa a produ&ccedil;&atilde;o do documento,
+	  e geralmente a do formul&aacute;rio.
 	  <filename>doc.<replaceable>xxx</replaceable>.mk</filename>.</para>
       </listitem>
     </itemizedlist>
 
     <sect2 id="sub-make">
-      <title>Subdiretório Makefiles</title>
+      <title>Subdiret&oacute;rio Makefiles</title>
 
       <para>Estes <filename>Makefile</filename>s geralmente tem a forma:</para>
 
@@ -141,55 +141,55 @@ COMPAT_SYMLINK = en
 DOC_PREFIX?= ${.CURDIR}/..
 .include "${DOC_PREFIX}/share/mk/doc.project.mk"</programlisting>
 
-      <para>Em um sumário rápido, as primeiras quatro linhas definem as variáveis do
+      <para>Em um sum&aacute;rio r&aacute;pido, as primeiras quatro linhas definem as vari&aacute;veis do
 	<application>make</application>,
 	<makevar>SUBDIR</makevar>, <makevar>COMPAT_SYMLINK</makevar>,
 	e <makevar>DOC_PREFIX</makevar>.</para>
 
-      <para>A primeira indicação ao <makevar>SUBDIR</makevar> statement, tanto quanto 
-	a indicação<makevar>COMPAT_SYMLINK</makevar>, mostra como atribuir um valor a uma variável,
+      <para>A primeira indica&ccedil;&atilde;o ao <makevar>SUBDIR</makevar> statement, tanto quanto 
+	a indica&ccedil;&atilde;o<makevar>COMPAT_SYMLINK</makevar>, mostra como atribuir um valor a uma vari&aacute;vel,
 	cancelando algum valor precendente.</para>
 
-      <para>A segunda indicação <makevar>SUBDIR</makevar> mostra como um valor
-	é adicionado ao valor atual de uma variável.  A variável
-	<makevar>SUBDIR</makevar> é agora <literal>articles
+      <para>A segunda indica&ccedil;&atilde;o <makevar>SUBDIR</makevar> mostra como um valor
+	&eacute; adicionado ao valor atual de uma vari&aacute;vel.  A vari&aacute;vel
+	<makevar>SUBDIR</makevar> &eacute; agora <literal>articles
 	books</literal>.</para>
 
-      <para>A indicação <makevar>DOC_PREFIX</makevar> mostra como um valor
-	é atribuído para variável, mas somente se já não estiver definida.
-	Isto é útil se o <makevar>DOC_PREFIX</makevar> não for
-	onde este <filename>Makefile</filename> pensa que é - o usuário
+      <para>A indica&ccedil;&atilde;o <makevar>DOC_PREFIX</makevar> mostra como um valor
+	&eacute; atribu&iacute;do para vari&aacute;vel, mas somente se j&aacute; n&atilde;o estiver definida.
+	Isto &eacute; &uacute;til se o <makevar>DOC_PREFIX</makevar> n&atilde;o for
+	onde este <filename>Makefile</filename> pensa que &eacute; - o usu&aacute;rio
 	pode cancelar este e fornecer o valor correto.</para>
 
       <para>Agora o que tudo isso significa? <makevar>SUBDIR</makevar>
-	menciona que todos subdiretórios abaixo deste, devem passar qualquer 
-        trabalho de processo de construção nele.</para>
+	menciona que todos subdiret&oacute;rios abaixo deste, devem passar qualquer 
+        trabalho de processo de constru&ccedil;&atilde;o nele.</para>
 
-      <para><makevar>COMPAT_SYMLINK</makevar> is specific to
-	compatibility symlinks (amazingly enough) for languages to their
-	official encoding (<filename>doc/en</filename> would point to
+      <para><makevar>COMPAT_SYMLINK</makevar> &eacute; espec&iacute;fico a 
+	compatibilidade dos links simb&oacute;licos (bastante surpreendente) para linguagens
+	oficiais(<filename>doc/en</filename> apontaria para
 	<filename>en_US.ISO-8859-1</filename>).</para>
 
-      <para><makevar>DOC_PREFIX</makevar> is the path to the root of the
-	FreeBSD Document Project tree.  This is not always that easy to
-	find, and is also easily overridden, to allow for flexibility.
-	<makevar>.CURDIR</makevar> is a <application>make</application>
-	builtin variable with the path to the current directory.</para>
+      <para><makevar>DOC_PREFIX</makevar> &eacute; o caminho para a ra&iacute;z da
+	&aacute;rvore do projeto de documenta&ccedil;&atilde;o do FreeBSD.  Isto nem sempre &eacute; facil This is not always that easy to
+	de encontrar, e tamb&eacute;m pode ser facilmente cancelado, para permitir flexibilidade.
+	<makevar>.CURDIR</makevar> &eacute; uma vari&aacute;vel embutida do <application>make</application>
+	com o caminho para o diret&oacute;rio atual.</para>
 
-      <para>The final line includes the FreeBSD Documentation Project's
-	project-wide <application>make</application> system file
-	<filename>doc.project.mk</filename> which is the glue which
-	converts these variables into build instructions.</para>
+      <para>A linha final inclue o projeto de documenta&ccedil;&atilde;o do FreeBSD
+	e o <application>make</application> faz o arquivo do sistema
+	<filename>doc.project.mk</filename> converter
+	estas vari&aacute;veis em instru&ccedil;&otilde;es de constru&ccedil;&atilde;o.</para>
 
     </sect2>
     <sect2 id="doc-make">
-      <title>Documentation Makefiles</title>
+      <title>Documenta&ccedil;&atilde;o dos Makefiles</title>
 
-      <para>These <filename>Makefile</filename>s set a bunch of
-	<application>make</application> variables that describe how to
-	build the documentation contained in that directory.</para>
+      <para>Estes <filename>Makefile</filename>s ajustam v&aacute;rias 
+	vari&aacute;veis do <application>make</application> que descrevem como
+	construir a documenta&ccedil;&atilde;o contida naquele diret&oacute;rio.</para>
 
-      <para>Here is an example:</para>
+      <para>Aqui esta um exemplo:</para>
 
       <programlisting>MAINTAINER=nik@FreeBSD.org
 
@@ -207,39 +207,38 @@ DOC_PREFIX?= ${.CURDIR}/../../..
 
 .include "$(DOC_PREFIX)/share/mk/docproj.docbook.mk"</programlisting>
 
-      <para>The <makevar>MAINTAINER</makevar> variable is a very 
-	important one.  This variable provides the ability to claim
-	ownership over a document in the FreeBSD Documentation
-	Project, whereby you gain the responsibility for maintaining 
-	it.</para>
+      <para>A vari&aacute;vel <makevar>MAINTAINER</makevar> &eacute; uma das
+	mais importantes.  Esta vari&aacute;vel fornece a habilidade de reivindicar 
+	a posse sobre um documento no projeto de documenta&ccedil;&atilde;o do
+	FreeBSD, por meio que voc&ecirc; recebe a responsabilidade de mant&eacute;-lo.</para>
 
-      <para><makevar>DOC</makevar> is the name (sans the
-	<filename>.sgml</filename> extension) of the main document
-	created by this directory.  <makevar>SRCS</makevar> lists all
-	the individual files that make up the document.  This should
-	also include important files in which a change should result
-	in a rebuild.</para>
+      <para><makevar>DOC</makevar> &eacute; o nome (sans &eacute; a extens&atilde;o do
+	<filename>.sgml</filename>) do principal documento
+	criado por este diret&oacute;rio.  <makevar>SRCS</makevar> lista todos
+	os arquivo individuais que constituem o documento.  Isto deve
+	tamb&eacute;m incluir arquivos importantes em que uma mudan&ccedil;a deve resultar
+	em uma reconstru&ccedil;&atilde;o.</para>
 
-      <para><makevar>FORMATS</makevar> indicates the default formats
-	that should be built for this document.
-	<makevar>INSTALL_COMPRESSED</makevar> is the default list of
-	compression techniques that should be used in the document
-	build.  <makevar>INSTALL_ONLY_COMPRESS</makevar>, empty by
-	default, should be non-empty if only compressed documents are
-	desired in the build.</para>
+      <para><makevar>FORMATS</makevar> indica o formato padr&atilde;o
+	que deve ser criado este documento.
+	<makevar>INSTALL_COMPRESSED</makevar> &eacute; a lista padr&atilde;o de 
+	t&eacute;cnicas de compress&atilde;o que devem ser usados na cria&ccedil;&atilde;o do
+	documento.  <makevar>INSTALL_ONLY_COMPRESS</makevar>, em branco por 
+	padr&atilde;o, nao deve estar em branco se somente documentos compactados 
+	forem desejados na cria&ccedil;&atilde;o.</para>
 
       <note>
-	<para>We covered optional variable assignments in the 
-	  <link linkend="sub-make">previous section</link>.</para>
+	<para>N&oacute;s cobrimos atribui&ccedil;&otilde;es de vari&aacute;veis na
+	  <link linkend="sub-make">se&ccedil;&atilde;o anterior</link>.</para>
       </note>
 
-      <para>The <makevar>DOC_PREFIX</makevar> and include statements
-	should be familiar already.</para>
+      <para>As indica&ccedil;&otilde;es <makevar>DOC_PREFIX</makevar> e include 
+	j&aacute; devem estar familiarizadas.</para>
     </sect2>
   </sect1>
 
   <sect1 id="make-includes">
-    <title>FreeBSD Documentation Project make includes</title>
+    <title>Includes do make do projeto de documenta&ccedil;&atilde;o do FreeBSD</title>
 
     <para>This is best explained by inspection of the code.  Here are
       the system include files:</para>
