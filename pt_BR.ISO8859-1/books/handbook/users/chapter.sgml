@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/users/chapter.sgml,v 1.13 2003/12/09 13:07:25 gamk Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/users/chapter.sgml,v 1.14 2003/12/10 11:00:37 gamk Exp $
 -->
 
 <chapter id="users">
@@ -872,7 +872,7 @@ passwd: done</screen>
           <para>Este é a quantidade máxima de memória quem um processo pode 
             requerir para travar na memória principal (ex: veja &man.mlock.2;).
             Alguns programas críticos do sistema, tais como &man.amd.8;, reserva
-            na memória principal como evento trocando para fora, 
+            na memória principal como evento trocando para fora, FALTAAAAAAAAAAAAA
 	</listitem>
       </varlistentry>
 
@@ -882,13 +882,13 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>memoryuse</primary></indexterm>
     <indexterm>
-      <primary>limiting users</primary>
+      <primary>limitando usuários</primary>
       <secondary>memoryuse</secondary>
     </indexterm>
-	  <para>This is the maximum amount of memory a process may consume
-	    at any given time.  It includes both core memory and swap
-	    usage.  This is not a catch-all limit for restricting memory
-	    consumption, but it is a good start.</para>
+          <para>Está é a quantidade máxima de memória que um processo pode 
+            consumir durante todo o tempo. Isso inclue o uso da memória principal e a 
+            <foreignphrase>swap</foreignphrase>. Isto não é um controle total de restrição de 
+            consumo de memória, mas é um bom começo</para>
 	</listitem>
       </varlistentry>
 
@@ -898,14 +898,14 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>openfiles</primary></indexterm>
     <indexterm>
-      <primary>limiting users</primary>
+      <primary>limitando usuários</primary>
       <secondary>openfiles</secondary>
     </indexterm>
-	  <para>This is the maximum amount of files a process may have
-	    open.  In FreeBSD, files are also used to represent sockets and
-	    IPC channels; thus, be careful not to set this too low.  The
-	    system-wide limit for this is defined by the
-	    <varname>kern.maxfiles</varname> &man.sysctl.8;.</para>
+          <para>Esta é a quantidade máxima de arquivos que um processo pode ter
+            aberto. No FreeBSD, arquivos são usados também para representar 
+            <foreignphrase>sockets</foreignphrase> e canais IPC; tenha assim cuidado
+            para não ajustar este demasiadamente baixo. O limite para este é definido
+            por &man.sysctl.8; <varname>kern.maxfiles</varname>.</para>
 	</listitem>
       </varlistentry>
 
@@ -915,13 +915,13 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>sbsize</primary></indexterm>
     <indexterm>
-      <primary>limiting users</primary>
+      <primary>limitando usuários</primary>
       <secondary>sbsize</secondary>
     </indexterm>
-	  <para>This is the limit on the amount of network memory, and thus
-	    mbufs, a user may consume.  This originated as a response to an
-	    old DoS attack by creating a lot of sockets, but can be
-	    generally used to limit network communications.</para>
+          <para>Esta é a quantidade máxima de memória da rede, e assim os mbufs,
+            um usuário podem consumir. Isto originado como uma resposta a um ataque
+            velho de DoS criando muitos dos <foreignphrase>sockets</foreignphrase>,
+            mas pode geralmente ser usado para limitar a comunicação da rede.</para>
 	</listitem>
       </varlistentry>
 
@@ -931,75 +931,70 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>stacksize</primary></indexterm>
     <indexterm>
-      <primary>limiting users</primary>
+      <primary>limitando usuários</primary>
       <secondary>stacksize</secondary>
     </indexterm>
-	  <para>This is the maximum size a process' stack may grow to.
-	    This alone is not sufficient to limit the amount of memory a
-	    program may use; consequently, it should be used in conjunction
-	    with other limits.</para>
+          <para>Este é o tamanho máximo que uma pilha dos processos pode vir.
+            Este sozinho não é suficiente para limitar a quantidade de memória que
+            um programa pode usar, consequentemente, deve ser usado em conjunto com
+            outros limites.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
 
-    <para>There are a few other things to remember when setting resource
-      limits.  Following are some general tips, suggestions, and
-      miscellaneous comments.</para>
+    <para>Existem outras coisas para recordar ao ajustar limites de recurso.
+      Logo em seguinda estão alguns pontos gerais, sugestões, e comentários variados.</para>
 
     <itemizedlist>
       <listitem>
-        <para>Processes started at system startup by
-          <filename>/etc/rc</filename> are assigned to the
-          <literal>daemon</literal> login class.</para>
+        <para>Os processos que são iniciados no sistema pelo
+          <filename>/etc/rc</filename> são atribuídos à classe de login
+          <literal>daemon</literal>.</para>
       </listitem>
 
       <listitem>
-        <para>Although the <filename>/etc/login.conf</filename> that comes
-          with the system is a good source of reasonable values for most
-          limits, only you, the administrator, can know what is appropriate
-          for your system.  Setting a limit too high may open your system
-          up to abuse, while setting it too low may put a strain on
-          productivity.</para>
+        <para>Embora o <filename>/etc/login.conf</filename> que vem com o 
+          sistema é uma fonte boa de valores razoáveis para a maioria dos limites,
+          apenas você, administrador, pode saber o que é apropriado para o seu 
+          sistema. Ajustar um limite demasiadamente elevado pode abrir seu sistema
+          até o abuso, quando o ajustar demasiadamente baixo pode pôr um tensão sobre
+          a produtividade.
       </listitem>
 
       <listitem>
-        <para>Users of the X Window System (X11) should probably be granted
-	  more resources than other users.  X11 by itself takes a lot of
-	  resources, but it also encourages users to run more programs
-	  simultaneously.</para>
+        <para>Os usuários do sistema de janela X (X11)devem provavelmente ser
+          concedidos mais recursos do que outros usuários. X11 por si só usa poucos
+          recursos, mas incentiva também usuários à rodar programas simultaneos.</para>
       </listitem>
 
       <listitem>
-        <para>Remember that many limits apply to individual processes, not
-          the user as a whole.  For example, setting 
-	  <varname>openfiles</varname> to 50 means
-          that each process the user runs may open up to 50 files.  Thus,
-          the gross amount of files a user may open is the value of
-          <literal>openfiles</literal> multiplied by the value of
-          <literal>maxproc</literal>.  This also applies to memory
-          consumption.</para>
+        <para>Recorde que muitos limites se aplicam aos processos individuais, não
+          usuário como um todo. Por exemplo, ajustar <varname>openfiles</varname> para
+          50 significa que cada processo que o usuário rodar, pode abrir até 50 arquivos.
+          Assim, a quantidade bruta de arquivos que um usuário pode abrir é o valor 
+          <literal>openfiles</literal> multiplicado pelo <literal>maxproc</literal>.
+          Isto também se aplica ao consumo de memória.</para>
       </listitem>
     </itemizedlist>
 
-    <para>For further information on resource limits and login classes and
-      capabilities in general, please consult the relevant manual pages:
+    <para>Para uma informação adicional sobre limites de recursos e classes de login 
+      e capacidades em geral, consulte por favor as páginas de manuais relevantes: 
       &man.cap.mkdb.1;, &man.getrlimit.2;, &man.login.conf.5;.</para>
   </sect1>
 
   <sect1 id="users-personalizing">
-    <title>Personalizing Users</title>
+    <title>Personalizando usuários</title>
 
-    <para>Localization is an environment set up by the system
-      administrator or user to accommodate different languages,
-      character sets, date and time standards, and so on.  This is
-      discussed in the <link linkend="l10n">localization</link>
-      chapter.</para>
+    <para>A localização é um ambiente ajustado pelo administrador ou pelo usuário 
+      do sistema para acomodar línguas diferentes, conjunto de caracteres, data e padrões
+      de tempo diferentes, e assim por diante. Isto é discutido no capítulo sobre 
+      <link linkend="l10n">localização</link>.</para>
   </sect1>
 
   <sect1 id="users-groups">
-    <title>Groups</title>
+    <title>Grupos</title>
 
-    <indexterm><primary>groups</primary></indexterm>
+    <indexterm><primary>grupos</primary></indexterm>
     <indexterm>
       <primary><filename>/etc/groups</filename></primary>
     </indexterm>
