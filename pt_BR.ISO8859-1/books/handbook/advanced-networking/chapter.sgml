@@ -2369,158 +2369,176 @@ Exports list on foobar:
 	<author>
 	  <firstname>Jean-Fran&ccedil;ois</firstname>
 	  <surname>Dock&egrave;s</surname>
-	  <contrib>Updated by </contrib>
+	  <contrib>Atualizado por </contrib>
 	</author>
       </authorgroup>
     </sect1info>
+    <title>Opera&ccedil;&atilde;o Sem Disco (Diskless Operation)</title>
     <title>Diskless Operation</title>
 
     <indexterm><primary>diskless workstation</primary></indexterm>
     <indexterm><primary>diskless operation</primary></indexterm>
 
-    <para>A FreeBSD machine can boot over the network and operate without a
-      local disk, using filesystems mounted from an NFS server.  No system
-      modification is necessary, beyond standard configuration files.
-      Such a system is easy to set up because all the necessary elements
-      are readily available:</para>
+    <para>Uma m&aacute;quina FreeBSD pode ser inicializada pela rede e operar
+    sem um disco local, usando sistemas de arquivos montados de um
+    servidor NFS.  Nenhuma modifica&ccedil;&atilde;o &eacute; necess&aacute;ria no sistema, al&eacute;m
+    dos arquivos de configura&ccedil;&atilde;o.  Tal sistema &eacute; f&aacute;cil de configurar
+    porque todos os elementos necess&aacute;rios est&atilde;o prontamente
+    dispon&iacute;veis:</para>
+
     <itemizedlist>
       <listitem>
-	<para>There are at least two possible methods to load the kernel over
-	  the network:</para>
+	<para>Existem pelo menos dois m&eacute;todos poss&iacute;veis para carregar
+	o kernel atrav&eacute;s da rede:</para>
+
 	<itemizedlist>
 	  <listitem>
-	    <para><emphasis>PXE</emphasis>: The &intel; Preboot Execution
-	      Environment system is a form of smart boot ROM built into some
-	      networking cards or motherboards.  See &man.pxeboot.8; for more
-	      details.</para>
+	    <para><emphasis>PXE</emphasis>: O sistema Ambiente de
+	    Execu&ccedil;&atilde;o Pr&eacute;-inicializa&ccedil;&atilde;o (Preboot Execution Environment)
+	    &eacute; uma forma de ROM de partida inteligente embutida em
+	    algumas placas de rede ou placas-m&atilde;e.  Veja
+	    &man.pxeboot.8; para maiores detalhes.</para>
 	  </listitem>
 	  <listitem>
-	    <para><emphasis>The <application>etherboot</application>
-	      port</emphasis> (<filename
-	      role="package">net/etherboot</filename>) produces
-	      ROM-able code to boot kernels over the network.  The
-	      code can be either burnt into a boot PROM on a network
-	      card, or loaded from a local floppy (or hard) disk
-	      drive, or from a running &ms-dos; system.  Many network
-	      cards are supported.</para>
+	    <para>O port<application>etherboot</application>
+	    (<filename role="package">net/etherboot</filename>)
+	    produz c&oacute;digo grav&aacute;vem em ROM para inicializar kernels
+	    atrav&eacute;s da rede.  O c&oacute;digo pode ser gravado em uma PROM de
+	    inicializa&ccedil;&atilde;o em uma interface de rede, ou carregada de
+	    um leitor de disquetes (ou disco r&iacute;gido) local, ou de um
+	    sistema rodando &ms-dos;.  Muitas placas de rede s&atilde;o
+	    suportadas.</para>
+
 	  </listitem>
 	</itemizedlist>
 	</listitem>
 
       <listitem>
-	<para>A sample script
-	  (<filename>/usr/share/examples/diskless/clone_root</filename>) eases
-	  the creation and maintenance of the workstation's root filesystem
-	  on the server.  The script will probably require a little
-	  customization but it will get you started very quickly.</para>
+	<para>Um script de amostra 
+	(<filename>/usr/share/examples/diskless/clone_root</filename>)
+	facilita a cria&ccedil;&atilde;o e manuten&ccedil;&atilde;o do sistema de arquivo raiz da
+	esta&ccedil;&atilde;o de trabalho no servidor.  O script provavelmente vai
+	requerer uma pequena personaliza&ccedil;&atilde;o, mas vai lhe permitir
+	come&ccedil;ar muito rapidamente.</para>
       </listitem>
 
       <listitem>
+	<para>Os arquivos de inicializa&ccedil;&atilde;o padr&atilde;o do sistema est&atilde;o em
+	<filename>/etc</filename> para detectar e suportar a partida
+	de um sistema sem disco.</para>
 	<para>Standard system startup files exist in <filename>/etc</filename>
 	  to detect and support a diskless system startup.</para>
       </listitem>
 
       <listitem>
-	<para>Swapping, if needed, can be done either to an NFS file or to
-	  a local disk.</para>
+	<para>Se necess&aacute;rio fazer swapping, poder&aacute; ser feito em um
+	arquivo NFS ou em um disco local.</para>
       </listitem>
     </itemizedlist>
 
-    <para>There are many ways to set up diskless workstations.  Many
-      elements are involved, and most can be customized to suit local
-      taste.  The following will describe the setup of a complete system,
-      emphasizing simplicity and compatibility with the
-      standard FreeBSD startup scripts.  The system described has the
-      following characteristics:</para>
+    <para>Existem muitas formas de configurar esta&ccedil;&otilde;es sem disco.
+    Muitos elementos est&atilde;o envolvidos, e a maioria pode ser
+    personalizada para atender uma prefer&ecirc;ncia local.  A seguir ser&aacute;
+    descrita a configura&ccedil;&atilde;o de um sistema completo, enfatizando a
+    simplicidade e compatibilidade com os scripts padr&atilde;o do FreeBSD.
+    O sistema descrito tem as seguintes caracter&iacute;sticas:</para>
 
     <itemizedlist>
       <listitem>
-	<para>The diskless workstations use a shared
-	  read-only <filename>root</filename> filesystem, and a shared
-	  read-only <filename>/usr</filename>.</para>
-	<para>The <filename>root</filename> filesystem is a copy of a
-	  standard FreeBSD root (typically the server's), with some
-	  configuration files overridden by ones specific to diskless
-	  operation or, possibly, to the workstation they belong to.</para>
-	<para>The parts of the <filename>root</filename> which have to be
-	  writable are overlaid with &man.mfs.8; filesystems.  Any changes
-	  will be lost when the system reboots.</para>
+	<para>As esta&ccedil;&otilde;es sem disco usam sistemas de arquivos
+	<filename>raiz</filename> e <filename>/usr</filename>
+	 somente-leitura compatilhados.</para>
+
+	<para>O sistema de arquivo <filename>raiz</filename> &eacute; uma
+	c&oacute;pia de uma raiz padr&atilde;o do FreeBSD (tipicamente a do
+	servidor), com alguns arquivos de configura&ccedil;&atilde;o cancelados por
+	alguns espec&iacute;ficos para opera&ccedil;&atilde;o sem disco ou, possivelmente,
+	para a esta&ccedil;&atilde;o de trabalho &agrave; qual pertencem.</para>
+
+	<para>As partes da <filename>raiz</filename> que precisam ser
+	grav&aacute;veis s&atilde;o cobertas com sistemas de arquivos &man.mfs.8;.
+	Quaisquer mudan&ccedil;&atilde;s ser&atilde;o perdidas quando o sistema for
+	reinicializado.</para>
+
       </listitem>
       <listitem>
-	<para>The kernel is loaded by <application>etherboot
-	  </application>, using DHCP (or BOOTP) and TFTP.</para>
+	<para>O kernel &eacute; carregado pelo
+	<application>etherboot</application>, usando DHCP (ou BOOTP) e
+	TFTP.</para>
       </listitem>
     </itemizedlist>
 
-    <caution><para>As described, this system is insecure.  It should
-	live in a protected area of a network, and be untrusted by
-	other hosts.</para>
-    </caution>
-
+    <caution><para> Como descrito, este sistema &eacute; inseguro.  Ele deve
+    morar em uma &aacute;rea protegida da rede, e n&atilde;o ser confiado por outras
+    m&aacute;quinas.</para></caution>
 
     <sect2>
-      <title>Setup Instructions</title>
+      <title>Instru&ccedil;&otilde;es de Configura&ccedil;&atilde;o</title>
 
       <sect3>
-	<title>Configuring DHCP/BOOTP</title>
+	<title>Configurando o DHCP/BOOTP</title>
 	<indexterm>
 	  <primary>diskless operation</primary>
 	  <secondary>booting</secondary>
 	</indexterm>
 
-	<para>There are two protocols that are commonly used to boot a
-	  workstation that retrieves its configuration over the network: BOOTP
-	  and DHCP.  They are used at several points in the workstation
-	  bootstrap:</para>
+	<para>Existem dois protocolos que s&atilde;o comumente usados para
+	inicializar uma esta&ccedil;&atilde;o de trabalho que recupera seus arquivos
+	de configura&ccedil;&atilde;o atrav&eacute;s da rede: BOOTP e DHCP.  Eles s&atilde;o
+	usados em diversos pontos na partida da esta&ccedil;&atilde;o de trabalho:</para>
+
 	<itemizedlist>
-	  <listitem><para><application>etherboot</application> uses
-	      DHCP (by default) or BOOTP (needs a configuration option) to
-	      find the kernel.  (PXE uses DHCP).</para>
-	  </listitem>
-	  <listitem><para>The kernel uses BOOTP to locate the NFS
-	      root.</para>
+	  <listitem><para>O <application>etherboot</application> usa o 
+	  DHCP (por padr&atilde;o) ou BOOTP (precisa de uma op&ccedil;&atilde;o de
+	  configura&ccedil;&atilde;o) para encontrar o kernel.  (PXE usa DHCP).
+	  </para></listitem>
+
+	  <listitem><para>O kernel usa BOOTP para localizar a raiz
+	  NFS.</para></listitem>
 	  </listitem>
 	</itemizedlist>
 
-	<para>It is possible to configure a system to use only BOOTP.
-	  The &man.bootpd.8; server program is included in the
-	  base FreeBSD system.</para>
+	<para>&Eacute; poss&iacute;vel configurar um sistema para usar somente
+	BOOTP.  O programa servidor &man.bootpd.8; est&aacute; inclu&iacute;do no
+	sistema base do FreeBSD.</para>
 
-	<para>However, DHCP has a number of advantages over BOOTP (nicer
-	  configuration files, possibility of using PXE, plus many others
-	  not directly related to diskless operation), and we shall describe
-	  both a pure BOOTP, and a BOOTP+DHCP configuration, with an
-	  emphasis on the latter, which will use the ISC DHCP software
-	  package.</para>
+	<para>Entretanto, o DHCP tem diversas vantagens sobre o BOOTP
+	(melhores arquivos de configura&ccedil;&atilde;o, possibilidade de usar PXE,
+	mais muitas outras n&atilde;o diretamente relacionadas &agrave; opera&ccedil;&atilde;o sem
+	disco), e n&oacute;s vamos descrever ambas as configura&ccedil;&otilde;es, BOOTP
+	puro e BOOTP+DHCP, com &ecirc;nfase no &uacute;ltimo, o qual vai usar o
+	pacote de software DHCP da ISC.</para>
 
 	<sect4>
-	  <title>Configuration Using ISC DHCP</title>
+	  <title>Configura&ccedil;&atilde;o Usando o DHCP da ISC</title>
 	  <indexterm>
 	    <primary>DHCP</primary>
 	    <secondary>diskless operation</secondary>
 	  </indexterm>
 
-	  <para>The <application>isc-dhcp</application> server can answer
-	    both BOOTP and DHCP requests.</para>
+	  <para>O servidor <application>isc-dhcp</application> pode
+	  responder tanto requisi&ccedil;&otilde;es BOOTP como DHCP.</para>
 
-	  <para>As of release 4.4, <application>isc-dhcp
-  	    3.0</application> is not part of the base
-	    system.  You will first need to install the
-	    <filename role="package">net/isc-dhcp3</filename> port or the
-	    corresponding package.  Please refer to <xref linkend="ports">
-	    for general information about ports and packages.</para>
+	  <para>Desde o lan&ccedil;amento (release) 4.4, o 
+	  <application>isc-dhcp 3.0</application> n&atilde;o &eacute; parte do
+	  sistema base.  Voc&ecirc; primeiro vai precisar instalar o port
+	  <filename role="package">net/isc-dhcp3</filename> ou o
+	  pacote (package) correspondente.  Por favor, veja <xref
+	  linkend="ports"> para informa&ccedil;&otilde;es gerais sobre ports e
+	  packages.</para>
 
-	  <para>Once <application>isc-dhcp</application> is installed, it
-	    needs a configuration file to run, (normally named
-	    <filename>/usr/local/etc/dhcpd.conf</filename>).  Here follows
-	    a commented example:</para>
+	  <para>Uma vez que o <application>isc-dhcp</application> 
+	  estiver instalado, ele precisa de um arquivo de 
+	  configura&ccedil;&atilde;o para rodar, (normalmente chamado 
+	  <filename>/usr/local/etc/dhcpd.conf</filename>).  Aqui segue
+	  um exemplo comentado:</para>
 
 	  <programlisting>
 	  default-lease-time 600;
 	  max-lease-time 7200;
 	  authoritative;
 
-	  option domain-name "example.com";
+	  option domain-name "exemplo.com";
 	  option domain-name-servers 192.168.4.1;
 	  option routers 192.168.4.1;
 
@@ -2531,7 +2549,7 @@ Exports list on foobar:
 
 	    host margaux {
 	      hardware ethernet 01:23:45:67:89:ab;
-	      fixed-address margaux.example.com;
+	      fixed-address margaux.exemplo.com;
 	      next-server 192.168.4.4;<co id="co-dhcp-next-server">
 	      filename "/tftpboot/kernel.diskless";<co id="co-dhcp-filename">
 	      option root-path "192.168.4.4:/data/misc/diskless";<co id="co-dhcp-root-path">
@@ -2540,57 +2558,52 @@ Exports list on foobar:
 	  </programlisting>
 
 	  <calloutlist>
-	    <callout arearefs="co-dhcp-host-name"><para>This option tells
-		<command>dhcpd</command> to send the value in the
-		<literal>host</literal> declarations as the hostname for the
-		diskless host.  An alternate way would be to add an
-		<literal>option host-name
-		  <replaceable>margaux</replaceable></literal> inside the
-		host declarations.</para>
+	    <callout arearefs="co-dhcp-host-name"><para>Esta op&ccedil;&atilde;o diz ao 
+	    <command>dhcpd</command> para enviar o valor nas
+	    declara&ccedil;&otilde;es <literal>host</literal> como o nome do sistema
+	    para a m&aacute;quina sem disco.  Uma alternativa seria adicionar
+	    um <literal>option host-name <replaceable>margaux</replaceable>
+	    </literal> dentro das declara&ccedil;&otilde;es host.</para></callout>
+
+	    <callout arearefs="co-dhcp-next-server"><para>A diretiva 
+	    <literal>next-server</literal> designa o servidor TFTP (o
+	    padr&atilde;o &eacute; usar o mesmo sistema que o servidor DHCP).</para>
 	    </callout>
 
-	    <callout arearefs="co-dhcp-next-server"><para>The
-		<literal>next-server</literal> directive designates
-		the TFTP server (the default is to use the same host as the
-		DHCP server).</para>
-	    </callout>
+	    <callout arearefs="co-dhcp-filename"><para>A diretiva 
+	    <literal>filename</literal> define que o arquivo que o 
+	    <application>etherboot</application> vai carregar como o 
+	    kernel.
+	    <note><para>O PXE parece preferir um nome de arquivo
+	    relativo, e ele carrega <command>pxeboot</command>, n&atilde;o 
+	    o kernel (<literal>option filename "pxeboot"</literal>).
+	    </para></note>
+	    </para></callout> 
 
-	    <callout arearefs="co-dhcp-filename"><para>The
-		<literal>filename</literal> directive defines the file that
-		<application>etherboot</application> will load as a
-		kernel.
-		<note><para>PXE appears to prefer a relative file
-		    name, and it loads <command>pxeboot</command>, not the
-		    kernel (<literal>option filename
-		      "pxeboot"</literal>).</para>
-		</note>
-	</para>
-	    </callout>
-
-	    <callout arearefs="co-dhcp-root-path"><para>The
-		<literal>root-path</literal> option defines the path to
-		the root filesystem, in usual NFS notation.</para>
-	    </callout>
+	    <callout arearefs="co-dhcp-root-path"><para>A op&ccedil;&atilde;o 
+	    <literal>root-path</literal> define o caminho do sistema
+	    de arquivo raiz, na nota&ccedil;&atilde;o NFS usual.</para></callout>
 	  </calloutlist>
 
 	</sect4>
 	<sect4>
-	  <title>Configuration Using BOOTP</title>
+	  <title>Configura&ccedil;&atilde;o Usando o BOOTP</title>
 	  <indexterm>
 	    <primary>BOOTP</primary>
 	    <secondary>diskless operation</secondary>
 	  </indexterm>
 
-	  <para>Here follows an equivalent <command>bootpd</command>
-	    configuration.  This would be found in
-	    <filename>/etc/bootptab</filename>.</para>
+	  <para>Aqui segue uma configura&ccedil;&atilde;o <command>bootpd</command>
+	  equivalente.  Isto seria encontrado em 
+	  <filename>/etc/bootptab</filename>.</para>
 
-	  <para>Please note that <application>etherboot</application>
-	    must be compiled with the non-default option
-	    <literal>NO_DHCP_SUPPORT</literal> in order to use BOOTP,
-	    and that PXE <emphasis>needs</emphasis> DHCP.  The only
-	    obvious advantage of <application>bootpd</application> is
-	    that it exists in the base system.</para>
+	  <para>Por favor, note que o 
+	  <application>etherboot</application> precisa ser compilado
+	  com a op&ccedil;&atilde;o n&atilde;o padr&atilde;o <literal>NO_DHCP_SUPPORT</literal>
+	   para usar o BOOTP, e que o PXE <emphasis>precisa</emphasis>
+	   do DHCP.  A &uacute;nica vantagem &oacute;bvia do 
+	   <application>bootpd</application> &eacute; que ele existe no
+	   sistema base.</para>
 
 	  <programlisting>
 	  .def100:\
@@ -2608,55 +2621,56 @@ Exports list on foobar:
       </sect3>
 
       <sect3>
-	<title>Preparing a Boot Program with
-	  <application>Etherboot</application></title>
+	<title>Preparando um Programa de Boot com 
+	<application>Etherboot</application></title>
 
 	<indexterm>
 	  <primary>Etherboot</primary>
 	</indexterm>
 
-	<para><ulink url="http://etherboot.sourceforge.net">Etherboot's Web
-	  site</ulink> contains
-	  <ulink url="http://etherboot.sourceforge.net/doc/html/userman.html">
-	  extensive documentation</ulink> mainly intended for Linux
-	  systems, but nonetheless containing useful information.  The
-	  following will just outline how you would use
-	  <application>etherboot</application> on a FreeBSD
-	  system.</para>
+	<para><ulink url="http://etherboot.sourceforge.net">O S&iacute;tio 
+	Web do Etherboot</ulink> cont&eacute;m <ulink
+	url="http://etherboot.sourceforge.net/doc/html/userman/t1.html">
+	extensa documenta&ccedil;&atilde;o</ulink> direcionada principalmente a 
+	sistemas Linux, mas apesar de tudo, contendo informa&ccedil;&otilde;es 
+	&uacute;teis.  O texto a seguir vai apenas delinear como voc&ecirc; usaria 
+	o <application>etherboot</application> em um sistema FreeBSD.
+	</para>
 
-	<para>You must first install the <filename
-	  role="package">net/etherboot</filename> package or port.
-	  The <application>etherboot</application> port can normally
-	  be found in <filename>/usr/ports/net/etherboot</filename>.
-	  If the ports tree is installed on your system, just typing
-	  <literal>make</literal> in this directory should take care
-	  of everything.  Else refer to <xref linkend="ports"> for
-	  information about ports and packages.</para>
+	<para>Primeiro voc&ecirc; precisa instalar o port ou pacote 
+	<filename role="package">net/etherboot</filename>.  O port
+	<application>etherboot</application> pode normalmente ser 
+	encontrado em <filename>/usr/ports/net/etherboot</filename>.
+	Se a &aacute;rvore dos ports est&aacute; instalada em seu sistema, apenas
+	digitando <literal>make</literal> neste diret&oacute;rio deve
+	resolver tudo.  Do contr&aacute;rio, veja <xref linkend="ports"> para
+	informa&ccedil;&otilde;es sobre ports e pacotes (packages).</para>
 
-	<para>For our setup, we shall use a boot floppy.  For other methods
-	  (PROM, or dos program), please refer to the
-	  <application>etherboot</application> documentation.</para>
+	<para>Para nossa configura&ccedil;&atilde;o, usaremos um disquete de
+	inicializa&ccedil;&atilde;o.  Para outros m&eacute;todos (PROM, ou programa DOS),
+	veja, por favor, a documenta&ccedil;&atilde;o do 
+	<application>etherboot</application>.</para>
 
-	<para>To make a boot floppy, insert a floppy in the drive on the
-	  machine where you installed <application>etherboot</application>,
-	  then change your current directory to the <filename>src</filename>
-	  directory in the <application>etherboot</application> tree and
-	  type:</para>
+	<para>Para fazer um disquete de inicializa&ccedil;&atilde;o, insira o
+	disquete no leitor na m&aacute;quina onde voc&ecirc; instalou o
+	<application>etherboot</application>, ent&atilde;o mude seu diret&oacute;rio
+	atual para o diret&oacute;rio <filename>src na &aacute;rvore 
+	<application>etherboot</application> e digite:</filename></para>
 
 	<screen>
 	  &prompt.root; <userinput>gmake bin32/<replaceable>devicetype</replaceable>.fd0</userinput>
 	</screen>
 
-	<para><replaceable>devicetype</replaceable> depends on the type of
-	  the Ethernet card in the diskless workstation.  Refer to the
-	  <filename>NIC</filename> file in the same directory to determine the
-	  right <replaceable>devicetype</replaceable>.</para>
+	<para>O <replaceable>devicetype</replaceable> depende do tipo
+	de interface Ethernet na esta&ccedil;&atilde;o de trabalho sem disco.  Veja
+	o arquivo <filename>NIC</filename> no mesmo diret&oacute;rio para
+	determinar o <replaceable>devicetype</replaceable> correto.</para>
 
       </sect3>
 
 
       <sect3>
-	<title>Configuring the TFTP and NFS Servers</title>
+	<title>Configurando os Servidores TFTP e NFS</title>
 
 	<indexterm>
 	  <primary>TFTP</primary>
@@ -2667,61 +2681,64 @@ Exports list on foobar:
 	  <secondary>diskless operation</secondary>
 	</indexterm>
 
-	<para>You need to enable <command>tftpd</command> on the TFTP
-	  server:</para>
+	<para>voc&ecirc; precisa ativar o <command>tftpd</command> no
+	servidor TFTP:</para>
 	<procedure>
 	  <step>
-	    <para>Create a directory from which <command>tftpd</command>
-	    will serve the files, e.g. <filename>/tftpboot</filename>.</para>
+	    <para>Crie um diret&oacute;rio de onde o 
+	    <command>tftpd</command> vai fornecer arquivos, p.ex. 
+	    <filename>/tftpboot</filename>.</para>
 	  </step>
 
 	  <step>
-	    <para>Add this line to your
-	      <filename>/etc/inetd.conf</filename>:</para>
+	    <para>Adicione esta linha ao seu 
+	    <filename>/etc/inetd.conf</filename>:</para>
 
 	    <programlisting>tftp    dgram   udp     wait    root  /usr/libexec/tftpd    tftpd -s /tftpboot</programlisting>
 
-	    <note><para>It appears that at least some PXE versions want
-		the TCP version of TFTP.  In this case, add a second line,
-		replacing <literal>dgram udp</literal> with <literal>stream
-		tcp</literal>.</para>
-	    </note>
+	    <note><para>Parece que pelo menos algumas vers&otilde;es de PXE
+	    querem a vers&atilde;o TCP do TFTP.  Neste caso, adicione a
+	    segunda linha, substituindo <literal>dgram udp</literal> por 
+	    <literal>stream tcp</literal>.</para></note>
 	  </step>
 	  <step>
-	    <para>Tell <command>inetd</command> to reread its configuration
-	      file:</para>
+	    <para>Diga ao <command>inetd</command> para reler seu
+	    arquivo de configura&ccedil;&atilde;o:</para>
 	    <screen>&prompt.root; <userinput>kill -HUP `cat /var/run/inetd.pid`</userinput></screen>
 	  </step>
 	</procedure>
 
-	<para>You can place the <filename>tftpboot</filename>
-	  directory anywhere on the server.  Make sure that the
-	  location is set in both <filename>inetd.conf</filename> and
-	  <filename>dhcpd.conf</filename>.</para>
+	<para>Voc&ecirc; pode colocar o diret&oacute;rio 
+	<filename>tftpboot</filename> em qualquer lugar no servidor.
+	Certifique-se de que a localiza&ccedil;&atilde;o est&aacute; configurada em ambos
+	<filename>inetd.conf</filename> e 
+	<filename>dhcpd.conf</filename>.</para>
 
-	<para>You also need to enable NFS and export the
-	  appropriate filesystem on the NFS server.</para>
+	<para>Voc&ecirc; tamb&eacute;m precisa ativar o NFS e exportar o sistema de
+	arquivo adequado no servidor NFS.</para>
 
 	<procedure>
 	  <step>
-	    <para>Add this to <filename>/etc/rc.conf</filename>:</para>
+	    <para>Adicione isto ao <filename>/etc/rc.conf</filename>:</para>
 	    <programlisting>nfs_server_enable="YES"</programlisting>
 	  </step>
 
 	  <step>
-	    <para>Export the filesystem where the diskless root directory
-	      is located by adding the following to
-	      <filename>/etc/exports</filename> (adjust the volume mount
-	      point and replace <replaceable>margaux</replaceable>
-	      with the name of the diskless workstation):</para>
+	    <para>Exporte o sistema de arquivo onde est&aacute; localizado o
+	    diret&oacute;rio raiz da esta&ccedil;&atilde;o de trabalho sem disco,
+	    adicionando o seguinte ao <filename>/etc/exports</filename>
+	     (ajuste o ponto de montagem do volume e troque 
+	     <replaceable>margaux</replaceable> pelo nome da esta&ccedil;&atilde;o
+	     de trabalho sem disco):</para>
 
 	    <programlisting><replaceable>/data/misc</replaceable> -alldirs -ro <replaceable>margaux</replaceable></programlisting>
 	  </step>
 	  <step>
-	    <para>Tell <command>mountd</command> to reread its configuration
-	      file.  If you actually needed to enable NFS in
-	      <filename>/etc/rc.conf</filename>
-	      at the first step, you probably want to reboot instead.</para>
+	    <para>Diga ao <command>mountd</command> para reler seu
+	    arquivo de configura&ccedil;&atilde;o.  Se voc&ecirc; realmente precisasse
+	    ativar o NFS no <filename>/etc/rc.conf</filename> no 
+	    primeiro passo, voc&ecirc; provavelmente iria preferir
+	    reinicializar.</para>
 	    <screen>&prompt.root; <userinput>kill -HUP `cat /var/run/mountd.pid`</userinput></screen>
 	  </step>
 	</procedure>
@@ -2729,84 +2746,90 @@ Exports list on foobar:
       </sect3>
 
       <sect3>
-	<title>Building a Diskless Kernel</title>
+	<title>Construindo um Kernel Sem Disco</title>
 
 	<indexterm>
 	  <primary>diskless operation</primary>
 	  <secondary>kernel configuration</secondary>
 	</indexterm>
 
-	<para>Create a kernel configuration file for the diskless client
-	  with the following options (in addition to the usual
-	  ones):</para>
+	<para>Crie um arquivo de configura&ccedil;&atilde;o de kernel para o cliente
+	sem disco com as seguintes op&ccedil;&otilde;es (em acr&eacute;scimo &agrave;s op&ccedil;&otilde;es
+	usuais):</para>
 
 	<programlisting>
-	  options     BOOTP	  # Use BOOTP to obtain IP address/hostname
+	  options     BOOTP	     # Use BOOTP to obtain IP address/hostname
 	  options     BOOTP_NFSROOT  # NFS mount root filesystem using BOOTP info
 	  options     BOOTP_COMPAT   # Workaround for broken bootp daemons.
 	</programlisting>
 
-	<para>You may also want to use <literal>BOOTP_NFSV3</literal> and
-	  <literal>BOOTP_WIRED_TO</literal> (refer to <filename>LINT</filename>).</para>
+	<para>Voc&ecirc; tamb&eacute;m pode querer usar <literal>BOOTP_NFSV3</literal> e 
+	<literal>BOOTP_WIRED_TO</literal> (veja o
+	<filename>LINT</filename>).</para>
 
-	<para>Build the kernel (See <xref linkend="kernelconfig">),
-	  and copy it to the tftp directory, under the name listed
-	  in <filename>dhcpd.conf</filename>.</para>
-
+	<para>Construa o kernel (Veja <xref linkend="kernelconfig">),
+	 e copie-o para o diret&oacute;rio do tftp, sob o nome listado em 
+	 <filename>dhcpd.conf</filename>.</para>
 
       </sect3>
 
       <sect3>
-	  <title>Preparing the Root Filesystem</title>
+	  <title>Preparando o Sistema de Arquivo Raiz</title>
 
 	<indexterm>
 	  <primary>root file system</primary>
 	  <secondary>diskless operation</secondary>
 	</indexterm>
 
-	<para>You need to create a root filesystem for the diskless
-	  workstations, in the location listed as
-	  <literal>root-path</literal> in
-	  <filename>dhcpd.conf</filename>.</para>
+	<para>voc&ecirc; precisa criar um sistema de arquivo raiz para as
+	esta&ccedil;&otilde;es de trabalho sem disco, no local listado como 
+	<literal>root-path</literal> no 
+	<filename>dhcpd.conf</filename>.</para>
 
-	<para>The easiest way to do this is to use the
-	  <filename>/usr/share/examples/diskless/clone_root</filename>
-	  shell script.  This script needs customization, at least to adjust
-	  the place where the filesystem will be created (the
-	  <literal>DEST</literal> variable).</para>
+	<para>A forma mais f&aacute;cil de faz&ecirc;-lo &eacute; usar o shell script
+	<filename>/usr/share/examples/diskless/clone_root</filename>.
+	 Este script precisa ser personalizado, pelo menos para
+	 ajustar o lugar onde o sistema de arquivo ser&aacute; criado (a
+	 vari&aacute;vel <literal>DEST</literal>).</para>
 
-	<para>Refer to the comments at the top of the script for
-	    instructions.  They explain how the base filesystem is built,
-	    and how files may be selectively overridden by versions specific
-	    to diskless operation, to a subnetwork, or to an individual
-	    workstation.  They also give examples for the diskless
-	    <filename>/etc/fstab</filename> and <filename>
-	    /etc/rc.conf</filename> files.</para>
+	<para>Refira aos coment&aacute;rios no topo do script para
+	instru&ccedil;&otilde;es.  Elas explicam como o sistema de arquivo base &eacute;
+	constru&iacute;do, e como os arquivos podem ser seletivamente
+	cancelados por vers&otilde;es espec&iacute;ficas para opera&ccedil;&atilde;o sem disco,
+	para uma subrede ou, para uma esta&ccedil;&atilde;o de trabalho individual. 
+	 Eles tamb&eacute;m d&atilde;o exemplos para os arquivos  
+	<filename>/etc/fstab</filename> e 
+	<filename>/etc/rc.conf</filename> para opera&ccedil;&atilde;o sem disco.
+	</para>
 
-	  <para>The <filename>README</filename> files in
-	    <filename>/usr/share/examples/diskless</filename> contain a lot
-	    of interesting background information, but, together with the
-	    other examples in the <filename>diskless</filename> directory,
-	    they actually document a configuration method which is distinct
-	    from the one used by <filename>clone_root</filename> and
-	    <filename>/etc/rc.diskless[12]</filename>, which is a little
-	    confusing.  Use them for reference only, except if you prefer
-	    the method that they describe, in which case you will need
-	    customized <filename>rc</filename> scripts.</para>
+	  <para>Os arquivos <filename>README</filename> em 
+	  <filename>/usr/share/examples/diskless</filename> cont&ecirc;m
+	  muitas informa&ccedil;&otilde;es t&eacute;cnicas , mas, juntamente com outros
+	  exemplos no diret&oacute;rio <filename>diskless</filename>, eles na
+	  realidade documentam um m&eacute;todo de configura&ccedil;&atilde;o que &eacute;
+	  diferente do usado por <filename>clone_root</filename> e
+	  <filename>/etc/rc.diskless[12]</filename>, o que &eacute; um pouco
+	  confuso.  Use-os apenas para refer&ecirc;ncia, exceto se voc&ecirc;
+	  preferir o m&eacute;todo por eles descrito, sendo que, neste caso,
+	  voc&ecirc; vai precisar de scripts <filename>rc</filename> 
+	  modificados.</para>
+
       </sect3>
 
       <sect3>
-	<title>Configuring Swap</title>
+	<title>Configurando o Swap</title>
 
-	<para>If needed, a swap file located on the server can be
-	  accessed via NFS.  The exact <filename>bootptab</filename>
-	  or <filename>dhcpd.conf</filename> options are not clearly
-	  documented at this time.  The following configuration
-	  suggestions have been reported to work in some installations
-	  using isc-dhcp 3.0rc11.</para>
+	<para>Se necess&aacute;rio, um arquivo de troca (swap) localizado no
+	servidor pode ser acessado via NFS.  As op&ccedil;&otilde;es exatas 
+	do <filename>bootptab</filename> ou 
+	<filename>dhcpd.conf</filename> n&atilde;o s&atilde;o claramente
+	documentadas neste momento.  As seguintes sugest&otilde;es de
+	configura&ccedil;&atilde;o foram reportadas como funcionais em algumas
+	instala&ccedil;&otilde;es usando o isc-dhcp 3.0rc11.</para>
+
 	<procedure>
-	  <step><para>Add the following lines to
-	  <filename>dhcpd.conf</filename>:</para>
+	  <step><para>Adicione as seguintes linhas ao 
+	  <filename>dhcpd.conf</filename>:</para></step>
 	    <programlisting>
 	      # Global section
 	      option swap-path code 128 = string;
@@ -2818,78 +2841,82 @@ Exports list on foobar:
 		option swap-size <replaceable>64000</replaceable>;
 	      }
 	    </programlisting>
-	    <para>The idea is that, at least for a FreeBSD client,
-	      DHCP/BOOTP option code 128 is the path to the NFS swap file,
-	      and option code 129 is the swap size in kilobytes.  Older
-	      versions of <command>dhcpd</command> allowed a syntax of
-	      <literal>option option-128 "...</literal>, which does not
-	      seem to work any more.</para>
-	    <para><filename>/etc/bootptab</filename> would use the
-	      following syntax instead:</para>
+	    <para>A ideia &eacute; que, pelo menos para o cliente FreeBSD, a
+	    op&ccedil;&atilde;o c&oacute;digo 128 &eacute; o caminho para o arquivo de troca
+	    (swap) do NFS, e a op&ccedil;&atilde;o c&oacute;digo 129 &eacute; o tamanho do 
+	    arquivo de troca, em kilobytes.  Vers&otilde;es anteriores do 
+	    <command>dhcpd</command> permitiam uma sintaxe 
+	    <literal>option option-128 "...</literal>, que parece
+	    n&atilde;o mais funcionar.</para>
+
+	    <para>O <filename>/etc/bootptab</filename>, ao inv&eacute;s,
+	    usaria a seguinte sintaxe:</para>
 
 	    <para><literal>T128="192.168.4.4:/netswapvolume/netswap":T129=64000
 	      </literal></para>
 	  </step>
 
 	  <step>
-	    <para>On the NFS swap file server, create the swap
-	    file(s)</para>
+	    <para>No servidor de arquivo de troca (swap), crie o(s)
+	    arquivo(s) de troca:</para>
 	    <screen>
 	      &prompt.root; <userinput>mkdir <replaceable>/netswapvolume/netswap</replaceable></userinput>
 	      &prompt.root; <userinput>cd <replaceable>/netswapvolume/netswap</replaceable></userinput>
 	      &prompt.root; <userinput>dd if=/dev/zero bs=1024 count=<replaceable>64000</replaceable> of=swap.<replaceable>192.168.4.6</replaceable></userinput>
 	      &prompt.root; <userinput>chmod 0600 swap.<replaceable>192.168.4.6</replaceable></userinput>
 	    </screen>
-	    <para><replaceable>192.168.4.6</replaceable> is the IP address
-	      for the diskless client.</para>
+	    <para><replaceable>192.168.4.6</replaceable> &eacute; o endere&ccedil;o
+	    IP do cliente sem disco.</para>
 	  </step>
 
 	  <step>
-	    <para>On the NFS swap file server, add the following line to
-	    <filename>/etc/exports</filename>:</para>
+	    <para>No servidor de arquivo de troca (swap) NFS, adicione
+	    a seguinte linha ao <filename>/etc/exports</filename>:</para>
 	    <programlisting>
 	      <replaceable>/netswapvolume</replaceable>  -maproot=0:10 -alldirs <replaceable>margaux</replaceable>
 	    </programlisting>
-	    <para>Then tell <application>mountd</application> to reread the
-		exports file, as above.</para>
+	    <para>Ent&atilde;o diga ao <application>mountd</application> 
+	    para reler o arquivo exports, como acima.</para>
 	  </step>
 	</procedure>
 
       </sect3>
 
       <sect3>
-	<title>Miscellaneous Issues</title>
-
+	<title>Casos Diversos</title>
 
 	<sect4>
-	  <title>Running with a Read-only <filename>/usr</filename></title>
+	  <title>Rodando com um <filename>/usr</filename>
+	  Somente-Leitura</title>
 
 	  <indexterm>
 	    <primary>diskless operation</primary>
 	    <secondary>/usr read-only</secondary>
 	  </indexterm>
 
-	    <para>If the diskless workstation is configured to run X, you
-	    will have to adjust the xdm configuration file, which puts
-	    the error log on <filename>/usr</filename> by default.</para>
+	    <para>Se esta&ccedil;&atilde;o de trabalho sem disco est&aacute; configurada
+	    para rodar X, voc&ecirc; precisar&aacute; ajustar o arquivo de
+	    configura&ccedil;&atilde;o xdm, o qual coloca o registro (log) de erros
+	    em <filename>/usr</filename>, por padr&atilde;o.</para>
 	</sect4>
 	<sect4>
-	  <title>Using a Non-FreeBSD Server</title>
+	  <title>Usando um Servidor N&atilde;o-FreeBSD</title>
 
-	  <para>When the server for the root filesystem is not running FreeBSD,
-	    you will have to create the root filesystem on a
-	    FreeBSD machine, then copy it to its destination, using
-	    <command>tar</command> or <command>cpio</command>.</para>
-	  <para>In this situation, there are sometimes
-	    problems with the special files in <filename>/dev</filename>,
-	    due to differing major/minor integer sizes.  A solution to this
-	    problem is to export a directory from the non-FreeBSD server,
-	    mount this directory onto a FreeBSD machine, and run
-	    <command>MAKEDEV</command> on the FreeBSD machine
-	    to create the correct device entries (FreeBSD 5.0 and later
-	    use &man.devfs.5; to allocate device nodes transparently for
-	    the user, running <command>MAKEDEV</command> on these
-	    versions is useless).</para>
+	  <para>Quando o servidor do sistema de arquivo raiz n&atilde;o roda
+	  FreeBSD, voc&ecirc; ter&aacute; que criar o sistema de arquivo raiz em
+	  uma m&aacute;quina FreeBSD e depois copi&aacute;-lo para seu destino,
+	  usando o <command>tar</command> ou <command>cpio</command>.
+	  </para>
+
+	  <para>Nesta situa&ccedil;&atilde;o, existem &agrave;s vezes alguns problemas com
+	  arquivos especiais em <filename>/dev</filename>, por causa
+	  de tamanhos inteiros maior/menor (major/minor) diferentes.
+	  A solu&ccedil;&atilde;o para este problema &eacute; exportar um diret&oacute;rio da
+	  m&aacute;quina n&atilde;o-FreeBSD para criar as entradas de dispositivos
+	  corretas (FreeBSD 5.0 e posteriores usam &man.devfs.5; para
+	  alocar n&oacute;s de dispositivos - device nodes -
+	  transparentemente para o usu&aacute;rio, executar
+	  <command>MAKEDEV</command> nestas vers&otilde;es &eacute; in&uacute;til).</para>
 
 	</sect4>
 
