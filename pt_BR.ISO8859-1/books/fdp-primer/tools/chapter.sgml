@@ -31,60 +31,66 @@
 -->
 
 <chapter id="tools">
-  <title>Tools</title>
+  <title>Ferramentas</title>
   
-  <para>The FDP uses a number of different software tools to help
-    manage the FreeBSD documentation, convert it to different output
-    formats, and so on.  You will need to use these tools yourself if
-    you are to work with the FreeBSD documentation.</para>                    
+  <para>O FDP usa diferentes ferramentas para ajudar no gerenciamento da
+    documenta&ccedil;&atilde;o do FreeBSD, na convers&atilde;o para diferentes
+    formatos, e por a&iacute; vai.  Voc&ecirc; pr&oacute;prio precisar&aacute;
+    usar essas ferramentas se voc&ecirc; for trabalhar com a 
+    documenta&ccedil;&atilde;o do FreeBSD</para>
 
-  <para>All these tools are available as FreeBSD Ports and Packages,
-    greatly simplifying the work you have to do to install
-    them.</para>                                                              
+  <para>Todas essas ferramentas est&atilde;o dispon&iacute;s como Ports e
+    Packages do FreeBSD, simplificando enormemente o trabalho a ser feito
+    para instal&aacute;-las.</para>
   
-  <para>You will need to install these tools before you work through
-    any of the examples in later chapters.  The actual usage of these
-    tools is covered in later chapters.</para>     
+  <para>Voc&ecirc; precisar&atilde; instalar essas ferramentas antes de
+    trabalhar com qualquer exemplo dos cap&iacute;tulos posteriores.  O
+    uso real dessas ferramentas ser&aacute; coberto nos cap&iacute;tulos
+    posteriores.</para>
 
   <tip>
-    <title>Use <filename role="package">textproc/docproj</filename> if possible</title>
+    <title>Use <filename role="package">textproc/docproj</filename> se poss&iacute;vel</title>
 
-    <para>You can save yourself a lot of time if you install the
-      <filename role="package">textproc/docproj</filename> port.  This is a
-      <emphasis>meta-port</emphasis> which does not contain any software
-      itself.  Instead, it depends on various other ports being installed
-      correctly.  Installing this port <emphasis>should</emphasis>
-      automatically download and install all of the packages listed in this
-      chapter that you need.</para>
+    <para>Voc&ecirc; pode economizar bastante tempo se instalar o port
+      <filename role="package">textproc/docproj</filename>.  Esse &eacute; um
+      <emphasis>meta-port</emphasis> que por si s&otilde; n&atilde;o
+      cont&eacute;m nenhum programa.  Ao inv&eacute;s disto, ele depende que
+      v&aacute;rios outros ports estejam instalados corretamente.
+      A instal&ccedil;&atilde;o <emphasis>dever&aacute;</emphasis>
+      automaticamente baixar e instalar todos os pacotes necess&aacute;rios
+      listados nesse cap&iacute;tulo.</para>
 
-    <para>One of the packages that you might need is the JadeTeX macro set.
-      In turn, this macro set requires TeX to be installed.  TeX is a large
-      package, and you only need it if you want to produce Postscript or PDF
-      output.</para>
+    <para>Um dos pacotes que voc&ecirc; pode precisar &eacute; o conjunto de
+      macros JadeTeX.  Por sua vez, esse conjunto de macros requer que o Tex
+      esteja instalado.  Tex &eacute; um pacote grande, e ele somente
+      ser&aacute; necess&aacute;rio se voc&ecirc; quer gerar sa&iacute;das em
+      formato Postscript ou PDF.</para>
 
-    <para>To save yourself time and space you must specify whether or not you
-      want JadeTeX (and therefore TeX) installed when you install this port.
-      Either do;
+    <para>Para economizar seu tempo e espa&ccedil;o em disco voc&ecirc; deve
+      especificar se quer ou &atilde;o quer o JadeTeX (e por consequ&ecirc;ncia
+      o TeX) seja instalado quando o port for instalado.
+      Conforme necess&aacute;rio, fa&ccedil;a;
 
       <screen>&prompt.root; <userinput>make JADETEX=yes install</userinput></screen>
 
-      or
+      ou
 
       <screen>&prompt.root; <userinput>make JADETEX=no install</userinput></screen>
 
-      as necessary.</para>
+      </para>
   </tip>
 
   <sect1>
-    <title>Mandatory tools</title>
+    <title>Ferramentas Obrigat&oacute;rias</title>
 
     <sect2>
       <title>Software</title>
       
-      <para>These programs are required before you can usefully work with the
-	FreeBSD documentation, and they will allow you to convert the
-	documentation to HTML, plain text, and RTF formats.  They are all
-	included in <filename role="package">textproc/docproj</filename>.</para>
+      <para>Esses programas s&atilde;o necess&aacute;rios para voc&ecirc;
+	trabalhar com a documenta&ccedil;&atilde;o do FreeBSD, e eles
+	permitir&atilde;o converter a documenta&ccedil;&atilde;o para
+	os formatos HTML, texto puro e RTF.  Eles est&atilde;o todos
+	inclu&iacute;dos em <filename role="package">textproc/docproj</filename>.</para>
       
       <variablelist>
 	<varlistentry>
@@ -92,8 +98,8 @@
 	    (<filename role="package">textproc/sp</filename>)</term>
 	  
 	  <listitem>
-	    <para>A suite of applications, including a validating SGML parser,
-	      and an SGML normaliser.</para>
+	    <para>Um suite de aplica&ccedil;&otilde;es, incluindo um parser SGML
+	      de valida&ccedil;&atilde;o, e um normalisador SGML.(?!?)</para>
 	  </listitem>
 	</varlistentry>
 	
@@ -102,8 +108,9 @@
 	    (<filename role="package">textproc/jade</filename>)</term>
 	  
 	  <listitem>
-	    <para>A DSSSL implementation.  Used for converting marked up
-	      documents to other formats, including HTML and TeX.</para>
+	    <para>Uma implementa&ccedil;&atilde;o DSSSL.  Utilizado para a
+	      convers&atilde;o de documentos escritos com linguagem de marcas
+	      para outros formatos, incluindo HTML e TeX.</para>
 	  </listitem>
 	</varlistentry>
 	
@@ -112,9 +119,9 @@
 	    (<filename role="package">www/tidy</filename>)</term>
 	  
 	  <listitem>
-	    <para>An HTML 'pretty printer', used to reformat some of the
-	      automatically generated HTML so that it is easier to
-	      follow.</para>
+	    <para>Um HTML 'pretty printer', utilizado para reformatar alguns
+	      dos HTMLs gerados automaticamente ficando mais f&aacute;cil de
+	      entend&ecirc;-los. (?!?)</para>
 	  </listitem>
 	</varlistentry>
 	
@@ -123,8 +130,8 @@
 	    (<filename role="package">www/links</filename>)</term>
 	  
 	  <listitem>
-	    <para>A text-mode WWW browser that can also convert
-	      HTML files to plain text.</para>
+	    <para>Um navegador WWW em modo texto que tamb&eacute; converte
+	      arquivos HTML para texto puro.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -133,27 +140,29 @@
 	    (<filename role="package">graphics/peps</filename>)</term>
 	  
 	  <listitem>
-	    <para>Some of the documentation includes images, some of which are
-	      stored as EPS files.  These must be converted to PNG before most
-	      web browsers will display them.</para>
+	    <para>Parte da documenta&ccedil;&atilde;o inclui imagens, algumas
+	      delas sendo armazenadas como arquivos EPS.  Essas imagens devem
+	      ser convertidas para PNG antes de algum navegador web
+	      mostr&aacute;-las.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
     </sect2>
 
     <sect2>
-      <title>DTDs and Entities</title>
+      <title>Entidades e DTDs</title>
 
-      <para>These are the DTDs and entity sets used by the FDP.  They need to
-	be installed before you can work with any of the documentation.</para>
+      <para>Esses s&atilde;o os conjuntos de DTDs e entidade usados pelo FDP.
+	Eles precisam estar instalados antes que voc&ecirc; trabalhe com
+	qualquer parte da documenta&ccedil;&atilde;o.</para>
       
       <variablelist>
 	<varlistentry>
 	  <term>HTML DTD (<filename role="package">textproc/html</filename>)</term>
 	  
 	  <listitem>
-	    <para>HTML is the markup language of choice for the World Wide
-	      Web, and is used throughout the FreeBSD web site.</para>
+	    <para>HTML &eacute; a linguagem de marcas escolhida para a World
+	      Wide Web, e &eacute; usada no web site do FreeBSD.</para>
 	  </listitem>
 	</varlistentry>
 	
@@ -161,8 +170,10 @@
 	  <term>DocBook DTD (<filename role="package">textproc/docbook</filename>)</term>
 	  
 	  <listitem>
-	    <para>DocBook is designed for marking up technical documentation.
-	      All the FreeBSD documentation is written in DocBook.</para>
+	    <para>DocBook &eacute; uma linguagem de marcas projetada para
+	      documenta&ccedil;&atilde;o t&eacute;cnica.
+	      Toda a documenta&ccedil;&atilde;o do FreeBSD est&aacute; escrita
+	      com DocBook.</para>
 	  </listitem>
 	</varlistentry>
 	
@@ -171,10 +182,11 @@
 	    (<filename role="package">textproc/iso8879</filename>)</term>
 	  
 	  <listitem>
-	    <para>19 of the ISO 8879:1986 character entity sets used by many
-	      DTDs.  Includes named mathematical symbols, additional
-	      characters in the 'Latin' character set (accents, diacriticals,
-	      and so on), and Greek symbols.</para>
+	    <para>19 dos conjuntos de entidade de caracter ISO 8879:1986
+	      utilizados por muitos DTDs.  Inclui s&iacute;mbolos
+	      matem&aacute;ticos nomeadosDTDs, caracteres do conjunto de
+	      caracter 'Latin' (acentos, diacriticals(?!?) e por a&iacute; vai),
+	      e s&iacute;mbolos Gregos.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
