@@ -10,7 +10,7 @@
       <author>
 	<firstname>Jim</firstname>
 	<surname>Mock</surname>
-	<contrib>Restruturado, reorganizado e 
+	<contrib>Restruturado, reorganizado e
 	atualizado por </contrib>
 	<!-- 1 Mar 2000 -->
       </author>
@@ -1746,18 +1746,18 @@ exit 1
 	<screen>&prompt.root;<userinput>dmesg | grep sio</userinput></screen>
 
 	<para>Você deve ver alguma informações sobre dispositivos
-	  <devicename>sio</devicename>. Essas são as portas COM que
-	  nós precisamos. Se seu modem age como uma porta serial padrão
+	  <devicename>sio</devicename>.  Essas são as portas COM que
+	  nós precisamos.  Se seu modem age como uma porta serial padrão
 	  então você deve ele listado como <devicename>sio1</devicename>,
-	  ou COM2. Neste caso você não precisa recompilar seu kernel,
-	  você precisa apenas criar o dispositivo serial. Você pode
+	  ou COM2.  Neste caso você não precisa recompilar seu kernel,
+	  você precisa apenas criar o dispositivo serial.  Você pode
 	  fazer isso indo em <filename>/dev</filename> e rodando o
-	  script <filename>MAKEDEV</filename> como acima. Agora crie
+	  script <filename>MAKEDEV</filename> como acima.  Agora crie
 	  os dispositivos seriais com:</para>
 
 	<screen>&prompt.root; <userinput>sh MAKEDEV cuaa0 cuaa1 cuaa2 cuaa3</userinput></screen>
 
-	<para>que irá criar os dispositivos seriais para seu sistema. Se seu
+	<para>que irá criar os dispositivos seriais para seu sistema.  Se seu
 	  modem estiver em <devicename>sio1</devicename> ou <acronym>COM2</acronym>
 	  se você está no DOS, então este modem será <devicename>/dev/cuaa1</devicename>.</para>
     </sect2>
@@ -1765,15 +1765,15 @@ exit 1
     <sect2>
       <title>Conectando Manualmente</title>
 
-	<para>Conectar a Internet através do controle manual do 
+	<para>Conectar a Internet através do controle manual do
 	  <command>ppp</command> é rápido, fácil e uma boa forma
 	  de depurar uma conexão ou apenas ver como seu provedor
-	  gerencia conexões de clientes ppp. Vamos iniciar 
+	  gerencia conexões de clientes ppp.  Vamos iniciar
 	  o <application>PPP</application> pela linha de comando.
-	  Note que todos os nossos exemplos irão utilizar 
+	  Note que todos os nossos exemplos irão utilizar
 	  <emphasis>exemplo</emphasis> como o hostname da máquina
-	  rodando o <application>PPP</application>. Você inicia
-	  o <command>ppp</command> digitando apenas 
+	  rodando o <application>PPP</application>.  Você inicia
+	  o <command>ppp</command> digitando apenas
 	  <command>ppp</command>:</para>
 
       <screen>&prompt.root; <userinput>ppp</userinput></screen>
@@ -1782,7 +1782,7 @@ exit 1
 
       <screen>ppp ON exemplo&gt; <userinput>set device <devicename>/dev/cuaa1</devicename></userinput></screen>
 
-	<para>Ajustamos o dispositivo do modem, nesse caso 
+	<para>Ajustamos o dispositivo do modem, nesse caso
 	  <devicename>cuaa1</devicename>.</para>
 
       <screen>ppp ON exemplo&gt; <userinput>set speed 115200</userinput></screen>
@@ -1817,34 +1817,34 @@ type '~h' for help</programlisting>
 
       <screen>CONNECT</screen>
 
-	<para>Sinal de confirmação da conexão. Se nós formos ter
+	<para>Sinal de confirmação da conexão.  Se nós formos ter
 	  qualquer problema, não relacionado ao hardware, é aqui que
 	  tentaremos resolvê-lo.</para>
 
       <screen>ISP Login:<userinput>usuario</userinput></screen>
 
-	<para>Aqui um usuário é requerido. Digite o usuário que
+	<para>Aqui um usuário é requerido.  Digite o usuário que
 	  lhe foir informado pelo provedor.</para>
 
       <screen>ISP Pass:<userinput>senha</userinput></screen>
 
 	<para>Agora é a vez da senha, apenas responda com a senha
-	  que o provedor lhe informou. Da mesma maneira como
+	  que o provedor lhe informou.  Da mesma maneira como
 	  entramos no sistema, a senha não será mostrada aqui.</para>
 
       <screen>Shell or PPP:<userinput>ppp</userinput></screen>
 
 	<para>Dependendo do seu provedor este prompt pode não
-	  aparecer. Aqui estamos sendo indagados se nós gostaríamos
+	  aparecer.  Aqui estamos sendo indagados se nós gostaríamos
 	  de usar uma <literal>shell</literal> no provedor ou iniciar
-	  o <command>ppp</command>. Neste exemplo nós escolhemos
+	  o <command>ppp</command>.  Neste exemplo nós escolhemos
 	  <command>ppp</command> pois queremos uma conexão com a
 	  Internet.</para>
 
       <screen>Ppp ON exemplo&gt;</screen>
 
 	<para>Note que neste exemplo o primeiro <option>p</option>
-	  está maiúsculo agora. Isso mostra que nós nos conectamos
+	  está maiúsculo agora.  Isso mostra que nós nos conectamos
 	  com sucesso ao provedor.</para>
 
       <screen>PPp ON exemplo&gt;</screen>
@@ -1859,25 +1859,25 @@ type '~h' for help</programlisting>
 
       <screen>PPP ON exemplo&gt;<userinput>add default HISADDR</userinput></screen>
 
-	<para>Aqui nós adicionar a rota padrão. Precisamos fazer isso
+	<para>Aqui nós adicionar a rota padrão.  Precisamos fazer isso
 	  antes de conversar com o mundo exterior pois no momento
-	  a única conexão estabelecida é com a ponta remota. Se
+	  a única conexão estabelecida é com a ponta remota.  Se
 	  isso falhar devido a já haver uma rota existente você
 	  pode colocar o caractere <literal>!</literal> na frente
-	  da opção <option>add</option>. Você também pode fazer isso
+	  da opção <option>add</option>.  Você também pode fazer isso
 	  antes de iniciar a conexão e o programa irá negociar uma rota
 	  de acordo.</para>
 
 	<para>Se tudo correu bem nós devemos ter uma conexão ativa
 	  com a Internet agora, que deve ser jogada para o segundo
 	  plano usando <keycombo action="simul"><keycap>CTRL</keycap>
-	  <keycap>z</keycap></keycombo> Se você notar que o 
+	  <keycap>z</keycap></keycombo> Se você notar que o
 	  <command>PPP</command> retornou para <command>ppp</command>
 	  então nós perdemos nossa conexão.  É bom saber isso pois
-	  ele lhe informa o estado atual da conexão. P's maiúsculos
+	  ele lhe informa o estado atual da conexão.  P's maiúsculos
 	  inidicam que nós temos uma conexão com o provedor e p's
 	  minúsculos indicam que a conexão foi perdido por um
-	  motivo qualquer. O comando <command>ppp</command> tem
+	  motivo qualquer.  O comando <command>ppp</command> tem
 	  apenas dois estados.</para>
 
       <sect3>
@@ -1891,34 +1891,34 @@ type '~h' for help</programlisting>
 	  trava quando ele tenta enviar os dados pelo seu <literal>
 	  link</literal> de comunicação.  Ele estaria esperando
 	  por um sinal <acronym>CTS</acronym>, ou Clear To Send (Livre
-	  para Enviar), que pode nunca chegar. Entretanto se você
+	  para Enviar), que pode nunca chegar.  Entretanto se você
 	  ativar esta opção você deve também usar <option>set accmap</option>
 	  que pode ser requerido para cancelar o hardware que
 	  depende do envio de certos caracteres de ponta a ponta, na
-	  maior parte do tempo XON/XOFF.  Veja a página manual 
+	  maior parte do tempo XON/XOFF.  Veja a página manual
 	  &man.ppp.8; para maiores informações sobre esta opção
 	  e como ela é utilizada.</para>
 
 	<para>Se você tem um modem antigo pode ter que utilizar
-	  a opção <option>set parity even</option>.  Paridade é 
+	  a opção <option>set parity even</option>.  Paridade é
 	  ajustada para <literal>none</literal> por padrão, mas
 	  é utilizada para verificação de erros (com um aumento
-	  no tráfego) em modens antigos e alguns provedores. Você
+	  no tráfego) em modens antigos e alguns provedores.  Você
 	  pode precisar desta opção no provedor Compuserve.</para>
 
 	<para>O <application>PPP</application> pode não retornar
 	  para o modo de comando, o que geralmente indica um erro
 	  de negociação onde o provedor está aguardando que você
-	  inicie a negociação. Nesse ponto, usar o comando
+	  inicie a negociação.  Nesse ponto, usar o comando
 	  <command>~p</command> irá forçar o ppp a enviar as
 	  informações de configuração.</para>
 
 	<para>Se você nunca ver um prompt de login você terá de
 	  utilizar <acronym>PAP</acronym> ou <acronym>CHAP</acronym>
 	  para fazer a autenticação em vez do estilo &unix; no
-	  exemplo acima. Para usar <acronym>PAP</acronym> ou
+	  exemplo acima.  Para usar <acronym>PAP</acronym> ou
 	  <acronym>CHAP</acronym> apenas adicione as seguintes
-	  opções no <application>PPP</application> antes de 
+	  opções no <application>PPP</application> antes de
 	  entrar em modo terminal:</para>
 
 	<screen>ppp ON exemplo&gt; <userinput>set authname <replaceable>usuario</replaceable></userinput></screen>
@@ -1932,13 +1932,13 @@ type '~h' for help</programlisting>
 	  pela senha que foi definida pelo seu provedor.</para>
 
 	<para>Se você conectar sem problemas mas não conseguir achar
-	  nenhum domínio, tente utilizar o &man.ping.8; com um 
+	  nenhum domínio, tente utilizar o &man.ping.8; com um
 	  endereço <acronym>IP</acronym> e ver se você consegue
-	  alguma informação. Se sua ver 100% de perda de pacotes
+	  alguma informação.  Se sua ver 100% de perda de pacotes
 	  (<literal>packet</literal> <literal>loss</literal>) então
-	  poderá indicar que uma rota padrão não foi definida. Verifique
+	  poderá indicar que uma rota padrão não foi definida.  Verifique
 	  novamente que a opção <option>add default HISADDR</option>
-	  foi definida durante a conexão. Se você conseguir conectar
+	  foi definida durante a conexão.  Se você conseguir conectar
 	  a um endereço IP remoto então é possível que um servidor
 	  de nomes não foi adicionado ao <filename>/etc/resolv.conf</filename>.
 	  Esse arquivo deve se parecer com:</para>
@@ -1947,7 +1947,7 @@ type '~h' for help</programlisting>
 nameserver <replaceable>x.x.x.x</replaceable>
 nameserver <replaceable>y.y.y.y</replaceable></programlisting>
 
-	<para>Onde <replaceable>x.x.x.x</replaceable> e 
+	<para>Onde <replaceable>x.x.x.x</replaceable> e
 	  <replaceable>y.y.y.y</replaceable> devem ser trocados
 	  pelos endereços IP dos servidores de DNS do seu provedor.
 	  Essa informação pode ser definida pelo seu provedor, ou não.
@@ -1955,7 +1955,7 @@ nameserver <replaceable>y.y.y.y</replaceable></programlisting>
 
 	<para>Você pode fazer com que o &man.syslog.3; ative a função
 	  de <literal>logging</literal> para sua conexão <application>PPP</application></para>
-	  
+	
 	<programlisting>!ppp
 *.*     /var/log/ppp.log</programlisting>
 
