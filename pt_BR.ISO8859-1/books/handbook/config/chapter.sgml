@@ -716,48 +716,50 @@ sshd is running as pid 433.</screen>
         <author>
 	 <firstname>Marc</firstname>
 	 <surname>Fonvieille</surname>
-	 <contrib>Contributed by </contrib>
+	 <contrib>Contribui&ccedil;&atilde;o de </contrib>
 	 <!-- 6 October 2002 -->
         </author>
       </authorgroup>
     </sect1info>
 
-    <title>Setting Up Network Interface Cards</title>
+    <title>Configurando Interfaces de Rede</title>
 
     <indexterm><primary>network card configuration</primary></indexterm>
 
-    <para>Nowadays we can not think about a computer without thinking
-      about a network connection.  Adding and configuring a network
-      card is a common task for any &os; administrator.</para>
+    <para>Nos dias de hoje &eacute; dif&iacute;cil pensar em um computador sem
+      conex&atilde;o de rede.  Adicionar e configurar uma placa de rede 
+      &eacute; uma tarefa comum para qualquer administrador &os;.</para>
 
     <sect2>
-      <title>Locating the Correct Driver</title>
+      <title>Encontrando o Driver Correto</title>
 
       <indexterm>
 	<primary>network card configuration</primary>
 	<secondary>locating the driver</secondary>
       </indexterm>
 
-      <para>Before you begin, you should know the model of the card
-	you have, the chip it uses, and whether it is a PCI or ISA card.
-	&os; supports a wide variety of both PCI and ISA cards.
-	Check the Hardware Compatibility List for your release to see
-	if your card is supported.</para>
+      <para>Antes de come&ccedil;ar, voc&ecirc; deve saber o modelo da placa que 
+	voc&ecirc; possui, o chip que ela usa, se &eacute; PCI ou ISA.
+	&os; tem suporte &agrave; uma grande variedade de plavas PCI e ISA.  
+	Verifiqye a Lista de Compatibilidade de Hardware da sua vers&atilde;o 
+	e veja se a sua placa &eacute; suportada.</para>
 
-      <para>Once you are sure your card is supported, you need
-	to determine the proper driver for the card.  The file
-	<filename>/usr/src/sys/i386/conf/LINT</filename> will give you
-	the list of network interfaces drivers with some information
-	about the supported chipsets/cards.  If you have doubts about
-	which driver is the correct one, read the manual page of the
-	driver.  The manual page will give you more information about
-	the supported hardware and even the possible problems that
-	could occur.</para>
+      <para>Uma vez que a placa possui suporte, voc&ecirc; precisa determinar 
+	o <literal>dirver</literal> para ela.  O arquivo
+	<filename>/usr/src/sys/i386/conf/LINT</filename> te dar&aacute; uma lista 
+	de drivers de placa de rede com alguma informa&ccedil;&atilde;o sobre os 
+	<literal>chipsets</literal> suportados.  Se voc&ecirc; estiver com 
+	d&uacute;vidas sobre qual <literal>driver</literal> &eacute; o correto, leia a 
+	p&aacute;gina de manual do <literal>driver</literal>.  O manual te dar&aacute; 
+	informa&ccedil;&otilde;es sobre os dispositivos suportados e at&eacute; sobre 
+	problemas que podem ocorrer.</para>
 
-      <para>If you own a common card, most of the time you will not
-	have to look very hard for a driver.  Drivers for common
-	network cards are present in the <filename>GENERIC</filename>
-	kernel, so your card should show up during boot, like so:</para>
+      <para>Se voc&ecirc; possui uma placa comum, provavelmente voc&ecirc; n&atilde;o 
+	precisar&aacute; procurar tanto por um <literal>driver</literal>.  
+	<literal>Drivers</literal> para as placas de rede mais comuns 
+	est&atilde;o presentes no arquivo de <foreignphrase>kernel</foreignphrase>
+ 	<filename>GENERIC</filename>, ent&atilde;o sua placa deve aparecer
+	durante a inicializa&ccedil;&atilde;o, tipo:</para>
 
 <screen>dc0: &lt;82c169 PNIC 10/100BaseTX&gt; port 0xa000-0xa0ff mem 0xd3800000-0xd38
 000ff irq 15 at device 11.0 on pci0
@@ -772,39 +774,42 @@ miibus1: &lt;MII bus&gt; on dc1
 ukphy1: &lt;Generic IEEE 802.3u media interface&gt; on miibus1
 ukphy1:  10baseT, 10baseT-FDX, 100baseTX, 100baseTX-FDX, auto</screen>
 
-      <para>In this example, we see that two cards using the &man.dc.4;
-	driver are present on the system.</para>
+      <para>Neste exemplo, note que duas placas usam o driver &man.dc.4;,
+	que j&aacute; est&aacute; presente no sistema.</para>
 
-      <para>To use your network card, you will need to load the proper
-	driver.  This may be accomplished in one of two ways.  The
-	easiest way is to simply load a kernel module for your network
-	card with &man.kldload.8;.  A module is not available for all
-	network card drivers (ISA cards and cards using the &man.ed.4;
-	driver, for example).  Alternatively, you may statically compile
-	the support for your card into your kernel.  Check
-	<filename>/usr/src/sys/i386/conf/LINT</filename> and the
-	manual page of the driver to know what to add in your kernel
-	configuration file.  For more information about recompiling your
-	kernel, please see <xref linkend="kernelconfig">.  If your card
-	was detected at boot by your kernel (<filename>GENERIC</filename>)
-	you do not have to build a new kernel.</para>
+      <para>Para usar a sua placa de rede voc&ecirc; precisa carregar o driver 
+	apropriado.  Isto pode ser feito de duas maneiras.  A mais f&aacute;cil 
+	&eacute; simplesmente carregar um m&oacute;dulo de <foreignphrase>kernel</foreignphrase> 
+	para a sua placa com o &man.kldload.8;.  Um m&oacute;dulo n&atilde;o &eacute; 
+	dispon&iacute;vel para todos os drivers de placa de rede (placas ISA que usam 
+	&man.ed.4;, por exemplo).  Alternativamente, voc&ecirc; pode compilar estaticamente 
+	o suporte para a sua placa no <foreignphrase>kernel</foreignphrase>.  Verifique 
+	o arquivo <filename>/usr/src/sys/i386/conf/LINT</filename> e a p&aacute;gina de manual 
+	do <literal>driver</literal> para saber o que adicionar ao seu 
+	arquivo de configura&ccedil;&atilde;o do <foreignphrase>kernel<foreignphrase>.  Para 
+	maiores informa&ccedil;&otilde;es de como recompilar seu <foreignphrase>kernel</foreignphrase> 
+	por favor veja <xref linkend="kernelconfig">.  Se a sua placa foi 
+	detectada pelo seu <foreignphrase>kernel</foreignphrase> 
+	(<filename>GENERIC</filename>) durante a inicializa&ccedil;&atilde;o voc&ecirc; n&atilde;o 
+	precisa construir um novo kernel.</para>
     </sect2>
 
     <sect2>
-      <title>Configuring the Network Card</title>
+      <title>Configurando a Placa de Rede</title>
 
       <indexterm>
 	<primary>Network card configuration</primary>
 	<secondary>configuration</secondary>
       </indexterm>
 
-      <para>Once the right driver is loaded for the network card, the
-	card needs to be configured.  As with many other things, the
-	network card may have been configured at installation time by
+      <para>Uma vez que o <literal>driver</literal> correto da 
+	placa de rede est&aacute; carregado, a placa precisar ser 
+	configurada.  Como muitas outras coisas, a placa de rede 
+	pode ter sido configurada durante a instala&ccedil;&atilde;o pelo
 	<application>sysinstall</application>.</para>
 
-      <para>To display the configuration for the network interfaces on
-	your system, enter the following command:</para>
+      <para>Para mostrar a configura&ccedil;&atilde;o das placas de rede 
+	do seu sistema, entre com o seguinte comando:</para>
 
 <screen>&prompt.user; <userinput>ifconfig</userinput>
 dc0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
@@ -823,167 +828,175 @@ lo0: flags=8049&lt;UP,LOOPBACK,RUNNING,MULTICAST&gt; mtu 16384
 tun0: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1500</screen>
 
       <note>
-	<para>Old versions of &os; may require the <option>-a</option>
-	  option following &man.ifconfig.8;, for more details about the
-	  correct syntax of &man.ifconfig.8;, please refer to the manual
-	  page.  Note also that entries concerning IPv6
-	  (<literal>inet6</literal> etc.) were omitted in this
-	  example.</para>
+	<para>Vers&otilde;es antigas do &os; podem requerer o par&acirc;metro <option>-a</option>
+	  seguido de &man.ifconfig.8;, para mais detalhes sobre a 
+	  sintaxe correta do &man.ifconfig.8; por favor leia a p&aacute;gina 
+	  de manual.  Note que tamb&eacute;m existem entradas referentes &agrave; IPv6
+	  (<literal>inet6</literal> etc.) que foram omitidas neste
+	  exemplo.</para>
       </note>
 
-      <para>In this example, the following devices were
-	displayed:</para>
+      <para>Neste exemplo, os seguintes dispositivos foram
+	mostrados:</para>
 
       <itemizedlist>
 	<listitem>
-	  <para><devicename>dc0</devicename>: The first Ethernet
-	    interface</para>
+	  <para><devicename>dc0</devicename>: A primeira interface
+	    Ethernet</para>
 	</listitem>
 
 	<listitem>
-	  <para><devicename>dc1</devicename>: The second Ethernet
-	    interface</para>
+	  <para><devicename>dc1</devicename>: A segunda interface
+	    Ethernet</para>
 	</listitem>
 
 	<listitem>
-	  <para><devicename>lp0</devicename>: The parallel port
-	    interface</para>
+	  <para><devicename>lp0</devicename>: A interface de porta
+	    paralela</para>
 	</listitem>
 
 	<listitem>
-	  <para><devicename>lo0</devicename>: The loopback device</para>
+	  <para><devicename>lo0</devicename>: O dispositivo 
+	    <literal>loopback</literal></para>
 	</listitem>
 
 	<listitem>
-	  <para><devicename>tun0</devicename>: The tunnel device used by
-	    <application>ppp</application></para>
+	  <para><devicename>tun0</devicename>: O dispositivo <literal>tunnel</literal>
+	    usado para <application>ppp</application></para>
 	</listitem>
       </itemizedlist>
 
-      <para>&os; uses the driver name followed by the order in
-	which one the card is detected at the kernel boot to name the
-	network card.  For example <devicename>sis2</devicename> would
-	be the third network card on the system using the &man.sis.4;
-	driver.</para>
+      <para>O &os; usa o nome do driver seguido pela ordem na qual 
+	cada placa &eacute; detectada na inicializa&ccedil;&atilde;o do 
+	<foreignphrase>kernel</foreignphrase> para dar nome &agrave; 
+	placa.  Por exemplo, <devicename>sis2</devicename> pode ser 
+	a terceira placa de rede no sistema usando o driver 
+	&man.sis.4;.</para>
 
-      <para>In this example, the <devicename>dc0</devicename> device is
-	up and running.  The key indicators are:</para>
+      <para>Neste exemplo, o dispositivo <devicename>dc0</devicename> est&aacute;
+	no ar.  Os indicadores chave s&atilde;o:</para>
 
       <orderedlist>
 	<listitem>
-	  <para><literal>UP</literal> means that the card is configured
-	    and ready.</para>
+	  <para><literal>UP</literal> siginifica que a placa est&aacute; 
+	    configurada e pronta para uso.</para>
 	</listitem>
 
 	<listitem>
-	  <para>The card has an Internet (<literal>inet</literal>)
-	    address (in this case
+	  <para>A placa tem um endere&ccedil;o Internet (<literal>inet</literal>)
+	    (neste caso
 	    <hostid role="ipaddr">192.168.1.3</hostid>).</para>
 	</listitem>
 
 	<listitem>
-	  <para>It has a valid subnet mask (<literal>netmask</literal>;
-	    <hostid role="netmask">0xffffff00</hostid> is the same as
+	  <para>Tem uma m&aacute;scara de rede v&aacute;lida (<literal>netmask</literal>;
+	    <hostid role="netmask">0xffffff00</hostid> que &eacute; o mesmo que 
 	    <hostid role="netmask">255.255.255.0</hostid>).</para>
 	</listitem>
 
 	<listitem>
-	  <para>It has a valid broadcast address (in this case,
+	  <para>Possui um endere&ccedil;o de <foreignphrase>broadcast</foreignphrase> 
+	    v&aacute;lido (neste caso, 
 	    <hostid role="ipaddr">192.168.1.255</hostid>).</para>
 	</listitem>
 
 	<listitem>
-	  <para>The MAC address of the card (<literal>ether</literal>)
+	  <para>Possui um endere&ccedil;o MAC oara a placa (<literal>ether</literal>)
 	    is <hostid role="mac">00:a0:cc:da:da:da</hostid></para>
 	</listitem>
 
 	<listitem>
-	  <para>The physical media selection is on autoselection mode
+	  <para>A sele&ccedil;&atilde;o f&iacute;sica de m&iacute;dia est&aacute; no modo de auto sele&ccedil;&atilde;o 
 	    (<literal>media: Ethernet autoselect (100baseTX
-	    &lt;full-duplex&gt;)</literal>).  We see that
-	    <devicename>dc1</devicename> was configured to run with
-	    <literal>10baseT/UTP</literal> media.  For more
-	    information on available media types for a driver, please
-	    refer to its manual page.</para>
+	    &lt;full-duplex&gt;)</literal>).  Podemos ver que o dispositivo
+	    <devicename>dc1</devicename> foi configurado para 
+	    <literal>10baseT/UTP</literal>.  Para mais informa&ccedil;&otilde;es 
+	    a respeito de tipos de m&iacute;dia para um determinado 
+	    <literal>driver</literal>, por favor verifique a 
+	    respectiva p&aacute;gina de manual.</para>
 	</listitem>
 
 	<listitem>
-	  <para>The status of the link (<literal>status</literal>)
-	    is <literal>active</literal>, i.e. the carrier is detected.
-	    For <devicename>dc1</devicename>, we see
-	    <literal>status: no carrier</literal>.  This is normal when
-	    an ethernet cable is not plugged into the card.</para>
+	  <para>O estado da conex&atilde;o (<literal>status</literal>)
+	    &eacute; <literal>active</literal>, ou seja, a conex&atilde;o foi 
+	    detectada.  Para
+	    <devicename>dc1</devicename>, vemos 
+	    <literal>status: no carrier</literal>.  Isto &eacute; normal quando 
+	    o cabo n&atilde;o est&aacute; conectado &agrave; placa.</para>
 	</listitem>
       </orderedlist>
 
-      <para>If the &man.ifconfig.8; output had shown something similar
-	to:</para>
+      <para>Se a sa&iacute;da do &man.ifconfig.8; mostrou algo parecido com 
+	</para>
 
 <screen>dc0: flags=8843&lt;BROADCAST,SIMPLEX,MULTICAST&gt; mtu 1500
 	        ether 00:a0:cc:da:da:da</screen>
 
-      <para>it would indicate the card has not been configured.</para>
+      <para>pode indicar que a placa n&atilde;o foi configurada.</para>
 
-      <para>To configure your card, you need <username>root</username>
-	privileges.  The network card configuration can be done from the
-	command line with &man.ifconfig.8; but you would have to do it
-	after each reboot of the system.  The file
-	<filename>/etc/rc.conf</filename> is where to add the network
-	card's configuration.</para>
+      <para>Para configurar sua placa, voc&ecirc; precisa de previl&eacute;gios de 
+	<username>root</username>.  A configura&ccedil;&atilde;o da placa de rede pode 
+	ser feita a partir da linha de comando com o &man.ifconfig.8; mas 
+	voc&ecirc; vai precisar refazer a configura&ccedil;&atilde;o ap&oacute;s cada inicializa&ccedil;ao.  O 
+	arquivo <filename>/etc/rc.conf</filename> &eacute; o lugar para adicionar 
+	a configura&ccedil;&atilde;o da placa de rede.</para>
 
-      <para>Open <filename>/etc/rc.conf</filename> in your favorite
-	editor.  You need to add a line for each network card present on
-	the system, for example in our case, we added these lines:</para>
+      <para>Abra o arquivo <filename>/etc/rc.conf</filename> no seu 
+	editor preferido.  Voc&ecirc; precisa adicionar uma linha para cada 
+	placa de rede presente no sistema, por exemplo, em nosso caso, 
+	adicionamos estas duas linhas:</para>
 
 <programlisting>ifconfig_dc0="inet 192.168.1.3 netmask 255.255.255.0"
 ifconfig_dc1="inet 10.0.0.1 netmask 255.255.255.0 media 10baseT/UTP"</programlisting>
 
-      <para>You have to replace <devicename>dc0</devicename>,
-	<devicename>dc1</devicename>, and so on, with
-	the correct device for your cards, and the addresses with the
-	proper ones.  You should read the card driver and
-	&man.ifconfig.8; manual pages for more details about the allowed
-	options and also &man.rc.conf.5; manual page for more
-	information on the syntax of
+      <para>Voc&ecirc; precisa substituir <devicename>dc0</devicename>,
+	<devicename>dc1</devicename>, e assim por sucessivamente, com 
+	nomes de dispositivos corretos para suas placas, e os endere&ccedil;os 
+	apropriados.  Voc&ecirc; deve ler as p&aacute;ginas de manual do 
+	<literal>driver</literal> e &man.ifconfig.8; para mais detalhes 
+	a respeito das op&ccedil;&otilde;es permitidas e tamb&eacute;m 
+	&man.rc.conf.5; para mais informa&ccedil;&otilde;es sobre a sintaxe em
 	<filename>/etc/rc.conf</filename>.</para>
 
-      <para>If you configured the network during installation, some
-	lines about the network card(s) may be already present.  Double
-	check <filename>/etc/rc.conf</filename> before adding any
-	lines.</para>
+      <para>Se voc&ecirc; configurou a rede durante a instala&ccedil;&atilde;o, 
+	algumas linhas de placa(s) de rede podem j&aacute; estar
+	presentes.  Fa&ccedil;a uma verifica&ccedil;&atilde;o dupla no arquivo 
+	<filename>/etc/rc.conf</filename> antes de adicionar 
+	qualquer linha.</para>
 
-      <para>You will also have to edit the file
-	<filename>/etc/hosts</filename> to add the names and the IP
-	addresses of various machines of the LAN, if they are not already
-	there.  For more information please refer to &man.hosts.5;
-	and to <filename>/usr/share/examples/etc/hosts</filename>.</para>
+      <para>Voc&ecirc; tamb&eacute;m ter&aacute; que editar o arquivo 
+	<filename>/etc/hosts</filename> para adicionar nomes e 
+	endere&ccedil;os IP das m&aacute;quinas da Rede Local, se estes nomes 
+	ainda n&atilde;o estiverem l&aacute;.  Para mais informa&ccedil;&otilde;es veja &man.hosts.5; 
+	e <filename>/usr/share/examples/etc/hosts</filename>.</para>
     </sect2>
 
     <sect2>
-      <title>Testing and Troubleshooting</title>
+      <title>Testes e Resolu&ccedil;&atilde;o de Problemas</title>
 
-      <para>Once you have made the necessary changes in
-	<filename>/etc/rc.conf</filename>, you should reboot your
-	system.  This will allow the change(s) to the interface(s) to
-	be applied, and verify that the system restarts without any
-	configuration errors.</para>
+      <para>Uma vez feitas as configura&ccedil;&otilde;es necess&aacute;rias no 
+	<filename>/etc/rc.conf</filename>, voc&ecirc; deve reinicializar seu 
+	sistema.  Isto far&aacute; com que as mudan&ccedil;as em sua(s) placa(s) de rede 
+	sejam aplicadas, e verifique se seu sistema reinicializa 
+	sem erros de configura&ccedil;&atilde;o.</para>
 
-      <para>Once the system has been rebooted, you should test the
-	network interfaces.</para>
+      <para>Ap&oacute;s reinicializar o sistema, voc&ecirc; dere testar as 
+	interfaces de rede.</para>
 
       <sect3>
-	<title>Testing the Ethernet Card</title>
+	<title>Testando a Placa Ethernet</title>
 
 	<indexterm>
 	  <primary>network card configuration</primary>
 	  <secondary>testing the card</secondary>
 	</indexterm>
 
-	<para>To verify that an Ethernet card is configured correctly,
-	  you have to try two things.  First, ping the interface itself,
-	  and then ping another machine on the LAN.</para>
+	<para>Para verificar se uma placa Ethernet foi configurada 
+	  corretamente, voc&ecirc; precisa tentar duas coisas.  Primeiro, execute 
+	  o comando ping para a sua pr&oacute;pria interface, e ent&atilde;o fa&ccedil;a o 
+	  mesmo para outra m&aacute;quina na sua Rede Local.</para>
 
-	<para>First test the local interface:</para>
+	<para>Primeiro teste para a interface local:</para>
 
 <screen>&prompt.user; <userinput>ping -c5 192.168.1.3</userinput>
 PING 192.168.1.3 (192.168.1.3): 56 data bytes
@@ -1011,69 +1024,76 @@ PING 192.168.1.2 (192.168.1.2): 56 data bytes
 5 packets transmitted, 5 packets received, 0% packet loss
 round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
 
-	<para>You could also use the machine name instead of
-	  <hostid role="ipaddr">192.168.1.2</hostid> if you have set up the
-	  <filename>/etc/hosts</filename> file.</para>
+	<para>Voc&ecirc; tamb&eacute;m pode usar o nome da m&aacute;quina ao inv&eacute;s de
+	  <hostid role="ipaddr">192.168.1.2</hostid> se voc&ecirc; configurou o arquivo 
+	  <filename>/etc/hosts</filename>.</para>
       </sect3>
 
       <sect3>
-	<title>Troubleshooting</title>
+	<title>Resolu&ccedil;&atilde;o de Problemas</title>
 
       <indexterm>
 	<primary>network card configuration</primary>
 	<secondary>troubleshooting</secondary>
       </indexterm>
 
-      <para>Troubleshooting hardware and software configurations is always
-	a pain, and a pain which can be alleviated by checking the simple
-	things first.  Is your network cable plugged in?  Have you properly
-	configured the network services?  Did you configure the firewall
-	correctly?  Is the card you are using supported by &os;?  Always
-	check the hardware notes before sending off a bug report.  Update
-	your version of &os; to the latest STABLE version.  Check the
-	mailing list archives, or perhaps search the Internet.</para>
+      <para>Resolu&ccedil;&atilde;o de problemas de configura&ccedil;&atilde;o de <literal>hardware</literal>
+	e <literal>software</literal> sempre &eacute; doloroso, e uma dor que pode 
+	ser aliviada atrav&eacute;s da checagem de coisas simples antes de 
+	quaquer coisa.  Seu cabo de rede est&aacute; conectado?  Voc&ecirc; configurou 
+	os servi&ccedil;os de rede corretamente?  Voc&ecirc; configurou o 
+	<foreignphrase>firewall</foreignphrase> corretamente?  A placa de 
+	rede que voc&ecirc; est&aacute; usando &eacute; suportada pelo &os;?  Sempre verifique 
+	as notas de hardware antes de enviar um relat&oacute;rio de falha.  Atualize 
+	sua vers&atilde;o do &os; para a &uacute;ltima vers&atilde;o <literal>STABLE</literal>.  
+	Verifique os arquivos das listas de discuss&atilde;o, ou procure na 
+	Internet.</para>
 
-      <para>If the card works, yet performance is poor, it would be
-	worthwhile to read over the &man.tuning.7; manual page.  You
-	can also check the network configuration as incorrect network
-	settings can cause slow connections.</para>
+      <para>Se a placa funcionar, e performance estiver ruim, vale 
+	dar uma lida na p&aacute;gina de manual &man.tuning.7;.  Voc&ecirc; tamb&eacute;m 
+	pode verificar configura&ccedil;&otilde;es de rede incorretas, que podem 
+	provocar lentid&atilde;o nas conex&otilde;es.</para>
 
-      <para>Some users experience one or two <quote>device
-	timeouts</quote>, which is normal for some cards.  If they
-	continue, or are bothersome, you may wish to be sure the
-	device is not conflicting with another device.  Double check
-	the cable connections.  Perhaps you may just need to get
-	another card.</para>
+      <para>Alguns usu&aacute;rios passam pro problemas de um ou dois <quote>device
+	timeouts</quote>, que &eacute; normal em algumas placas.  Se eles 
+	continuarem, ou come&ccedil;ar a incomodar, voc&ecirc; pode querer ter certeza 
+	de que o dispositivo n&atilde;o est&aacute; conflitando com outro dispositivo.  
+	Fa&ccedil;a uma verifica&ccedil;&atilde;o dupla das conex&otilde;es de cabeamento.  Talvez 
+	voc&ecirc; apenas precise de outra placa.</para>
 
-      <para>At times, users see a few <errorname>watchdog timeout</errorname>
-	errors.  The first thing to do here is to check your network
-	cable. Many cards require a PCI slot which supports Bus
-	Mastering. On some old motherboards, only one PCI slot allows
-	it (usually slot 0). Check the network card and the
-	motherboard documentation to determine if that may be the
-	problem.</para>
+      <para>Algumas vezes, os usu&aacute;rios percebem pequenos erros <errorname>watchdog timeout</errorname>.  
+	A primeira coisa a ser feita &eacute; checar o cabo da conex&atilde;o.  Muitas 
+	placas requerem um <literal>slot</literal> PCI que suporte 
+	gerenciamento de barramento.  Em algumas placas-m&atilde;e antigas, apenas um 
+	<literal>slot</literal> permite isso (geralmente o <literal>slot</literal> 0).  
+	Verifique a documenta&ccedil;&atilde;o da placa de rede e da placa-m&atilde;e 
+	para saber se isto pode ser um problema.</para>
 
-      <para><errorname>No route to host</errorname> messages occur if the
-	system is unable to route a packet to the destination host.
-	This can happen if no default route is specified, or if a
-	cable is unplugged.  Check the output of <command>netstat
-	-rn</command> and make sure there is a valid route to the host
-	you are trying to reach.  If there is not, read on to <xref
+      <para>A mensagem <errorname>No route to host</errorname> acontece quando  
+	o sistema n&atilde;o &eacute; capaz de rotear um pacote para a m&aacute;quina de destino.  Isto 
+	pode acontecer se nenhuma rota padr&atilde;o for especificada, ou se um cabo 
+	estiver desconectado.  Verifique a sa&iacute;da do comando 
+	<command>netstat -rn</command> e tenha certeza de que exista 
+	uma rota v&aacute;lida para a m&aacute;quina que voc&ecirc; est&aacute; tentando 
+	alcan&ccedil;ar.  Se n&atilde;o existir, leia 
+	<xref
 	linkend="advanced-networking">.</para>
 
-      <para><errorname>ping: sendto: Permission denied</errorname> error
-	messages are often caused by a misconfigured firewall.  If
-	<command>ipfw</command> is enabled in the kernel but no rules
-	have been defined, then the default policy is to deny all
-	traffic, even ping requests!  Read on to <xref
-	linkend="firewalls"> for more information.</para>
+      <para>As mensagens de erro <errorname>ping: sendto: Permission denied</errorname> 
+	geralmente s&atilde;o provocadas por um <foreignphrase>firewall</foreignphrase> 
+	desconfigurado.  Se o <command>ipfw</command> estiver habilitado no 
+	<foreignphrase>kernel</foreignphrase> mas n&atilde;o existirem regras definidas, 
+	ent&atilde;o a pol&iacute;tica padr&atilde;o &eacute; de negar todo o tr&aacute;fego, at&eacute; mesmo as 
+	requisi&ccedil;&otilde;es de <command>ping</command>!  
+	Leia <xref
+	linkend="firewalls"> para maiores informa&ccedil;&otilde;es.</para>
 
-      <para>Sometimes performance of the card is poor, or below average.
-	In these cases it is best to set the media selection mode
-	from <literal>autoselect</literal> to the correct media selection.
-	While this usually works for most hardware, it may not resolve
-	this issue for everyone.  Again, check all the network settings,
-	and read over the &man.tuning.7; manual page.</para>
+      <para>Algumas vezes a performance da placa &eacute; ruim, ou abaixo do 
+	normal.  Nestes casos &eacute; melhor configurar o modo de  sele&ccedil;&atilde;o de m&iacute;dia 
+	de <literal>autoselect</literal> para a velocidade correta.  
+	Enquanto isto pode funcionar para grande parte dos equipamentos, talvez 
+	n&atilde;o resolva o problema de todos.  Novamente, verifique toda a 
+	configura&ccedil;&atilde;o de rede, e leia a p&aacute;gina de manual &man.tuning.7;.</para>
 
       </sect3>
     </sect2>
