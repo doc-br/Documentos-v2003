@@ -2046,11 +2046,11 @@ kern.maxfiles: 2088 -> 5000</screen>
 	necess&aacute;rio ajustar de acordo com a necessidade.</para>
 
       <important>
-	<para>Even though a socket has been marked as non-blocking,
-	  calling &man.sendfile.2; on the non-blocking socket may
-	  result in the &man.sendfile.2; call blocking until enough
-	  <literal>struct sf_buf</literal>'s are made
-	  available.</para>
+	<para>Mesmo que o <literal>socket</literal> tenha sido marcado como 
+	  n&atilde;o bloqueador, invocar o &man.sendfile.2; neste <literal>socket
+	  </literal> pode resultar em bloqueamento de chamadas no 
+	  &man.sendfile.2; at&eacute; que <literal>struct sf_buf</literal>'s 
+	  tenham sido disponibilizados.</para>
       </important>
 
       <sect3>
@@ -2060,29 +2060,33 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <primary>net.inet.ip.portrange.*</primary>
 	</indexterm>
 
-	<para>The <varname>net.inet.ip.portrange.*</varname> sysctl
-	  variables control the port number ranges automatically bound to TCP
-	  and UDP sockets.  There are three ranges: a low range, a default
-	  range, and a high range.  Most network programs use the default
-	  range which is controlled by the
-	  <varname>net.inet.ip.portrange.first</varname> and
-	  <varname>net.inet.ip.portrange.last</varname>, which default to
-	  1024 and 5000, respectively.  Bound port ranges are used  for
-	  outgoing connections, and it is possible to run the system out of
-	  ports under certain circumstances.  This most commonly occurs
-	  when you are running a heavily loaded web proxy.  The port range
-	  is not an issue when running servers which handle mainly incoming
-	  connections, such as a normal web server, or has a limited number
-	  of outgoing connections, such as a mail relay.  For situations
-	  where you may run yourself out of ports, it is recommended to
-	  increase <varname>net.inet.ip.portrange.last</varname> modestly.
-	  A value of <literal>10000</literal>, <literal>20000</literal> or
-	  <literal>30000</literal> may be reasonable.  You should also
-	  consider firewall effects when changing the port range.  Some
-	  firewalls may block large ranges of ports (usually low-numbered
-	  ports) and expect systems to use higher ranges of ports for
-	  outgoing connections &mdash; for this reason it is recommended that
-	  <varname>net.inet.ip.portrange.first</varname> be lowered.</para>
+	<para>A vari&aacute;vel sysctl <varname>net.inet.ip.portrange.*</varname> 
+	  controla a faixa de n&uacute;mero de portas automaticamente ligadas a 
+	  <literal>sockets</literal> TCP e UDP.  Existem tr&ecirc;s faixas: a 
+	  baixa, a padr&atilde;o e a faixa alta.  Muitos programas de rede usam 
+	  a faixa padr&atilde;o, que &eacute; controlada pela vari&aacute;vel 
+	  <varname>net.inet.ip.portrange.first</varname> e
+	  <varname>net.inet.ip.portrange.last</varname>, que possuem 
+	  valores padr&atilde;o 1024 e 5000, respectivamente. Faixas de porta 
+	  padr&atilde;o s&atilde;o usdas para conex&otilde;es que saem, e &eacute; poss&iacute;vel ficar 
+	  sem portas sob certas circunst&acirc;ncias.  Isto ocorre de forma 
+	  mais comum quando voc&ecirc; roda um servidor proxy que tem muita 
+	  carga.  A faixa de portas n&atilde;o &eacute; um problema quando se executa 
+	  servidores cujo papel principal &eacute; receber conex&otilde;es, como um 
+	  servdor web normal, ou um servidor que possui um n&uacute;mero limitado 
+	  de conex&otilde;es que saem, como um <literal>relay</literal> de 
+	  correio.  Para situa&ccedil;&otilde;es onde voc&ecirc; pode ficar sem portas, &eacute; 
+	  recomendado que se aumente modestamente a vari&aacute;vel 
+	  <varname>net.inet.ip.portrange.last</varname>.  Um valor de 
+	   <literal>10000</literal>, <literal>20000</literal> ou
+	  <literal>30000</literal> deve ser suficiente.  Voc&ecirc; tamb&eacute;m deve 
+	  considerar os efeitos colaterais que a mudan&ccedil;a de faixa de 
+	  portas pode causar em um firewall.  Alguns firewalls podem 
+	  bloquear grandes faixas de portas (geralmente portas de n&uacute;meros 
+	  baixos) e esperar que os sistemas utilizem faixas de portas 
+	  altas para conex&otilde;es que saem &mdash, por esta raz&atilde;o 
+	  recomenda-se que a vari&aacute;vel <varname>net.inet.ip.portrange.first
+	  </varname> tenha seu valor diminuido.</para>
       </sect3>
 
       <sect3>
