@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: doc/en_US.ISO8859-1/books/handbook/serialcomms/chapter.sgml,v 1.83 2003/11/05 10:36:56 ceri Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/serialcomms/chapter.sgml,v 1.4 2003/12/09 03:26:06 ebrandi Exp $
 -->
 
 <chapter id="serialcomms">
@@ -10,35 +10,37 @@
   <sect1 id="serial-synopsis">
     <title>Sin&oacute;pse</title>
 
-    <indexterm><primary>serial communications</primary></indexterm>
+    <indexterm><primary>Comunica&ccedil;&otilde;es Seriais</primary></indexterm>
 
-    <para>O &unix; sempre possuiu suporte a comunica&ccedil;&otilde;es seriais.  In fact,
-      the very first &unix; machines relied on serial lines for user input
-      and output.  Things have changed a lot from the days when the average
-      <quote>terminal</quote> consisted of a 10-character-per-second serial
-      printer and a keyboard.  This chapter will cover some of the ways in
-      which FreeBSD uses serial communications.</para>
+    <para>O &unix; sempre possuiu suporte a comunica&ccedil;&otilde;es seriais.  De
+    fato, as primeiras maquinas &unix; disponibilizavam linhas
+    seriais para as opera&ccedil;&otilde;es de entrada e de sa&iacute;da realizada pelos
+    usu&aacute;rios.  As coisas mudaram muito desde os dias em que a m&eacute;dia
+    dos <quote>terminais</quote> consistiam-se em uma impressora serial de
+    10 caracteres por segundo e um teclado.  Este cap&iacute;tulo ir&aacute; abordar
+    algumas das formas como o FreeBSD utiliza comunica&ccedil;&otilde;es
+    seriais.</para>
 
-    <para>Ap&oacute;s ler este capitulo voc&ecirc; ir&aacute; saber:</para>
+    <para>Ap&oacute;s ler este capitulo voc&ecirc; ir&aacute; conhecer:</para>
     <itemizedlist>
-      <listitem><para>How to connect terminals to your FreeBSD
-	  system.</para></listitem>
-      <listitem><para>How to use a modem to dial out to remote
-	  hosts.</para></listitem>
-      <listitem><para>How to allow remote users to login to your
-	  system with a modem.</para></listitem>
-      <listitem><para>How to boot your system from a serial
-	  console.</para></listitem>
+      <listitem><para>Como conectar terminais ao seu sistema FreeBSD
+	  .</para></listitem>
+      <listitem><para>Como utilizar um modem para discar para um servidor remoto
+	  .</para></listitem>
+      <listitem><para>Como permitir que usu&aacute;rios remotos se conectem
+      ao seu sistema atrav&eacute;s de um modem.</para></listitem>
+      <listitem><para>Como efetuar boot utilizando um console serial.</para></listitem>
     </itemizedlist>
 
-    <para>Before reading this chapter, you should:</para>
+    <para>Antes de ler este capitulo, voce deve:</para>
     <itemizedlist>
-      <listitem><para>Know how to configure and install a new kernel (<xref
+      <listitem><para>Conhecer como configurar e instalar um novo kernel (<xref
         linkend="kernelconfig">).</para></listitem>
-      <listitem><para>Understand &unix; permissions and processes (<xref linkend="basics">).</para></listitem>
-      <listitem><para>Have access to the technical manual for the
-        serial hardware (modem or multi-port card) that you would like
-        to use with FreeBSD.</para></listitem>
+      <listitem><para>Compreender o sistema de permiss&otilde;es e de processos no ambiente &unix; 
+        (<xref linkend="basics">).</para></listitem>
+      <listitem><para>Ter acesso ao manual t&eacute;cnico do hardware
+      serial (Modem ou Placa multi-portas) que voc&ecirc; deseja utilizar
+      com o FreeBSD.</para></listitem>
     </itemizedlist>
   </sect1>
 
@@ -48,15 +50,15 @@
     <!-- XXX Write me! -->
 
     <sect2 id="serial-terminology">
-      <title>Terminology</title>
+      <title>Terminologia</title>
 
       <variablelist>
-        <indexterm><primary>bits-per-second</primary></indexterm>
+        <indexterm><primary>bits-por-segundo</primary></indexterm>
 	<varlistentry>
 	  <term>bps</term>
 	  <listitem>
-	    <para>Bits per Second &mdash; the rate at which data is
-	      transmitted</para>
+	    <para>Bits por segundo &mdash; &eacute; a taxa com que os dados
+	    s&atilde;o transmitidos.</para>
 	  </listitem>
 	</varlistentry>
 	  
@@ -64,8 +66,8 @@
 	  <term>DTE</term>
 	  <indexterm><primary>DTE</primary></indexterm>
 	  <listitem>
-	    <para>Data Terminal Equipment &mdash; for example, your
-	      computer</para>
+	    <para>Equipamento Terminal de Dados &mdash; por exemplo, o seu
+	    computador</para>
 	  </listitem>
 	</varlistentry>
 	  
@@ -73,25 +75,28 @@
 	  <term>DCE</term>
 	  <indexterm><primary>DCE</primary></indexterm>
 	  <listitem>
-	    <para>Data Communications Equipment &mdash;  your modem</para>
+	    <para>Equipamento de Comunica&ccedil;&atilde;o de Dados &mdash;  seu
+	    modem</para>
 	  </listitem>
 	</varlistentry>
 	  
 	<varlistentry>
 	  <term>RS-232</term>
-	  <indexterm><primary>RS-232C cables</primary></indexterm>
+	  <indexterm><primary>Cabos RS-232C</primary></indexterm>
 	  <listitem>
-	    <para>EIA standard for hardware serial communications</para>
+	    <para>Padr&atilde;o EIA para hardwares de comunica&ccedil;&atilde;o serial</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
 
-      <para>When talking about communications data rates, this section
-	does not use the term <quote>baud</quote>.  Baud refers to the
-	number of electrical state transitions that may be made in a
-	period of time, while <quote>bps</quote> (bits per second) is
-	the <emphasis>correct</emphasis> term to use (at least it does not
-	seem to bother the curmudgeons quite as much).</para>
+      <para>
+	Quando fala sobre taxa de comunica&ccedil;&atilde;o de dados, esta sess&atilde;o
+	n&atilde;o usa o termo <quote>baud</quote>.  Baud se refere ao
+	numero de estados de transi&ccedil;&otilde;es el&eacute;tricos que ocorrem em um
+	determinado periodo de tempo, enquanto <quote>bps</quote>
+	(bits por segundo) &eacute; o termo <emphasis>correto</emphasis> a
+	ser utilizado (at least it does not seem to bother the 
+	curmudgeons quite as much).</para>
     </sect2>
 
     <sect2 id="serial-cables-ports">
