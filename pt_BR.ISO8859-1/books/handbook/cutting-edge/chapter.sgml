@@ -1262,11 +1262,10 @@ Script done, &hellip;</screen>
 
 	<procedure>
 	  <step>
-	    <para>Make the world as normal.  When you want to update
-	      <filename>/etc</filename> and the other directories, give the
-	      target directory a name based on the current date.  If you were
-	      doing this on the 14th of February 1998 you could do the
-	      following:</para>
+	    <para>Compile o sistema normalmente.  Quando voc&ecirc; quiser atualizar o 
+	      <filename>/etc</filename> e outros diret&oacute;rios, d&ecirc; ao diret&oacute;rio de 
+	      destino um nome baseado na data corrente.  Se voc&ecirc; estiver fazendo 
+	      isto em 14 de fevereiro de 1998 voc&ecirc; pode fazer o seguinte:</para>
 	  
 	    <screen>&prompt.root; <userinput>mkdir /var/tmp/root-19980214</userinput>
 &prompt.root; <userinput>cd /usr/src/etc</userinput>
@@ -1275,53 +1274,52 @@ Script done, &hellip;</screen>
 	  </step>
 	  
 	  <step>
-	    <para>Merge in the changes from this directory as outlined
-	      above.</para>
+	    <para>Fa&ccedil;a a jun&ccedil;&atilde;o destes diret&oacute;rios como descrito 
+	      abaixo.</para>
 	    
-	    <para><emphasis>Do not</emphasis> remove the
-	      <filename>/var/tmp/root-19980214</filename> directory when you
-	      have finished.</para>
+	    <para><emphasis>N&atilde;o</emphasis> remova o diret&oacute;rio
+	      <filename>/var/tmp/root-19980214</filename> quando 
+	      voc&ecirc; terminar.</para>
 	  </step>
 	  
 	  <step>
-	    <para>When you have downloaded the latest version of the source
-	      and remade it, follow step 1.  This will give you a new
-	      directory, which might be called
-	      <filename>/var/tmp/root-19980221</filename> (if you wait a week
-	      between doing updates).</para>
+	    <para>Ap&oacute;s ter pego e compilado a &uacute;ltima vers&atilde;o dos fontes, 
+	      siga o passo 1.  Isto lhe dar&aacute; um novo diret&oacute;rio, que poder&aacute; 
+	      ser chamado <filename>/var/tmp/root-19980221</filename> (se 
+	      voc&ecirc; esperar uma semana para fazer a atualiza&ccedil;&atilde;o).</para>
 	  </step>
 	  
 	  <step>
-	    <para>You can now see the differences that have been made in the
-	      intervening week using &man.diff.1; to create a recursive diff
-	      between the two directories:</para>
+	    <para>Agora voc&ecirc; pode ver as diferen&ccedil;as que foram feitas usando 
+	      o &man.diff; para criar um arquivo de diferen&ccedil;as recursivamente 
+	      entre os dois diret&oacute;rios:</para>
 	      
 	    <screen>&prompt.root; <userinput>cd /var/tmp</userinput>
 &prompt.root; <userinput>diff -r root-19980214 root-19980221</userinput></screen>
 	  
-	    <para>Typically, this will be a much smaller set of differences
-	      than those between
-	      <filename>/var/tmp/root-19980221/etc</filename> and
-	      <filename>/etc</filename>.  Because the set of differences is
-	      smaller, it is easier to migrate those changes across into your
-	      <filename>/etc</filename> directory.</para>
+	    <para>Tipicamente, ser&aacute; um conjunto de diferen&ccedil;as bem menor do 
+	      que as diferen&ccedil;as entre 
+	      <filename>/var/tmp/root-19980221/etc</filename> e
+	      <filename>/etc</filename>.  Pelo fato das diferen&ccedil;as serem 
+	      menores, &eacute; mais f&aacute;cil migrar as mudan&ccedil;as no seu diret&oacute;rio 
+	      <filename>/etc</filename>.</para>
 	  </step>
 	  
 	  <step>
-	    <para>You can now remove the older of the two
-	      <filename>/var/tmp/root-*</filename> directories:</para>
+	    <para>Agora voc&ecirc; pode remover o mais antigo dos dois diret&oacute;rios 
+	      <filename>/var/tmp/root-*</filename>:</para>
 	      
 	    <screen>&prompt.root; <userinput>rm -rf /var/tmp/root-19980214</userinput></screen>
 	  </step>
 	  
 	  <step>
-	    <para>Repeat this process every time you need to merge in changes
-	      to <filename>/etc</filename>.</para>
+	    <para>Repita este processo sempre que precisar unir as mudan&ccedil;as para o 
+	      <filename>/etc</filename>.</para>
 	  </step>
 	</procedure>
 
-	<para>You can use &man.date.1; to automate the generation of the
-	  directory names:</para>
+	<para>Voc&ecirc; pode usar o &man.date.1; para automatizar a gera&ccedil;&atilde;o de nomes 
+	  de diret&oacute;rios:</para>
 	  
 	<screen>&prompt.root; <userinput>mkdir /var/tmp/root-`date "+%Y%m%d"`</userinput></screen>
       </tip>
@@ -1329,25 +1327,26 @@ Script done, &hellip;</screen>
     </sect2>
   
     <sect2 id="update-dev">
-      <title>Update <filename>/dev</filename></title>
+      <title>Atualize o <filename>/dev</filename></title>
       
       <note>
         <indexterm><primary>DEVFS</primary></indexterm>
-	<para>If you are running FreeBSD&nbsp;5.0 or later you can safely
-	  skip this section.  These versions use &man.devfs.5; to
-	  allocate device nodes transparently for the user.</para>
+	<para>Se voc&ecirc; estiver executando o FreeBSD&nbsp;5.0 ou superior 
+	  voc&ecirc; pode pular esta se&ccedil;&atilde;o.  Estas vers&otilde;es usam o &man.devfs.5; 
+	  para alocar n&oacute;s de dispositivos transparentemente para o 
+	  usu&aacute;rio.</para>
       </note>
 
-      <para>In most cases, the &man.mergemaster.8; tool will realize when
-        it is necessary to update the device nodes, and offer to complete it
-        automatically.  These instructions tell how to update the device
-        nodes manually.</para>
+      <para>Na maioria dos casos, a ferramenta &man.mergemaster.8; saber&aacute; 
+	quando for necess&aacute;rio atualizar os n&oacute;s de dispositivo, e se oferecer&aacute; 
+	para completar automaticamente a tarefa.  Estas instru&ccedil;&otilde;es lhe dir&atilde;o 
+	como atualizar os n&oacute;s de dispositivo manualmente.</para>
       
-      <para>For safety's sake, this is a multi-step process.</para>
+      <para>Em nome da seguran&ccedil;a, este &eacute; um processo passo a passo.</para>
 
       <procedure>
 	<step>
-	  <para>Copy <filename>/var/tmp/root/dev/MAKEDEV</filename> to
+	  <para>Copie o <filename>/var/tmp/root/dev/MAKEDEV</filename> para
 	    <filename>/dev</filename>:</para>
 
 	  <screen>&prompt.root; <userinput>cp /var/tmp/root/dev/MAKEDEV /dev</userinput></screen>
@@ -1355,112 +1354,115 @@ Script done, &hellip;</screen>
 	    <primary><filename>MAKEDEV</filename></primary>
 	  </indexterm>
 
-          <para>If you used &man.mergemaster.8; to
-            update <filename>/etc</filename>, then your
-            <filename>MAKEDEV</filename> script should have been updated
-            already, though it cannot hurt to check (with &man.diff.1;)
-            and copy it manually if necessary.</para>
+          <para>Se voc&ecirc; usou o &man.mergemaster.8; para
+            atualizar o <filename>/etc</filename>, ent&atilde;o o seu <literal>
+            script</literal> <filename>MAKEDEV</filename> j&aacute; pode ter sido 
+	    atualizado, embora n&atilde;o custe nada verificar (com &man.diff.1;) 
+	    e copi&aacute;-lo manualmente, se necess&aacute;rio.</para>
 	</step>
 
 	<step>
-	  <para>Now, take a snapshot of your current
-	    <filename>/dev</filename>.  This snapshot needs to contain the
-	    permissions, ownerships, major and minor numbers of each filename,
-	    but it should not contain the time stamps.  The easiest way to do
-	    this is to use &man.awk.1; to strip out some of the
-	    information:</para>
+	  <para>Agora, tire uma fotografia do seu <filename>/dev</filename> 
+	    atual.  Esta foto precisa ter as permiss&otilde;es, donos, n&uacute;meros de 
+	    cada arquivo, mas n&atilde;o pode conter os selos de tempo.  A 
+	    maneira mais f&aacute;cil de fazer isto &eacute; usar o &man.awk.1; para 
+	    retirar alguma informa&ccedil;&atilde;o:</para>
 
 	  <screen>&prompt.root; <userinput>cd /dev</userinput>
 &prompt.root; <userinput>ls -l | awk '{print $1, $2, $3, $4, $5, $6, $NF}' > /var/tmp/dev.out</userinput></screen>
 	</step>
 
 	<step>
-	  <para>Remake all the device nodes:</para>
+	  <para>Recompile todos os n&oacute;s de dispositivo:</para>
 	    
 	    <screen>&prompt.root; <userinput>sh MAKEDEV all</userinput></screen>
 	</step>
 
 	<step>
-	  <para>Write another snapshot of the directory, this time to
-	    <filename>/var/tmp/dev2.out</filename>.  Now look through these
-	    two files for any device node that you missed creating.  There should
-	    not be any, but it is better to be safe than sorry.</para>
+	  <para>Tire outra foto do diret&oacute;rio, desta vez em 
+	    <filename>/var/tmp/dev2.out</filename>.  Agora olhe estes dois 
+	    arquivos e procure por n&oacute;s de dispositivos que voc&ecirc; deixou de criar.  
+	    N&atilde;o deve ter nenhum, mas &eacute; melhor prevenir do que remediar.</para>
 
 	  <screen>&prompt.root; <userinput>diff /var/tmp/dev.out /var/tmp/dev2.out</userinput></screen>
 
-	  <para>You are most likely to notice disk slice discrepancies which
-	    will involve commands such as:</para>
+	  <para>Voc&ecirc; est&aacute; mais sujeito a ver discrepancias de fatias de disco que 
+	    envolvem comandos como:</para>
 	  
 	    <screen>&prompt.root; <userinput>sh MAKEDEV sd0s1</userinput></screen>
 
-	  <para>to recreate the slice entries.  Your precise circumstances may
-	    vary.</para>
+	  <para>para recriar as entradas de fatias de disco.  As circunst&acirc;ncias podem 
+	    variar.</para>
 	</step>
       </procedure>
     </sect2>
     
     <sect2>
-      <title>Update <filename>/stand</filename></title>
+      <title>Atualize o <filename>/stand</filename></title>
       
       <note>
-	<para>This step is included only for completeness.  It can safely be
-	  omitted.  If you are using FreeBSD&nbsp;5.2 or later, the
-          <filename>/rescue</filename> directory is automatically updated
-          for the user with current, statically compiled binaries during
-	  <command>make installworld</command>, thus obsoleting the need
-	  to update <filename>/stand</filename>.</para>
+	<para>Este fato &eacute; inclu&iacute;do apenas como complemento.  Pode ser 
+	  omitido seguramente.  Se voc&ecirc; est&aacute; usando o FreeBSD&nbsp;5.2 
+	  ou superior, o diret&oacute;rio <filename>/rescue</filename> &eacute; 
+	  automaticamente atualizado para usu&aacute;rio com os bin&aacute;rios atuais, 
+	  compilados estaticamente durante o <command>make installworld
+	  </command>, tornando obsoleta a necessidade de atualizar o 
+	  <filename>/stand</filename>.</para>
       </note>
       
-      <para>For the sake of completeness, you may want to update the files in
-	<filename>/stand</filename> as well.  These files consist of hard
-	links to the <filename>/stand/sysinstall</filename> binary.  This
-	binary should be statically linked, so that it can work when no other
-	file systems (and in particular <filename>/usr</filename>) have been
-	mounted.</para>
+      <para>Em nome da finaliza&ccedil;&atilde;o, voc&ecirc; pode querer atualizar os 
+	arquivos em <filename>/stand</filename>.  Estes arquivos 
+	consistem em <literal>links</literal> para o bin&aacute;rio 
+	<filename>/stand/sysinstall</filename>.   Este bin&aacute;rio 
+	deve ser ligado estaticamente, para que possa funcionar 
+	quando nenhum outro sistema de arquivos (e em particular o 
+	<filename>/usr</filename>) foi montado.</para>
 
       <screen>&prompt.root; <userinput>cd /usr/src/release/sysinstall</userinput>
 &prompt.root; <userinput>make all install</userinput></screen>
     </sect2>
     
     <sect2>
-      <title>Rebooting</title>
+      <title>Reinicializando</title>
       
-      <para>You are now done.  After you have verified that everything appears
-	to be in the right place you can reboot the system.  A simple
-	&man.shutdown.8; should do it:</para>
+      <para>Voc&ecirc; est&aacute; pronto.  Ap&oacute;s ter verificado que tudo parece estar 
+	em seu devido lugar voc&ecirc; pode reinicializar o sistema.  Um 
+	simples &man.shutdown.8; far&aacute; isto:</para>
 
       <screen>&prompt.root; <userinput>shutdown -r now</userinput></screen>
     </sect2>
 
     <sect2>
-      <title>Finished</title>
+      <title>Finalizado</title>
       
-      <para>You should now have successfully upgraded your &os; system.
-	Congratulations.</para>
+      <para>Agora voc&ecirc; deve ter seu sistema &os; atualizado.  
+	Parab&eacute;ns.</para>
       
-      <para>If things went slightly wrong, it is easy to rebuild a particular
-        piece of the system.  For example, if you accidentally deleted
-        <filename>/etc/magic</filename> as part of the upgrade or merge of
-        <filename>/etc</filename>, the &man.file.1; command will stop working.
-        In this case, the fix would be to run:</para>
+      <para>Se as coisas deram um pouco errado, &eacute; f&aacute;cil recompilar 
+	uma parte particular do sistema.  Por exemplo, se voc&ecirc; 
+	apagou acidentalmente o <filename>/etc/magic</filename> 
+	como parte da atualiza&ccedil;&atilde;o ou jun&ccedil;&atilde;o do <filename>/etc
+	</filename>, o comando &man.file.1; vai parar de funcionar.  
+	Neste caso, o conserto seria executar:</para>
 
 	<screen>&prompt.root; <userinput>cd /usr/src/usr.bin/file</userinput>
 &prompt.root; <userinput>make all install</userinput></screen>
     </sect2>    
     
     <sect2>
-      <title>Questions</title>
+      <title>Quest&otilde;es</title>
 
       <qandaset>
 	<qandaentry>
 	  <question>
-	    <para>Do I need to re-make the world for every change?</para>
+	    <para>Eu preciso recompilar o sistema para toda mudan&ccedil;a?</para>
 	  </question>
 
 	  <answer>
-            <para>There is no easy answer to this one, as it depends on the
-	      nature of the change.  For example, if you just ran <application>CVSup</application>, and
-	      it has shown the following files as being updated:</para>
+            <para>N&atilde;o existe resposta f&aacute;cil para esta, depende da natureza da 
+	      mudan&ccedil;a.  Por exemplo, se voc&ecirc; apenas executou o <application>
+	      CVSup</application>, e a sa&iacute;da foi a atualiza&ccedil;&atilde;o dos seguintes 
+	      arquivos:</para>
       
 	    <screen><filename>src/games/cribbage/instr.c</filename>
 <filename>src/games/sail/pl_main.c</filename>
@@ -1468,218 +1470,222 @@ Script done, &hellip;</screen>
 <filename>src/release/sysinstall/media.c</filename>
 <filename>src/share/mk/bsd.port.mk</filename></screen>
 
-	    <para>it probably is not worth rebuilding the entire world.
-	      You could just go to the appropriate sub-directories and
-	      <command>make all install</command>, and that's about it.  But
-	      if something major changed, for example
-	      <filename>src/lib/libc/stdlib</filename> then you should either
-	      re-make the world, or at least those parts of it that are
-	      statically linked (as well as anything else you might have added
-	      that is statically linked).</para>
+	    <para>provavelmente n&atilde;o merece recompilar todo o sistema.  
+	      Voc&ecirc; pode apenar is aos subdiret&oacute;rios apropriados e 
+	      executar <command>make all install</command>.  Mas se 
+	      algo maior foi modificado, por exemplo <filename>
+	      src/lib/stdlib</filename>, ent&atilde;o voc&ecirc; deve recompilar todo o 
+	      sistema ou pelo menos as partes que s&atilde;o estaticamente ligadas 
+	      (como qualquer coisa que voc&ecirc; pode ter adicionado que &eacute; 
+	      ligado estaticamente).</para>
       
-	    <para>At the end of the day, it is your call.  You might be happy
-	      re-making the world every fortnight say, and let changes
-	      accumulate over that fortnight.  Or you might want to re-make
-	      just those things that have changed, and be confident you can
-	      spot all the dependencies.</para>
+	    <para>No fim do dia, &eacute; por sua conta.  Voc&ecirc; pode estar feliz 
+	      em recompilar o sistema toda noite, e deixar as mudan&ccedil;as 
+	      acumularem por esta noite.  Ou voc&ecirc; pode querer recompilar 
+	      apenas aquelas coisas que foram modificadas, e ter certeza 
+	      de que voc&ecirc; pode detectar todas as deped&ecirc;ncias.</para>
       
-	    <para>And, of course, this all depends on how often you want to
-	      upgrade, and whether you are tracking &os.stable; or
-	      &os.current;.</para>
+	    <para>E, &eacute; claro, isto tudo depende da freq&uuml;&ecirc;ncia na qual 
+	      voc&ecirc; deseja atualizar, e qual vers&atilde;o voc&ecirc; est&aacute;, 
+	      &os.stable; ou &os.current;.</para>
 	  </answer>
 	</qandaentry>
 
 	<qandaentry>
 	  <question>
-	    <para>My compile failed with lots of signal 11 (or other signal
-	      number) errors.  What has happened?</para>
+	    <para>Minha compila&ccedil;&atilde;o falhou com muitos <literal>signal 11</literal> 
+	      (ou outro n&uacute;mero de sinal).  O que aconteceu?</para>
 	  </question>
     <indexterm><primary>signal 11</primary></indexterm>
 
 	  <answer>
 
-	    <para>This is normally indicative of hardware problems.
-	      (Re)making the world is an effective way to stress test your
-	      hardware, and will frequently throw up memory problems.  These
-	      normally manifest themselves as the compiler mysteriously dying
-	      on receipt of strange signals.</para>
+	    <para>Isto normalmente &eacute; um indicativo de problemas de hardware.  
+	      (Re)compilar o sistema &eacute; uma maneira efetiva de testar seu 
+	      hardware, e frequentemente mostrar&aacute; problemas de mem&oacute;ria.  
+	      Estes problemas normalmente se manifestar&atilde;o, com o compilador 
+	      morrendo misteriosamente na recep&ccedil;&atilde;o de sinais estranhos.</para>
       
-	    <para>A sure indicator of this is if you can restart the make and
-	      it dies at a different point in the process.</para>
+	    <para>Um indicador certo disto &eacute; que se voc&ecirc; pode reinicializar a 
+	      compila&ccedil;&atilde;o e ela volta a falhar em um ponto diferente do 
+	      processo.</para>
       
-	    <para>In this instance there is little you can do except start
-	      swapping around the components in your machine to determine
-	      which one is failing.</para>
+	    <para>Nesta inst&acirc;ncia pouco voc&ecirc; pode fazer, exceto come&ccedil;ar a 
+	      trocar componentes da sua m&aacute;quina para determinar qual 
+	      est&aacute; falhando.</para>
 	  </answer>
 	</qandaentry>
 
 	<qandaentry>
 	  <question>
-	    <para>Can I remove <filename>/usr/obj</filename> when I have
-	      finished?</para>
+	    <para>Posso remover o <filename>/usr/obj</filename> quando 
+	      eu terminar?</para>
 	  </question>
 	  
 	  <answer>
-	    <para>The short answer is yes.</para>
+	    <para>A resposta curta &eacute; sim.</para>
       
-	    <para><filename>/usr/obj</filename> contains all the object files
-	      that were produced during the compilation phase.  Normally, one
-	      of the first steps in the <quote>make world</quote> process is to
-	      remove this directory and start afresh.  In this case, keeping
-	      <filename>/usr/obj</filename> around after you have finished
-	      makes little sense, and will free up a large chunk of disk space
-	      (currently about 340&nbsp;MB).</para>
+	    <para><filename>/usr/obj</filename> cont&eacute;m todos os arquivos 
+	      objeto que foram produzidos durante a fase de compila&ccedil;&atilde;o.  
+	      Normalmente, um dos primeiros passos do processo do 
+	      <quote>make world</quote> &eacute; remover este diret&oacute;rio e come&ccedil;ar 
+	      do zero.   Neste caso, manter o <filename>/usr/obj</filename> 
+	      por perto depois de ter acabado faz algum sentido, e vai 
+	      liberar um bom espa&ccedil;o em disco (atualmente em torno de 340&nbsp;MB).
+	      </para>
       
-	    <para>However, if you know what you are doing you can have
-	      <quote>make world</quote> skip this step.  This will make subsequent
-	      builds run much faster, since most of sources will not need to
-	      be recompiled.  The flip side of this is that subtle dependency
-	      problems can creep in, causing your build to fail in odd ways.
-	      This frequently generates noise on the &os; mailing lists,
-	      when one person complains that their build has failed, not
-	      realizing that it is because they have tried to cut
-	      corners.</para>
+	    <para>Entretanto, se voc&ecirc; souber o que est&aacute; fazendo, voc&ecirc; pode fazer 
+	      com que o <quote>make world</quote> pule este passo.  Isto far&aacute; 
+	      com que as compila&ccedil;&otilde;es subsequentes sejam executadas mais r&aacute;pido, 
+	      uma vez que a maioria dos fontes n&atilde;o precisar&atilde;o ser recompilados.  
+	      O outro lado disso &eacute; que problemas subitos de depend&ecirc;ncia podem 
+	      ocorrer, fazendo com que sua compila&ccedil;&atilde;o falhe de maneira 
+	      estranha.  Isto frequentemente gera barulho nas listas de 
+	      discuss&atilde;o do &os;, quando uma pessoa reclama que sua compila&ccedil;&atilde;o 
+	      falhou, sem saber que a causa foi a tentativa de cortar 
+	      caminho.</para>
 	  </answer>
 	</qandaentry>
 
 	<qandaentry>
 	  <question>
-	    <para>Can interrupted builds be resumed?</para>
+	    <para>Compila&ccedil;&otilde;es interrompidas podem ser continuadas?</para>
 	  </question>
 
 	  <answer>
-	    <para>This depends on how far through the process you got before
-	      you found a problem.</para>
+	    <para>Isto depende qu&atilde;o longe voc&ecirc; chegou no processo at&eacute; ter 
+	      encontrado um problema.</para>
 
-	    <para><emphasis>In general</emphasis> (and this is not a hard and
-	      fast rule) the <quote>make world</quote> process builds new
-	      copies of essential tools (such as &man.gcc.1;, and
-	      &man.make.1;) and the system libraries.  These tools and
-	      libraries are then installed.  The new tools and libraries are
-	      then used to rebuild themselves, and are installed again. The
-	      entire system (now including regular user programs, such as
-		&man.ls.1; or &man.grep.1;) is then rebuilt with the new
-	      system files.</para>
+	    <para><emphasis>Em geral</emphasis> (e isto n&atilde;o &eacute; uma regra 
+	      r&iacute;gida) o processo <quote>make world</quote> compila novas 
+	      c&oacute;pias de ferramentas essenciais (tais como &man.gcc.1; e 
+	      &man.make.1;) e bibliotecas de sistema.  Estas ferramentas e 
+	      bibliotecas s&atilde;o ent&atilde;o instaladas.  Elas s&atilde;o usadas para 
+	      compilarem a si pr&oacute;prias, e s&atilde;o instaladas novamente.  Todo 
+	      o sistema, (agora incluindo programas regulares de usu&aacute;rio, 
+	      tais como &man.ls.1; ou &man.grep.1;) &eacute; ent&atilde;o recompilado 
+	      com os novos arquivos de sistema.</para>
 
-	    <para>If you are at the last stage, and you know it (because you
-	      have looked through the output that you were storing) then you
-	      can (fairly safely) do:</para>
+	    <para>Se voc&ecirc; est&aacute; no &uacute;ltimo est&aacute;gio, e voc&ecirc; sabe disto (pois 
+	      voc&ecirc; olhou na sa&iacute;da do comando que voc&ecirc; est&aacute; guardando), ent&atilde;o 
+	      voc&ecirc; pode (de forma consideravelmente segura) fazer:</para>
 
 	    <screen><emphasis>&hellip; fix the problem &hellip;</emphasis>
 &prompt.root; <userinput>cd /usr/src</userinput>
 &prompt.root; <userinput>make -DNOCLEAN all</userinput></screen>
 
-	    <para>This will not undo the work of the previous
-	      <quote>make world</quote>.</para>
+	    <para>Isto n&atilde;o desfar&aacute; o trabalho do <quote>make world</quote> 
+	      anterior.</para>
 
-	    <para>If you see the message:</para>
+	    <para>Se voc&ecirc; ver a mensagem:</para>
 
 	      <screen>--------------------------------------------------------------
 Building everything..
 --------------------------------------------------------------</screen>
 
-	    <para>in the <quote>make world</quote> output then it is
-	      probably fairly safe to do so.</para>
+	    <para>na sa&iacute;da do <quote>make world</quote>, ent&atilde;o provavelmente 
+	      &eacute; seguro fazer isto.</para>
 	    
-	    <para>If you do not see that message, or you are not sure, then it
-	      is always better to be safe than sorry, and restart the build
-	      from scratch.</para>
+	    <para>Se voc&ecirc; n&atilde;o ver esta mensagem, ou n&atilde;o tiver certeza, ent&atilde;o 
+	      &eacute; sempre melhor prevenir do que remediar, e reiniciar a 
+	      compila&ccedil;&atilde;o do zero.</para>
 	  </answer>
 	</qandaentry>
 
 	<qandaentry>
 	  <question>
-	    <para>How can I speed up making the world?</para>
+	    <para>Como eu posso acelerar a compila&ccedil;&atilde;o do sistema?</para>
           </question>
 
           <answer>
 	    <itemizedlist>
 	      <listitem>
-		<para>Run in single user mode.</para>
+		<para>Execute em modo mono usu&aacute;rio.</para>
 	      </listitem>
 	      
 	      <listitem>
-		<para>Put the <filename>/usr/src</filename> and
-		  <filename>/usr/obj</filename> directories on separate
-		  file systems held on separate disks.  If possible, put these
-		  disks on separate disk controllers.</para>
+		<para>Coloque os diret&oacute;rios <filename>/usr/src</filename> e
+		  <filename>/usr/obj</filename> em sistemas de arquivos 
+		  em discos separados.  Se poss&iacute;vel, coloque estes discos 
+		  em controladoras separadas.</para>
 	      </listitem>
 	      
 	      <listitem>
-		<para>Better still, put these file systems across multiple
-		  disks using the &man.ccd.4; (concatenated disk
-		  driver) device.</para>
+		<para>Melhor ainda, coloque estes sistemas de arquivo 
+		  distribu&iacute;dos em multiplos discos usando o dispositivo 
+		  &man.ccd.4; (driver de disco contatenado).</para>
 	      </listitem>
 	      
 	      <listitem>
-		<para>Turn off profiling (set <quote>NOPROFILE=true</quote> in
-		  <filename>/etc/make.conf</filename>).  You almost certainly
-		  do not need it.</para>
+		<para>Desligue o <literal>profiling</literal> (set <quote>NOPROFILE=true</quote> 
+		  no <filename>/etc/make.conf</filename>).  &Eacute; quase certo 
+		  que voc&ecirc; n&atilde;o v&aacute; precisar disto.</para>
 	      </listitem>
 	      
 	      <listitem>
-		<para>Also in <filename>/etc/make.conf</filename>, set
-		  <makevar>CFLAGS</makevar> to something like <option>-O
-		  -pipe</option>.  The optimization <option>-O2</option> is much
-		  slower, and the optimization difference between
-		  <option>-O</option> and <option>-O2</option> is normally
-		  negligible.  <option>-pipe</option> lets the compiler use
-		  pipes rather than temporary files for communication, which
-		  saves disk access (at the expense of memory).</para>
+		<para>Tamb&eacute;m no <filename>/etc/make.conf</filename>, 
+		  configure <makevar>CFLAGS</makevar> para algo como <option>-O
+		  -pipe</option>.  A otimiza&ccedil;&atilde;o <option>-O2</option> &eacute; mais 
+		  lenta, e a diferen&ccedil;a de otimiza&ccedil;&atilde;o entre a op&ccedil;&atilde;o 
+		  <option>-O</option> e <option>-O2</option> normalmente n&atilde;o 
+		  &eacute; notada.  A op&ccedil;&atilde;o <option>-pipe</option> faz com que o 
+		  compilador use <literal>pipes</literal> ao inv&eacute;s de usar 
+		  arquivos tempor&aacute;rios para comunica&ccedil;&atilde;o, evitando acessos ao 
+		  disco (por conta da mem&oacute;ria).</para>
 	      </listitem>
 	      
 	      <listitem>
-		<para>Pass the <option>-j<replaceable>n</replaceable></option> option to &man.make.1; to
-		  run multiple processes in parallel.  This usually helps 
-		  regardless of whether you have a single or a multi processor
-		  machine.</para>
+		<para>Passe a op&ccedil;&atilde;o <option>-j<replaceable>n</replaceable></option> para o &man.make.1; 
+		  para executar multiplos processos em paralelo.  Isto geralmente ajuda, n&atilde;o 
+		  importando que sua m&aacute;quina tenha um ou v&aacute;rios processadores.</para>
 	      </listitem>
 	      
-	      <listitem><para>The file system holding
-		  <filename>/usr/src</filename> can be mounted (or remounted)
-		  with the <option>noatime</option> option.  This prevents the
-		  file system from recording the file access time.  You probably
-		  do not need this information anyway.</para>
+	      <listitem><para>O sistema de arquivos que hospedar o 
+		  <filename>/usr/src</filename> pode ser montado (ou desmontado) 
+		  com a op&ccedil;&atilde;o <option>noatime</option>.  Isto evita que o sistema 
+		  de arquivos fa&ccedil;a grava&ccedil;&otilde;es durante o acesso &agrave; arquivo.  Voc&ecirc; 
+		  provavelmente n&atilde;o precisa desta informa&ccedil;&atilde;o.</para>
 		  
 		  <screen>&prompt.root; <userinput>mount -u -o noatime /usr/src</userinput></screen>
 		  
 		  <warning>
-		    <para>The example assumes <filename>/usr/src</filename> is
-		      on its own file system.  If it is not (if it is a part of
-		      <filename>/usr</filename> for example) then you will
-		      need to use that file system mount point, and not
-		      <filename>/usr/src</filename>.</para>
+		    <para>Este exemplo assume que <filename>/usr/src</filename> 
+		      est&aacute; em seu pr&oacute;prio sistema de arquivos.  Se n&atilde;o estiver 
+		      (se for parte do <filename>/usr</filename>, por exemplo) 
+		      ent&atilde;o voc&ecirc; n&atilde;o precisar&aacute; usar este ponto de montagem para 
+		      este sistema de arquivos.</para>
 		  </warning>
 	      </listitem>
 	      
 	      <listitem>
-		<para>The file system holding <filename>/usr/obj</filename> can
-		  be mounted (or remounted) with the <option>async</option>
-		  option.  This causes disk writes to happen asynchronously.
-		  In other words, the write completes immediately, and the
-		  data is written to the disk a few seconds later.  This
-		  allows writes to be clustered together, and can be a
-		  dramatic performance boost.</para>
+		<para>O sistema de arquivos onde <filename>/usr/obj</filename> 
+		  estiver pode ser montado (ou remontado) com a op&ccedil;&atilde;o 
+		  <option>async</option>.  Isto faz com que a escrita em disco 
+		  aconte&ccedil;a ass&iacute;ncronamente.  Em outras palavras, a escrita &eacute; 
+		  completada imediatamente, e os dados s&atilde;o escritos no disco 
+		  poucos segundos depois.  Isto permite que as escritas sejam 
+		  agupadas, e pode causar um grande ganho de performance.</para>
 
 		<warning>
-		  <para>Keep in mind that this option makes your file system
-		    more fragile.  With this option there is an increased
-		    chance that, should power fail, the file system will be in
-		    an unrecoverable state when the machine restarts.</para>
+		  <para>Tenha em mente que esta op&ccedil;&atilde;o faz com que seu sistema 
+		    de arquivos fique mais fr&aacute;gil.  Com est&aacute; op&ccedil;&atilde;o aumentam as 
+		    chances que, em uma falha de energia, o sistema de arquivos 
+		    fique em um estado irrecuper&aacute;vel quando a m&aacute;quina 
+		    reinicializar.</para>
 	   
-		  <para>If <filename>/usr/obj</filename> is the only thing on
-		    this file system then it is not a problem.  If you have
-		    other, valuable data on the same file system then ensure
-		    your backups are fresh before you enable this
-		    option.</para>
+		  <para>Se <filename>/usr/obj</filename> &eacute; o &uacute;nico neste 
+		    sistema de arquivos ent&atilde;o isto n&atilde;o &eacute; problema.  Se voc&ecirc; 
+		    outros dados de valor no mesmo sistema de arquivos, 
+		    certifique-se que suas c&oacute;pias de seguran&ccedil;a est&atilde;o 
+		    recentes antes de habilitar esta op&ccedil;&atilde;o.</para>
 		</warning>
 		
 		<screen>&prompt.root; <userinput>mount -u -o async /usr/obj</userinput></screen>
 		
 		<warning>
-		  <para>As above, if <filename>/usr/obj</filename> is not on
-		    its own file system, replace it in the example with the
-		    name of the appropriate mount point.</para>
+		  <para>Como acima, se <filename>/usr/obj</filename> n&atilde;o estiver 
+		    em seu em seu pr&oacute;prio sistema de arquivos, substitua pelo 
+		    nome apropriado de ponto de montagem.</para>
 		</warning>
 	      </listitem>
 	    </itemizedlist>
@@ -1688,13 +1694,13 @@ Building everything..
 
         <qandaentry>
           <question>
-            <para>What do I do if something goes wrong?</para>
+            <para>O que eu fa&ccedil;o se algo der errado?</para>
           </question>
 
           <answer>
-            <para>Make absolutely sure your environment has no
-              extraneous cruft from earlier builds.  This is simple
-              enough.</para>
+            <para>Esteja absolutamente certo de que seu ambiente n&atilde;o 
+	      experimentou anomalias nas compila&ccedil;&otilde;es anteriores.  Isto 
+	      &eacute; o bastante.</para>
 
             <screen>&prompt.root; <userinput>chflags -R noschg /usr/obj/usr</userinput>
 &prompt.root; <userinput>rm -rf /usr/obj/usr</userinput>
@@ -1702,16 +1708,16 @@ Building everything..
 &prompt.root; <userinput>make cleandir</userinput>
 &prompt.root; <userinput>make cleandir</userinput></screen>
 
-            <para>Yes, <command>make cleandir</command> really should
-              be run twice.</para>
+            <para>Sim, o comando <command>make cleandir</command> 
+              realmente deve ser executado duas vezes.</para>
 
-            <para>Then restart the whole process, starting
-              with <command>make buildworld</command>.</para>
+            <para>Ent&atilde;o reinicie todo o processo, come&ccedil;ando com 
+              o comando <command>make buildworld</command>.</para>
 
-            <para>If you still have problems, send the error and the
-              output of <command>uname -a</command> to &a.questions;.
-              Be prepared to answer other questions about your
-              setup!</para>
+            <para>Se voc&ecirc; ainda tiver problemas, envie o erro e a 
+              sa&iacute;da do comando <command>uname -a</command> para &a.questions;.
+              Esteja preparador para responder perguntas a respeito da 
+	      sua configura&ccedil;&atilde;o!</para>
           </answer>
         </qandaentry>
       </qandaset>
@@ -1724,7 +1730,7 @@ Building everything..
 	<author>
 	  <firstname>Mike</firstname>
 	  <surname>Meyer</surname>
-	  <contrib>Contributed by </contrib>
+	  <contrib>Contribui&ccedil;&atilde;o de </contrib>
 	</author>
       </authorgroup>
     </sect1info>
