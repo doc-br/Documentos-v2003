@@ -119,60 +119,67 @@
   <sect1 id="security-intro">
     <title>Introdução</title>
 
-    <para>Security is a function that begins and ends with the system
-      administrator.  While all BSD &unix; multi-user systems have some
-      inherent security, the job of building and maintaining additional
-      security mechanisms to keep those users <quote>honest</quote> is
-      probably one of the single largest undertakings of the sysadmin.
-      Machines are only as secure as you make them, and security concerns
-      are ever competing with the human necessity for convenience.  &unix;
-      systems, in general, are capable of running a huge number of
-      simultaneous processes and many of these processes operate as
-      servers &ndash; meaning that external entities can connect and talk
-      to them.  As yesterday's mini-computers and mainframes become
-      today's desktops, and as computers become networked and
-      internetworked, security becomes an even bigger issue.</para>
+    <para>Segurança é uma função que começa e termina com o administrador 
+      do sistema.  Enquanto todo sistema BSD &unix; multi-usuário tem 
+      alguma segurança nativa, o trabalho de criar e manter mecanismos 
+      adicionais de segurança para controlar aqueles usuários 
+      <quote>honestos</quote> é provavelmente uma das grandes e 
+      solitárias tarefas do <quote>sysadmin-Administrador do sistema</quote>.
 
-    <para>Security is best implemented through a layered
-      <quote>onion</quote> approach.  In a nutshell, what you want to do is
-      to create as many layers of security as are convenient and then
-      carefully monitor the system for intrusions.  You do not want to
-      overbuild your security or you will interfere with the detection
-      side, and detection is one of the single most important aspects of
-      any security mechanism.  For example, it makes little sense to set
-      the <literal>schg</literal> flags (see &man.chflags.1;) on every 
-      system binary because
-      while this may temporarily protect the binaries, it prevents an
-      attacker who has broken in from making an easily detectable change
-      that may result in your security mechanisms not detecting the attacker
-      at all.</para>
+      Maquinas estão seguras sómente quando voce as faz assim, e o 
+      interesse por segurança está sempre competindo com a necessidade
+      humana por conveniência. Sistemas &unix;, em geral, são capazes
+      de executar um grande numero de processos simultaneos e muitos
+      destes processos operam como servidores &ndash; Significando que
+      entidades externas podem conectar e conversar com eles.  A medida
+      que os mini-computadores e <foreignphrase>mainframes</foreignphrase>
+      de ontem tornaram-se os micro-computadores de hoje, e a medida
+      que os computadores foram se conectando em redes e as redes se
+      conectaram entre elas, segurança passou a ser um assunto sempre
+      mais importante.</para>
 
-    <para>System security also pertains to dealing with various forms of
-      attack, including attacks that attempt to crash, or otherwise make a
-      system unusable, but do not attempt to compromise the
-      <username>root</username> account (<quote>break root</quote>).
-      Security concerns
-      can be split up into several categories:</para>
+    <para>A melhor maneira de implementar segurança é através de 
+      camadas, como se fosse uma <quote>cebola</quote>.  Em resumo,
+      o que você precisa fazer é tantas camadas de proteção quanto lhe
+      for convêniente e então monitorar cuidadosamente o systemas contra
+      criar invasões.  Você não precisa exagerar em suas configuraões
+      de proteção, ou irá interferir com a possibilidade de detecção,
+      e a detecção é isoladamente um dos aspectos mais importantes de
+      qualquer mecanismo de segurança.  Por exemplo, faria pouco sentido
+      definir o flag <literal>schg</literal> (veja &man.chflags.1;) em
+      cada binário do sistema, porque enquanto isto pode temporariamente
+      proteger os binários, irá impedir que um invasor que obteve acesso 
+      ao seu sistema faça um alteração que seria facilmente detectada e
+      levar seus mecanismos de segurança a nunca detectarem o invasor ou
+      e a falha que foi explorada.</para>
+
+    <para>Segurança de sistema tambem está relacionada com várias formas 
+      de ataque, incluindo ataques que tentam travar, ou de alguma forma 
+      impedir o uso ou funcionamento do sistema, mas que não tentam 
+      comprometer a conta <username>root</username> 
+      (<quote>break root</quote>). 
+      Preocupações com segurança
+      podem ser divididas em diversas categorias:</para>
 
     <orderedlist>
       <listitem>
-	<para>Denial of service attacks.</para>
+	<para>Ataque de negação de serviços(<Foreignphrase>DoS-Denial of service attacks</foreignphrase>).</para>
       </listitem>
 
       <listitem>
-	<para>User account compromises.</para>
+	<para>Comprometimento de contas de usuário.</para>
       </listitem>
 
       <listitem>
-	<para>Root compromise through accessible servers.</para>
+	<para>Comprometimento do <username>root</username> através de servidores acessíveis.</para>
       </listitem>
 
       <listitem>
-	<para>Root compromise via user accounts.</para>
+	<para>Comprometimento do <username>root</username> via contas de usuários.</para>
       </listitem>
 
       <listitem>
-	<para>Backdoor creation.</para>
+	<para>Criação de portas de acesso clandestinas(<foreignphrase>Backdoor</foreignphrase>.</para>
       </listitem>
     </orderedlist>
 
@@ -5404,9 +5411,9 @@ drwxr-xr-x  2 robert  robert  512 Nov 10 11:54 public_html</programlisting>
       </authorgroup>
     </sect1info>
     <indexterm>
-      <primary>FreeBSD Security Advisories</primary>
+      <primary>recomendações de segurança do FreeBSD</primary>
     </indexterm>
-    <title>&os; Security Advisories</title>
+    <title>Recomendações de Segurança do &os;</title>
 
     <para>Like many production quality operating systems, &os; publishes
       <quote>Security Advisories</quote>.  These advisories are usually
