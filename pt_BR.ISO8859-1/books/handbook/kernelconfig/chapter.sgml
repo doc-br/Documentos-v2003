@@ -833,25 +833,25 @@ options          CD9660_ROOT  #CD-ROM usable as root, CD9660 required</programli
 
     <programlisting>options          SYSVSHM             #SYSV-style shared memory</programlisting>
 
-    <para>This option provides for System V shared memory.  The most
-      common use of this is the XSHM extension in X, which many
-      graphics-intensive programs will automatically take advantage of for
-      extra speed.  If you use X, you will definitely want to include
-      this.</para>
+    <para>Está opção fornece compartilhamento de memória para o Sistema V. O uso
+      mais comum deste é o XSHM extensão em X, com muitos
+      programas de gráficos-intensivos que darão automaticamente vantagem para acréscimo de velocidade.
+      Se você usa X, você deverá definitivamente incluir
+      este.</para>
 
     <programlisting>options          SYSVSEM             #SYSV-style semaphores</programlisting>
 
-    <para>Support for System V semaphores.  Less commonly used but only
-      adds a few hundred bytes to the kernel.</para>
+    <para>Suporte para Sistemas V de sinalização. Geralmente menos usado mas somente
+      adicionado cem alguns bytes no kernel.</para>
 
     <programlisting>options          SYSVMSG             #SYSV-style message queues</programlisting>
 
-    <para>Support for System V messages.  Again, only adds a few hundred
-      bytes to the kernel.</para>
+    <para>Suporte para Sistema V menssagens. Novamente, somente adicionado cem alguns 
+      bytes no kernel.</para>
 
     <note>
-      <para>The &man.ipcs.1; command will list any processes using each of
-	these System V facilities.</para>
+      <para>O &man.ipcs.1; comando listará algum processo usando alguma facilidade
+	deste Sistema V.</para>
     </note>
 
     <programlisting>options 	P1003_1B		#Posix P1003_1B real-time extensions
@@ -861,94 +861,93 @@ options 	_KPOSIX_PRIORITY_SCHEDULING</programlisting>
       applications in the ports collection use these
       (such as <application>&staroffice;</application>).</para>
 
-    <note><para>In &os; 5.X, all of this functionality is now
-      provided by the <literal>_KPOSIX_PRIORITY_SCHEDULING</literal>
-      option, and <literal>P1003_1B</literal> is no longer
-      required.</para></note>
+    <note><para>No &os; 5.X, todas estas funcionalidades agora são
+      fornecidos pela opção <literal>_KPOSIX_PRIORITY_SCHEDULING</literal>,
+      e <literal>P1003_1B</literal> não é 
+      requirido.</para></note>
 
     <indexterm>
-      <primary>kernel options</primary>
+      <primary>Opção do kernel</primary>
       <secondary>ICMP_BANDLIM</secondary>
     </indexterm>
     <indexterm>
-      <primary>Denial of Service (DoS)</primary>
+      <primary>Negando Serviço (DoS)</primary>
     </indexterm>
     <programlisting>options		ICMP_BANDLIM		#Rate limit bad replies</programlisting>
 
-    <para>This option enables ICMP error response bandwidth limiting.  You
-      typically want this option as it will help protect the machine from
-      denial of service packet attacks.</para>
+    <para>Está opção permite limitar largura de resposta de erro de ICMP. Você
+      tipicamente quer está opção para lhe ajudar a proteger a máquina 
+      negando do ataques de serviço pacotes.</para>
 
-    <note><para>In &os; 5.X, this feature is enabled by default and
-      the <literal>ICMP_BANDLIM</literal> option is not required.
+    <note><para>No &os; 5.X, está característica é habilitada por padrão e
+      a opção <literal>ICMP_BANDLIM</literal> não é requerida.
       </para></note>
 
     <indexterm>
-      <primary>kernel options</primary>
+      <primary>Opções do kernel</primary>
       <secondary>SMP</secondary>
     </indexterm>
     <programlisting># To make an SMP kernel, the next two are needed
 #options        SMP                     # Symmetric MultiProcessor Kernel
 #options        APIC_IO                 # Symmetric (APIC) I/O</programlisting>
 
-    <para>The above are both required for SMP support.</para>
+    <para>Acima são ambos requeridos para suporte a SMP.</para>
 
     <programlisting>device          isa</programlisting>
 
-    <para>All PCs supported by &os; have one of these.  If you have an
-      IBM PS/2 (Micro Channel Architecture), &os; provides some
-      limited support at this time.  For more information about the
-      MCA support, see
+    <para>Todos os PCs suportados por &os; tem uma desta. Se você tiver um
+      IBM PS/2 (Micro Channel Architecture), &os; fornece algum
+      limite suporte por tempo. Para maiores informações sobre o suporte
+      MCA, veja
       <filename>/usr/src/sys/i386/conf/LINT</filename>.</para>
 
     <programlisting>device          eisa</programlisting>
 
-    <para>Include this if you have an EISA motherboard.  This enables
-      auto-detection and configuration support for all devices on the EISA
+    <para>Inclua este se você tiver uma placa-mãe EISA. Isto habilita
+      auto-detectação e suporte a configuração para todos os dispositivos sobre o EISA
       bus.</para>
 
     <programlisting>device          pci</programlisting>
 
-    <para>Include this if you have a PCI motherboard.  This enables
-      auto-detection of PCI cards and gatewaying from the PCI to ISA
+    <para>Inclua este se você tiver uma placa-mãe PCI. Isto habilita
+      auto-detectação de cartões PCI e passando da PCI para ISA
       bus.</para>
 
     <programlisting>device          agp</programlisting>
 
-    <para>Include this if you have an AGP card in the system.  This
-      will enable support for AGP, and AGP GART for boards which
-      have these features.</para>
+    <para>Inclua isto se você tiver um cartão  AGP no sistema. Isto
+      habilitará suporte para AGP, e AGP GART para placas que
+      tem estas características.</para>
 
     <programlisting># Floppy drives
 device          fdc0        at isa? port IO_FD1 irq 6 drq 2
 device          fd0         at fdc0 drive 0
 device          fd1         at fdc0 drive 1</programlisting>
 
-    <para>This is the floppy drive controller.  <literal>fd0</literal> is
-      the <devicename>A:</devicename> floppy drive, and
-      <literal>fd1</literal> is the <devicename>B:</devicename>
-      drive.</para>
+    <para>Este é o controlador de disco flexível.  <literal>fd0</literal> é
+      o drive flexível <devicename>A:</devicename>, e
+      <literal>fd1</literal> é o drive <devicename>B:</devicename>.</para>
 
     <programlisting>device          ata</programlisting>
 
-    <para>This driver supports all ATA and ATAPI devices.  You only need
-      one <literal>device ata</literal> line for the kernel to detect all
-      PCI ATA/ATAPI devices on modern machines.</para>
+    <para>Este driver suporta todos dispositivos ATA e de ATAPI. Você necessitará somente
+      uma <literal>device ata</literal> linha para o kernel detectar todos os dispositivos 
+      PCI ATA/ATAPI sobre uma máquina moderna.</para>
 
     <programlisting>device          atadisk                 # ATA disk drives</programlisting>
 
-    <para>This is needed along with <literal>device ata</literal> for
+    <para>Isto é necessário em conjunto com a <literal>device ata</literal> para
       ATA disk drives.</para>
 
     <programlisting><anchor id="kernelconfig-atapi">
 device          atapicd                 # ATAPI CDROM drives</programlisting>
 
-    <para>This is needed along with <literal>device ata</literal> for
+    <para>Isto é necessário em conjunto com <literal>device ata</literal> para
       ATAPI CDROM drives.</para>
 
     <programlisting>device          atapifd                 # ATAPI floppy drives</programlisting>
 
-    <para>This is needed along with <literal>device ata</literal> for
+    <para>Isto é necessário em conjunto com <literal>device ata</literal> para
       ATAPI floppy drives.</para>
 
     <programlisting>device          atapist                 # ATAPI tape drives</programlisting>
@@ -958,14 +957,14 @@ device          atapicd                 # ATAPI CDROM drives</programlisting>
 
     <programlisting>options         ATA_STATIC_ID           #Static device numbering</programlisting>
 
-    <para>This makes the controller number static (like the old driver) or
-      else the device numbers are dynamically allocated.</para>
+    <para>Isto faz o controle Estático de número (parecendo o velho driver) ou
+      os números de dispositivos são alocados dinamicamente.</para>
 
     <programlisting># ATA and ATAPI devices
 device          ata0        at isa? port IO_WD1 irq 14
 device          ata1        at isa? port IO_WD2 irq 15</programlisting>
 
-    <para>Use the above for older, non-PCI systems.</para>
+    <para>Use-o sobre mais velho, sistemas non-PCI.</para>
 
     <programlisting># SCSI Controllers
 device          ahb        # EISA AHA1742 family
@@ -982,9 +981,9 @@ device          bt0        at isa?
 device          aha0       at isa?
 device          aic0       at isa?</programlisting>
 
-    <para>SCSI controllers.  Comment out any you do not have in your
-      system.  If you have an IDE only system, you can remove these
-      altogether.</para>
+    <para>Controladoras SCSI. Comente alguma linha se você não tiver em seu
+      sistema. Se você tiver somente sistema IDE, você pode remover estes
+      completamente.</para>
 
     <programlisting># SCSI peripherals
 device          scbus      # SCSI bus (required)
@@ -994,41 +993,39 @@ device          cd         # CD
 device          pass       # Passthrough device (direct SCSI
 access)</programlisting>
 
-    <para>SCSI peripherals.  Again, comment out any you do not have, or if
-      you have only IDE hardware, you can remove them completely.</para>
+    <para>Periféricos SCSI. Novamente, coment alguma se você não tiver, ou se
+      você tiver apenas hardware IDE, você pode remover este completamente.</para>
 
     <programlisting># RAID controllers
 device          ida        # Compaq Smart RAID
 device          amr        # AMI MegaRAID
 device          mlx        # Mylex DAC960 family</programlisting>
 
-    <para>Supported RAID controllers.  If you do not have any of these,
-      you can comment them out or remove them.</para>
+    <para>Suporte a controladoras RAID. Se você não tiver algumas destas,
+      você pode comentar esta ou remover esta.</para>
 
     <programlisting># atkbdc0 controls both the keyboard and the PS/2 mouse
 device          atkbdc0    at isa? port IO_KBD</programlisting>
 
-    <para>The keyboard controller (<literal>atkbdc</literal>) provides I/O
-      services for the AT keyboard and PS/2 style pointing devices.  This
-      controller is required by the keyboard driver
-      (<literal>atkbd</literal>) and the PS/2 pointing device driver
+    <para>O controlador de teclado (<literal>atkbdc</literal>) fornece serviços de I/O
+      para o teclado AT e estilo PS/2 que aponta dispositivos. Este
+      controlador é requerido pelo driver do teclado
+      (<literal>atkbd</literal>) e o PS/2 que aponta dispositivo driver
       (<literal>psm</literal>).</para>
 
     <programlisting>device          atkbd0     at atkbdc? irq 1</programlisting>
 
-    <para>The <literal>atkbd</literal> driver, together with
-      <literal>atkbdc</literal> controller, provides access to the AT 84
-      keyboard or the AT enhanced keyboard which is connected to the AT
-      keyboard controller.</para>
+    <para>O driver <literal>atkbd</literal>, em comjunto com o controlador
+      <literal>atkbdc</literal>, provém accesso para o teclado AT 84
+      ou o teclado AT realçado que é conectado ao controlador de teclado AT.</para>
 
     <programlisting>device          psm0       at atkbdc? irq 12</programlisting>
 
-    <para>Use this device if your mouse plugs into the PS/2 mouse
-      port.</para>
+    <para>Use este dispositivo se o plug do seu mouse for na porta PS/2.</para>
 
     <programlisting>device          vga0        at isa?</programlisting>
 
-    <para>The video card driver.</para>
+    <para>O driver de video.</para>
 
     <programlisting># splash screen/screen saver
 pseudo-device          splash</programlisting>
