@@ -582,43 +582,48 @@
 	binário sgid-kmem, o invasor provavelmente será capaz de
 	ler o <filename>/dev/kmem</filename> e assim ler o arquivo
 	de senhas criptografadas, comprometendo potencialmente
-	qualquer conta com senha.  Alternatively an intruder who breaks
-	group <literal>kmem</literal> can monitor keystrokes sent through
-	pty's, including pty's used by users who login through secure
-	methods.  An intruder that breaks the <groupname>tty</groupname>
-	group can write to
-	almost any user's tty.  If a user is running a terminal program or
-	emulator with a keyboard-simulation feature, the intruder can
-	potentially generate a data stream that causes the user's terminal
-	to echo a command, which is then run as that user.</para>
+	qualquer conta com senha.  Alternativamente um invasor que
+	viole o grupo <literal>kmem</literal> pode monitorar keystrokes 
+	enviadas através dos terminais <literal>pty<literal>, incluindo
+	<literal>pty's<literal> usados por usuários que fazem login 
+	através de métodos seguros.  Um invasor que viole o grupo 
+	<groupname>tty</groupname> pode escrever para quase todos os
+	tty de usuário.  Se um usuário estiver executando um programa ou 
+	emulador no terminal com característica de simulação de teclado, 
+	o invasor pode gerar potencialmente um data stream que ocasiona
+	o terminal do usuário a executar um comando, que é então executado
+	como esse usuário.</para>
     </sect2>
 
     <sect2 id="secure-users">
-      <title>Securing User Accounts</title>
+      <title>Protegendo Contas de Usuários</title>
 
-      <para>User accounts are usually the most difficult to secure.  While
-	you can impose Draconian access restrictions on your staff and
-	<quote>star</quote> out their passwords, you may not be able to
-	do so with any general user accounts you might have.  If you do
-	have sufficient control, then you may win out and be able to secure
-	the user accounts properly.  If not, you simply have to be more
-	vigilant in your monitoring of those accounts.  Use of
-	ssh and Kerberos for user accounts is
-	more problematic, due to the extra administration and technical
-	support required, but still a very good solution compared to a
-	crypted password file.</para>
+      <para>Contas de usuário geralmente são as mais difíceis de 
+	proteger.  Enquanto você pode impor restrições de acesso 
+	Draconianas em contas do sistema e colocar 
+	<quote>estrela</quote> nas suas senhas, você não pode
+	ser capaz de fazer algo assim com todas as contas gerais de 
+	usuário que você pode ter.  Se você tiver controle suficiente,
+	então você pode	conseguir e ser capaz de proteger as contas
+	de usuário corretamente.  Se não, você simplesmente tem que
+	ser mais vigilante na sua monitoração daquelas contas.  O uso
+	do ssh e Kerberos para contas de usuário é mais problematica,
+	devido a administração extra e suporte técnico requeridos, 
+	mas ainda uma solução muito boa comparada a um arquivo de senhas
+	criptografadas.</para>
     </sect2>
 
     <sect2>
-      <title>Securing the Password File</title>
+      <title>Protegendo o Arquivo de Senhas</title>
 
-      <para>The only sure fire way is to <literal>*</literal> out as many
-	passwords as you can and use ssh or
-	Kerberos for access to those accounts.  Even though the encrypted
-	password file (<filename>/etc/spwd.db</filename>) can only be read
-	by <username>root</username>, it may be possible for an intruder
-	to obtain read access to that file even if the attacker cannot
-	obtain root-write access.</para>
+      <para>The only sure fire way is to <literal>*</literal> out 
+	em quantas senhas você puder e usar ssh ou Kerberos para
+	o acesso daquelas contas.  Mesmo que o arquivo de senhas
+	criptografadas (<filename>/etc/spwd.db</filename>) possa
+	somente ser lido pelo <username>root</username>, pode ser
+	possível para um invasor obter acesso de leitura a esse
+	arquivo mesmo se o atacante não pode obter acesso de escrita
+	root.</para>
 
       <para>Your security scripts should always check for and report
 	changes to the password file (see the <link
