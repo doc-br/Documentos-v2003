@@ -1810,7 +1810,7 @@ export PATH</programlisting>
 pam-0.68-7.i386.rpm</userinput></screen>
 
 	<para>Para o <application>&oracle; 8.0.5</application> executar o 
-	  <foreignphrase>intelligent agent<foreignphrase>, n&oacute;s 
+	  <foreignphrase>intelligent agent</foreignphrase>, n&oacute;s 
 	  tamb&eacute;m tivemos que instalar o pacote Tcl RedHat  
 	  <filename>tcl-8.0.5-30.i386.rpm</filename> (caso contr&aacute;rio 
 	  o religamento durante a instala&ccedil;&atilde;o do 
@@ -2139,7 +2139,7 @@ en_US.ISO-8859-1</programlisting>
 	  ocorrer&atilde;o durante a instala&ccedil;&atilde;o.  Se forem ignorados 
           (configurando-se o <literal>STATUS</literal> dos passos problem&aacute;ticos 
           para <literal>OK</literal> no arquivo <filename>CENTRDB.R3S</filename>), 
-	  ser&aacute; imposs&iacute;vel efetuar <foreignphrase>logon<foreignphrase> 
+	  ser&aacute; imposs&iacute;vel efetuar <foreignphrase>logon</foreignphrase> 
           no sistema <application>&sap;</application> sem um esfor&ccedil;o adicional.</para>
       </sect3>
 
@@ -2620,26 +2620,31 @@ options SEMUME=100       #number of UNDO keys</programlisting>
     </sect2>
 
     <sect2 id="installingoracle805">
-      <title>Installing &oracle; 8.0.5</title>
+      <title>Instalando o &oracle; 8.0.5</title>
 
-      <para>Please see the corresponding &sap; Notes and &oracle; <filename>Readme</filename>s
-        regarding Linux and <application>&oracle; DB</application> for possible problems. Most if
-        not all problems stem from incompatible libraries.</para>
+      <para>Por favor veja as notas correspondentes ao &sap; e ao &oracle; 
+	nos arquivos <filename>Readme</filename>a respeito do Linux e do 
+        banco de dados <application>&oracle;</application> para poss&iacute;veis 
+	problemas.  A maioria dos problemas prov&eacute;m de bibliotecas 
+	incompat&iacute;veis.</para>
 
-      <para>For more information on installing <application>&oracle;</application>, refer to <link
-	  linkend="linuxemu-oracle">the Installing &oracle;
-	  chapter.</link></para>
+      <para>Para mais informa&ccedil;&ccedil;&otilde;es sobre a 
+	  instala&ccedil;&atilde;o do <application>&oracle;</application>, 
+	  veja o cap&iacute;tulo <link linkend="linuxemu-oracle">Instalando o &oracle;.
+	  </link></para>
 
 
       <sect3 id="installingtheoracle805withorainst">
-        <title>Installing the &oracle; 8.0.5 with <command>orainst</command></title>
+        <title>Instalando o &oracle; 8.0.5 com o <command>orainst</command></title>
 
-        <para>If <application>&oracle; 8.0.5</application> is to be
-          used, some additional libraries are needed for successfully
-          relinking, as <application>&oracle; 8.0.5</application> was linked with an old glibc
-          (RedHat 6.0), but RedHat 6.1 already uses a new glibc. So
-          you have to install the following additional packages to
-          ensure that linking will work:</para>
+        <para>Se o <application>&oracle; 8.0.5</application> for usado, 
+          algumas bibliotecas adicionais ser&atilde;o necess&aacute;rias 
+          para uma religa&ccedil;&atilde;o bem sucedida, pois o 
+	  <application>&oracle; 8.0.5</application> foi ligado com uma 
+	  <literal>glibc</literal> antiga (RedHat 6.0), mas o RedHat 6.1 
+	  j&aacute; utiliza uma nova <literal>glibc</literal>.  Ent&atilde;o 
+	  voc&ecirc; tem que instalar os seguintes pacotes adicionais para 
+	  ter certeza que a liga&ccedil;&atilde;o vai funcionar:</para>
 
         <para><filename>compat-libs-5.2-2.i386.rpm</filename></para>
         <para><filename>compat-glibc-5.2-2.0.7.2.i386.rpm</filename></para>
@@ -2647,20 +2652,22 @@ options SEMUME=100       #number of UNDO keys</programlisting>
         <para><filename>compat-egcs-c++-5.2-1.0.3a.1.i386.rpm</filename></para>
         <para><filename>compat-binutils-5.2-2.9.1.0.23.1.i386.rpm</filename></para>
 
-        <para>See the corresponding &sap; Notes or &oracle; <filename>Readme</filename>s for
-          further information.  If this is no option (at the time of
-          installation we did not have enough time to check this), one
-          could use the original binaries, or use the relinked
-          binaries from an original RedHat system.</para>
+        <para>Veja as notas correspondentes ao &sap; e ao &oracle; 
+	  nos arquivos <filename>Readme</filename> para mais informa&ccedil;&otilde;es.  
+	  Se isto n&atilde;o &eacute; uma op&ccedil;&atilde;o (no momento da 
+	  instala&ccedil;&atilde;o n&atilde;o tivemos tempo de verificar isso), 
+	  um pode usar os bin&aacute;rios originais, ou usar os bin&aacute;rios 
+	  religados originalmente no sistema RedHat.</para>
 
-        <para>For compiling the intelligent agent, the RedHat Tcl
-          package must be installed.  If you cannot get
-          <filename>tcl-8.0.3-20.i386.rpm</filename>, a newer one like
-          <filename>tcl-8.0.5-30.i386.rpm</filename> for RedHat 6.1
-          should also do.</para>
+        <para>Para compilar o <foreignphrase>intelligent agent</foreignphrase>, 
+	  o pacote Tcl do RedHat deve estar instalado.  Se voc&ecirc; 
+          n&atilde;o puder pegar o 
+          <filename>tcl-8.0.3-20.i386.rpm</filename>, um mais novo como 
+          o <filename>tcl-8.0.5-30.i386.rpm</filename> para RedHat 6.1
+          deve ser suficiente.</para>
 
-        <para>Apart from relinking, the installation is
-          straightforward:</para>
+        <para>Fora a religa&ccedil;&atilde;o, a instala&ccedil;&atilde;o 
+          &eacute; direta:</para>
 
         <screen>&prompt.root; <userinput>su - oraids</userinput>
 &prompt.root; <userinput>export TERM=xterm</userinput>
@@ -2669,44 +2676,47 @@ options SEMUME=100       #number of UNDO keys</programlisting>
 &prompt.root; <userinput>cd /ORACLE_HOME/orainst_sap</userinput>
 &prompt.root; <userinput>./orainst</userinput></screen>
 
-        <para>Confirm all screens with <keycap>Enter</keycap> until the software is
-          installed, except that one has to deselect the
-          <emphasis>&oracle; On-Line Text Viewer</emphasis>, as this is
-          not currently available for Linux. <application>&oracle;</application> then wants to
-          relink with <command>i386-glibc20-linux-gcc</command>
-          instead of the available <command>gcc</command>,
-          <command>egcs</command> or <command>i386-redhat-linux-gcc
+        <para>Confirme todas as telas com <keycap>Enter</keycap> at&eacute; 
+	  que o programa seja instalado, exceto a que tem a op&ccedil;&atilde;o 
+          para deselecionar o <emphasis>&oracle; On-Line Text Viewer</emphasis>, 
+          pois n&atilde;o est&aacute; dispon&iacute;vel para Linux, ent&atilde;o 
+	  o <application>&oracle;</application> religa com o 
+          <command>i386-glibc20-linux-gcc</command> ao inv&eacute;s 
+          do <command>gcc</command> dispon&iacute;vel,
+          <command>egcs</command> ou <command>i386-redhat-linux-gcc
           </command>.</para>
 
-        <para>Due to time constrains we decided to use the binaries
-          from an <application>&oracle; 8.0.5 PreProduction</application>
-	  release, after the first
-          attempt at getting the version from the RDBMS CD working,
-          failed, and finding and accessing the correct RPMs was a
-          nightmare at that time.</para>
+        <para>Devido a restri&ccedil;&otilde;es de tempo decidimos usar 
+          bin&aacute;rios de uma vers&atilde;o do <application>&oracle; 
+	  8.0.5 PreProduction</application>, depois da primeira tentativa 
+	  frustada de tentar fazer funcionar a vers&atilde;o do RDBMS do CD, 
+	  procurar e acessar os RPMs corretos naquela ocasi&atilde;o foi 
+	  um pesadelo.</para>
 
       </sect3>
 
       <sect3 id="installingtheoracle805preproduction">
-        <title>Installing the &oracle; 8.0.5 Pre-production Release for
+        <title>Instalando o &oracle; 8.0.5 Pre-production Release para 
           Linux (Kernel 2.0.33)</title>
 
-        <para>This installation is quite easy. Mount the CD, start the
-          installer.  It will then ask for the location of the &oracle;
-          home directory, and copy all binaries there. We did not
-          delete the remains of our previous RDBMS installation tries,
-          though.</para>
+        <para>Esta instala&ccedil;&atilde;o &eacute; bem f&aacute;cil.  Monte 
+	  o CD, inicie o instalador.  Ent&atilde;o ele perguntar&aacute; pelo 
+	  local do diret&oacute;rio <literal>home</literal> do &oracle;, 
+	  e copiar&aacute; todos os bin&aacute;rios para l&aacute;.  
+	  N&oacute;s n&atilde;o apagamos os resqu&iacute;cios das nossas 
+	  tentativas anteriores de instalar o RDBMS.</para>
 
-        <para>Afterwards, <application>&oracle;</application> Database could be started with no
-          problems.</para>
+        <para>Depois disso, o Banco de Dados <application>&oracle;</application> 
+	  pode ser instalado sem problemas.</para>
       </sect3>
     </sect2>
 
     <sect2 id="installingoracle817">
-      <title>Installing the &oracle; 8.1.7 Linux Tarball</title>
-      <para>Take the tarball <filename>oracle81732.tgz</filename> you
-	produced from the installation directory on a Linux system
-	and untar it to <filename>/oracle/<replaceable>SID</replaceable>/817_32/</filename>.</para>
+      <title>Instalando o Tarball Linux do &oracle; 8.1.7</title>
+      <para>Pegue o <foreignphrase>tarball</foreignphrase> 
+	<filename>oracle81732.tgz</filename> que voc&ecirc; 
+	produziu no diret&oacute;rio de instala&ccedil;&atilde;o do 
+	sistema Linux e descompacte-o em <filename>/oracle/<replaceable>SID</replaceable>/817_32/</filename>.</para>
     </sect2>
 
     <sect2 id="continuewithsapr4installation">
