@@ -5,20 +5,20 @@
      modification, are permitted provided that the following conditions
      are met:
 
-      1. Redistributions of source code (SGML DocBook) must retain the above
-         copyright notice, this list of conditions and the following
-         disclaimer as the first lines of this file unmodified.
+      1.  Redistributions of source code (SGML DocBook) must retain the above
+	 copyright notice, this list of conditions and the following
+	 disclaimer as the first lines of this file unmodified.
 
-      2. Redistributions in compiled form (transformed to other DTDs,
-         converted to PDF, PostScript, RTF and other formats) must reproduce
-         the above copyright notice, this list of conditions and the
-         following disclaimer in the documentation and/or other materials
-         provided with the distribution.
+      2.  Redistributions in compiled form (transformed to other DTDs,
+	 converted to PDF, PostScript, RTF and other formats) must reproduce
+	 the above copyright notice, this list of conditions and the
+	 following disclaimer in the documentation and/or other materials
+	 provided with the distribution.
 
      THIS DOCUMENTATION IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR
      IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
      OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-     DISCLAIMED. IN NO EVENT SHALL NIK CLAYTON BE LIABLE FOR ANY DIRECT,
+     DISCLAIMED.  IN NO EVENT SHALL NIK CLAYTON BE LIABLE FOR ANY DIRECT,
      INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
      (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
      SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -36,7 +36,7 @@
   <para>A principal finalidade desse capitulo &eacute; explicar claramente <emphasis>como
     o processo de cria&ccedil;&atilde;o da documenta&ccedil;&atilde;o &eacute; organizado</emphasis>, e
     <emphasis>e como fazer modifica&ccedil;&otilde;es a este processo</emphasis>.
-    </para>
+</para>
 
   <para>Depois de finalizar a leitura deste cap&iacute;tulo voc&ecirc; dever&aacute;:</para>
 
@@ -48,12 +48,12 @@
     </listitem>
 
     <listitem>
-      <para>Poder ler e entender as instru&ccedil;&otilde;es do 
-	<application>make</application> que est&atilde;o presentes em cada 
-	documento <filename>Makefile</filename>, assim como uma vis&atilde;o 
+      <para>Poder ler e entender as instru&ccedil;&otilde;es do
+	<application>make</application> que est&atilde;o presentes em cada
+	documento <filename>Makefile</filename>, assim como uma vis&atilde;o
 	geral do <filename>doc.project.mk</filename> .</para>
     </listitem>
- 
+
     <listitem>
       <para>Poder customizar o processo de constru&ccedil;&atilde;o usando
 	<application>make</application> vari&aacute;veis e
@@ -81,16 +81,16 @@
       </listitem>
 
       <listitem>
-	<para>O <application>gzip</application> &eacute; necess&aacute;rio para criar vers&otilde;es 
+	<para>O <application>gzip</application> &eacute; necess&aacute;rio para criar vers&otilde;es
 	  compactadas do documento.
 	  O compressor <application>bzip2</application> e
 	  os arquivos <application>zip</application> tamb&eacute;m s&atilde;o suportados.
-	  O <application>tar</application> &eacute; suportado, mas a constru&ccedil;&atilde;o de 
+	  O <application>tar</application> &eacute; suportado, mas a constru&ccedil;&atilde;o de
 	  pacotes necessita dele.</para>
       </listitem>
 
       <listitem>
-	<para>O <application>install</application> &eacute; o m&eacute;todo padr&atilde;o 
+	<para>O <application>install</application> &eacute; o m&eacute;todo padr&atilde;o
 	  para instalar a documenta&ccedil;&atilde;o.  Entretanto, h&aacute; alternativas.</para>
       </listitem>
     </itemizedlist>
@@ -104,8 +104,8 @@
   <sect1>
     <title>Entendendo Makefiles na &aacute;rvore da documenta&ccedil;&atilde;o</title>
 
-    <para>H&aacute; tr&ecirc;s tipos principais de <filename>Makefile</filename>s 
-      na &aacute;rvore do  projeto de document&ccedil;&atilde;o do FreeBSD.</para>
+    <para>H&aacute; tr&ecirc;s tipos principais de <filename>Makefile</filename>s
+      na &aacute;rvore do projeto de document&ccedil;&atilde;o do FreeBSD.</para>
 
     <itemizedlist>
       <listitem>
@@ -146,7 +146,7 @@ DOC_PREFIX?= ${.CURDIR}/..
 	<makevar>SUBDIR</makevar>, <makevar>COMPAT_SYMLINK</makevar>,
 	e <makevar>DOC_PREFIX</makevar>.</para>
 
-      <para>A primeira indica&ccedil;&atilde;o ao <makevar>SUBDIR</makevar> statement, tanto quanto 
+      <para>A primeira indica&ccedil;&atilde;o ao <makevar>SUBDIR</makevar> statement, tanto quanto
 	a indica&ccedil;&atilde;o<makevar>COMPAT_SYMLINK</makevar>, mostra como atribuir um valor a uma vari&aacute;vel,
 	cancelando algum valor precendente.</para>
 
@@ -162,10 +162,10 @@ DOC_PREFIX?= ${.CURDIR}/..
 	pode cancelar este e fornecer o valor correto.</para>
 
       <para>Agora o que tudo isso significa? <makevar>SUBDIR</makevar>
-	menciona que todos subdiret&oacute;rios abaixo deste, devem passar qualquer 
-        trabalho de processo de constru&ccedil;&atilde;o nele.</para>
+	menciona que todos subdiret&oacute;rios abaixo deste, devem passar qualquer
+	trabalho de processo de constru&ccedil;&atilde;o nele.</para>
 
-      <para><makevar>COMPAT_SYMLINK</makevar> &eacute; espec&iacute;fico a 
+      <para><makevar>COMPAT_SYMLINK</makevar> &eacute; espec&iacute;fico a
 	compatibilidade dos links simb&oacute;licos (bastante surpreendente) para linguagens
 	oficiais(<filename>doc/en</filename> apontaria para
 	<filename>en_US.ISO-8859-1</filename>).</para>
@@ -185,7 +185,7 @@ DOC_PREFIX?= ${.CURDIR}/..
     <sect2 id="doc-make">
       <title>Documenta&ccedil;&atilde;o dos Makefiles</title>
 
-      <para>Estes <filename>Makefile</filename>s ajustam v&aacute;rias 
+      <para>Estes <filename>Makefile</filename>s ajustam v&aacute;rias
 	vari&aacute;veis do <application>make</application> que descrevem como
 	construir a documenta&ccedil;&atilde;o contida naquele diret&oacute;rio.</para>
 
@@ -208,7 +208,7 @@ DOC_PREFIX?= ${.CURDIR}/../../..
 .include "$(DOC_PREFIX)/share/mk/docproj.docbook.mk"</programlisting>
 
       <para>A vari&aacute;vel <makevar>MAINTAINER</makevar> &eacute; uma das
-	mais importantes.  Esta vari&aacute;vel fornece a habilidade de reivindicar 
+	mais importantes.  Esta vari&aacute;vel fornece a habilidade de reivindicar
 	a posse sobre um documento no projeto de documenta&ccedil;&atilde;o do
 	FreeBSD, por meio que voc&ecirc; recebe a responsabilidade de mant&eacute;-lo.</para>
 
@@ -221,10 +221,10 @@ DOC_PREFIX?= ${.CURDIR}/../../..
 
       <para><makevar>FORMATS</makevar> indica o formato padr&atilde;o
 	que deve ser criado este documento.
-	<makevar>INSTALL_COMPRESSED</makevar> &eacute; a lista padr&atilde;o de 
+	<makevar>INSTALL_COMPRESSED</makevar> &eacute; a lista padr&atilde;o de
 	t&eacute;cnicas de compress&atilde;o que devem ser usados na cria&ccedil;&atilde;o do
-	documento.  <makevar>INSTALL_ONLY_COMPRESS</makevar>, em branco por 
-	padr&atilde;o, nao deve estar em branco se somente documentos compactados 
+	documento.  <makevar>INSTALL_ONLY_COMPRESS</makevar>, em branco por
+	padr&atilde;o, nao deve estar em branco se somente documentos compactados
 	forem desejados na cria&ccedil;&atilde;o.</para>
 
       <note>
@@ -232,7 +232,7 @@ DOC_PREFIX?= ${.CURDIR}/../../..
 	  <link linkend="sub-make">se&ccedil;&atilde;o anterior</link>.</para>
       </note>
 
-      <para>As indica&ccedil;&otilde;es <makevar>DOC_PREFIX</makevar> e include 
+      <para>As indica&ccedil;&otilde;es <makevar>DOC_PREFIX</makevar> e include
 	j&aacute; devem estar familiarizadas.</para>
     </sect2>
   </sect1>
@@ -240,7 +240,7 @@ DOC_PREFIX?= ${.CURDIR}/../../..
   <sect1 id="make-includes">
     <title>Includes do make do projeto de documenta&ccedil;&atilde;o do FreeBSD</title>
 
-    <para>Isto &eacute; melhor explicado pela inspe&ccedil;&atilde;o no c&oacute;digo. Aqui est&atilde;o
+    <para>Isto &eacute; melhor explicado pela inspe&ccedil;&atilde;o no c&oacute;digo.  Aqui est&atilde;o
       os arquivos include do sistema:</para>
 
     <itemizedlist>
@@ -293,9 +293,9 @@ PRI_LANG?=	en_US.ISO8859-1
 
 	<para><makevar>DOCFORMAT</makevar> e <makevar>MAINTAINER</makevar>
 	  ser&atilde;o atribu&iacute;dos valores padr&atilde;o, se estes n&atilde;o forem configuradores pelo
-	  arquivo de documento do  make.</para>
+	  arquivo de documento do make.</para>
 
-	<para><makevar>PREFIX</makevar> &eacute; o caminho que os 
+	<para><makevar>PREFIX</makevar> &eacute; o caminho que os
 	  <link linkend="tools">aplicativos de constru&ccedil;&atilde;o da documenta&ccedil;&atilde;o</link> est&atilde;o
 	  instalados.  Para uma instala&ccedil;&atilde;o normal de pacotes e port, este caminho tamb&eacute;m &eacute;
 	  <filename>/usr/local</filename>.</para>
@@ -305,8 +305,8 @@ PRI_LANG?=	en_US.ISO8859-1
 	  em sua constru&ccedil;&atilde;o.  US English (Ingl&ecirc;s) &eacute; o padr&atilde;o.</para>
 
 	<note>
-	  <para><makevar>PRI_LANG</makevar> de maneira alguma pode afetar 
-	    os documentos, ou se forem, &eacute; para serem criados.  Seu uso principal &eacute; criar links 
+	  <para><makevar>PRI_LANG</makevar> de maneira alguma pode afetar
+	    os documentos, ou se forem, &eacute; para serem criados.  Seu uso principal &eacute; criar links
 	    de refer&ecirc;ncias comuns aos documentos no projeto de documenta&ccedil;&atilde;o do FreeBSD
 	    instalado na ra&iacute;z.</para>
 	</note>
@@ -314,19 +314,19 @@ PRI_LANG?=	en_US.ISO8859-1
 
       <sect3>
 	<title>Condicionais</title>
-       
-	<para>A linha <literal>.if defined(DOC)</literal> &eacute; um exemplo da 
+
+	<para>A linha <literal>.if defined(DOC)</literal> &eacute; um exemplo da
 	  condicional do <application>make</application>, como em
 	  outros programas, define o comportamento se algumas condi&ccedil;&otilde;es &eacute; verdadeira
-	  ou se &eacute; falsa.  <literal>defined</literal> &eacute; a fun&ccedil;&atilde;o que 
+	  ou se &eacute; falsa.  <literal>defined</literal> &eacute; a fun&ccedil;&atilde;o que
 	  retorna se a vari&aacute;vel passada est&aacute; definida ou n&atilde;o.</para>
 
-	<para>A seguir, <literal>.if ${DOCFORMAT} == "docbook"</literal>, 
+	<para>A seguir, <literal>.if ${DOCFORMAT} == "docbook"</literal>,
 	  teste se a vari&aacute;vel <makevar>DOCFORMAT</makevar> &eacute;
 	  <literal>"docbook"</literal>, e neste caso, inclue o
 	  <filename>doc.docbook.mk</filename>.</para>
 
-	<para>Os dois <literal>.endif</literal>s fecham as duas condi&ccedil;&otilde;es 
+	<para>Os dois <literal>.endif</literal>s fecham as duas condi&ccedil;&otilde;es
 	  anteriores, marcando o fim da sua aplica&ccedil;&atilde;o.</para>
       </sect3>
     </sect2>
@@ -344,13 +344,13 @@ PRI_LANG?=	en_US.ISO8859-1
 	<itemizedlist>
 	  <listitem>
 	    <para><makevar>SUBDIR</makevar> &eacute; a lista de subdiret&oacute;rios
-	      em que o processo de constru&ccedil;&atilde;o deve feito 
+	      em que o processo de constru&ccedil;&atilde;o deve feito
 	      abaixo.</para>
 	  </listitem>
 
 	  <listitem>
 	    <para><makevar>ROOT_SYMLINKS</makevar> &eacute; o nome dos
-	      diret&oacute;rios que devem ser linkados a ra&iacute;z de instala&ccedil;&atilde;o 
+	      diret&oacute;rios que devem ser linkados a ra&iacute;z de instala&ccedil;&atilde;o
 	      do documento em sua localiza&ccedil;&atilde;o atual, se a linguagem
 	      atual &eacute; a linguagem prim&aacute;ria (especificado por
 	      <makevar>PRI_LANG</makevar>).</para>
@@ -364,22 +364,22 @@ PRI_LANG?=	en_US.ISO8859-1
       </sect3>
 
       <sect3>
-	<title>Targets and macros</title>
+	<title>Targets e macros</title>
 
-	<para>Dependencies are described by 
+	<para>Depend&ecirc;ncias s&atilde;o descritas por
 	  <literal><replaceable>target</replaceable>:
-	  <replaceable>dependency1 dependency2 ...</replaceable></literal>
-	  tuples, where to build <literal>target</literal>, you need to build
-	  the given dependencies first.</para>
+	  <replaceable>depend&ecirc;ncia1 depend&ecirc;ncia2 ...</replaceable></literal>
+	  , onde para construir o <literal>target</literal>, voc&ecirc; necessita primeiramente
+	  construir as depend&ecirc;ncias dadas.</para>
 
-	<para>After that descriptive tuple, instructions on how to build
-	  the target may be given, if the conversion process between the
-	  target and its dependencies are not previously defined, or if
-	  this particular conversion is not the same as the default
-	  conversion method.</para>
+	<para>Em seguida a tupla descritiva, instru&ccedil;&otilde;es em como construir
+	  o target pode ser dada, se o processo de convers&atilde;o entre o
+	  target e estas depend&ecirc;ncias n&atilde;o forem previamente definidas, ou se
+	  esta convers&atilde;o particular n&atilde;o for a mesma que o m&eacute;todo de
+	  convers&atilde;o padr&atilde;o.</para>
 
-	<para>A special dependency <literal>.USE</literal> defines
-	  the equivalent of a macro.</para>
+	<para>A depend&ecirc;ncia especial <literal>.USE</literal> define
+	  o equivalente ao macro.</para>
 
 <programlisting>_SUBDIRUSE: .USE
 .for entry in ${SUBDIR}
@@ -388,80 +388,80 @@ PRI_LANG?=	en_US.ISO8859-1
 	${MAKE} ${.TARGET:S/realpackage/package/:S/realinstall/install/} DIRPRFX=${DIRPRFX}${entry}/ )
 .endfor</programlisting>
 
-	<para>In the above, <maketarget>_SUBDIRUSE</maketarget> is now a
-	  macro which will execute the given commands when it is listed
-	  as a dependency.</para>
+	<para>Acima, <maketarget>_SUBDIRUSE</maketarget> &eacute; agora um
+	  macro que ir&aacute; executar comandos passados quando for listado
+	  como depend&ecirc;ncia.</para>
 
-	<para>What sets this macro apart from other targets?  Basically,
-	  it is executed <emphasis>after</emphasis> the instructions
-	  given in the build procedure it is listed as a dependency to,
-	  and it does not adjust <makevar>.TARGET</makevar>, which is the
-	  variable which contains the name of the target currently
-	  being built.</para>
+	<para>O que configura este macro a parte de outros targets?  Basicamente,
+	  &eacute; executado <emphasis>ap&oacute;s</emphasis> as instru&ccedil;&otilde;es
+	  passadas no processo de constru&ccedil;&atilde;o, s&atilde;o listados como uma depend&ecirc;ncia,
+	  e n&atilde;o o configura o <makevar>.TARGET</makevar>, que &eacute; a
+	  vari&aacute;vel que cont&eacute;m o nome do target atual
+	  est&aacute; sendo constru&iacute;do.</para>
 
 <programlisting>clean: _SUBDIRUSE
 	rm -f ${CLEANFILES}</programlisting>
 
-	<para>In the above, <maketarget>clean</maketarget> will use the
-	  <maketarget>_SUBDIRUSE</maketarget> macro after it has
-	  executed the instruction 
-	  <command>rm -f ${CLEANFILES}</command>.  In effect, this causes
-	  <maketarget>clean</maketarget> to go further and further down
-	  the directory tree, deleting built files as it goes
-	  <emphasis>down</emphasis>, not on the way back up.</para>
+	<para>Acima, o <maketarget>clean</maketarget> ir&aacute; usar o macro
+	  <maketarget>_SUBDIRUSE</maketarget> depois de ter
+	  executado a instru&ccedil;&atilde;o
+	  <command>rm -f ${CLEANFILES}</command>.  De fato, isto causa um
+	  <maketarget>clean</maketarget> na &aacute;rvore de diret&oacute;rio,
+	  deletando arquivos constru&iacute;dos enquanto vai
+	  <emphasis>descendo</emphasis> aos subdiret&oacute;rios.</para>
 
 	<sect4>
-	  <title>Provided targets</title>
+	  <title>Targets fornecidos</title>
 
 	  <itemizedlist>
 	    <listitem>
-	      <para><maketarget>install</maketarget> and
-		<maketarget>package</maketarget> both go down the
-		directory tree calling the real versions of themselves
-		in the subdirectories.
-		(<maketarget>realinstall</maketarget> and
+	      <para><maketarget>install</maketarget> e
+		<maketarget>package</maketarget>, ambos v&atilde;o abaixo
+		na &aacute;rvore de diret&oacute;rio requisitando a real vers&atilde;o deles
+		nos subdiret&oacute;rios.
+		(<maketarget>realinstall</maketarget> e
 		<maketarget>realpackage</maketarget>
-		 respectively)</para>
+		 respectivamente)</para>
 	    </listitem>
 
 	    <listitem>
-	      <para><maketarget>clean</maketarget> removes files created
-		by the build process (and goes down the directory tree
-		too).  <maketarget>cleandir</maketarget> does the same,
-		and also removes the object directory, if any.</para>
+	      <para>O <maketarget>clean</maketarget> remove arquivos criados
+		pelo processo de compila&ccedil;&atilde;o (e tamb&eacute;m desce na &aacute;rvore de diret&oacute;rios
+		tamb&eacute;m).  O <maketarget>cleandir</maketarget> faz a mesma coisa,
+		e tamb&eacute;m remove o diret&oacute;rio de objetos se este existir.</para>
 	    </listitem>
 	  </itemizedlist>
 	</sect4>
       </sect3>
 
       <sect3>
-	<title>More on conditionals</title>
+	<title>Mais condicionais</title>
 
 	<itemizedlist>
 	  <listitem>
-	    <para><literal>exists</literal> is another condition
-	      function which returns true if the given file exists.</para>
+	    <para><literal>exists</literal> &eacute; outra fun&ccedil;&atilde;o
+	      condicional que retorna verdadeiro se o arquivo dado existir.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para><literal>empty</literal> returns true if the given
-	      variable is empty.</para>
+	    <para><literal>empty</literal> retorna verdadeiro se a vari&aacute;vel
+	      passada estiver vazia.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para><literal>target</literal> returns true if the given
-	      target does not already exist.</para>
+	    <para><literal>target</literal> retorna verdadeiro se o target
+	      passado j&aacute; n&atilde;o existir.</para>
 	  </listitem>
 	</itemizedlist>
       </sect3>
 
       <sect3>
-	<title>Looping constructs in make (.for)</title>
+	<title>Constru&ccedil;&atilde;o de Looping no make (.for)</title>
 
-	<para><literal>.for</literal> provides a way to repeat a set of
-	  instructions for each space-separated element in a variable.
-	  It does this by assigning a variable to contain the current
-	  element in the list being examined.</para>
+	<para><literal>.for</literal> fornece uma maneira de repetir instru&ccedil;&otilde;es
+	  definidas para cada elemente separado por espa&ccedil;o em uma vari&aacute;vel.
+	  Ele faz isso atribu&iacute;ndo uma vari&aacute;vel para conter o elemento
+	  atual na lista que est&aacute; sendo examinada.</para>
 
 <programlisting>_SUBDIRUSE: .USE
 .for entry in ${SUBDIR}
@@ -470,12 +470,12 @@ PRI_LANG?=	en_US.ISO8859-1
 	${MAKE} ${.TARGET:S/realpackage/package/:S/realinstall/install/} DIRPRFX=${DIRPRFX}${entry}/ )
 .endfor</programlisting>
 
-	<para>In the above, if <makevar>SUBDIR</makevar> is empty, no
-	  action is taken; if it has one or more elements, the
-	  instructions between <literal>.for</literal> and
-	  <literal>.endfor</literal> would repeat for every element,
-	  with <makevar>entry</makevar> being replaced with the value of
-	  the current element.</para>
+	<para>Acima, se o <makevar>SUBDIR</makevar> est&aacute; vazio, nenhuma
+	  a&ccedil;&atilde;o &eacute; feita; se ele tiver um ou mais elementos, as
+	  instru&ccedil;&otilde;es entre o <literal>.for</literal> e o
+	  <literal>.endfor</literal> repetiria para cada elemento,
+	  com o <makevar>entry</makevar> sendo substitu&iacute;da com o valor
+	  do elemento atual.</para>
       </sect3>
     </sect2>
   </sect1>
