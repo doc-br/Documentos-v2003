@@ -1,32 +1,26 @@
 <articleinfo>
   <title>&os;/&arch; &release.current; Release Notes</title>
 
-  <corpauthor>The FreeBSD Project</corpauthor>
+  <pubdate>$FreeBSD: src/release/doc/en_US.ISO8859-1/relnotes/common/new.sgml,v 1.22.2.391 2004/01/10 18:15:44 bmah Exp $</pubdate>
 
-  <pubdate>$FreeBSD: src/release/doc/en_US.ISO8859-1/relnotes/common/new.sgml,v 1.667 2003/12/12 21:58:13 bmah Exp $</pubdate>
+  <corpauthor>The FreeBSD Project</corpauthor>
 
   <copyright>
     <year>2000</year>
     <year>2001</year>
     <year>2002</year>
     <year>2003</year>
+    <year>2004</year>
     <holder role="mailto:doc@FreeBSD.org">The FreeBSD Documentation Project</holder>
   </copyright>
 
   <abstract>
-    <para>The release notes for &os; &release.current; contain a summary
-      of
-<![ %include.historic; [
-      the changes made to the &os; base system since &release.prev;.
-]]>
-<![ %no.include.historic; [
-      recent changes made to the &os; base system on the &release.branch;
-      development branch.
-]]>
-      This document lists applicable security advisories that were issued since
-      the last release, as well as significant changes to the &os;
-      kernel and userland.
-      Some brief remarks on upgrading are also presented.</para>
+    <para>The release notes for &os; &release.current; contain a
+      summary of the changes made to the &os; base system since
+      &release.prev;.  Both changes for kernel and userland are
+      listed, as well as applicable security advisories for the base
+      system that were issued since the last release.  Some brief
+      remarks on upgrading are also presented.</para>
   </abstract>
 </articleinfo>
 
@@ -35,8 +29,8 @@
 
   <para>This document contains the release notes for &os;
     &release.current; on the &arch.print; hardware platform.  It
-    describes recently added, changed, or deleted features of &os;.
-    It also provides some notes on upgrading
+    describes new features of &os; that have been added (or changed)
+    since &release.prev;.  It also provides some notes on upgrading
     from previous versions of &os;.</para>
 
 <![ %release.type.snapshot [
@@ -57,80 +51,59 @@
     information on obtaining this (or other) &release.type;
     distributions of &os; can be found in the <ulink
     url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/mirrors.html"><quote>Obtaining
-    FreeBSD</quote> appendix</ulink> to the <ulink
+    FreeBSD</quote></ulink> appendix in the <ulink
     url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/">FreeBSD
     Handbook</ulink>.</para>
 
 ]]>
-
-  <para>Users who are new to the &release.branch; series of &os;
-    &release.type;s should also read the <quote>Early Adopters Guide
-    to &os; &release.current;</quote>.  This document can generally be
-    found in the same location as the release notes (either as a part of a
-    &os; distribution or on the &os; Web site).  It contains important
-    information regarding the advantages and disadvantages of using
-    &os; &release.current;, as opposed to releases based on the &os;
-    4-STABLE development branch.</para>
-
-  <para>All users are encouraged to consult the release errata before
-    installing &os;.  The errata document is updated with
-    <quote>late-breaking</quote> information discovered late in the
-    release cycle or after the release.  Typically, it contains
-    information on known bugs, security advisories, and corrections to
-    documentation.  An up-to-date copy of the errata for &os;
-    &release.current; can be found on the &os; Web site.</para>
-
 </sect1>
+
+<!--
+	The "What's New" section of the release notes. 
+
+	Guidelines for new entries:
+
+	1.  If there is some obvious "keyword" associated with an
+	entry (such as a manpage entry or an application name), try to
+	put it at the start of the sentence.
+
+	2.  Within each subsection (i.e. kernel, security, userland),
+	list items in alphabetical order by these keywords.
+
+	Some entries will have no obvious keywords to help with
+	ordering.  In sections containing these entries, put those
+	containing (e.g.) manpage references first, then some
+	suitable SGML comment line as a demarc, then the remaining
+	entries.
+
+-->
 
 <sect1 id="new">
   <title>What's New</title>
 
-  <para>This section describes
-<![ %include.historic; [
-      the most user-visible new or changed features in &os;
-      since &release.prev;.
-      In general, changes described here are unique to the &release.branch;
-      branch unless specifically marked as &merged; features.
-]]>
-<![ %no.include.historic; [
-      many of the user-visible new or changed features in &os;
-      since &release.prev;.  It includes items that are unique to the
-      &release.branch; branch, as well as some features that may have been
-      recently merged to
-      other branches (after &os; &release.prev.historic;).  The latter
-      items are marked as &merged;.
-]]>
-  </para>
-
-  <para>Typical release note items
-    document recent security advisories issued after
-    &release.prev.historic;,
-    new drivers or hardware support, new commands or options,
-    major bug fixes, or contributed software upgrades.  They may also
-    list changes to major ports/packages or release engineering
-    practices.  Clearly the release notes cannot list every single
-    change made to &os; between releases; this document focuses
-    primarily on security advisories, user-visible changes, and major
-    architectural improvements.</para>
+  <para>This section describes the most user-visible new or changed
+    features in &os; since &release.prev;.  Typical release note items
+    document new drivers or hardware support, new commands or options,
+    major bugfixes, or contributed software upgrades.  Security
+    advisories for the base system that were issued after
+    &release.prev; are also listed.</para>
 
   <sect2 id="security">
     <title>Security Advisories</title>
 
-    <para></para>
+    <para>A potential denial of service in
+      <application>BIND</application> has been fixed.  For more
+      information, see security advisory
+      <ulink url="ftp://ftp.FreeBSD.org/pub/FreeBSD/CERT/advisories/FreeBSD-SA-03:19.bind.asc">FreeBSD-SA-03:19</ulink>.</para>
 
   </sect2>
 
   <sect2 id="kernel">
     <title>Kernel Changes</title>
 
-    <para arch="i386,pc98">The dgb (DigiBoard intelligent serial card) driver has been
-      removed due to breakage.  Its replacement is the digi driver,
-      which supports all the hardware of the dgb driver.</para>
+    <para>The &man.stl.4; driver has been updated to version 5.6.0b1.</para>
 
-    <para arch="i386">The loran (Loran-C receiver) driver has been removed due to
-      breakage and lack of maintainership.</para>
-
-    <!-- Above this line, sort kernel changes by manpage/keyword-->
+<!-- Above this line, kernel changes ordered by manpage/variable name -->
 
     <sect3 id="proc">
       <title>Platform-Specific Hardware Support</title>
@@ -142,30 +115,18 @@
     <sect3 id="boot">
       <title>Boot Loader Changes</title>
 
-      <para arch="i386">A serial console-capable version of
-        <filename>boot0</filename> has been added.  It can be written
-        to a disk using &man.boot0cfg.8; and specifying
-        <filename>/boot/boot0sio</filename> as the argument to the
-        <option>-b</option> option.</para>
+      <para></para>
 
-      <!-- Above this line, order boot loader changes by keyword-->
+<!-- Above this line, order boot loader changes by manpage/variable name-->
 
     </sect3>
 
     <sect3 id="net-if">
       <title>Network Interface Support</title>
 
-      <para arch="i386,pc98">The hea (Efficient Networks, Inc. ENI-155p ATM adapter)
-	driver has been removed due to breakage.  Its functionality
-	has been subsumed into the &man.en.4; driver.</para>
+      <para></para>
 
-      <para arch="i386">The lmc (LAN Media Corp. PCI WAN adapter) driver has been
-	removed due to breakage and lack of maintainership.</para>
-
-      <para arch="i386">A wrapper system has been added to allow
-	binary Windows NDIS miniport network drivers to be used with
-	FreeBSD.  For more information, see the &man.ndis.4; and
-	&man.ndiscvt.8; manual pages.</para>
+<!-- Above this line, order network driver changes by manpage/variable name-->
 
     </sect3>
 
@@ -179,7 +140,7 @@
     <sect3 id="disks">
       <title>Disks and Storage</title>
 
-      <para></para>
+      <para>The &man.amr.4; driver now has system crashdump support.</para>
 
     </sect3>
 
@@ -190,34 +151,61 @@
 
     </sect3>
 
-    <sect3 id="mm">
-      <title>Multimedia Support</title>
+    <sect3 id="pccard">
+      <title>PCCARD Support</title>
 
-      <para>The meteor (video capture) driver has been removed due to
-	breakage and lack of maintainership.</para>
+      <para></para>
 
     </sect3>
 
+    <sect3 id="mm">
+      <title>Multimedia Support</title>
+
+      <para></para>
+
+    </sect3>
   </sect2>
 
   <sect2 id="userland">
     <title>Userland Changes</title>
 
-    <para>The configuration files used by the &man.resolver.5; now
-      support the <literal>timeout:</literal> and
-      <literal>attempts:</literal> keywords.</para>
+    <para>&man.ifconfig.8; now supports a <option>staticarp</option>
+      option for an interface, which disables the sending of ARP
+      requests for that interface.</para>
 
-    <para>&man.ipfw.8; now supports a <option>-b</option> flag to
-      print only the action and comment for each rule, thus omitting
-      the rule body.</para>
+    <para>The default mode for the <filename>lost+found</filename>
+      directory of &man.fsck.8; is now <literal>0700</literal> instead
+      of <literal>01777</literal>.</para>
+
+    <para>The <filename>libalias</filename> library,
+      &man.natd.8;, and &man.ppp.8; now support Cisco Skinny Station protocol,
+      which is the protocol used by Cisco IP phones to talk to Cisco Call
+      Managers.  Note that currently having the Call Manager behind
+      the NAT gateway is not supported.</para>
+
+    <para>&man.makewhatis.1;, formerly a Perl script, has been
+      reimplemented in C.</para>
+
+    <para>&man.stat.1; from <application>NetBSD</application>, as of 5
+      June 2002 has, been imported.</para>
+
+    <para>&man.which.1;, formerly a Perl script, has been
+      reimplemented in C.</para>
+
+<!-- Above this line, order userland changes by manpage/variable name-->
 
   </sect2>
 
   <sect2 id="contrib">
     <title>Contributed Software</title>
 
-    <para>The <application>ACPI-CA</application> code has been updated
-      from the 20030619 snapshot to the 20031203 snapshot.</para>
+    <para><application>BIND</application> has been updated from 8.3.4
+      to 8.3.7.</para>
+
+    <para><application>sendmail</application> has been updated
+      from version 8.12.9
+      to
+      version 8.12.10.</para>
 
   </sect2>
 
@@ -234,28 +222,58 @@
     <para></para>
 
   </sect2>
-
-  <sect2 id="doc">
-    <title>Documentation</title>
-
-    <para></para>
-
-  </sect2>
-
 </sect1>
 
 <sect1 id="upgrade">
   <title>Upgrading from previous releases of &os;</title>
 
-  <para>Users with existing &os; systems are
-    <emphasis>highly</emphasis> encouraged to read the <quote>Early
-    Adopter's Guide to &os; &release.current;</quote>.  This document generally has
-    the filename <filename>EARLY.TXT</filename> on the distribution
-    media, or any other place that the release notes can be found.  It
-    offers some notes on upgrading, but more importantly, also
-    discusses some of the relative merits of upgrading to &os;
-    5.<replaceable>X</replaceable> versus running &os;
-    4.<replaceable>X</replaceable>.</para>
+  <para>If you're upgrading from a previous release of &os;, you
+    generally will have three options:
+
+    <itemizedlist>
+      <listitem>
+	<para>Using the binary upgrade option of &man.sysinstall.8;.
+	  This option is perhaps the quickest, although it presumes
+	  that your installation of &os; uses no special compilation
+	  options.</para>
+      </listitem>
+      <listitem>
+	<para>Performing a complete reinstall of &os;.  Technically,
+	  this is not an upgrading method, and in any case is usually less
+	  convenient than a binary upgrade, in that it requires you to
+	  manually backup and restore the contents of
+	  <filename>/etc</filename>.  However, it may be useful in
+	  cases where you want (or need) to change the partitioning of
+	  your disks.
+      </listitem>
+      <listitem>
+	<para>From source code in <filename>/usr/src</filename>.  This
+	  route is more flexible, but requires more disk space, time,
+	  and technical expertise.  More information can be found
+	  in the <ulink
+	  url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/makeworld.html"><quote>Using
+	  <command>make world</command></quote></ulink> section of the <ulink
+	  url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/">FreeBSD
+	  Handbook</ulink>.  Upgrading from very old
+	  versions of &os; may be problematic; in cases like this, it
+	  is usually more effective to perform a binary upgrade or a
+	  complete reinstall.</para>
+      </listitem>
+    </itemizedlist>
+  </para>
+
+  <para>Please read the <filename>INSTALL.TXT</filename> file for more
+    information, preferably <emphasis>before</emphasis> beginning an
+    upgrade.  If you are upgrading from source, please be sure to read
+    <filename>/usr/src/UPDATING</filename> as well.</para>
+
+  <para>Finally, if you want to use one of various means to track the
+    -STABLE or -CURRENT branches of &os;, please be sure to consult
+    the <ulink
+    url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/current-stable.html"><quote>-CURRENT
+    vs. -STABLE</quote></ulink> section of the <ulink
+    url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/">FreeBSD
+    Handbook</ulink>.</para>
 
   <important>
     <para>Upgrading &os; should, of course, only be attempted after
@@ -263,3 +281,4 @@
       files.</para>
   </important>
 </sect1>
+
