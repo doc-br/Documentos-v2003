@@ -716,107 +716,117 @@ FEATURE Maple maplelmg 2000.0831 permanent 1 XXXXXXXXXXXX \
 	<author>
 	  <firstname>Dan</firstname>
 	  <surname>Pelleg</surname>
-	  <contrib>Contributed by </contrib>
+	  <contrib>Contribui&ccedil;&atilde;o de </contrib>
 	</author>
 	<!-- daniel+handbook@pelleg.org -->
       </authorgroup>
     </sect1info>
-    <title>Installing &matlab;</title>
+    <title>Instalando o &matlab;</title>
 
     <indexterm>
       <primary>applications</primary>
       <secondary><application>MATLAB</application></secondary>
     </indexterm>
 
-    <para>This document describes the process of installing the Linux
-      version of <application>&matlab; version 6.5</application> onto
-      a &os; system.  It works quite well, with the exception of the
-      <application>&java.virtual.machine;</application> (see
+    <para>Este documento descreve o processo de instala&ccedil;&atilde;o 
+      da vers&atilde;o Linux do <application>&matlab; vers&atilde;o 6.5</application> 
+      em um sistema &os;.  Funciona razoavelmente bem, com a exce&ccedil;&atilde;o 
+      do <application>&java.virtual.machine;</application> (veja
       <xref linkend="matlab-using">).</para>
 
-    <para>The Linux version of <application>&matlab;</application> can be
-      ordered directly from The MathWorks at <ulink
-      url="http://www.mathworks.com"></ulink>.  Make sure you also get
-      the license file or instructions how to create it.  While you
-      are there, let them know you would like a native &os;
-      version of their software.</para>
+    <para>A vers&atilde;o Linux do <application>&matlab;</application> 
+      pode ser solicitada diretamente do <foreignphrase>The MathWorks
+      </foreignphrase> em <ulink
+      url="http://www.mathworks.com"></ulink>.  Certifique-se que 
+      voc&ecirc; obteve o arquivo de licen&ccedil;a ou as 
+      instru&ccedil;&otilde;es de como cri&aacute;-lo.  Enquanto 
+      voc&ecirc; estiver por l&aacute;, fa&ccedil;a com que eles 
+      saibam que voc&ecirc; gostaria de ter uma vers&atilde;o do 
+      programa deles nativa para &os;.</para>
 
     <sect2>
-      <title>Installing &matlab;</title>
+      <title>Instalando o &matlab;</title>
 
-      <para>To install <application>&matlab;</application>, do the 
-	following:</para>
+      <para>Para instalar o <application>&matlab;</application>, fa&ccedil;a 
+	o seguinte:</para>
 
       <procedure>
 	<step>
-	  <para>Insert the installation CD and mount it.
-	    Become <username>root</username>, as recommended by the
-	    installation script.  To start the installation script
-	    type:</para>
+	  <para>Insira o CD de instala&ccedil;&atilde;o de monte-o.  
+	    Torne-se <username>root</username>, como recomendado pelo 
+	    <literal>script</literal> de instala&ccedil;&atilde;o.  Para 
+	    inicializar a instala&ccedil;&atilde;o digite:</para>
 
 	  <screen>&prompt.root; <userinput>/compat/linux/bin/sh /cdrom/install</userinput></screen>
 
 	  <tip>
-	    <para>The installer is graphical.  If you get errors about
-	      not being able to open a display, type
+	    <para>O instalador &eacute; gr&aacute;fico.  Se voc&ecirc; 
+	      obtiver erros do tipo n&atilde;o posso abrir um <literal>
+	      display</literal>, digite 
 	      <command>setenv HOME ~<replaceable>USER</replaceable></command>,
-	      where <replaceable>USER</replaceable> is the user you did a
-	      &man.su.1; as.</para>
+	      onde <replaceable>USER</replaceable> &eacute; o usu&aacute;rio 
+	      que executou o &man.su.1;.</para>
 	  </tip>
 	</step>
 
 	<step>
 	  <para>
-	    When asked for the <application>&matlab;</application> root
-	    directory, type:
+	    Quando o <application>&matlab;</application> perguntar 
+	    pelo diret&oacute;rio root, digite:
 	    <userinput>/compat/linux/usr/local/matlab</userinput>.</para>
 
 	  <tip>
-	    <para>For easier typing on the rest of the installation
-	      process, type this at your shell prompt:
+	    <para>Para facilitar a digita&ccedil;&atilde;o durante o resto 
+	      do processo de instala&ccedil;&atilde;o, digite isto na 
+	      sua linha de comando:
 	      <command>set MATLAB=/compat/linux/usr/local/matlab</command></para>
 	  </tip>
 	</step>
 
 	<step>
-	  <para>Edit the license file as instructed when
-	    obtaining the <application>&matlab;</application> license.</para>
+	  <para>Edite o arquivo de licen&ccedil;a de acordo as 
+	    instru&ccedil;&otilde;es obtidas no arquivo de licen&ccedil;a 
+	    do <application>&matlab;</application>.</para>
 
 	  <tip>
-	    <para>You can prepare this file in advance using your
-	      favorite editor, and copy it to
-	      <filename>$MATLAB/license.dat</filename> before the
-	      installer asks you to edit it.</para>
+	    <para>Voc&ecirc; pode preparar este arquivo antecipadamente 
+	      usando seu editor favorito, e copiando-o para 
+	      <filename>$MATLAB/license.dat</filename> antes que o 
+	      instalador solicite que voc&ecirc; o edite.</para>
 	  </tip>
 	</step>
 
 	<step>
-	  <para>Complete the installation process.</para>
+	  <para>Complete o processo de instala&ccedil;&atilde;o.</para>
 	</step>
       </procedure>
 
-      <para>At this point your <application>&matlab;</application>
-	installation is complete.  The following steps apply
-	<quote>glue</quote> to connect it to your &os; system.</para>
+      <para>Neste ponto a instala&ccedil;&atilde;o do seu 
+	<application>&matlab;</application> est&aacute; 
+	completa.  Os seguintes passos aplicam uma 
+	<quote>cola</quote> para conect&aacute;-lo ao 
+	seu sistema &os;.</para>
     </sect2>
 
     <sect2>
-      <title>License Manager Startup</title>
+      <title>Inicializa&ccedil;&atilde;o do Gerenciador de Licen&ccedil;as</title>
       <procedure>
 	<step>
-	  <para>Create symlinks for the license manager scripts:</para>
+	  <para>Crie liga&ccedil;&otilde;es simb&oacute;licas para os 
+	    <literal>scripts</literal> do gerenciador de licen&ccedil;as:</para>
 
 	  <screen>&prompt.root; <userinput>ln -s $MATLAB/etc/lmboot /usr/local/etc/lmboot_TMW</userinput>
 &prompt.root; <userinput>ln -s $MATLAB/etc/lmdown /usr/local/etc/lmdown_TMW</userinput></screen>
 	</step>
 	
 	<step>
-	  <para>Create a startup file at
-	    <filename>/usr/local/etc/rc.d/flexlm.sh</filename>.  The
-	    example below is a modified version of the distributed
-	    <filename>$MATLAB/etc/rc.lm.glnx86</filename>.  The changes
-	    are file locations, and startup of the license manager
-	    under Linux emulation.</para>
+	  <para>Crie um arquivo de inicializa&ccedil;&atilde;o em 
+	    <filename>/usr/local/etc/rc.d/flexlm.sh</filename>.  O
+	    exemplo acima &eacute; uma vers&atilde;o modificada do 
+	    <filename>$MATLAB/etc/rc.lm.glnx86</filename>.  As 
+	    mudan&ccedil;as s&atilde;o em localiza&ccedil;&atilde;o 
+	    de arquivos, e inicializa&ccedil;&atilde;o do gerenciador 
+	    de licen&ccedil;as sob emula&ccedil;&atilde;o Linux.</para>
 
 	  <programlisting>#!/bin/sh
 case "$1" in
@@ -839,19 +849,19 @@ esac
 exit 0</programlisting>
 
 	  <important>
-	    <para>The file must be made executable:</para>
+	    <para>O arquivo deve ser feito execut&aacute;vel:</para>
 
 	    <screen>&prompt.root; <userinput>chmod +x /usr/local/etc/rc.d/flexlm.sh</userinput></screen>
 
-	    <para>You must also replace
-	      <replaceable>username</replaceable> above with the name
-	      of a valid user on your system (and not
+	    <para>Voc&ecirc; tamb&eacute;m deve substituir 
+	      <replaceable>username</replaceable> acima por 
+	      um nome v&aacute;lido em seu sistema (e n&atilde;o 
 	      <username>root</username>).</para>
 	  </important>
 	</step>
 
 	<step>
-	  <para>Start the license manager with the command:</para>
+	  <para>Inicialize o gerenciador de licen&ccedil;a com o comando:</para>
 
 	  <screen>&prompt.root; <userinput>/usr/local/etc/rc.d/flexlm.sh start</userinput></screen>
 	</step>
@@ -859,21 +869,23 @@ exit 0</programlisting>
     </sect2>
 
     <sect2>
-      <title>Linking the &java; Runtime Environment</title>
+      <title>Ligando o Ambiente de Tempo de Execu&ccedil;&atilde;o &java;</title>
 
-      <para>Change the <application>&java;</application> Runtime
-	Environment (JRE) link to one working under &os;:</para>
+      <para>Modifique a liga&ccedil;&atilde;o do Ambiente de Tempo 
+	de Execu&ccedil;&atilde;o <application>&java;</application>  
+	(JRE) para um funcionando no &os;:</para>
 
       <screen>&prompt.root; <userinput>cd $MATLAB/sys/java/jre/glnx86/</userinput>
 &prompt.root; <userinput>unlink jre; ln -s ./jre1.1.8 ./jre</userinput></screen>
     </sect2>
 
     <sect2>
-      <title>Creating a &matlab; Startup Script</title>
+      <title>Crie um <literal>Script</literal> de Incializa&ccedil;&atilde;o &matlab;</title>
 
       <procedure>
 	<step>
-	  <para>Place the following startup script in
+	  <para>Coloque o seguinte <literal>script</literal> de 
+	    inicializa&ccedil;&atilde;o em 
 	    <filename>/usr/local/bin/matlab</filename>:
 	  </para>
 
@@ -882,18 +894,18 @@ exit 0</programlisting>
 	</step>
 
 	<step>
-	  <para>Then type the command
+	  <para>Ent&atilde;o digite o comando 
 	    <command>chmod +x /usr/local/bin/matlab</command>.</para>
 	</step>
       </procedure>
 
       <tip>
-	<para>Depending on your version of
-	  <filename role="package">emulators/linux_base</filename>, you
-	  may run into errors when running this script.  To avoid that,
-	  edit the file
+	<para>Dependendo da sua vers&atilde;o do 
+	  <filename role="package">emulators/linux_base</filename>, 
+	  voc&ecirc; pode obter erros ao executar este <literal>
+	  script</literal>.  Para evitar isso, edite o arquivo 
 	  <filename>/compat/linux/usr/local/matlab/bin/matlab</filename>,
-	  and change the line that says:</para>
+	  e modifique a linha que diz:</para>
 
 	<programlisting>if [ `expr "$lscmd" : '.*-&gt;.*'` -ne 0 ]; then</programlisting>
 
@@ -905,35 +917,36 @@ exit 0</programlisting>
     </sect2>
 
     <sect2>
-      <title>Creating a &matlab; Shutdown Script</title>
+      <title>Criando um <literal>Script</literal> de Finaliza&ccedil;&atilde;o do &matlab;</title>
 
-      <para>The following is needed to solve a problem with &matlab;
-	not exiting correctly.</para>
+      <para>O seguinte procedimento &eacute; necess&aacute;rio 
+	para resolver o problema do &matlab; n&atilde;o sair corretamente.</para>
 
       <procedure>
 	<step>
-	  <para>Create a file
-	    <filename>$MATLAB/toolbox/local/finish.m</filename>, and
-	    in it put the single line:</para>
+	  <para>Crie o arquivo 
+	    <filename>$MATLAB/toolbox/local/finish.m</filename>, e
+	    insita a &uacute;nica linha:</para>
 
 	  <programlisting>! $MATLAB/bin/finish.sh</programlisting>
 
-	  <note><para>The <literal>$MATLAB</literal> is
+	  <note><para>O <literal>$MATLAB</literal> &eacute; 
 	    literal.</para></note>
 
 	  <tip>
-	    <para>In the same directory, you will find the files
-	      <filename>finishsav.m</filename> and
-	      <filename>finishdlg.m</filename>, which let you save
-	      your workspace before quitting.  If you use either of
-	      them, insert the line above immediately after the
-	      <literal>save</literal> command.</para></tip>
+	    <para>No mesmo diret&oacute;rio, voc&ecirc; encotrar&aacute; 
+	      os arquivos <filename>finishsav.m</filename> e
+	      <filename>finishdlg.m</filename>, que permitir&atilde;o a 
+	      voc&ecirc; salvar seu espa&ccedil;o de trabalho antes de 
+	      sair.  Se voc&ecirc; usar qualquer um deles, insita a 
+	      linha acima imediatamente depois do comando 
+	      <literal>save</literal>.</para></tip>
 	</step>
 
 	<step>
-	  <para>Create a file
-	    <filename>$MATLAB/bin/finish.sh</filename>, which will
-	    contain the following:</para>
+	  <para>Crie o arquivo 
+	    <filename>$MATLAB/bin/finish.sh</filename>, que 
+	    possuir&aacute; o seguinte conte&uacute;do:</para>
 
 	  <programlisting>#!/usr/compat/linux/bin/sh
 (sleep 5; killall -1 matlab_helper) &
@@ -941,7 +954,7 @@ exit 0</programlisting>
 	</step>
 
 	<step>
-	  <para>Make the file executable:</para>
+	  <para>Fa&ccedil;a com que o arquivo seja execut&aacute;vel:</para>
 
 	  <screen>&prompt.root; <userinput>chmod +x $MATLAB/bin/finish.sh</userinput></screen>
 	</step>
@@ -949,10 +962,11 @@ exit 0</programlisting>
     </sect2>
 
     <sect2 id="matlab-using">
-      <title>Using &matlab;</title>
+      <title>Usando o &matlab;</title>
 
-      <para>At this point you are ready to type
-	<command>matlab</command> and start using it.</para>
+      <para>Neste ponto voc&ecirc; est&aacute; pronto para 
+	digitar <command>matlab</command> e come&ccedil;ar a 
+	us&aacute;-lo.</para>
     </sect2>
   </sect1>
 
