@@ -5686,7 +5686,7 @@ www	     IN CNAME	@</programlisting>
     </sect2>
 
     <sect2>
-      <title>Servidor de Nomes de Cache</title>
+      <title>Servidor Cache de Nomes</title>
       <indexterm>
 	<primary>BIND</primary>
 	<secondary>caching name server</secondary>
@@ -5702,7 +5702,7 @@ www	     IN CNAME	@</programlisting>
     </sect2>
 
     <sect2 id="network-named-sandbox">
-      <title>Rodando o <application>named</application> em Um Diret&oacute;rio Restrito (Sandbox)</title>
+      <title>Rodando o <application>named</application> Restrito a Um Diret&oacute;rio (Sandbox)</title>
       <indexterm>
 	<primary>BIND</primary>
 	<secondary>running in a sandbox</secondary>
@@ -5777,20 +5777,21 @@ $TTL 6h
 			604800	; expiration
 			3600 )	; minimum
 	IN	NS	localhost.
-	IN	A		127.0.0.1
+	IN	A	127.0.0.1
 ^D</userinput></screen>
 
 	  <calloutlist>
 	    <callout arearefs="localtime">
-	      <para>This allows <application>named</application> to log the
-		correct time to &man.syslogd.8;</para>
+	      <para>Isto permite ao <application>named</application> 
+	      registrar a hora correta ao &man.syslogd.8;</para>
 	    </callout>
 	  </calloutlist>
 	</listitem>
 
 	<listitem>
-	  <para>If you are running a version of &os; prior to 4.9-RELEASE, build a statically linked copy of
-	    <application>named-xfer</application>, and copy it into the sandbox:</para>
+	  <para>Se voc&ecirc; estiver rodando a vers&atilde;o de &os; anterior &agrave;
+	  4.9-RELEASE, construa uma c&oacute;pia estaticamente compilada do 
+	  <application>named-xfer</application> e a copie na sandbox:</para>
 
 	      <screen>&prompt.root; <userinput>cd /usr/src/lib/libisc</userinput>
 &prompt.root; <userinput>make cleandir && make cleandir && make depend && make all</userinput>
@@ -5800,10 +5801,10 @@ $TTL 6h
 &prompt.root; <userinput>make cleandir && make cleandir && make depend && make NOSHARED=yes all</userinput>
 &prompt.root; <userinput>cp named-xfer /etc/namedb/bin && chmod 555 /etc/namedb/bin/named-xfer</userinput><co id="clean-cruft"></screen>
 
-	  <para>After your statically linked
-	    <command>named-xfer</command> is installed some cleaning up
-	    is required, to avoid leaving stale copies of libraries or
-	    programs in your source tree:</para>
+	  <para>Ap&oacute;s a instala&ccedil;&atilde;o do seu <command>named-xfer</command>
+	   compilado estaticamente, uma faxina se faz necess&aacute;ria, para
+	   evitar deixar c&oacute;pias envelhecidas de bibliotecas ou
+	   programas na sua &aacute;rvore de fontes:</para>
 
 	  <screen>&prompt.root; <userinput>cd /usr/src/lib/libisc</userinput>
 &prompt.root; <userinput>make cleandir</userinput>
@@ -5814,8 +5815,9 @@ $TTL 6h
 
 	  <calloutlist>
 	    <callout arearefs="clean-cruft">
-	      <para>This step has been reported to fail occasionally.  If this
-		happens to you, then issue the command:</para>
+	      <para>J&aacute; houveram relatos de que este passo pode
+	      ocasionalmente falhar.  Se isto acontecer com voc&ecirc;,
+	      ent&atilde;o use o comando:</para>
 
 	      <screen>&prompt.root; <userinput>cd /usr/src && make cleandir && make cleandir</userinput></screen>
 
@@ -5823,91 +5825,93 @@ $TTL 6h
 
 	      <screen>&prompt.root; <userinput>rm -fr /usr/obj && mkdir /usr/obj</userinput></screen>
 
-		<para>This will clean out any <quote>cruft</quote> from your
-		  source tree, and retrying the steps above should then work.</para>
+		<para>Isto limpar&aacute; quaisquer <quote>restos</quote> de sua 
+		&aacute;rvore de fontes, e, tentar novamente os passos acima
+		dever&aacute; funcionar.</para>
 	    </callout>
 	  </calloutlist>
 
-	  <para>If you are running &os; version 4.9-RELEASE or later, then
-	    the copy of <command>named-xfer</command> in
-	    <filename>/usr/libexec</filename> is statically linked by default,
-	    and you can simply use &man.cp.1; to copy it into your sandbox.</para>
+	  <para>Se voc&ecirc; est&aacute; rodando o &os; vers&atilde;o 4.9-RELEASE ou
+	  posterior, ent&atilde;o a c&oacute;pia do <command>named-xfer</command> em
+	  <filename>/usr/libexec</filename> &eacute; compilada estaticamente
+	  por padr&atilde;o, e voc&ecirc; pode simplesmente usar &man.cp.1; para
+	  copi&aacute;-la dentro da sua sandbox.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Make a <devicename>dev/null</devicename> that
-	    <application>named</application> can see and write to:</para>
+	  <para>Crie um <devicename>dev/null</devicename> o qual o  
+	  <application>named</application> possa ver e escrever:</para>
 
 	  <screen>&prompt.root; <userinput>cd /etc/namedb/dev && mknod null c 2 2</userinput>
 &prompt.root; <userinput>chmod 666 null</userinput></screen>
 	</listitem>
 
 	<listitem>
-	  <para>Symlink <filename> /var/run/ndc</filename> to
-	    <filename>/etc/namedb/var/run/ndc</filename>:</para>
+	  <para>Crie um link simb&oacute;lico <filename>/var/run/ndc</filename>
+	   para <filename>/etc/namedb/var/run/ndc</filename>:</para>
 
 	  <screen>&prompt.root; <userinput>ln -sf /etc/namedb/var/run/ndc /var/run/ndc</userinput></screen>
 
 	  <note>
-	    <para>This simply avoids having to specify the
-	      <option>-c</option> option to &man.ndc.8; every time you
-	      run it.  Since the contents of /var/run are deleted on boot,
-	      if this is something that you find useful you
-	      may wish to add this command to root's crontab, making use
-	      of the <option>@reboot</option> option.  See
-	      &man.crontab.5; for more information regarding
-	      this.</para>
+	    <para>Isto evita, de forma simples, ter que especificar a
+	    op&ccedil;&atilde;o <option>-c</option> para o &man.ndc.8; cada vez que
+	    voc&ecirc; execut&aacute;-lo.  Uma vez que o conte&uacute;do do /var/run s&atilde;o
+	    apagados na inicializa&ccedil;&atilde;o (boot), se isto for algo que
+	    voc&ecirc; considera &uacute;til voc&ecirc; pode adicionar este comando ao
+	    crontab do root, usando a op&ccedil;&atilde;o <option>@reboot</option>.  
+	    Veja &man.crontab.5; para mais informa&ccedil;&otilde;es a este
+	    respeito.</para>
 	  </note>
 
 	</listitem>
 
 	<listitem>
-	  <para>Configure &man.syslogd.8; to create an extra
-	    <devicename>log</devicename> socket that
-	    <application>named</application> can write to.  To do this,
-	    add <literal>-l /etc/namedb/dev/log</literal> to the
-	    <varname>syslogd_flags</varname> variable in
-	    <filename>/etc/rc.conf</filename>.</para>
+	  <para>Confirgure &man.syslogd.8; para criar mais um socket
+	  de <devicename>log</devicename> no qual o 
+	  <application>named</application> pode gravar.  Para isto,
+	  adicione <literal>-l /etc/namedb/dev/log</literal> na
+	  vari&aacute;vel <varname>syslogd_flags</varname> no 
+	  <filename>/etc/rc.conf</filename>.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Arrange to have <application>named</application> start
-	    and <command>chroot</command> itself to the sandbox by
-	    adding the following to
-	    <filename>/etc/rc.conf</filename>:</para>
+	  <para>Configure para que o <application>named</application> 
+	  seja inicializado e restrinja-se com 
+	  <command>chroot</command> &agrave; sandbox adicionando o seguinte
+	  ao <filename>/etc/rc.conf</filename>:</para>
 
 	  <programlisting>named_enable="YES"
 named_flags="-u bind -g bind -t /etc/namedb /etc/named.conf"</programlisting>
 
 	  <note>
-	    <para>Note that the configuration file
-	    <replaceable>/etc/named.conf</replaceable> is denoted by a full
-	    pathname <emphasis>relative to the sandbox</emphasis>, i.e.  in
-	    the line above, the file referred to is actually
-	    <filename>/etc/namedb/etc/named.conf</filename>.</para>
+	    <para>Note que o arquivo de configura&ccedil;&atilde;o 
+	    <replaceable>/etc/named.conf</replaceable> &eacute; declarado por
+	    um caminho completo <emphasis>relativo &agrave; sandbox</emphasis>, 
+	    p.ex.:  na linha acima, o arquivo referenciado &eacute;, na
+	    verdade, <filename>/etc/namedb/etc/named.conf</filename>.</para>
 	  </note>
 	</listitem>
       </itemizedlist>
 
-      <para>The next step is to edit
-	<filename>/etc/namedb/etc/named.conf</filename> so that
-	<application>named</application> knows which zones to load and
-	where to find them on the disk.  There follows a commented
-	example (anything not specifically commented here is no
-	different from the setup for a DNS server not running in a
-	sandbox):</para>
+      <para>O pr&oacute;ximo passo &eacute; editar o
+      <filename>/etc/namedb/etc/named.conf</filename> de forma que o 
+      <application>named</application> saiba quais zonas carregar e
+      onde encontr&aacute;-las no disco.  A seguir, um exemplo comentado
+      (qualquer coisa n&atilde;o especificamente comentada aqui n&atilde;o &eacute;
+      diferente da configura&ccedil;&atilde;o de um servidor DNS que n&atilde;o est&aacute;
+      rodando dentro de uma sandbox):</para>
 
 	<programlisting>options {
 	directory "/";<co id="directory">
 	named-xfer "/bin/named-xfer";<co id="named-xfer">
-	version "";		// Don't reveal BIND version
+	version "";		// N&atilde;o revele a vers&atilde;o do BIND
 	query-source address * port 53;
 };
-// ndc control socket
+// socket de controle ndc
 controls {
 	unix "/var/run/ndc" perm 0600 owner 0 group 0;
 };
-// Zones follow:
+// Zones a seguir:
 zone "localhost" IN {
 	type master;
 	file "master/named.localhost";<co id="master">
@@ -5943,77 +5947,78 @@ zone "10.168.192.in-addr.arpa" in {
 
       <calloutlist>
 	<callout arearefs="directory">
-	  <para>The
-	    <literal>directory</literal> statement is specified as
-	    <filename>/</filename>, since all files that
-	    <application>named</application> needs are within this
-	    directory (recall that this is equivalent to a
-	    <quote>normal</quote> user's
-	    <filename>/etc/namedb</filename>.</para>
+	  <para>A declara&ccedil;&atilde;o <literal>directory</literal> &eacute;
+	  especificada como <filename>/</filename>, uma vez que todos
+	  os arquivos que o <application>named</application> precisa
+	  est&atilde;o dentro deste diret&oacute;rio (lembre-se de que isto equivale
+	  ao <filename>/etc/namedb</filename> de um usu&aacute;rio 
+	  <quote>normal</quote>).</para>
 	</callout>
 
 	<callout arearefs="named-xfer">
-	  <para>Specifies the full path
-	    to the <command>named-xfer</command> binary (from
-	    <application>named</application>'s frame of reference).  This
-	    is necessary since <application>named</application> is
-	    compiled to look for <command>named-xfer</command> in
-	    <filename>/usr/libexec</filename> by default.</para>
+	  <para>Especifica o caminho completo para o arquivo bin&aacute;rio
+	  <command>named-xfer</command> (do sistema de refer&ecirc;ncia do 
+	  <application>named</application>).  Isto &eacute; necess&aacute;rio, uma
+	  vez que o <application>named</application> &eacute; compilado para,
+	  por padr&atilde;o, buscar o <command>named-xfer</command> no 
+	  <filename>/usr/libexec</filename>.</para>
 	</callout>
-	<callout arearefs="master"><para>Specifies the filename (relative
-	  to the <literal>directory</literal> statement above) where
-	  <application>named</application> can find the zonefile for this
-	  zone.</para>
+	<callout arearefs="master">
+	  <para>Especifica o nome do arquivo (relativo &agrave; declara&ccedil;&atilde;o  
+	  <literal>directory</literal> acima) onde o 
+	  <application>named</application> pode encontrar o arquivo de
+	  zona para esta zona.</para>
 	</callout>
-	<callout arearefs="slave"><para>Specifies the filename
-	    (relative to the <literal>directory</literal> statement above)
-	    where <application>named</application> should write a copy of
-	    the zonefile for this zone after successfully transferring it
-	    from the master server.  This is why we needed to change the
-	    ownership of the directory <filename>slave</filename> to
-	    <groupname>bind</groupname> in the setup stages above.</para>
+	<callout arearefs="slave">
+	    <para>Especifica o nome do arquivo (relativo &agrave; declara&ccedil;&atilde;o
+	     <literal>directory</literal> acima, onde o 
+	     <application>named</application> deve gravar uma c&oacute;pia do
+	     arquivo de zona para esta zona ap&oacute;s transferir a mesma
+	     com sucesso do servidor mestre.  Por isto que precisamos
+	     mudar a posse do diret&oacute;rio <filename>slave</filename> para 
+	     <groupname>bind</groupname> nos passos de configura&ccedil;&atilde;o
+	     acima.</para>
 	</callout>
       </calloutlist>
 
-      <para>After completing the steps above, either reboot your
-	server or restart &man.syslogd.8; and start &man.named.8;, making
-	sure to use the new options specified in
-	<varname>syslogd_flags</varname> and
-	<varname>named_flags</varname>.  You should now be running a
-	sandboxed copy of <application>named</application>!</para>
+      <para>Ap&oacute;s completar os passos acima, reinicie seu servidor ou o
+      &man.syslogd.8; e inicie o &man.named.8;, certificando-se de
+      usar as novas op&ccedil;&otilde;es especificadas em 
+      <varname>syslogd_flags</varname> e
+      <varname>named_flags</varname>.  Voc&ecirc; agora devve estar rodando
+      uma c&oacute;pia restrita do <application>named</application>!</para>
 
     </sect2>
 
     <sect2>
-      <title>Security</title>
+      <title>Seguran&ccedil;a</title>
 
-      <para>Although BIND is the most common implementation of DNS,
-	there is always the issue of security.  Possible and
-	exploitable security holes are sometimes found.
-</para>
+      <para>Apesar do BIND ser a implementa&ccedil;&atilde;o mais comum do DNS,
+      sempre h&aacute; a quest&atilde;o da seguran&ccedil;a.  Furos poss&iacute;veis e
+      explor&aacute;veis de seguran&ccedil;a s&atilde;o encontrados de vez em quando.</para>
 
-      <para>
-	It is a good idea to subscribe to <ulink
-	url="http://www.cert.org/">CERT</ulink> and
-	<ulink url="../handbook/eresources.html#ERESOURCES-MAIL">freebsd-security-notifications</ulink>
-	to stay up to date with the current Internet and FreeBSD security
-	issues.
-</para>
+      <para>&Eacute; uma boa id&eacute;ia assinar 
+      <ulink url="http://www.cert.org/">CERT</ulink> e 
+      <ulink
+      url="../handbook/eresources.html#ERESOURCES-MAIL">freebsd-security-notifications</ulink> para se manter atualizado sobre as atuais quest&otilde;es 
+      de seguran&ccedil;a na Internet e do FreeBSD.</para>
 
-      <tip><para>If a problem arises, keeping sources up to date and having a
-	fresh build of named would not hurt.</para></tip>
+      <tip>
+        <para>Se um problema surgir, manter os fontes atualizados e ter
+      uma compila&ccedil;&atilde;o recente do named n&atilde;o &eacute; m&aacute; id&eacute;ia.</para>
+      </tip>
     </sect2>
 
     <sect2>
-      <title>Further Reading</title>
+      <title>Leitura adicional</title>
       <para>
-	BIND/named manual pages: &man.ndc.8; &man.named.8; &man.named.conf.5;
+	P&aacute;ginas de manual do BIND/named: &man.ndc.8; &man.named.8; &man.named.conf.5;
 </para>
 
       <itemizedlist>
 	<listitem>
 	  <para><ulink
-	      url="http://www.isc.org/products/BIND/">Official ISC Bind
+	      url="http://www.isc.org/products/BIND/">P&aacute;gina Oficial do ISC Bind
 	      Page</ulink></para>
 	</listitem>
 
