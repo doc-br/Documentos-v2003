@@ -65,74 +65,73 @@
     <para>Este problema paralelo um estao no livro <citetitle>As aventuras de
       Baron Munchausen</citetitle>. Um caracter teve afastado parte way down a
       manhole, and pulled himself out by grabbing his bootstraps, and
-      lifting.  In the early days of computing the term
-      <firstterm>bootstrap</firstterm> was applied to the mechanism used to
-      load the operating system, which has become shortened to
-      <quote>booting</quote>.</para>
+      lifting.  Nos dias de computacao o termo
+      <firstterm>colocar e tirar</firstterm> foi aplicado no mecanismo usado para
+      carregar o sistema operacional, que se tornou compacto para
+      <quote>carregar</quote>.</para>
 
-    <para>On x86 hardware the Basic Input/Output System (BIOS) is responsible
-      for loading the operating system.  To do this, the BIOS looks on the
-      hard disk for the Master Boot Record (MBR), which must be located on a
-      specific place on the disk.  The BIOS has enough knowledge to load and
-      run the MBR, and assumes that the MBR can then carry out the rest of the
-      tasks involved in loading the operating system.</para>
+    <para>No hardware x86 o Sistema Basico de Entrada/Saida (BIOS) e responsavel
+      por carregar o sistema operacional. Para fazer isto, na BIOS aparece o
+      hard disk para o Master Boot Record (MBR), que deve ser alocado sobre um
+      local especifico do disco. A BIOS tem bastante mudancas que podem ser feitas para carregar e
+      rodar a MBR, e assume que a MBR pode entao carregar a saida do resto das
+      tarefas involvidas na inicializacao do sistema operacional.</para>
 
     <indexterm>
       <primary>BIOS</primary>
       <secondary>Basic Input/Output System</secondary>
     </indexterm>
 
-    <para>If you only have one operating system installed on your disks then
-      the standard MBR will suffice.  This MBR searches for the first bootable
-      slice on the disk, and then runs the code on that slice to load the
-      remainder of the operating system.</para>
+    <para>Se voce tiver somente um sistema operacional instalado no seu disco entao
+      MBR padrao sera suficiente. Esta MBR procurara pela primeira particao inicializavel
+      no disco, e entao roda o codigo nesta particao para carregar o
+      restante do sistema operacional.</para>
 
-    <para>If you have installed multiple operating systems on your disks then
-      you can install a different MBR, one that can display a list of
-      different operating systems, and allows you to choose the one to boot
-      from.  FreeBSD comes with one such MBR which can be installed, and other
-      operating system vendors also provide alternative MBRs.</para>
+    <para>Se voce tiver instalado varios sistemas operacionais em seus discos entao
+      voce pode instalar uma MBR diferente, um que pode mostrar uma lista de
+      diferentes sistemas operacionais, e permite a voce escolher um para carregar.
+      FreeBSD vem com um MBR que pode ser instalado, e outros
+      sistemas operacionais vendidos fornecem MBRs alternativos.</para>
 
-    <para>The remainder of the FreeBSD bootstrap system is divided into three
-      stages.  The first stage is run by the MBR, which knows just enough to
-      get the computer into a specific state and run the second stage.  The
-      second stage can do a little bit more, before running the third stage.
-      The third stage finishes the task of loading the operating system.  The
-      work is split into these three stages because the PC standards put
-      limits on the size of the programs that can be run at stages one and
-      two.  Chaining the tasks together allows FreeBSD to provide a more
-      flexible loader.</para>
+    <para>O restante do sistema bootstrap do FreeBSD e divido em tres
+      estagios. O primeiro estagio e executado pela MBR, que sabe apenas iniciar
+      o computador em um estado especifico e rodar o segundo estagio. O
+      segundo estagio pode fazer mais um pedaco em pouco tempo, depois roda o terceiro estagio.
+      O terceiro estagio terminara a tarefa de carregar o sistema operacional. O
+      trabalho e dividido dentro destes tres estagios porque o padrao do PC impoe
+      limites sobre o tamanho dos programas que podem ser rodados nos estagios 1 e
+      2. Encadear as tarefas permite que o FreeBSD forneca um carregador mais
+      flexivel.</para>
 
     <indexterm><primary>kernel</primary></indexterm>
     <indexterm><primary><command>init</command></primary></indexterm>
 
-    <para>The kernel is then started and it begins to probe for devices
-      and initialize them for use.  Once the kernel boot
-      process is finished, the kernel passes control to the user process
-      &man.init.8;, which then makes sure the disks are in a usable state.
-      &man.init.8; then starts the user-level resource configuration which
-      mounts file systems, sets up network cards to communicate on the
-      network, and generally starts all the processes that usually
-      are run on a FreeBSD system at startup.</para>
+    <para>O kernel entao e inicializado e esta inicializacao testa os dispositivos
+      e entao inicializa estes para o uso. Uma vez que o processo de inicializacao do kernel
+      e terminado, o kernel passa o controle do processo para
+      &man.init.8;, qual se certifica que os discos estao em um estado aproveitavel.
+      &man.init.8; comeca entao a configuracao user-level que
+      mounta o sistema de arquivos, seta e levanta drivers de rede para comunicacao com
+      a rede, e normalmente inicia todos os processos que normalmente
+      sao rodados sobre um sistema FreeBSD na inicializacao.</para>
   </sect1>
 
   <sect1 id="boot-blocks">
-    <title>The MBR, and Boot Stages One, Two, and Three</title>
+    <title>A MBR, e estagios da inicializacao Um, Dois, e Tres</title>
 
     <sect2 id="boot-boot0">
       <title>MBR, <filename>/boot/boot0</filename></title>
       <indexterm><primary>Master Boot Record (MBR)</primary></indexterm>
 
-      <para>The FreeBSD MBR is located in <filename>/boot/boot0</filename>.
-	This is a <emphasis>copy</emphasis> of the MBR, as the real MBR must
-	be placed on a special part of the disk, outside the FreeBSD
-	area.</para>
+      <para>A MBR do FreeBSD e localizado no <filename>/boot/boot0</filename>.
+	Este e uma <emphasis>copia</emphasis> do MBR, por que a real MBR deve
+	ficar em uma parte especial do disco, fora da area do FreeBSD.</para>
 
-      <para><filename>boot0</filename> is very simple, since the
-	program in the <abbrev>MBR</abbrev> can only be 512 bytes in
-	size.  If you have installed the FreeBSD MBR and have installed
-	multiple operating systems on your hard disks then you will see a
-	display similar to this one at boot time:</para>
+      <para><filename>boot0</filename> e muito simples, visto que o
+	programa dentro da <abbrev>MBR</abbrev> pode ter no maximo o tamanho de 512 bytes.
+	Se voce tiver instalado na MBR o FreeBSD e tiver instalado
+	multiplos sistemas operacionais em seu HD entao voce vera um
+	menu similar a este um na hora da inicializacao:</para>
 
       <example id="boot-boot0-example">
 	<title><filename>boot0</filename> Screenshot</title>
