@@ -187,108 +187,102 @@
 	<term>Diretório <foreignphrase>Home</foreignphrase></term>
 
 	<listitem>
-	  <para>The home directory is the full path to a directory on the
-	    system in which the user will start when logging on to the
-	    system.  A common convention is to put all user home directories
-	    under
-	    <filename>/home/<replaceable>username</replaceable></filename>
-	    or <filename>/usr/home/<replaceable>username</replaceable></filename>.
-	    The user would store their personal files in their home directory,
-	    and any directories they may create in there.</para>
-	</listitem>
-      </varlistentry>
-
-	<listitem>
 	  <para>O Diretório <foreignphrase>Home</foreignphrase> é o caminho completo
-            para o diretório do sistema 
-	</listitem>
+            para o diretório do sistema em que o usuário logará no sistema. Uma convenção
+            comum deve pôr todos os diretórios home do usuário sob <filename>/home/<replaceable>usuário</replaceable></filename>.
+            O usuário armazenaria seus arquivos pessoais em seu diretório home, e 
+            todos os diretórios que puderem criar dentro dele.</para>
+         </listitem>
       </varlistentry>
 
 
 
       <varlistentry>
-	<term>User shell</term>
+	<term><foreignphrase>Shell</foreignphase> do usuário</term>
 
 	<listitem>
-	  <para>The shell provides the default environment users use to
-	    interact with the system.  There are many different kinds of
-	    shells, and experienced users will have their own preferences,
-	    which can be reflected in their account settings.</para>
+	  <para>A shell fornece o ambiente de usuário padrão para interagir com
+            o sistema. Existem muitos tipos diferentes de shells, e os usuários
+            experientes terão suas próprias preferências, que podem ser refletidas
+            para os ajustes de contas.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
 
-    <para>There are three main types of accounts: the <link
-	linkend="users-superuser">Superuser</link>, <link
-	linkend="users-system">system users</link>, and <link
-	linkend="users-user">user accounts</link>.  The Superuser
-      account, usually called <username>root</username>, is used to
-      manage the system with no limitations on privileges.  System
-      users run services.  Finally, user accounts are used by real
-      people, who log on, read mail, and so forth.</para>
+
+    <para>Existem tres tipos de contas: o <link
+	linkend="users-superuser">super usuário</link>, <link
+	linkend="users-system">usuários do sistema</link>, e <link
+	linkend="users-user">usuários</link>.  A conta super usuário
+      normalmente chamada de <username>root</username>, é usada para 
+      administrar o sistema sem limitação de privilegios. Usuários do
+      sistema executam serviços.  Finalmente, usuários são usadas por 
+      pessoas, que poderão logar, ler e-mail, e assim por diante.</para>
   </sect1>
     
   <sect1 id="users-superuser">
-    <title>The Superuser Account</title>
+    <title>O super usuário</title>
     
     <indexterm>
-      <primary>accounts</primary>
-      <secondary>superuser (root)</secondary>
+      <primary>contas</primary>
+      <secondary>super usuário (root)</secondary>
     </indexterm>
-    <para>The superuser account, usually called
-      <username>root</username>, comes preconfigured to facilitate
-      system administration, and should not be used for day-to-day
-      tasks like sending and receiving mail, general exploration of
-      the system, or programming.</para>
-      
-    <para>This is because the superuser, unlike normal user accounts,
-      can operate without limits, and misuse of the superuser account
-      may result in spectacular disasters.  User accounts are unable
-      to destroy the system by mistake, so it is generally best to use
-      normal user accounts whenever possible, unless you especially
-      need the extra privilege.</para>
+    <para>A conta super usuário, normalmente chamada
+      <username>root</username>, vem pré configurada para facilitar
+      a administração do sistema, e não deve ser usada para tarefas
+      cotidianas como envio e recebimento de e-mail, exploração geral
+      do sistema, ou para programação.</para>
 
-    <para>You should always double and triple-check commands you issue
-      as the superuser, since an extra space or missing character can
-      mean irreparable data loss.</para>
+  
+    <para>Isto é porque o super usuário, ao contrário dos usuários normais,
+      podem operar sem limites, e o emprego errado do super usuário pode 
+      resultar em um espetacular desastre. As contas de usuários são 
+      incapazes de destruir o sistema atravéz de um erro, assim que é geralmente
+      melhor usar um usuário normal quando possível, a menos que você 
+      necessite de um privilégio extra.</para>
 
-    <para>So, the first thing you should do after reading this
-      chapter is to create an unprivileged user account for yourself
-      for general usage if you have not already.  This applies equally
-      whether you are running a multi-user or single-user machine.
-      Later in this chapter, we discuss how to create additional
-      accounts, and how to change between the normal user and
-      superuser.</para>
+   
+    <para>Você deve sempre dobrar e triplicar a verificação dos comandos 
+      que você emite como o super usuário, desde que um espaço extra ou um
+      caracter faltante podem significar a perda irreparável dos dados.</para>
+   
+
+    <para>Assim, a primeira coisa que você deve fazer após ter lido este
+      capítulo é criar um usuário sem privilégios para você mesmo para 
+      uso geral se você não tiver já. Isto aplica-se igualmente se você está 
+      rodando em uma máquina multi usuários ou mono usuário.
+      Mais tarde neste capítulo, nós discutimos como criar clientes adicionais,
+      e como mudar entre o usuário e o super usuário.</para>
   </sect1>
     
   <sect1 id="users-system">
-    <title>System Accounts</title>
+    <title>Contas do sistema</title>
 
     <indexterm>
-      <primary>accounts</primary>
-      <secondary>system</secondary>
+      <primary>contas</primary>
+      <secondary>sistema</secondary>
     </indexterm>
-    <para>System users are those used to run services such as DNS,
-      mail, web servers, and so forth.  The reason for this is
-      security; if all services ran as the superuser, they could
-      act without restriction.</para>
+  
+    <para>Usuários do sistema são usados para rodar serviços como DNS,
+      correio, servidores web, e assim por diante. A razão para isso é 
+      segurança, se todos os serviços rodarem com super usuários, poderiam
+      agir sem restrições.</para>
 
     <indexterm>
-      <primary>accounts</primary>
+      <primary>conta</primary>
       <secondary><username>daemon</username></secondary>
     </indexterm>
     <indexterm>
-      <primary>accounts</primary>
+      <primary>conta</primary>
       <secondary><username>operator</username></secondary>
     </indexterm>
-    <para>Examples of system users are <username>daemon</username>,
-      <username>operator</username>, <username>bind</username> (for
-      the Domain Name Service), and <username>news</username>.  Often
-      sysadmins create <username>httpd</username> to run web servers
-      they install.</para>
+    <para>Exemplos de usuários de sistema são <username>daemon</username>,
+      <username>operator</username>, <username>bind</username> (para o Domain
+      Name Service), e <username>news</username>. Frequentemente os administradores
+      de sistemas criam <username>httpd</username> para rodar um servidor de web.</para> 
 
     <indexterm>
-      <primary>accounts</primary>
+      <primary>contas</primary>
       <secondary><username>nobody</username></secondary>
     </indexterm>
     <para><username>nobody</username> is the generic unprivileged
