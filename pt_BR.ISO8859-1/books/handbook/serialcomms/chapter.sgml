@@ -675,12 +675,12 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
       
 
       <para>Relembrando o <xref linkend="boot"> que descreve que o processo
-        <command>init</command> é responsável pelo controle e inícialização 
+        <command>init</command> &eacute; respons&aacute;vel pelo controle e in&iacute;cializa&ccedil;&atilde;o 
         de todos os processos ao iniciar o sistema.  Uma das atividades executadas
-        pelo <command>init</command> é ler o arquivo <filename>/etc/ttys</filename>
+        pelo <command>init</command> &eacute; ler o arquivo <filename>/etc/ttys</filename>
         e iniciar o processo <command>getty</command> nos terminais disponibilizados.
-	O processo <command>getty</command> é responsável pela leitura do nome de <foreignphrase>login</foreignphrase>
-	e pela inicialização do programa <command>login</command>.</para>
+	O processo <command>getty</command> &eacute; respons&aacute;vel pela leitura do nome de <foreignphrase>login</foreignphrase>
+	e pela inicializa&ccedil;&atilde;o do programa <command>login</command>.</para>
 	  
       <para>Assim, para configurar os terminais para o seu sistema FreeBSD 
 	os seguintes passos devem ser realizados como <username>root</username>:</para>
@@ -688,7 +688,7 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
       <procedure>
 	<step>
 	  <para>Adicione uma linha no arquivo <filename>/etc/ttys</filename> para a entrada
-	    do diretório <filename>/dev</filename> indicando a porta serial caso esta não esteja 
+	    do diret&oacute;rio <filename>/dev</filename> indicando a porta serial caso esta n&atilde;o esteja 
             descrita no arquivo.</para>
 	</step>
 
@@ -698,7 +698,7 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
 	</step>
 
 	<step>
-	  <para>Especifique o tipo padrão do terminal.</para>
+	  <para>Especifique o tipo padr&atilde;o do terminal.</para>
 	</step>
 
 	<step>
@@ -714,45 +714,37 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
 	</step>
       </procedure>
       
-      <para>As an optional step, you may wish to create a custom
-	<replaceable>getty</replaceable> type for use in step 2 by making an
-	entry in <filename>/etc/gettytab</filename>.  This chapter does
-	not explain how to do so; you are encouraged to see the
-	  &man.gettytab.5; and the &man.getty.8; manual pages for more
-	information.</para>
+      <para>Como passo opcional, voc&ecirc; pode desejar criar um tipo de <replaceable>getty</replaceable> 
+        personalizado para utilizar no passo 2 fazendo uma entrada no arquivo <filename>/etc/gettytab</filename>.
+        Este cap&iacute;tulo n&atilde;o explica como fazer isso; &eacute; recomend&aacute;vel que voc&ecirc; leia as p&aacute;ginas de manual &man.gettytab.5;
+        e a &man.getty.8; para informa&ccedil;&otilde;es detalhadas deste processo.</para>
       
       <sect3 id="term-etcttys">
-	<title>Adding an Entry to <filename>/etc/ttys</filename></title>
+	<title>Adicionando uma entrada no arquivo <filename>/etc/ttys</filename></title>
 
-	<para>The <filename>/etc/ttys</filename> file lists all of the ports
-	  on your FreeBSD system where you want to allow logins.  For example,
-	  the first virtual console <filename>ttyv0</filename> has an entry in
-	  this file.  You can log in on the console using this entry.  This
-	  file also contains entries for the other virtual consoles, serial ports,
-	  and pseudo-ttys.  For a hardwired terminal, just list the serial
-	  port's <filename>/dev</filename> entry without the
-	  <filename>/dev</filename> part (for example, 
-	  <devicename>/dev/ttyv0</devicename> would be listed as
+	<para>O arquivo <filename>/etc/ttys</filename> lista todas as portas do seu sistema FreeBSD em que voc&ecirc;
+          deseja permitir <foreignphrase>logins</foreignphrase>. Por exemplo,
+	  o primeiro console virtual que &eacute; definido em uma entrada deste arquivo &eacute; o <filename>ttyv0</filename>.  Voc&ecirc;
+          pode realizar <foreignphrase>login</foreignphrase> devido esta entrada.  Este arquivo tamb&eacute;m cont&eacute;m
+          entradas para outros consoles virtuais, portas seriais, e pseudo-ttys.  Para um terminal f&iacute;sico,
+          apenas liste a porta serial que est&aacute; em <filename>/dev</filename> numa entrada sem a parte do 
+          <filename>/dev</filename> (por exemplo, 
+	  <devicename>/dev/ttyv0</devicename> deve ser listado como 
 	  <devicename>ttyv0</devicename>).</para>
 
-	<para>A default FreeBSD install includes an
-	  <filename>/etc/ttys</filename> file with support for the first
-	  four serial ports: <filename>ttyd0</filename> through
-	  <filename>ttyd3</filename>.  If you are attaching a terminal
-	  to one of those ports, you do not need to add another entry.</para>
+	<para>A instala&ccedil;&atilde;o padr&atilde;o do FreeBSD inclui no arquivo <filename>/etc/ttys</filename>
+          o suporte para as quatro primeiras portas seriais: <filename>ttyd0</filename> &agrave; <filename>ttyd3</filename>.  Se 
+          voc&ecirc; conectar fisicamente um terminal em uma destas portas n&atilde;o ser&aacute; necess&aacute;rio editar o <filename>/etc/ttys</filename>
+          pois as entradas referentes a estes terminais j&aacute; constar&atilde;o no arquivo.</para>
 
 	<example id="ex-etc-ttys">
-	  <title>Adding Terminal Entries to
-	    <filename>/etc/ttys</filename></title> 
+	  <title>Adicionando entradas de terminais em <filename>/etc/ttys</filename></title> 
 
-	  <para>Suppose we would like to connect two terminals to the
-	    system: a Wyse-50 and an old 286 IBM PC running
-	    <application>Procomm</application> terminal software
-	    emulating a VT-100 terminal.  We connect the Wyse to the
-	    second serial port and the 286 to the sixth serial port (a
-	    port on a multiport serial card).  The corresponding
-	    entries in the <filename>/etc/ttys</filename> file would
-	    look like this:</para>
+	  <para>Vamos supor que gostar&iacute;amos de conectar dois terminais ao sistema: um Wyse-50 e um velho IBM PC 286 executando
+            o programa de terminal <application>Procomm</application>, que emula um terminal VT-100.
+            N&oacute;s conectamos o Wyse na segunda porta serial e o 286 na sexta porta serial (uma porta de uma placa multi-serial).
+	    As entradas correspondentes a esta configura&ccedil;&atilde;o no arquivo <filename>/etc/ttys</filename>
+            deveriam ser algo como abaixo:</para>
 
 	  <programlisting>ttyd1<co 
 	      id="co-ttys-line1col1">  "/usr/libexec/getty std.38400"<co
@@ -765,115 +757,100 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
       
 	  <calloutlist>
 	    <callout arearefs="co-ttys-line1col1">
-	      <para>The first field normally specifies the name of
-	      the terminal special file as it is found in
+	      <para>O primeiro campo normalmente especifica o nome de arquivo do terminal e ele &eacute; localizado em
 	      <filename>/dev</filename>.</para>
 	    </callout>
 	    <callout arearefs="co-ttys-line1col2">
 
-	      <para>The second field is the command to execute for
-	        this line, which is usually &man.getty.8;.
-	        <command>getty</command> initializes and opens the
-	        line, sets the speed, prompts for a user name and then
-	        executes the &man.login.1; program.</para>
+	      <para>O segundo campo &eacute; o comando executado para esta linha, que &eacute; usualmente &man.getty.8;.
+	        <command>getty</command> que inicializa e abre a via de comunica&ccedil;&atilde;o, definindo a velocidade, al&eacute;m de perguntar
+                por um nome de usu&aacute;rio e em seguida executar o programa &man.login.1;.</para>
 
-	      <para>The <command>getty</command> program accepts one
-		(optional) parameter on its command line, the
-		<replaceable>getty</replaceable> type.  A
-		<replaceable>getty</replaceable> type configures
-		characteristics on the terminal line, like bps rate
-		and parity. The <command>getty</command> program reads
-		these characteristics from the file
-		<filename>/etc/gettytab</filename>.</para>
+	      <para>O programa <command>getty</command> aceita um(opcional) par&acirc;metro em sua linha de comando
+                que define o tipo do <replaceable>getty</replaceable>.  Um tipo de
+		<replaceable>getty</replaceable> determina as caracter&iacute;sticas de comunica&ccedil;&atilde;o 
+                de um terminal, como taxa de bps e paridade. O programa <command>getty</command>
+                l&ecirc; estas caracter&iacute;sticas do arquivo <filename>/etc/gettytab</filename>.</para>
 
-	      <para>The file <filename>/etc/gettytab</filename>
-		contains lots of entries for terminal lines both old
-		and new.  In almost all cases, the entries that start
-		with the text <literal>std</literal> will work for
-		hardwired terminals. These entries ignore parity.
-		There is a <literal>std</literal> entry for each bps
-		rate from 110 to 115200.  Of course, you can add your
-		own entries to this file. The &man.gettytab.5; manual
-		page provides more information.</para>
+	      <para>O arquivo <filename>/etc/gettytab</filename>
+		cont&eacute;m v&aacute;rias entradas de terminais, tanto de terminais novos quanto de antigos. Em quase todos os casos, 
+                as entradas que iniciam com o texto <literal>std</literal> funcionar&atilde;o para os terminais 
+                conectados fisicamente. Estas entradas ignoram paridade.
+		H&aacute; uma entrada <literal>std</literal> para cada taxa de bps
+		de 110 &agrave; 115200.  &Eacute; claro que voc&ecirc; pode adicionar suas pr&oacute;prias entradas neste arquivo. A p&aacute;gina de manual &man.gettytab.5;
+                possui maiores informa&ccedil;&otilde;es sobre o assunto.</para>
 
-	      <para>When setting the <replaceable>getty</replaceable>
-		type in the <filename>/etc/ttys</filename> file, make
-		sure that the communications settings on the terminal
-		match.</para>
+	      <para>Quando estiver configurando o tipo de <replaceable>getty</replaceable>
+		no arquivo <filename>/etc/ttys</filename>, tenha certeza de que as configura&ccedil;&otilde;es de comunica&ccedil;&atilde;o
+                do terminal sejam equivalentes.</para>
 	    
-	      <para>For our example, the Wyse-50 uses no parity and
-		connects at 38400&nbsp;bps.  The 286&nbsp;PC uses no parity and
-		connects at 19200&nbsp;bps.</para>
+	      <para>Para o nosso exemplo, o Wyse-50 n&atilde;o usa paridade e conecta &agrave; 38400&nbsp;bps.  O 286&nbsp;PC n&atilde;o usa paridade
+                e conecta &agrave; 19200&nbsp;bps.</para>
 
 	    </callout>
 
 	    <callout arearefs="co-ttys-line1col3">
 
-	      <para>The third field is the type of terminal usually
-		connected to that tty line.  For dial-up ports,
-		<literal>unknown</literal> or
-		<literal>dialup</literal> is typically used in this
-		field since users may dial up with practically any
-		type of terminal or software.  For hardwired
-		terminals, the terminal type does not change, so you
-		can put a real terminal type from the &man.termcap.5;
-		database file in this field.</para>
+	      <para>O terceiro campo &eacute; o tipo de terminal usualmente conectado atrav&eacute;s desta tty.  Para portas<foreignphrase>dial-up</foreignphrase>,
+		<literal>unknown</literal> ou
+		<literal>dialup</literal> s&atilde;o tipicamente definidos neste campo 
+                desde que usu&aacute;rios possam fazer <foreignphrase>dial up</foreignphrase> com praticamente
+                qualquer tipo de terminal ou programa.  Para terminais f&iacute;sicos
+                o tipo n&atilde;o muda, portanto, voc&ecirc; pode colocar um tipo real de terminal neste campo,
+                baseando-se na cole&ccedil;&atilde;o de terminais do arquivo &man.termcap.5;.</para>
 
-	      <para>For our example, the Wyse-50 uses the real
-		terminal type while the 286 PC running
-		<application>Procomm</application> will be set to
-		emulate at VT-100. </para>
+	      <para>Para o nosso exemplo, o Wyse-50 usa um tipo real de terminal enquanto o 286 PC executa o programa
+                <application>Procomm</application> emulando um terminal VT-100.</para>
 
 	    </callout>
 
 	    <callout arearefs="co-ttys-line1col4">
-	      <para>The fourth field specifies if the port should be
-	        enabled.  Putting <literal>on</literal> here will have
-	        the <command>init</command> process start the program
-	        in the second field, <command>getty</command>.  If you
-	        put <literal>off</literal> in this field, there will
-	        be no <command>getty</command>, and hence no logins on
-	        the port.</para>
+	      <para>O quarto campo especifica se a porta deve ser ativada.
+	        Colocando um <literal>on</literal> neste campo far&aacute; com 
+	        que o processo <command>init</command> inicie o programa especificado no segundo campo,
+	        <command>getty</command>.  Caso voc&ecirc; defina <literal>off</literal> neste campo
+                o <command>getty</command> n&atilde;o ser&aacute; iniciado, o que resultar&aacute; na impossibilidade de 
+                <foreignphrase>logins</foreignphrase> nesta porta.</para>
 	    </callout>
 
 	    <callout arearefs="co-ttys-line1col5">
-	      <para>The final field is used to specify whether the
-	        port is secure.  Marking a port as secure means that
-	        you trust it enough to allow the
-	        <username>root</username> account (or any account with
-	        a user ID of 0) to login from that port.  Insecure
-	        ports do not allow <username>root</username> logins.
-	        On an insecure port, users must login from
-	        unprivileged accounts and then use &man.su.1; or a
-	        similar mechanism to gain superuser privileges.</para>
+	      <para>O campo final &eacute; usado para especificar se a porta ser&aacute; segura.
+	        Definindo a porta como segura significar&aacute; que esta &eacute; confi&aacute;vel ao ponto de permitir
+	        que a conta <username>root</username> (ou qualquer outra conta com UID 0)
+                possa realizar <foreignphrase>login</foreignphrase> desta porta. 
+	        Definindo como n&atilde;o segura far&aacute; com que n&atilde;o seja permitido <foreignphras>logins</foreignphrase> com 
+                direitos de acesso como os do <username>root</username>.
+	        Numa porta n&atilde;o segura os usu&aacute;rios devem fazer acesso ao sistema atrav&eacute;s de contas
+	        sem privil&eacute;gios de superusu&aacute;rio, e atrav&eacute;s do uso do &man.su.1; ou algum m&eacute;todo similar
+                adquirir os privil&eacute;gios.</para>
 
-	      <para>It is highly recommended that you use
-		<quote>insecure</quote>
-	        even for terminals that are behind locked doors.  It
-	        is quite easy to login and use <command>su</command>
-	        if you need superuser privileges.</para>
+	      <para>&Eacute; altamente recomand&aacute;vel que voc&ecirc; defina com <quote>insecure</quote>
+	        tanto os terminais quanto as portas n&atilde;o habilitadas.
+                &Eacute; bastante f&aacute;cil fazer o acesso e utilizar <command>su</command>
+	        caso voc&ecirc; precise de privil&eacute;gios de superusu&aacute;rio.</para>
 	    </callout>
 	  </calloutlist>
 	</example>
       </sect3>  
 
       <sect3 id="term-hup">
-	<title>Force <command>init</command> to Reread
-	  <filename>/etc/ttys</filename></title>
+	<title>For&ccedil;ando o <command>init</command> a reler o <filename>/etc/ttys</filename></title>
 
-	<para>After making the necessary changes to the
-	  <filename>/etc/ttys</filename> file you should send a SIGHUP
-	  (hangup) signal to the <command>init</command> process to
-	  force it to re-read its configuration file.  For example:</para>
+	<para>Ap&oacute;s ter realizado as configura&ccedil;&otilde;es necess&aacute;rias no arquivo
+	  <filename>/etc/ttys</filename> voc&ecirc; deve enviar um sinal SIGHUP
+	  (<foreignphrase>hangup</foreignphrase>) para o processo <command>init</command>
+          para for&ccedil;a-lo a reler as configura&ccedil;&otilde;es e execut&aacute;-las como descrito no arquivo. Por exemplo:</para>
+
 
 	<screen>&prompt.root; <userinput>kill -HUP 1</userinput></screen>
 
 	<note>
-	  <para><command>init</command> is always the first process run
-	    on a system, therefore it will always have PID 1.</para>
+	  <para><command>init</command> &eacute; sempre o primeiro processo a ser executado no sistema, portanto, ele sempre
+            ter&aacute; o PID 1.</para>
 	</note>
 
-	<para>If everything is set up correctly, all cables are in
+	<para>Se tudo foi configurado corretamente, todos os cabos devidamente conectados,
+          e os terminais ligados, ent&atilde;o o If everything is set up correctly, all cables are in
 	  place, and the terminals are powered up, then a
 	  <command>getty</command> process should be running on each
 	  terminal and you should see login prompts on your terminals
