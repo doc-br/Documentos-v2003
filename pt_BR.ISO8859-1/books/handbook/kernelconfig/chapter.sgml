@@ -94,64 +94,57 @@
       isto est&aacute; assim porque a funcionalidades que est&atilde;o amarrada ao kernel e n&atilde;o podem ser carregadas din&acirc;micamente. 
       Em outros isto pode simplesmente estar porque nenhum tem ainda conseguido o tempo para escrita capaz de carregamento dinamico de modulos do kernel para essa funcionalidade ainda.</para>
 
-    <para>Building a custom kernel is one of the most important rites of
-      passage nearly every &unix; user must endure.  This process, while
-      time consuming, will provide many benefits to your &os; system.
-      Unlike the <filename>GENERIC</filename> kernel, which must support a
-      wide range of hardware, a custom kernel only contains support for
-      <emphasis>your</emphasis> PC's hardware.  This has a number of
-      benefits, such as:</para>
+    <para>Compilar um kernel personalizado e um dos passos mais importante que cada usuário de
+      &unix; deve saber. Este processo, quando consome tempo, trará muitos benefícios para o seu sistema &os;.
+      Diferente <arquivo>GENERIC</arquivo> do kernel, o qual necessita de suporte de uma
+      abrangente lista de hardware, um kernel personalizado somente contém suporte para o hardware dos
+      <emphasis>seus</emphasis> PC's. Isto tem benefícios inúmeros
+      , como:</para>
 
     <itemizedlist>
       <listitem>
-	<para>Faster boot time.  Since the kernel will only probe the
-	hardware you have on your system, the time it takes your system to
-	boot will decrease dramatically.</para>
+	<para>Tempo mais rápido para carregar. Posto que o kernel apenas experimentará o
+	hardware que você tiver em seu sistema, o tempo de teste do seu sistema ao carregar a máquina diminuirá drasticamente.</para>
       </listitem>
 
       <listitem>
-	<para>Less memory usage.  A custom kernel often uses less memory
-	  than the <filename>GENERIC</filename> kernel, which is important
-	  because the kernel must always be present in real
-	  memory.  For this reason, a custom kernel is especially useful
-	  on a system with a small amount of RAM.</para>
+	<para>Menos uso da memória. Um kernel personalizado usa frequentemente menos memória
+	  que o <filename>GENERIC</filename> kernel, o que é importante
+	  porque o kernel atual deve sempre estar presente na memória real.
+	  Para esta razão, um kernel personalizado e útil especialmente
+	  em um sistema com pouca quantidade de RAM.</para>
       </listitem>
 
       <listitem>
-	<para>Additional hardware support.  A custom kernel allows you to
-	  add in support for devices such as sound cards, which are not
-	  present in the <filename>GENERIC</filename> kernel.</para>
+	<para>Adicionar suporte a hardware. Um kernel personalizado permite a você adicionar suporte a dispositivos tais como Placas de Som, que não estão presentes no
+	  <filename>GENERIC</filename> do kernel.</para>
       </listitem>
     </itemizedlist>
   </sect1>
 
   <sect1 id="kernelconfig-building">
-    <title>Building and Installing a Custom Kernel</title>
+    <title> Compilando e Instalando um Kernel Personalizado</title>
     <indexterm>
       <primary>kernel</primary>
-      <secondary>building / installing</secondary>
+      <secondary>Compilando / instalando</secondary>
     </indexterm>
 
-    <para>First, let us take a quick tour of the kernel build directory.
-      All directories mentioned will be relative to the main
-      <filename>/usr/src/sys</filename> directory, which is also
-      accessible through <filename>/sys</filename>.  There are a number of
-      subdirectories here representing different parts of the kernel, but
-      the most important, for our purposes, are
-      <filename><replaceable>arch</replaceable>/conf</filename>, where you
-      will edit your custom kernel configuration, and
-      <filename>compile</filename>, which is the staging area where your
-      kernel will be built.  <replaceable>arch</replaceable> represents
-      either <filename>i386</filename>, <filename>alpha</filename>, or
-      <filename>pc98</filename> (an alternative development branch of PC
-      hardware, popular in Japan).  Everything inside a particular
-      architecture's directory deals with that architecture only; the rest
-      of the code is common to all platforms to which &os; could
-      potentially be ported.  Notice the logical organization of the
-      directory structure, with each supported device, file system, and
-      option in its own subdirectory.  &os; 5.X and up has support for
-      <filename>sparc64</filename>, and a few other architectures under
-      development.</para>
+    <para>Primeiramente, devemos ir rapidamente até o  diretório de configuração do kernel.
+      Todos os diretórios mencionados serão relativos ao diretório principal
+      <filename>/usr/src/sys</filename>, que também pode ser acessado direto
+      <filename>/sys</filename>. Há um número de subdiretórios que representam partes diferentes do kernel, mas
+      o mais importante, para nossas finalidades, são
+      <filename><replaceable>arch</replaceable>/conf</filename>, onde você
+      editará sua configuração de kernel personalizado, e
+      <filename>compile</filename>, que estão na área de preparação onde seu
+      kernel irá ser compilado. <replaceable>arch</replaceable> representa
+      qualquer <filename>i386</filename>, <filename>alpha</filename>, ou
+      <filename>pc98</filename> (uma alternativa de seção de desenvolvimento de hardware do PC, popular no Japan).  
+      Tudo dentro da arquitetura particular de diretórios trata de uma arquitetura apenas; O resto
+      do código é comum a todas as plataformas com o &os; podia ser portado potencialmente. Observe a organização lógica da estrutura de diretório, com cada um dispositivos suportados, sistema de arquivos, e
+      opções em seu próprio subdiretório.  &os; 5.X e superiores tem suporte para
+      <filename>sparc64</filename>, e algumas outras arquiteturas sob
+      desenvolvimento.</para>
 
     <note>
       <para>If there is <emphasis>not</emphasis> a
