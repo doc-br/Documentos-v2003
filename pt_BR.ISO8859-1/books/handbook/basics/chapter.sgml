@@ -2009,84 +2009,100 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
     <indexterm><primary>shells</primary></indexterm>
     <indexterm><primary>linha de comando</primary></indexterm>
 
-    <para>In FreeBSD, a lot of everyday work is done in a command line
-      interface called a shell.  A shell's main job is to take commands
-      from the input channel and execute them.  A lot of shells also have
-      built in functions to help everyday tasks such as file management,
-      file globbing, command line editing, command macros, and environment
-      variables.  FreeBSD comes with a set of shells, such as 
-      <command>sh</command>, the Bourne Shell, and <command>tcsh</command>, 
-      the improved C-shell.  Many other shells are available
-      from the FreeBSD Ports Collection, such as
-      <command>zsh</command> and <command>bash</command>.</para>
+    <para>No FreeBSD, uma grande parte do trabalho do dia a dia é feito
+	por interface de linha de comando, chamada de interpretador
+	de comandos, ou <foreignphrase>shell</foreignphrase>.  A
+	principal função de uma <foreignphrase>shell</foreignphrase> é
+	receber comandos por um canal de entrada e executá-los.  Uma
+	série de <foreignphrase>shells</foreignphrase> ainda possuem
+	funções embutidas, o que ajuda a facilitar a realização de
+	tarefas do dia-a-dia, como gerenciamente de arquivos,
+	edição de linha de comando, macros de comandos e variáveis
+	de ambiente.  O FreeBSD vem com uma série de interpretadores
+	de comandos, como o <command>sh</command>, chamado de
+	<foreignphrase>Bourne Shell</foreignphrase>, e <command>tcsh</command>,
+	A <quote>C-shell</quote> melhorada.  Muitos outros interpretadores
+	de comandos estão disponíveis na Coleção de Ports do FreeBSD,
+	como o <command>zsh</command> e o <command>bash</command>.</para>
 
-    <para>Which shell do you use?  It is really a matter of taste.  If you
-      are a C programmer you might feel more comfortable with a C-like shell
-      such as <command>tcsh</command>.  If you have come from Linux or are new 
-      to a &unix; command line interface you might try <command>bash</command>.  
-      The point is that each
-      shell has unique properties that may or may not work with your
-      preferred working environment, and that you have a choice of what
-      shell to use.</para>
+    <para>Que <foreignphrase>shell</foreignphrase> utilizar?  Trata-se meramente
+	de uma questão de gosto.  Se você é um programador C, se sentirá mais
+	confortável com um interpretador de comandos similar à linguagem C,
+	como o <command>tcsh</command>.  Se você teve suas origens
+	no Linux, ou é novo ao &unix;, tenta experimentar o
+	<command>bash</command>.  O ponto é que cada interpretador
+	de comandos possui propriedades únicas, que pode ou não
+	funcionar corretamente em seu ambiente de trabalho, e
+	também, outro ponto importante é sua liberdade de escolha
+	para decidir qual e quando interpretador utilizar.</para>
 
-    <para>One common feature in a shell is filename completion.  Given
-      the typing of the first few letters of a command or filename, you
-      can usually have the shell automatically complete the rest of the
-      command or filename by hitting the <keycap>Tab</keycap> key on the keyboard.  Here is
-      an example.  Suppose you have two files called
-      <filename>foobar</filename> and <filename>foo.bar</filename>.  You
-      want to delete <filename>foo.bar</filename>.  So what you would type
-      on the keyboard is: <command>rm fo[<keycap>Tab</keycap>].[<keycap>Tab</keycap>]</command>.</para>
+    <para>Uma das características mais comuns em interpretadores de
+	comandos é completar nome de arquivos.  Ao digitar as primeiras
+	letras de um comando ou de um arquivo, você normalmente pode
+	fazer com que a <foreignphrase>shell</foreignphrase> automaticamente
+	complete o restante do comando ou arquivo, pressionando a tecla
+	<keycap>Tab</keycap> no teclado.  Aqui está um exemplo.  Suponha que
+	você tenha dois arquivos chamados <filename>foobar</filename> e
+	<filename>foo.bar</filename>.  Você quer apagar o <filename>foo.bar</filename>.
+	Então o que você faria no teclado
+	é: <command>rm fo[<keycap>Tab</keycap>].[<keycap>Tab</keycap>]</command>.</para>
 
-    <para>The shell would print out <command>rm
+    <para>O interpretador de comandos apresentaria como resultado algo similar à <command>rm
       foo[BEEP].bar</command>.</para>
 
-    <para>The [BEEP] is the console bell, which is the shell telling me it
-      was unable to totally complete the filename because there is more
-      than one match.  Both <filename>foobar</filename> and
-      <filename>foo.bar</filename> start with <literal>fo</literal>, but
-      it was able to complete to <literal>foo</literal>.  If you type in
-      <literal>.</literal>, then hit <keycap>Tab</keycap> again, the shell would be able to
-      fill in the rest of the filename for you.</para>
-    <indexterm><primary>environment variables</primary></indexterm>
+    <para>O [BEEP] é o sino do console, que indica que o interpretador de
+	comandos não foi capaz de completar totalmente o nome do arquivo
+	porque existe mais do que uma opções que coincide.  Ambos,
+	<filename>foobar</filename> e <filename>foo.bar</filename> começam com <literal>fo</literal>,
+	mas a <foreignphrase>shell</foreignphrase> pode completar o nome
+	do arquivo até <literal>foo</literal>.  Se neste momento você digitar
+	<literal>.</literal>, e pressionar <keycap>Tab</keycap> mais uma vez, a
+	<foreignphrase>shell</foreignphrase> deve ser capaz de
+	completar o restante do nome do arquivo para você.</para>
 
-    <para>Another feature of the shell is the use of environment variables.
-      Environment variables are a variable key pair stored in the shell's
-      environment space.  This space can be read by any program invoked by
-      the shell, and thus contains a lot of program configuration.  Here
-      is a list of common environment variables and what they mean:</para>
-    <indexterm><primary>environment variables</primary></indexterm>
+    <indexterm><primary>variáveis de ambiente</primary></indexterm>
+
+    <para>Outra funcionalidade de um interpretador de comandos
+	é o uso de variáveis de ambiente.  Variáveis de ambiente são duplas
+	variáveis de valores armazenados no espaço de ambiente da
+	<foreignphrase>shell</foreignphrase>.  Esse espaço de ambiente
+	pode ser lido por qualquer programa chamado pelo intepretador,
+	de forma que contenha uma série de configurações interpretadas
+	pelo mesmo.  Segue aqui uma lista de variáveis de ambiente
+	comuns, e seus respectivos significados:</para>
+    <indexterm><primary>variáveis de ambiente</primary></indexterm>
 
     <informaltable frame="none">
       <tgroup cols="2">
 	<thead>
 	  <row>
-	    <entry>Variable</entry>
-	    <entry>Description</entry>
+	    <entry>Variável</entry>
+	    <entry>Descrição</entry>
 	  </row>
 	</thead>
 
 	<tbody>
 	  <row>
 	    <entry><envar>USER</envar></entry>
-	    <entry>Current logged in user's name.</entry>
+	    <entry>Nome do usuário logado no momento.</entry>
 	  </row>
 
 	  <row>
 	    <entry><envar>PATH</envar></entry>
-	    <entry>Colon separated list of directories to search for
-	      binaries.</entry>
+	    <entry>Lista de diretórios, divididos por vírgula,
+		indincando onde deve-se procurar por
+		binários.</entry>
 	  </row>
 
 	  <row>
 	    <entry><envar>DISPLAY</envar></entry>
-	    <entry>Network name of the X11 display to connect to, if
-	      available.</entry>
+	    <entry>Nome de rede do terminal gráfico do X11 onde
+		o mesmo deve se conectar, caso esteja disponível.</entry>
 	  </row>
 
 	  <row>
 	    <entry><envar>SHELL</envar></entry>
-	    <entry>The current shell.</entry>
+	    <entry>O interpretador de comandos atual.</entry>
 	  </row>
 
 	  <row>
