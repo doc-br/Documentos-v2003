@@ -24,7 +24,7 @@
     </authorgroup>
   </chapterinfo>
 
-  <title>Configurando o <literal>Kernel</literal> do FreeBSD</title>
+  <title>Configurando o <literal>kernel</literal> do FreeBSD</title>
 
   <sect1 id="kernelconfig-synopsis">
     <title>Sinopse</title>
@@ -74,93 +74,93 @@
   </sect1>
 
   <sect1 id="kernelconfig-custom-kernel">
-    <title>Porque Compilar um <literal>Kernel</literal> Personalizado?</title>
+    <title>Porque Compilar um <literal>kernel</literal> Personalizado?</title>
 
     <para>Tradicionalmente, o &os; teve o que foi chamado de <literal>kernel</literal>
       <quote>monol&iacute;tico</quote>. Isto significa que o <literal>kernel</literal> era um
       grande programa, contendo uma lista fixa de dispositivos suportados, e se voc&ecirc; quisesse
-      alterar o comportamento do <literal>kernel</literal> ent&atilde;o &eacute; voc&ecirc; teria que compilar um novo <literal>kernel</literal>,
-      e da&iacute; reiniciar seu computador com o novo <literal>kernel</literal>.</para>
+      alterar o comportamento do <literal>kernel</literal> ent&atilde;o seria necess&aacute;rio compilar um novo <literal>kernel</literal>,
+      e da&iacute; reiniciar seu computador com ele.</para>
 
     <para>Hoje, o &os; est&aacute; movendo-se rapidamente para um modelo onde muitas das funcionalidades do
-      <literal>kernel</literal> est&aacute; contida em m&oacute;dulos que s&atilde;o carregados e descarregados din&acirc;micamente do <literal>kernel</literal> conforme eles s&atilde;o necess&aacute;rios.
-      Isto permite que o <literal>kernel</literal> se adapte a um novo <foreignphrase>hardware</foreignphrase> repentinamente
+      <literal>kernel</literal> est&atilde;o contidas em m&oacute;dulos que s&atilde;o carregados e descarregados din&acirc;micamente do <literal>kernel</literal> conforme eles s&atilde;o necess&aacute;rios.
+      Isto permite que o <literal>kernel</literal> se adapte a um novo <foreignphrase>hardware</foreignphrase> subitamente
       tornando-o dispon&iacute;vel (tais como cart&otilde;es PCMCIA para <foreignphrase>laptop</foreignphrase>), ou a
       novas funcionalidades a serem inseridas no <literal>kernel</literal> que n&atilde;o eram
-      necess&aacute;rias quando o <literal>kernel</literal> foi originalmente compilado. Isso
+      necess&aacute;rias quando o ele foi originalmente compilado. Isso
       &eacute; conhecido como <literal>kernel</literal> modular. Coloquialmente eles s&atilde;o chamados KLDs.</para>
 
     <para>Apesar disto, ainda &eacute necess&aacute;rio carregar algumas configura&ccedil;&otilde;es est&aacute;ticas no <literal>kernel</literal>. Em alguns casos 
       isto est&aacute; assim porque a funcionalidades est&atilde;o t&atilde;o amarradas ao <literal>kernel</literal> que elas n&atilde;o podem ser carregadas din&acirc;micamente. 
-      Em outros casos isto pode simplesmente estar assim porque ningu&eacute;m ainda conseguiu tempo para escrever
+      Em outros casos, isto pode simplesmente estar assim porque ningu&eacute;m ainda conseguiu tempo para escrever
 um m&oacute;dulo de 
-carregamento din&acirc;mico do <literal>kernel</literal> para essas funcionalidades.</para>
+carga din&acirc;mico do <literal>kernel</literal> para essas funcionalidades.</para>
 
     <para>Compilar um <literal>kernel</literal> personalizado &eacute; um dos rituais mais importantes que cada usu&aacute;rio de
       &unix; deve enfrentar. Este processo, embora consuma tempo, trar&aacute; muitos benef&iacute;cios para o seu sistema &os;.
       Diferentemente do <literal>kernel</literal> <filename>GENERIC</filename>, o qual necessita de suporte a uma
-      abrangente lista de equipamentos, um <literal>kernel</literal> personalizado somente cont&eacute;r&aacute; suporte para o <foreignphrase>hardware</foreignphrase> do
+      abrangente lista de equipamentos, um <literal>kernel</literal> personalizado somente conter&aacute; suporte para o <foreignphrase>hardware</foreignphrase> do
       <emphasis>seu</emphasis> PC. Isto tem in&uacute;meros benef&iacute;cios, tais como:</para>
 
     <itemizedlist>
       <listitem>
 	<para>Tempo de inicializa&ccedil;&atilde;o mais r&aacute;pido. Visto que o <literal>kernel</literal> apenas testar&aacute; o
-	equipamento que voc&ecirc; tiver em seu sistema, o tempo de testes do seu sistema ao inicializar a m&aacute;quina diminuir&aacute; dr&aacute;sticamente.</para>
+	equipamento que voc&ecirc; tiver em seu sistema, o tempo de testes ao inicializar a m&aacute;quina diminuir&aacute; drasticamente.</para>
       </listitem>
 
       <listitem>
 	<para>Menor uso da mem&oacute;ria. Um <literal>kernel</literal> personalizado frequentemente utiliza menos mem&oacute;ria
 	  que o <literal>kernel</literal> <filename>GENERIC</filename>, o que &eacute; importante
 	  porque o <literal>kernel</literal> deve sempre estar presente na mem&oacute;ria f&iacute;sica.
-	  Por esta raz&atilde;o, um <literal>kernel</literal> personalizado e especialmente &uacute;til 
+	  Por esta raz&atilde;o, um <literal>kernel</literal> personalizado &eacute; especialmente &uacute;til 
 	  em um sistema com pouca quantidade de RAM.</para>
       </listitem>
 
       <listitem>
-	<para>Suporte adicional de <foreignphrase>hardware</foreignphrase>. Um <literal>kernel</literal> personalizado permite a voc&ecirc; adicionar suporte a dispositivos tais como placas de som, que n&atilde;o est&atilde;o presentes no <literal>kernel</literal> <filename>GENERIC</filename>.</para>
+	<para>Suporte adicional de <foreignphrase>hardware</foreignphrase>. Um <literal>kernel</literal> personalizado permite a voc&ecirc; adicionar suporte a dispositivos, tais como placas de som, que n&atilde;o est&atilde;o presentes no <literal>kernel</literal> <filename>GENERIC</filename>.</para>
       </listitem>
     </itemizedlist>
   </sect1>
 
   <sect1 id="kernelconfig-building">
-    <title> Compilando e Instalando um <literal>Kernel</literal> Personalizado</title>
+    <title> Compilando e Instalando um <literal>kernel</literal> Personalizado</title>
     <indexterm>
       <primary>kernel</primary>
       <secondary>Compilando / instalando</secondary>
     </indexterm>
 
-    <para>Primeiramente, devemos ir rapidamente at&eacute; o  diret&oacute;rio de configura&ccedil;&atilde;o do kernel.
+    <para>Primeiramente, deixe-nos apresentar rapidamente o  diret&oacute;rio de compila&ccedil;&atilde;o do <literal>kernel</literal>.
       Todos os diret&oacute;rios mencionados ser&atilde;o relativos ao diret&oacute;rio principal
-      <filename>/usr/src/sys</filename>, que tamb&eacute;m pode ser acessado direto
-      <filename>/sys</filename>. H&aacute; um n&uacute;mero de subdiret&oacute;rios que representam partes diferentes do kernel, mas
-      o mais importante, para nossos objetivos, s&atilde;o
+      <filename>/usr/src/sys</filename>, que tamb&eacute;m poder&aacute; ser acessado diretamente atrav&eacute;s
+      <filename>/sys</filename>. H&aacute; um n&uacute;mero de subdiret&oacute;rios que representam partes diferentes do <literal>kernel</literal>, mas
+      os mais importantes, para nossos objetivos, s&atilde;o
       <filename><replaceable>arch</replaceable>/conf</filename>, onde voc&ecirc;
-      editar&aacute; sua configura&ccedil;&atilde;o de kernel personalizado, e
-      <filename>compile</filename>, que est&atilde;o na &aacute;rea de prepara&ccedil;&atilde;o onde seu
-      kernel ir&aacute; ser compilado. <replaceable>arch</replaceable> representa
+      editar&aacute; sua configura&ccedil;&atilde;o de <literal>kernel</literal> personalizado, e
+      <filename>compile</filename>, que &eacute; a &aacute;rea de prepara&ccedil;&atilde;o onde seu
+      <literal>kernel</literal> ir&aacute; ser compilado.  <replaceable>arch</replaceable> representa
       qualquer <filename>i386</filename>, <filename>alpha</filename>, ou
-      <filename>pc98</filename> (uma alternativa de se&ccedil;&atilde;o de desenvolvimento de hardware do PC, popular no Jap&atilde;o).  
-      Tudo dentro da arquitetura particular de diret&oacute;rios trata apenas de uma arquitetura. O resto
-      do c&oacute;digo do &os; &eacute; comum para todas as plataformas por ele potencialmente suportado. Observe a 
+      <filename>pc98</filename> (uma ramo de desenvolvimento alternativo de <foreignphrase>hardware</foreignphrase> do PC, popular no Jap&atilde;o).  
+      Tudo que est&aacute; dentro de um diret&oacute;rio de uma arquitetura espec&iacute;fica diz respeito somente a esta arquitetura; o resto
+      do c&oacute;digo do &os; &eacute; comum para todas as plataformas &agrave;s quais ele poder&aacute; ser potencialmente convertido. Observe a 
 organiza&ccedil;&atilde;o 
-      l&oacute;gica da estrutura de diret&oacute;rio, com cada um dos dispositivos suportados, sistema de arquivos, e
-      op&ccedil;&otilde;es em seu pr&oacute;prio subdiret&oacute;rio. &os; 5.X e superiores tem suporte para
-      <filename>sparc64</filename>, e algumas outras arquiteturas sob
+      l&oacute;gica da estrutura de diret&oacute;rio, com cada dispositivo suportado, sistema de arquivos, e
+      op&ccedil;&otilde;es em seu pr&oacute;prio subdiret&oacute;rio. As vers&otilde;es do &os; 5.X e superiores tem suporte para
+      <filename>sparc64</filename>, e algumas outras arquiteturas em
       desenvolvimento.</para>
 
     <note>
-      <para>Se <emphasis>n&atilde;o</emphasis> tiver o diret&oacute;rio
+      <para>Se <emphasis>n&atilde;o</emphasis> existir o diret&oacute;rio
 	<filename>/usr/src/sys</filename> no seu sistema,
-	ent&atilde;o o source do kernel n&atilde;o foi instalado. A maneira mais f&aacute;cil
-	para fazer isso e rodando
+	ent&atilde;o o fonte do <literal>kernel</literal> n&atilde;o foi instalado. A maneira mais f&aacute;cil
+	para fazer isso &eacute; rodando
 	<command>/stand/sysinstall</command> como
 	<username>root</username>, escolher
 	<guimenuitem>Configure</guimenuitem>,
 	<guimenuitem>Distributions</guimenuitem>,
-	<guimenuitem>src</guimenuitem>, ent&atilde;o
-	<guimenuitem>sys</guimenuitem>. Se voc&ecirc; tiver alguma avers&atilde;o a
-	<application>sysinstall</application> e voc&ecirc; tem acesso a
-	um <quote>oficial</quote> &os; CDROM, ent&atilde;o voc&ecirc; pode tamb&eacute;m
+	<guimenuitem>src</guimenuitem>, e ent&atilde;o
+	<guimenuitem>sys</guimenuitem>. Se voc&ecirc; tiver alguma avers&atilde;o ao
+	<application>sysinstall</application> e voc&ecirc; possuir acesso a
+	um &os; CDROM <quote>oficial</quote>, ent&atilde;o voc&ecirc; poder&aacute; tamb&eacute;m
 	instalar o fonte atrav&eacute;s da linha de comando:</para>
 
       <screen>&prompt.root; <userinput>mount /cdrom</userinput>
@@ -172,30 +172,29 @@ organiza&ccedil;&atilde;o
     <para>Depois, v&aacute; at&eacute; o diret&oacute;rio
       <filename><replaceable>arch</replaceable>/conf</filename>
       e copie o arquivo de configura&ccedil;&atilde;o <filename>GENERIC</filename> com o
-      nome que voc&ecirc; quer para o seu kernel. Por exemplo:</para>
+      nome que voc&ecirc; quiser para o seu <literal>kernel</literal>. Por exemplo:</para>
 
     <screen>&prompt.root; <userinput>cd /usr/src/sys/i386/conf</userinput>
 &prompt.root; <userinput>cp GENERIC MYKERNEL</userinput></screen>
 
-    <para>Tradicionalmente, este nome tem todas as principais letras e, se voc&ecirc;s
-      s&atilde;o mantenedores de m&uacute;ltiplos &os; m&aacute;quinas com diferentes hardware,
-      &Eacute; uma boa id&eacute;ia nome&aacute;-lo para o hostname da sua m&aacute;quina. N&oacute;s normalmente
-      alteramos isto <filename>MYKERNEL</filename> para a finalidade deste
-      exemplo.</para>
+    <para>Tradicionalmente, este nome tem todas letras em mai&uacute;sculas, se voc&ecirc;
+      mant&eacute;m m&uacute;ltiplas m&aacute;quinas &os; com diferentes <foreignphrase>hardware</foreignphrase>,
+      &Eacute; uma boa id&eacute;ia nome&aacute;-lo prefixando o <foreignphrase>hostname</foreignphrase> da sua m&aacute;quina. Para a finalidade deste
+      exemplo, ser&aacute; usado o nome <filename>MYKERNEL</filename>.</para> 
 
     <tip>
-      <para>Guardar os arquivos de configura&ccedil;&atilde;o do seu kernel abaixo do directly
+      <para>Guardar os arquivos de configura&ccedil;&atilde;o do seu <literal>kernel</literal> abaixo do directly
 	<filename>/usr/src</filename> pode ser uma m&aacute; id&eacute;ia. Se voc&ecirc; sentir problemas
 	para apenas ajustar delete o
 	<filename>/usr/src</filename> e comece novamente. Cinco segundos depois
-	que voc&ecirc; realizou que voc&ecirc; teve que deletar seu arquivo de configura&ccedil;&atilde;o de kernel personalizado. N&atilde;o 
+	que voc&ecirc; realizou que voc&ecirc; teve que deletar seu arquivo de configura&ccedil;&atilde;o de <literal>kernel</literal> personalizado. N&atilde;o 
         edite 
         diretamente o arquivo <filename>GENERIC</filename>,
 	pois da pr&oacute;xima vez que voc&ecirc;s forem 
 	<link linkend="cutting-edge">atualizar seu c&oacute;digo da &aacute;rvore</link>, 
-	as suas antigas modifica&ccedil;&otilde;es do kernel ser&atilde;o perdidas.</para>
+	as suas antigas modifica&ccedil;&otilde;es do <literal>kernel</literal> ser&atilde;o perdidas.</para>
 
-      <para>Voc&ecirc; querer manter em outro local seu arquivo de configura&ccedil;&atilde;o do kernel, e ent&atilde;o
+      <para>Voc&ecirc; querer manter em outro local seu arquivo de configura&ccedil;&atilde;o do <literal>kernel</literal>, e ent&atilde;o
 	criar um link simb&oacute;lico do arquivo para o diret&oacute;rio <filename>i386</filename>.</para>
 
       <para>Por exemplo:</para>
