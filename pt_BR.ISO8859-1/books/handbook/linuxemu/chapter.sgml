@@ -1270,7 +1270,7 @@ export PATH</programlisting>
       </authorgroup>
     </sect1info>
 
-    <title>Installing &sap.r3;</title>
+    <title>Instalando o &sap.r3;</title>
 
     <indexterm>
       <primary>applications</primary>
@@ -2720,39 +2720,42 @@ options SEMUME=100       #number of UNDO keys</programlisting>
     </sect2>
 
     <sect2 id="continuewithsapr4installation">
-      <title>Continue with &sap.r3; Installation</title>
+      <title>Continue com a Instala&ccedil;&atilde;o do &sap.r3;</title>
 
-      <para>First check the environment settings of users 
-	<username>idsamd</username>
-        (<replaceable>sid</replaceable>adm) and 
-	<username>oraids</username> (ora<replaceable>sid</replaceable>). They should now
-        both have the files <filename>.profile</filename>,
-        <filename>.login</filename> and <filename>.cshrc</filename>
-        which are all using <command>hostname</command>. In case the
-        system's hostname is the fully qualified name, you need to
-        change <command>hostname</command> to <command>hostname
-        -s</command> within all three files.</para>
+      <para>Primeiro verifique as configura&ccedil;&otilde;es de ambiente 
+	dos usu&aacute;rios <username>idsamd</username>
+        (<replaceable>sid</replaceable>adm) e 
+	<username>oraids</username> (ora<replaceable>sid</replaceable>). Ambos 
+        devem possuir os arquvos <filename>.profile</filename>,
+        <filename>.login</filename> e <filename>.cshrc</filename>
+        que estar&atilde;o usando o <command>hostname</command>. No caso 
+	em que o nome da m&aacute;quina seja o nome completo qualificado do 
+        dom&iacute;nio, voc&ecirc; deve mudar <command>hostname</command> para <command>hostname
+        -s</command> nos tr&ecirc;s arquivos.</para>
 
       <sect3 id="databaseload">
-        <title>Database Load</title>
+        <title>Carga da Base de Dados</title>
 
-        <para>Afterwards, <command>R3SETUP</command> can either be restarted or continued
-          (depending on whether exit was chosen or not). <command>R3SETUP</command> then
-	  creates the tablespaces and loads the data (for 46B IDES, from 
-	  EXPORT1 to EXPORT6, for 46C from DISK1 to DISK4) with <command>R3load</command>
-	  into the database.</para>
+        <para>Mais tarde, o <command>R3SETUP</command> pode ser reinicializado ou 
+	  continuar com sua execu&ccedil;&atilde;o (dependendo da escolha de sair ou 
+          n&atilde;o).  O  <command>R3SETUP</command> ent&atilde;o cria os 
+	  <foreignphrase>tablespaces</foreignphrase> e carrega os dados (para o 
+	  46B IDES, do EXPORT1 ao EXPORT6, para o 46C do DISK1 ao DISK4) com 
+	  <command>R3load</command> no banco de dados.</para>
 
-        <para>When the database load is finished (might take a few
-          hours), some passwords are requested. For test
-          installations, one can use the well known default passwords
-          (use different ones if security is an issue!):</para>
+        <para>Quando a carga da base de dados terminar (pode levar 
+	  algumas horas), algumas senhas ser&atilde;o requisitadas.  
+	  Para instala&ccedil;&otilde;es de teste, pode-se usar 
+	  senhas padr&atilde;o conhecidas (use senhas diferentes se 
+	  a seguran&ccedil;a for uma preocupa&ccedil;&atilde;o para 
+	  voc&ecirc;!):</para>
 
         <informaltable>
           <tgroup cols="2">
           <thead>
           <row>
-            <entry>Question</entry>
-            <entry>Input</entry>
+            <entry>Quest&atilde;o</entry>
+            <entry>Entrada</entry>
           </row>
           </thead>
           <tbody>
@@ -2784,56 +2787,64 @@ options SEMUME=100       #number of UNDO keys</programlisting>
           </tgroup>
         </informaltable>
 
-        <para>At this point We had a few problems with 
-	  <command>dipgntab</command> during the 4.6B
-	  installation.</para>
+        <para>Neste ponto tivemos alguns problemas com o 
+	  <command>dipgntab</command> durante a 
+	  instala&ccedil;&atilde;o do 4.6B.</para>
       </sect3>
 
       <sect3 id="listener">
         <title>Listener</title>
 
-        <para>Start the <application>&oracle;</application> Listener as user 
-	  <username>ora<replaceable>sid</replaceable></username> as follows:</para>
+        <para>Inicie o <literal>Listener</literal> do <application>&oracle;</application>  
+	  como usu&aacute;rio <username>ora<replaceable>sid</replaceable></username> como
+	  segue:</para>
 
         <screen>&prompt.user; <userinput>umask 0; lsnrctl start</userinput></screen>
 
-        <para>Otherwise you might get the error <errorcode>ORA-12546</errorcode> as the sockets will not
-        have the correct permissions. See &sap; Note 072984.</para>
+        <para>Caso contr&aacute;rio voc&ecirc; pode ter o erro <errorcode>ORA-12546</errorcode>, 
+	pois os <literal>sockets</literal> n&atilde;o possuir&atilde;o as permiss&otilde;es 
+	corretas.  Veja a nota &sap; 072984.</para>
       </sect3>
 
       <sect3 id="mnlstables">
-	<title>Updating MNLS Tables</title>
-	<para>If you plan to import non-Latin-1 languages into the <application>&sap;</application> system,
-	  you have to update the Multi National Language Support tables.
-	  This is described in the &sap; OSS Notes 15023 and 45619. Otherwise,
-	  you can skip this question during <application>&sap;</application> installation.</para>
-	<note><para>If you do not need MNLS, it is still necessary to check
-	  the table TCPDB and initializing it if this has not been done. See
-	  &sap; note 0015023 and 0045619 for further information.</para></note>
+	<title>Atualizando as Tabelas MNLS</title>
+	<para>Se voc&ecirc; planeja importar linguagens que n&atilde;o sejam Latin-1 
+	  para o sistema <application>&sap;</application>, voc&Ccedil;e tem que 
+	  atualizar as tabelas de Suporte a L&iacute;nguas Multi Nacionais.  Isto 
+	  est&aacute; descrito nas notas OSS 15023 e 45619 do &sap;, caso 
+	  contr&aacute;rio, voc&ecirc; pode pular esta quest&atilde;o durante a 
+	  instala&ccedil;&atilde;o do <application>&sap;</application>.</para>
+	<note><para>Se voc&ecirc; n&atilde;o precisa do MNLS, ainda &eacute; 
+	  necess&aacute;rio verificar a tabela TCPDB e inici&aacute;-la se isso 
+	  n&atilde;o foi feito.  Veja as notas 0015023 e 0045619 do &sap; para 
+	  mais informa&ccedil;&otilde;es.</para></note>
       </sect3>
     </sect2>
 
     <sect2 id="postinstallationsteps">
-      <title>Post-installation Steps</title>
+      <title>Passos P&oacute;s-Instala&ccedil;&atilde;o</title>
 
       <sect3 id="requestsapr3licensekey">
-        <title>Request &sap.r3; License Key</title>
+        <title>Solicite a Chave de Licen&ccedil;a do &sap.r3;</title>
 
-        <para>You have to request your <application>&sap.r3;</application> License Key. This is needed,
-	  as the temporary license that was installed during installation
-	  is only valid for four weeks. First get the hardware key.  Log 
-	  on as user <username>idsadm</username> and call 
+        <para>Voc&ecirc; precisa solicitar sua Chave de Licen&ccedil;a do 
+	  <application>&sap.r3;</application>.  Isto &eacute; necess&aacute;rio, 
+	  pois a licen&ccedil;a tempor&aacute;ria que foi usada durante a 
+	  instala&ccedil;&atilde;o &eacute; v&aacute;lida apenas por quatro 
+	  semanas.  Primeiro obtenha a licen&ccedil;a de hardware.  Entre como 
+	  o usu&aacute;rio <username>idsadm</username> e execute o 
 	  <command>saplicense</command>:</para>
 
         <screen>&prompt.root; <userinput>/sapmnt/IDS/exe/saplicense -get</userinput></screen>
 
-	<para>Calling <command>saplicense</command> without parameters gives 
-	  a list of options.  Upon receiving the license key, it can be 
-	  installed using:</para>
+	<para>Executando o <command>saplicense</command> sem par&acirc;metros obtemos 
+	  uma lista de op&ccedil;&otilde;es.  Recebendo a chave de licen&ccedil;a, 
+	  pode-se instal&aacute;-la usando:</para>
 
         <screen>&prompt.root; <userinput>/sapmnt/IDS/exe/saplicense -install</userinput></screen>
 
-        <para>You are then required to enter the following values:</para>
+        <para>Ent&atilde;o voc&Ccedil;e &eacute; solicitado a entrar com os 
+	  seguintes valores:</para>
 
         <programlisting>SAP SYSTEM ID   = <replaceable>SID, 3 chars</replaceable>
 CUSTOMER KEY    = <replaceable>hardware key, 11 chars</replaceable>
@@ -2843,33 +2854,35 @@ LICENSE KEY     = <replaceable>license key, 24 chars</replaceable></programlisti
       </sect3>
 
       <sect3 id="creatingusers">
-        <title>Creating Users</title>
+        <title>Criando Usu&aacute;rios</title>
 
-        <para>Create a user within client 000 (for some tasks required
-        to be done within client 000, but with a user different from
-        users <username>sap*</username> and
-        <username>ddic</username>). As a user name, We usually choose
-        <username>wartung</username> (or
-        <username>service</username> in English).  Profiles
-        required are <literal>sap_new</literal> and
-        <literal>sap_all</literal>. For additional safety the
-        passwords of default users within all clients should be
-        changed (this includes users <username>sap*</username> and
+        <para>Crie um usu&aacute;rio dentro do cliente 000 (algumas 
+	tarefas s&atilde;o feitas com o cliente 000, mas com um 
+        usu&aacute;rio diferente do <username>sap*</username> e
+        <username>ddic</username>). Como um nome de usu&aacute;rio, 
+        normalmente escolhemos <username>wartung</username> (ou
+        <username>service</username> em Ingl&ecirc;s).  Os perfis 
+        requeridos s&atilde;o <literal>sap_new</literal> e
+        <literal>sap_all</literal>. Para seguran&ccedil;a adiciona&ccedil; 
+	a senha dos usu&aacute;rios padr&atilde;o dentro de todos os 
+        devem ser modificadas (isto inclui os usu&aacute;rios 
+	<username>sap*</username> e
         <username>ddic</username>).</para>
       </sect3>
 
       <sect3 id="configtranssysprofileopermodesetc">
-        <title>Configure Transport System, Profile, Operation Modes, Etc.</title>
+        <title>Configure o Sistema de Transporte, Perfil, Modos de Opera&ccedil;&atilde;o, Etc.</title>
 
-        <para>Within client 000, user different from <username>ddic</username>
-	  and <username>sap*</username>, do at least the following:</para>
+       <para>Dentro do cliente 000, com usu&aacute;rio diferente de 
+	  <username>ddic</username> e <username>sap*</username>, 
+	  fa&ccedil;a pelo menos o seguinte:</para>
 
         <informaltable>
           <tgroup cols="2">
           <thead>
           <row>
-            <entry>Task</entry>
-            <entry>Transaction</entry>
+            <entry>Tarefa</entry>
+            <entry>Transa&ccedil;&atilde;o</entry>
           </row>
           </thead>
           <tbody>
@@ -2890,18 +2903,19 @@ LICENSE KEY     = <replaceable>license key, 24 chars</replaceable></programlisti
           </tgroup>
         </informaltable>
 
-        <para>These and all the other post-installation steps are
-          thoroughly described in <application>&sap;</application> installation guides.</para>
+        <para>Este e todos os passos p&oacute;s-instala&ccedil;&atilde;o s&atilde;o 
+          amplamente descritos nos guias de instala&ccedil;&atilde;o do <application>&sap;</application>.</para>
       </sect3>
 
       <sect3 id="editintsidsap">
-        <title>Edit <filename>init<replaceable>sid</replaceable>.sap</filename> (<filename>initIDS.sap</filename>)</title>
+        <title>Edite o <filename>init<replaceable>sid</replaceable>.sap</filename> (<filename>initIDS.sap</filename>)</title>
 
-	<para>The file <filename>/oracle/IDS/dbs/initIDS.sap</filename>
-	  contains the <application>&sap;</application> backup profile.  Here the size of the tape to 
-	  be used, type of compression and so on need to be defined. To 
-          get this running with <command>sapdba</command> /
-	  <command>brbackup</command>, we changed the following values:</para>
+	<para>O arquivo <filename>/oracle/IDS/dbs/initIDS.sap</filename>
+	  cont&eacute;m a &oacute;pia de seguran&ccedil;a do perfil do 
+	  <application>&sap;</application>.  Aqui o tamanho da fita a ser 
+	  usada, tipo de compress&atilde;o e o que mais precisa ser definido.  
+          Para ter isto rodando com o <command>sapdba</command> /
+	  <command>brbackup</command>, n&oacute;s mudamos os seguintes valores:</para>
 
         <programlisting>compress = hardware
 archive_function = copy_delete_save
@@ -2911,55 +2925,59 @@ tape_size = 38000M
 tape_address = /dev/nsa0
 tape_address_rew = /dev/sa0</programlisting>
 
-        <para>Explanations:</para>
+        <para>Explica&ccedil;&otilde;es:</para>
 
-        <para><varname>compress</varname>: The tape we use is a HP DLT1
-        which does hardware compression.</para>
+        <para><varname>compress</varname>: A unidade de fita que usamos 
+	foi uma HP DLT1, que faz compress&atilde;o por hardware.</para>
 
-        <para><varname>archive_function</varname>: This defines the
-        default behavior for saving &oracle; archive logs: new logfiles
-        are saved to tape, already saved logfiles are saved again and
-        are then deleted.  This prevents lots of trouble if you need to
-        recover the database, and one of the archive-tapes has gone
-        bad.</para>
+        <para><varname>archive_function</varname>: Isto define o 
+	comportamento padr&atilde;o do &oracle; para a grava&ccedil;&atilde;o 
+	de logs: novos arquivos de log s&atilde;o gravados na fita, arquivos 
+	de log anteriormente gravados s&atilde;o novamente gravados e depois 
+	apagados.  Isto previne muitos problemas se voc&ecirc; precisa 
+	recuperar a base de dados e uma das fitas deu problema.</para>
 
-        <para><varname>cpio_flags</varname>: Default is to use <option>-B</option> which
-        sets block size to 5120&nbsp;Bytes. For DLT Tapes, HP recommends at
-        least 32&nbsp;K block size, so we used <option>--block-size=128</option> for
-        64&nbsp;K. <option>--format=newc</option> is needed because we have inode numbers greater than
-        65535. The last option <option>--quiet</option> is needed as otherwise 
-	<command>brbackup</command>
-        complains as soon as <command>cpio</command> outputs the 
-	numbers of blocks saved.</para>
+        <para><varname>cpio_flags</varname>: O padr&atilde;o &eacute; 
+	usar a op&ccedil;&atilde;o <option>-B</option> que configura 
+        o tamanho dos blocos para 5120&nbsp;Bytes.  Para fitas DLT, a 
+        HP recomenda pelo menos 32&nbsp;K de tamanho de blocos, ent&atilde;o 
+	usamos a op&ccedil;&atilde;o <option>--block-size=128</option> para 
+        64&nbsp;K. <option>--format=newc</option> &eacute; necess&aacute;rio 
+	pois temos n&uacute;meros de inodo maiores que 65535.  A &uacute;ltima 
+        op&ccedil;&atilde;o <option>--quiet</option> e necess&aacute;rio, 
+	caso contr&aacute;rio o <command>brbackup</command>
+        reclamar&aacute; assim que o <command>cpio</command> retorne o 
+	n&uacute;mero de blocos gravados.</para>
 
-        <para><varname>cpio_in_flags</varname>: Flags needed for
-        loading data back from tape. Format is recognized
-        automatically.</para>
+        <para><varname>cpio_in_flags</varname>: Par&acirc;metros 
+	necess&aacute;rios para carregar os dados de volta para a 
+	fita.  O formato &eacute; reconhecido automaticamente.</para>
 
-        <para><varname>tape_size</varname>: This usually gives the raw
-        storage capability of the tape. For security reason (we use
-        hardware compression), the value is slightly lower than the
-        actual value.</para>
+        <para><varname>tape_size</varname>: Isto normalmente oferece 
+	a capacidade nativa de armazenamento da fita.  Por raz&otilde;es 
+	de seguran&ccedil;a (n&oacute;s usamos compress&atilde;o por 
+	hardware), o valor &eacute; discretamente menor do que o 
+	valor atual.</para>
 
-        <para><varname>tape_address</varname>: The non-rewindable
-        device to be used with <command>cpio</command>.</para>
+        <para><varname>tape_address</varname>: O dispositivo n&atilde;o-
+	rebobin&aacute;vel a ser usado com o <command>cpio</command>.</para>
 
-        <para><varname>tape_address_rew</varname>: The rewindable device to be
-        used with <command>cpio</command>.</para>
+        <para><varname>tape_address_rew</varname>: O dispositivo 
+	rebobin&aacute;vel a ser usado com o <command>cpio</command>.</para>
       </sect3>
 
       <sect3>
-	<title>Configuration Issues after Installation</title>
+	<title>Quest&otilde;es de Configura&ccedil;&atilde;o ap&oacute;s a Instala&ccedil;&atilde;o</title>
 
-	<para>The following <application>&sap;</application> parameters should be tuned after
-	  installation (examples for IDES 46B, 1&nbsp;GB memory):</para>
+	<para>Os seguintes par&acirc;metros do <application>&sap;</application> devem ser 
+	  ligados depois da instala&ccedil;&atilde;o (exemplos para o IDES 46B, 1&nbsp;GB memory):</para>
 
 	<informaltable frame="none">
 	  <tgroup cols="2">
 	    <thead>
 	      <row>
-		<entry>Name</entry>
-		<entry>Value</entry>
+		<entry>Nome</entry>
+		<entry>Valor</entry>
 	      </row>
 	    </thead>
 	    <tbody>
@@ -2991,14 +3009,14 @@ tape_address_rew = /dev/sa0</programlisting>
 	  </tgroup>
 	</informaltable>
 
-	<para>&sap; Note 0013026:</para>
+	<para>Nota &sap; 0013026:</para>
 
 	<informaltable frame="none">
 	  <tgroup cols="2">
 	    <thead>
 	      <row>
-		<entry>Name</entry>
-		<entry>Value</entry>
+		<entry>Nome</entry>
+		<entry>Valor</entry>
 	      </row>
 	    </thead>
 	    <tbody>
@@ -3010,14 +3028,14 @@ tape_address_rew = /dev/sa0</programlisting>
 	  </tgroup>
 	</informaltable>
 
-	<para>&sap; Note 0157246:</para>
+	<para>Nota &sap; 0157246:</para>
 
 	<informaltable frame="none">
 	  <tgroup cols="2">
 	    <thead>
 	      <row>
-		<entry>Name</entry>
-		<entry>Value</entry>
+		<entry>Nome</entry>
+		<entry>Valor</entry>
 	      </row>
 	    </thead>
 	    <tbody>
@@ -3034,8 +3052,9 @@ tape_address_rew = /dev/sa0</programlisting>
 	</informaltable>
 
 	<note>
-	  <para>With the above parameters, on a system with 1&nbsp;gigabyte
-	    of memory, one may find memory consumption similar to:</para>
+	  <para>Com os par&acirc;metros acima, em um sistema com 
+	    1&nbsp;gigabyte de mem&oacute;ria, pode-se encontrar um 
+	    consumo de mem&oacute;ria similar a:</para>
 
 	  <programlisting>Mem: 547M Active, 305M Inact, 109M Wired, 40M Cache, 112M Buf, 3492K Free</programlisting>
 	</note>
@@ -3043,92 +3062,96 @@ tape_address_rew = /dev/sa0</programlisting>
     </sect2>
 
     <sect2 id="problemsduringinstallation">
-      <title>Problems during Installation</title>
+      <title>Problemas durante a Instala&ccedil;&atilde;o</title>
 
       <sect3 id="restartr3setup">
-	<title>Restart <command>R3SETUP</command> after Fixing a Problem</title>
+	<title>Reincialize o <command>R3SETUP</command> ap&oacute;s Resolver um Problema</title>
 
-	<para><command>R3SETUP</command> stops if it encounters an error. If you have
-	  looked at the corresponding logfiles and fixed the error,
-	  you have to start <command>R3SETUP</command> again, usually selecting REPEAT
-	  as option for the last step <command>R3SETUP</command> complained about.</para>
+	<para><command>R3SETUP</command> para se encontrar um erro.  Se voc&ecirc; 
+	  olhou os arquivos de log correspondentes e consertou o erro, voc&ecirc; 
+	  tem que inicializar o <command>R3SETUP</command> novamente, normalmente 
+	  selecionando REPEAT como uma op&ccedil;&atilde;o para o &uacute;ltimo 
+	  passo que o <command>R3SETUP</command> reclamou.</para>
 
-	<para>To restart <command>R3SETUP</command>, just start it with the corresponding
-	  <filename>R3S</filename> file:</para>
+	<para>Para reinicializar o <command>R3SETUP</command>, apenas inicie com o 
+	  arquivo <filename>R3S</filename> correspondente:</para>
 
 	  <screen>&prompt.root; <userinput>./R3SETUP -f CENTRDB.R3S</userinput></screen>
 
-	  <para>for 4.6B, or with</para>
+	  <para>para o 4.6B, ou com</para>
 
 	  <screen>&prompt.root; <userinput>./R3SETUP -f CENTRAL.R3S</userinput></screen>
 
-	  <para>for 4.6C, no matter whether the error occurred
-	  with <filename>CENTRAL.R3S</filename> or
+	  <para>para o 4.6C, n&atilde;o importando o erro que tenha ocorrido 
+	  com o <filename>CENTRAL.R3S</filename> ou
 	  <filename>DATABASE.R3S</filename>.</para>
 
-	<note><para>At some stages, <command>R3SETUP</command> assumes that both database
-	    and <application>&sap;</application> processes are up and running (as those were steps it
-	    already completed). Should errors occur and for example the 
-	    database could not be started, you have to start both database 
-	    and <application>&sap;</application> by hand after you fixed the errors and before starting 
-	    <command>R3SETUP</command> again.</para>
-	  <para>Do not forget to also start the <application>&oracle;</application> listener again (as 
-	    <username>ora<replaceable>sid</replaceable></username> with
-	    <command>umask 0; lsnrctl start</command>) if it was also
-	    stopped (for example due to a necessary reboot of the 
-	    system).</para>
+	<note><para>Em alguns est&aacute;gios, o <command>R3SETUP</command> assume que 
+	    ambos os processos do banco de dados e do <application>&sap;</application> 
+	    est&atilde;o no ar e sendo executados (uma vez que aqueles passos foram 
+	    completados).  Erros podem ocorrer e, por exemplo, o banco de dados n&atilde;o 
+	    pode ser incializado, voc&ecirc; tem que inicializar ambos na m&atilde;o 
+	    ap&oacute;s ter consertado os erros e antes de iniciar o 
+	    <command>R3SETUP</command> novamente.</para>
+	  <para>N&atilde;o esque&ccedil;a tamb&eacute;m de iniciar o <literal>
+	    listener</literal> do <application>&oracle;</application> novamente (como 
+	    <username>ora<replaceable>sid</replaceable></username> com 
+	    <command>umask 0; lsnrctl start</command>) se ele tamb&eacute;m foi parado 
+	    (por exemplo, devido &agrave; uma reinicializa&ccedil;&atilde;o 
+	    necess&aacute;ria do sistema).</para>
 	</note>
       </sect3>
 
       <sect3 id="indoraduringduringr3setup">
-        <title>OSUSERSIDADM_IND_ORA during <command>R3SETUP</command></title>
+        <title>OSUSERSIDADM_IND_ORA durante o <command>R3SETUP</command></title>
 
-        <para>If <command>R3SETUP</command> complains at this stage, edit the
-	  template file <command>R3SETUP</command> used at that time
-          (<filename>CENTRDB.R3S</filename> (4.6B) or either
-	  <filename>CENTRAL.R3S</filename> or
+        <para>Se o <command>R3SETUP</command> reclamar neste est&aacute;gio, 
+	  edite o arquivo modelo <command>R3SETUP</command> usado em 
+          (<filename>CENTRDB.R3S</filename> (4.6B) ou 
+	  <filename>CENTRAL.R3S</filename> ou
 	  <filename>DATABASE.R3S</filename> (4.6C)).
-	  Locate <literal>[OSUSERSIDADM_IND_ORA]</literal> or search for the
-	  only <literal>STATUS=ERROR</literal> entry
-	  and edit the following values:</para>
+	  Localize <literal>[OSUSERSIDADM_IND_ORA]</literal> ou procure  
+	  apenas a entrada <literal>STATUS=ERROR</literal> 
+	  e edite os seguintes valores:</para>
 
         <programlisting>HOME=/home/<replaceable>sid</replaceable>adm (was empty)
 STATUS=OK (had status ERROR)
         </programlisting>
 
-        <para>Then you can restart <command>R3SETUP</command> again.</para>
+        <para>Ent&atilde;o voc&ccedil;e pode reiniciar o <command>R3SETUP</command> novamente.</para>
       </sect3>
 
       <sect3 id="indoraduringr3setup">
-        <title>OSUSERDBSID_IND_ORA during <command>R3SETUP</command></title>
+        <title>OSUSERDBSID_IND_ORA durante o <command>R3SETUP</command></title>
 
-        <para>Possibly <command>R3SETUP</command> also complains at this stage. The error
-	  here is similar to the one in phase OSUSERSIDADM_IND_ORA. 
-	  Just edit
-	  the template file <command>R3SETUP</command> used at that time
-          (<filename>CENTRDB.R3S</filename> (4.6B) or either
-	  <filename>CENTRAL.R3S</filename> or
+        <para>Possivelmente o <command>R3SETUP</command> tamb&eacute;m reclame 
+	  neste est&aacute;gio.  O erro aqui &eacute; similar ao 
+	  OSUSERSIDADM_IND_ORA.  Apenas edite o arquivo modelo  
+	  <command>R3SETUP</command> usado em 
+          (<filename>CENTRDB.R3S</filename> (4.6B) ou 
+	  <filename>CENTRAL.R3S</filename> ou
 	  <filename>DATABASE.R3S</filename> (4.6C)).
-	  Locate <literal>[OSUSERDBSID_IND_ORA]</literal> or search for the
-	  only <literal>STATUS=ERROR</literal> entry
-	  and edit the following value in that section:</para>
+	  Localize <literal>[OSUSERDBSID_IND_ORA]</literal> ou procure 
+	  apenas a entrada <literal>STATUS=ERROR</literal> 
+	  e edite os seguintes valores naquela se&ccedil;&atilde;o:</para>
 
         <programlisting>STATUS=OK</programlisting>
 
-        <para>Then restart <command>R3SETUP</command>.</para>
+        <para>Ent&atilde;o reinicie o <command>R3SETUP</command>.</para>
       </sect3>
 
       <sect3 id="oraviewvrffilenotfound">
-        <title><errorname>oraview.vrf FILE NOT FOUND</errorname> during &oracle; Installation</title>
+        <title><errorname>oraview.vrf FILE NOT FOUND</errorname> durante a Instala&ccedil;&atilde;o do &oracle;</title>
 
-        <para>You have not deselected <emphasis>&oracle; On-Line Text Viewer</emphasis>
-          before starting the installation. This is marked for installation even
-          though this option is currently not available for Linux. Deselect this
-          product inside the <application>&oracle;</application> installation menu and restart installation.</para>
+        <para>Voc&ecirc; n&atilde;o removeu a sele&ccedil;&atilde;o <emphasis>&oracle; On-Line Text Viewer</emphasis>
+          antes de iniciar a instala&ccedil;&atilde;o.  Isto &eacute; marcado pela 
+	  instala&ccedil;&atilde;o mesmo que n&atilde;o esteja dispon&iacute;vel 
+	  para Linux.  Desmarque esta op&ccedil;&atilde;o dentro do menu de instala&ccedil;&atilde;o 
+          do <application>&oracle;</application> e reinicie a instala&ccedil;&atilde;o.</para>
       </sect3>
 
       <sect3 id="textenvincalid">
-        <title><errorname>TEXTENV_INVALID</errorname> during <command>R3SETUP</command>, RFC or SAPgui Start</title>
+        <title><errorname>TEXTENV_INVALID</errorname> durante o <command>R3SETUP</command>, RFC ou SAPgui Start</title>
 
         <para>If this error is encountered, the correct locale is
 	  missing.  &sap; Note 0171356 lists the necessary RPMs that need
