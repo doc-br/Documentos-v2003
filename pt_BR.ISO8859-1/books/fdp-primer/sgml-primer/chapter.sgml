@@ -988,108 +988,116 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
   <sect1 id="sgml-primer-entities">
     <title>Entidades</title>
 
-    <para>Entities are a mechanism for assigning names to chunks of content.
-      As an SGML parser processes your document, any entities it finds are
-      replaced by the content of the entity.</para>
+    <para>Entidades s&atilde;o um mecanismo para atribuir um nome para
+      peda&ccedil;os de conte&uacute;do.  Quando o interpretador SGML processa o
+      seu documento, qualquer entidade que ele enconte &eacute; substituida
+      pelo conte&uacute;do da entiade.</para>
     
-    <para>This is a good way to have re-usable, easily changeable chunks of
-      content in your SGML documents.  It is also the only way to include one
-      marked up file inside another using SGML.</para>
+    <para>Esta &eacute; uma boa forma de ter peda&ccedil;os de conte&uacute;do re-utiliz&aacute;veis 
+      e facilmente alter&aacute;veis em seus documentos SGML.  Esta &eacute; tamb&eacute;m a
+      &uacute;nica forma de incluir um arquivo marcado dentro de outro
+      utilizando SGML.</para>
     
-    <para>There are two types of entities which can be used in two different
-      situations; <emphasis>general entities</emphasis> and
-      <emphasis>parameter entities</emphasis>.</para>
+    <para>Existem dois tipos de entidades que podem ser utilizadas em
+      duas situa&ccedil;&otilde;es diferentes; <emphasis>Entidades gerais</emphasis> e
+      <emphasis>Entidades de parametros</emphasis>.</para>
     
     <sect2 id="sgml-primer-general-entities">
       <title>Entidades gerais</title>
       
-      <para>You cannot use general entities in an SGML context (although you
-	define them in one).  They can only be used in your document.
-	Contrast this with <link
-	  linkend="sgml-primer-parameter-entities">parameter
-	  entities</link>.</para>
+      <para>Voc&ecirc; n&atilde;o pode utilizar uma entidade geral em um contexto
+      	SGML (embora voc&ecirc; as defina em um).  Elas podem ser utilizadas
+	apenas no seu documento.  Compare isto com as <link
+	linkend="sgml-primer-parameter-entities">entidades de
+	parametros</link>.</para>
 
-      <para>Each general entity has a name.  When you want to reference a
-	general entity (and therefore include whatever text it represents in
-	your document), you write
-	<literal>&amp;<replaceable>entity-name</replaceable>;</literal>.  For
-	example, suppose you had an entity called
-	<literal>current.version</literal> which expanded to the current
-	version number of your product.  You could write;</para>
+      <para>Cada entidade geral possui um nome.  Quando voc&ecirc; quer
+	referenciar uma entidade geral (e consequentemente incluir o
+	texto que ela representa no seu documento), voc&ecirc; escreve
+	<literal>&amp;<replaceable>nome-da-entidade</replaceable>;</literal>.  
+	Por exemplo, suponha que voc&ecirc; possui uma entidade chamada
+	<literal>current.version</literal>, a qual expande para a
+	vers&atilde;o atual do seu produto.  Voc&ecirc; pode escrever;</para>
+      
+      <programlisting><![ CDATA [<para>A vers&atilde;o atual do nosso produto &eacute; &current.version;.</para>]]></programlisting>
 
-      <programlisting><![ CDATA [<para>The current version of our product is
-  &current.version;.</para>]]></programlisting>
-
-      <para>When the version number changes you can simply change the
-	definition of the value of the general entity and reprocess your
-	document.</para>
-
-      <para>You can also use general entities to enter characters that you
-	could not otherwise include in an SGML document.  For example, &lt;
-	and &amp; cannot normally appear in an SGML document.  When the SGML
-	parser sees the &lt; symbol it assumes that a tag (either a start tag
-	or an end tag) is about to appear, and when it sees the &amp; symbol
-	it assumes the next text will be the name of an entity.</para>
-
-      <para>Fortunately, you can use the two general entities &amp;lt; and
-	&amp;amp; whenever you need to include one or other of these </para>
-	
-      <para>A general entity can only be defined within an SGML context.
-	Typically, this is done immediately after the DOCTYPE
-	declaration.</para>
-
+      <para>Quando o n&uacute;mero de vers&atilde;o mudar, voc&ecirc; pode simplesmente
+	alterar a defini&ccedil;&atilde;o do valor da entidade geral e reprocessar o
+	seu documento.</para>
+      
+      <para>Voc&ecirc; tamb&eacute;m pode utilizar entidades gerais para incorporar
+      	caracteres que voc&ecirc; n&atilde;o poderia incorporar de outra forma em um
+	documento SGML.  Por exemplo, os caracteres &lt; e &amp; n&atilde;o
+	podem aparecer normalmente em um documento SGML.  Quando o
+	interpretador SGML v&ecirc; o s&iacute;mbolo &lt; ele assume que aquilo &eacute;
+	uma tag (uma tag de abertura ou de fechamento) que est&aacute; a
+	ponto de aparecer, e quando ele v&ecirc; o s&iacute;mbolo &amp; ele assume
+	que o pr&oacute;ximo texto ser&aacute; o nome de uma entidade.</para>
+      
+      <para>Felizmente, voc&ecirc; pode utilizar as duas entidades gerais
+        &amp;lt; e &amp;amp; sempre que voc&ecirc; precisar incluir um ou
+        outro destes.</para>
+      
+      <para>Uma entidade geral s&oacute; pode ser definida dentro de um
+	contexto SGML.  Tipicamente, isto &eacute; feito imediatamente depois
+	da declara&ccedil;&atilde;o DOCTYPE.</para>
+      
       <example>
-	<title>Defining general entities</title>
+	<title>Definindo um entidade geral</title>
 
 	<programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
 <!ENTITY current.version    "3.0-RELEASE">
 <!ENTITY last.version       "2.2.7-RELEASE">
 ]>]]></programlisting>
 	  
-	<para>Notice how the DOCTYPE declaration has been extended by adding a
-	  square bracket at the end of the first line.  The two entities are
-	  then defined over the next two lines, before the square bracket is
-	  closed, and then the DOCTYPE declaration is closed.</para>
-
-	<para>The square brackets are necessary to indicate that we are
-	  extending the DTD indicated by the DOCTYPE declaration.</para>
+	<para>Observe como a declara&ccedil;&atilde;o DOCTYPE foi extendida
+	  adicionando-se um colchetes no final da primeira linha.  As
+	  duas entidades est&atilde;o definidas nas pr&oacute;ximas duas linhas,
+	  antes que o colchetes seja fechado, e ent&atilde;o a declara&ccedil;&atilde;o
+	  DOTYPE &eacute; fechada.</para>
+	
+	<para>O colchetes &eacute; necess&aacute;rio para indicar que n&oacute;s estamos
+	  extendendo o DTD indicado pela declara&ccedil;&atilde;o DOCTYPE.</para>
       </example>
     </sect2>
     
     <sect2 id="sgml-primer-parameter-entities">
       <title>Entidades de par&acirc;metro</title>
 
-      <para>Like <link linkend="sgml-primer-general-entities">general
-	  entities</link>, parameter entities are used to assign names to
-	reusable chunks of text.  However, where as general entities can only
-	be used within your document, parameter entities can only be used
-	within an <link linkend="sgml-primer-sgml-escape">SGML
-	  context</link>.</para>
+      <para>Assim como as <link linkend="sgml-primer-general-entities">
+	entidades gerais</link>, as entidades de parametro s&atilde;o
+	utilizadas para atribuir um nome a peda&ccedil;os reutiliz&aacute;veis de
+	texto.  Entretanto, enquanto as entidades gerais s&oacute; podem ser
+	utilizadas com o seu documento, as entidades de parametro
+	podem ser utilizadas apenas dentro de um <link 
+	linkend="sgml-primer-sgml-escape">contexto SGML</link>.</para>
 
-      <para>Parameter entities are defined in a similar way to general
-	entities.  However, instead of using
-	<literal>&amp;<replaceable>entity-name</replaceable>;</literal> to
-	refer to them, use
-	<literal>%<replaceable>entity-name</replaceable>;</literal><footnote>
-	  <para><emphasis>P</emphasis>arameter entities use the
-	    <emphasis>P</emphasis>ercent symbol.</para>
-	</footnote>.  The definition also includes the <literal>%</literal>
-	between the <literal>ENTITY</literal> keyword and the name of the
-	entity.</para>
-      
+      <para>As entidades de parametro s&atilde;o definidas de uma forma
+	similar as entidades gerais.  Entretanto, ao inv&eacute;s de utilizar
+	<literal>&amp;<replaceable>nome-da-entidade</replaceable>;</literal> 
+	como refer&ecirc;ncia, utiliza 
+	<literal>%<replaceable>nome-da-entidade</replaceable>;</literal><footnote>
+	  <para>Entidades de <emphasis>P</emphasis>arametro utiliza o
+	  simbolo de <emphasis>P</emphasis>orcento.</para>
+	</footnote>.  A defini&ccedil;&atilde;o tamb&eacute;m inclui o <literal>%</literal>
+	entre a palavra chave <literal>ENTITY</literal> e o nome da
+	entidade.</para>
+	
       <example>
-	<title>Defining parameter entities</title>
+	<title>Definindo entidades de parametros</title>
 	
 	<programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
 <!ENTITY % param.some "some">
 <!ENTITY % param.text "text">
 <!ENTITY % param.new  "%param.some more %param.text">
 
-<!-- %param.new now contains "some more text" -->
+<!-- %param.new agora cont&eacute;m "some more text" -->
 ]>]]></programlisting>
       </example>
 	
-      <para>This may not seem particularly useful.  It will be.</para>
+      <para>Isto pode n&atilde;o parecer particularmente &uacute;til. Ele
+	ser&aacute;.</para>
+      
     </sect2>
 
     <sect2>
@@ -1097,8 +1105,7 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 
       <procedure>
 	<step>
-	  <para>Add a general entity to
-	    <filename>example.sgml</filename>.</para>
+	  <para>Adicione uma entidade geral ao <filename>example.sgml</filename>.</para>
 
 	  <programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" [
 <!ENTITY version "1.1">
@@ -1106,66 +1113,72 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 
 <html>
   <head>	     
-    <title>An example HTML file</title>
+    <title>Um exemplo de arquivo HTML</title>
   </head>
 
-  <!-- You might well have some comments in here as well -->
+  <!-- Voc&ecirc; pode ter alguns coment&aacute;rios aqui tamb&eacute;m -->
 	  
   <body>	    
-    <p>This is a paragraph containing some text.</p>
+    <p>Este &eacute; um paragr&aacute;fo contendo algum texto.</p>
 
-    <p>This paragraph contains some more text.</p>
+    <p>Este paragr&aacute;fo cont&eacute;m mais algum texto.</p>
 
-    <p align="right">This paragraph might be right-justified.</p>
+    <p align="right">Este paragrafo pode estar alinhado a direita.</p>
 
-    <p>The current version of this document is: &version;</p>	  
+    <p>A vers&atilde;o atual deste documento &eacute;: &version;</p>	  
   </body>	    
 </html>]]></programlisting>	  
 	</step>
 
 	<step>
-	  <para>Validate the document using &man.nsgmls.1;</para>
+	  <para>Valide o documento utilizando o &man.nsgmls.1;</para>
 	</step>
 
 	<step>
-	  <para>Load <filename>example.sgml</filename> into your web browser
-	    (you may need to copy it to <filename>example.html</filename>
-	    before your browser recognises it as an HTML document).</para>
-
-	  <para>Unless your browser is very advanced, you will not see the entity
-	    reference <literal>&amp;version;</literal> replaced with the
-	    version number.  Most web browsers have very simplistic parsers
-	    which do not handle proper SGML<footnote>
-	      <para>This is a shame.  Imagine all the problems and hacks (such
-		as Server Side Includes) that could be avoided if they
-		did.</para>
-	    </footnote>.</para>
+	  <para>Carregue o arquivo <filename>example.sgml</filename>
+	  no seu navegador web (Voc&ecirc; pode precisar copi&aacute;-lo para
+	  <filename>example.html</filename> antes que o seu navegador
+	  possa reconhec&ecirc;-lo como um documento HTML).</para>
+	  
+	  <para>A menos que o seu navegador seja muito avan&ccedil;ado, voc&ecirc;
+	  n&atilde;o ir&aacute; ver a entidade referenciada por
+	  <literal>&amp;version;</literal> subistituida pelo n&uacute;mero de
+	  vers&atilde;o.  A maioria dos navegadores web possuem
+	  interpretadores muito simplistas os quais n&atilde;o manuseiam
+	  corretamente SGML <footnote>
+	    <para>Isto &eacute; um <literal>shame</literal>.  Imagine todos
+	    os problemas e <literal>hacks</literal> (tais como os
+	    Server Side Includes) que pderiam ser evitados se eles
+	    o fizessem.</para>
+	  </footnote>.</para>  
 	</step>
 
 	<step>
-	  <para>The solution is to <emphasis>normalise</emphasis> your
-	    document using an SGML normaliser.  The normaliser reads in valid
-	    SGML and outputs equally valid SGML which has been transformed in
-	    some way.  One of the ways in which the normaliser transforms the
-	    SGML is to expand all the entity references in the document,
-	    replacing the entities with the text that they represent.</para>
-
-	  <para>You can use &man.sgmlnorm.1; to do this.</para>
+	  <para>A solu&ccedil;&atilde;o &eacute; <emphasis>normalizar</emphasis>  seu
+	    documento utilizando um normalizador SGML.  Um
+	    normalizador l&ecirc; um SGML v&aacute;lido e retorna uma SGML
+	    igualmente v&aacute;lido o qual foi transformado de alguma forma.
+	    Uma das formas em que o normalizador transforma o SGML &eacute;
+	    expandindo todas as entidades referenciadas no documento,
+	    subistituindo as entidades pelo texto que elas
+	    representam.</para>
+	  
+	  <para>Voc&ecirc; pode utilizar o &man.sgmlnorm.1; Para fazer isto.</para>
 
           <screen>&prompt.user; <userinput>sgmlnorm example.sgml > example.html</userinput></screen>
 
-	  <para>You should find a normalised (i.e., entity references
-	    expanded) copy of your document in
-	    <filename>example.html</filename>, ready to load into your web
-	    browser.</para>
+	  <para>Voc&ecirc; deve encontrar uma c&oacute;pia normalizada (isto &eacute;,
+	    entidades referenciadas expandidas) do seu documento no
+	    arquivo <filename>example.html</filename>, pronta para ser
+	    carregada no seu navegador web.</para>
 	</step>
 
 	<step>
-	  <para>If you look at the output from &man.sgmlnorm.1; you will see
-	    that it does not include a DOCTYPE declaration at the start.  To
-	    include this you need to use the <option>-d</option>
-	    option;</para>
-
+	  <para>Se voc&ecirc; examinar o retorno do &man.sgmlnorm.1; voc&ecirc;
+	  ira ver que ele n&atilde;o inclui a declara&ccedil;&atilde;o DOCTYPE no inicio.
+	  Para inclu&iacute;-la voc&ecirc; precisa utilizar a op&ccedil;&atilde;o
+	  <option>-d</option>;</para>
+	  
           <screen>&prompt.user; <userinput>sgmlnorm -d example.sgml > example.html</userinput></screen>
 	</step>
       </procedure>
