@@ -1,0 +1,1194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" [
+<!ENTITY base CDATA "../..">
+<!ENTITY date "$FreeBSD: www/en/projects/busdma/index.sgml,v 1.77 2003/11/04 17:41:59 rwatson Exp $">
+<!ENTITY title "FreeBSD busdma and SMPng driver conversion project">
+<!ENTITY email 'mux'>
+<!ENTITY % includes SYSTEM "../../includes.sgml"> %includes;
+
+<!-- Status levels -->
+<!ENTITY status.na "<font color=green>N/A</font>">
+<!ENTITY status.done "<font color=green>Done</font>">
+<!ENTITY status.wip "<font color=blue>In progress</font>">
+<!ENTITY status.untested "<font color=yellow>Needs testing</font>">
+<!ENTITY status.new "<font color=red>Not done</font>">
+<!ENTITY status.unknown "<font color=red>Unknown</font>">
+
+<!-- The list of contributors was moved to a separate file so that it can
+  be used by other documents in the FreeBSD web site. -->
+
+<!ENTITY % developers SYSTEM "../../developers.sgml"> %developers;
+
+]>
+
+<html>
+  &header;
+
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#goal">Project Goal</a></li>
+      <li><a href="#platform-status">Platform Support Status</a></li>
+      <li><a href="#ifnet-status">Network Interface Driver Status</a></li>
+      <li><a href="#storage-status">Storage Device Driver Status</a></li>
+      <li><a href="#misc-status">Miscellaneous Device Driver Status</a></li>
+      <li><a href="#doc-status">Documentation Status</a></li>
+    </ul>
+
+    <a name="goal"></a>
+    <h2>Project Goal</h2>
+
+    <p><b>busdma</b></p>
+    <p>The busdma interfaces permit hardware device drivers to operate
+      on a variety of platforms avoiding the encoding of platform-specific
+      access methods into drivers.  This lowers the maintenance costs
+      for drivers across platforms, and improves the chances that a driver
+      will "just work" on a new platform.  Modifying a driver to make use
+      of busdma is relatively straight forward, but does require
+      familiarity with both the device driver and busdma primitives.
+      For busdma to be used in FreeBSD, two sets of changes are generally
+      required: adaptation of the busdma implementation to run on all
+      platforms, and adaptation of drivers to use the framework.  As such,
+      status information on this project is broken down into platform
+      support, and driver support (sorted by category).  Completing
+      this work requires a thorough audit of the system device drivers,
+      then prioritized conversion of drivers.</p>
+
+    <p><b>INTR_MPSAFE</b></p>
+    <p>Hardware drivers register their interrupt handler with the
+      <code>bus_setup_intr()</code> function.  Setting the flag
+      <code>INTR_MPSAFE</code> tells the system interrupt code
+      to call the interrupt routine without holding the Giant
+      mutex.  This can give a significant performance gain on SMP
+      systems.</p>
+    <p>Drivers can set this flag even if they are not fully locked
+      down as long as their interrupt routine is careful about not
+      touching other data structures in the driver.  An easy way to
+      do this is to check and clear the hardware interrupt status
+      registers and then schedule the interrupt processing for a
+      taskqueue or kernel thread.</p>
+
+    <p><b>SMPng locked</b></p>
+    <p>Drivers should employ mutexes and sx locks to protect their
+      data structures and hardware registers from competing threads.
+      Mutex operations are somewhat expensive, so a good strategy is
+      combine as many atomic operations into a single mutex acquisition
+      as possible.</p>
+
+    <p><b>p!=a safety</b></p>
+    <p>Intel PAE support requires that pointers and physical address
+      representations be of differing sizes.  This means that drivers
+      must be written to use vm_paddr_t or bus_addr_t rather than
+      assuming that physical addresses can be represented using a
+      void *.  In addition, format strings and casts must be
+      carefully handled.</p>
+
+    <p>The task list below is not intended to be complete, but does
+      represent a set of relevant and/or important components of the
+      overall work.  The "Responsible" field identifies a developer who
+      has expressed willingness to be responsible for completing the
+      identified task; this doesn't preclude others working on it,
+      but suggests that coordination with the responsible party might
+      be appropriate so as to avoid unnecessary duplication of work,
+      and to maximize forward progress.  If beginning work on a new
+      area of substantial size, or one that appears unclaimed, it may
+      be worth dropping an e-mail to &a.mux; to see if any progress
+      has been made.</p>
+
+    <p>The definition of the date field varies depending on the status
+      of a task.  For completed tasks, it refers to the date completed
+      or reported completed.  For in-progress tasks, it refers to the
+      date of the last update of the entry.  For stalled tasks, it
+      refers to the date that the task was declared stalled.  For
+      new tasks, it refers to the date the task was added to the list.</p>
+
+    <p>Tasks are sorted first by status, then by date.</p>
+
+    <a name="platform-status"></a>
+    <h2>Platform Support Status</h2>
+
+    <table border=3>
+      <tr>
+	<th> Task </th>
+	<th> Responsible </th>
+	<th> Last updated </th>
+	<th> Status </th>
+	<th> Details </th>
+      </tr>
+
+      <tr>
+	<td>alpha</td>
+	<td>&a.gallatin;</td>
+	<td>December 10, 2002</td>
+	<td>&status.done;</td>
+	<td>There may be problems for systems with large amounts
+	  of memory.</td>
+      </tr>
+
+      <tr>
+	<td>amd64</td>
+	<td>&a.peter;</td>
+	<td>July 1, 2003</td>
+	<td>&status.done;</td>
+	<td>Fully supported.</td>
+      </tr>
+
+      <tr>
+	<td>ia64</td>
+	<td>&a.marcel;</td>
+	<td>December 10, 2002</td>
+	<td>&status.done;</td>
+	<td>There may be problems for systems with large amounts
+	  of memory.</td>
+      </tr>
+
+      <tr>
+	<td>i386</td>
+	<td>&a.sam;</td>
+	<td>December 9, 2002</td>
+	<td>&status.done;</td>
+	<td>Fully supported.</td>
+      </tr>
+
+      <tr>
+	<td>powerpc</td>
+	<td>&a.hmp;</td>
+	<td>January 15, 2003</td>
+	<td>&status.done;</td>
+	<td>Fully supported.</td>
+      </tr>
+
+      <tr>
+	<td>sparc64</td>
+	<td>&a.tmm;</td>
+	<td>January 6, 2003</td>
+	<td>&status.done;</td>
+	<td>Fully supported.</td>
+      </tr>
+
+    </table>
+
+    <a name="ifnet-status"></a>
+    <h2>Network Interface Driver Status</h2>
+
+    <table border=3>
+      <tr>
+	<th> Driver </th>
+	<th> Responsible </th>
+	<th> Last updated </th>
+	<th> busdma </th>
+	<th> INTR_MPSAFE </th>
+	<th> SMPng locked </th>
+	<th> a!=p </th>
+	<th> 4.x status </th>
+	<th> Notes </th>
+      </tr>
+
+      <tr>
+	<td> if_ar </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> kvtop() </td>
+      </tr>
+
+      <tr>
+	<td> if_bge </td>
+	<td> &a.wpaul; </td>
+	<td> July 26, 2003 </td>
+	<td> &status.untested; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_cs </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_dc </td>
+	<td> &a.mux; </td>
+	<td> April 17, 2003 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.untested; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_de </td>
+	<td> &a.mux; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_ed </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> kvtop() </td>
+      </tr>
+
+      <tr>
+	<td> if_em </td>
+	<td> &a.pdeuskar; </td>
+	<td> December 19, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_en </td>
+	<td> &a.harti; </td>
+	<td> March 4, 2003 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.untested; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_ep </td>
+	<td> &a.imp; </td>
+	<td> November 4, 2003 </td>
+	<td> &status.na; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.done; </td>
+	<td> &status.na; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_fxp </td>
+	<td> &a.mux; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_fwe </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_gem </td>
+	<td> &a.tmm; </td>
+	<td> January 6, 2003 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> N/A </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_gx </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_hme </td>
+	<td> &a.tmm; </td>
+	<td> January 6, 2003 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> N/A </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_idt </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_lge </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_lmc </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_lnc </td>
+	<td> &a.obrien; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys(). Please contact &a.phk; for info/hardware. </td>
+      </tr>
+
+      <tr>
+	<td> if_mn </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys(). Please contact &a.phk; for info/hardware. </td>
+      </tr>
+
+      <tr>
+	<td> if_my </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_nge </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_pcn </td>
+	<td> &a.obrien; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_pdq </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> mostly busdma, except for vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_rl </td>
+	<td> &a.wpaul; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_sf </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_sis </td>
+	<td> &a.wpaul; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_sk </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_sr </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_ste </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_ti </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_tl </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_tx </td>
+	<td> &a.mux; </td>
+	<td> April 19, 2003 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.untested; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> if_txp </td>
+	<td> &a.will; </td>
+	<td> July 18, 2003 </td>
+	<td> &status.wip; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_vr </td>
+	<td> Christian S.J. Peron &lt;maneo@bsdpro.com&gt; </td>
+	<td> January 20, 2003 </td>
+	<td> &status.wip; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_wb </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_wi </td>
+	<td> &a.sam;, &a.imp; </td>
+	<td> November 4, 2003 </td>
+	<td> &status.unknown; </td>
+	<td> &status.done; </td>
+	<td> &status.unknown; </td>
+	<td> &status.unknown; </td>
+	<td> &status.unknown; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> if_xl </td>
+	<td> &a.mux; </td>
+	<td> December 17, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+    </table>
+
+    <a name="storage-status"></a>
+    <h2>Storage Device Driver Status</h2>
+
+    <table border=3>
+      <tr>
+	<th> Driver </th>
+	<th> Responsible </th>
+	<th> Last updated </th>
+	<th> busdma </th>
+	<th> INTR_MPSAFE </th>
+	<th> SMPng locked </th>
+	<th> a!=p </th>
+	<th> 4.x status </th>
+	<th> Notes </th>
+      </tr>
+
+      <tr>
+	<td> aac </td>
+	<td> &a.scottl; </td>
+	<td> February 8, 2003 </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> PCI-64 capable, not endian clean </td>
+      </tr>
+
+      <tr>
+	<td> adv </td>
+	<td> &nbsp; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> aha </td>
+	<td> &nbsp; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> ahb </td>
+	<td> &nbsp; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> aic7xxx </td>
+	<td> &nbsp; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> amd </td>
+	<td> &nbsp; </td>
+	<td> December 14, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> amr </td>
+	<td> &nbsp; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> asr </td>
+	<td> &a.obrien; </td>
+	<td> January 4, 2003 </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> ata </td>
+	<td> &a.sos; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> buslogic </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> ciss </td>
+	<td> &nbsp; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> ct </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> dpt </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> ida </td>
+	<td> &nbsp; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> iir </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> isp </td>
+	<td> &nbsp; </td>
+	<td> February 8, 2003 </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> mlx </td>
+	<td> &a.scottl; </td>
+	<td> February 8, 2003 </td>
+	<td> &status.done; </td>
+	<td> &status.wip; </td>
+	<td> &status.wip; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> mly </td>
+	<td> &a.scottl; </td>
+	<td> February 8, 2003 </td>
+	<td> &status.done; </td>
+	<td> &status.wip; </td>
+	<td> &status.wip; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> mpt </td>
+	<td> &nbsp; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> ncr </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys(). Please contact &a.phk; for a possible source
+	  of hardware. </td>
+      </tr>
+
+      <tr>
+	<td> pst </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> stg </td>
+	<td> &nbsp; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> At least, it looks like it may well be. </td>
+      </tr>
+
+      <tr>
+	<td> sym </td>
+	<td> &nbsp; </td>
+	<td> December 19, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> trm </td>
+	<td> &a.cognet; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> twe </td>
+	<td> &nbsp; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+    </table>
+    <a name="misc-status"></a>
+    <h2>Miscellaneous Device Driver Status</h2>
+
+    <table border=3>
+      <tr>
+	<th> Driver </th>
+	<th> Responsible </th>
+	<th> Last updated </th>
+	<th> busdma </th>
+	<th> INTR_MPSAFE </th>
+	<th> SMPng locked </th>
+	<th> a!=p </th>
+	<th> 4.x status </th>
+	<th> Notes </th>
+      </tr>
+
+      <tr>
+	<td> agp </td>
+	<td> &a.cognet; </td>
+	<td> January 23, 2003 </td>
+	<td> &status.wip; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> bktr </td>
+	<td> &a.cognet; </td>
+	<td> January 15, 2003 </td>
+	<td> &status.wip; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> cs </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> digi </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> drm </td>
+	<td> &a.anholt; </td>
+	<td> October 27, 2003 </td>
+	<td> &status.wip; </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.wip; </td>
+	<td> &status.wip; </td>
+	<td> vtophys(). The locking could use some review. </td>
+      </tr>
+
+      <tr>
+	<td> exca </td>
+	<td> &a.imp; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> fb </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> firewire </td>
+	<td> &a.simokawa; </td>
+	<td> April 17, 2003 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> hea </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> hfa </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> hifn </td>
+	<td> &a.sam; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> meteor </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() </td>
+      </tr>
+
+      <tr>
+	<td> musycc </td>
+	<td> &nbsp; </td>
+	<td> &nbsp; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys(). Please contact &a.phk; for info/hardware. </td>
+      </tr>
+
+      <tr>
+	<td> pcm </td>
+	<td> &a.cognet; </td>
+	<td> February 20, 2003 </td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+      <tr>
+	<td> ubsec </td>
+	<td> &a.sam; </td>
+	<td> December 9, 2002</td>
+	<td> &status.done; </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> vtophys() is used in debugging printf </td>
+      </tr>
+
+      <tr>
+	<td> usb </td>
+	<td> &a.jmg; </td>
+	<td> July 24, 2003 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> a!=p should be clean, but requires further testing </td>
+      </tr>
+
+      <tr>
+	<td> wds </td>
+	<td> &nbsp; </td>
+	<td> December 9, 2002 </td>
+	<td> &status.done; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &status.new; </td>
+	<td> &nbsp; </td>
+      </tr>
+
+    </table>
+
+    <a name="doc-status"></a>
+    <h2>Documentation Status</h2>
+
+    <table border=3>
+      <tr>
+	<th> Task </th>
+	<th> Responsible </th>
+	<th> Last updated </th>
+	<th> Status </th>
+	<th> Notes </th>
+      </tr>
+
+      <tr>
+	<td> manpages for the busdma API </td>
+	<td> &a.hmp; </td>
+	<td> January 15, 2003 </td>
+	<td> &status.done; </td>
+	<td> &nbsp; </td>
+      </tr>
+    </table>
+
+  &footer;
+  </body>
+</html>

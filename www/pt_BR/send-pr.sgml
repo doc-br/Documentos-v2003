@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" [
+<!ENTITY date "$FreeBSD: www/en/send-pr.sgml,v 1.35 2003/12/16 21:25:05 ceri Exp $">
+<!ENTITY title "Submit a FreeBSD problem report">
+<!ENTITY copyright "This gnats pr-submission mechanism Copyright &copy; 1996
+ The NetBSD Foundation, Inc.  ALL RIGHTS RESERVED.">
+<!ENTITY footer '<address>&author;<br>&date;</address>'>
+<!ENTITY % includes SYSTEM "includes.sgml"> %includes;
+<!ENTITY bugbusters "bugbusters@FreeBSD.org">
+]>
+
+<html>
+    &header;
+    
+    <!-- Copyright (c) 1996 The NetBSD Foundation, Inc.  ALL RIGHTS RESERVED. -->
+    
+    <img src="gifs/bug.jpg" alt="Bugs" align="right" border="0" width="200" height="233">
+
+    <p>Thank you for taking the time to let us know about a problem with
+      FreeBSD.  Please fill out the form as completely as possible.  Make sure
+      you fill in the "Environment" field as requested with the output from
+      the machine on which problem occurred.</p>
+
+    <p>Before filling out the form, please take the time to read the
+      <a href="doc/en_US.ISO8859-1/articles/problem-reports/article.html">
+      Writing FreeBSD Problem Reports</a> guidelines, and help us to
+      help you.</p>
+
+    <p>Please note that, unless you explicitly state otherwise, any changes 
+      you submit to the FreeBSD Project are assumed to be under the same 
+      license as FreeBSD.</p>
+
+    <form action="http://www.FreeBSD.org/cgi/dosendpr.cgi" method="post">
+      <input type="hidden" name="gndb" value="freebsd" >
+      <input type="hidden" name="submitterid" value="current-users" >
+      <input type="hidden" name="confidential" value="no" >
+      
+      <b>Your Electronic Mail Address</b>: <br>
+      <input type="text" name="email" size="40">
+      
+      <br><b>Your Name</b>:<br>
+      <input type="text" name="originator" size="40" >
+
+      <br><b>Your Organization or Company</b>: <br>
+      <input type="text" name="organization" size="40" >
+      
+      <br><b>One line summary of the problem:</b> <br>
+      <input type="text" name="synopsis" size="72" >
+
+      <br><b>Category</b>: <select name="category">
+	<option> advocacy</option>
+	<option> alpha</option>
+	<option> amd64</option>
+	<option> bin</option>
+	<option> conf</option>
+	<option> docs</option>
+	<option> gnu</option>
+	<option> i386</option>
+	<option> ia64</option>
+	<option> java</option>
+	<option> kern</option>
+	<option selected> misc</option>
+	<option> ports</option>
+	<option> powerpc</option>
+	<option> sparc64</option>
+	<option> standards</option>
+	<option> www</option>
+      </select>
+      
+      <br><b>Severity</b>: <select name="severity">
+	<option> non-critical</option>
+	<option> serious</option>
+	<option> critical</option>
+      </select>
+      
+      <br><b>Priority</b>: <select name="priority">
+	<option> low</option>
+	<option> medium</option>
+	<option> high</option>
+      </select>
+      
+      <br><b>Class:</b> <select name="class">
+	<option> sw-bug</option>
+	<option> doc-bug</option>
+	<option> change-request</option>
+	<option> update</option>
+	<option> maintainer-update</option>
+      </select>
+      
+      <br><b>Which FreeBSD Release You Are Using </b>: <br>
+      <input type="text" name="release" size="40" >
+
+      <br><b>Environment (output of "uname -a" on the problem machine)</b>:
+      <br>
+      <textarea name="environment" rows="3" cols="72"></textarea><br>
+
+      <b>Full Description</b>: <br>
+      <textarea name="description" rows="6" cols="72"></textarea><br>
+
+      <b>How to repeat the problem</b>: <br>
+      <textarea name="howtorepeat" rows="6" cols="72"></textarea><br>
+
+      <b>Fix to the problem if known</b>: <br>
+      <textarea name="fix" rows="6" cols="72"></textarea><br>
+
+      <b>Finally, please enter the code from the image below to prove
+	you're not a robot</b>: <br>
+      <img src="http://www.FreeBSD.org/cgi/sendpr-code.cgi"
+	alt="Random text; if you cannot see the image, please email &bugbusters;"
+	border="0" height="24">
+      <input type="text" name="code-confirm" size="8"><br>
+
+      <input type="submit" value="Submit Problem Report" >
+      <input type="reset" value="Reset" >
+    </form>
+    
+    <p><b>Note</b>: copy/paste will destroy TABs and spacing, and this web
+      form should not be used to submit code as plain text.</p>
+      
+      &footer;
+  </body>
+</html>
+
+<!-- 
+     Local Variables:
+     mode: sgml
+     sgml-indent-data: t
+     sgml-omittag: nil
+     sgml-always-quote-attributes: t
+     End:
+-->

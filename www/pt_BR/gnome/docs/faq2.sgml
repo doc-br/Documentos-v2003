@@ -1,0 +1,601 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" [
+<!ENTITY base CDATA "../..">
+<!ENTITY date "$FreeBSD: www/en/gnome/docs/faq2.sgml,v 1.56 2003/12/28 00:48:28 adamw Exp $">
+<!ENTITY title "FreeBSD GNOME Project: GNOME &gnomever; FAQ">
+<!ENTITY % gnomeincludes SYSTEM "../includes.sgml"> %gnomeincludes;
+<!ENTITY % includes SYSTEM "../../includes.sgml"> %includes;
+]>
+<html>
+  &header;
+
+        <h2>Contents</h2>
+          <ol>
+            <li> <a href="#q1">How do I get GNOME &gnomever; for FreeBSD?</a>
+            <li> <a href="#q2">GNOME &gnomever; is failing to build from ports.  What 
+	      do I do?</a>
+            <li> <a href="#q3">I installed GNOME &gnomever;, but I am missing 
+	      application foo.  What gives?</a>
+            <li> <a href="#q4">What is the best way to upgrade from GNOME
+	      1.4 to GNOME 2?</a>
+            <li> <a href="#q5">What is the best way to upgrade from GNOME
+	      2.2 to GNOME &gnomever;?</a>
+	    <li> <a href="#q6">How do I keep my GNOME &gnomever; components 
+	      and applications up-to-date?</a>
+	    <li> <a href="#q7">Can I install GNOME 1.4 applications under
+	      GNOME &gnomever;?</a>
+	    <li> <a href="#q8">Where can I get more themes for GNOME &gnomever;?</a>
+	    <li> <a href="#q9">What window managers work well with GNOME &gnomever;?
+	      </a>
+	    <li> <a href="#q10">Does GNOME &gnomever; support anti-aliased fonts?</a>
+            <li> <a href="#q11">How can I control what fonts are anti-aliased?
+              </a>
+	    <li> <a href="#q12">How do I edit my GNOME 2 menus?</a>
+	    <li> <a href="#q13">How do I use GTK+ 2 resource settings for 
+	      GTK+ 2 applications when not in a GNOME environment?</a>
+	    <li> <a href="#q14">How do I configure settings for GNOME 1.4
+	      applications under GNOME &gnomever;?</a>
+	    <li> <a href="#q15">Nautilus-cd-burner does not let me burn CDs.
+	      How can I fix this?</a>
+	    <li> <a href="#q16">How do I add new GDM sessions?</a>
+          </ol>
+        <h2>Full Text </h2> 
+
+          <ol>
+<!-- Q1 -->
+	    <li style="padding-bottom: 0.5em"><a name="q1"></a>
+	    <p><b>How do I get GNOME &gnomever; for FreeBSD?</b></p>
+<!-- A1 -->
+	    <p>There are two ways to install GNOME &gnomever; on FreeBSD.  One way is to use 
+	      <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/packages-using.html">
+	        packages</a>, and the other way is to use
+	      <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/ports-using.html">
+	        ports</a>.  Before doing either installation, you should
+		first familiarize yourself with the GNOME &gnomever;
+		<a href="http://www.gnome.org/start/&gnomever;/notes/">
+		release notes</a>.</p>
+
+	    <p>To install GNOME &gnomever; from packages, use the command:</p>
+
+	    <tt># pkg_add -r gnome2</tt>
+
+	    <p>This will download the latest GNOME &gnomever; packages from the 
+	      FreeBSD FTP site, and proceed to install them on your system.
+	    </p>
+
+	    <p>To build and install GNOME &gnomever; from ports, you should first 
+	      <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/cvsup.html">
+	        cvsup</a> the latest ports tree.  Then:</p>
+
+	    <pre>
+# cd /usr/ports/x11/gnome2
+# make clean
+# make install clean
+	    </pre>
+
+	    <p>For the best GNOME &gnomever; experience, you should install from
+	      ports, after adding the following macros to your 
+	      <tt>/etc/make.conf</tt> file:</p>
+
+	    <pre>
+WITH_FAM=	yes
+WITH_LAME=	yes
+	    </pre>
+
+	    <p><tt>WITH_FAM</tt> enables file alteration manager support
+	      which allows Nautilus to update its file lists in real-time
+	      as well as allows all GNOME components to detect config
+	      file changes without needing to restart GNOME.  Note that
+	      for FAM to work properly, you also need to add the following
+	      to <tt>/etc/rc.conf</tt> then reboot:</p>
+
+	      <p>For FreeBSD 4.x:<br>
+	        <tt>portmap_enable="YES"</tt>
+	      </p>
+
+	      <p>For FreeBSD 5.x:<br>
+	        <tt>rpcbind_enable="YES"</tt>
+	      </p>
+
+	      <p><tt>WITH_LAME</tt> adds MP3 support, enabling you to play
+	      MP3s directly in Nautilus.</p>
+
+	    <p>These options may cause build errors on certain platforms, and
+	      thus they are not enabled by default.</p>
+
+	    <p>Once you have the GNOME &gnomever; desktop installed,
+	      GNOME &gnomever; can be started by adding the following line
+	      to <tt>~/.xsession</tt> or <tt>~/.xinitrc</tt>, as appropriate:</p>
+
+	    <pre>
+exec gnome-session
+	    </pre>
+
+	    </li>
+
+<!-- Q2 -->
+            <li style="padding-bottom: 0.5em"><a name="q2"></a>
+	    <p><b>GNOME &gnomever; is failing to build from ports.  What do I do?</b></p>
+<!-- A2 -->
+	    <p>The majority of GNOME &gnomever; compilation problems can be solved 
+	      by making sure all the necessary GNOME &gnomever; components are 
+	      <a href="#q6">up-to-date</a>.</p>
+	      
+	    <p>In general, when a GNOME &gnomever; component is not up-to-date,
+	      you will see an error similar to the following:</p>
+
+	      <pre>
+checking for libgnomeui-2.0 libbonoboui-2.0 libbonobo-2.0 >= 2.2.1
+gnome-vfs-2.0 libgnomeprint-2.2 >= 2.3.0 libgnomeprintui-2.2 libglade-2.0... 
+configure: error: Library requirements (libgnomeui-2.0 libbonoboui-2.0
+libbonobo-2.0 >= 2.2.1 gnome-vfs-2.0 libgnomeprint-2.2 >= 2.3.0 libgnomeprintui-2.2
+libglade-2.0) not met; consider adjusting the PKG_CONFIG_PATH environment variable
+if your libraries are in a nonstandard prefix so pkg-config can find them.
+	      </pre>
+	      
+	    <p>Simply keeping your ports tree <a href="#q6">up-to-date</a> will
+	      prevent these errors.</p>
+	      
+	    <p>If the <tt>pkg-config</tt> program is out-of-date, you may see
+	      a configure error similar to the following:</p>
+
+	      <pre>
+configure: error: *** pkg-config too old; version 0.14 or better required.
+	      </pre>
+
+	      <p>While this may be buried in some other text, the error is
+	        very straight-forward: you need to upgrade pkg-config.
+		The pkg-config application is found in the 
+		<tt>devel/pkgconfig</tt> port.  By updating this port to
+		the latest version, this error will go away.</p>
+	      
+	      <p>You may see compiler errors relating to pthreads 
+	      (&posix; threads), such as:</p>
+
+	    <pre>
+undefined reference to 'strerror_r'
+            </pre>
+
+	    <p>To fix thread related errors, make sure you have the following
+	      compiled into your kernel:</p>
+
+	    <pre>
+options     _KPOSIX_PRIORITY_SCHEDULING
+            </pre>
+
+	    <p>If you are tracking -stable or -current, make sure that you
+	      do <b>not</b> have <tt>NOLIBC_R</tt> set in 
+	      <tt>/etc/make.conf</tt>. If you do, remove it, then rebuild world.
+	      If you still have trouble, please send email to 
+	      <a href="mailto:&email;@FreeBSD.org">
+	      &email;@FreeBSD.org</a> with the output of the failed compilation.
+	      It is also helpful to include the config.log from the port's
+	      work directory.</p>
+
+	    <p>Ports such as <tt>devel/pth</tt> and <tt>devel/ngpt</tt> can
+	      also cause pthread-related problems when compiling GNOME &gnomever;.
+	      If you do not need these ports installed, it is recommended that
+	      you remove them.
+	    </p>
+
+		<p>A common source of build failures is the existence of multiple versions
+		  of the same library.  This can happen if you have two different versions of
+		  a port installed, or can even happen through normal <tt>portupgrade</tt> use.
+		  You can back up the libraries in <tt>/usr/local/lib/compat/pkg</tt> and remove
+		  them, and then run <tt>portupgrade -u -rf pkgconfig</tt>.  This will force a
+		  rebuild of all GNOME-related apps (and a fair number of other apps) without
+		  retaining old versions of libraries in <tt>/usr/local/lib/compat/pkg</tt>.
+		</p>
+	  </li>
+
+<!-- Q3 -->
+	  <li style="padding-bottom: 0.5em"><a name="q3"></a>
+	    <p><b>I installed GNOME &gnomever;, but I am missing application foo.
+	      What gives?</b></p>
+<!-- A3 -->
+	    <p>Only the core components, and a few extras, are included in the
+	      <tt>gnome2</tt> package.  While you can still run 
+	      <a href="#q7">GNOME 1.4 applications</a> under GNOME &gnomever;,
+	      a number of applications have already been ported to
+	      GNOME &gnomever;.</p>
+
+	    <p>The applications that have been ported are included 
+	      in the <tt>gnome2-fifth-toe</tt> meta-port.  
+	      Note, some of these applications are still in the early 
+	      development stages, and may not be very stable.</p>
+
+	    <p>To install <tt>gnome2-fifth-toe</tt> from packages:</p>
+
+            <pre>
+# pkg_add -r gnome2-fifth-toe
+            </pre>
+
+	    <p>To install <tt>gnome2-fifth-toe</tt> from ports:</p>
+
+	    <pre>
+# cd /usr/ports/x11/gnome2-fifth-toe
+# make clean
+# make install clean
+	    </pre>
+
+	  </li>
+
+<!-- Q4 -->
+	  <li style="padding-bottom: 0.5em"><a name="q4"></a>
+	    <p><b>What is the best way to upgrade from GNOME 1.4 to GNOME 2?</b></p>
+<!-- A4 -->
+	    <p>If you have
+	      GNOME 1.4, and you want to upgrade to GNOME &gnomever;, first
+	      familiarize yourself with the <a href="http://www.gnome.org/start/2.0/installation.html#upgrading">official</a> upgrade instructions from
+	      the GNOME site.  Make sure your GNOME 1.4 ports are
+	      up-to-date, and then remove the following GNOME 1.4 packages from
+	      the system:</p>
+	    
+	    <pre>
+gnomecore
+sawfish
+gnomeapplets 
+gnomemedia
+gtop
+libgtop
+nautilus
+gedit
+xalf
+bugbuddy
+gnomeaudio
+gnomegames
+gnomeutils
+gdm
+eog
+ggv
+	   </pre>
+
+	   <p>After those packages are removed, you can build GNOME &gnomever; as per 
+	     the <a href="#q1">instructions listed above</a>.</p>
+
+	  </li>
+
+<!-- Q5 -->
+	  <li style="padding-bottom: 0.5em"><a name="q5"></a>
+	    <p><b>What is the best way to upgrade from GNOME 2.2 to GNOME &gnomever;?</b></p>
+<!-- A5 -->
+	    <p>We recommend that you use <tt>/usr/ports/sysutils/portupgrade</tt>
+	      for this purpose.  The following will do the job well:</p>
+
+	    <pre>
+# pkgdb -F
+(answer yes to all prompts; note that you might wish
+to run the above command after each step below)
+# portupgrade ORBit2 libbonobo
+# portupgrade -rf -m BATCH=yes atk
+# portupgrade -R -m BATCH=yes gnome2
+	    </pre>
+
+	  </li>
+
+<!-- Q6 -->
+	  <li style="padding-bottom: 0.5em"><a name="q6"></a>
+	    <p><b>How do I keep my GNOME &gnomever; components and applications 
+	      up-to-date?</b></p>
+<!-- A6 -->
+	    <p>I find that <tt>/usr/ports/sysutils/portupgrade</tt> works really
+	      well.  For example:</p>
+
+	    <tt># portupgrade -r pkgconfig</tt>
+
+	    <p>This will upgrade pkgconfig and every other port that depends 
+	      on it (that needs updating).</p>
+
+	    <p>However, sometimes so much changes that it becomes 
+	      necessary to do a little housekeeping first. In that case, this 
+	      usually works:</p>
+
+	    <pre>
+# pkg_delete -rf pkgconfig\*
+# cd /usr/ports/x11/gnome2
+# make clean
+# make install clean
+	    </pre>
+
+	    <p>These steps will remove <b>all</b> the GNOME 1 and 2 components 
+	      and applications from your machine, but only reinstalls the
+	      GNOME 2 desktop.  You should be aware, that if it comes to
+	      this, you will need to reinstall your applications after 
+	      reinstalling the desktop.  Fortunately, this extreme measure
+	      is only rarely needed.
+	    </p>
+	  </li>
+
+<!-- Q7 -->
+	  <li style="padding-bottom: 0.5em"><a name="q7"></a>
+	    <p><b>Can I install GNOME 1.4 applications under GNOME &gnomever;?</b></p>
+<!-- A7 -->
+	    <p>GNOME 1.4 ports will run well under the GNOME 2 desktop. Older
+	      applications that were incompatible with the GNOME 2 desktop
+	      have been removed from the ports tree, so it should be safe to
+	      run any GNOME application in the ports tree under the GNOME 2
+	      desktop.</p>
+	  </li>
+
+<!-- Q8 -->
+	  <li style="padding-bottom: 0.5em"><a name="q8"></a>
+	    <p><b>Where can I get more themes for GNOME &gnomever;?</b></p>
+<!-- A8 -->
+	    <p>The website <a href="http://art.gnome.org"> 
+	      art.gnome.org</a> has been setup as a general GNOME theme
+	      repository.  They offer some gtk+-2, metacity, sawfish,
+	      nautilus, icon, and gdm themes, as well as some backgrounds.</p>
+
+	    <p>A new theme site called <a href="http://www.themedepot.org">
+	      The Theme Depot</a> has just been launched.  This site contains
+	      themes for GNOME 2 as well as KDE and quite a few window
+	      managers.
+	    </p>
+	    
+	    <p>Freshmeat.net has a themes archive at
+	      <a href="http://themes.freshmeat.net">themes.freshmeat.net</a>,
+	      which contains themes and backgrounds for many window managers,
+	      theme engines, and desktop environments.  This site grew out of
+	      the old themes.org.
+	    </p>
+
+	    <p>A good site for some cool GNOME icons (some stock, some new)
+	      is jimmac's <a href="http://jimmac.musichall.cz/ikony.php3"> 
+	      Icons</a> site.</p>
+
+	    <p>See the instructions on the website for installing the themes.
+	      If you feel inclined to port a few of them, you will not be
+	      turned away ;-).</p>
+	  </li>
+
+<!-- Q9 -->
+	  <li style="padding-bottom: 0.5em"><a name="q9"></a>
+	    <p><b>What window managers work well with GNOME &gnomever;?</b></p>
+<!-- A9 -->
+	    <p>The <tt>gnome2</tt> meta-port installs the 
+	      metacity window manager by default.  Another popular window
+	      manager that works well with GNOME &gnomever; is 
+	      <a href="http://sawmill.sourceforge.net/">sawfish</a>.  Sawfish
+	      is distributed as part of the <tt>x11/gnome2-fifth-toe</tt>
+	      meta-port.
+
+	    <p>To switch between metacity and sawfish in GNOME 2, you will need
+	      to do the following:</p>
+
+<pre>
+killall metacity; sawfish &
+gnome-session-save --gui
+</pre>
+	    <p>The <tt>gnome-session-save</tt> is important.  Without it, the
+	      window manager will revert back to the one previously configured
+	      upon next login.  To switch back, simply reverse sawfish and 
+	      metacity.</p>
+
+		<p>If you have gotten the GNOME &gnomever; desktop working under an
+		  alternative window manager, please take a screenshot and
+		  <a href="mailto:&email;@FreeBSD.org">send it to us</a>!
+		</p>
+	  </li>
+
+<!-- Q10 -->
+	  <li style="padding-bottom: 0.5em"><a name="q10"></a>
+	    <p><b>Does GNOME &gnomever; support anti-aliased fonts?</b></p>
+<!-- A10 -->
+		<p>Yes!  Anti-aliasing requires XFree86 4.x with 
+		  freetype2 support.  To add freetype2 support to X, make
+		  sure you have the following modules loaded in your 
+		  XF86Config file under the Modules section:</p>
+
+		<pre>
+Load	"freetype"
+Load	"type1"
+		</pre>
+		
+		<p>Then, simply check out the Fonts capplet under
+		  Applications->Desktop Preferences.  If you want a good set
+		  of TrueType starter fonts, install the 
+		  <tt>x11-fonts/webfonts</tt> port.</p>
+
+		<p>Sometimes, after adding new fonts to the system, it is
+		  necessary to teach fontconfig about them.  If you find that
+		  newly added fonts are not made available even after 
+		  restarting GNOME 2, run the following command as root:</p>
+
+		<pre>
+# fc-cache -f -v
+		</pre>
+
+		<p>If you have any questions, please send them to 
+		  <a href="mailto:&email;@FreeBSD.org">&email;@FreeBSD.org</a>.
+		</p>
+	  </li>
+
+<!-- Q11 -->
+	  <li style="padding-bottom: 0.5em"><a name="q11"></a>
+	    <p><b>How can I control what fonts are anti-aliased?</b></p>
+<!-- A11 -->
+		<p>GNOME &gnomever; makes use of Xft and fontconfig to handle 
+		  anti-aliasing.  Fontconfig is a very powerful XML-based
+		  font configuration package.  You can create a
+		  <tt>~/.fonts.conf</tt> file that controls virtually
+		  every aspect of fontconfig.  For example, if you do not
+		  want to anti-alias fonts smaller than 16 point, create
+		  a <tt>~/.fonts.conf</tt> with the following contents:</p>
+
+		<pre>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE fontconfig SYSTEM "fonts.dtd"&gt;
+&lt;fontconfig&gt;
+
+&lt;match target="font"&gt;
+        &lt;test name="size" compare="less_eq"&gt;
+                &lt;double&gt;16&lt;/double&gt;
+        &lt;/test&gt;
+        &lt;edit name="antialias" mode="assign"&gt;
+                &lt;bool&gt;false&lt;/bool&gt;
+        &lt;/edit&gt;
+&lt;/match&gt;
+&lt;/fontconfig&gt;
+                </pre>
+
+                <p>Refer to fonts-conf(5) for more information.</p>
+	  </li>
+
+<!-- Q12 -->
+	  <li style="padding-bottom: 0.5em"><a name="q12"></a>
+	    <p><b>How do I edit my GNOME 2 menus?</b></p>
+<!-- A12 -->
+	    <p>You need to use Nautilus to edit your GNOME 2 menus.  If you
+	      want to edit any menu other than Favorites, you must be
+	      root.</p>
+
+	    <p>To edit the menus, launch Nautilus, and enter the URL 
+	      <b>applications:///</b>.  From there you should be able to edit
+	      your entire application menu.</p>
+	  </li>
+
+<!-- Q13 -->
+	  <li style="padding-bottom: 0.5em"><a name="q13"></a>
+	    <p><b>How do I use GTK+ 2 resource settings for GTK+ 2 applications
+	      when not in a GNOME environment?</b></p>
+<!-- A13 -->
+	    <p> GNOME 2 applications get their GTK+ 2 resources from themes and
+	      the corresponding theme engine.  If you would rather run your
+	      GTK+ 2 applications in a non-GNOME environment then you will
+	      need to create a file named <tt>~/.gtkrc-2.0</tt>.</p>
+		<p> To use the widgets from a GTK+ 2 theme when in a non-GNOME
+		  environment, simply <tt>include</tt> the theme's
+		  <tt>gtk-2.0/gtkrc</tt> in your <tt>~/.gtkrc-2.0</tt>. For example:
+
+		  <pre>include "/usr/X11R6/share/themes/Crux/gtk-2.0/gtkrc"</pre>
+		<p> If you prefer, you can use the same GTK+ 1.2 theme for both
+		  GTK+ 1.2 and GTK+ 2 applications, which will give your GTK+
+		  programs a consistent look. For the most part, you can transfer
+		  your settings from your <tt>~/.gtkrc</tt> file (used for
+		  GTK+ 1.2) with a couple of caveats.</p>
+
+	      <ol>
+	        <li> If you have any theme engine references, you will have
+		  to make sure there is a corresponding GTK+ 2 theme engine.  
+		  Otherwise, remove the engine entries.</li>
+		<li> The default font specification should be outside of
+		  any <tt>style</tt> blocks and should be specified with
+		  the <tt>gtk-font-name</tt> keyword.  For example:
+
+		  <pre>gtk-font-name = "Verdana 11"</pre>
+		</li>
+              </ol>
+
+	        <p> Note that while a GTK+ 1.2 <tt>gtkrc</tt> file will work
+		  in a GTK+ 2 <tt>gtkrc-2.0</tt> file, the opposite is <i>not</i>
+		  true: the contents of a GTK+ 2 <tt>gtkrc-2.0</tt> file will
+		  <i>not</i> work inside a GTK+ 1.2 <tt>gtkrc</tt> file.</p>
+	  </li>
+
+<!-- Q14 -->
+	  <li style="padding-bottom: 0.5em"><a name="q14"></a>
+	    <p><b>How do I configure settings for GNOME 1.4 applications under
+	      GNOME &gnomever;?</b></p>
+<!-- A14 -->
+	    <p>Install <tt>sysutils/gnomecontrolcenter</tt>, then invoke
+	      <tt>gnomecc</tt> from the command line to bring up the GNOME
+	      1.4 control center.</p>
+	  </li>
+
+<!-- Q15 -->
+	  <li style="padding-bottom: 0.5em"><a name="q15"></a>
+	    <p><b>Nautilus-cd-burner does not let me burn CDs.  How can I
+	      fix this?</b></p>
+<!-- A15 -->
+	    <p>Nautilus-cd-burner cannot write to CD/DVD burners unless support
+	      for those devices is enabled in the kernel, and the
+	      permissions on the device nodes allow write access.
+	      Nautilus-cd-burner talks to CD/DVD burners through the
+	      SCSI CAM subsystem.  Therefore, you must make sure
+	      you have the following configured in your kernel:</p> 
+
+	    <pre>
+device          scbus
+device          cd
+device          pass
+	    </pre>
+
+	    <p>You must also make sure you have the following configured in
+	      your kernel if you are using an ATAPI CD/DVD burner:</p>
+
+	    <pre>
+device		atapicam
+	    </pre>
+
+	    <p>To figure out which CD/DVD drive you will be using, run the
+	      following command as root:</p>
+
+	    <pre>
+# camcontrol devlist
+	    </pre>
+
+	    <p>Your output will look similar to the following:</p>
+
+	    <pre>
+&lt;QSI CDRW/DVD SBW-242 UD22&gt;		at scbus1 target 0 lun 0 (cd0,pass0)
+	    </pre>
+
+	    <p>The devices in parentheses at the end are important.  You
+	      must make sure the <tt>/dev</tt> entries for those devices
+	      are writable by the users that will be using 
+	      nautilus-cd-burner.  In addition to those devices,
+	      <tt>/dev/xpt*</tt> must also be writable to your 
+	      nautilus-cd-burner users.  The following 
+	      <tt>/etc/devfs.conf</tt> configuration will achieve the
+	      desired results given the above devlist (<b>NB:</b> 
+	      <tt>devfs.conf</tt> is only supported on FreeBSD 5.x):</p>
+
+	      <pre>
+perm    cd0     0666
+perm    xpt0    0666
+perm    pass0   0666
+	      </pre>
+
+	      <p>On FreeBSD 4.x, you can simply set the device node
+	        permissions, and they will be preserved across reboots.
+		Note that you must use the 'c' device nodes on
+		FreeBSD 4.x (e.g. <tt>cd0c</tt>).</p>
+	  </li>
+
+<!-- Q16 -->
+	  <li style="padding-bottom: 0.5em"><a name="q16"></a>
+	    <p><b>How do I add new GDM sessions?</b></p>
+<!-- A16 -->
+	  <p>The process for adding new GDM sessions has changed substantially
+	    between GNOME 2.2 and &gnomever;.  In order to add new sessions
+	    now, you must create a <tt>.desktop</tt> file containing the session
+	    configuration information.  Session files live in
+	    <tt>/usr/X11R6/etc/dm/Sessions</tt>.  For example, to add
+	    a KDE session, create a file in <tt>/usr/X11R6/etc/dm/Sessions</tt>
+	    called <tt>kde.desktop</tt>.  That file should contain the
+	    following:</p>
+
+	    <pre>
+[Desktop Entry]
+Encoding=UTF-8
+Name=KDE
+Comment=This session logs you into KDE
+Exec=/usr/local/bin/startkde
+TryExec=/usr/local/bin/startkde
+Icon=
+Type=Application
+	    </pre>
+
+	    <p>This file must have execute permissions.  For example:</p>
+
+	    <pre>
+# chmod 0555 kde.desktop
+	    </pre>
+
+	    <p>After creating this file, restart GDM, and there will be a
+	      <b>KDE</b> link under the <em>Sessions</em> menu.</p>
+	  </li>
+        </ol>
+
+  &footer;
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" [
+<!ENTITY base CDATA "..">
+<!ENTITY date "$FreeBSD: www/en/internal/mirror.sgml,v 1.16 2002/06/29 09:07:07 nik Exp $">
+<!ENTITY title "Mirroring the FreeBSD Web Pages">
+<!ENTITY % includes SYSTEM "../includes.sgml"> %includes;
+]>
+
+<html>
+&header;
+
+<p>You can (and are encouraged to) mirror the FreeBSD web pages 
+<tt>www.FreeBSD.org</tt>. 
+
+To do this, you need to obtain and install
+a program called <em>cvsup</em> on your web server. 
+
+<a href="../doc/en_US.ISO8859-1/books/handbook/synching.html#CVSUP">CVSup</a> is a software package for
+distributing and updating collections of files across a network.</p>
+
+<H2>Installing CVSup</H2>
+
+<p>To build and install it, do the following:</p>
+
+<pre>
+ # cd /usr/ports/net/cvsup-bin
+ # make all install clean
+</pre>
+
+<H2>Running CVSup</H2>
+
+<p>If you keep your mirrored FreeBSD web pages in the directory
+<tt>/usr/FreeBSD-mirror</tt> and are owned by the user `fred', then
+run the following command as user `fred':</p>
+
+<pre>
+     $ cvsup supfile-www
+</pre>
+
+The file <tt>supfile-www</tt> contain:
+<pre>
+       *default host=cvsup.FreeBSD.org
+       *default prefix=/usr/FreeBSD-mirror
+       *default base=/usr/local/etc/cvsup
+       www release=current delete use-rel-suffix compress
+</pre>
+
+<p>This will mirror the FreeBSD web pages into
+<tt>/usr/FreeBSD-mirror</tt>. You can install this into fred's
+crontab, so that it runs once a day. The pages on www.FreeBSD.org are
+updated daily at about 4:30am California time.</p>
+
+<H2>More Information on CVSup</H2>
+
+See the <a href="../doc/en_US.ISO8859-1/books/handbook/synching.html#CVSUP">CVSup introduction</a> in the
+handbook.
+
+<p></p><A HREF="internal.html">FreeBSD Internal Home</a>
+&footer;
+
+</body>
+</html>

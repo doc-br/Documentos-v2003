@@ -1,0 +1,293 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" [
+<!ENTITY base CDATA "..">
+<!ENTITY date "$FreeBSD: www/en/releng/index.sgml,v 1.85 2003/12/26 15:18:41 scottl Exp $">
+<!ENTITY email 're'>
+<!ENTITY title "Release Engineering Information">
+<!ENTITY % includes SYSTEM "../includes.sgml"> %includes;
+<!ENTITY % developers SYSTEM "../developers.sgml"> %developers;
+<!ENTITY contact.re '<a href="mailto:re@FreeBSD.org">re@FreeBSD.org</a>'>
+<!ENTITY contact.so '<a href="mailto:security-officer@FreeBSD.org">security-officer@FreeBSD.org</a>'>
+]>
+
+<html>
+&header;
+
+<p>This page contains documentation about the FreeBSD release
+  engineering process.</p>
+
+<ul>
+  <li><a href="#schedule">Upcoming Release Schedule</a></li>
+  <li><a href="#freeze">Code Freeze Status</a></li>
+  <li><a href="&base;/releng/charter.html">Charter for the Release
+  Engineering Team</a></li>
+  <li><a href="#docs">Release Engineering Documentation</a></li>
+  <li><a href="#team">Current Release Engineering Team</a></li>
+  <li><a href="#faq">Frequently Asked Questions</a></li>
+
+<!-- 
+  <li>General information about committing to -STABLE.</li>
+-->
+</ul>
+
+<a name="schedule"></a>
+<h1>Upcoming Release Schedule</h1>
+
+<p>NOTE:  Release dates are approximate and may be subject to schedule
+  slippage.</p>
+
+<ul>
+  <li><p><strong>January 2004</strong> : FreeBSD 5.2 (<a href="&base;/releases/5.2R/schedule.html">schedule</a>, <a href="&base;/releases/5.2R/todo.html">todo list</a>)</p></li>
+</ul>
+
+<a name="freeze"></a>
+<h1>Code-Freeze Status</h1>
+
+<p>The following table lists the code freeze status for the major
+branches of the <tt>src/</tt> subtree of the FreeBSD CVS
+repository.  Commits to any branch listed as "frozen" must first be
+reviewed and approved by the relevant contact party.  The status of
+other subtrees such as <tt>ports/</tt> and <tt>doc/</tt> is also
+provided below.</p>
+
+<table border="3" cellpadding="2" cellspacing="0">
+  <tr>
+    <th> Branch </th>
+    <th> Status </th>
+    <th> Contact </th>
+    <th> Notes </th>
+  </tr>
+
+  <tr>
+    <td> <tt>HEAD</tt> </td>
+    <td> Semi-Frozen </td>
+    <td> &contact.re; </td>
+    <td> Active development branch for -CURRENT.  In general, open for
+      commits, although restraint is urged until 5.2-RELEASE is
+      announced.  Review by &contact.re; is strongly encouraged for
+      large and/or potentially disruptive commits.</td>
+  </tr>
+
+  <tr>
+    <td> <tt>RELENG_5_2</tt> </td>
+    <td> Frozen </td>
+    <td> &contact.re; </td>
+    <td> FreeBSD 5.2 release branch.  Now in code freeze in
+      preparation for 5.2-RELEASE. </td>
+  </tr>
+
+  <tr>
+    <td> <tt>RELENG_5_1</tt> </td>
+    <td> Frozen </td>
+    <td> &contact.so; </td>
+    <td> FreeBSD 5.1 supported security fix branch. </td>
+  </tr>
+
+  <tr>
+    <td> <tt>RELENG_5_0</tt> </td>
+    <td> Frozen </td>
+    <td> &contact.so; </td>
+    <td> FreeBSD 5.0 security fix branch (not officially supported). </td>
+  </tr>
+
+  <tr>
+    <td> <tt>RELENG_4</tt> </td>
+    <td> Open </td>
+    <td> committers </td>
+    <td> Development branch for 4-STABLE. </td>
+  </tr>
+
+  <tr>
+    <td> <tt>RELENG_4_9</tt> </td>
+    <td> Frozen </td>
+    <td> &contact.so </td>
+    <td> FreeBSD 4.9 supported security fix branch. </td>
+  </tr>
+
+  <tr>
+    <td> <tt>RELENG_4_8</tt> </td>
+    <td> Frozen </td>
+    <td> &contact.so; </td>
+    <td> FreeBSD 4.8 supported security fix branch. </td>
+  </tr>
+
+  <tr>
+    <td> <tt>RELENG_4_7</tt> </td>
+    <td> Frozen </td>
+    <td> &contact.so; </td>
+    <td> FreeBSD 4.7 supported security fix branch. </td>
+  </tr>
+
+  <tr>
+    <td> <tt>RELENG_4_6</tt> </td>
+    <td> Frozen </td>
+    <td> &contact.so; </td>
+    <td> FreeBSD 4.6 security fix branch (not officially supported). </td>
+  </tr>
+
+  <tr>
+    <td> <tt>RELENG_4_5</tt> </td>
+    <td> Frozen </td>
+    <td> &contact.so; </td>
+    <td> FreeBSD 4.5 security fix branch (not officially supported). </td>
+  </tr>
+
+  <tr>
+    <td> <tt>RELENG_4_4</tt> </td>
+    <td> Frozen </td>
+    <td> &contact.so; </td>
+    <td> FreeBSD 4.4 security fix branch (not officially supported). </td>
+  </tr>
+
+  <tr>
+    <td> <tt>RELENG_4_3</tt> </td>
+    <td> Frozen </td>
+    <td> &contact.so; </td>
+    <td> FreeBSD 4.3 security fix branch (not officially supported). </td>
+  </tr>
+
+  <tr>
+    <td> <tt>RELENG_3</tt> </td>
+    <td> Open </td>
+    <td> committers </td>
+    <td> Maintenance branch for 3-STABLE (not officially supported). </td>
+  </tr>
+
+  <tr>
+    <td> <tt>RELENG_2_2</tt> </td>
+    <td> Open </td>
+    <td> committers </td>
+    <td> Maintenance branch for 2.2-STABLE (not officially supported). </td>
+  </tr>
+
+  <tr>
+    <th> Subtree </th>
+    <th> Status </th>
+    <th> Contact </th>
+    <th> Notes </th>
+  </tr>
+  <tr>
+    <td> <tt>ports/</tt> </td>
+    <td> Semi-Frozen </td>
+    <td> freebsd-ports </td>
+    <td> FreeBSD Ports Collection.  No large or sweeping
+      commits or infrastructure changes until after 
+      5.2-RELEASE is announced. </td>
+  </tr>
+  <tr>
+    <td> <tt>doc/</tt> </td>
+    <td> Open </td>
+    <td> freebsd-doc </td>
+    <td> SGML/XML based documentation set.  Large/sweeping commits or
+      infrastructure changes not recommended until after 5.2-RELEASE
+      is announced. </td>
+  </tr>
+</table>
+
+
+<a name="docs"></a>
+<h1>Release Engineering Documentation</h1>
+
+<ul>
+  <li><p><a
+	href="&base;/doc/en_US.ISO8859-1/articles/releng/index.html">FreeBSD
+	Release Engineering</a><br>
+
+      <small>Describes the approach used by the FreeBSD release
+	engineering team to make production quality releases of the
+	FreeBSD Operating System. It describes the tools available
+	for those interested in producing customized FreeBSD releases
+	for corporate rollouts or commercial
+	productization.</small></p></li>
+
+
+  <li><p><a
+	href="&base;/doc/en_US.ISO8859-1/articles/releng-packages/index.html">FreeBSD
+	Release Engineering for Third Party Packages</a><br>
+
+      <small>Describes the approach used by the FreeBSD release
+        engineering team to produce a high quality package set
+        suitable for official FreeBSD release media.  This document is
+        a work in progress, but eventually it will cover the process
+        used to build a clean package set on the FreeBSD.org "Ports
+        Cluster", how to configure any other set of machines as a
+        ports cluster, how to split up the packages for the release
+        media, and how to verify that a package set is
+        consistent.</small></p></li>
+
+  <li><p><a
+        href="&base;/doc/en_US.ISO8859-1/articles/5-roadmap/index.html">FreeBSD
+        5-STABLE Roadmap</a><br>
+
+      <small>Describes the roadmap for the project for reaching the RELENG_5
+        branch.  Includes overall status of 5.x, what's left to be done, and
+        tentative schedules.</small></p></li>
+
+</ul>
+
+<a name="team"></a>
+<h1>Release Engineering Team</h1>
+
+<p>The primary release engineering team is responsible for approving
+  <a
+  href="&base;/doc/en_US.ISO8859-1/books/faq/misc.html#DEFINE-MFC">MFC</a>
+  requests during code freezes, setting release schedules, and all of
+  the other responsibilities laid out in our <a
+  href="&base;/releng/charter.html">charter</a>.</p>
+
+<p><strong>Primary RE Team (<a
+href="mailto:re@FreeBSD.org">re@FreeBSD.org</a>)</strong> :
+&a.murray;, &a.steve;, &a.rwatson;, &a.jhb;, &a.bmah;, and
+&a.scottl; form the primary release engineering decision-making
+group.</p>
+
+<p>The platform-specific release engineering teams are responsible for
+building and packaging FreeBSD releases on the given platforms.</p>
+
+<p><strong>Alpha Platform REs (<a
+href="mailto:re-alpha@FreeBSD.org">re-alpha@FreeBSD.org</a>)</strong> :
+&a.wilko;, &a.murray;, &a.jhb;, &a.rwatson;, &a.scottl;</p>
+
+<p><strong>ia64 Platform REs (<a
+href="mailto:re-ia64@FreeBSD.org">re-ia64@FreeBSD.org</a>)</strong> :
+&a.marcel;, &a.peter;</p>
+
+<p><strong>i386 Platform REs (<a
+href="mailto:re-x86@FreeBSD.org">re-x86@FreeBSD.org</a>)</strong> :
+&a.murray;, &a.jhb;, &a.rwatson;, &a.bmah;, &a.scottl;</p>
+
+<p><strong>pc98 Platform REs (<a
+href="mailto:re-pc98@FreeBSD.org">re-pc98@FreeBSD.org</a>)</strong> :
+&a.nyan;</p>
+
+<p><strong>sparc64 Platform REs (<a
+href="mailto:re-sparc64@FreeBSD.org">re-sparc64@FreeBSD.org</a>)</strong> :
+&a.jake;, &a.tmm;, &a.rwatson;, &a.jhb;, &a.murray;, &a.phk;, &a.scottl;</p>
+
+<p>The third party packages in the Ports Collection are managed by the
+portmgr@ team.  Among many other responsibilities, the port managers
+keep the ports cluster running smoothly to produce binary
+packages.</p>
+
+<p><strong>Package Builders (<a
+href="mailto:portmgr@FreeBSD.org">portmgr@FreeBSD.org</a>)</strong> :
+&a.asami;, &a.kris;, &a.sobomax;, &a.steve;, &a.will;, &a.knu;, &a.lioux;, &a.marcus;</p>
+
+<a name="faq"></a>
+<h1>Frequently Asked Questions</h1>
+
+<p>Where can I find the release directory or ISO images for older FreeBSD releases?</p>
+
+<p>The FreeBSD Project does not maintain a centralized historical
+  archive of old release ISO images, but there are still many options.
+  First, try looking on <a
+  href="http://www.freebsdmirrors.org">http://www.freebsdmirrors.org</a>.
+  If you are unable to find an FTP mirror that still contains the
+  release you are looking for, then you can email CDROM vendors to see
+  if they have any old releases available.  In September 2003, we know
+  of a case where FreeBSD 1.1 was used in a court of law to invalidate
+  a bogus software patent.  Clearly, older releases can be very
+  important in some situations.</p>
+
+&footer;
+</body>
+</html>
