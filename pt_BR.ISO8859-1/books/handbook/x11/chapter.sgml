@@ -160,7 +160,7 @@
         suportam <quote>áreas de trabalho virtuais</quote>; alguns permitem personalizar
         atalhos de teclado para gerenciar a área de trabalho; outros tem um bot&atilde;o <quote>Iniciar</quote>
         ou dispositivo semelhante; outros s&atilde;o <quote>tematizáveis</quote>, permitindo
-        uma modificaç&atilde; completa no visual e sensaç&otilde;es pela aplicaç&atilde;o de um novo tema.i Estes
+        uma modificaç&atilde; completa no visual e sensaç&otilde;es pela aplicaç&atilde;o de um novo tema. Estes
         gerenciadores de janela, e muitos outros, est&atilde;o disponíveis na
         categoria <filename>x11-wm</filename> da Coleç&atilde;o de <literal>Ports</literal>.</para>
 
@@ -168,68 +168,67 @@
 	<application>GNOME</application> têm seus 
 	próprios gerenciadores de janela integrados na área de trabalho.</para>
 
-      <para>Each window manager also has a different configuration mechanism;
-        some expect configuration file written by hand, others feature
-        GUI tools for most of the configuration tasks; at least one
-        (<application>sawfish</application>) has a configuration file written
-        in a dialect of the Lisp language.</para>
+      <para>Cada gerenciador de janela também possui um mecanismo de configuraç&atilde;o diferente;
+        alguns esperam que a configuraç&atilde;o seja escrita manualmente, outros possuem
+        <acronym>GUI</acronym> como ferramentas para a maior parte das tarefas de configuraç&atilde;o; pelo menos um
+        (<application>sawfish</application>) tem seu arquivo de configuraç&otilde;es escrito
+        em um dialeto da linguagem List.</para> 
 
       <note>
-        <title>Focus Policy</title>
+        <title>Política do Foco</title>
 
-        <para>Another feature the window manager is responsible for is the
-          mouse <quote>focus policy</quote>.  Every windowing system
-          needs some means of choosing a window to be actively receiving
-          keystrokes, and should visibly indicate which window is active as
-          well.</para>
+        <para>Outro recurso de responsabilidade do gerenciador de janela é 
+          a <quote>política de foco</quote> do mouse. Todo sistema de enjanelamento 
+          precisa de parâmetros para escolher uma janela que responda ao acionamento do 
+          teclado, e deve indicar visivelmente qual janela está ativa 
+          também.</para> 
 
-        <para>A familiar focus policy is called <quote>click-to-focus</quote>.
-          This is the model utilized by &microsoft.windows;, in which a window
-          becomes active upon receiving a mouse click.</para>
+        <para>Uma política de foco bem familiar é a chamada <quote>clique para focar</quote>.
+          Este é o modelo utilizado pelo &microsoft.windows;, no qual uma janela
+          se torna ativa após receber um clique do mouse.</para>
 
-        <para>X does not support any particular focus policy.  Instead, the
-          window manager controls which window has the focus at any one time.
-          Different window managers will support different focus methods.  All
-          of them support click to focus, and the majority of them support
-          several others.</para>
+        <para>O X n&atilde;o suporta nenhuma política de foco em particular. Ao invés disso, o
+          gerenciador de janela controla qual tem o foco a qualquer tempo.
+          Os diferentes gerenciadores de janela v&atilde;o suportar métodos de foco distintos. Todos
+          suportam clique para focar, e a maioria deles suporta
+          vários outros.</para>
 
-        <para>The most popular focus policies are:</para>
+        <para>As políticas de foco mais populares s&atilde;o:</para>
 
         <variablelist>
           <varlistentry>
-            <term>focus-follows-mouse</term>
-
+            <term>o foco segue o mouse</term>
             <listitem>
-              <para>The window that is under the mouse pointer is the
-                window that has the focus.  This may not necessarily be
-                the window that is on top of all the other windows.
-                The focus is changed by pointing at another window, there
-                is no need to click in it as well.</para>
+              <para>A janela abaixo do ponteiro do mouse é a
+                janela que possui o foco. Esta n&atilde;o é necessariamente
+                a janela que está sobre todas as demais.
+                O foco é modificado ao apontar outra janela, n&atilde;o há
+                necessidade de clicar nela.</para>
             </listitem>
           </varlistentry>
 
           <varlistentry>
-            <term>sloppy-focus</term>
+            <term>foco desleixado</term>
 
             <listitem>
-              <para>This policy is a small extension to focus-follows-mouse.
-                With focus-follows-mouse, if the mouse is moved over the
-                root window (or background) then no window has the focus,
-                and keystrokes are simply lost.  With sloppy-focus, focus is
-                only changed when the cursor enters a new window, and not
-                when exiting the current window.</para>
+              <para>Esta política é uma pequena extens&atilde;o de <quote>o foco segue o mouse</quote>.
+                Com o foco seguindo o mouse, se o mouse é movido para
+                a janela raiz (ou a area de trabalho) ent&atilde;o nenhuma janela tem o foco,
+                e o acionamento do teclado é simplesmente perdido. Com o foco desleixado, o foco é
+                modificado apenas quando o cursor entra em uma nova janela, e n&atilde;o
+                quando se sai da janela atual.</para>
             </listitem>
           </varlistentry>
 
           <varlistentry>
-            <term>click-to-focus</term>
+            <term>clique para focar</term>
 
             <listitem>
-              <para>The active window is selected by mouse click.  The
-                window may then be <quote>raised</quote>, and appear in
-                front of all other windows.  All keystrokes will now be
-                directed to this window, even if the cursor is moved to
-                another window.</para>
+              <para>A janela ativa é selecionada pelo clique do mouse. A
+                janela pode ent&atilde;o ser <quote>elevada</quote>, e aparecer na
+                frente de todas as demais janelas. Todo acionamento do teclado ser&atilde;o agora
+                direcionados para essa janela, mesmo se o cursor for movido para
+                outra janela.</para>
             </listitem>
           </varlistentry>
         </variablelist>
