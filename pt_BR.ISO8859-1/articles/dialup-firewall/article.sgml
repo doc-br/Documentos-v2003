@@ -35,7 +35,7 @@
     <abstract>
       <para>Este artigo documenta como configurar um firewall
 	utilizando uma conex&atilde;o discada com o FreeBSD e o IPFW, e
-	especificamente como implementar implementar um firewall de
+	especificamente como implementar um firewall de
 	filtragem de pacotes em cima de um endere&ccedil;o IP atribuido
 	dinamicamente.  Este documento n&atilde;o aborda a configura&ccedil;&atilde;o da sua
 	conex&atilde;o PPP propriamente dita.</para>
@@ -47,11 +47,11 @@
 
     <para>Dialup Firewalling with FreeBSD</para>
 
-     <para>Este documento aborda o processo o qual &eacute; necess&aacute;rio para
+     <para>Este documento aborda o processo necess&aacute;rio para
        configurar um firewall de filtragem de pacotes com o freebsd
        quando o seu IP &eacute; atribuido dinamicamente pelo seu provedor.
-       Realizei todo o esfor&ccedil;o possivel para fazer este documento t&atilde;o
-       informativo e correto quanto possivel, seus emails com
+       Realizei todo o esfor&ccedil;o poss&iacute;vel para fazer este documento t&atilde;o
+       informativo e correto quanto poss&iacute;vel, seus emails com
        coment&aacute;rios e sugest&otilde;es s&atilde;o bem vindos e devem ser enviados
        para <email>marcs@draenor.org</email>.</para>
    </sect1>
@@ -60,11 +60,11 @@
     <title>Op&ccedil;&otilde;es do Kernel</title>
 
     <para>A primeira coisa que voc&ecirc; necessitar&aacute; fazer &eacute; recompilar o
-      seu kernel.  Se voc&ecirc; precisa de maiores informa&ccedil;&otilde;es sovre como
+      seu kernel.  Se voc&ecirc; precisa de maiores informa&ccedil;&otilde;es sobre como
       recompilar o kernel, ent&atilde;o o melhor lugar para iniciar &eacute; a
       <ulink URL="../../books/handbook/kernelconfig.html">sess&atilde;o sobre
       configura&ccedil;&atilde;o do kernel no Handbook</ulink>.  Voc&ecirc; precisa
-      adicionar as seguintes op&ccedil;&otilde;es no seu arquivo de configura&ccedil;&atilde;o do
+      adicionar as seguintes op&ccedil;&otilde;es ao seu arquivo de configura&ccedil;&atilde;o do
       kernel:</para>
 
     <variablelist>
@@ -82,7 +82,7 @@
 	<listitem>
 	  <para>Habilita a nova vers&atilde;o do IPFW.</para>
 	  <important><para>S&oacute; fa&ccedil;a isso se voc&ecirc; estiver executando o
-	  FreeBSD 4.X, este &eacute; o padr&atilde;o  nas vers&otilde;es mais recentes do
+	  FreeBSD 4.X, este &eacute; o padr&atilde;o nas vers&otilde;es mais recentes do
 	  FreeBSD.</para></important>
 	</listitem>
       </varlistentry>
@@ -122,7 +122,7 @@
       os quais voc&ecirc; pode compilar no seu Kernel para algum acr&eacute;scimo de
       seguran&ccedil;a.  Eles n&atilde;o s&atilde;o requeridos para colocar o firewall para
       funcionar, mas alguns usu&aacute;rios mais paran&oacute;icos podem desejar
-      utiliza-los.</para>
+      utiliz&aacute;-los.</para>
     
     <variablelist>
       <varlistentry>
@@ -130,9 +130,9 @@
 
 	<listitem>
 	  <para>Esta op&ccedil;&atilde;o ignora os pacotes TCP com SYN e FIN.  Isto
-	    impede que ferramentas como <filename
+	    impede que ferramentas tais como o <filename
 	    role="package">security/nmap</filename> de identificar a
-	    pilha TCP/IP de uma maquina, mas quebra o suporte as
+	    pilha TCP/IP de uma maquina, mas isto quebra o suporte as
 	    extens&otilde;es previstas na RFC1644.  Isto n&atilde;o &eacute; recomendado se
 	    a m&aacute;quina for executar um servidor web.</para>
 	</listitem>
@@ -158,7 +158,7 @@ natd_enable="YES"
 natd_interface="tun0"
 natd_flags="-dynamic"</programlisting>
 
-    <para>iMara maiores informa&ccedil;&otilde;es sobre a fun&ccedil;&atilde;o destas instru&ccedil;&otilde;es,
+    <para>Para maiores informa&ccedil;&otilde;es sobre a fun&ccedil;&atilde;o destas instru&ccedil;&otilde;es,
       consulte o <filename>/etc/defaults/rc.conf</filename> e leia o
       &man.rc.conf.5;</para>
   </sect1>
@@ -166,10 +166,10 @@ natd_flags="-dynamic"</programlisting>
   <sect1>
     <title>Desabilite a tradu&ccedil;&atilde;o de endere&ccedil;os de rede do PPP</title>
 
-    <para>Voc&ecirc; j&aacute; pdoe estar utilizando a tradu&ccedil;&atilde;o de endere&ccedil;os de
+    <para>Voc&ecirc; j&aacute; pode estar utilizando a tradu&ccedil;&atilde;o de endere&ccedil;os de
       rede (NAT) integrante do PPP.  Se este &eacute; o caso ent&atilde;o voc&ecirc; ter&aacute;
-      que desabilit&aacute;-lo, como estes exemplos utilize o &man.natd.8;
-      para fazer o mesmo.</para>
+      que desabilit&aacute;-lo, e ap&oacute;s ir&aacute; utilizar o &man.natd.8; para fazer 
+      o mesmo, como mostrado nos exemplos.</para>
     
     <para>Se voc&ecirc; j&aacute; tiver um bloco de entradas para iniciar
       automaticamente o PPP, ele provavelmente ir&aacute; se parecer com
@@ -180,7 +180,7 @@ ppp_mode="auto"
 ppp_nat="YES"
 ppp_profile="<replaceable>profile</replaceable>"</programlisting>
 
-    <para>Se assim, voc&ecirc; necessitar&aacute; desabilitar especificamente o
+    <para>Voc&ecirc; necessitar&aacute; desabilitar especificamente o
       <literal>ppp_nat</literal> certificando-se de que voc&ecirc; tenha a
       entrada <literal>ppp_nat="NO"</literal> no seu
       <filename>/etc/rc.conf</filename>.  Voc&ecirc; tamb&eacute;m necessitar&aacute;
@@ -193,17 +193,17 @@ ppp_profile="<replaceable>profile</replaceable>"</programlisting>
     <title>O conjunto de regras para o firewall</title>
 
     <para>N&oacute;s estamos pr&oacute;ximos do final agora.  Tudo o que resta agora
-      &eacute; definir as regras do firewall e ent&atilde;o n&oacute;s podemos rebootar a
-      maquina e o firewall dever&aacute; estar de p&eacute; e rodando.  Eu fa&ccedil;o
-      desta forma, as outras pessoas podem desejar algo liveiramente
+      &eacute; definir as regras do firewall e ent&atilde;o n&oacute;s poderemos rebootar a
+      maquina e o firewall dever&aacute; estar de p&eacute; e rodando quando ela
+      subir.  Eu fa&ccedil;o desta forma, outras pessoas podem desejar algo ligeiramente
       diferente quando forem implementar as suas proprias regras de
       base.  O que eu tentei fazer foi escrever um conjunto de regras
       que se aplique a maioria dos usu&aacute;rios dialup.  Voc&ecirc; pode
-      obviamente modifica-las adequando-as as suas necessidades,
+      obviamente modific&aacute;-las adequando-as as suas necessidades,
       utilizando as regras seguintes como ponto de partida para a
       cria&ccedil;&atilde;o das suas proprias regras.  Primeiro, vamos iniciar com
       um firewall fechado b&aacute;sico.  O que voc&ecirc; precisa fazer &eacute; negar
-      tudo por padr&atilde;o, e ent&atilde;o liberar o acesso apenas as coisas que
+      tudo por padr&atilde;o, e ent&atilde;o liberar o acesso apenas &agrave;s coisas que
       voc&ecirc; realmente precisar.  As regras devem estar dispostas de
       forma a liberar primeiro e ent&atilde;o negar.  A premissa &eacute; que voc&ecirc;
       adicione as regras para o que for liberado, e ent&atilde;o tudo mais &eacute;
@@ -263,12 +263,12 @@ $fwcmd add allow icmp from any to any icmptypes 0,3,8,11,12,13,14
 $fwcmd add deny log ip from any to any</programlisting>
 
     <para>Agora voc&ecirc; tem um firewall completamente funcional o qual
-    ir&aacute; permitir conex&otilde;es nas portas 22 e 80 e ir&aacute; logar qualquer
-    outra tentativa de conex&atilde;o.  Agora, voc&ecirc; j&aacute; esta apto a rebootar o
-    seu equipamento em seguran&ccedil;a e o seu firewall deveria subir
-    perfeitamente.  Se voc&ecirc; achar que isto esta incorreto de alguma
-    forma ou experimentar algum problema, ou tiver alguma sugest&atilde;o
-    para mlehorar esta p&aacute;gina, por favor envie-me um email.M/para>
+      ir&aacute; permitir conex&otilde;es nas portas 22 e 80 e ir&aacute; logar qualquer
+      outra tentativa de conex&atilde;o.  Agora, voc&ecirc; j&aacute; esta apto a rebootar o
+      seu equipamento em seguran&ccedil;a e o seu firewall deveria subir
+      perfeitamente.  Se voc&ecirc; achar que isto esta incorreto de alguma
+      forma ou experimentar algum problema, ou tiver alguma sugest&atilde;o
+      para melhorar esta p&aacute;gina, por favor envie-me um email.</para>
     
   </sect1>
 
@@ -291,13 +291,13 @@ $fwcmd add deny log ip from any to any</programlisting>
 	    <command>ppp</command>.  Nas discuss&otilde;es que eu tive
 	    com outras pessoas sobre este assunto, o consenso parece
 	    ser de que enquanto o <command>ipfw</command> &eacute; certamente mais
-	    poderoso e mais configuravel do que a capacidade nativa de
+	    poderoso e mais configur&aacute;vel do que a capacidade nativa de
 	    filtragem do <command>ppp</command>, o que ele compensa na
 	    funcionalidade perde em na facilidade de se customizar.
-	    Uma das raz&otilde;es d eo porque eu o utilizo &eacute; porque eu
-	    prefiro ter a filtragem de pacotes realizada a nivel de
-	    kernel do que a nivel de um programa de nivel de
-	    usu&aacute;rio.</para>
+	    Uma das raz&otilde;es de porque eu o utilizo &eacute; porque eu
+	    prefiro ter a filtragem de pacotes realizada a n&iacute;vel de
+	    kernel do que a n&iacute;vel de um programa
+	    <literal>userland</literal>.</para>
 	</answer>
       </qandaentry>
 
@@ -313,7 +313,7 @@ $fwcmd add deny log ip from any to any</programlisting>
 	  <para>Isto significa somente que a contagem m&aacute;xima de log
 	    para esta regra foi atingida.  A regra propriamente dita
 	    continua funcionando, mas n&atilde;o ser&aacute; mais logada at&eacute; que
-	    voc&ecirc; resete a contagem do log.  Voce pode resetar esta
+	    voc&ecirc; resete a contagem do log.  Voc&ecirc; pode resetar esta
 	    contagem com o comando <command>ipfw resetlog</command>.
 	    Alternativamente, voc&ecirc; pode aumentar o limite de log no
 	    seu arquivo de configura&ccedil;&atilde;o do kernel com a op&ccedil;&atilde;o
@@ -357,23 +357,25 @@ $fwcmd add deny log ip from any to any</programlisting>
         </question>
 
 	<answer>
-	  <para>This tutorial assumes that you are running
-	    <emphasis>userland-ppp</emphasis>, therefore the supplied rule set
-	    operates on the <devicename>tun0</devicename> interface, which
-	    corresponds to the first connection made with &man.ppp.8; (a.k.a.
-	    <emphasis>user-ppp</emphasis>).  Additional connections would use
-	    <devicename>tun1</devicename>, <devicename>tun2</devicename> and so
-	    on.</para>
-
-	  <para>You should also note that &man.pppd.8; uses the
-	    <devicename>ppp0</devicename> interface instead, so if you
-	    start the connection with &man.pppd.8; you must substitute
-	    <devicename>tun0</devicename> for
-	    <devicename>ppp0</devicename>.  A quick way to edit the
-	    firewall rules to reflect this change is shown below. The
-	    original rule set is backed up as
+	  <para>Este tutorial assum que voc&ecirc; est&aacute; executando o
+	    <emphasis>userland-ppp</emphasis>, ent&atilde;o o conjunto de
+	    regras disponibilizado opera com a interface
+	    <devicename>tun0</devicename> , a qual corresponde a
+	    primeira conex&atilde;o realizada com o &man.ppp.8; (tamb&eacute;m
+	    conhecido como <emphasis>user-ppp</emphasis>).  Conex&otilde;es
+	    adicionais ir&atilde;o utilizar <devicename>tun1</devicename>,
+	    <devicename>tun2</devicename>, etc.</para>
+	  
+	  <para>Voc&ecirc; tamb&eacute;m deve observar que o &man.pppd.8; por sua
+	    vez utiliza a interface  <devicename>ppp0</devicename>,
+	    assim se voc&ecirc; iniciar a conex&atilde;o com o &man.pppd.8; voc&ecirc;
+	    precisa subistituir as ocorrencias de <devicename>tun0i
+	    </devicename> nas regras por <devicename>ppp0</devicename>.  
+	    Uma forma r&aacute;pida de editar as regras do firewall para
+	    refletir esta mudan&ccedil;a &eacute; mostrada abaixo.  O arquivo
+	    original de regras deve ser backupeado como
 	    <filename>fwrules_tun0</filename>.</para>
-
+	  
 	  <screen>	    &prompt.user; <userinput>cd /etc/firewall</userinput>
 	    /etc/firewall&prompt.user; <userinput>su</userinput>
 	    <prompt>Password:</prompt>
@@ -381,32 +383,33 @@ $fwcmd add deny log ip from any to any</programlisting>
 	    /etc/firewall&prompt.root; <userinput>cat fwrules_tun0 | sed s/tun0/ppp0/g > fwrules</userinput>
 	  </screen>
 
-	  <para>To know whether you are currently using &man.ppp.8; or
-	    &man.pppd.8; you can examine the output of
-	    &man.ifconfig.8; once the connection is up. E.g., for a
-	    connection made with &man.pppd.8; you would see something
-	    like this (showing only the relevant lines):</para>
-
+	  <para>Para saber se voc&ecirc; est&aacute; utilizando o &man.ppp.8; ou o
+	    &man.pppd.8; voc&ecirc; pode examinar a saida do comando
+	    &man.ifconfig.8; quando a conex&atilde;o estiver ativa.  Por
+	    exemplo, para uma conex&atilde;o estabelecida com o  &man.pppd.8;
+	    voc&ecirc; deve ver algo semelhante a isto (abaixo seguem apenas
+	    as linhas relevantes):</para>
+	  
 	  <screen>	    &prompt.user; <userinput>ifconfig</userinput>
-	    <emphasis>(skipped...)</emphasis>
+	    <emphasis>(omitido...)</emphasis>
 	    ppp0: flags=<replaceable>8051&lt;UP,POINTOPOINT,RUNNING,MULTICAST&gt; mtu 1524</replaceable>
                     inet <replaceable>xxx.xxx.xxx.xxx</replaceable> --&gt; <replaceable>xxx.xxx.xxx.xxx</replaceable> netmask <replaceable>0xff000000</replaceable>
-	    <emphasis>(skipped...)</emphasis>
+	    <emphasis>(omitido...)</emphasis>
 	    </screen>
 
-	  <para>On the other hand, for a connection made with
-	    &man.ppp.8; (<emphasis>user-ppp</emphasis>) you should see
-	    something similar to this:</para>
-
+	  <para>Por outro lado, para uma conex&atilde;o estabelecida com o
+	    &man.ppp.8; (<emphasis>user-ppp</emphasis>) voc&ecirc; deve ver
+	    alguma coisa semelhante a isto:</para>
+	  
 	  <screen>	    &prompt.user; <userinput>ifconfig</userinput>
-	    <emphasis>(skipped...)</emphasis>
+	    <emphasis>(omitido...)</emphasis>
 	    ppp0: flags=<replaceable>8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1500</replaceable>
 	    <emphasis>(skipped...)</emphasis>
 	    tun0: flags=<replaceable>8051&lt;UP,POINTOPOINT,RUNNING,MULTICAST&gt; mtu 1524</replaceable>
 	            <emphasis>(IPv6 stuff skipped...)</emphasis>
                     inet <replaceable>xxx.xxx.xxx.xxx</replaceable> --&gt; <replaceable>xxx.xxx.xxx.xxx</replaceable> netmask <replaceable>0xffffff00</replaceable>
                     Opened by PID <replaceable>xxxxx</replaceable>
-            <emphasis>(skipped...)</emphasis></screen>
+            <emphasis>(omitido...)</emphasis></screen>
 	</answer>
       </qandaentry>
     </qandaset>
