@@ -13,7 +13,8 @@
     <indexterm><primary>ports</primary></indexterm>
     <indexterm><primary>packages</primary></indexterm>
     <para>O FreeBSD tem como parte de seu pacote b&aacute;sico uma vasta
-    cole&ccedil;ao de ferramentas de sistemas. Contudo,
+    cole&ccedil;ao de ferramentas de sistemas. Contudo, existe muito a ser
+    feito antes de instalar um aplicativo adicional 
     
     FreeBSD is bundled with a rich collection of system tools as
       part of the base system.  However, there is only so much one can
@@ -25,67 +26,72 @@
       newest version of your favorite applications from local media or
       straight off the network.</para>
 
-    <para>After reading this chapter, you will know:</para>
+    <para>Ap&oacute;s ler este capitulo voc&ecirc; ir&aacute; conhecer:</para>
 
     <itemizedlist>
       <listitem>
-	<para>How to install third-party binary software packages.</para>
+	<para>Como instalar aplicativos a partir de pacotes bin&aacute;rios do 
+	software.</para>
       </listitem>
       <listitem>
-	<para>How to build third-party software from the ports
-	collection.</para>
+	<para>Como compilar aplicativos a partir da cole&ccedil;&atilde;o do Ports.</para>
       </listitem>
       <listitem>
-	<para>How to remove previously installed packages or ports.</para>
+	<para>Como remover aplicativos instalados pr&eacute;viamente atrav&eacute;s 
+	de pacotes ou do ports.</para>
       </listitem>
       <listitem>
-	<para>How to override the default values that the ports
-	  collection uses.</para>
+	<para>Como sobrescrever os valores padr&otilde;es utilizados pela cole&ccedil;&atilde;o 
+	de ports.</para>
       </listitem>
       <listitem>
-	<para>How to upgrade your ports.</para>
+	<para>Como atualizar sua cole&ccedil;&atilde;o de ports.</para>
       </listitem>
     </itemizedlist>
   </sect1>
 
   <sect1 id="ports-overview">
-    <title>Overview of Software Installation</title>
+    <title>Vis&atilde;o geral do processo de instala&ccedil;&atilde;o de software</title>
 
-    <para>If you have used a &unix; system before you will know that the typical
-      procedure for installing third party software goes something like
-      this:</para>
+    <para>Se voc&ecirc; j&aacute; utilizou um sistema &unix; anteriormente, voc&ecirc;
+    deve saber que o procedimento tipico para instalar um aplicativo 
+    &eacute; parecido com isto:</para>
 
     <procedure>
       <step>
-	<para>Download the software, which might be distributed in source code
-	  format, or as a binary.</para>
+	<para>Fa&ccedil;a o download do software, o qual pode ser distribuido 
+	como c&oacute;digo fonte ou no formato bin&aacute;rio.</para>
       </step>
 
       <step>
-	<para>Unpack the software from its distribution format (typically a
-	  tarball compressed with &man.compress.1;, &man.gzip.1;, or &man.bzip2.1;).</para>
+	<para>Descompacte o arquivo de distribui&ccedil;&atilde;o do software 
+	(tipicamente um tarball comprimido com &man.compress.1;, 
+	&man.gzip.1;, ou &man.bzip2.1;).</para>
       </step>
 
       <step>
-	<para>Locate the documentation (perhaps an <filename>INSTALL</filename> or <filename>README</filename>
-	  file, or some files in a <filename>doc/</filename> subdirectory) and
-	  read up on how to install the software.</para>
+	<para>Localize a documenta&ccedil;&atilde;o (normalmente &eacute; um arquivo chamado 
+	<filename>INSTALL</filename> ou <filename>README</filename>, ou 
+	ent&atilde;o um conjunto de arquivos no subdiret&oacute;rio <filename>doc/
+	</filename>) e descubra como instalar o software.</para>
       </step>
 
       <step>
-	<para>If the software was distributed in source format, compile it.
-	  This may involve editing a <filename>Makefile</filename>, or
-	  running a <command>configure</command> script, and other work.</para>
+	<para>Se o software for distribuido como c&oacute;digo fonte, compile-o.
+	  Isto pode envolver a edi&ccedil;&atilde;o de um arquivo <filename>Makefile
+	  </filename>, ou a execu&ccedil;&atilde;o de um script chamado <command>configure
+	  </command>, al&eacute;m de outras tarefas.</para>
       </step>
 
       <step>
-	<para>Test and install the software.</para>
+	<para>Teste e instale o software.</para>
       </step>
     </procedure>
 
-    <para>And that is only if everything goes well.  If you are installing a
-      software package that was not deliberately ported to FreeBSD you may
-      even have to go in and edit the code to make it work properly.</para>
+    <para>E &eacute; s&oacute; isso se tudo correu como esperado. Agora se voc&ecirc; est&aacute;
+    instalando um aplicativo que n&atilde;o foi deliberamente portado para o
+    FreeBSD, voc&ecirc; pode ter que fazer ajustes no c&oacute;digo fonte do mesmo 
+    para que ele compile corretamente.</para>
 
     <para>Should you want to, you can continue to install software the
       <quote>traditional</quote> way with FreeBSD.  However, FreeBSD
