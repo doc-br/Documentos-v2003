@@ -1152,70 +1152,86 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
   <sect1 id="ports-nextsteps">
     <title>Atividades p&oacute;s-instala&ccedil;&atilde;o</title>
 
-    <para>After installing a new application you will normally want to
-      read any documentation it may have included, edit any
-      configuration files that are required, ensure that the
-      application starts at boot time (if it is a daemon), and so
-      on.</para>
-
-    <para>The exact steps you need to take to configure each
-      application will obviously be different.  However, if you have
-      just installed a new application and are wondering <quote>What
-      now?</quote> these tips might help:</para>
-
+    <para>
+      Depois de instalar um novo aplicativo voc&ecirc; normalmente ir&aacute;
+      querer ler a documenta&ccedil;&atilde;o instalada com ele, editar algum
+      arquivo de configura&ccedil;&atilde;o necess&aacute;rio para o correto funcionamento
+      do aplicativo, certificar-se de que ele o aplicativo ir&aacute; iniciar
+      automaticamente no pr&oacute;ximo boot (se ele for um servidor) e assim
+      por diante.</para>
+    
+    <para>Os passos exatos necess&aacute;rios para configurar cada aplicativo
+    s&atilde;o obviamente diferentes. No entando, se voc&ecirc; acabou de instalar 
+    um novo aplicativo e est&aacute; se perguntando <quote>O que fazer agora ?
+    </quote>, as dicas abaixo podem ajud&aacute;-lo:</para>
+    
     <itemizedlist>
       <listitem>
-	<para>Use &man.pkg.info.1; to find out which files were installed,
-	  and where.  For example, if you have just
-	  installed FooPackage version 1.0.0, then this command</para>
-
+	<para>Utilize o comando &man.pkg.info.1; para descobrir quais aplicativos 
+	est&atilde;o instalados e onde eles est&atilde;o instalados. Por exemplo,
+	voc&ecirc; tiver instalado o aplicativo
+	<literal>FooPackage</literal> vers&atilde;o 1.0.0, ent&atilde;o o
+	comando</para>
+	
 	<screen>&prompt.root; <userinput>pkg_info -L foopackage-1.0.0 | less</userinput></screen>
 
-	<para>will show all the files installed by the package.  Pay
-	  special attention to files in <filename>man/</filename>
-	  directories, which will be manual pages,
-	  <filename>etc/</filename> directories, which will be
-	  configuration files, and <filename>doc/</filename>, which
-	  will be more comprehensive documentation.</para>
+	<para>Ir&aacute; exibir todos os arquivos instalados com o pacote.
+	Preste aten&ccedil;&atilde;o especial aos arquicos instalados no diret&oacute;rio
+	<filename>man/</filename>, pois eles s&atilde;o os manuais dos
+	aplicativos que compoem o pacote, Tamb&eacute;m preste aten&ccedil;&atilde;o aos
+	arquivos instalados no diret&oacute;rio <filename>etc/</filename>,
+	pois s&atilde;o os arquivos de configura&ccedil;&atilde;o, e por fim preste aten&ccedil;&atilde;o
+	aos arquivos instalados no diret&oacute;rio
+	<filename>doc/</filename>, pois nele ficam os documentos
+	complementares sobre o aplicativo.</para>
 
-	<para>If you are not sure which version of the application was
-	  just installed, a command like this</para>
+	<para>Se voc&ecirc; n&atilde;o tem certeza de qual vers&atilde;o do aplicativo
+	esta instalada, utilize um comando semelhante ao abaixo</para>
 
 	<screen>&prompt.root; <userinput>pkg_info | grep -i <replaceable>foopackage</replaceable></userinput></screen>
 
-	<para>will find all the installed packages that have
-	  <replaceable>foopackage</replaceable> in the package name.
-	  Replace <replaceable>foopackage</replaceable> in your
-	  command line as necessary.</para>
+	<para>Ir&aacute; procurar todos os aplicativos instalados que possuem
+	a palavra <replaceable>foopackage</replaceable> no nome.
+	Substitua a palavra <replaceable>foopackage</replaceable> no
+	seu comando de acordo com sua necessidade.</para>
       </listitem>
 
       <listitem>
-	<para>Once you have identified where the application's manual
-	  pages have been installed, review them using &man.man.1;.
-	  Similarly, look over the sample configuration files, and any
-	  additional documentation that may have been provided.</para>
+	<para>
+	  Uma vez que voc&ecirc; tiver identificado as paginas de manual
+	  instaladas com o seu aplicativo, utilize o comando
+	  &man.man.1; para visualiz&aacute;-las. De forma an&aacute;loga, leia os
+	  arquivos de configura&ccedil;&atilde;o instalados como exemplo, bem como
+	  qualquer outra documenta&ccedil;&atilde;o complementar que tenha sido
+	  disponibilizada.</para>
       </listitem>
 
       <listitem>
-	<para>If the application has a web site, check it for
-	  additional documentation, frequently asked questions, and so
-	  forth.  If you are not sure of the web site address it may
-	  be listed in the output from</para>
-
+	<para>Se o aplicativo possuir um <literal>web site</literal>,
+	fa&ccedil;a uma visita e verifique se ele disponibiliza alguma documenta&ccedil;&atilde;o 
+	adicional, uma lista com as perguntas e repostas mais
+	frequentes, e assim por diante. Se voc&ecirc; n&atilde;o tiver certeza do
+	endere&ccedil;o do <literal>web site</literal> do aplicativo, ele
+	pode ser listado na saida do comando</para>
+	
 	<screen>&prompt.root; <userinput>pkg_info <replaceable>foopackage-1.0.0</replaceable></userinput></screen>
 	
-	<para>A <literal>WWW:</literal> line, if present, should provide a URL
-	  for the application's web site.</para>
+	<para>Verifique se existe uma linha iniciada por <literal>WWW:</literal>
+	, se ela estiver presente, voc&ecirc; tera descoberto o endere&ccedil;o do <literal>web 
+	site</literal> do aplicativo.</para>
+	
       </listitem>
 
       <listitem>
-	<para>Ports that should start at boot (such as Internet
-	  servers) will usually install a sample script in
-	  <filename>/usr/local/etc/rc.d</filename>.  You should
-	  review this script for correctness and edit or rename it if
-	  needed.  See <link
-	  linkend="configtuning-starting-services">Starting
-	  Services</link> for more information.</para>
+	<para>
+	  Os aplicativos que inicializam no boot (aplicativos servidores) 
+	  ir&atilde;o instalar um script shell no diret&oacute;rio
+	  <filename>/usr/local/etc/rc.d</filename>. 
+	  Voce deve verificar este script para ter certeza de que est&aacute; 
+	  correto, editando-o ou renomeando-o se for necess&aacute;rio. 
+	  Consulte a sess&atilde;o <link
+	  linkend="configtuning-starting-services">Iniciando Servi&ccedil;os
+	  </link> para maiores informa&ccedil;&otilde;es.</para>
       </listitem>
     </itemizedlist>
   </sect1>
