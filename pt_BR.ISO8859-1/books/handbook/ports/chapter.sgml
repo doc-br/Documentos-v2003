@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: doc/en_US.ISO8859-1/books/handbook/ports/chapter.sgml,v 1.207 2003/09/09 12:21:13 simon Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/ports/chapter.sgml,v 1.22 2003/12/09 15:18:21 ebrandi Exp $
 -->
 
 <chapter id="ports">
@@ -14,15 +14,15 @@
     <indexterm><primary>packages</primary></indexterm>
     <para>
       O FreeBSD tem como parte de seu pacote b&aacute;sico uma vasta
-      cole&ccedil;ao de ferramentas de sistemas. No entanto, &eacute;
+      cole&ccedil;ao de ferramentas de sistemas.  &eacute;
       poss&iacute;vel fazer muita coisa antes de ter que instalar
-      aplicativos adicionais de terceiros para trabalhar de verdade. O
+      aplicativos adicionais de terceiros para trabalhar de verdade.  O
       FreeBSD disponibiliza duas tecnologias complementares para a
-      instala&ccedil;&atilde;o de aplicativos em seu sistema: A
-      cole&ccedil;&atilde;o de ports do FreeBSD, e pacotes
-      bin&aacute;rios de software. Qualquer um dos dois sistemas pode
+      instala&ccedil;&atilde;o de aplicativos em seu sistema:  A
+      cole&ccedil;&atilde;o de <foreignphrase>ports</foreignphrase> do FreeBSD, e pacotes
+      bin&aacute;rios de <foreignphrase>software</foreignphrase>.  Qualquer um dos dois sistemas pode
       ser utilizado para instalar as ver&otilde;es mais recentes das
-      suas aplica&ccedil;&otilde;es preferidas apartir de uma media
+      suas aplica&ccedil;&otilde;es preferidas a partir de uma m&iacute;dia
       local ou ent&atilde;o direto da rede.</para>
       
     <para>Ap&oacute;s ler este capitulo voc&ecirc; ir&aacute;
@@ -31,11 +31,11 @@
     <itemizedlist>
       <listitem>
 	<para>Como instalar aplicativos a partir de pacotes
-	  bin&aacute;rios do software.</para>
+	  bin&aacute;rios do <foreignphrase>software</foreignphrase>.</para>
       </listitem>
       <listitem>
 	<para>Como compilar aplicativos a partir da
-	  cole&ccedil;&atilde;o do Ports.</para>
+	  cole&ccedil;&atilde;o do <foreignphrase>Ports</foreignphrase>.</para>
       </listitem>
       <listitem>
 	<para>Como remover aplicativos instalados pr&eacute;viamente
@@ -44,18 +44,18 @@
       </listitem>
       <listitem>
 	<para>Como sobrescrever os valores padr&otilde;es utilizados
-	  pela cole&ccedil;&atilde;o de ports.</para>
+	  pela cole&ccedil;&atilde;o de <foreignphrase>ports</foreignphrase>.</para>
       </listitem>
       <listitem>
 	<para>Como atualizar sua cole&ccedil;&atilde;o de
-	  ports.</para>
+	  <foreignphrase>ports</foreignphrase>.</para>
       </listitem>
     </itemizedlist>
   </sect1>
 
   <sect1 id="ports-overview">
     <title>Vis&atilde;o geral do processo de instala&ccedil;&atilde;o
-      de software</title>
+      de <foreignphrase>software</foreignphrase></title>
 
     <para>Se voc&ecirc; j&aacute; utilizou um sistema &unix;
       anteriormente, voc&ecirc; deve saber que o procedimento tipico
@@ -70,7 +70,7 @@
 
       <step>
 	<para>Descompacte o arquivo de distribui&ccedil;&atilde;o do software 
-	  (tipicamente um tarball comprimido com &man.compress.1;, 
+	  (tipicamente um <foreignphrase>tarball</foreignphrase> comprimido com &man.compress.1;, 
 	&man.gzip.1;, ou &man.bzip2.1;). </para>
       </step>
 
@@ -79,7 +79,7 @@
 	  &eacute; um arquivo chamado <filename>INSTALL</filename> ou
 	  <filename>README</filename>, ou ent&atilde;o um conjunto de
 	  arquivos no subdiret&oacute;rio <filename>doc/ </filename>)
-	  e descubra como instalar o software.</para>
+	  e descubra como instalar o <foreignphrase>software</foreignphrase>.</para>
       </step>
 
       <step>
@@ -104,9 +104,9 @@
 
     <para>Se voc&ecirc; desejar, voc&ecirc; pode continuar instalando
       aplicativos no FreeBSD pelo m&eacute;todo
-      <quote>tradicional</quote>. Contudo, o FreeBSD disponibiliza
+      <quote>tradicional</quote>.  Contudo, o FreeBSD disponibiliza
       duas tecnologias que podem lhe economizar muito esfor&ccedil;o:
-      <literal>packages</literal> e <literal>ports</literal>. No
+      <literal>packages</literal> e <literal>ports</literal>.  No
       momento, mais de &os.numports; aplicativos j&aacute; foram
       disponibilizados desta forma.</para>
     
@@ -120,35 +120,36 @@
     de um novo aplicativo pode ser realizada atrav&eacute;s da execu&ccedil;&atilde;o de um
     unico comando.</para>
 
-    <para>Um port FreeBSD para um aplicativo consiste-se em uma
+    <para>Um <foreignphrase>port</foreignphrase> FreeBSD para um aplicativo consiste-se em uma
       cole&ccedil;&atilde;o de arquivos destinados a automatizar o
       processo de compila&ccedil;&atilde;o da aplica&ccedil;&atilde;o
-      apartir do seu c&oacute;digo fonte.</para> 
+      a partir do seu c&oacute;digo fonte.</para> 
     
     <para>Lembre-se que existem diversos passos que voc&ecirc; teria
-      que executar para compilar o programa manualmente (download,
-      descompactar, aplicar patch, compilar e instalar). Os arquivos
+      que executar para compilar o programa manualmente ( baixar ,
+      descompactar, aplicar corre&ccedil;&otilde;es, compilar e instalar).  Os arquivos
       de um port cont&eacute;m todas as informa&ccedil;&otilde;es
       necess&aacute;rias para possibilitar que o sistema automatize o
-      processo para voc&ecirc;. Voc&ecirc; executa um conjunto de
+      processo para voc&ecirc;.  Voc&ecirc; executa um conjunto de
       comandos simples e o c&oacute;digo fonte do aplicativo &eacute;
-      automaticamente baixado, descompactado, patcheado, compilado e
+      automaticamente baixado, descompactado, corrigido, compilado e
       instalado para voc&ecirc;.</para> 
     
-    <para>De fato, o systema de ports pode ser utilizado para pacotes
+    <para>De fato, o sistema de <foreignphrase>ports</foreignphrase> pode ser utilizado para pacotes
       bin&aacute;rios do aplicativo, o qual pode ser manipulado mais
       tarde atrav&eacute;s do comando <command>pkg_add</command>, ou
       por qualquer outro comando de gerenciamento de pacotes, os quais
-      iremos introduzir em instantes.</para>
+      iremos introduzir adiante.</para>
     
     <para>Ambos os sistemas de instala&ccedil;&atilde;o cuidam da
       instala&ccedil;&atilde;o das
-      <emphasis>depend&ecirc;ncias</emphasis> do aplicativo. Suponha
+      <emphasis>depend&ecirc;ncias</emphasis> do aplicativo.  Suponha
       que voc&ecirc; deseja instalar uma aplica&ccedil;&atilde;o que
-      depende de uma biblioteca especifica para funcionar. Tanto o
+      depende de uma biblioteca espec&iacute;fica para funcionar.  Tanto o
       aplicativo quanto a biblioteca s&atilde;o disponibilizadas no
-      FreeBSD como pacote e como ports. Se voce utilizar o comando
-      <command>pkg_add</command> ou o sistema de ports para adicionar
+      FreeBSD como pacote e como <foreignphrase>ports</foreignphrase>.  
+      Se voc&ecirc; utilizar o comando
+      <command>pkg_add</command> ou o sistema de <foreignphrase>ports</foreignphrase> para adicionar
       o aplicativo, ambos ir&atilde;o informar que a biblioteca
       necess&aacute;ria para o funcionamento do aplicativo n&atilde;o
       est&aacute; instalada corretamente e ir&atilde;o instalar
@@ -156,30 +157,30 @@
       aplicativo.</para>
     
     <para>dado que ambas as tecnologias s&atilde;o muito similares,
-      voc&ecirc; deve querer saber o porque o FreeBSD se preocupa com
-      as duas. Os sistemas de pacotes e ports possuem suas
-      pr&oacute;prias virtudes, e qual voc&ecirc; ir&aacute; utilizar
-      depender&aacute; da sua preferencia pessoal.</para>
+      voc&ecirc; deve querer saber porque o FreeBSD se preocupa com
+      as duas.  Os sistemas de pacotes e <foreignphrase>ports</foreignphrase> possuem suas
+      pr&oacute;prias virtudes, a que voc&ecirc; ir&aacute; utilizar
+      depender&aacute; da sua prefer&ecirc;ncia pessoal.</para>
     
     <itemizedlist>
-      <title>Beneficios do sistema de Pacotes</title>
+      <title>Benef&iacute;cios do sistema de Pacotes</title>
       
       <listitem>
-	<para>Um pacote tarball comprimido dos bin&aacute;rios do
-	  aplicativo &eacute; normalmente menor que um tarball
+	<para>Um pacote <foreignphrase>tarball</foreignphrase> comprimido dos bin&aacute;rios do
+	  aplicativo &eacute; &eacute; normalmente menor que um <foreignphrase>tarball</foreignphrase>
 	  compactado contendo o c&oacute;digo fonte do mesmo
-	  aplicativo</para>
+	  aplicativo.</para>
       </listitem>
 
       <listitem>
 	<para>Um pacote n&atilde;o requer nenhuma
-	  compila&ccedil;&atilde;o adicional. Para os grandes
+	  compila&ccedil;&atilde;o adicional.  Para os grandes
 	  aplicativos como por exemplo
 	  <application>Mozilla</application>,
-	  <application>KDE</application>, or
+	  <application>KDE</application>, ou
 	  <application>GNOME</application> isto pode ser importante,
-	  particularmente se voc&ecirc; est&aacute; utilizando um
-	  sistema lento.</para>
+	  particularmente se voc&ecirc; est&aacute; utilizando uma
+	  m&aacute;quina lenta.</para>
       </listitem>
 
       <listitem>
@@ -190,17 +191,17 @@
     </itemizedlist>
 
     <itemizedlist>
-      <title>Beneficios do Sistema de ports</title>
+      <title>Benef&iacute;cios do Sistema de <foreignphrase>ports</foreignphrase></title>
       
       <listitem>
 	<para>
 	  Um pacote &eacute; compilado normalmente com
 	  op&ccedil;&otilde;es conservadoras, pois ele tem que
-	  executar no maior numero de sistemas possivel. Ao instalar
-	  apartir do ports, voc&ecirc; pode ajustar as
+	  executar no maior numero de sistemas possivel.  Ao instalar
+	  a partir do <foreignphrase>ports</foreignphrase>, voc&ecirc; pode ajustar as
 	  op&ccedil;&otilde;es de compila&ccedil;&atilde;o para (por
-	  exemplo) gerar um bin&aacute;rio especifico para
-	  processadores Pentiun IV ou para processadores
+	  exemplo) gerar um bin&aacute;rio espec&iacute;fico para
+	  processadores Pentium IV ou para processadores
 	  Athlon.</para>
       </listitem>
 
@@ -209,28 +210,28 @@
 	  Alguns aplicativos possuem op&ccedil;&otilde;es que
 	  s&atilde;o especificadas no ato da compila&ccedil;&atilde;o
 	  que est&atilde;o relacionadas ao que eles podem ou
-	  n&atilde;o fazer. Por exemplo, o
+	  n&atilde;o fazer.  Por exemplo, o
 	  <application>Apache</application> pode ser configurado no
 	  momento de sua compila&ccedil;&atilde;o com uma grande
-	  variedade de op&ccedil;&otilde;es. Ao compilar apartir do
-	  port voce n&atilde;o &eacute; obrigado a aceitar as
-	  op&ccedil;&otilde;es default, e pode defini-las de acordo
+	  variedade de op&ccedil;&otilde;es.  Ao compilar a partir do
+	  <foreignphrase>port</foreignphrase> voce n&atilde;o &eacute; obrigado a aceitar as
+	  op&ccedil;&otilde;es <foreignphrase>default</foreignphrase>, e pode defini-las de acordo
 	  com suas necessidades.</para>
 	  
 	<para>
 	  Em alguns casos, ir&atilde;o existir multiplos pacotes de um
 	  mesmo aplicativo para especificar certas
-	  op&ccedil;&otilde;es. Por exemplo, o aplicativo
+	  op&ccedil;&otilde;es.  Por exemplo, o aplicativo
 	  <application>Ghostscript</application> esta
 	  dispon&iacute;vel em dois pacotes,
 	  <filename>ghostscript</filename> e
 	  <filename>ghostscript-nox11</filename>, voc&ecirc;
 	  ir&aacute; optar por um ou por outro dependendo se possui ou
-	  n&atilde;o um servidor X11 instalado. Esse tipo de ajuste
+	  n&atilde;o um servidor X11 instalado.  Esse tipo de ajuste
 	  fino &eacute; poss&iacute;vel de ser realizado com pacotes,
 	  mas se torna invi&aacute;vel se o aplicativo possuir mais de
-	  uma ou duas op&ccedil;&otilde;es em tempo de
-	  compila&ccedil;&atilde;o diferentes.</para>
+	  uma ou duas op&ccedil;&otilde;es, em tempo de
+	  compila&ccedil;&atilde;o, diferentes.</para>
       </listitem>
 
       <listitem>
@@ -243,16 +244,15 @@
       <listitem>
 	<para>
 	  Algumas pessoas n&atilde;o confiam em
-	  distribui&ccedil;&otilde;es bin&aacute;rias. tendo acesso ao
-	  c&oacute;digo fonte, voc&ecirc; pode (em teoria)
-	  inspecion&aacute;-lo e procurar por problemas potenciais
-	  voc&ecirc; mesmo.</para>
+	  distribui&ccedil;&otilde;es bin&aacute;rias.  Tendo acesso ao
+	  c&oacute;digo fonte, voc&ecirc; mesmo pode (em teoria)
+	  inspecion&aacute;-lo e procurar por problemas potenciais.</para>
       </listitem>
 
       <listitem>
-	<para>Se voc&ecirc; possui patches customizados, voc&ecirc;
+	<para>Se voc&ecirc; possui correções customizadas, voc&ecirc;
 	  vai precisar do c&oacute;digo fonte para poder
-	  aplic&aacute;-los.</para>
+	  aplic&aacute;-las.</para>
       </listitem>
 
       <listitem>
@@ -264,12 +264,13 @@
     </itemizedlist>
 
     <para>Para manter-se atualizado sobre a cole&ccedil;&atilde;o de
-      ports, inscreva-se nais listas &a.ports; e
+      <foreignphrase>ports</foreignphrase>, inscreva-se nais listas &a.ports; e
       &a.ports-bugs;.</para>
 
     <para>
       O restante deste capitulo ir&aacute; explicar como utilizar o
-      sistema de packages e o de ports para instalar e gerenciar
+      sistema de <foreignphrase>packages</foreignphrase> e o de 
+      <foreignphrase>ports</foreignphrase> para instalar e gerenciar
       aplicativos de terceiros no FreeBSD.</para>
   </sect1>
 
@@ -294,7 +295,7 @@
 	  atualizada de todos os aplicativos disponiveis e na qual
 	  voc&ecirc; pode executar buscas, em <ulink
 	    url="../../../../ports/index.html">
-	    http://www.FreeBSD.org/ports/</ulink>. O ports est&aacute;
+	    http://www.FreeBSD.org/ports/</ulink>.  O ports est&aacute;
 	  dividido em categorias, e voc&ecirc; pode efetuar buscas
 	  pelo nome do aplicativo (se voc&ecirc; souber qual
 	  &eacute;), ou ent&atilde;o olhar todos os aplicativos
@@ -304,12 +305,13 @@
       <indexterm><primary>FreshPorts</primary></indexterm>
 
       <listitem>
-	<para>Dan Langille mant&eacute;m o web site FreshPorts, em
-	  <ulink url="http://www.FreshPorts.org/"></ulink>.
-	  FreshPorts rastreia as altera&ccedil;&otilde;es nas
-	  aplica&ccedil;&otilde;es na &aacute;rvore do ports a medida
+	<para>Dan Langille mant&eacute;m o s&iacute;tio <foreignphrase>web</foreignphrase> 
+	<literal>FreshPorts</literal>, em
+	  <ulink url="http://www.FreshPorts.org/"></ulink>.  
+	  O <literal>FreshPorts</literal> rastreia as altera&ccedil;&otilde;es nas
+	  aplica&ccedil;&otilde;es na &aacute;rvore do <foreignphrase>ports</foreignphrase> a medida
 	  que elas acontecem, permitindo que voc&ecirc; monitore um ou
-	  mais ports, enviando um email para voc&ecirc; quando eles
+	  mais <foreignphrase>ports</foreignphrase>, enviando um email para voc&ecirc; quando eles
 	  forem atualizados.</para>
       </listitem>
 
@@ -317,12 +319,12 @@
 
       <listitem>
 	<para>Se voc&ecirc; n&atilde;o sabe o nome da
-	  aplica&ccedil;&atilde;o que deseja, consulte um site no
-	  estilo do FreshMeat (<ulink
+	  aplica&ccedil;&atilde;o que deseja, consulte um s&iacute;tio no
+	  estilo do <literal>FreshMeat</literal> (<ulink
 	    url="http://www.freshmeat.net/"></ulink>) para procurar um
-	  aplicativo que lhe atenda, quando encontrar volte ao site do
+	  aplicativo que lhe atenda, quando encontrar volte ao s&iacute;tio do
 	  FreeBSD e verifique se o aplicativo j&aacute; foi
-	  portado.</para>
+	  incorporado ao <foreignphrase>ports</foreignphrase>.</para>
       </listitem>
     </itemizedlist>
   </sect1>
@@ -353,12 +355,12 @@
       </indexterm>
       <para>
 	Voc&ecirc; pode utilizar o utilit&aacute;rio &man.pkg.add.1; para instalar
-	um pacote de software no FreeBSD apartir de um arquivo local
-	ou apartir de um servidor na rede.
+	um pacote de <foreignphrase>software</foreignphrase> no FreeBSD a partir de um arquivo local
+	ou a partir de um servidor na rede.
       </para>
 
       <example>
-        <title>Fazendo o download manual de um pacote e instalando-o localmente</title>
+        <title>Baixando manualmente um pacote e instalando-o localmente</title>
 
         <screen>&prompt.root; <userinput>ftp -a <replaceable>ftp2.FreeBSD.org</replaceable></userinput>
 Connected to ftp2.FreeBSD.org.
@@ -387,8 +389,8 @@ local: lsof-4.56.4.tgz remote: lsof-4.56.4.tgz
 
       <para>
 	Se voc&ecirc; n&atilde;o possui uma fonte local de pacotes (como por
-	exemplo um Set de CD-ROMs do FreeBSD) ser&aacute; mais facil utilizar
-	a op&ccedil;&atilde;p <option>-r</option> com o &man.pkg.add.1;. Esta op&ccedil;&atilde;o
+	exemplo um conjunto de CD-ROMs do FreeBSD) ser&aacute; mais facil utilizar
+	a op&ccedil;&atilde;o <option>-r</option> com o &man.pkg.add.1;.  Esta op&ccedil;&atilde;o
 	far&aacute; com que o utilit&aacute;rio determine automaticamente o formato
 	correto do objeto, a vers&atilde;o apropriada, bem como dir&aacute; ao
 	utilit&aacute;rio para fazer o download e a instala&ccedil;&atilde;o do aplicativo 
@@ -399,19 +401,20 @@ local: lsof-4.56.4.tgz remote: lsof-4.56.4.tgz
       <screen>&prompt.root; <userinput>pkg_add -r <replaceable>lsof</replaceable></userinput></screen>
 
       <para>
-	O exemplo acima ir&aacute; fazer o download do pacote correto e
-	instal&aacute;-lo sem nenhuma outra interven&ccedil;&atilde;o do usu&aacute;rio. O
-	&man.pkg.add.1; utiliza o &man.fetch.3; para fazer download
-	dos arquivos, o qual considera vari&aacute;veis de ambiente incluindo
+	O exemplo acima ir&aacute; baixar o pacote correto e
+	instal&aacute;-lo sem nenhuma outra interven&ccedil;&atilde;o do usu&aacute;rio.  O
+	&man.pkg.add.1; utiliza o &man.fetch.3; para baixar 
+	os arquivos, o qual considera vari&aacute;veis de ambiente incluindo
 	<envar>FTP_PASSIVE_MODE</envar>, <envar>FTP_PROXY</envar>, e 
-	<envar>FTP_PASSWORD</envar>. Voc&ecirc; pode ter que ajustar uma ou
-	mais delas caso esteja atr&aacute;s de um firewall, ou ent&atilde;o ter&aacute; que
-	utilizar um proxy FTP/HTTP. Consulte &man.fetch.3; para
-	visualizar a lista completa. Observe que no exemplo acima
+	<envar>FTP_PASSWORD</envar>.  Voc&ecirc; pode ter que ajustar uma ou
+	mais delas caso esteja atr&aacute;s de um <foreignphrase>firewall</foreignphrase>, 
+	ou ent&atilde;o ter&aacute; que
+	utilizar um <foreignphrase>proxy</foreignphrase> FTP/HTTP.  Consulte &man.fetch.3; para
+	visualizar a lista completa.  Observe que no exemplo acima
 	<literal>lsof</literal> &eacute; utilizado no lugar de
-	<literal>lsof-4.56.4</literal>. Quando o recurso de busca
-	remota &eacute; utilizada, o numero de vers&atilde;o do pacote deve ser
-	removida. O &man.pkg.add.1; ir&aacute; buscar automaticamente a
+	<literal>lsof-4.56.4</literal>.  Quando o recurso de busca
+	remota &eacute; utilizado, o numero de vers&atilde;o do pacote deve ser
+	removido.  O &man.pkg.add.1; ir&aacute; buscar automaticamente a
 	ultima vers&atilde;o do aplicativo.</para>
 
       <para>
@@ -419,19 +422,19 @@ local: lsof-4.56.4.tgz remote: lsof-4.56.4.tgz
 	<filename>.tgz</filename> e <filename>.tbz</filename>,
 	voc&ecirc; pode encontra-los em <ulink
 	  url="ftp://ftp.FreeBSD.org/pub/FreeBSD/ports/packages/"></ulink>, 
-	ou nos CDs de instala&ccedil;&atilde;o do FreeBSD. Todos os
-	CDs do set de 4 CDs de instala&ccedil;&atilde;o do FreeBSD (e
-	do PowerPack, etc) cont&eacute;m pacotes no diret&oacute;rio
-	<filename>/packages</filename>. O layout do diret&oacute;rio
+	ou nos CDs de instala&ccedil;&atilde;o do FreeBSD.  Todos os
+	CDs do conjunto de CDs de instala&ccedil;&atilde;o do FreeBSD (e
+	do <foreignphrase>PowerPack</foreignphrase>, etc) cont&eacute;m pacotes no diret&oacute;rio
+	<filename>/packages</filename>.  O layout do diret&oacute;rio
 	packages &eacute; similar ao encontrado na &aacute;rvore
-	<filename>/usr/ports</filename>. Cada categoria possui seu
+	<filename>/usr/ports</filename>.  Cada categoria possui seu
 	pr&oacute;prio diret&oacute;rio, e cada pacote pode ser
 	encontrado no diret&oacute;rio <filename>All</filename>.
       </para>
 
       <para>A estrutura do diret&oacute;rio do sistema de pacotes
-	&eacute; identica ao layout do ports; eles trabalham em
-	conjunto para formar o sistema de pacotes/ports.
+	&eacute; id&ecirc;ntica ao layout do <foreignphrase>ports</foreignphrase>; eles trabalham em
+	conjunto para formar o sistema de pacotes/<foreignphrase>ports</foreignphrase>.
       </para>
 
     </sect2>
@@ -444,7 +447,7 @@ local: lsof-4.56.4.tgz remote: lsof-4.56.4.tgz
         <secondary>managing</secondary>
       </indexterm>
       <para>O &man.pkg.info.1; &eacute; um utilit&aacute;rio que lista e descreve os
-      varios pacotes instalados.</para>
+      v&aacute;rios pacotes instalados.</para>
 
       <indexterm>
         <primary><command>pkg_info</command></primary>
@@ -454,9 +457,9 @@ cvsup-16.1          A general network file distribution system optimized for CV
 docbook-1.2         Meta-port for the different versions of the DocBook DTD
 ...</screen>
       <para>O &man.pkg.version.1; &eacute; um utilit&aacute;rio que sumariza a
-      vers&atilde;o de todos os pacotes instalados. Ele compara a vers&atilde;o do
+      vers&atilde;o de todos os pacotes instalados.  Ele compara a vers&atilde;o do
       pacote instalado com a vers&atilde;o atual encontrada na &aacute;rvore do
-      ports.</para> 
+      <foreignphrase>ports</foreignphrase>.</para> 
       <indexterm>
         <primary><command>pkg_version</command></primary>
       </indexterm>
@@ -465,9 +468,9 @@ cvsup                       =
 docbook                     =
 ...</screen>
 
-      <para>Os simbolos na segunda coluna indicam a idade relativa da
+      <para>Os s&iacute;mbolos na segunda coluna indicam a idade relativa da
 	vers&atilde;o instadada e da vers&atilde;o disponivel na
-	&aacute;rvore local do ports.</para>
+	&aacute;rvore local do <foreignphrase>ports</foreignphrase>.</para>
 
       <informaltable frame="none">
         <tgroup cols="2">
@@ -481,28 +484,29 @@ docbook                     =
  	  <tbody>
   	    <row>
 	    <entry>=</entry> <entry>A vers&atilde;o instalada do pacote &eacute;
-	    identica a vers&atilde;o dispon&iacute;vel na &aacute;rvore local do ports.
+	    id&ecirc;ntica a vers&atilde;o dispon&iacute;vel na &aacute;rvore local do 
+	    <foreignphrase>ports</foreignphrase>.
 	    </entry>
   	    </row>
  
         <row><entry>&lt;</entry>
 	<entry>A vers&atilde;o instalada do pacote &eacute; mais antiga que a vers&atilde;o
-	disponivel na &aacute;rvore local do ports.
+	disponivel na &aacute;rvore local do <foreignphrase>ports</foreignphrase>.
 	</entry>
 	</row>
 
         <row><entry>&gt;</entry><entry>A vers&atilde;o instalada do pacote &eacute;
-	mais rescente que a vers&atilde;o disponivel na &aacute;rvore local do
-	ports. (Provavelmente sua &aacute;rvore do ports est&aacute; desatualizada)
+	mais resente que a vers&atilde;o disponivel na &aacute;rvore local do
+	<foreignphrase>ports</foreignphrase>. (Provavelmente sua &aacute;rvore do ports est&aacute; desatualizada)
         </entry></row>
 
         <row><entry>?</entry><entry>
 	  O pacote instalado n&atilde;o foi localizado no indice do ports.
 	  (Isto pode ocorrer, por exemplo, se um aplicativo instalado
-	  for removido da aravore do ports ou ent&atilde;o renomeado).
+	  for removido da &aacute;rvore do <foreignphrase>ports</foreignphrase> ou ent&atilde;o foi renomeado).
 	  </entry></row>
 
-        <row><entry>*</entry><entry>Existem multiplas vers&otilde;es do pacote.</entry></row>
+        <row><entry>*</entry><entry>Existem m&uacute;ltiplas vers&otilde;es do pacote.</entry></row>
 
 	</tbody>
 	</tgroup>
@@ -527,27 +531,27 @@ docbook                     =
     </sect2>
 
     <sect2>
-      <title>Miscelanea</title>
-      <para>Todas as informa&ccedil;&otilde;es dos pacotes &eacute;
-	armazenada no diret&oacute;rio
-	<filename>/var/db/pkg</filename>. A lista de arquivos
+      <title>Miscel&acirc;nea</title>
+      <para>Todas as informa&ccedil;&otilde;es dos pacotes s&atilde;o
+	armazenadas no diret&oacute;rio
+	<filename>/var/db/pkg</filename>.  A lista de arquivos
 	instalados e a descri&ccedil;&atilde;o de cada pacote pode ser
-	encontrada nos arquivos destes diretorios.
+	encontrada nos arquivos destes diret&oacute;rios.
       </para>
     </sect2>
   </sect1>
   
   <sect1 id="ports-using">
-    <title>Usando a cole&ccedil;&atilde;o de ports</title>
+    <title>Usando a cole&ccedil;&atilde;o de <foreignphrase>ports</foreignphrase></title>
 
     <para>A sess&atilde;o abaixo fornecer&aacute; as
       instru&ccedil;&otilde;es b&aacute;sicas sobre o uso da
-      cole&ccedil;&atilde;o de ports para instalar e remover programas
+      cole&ccedil;&atilde;o de <foreignphrase>ports</foreignphrase> para instalar e remover programas
       do seu sistema.
     </para>
 
     <sect2 id="ports-tree">
-      <title>Obtendo a cole&ccedil;&atilde;o do ports</title>
+      <title>Obtendo a cole&ccedil;&atilde;o do <foreignphrase>ports</foreignphrase></title>
 
       <para>
 	Antes que voc&ecirc; possa instalar um port, voc&ecirc;
@@ -561,24 +565,24 @@ docbook                     =
       <para>
 	Quando voc&ecirc; est&aacute; instalando o FreeBSD, o
 	<application>Sysinstall</application> pergunta se voc&ecirc;
-	deseja instalar a arvore do ports, se voc&ecirc; respondeu
+	deseja instalar a &aacute;rvore do <foreignphrase>ports</foreignphrase>, se voc&ecirc; respondeu
 	n&atilde;o naquela ocasi&atilde;o, voc&ecirc; pode seguir as
 	seguintes instru&ccedil;&otilde;es para instalar a
-	cole&ccedil;&atilde;o de ports:</para>
+	cole&ccedil;&atilde;o de <foreignphrase>ports</foreignphrase>:</para>
 
       <procedure>
-	<title>Via Sysinstall</title>
+	<title>Via <literal>Sysinstall</literal></title>
 
 	<para>
 	  Este m&eacute;todo envolve novamente a
 	  utiliza&ccedil;&atilde;o do <application>sysinstall
 	  </application> para instalar manualmente a
-	  cole&ccedil;&atilde;o de ports.</para>
+	  cole&ccedil;&atilde;o de <foreignphrase>ports</foreignphrase>.</para>
 
 	<step>
-	  <para>Estando logado como o usu&aacute;rio
+	  <para>Estando <quote>logado</quote> como o usu&aacute;rio
 	    <username>root</username>, execute o comando
-	    <command>/stand/sysinstall</command> como ilustrado
+	    <command>/stand/sysinstall</command> como mostrado
 	    abaixo:</para>
 
 	  <screen>&prompt.root; <userinput>/stand/sysinstall</userinput></screen>
@@ -599,7 +603,7 @@ docbook                     =
 
 	<step>
 	  <para>Selecione a op&ccedil;&atilde;o
-	    <guimenuitem>ports</guimenuitem>, e pressione <keycap>a
+	    <guimenuitem>ports</guimenuitem>, e pressione a <keycap>
 	      barra de espa&ccedil;o</keycap> para
 	    marc&aacute;-la.</para>
 	</step>
@@ -611,8 +615,8 @@ docbook                     =
 	</step>
 
 	<step>
-	  <para>Agora voc&ecirc; deve escolher a media apartir da qual
-	    a cole&ccedil;&atilde;o de ports ser&aacute; instalada,
+	  <para>Agora voc&ecirc; deve escolher a m&iacute;dia a partir da qual
+	    a cole&ccedil;&atilde;o de <foreignphrase>ports</foreignphrase> ser&aacute; instalada,
 	    como por exemplo CDROM, FTP, etc. Selecione a
 	    op&ccedil;&atilde;o desejada e pressione
 	    <keycap>Enter</keycap> para iniciar a
@@ -632,14 +636,14 @@ docbook                     =
       </procedure>
 
       <para>
-	Um m&eacute;todo alternativo para obter e manter atualiza a
-	cole&ccedil;&atilde;o de ports &eacute; atrav&eacute;s da
+	Um m&eacute;todo alternativo para obter e manter atualizada a 
+	cole&ccedil;&atilde;o de <foreignphrase>ports</foreignphrase> &eacute; atrav&eacute;s da
 	utiliza&ccedil;&atilde;o do aplicativo <application>CVSup
-	</application>. De uma olhada no arquivo de
+	</application>.  D&ecirc; uma olhada no arquivo de
 	configura&ccedil;&atilde;o do <application>CVSup
-	</application> para o ports em
+	</application> para o <foreignphrase>ports</foreignphrase> em
 	<filename>/usr/share/examples/cvsup/ports-supfile</filename>.
-	Cosulte a sess&atilde;o <link linkend="cvsup">Utilizando o
+	Consulte a sess&atilde;o <link linkend="cvsup">Utilizando o
 	  CVSup</link> (<xref linkend="cvsup">) para maiores
 	informa&ccedil;&otilde;es sobre a utiliza&ccedil;&atilde;o do
 	<application>CVSup</application> e deste arquivo.</para>
@@ -649,15 +653,15 @@ docbook                     =
 
 	<para>
 	  Este &eacute; um guia r&aacute;pido sobre como obter a
-	  cole&ccedil;&atilde;o de ports atrav&eacute;s do uso do
-	  <application>CVSup</application>. Se voce deseja manter a
-	  sua &aacute;rvore do ports atualizada, ou ent&atilde;o se
+	  cole&ccedil;&atilde;o de <foreignphrase>ports</foreignphrase> atrav&eacute;s do uso do
+	  <application>CVSup</application>.  Se voce deseja manter a
+	  sua &aacute;rvore do <foreignphrase>ports</foreignphrase> atualizada, ou ent&atilde;o se
 	  desejar aprender mais sobre o
 	  <application>CVSup</application>, leia a sess&atilde;o
 	  mencionada anteriormente.</para>
 
 	<step>
-	  <para>Instale o port <filename
+	  <para>Instale o <foreignphrase>port</foreignphrase><filename
 	      role="package">net/cvsup</filename>.  Consulte a
 	    sess&atilde;o <link linkend="cvsup-install">Instalando o
 	      CVSup</link> (<xref
@@ -665,7 +669,7 @@ docbook                     =
 	</step>
 
 	<step>
-	  <para>Estando logado como o usu&aacute;rio
+	  <para>Estando <quote>logado</quote> como o usu&aacute;rio
 	    <username>root</username>, copie o arquivo
 	    <filename>/usr/share/examples/cvsup/ports-supfile
 	    </filename> para um novo local, como por exemplo para o
@@ -698,8 +702,8 @@ docbook                     =
 
 	<step>
 	  <para>Ao executar este comando novamente no futuro, ele
-	    ir&aacute; atualizar a sua &aacute;rvore do ports, fazendo
-	    o download de todas as altera&ccedil;&otilde;es que
+	    ir&aacute; atualizar a sua &aacute;rvore do ports, baixando
+	    todas as altera&ccedil;&otilde;es que
 	    ocorreram na cole&ccedil;&atilde;o desde a ultima vez em
 	    que ele foi executado.</para>
 	</step>
@@ -707,7 +711,7 @@ docbook                     =
     </sect2>
 
     <sect2 id="ports-skeleton">
-      <title>Instalando um aplicativo via Ports</title>
+      <title>Instalando um aplicativo via <foreignphrase>Ports</foreignphrase></title>
 
       <indexterm>
         <primary>ports</primary>
@@ -715,16 +719,16 @@ docbook                     =
       </indexterm>
       <para>
 	A primeira coisa que precisa ser explicada a algu&eacute;m que
-	est&aacute; iniciando no uso do ports &eacute; que na verdade
-	um port &eacute; composto por um <quote>conjunto de
-	  arquivos</quote>. Em poucas palavras, um port &eacute; o
-	conjunto minimo de arquivos que diz ao sistema FreeBSD como
-	compilar corretamente e como instalar um aplicativo. Cada port
+	est&aacute; iniciando no uso do <foreignphrase>ports</foreignphrase> &eacute; que na verdade
+	um <foreignphrase>port</foreignphrase> &eacute; composto por um <quote>conjunto de
+	  arquivos</quote>.  Em poucas palavras, um <foreignphrase>port</foreignphrase> &eacute; o
+	conjunto m&iacute;nimo de arquivos que diz ao sistema FreeBSD como
+	compilar corretamente e como instalar um aplicativo.  Cada <foreignphrase>port</foreignphrase>
 	&eacute; composto por:</para>
 
       <itemizedlist>
 	<listitem>
-	  <para>Um arquivo <filename>Makefile</filename>. O
+	  <para>Um arquivo <filename>Makefile</filename>.  O
 	    <filename>Makefile</filename> cont&eacute;m v&aacute;rias
 	    instru&ccedil;&otilde;es que definem como o aplicativo
 	    deve ser compilado e onde ele deve ser instalado em seu
@@ -733,80 +737,79 @@ docbook                     =
 
 	<listitem>
 	  <para>Um arquivo <filename>distinfo</filename>.  
-	  Este arquivo contem informa&ccedil;&otilde;es sobre quais arquivos
-	  precisam ser obtidos para compilar o port e os seus
+	   Este arquivo contem informa&ccedil;&otilde;es sobre quais arquivos
+	  precisam ser obtidos para compilar o <foreignphrase>port</foreignphrase> e os seus
 	  respectivos <literal>checksums</literal>, os quais s&atilde;o
 	  utilizados para  verificar se o o arquivo n&atilde;o foi corrompido durante 
-	  o processo de download, a verifica&ccedil;&atilde;o &eacute; realizada atrav&eacute;s do
+	  o processo de transmiss&atilde;o, a verifica&ccedil;&atilde;o &eacute; realizada atrav&eacute;s do
 	    utilit&aacute;rio &man.md5.1;.</para>
 	</listitem>
 	
 	<listitem>
 	  <para>Um diret&oacute;rio chamado <filename>files</filename>.  
-	   Este diret&oacute;rio cont&eacute;m os patchs necess&aacute;rios para que o
-	   aplicativo possa ser compilado e instalado no FreeBSD. Os
-	   patchs s&atilde;o basicamente arquivos pequenos os quais
+	   Este diret&oacute;rio cont&eacute;m as corre&ccedil;&otilde;es necess&aacute;rias para que o
+	   aplicativo possa ser compilado e instalado no FreeBSD.  As corre&ccedil;&otilde;es
+	   s&atilde;o basicamente arquivos pequenos os quais
 	   especificam altera&ccedil;&otilde;es a serem aplicadas a determinados
-	   arquivos. S&atilde;o arquivos em formato texto plano, e
+	   arquivos.  S&atilde;o arquivos em formato texto plano, e
 	   basicamente dizem <quote> remova a linha 10</quote> ou
-	   <quote>Altere a linha 26 para ...</quote>. Os patchs s&atilde;o
-	   normalmente conhecidos como <quote>diffs</quote>, pois
+	   <quote>Altere a linha 26 para ...</quote>.  As corre&ccedil;&otilde;es s&atilde;o
+	   normalmente conhecidas como <quote>diffs</quote>, pois
 	    s&atilde;o gerados pelo utilit&aacute;rio &man.diff.1;</para>
 	  
 	  <para>Este diret&oacute;rio tamb&eacute;m pode conter outros
-	    arquivos necess&aacute;rios para a
-	    compila&ccedil;&atilde;o do aplicativo.</para>
+	    arquivos necess&aacute;rios para a  compila&ccedil;&atilde;o do aplicativo.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Um arquivo <filename>pkg-descr</filename>. Este
+	  <para>Um arquivo <filename>pkg-descr</filename>.  Este
 	    arquivo cont&eacute;m a descri&ccedil;&atilde;o detalhada
 	    do aplicativo.</para>
 	</listitem>
 	
 	<listitem>
-	  <para>Um arquivo <filename>pkg-plist</filename>. Este
-	    arquivo cont&eacute;m a listagem de todos os arquivos que
-	    ser&atilde;o instalados pelo port. Ele tamb&eacute;m diz
-	    ao sistema de ports quais arquivos devem ser removidos
+	  <para>Um arquivo <filename>pkg-plist</filename>.  Este
+	    arquivo cont&eacute;m a lista de todos os arquivos que
+	    ser&atilde;o instalados pelo <foreignphrase>port</foreignphrase>.  Ele tamb&eacute;m diz
+	    ao sistema de <foreignphrase>ports</foreignphrase> quais arquivos devem ser removidos
 	    durante a desinstala&ccedil;&atilde;o do
 	    aplicativo.</para>
 	</listitem>
       </itemizedlist>
 
-      <para>iAlguns ports possuem outros arquivos, como por exemplo
-	<filename>pkg-message</filename>. O sistema de ports utiliza
+      <para>Alguns <foreignphrase>ports</foreignphrase> possuem outros arquivos, como por exemplo
+	<filename>pkg-message</filename>.  O sistema de <foreignphrase>ports</foreignphrase> utiliza
 	estes arquivos para lidar com sistua&ccedil;&otilde;es
-	especiais. Se voc&ecirc; desejar maiores detalhes sobre estes
-	arquivos, e sobre o sistema de ports em geral, consulte o
+	especiais.  Se voc&ecirc; desejar maiores detalhes sobre estes
+	arquivos, e sobre o sistema de <foreignphrase>ports</foreignphrase> em geral, consulte o
 	<ulink url="../porters-handbook/index.html">FreeBSD Porter's
 	  Handbook </ulink>.</para>
       
       <para>
-	Agora que voc&ecirc; tem bastante informa&ccedil;&atilde;o de
-	fundo para saber para que a cole&ccedil;&atilde;o de ports
+	Agora que voc&ecirc; tem bastante informa&ccedil;&atilde;o 
+	b&aacute;sica para saber para que a cole&ccedil;&atilde;o de <foreignphrase>ports</foreignphrase>
 	&eacute; utilizada, voc&ecirc; est&aacute; pronto para
-	instalar seu primeiro aplicativo pelo sistema de ports.
-	Existem 2 formas pelas quais isto pode ser feito, e cada uma
+	instalar seu primeiro aplicativo pelo sistema de <foreignphrase>ports</foreignphrase>.  
+	Existem duas formas como isto pode ser feito, e cada uma
 	delas est&aacute; detalhada abaixo.</para>
       
       <para>
-	No entanto antes de iniciarmos voc&ecirc; precisair&aacute;
-	escolher um aplicativo para instalar. Existem algumas formas
+	No entanto antes de iniciarmos voc&ecirc; precisar&aacute;
+	escolher um aplicativo para instalar.  Existem algumas formas
 	de fazer isso, mas a maneira mais facil &eacute;
 	atrav&eacute;s da <ulink
-	  url="../../../../ports/index.html">listagem de ports no web
-	  site do FreeBSD</ulink>. No site voc&ecirc; pode navegar
-	pela &aacute;rvore de ports ou ent&atilde;o utilizar-se do
-	mecanismo de busca. Cada port possui uma
-	descri&ccedil;&atilde;o sobre a finalidade do aplicativo a que
+	  url="../../../../ports/index.html">listagem de <foreignphrase>ports</foreignphrase> no web
+	  site do FreeBSD</ulink>.  No site voc&ecirc; pode navegar
+	pela &aacute;rvore de <foreignphrase>ports</foreignphrase> ou ent&atilde;o utilizar-se do
+	mecanismo de busca.  Cada <foreignphrase>port</foreignphrase> possui uma
+	descri&ccedil;&atilde;o da finalidade do aplicativo a que
 	ele se refere, a leitura destas descri&ccedil;&otilde;es vai
-	ajuda-lo na escolha de qual port instalar.</para>
+	ajud&aacute;-lo na escolha de qual <foreignphrase>port</foreignphrase> instalar.</para>
       
       <para>Uma outra op&ccedil;&atilde;o &eacute; utilizar-se do utilit&aacute;rio &man.whereis.1;.
-	Simplesmente execute <command>whereis <replaceable>arquivo
+	  Simplesmente execute <command>whereis <replaceable>arquivo
 	</replaceable></command>, onde <replaceable>arquivo</replaceable> 
-	&eacute; o programa que voc&ecirc; deseja instalar. Se ele for encontrado
+	&eacute; o programa que voc&ecirc; deseja instalar.  Se ele for encontrado
 	em seu sistema, voc&ecirc; ser&aacute; informado da sua localiza&ccedil;&atilde;o, como
 	mostrado abaixo:</para>
 
@@ -819,16 +822,16 @@ lsof: /usr/ports/sysutils/lsof</screen>
 	<filename>/usr/ports/sysutils/lsof</filename>.</para>
 
       <para>
-	Outra forma de procurar um port em particular &eacute;
+	Outra forma de procurar um <foreignphrase>port</foreignphrase> em particular &eacute;
 	atrav&eacute;s da utiliza&ccedil;&atilde;o do mecanismo
-	interno de busca disponibilizado pelo sistema de ports. Para
-	usar o reurso de busca, voce tem que estar dentro do
-	diret&oacute;rio <filename>/usr/ports</filename>. Uma vez
+	interno de busca disponibilizado pelo sistema de <foreignphrase>ports</foreignphrase>.  Para
+	usar o recurso de busca, voc&ecirc; tem que estar dentro do
+	diret&oacute;rio <filename>/usr/ports</filename>.  Uma vez
 	dentro do diret&oacute;rio, execute o comando <command>make
 	  search
 	  name=<replaceable>nome_do_programa</replaceable></command>
 	onde <replaceable>nome_do_programa</replaceable> &eacute; o
-	nome do aplicativo que vc est&aacute; procurando. Por exemplo,
+	nome do aplicativo que vc est&aacute; procurando.  Por exemplo,
 	se voc&ecirc; estiver procurando pelo
 	<command>lsof</command>:</para>
 
@@ -846,53 +849,53 @@ R-deps: </screen>
 	A parte da sa&iacute;da na qual voc&ecirc; deve prestar um
 	aten&ccedil;&atilde;o especial &eacute; a linha iniciada com
 	<quote>Path:</quote>, uma vez que &eacute; ela que diz onde
-	encontrar o port. As outras informa&ccedil;&otilde;es exibidas
+	encontrar o <foreignphrase>port</foreignphrase>.  As outras informa&ccedil;&otilde;es exibidas
 	n&atilde;o s&atilde;o necess&aacute;rias para a
-	instala&ccedil;&atilde;o do aplicativo pelo ports, e portanto
+	instala&ccedil;&atilde;o do aplicativo pelo <foreignphrase>ports</foreignphrase>, e portanto
 	n&atilde;o ser&atilde;o comentadas aqui.</para>
 
       <para>
 	Para uma busca mais profunda voce pode utilizar <command>make
 	  search key=<replaceable>string</replaceable></command> ,
 	onde <replaceable>string</replaceable> &eacute; a palavra
-	chave que deseja procurar. Esta busca ir&aacute; varrer os
-	nomes dos ports, os coment&aacute;rios, as
+	chave que deseja procurar.  Esta busca ir&aacute; varrer os
+	nomes dos <foreignphrase>ports</foreignphrase>, os coment&aacute;rios, as
 	descri&ccedil;&otilde;es, as depend&ecirc;ncias e pode pode
 	ser utilizada para buscar um aplicativo que esteja relacionado
 	a um assunto em particular caso voc&ecirc; n&atilde;o saiba o
 	nome do aplicativo pelo qual voc&ecirc; est&aacute;
 	procurando.</para>
 
-      <para>Em ambos os casos descritos acima,i o argumento da busca
+      <para>Em ambos os casos descritos acima, o argumento da busca
 	&eacute; <literal>case-insensitive</literal>. A busca por
 	<quote>LSOF</quote> ir&aacute; apresentar o mesmo resultado
 	que uma busca por <quote>lsof </quote>.</para>
 
       <note>
-        <para>Voce Precisa estar logado como <username>root</username>
+        <para>Voce precisa estar <quote>logado</quote> como <username>root</username>
 	  para instalar um aplicativo pelo ports.</para>
       </note>
 
       <para>
 	Agora que voc&ecirc; ja encontrou um aplicativo que gostaria
 	de instalar, voc&ecirc; j&aacute; est&aacute; pronto para
-	executar a instala&ccedil;&atilde;o. O port inclui
+	executar a instala&ccedil;&atilde;o.  O <foreignphrase>port</foreignphrase> inclui
 	instru&ccedil;&otilde;es sobre como compilar o c&oacute;digo
 	fonte, por&eacute;m n&atilde;o inclui o c&oacute;digo fonte
 	propriamente dito. Voc&ecirc; pode obter o c&oacute;digo fonte
-	apartir de um CDROM ou apartir da internet. O c&oacute;digo
+	a partir de um CDROM ou a partir da internet.  O c&oacute;digo
 	fonte &eacute; distribuido da forma como o autor do software
-	desejar, normalmente o formaro utilizado &eacute; um tarball
+	desejar, normalmente o formaro utilizado &eacute; um <foreignphrase>tarball</foreignphrase>
 	compactado com o utilit&aacute;rio gzip, por&eacute;m ele pode
 	estar compactado com outro utilit&aacute;rio ou mesmo estar
-	descompactado. O c&oacute;digo fonte de um software,
+	descompactado.  O c&oacute;digo fonte de um software,
 	independente de como ele for distribuido, &eacute; chamado de
-	<quote>distfile</quote>. Voce pode obter o
-	<quote>distfile</quote> apartir de um CDROM ou da
+	<quote>distfile</quote>.  Voce pode obter o
+	<quote>distfile</quote> a partir de um CDROM ou da
 	internet.</para>
       
       <sect3 id="ports-cd">
-        <title>Instalando um aplicativo atrav&eacute;s do ports via
+        <title>Instalando um aplicativo atrav&eacute;s do <foreignphrase>ports</foreignphrase> via
 	  CDROM</title>
 
         <indexterm>
@@ -901,21 +904,21 @@ R-deps: </screen>
         </indexterm>
         <para>
 	  Os ISOs oficiais distribuidos pelo projeto FreeBSD
-	  n&atilde;o incluem nenhum distfile. Eles ocupariam muito
+	  n&atilde;o incluem nenhum <quote>distfile</quote>.  Eles ocupariam muito
 	  espa&ccedil;o, o qual &eacute; melhor utilizado pelos
-	  pacotes pr&eacute;-compilados. Os CDROMs da linha PowerPack
-	  incluem distifiles, e voce pode comprar este conjunto de CDs
+	  pacotes pr&eacute;-compilados.  Os CDROMs da linha <foreignphrase>PowerPack</foreignphrase>
+	  incluem <quote>distifiles<quote>, e voce pode comprar este conjunto de CDs
 	  em vendedores como a <ulink
-	    url="http://www.freebsdmall.com/">FreeBSD Mall</ulink>.
-	  Esta sess&atilde;o assume que voc&ecirc; possui este
+	    url="http://www.freebsdmall.com/">FreeBSD Mall</ulink>.  
+	  Esta se&ccedil;&atilde;o assume que voc&ecirc; possui este
 	  conjunto de CDs.</para>
 	
         <para>
-	  Insira o CDROM do FreeBSD no drive. Monte-o como
+	  Insira o CDROM do FreeBSD no <quote>drive</quote>.  Monte-o como
 	  <filename>/cdrom</filename>. Se voc&ecirc; utilizar um ponto
 	  de montagem diferente o processo de instala&ccedil;&atilde;o
-	  n&atilde;o ir&aacute; funcionar. Para iniciar, va para o
-	  diret&oacute;rio do ports que voc&ecirc; deseja
+	  n&atilde;o ir&aacute; funcionar.  Para iniciar, v&aacute; para o
+	  diret&oacute;rio do <foreignphrase>ports</foreignphrase> que voc&ecirc; deseja
 	  instalar:</para>
 	
         <screen>&prompt.root; <userinput>cd /usr/ports/sysutils/lsof</userinput></screen>
@@ -923,9 +926,9 @@ R-deps: </screen>
         <para>
 	  Uma vez dentro do diret&oacute;rio
 	  <filename>lsof</filename>, voc&ecirc; ir&aacute; ver o
-	  esqueleto do port. O pr&oacute;ximo passo &eacute; compilar,
-	  ou construir, o port. Isto &eacute; realizado pela simples
-	  execu&ccedil;&atilde;o do comando <command>make</command>.
+	  esqueleto do <foreignphrase>port</foreignphrase>.  O pr&oacute;ximo passo &eacute; compilar,
+	  ou construir, o <foreignphrase>port</foreignphrase>.  Isto &eacute; realizado pela simples
+	  execu&ccedil;&atilde;o do comando <command>make</command>.  
 	  Ao executar o comando, voc&ecirc; ir&aacute; visualizar uma
 	  saida semelhante a esta:</para>
 	  
@@ -952,8 +955,8 @@ R-deps: </screen>
         <para>
 	  Observe que ap&oacute;s completar o processo de
 	  compila&ccedil;&atilde;o voc&ecirc; ir&aacute; voltar para o
-	  prompt. O pr&oacute;ximo passo &eacute; instalar o port.
-	  Para instal&aacute;-lo, basta adicionat a palavra
+	  prompt.  O pr&oacute;ximo passo &eacute; instalar o <foreignphrase>port</foreignphrase>.  
+	  Para instal&aacute;-lo, basta adicionar a palavra
 	  <command>install</command> ao comando
 	  <command>make</command>, como mostrado abaixo:</para>
 
@@ -973,10 +976,10 @@ R-deps: </screen>
         <para>
 	  Uma vez que voc&ecirc; tenha retornado ao prompt, voc&ecirc;
 	  j&aacute; deve ser capaz de executar a
-	  aplica&ccedil;&atilde;o que acabou de instalar. Como o
+	  aplica&ccedil;&atilde;o que acabou de instalar.  Como o
 	  aplicativo <command>lsof</command> executa com
 	  privil&eacute;gios altos, um aviso de seguran&ccedil;a
-	  &eacute; exibido. Durante o processo de
+	  &eacute; exibido.  Durante o processo de
 	  compila&ccedil;&atilde;o e de instala&ccedil;&atilde;o,
 	  outros avisos podem ser exibidos.</para>
 
@@ -991,60 +994,60 @@ R-deps: </screen>
 
 	<note>
 	  <para>
-	    Alguns <literal>shells</literal> mantem um
-	    <literal>cache</literal> dos comandos disponiveis nos
-	    diret&oacute;rios listados na v&aacute;riavel de ambiente
+	    Alguns <literal>shells</literal> mant&eacute;m um
+	    <literal>cache</literal> dos comandos dispon&iacute;veis nos
+	    diret&oacute;rios listados na vari&aacute;vel de ambiente
 	    <envar>PATH</envar>, com o objetivo de agilizar o processo
-	    de busca para a execu&ccedil;&atilde;o desdes comandos. Se
+	    de busca para a execu&ccedil;&atilde;o desdes comandos.  Se
 	    voce estiver utilizando um destes
 	    <literal>shells</literal>, voc&ecirc; ter&aacute; que
 	    executar o comando <command>rehash</command> logo
-	    ap&oacute;s a instala&ccedil;&atilde;o do ports, antes que
-	    voce possa utilizar o aplicativo rec&eacute;m instalado.
+	    ap&oacute;s a instala&ccedil;&atilde;o do <foreignphrase>ports</foreignphrase>, antes que
+	    voce possa utilizar o aplicativo rec&eacute;m instalado.  
 	    Esta opera&ccedil;&atilde;o &eacute; necess&aacute;ria com
 	    todos os shells disponibilizados na base do sistema (como
 	    por exemplo o <command>tcsh</command>) e com alguns dos
-	    disponibilizados no ports (por exemplo, <filename
+	    disponibilizados no <foreignphrase>ports</foreignphrase> (por exemplo, <filename
 	      role="package">shells/zsh</filename>).</para>
 	</note>
 
         <note>
           <para>
-	    Por favor esteja ciente de que a licensa de alguns
+	    Por favor, esteja ciente de que a licen&ccedil;a de alguns
 	    aplicativos n&atilde;o permite a inclus&atilde;o dos
-	    mesmos em um CDROM. Isto pode ocorrer devido a necessidade
+	    mesmos em um CDROM.  Isto pode ocorrer devido a necessidade
 	    de se preencher algum formul&aacute;rio antes de se fazer
-	    o download ou ent&atilde;o porque a
+	    o <foreignphrase>download</foreignphrase> ou ent&atilde;o porque a
 	    redistribui&ccedil;&atilde;o n&atilde;o &eacute;
-	    permitida, ou por qualquer outra raz&atilde;o. Se
-	    voc&ecirc; deseja instalar um ports cujo distfile
+	    permitida, ou por qualquer outra raz&atilde;o.  Se
+	    voc&ecirc; deseja instalar um <foreignphrase>ports</foreignphrase> cujo <quote>distfile</quote>
 	    n&atilde;o esteja presente no CDROM, voc&ecirc;
 	    ter&aacute; que estar online para instal&aacute;-lo
 	    (consulte a <link linkend="ports-inet">pr&oacute;xima
-	      sess&atilde;o</link>.</para>
+	      se&ccedil;&atilde;o</link>).</para>
 	</note>
       </sect3>
 
       <sect3 id="ports-inet">
-      <title>Instalando um aplicativo atrav&eacute;s do ports via
+      <title>Instalando um aplicativo atrav&eacute;s do <foreignphrase>ports</foreignphrase> via
 	  Internet</title>
 
         <para>
-	  Como na ultima sess&atilde;o, est&aacute; sess&atilde;o
+	  Como na &uacute;ltima se&ccedil;&atilde;o, est&aacute; se&ccedil;&atilde;o
 	  assume que voc&ecirc; possui uma conex&atilde;o internet
 	  funcional. Se voc&ecirc; n&atilde;o possuir, voc&ecirc;
 	  ter&aacute; que executar a <link
 	    linkend="ports-cd">instala&ccedil;&atilde;o apartir do
 	    CDROM</link>, ou ent&atilde;o colocar manualmente uma
-	  c&oacute;pia do distifile do port desejado no
+	  c&oacute;pia do <quote>distifile</quote> do <foreignphrase>port</foreignphrase> desejado no
 	  diret&oacute;rio
 	  <filename>/usr/ports/distfiles</filename>.</para>
 	
         <para>
-	  A instala&ccedil;&atilde;o de um port apartir da internet
+	  A instala&ccedil;&atilde;o de um <foreignphrase>port</foreignphrase> a partir da internet
 	  &eacute; realizada de forma id&ecirc;ntica a
-	  instala&ccedil;&atilde;o apartir do CDROM, a unica
-	  diferen&ccedil;a entre as duas &eacute; que agora o distfile
+	  instala&ccedil;&atilde;o a partir do CDROM, a &uacute;nica
+	  diferen&ccedil;a entre as duas &eacute; que agora o <quote>distfile</quote>
 	  ser&aacute; obtido da internet ao inv&eacute;s de ser lido
 	  do CDROM.</para>
 
@@ -1084,56 +1087,54 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
 
         <para>
 	  Como voce pode ver a &uacute;nica diferen&ccedil;a &eacute;
-	  a linha que informa que o sistema esta fazendo o download do
-	  distfile.</para>
+	  a linha que informa que o sistema esta baixando o <quote>distfile</quote>.</para>
 
 	<para>
-	  O sistema de ports utiliza o &man.fetch.1; para fazer
-	  download dos arquivos, o qual considera varias vari&aacute;veis de
+	  O sistema de <foreignphrase>ports</foreignphrase> utiliza o &man.fetch.1; para baixar
+	  os arquivos, o qual considera v&aacute;rias vari&aacute;veis de
 	  ambiente, incluindo <envar>FTP_PASSIVE_MODE</envar>,
-	  <envar>FTP_PROXY</envar>, e <envar>FTP_PASSWORD</envar>.
+	  <envar>FTP_PROXY</envar>, e <envar>FTP_PASSWORD</envar>.  
 	  Voc&ecirc; pode precisar definir uma ou mais delas caso esteja
 	  atr&aacute;s de um firewall, ou mesmo fazer uso de um proxy
-	  FTP/HTTP, Consulte &man.fetch.3; para visualizar a lista de
+	  FTP/HTTP, consulte &man.fetch.3; para visualizar a lista de
 	  todas as vari&aacute;veis.</para>
 	
 	<para>
 	  Para os usu&aacute;rios que n&atilde;o podem ficar
 	  conectados o tempo todo, &eacute; oferecido o comando
 	  <command>make <maketarget>fetch</maketarget></command> como
-	  op&ccedil;&atilde;o. Ao executar este comando na raiz da
+	  op&ccedil;&atilde;o.  Ao executar este comando na raiz da
 	  &aacute;rvore do ports (<filename>/usr/ports</filename>),
-	  ele ir&aacute; fazer o download de todos os distifiles
-	  necess&aacute;rios para o uso do ports para voc&ecirc;. Este
+	  ele ir&aacute; baixar todos os <quote>distifiles</quote>
+	  necess&aacute;rios para o uso do <foreignphrase>ports</foreignphrase> para voc&ecirc;.  Este
 	  comando tamb&eacute;m funciona para as demais categorias do
-	  segundo nivel (por exemplo,
-	  <filename>/usr/ports/net</filename>). Observe que se um port
-	  depender de uma biblioteca ou de outros ports para
-	  funcionar, o comando acima n&atilde;o ir&aacute; fazer o
-	  download do distifile destes ports. Se voc&ecirc; desejar
-	  que seja efetuado o download do distfile de todas as
+	  segundo n&iacute;vel (por exemplo,
+	  <filename>/usr/ports/net</filename>).  Observe que se um <foreignphrase>port</foreignphrase>
+	  depender de uma biblioteca ou de outros <foreignphrase>ports</foreignphrase> para
+	  funcionar, o comando acima n&atilde;o ir&aacute; baixar os
+	  <quote>distifiles</quote> destes <foreignphrase>ports</foreignphrase>.  Se voc&ecirc; desejar
+	  que sejam baixadas todas as
 	  dependencias, substitua a op&ccedil;&atilde;o
 	  <maketarget>fetch</maketarget> por
 	  <maketarget>fetch-recursive</maketarget>.
 	
 	<note>
 	    <para>
-	      Voc&ecirc; pode compilar todos os ports de uma
-	      determinada categoria, ou mesmo todos os ports,
+	      Voc&ecirc; pode compilar todos os <foreignphrase>ports</foreignphrase> de uma
+	      determinada categoria, ou mesmo todos os <foreignphrase>ports</foreignphrase>,
 	      executando o comando <command>make</command> na raiz da
-	      &aacute;rvore do ports, exatamente como mencionado acima
-	      para o <command>make <makevar>fetch</makevar></command>.
-	      Isto &eacute; perigoso, pois alguns ports n&atilde;o
+	      &aacute;rvore do <foreignphrase>ports</foreignphrase>, exatamente como mencionado acima
+	      para o <command>make <makevar>fetch</makevar></command>.  
+	      Isto &eacute; perigoso, pois alguns <foreignphrase>ports</foreignphrase> n&atilde;o
 	      podem co-existir no mesmo sistema. Em outros casos,
-	      alguns ports podem instalar 2 arquivos diferentes com o
-	      mesmo nome, um sobrescrevendo o arquivo do
-	      outro.</para></note>
+	      alguns <foreignphrase>ports</foreignphrase> podem instalar 2 arquivos diferentes com o
+	      mesmo nome, um sobrescrevendo o arquivo do outro.</para></note>
 
 	<para>
 	  Em alguns casos raros, os usu&aacute;rios podem precisar
-	  obter os tarballs, apartir de um site diferente do
+	  obter os <foreignphrase>tarballs</foreignphrase>, a partir de um s&iacute;tio diferente do
 	  especificado no <makevar>MASTER_SITES</makevar> (local de
-	  onde os distfiles s&atilde;o obtidos). Voce pode
+	  onde os <quote>distfiles<quote> s&atilde;o obtidos). Voce pode
 	  sobrescrever o valor da op&ccedil;&atilde;o
 	  <makevar>MASTER_SITES</makevar> com o seguinte
 	  comando:</para>
@@ -1149,35 +1150,36 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
 
 	<note>
 	<para>
-	    Alguns ports permitem (ou mesmo precisam) que voc&ecirc;
+	    Alguns <foreignphrase>ports</foreignphrase> permitem (ou mesmo precisam) que voc&ecirc;
 	    forne&ccedil;a algumas op&ccedil;&otilde;es no momento da
-	    compila&ccedil;&atilde;o, com o objetido de habilitar ou
+	    compila&ccedil;&atilde;o, com o objetivo de habilitar ou
 	    desabilitar partes da aplica&ccedil;&atilde;o que
 	    n&atilde;o s&atilde;o necess&aacute;rias,
 	    op&ccedil;&otilde;es de seguran&ccedil;a e outras
-	    customiza&ccedil;&otilde;es. Alguns ports onde ocorrem
+	    customiza&ccedil;&otilde;es.  Alguns <foreignphrase>ports</foreignphrase> onde ocorrem
 	    isso, e que vem a mente no momento s&atilde;o <filename
 	      role="package">www/mozilla</filename>, <filename
 	      role="package">security/gpgme</filename>, e <filename
-	      role="package">mail/sylpheed-claws</filename>. Uma
+	      role="package">mail/sylpheed-claws</filename>.  Uma
 	    mensagem &eacute; exibida quando este tipo de
 	    op&ccedil;&otilde;es estiverem dispon&iacute;veis.
 	 </para></note>
       </sect3>
 
       <sect3>
-        <title>Sobrescrevendo o diret&oacute;rio default do Ports</title>
+        <title>Sobrescrevendo o diret&oacute;rio <foreignphrase>default</foreignphrase> 
+	do <foreignphrase>Ports</foreignphrase></title>
 
 	<para>
 	  Algumas vezes &eacute; &uacute;til (ou obrigat&oacute;rio)
-	  utilizar diferentes distfiles e diretorios de ports. As
+	  utilizar diferentes <quote>distfiles</quote> e diret&oacute;rios de <foreignphrase>ports</foreignphrase>.  As
 	  vari&aacute;veis <makevar>PORTSDIR</makevar> e
 	  <makevar>PREFIX</makevar> podem sobrescrever os
-	  diret&oacute;rios default. Por exemplo:</para>
+	  diret&oacute;rios <foreignphrase>default</foreignphrase>. Por exemplo:</para>
 
 	<screen>&prompt.root; <userinput>make PORTSDIR=/usr/home/example/ports install</userinput></screen>
 
-	<para>Ir&aacute; compilar o port dispon&iacute;vel no
+	<para>Ir&aacute; compilar o <foreignphrase>port</foreignphrase> dispon&iacute;vel no
 	  diret&oacute;rio
 	  <filename>/usr/home/example/ports</filename> e instalar tudo
 	  sob o diret&oacute;rio
@@ -1185,7 +1187,7 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
 	
 	<screen>&prompt.root; <userinput>make PREFIX=/usr/home/example/local install</userinput></screen>
 
-	<para>Ir&aacute; compilar o port em
+	<para>Ir&aacute; compilar o <foreignphrase>port</foreignphrase> em
 	  <filename>/usr/ports</filename> e instalar tudo em
 	  <filename>/usr/home/example/local</filename>.</para>
 	
@@ -1199,7 +1201,7 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
 	  uma id&eacute;ia geral de como isso funciona).</para>
 	
 	<para>
-	  Alternativamente, estas variaveis podem fazer parte do seu
+	  Alternativamente, estas vari&aacute;veis podem fazer parte do seu
 	  ambiente. Leia o manual do seu shell para ver
 	  instru&ccedil;&otilde;es de como fazer desta forma.</para>
       </sect3>
@@ -1208,16 +1210,16 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
 	<title>Lidando com o <command>imake</command></title>
 
 	<para>
-	  Alguns ports que fazem uso do <command>imake</command> (uma
-	  parte do Sistema X Windows) n&atilde;o funiona bem com a
-	  vari&aacute;vel <makevar>PREFIX</makevar>,e ir&aacute;
+	  Alguns <foreignphrase>ports</foreignphrase> que fazem uso do <command>imake</command> (uma
+	  parte do Sistema X Windows) n&atilde;o fucionam bem com a
+	  vari&aacute;vel <makevar>PREFIX</makevar>, e ir&atilde;o 
 	  insistir em instalar o aplicativo sob
-	  <filename>/usr/X11R6</filename>. De forma semelhante, alguns
-	  ports Perl ignoram a vari&aacute;vel
+	  <filename>/usr/X11R6</filename>.  De forma semelhante, alguns
+	  <foreignphrase>ports</foreignphrase> Perl ignoram a vari&aacute;vel
 	  <makevar>PREFIX</makevar> e se instalam sob a &aacute;rvore
 	  do Perl. Fazer estes ports respeitarem a vari&aacute;vel
-	  <makevar>PREFIX</makevar> &eacute; um trabalho dificil,
-	  sen&atilde;o impossivel.</para>
+	  <makevar>PREFIX</makevar> &eacute; um trabalho dif&iacute;cil,
+	  sen&atilde;o imposs&iacute;vel.</para>
 
       </sect3>
     </sect2>
@@ -1230,19 +1232,19 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
         <secondary>removing</secondary>
       </indexterm>
       <para>
-	Agora que voc&ecirc; sabe como instalar um ports, voc&ecirc;
+	Agora que voc&ecirc; sabe como instalar um <foreignphrase>ports</foreignphrase>, voc&ecirc;
 	prov&aacute;velmente est&aacute; se perguntando como remove-lo
 	do sistema, apenas para o caso de voc&ecirc; instalar um e
-	mais tarde descobrir que instalaou o port errado. N&oacute;s
+	mais tarde descobrir que instalou o <foreignphrase>port</foreignphrase> errado.  N&oacute;s
 	iremos remover o nosso exemplo anterior (era o
 	<command>lsof</command> caso n&atilde;o tenha prestado
-	aten&ccedil;&atilde;o). Assim como na
+	aten&ccedil;&atilde;o).  Assim como na
 	instala&ccedil;&atilde;o, voc&ecirc; primeiro deve entrar no
-	diret&oacute;rio do port, no nosso caso
-	<filename>/usr/ports/sysutils/lsof</filename>. Depois que
+	diret&oacute;rio do <foreignphrase>port</foreignphrase>, no nosso caso
+	<filename>/usr/ports/sysutils/lsof</filename>.  Depois que
 	voc&ecirc; tiver entrado no diret&oacute;rio, voc&ecirc;
 	estar&aacute; pronto para desinstalar o
-	<command>lsof</command>. O que &eacute; feito atrav&eacute;s
+	<command>lsof</command>.  O que &eacute; feito atrav&eacute;s
 	do comando <command>make deinstall</command>:</para>
 
       <screen>&prompt.root; <userinput>cd /usr/ports/sysutils/lsof</userinput>
@@ -1250,8 +1252,8 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
 ===&gt;  Deinstalling for lsof-4.57</screen>
 
       <para>
-	Simples assim, voce j&aacute; removeu o
-	<command>lsof</command> do seu sistema. Se voc&ecirc; desejar
+	Simples assim, voc&ecirc; j&aacute; removeu o
+	<command>lsof</command> do seu sistema.  Se voc&ecirc; desejar
 	reinstal&aacute;-lo, basta executar o comando <command>make
 	  reinstall</command> dentro do diret&oacute;rio
 	<filename>/usr/ports/sysutils/lsof</filename>.</para>
@@ -1259,8 +1261,8 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
       <para>
 	Os comandos <command>make deinstall</command> e <command>make
 	reinstall</command>, n&atilde;o ir&atilde;o funcionar depois que voce
-	executar o comando <command>make clean</command>. Se voce
-	desejar desinstalar um ports depois de ter limpado o diret&oacute;rio
+	executar o comando <command>make clean</command>.  Se voce
+	desejar desinstalar um <foreignphrase>ports</foreignphrase> depois de ter limpado o diret&oacute;rio
 	de trabalho, utilize o comando &man.pkg.delete.1; como
 	mostrado na <link linkend="packages-using">Sess&atilde;o sobre
 	pacotes do Handbook</link>.</para>
@@ -1268,35 +1270,35 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
     </sect2>
 
     <sect2 id="ports-disk-space">
-      <title>Ports e espa&ccedil;o em disco</title>
+      <title><foreignphrase>Ports</foreignphrase> e espa&ccedil;o em disco</title>
 
       <indexterm>
         <primary>ports</primary>
         <secondary>disk-space</secondary>
       </indexterm>
       <para>
-	Utilizar a cole&ccedil;&atilde;o de ports pode definitivamente
-	devorar espa&ccedil;o do seu HDD. Por esta raz&atilde;o
+	Utilizar a cole&ccedil;&atilde;o de <foreignphrase>ports</foreignphrase> pode definitivamente
+	devorar espa&ccedil;o do seu HD. Por esta raz&atilde;o
 	voc&ecirc; precisa se lembrar de limpar o diret&oacute;rio de
 	trabalho utilizando o comando <command>make
 	  <makevar>clean</makevar></command>. Ao execut&aacute;-lo ele
 	ir&aacute; remover o diret&oacute;rio
-	<filename>work</filename> depois do port ter sido compilado e
-	instalado. Voc&ecirc; tamb&eacute;m pode remover os arquivos
-	tarballs do diret&oacute;rio <filename>distfiles</filename>,
+	<filename>work</filename> depois do <foreignphrase>port</foreignphrase> ter sido compilado e
+	instalado.  Voc&ecirc; tamb&eacute;m pode remover os arquivos
+	<foreignphrase>tarballs</foreignphrase> do diret&oacute;rio <filename>distfiles</filename>,
 	al&eacute;m de remover os aplicativos instalados quando eles
 	n&atilde;o tiverem mais utilidade.</para>
 	 
       <para>
-	Alguns usu&aacute;rios preferem limitar as categorias do port,
+	Alguns usu&aacute;rios preferem limitar as categorias do <foreignphrase>port</foreignphrase>,
 	colocando uma entrada no arquivo <filename>refuse</filename>.
 	Desta forma quando eles executam o
 	<application>CVSup</application>, ele n&atilde;o ir&aacute;
-	fazer o download de nenhum arquivo desta categoria.</para>
+	baixar nenhum arquivo desta categoria.</para>
     </sect2>
 
     <sect2 id="ports-upgrading">
-      <title>Atualizando um aplicativo instalado via Ports</title>
+      <title>Atualizando um aplicativo instalado via <foreignphrase>Ports</foreignphrase></title>
 
       <indexterm>
 	<primary>portupgrade</primary>
@@ -1308,32 +1310,33 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
       <para>
 	Manter um aplicativo atualizado pode ser uma tarefa tediosa.
 	Pois para atualizar um aplicativo voc&ecirc; precisa ir ao
-	diret&oacute;rio do ports, compilar o port, desinstalar a
-	vers&atilde;o antiga do port, instalar a nova vers&atilde;o e
+	diret&oacute;rio do <foreignphrase>ports</foreignphrase>, compilar o 
+	<foreignphrase>port</foreignphrase>, desinstalar a
+	vers&atilde;o antiga do <foreignphrase>port</foreignphrase>, instalar a nova vers&atilde;o e
 	ent&atilde;o limpar o diret&oacute;rio de trabalho ap&oacute;s
-	a compila&ccedil;&atilde;o. Imagine fazer isso para 5
+	a compila&ccedil;&atilde;o.  Imagine fazer isso para 5
 	aplicativos, entediante certo ? Este &eacute; um dos grandes
 	problemas com que um administrador de sistema tem que lidar,
 	mas agora temos um utilit&aacute;rio para fazer este trabalho
-	para n&oacute;s. Por exemplo o utilit&aacute;rio <filename
+	para n&oacute;s.  Por exemplo o utilit&aacute;rio <filename
 	  role="port">sysutils/portupgrade </filename> ir&aacute;
-	fazer tudo para voc&ecirc;. Instale-o da mesma forma como faz
+	fazer tudo para voc&ecirc;.  Instale-o da mesma forma como faz
 	com qualquer outro port, usando o comando <command>make
 	  <makevar>install clean</makevar></command>.</para>
 	
       <para>
 	Agora crie o banco de dados com o comando <command>pkgdb
-	  -F</command>. Este comando ir&aacute; ler a lista de ports
-	instados em seu sistema e ir&aacute; criar um banco de dados
+	  -F</command>. Este comando ir&aacute; ler a lista de <foreignphrase>ports</foreignphrase>
+	instalados em seu sistema e ir&aacute; criar um banco de dados
 	com informa&ccedil;&otilde;es dos mesmos no diret&oacute;rio
-	<filename>/var/db/pkg</filename>. Agora quando voc&ecirc;
+	<filename>/var/db/pkg</filename>.  Agora quando voc&ecirc;
 	executar <command>portupgrade -a</command>, ele ir&aacute; ler
 	este banco de dados e o arquivo <filename>INDEX</filename> na
-	raiz da &aacute;rvore do ports. Em seguida o
+	raiz da &aacute;rvore do <foreignphrase>ports</foreignphrase>.  Em seguida o
 	<command>portupgrade</command> ir&aacute; iniciar o processo
 	de download, compila&ccedil;&atilde;o, backup,
 	instala&ccedil;&atilde;o e limpeza dos aplicativos que
-	precisarem de atualiza&ccedil;&atilde;o. Existem outros
+	precisarem de atualiza&ccedil;&atilde;o.  Existem outros
 	utilit&aacute;rios que fazem um trabalho semelhante, verifique
 	as demais op&ccedil;&otilde;es no diret&oacute;rio
 	<filename>ports/sysutils</filename>.
@@ -1349,12 +1352,12 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
       ir&aacute; querer ler a documenta&ccedil;&atilde;o instalada com
       ele, editar algum arquivo de configura&ccedil;&atilde;o
       necess&aacute;rio para o correto funcionamento do aplicativo,
-      certificar-se de que ele o aplicativo ir&aacute; iniciar
-      automaticamente no pr&oacute;ximo boot (se ele for um servidor)
+      certificar-se de que o aplicativo ir&aacute; iniciar
+      automaticamente no pr&oacute;ximo <quote>boot</quote> (se ele for um servidor)
       e assim por diante.</para>
     
     <para>Os passos exatos necess&aacute;rios para configurar cada
-      aplicativo s&atilde;o obviamente diferentes. No entando, se
+      aplicativo s&atilde;o obviamente diferentes.  No entando, se
       voc&ecirc; acabou de instalar um novo aplicativo e est&aacute;
       se perguntando <quote>O que fazer agora ? </quote>, as dicas
       abaixo podem ajud&aacute;-lo:</para>
@@ -1370,7 +1373,7 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
 	<screen>&prompt.root; <userinput>pkg_info -L foopackage-1.0.0 | less</userinput></screen>
 
 	<para>Ir&aacute; exibir todos os arquivos instalados com o
-	  pacote. Preste aten&ccedil;&atilde;o especial aos arquicos
+	  pacote. Preste aten&ccedil;&atilde;o especial aos arquivos
 	  instalados no diret&oacute;rio <filename>man/</filename>,
 	  pois eles s&atilde;o os manuais dos aplicativos que compoem
 	  o pacote, Tamb&eacute;m preste aten&ccedil;&atilde;o aos
@@ -1388,7 +1391,7 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
 	<screen>&prompt.root; <userinput>pkg_info | grep -i <replaceable>foopackage</replaceable></userinput></screen>
 
 	<para>Ir&aacute; procurar todos os aplicativos instalados que possuem
-	a palavra <replaceable>foopackage</replaceable> no nome.
+	a palavra <replaceable>foopackage</replaceable> no nome.  
 	Substitua a palavra <replaceable>foopackage</replaceable> no
 	seu comando de acordo com sua necessidade.</para>
       </listitem>
@@ -1397,38 +1400,37 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
 	<para>
 	  Uma vez que voc&ecirc; tiver identificado as paginas de manual
 	  instaladas com o seu aplicativo, utilize o comando
-	  &man.man.1; para visualiz&aacute;-las. De forma an&aacute;loga, leia os
+	  &man.man.1; para visualiz&aacute;-las.  De forma an&aacute;loga, leia os
 	  arquivos de configura&ccedil;&atilde;o instalados como exemplo, bem como
 	  qualquer outra documenta&ccedil;&atilde;o complementar que tenha sido
 	  disponibilizada.</para>
       </listitem>
 
       <listitem>
-	<para>Se o aplicativo possuir um <literal>web site</literal>,
+	<para>Se o aplicativo possuir um s&iacute;tio <literal>web</literal>,
 	  fa&ccedil;a uma visita e verifique se ele disponibiliza
 	  alguma documenta&ccedil;&atilde;o adicional, uma lista com
-	  as perguntas e repostas mais frequentes, e assim por diante.
+	  as perguntas e repostas mais frequentes, e assim por diante.  
 	  Se voc&ecirc; n&atilde;o tiver certeza do endere&ccedil;o do
-	  <literal>web site</literal> do aplicativo, ele pode ser
+	  s&iacute;tio <literal>web</literal> do aplicativo, ele pode ser
 	  listado na saida do comando</para>
 	
 	<screen>&prompt.root; <userinput>pkg_info <replaceable>foopackage-1.0.0</replaceable></userinput></screen>
 	
 	<para>Verifique se existe uma linha iniciada por
 	  <literal>WWW:</literal> , se ela estiver presente,
-	  voc&ecirc; tera descoberto o endere&ccedil;o do <literal>web
-	    site</literal> do aplicativo.</para>
+	  voc&ecirc; ter&aacute; descoberto o endere&ccedil;o do s&iacute;tio<literal>web</literal> do aplicativo.</para>
 	
       </listitem>
 
       <listitem>
 	<para>
-	  Os aplicativos que inicializam no boot (aplicativos
+	  Os aplicativos que inicializam no <quote>boot</quote> (aplicativos
 	  servidores) ir&atilde;o instalar um script shell no
 	  diret&oacute;rio <filename>/usr/local/etc/rc.d</filename>.
 	  Voce deve verificar este script para ter certeza de que
 	  est&aacute; correto, editando-o ou renomeando-o se for
-	  necess&aacute;rio. Consulte a sess&atilde;o <link
+	  necess&aacute;rio.  Consulte a sess&atilde;o <link
 	    linkend="configtuning-starting-services">Iniciando
 	    Servi&ccedil;os </link> para maiores
 	  informa&ccedil;&otilde;es.</para>
@@ -1439,7 +1441,7 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
   <sect1 id="ports-broken">
     <title>Lidando com ports quebrados</title>
 
-      <para>Se voc&ecirc; encontrar um port que n&atilde;o est&aacute;
+      <para>Se voc&ecirc; encontrar um <foreignphrase>port</foreignphrase> que n&atilde;o est&aacute;
       funcionando, existem algumas coisas que voc&ecirc; pode fazer,
       incluindo:</para>
 
@@ -1449,24 +1451,24 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
 	    url="../porters-handbook/index.html">Porter's
 	    Handbook</ulink> inclui informa&ccedil;&otilde;es
 	  detalhadas sobre a infraestrutura do <quote>Ports</quote>,
-	  de forma que voc&ecirc; pode ocasionalmente corrigir um port
+	  de forma que voc&ecirc; pode ocasionalmente corrigir um <foreignphrase>port</foreignphrase>
 	  quebrado ou ent&atilde;o submeter o seu
 	  pr&oacute;prio!</para>
 	</listitem>
 
 	<listitem>
 	  <para>
-	    Reclamar&mdash;<emphasis>por email apenas</emphasis>!
-	    Primeiro envie um email para o respons&aacute;vel pelo port.
+	    Reclamar&mdash;<emphasis>por email apenas</emphasis>!  
+	    Primeiro envie um email para o respons&aacute;vel pelo <foreignphrase>port</foreignphrase>.  
 	    Execute <command>make maintainer</command> ou ent&atilde;o leia o
 	    arquivo <filename>Makefile</filename> para encontrar o
-	    endere&ccedil;o de email do respons&aacute;vel pelo port. Lembre-se de
-	    incluir o nome e a vers&atilde;o do port (envie a linha 
+	    endere&ccedil;o de email do respons&aacute;vel pelo <foreignphrase>port</foreignphrase>.  Lembre-se de
+	    incluir o nome e a vers&atilde;o do <foreignphrase>port</foreignphrase> (envie a linha 
 	    <literal>&dollar;FreeBSD:</literal>, do arquivo <filename>
-	    Makefile</filename>) e a mensagem de erro no emaili que
-	    ir&aacute; enviar. Se voc&ecirc; n&atilde;o obtiver uma resposta do
+	    Makefile</filename>) e a mensagem de erro no email que
+	    ir&aacute; enviar.  Se voc&ecirc; n&atilde;o obtiver uma resposta do
 	  respons&aacute;vel, voce pode utilizar o &man.send-pr.1; para
-	    enviar um relatorio de falha.</para>
+	    enviar um relat&oacute;rio de falha.</para>
 	</listitem>
 
 	<listitem>
@@ -1474,11 +1476,11 @@ Receiving lsof_4.57D.freebsd.tar.gz (439860 bytes): 100%
 	  A cole&ccedil;&atilde;o de pacotes <quote>master</quote> fica no servidor
 	  <hostid role="fqdn">ftp.FreeBSD.org</hostid>, no diret&oacute;rio
 	  <ulink url="ftp://ftp.FreeBSD.org/pub/FreeBSD/ports/packages/">
-	  packages</ulink>, mas tenha certeza de verificar o seu
-	  mirror local <emphasis>antes</emphasis>! Esta abordagem &eacute;
+	  packages</ulink>, mas tenha certeza de verificar o seu 
+	  <foreignphrase>mirror</foreignphrase> local <emphasis>antes</emphasis>!  Esta abordagem &eacute;
 	  muito garantida de que vai funcionar do que tentar compilar
 	  o aplicativo apartir do c&oacute;digo fonte, al&eacute;m de ser muito mais
-	  r&aacute;pida tamb&eacute;m. Utilize o utilit&aacute;rio &man.pkg.add.1; para
+	  r&aacute;pida tamb&eacute;m.  Utilize o utilit&aacute;rio &man.pkg.add.1; para
 	  instalar aplicativos no seu sistema.</para>
 	</listitem>
       </orderedlist>
