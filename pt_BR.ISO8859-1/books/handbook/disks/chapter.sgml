@@ -1,52 +1,56 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: doc/en_US.ISO8859-1/books/handbook/disks/chapter.sgml,v 1.187 2003/11/05 10:36:54 ceri Exp $
+     $FreeBSD: doc/en_US.ISO8859-1/books/handbook/disks/chapter.sgml,v 1.184 2004/04/02 13:05:54 eksffa Exp $
 -->
 
 <chapter id="disks">
   <title>Armazenamento</title>
 
   <sect1 id="disks-synopsis">
-    <title>Sinopse</title>
+    <title>Sin&oacute;pse</title>
 
 
-    <para>Este cap&iacute;tulo cobre a utiliza&ccedil;&atilde;o de discos no FreeBSD.  Isto
-      inclui discos memory-backed , discos atachados de rede, e
-      dispositivos de armazenamento padrao SCSI/IDE .</para>
+    <para>Este cap&iacute;tulo demonstra como fazer uso de discos no FreeBSD.
+	  Incluindo discos de mem&oacute;ria, conectados atrav&eacute;s da rede e os
+	  dispositivos de armazenamento dos padr&otilde;es SCSI/IDE.</para>
 
-    <para>Ap&oacute;s a leitura deste cap&iacute;tulo, voc&ecirc; saber&aacute;:</para>
+    <para>Ap&oacute;s ler este cap&iacute;tulo voc&ecirc; saber&aacute;:</para>
     <itemizedlist>
-      <listitem><para>A terminologia que o FreeBSD
-	  utiliza para descrever a
-      organiza&ccedil;&atilde;o dos dados em um disco f&iacute;sico (parti&ccedil;&otilde;es e slices).</para>
+      <listitem><para>A terminologia utilizada pelo FreeBSD para descrever
+	  a organiza&ccedil;&atilde;o dos dados num disco r&iacute;gido (parti&ccedil;&otilde;es, e slices ou
+	  fatias).</para>
       </listitem>
-      <listitem><para>Como conectar discos r&iacute;gidos
-	  adicionais para seu sistema.</para>
+      <listitem><para>Como adicionar um disco r&iacute;gido ao seu sistema.</para>
       </listitem>
-      <listitem><para>Como configurar sistemas de arquivos
-	  virtuais, tais como
-      discos de mem&oacute;ria.</para></listitem>
+      <listitem><para>Como configurar um sistema
+	  de arquivos virtual, como
+	  os alocados em mem&oacute;ria.</para></listitem>
       <listitem>
-	<para>Como utilizar cotas para limitar o uso de espa&ccedil;o do disco.</para>
-      </listitem>
-      <listitem>
-	<para>Como cifrar discos para proteg&ecirc;-los contra atacantes.</para>
+	<para>Como fazer utiliza&ccedil;&atilde;o de cotas para limitar o uso do espa&ccedil;o de
+      armazenamento em disco.</para>
       </listitem>
       <listitem>
-	<para>Como criar e queimar CDs e DVDs no FreeBSD.</para>
+	<para>Como criptografar discos para assegurar contra
+		poss&iacute;veis ataques.</para>
       </listitem>
       <listitem>
-        <para>As diversas op&ccedil;&otilde;es de m&iacute;dias de armazenamento para backups.</para>
+	<para>Como criar e gravar CDs e DVDs no FreeBSD.</para>
       </listitem>
       <listitem>
-        <para>Como utilizar programas de backup dispon&iacute;veis pelo FreeBSD.</para>
+        <para>As v&aacute;rias op&ccedil;&otilde;es de m&iacute;dias para c&oacute;pias
+		de seguran&ccedil;a(Backup).</para>
       </listitem>
       <listitem>
-        <para>Como realizar c&oacute;pias de seguran&ccedil;a de disquetes.</para>
+        <para>Como utilizar os programas dispon&iacute;veis no FreeBSD para
+		realizar c&oacute;pias de seguran&ccedil;a(Backup).</para>
       </listitem>
       <listitem>
-        <para>O que s&atilde;o snapshots e como utiliz&aacute;-los eficientemente.</para>
+        <para>Como fazer c&oacute;pias de seguran&ccedil;a em disquetes.</para>
+      </listitem>
+      <listitem>
+        <para>O que s&atilde;o <foreignphrase>snapshots</foreignphrase> e
+		como fazer uso deles de maneira eficiente.</para>
       </listitem>
     </itemizedlist>
   </sect1>
@@ -54,18 +58,18 @@
   <sect1 id="disks-naming">
     <title>Nomes de Dispositivos</title>
 
-    <para>A seguir temos uma lista dos dispositivos de armazenamento
-      suportados pelo FreeBSD, e os nomes de dispositivos associados
-      a eles.</para>
+    <para>Temos aqui uma lista dos dispositivos f&iacute;sicos de
+	  armazenamento suportados pelo FreeBSD, e os nomes
+	  associados a eles.</para>
 
     <table id="disk-naming-physical-table">
-      <title>Conven&ccedil;&otilde;es de nomes f&iacute;sicos de discos</title>
+      <title>Conven&ccedil;&otilde;es de Nomenclatura de Discos F&iacute;sicos</title>
 
       <tgroup cols="2">
 	<thead>
 	  <row>
-	    <entry>Tipo de drive</entry>
-	    <entry>Nome do dispositivo do drive</entry>
+	    <entry>Tipo de Controladora</entry>
+	    <entry>Nome do Dispositivo</entry>
 	  </row>
 	</thead>
 	<tbody>
@@ -74,54 +78,54 @@
 	    <entry><literal>ad</literal></entry>
 	  </row>
 	  <row>
-	    <entry>Discos de CDROM IDE</entry>
+	    <entry>CDROM IDE</entry>
 	    <entry><literal>acd</literal></entry>
 	  </row>
 	  <row>
 	    <entry>Discos r&iacute;gidos SCSI e dispositivos de armazenamento
-                   de massa USB</entry>
+		em massa USB</entry>
 	    <entry><literal>da</literal></entry>
 	  </row>
 	  <row>
-	    <entry>Drives de CDROM SCSI</entry>
+	    <entry>CDROM SCSI</entry>
 	    <entry><literal>cd</literal></entry>
 	  </row>
 	  <row>
-	    <entry>Assorted non-standard CDROM drives</entry>
-	    <entry><literal>mcd</literal> para o CD-ROM Mitsumi,
-	      <literal>scd</literal> para o CD-ROM Sony,
-	      <literal>matcd</literal> para CD-ROMs Matsushita/Panasonic
+	    <entry>Controladores de CDROM fora de padr&otilde;es</entry>
+	    <entry><literal>mcd</literal> para CD-ROM Mitsumi,
+	      <literal>scd</literal> para CD-ROM Sony,
+	      <literal>matcd</literal> para CD-ROM Matsushita/Panasonic
 		<footnote>
-		  <para>O driver &man.matcd.4; foi removido
-		    no branch FreeBSD&nbsp;4.X desde 5 de outubro de
-		    2002 e n&atilde;o existe nos releases do  FreeBSD&nbsp;5.0 e
-		    5.1 .  Contudo, este driver est&aacute; de volta no branch
-		    FreeBSD&nbsp;5.X desde o dia 16 de Junho de
-		    2003.</para>
+		  <para>O suporte a controladora &man.matcd.4; foi removido no
+		    FreeBSD&nbsp;4.X desde 5 de outubro de 2002 e n&atilde;o &eacute;
+			suportada no FreeBSD&nbsp;5.0 e 5.1.  Entretanto,
+			o suporte foi novamente adicionado no FreeBSD&nbsp;5.X
+			desde 16 de junho de 2003.</para>
 		</footnote>
 	    </entry>
 	  </row>
 	  <row>
-	    <entry>Drives de disquete</entry>
+	    <entry>Controladoras de disquete</entry>
 	    <entry><literal>fd</literal></entry>
 	  </row>
 	  <row>
-	    <entry>Drives de fita SCSI</entry>
+	    <entry>Controladoras de tape SCSI</entry>
 	    <entry><literal>sa</literal></entry>
             </row>
 	  <row>
-	    <entry>Drives de fita IDE</entry>
+	    <entry>Controladoras de tape IDE</entry>
 	    <entry><literal>ast</literal></entry>
 	  </row>
 	  <row>
-	    <entry>Drives de Flash</entry>
-	    <entry><literal>fla</literal> para &diskonchip; dispositivo Flash </entry>
+	    <entry>Controladoras de Flash</entry>
+	    <entry><literal>fla</literal> para dispositivos
+		de Flash &diskonchip;</entry>
 	  </row>
 	  <row>
-	    <entry>Drives RAID </entry>
+	    <entry>Controladoras RAID</entry>
 	    <entry><literal>aacd</literal> para &adaptec; AdvancedRAID,
 	      <literal>mlxd</literal> e <literal>mlyd</literal>
-	      for &mylex;,
+	      para &mylex;,
 	      <literal>amrd</literal> para AMI &megaraid;,
 	      <literal>idad</literal> para Compaq Smart RAID,
 	      <literal>twed</literal> para &tm.3ware; RAID.</entry>
@@ -137,236 +141,237 @@
 	<author>
 	  <firstname>David</firstname>
 	  <surname>O'Brien</surname>
-	  <contrib>Contribuido originalmente por </contrib>
+	  <contrib>Contribui&ccedil;&atilde;o original de </contrib>
 	</author>
       </authorgroup>
-      <!-- 26 Apr 1998 -->
+      <!-- 26 Abr 1998 -->
     </sect1info>
 
-    <title>Adicionando discos</title>
+    <title>Adicionando Discos</title>
 
     <indexterm>
-      <primary>discos</primary>
-      <secondary>adicionando</secondary>
+      <primary>disks</primary>
+      <secondary>adding</secondary>
     </indexterm>
 
-    <para>Vamos dizer que queremos adicionar um novo disco SCSI para
-          uma m&aacute;quina que possui apenas um &uacute;nico disco.
-     Primeiro, desligue o computador
-      e instale o disco no computador seguindo as instru&ccedil;&otilde;es
-      do computador, controladora e, do fabricante do disco.  Devido
-      as grandes varia&ccedil;&otilde;es dos procedimentos para fazer isso, os
-      detalhes est&atilde;o al&eacute;m do escopo deste documento.</para>
+    <para>Vamos supor que desejamos adicionar um novo disco SCSI
+	  numa m&aacute;quina que atualmente possui apenas um. Primeiro
+	  desligamos o computador e conectamos o novo disco ao
+	  computador seguindo as instru&ccedil;&otilde;es fornecidas pelos
+	  fabricantes do computador, da controladora e do disco.
+	  Devido a este procedimento variar bastante, os detalhes
+	  desta opera&ccedil;&atilde;o estar&atilde;o fora do escopo deste documento.</para>
 
-    <para>Logue como usu&aacute;rio <username>root</username>. Depois de
-      instalado o disco, inspecione <filename>/var/run/dmesg.boot</filename>
-	  para confirmar que o novo disco foi encontrado.
-      Continuando com nosso exemplo, o disco recentemente adicionado
-      ser&aacute; <devicename>da1</devicename> e queremos mont&aacute;-lo em
-      <filename>/1</filename> (se voce est&aacute; adicionando um disco IDE,
-	  o nome do dispositivo ser&aacute; <devicename>wd1</devicename>
-	  nos sistemas pre-4.0, ou
-      <devicename>ad1</devicename> na maioria dos sistemas 4.X ).</para>
+    <para>Realize login como usu&aacute;rio <username>root</username>.
+	  Ap&oacute;s voc&ecirc; ter instalado o disco, verifique o arquivo
+	  <filename>/var/run/dmesg.boot</filename> para certificar-se
+	  de que o novo disco foi encontrado.  Continuando com o nosso
+	  exemplo, o novo disco adicionado ser&aacute; o
+	  <devicename>da1</devicename> e n&oacute;s vamos mont&aacute;-lo em
+      <filename>/1</filename> (se voc&ecirc; estiver adicionando um disco
+	  IDE, o nome do dispositivo ser&aacute; <devicename>wd1</devicename>
+	  em sistemas pre-4.0, ou <devicename>ad1</devicename>
+	  ma maioria dos sistemas 4.X).</para>
 
-    <indexterm><primary>parti&ccedil;&otilde;es</primary></indexterm>
+    <indexterm><primary>partitions</primary></indexterm>
     <indexterm><primary>slices</primary></indexterm>
     <indexterm>
       <primary><command>fdisk</command></primary>
     </indexterm>
 
-    <para>Pelo fato do FreeBSD rodar em computadores compat&iacute;veis com
-      IBM-PC, este levar&aacute; em conta as particoes da BIOS do PC.  Estas s&atilde;o
-      diferentes das tradicionais parti&ccedil;&otilde;es BSDs.
-      Um disco de PC tem at&eacute; no m&aacute;ximo 4 entradas de parti&ccedil;&otilde;es na
-      BIOS.  Se o disco for totalmente dedicado ao FreeBSD, voce pode
-      utilizar o modo <emphasis>dedicado</emphasis>.  Do contr&aacute;rio,
-	  o FreeBSD ter&aacute; de localizar-se dentro de uma das parti&ccedil;&otilde;es da
-	  BIOS do PC.  O FreeBSD chama as parti&ccedil;&otilde;es da BIOS do PC como
-	  <emphasis>slices</emphasis> de forma
-      a n&atilde;o confundir com as partic&otilde;es tradicionais do BSD.  Voc&ecirc; pode
-      tamb&eacute;m utilizar slices em um disco que est&aacute; dedicado para o
-      FreeBSD, mas utilizando em um computador que tamb&eacute;m tenha outro
-      sistema operacional instalado.
-      Isto &eacute; para n&aacute;o confundir com o utilit&aacute;rio <command>fdisk</command>
-      de outros sistemas operacionais.</para>
+    <para>Devido ao FreeBSD rodar em computadores compat&iacute;veis com
+	  IBM-PC, ele ter&aacute; que respeitar o particionamento
+	  especificado pela BIOS do PC.  Estas por sua vez s&atilde;o diferentes
+	  das parti&ccedil;&otilde;es tradicionais BSD. Um disco de um PC pode ter
+	  quatro entradas de parti&ccedil;&otilde;es na BIOS. Se o disco ser&aacute; totalmente
+      dedicado ao FreeBSD voc&ecirc; ter&aacute; a op&ccedil;&atilde;o de usar o modo
+      <emphasis>dedicated</emphasis>.  Ou ent&atilde;o, o FreeBSD
+	  ter&aacute; de viver como uma das parti&ccedil;&otilde;es da BIOS do PC.  O FreeBSD
+      chama as parti&ccedil;&otilde;es da BIOS do PC de <emphasis>slices</emphasis>
+	  ou <emphasis>fatias</emphasis>, ent&atilde;o n&atilde;o as confunda com as
+	  parti&ccedil;&otilde;es BSD tradicionaiso.  Voc&ecirc; tamb&eacute;m pode usar fatias num
+	  disco dedicado ao FreeBSD, mas us&aacute;-las em um computador que
+	  possua um outro sistema operacional instalado. Isso para n&atilde;o
+      causar confus&otilde;es com o utilit&aacute;rio <command>fdisk</command>
+	  de outros sistemas operativos.</para>
 
-    <para>No caso do slice, o disco ser&aacute; adicionado como
-      <filename>/dev/da1s1e</filename>.  E lido como: disco SCSI,
-      unidade numero 1 (segundo disco SCSI ), slice 1 (parti&ccedil;&atilde;o 1 da BIOS do PC ),
-      e parti&ccedil;&atilde;o BSD <filename>e</filename>.  No caso dedicado,
-	  o disco ser&aacute; adicionado simplesmente como
+    <para>In the slice case the drive will be added as
+      <filename>/dev/da1s1e</filename>.  This is read as: SCSI disk,
+      unit number 1 (second SCSI disk), slice 1 (PC BIOS partition 1),
+      and <filename>e</filename> BSD partition.  In the dedicated
+      case, the drive will be added simply as
       <filename>/dev/da1e</filename>.</para>
 
     <sect2>
       <title>Utilizando o &man.sysinstall.8;</title>
       <indexterm>
         <primary><application>sysinstall</application></primary>
-        <secondary>adicionando discos</secondary>
+        <secondary>adding disks</secondary>
       </indexterm>
       <indexterm>
 	<primary>su</primary>
       </indexterm>
       <procedure>
 	<step>
-	  <title>Navegando pelo <application>Sysinstall</application></title>
-
-	  <para>Voc&ecirc; pode utilizar o <command>/stand/sysinstall</command> para
-	    particionar e rotular um novo disco facilmente utilizando os menus.
-	    Logue como usu&aacute;rio <username>root</username> ou utilize o
-	    comando <command>su</command>.  Execute
+	  <title>Navegando no <application>Sysinstall</application></title>
+	  <para>Voc&ecirc; pode utilizar o <command>/stand/sysinstall</command>
+	    para particionar e definir os r&oacute;tulos ou
+		<foreignphrase>label</foreignphrase>
+	    que ser&atilde;o utilizados no novo disco de maneira facilitada
+		atrav&eacute;s de seus menus.  Estando logado como usu&aacute;rio
+		<username>root</username> ou utilizando o comando
+	    <command>su</command>.  Execute
 	    <command>/stand/sysinstall</command> e entre no menu
-	    <literal>Configure</literal> .  Dentro do
-	    <literal>Menu FreeBSD Configuration </literal>, tecle
-	    para abaixo e selecione a op&ccedil;&atilde;o <literal>Fdisk</literal>.</para>
+	    <literal>Configure</literal>.  Estando em
+	    <literal>FreeBSD Configuration Menu</literal>, v&aacute; descendo nas
+		op&ccedil;&otilde;es e abaixo selecione a op&ccedil;&atilde;o <literal>Fdisk</literal>.</para>
 	</step>
-
 	<step>
 	  <title><application>fdisk</application> Editor de Parti&ccedil;&otilde;es</title>
-	  <para>Dentro da <application>fdisk</application>,
-	    n&aacute;s podemos digitar <userinput>A</userinput> para
-	    utilizar o disco inteiro para o FreeBSD.  Quando
-	    perguntado se voc&ecirc; quer <quote>manter coopera&ccedil;&atilde;o com
-	    qualquer sistema operacional no futuro,
-	    </quote>, responda <literal>YES</literal>. Grave as
-	    mudan&ccedil;as para o disco utilizando o <userinput>W</userinput>.
-	    Agora, saia do editor do FDISK digitando <userinput>q</userinput>.
-	    &Agrave; seguir, ser&aacute; perguntado sobre o <quote>Registro Mestre de
-	    Boot</quote>. Desde que estamos adicionando um disco em um sistema
-	    j&aacute; em funcionando, escolha <literal>None</literal>.</para>
+	  <para>Uma vez no <application>fdisk</application>, n&oacute;s podemos
+	    teclar <userinput>A</userinput> para usar todo o disco
+		para o FreeBSD.  Quando for perguntado se voc&ecirc; quer
+		<quote>manter a possibilidade de uso cooperativo com
+		outro sistema operacional no futuro</quote> responda
+		<literal>YES</literal>.  Grave as altera&ccedil;&otilde;es feitas
+		no disco teclando <userinput>W</userinput>.  Agora
+		saia do FDISK teclando <userinput>q</userinput>.  Em
+		seguida, voc&ecirc; ser&aacute; perguntado sobre o Registro Mestre de
+		Inicializa&ccedil;&atilde;o(MBR, Master Boot Record). Desde que voc&ecirc; esteja
+		adicionando um disco num sistema em execu&ccedil;&atilde;o, selecione
+	    <literal>None</literal>.</para>
 	</step>
 
 	<step>
-	  <title>Editor de R&oacute;tulo do Disco</title>
-	  <indexterm><primary>Parti&ccedil;&otilde;es BSD </primary></indexterm>
+	  <title>Editor de R&oacute;tulo(Label) de Disco</title>
+	  <indexterm><primary>BSD partitions</primary></indexterm>
 
-	  <para>&Agrave; seguir, voc&ecirc; precisa sair do <application>sysinstall</application>
-        e reinici&aacute;-lo.  Siga as orientacoes acima, embora desta
-        vez escolha a op&ccedil;&atilde;o <literal>Label</literal>. Entrar&aacute;
-	    no <literal>Editor de R&oacute;tulo do Disco</literal>.  Este
-	    &eacute; o lugar onde ser&atilde;o criados as tradicionais parti&ccedil;&otilde;es BSD.
-	    Um disco pode ter no m&aacute;ximo 8 parti&ccedil;&otilde;es, rotuladas de
+	  <para>Em seguida, voc&ecirc; precisar&aacute; sair do
+	    <application>sysinstall</application> e inici&aacute;-lo
+		novamente.  Siga a mesma dire&ccedil;&atilde;o citada nos menus, por&eacute;m
+		agora selecione a op&ccedil;&atilde;o <literal>Label</literal>. Voc&ecirc;
+		entrar&aacute; ent&atilde;o no <literal>Disk Label Editor</literal>
+		(Editor de R&oacute;tulos de Discos).  Onde s&atilde;o criadas as
+		parti&ccedil;&otilde;es BSD tradicionais.  Um disco pode ter oito
+		parti&ccedil;&otilde;es, rotuladas de
 	    <literal>a-h</literal>.
-	    Alguns r&oacute;tulos de particoes tem utilizacoes especiais.A
-	    particao <literal>a</literal> e utilizada para representar
-	    a particao root(<filename>/</filename>).
-	    Assim, somente seu disco de sistema (por exemplo,
-	    o disco do qual e dado o boot) deve possuir uma particao
-	    <literal>a</literal>.  A particao  <literal>b</literal>
-	    e utilizada para identificar as particoes de swap, e voce
-	    pode ter muitos discos com particoes de swap.
-	    A particao <literal>c</literal> partition endereca todo o
-	    disco no modo dedicado , ou o slice inteiro do FreeBSD
-	    no modo slice.  As outras particoes sao para uso gerais.</para>
+	    Alguns r&oacute;tulos de parti&ccedil;&otilde;es tem um uso especial.  A
+	    parti&ccedil;&atilde;o <literal>a</literal> &eacute; utilizada para a parti&ccedil;&atilde;o
+		raiz ou root (<filename>/</filename>).  Somente o disco
+		do sistema (e.g, o disco de onde seu sistema realiza o boot)
+	    deve ter uma parti&ccedil;&atilde;o<literal>a</literal>.
+	    A parti&ccedil;&atilde;o <literal>b</literal> &eacute; utilizada para parti&ccedil;&otilde;es
+		de mem&oacute;ria virtual(swap), e voc&ecirc; pode ter v&aacute;rios discos com
+		parti&ccedil;&otilde;es swap.  A parti&ccedil;&atilde;o <literal>c</literal> endere&ccedil;a todo
+		o disco no modo dedicado, ou toda a slice do FreeBSD no
+		modo slice.  As outras parti&ccedil;&otilde;es s&atilde;o para uso geral.</para>
 
-	  <para>o editor de Rotulos do <application>sysinstall</application>
-	    favors a particao <literal>e</literal>
-	    para particoes nao-swap. Dentro do editor de Rotulo,
-	    crie um unico sistema de arquivos digitando
-	    <userinput>C</userinput>.  Quando perguntado se este sera
-	    um FS(sistema de arquivo) ou swap, escolha
-	    <literal>FS</literal> e digite um ponto de montagem
-	    (por exemplo, <filename>/mnt</filename>).  Quando
-	    adicionar um disco no modo post-install,
-	     <application>sysinstall</application>
-	    nao criara as entradas
-	    no <filename>/etc/fstab</filename> para voce, entao
-	    especificar o ponto de montagem nao e tao importante.</para>
+	  <para>O editor de r&oacute;tulos do
+	    <application>sysinstall</application>
+	    prefere usar a parti&ccedil;&atilde;o <literal>e</literal> quando esta
+		n&atilde;o for uma parti&ccedil;&atilde;o raiz ou swap.  Uma vez no Editor de
+		R&oacute;tulos, crie um sistema de arquivos simples teclando
+        <userinput>C</userinput>.  Quando perguntado se
+		este ser&aacute; um Sistema de Arquivos(FS, file system) ou
+		swap, escolha <literal>FS</literal> e digite um
+		ponto de montagem (e.g, <filename>/mnt</filename>).  Quando
+		voc&ecirc; estiver adicionando um disco ap&oacute;s ter instalado,
+	    o <application>sysinstall</application> n&atilde;o criar&aacute; as entradas
+		no <filename>/etc/fstab</filename> para voc&ecirc;, ent&atilde;o o ponto
+		de montagem definido n&atilde;o tem muita import&acirc;ncia.</para>
 
-	  <para>Agora voce esta pronto para escrever o novo rotulo para o
-	  disco e criar um sistema de arquivos nele.
-	    Faca isso digitando
-	    <userinput>W</userinput>.  Ignore quaisquer erros do
-	    <application>sysinstall</application> que ele nao pode
-	    montar a nova particao.  Saia do Editor de Rotulo 
-	    e do <application>sysinstall</application>.</para>
+	  <para>Voc&ecirc; agora est&aacute; pronto para gravar o novo r&oacute;tulo
+	    no disco e criar o sistema de arquivos. Fa&ccedil;a isso
+		teclando <userinput>W</userinput>.  Ignore qualquer erro do
+	    <application>sysinstall</application> que n&atilde;o poder&aacute;
+		montar a nova parti&ccedil;&atilde;o.  Saia do Editor de R&oacute;tulos e do
+        <application>sysinstall</application>.</para>
 	</step>
 
 	<step>
-	  <title>Finish</title>
+	  <title>Finalizando</title>
 
-	  <para>O ultimo passo e editar o <filename>/etc/fstab</filename>
-	    para adicionar uma entrada para seu novo disco.</para>
+	  <para>Como &uacute;ltimo passo, edite o <filename>/etc/fstab</filename>
+	    para adicionar a entrada referente ao novo disco.</para>
 	</step>
       </procedure>
     </sect2>
 
     <sect2>
-      <title>Utilizando os Utilitarios de Linha de Comando</title>
+      <title>Utilizando utilit&aacute;rios da linha de comando</title>
 
       <sect3>
-	<title>Utilizando Slices</title>
+	<title>Utilizando Slices ou Fatias</title>
 
-	<para>Este setup permitira que seu disco trabalhe corretamente
-	com outros sistemas operacionais que podem ser instalados no 
-	seu computador e nao confudirao outros utilitarios 
-	<command>fdisk</command> de outros sistemas operacionais.
-	    E recomendado utilizar este metodo para a instalacao de 
-	    novos discos. Somente utilize o modo 
-	    <literal>dedicado</literal> se voce tiver uma boa razao
-	    para isso!</para>
+	<para>Esta configura&ccedil;&atilde;o permitir&aacute; que ao seu disco funcionar
+	  corretamente com um outro sistema operacional que possa estar
+	  estar instalado em seu computador e n&atilde;o se confundir&aacute; com
+	  com o utilit&aacute;rio <command>fdisk</command> de outros
+	  sistemas.  &Eacute; recomendado o uso deste m&eacute;todo para instalar
+	  novos discos.  Somente use o modo <literal>dedicated</literal>
+	  se voc&ecirc; tiver uma boa raz&atilde;o!</para>
 
 	<screen>&prompt.root; <userinput>dd if=/dev/zero of=/dev/da1 bs=1k count=1</userinput>
-&prompt.root; <userinput>fdisk -BI da1</userinput> #Inicializa seu
-novo disco
-&prompt.root; <userinput>disklabel -B -w -r da1s1 auto</userinput>
-#Rotula-o.
-&prompt.root; <userinput>disklabel -e da1s1</userinput> # Edita o rotulo do disco recem criado e adiciona novas particoes.
+&prompt.root; <userinput>fdisk -BI da1</userinput> #Inicializa seu novo disco
+&prompt.root; <userinput>disklabel -B -w -r da1s1 auto</userinput> #Rotula ele
+&prompt.root; <userinput>disklabel -e da1s1</userinput> #Edita o r&oacute;tulo do disco somente para criar e adicionar alguma parti&ccedil;&atilde;o
 &prompt.root; <userinput>mkdir -p /1</userinput>
-&prompt.root; <userinput>newfs /dev/da1s1e</userinput> # Repete isso para cada particao que voce criou.
-&prompt.root; <userinput>mount /dev/da1s1e /1</userinput> # Monta a
-particao(s)
-&prompt.root; <userinput>vi /etc/fstab</userinput> # Adiciona a entrada(as) apropriadas para o seu <filename>/etc/fstab</filename>.</screen>
+&prompt.root; <userinput>newfs /dev/da1s1e</userinput> #Repita isso em cada uma das parti&ccedil;&otilde;es criadas
+&prompt.root; <userinput>mount /dev/da1s1e /1</userinput> #Monta a parti&ccedil;&atilde;o
+&prompt.root; <userinput>vi /etc/fstab</userinput> #Adiciona uma entrada apropriada no seu <filename>/etc/fstab</filename>.</screen>
 
-	<para>Se voce tem um disco ide, substitua <filename>ad</filename>
-	  for <filename>da</filename>.  Nos sistemas pre-4.X utilize
+	<para>Se voc&ecirc; possuir um disco IDE, substitua o
+	  <filename>ad</filename>
+	  por <filename>da</filename>.  Nos sistemas pre-4.X use
 	  <filename>wd</filename>.</para>
       </sect3>
-      
+
       <sect3>
 	<title>Dedicado</title>
 	<indexterm><primary>OS/2</primary></indexterm>
 
-	<para>Se voce nao for compartilhar o novo disco com outro sistema
-          operacional, voce pode utilizar o modo <literal>dedicado</literal>. 
-          Lembre-se que este modo pode confundir os sistemas operacionais
-          da Microsoft; no entanto, nenhum dano sera feito a eles.
-	  O &os2; da IBM, contudo <quote>apropriarar-se</quote> de qualquer 
-          particao encontrada que ele nao compreenda.</para>
-	
+	<para>Caso voc&ecirc; n&atilde;o v&aacute; compartilhar este novo disco com outros
+	  sistemas operacionais, voc&ecirc; poder&aacute; usar o modo
+	  <literal>dedicated</literal> ou dedicado.  Lembre-se que
+	  este modo pode causar confus&atilde;o nos sistemas operacionais
+	  Microsoft; entretanto, este n&atilde;o causar&aacute; danos.  O &os2;
+	  da IBM, entretanto, ir&aacute; tornar qualquer parti&ccedil;&atilde;o que ele
+	  n&atilde;o entenda numa parti&ccedil;&atilde;o <quote>apropriada</quote>.</para>
+
 	<screen>&prompt.root; <userinput>dd if=/dev/zero of=/dev/da1 bs=1k count=1</userinput>
 &prompt.root; <userinput>disklabel -Brw da1 auto</userinput>
-&prompt.root; <userinput>disklabel -e da1</userinput>				# cria a particao `e' 
+&prompt.root; <userinput>disklabel -e da1</userinput>				#Cria a parti&ccedil;&atilde;o `e'
 &prompt.root; <userinput>newfs -d0 /dev/da1e</userinput>
 &prompt.root; <userinput>mkdir -p /1</userinput>
-&prompt.root; <userinput>vi /etc/fstab</userinput>				# insere uma entrada para /dev/da1e
+&prompt.root; <userinput>vi /etc/fstab</userinput>				#Adicione a entrada para /dev/da1e
 &prompt.root; <userinput>mount /1</userinput></screen>
-      
-	<para>Um metodo alternativo e:</para>
-      
+
+	<para>Um met&oacute;do alternativo &eacute;:</para>
+
 	<screen>&prompt.root; <userinput>dd if=/dev/zero of=/dev/da1 count=2</userinput>
 &prompt.root; <userinput>disklabel /dev/da1 | disklabel -BrR da1 /dev/stdin</userinput>
 &prompt.root; <userinput>newfs /dev/da1e</userinput>
 &prompt.root; <userinput>mkdir -p /1</userinput>
-&prompt.root; <userinput>vi /etc/fstab</userinput>					# insere uma entrada para /dev/da1e
+&prompt.root; <userinput>vi /etc/fstab</userinput>					#Adicione a entrada para /dev/da1e
 &prompt.root; <userinput>mount /1</userinput></screen>
 
-	<note><para>Desde o  &os;&nbsp;5.1-RELEASE, o utilitario 
-	&man.bsdlabel.8;  substitui o antigo programa &man.disklabel.8;.  
-	Com o comando &man.bsdlabel.8; foram retiradas um grande
-	numero de opcoes e paramentros que se tornaram obsoletos;
-	  nos exemplos acima, a opcao 
-	  <option>-r</option> deve ser removida com o &man.bsdlabel.8;.
-	  Para mais informacoes , refira-se ao manual &man.bsdlabel.8; .
-	  </para></note>
+	<note><para>Desde o &os;&nbsp;5.1-RELEASE, o utilit&aacute;rio
+	  &man.bsdlabel.8; substitui o velho programa
+	  &man.disklabel.8;.  No &man.bsdlabel.8; algumas op&ccedil;&otilde;es
+	  e par&acirc;metros obsoletos foram retirados; no exemplo abaixo
+	  temos a op&ccedil;&atilde;o <option>-r</option> que deve ser removida
+	  com o &man.bsdlabel.8;.
+	  Para ter mais informa&ccedil;&otilde;es, por favor, visite a p&aacute;gina de manual
+	  do &man.bsdlabel.8;.</para></note>
       </sect3>
     </sect2>
   </sect1>
-  
+
   <sect1 id="raid">
     <title>RAID</title>
 
     <sect2 id="raid-soft">
-      <title>Software RAID</title>
+      <title>RAID feito em Software</title>
 
       <sect3 id="ccd">
 	<sect3info>
@@ -374,7 +379,7 @@ particao(s)
 	    <author>
 	      <firstname>Christopher</firstname>
 	      <surname>Shumway</surname>
-	      <contrib>Trabalho original por</contrib>
+	      <contrib>Trabalho original de </contrib>
 	    </author>
 	  </authorgroup>
 	  <authorgroup>
@@ -391,137 +396,148 @@ particao(s)
   <primary>RAID</primary><secondary>CCD</secondary>
 </indexterm>
 
-	<title>Configuracao do Driver de Concatenacao de Disco (CCD)</title>
-	<para>Quando escolher uma solucao de armazenamento de massa,
-	os aspectos  mais importantes a considerar sao velocidade,
-	confiabilidade e custo.  E raro termos um equilibrio
-	entre os tres; normalmente , um dispositivo de armazenamento de
-	massa rapido e confiavel tem um custo mais elevado e
-	economizando fatalmente sacrificara ou velocidade ou
-	confiabilidade do dispositivo.</para>
+	<title>Configura&ccedil;&atilde;o do Controlador de Discos Concatenados(CCD)</title>
+	<para>Quando estiver escolhendo uma solu&ccedil;&atilde;o de armazenamento em massa
+	  os fatores mais importantes a considerar s&atilde;o a velocidade, a
+	  confian&ccedil;a e o custo.  &Eacute; raro ter todos os tr&ecirc;s num
+	  equil&iacute;brio; normalmente um r&aacute;pido e confi&aacute;vel dispositivo
+	  de armazenamento em massa &eacute; caro, e para baixar o pre&ccedil;o tanto
+	  a velocidade como a confi&aacute;n&ccedil;a do dispositivo podem ser
+	  sacrificadas.</para>
 
-          <para>No projero do sistema abaixo, o custo foi 
-	  escolhido como o fator mais importante , seguido pela
-	  velocidade , e entao, confiabilidade.
-          A velocidade de transferencia para este sistema is ultimately
-          constrained pela rede.  E enquanto a confiabilidade e muito
-	  importante, o drive CCD descrito abaixo serve dados online
-	  que ja foram backupeados em CD-Rs e podem ser facilmente 
-	  substituidos.</para>  
+          <para>No desenvolvimento do sistema descrito abaixo, o
+		  custo &eacute; escolhido como o fator mais importante, seguido da
+		  velocidade e ent&atilde;o a confian&ccedil;a.
+          A velocidade da tranfer&ecirc;ncia de dados deste sistema
+		  determinada &eacute; relacionada pela rede.  E enquanto
+		  a confian&ccedil;a &eacute; muito importante, o controlador CCD
+		  descrito abaixo disponibiliza dados que j&aacute; tiveram
+		  c&oacute;pias de seguran&ccedil;a geradas em CD-Rs e que
+		  podem facilmente ser substitu&iacute;dos.</para>
 
-          <para>Definindo seus proprios requisitos e o primeiro passo
-	  na escolha de uma solucao de armazenamento de massa.
-          Se seus requisitos priorizam velocidade ou confiabilidade
-          sobre o custo, sua solucao diferira do sistema descrito
-	  nesta secao.</para>
+          <para>Definir seus pr&oacute;prios requerimentos &eacute; o
+		  primeiro passo
+		  na escolha de uma solu&ccedil;&atilde;o de armazenamento
+		  em massa.  Se suas
+		  necessidades preferirem a velocidade
+		  e a confian&ccedil;a ao inv&eacute;s do
+		  custo, sua solu&ccedil;&atilde;o ir&aacute; ser diferente
+		  do sistema descrito nesta se&ccedil;&atilde;o.</para>
 
 
 	<sect4 id="ccd-installhw">
 	  <title>Instalando o Hardware</title>
 
-	  <para>Alem do disco de sistema IDE, tres discos Western 
-            Digital 30GB, 5400 RPM IDE compoem o centro dos discos
-	    CCD descritos abaixo, fornecendo aproximadamente
-	    90GB de armazenamento online .  Idealmente, cada disco
-	    IDE teria seu proprio cabo e controladora, porem, 
-	    para minimizar os custos, controladoras adicionais nao
-	    foram utilizadas.  Ao inves disso, os discos foram 
-	    configurados com os jumpers de forma que cada controladora
-	    IDE tenha um dispositivo master e um slave.</para>
+	  <para>Em rela&ccedil;&atilde;o ao sistema de discos IDE, temos
+	    tr&ecirc;s discos IDE Western Digital 30GB de 5400 RPM
+		para o n&uacute;cleo do disco CCD descrito abaixo,
+		disponibilizando aproximadamente 90GB de
+		armazenamento.  De maneira ideal, cada disco IDE
+		teria sua pr&oacute;pria controladora e cabo, mas para
+		minimizar custos n&atilde;o utilizaremos controladoras
+		IDEs adicionais.  Uma vez que os discos s&atilde;o configurados
+		com jumpers, temos que cada controladora IDE possui
+		um mestre(master) e um escravo(slave).</para>
 
-	  <para>Upon reboot, a BIOS do sistema foi configurada para
-	  automaticamente detectar os discos que estao conectados.
-	      O mais importante e que o FreeBSD detectou-os no
-	    reboot:</para>
+	  <para>Ao reciniciar, a BIOS do sistema ter&aacute; que
+	    detectar automaticamente os discos conectados.  Ainda
+		mais importante,  o FreeBSD ter&aacute; que
+		detectar os discos ao reiniciar:</para>
 
 	  <programlisting>ad0: 19574MB &lt;WDC WD205BA&gt; [39770/16/63] at ata0-master UDMA33
 ad1: 29333MB &lt;WDC WD307AA&gt; [59598/16/63] at ata0-slave UDMA33
 ad2: 29333MB &lt;WDC WD307AA&gt; [59598/16/63] at ata1-master UDMA33
 ad3: 29333MB &lt;WDC WD307AA&gt; [59598/16/63] at ata1-slave UDMA33</programlisting>
 
- 	  <note><para>Se o FreeBSD nao detectar todos os discos,
- 	    assegure que voce os tenha jumpeado corretamente.
-	    Muitos drives IDE tambem tem um jumper de 
-	    <quote>selecao de cabos</quote>. Este <emphasis>nao</emphasis> 
-	    e o jumper para a relacao master/slave.
- 	     Consulte a documentacao do drive para auxilio na
-	     identificacao do jumper correto</para></note>.
- 
- 	  <para>Em seguida, avalie como voce ira conecta-los como
-	  parte do sistema de arquivo. Voce deve pesquisar ambos
-	  &man.vinum.8; (<xref linkend="vinum-vinum">) e &man.ccd.4;. 
-	  Nesta configuracao particular, o &man.ccd.4; foi escolhido.</para>
+ 	  <note><para>Se o FreeBSD n&atilde;o detectar todos os discos, confira
+	    se os discos foram jumpeados corretamente.  A maioria das
+		controladores tamb&eacute;m possuem a
+		op&ccedil;&atilde;o de jumpeamento <quote>Cable Select</quote>.  Este
+		<emphasis>n&atilde;o</emphasis> &eacute; o jumper
+		para a rela&ccedil;&atilde;o master/slave.  Consulte a documenta&ccedil;&atilde;o da controladora
+		para ter ajuda de como identificar a maneira correta de
+		configurar.</para></note>
+
+ 	  <para>Em seguida, consideraremos como ser&atilde;o conectados
+	    como parte do sistema de arquivos.  Voc&ecirc; deve realizar uma
+		pesquisa entre o &man.vinum.8; (<xref
+ 	    linkend="vinum-vinum">) e o &man.ccd.4;.  Nesta configura&ccedil;&atilde;o
+		em particular, o &man.ccd.4; foi o escolhido.</para>
 	</sect4>
 
 	<sect4 id="ccd-setup">
 	  <title>Configurando o CCD</title>
 
- 	  <para>O driver &man.ccd.4; permite tomar varios discos
-	  identicos e concantena-los em um unico sistema de arquivos
-	  logico.  De forma a utilizar o &man.ccd.4;, voce precisa 
-	  de um kernel que tenha o &man.ccd.4; compilado.
- 	    Adicione esta linha ao seu arquivo de configuracao do kernel,
-	    recompile e reinstale o kernel:</para>
+ 	  <para>O controlador &man.ccd.4; permite que voc&ecirc;
+	    pegue diversos discos iguais e concaten&ecirc;-os em
+		um sistema de arquivos l&oacute;gico.  Para fazer o uso do
+ 	    &man.ccd.4; voc&ecirc; precisar&aacute; de um kernel contru&iacute;do
+		com o suporte ao &man.ccd.4;. Adicione esta linha no seu
+		arquivos de configura&ccedil;&atilde;o do kernel, recompile e
+		reinstale o kernel:</para>
 
 	  <programlisting>pseudo-device   ccd     4</programlisting>
 
-	  <para>Em sistemas 5.X , voce deve adicionar a linha
-	  seguinte:</para>
+	  <para>Nos sistemas 5.X voc&ecirc; deve usar a linha &agrave; seguir:</para>
 
 	  <programlisting>device   ccd</programlisting>
 
-	  <note><para>No FreeBSD&nbsp;5.X, nao e necessario definir
-	    um numero de dispositivos do &man.ccd.4;, pois os drivers
-	    dos dispositivos do &man.ccd.4; clonam a si mesmos&mdash; 
-	    novas instancias dos dispositivos 
-	    serao criados automaticamente por demanda.</para></note>
+	  <note><para>No FreeBSD&nbsp;5.X n&atilde;o &eacute; necess&aacute;rio especificar
+	    um n&uacute;mero de dispositivos &man.ccd.4;, como o dispositivo
+		do controlador &man.ccd.4; agora se auto-replica
+	    &mdash; novas inst&acirc;ncias do dispositivo
+		ser&atilde;o criadas automaticamente
+		sobre demanda.</para></note>
 
-	  <para>O suporte do &man.ccd.4; tambem pode ser 
-	    carregado como um modulo do kernel no FreeBSD 3.0 ou
-	    mais recente.</para>
+	  <para>O suporte ao &man.ccd.4; pode tamb&eacute;m ser carregado como um
+	    m&oacute;dulo de kernel carreg&aacute;vel no FreeBSD 3.0 ou anterior.</para>
 
- 	  <para>Para setar o  &man.ccd.4;, voce precisa primeiro
-	    usar o &man.disklabel.8; para rotular os discos:</para>
+ 	  <para>Para configurar o &man.ccd.4; voc&ecirc; deve primeiro usar o
+ 	    &man.disklabel.8; para rotular os discos:</para>
 
 	  <programlisting>disklabel -r -w ad1 auto
 disklabel -r -w ad2 auto
 disklabel -r -w ad3 auto</programlisting>
 
- 	  <para>Este cria um rotulo de disco para <devicename>ad1c</devicename>, <devicename>ad2c</devicename> e <devicename>ad3c</devicename> que
-  	    se extende pelo disco inteiro.</para>
+ 	  <para>Isto criar&aacute; um r&oacute;tulo de
+	    disco para o <devicename>ad1c</devicename>,
+	    <devicename>ad2c</devicename> e
+		<devicename>ad3c</devicename> que
+		far&atilde;o uso do disco todo.</para>
 
-	  <note><para>Desde o  &os;&nbsp;5.1-RELEASE, o utilitario
-	    &man.bsdlabel.8; substituiu o antigo programa 
-	    &man.disklabel.8;. Com o &man.bsdlabel.8; , um grande
-	    numero de opcoes e paramentros ja obsoletos foram
-	    removidos; nos exemplos acima, a opcao <option>-r</option> 
-	    deve ser removida. Para mais informacoes, consulte a
-	    pagina do manual do &man.bsdlabel.8; .</para></note>
+	  <note><para>Desde o &os;&nbsp;5.1-RELEASE, o
+	    utilit&aacute;rio &man.bsdlabel.8;
+	    substitui o antigo programa &man.disklabel.8;.  No
+	    &man.bsdlabel.8; algumas op&ccedil;&otilde;es e par&acirc;metros obsoletos foram
+		retirados; no exemplo que segue temos
+		a op&ccedil;&atilde;o <option>-r</option> que deve ser retirada.  Para mais
+		informa&ccedil;&otilde;es, visite a p&aacute;gina
+		de manual do &man.bsdlabel.8;.</para></note>
 
- 	  <para>O proximo passo e mudar o tipo do rotulo do disco.
- 	    Voce pode utilizar o &man.disklabel.8; para editar os
-	    discos:</para>
+ 	  <para>O pr&oacute;ximo passo &eacute; mudar o tipo do r&oacute;tulo.  Voc&ecirc;
+	    pode usar o &man.disklabel.8; para editar os discos:</para>
 
 	  <programlisting>disklabel -e ad1
 disklabel -e ad2
 disklabel -e ad3</programlisting>
 
- 	  <para> This opens up the current disk label on each disk with
- 	    the editor specified by the <envar>EDITOR</envar>
- 	    environment variable, typically &man.vi.1;.</para>
+ 	  <para>Isto abre o r&oacute;tulo atual de cada disco com o editor
+	    especificado pela vari&aacute;vel de ambiente <envar>EDITOR</envar>,
+		que geralmente &eacute; o &man.vi.1;.</para>
 
-	  <para>Um rotulo de disco nao modificado ira se parecer com
-	  algo assim:</para>
+	  <para>Um r&oacute;tulo de disco n&atilde;o modificado
+	    parecer&aacute; com algo como isto:</para>
 
 	  <programlisting>8 partitions:
 #        size   offset    fstype   [fsize bsize bps/cpg]
   c: 60074784        0    unused        0     0     0   # (Cyl.    0 - 59597)</programlisting>
 
- 	  <para>Add a new <literal>e</literal> partition for &man.ccd.4; to use. This
- 	    can usually be copied from the <literal>c</literal> partition,
- 	    but the <option>fstype</option> <emphasis>must</emphasis>
- 	    be <userinput>4.2BSD</userinput>.  The disk label should
- 	    now look something like this:</para>
+ 	  <para>Adicione uma nova parti&ccedil;&atilde;o <literal>e</literal> para
+	    que o &man.ccd.4; use. Isto pode usualmente ser copiado da
+		parti&ccedil;&atilde;o <literal>c</literal>, mas a op&ccedil;&atilde;o
+		<option>fstype</option> <emphasis>tem de</emphasis>
+ 	    ser <userinput>4.2BSD</userinput>.  O r&oacute;tulo do disco
+		agora deve parecer com algo como isto:</para>
 
 	  <programlisting>8 partitions:
 #        size   offset    fstype   [fsize bsize bps/cpg]
@@ -531,59 +547,65 @@ disklabel -e ad3</programlisting>
 	</sect4>
 
 	<sect4 id="ccd-buildingfs">
-	  <title>Building the File System</title>
+	  <title>Construindo o Sistema de Arquivos</title>
 
-            <para>The device node for
-	    <devicename>ccd0c</devicename> may not exist yet, so to
-	    create it, perform the following commands:</para>
+            <para>O dispositivo <devicename>ccd0c</devicename> pode
+			  n&atilde;o existir ainda, para cri&aacute;-lo execute os
+			  seguintes comandos:</para>
 
 	  <programlisting>cd /dev
 sh MAKEDEV ccd0</programlisting>
 
-	  <note><para>In FreeBSD 5.0, &man.devfs.5; will automatically
-	    manage device nodes in <filename>/dev</filename>, so use of
-	    <command>MAKEDEV</command> is not necessary.</para></note>
+	  <note><para>No FreeBSD 5.0, o &man.devfs.5; gerenciar&aacute;
+	    automaticamente os dispositivos listados em
+		<filename>/dev</filename>, o que dispensa o uso do
+	    <command>MAKEDEV</command>.</para></note>
 
-	  <para>Now that you have all of the disks labeled, you must
-	    build the &man.ccd.4;.  To do that,
-	    use  &man.ccdconfig.8;, with options similar to the following:</para>
+	  <para>Agora que voc&ecirc; tem todos os discos rotulados voc&ecirc; deve
+	    contruir o &man.ccd.4;.  Para fazer isso, use
+		o &man.ccdconfig.8; com op&ccedil;&otilde;es similares as que seguem:</para>
 
 	    <programlisting>ccdconfig ccd0<co id="co-ccd-dev"> 32<co id="co-ccd-interleave"> 0<co id="co-ccd-flags"> /dev/ad1e<co id="co-ccd-devs"> /dev/ad2e /dev/ad3e</programlisting>
 
-	  <para>The use and meaning of each option is shown below:</para>
+	  <para>O uso e o significado de cada op&ccedil;&atilde;o est&aacute; listado abaixo:</para>
 
           <calloutlist>
             <callout arearefs="co-ccd-dev">
-	    <para>The first argument is the device to configure, in this case,
-	    <devicename>/dev/ccd0c</devicename>. The <filename>/dev/</filename>
-            portion is optional.</para>
+	    <para>O primeiro argumento &eacute; o dispositivo que
+		    ser&aacute; configurado, neste caso, o
+			<devicename>/dev/ccd0c</devicename>. A por&ccedil;&atilde;o
+			<filename>/dev/</filename> &eacute; opcional.</para>
             </callout>
 
             <callout arearefs="co-ccd-interleave">
 
-	    <para>The interleave for the file system.  The interleave
-	    defines the size of a stripe in disk blocks, each normally 512 bytes.
-	    So, an interleave of 32 would be 16,384 bytes.</para>
+	    <para>O intercalamento para o sistema de arquivos.  O
+		intercalamento define o tamanho da faixa(stripe) em
+		blocos de disco, que &eacute; normalmente 512 bytes.
+	    Ebnt&atilde;o, um intercalamento de 32 seria 16,384 bytes.</para>
             </callout>
 
             <callout arearefs="co-ccd-flags">
-	    <para>Flags for &man.ccdconfig.8;.  If you want to enable drive
-	    mirroring, you can specify a flag here. This 
-	    configuration does not provide mirroring for  
-	    &man.ccd.4;, so it is set at 0 (zero).</para>
+	    <para>Par&acirc;metros para o &man.ccdconfig.8;.  Se
+		voc&ecirc; deseja ativar
+		o controle de espelhamento voc&ecirc; pode especificar
+		o par&acirc;metro aqui. Esta configura&ccedil;&atilde;o n&atilde;o prov&ecirc;
+		espelhamento para o &man.ccd.4;, ent&atilde;o
+		esta est&aacute; sendo definida por 0 (zero).</para>
             </callout>
 
             <callout arearefs="co-ccd-devs">
-	    <para>The final arguments to &man.ccdconfig.8;
-	    are the devices to place into the array.  Use the complete pathname 
-	    for each device.</para>
+	    <para>As argumentos finais para o &man.ccdconfig.8;
+	    s&atilde;o os dispositivos para colocar na matriz.  Utilize
+		o caminho e nome completo para cada dispositivo.</para>
             </callout>
           </calloutlist>
 
 
-	  <para>After running &man.ccdconfig.8; the &man.ccd.4;
-          is configured. A file system can be installed. Refer to &man.newfs.8; 
-          for options, or simply run: </para>
+	  <para>Ap&oacute;s executar o &man.ccdconfig.8; o &man.ccd.4;
+	      &eacute; configurado. Um sistema de arquivo
+		  pode ser instalado.  Use o &man.newfs.8;
+          para mais op&ccedil;&otilde;es, ou simplesmente execute: </para>
 
 	  <programlisting>newfs /dev/ccd0c</programlisting>
 
@@ -591,39 +613,42 @@ sh MAKEDEV ccd0</programlisting>
 	</sect4>
 
 	<sect4 id="ccd-auto">
-	  <title>Making it All Automatic</title>
+	  <title>Fazendo tudo automaticamente</title>
 
-	  <para>Generally, you will want to mount the
-	    &man.ccd.4; upon each reboot. To do this, you must
-	    configure it first.  Write out your current configuration to
-	    <filename>/etc/ccd.conf</filename> using the following command:</para>
+	  <para>Geralmente, voc&ecirc; ir&aacute; querer montar o &man.ccd.4;
+	    em cada rein&iacute;cio do sistema. Para fazer isso voc&ecirc; deve
+		configurar isso primeiro.  Escreva sua configura&ccedil;&atilde;o
+		corrente no <filename>/etc/ccd.conf</filename>
+		utilizando os seguintes comandos:</para>
 
 	  <programlisting>ccdconfig -g &gt; /etc/ccd.conf</programlisting>
 
-	  <para>During reboot, the script <command>/etc/rc</command>
-	    runs <command>ccdconfig -C</command> if <filename>/etc/ccd.conf</filename>
-	    exists. This automatically configures the
-	    &man.ccd.4; so it can be mounted.</para>
+	  <para>Durante o rein&iacute;cio do sistema o script
+	    <command>/etc/rc</command>
+	    executa <command>ccdconfig -C</command> caso
+		exista o <filename>/etc/ccd.conf</filename>. Isto
+		automaticamente configura o &man.ccd.4; e ent&atilde;o
+		este poder&aacute; ser montado.</para>
 
-	  <note><para>If you are booting into single user mode, before you can
-	    &man.mount.8; the &man.ccd.4;, you
-	    need to issue the following command to configure the
-	    array:</para>
+	  <note><para>Se voc&ecirc; estiver inicializando o sistema
+	    em modo monousu&aacute;rio, antes voc&ecirc; poder dar &man.mount.8;
+		no &man.ccd.4;, voc&ecirc; precisa definir os seguintes
+		comandos para configurar a matriz:</para>
 
 	  <programlisting>ccdconfig -C</programlisting>
           </note>
 
-	  <para>To automatically mount the &man.ccd.4;,
-            place an entry for the &man.ccd.4; in
-	    <filename>/etc/fstab</filename> so it will be mounted at
-	    boot time:</para>
+	  <para>Para montar automaticamente o &man.ccd.4; coloque
+	    uma entrada para o &man.ccd.4; em
+		<filename>/etc/fstab</filename> e ent&atilde;o este ser&aacute;
+		montado no in&iacute;cio do sistema:</para>
 
 	  <programlisting>/dev/ccd0c              /media       ufs     rw      2       2</programlisting>
 	</sect4>
       </sect3>
 
       <sect3 id="vinum">
-	<title>O Gerenciador de Volume Vinum</title>
+	<title>O gerenciador de volumes Vinum</title>
 
 <indexterm><primary>RAID</primary><secondary>software</secondary></indexterm>
 <indexterm>
@@ -631,53 +656,58 @@ sh MAKEDEV ccd0</programlisting>
   <secondary>Vinum</secondary>
 </indexterm>
 
-	<para>O Gerenciador de Volume Vinum e um driver de dispositivo 
-	de bloco que implementa disco virtuais.  Ele isola o hardware 
-	do disco da interface do driver do dispositivo de bloco e mapeia 
-	os dados de forma que resulte em um aumento de flexibilidade,
-	performance e confiabilidade comparado com a visao do
-	armazenamento de disco tradicional.  &man.vinum.8; 
-	implementa os modelos RAID-0, RAID-1 e RAID-5 , ambos 
-	individualmente e em combinacao.</para>
+	<para>O gerenciador de volumes Vinum &eacute; um controlador
+	  de dispositivo de bloco que implementa controladores de
+	  discos virtuais.  Este isola o disco f&iacute;sico da interface
+	  de dispositivos de bloco e mapeia os dados em meios
+	  que resultam num aimento de flexibilidade, performance e
+	  confian&ccedil;a compar&aacute;veis as tradicionais slices de
+	  armazenamento em disco. O &man.vinum.8; implementa os modelos RAID-0, RAID-1 e
+	  RAID-5, tanto individualmente como combinando.</para>
 
-	<para>Veja <xref linkend="vinum-vinum"> para mais 
-	  informacoes a respeito do &man.vinum.8;.</para>
+	<para>Visite <xref linkend="vinum-vinum"> para mais
+	  informa&ccedil;&otilde;es sobre &man.vinum.8;.</para>
       </sect3>
     </sect2>
 
     <sect2 id="raid-hard">
-      <title>Hardware RAID</title>
+      <title>RAID feito em Hardware</title>
 
       <indexterm>
 	<primary>RAID</primary>
 	<secondary>hardware</secondary>
       </indexterm>
 
-      <para>O FreeBSD tambem suporta uma grande variedade de controladoras
-      <acronym>RAID</acronym>.
-        Estes dispositivos controlam um subsistema <acronym>RAID</acronym>
-        sem a necessidade para o FreeBSD de ter softwares especificos
-	para gerenciar o array.</para>
+      <para>O FreeBSD tamb&eacute;m suporta uma variedade de
+	    controladoras <acronym>RAID</acronym>.  Estes
+		dispositivos controlam um subsistema <acronym>RAID</acronym>
+        sem precisar de um software espec&iacute;fico
+		do FreeBSD para gerenciar
+		a matriz.</para>
 
-      <para>Using an on-card <acronym>BIOS</acronym>, the card controls most  of the disk operations
-	itself.  The following is a brief setup description using a <acronym>Promise IDE RAID</acronym>
-	controller.  When this card is installed and the system is started up, it 
-	displays a prompt requesting information.  Follow the instructions
-	to enter the card's setup screen.  From here, you have the ability to
-	combine all the attached drives.  After doing so, the disk(s) will look like
-	a single drive to FreeBSD.  Other <acronym>RAID</acronym> levels can be set up
-	accordingly.
+      <para>Utilizando uma <acronym>BIOS</acronym> na placa, a placa
+        controla a maioria das opera&ccedil;&otilde;es em disco.  &Agrave; seguir temos uma
+		configura&ccedil;&atilde;o descrevendo o uso de uma controladora
+		<acronym>Promise IDE RAID</acronym>.  Quando esta placa &eacute;
+		instalada e o sistema &eacute; iniciado, &eacute; apresentado um prompt
+		pedindo informa&ccedil;&otilde;es.  Siga as instru&ccedil;&otilde;es para entrar na tela
+		de configura&ccedil;&atilde;o da placa.  Daqui, voc&ecirc; tem a habilidade
+	    para combinar todos os discos conectados.  Ap&oacute;s ter feito
+		a configura&ccedil;&atilde;o os disco parecer&atilde;o um &uacute;nico disco para o
+		FreeBSD.  Outros n&iacute;veis de <acronym>RAID</acronym> podem ser
+		configurados como descrito.
       </para>
     </sect2>
-    
+
     <sect2>
-      <title>Rebuilding ATA RAID1 Arrays</title>
+      <title>Reconstruindo Matrizes de ATA RAID1</title>
 
-      <para>FreeBSD allows you to hot-replace a failed disk in an array. This requires
-	that you catch it before you reboot.</para>
+      <para>O FreeBSD permite que voc&ecirc; troque um disco falhando em
+	  uma matriz. Isto requere que voc&ecirc; pegue-o antes de reiniciar
+	  o sistema.</para>
 
-      <para>You will probably see something like the following in <filename>/var/log/messages</filename> or in the &man.dmesg.8;
-	output:</para>
+      <para>Voc&ecirc; provavelmente ver&aacute; algo como o seguinte
+	  em <filename>/var/log/messages</filename> ou na sa&iacute;da do &man.dmesg.8;:</para>
 
       <programlisting>ad6 on monster1 suffered a hard error.
 ad6: READ command timeout tag=0 serv=0 - resetting
@@ -686,7 +716,7 @@ ata3: resetting devices .. done
 ad6: hard error reading fsbn 1116119 of 0-7 (ad6 bn 1116119; cn 1107 tn 4 sn 11) status=59 error=40
 ar0: WARNING - mirror lost</programlisting>
 
-      <para>Using &man.atacontrol.8;, check for further information:</para>
+      <para>Utilizando o &man.atacontrol.8;, busque por informa&ccedil;&otilde;es:</para>
 
       <screen>&prompt.root; <userinput>atacontrol list</userinput>
 ATA channel 0:
@@ -710,18 +740,18 @@ ar0: ATA RAID1 subdisks: ad4 ad6 status: DEGRADED</screen>
 
       <procedure>
 	<step>
-	  <para>You will first need to detach the disk from the array so that you can
-	    safely remove it:</para>
+	  <para>Voc&ecirc; primeiramente precisar&aacute; desconectar o disco
+	  da matriz para ent&atilde;o poder remov&ecirc;-lo seguramente:</para>
 
 	  <screen>&prompt.root; <userinput>atacontrol detach 3</userinput></screen>
 	</step>
 
 	<step>
-	  <para>Replace the disk.</para>
+	  <para>Substitua o disco.</para>
 	</step>
 
 	<step>
-	  <para>Reattach the disk as a spare:</para>
+	  <para>Reconecte o disco como um reserva:</para>
 
 	  <screen>&prompt.root; <userinput>atacontrol attach 3</userinput>
 Master:  ad6 &lt;MAXTOR 6L080J4/A93.0500&gt; ATA/ATAPI rev 5
@@ -729,15 +759,19 @@ Slave:   no device present</screen>
 	</step>
 
 	<step>
-	  <para>Rebuild the array:</para>
+	  <para>Reconstrua a matriz:</para>
 
 	  <screen>&prompt.root; <userinput>atacontrol rebuild ar0</userinput></screen>
 	</step>
 
 	<step>
-	  <para>The rebuild command hangs until complete.  However, it is possible to open another
-	  terminal (using <keycombo action="simul"><keycap>Alt</keycap> <keycap>F<replaceable>n</replaceable></keycap></keycombo>)
-          and check on the progress by issuing the following command:</para>
+	  <para>O comando de reconstru&ccedil;&atilde;o executar&aacute;
+	      at&eacute; estar completo.  Entretanto, &eacute; poss&iacute;vel
+	      abrir outro terminal (utilizando <keycombo action="simul">
+		  <keycap>Alt</keycap> <keycap>F<replaceable>n</replaceable>
+		  </keycap></keycombo>)
+          e checar o progresso da
+		  reconstrui&ccedil;&atilde;o com o seguinte comando:</para>
 
 	  <screen>&prompt.root; <userinput>dmesg | tail -10</userinput>
 [output removed]
@@ -750,77 +784,82 @@ ar0: ATA RAID1 subdisks: ad4 ad6 status: REBUILDING 0% completed</screen>
 	</step>
 
 	<step>
-	  <para>Wait until this operation completes.</para>
+	  <para>Espere at&eacute; que esta opera&ccedil;&atilde;o esteja completa.</para>
 	</step>
       </procedure>
     </sect2>
   </sect1>
-  
+
   <sect1 id="creating-cds">
     <sect1info>
       <authorgroup>
 	<author>
 	  <firstname>Mike</firstname>
 	  <surname>Meyer</surname>
-	  <contrib>Contributed by </contrib>
+	  <contrib>Comtribui&ccedil;&atilde;o de </contrib>
 	  <!-- mwm@mired.org -->
 	</author>
       </authorgroup>
       <!-- Apr 2001 -->
     </sect1info>
 
-    <title>Creating and Using Optical Media (CDs &amp; DVDs)</title>
+    <title>Criando e utilizando m&iacute;dias &oacute;pticas (CDs &amp; DVDs)</title>
     <indexterm>
       <primary>CDROMs</primary>
       <secondary>creating</secondary>
     </indexterm>
 
     <sect2>
-      <title>Introduction</title>
+      <title>Introdu&ccedil;&atilde;o</title>
 
-      <para>CDs have a number of features that differentiate them from
-	conventional disks. Initially, they were not writable by the
-	user. They are designed so that they can be read continuously without
-	delays to move the head between tracks. They are also much easier
-	to transport between systems than similarly sized media were at the
-	time.</para>
+      <para>Os CDs tem um n&uacute;mero diferenciado de funcionalidades dos
+	    discos convencionais. Inicialmente, eles n&atilde;o s&atilde;o grav&aacute;veis aos
+		usu&aacute;rios. Eles s&atilde;o criados o que permite serem
+		lidos continuamente sem esperas para mover o cabe&ccedil;ote entre
+		trilhas. Eles tamb&eacute;m s&atilde;o facilitadores no transporte
+		de informa&ccedil;&otilde;es entre sistemas com tamanhos de m&iacute;dias similares
+		e podendo ser feitas ao mesmo tempo.</para>
 
-      <para>CDs do have tracks, but this refers to a section of data to
-	be read continuously and not a physical property of the disk. To
-	produce a CD on FreeBSD, you prepare the data files that are going
-	to make up the tracks on the CD, then write the tracks to the
-	CD.</para>
+      <para>Os CDs tem trilhas, mas isto se refere a uma se&ccedil;&atilde;o de
+	    dados que s&atilde;o lidos continuamente e n&atilde;o s&atilde;o uma propriedade
+		f&iacute;sica do disco. Para produzir um CD no FreeBSD, voc&ecirc; deve
+		preparar os arquivos de dados que compor&atilde;o as trilhas,
+		para que ent&atilde;o sejam escritas como trilhas do CD.</para>
 
       <indexterm><primary>ISO 9660</primary></indexterm>
       <indexterm>
         <primary>file systems</primary>
         <secondary>ISO 9660</secondary>
       </indexterm>
-      <para>The ISO 9660 file system was designed to deal with these
-	differences. It unfortunately codifies file system limits that were
-	common then. Fortunately, it provides an extension mechanism that
-	allows properly written CDs to exceed those limits while still
-	working with systems that do not support those extensions.</para>
+      <para>O sistema de arquivos ISO 9660 foi desenvolvido para criar
+	    um acordo nestas diferen&ccedil;as. Isto infelizmente codifica
+		o sistema de arquivos com limites inerentes ao padr&atilde;o.
+		Afortunadamente, este prov&ecirc; um mecanismo de extens&otilde;es que
+		permite gravar CDs apropriadamente para exceder estes
+		limites enquanto estiver trabalhando com sistemas que
+		que n&atilde;o suportam estas extens&otilde;es.</para>
 
       <indexterm>
         <primary><filename role="package">sysutils/mkisofs</filename></primary>
       </indexterm>
-      <para>The <filename role="package">sysutils/mkisofs</filename>
-	program is used to produce a data file containing an ISO 9660 file
-	system. It has options that support various extensions, and is
-	described below. You can install it with the
-	<filename role="package">sysutils/mkisofs</filename> port.</para>
+      <para>O programa <filename role="package">sysutils/mkisofs</filename>
+	     &eacute; utilizado para produzir um arquivo contendo um
+		 sistema de arquivos ISO 9660. Este possui op&ccedil;&otilde;es que
+		 suportam diversas extens&otilde;es, estas est&atilde;o descritas
+		 abaixo. Voc&ecirc; pode instalar o port <filename role="package">sysutils/mkisofs</filename>.</para>
 
       <indexterm>
         <primary>CD burner</primary>
         <secondary>ATAPI</secondary>
       </indexterm>
-      <para>Which tool to use to burn the CD depends on whether your CD burner
-	is ATAPI or something else. ATAPI CD burners use the <command><link
-	linkend="burncd">burncd</link></command> program that is part of
-	the base system. SCSI and USB CD burners should use
-	<command><link linkend="cdrecord">cdrecord</link></command> from
-	the <filename role="package">sysutils/cdrtools</filename> port.</para>
+      <para>Qual utilit&aacute;rio usar para gravar o CD depender&aacute; se
+	    seu gravador de CD &eacute; ATAPI ou algum outro. Gravadores
+		de CD ATAPI usam o programa <command><link
+	    linkend="burncd">burncd</link></command> que &eacute; uma parte
+	    do sistema. Os gravadores SCSI e USB devem usar o
+	    <command><link linkend="cdrecord">cdrecord</link>
+		</command> do port <filename role="package">
+		sysutils/cdrtools</filename>.</para>
 
       <para><command>burncd</command> has a limited number of
 	supported drives. To find out if a drive is supported, see the
@@ -832,10 +871,11 @@ ar0: ATA RAID1 subdisks: ad4 ad6 status: REBUILDING 0% completed</screen>
 	<primary>CD burner</primary>
 	<secondary>ATAPI/CAM driver</secondary>
       </indexterm>
-	<para>If you run &os;&nbsp;5.X, &os;&nbsp;4.8-RELEASE version or
-	  higher, it will be possible to use <command><link
-	  linkend="cdrecord">cdrecord</link></command> and other tools
-	  for SCSI drives on an ATAPI hardware with the <link
+	<para>Se voc&ecirc; usa a vers&atilde;o &os;&nbsp;5.X, &os;&nbsp;4.8-RELEASE ou
+	  acima, ser&aacute; poss&iacute;vel utilizar o <command><link
+	  linkend="cdrecord">cdrecord</link></command> e
+	  outros utilit&aacute;rios para controladores SCSI
+	  em controladores ATAPI com o <link
 	  linkend="atapicam">ATAPI/CAM module</link>.</para>
       </note>
     </sect2>
@@ -843,9 +883,10 @@ ar0: ATA RAID1 subdisks: ad4 ad6 status: REBUILDING 0% completed</screen>
     <sect2 id="mkisofs">
       <title>mkisofs</title>
 
-      <para><filename role="package">sysutils/mkisofs</filename> produces an ISO 9660 file system
-	that is an image of a directory tree in the &unix; file system name
-	space. The simplest usage is:</para>
+      <para>O <filename role="package">sysutils/mkisofs</filename>
+	    produz um sistema de arquivos ISO 9660 que &eacute; uma imagem
+		da &aacute;rvore de diret&oacute;rios no espa&ccedil;o de nomes do sistema
+		de arquivos &unix;. A maneira mais simples de us&aacute;-lo &eacute;:</para>
 
       <screen>&prompt.root; <userinput>mkisofs -o <replaceable>imagefile.iso</replaceable> <replaceable>/path/to/tree</replaceable></userinput></screen>
 
@@ -853,13 +894,14 @@ ar0: ATA RAID1 subdisks: ad4 ad6 status: REBUILDING 0% completed</screen>
         <primary>file systems</primary>
         <secondary>ISO 9660</secondary>
       </indexterm>
-      <para>This command will create an <replaceable>imagefile.iso</replaceable>
-	containing an ISO 9660 file system that is a copy of the tree at
-	<replaceable>/path/to/tree</replaceable>. In the process, it will
-	map the file names to names that fit the limitations of the
-	standard ISO 9660 file system, and will exclude files that have
-	names uncharacteristic of ISO file systems.</para>
-    
+      <para>Este comando criar&aacute; o arquivo <replaceable>imagefile.iso</replaceable>
+	    contendo um sistema de arquivos ISO 9660 que &eacute; uma c&oacute;pia da
+		&aacute;rvore de diret&oacute;rios e arquivos em <replaceable>/path/to/tree
+		</replaceable>. No processo, ser&atilde;o mapeados os nomes de arquivos
+		de acordo com as limita&ccedil;&otilde;es do padr&atilde;o ISO 9660, e ser&atilde;o exclu&iacute;dos
+		os arquivos que tiverem nomes n&atilde;o caracter&iacute;sticos de
+		sistemas de arquivos ISO.</para>
+
       <indexterm>
         <primary>file systems</primary>
         <secondary>HFS</secondary>
@@ -868,57 +910,62 @@ ar0: ATA RAID1 subdisks: ad4 ad6 status: REBUILDING 0% completed</screen>
         <primary>file systems</primary>
         <secondary>Joliet</secondary>
       </indexterm>
-      <para>A number of options are available to overcome those
-	restrictions. In particular, <option>-R</option> enables the
-	Rock Ridge extensions common to &unix; systems, <option>-J</option>
-	enables Joliet extensions used by Microsoft systems, and
-	<option>-hfs</option> can be used to create HFS file systems used
-	by &macos;.</para>
+      <para>Algumas op&ccedil;&otilde;es est&atilde;o dispon&iacute;veis para exceder
+	    as restri&ccedil;&otilde;es. Em particular, a op&ccedil;&atilde;o <option>-R</option>
+		ativa as extens&otilde;es Rock Ridge, que s&atilde;o comuns aos sistemas
+		&unix;, a op&ccedil;&atilde;o <option>-J</option> ativa o uso de extens&otilde;es
+		Joliet, que s&atilde;o utilizadas em sistemas da Microsoft, e a
+		op&ccedil;&atilde;o <option>-hfs</option> pode ser utilizada na cria&ccedil;&atilde;o de
+		sistemas de arquivis HFS, que s&atilde;o utilizados no &macos;.</para>
 
-      <para>For CDs that are going to be used only on FreeBSD systems,
-	<option>-U</option> can be used to disable all filename
-	restrictions. When used with <option>-R</option>, it produces a
-	file system image that is identical to the FreeBSD tree you started
-	from, though it may violate the ISO 9660 standard in a number of
-	ways.</para>
+      <para>Para CDs que v&atilde;o ser utilizados apenas em sistemas FreeBSD
+	  a op&ccedil;&atilde;o <option>-U</option> pode ser utilizada para desativar
+	  todas a limita&ccedil;&otilde;es de nomes de arquivos. Quando utilizada com
+	  a op&ccedil;&atilde;o <option>-R</option>, esta produz um sistema de arquivos
+	  id&ecirc;ntico &agrave; &aacute;rvore de diret&oacute;rios do FreeBSD que voc&ecirc; utilizou
+	  na cria&ccedil;&atilde;o da imagem. Por&eacute;m isso viola de diversas maneiras
+	  o padr&atilde;o ISO 9660.</para>
 
       <indexterm>
         <primary>CDROMs</primary>
         <secondary>creating bootable</secondary>
       </indexterm>
-      <para>The last option of general use is <option>-b</option>. This is
-	used to specify the location of the boot image for use in producing an
-	<quote>El Torito</quote> bootable CD. This option takes an
-	argument which is the path to a boot image from the top of the
-	tree being written to the CD. So, given that
-	<filename>/tmp/myboot</filename> holds a bootable FreeBSD system
-	with the boot image in
-	<filename>/tmp/myboot/boot/cdboot</filename>, you could produce the
-	image of an ISO 9660 file system in
-	<filename>/tmp/bootable.iso</filename> like so:</para>
+      <para>A &uacute;ltima op&ccedil;&atilde;o de uso geral &eacute; a <option>-b</option>. Ela
+	    &eacute; utilizada para especificar o local de uma imagem de boot
+		que ser&aacute; utilizada na gera&ccedil;&atilde;o de um CD boot&aacute;vel
+		<quote>El Torito</quote>. Esta op&ccedil;&atilde;o pede um argumento que &eacute;
+		o caminho da imagem de boot do topo da &aacute;rvore de diret&oacute;rios
+		que ser&aacute; escrita no CD.  Ent&atilde;o, fornecer
+		<filename>/tmp/myboot</filename> cria um sistema FreeBSD
+		boot&aacute;vel com a imagem de boot em
+		<filename>/tmp/myboot/boot/cdboot</filename>, voc&ecirc; poderia
+		produzir a imagem de um sistema de arquivos ISO 9660 em
+	    <filename>/tmp/bootable.iso</filename> como:</para>
 
       <screen>&prompt.root; <userinput>mkisofs -U -R -b boot/cdboot -o /tmp/bootable.iso /tmp/myboot</userinput></screen>
 
-      <para>Having done that, if you have <devicename>vn</devicename>
-	(FreeBSD&nbsp;4.X), or <devicename>md</devicename>
-	(FreeBSD&nbsp;5.X)
-	configured in your kernel, you can mount the file system with:</para>
+      <para>Ap&oacute;s ter feito o indicado, se voc&ecirc; possuir um dispositivo
+	    <devicename>vn</devicename>	(FreeBSD&nbsp;4.X), ou
+		<devicename>md</devicename>	(FreeBSD&nbsp;5.X) configurado
+		em seu kernel, voc&ecirc; poder&aacute; monta o sistema de arquivos com:</para>
 
       <screen>&prompt.root; <userinput>vnconfig -e vn0c /tmp/bootable.iso</userinput>
 &prompt.root; <userinput>mount -t cd9660 /dev/vn0c /mnt</userinput></screen>
 
-      <para>for FreeBSD&nbsp;4.X, and for FreeBSD&nbsp;5.X:</para>
+      <para>Isso no FreeBSD&nbsp;4.X, j&aacute; no FreeBSD&nbsp;5.X fa&ccedil;a:</para>
 
       <screen>&prompt.root; <userinput>mdconfig -a -t vnode -f /tmp/bootable.iso -u 0</userinput>
 &prompt.root; <userinput>mount -t cd9660 /dev/md0 /mnt</userinput></screen>
 
-      <para>At which point you can verify that <filename>/mnt</filename>
-	and <filename>/tmp/myboot</filename> are identical.</para>
+      <para>At&eacute; agora voc&ecirc; pode verificar que o <filename>/mnt</filename>
+	    e o <filename>/tmp/myboot</filename> s&atilde;o id&ecirc;nticos.</para>
 
-      <para>There are many other options you can use with
-	<filename role="package">sysutils/mkisofs</filename> to fine-tune its behavior.  In particular:
-	modifications to an ISO 9660 layout and the creation of Joliet
-	and HFS discs.  See the	&man.mkisofs.8; manual page for details.</para>
+      <para>Existem diversas outras op&ccedil;&otilde;es que podem ser utilizadas
+	    com o <filename role="package">sysutils/mkisofs</filename>
+		para ajustar seu comportamento.  Em particular, modifica&ccedil;&otilde;es
+		para um layout ISO 9660 e na cria&ccedil;&atilde;o de discos Joliet e
+		HFS.  Visite a p&aacute;gina de manual do &man.mkisofs.8; para
+		ter mais detalhes.</para>
     </sect2>
 
     <sect2 id="burncd">
@@ -927,46 +974,50 @@ ar0: ATA RAID1 subdisks: ad4 ad6 status: REBUILDING 0% completed</screen>
         <primary>CDROMs</primary>
         <secondary>burning</secondary>
       </indexterm>
-      <para>If you have an ATAPI CD burner, you can use the
-	<command>burncd</command> command to burn an ISO image onto a
-	CD. <command>burncd</command> is part of the base system, installed
-	as <filename>/usr/sbin/burncd</filename>.  Usage is very simple, as
-	it has few options:</para>
+      <para>Se voc&ecirc; tiver um gravador de CD ATAPI, voc&ecirc; poder&aacute;
+	  utilizar o comando <command>burncd</command> para gravar
+	  uma imagem ISO num CD. O <command>burncd</command> &eacute; parte
+	  do sistema, &eacute; instalado em <filename>/usr/sbin/burncd
+	  </filename>.  Us&aacute;-lo &eacute; muito simples, e este
+	  possui poucas op&ccedil;&otilde;es:</para>
 
       <screen>&prompt.root; <userinput>burncd -f <replaceable>cddevice</replaceable> data <replaceable>imagefile.iso</replaceable> fixate</userinput></screen>
 
-      <para>Will burn a copy of <replaceable>imagefile.iso</replaceable> on
-	<replaceable>cddevice</replaceable>. The default device is
-	<filename>/dev/acd0c</filename>. See &man.burncd.8; for options to
-	set the write speed, eject the CD after burning, and write audio
-	data.</para>
+      <para>Isto ir&aacute; gravar uma c&oacute;pia do <replaceable>imagefile.iso
+	   </replaceable> no <replaceable>cddevice</replaceable>. O
+	   dispositivo padr&atilde;o &eacute; o <filename>/dev/acd0c</filename>. Visite
+	   a p&aacute;gina de manual do See &man.burncd.8; para ter mais
+	   op&ccedil;&otilde;es de como definir a velocidade de grava&ccedil;&atilde;o, para
+	   ejetar o CD ap&oacute;s a grava&ccedil;&atilde;o e para gravar CDs de &aacute;udio.</para>
     </sect2>
 
     <sect2 id="cdrecord">
       <title>cdrecord</title>
 
-      <para>If you do not have an ATAPI CD burner, you will have to use
-	<command>cdrecord</command> to burn your
-	CDs. <command>cdrecord</command> is not part of the base system;
-	you must install it from either the port at <filename role="package">sysutils/cdrtools</filename>
-	or the appropriate
-	package. Changes to the base system can cause binary versions of
-	this program to fail, possibly resulting in a
-	<quote>coaster</quote>. You should therefore either upgrade the
-	port when you upgrade your system, or if you are <link
-	linkend="stable">tracking -STABLE</link>, upgrade the port when a
-	new version becomes available.</para>
+      <para>Se voc&ecirc; n&atilde;o possuir um gravador de CDs ATAPI, voc&ecirc; ter&aacute;
+	    que usar o <command>cdrecord</command> para gravar seus CDs. O
+        <command>cdrecord</command> n&atilde;o faz parte do sistema; voc&ecirc;
+		deve instal&aacute;-lo atrav&eacute;s do port <filename role="package">
+		sysutils/cdrtools</filename> ou pelo pacote apropriado.
+		Mudan&ccedil;as no sistema podem fazer que algumas vers&otilde;es bin&aacute;rias
+		deste programa venham resultar em falhas. Voc&ecirc; deve
+		atualizar este port quando atualizar o seu sistema, ou
+		se voc&ecirc; j&aacute; estiver <link linkend="stable">tracking -STABLE
+		</link>, atualize o port quando uma nova vers&atilde;o estiver
+		dispon&iacute;vel.</para>
 
-      <para>While <command>cdrecord</command> has many options, basic usage
-	is even simpler than <command>burncd</command>. Burning an ISO 9660
-	image is done with:</para>
+      <para>Enquanto o <command>cdrecord</command> tem diversas
+	    op&ccedil;&otilde;es, o uso b&aacute;sico dele &eacute; mais simples do que o uso do
+		<command>burncd</command>. Para gravar uma imagem ISO 9660
+	    basta:</para>
 
       <screen>&prompt.root; <userinput>cdrecord dev=<replaceable>device</replaceable> <replaceable>imagefile.iso</replaceable></userinput></screen>
 
-      <para>The tricky part of using <command>cdrecord</command> is finding
-	the <option>dev</option> to use. To find the proper setting, use
-	the <option>-scanbus</option> flag of <command>cdrecord</command>,
-	which might produce results like this:</para>
+      <para>O segredo da utiliza&ccedil;&atilde;o do <command>cdrecord</command>
+	    &eacute; encontrar a op&ccedil;&atilde;o <option>dev</option> que deve ser
+		utilizada. Para encontrar a configura&ccedil;&atilde;o correta, use o
+		par&acirc;metro <option>-scanbus</option> do <command>cdrecord</command>,
+	    que podruzir&aacute; um resultado parecido com este:</para>
       <indexterm>
         <primary>CDROMs</primary>
         <secondary>burning</secondary>
@@ -993,47 +1044,50 @@ scsibus1:
         1,6,0   106) 'ARTEC   ' 'AM12S           ' '1.06' Scanner
         1,7,0   107) *</screen>
 
-      <para>This lists the appropriate <option>dev</option> value for the
-	devices on the list. Locate your CD burner, and use the three
-	numbers separated by commas as the value for
-	<option>dev</option>. In this case, the CRW device is 1,5,0, so the
-	appropriate input would be
-	<option>dev=1,5,0</option>. There are easier
-	ways to specify this value; see &man.cdrecord.1; for
-	details. That is also the place to look for information on writing
-	audio tracks, controlling the speed, and other things.</para>
+      <para>Esta listagem demonstra qual o valor apropriado que a
+	    op&ccedil;&atilde;o <option>dev</option> dever&aacute; ter. Localize seu
+		gravador de CDs, e use os tr&ecirc;s n&uacute;meros separados por
+		v&iacute;rgulas como valor para a op&ccedil;&atilde;o <option>dev</option>.
+		Neste caso, o dispositivo CRW &eacute; o 1,5,0, ent&atilde;o o
+		valor apropriado seria <option>dev=1,5,0</option>. H&aacute;
+		maneiras mais f&aacute;ceis de especificar este valor; visite
+		a p&aacute;gina de manual do  &man.cdrecord.1; para mais detalhes.
+        Que &eacute; onde est&atilde;o descritas as informa&ccedil;&otilde;es de como gravar
+		trilhas de &aacute;udio, controlar a velocidade entre
+		outras possibilidades.</para>
     </sect2>
 
     <sect2 id="duplicating-audiocds">
-      <title>Duplicating Audio CDs</title>
+      <title>Duplica&ccedil;&atilde;o de CDs de &Aacute;udio</title>
 
-      <para>You can duplicate an audio CD by extracting the audio data from
-	the CD to a series of files, and then writing these files to a blank
-	CD.  The process is slightly different for ATAPI and SCSI
-	drives.</para>
+      <para>Voc&ecirc; pode duplicar um CD de &aacute;udio extraindo
+	    seus dados do CD em uma s&eacute;rie de arquivos, e ent&atilde;o
+		gravar estes arquivos num CD virgem.  Este processo
+		&eacute; um pouco diferente entre controladores ATAPI e SCSI.</para>
 
       <procedure>
-	<title>SCSI Drives</title>
+	<title>Controladores SCSI</title>
 
 	<step>
-	  <para>Use <command>cdda2wav</command> to extract the audio.</para>
+	  <para>Utilize o <command>cdda2wav</command> para extrair o &aacute;udio.</para>
 
 	  <screen>&prompt.user; <userinput>cdda2wav -v255 -D2,0 -B -Owav</userinput></screen>
 	</step>
 
 	<step>
-	  <para>Use <command>cdrecord</command> to write the
-	    <filename>.wav</filename> files.</para>
+	  <para>Utilize o <command>cdrecord</command> para gravar os
+	     arquivos <filename>.wav</filename>.</para>
 
 	  <screen>&prompt.user; <userinput>cdrecord -v dev=<replaceable>2,0</replaceable> -dao -useinfo  *.wav</userinput></screen>
 
-	  <para>Make sure that <replaceable>2.0</replaceable> is set
-	    appropriately, as described in <xref linkend="cdrecord">.</para>
+	  <para>Certifique-se que o <replaceable>2,0</replaceable> &eacute;
+	    a configura&ccedil;&atilde;o apropriada como descrito em
+		<xref linkend="cdrecord">.</para>
 	</step>
       </procedure>
 
       <procedure>
-	<title>ATAPI Drives</title>
+	<title>Controladores ATAPI</title>
 
 	<step>
 	  <para>The ATAPI CD driver makes each track available as
@@ -1642,7 +1696,7 @@ sa0(ncr1:4:0):  Logical unit is in process of becoming ready</screen>
 
     </sect2>
   </sect1>
-  
+
   <sect1 id="backups-floppybackups">
     <title>Backups to Floppies</title>
 
@@ -2922,8 +2976,8 @@ Filesystem 1K-blocks Used Avail Capacity  Mounted on
       <screen>&prompt.root; <userinput>kill -HUP `cat /var/run/inetd.pid`</userinput></screen>
     </sect2>
   </sect1>
-  
-  
+
+
   <sect1 id="disks-encrypting">
     <sect1info>
       <authorgroup>
@@ -3213,44 +3267,41 @@ Filesystem        Size   Used  Avail Capacity  Mounted on
       </procedure>
 
       <sect3>
-	<title>Montando Automaticamente Particoes Criptografadas</title>
+	<title>Automatically Mounting Encrypted Partitions</title>
 
-	<para>E possivel criar um script para automaticamente anexar,
-	checar e montar uma particao criptografada, mas por razoes de
-	seguranca, o script nao deve conter a senha do &man.gbde.8; . 
-	Ao inves disso, e recomendado que tais scripts sejam
-	executados manualmente, enquanto forneca a senha via console 
-	ou &man.ssh.1;.</para>
+	<para>It is possible to create a script to automatically attach,
+	  check, and mount an encrypted partition, but for security reasons
+	  the script should not contain the &man.gbde.8; password. Instead,
+	  it is recommended that such scripts be run manually while
+	  providing the password via the console or &man.ssh.1;.</para>
       </sect3>
     </sect2>
 
       <sect2>
-	<title>Protecoes Criptograficas Empregadas pelo gbde</title>
+	<title>Cryptographic Protections Employed by gbde</title>
 
-	<para>O &man.gbde.8; criptografa o setor de payload utilizando 
-	o AES no modo CBC.
-	   Cada setor no disco e criptografado com uma chave AES
-	   diferente. Para mais informacoes sobre o projeto criptografico
-	   do <application>gbde</application>, incluindo como as chaves
-	   dos setores sao derivadas de passphrases providas pelos 
-	   usuarios, veja &man.gbde.4;.</para>
+	<para>&man.gbde.8; encrypts the sector payload using 128-bit AES in
+	  CBC mode.  Each sector on the disk is encrypted with a different
+	  AES key. For more information on <application>gbde</application>'s
+	  cryptographic design, including how the sector keys are derived
+	  from the user-supplied passphrase, see &man.gbde.4;.</para>
       </sect2>
 
       <sect2>
-	<title>Questoes de Compatibilidade</title>
+	<title>Compatibility Issues</title>
 
-	<para>O &man.sysinstall.8; e incompativel com
-	  dispositivos <application>gbde</application>-criptografados. Todos
-	  os dispositivos <devicename><replaceable>*</replaceable>.bde</devicename> devices devem ser destacados do kernel antes de iniciar o 
-	  &man.sysinstall.8; ou ele crash durante sua varredura inicial dos
-          dispositivos. Para destacar o dispositivo criptografado utilizado
-          no nosso exemplo, utilize o seguinte comando:</para>
+	<para>&man.sysinstall.8; is incompatible with
+	  <application>gbde</application>-encrypted devices. All
+	  <devicename><replaceable>*</replaceable>.bde</devicename> devices must be detached from the
+	  kernel before starting &man.sysinstall.8; or it will crash during
+	  its initial probing for devices. To detach the encrypted device
+	  used in our example, use the following command:</para>
 	<screen>&prompt.root; <userinput>gbde detach /dev/ad4s1c</userinput></screen>
 
-      <para>Note tambem que , como o &man.vinum.4; nao utiliza o
-	subsistema man.geom.4; , voce nao pode utilizar o
-	<application>gbde</application> com volumes do
-	<application>vinum</application>.</para>
+      <para>Also note that, as &man.vinum.4; does not use the
+	&man.geom.4; subsystem, you cannot use
+	<application>gbde</application> with
+	<application>vinum</application> volumes.</para>
       </sect2>
 
   </sect1>
