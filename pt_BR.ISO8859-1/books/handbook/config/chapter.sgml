@@ -564,143 +564,150 @@ HOME=/var/log
         <author>
 	 <firstname>Tom</firstname>
 	 <surname>Rhodes</surname>
-	 <contrib>Contributed by </contrib>
+	 <contrib>Contribui&ccedil;&atilde;o de </contrib>
 	 <!-- 16 May 2003 -->
         </author>
       </authorgroup>
     </sect1info>
 
-    <title>Using rc under FreeBSD 5.X</title>
+    <title>Usando rc no FreeBSD 5.X</title>
 
     <indexterm><primary>rcNG</primary></indexterm>
 
-    <para>&os; has recently integrated the NetBSD
-      <filename>rc.d</filename> system for system initialization.
-      Users should notice the files listed in the
-      <filename>/etc/rc.d</filename> directory.  Many of these files
+    <para>&os; recentemente integrou o sistema de inicializa&ccedil;&atilde;o 
+      <filename>rc.d</filename> do NetBSD. Os usu&aacute;rios podem notar os 
+      arquivos no diret&oacute;rio 
+      <filename>/etc/rc.d</filename>.  Muitos destes arquivos s&atilde;o para 
+      servi&ccedil;os b&aacute;sicos que podem ser controlados com os par&acirc;metros 
       are for basic services which can be controlled with the
       <option>start</option>, <option>stop</option>,
-      and <option>restart</option> options.
-      For instance, &man.sshd.8; can be restarted with the following
-      command:</para>
+      e <option>restart</option>.
+      Por exemplo, o &man.sshd.8; pode ser reinicializado com o seguinte 
+      comando:</para>
 
     <screen>&prompt.root; <userinput>/etc/rc.d/sshd restart</userinput></screen>
 
-    <para>This procedure is similar for other services.  Of course,
-      services are usually started automatically as specified in
-      &man.rc.conf.5;.  For example, enabling the Network Address
-      Translation daemon at startup is as simple as adding the
-      following line to <filename>/etc/rc.conf</filename>:</para>
+    <para>Este procedimento &eacute; similar para outros servi&ccedil;os.  Claro, 
+      servi&ccedil;os que normalmente s&atilde;o inicializados como especificado em 
+      &man.rc.conf.5;.  Por exemplo, habilitar o <literal>daemon Network Address
+      Translation</literal> na inicializa&ccedil;&atilde;o basta adicionar a seguinte 
+      linha em <filename>/etc/rc.conf</filename>:</para>
 
     <programlisting>natd_enable="YES"</programlisting>
 
-    <para>If a <option>natd_enable="NO"</option> line is already
-       present, then simply change the <option>NO</option> to
-       <option>YES</option>.  The rc scripts will automatically load
-       any other dependent services during the next reboot, as
-       described below.</para>
+    <para>Se a linha <option>natd_enable="NO"</option> j&aacute; existe, 
+       ent&atilde;o simplesmente mude a op&ccedil;&atilde;o <option>NO</option> para  
+       <option>YES</option>.  Os <literal>scripts</literal> rc automaticamente 
+       carregar&atilde;o outros servi&ccedil;os dependentes durante a pr&oacute;xima inicializa&ccedil;&atilde;o, 
+       como descrito abaixo.</para>
 
-    <para>Since the <filename>rc.d</filename> system is primarily
-      intended to start/stop services at system startup/shutdown time;
-      the standard <option>start</option>,
-      <option>stop</option> and <option>restart</option> options will only
-      perform their action if the appropriate
-      <filename>/etc/rc.conf</filename> variables are set.  For
-      instance the above <command>sshd restart</command> command will
-      only work if <varname>sshd_enable</varname> is set to
-      <option>YES</option> in <filename>/etc/rc.conf</filename>.  To
-      <option>start</option>, <option>stop</option> or
-      <option>restart</option> a service regardless of the settings in
-      <filename>/etc/rc.conf</filename>, the commands should be
-      prefixed with <quote>force</quote>.  For instance to restart
-      <command>sshd</command> regardless of the current
-      <filename>/etc/rc.conf</filename> setting, execute the following
-      command:</para>
+    <para>Uma vez que o sistema <filename>rc.d</filename> foi feito primariamente 
+      para iniciar/parar servi&ccedil;os na ocasi&atilde;o de inicializa&ccedil;&atilde;o/desligamento 
+      do sistema;  os par&acirc;metros 
+      <option>start</option>,
+      <option>stop</option> e <option>restart</option> somente 
+      cumprir&atilde;o suas fun&ccedil;&otilde;es se as vari&aacute;veis apropriadas 
+      estiverem configuradas no <filename>/etc/rc.conf</filename>.  Por 
+      exemplo, o comando <command>sshd restart</command> acima s&oacute; 
+      funcionar&aacute; se <varname>sshd_enable</varname> estiver configurado para 
+      <option>YES</option> no <filename>/etc/rc.conf</filename>.  Para iniciar 
+      <option>(start)</option>, parar <option>(stop)</option> ou reiniciar 
+      <option>(restart)</option> um servi&ccedil;o, independente das configura&ccedil;&otilde;es em 
+      <filename>/etc/rc.conf</filename>, os comandos devem ter o prefixo 
+      <quote>force</quote>.  Por exemplo, para reiniciar o 
+      <command>sshd</command> independente da configura&ccedil;&atilde;o atual no 
+      <filename>/etc/rc.conf</filename>, execute o seguinte comando: 
+      :</para>
 
     <screen>&prompt.root; <userinput>/etc/rc.d/sshd forcerestart</userinput></screen>
 
-    <para>It is easy to check if a service is enabled in
-      <filename>/etc/rc.conf</filename> by running the appropriate
-      <filename>rc.d</filename> script with the option
-      <option>rcvar</option>.  Thus, an administrator can check that
-      <command>sshd</command> is in fact enabled in
-      <filename>/etc/rc.conf</filename> by running:</para>
+    <para>&Eacute; f&aacute;cil verificar se um servi&ccedil;o est&aacute; habilitado no 
+      <filename>/etc/rc.conf</filename>, basta executar o <literal>script</literal> 
+      <filename>rc.d</filename> com o par&acirc;metro  
+      <option>rcvar</option>.  Desta forma, o administrador pode verificar se o 
+      <command>sshd</command> est&aacute; de fato habilitado no 
+      <filename>/etc/rc.conf</filename>:</para>
 
     <screen>&prompt.root; <userinput>/etc/rc.d/sshd rcvar</userinput>
 # sshd
 $sshd_enable=YES</screen>
 
     <note>
-      <para>The second line (<literal># sshd</literal>) is the output
-        from the <command>sshd</command> command; not a <username>root</username>
-        console.</para>
+      <para>A segunda linha (<literal># sshd</literal>) &eacute; a sa&iacute;da do comando 
+        <command>sshd</command>; n&atilde;o um console <username>root</username>.
+        </para>
     </note>
 
-    <para>To determine if a service is running, a
-      <option>status</option> option is available.  For instance to
-      verify that <command>sshd</command> is actually started:</para>
+    <para>Para determinar se o servi&ccedil;o est&aacute; no ar, use o par&acirc;metro 
+      <option>status</option>.  Por exemplo, para verficar se 
+      o <command>sshd</command> est&aacute; no ar:</para>
 
     <screen>&prompt.root; <userinput>/etc/rc.d/sshd status</userinput>
 sshd is running as pid 433.</screen>
 
-    <para>It is also possible to <option>reload</option> a service.
-      This will attempt to send a signal to an individual service, forcing the
-      service to reload its configuration files.  In most cases this
-      means sending the service a <literal>SIGHUP</literal>
-      signal.</para>
+    <para>Tamb&eacute;m &eacute; poss&iacute;vel recarregar <option>(reload)</option> um servi&ccedil;o.
+      Este par&acirc;metro tentar&aacute; enviar um sinal para um servi&ccedil;o em particular, 
+      for&ccedil;ando uma recarga dos arquivos de configura&ccedil;&atilde;o.  Em muitos casos 
+      isto significa enviar um sinal <literal>SIGHUP</literal> 
+      para o servi&ccedil;o.</para>
 
-    <para>The <application>rcNG</application> structure is not only used for network services, it also
-      contributes to most of the system initialization.  For
-      instance, consider the <filename>bgfsck</filename> file.  When
-      this script is executed, it will print out the following
-      message:</para>
+    <para>A estrutura do <application>rcNG</application> n&atilde;o &eacute; apenas usada 
+      para servi&ccedil;os de rede, tamb&eacute;m contribui em grande parte 
+      para a inicializa&ccedil;&atilde;o do sistema.  Por exemplo, 
+      considere o arquivo <filename>bgfsck</filename>.  Quando 
+      este script for executado imprimir&aacute; a seginte mensagem: 
+      </para>
 
     <screen>Starting background file system checks in 60 seconds.</screen>
 
-    <para>Therefore this file is used for background file system
-      checks, which are done only during system initialization.</para>
+    <para>Portanto, este arquivo &eacute; usado para checagem de sistema de 
+      arquivo em segundo plano, que &eacute; feita durante a inicializa&ccedil;&atilde;o.
+      </para>
 
-    <para>Many system services depend on other services to function
-      properly.  For example, NIS and other RPC-based services may
-      fail to start until after the <command>rpcbind</command>
-      (portmapper) service has started.  To resolve this issue,
-      information about dependencies and other meta-data is included
-      in the comments at the top of each startup script.  The
-      &man.rcorder.8; program is then used to parse these comments
-      during system initialization to determine the order in which
-      system services should be invoked to satisfy the dependencies.
-      The following words may be included at the top of each startup
-      file:</para>
+    <para>Muitos servi&ccedil;os de sistema dependem de outros sevi&ccedil;os para 
+      funcionar corretamente.  Por exemplo, NIS e outros servi&ccedil;os 
+      baseados em RPC podem falhar durante a inicializa&ccedil;&atilde;o at&eacute; que 
+      o servi&ccedil;o <command>rpcbind</command>
+      (portmapper) tenha sido iniciado.  Para resolver esta quest&atilde;o, 
+      informa&ccedil;&otilde;es sobre depend&ecirc;ncia e outros meta-dados est&atilde;o 
+      inclu&iacute;dos no topo de cada <literal>script</literal> de 
+      inicializa&ccedil;&atilde;o.  O programa &man.rcorder.8; &eacute; usado para analisar 
+      estes coment&aacute;rios durante a inicializa&ccedil;&atilde;o do sistema para determinar 
+      a ordem na qual os servi&ccedil;os de sistema devem ser invocados para 
+      satisfazer as depend&ecirc;ncias.  As seguintes palavras podem ser 
+      incluidas no topo de cada arquivo de <literal>script</literal> de  
+      inicializa&ccedil;&atilde;o:</para>
 
     <itemizedlist>
       <listitem>
-	<para>PROVIDE: Specifies the services this file provides.</para>
+	<para>PROVIDE: Especifica os servi&ccedil;os que este arquivo oferece.</para>
       </listitem>
 
       <listitem>
-	<para>REQUIRE: Lists services which are required for this
-	  service.  This file will run <emphasis>after</emphasis>
-	  the specified services.</para>
+	<para>REQUIRE: Lista os servi&ccedil;os que s&atilde;o necess&aacute;rios para este 
+	  servi&ccedil;o.  Este arquivo ser&aacute; executado <emphasis>depois</emphasis>
+	  dos servi&ccedil;os especificados.</para>
       </listitem>
 
       <listitem>
-	<para>BEFORE: Lists services which depend on this service.
-	  This file will run <emphasis>before</emphasis>
-	  the specified services.</para>
+	<para>BEFORE: Lista os servi&ccedil;os que dependem deste servi&ccedil;o.
+	  Este servi&ccedil;o ser&aacute; executado <emphasis>antes</emphasis>
+	  dos servi&ccedil;os especificados.</para>
       </listitem>
 
       <listitem>
-	<para>KEYWORD: &os; or NetBSD.  This is used for *BSD dependent features.</para>
+	<para>KEYWORD: &os; ou NetBSD.  Isto &eacute; usado para caracter&iacute;sticas
+          dependentes de *BSD.</para>
       </listitem>
     </itemizedlist>
 
-    <para>By using this method, an administrator can easily control system
-      services without the hassle of <quote>runlevels</quote> like
-      some other &unix; operating systems.</para>
+    <para>Usando este m&eacute;todo, um administrador pode controlar facilmente 
+      os servi&ccedil;os de sistema sem o stress dos <quote>runlevels</quote> 
+      como em outros sistemas operacionais &unix;.</para>
 
-    <para>Additional information about the &os; 5.X
-      <filename>rc.d</filename> system can be found in the &man.rc.8;
-      and &man.rc.subr.8; manual pages.</para>
+    <para>Informa&ccedil;&otilde;es adicionais sobre sistema <filename>rc</filename> no &os; 5.X
+      podem ser encontradas em &man.rc.8;
+      e &man.rc.subr.8;.</para>
   </sect1>
 
   <sect1 id="config-network-setup">
