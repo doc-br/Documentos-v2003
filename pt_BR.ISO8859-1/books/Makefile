@@ -8,7 +8,7 @@
 #SUBDIR = corp-net-guide
 #SUBDIR+= design-44bsd
 #SUBDIR+= developers-handbook
-#SUBDIR+= faq
+SUBDIR+= faq
 #SUBDIR+= fdp-primer
 SUBDIR+= handbook
 #SUBDIR+= porters-handbook
