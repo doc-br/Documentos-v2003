@@ -959,188 +959,184 @@
 	 mas seguida pelo literal <literal>=</literal> e uma segunda palavra.  Por exemplo,
 	<literal>release=cvs</literal>, &eacute; um campo valor.</para>
       
-      <para>A <filename>supfile</filename> typically specifies more than
-	one collection to receive.  One way to structure a
-	<filename>supfile</filename> is to specify all of the relevant
-	fields explicitly for each collection.  However, that tends to
-	make the <filename>supfile</filename> lines quite long, and it
-	is inconvenient because most fields are the same for all of the
-	collections in a <filename>supfile</filename>.
-	<application>CVSup</application> provides a defaulting mechanism
-	to avoid these problems.  Lines beginning with the special
-	pseudo-collection name <literal>*default</literal> can be used
-	to set flags and values which will be used as defaults for the
-	subsequent collections in the <filename>supfile</filename>.  A
-	default value can be overridden for an individual collection, by
-	specifying a different value with the collection itself.
-	Defaults can also be changed or augmented in mid-supfile by
-	additional <literal>*default</literal> lines.</para>
+      <para>Um <filename>supfile</filename> tipicamente especifica mais de uma 
+	<foreignphrase>collection</foreignphrase> para ser recebida.
+	  Uma maneira de estruturar um <filename>supfile</filename> &eacute;
+	especificar todos os campos relevantes expl&iacute;citamente para cada 
+	<foreignphrase>collection</foreignphrase>.  Entretanto, isso tende a fazer
+	 com que as linhas do <filename>supfile</filename> fiquem muito longas e 
+	&eacute; inconveniente porque muitos campos s&atilde;o os mesmos para 
+	todas as <foreignphrase>collections</foreignphrase> no <filename>supfile</filename>.
+	<application>CVSup</application> prev&circ; um mecanismo de
+	 <foreignphrase>default</foreignphrase> para evitar &ecirc;sse problema.
+	  Linhas come&ccedil;ando com o nome de <foreignphrase>collection</foreignphrase>
+	 especial <literal>*default</literal> podem ser usadas para atribuir indicadores e valores
+	 que ser&atilde;o usados como <foreignphrase>default</foreignphrase> para todas as
+	 <foreignphrase>collections</foreignphrase> subsequentes no arquivo
+	 <filename>supfile</filename>.  Um valor <foreignphrase>default</foreignphrase> pode
+	ser sobreposto numa determinada <foreignphrase>collection</foreignphrase>
+	 especificando-se um valor diferente na linha desta 
+	  <foreignphrase>collection</foreignphrase>.  Os <foreignphrase>defaults</foreignphrase>
+	podem ser mudados ou expandidos no meio do arquivo <filename>supfile</filename>
+	 colocando-se linhas <literal>*default</literal> adicionais.</para>
 
-      <para>With this background, we will now proceed to construct a
-	<filename>supfile</filename> for receiving and updating the main
-	source tree of <link
-	  linkend="current">FreeBSD-CURRENT</link>.</para>
+      <para>Dito isto, vamos come&ccedil;ar a preparar um <filename>supfile</filename>
+	 para receber e atualizar a &aacute;rvore de diret&oacute;rios dos fontes do 
+	<link  linkend="current">FreeBSD-CURRENT</link>.</para>
 
       <itemizedlist>
 	<listitem>
-	  <para><anchor id="cvsup-config-files">Which files do you want
-	    to receive?</para>
+	  <para><anchor id="cvsup-config-files">Que arquivos voc&ecirc; quer receber ?</para>
 	  
-	  <para>The files available via <application>CVSup</application>
-	    are organized into named groups called
-	    <quote>collections</quote>.  The collections that are
-	    available are described in the <link
-	      linkend="cvsup-collec">following section</link>.  In this
-	    example, we
-	    wish to receive the entire main source tree for the FreeBSD
-	    system.  There is a single large collection
-	    <literal>src-all</literal> which will give us all of that.
-	    As a first step toward constructing our
-	    <filename>supfile</filename>, we
-	    simply list the collections, one per line (in this case,
-	    only one line):</para>
+	  <para>Os arquivos dispon&Iacute;veis atrav&eacute;s do 
+	  <application>CVSup</application>
+	    s&atilde;o organizados em grupos chamados 
+	    <quote>collections</quote>.  Os <foreignphrase>collections</foreignphrase>
+	  dispon&iacute;veis s&atilde;o descritos na <link
+	      linkend="cvsup-collec">seç&atilde;o seguinte</link>.  
+	  No nosso exemplo desejamos receber toda a &aacute;rvore de diret&oacute;rios com os 
+	  fontes do FreeBSD  Existe um grande <foreignphrase>collection</foreignphrase> 
+	  chamado <literal>src-all</literal> que nos dar&aacute; isso.
+	    Como primeiro passo na prepara&ccecil;&atilde;o de nosso 
+	    <filename>supfile</filename>, vamos simplesmente listar os 
+	  <foreignphrase>collections</foreignphrase>, um por linha ( nesse caso, somente uma 
+	  linha):</para>
 
 	  <programlisting>src-all</programlisting>
 	</listitem>
 
 	<listitem>
-	  <para><anchor id="cvsup-config-vers">Which version(s) of them
-	    do you want?</para>
+	  <para><anchor id="cvsup-config-vers">Que vers&atilde;o dele voc&ecirc; quer ?</para>
 
-	  <para>With <application>CVSup</application>, you can receive
-	    virtually any version of the sources that ever existed.
-	    That is possible because the
-	    <application>cvsupd</application> server works directly from
-	    the CVS repository, which contains all of the versions.  You
-	    specify which one of them you want using the
-	    <literal>tag=</literal> and <option>date=</option> value
-	    fields.</para>
+	  <para>Com o <application>CVSup</application>, voc&ecirc; pode receber
+	  praticamente qualquer vers&atilde;o dos fontes que j&aacute; tenha existido.
+	    Isso &eacute poss&iacutevel porque o servidor <application>cvsupd</application>
+	   trabalha diretamente com o reposit&oacute;rio CVS  que cont&eacute;m todas as
+	   vers&otilde;es.  Voc&ecirc; especifica qual delas voc&ecirc; quer usando os campos de 
+	  valores <literal>tag=</literal> e <option>date=</option>.</para>
 	  
 	  <warning>
-	    <para>Be very careful to specify any <literal>tag=</literal>
-	      fields correctly.  Some tags are valid only for certain
-	      collections of files.  If you specify an incorrect or
-	      misspelled tag, <application>CVSup</application>
-	      will delete files which you probably
-	      do not want deleted.  In particular, use <emphasis>only
-	      </emphasis> <literal>tag=.</literal> for the
-	      <literal>ports-*</literal> collections.</para>
+	    <para>Seja muito cuidadoso para especificar corretamente os campos 
+	    <literal>tag=</literal>.  Alguns <foreignphrase>tags</foreignphrase> s&atilde;o 
+	    v&aacute;lidos somente para alguns <foreignphrase>collections</foreignphrase>.
+	     Se voc&ecirc; especificar uma <foreignphrase>tag</foreignphrase> incorreta, o
+	      <application>CVSup</application> deletar&aacute; arquivos que voc&ecirc; 
+	  provavelmente n&atilde;o queria deletar.  Use <foreignphrase>tag=.</foreignphrase>
+	  somente para os <literal>ports-*</literal> <foreignphrase>collections</foreignphrase>
+	  .</para>
 	  </warning>
 
-	  <para>The <literal>tag=</literal> field names a symbolic tag
-	    in the repository.  There are two kinds of tags, revision
-	    tags and branch tags.  A revision tag refers to a specific
-	    revision.  Its meaning stays the same from day to day.  A
-	    branch tag, on the other hand, refers to the latest revision
-	    on a given line of development, at any given time.  Because
-	    a branch tag does not refer to a specific revision, it may
-	    mean something different tomorrow than it means
-	    today.</para>
+	  <para>O campo <literal>tag=</literal> aponta para uma indicador
+	    no reposit&oacute;rio.  Existem duas esp&eacute;cies de indicadores, 
+	    indicadores de revis&atilde;o e de estado.  Um indicador de revis&atilde;o
+	    refere-se a uma revis&atilde;o espec&iacute;fica. Isso significa que  ela
+	    ser&aacute; a mesma dia ap&oacute;s dia.
+	    Por outro lado, um indicador de estado refere-se sempre a &uacute;ltima 
+	    vers&atilde;o numa dada linha de desenvolvimento e pode ser diferente
+	    de hoje para amanh&atilde;.</para>
 	  
-	  <para><xref linkend="cvs-tags"> contains branch tags that
-	    users might be interested in.  When specifying a tag in
-	    <application>CVSup</application>'s configuration file, it
-	    must be preceded with <literal>tag=</literal>
-	    (<literal>RELENG_4</literal> will become
-	    <literal>tag=RELENG_4</literal>).
-	    Keep in mind that only the <literal>tag=.</literal> is
-	    relevant for the ports collection.</para>
+	  <para><xref linkend="cvs-tags"> cont&eacute;m indicadores de estado que
+	   podem interess&aacute;-lo.  Quando especificando um indicador
+	   num arquivo de configura&ccedil;&atilde;o <application>CVSup</application>',
+	   ele deve ser precedido de <literal>tag=</literal> 
+	    (<literal>RELENG_4</literal> como <literal>tag=RELENG_4</literal>).
+	    Lembre-se que somente o <literal>tag=.</literal> &eacute; relevante 
+	    para o <foreignphrase>ports collection</foreignphrase>.</para>
 
 	  <warning>
-	    <para>Be very careful to type the tag name exactly as shown.
-	      <application>CVSup</application> cannot distinguish
-	      between valid and invalid tags.  If you misspell the tag,
-	      <application>CVSup</application> will behave as though you
-	      had specified a valid tag which happens to refer to no
-	      files at all.  It will delete your existing sources in
-	      that case.</para>
+	    <para>Tome cuidado para digitar um indicador exatamente como mostrado.
+	      O <application>CVSup</application> n&atilde;o pode distinguir
+	      entre um <foreignphrase>tag</foreignphrase> v&aacute;lido ou n&atilde;o.
+	      Se voc&ecirc; informa ao <application>CVSup</application> um 
+	      <foreignphrase>tag</foreignphrase> errado, ele trabalhar&aacute; como se
+	       voc&ecirc; tivesse informado um <foreignphrase>tag</foreignphrase>
+	       v&aacute;lido que aponta para <emphasis>nada</emphasis>.</para>
 	  </warning>
 
-	  <para>When you specify a branch tag, you normally receive the
-	    latest versions of the files on that line of development.
-	    If you wish to receive some past version, you can do so by
-	    specifying a date with the <option>date=</option> value
-	    field. The &man.cvsup.1; manual page explains how to do
-	    that.</para>
+	  <para>Quando voc&ecirc; especifica um indicador de estado, voc&ecirc;
+	    normalmente receber&aacute; a u&acute;ltima vers&atilde;o dos arquivos
+	    naquela linha de desenvolvimento.
+	    Se voc&ecirc; quer alguma vers&atilde;o mais antiga, voc&ecirc; pode
+	     especificar o campo de valor <option>date=</option>. 
+	     O &man.cvsup.1; ( <foreignphrase>manual page</foreignphrase> ) 
+	     explica como fazer isso.</para>
 
-	  <para>For our example, we wish to receive FreeBSD-CURRENT.  We
-	    add this line at the beginning of our
-	    <filename>supfile</filename>:</para>
+	  <para>No nosso exemplo, queremos receber o <foreignphrase>FreeBSD-CURRENT</foreignphrase>.
+	    Ent&atilde;o adicionaremos a linha seguinte ao <filename>supfile</filename>:</para>
 	  
 	  <programlisting>*default tag=.</programlisting>
 
-	  <para>There is an important special case that comes into play
-	    if you specify neither a <literal>tag=</literal> field nor a
-	    <literal>date=</literal> field.  In that case, you receive
-	    the actual RCS files directly from the server's CVS
-	    repository, rather than receiving a particular version.
-	    Developers generally prefer this mode of operation.  By
-	    maintaining a copy of the repository itself on their
-	    systems, they gain the ability to browse the revision
-	    histories and examine past versions of files.  This gain is
-	    achieved at a large cost in terms of disk space,
-	    however.</para>
+	  <para>Esse &eacute; um caso especial, onde voc&ecirc;
+	    não especifica nada no campo <literal>tag=</literal> nem no campo
+	    <literal>date=</literal>.  Nesse caso, voc&ecirc; receber&aacute;
+	    os atuais arquivos <emphasis>RCS</emphasis> do reposit&oacute;rio CVS,
+	    e n&atilde;o uma vers&atilde;o em particular.
+	    Desenvolvedores geralmente preferem esta forma de opera&ccedil;&atilde;o.  
+	    Mantendo uma c&oacute;pia do reposit&oacute;rio inteiro em sua m&aacute;quina
+	    eles tem a facilidade de pesquisar o hist&oacute;rico das revis&otilde;es, 
+	    bem como, examinar vers&otilde;es anteriores dos arquivos. Entretanto, esta 
+	    facilidade implica numa grande ocupa&ccedil;&atilde;o de espa&ccedil;o em
+	    Disco.</para>
 	</listitem>
 
 	<listitem>
-	  <para><anchor id="cvsup-config-where">Where do you want to get
-	    them from?</para>
+	  <para><anchor id="cvsup-config-where">De onde voc&ecirc; quer 
+	    peg&aacute;-los ?</para>
 	  
-	  <para>We use the <literal>host=</literal> field to tell
-	    <command>cvsup</command> where to obtain its updates.  Any
-	    of the <link linkend="cvsup-mirrors">CVSup mirror
-	      sites</link> will do, though you should try to select one
-	    that is close to you in cyberspace.  In this example we will
-	    use a fictional FreeBSD distribution site,
-	    <hostid role="fqdn">cvsup666.FreeBSD.org</hostid>:</para>
+	  <para>Usamos o campo de valor <literal>host=</literal> para dizer
+	   ao <command>cvsup</command> onde obter as atualiza&ccedil;&otilde;es.  
+	   Qualquer um dos reposit&oacute;rios <command>cvsup</command>
+	   listados em <link linkend="cvsup-mirrors">Reposit&oacute;rios CVSup</link>
+	   pode ser usado. Voc&ecirc; deve escolher um mais pr&oacute;ximo de 
+	   voc&ecirc;.  Em nosso exemplo usaremos o reposit&oacute;rio fict&iacute;cio
+	   <hostid role="fqdn">cvsup666.FreeBSD.org</hostid>:</para>
 
 	  <programlisting>*default host=cvsup666.FreeBSD.org</programlisting>
 	  
-	  <para>You will need to change the host to one that actually
-	    exists before running <application>CVSup</application>.
-	    On any particular run of
-	    <command>cvsup</command>, you can override the host  setting
-	    on the command line, with <option>-h
-	      <replaceable>hostname</replaceable></option>.</para>
+	  <para>Voc&ecirc; precisar%aacute; mudar este campo para um que rode o
+	    <application>CVSup</application> atualmente.
+	    Numa execu&ccedil;&atilde;o em particular do <command>cvsup</command>, 
+	    voc&ecirc; pode sobrep&ocirc;r o reposit&oacute;rio escolhido com uma linha de
+	    comando com a op&ccedil;&atilde;o <option>-h <replaceable>hostname</replaceable></option>.</para>
 	</listitem>
 	
 	<listitem>
-	  <para><anchor id="cvsup-config-dest">Where do you want to put
-	    them on your own machine?</para>
+	  <para><anchor id="cvsup-config-dest">Onde voc&ecirc; quer coloc&aacute;-los
+	      em sua m&aacute;quina ?</para>
 	  
-	  <para>The <literal>prefix=</literal> field tells
-	    <command>cvsup</command> where to put the files it receives.
-	    In this example, we will put the source files directly into
-	    our main source tree, <filename>/usr/src</filename>.  The
-	    <filename>src</filename> directory is already implicit in
-	    the collections we have chosen to receive, so this is the
-	    correct specification:</para>
+	  <para>O campo de valor <literal>prefix=</literal> diz ao 
+	    <command>cvsup</command> onde colocar os arquivos recebidos.
+	    Neste exemplo vamos colocar os arquivos fontes recebidos diretamente
+	    em nossa &aacute;rvore de fontes <filename>/usr/src</filename>.  O
+	    subdiret&oacute;rio em <filename>src</filename> &eacute; impl&iacute;cito 
+	    conforme o <foreignphrase>collections</foreignphrase> que voc&ecirc; escolheu 
+	    para receber:</para>
 	  
 	  <programlisting>*default prefix=/usr</programlisting>
 	</listitem>
 
 	<listitem>
-	  <para><anchor id="cvsup-config-status">Where should
-	    <command>cvsup</command> maintain its status files?</para>
+	  <para><anchor id="cvsup-config-status">Onde voc&ecirc; quer colocar os 
+	   arquivos de <foreignphrase>status</foreignphrase> ?</para>
 
-	  <para>The <application>CVSup</application> client maintains
-	    certain status files in what
-	    is called the <quote>base</quote> directory.  These files
-	    help <application>CVSup</application> to work more
-	    efficiently, by keeping track of which updates you have
-	    already received.  We will use the standard base directory,
-	    <filename>/usr/local/etc/cvsup</filename>:</para>
+	  <para>O cliente <application>CVSup</application> mant&eacute;m certos 
+	    arquivos de <emphasis>status</emphasis> chamados
+	    <quote>base de diret&oacute;rios</quote>.  Esses arquivos auxiliam o
+	    <application>CVSup</application> a trabalhar mais eficientemente, mantendo
+	    o registro das atualiza&ccedil;&otilde;es que voc&ecirc; j&aacute; recebeu.
+	    Usaremos o local usual, <filename>/usr/local/etc/cvsup</filename>, para a
+	    <quote>base de diret&oacute;rios</quote>:</para>
 
 	  <programlisting>*default base=/usr/local/etc/cvsup</programlisting>
 
-	  <para>This setting is used by default if it is not specified
-	    in the <filename>supfile</filename>, so we actually do not
-	    need the above line.</para>
+	  <para>Esta escolha &eacute; a <foreignphrase>default</foreignphrase> quando
+	   nenhuma outra &eacute; especificada no <filename>supfile</filename>, assim
+	   a linha acima n&atilde;o ser&aacute; necess&aacute;ria.</para>
 	  
-	  <para>If your base directory does not already exist, now would
-	    be a good time to create it.  The <command>cvsup</command>
-	    client will refuse to run if the base directory does not
-	    exist.</para>
+	  <para>Se sua <quote>base de diret&oacute;rios</quote> ainda n&atilde;o
+	   existe, agora &eacute; uma boa hora para cri&aacute;-la.  O
+	   cliente <command>cvsup</command> n&atilde;o executar&aacute; se 
+	   a <quote>base de diret&oacute;rios</quote> n&atilde;o existir.</para>
 	</listitem>
 
 	<listitem>
