@@ -2577,7 +2577,7 @@ exit 2</programlisting>
 			impressora &postscript;.  Cada vez que nos geramos um arquivo DVI
 			atrav&eacute;s do &tex;, nos n&atilde;o podemos imprimi-lo 
 			diretamente, pos precisamos converte-lo em &postscript;.  A 
-			seq&utrema;&ecirc;ncia de comandos sera algo semelhante a:
+			sequ&ecirc;ncia de comandos sera algo semelhante a:
 			</para>
                 
           <screen>&prompt.user; <userinput>dvips seaweed-analysis.dvi</userinput>
@@ -3045,7 +3045,7 @@ exit 0</programlisting>
 			usua&aacute;rio a especificar ( no comando de linha &man.lpr.1; )
 			Qual ele ir&acute; usar.
 				Se seus usu&aacute;rios n&atilde;o est&atilde;o familiarizados, ou
-			n&aatilde;o tiverem uma literatura particular, eles acharam isso 
+			n&atilde;o tiverem uma literatura particular, eles acharam isso 
 			muito chato.  O que &eacute; ruim, entretanto, &eacute; a escolha
 			de uma op&ccedil;&atilde;o errada, que poder&aacute; gerar muitas
 			p&aacute;ginas de lixo.
@@ -3104,48 +3104,68 @@ exit 0</programlisting>
           </listitem>
           
           <listitem>
-            <para><application>LPD</application> does not make any provision
-	      to identify the start or the
-              end of files within the job for the output filter.</para>
+			<para>
+				O sistema <application>LPD</application> n&atilde;o faz nenhuma
+			previs&atilde;o para identificar o inc&iacute;cio ou o final de 
+			arquivos dentro do trabalho de impress&atilde;o para o filtro de
+			sa&iacute;da.
+			</para>
           </listitem>
           
           <listitem>
-            <para><application>LPD</application> does not pass the user's 
-	      login or host to the filter, so
-              it is not intended to do accounting.  In fact, it gets only two
-              arguments:</para>
+			<para>
+				O sistema <application>LPD</application> n&atilde;o repassa o
+			nome do usu&aacute;rio ou a m&aacute;quina para o filtro, ent&atilde;o
+			n&atilde;o conseque fazer a contabiliza&ccedil;&atilde;o do uso.  de
+			fato, ele s&oacute; utiliza dois argumentos:
+			</para>
                     
             <cmdsynopsis>
-              <command>filter-name</command>
-              <arg choice="plain">-w<replaceable>width</replaceable></arg>
-              <arg choice="plain">-l<replaceable>length</replaceable></arg>
+              <command>nome do filtro</command>
+              <arg choice="plain">-w<replaceable>largura</replaceable></arg>
+              <arg choice="plain">-l<replaceable>comprimento</replaceable></arg>
             </cmdsynopsis>
             
-            <para>Where <replaceable>width</replaceable> is from the
-              <literal>pw</literal> capability and
-              <replaceable>length</replaceable> is from the
-              <literal>pl</literal> capability for the printer in
-              question.</para>
+			<para>
+				Onde <replaceable>largura</replaceable> &eacute; retirado
+			da op&ccedil;&atilde;o <literal>pw</literal> e o
+			<replaceable>comprimento</replaceable> &eacute; retirado da 
+			op&ccedil;&atilde;o <literal>pl</literal> referente a impressora
+			utilizada
+			</para>
           </listitem>
         </itemizedlist>
 
-        <para>Do not be seduced by an output filter's simplicity.  If you
-          would like each file in a job to start on a different page an output
-          filter <emphasis>will not work</emphasis>.  Use a text filter (also
-          known as an input filter); see section <link
-            linkend="printing-textfilter">Installing the Text Filter</link>.
-          Furthermore, an output filter is actually <emphasis>more
-            complex</emphasis> in that it has to examine the byte stream being
-          sent to it for special flag characters and must send signals to
-          itself on behalf of <application>LPD</application>.</para>
+			<para>
+				N&atilde;o fique seduzido pela facilidade do uso dos filtros
+			de sa&iacute;da.  Se voc&ecirc; gostaria de ter cada arquivo do
+			trabalho de impress&atilde;o iniciando em diferente p&aacute;ginas
+			um filtro de sa&iacute;da <emphasis>n&atilde;o iria funcionar
+			</emphasis>.  Use um filtro de texto (tamb&eacute;m conhecido como
+			filtro de entrada); veja a se&ccedil;&atilde;o <link
+            linkend="printing-textfilter">Instalando um Filtro Texto</link>.
+			  Al&eacute;m disso, um filtro de sa&iacute;da &eacute; atualmente
+         <emphasis>mais complexo</emphasis> porque ele examina um
+			<foreignphrase>stream</foreignphrase> de bytes iniciamente enviado
+			para ele com um <foreignphrase>flag</foreignphrase> especial e deve
+			ser enviado sinais para ele pr&oacute;rio em benef&iacute;cio do
+			sistema <application>LPD</application>.
+			</para>
             
-        <para>However, an output filter is <emphasis>necessary</emphasis> if
-          you want header pages and need to send escape sequences or other
-          initialization strings to be able to print the header page.  (But it
-          is also <emphasis>futile</emphasis> if you want to charge header
-          pages to the requesting user's account, since 
-	  <application>LPD</application> does not give any
-          user or host information to the output filter.)</para>
+			<para>
+				Entretanto, um filtro de sa&iacute;da &eacute; 
+			<emphasis>necessario</emphasis> se voc&ecirc; quizer 
+			cabe&ccedil;alho de p&aacute; e precisa enviar segu&ecirc;ncias de
+			caracteres escape ou outro conjunto de caracteres 
+			inicializa&ccedil;&atilde;o para abilitar o cabe&ccedil;alho das
+			p&aacute;ginas.  (mas isso &eacute; tamb&eacute;m
+         <emphasis>f&uacute;til</emphasis> se voc&ecirc; deseja carregar
+			cabe&ccedil;alhos de p&aacute;gina para a contabilidade do 
+			usu&aacute;rio uma vez que o sistema <application>LPD</application> 
+			n&atilde;o fornece nenhuma informa&ccedil;&atilde;o do usu&aacute;rio
+			ou do computador para o filtro de sa&iacute;da).
+			</para>
+---
             
         <para>On a single printer, <application>LPD</application>
 	  allows both an output filter and text or other filters.  In
