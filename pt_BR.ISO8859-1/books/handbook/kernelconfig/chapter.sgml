@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.29 2003/12/12 16:46:09 surf Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.29 2004/02/16 18:37:09 eksffa Exp $
 -->
 
 <chapter id="kernelconfig">
@@ -19,7 +19,7 @@
 	<firstname>Jake</firstname>
 	<surname>Hamby</surname>
 	<contrib>Contribui&ccedil;&atilde;o original de </contrib>
-	<!-- 6 Oct 1995 -->
+	<!-- 6 Out 1995 -->
       </author>
     </authorgroup>
   </chapterinfo>
@@ -27,14 +27,14 @@
   <title>Configurando o <literal>kernel</literal> do FreeBSD</title>
 
   <sect1 id="kernelconfig-synopsis">
-    <title>Sinopse</title>
+    <title>Sinópse</title>
 
     <indexterm>
       <primary>kernel</primary>
-      <secondary>compilando um <literal>kernel</literal> personalizado</secondary>
+      <secondary>compilando um <literal>kernel</literal> customizado</secondary>
     </indexterm>
 
-    <para>O <literal>kernel</literal> &eacute; o cora&ccedil;&atilde;o do sistema operacional &os;.  
+    <para>O <literal>kernel</literal> &eacute; o cora&ccedil;&atilde;o do sistema &os;.  
       Ele &eacute; respons&aacute;vel por gerenciar a mem&oacute;ria, refor&ccedil;ar 
       controles de seguran&ccedil;a,
       pela rede, pelo accesso a disco, e muito mais.  A medida que mais e mais o &os;
@@ -45,7 +45,7 @@
 
     <itemizedlist>
       <listitem>
-	<para>Porque voc&ecirc; poder&aacute; precisar compilar um <literal>kernel</literal> personalizado.</para>
+	<para>Porque voc&ecirc; poder&aacute; precisar compilar um <literal>kernel</literal> customizado.</para>
       </listitem>
 
       <listitem>
@@ -68,33 +68,32 @@
       </listitem>
 
       <listitem>
-	<para>Como resolver defeitos se algo der errado.</para>
+	<para>Como resolver problemas se algo der errado.</para>
       </listitem>
     </itemizedlist>
   </sect1>
 
   <sect1 id="kernelconfig-custom-kernel">
-    <title>Porque Compilar um <literal>kernel</literal> Personalizado?</title>
+    <title>Porque compilar um <literal>kernel</literal> customizado?</title>
 
     <para>Tradicionalmente, o &os; teve o que foi chamado de <literal>kernel</literal>
       <quote>monol&iacute;tico</quote>. Isto significa que o <literal>kernel</literal> era um
       grande programa, contendo uma lista fixa de dispositivos suportados, e se voc&ecirc; quisesse
       alterar seu comportamento ent&atilde;o seria necess&aacute;rio compilar um novo <literal>kernel</literal>,
-      e da&iacute; reiniciar seu computador com ele.</para>
+      e então reiniciar seu computador com ele.</para>
 
     <para>Hoje, o &os; est&aacute; movendo-se rapidamente para um modelo onde muitas das funcionalidades do
       <literal>kernel</literal> est&atilde;o contidas em m&oacute;dulos que s&atilde;o carregados e descarregados din&acirc;micamente conforme eles s&atilde;o necess&aacute;rios.
       Isto permite que o <literal>kernel</literal> imediatamente se adapte a um novo <foreignphrase>hardware</foreignphrase>
       tornando-o dispon&iacute;vel (tais como cart&otilde;es PCMCIA para <foreignphrase>laptop</foreignphrase>), ou a
-      novas funcionalidades a serem inseridas no <literal>kernel</literal> que n&atilde;o eram
+      novas funcionalidades à serem inseridas no <literal>kernel</literal> que n&atilde;o eram
       necess&aacute;rias quando o ele foi originalmente compilado. Isso
       &eacute; conhecido como <literal>kernel</literal> modular. Coloquialmente eles s&atilde;o chamados KLDs.</para>
 
     <para>Apesar disto, ainda &eacute necess&aacute;rio carregar algumas configura&ccedil;&otilde;es est&aacute;ticas no <literal>kernel</literal>. Em alguns casos 
       isto est&aacute; assim porque estas funcionalidades est&atilde;o t&atilde;o amarradas ao <literal>kernel</literal> que elas n&atilde;o podem ser carregadas din&acirc;micamente. 
       Em outros casos, isto pode simplesmente estar assim porque ningu&eacute;m ainda conseguiu tempo para escrever
-um m&oacute;dulo de 
-carga din&acirc;mico do <literal>kernel</literal> para elas.</para>
+um m&oacute;dulo de carga din&acirc;mico do <literal>kernel</literal> para cada uma delas.</para>
 
     <para>Compilar um <literal>kernel</literal> personalizado &eacute; um dos rituais mais importantes que cada usu&aacute;rio de
       &unix; deve enfrentar. Este processo, embora consuma tempo, trar&aacute; muitos benef&iacute;cios para o seu sistema &os;.
@@ -123,26 +122,26 @@ carga din&acirc;mico do <literal>kernel</literal> para elas.</para>
   </sect1>
 
   <sect1 id="kernelconfig-building">
-    <title> Compilando e Instalando um <literal>kernel</literal> Personalizado</title>
+    <title>Compilando e instalando um <literal>kernel</literal> customizado</title>
     <indexterm>
       <primary>kernel</primary>
       <secondary>Compilando / instalando</secondary>
     </indexterm>
 
-    <para>Primeiramente, deixe-nos apresentar rapidamente o  diret&oacute;rio de compila&ccedil;&atilde;o do <literal>kernel</literal>.
-      Todos os diret&oacute;rios mencionados ser&atilde;o relativos ao diret&oacute;rio principal
-      <filename>/usr/src/sys</filename>, que tamb&eacute;m poder&aacute; ser acessado diretamente atrav&eacute;s
+    <para>Primeiramente, deixe-nos apresentar rapidamente o diret&oacute;rio de compila&ccedil;&atilde;o do <literal>kernel</literal>.
+      Todos os diret&oacute;rios mencionados ser&atilde;o relativos ao diret&oacute;rio principal,
+      <filename>/usr/src/sys</filename>, que tamb&eacute;m poder&aacute; ser acessado diretamente atrav&eacute;s de
       <filename>/sys</filename>. H&aacute; um n&uacute;mero de subdiret&oacute;rios que representam partes diferentes do <literal>kernel</literal>, mas
       os mais importantes, para nossos objetivos, s&atilde;o
       <filename><replaceable>arch</replaceable>/conf</filename>, onde voc&ecirc;
       editar&aacute; sua configura&ccedil;&atilde;o de <literal>kernel</literal> personalizado, e
       <filename>compile</filename>, que &eacute; a &aacute;rea de prepara&ccedil;&atilde;o onde seu
       <literal>kernel</literal> ir&aacute; ser compilado.  <replaceable>arch</replaceable> representa
-      qualquer <filename>i386</filename>, <filename>alpha</filename>, ou
+      uma das arquiteturas suportadas pelo &os; como <filename>i386</filename>, <filename>alpha</filename>, ou
       <filename>pc98</filename> (uma ramo de desenvolvimento alternativo de <foreignphrase>hardware</foreignphrase> do PC, popular no Jap&atilde;o).  
       Tudo que est&aacute; dentro de um diret&oacute;rio de uma arquitetura espec&iacute;fica diz respeito somente a esta arquitetura; o resto
       do c&oacute;digo do &os; &eacute; comum para todas as plataformas &agrave;s quais ele poder&aacute; ser potencialmente convertido. Observe a 
-organiza&ccedil;&atilde;o 
+      organiza&ccedil;&atilde;o 
       l&oacute;gica da estrutura de diret&oacute;rio, com cada dispositivo suportado, sistema de arquivos, e
       op&ccedil;&otilde;es em seu pr&oacute;prio subdiret&oacute;rio. As vers&otilde;es do &os; 5.X e superiores tem suporte para
       <filename>sparc64</filename>, e algumas outras arquiteturas em
@@ -159,8 +158,8 @@ organiza&ccedil;&atilde;o
 	<guimenuitem>Distributions</guimenuitem>,
 	<guimenuitem>src</guimenuitem>, e ent&atilde;o
 	<guimenuitem>sys</guimenuitem>. Se voc&ecirc; tiver alguma avers&atilde;o ao
-	<application>sysinstall</application> e voc&ecirc; possuir acesso a
-	um &os; CDROM <quote>oficial</quote>, ent&atilde;o voc&ecirc; poder&aacute; tamb&eacute;m
+	<application>sysinstall</application> e possuir acesso a
+	um &os; CDROM <quote>oficiais</quote>, ent&atilde;o voc&ecirc; poder&aacute; tamb&eacute;m
 	instalar o fonte atrav&eacute;s da linha de comando:</para>
 
       <screen>&prompt.root; <userinput>mount /cdrom</userinput>
@@ -191,8 +190,8 @@ organiza&ccedil;&atilde;o
         N&atilde;o edite 
         diretamente o arquivo <filename>GENERIC</filename>,
 	pois ele pode ser sobrescrito da pr&oacute;xima vez que voc&ecirc; for
-	<link linkend="cutting-edge">atualizar a &aacute;rvore do c&oacute;digo fonte</link>, 
-	as suas modifica&ccedil;&otilde;es do <literal>kernel</literal> ser&atilde;o perdidas.</para>
+	<link linkend="cutting-edge">atualizar a &aacute;rvore do c&oacute;digo fonte</link>;
+	suas modifica&ccedil;&otilde;es do <literal>kernel</literal> ser&atilde;o perdidas.</para>
 
       <para>Voc&ecirc; pode querer manter em outro local seu arquivo de configura&ccedil;&atilde;o do <literal>kernel</literal>, e ent&atilde;o
 	criar um link simb&oacute;lico deste arquivo para o diret&oacute;rio <filename>i386</filename>.</para>
@@ -214,13 +213,13 @@ organiza&ccedil;&atilde;o
     <para>Agora, edite o <filename>MYKERNEL</filename> com seu editor de texto favorito. Se voc&ecirc; for come&ccedil;ar a configurar, 
     provavelmente somente o 
     <application>vi</application> esteja dispon&iacute;vel, o qual &eacute; muito complexo para
-      explicar aqui, mas &eacute; coberto em muitos livros de <link
+      explicar aqui, mas &eacute; coberto em muitos livros indicados na <link
       linkend="bibliography">bibliografia</link>. Entretanto, o &os; oferece um editor mais f&aacute;cil chamado <application>ee</application> 
       que, se 
       voc&ecirc; for um novato, deve ser o editor de sua escolha.
-      Sensa&ccedil;&atilde;o de liberdade para mudar as linhas de coment&aacute;rios principalmente para pensar sua 
+      Sinta-se livre para mudar as linhas de coment&aacute;rios, principalmente para identificar sua 
 configura&ccedil;&atilde;o e as 
-      altera&ccedil;&otilde;es para diferenciar do 
+      altera&ccedil;&otilde;es que diferenciam seu arquivo do 
       <filename>GENERIC</filename>.</para>
     <indexterm><primary>SunOS</primary></indexterm>
 
@@ -234,18 +233,18 @@ configura&ccedil;&atilde;o e as
 
     <note>
       <para>&Eacute; importante voc&ecirc; sempre verificar o arquivo
-        <filename>/usr/src/UPDATING</filename>, antes que voc&ecirc; execute todas as etapas da atualiza&ccedil;&atilde;o,
+        <filename>/usr/src/UPDATING</filename>, antes de executar todas as etapas da atualiza&ccedil;&atilde;o,
         No caso voc&ecirc; pode <link
         linkend="cutting-edge">sincronizar sua &aacute;rvore de c&oacute;digo</link> com o
         c&oacute;digo fonte do &uacute;ltimo projeto do &os;.
         Neste arquivo todas as importantes altera&ccedil;&otilde;es para atualia&ccedil;&atilde;o do &os;
-        s&atilde;o digitadas. Ajuste sempre sua vers&atilde;o do c&oacute;digo fonte do &os; 
-<filename>/usr/src/UPDATING</filename>, 
+        s&atilde;o digitadas. Ajuste sempre sua vers&atilde;o do c&oacute;digo fonte do &os; de acordo com
+<filename>/usr/src/UPDATING</filename>, pois estas notas 
         s&atilde;o mais precisas para novas informa&ccedil;&otilde;es que o handbook.</para>
     </note>
 
     <para>Voc&ecirc; deve agora compilar o c&oacute;digo fonte do kernel. Est&atilde;o aqui dois
-      procedimentos que voc&ecirc; pode usar para isto, e qual voc&ecirc; usar&aacute;, vai depender de como voc&ecirc; quer recompilar seu 
+      procedimentos que voc&ecirc; pode usar para isto, e qual voc&ecirc; usar&aacute;, vai depender de como quer recompilar seu 
       kernel, e a vers&atilde;o do &os; que voc&ecirc; est&aacute; rodando.</para>
 
     <itemizedlist>
@@ -288,7 +287,7 @@ configura&ccedil;&atilde;o e as
 
 	<screen>&prompt.root; <userinput>cd ../compile/<replaceable>MYKERNEL</replaceable></userinput></screen>
 
-	<para>Para &os; version anterior a 5.0, usa-se preferivelmente:</para>
+	<para>Para &os; anterior a 5.0, usa-se preferivelmente:</para>
 
 	<screen>&prompt.root; <userinput>cd ../../compile/<replaceable>MYKERNEL</replaceable></userinput></screen>
       </step>
@@ -308,10 +307,10 @@ configura&ccedil;&atilde;o e as
     </procedure>
 
     <procedure>
-      <title>Procedimento 2.  Compilando um Kernel Maneira <quote>Nova</quote></title>
+      <title>Procedimento 2.  Compilando um Kernel da <quote>Nova</quote> maneira</title>
       
       <step>
-	<para>Mude o diret&oacute;rio para <filename>/usr/src</filename>.</para>
+	<para>Mude de diret&oacute;rio para <filename>/usr/src</filename>.</para>
 	
 	<screen>&prompt.root; <userinput>cd /usr/src</userinput></screen>
       </step>
@@ -330,9 +329,9 @@ configura&ccedil;&atilde;o e as
     </procedure>
     
     <note>
-      <para>Em &os;&nbsp;4.2 e anteriores troque
+      <para>No &os;&nbsp;4.2 e anteriores troque
         <literal>KERNCONF=</literal> por <literal>KERNEL=</literal>.
-        4.2-STABLE isso foi colocado antes de Fevereiro, 2001 ele n&atilde;o reconhece <literal>KERNCONF=</literal>.</para>
+        Após o 4.2-STABLE esta opção já foi atualizada, e antes de Fevereiro de 2001 o sistema não reconhece <literal>KERNCONF=</literal>.</para>
     </note>
 
     <indexterm>
@@ -345,10 +344,10 @@ configura&ccedil;&atilde;o e as
       <secondary>anonymous</secondary>
     </indexterm>
 
-    <para>Se voc&ecirc; <emphasis>n&atilde;o</emphasis> tem atualizado seu c&oacute;digo
-      de alguma maneira (voc&ecirc; n&atilde;o pode executar <application>CVSup</application>, 
-      <application>CTM</application>, ou usar 
-      <application>anoncvs</application>), ent&atilde;o voc&ecirc; deve usar 
+    <para>Se voc&ecirc; <emphasis>n&atilde;o</emphasis> atualizou seu c&oacute;digo
+      de alguma maneira (as formas possíveis incluem <application>CVSup</application>, 
+      <application>CTM</application>, ou 
+      <application>anoncvs</application>), ent&atilde;o deve-se usar os comandos
       <command>config</command>, <maketarget>make depend</maketarget>,
       <command>make</command>, <maketarget>make install</maketarget> nesta sequ&ecirc;ncia.
     </para>
@@ -360,33 +359,33 @@ configura&ccedil;&atilde;o e as
     <para>O novo kernel ser&aacute; copiado para o diret&oacute;rio do root como
       <filename>/kernel</filename> e o velho kernel ser&aacute; movido para
       <filename>/kernel.old</filename>. Agora, desligue o sistema e
-      reinicie para usar seu novo kernel. Caso algo saia errado, h&aacute; algumas instru&ccedil;&otilde;es para 
-      <link linkend="kernelconfig-trouble">pesquisa de defeitos</link> no final deste cap&iacute;tulo. 
-      &Eacute; interessante que voc&ecirc; leia the a se&ccedil;&atilde;o de como recuperar caso seu novo kernel <link
+      reinicie-o, para carregar seu novo kernel. Caso algo saia errado, h&aacute; algumas instru&ccedil;&otilde;es para 
+      <link linkend="kernelconfig-trouble">resolver problemas</link> no final deste cap&iacute;tulo. 
+      &Eacute; interessante que voc&ecirc; leia a se&ccedil;&atilde;o de como recuperar o sistema caso seu novo kernel <link
       linkend="kernelconfig-noboot"> n&atilde;o carregue</link>.</para>
 
     <note>
       <para>No &os; 5.0, o kernel &eacute; instalados junto com os
-	m&oacute;dulos em <filename>/boot/kernel</filename>, e os kernels
+	m&oacute;dulos em <filename>/boot/kernel</filename>, e os kernel
 	velhos s&atilde;o colocados em <filename>/boot/kernel.old</filename>.
 	Outros arquivos relacionados ao processo de carregamento, tal como o carregamento do sistema
-	&man.loader.8; e as configura&ccedil;&otilde;es s&atilde;o armazenadas tamb&eacute;m em
-	<filename>/boot</filename>. A terceira parte de parsonaliza&ccedil;&atilde;o dos m&oacute;dulos
+	por meio do &man.loader.8; e suas configura&ccedil;&otilde;es s&atilde;o armazenadas tamb&eacute;m em
+	<filename>/boot</filename>.  Módulos personalizados de terceiros 
 	normalmente s&atilde;o colocados em <filename>/boot/modules</filename>, embora
-	os usu&aacute;rios devam estar cientes que manter os m&oacute;dulos na sincroniza&ccedil;&atilde;o com o
-	kernel compilado &eacute; muito importante. Os m&oacute;dulos pretendidos n&atilde;o
-	rodar com o kernel compilado podem resultar em instabilidade
-	ou inconformidades.</para>
+	os usu&aacute;rios devam estar cientes que manter os m&oacute;dulos em sincroniza&ccedil;&atilde;o com o
+	kernel compilado &eacute; muito importante. Se os m&oacute;dulos pretendidos n&atilde;o
+	rodarem com o kernel compilado, isso pode resultar em instabilidade
+	ou inconformidades no sistema.</para>
     </note>
 
     <note>
       <para>Se voc&ecirc; adicionar qualquer dispositivo novo (tal como Placa de Som)
-	e voc&ecirc; estiver rodando &os;&nbsp;4.X ou vers&otilde;es anteriores, voc&ecirc;
-	pode ter que adicionar algum dispositivo de liga&ccedil;&atilde;o para seu diret&oacute;rio
-	<filename>/dev</filename> antes que voc&ecirc; possa usar
-	eles. Para mais informa&ccedil;&otilde;es, de uma olhada na se&ccedil;&atilde;o <link
-	linkend="kernelconfig-nodes">Fazendo ligacao de dispositivos</link>
-	mais tarde neste cap&iacute;tulo.</para>
+	e estiver rodando &os;&nbsp;4.X ou vers&otilde;es anteriores,
+	pode ser necessário adicionar algum dispositivo de controle em seu diretório
+	<filename>/dev</filename> antes que eles possam ser utilizados corretamente,
+	Para mais informa&ccedil;&otilde;es, dê uma olhada na se&ccedil;&atilde;o <link
+	linkend="kernelconfig-nodes">Criando dispositivos de controle</link>
+	posteriormente neste mesmo cap&iacute;tulo.</para>
     </note>
   </sect1>
 
