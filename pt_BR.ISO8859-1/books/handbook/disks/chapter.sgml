@@ -1202,45 +1202,47 @@ scsibus1:
 	  comuns estão disponíveis no port
 	  <filename role="package">sysutils/cd9660_unicode</filename>.)</para>
 
-      <para>Occasionally, you might get <errorname>Device not
-	configured</errorname> when trying to mount a CDROM.  This
-	usually means that the CDROM drive thinks that there is no
-	disk in the tray, or that the drive is not visible on the bus.
-	It can take a couple of seconds for a CDROM drive to realize
-	that it has been fed, so be patient.</para>
+      <para>Ocasionalmente, você poderá receber um <errorname>Device not
+	configured</errorname> quando tentar montar um CDROM.  Isto
+	geralmente significa que o drive de CDROM acha que não há um disco, ou
+	este drive não é visível no barramento. Pode levar alguns segundos
+	para que um drive de CDROM detectar que está com um disco, portanto
+	seja paciente.</para>
 
-      <para>Sometimes, a SCSI CDROM may be missed because it didn't
-	have enough time to answer the bus reset.  If you have a SCSI
-	CDROM please add the following option to your kernel
-	configuration and <link linkend="kernelconfig-building">rebuild your kernel</link>.</para>
+      <para>Algumas vezes, um CDROM SCSI pode não ser inicializado devido
+	  a não haver tempo suficiente para responder durante um reinício do
+	  barramento. Se você possui um CDROM SCSI, por favor, adicione
+	  a seguinte opção ao seu arquivo de configuração do kernel e
+      e <link linkend="kernelconfig-building">recompile-o</link>.</para>
 
       <programlisting>options SCSI_DELAY=15000</programlisting>
 
-      <para>This tells your SCSI bus to pause 15 seconds during boot,
-	to give your CDROM drive every possible chance to answer the
-	bus reset.</para>
+      <para>Isto diz para o barramento SCSI pausar durante 15 segundos
+	  durante a inicialização, para dar chance de resposta ao seu
+	  drive de CDROM durante o reinício do barramento SCSI.</para>
     </sect2>
 
     <sect2 id="rawdata-cd">
-      <title>Burning Raw Data CDs</title>
+      <title>Gravando CDs de Dados em modo Raw</title>
 
-      <para>You can choose to burn a file directly to CD, without
-	creating an ISO 9660 file system.  Some people do this for
-	backup purposes.  This runs more quickly than burning a
-	standard CD:</para>
+      <para>Você pode querer gravar um arquivo diretamente no CD,
+	  sem criar um sistema de arquivos ISO 9660.  Algumas pessoas
+	  fazem isso no propósito de backup.  E este modo de gravação
+	  é mais rápido:</para>
 
       <screen>&prompt.root; <userinput>burncd -f /dev/acd1c -s 12 data archive.tar.gz fixate</userinput></screen>
 
-      <para>In order to retrieve the data burned to such a CD, you
-	  must read data from the raw device node:</para>
+      <para>Para poder acessar os dados que serão gravados no CD você
+	  deverá ler os dados de um dispositivo raw:</para>
 
       <screen>&prompt.root; <userinput>tar xzvf /dev/acd1c</userinput></screen>
 
-      <para>You cannot mount this disk as you would a normal CDROM.
-	  Such a CDROM cannot be read under any operating system
-	  except FreeBSD.  If you want to be able to mount the CD, or
-	  share data with another operating system, you must use
-	  <filename role="package">sysutils/mkisofs</filename> as described above.</para>
+      <para>Você não pode montar este disco como faria com um
+	  CDROM normal. Como um CDROM não poderia ser lido sob nenhum
+	  outro sistema operacional, excepto o FreeBSD.
+	  Se você quer estar apto a montar os CDs, ou a compartilhar os dados com
+	  outros sistemas operacionais, você deve usar o
+	  <filename role="package">sysutils/mkisofs</filename> como já citado.</para>
     </sect2>
 
     <sect2 id="atapicam">
@@ -1248,33 +1250,31 @@ scsibus1:
 	<primary>CD burner</primary>
 	<secondary>ATAPI/CAM driver</secondary>
       </indexterm>
-      <title>Using the ATAPI/CAM Driver</title>
+      <title>Utilizando o Driver ATAPI/CAM</title>
 
-      <para>This driver allows ATAPI devices (CD-ROM, CD-RW, DVD
-	drives etc...) to be accessed through the SCSI subsystem, and
-	so allows the use of applications like <filename
-	role="package">sysutils/cdrdao</filename> or
-	&man.cdrecord.1;.</para>
+      <para>Este driver permite que dispositivos ATAPI (CD-ROM, CD-RW, DVD-ROM, etc...)
+	  possam ser acessados através do sub-sistema SCSI, permitindo o uso de aplicações
+	  como o  <filename
+	role="package">sysutils/cdrdao</filename> ou o &man.cdrecord.1;.</para>
 
-      <para>To use this driver, you will need to add the following
-	lines to your kernel configuration file:</para>
+      <para>Para utilizar este driver, você precisará adicionar as seguintes
+	  linhas ao seu arquivo de configuração do kernel:</para>
 
       <programlisting>device atapicam
 device scbus
 device cd
 device pass</programlisting>
 
-      <para>You also need the following lines in your kernel
-	configuration file:</para>
+      <para>Você também prexisará adicionar as seguintes linhas:</para>
 
       <programlisting>device ata
 device atapicd</programlisting>
 
-      <para>Both of which should already be present.</para>
+      <para>Ambas deverão estar presentes.</para>
 
-      <para>Then rebuild, install your new kernel, and reboot your
-	machine.  During the boot process, your burner should show up,
-	like so:</para>
+      <para>Então recompile, instale o novo kernel e reinicie seu sistema.
+	  Durante o processo de inicialização, seu gravador de CDs deverá
+	  retornar algo como:</para>
 
       <screen>acd0: CD-RW &lt;MATSHITA CD-RW/DVD-ROM UJDA740&gt; at ata1-master PIO4
 cd0 at ata1 bus 0 target 0 lun 0
