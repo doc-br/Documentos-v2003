@@ -11,7 +11,7 @@
   <articleinfo>
     <title>Escrevendo relat&oacute;rios de problema no FreeBSD</title>
 
-    <pubdate>$FreeBSD: articles/problem-reports/article.sgml,v 1.5 2003/12/11 13:48:50 ebrandi Exp $</pubdate>
+    <pubdate>$FreeBSD: articles/problem-reports/article.sgml,v 1.6 2003/12/11 14:57:27 ebrandi Exp $</pubdate>
 
     <legalnotice id="trademarks" role="trademarks">
       &tm-attrib.freebsd;
@@ -152,93 +152,105 @@
   <section id="pr-prep">
     <title>Prepara&ccedil;&atilde;o</title>
 
-    <para>A good rule to follow is to always do a background search
-      before submitting a problem report.  Maybe your problem has
-      already been reported; maybe it is being discussed on the
-      mailing lists, or recently was; it may even already be fixed in
-      a newer version than what you are running.  You should therefore
-      check all the obvious places before submitting your problem
-      report.  For FreeBSD, this means:</para>
-
+    <para>
+      Uma boa regra a ser seguida sempre &eacute; realizar uma busca a
+      respeito do assunto, antes de enviar um relat&oacute;rio de problema.
+      Pode ser que o seu problema j&aacute; tenha sido reportado; pode ser
+      que ele esteja sendo debatido nas listas de discuss&atilde;o, ou que o
+      foi recentemente; e pode ser inclusive que ele ja foi corrigido
+      em uma vers&atilde;o mais recente do que a que voce esta utilizando.
+      Consequentemente voc&ecirc; deve verificar em todos os lugares &oacute;bvios 
+      antes de enviar antes de enviar o rel&aacute;torio de problema.  Para o
+      FreeBSD, isto significa:</para>
+      
     <itemizedlist>
       <listitem>
-        <para>The FreeBSD
-          <ulink URL="../../books/faq/index.html">Frequently Asked
-            Questions</ulink> (FAQ) list.
-          The FAQ attempts to provide answers for a wide range of questions,
-          such as those concerning
-          <ulink URL="../../books/faq/hardware.html">hardware
-            compatibility</ulink>,
-          <ulink URL="../../books/faq/applications.html">user
-            applications</ulink>,
-          and <ulink URL="../../books/faq/kernelconfig.html">kernel
-            configuration</ulink>.</para>
+        <para>A lista de 
+          <ulink URL="../../books/faq/index.html">perguntas e
+	  respostas mais frequentes</ulink> sobre o FreeBSD (FAQ).  O
+	  FAQ tenta dar repostas a uma larga variedade de perguntas,
+	  como aquelas que dizem respeito a 
+          <ulink URL="../../books/faq/hardware.html">compatibilidade 
+	  hardware</ulink>,
+          <ulink URL="../../books/faq/applications.html">aplica&ccedil;&otilde;es de
+	  usu&aacute;rios</ulink>, e
+          <ulink URL="../../books/faq/kernelconfig.html">configura&ccedil;&atilde;o
+	  do kernel</ulink>.</para>
       </listitem>
 
       <listitem>
-        <para>The
+        <para>As 
           <ulink
-            URL="../../books/handbook/eresources.html#ERESOURCES-MAIL">mailing
-            lists</ulink>&mdash;if you are not subscribed, use
-          <ulink
-            URL="http://www.FreeBSD.org/search/search.html#mailinglists">the
-            searchable archives</ulink> on the FreeBSD web site.  If your
-          problem has not been discussed on the lists, you might try
-          posting a message about it and waiting a few days to see if
-          someone can spot something you have overlooked.</para>
+            URL="../../books/handbook/eresources.html#ERESOURCES-MAIL">
+	    listas de discuss&atilde;o</ulink>&mdash; se voc&ecirc; n&atilde;o participar da 
+	    lista desejada, utilize o <ulink
+            URL="http://www.FreeBSD.org/search/search.html#mailinglists">
+            mecanismo de busca do hist&oacute;rico</ulink> no web site do
+	    FreeBSD.  Se o seu problema n&atilde;o estiver sendo discutido
+	    nas listas, voc&ecirc; pode tentar enviar uma mensagem a
+	    respeito dele, e aguardar alguns dias para ver se algu&eacute;m
+	    menciona algo que voc&ecirc; tenha esquecido.</para>
       </listitem>
 
       <listitem>
-        <para>Optionally, the entire web&mdash;use your favorite
-          search engine to locate any references to your problem.  You
-          may even get hits from archived mailing lists or newsgroups
-          you did not know of or had not thought to search
-          through.</para>
+        <para>
+	  Opcionalmente, utilize o seu mecanismo de busca preferido
+	  para fazer uma consulta a internet em geral de refer&ecirc;ncias
+	  sobre o seu problema. Voc&ecirc; pode se deparar refer&ecirc;ncias a
+	  arquivos de listas de discuss&atilde;o ou de grupos de noticias nos
+	  quais voc&ecirc; n&atilde;o tinha nem pensado em procurar.</para>
       </listitem>
 
       <listitem>
-        <para>Next, the searchable
-          <ulink URL="http://www.FreeBSD.org/cgi/query-pr-summary.cgi?query">
-          FreeBSD PR database</ulink> (GNATS).  Unless your problem
-          is recent or obscure, there is a fair chance it has already
-          been reported.</para>
+        <para>
+	  Na sequ&ecirc;ncia, verifique o <ulink
+	  URL="http://www.FreeBSD.org/cgi/query-pr-summary.cgi?query">banco
+	  de dados de relat&oacute;rios de problema do FreeBSD</ulink>
+	  (GNATS).  A menos que o seu problema seja recente ou muito
+	  obscuro, existe uma grande chance dele j&aacute; ter sido
+	  reportado.</para>
       </listitem>
 
       <listitem>
-        <para>Finally, if you are upgrading from one version to
-          another&mdash;especially if you are upgrading to the
-          <literal>-current</literal> branch&mdash;you should
-          carefully study the contents of the
-          <filename>/usr/src/UPDATING</filename> file on your system
-          or its latest version at
-          <ulink URL="http://www.FreeBSD.org/cgi/cvsweb.cgi/src/UPDATING"></ulink>.
-          This file contains many pieces of vital information.</para>
+        <para>
+	  Finalmente, se voce estiver atualizando de uma vers&atilde;o para
+	  outra &mdash; e especialmente se voc&ecirc; estiver atualizando
+	  para o ramo <literal>-current</literal> voc&ecirc; deve estudar
+	  cuidadosamente o conteudo do arquivo
+	  <filename>/usr/src/UPDATING</filename> no seu sistema ou
+	  ent&atilde;o a sua vers&atilde;o mais recente <ulink
+	  URL="http://www.FreeBSD.org/cgi/cvsweb.cgi/src/UPDATING">
+	  no reposit&oacute;rio CVS.</ulink>. Este arquivo cont&eacute;m muitas
+	  informa&ccedil;&otilde;es vitais.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Next, you need to make sure your problem report goes to the
-      right people.</para>
+    <para>Agora, voc&ecirc; precisa ter certeza que o seu relat&oacute;rio de
+      problema ir&aacute; chegar at&eacute; as pessoas corretas.</para>
 
-    <para>The first catch here is that if the problem is a bug in
-      third-party software (a port or a package you have installed), you
-      should report the bug to the original author, not to the FreeBSD
-      Project.  There are two exceptions to this rule: the first is if
-      the bug does not occur on other platforms, in which case the
-      problem may lie in how the software was ported to FreeBSD; the
-      second is if the original author has already fixed the bug and
-      released a patch or a new version of his software, and the
-      FreeBSD port has not been updated yet.</para>
-
-    <para>The second catch is that FreeBSD's bug tracking system sorts
-      problem reports according to the category the originator
-      selected.  Therefore, if you select the wrong category when you
-      submit your problem report, there is a good chance that it will
-      go unnoticed for a while, until someone re-categorizes
-      it.</para>
+    <para>
+      O primeiro ponto a ser verificado &eacute; se o problema &eacute; um bug em um
+      software de terceiros (um port ou um package que voc&ecirc; tenha
+      instalado), se for, voc&ecirc; deve reportar o bug ao autor original e
+      n&atilde;o ao Projeto FreeBSD.  Existem 2 exce&ccedil;&otilde;es a essa regra:
+      A primeira &eacute; se o bug  n&atilde;o ocorre em outras plataformas, neste
+      caso o problema deve ser encaminhado para a pessoa que portou o
+      software para o FreeBSD; A segunda &eacute; se o autor original ja
+      tiver corrigido o bug e liberado um patch ou uma nova vers&atilde;o do
+      seu software, e o port para o FreeBSD n&atilde;o tiver sido atualizado
+      ainda.</para>
+      
+    <para>
+      O segundo ponto a ser verificado &eacute; que o sistema de rastreamento
+      de bugs do FreeBSD ordena os relat&oacute;rios de problemas de acordo
+      com a categoria que o usu&aacute;rio selecionou.  Desta forma, se voc&ecirc;
+      selecionar a categoria errada quando enviar o seu relat&oacute;rio de
+      problemas, existe uma boa chance que ele passe desapercebido por
+      um tempo at&eacute; que alguem lhe atribua categoria correta.</pata>
   </section>
 
   <section id="pr-writing">
-    <title>Writing the problem report</title>
+    <title>Escrevendo o relat&oacute;rio de problemas</title>
 
     <para>Now that you have decided that your issue merits a problem
       report, and that it is a FreeBSD problem, it is time to write
