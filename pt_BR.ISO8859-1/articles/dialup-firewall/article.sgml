@@ -63,7 +63,7 @@
       seu kernel.  Se voc&ecirc; precisa de maiores informa&ccedil;&otilde;es sovre como
       recompilar o kernel, ent&atilde;o o melhor lugar para iniciar &eacute; a
       <ulink URL="../../books/handbook/kernelconfig.html">sess&atilde;o sobre
-      configura&ccedil;&atilde;o do kernel no Handbook<u/link>.  Voc&ecirc; precisa
+      configura&ccedil;&atilde;o do kernel no Handbook</ulink>.  Voc&ecirc; precisa
       adicionar as seguintes op&ccedil;&otilde;es no seu arquivo de configura&ccedil;&atilde;o do
       kernel:</para>
 
@@ -327,31 +327,33 @@ $fwcmd add deny log ip from any to any</programlisting>
 
       <qandaentry>
 	<question>
-	  <para>If I am using private addresses internally, such as in the
-	    192.168.0.0 range, could I add a command like <literal>$fwcmd add
-	      deny all from any to 192.168.0.0:255.255.0.0 via tun0</literal>
-	    to the firewall rules to prevent outside attempts to connect to
-	    internal machines?</para>
+	  <para>Se eu estou utilizando internamente um endere&ccedil;o
+	  privado, como por exemplo da rede 192.168.0.0, eu posso
+	  adicionar uma linha de comando semelhante a <literal>$fwcmd
+	  add deny all from any to 192.168.0.0:255.255.0.0 via 
+	  tun0</literal> as regras do firewall para prevenir
+	  tentativas externas de conex&atilde;o as m&aacute;quinas internas?</para>
 	</question>
 
 	<answer>
-	  <para>The simple answer is no. The reason for this is that
-	    <command>natd</command> is doing address translation for
-	    <emphasis>anything</emphasis> being diverted through the
-	    <devicename>tun0</devicename> device. As far as it is
-	    concerned incoming packets will speak only to the
-            dynamically assigned IP address and <emphasis>not</emphasis> to
-            the internal network. Note though that you can add a rule like
-	    <literal>$fwcmd add deny all from 192.168.0.4:255.255.0.0
-	    to any via tun0</literal> which would limit a host on your
-	    internal network from going out via the firewall.</para>
+	  <para>A resposta simples &eacute; n&atilde;o.  A raz&atilde;o para isto &eacute; que o
+	    <command>natd</command> est&aacute; fazendo a tradu&ccedil;&atilde;o de endere&ccedil;os
+	    para <emphasis>qualquer</emphasis> coisa que esteja sendo 
+	    desviada atrav&eacute;s do dispositivo <devicename>tun0</devicename>.  
+	    Tanto quanto os pacotes entrantes falar&atilde;o apenas com o IP
+	    atribuido dinamicamente e <emphasis>n&atilde;o</emphasis> com a
+	    rede interna.  De qualquer forma, observe que voc&ecirc; pode
+	    adicionar uma regra semelhante a <literal>$fwcmd add deny
+	    all from 192.168.0.4:255.255.0.0 to any via tun0</literal>,
+	    ao seu firewall para negar o acesso de um equipamento da
+	    sua rede interna a um endere&ccedil;o fora dela.</para>
 	</answer>
       </qandaentry>
 
       <qandaentry>
 	<question>
-	  <para>There must be something wrong.  I followed your instructions
-	    to the letter and now I am locked out.</para>
+	  <para>Deve haver algo errado.  Eu segui as suas instru&ccedil;&otilde;es a
+	    risca e agora estou fechado fora.</para>
         </question>
 
 	<answer>
