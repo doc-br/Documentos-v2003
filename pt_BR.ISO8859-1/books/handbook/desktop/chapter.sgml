@@ -9,149 +9,173 @@
       <author>
         <firstname>Christophe</firstname>
         <surname>Juniet</surname>
-        <contrib>Contributed by </contrib>
+        <contrib>Contribui&ccedil;&atilde;o de </contrib>
       </author>
     </authorgroup>
   </chapterinfo>
 
-  <title>Desktop Applications</title>
+  <title>Aplica&ccedil;&otilde;es de
+    <foreignphrase>Desktop</foreignphrase></title>
 
   <sect1 id="desktop-synopsis">
-    <title>Synopsis</title>
+    <title>Sin&oacute;pse</title>
 
-    <para>FreeBSD can run a wide variety of desktop applications, such
-      as browsers and word processors.  Most of these are available as
-      packages or can be automatically built from the ports
-      collection.  Many new users expect to find these kinds of
-      applications on their desktop.  This chapter will show you how
-      to install some popular desktop applications effortlessly,
-      either from their packages or from the ports collection.</para>
+    <para>O FreeBSD pode executar uma grande variedade de
+      aplica&ccedil;&otilde;es de
+      <foreignphrase>Desktop</foreignphrase>, como navegadores a
+      processadores de texto. Muitos destes est&atilde;o
+      dispon&iacute;veis como pacotes ou podem ser automaticamente
+      compilados da cole&ccedil;&atilde;o de
+      <literal>ports</literal>. Muitos usu&aacute;rios novos esperam
+      encontrar este tipo de aplica&ccedil;&atilde;o em seu
+      <foreignphrase>desktop</foreignphrase>. Este cap&iacute;tulo
+      ir&aacute; lhe apresentar como dispor destas
+      aplica&ccedil;&otilde;es sem esfor&ccedil;o, seja atrav&eacute;s
+      de pacotes ou pela cole&ccedil;&atilde;o de
+      <foreignphrase>ports</foreignphrase>.</para>
 
-    <para>Note that when installing programs from the ports, they are
-      compiled from source.  This can take a very long time, depending
-      on what you are compiling and the processing power of your
-      machine(s).  If building from source takes a prohibitively long
-      amount of time for you, you can install most of the programs of
-      the ports collection from pre-built packages.</para>
+    <para>Note que quando programas s&atilde;o instalados pelos
+      <foreignphrase>ports</foreignphrase>, eles s&atilde;o compilados a
+      partir do c&oacute;digo fonte. Isso pode tomar muito tempo,
+      dependendo do que voc&ecirc; est&aacute; compilando e da
+      capacidade de processamento de sua(s) m&aacute;quina(s). Caso a
+      compila&ccedil;&atilde;o tome tempo em demasia para voc&ecirc;,
+      ainda &eacute; poss&iacute;vel instalar a maioria dos programas da
+      cole&ccedil;&atilde;o de <foreignphrase>ports</foreignphrase> dos
+      pacotes pr&eacute;-compilados.</para>
 
-    <para>As FreeBSD features Linux binary compatibility, many
-      applications originally developed for Linux are available for
-      your desktop.  It is strongly recommended that you read
-      <xref linkend="linuxemu"> before installing any of the Linux
-      applications.  Many of the ports using the Linux binary
-      compatibility start with <quote>linux-</quote>.  Remember this
-      when you search for a particular port, for instance with
-      &man.whereis.1;.  In the following text, it is assumed that you
-      have enabled Linux binary compatibility before installing any of
-      the Linux applications.</para>
-
-    <para>Here are the categories covered by this chapter:</para>
+    <para>Como tem como caracter&iacute;stica a compatilidade com
+      bin&aacute;rios de Linux, muitas das
+      aplica&ccedil;&otilde;es originalmente desenvolvidas para Linux
+      est&atilde;o dispon&iacute;veis para o seu
+      <foreignphrase>desktop</foreignphrase>. &Eacute; extremamente
+      recomendado que voc&ecirc; leia o <xref linkend="linuxemu"> antes
+	de instalar qualquer aplica&ccedil;&otilde; para Linux. Muitos
+	dos <foreignphrase>ports</foreignphrase> que usam a
+	compatibilidade com bin&aacute;rios de Linux come&ccedil;am com
+	<quote>linux-</quote>. Lembre-se disso quando procurar por algum
+	<foreignphrase>port</foreignphrase>, a prop&oacute;sito use
+	&man.whereis.1;. No texto adiante, assume-se que voc&ecirc;
+	ativou a compatibilidade com bin&aacute;rios de Linux antes de
+	instalar qualquer das aplica&ccedil;&otilde;es para
+	Linux.</para>
+    
+    <para>Estas s&atilde;o as categorias cobertas neste
+      cap&iacute;tulo:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Browsers (such as <application>Mozilla</application>,
+        <para>Navegadores (como <application>Mozilla</application>,
           <application>&netscape;</application>,
           <application>Opera</application>)</para>
       </listitem>
 
       <listitem>
-        <para>Productivity (such as
-          <application>KOffice</application>,
+	<para>Ferramentas de produtividade (como 
+	  <application>KOffice</application>,
           <application>AbiWord</application>,
           <application>The GIMP</application>,
           <application>OpenOffice.org</application>)</para>
       </listitem>
 
       <listitem>
-        <para>Document Viewers (such as <application>&acrobat.reader;</application>,
+	<para>Visualizadores (como <application>&acrobat.reader;</application>,
           <application>gv</application>,
           <application>Xpdf</application>,
           <application>GQview</application>)</para>
       </listitem>
 
       <listitem>
-        <para>Finance (such as
+	<para>Aplica&ccedil;&otilde;es Financeiras (como
           <application>GnuCash</application>,
           <application>Gnumeric</application>,
           <application>Abacus</application>)</para>
       </listitem>
     </itemizedlist>
 
-    <para>Before reading this chapter, you should:</para>
+    <para>Depois de ler este cap&iacute;tulo, voc&ecirc; deve:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Know how to install additional third-party software
+	<para>Aprender a instalar
+	  <foreignphrase>software</foreignphrase> de terceiros 
           (<xref linkend="ports">).</para>
       </listitem>
 
       <listitem>
-        <para>Know how to install additional Linux software
+	<para>Aprender a instalar
+	  <foreignphrase>software</foreignphrase> para Linux
 	  (<xref linkend="linuxemu">).</para>
       </listitem>
     </itemizedlist>
 
-    <para>For information on how to get a multimedia environment, read
-      <xref linkend="multimedia">.  If you want to set up and use
-      electronic mail, please refer to <xref linkend="mail">.</para>
+    <para>Para mais infor&ccedil;&otilde;es sobre como definir um
+      ambiente multim&iacute;dia, leia <xref linkend="multimedia">.
+	Caso pretenda utilizar o correio eletr&ocirc;nico, consulte
+	<xref linkend="mail">.</para>
   </sect1>
 
   <sect1 id="desktop-browsers">
-    <title>Browsers</title>
+    <title>Navegadores</title>
 
-    <para>FreeBSD does not come with a particular browser
-      pre-installed.  Instead, the
-      <ulink url="http://www.FreeBSD.org/ports/www.html">www</ulink>
-      directory of the ports collection contains a lot of browsers
-      ready to be installed.  If you do not have time to compile
-      everything (this can take a very long time in some cases) many
-      of them are available as packages.</para>
+    <para>O FreeBSD n&atilde;o vem com nenhum navegador em particular
+      pr&eacute;-instalado. Por&eacute;m, o diret&oacute;rio <ulink
+	url="http://www.FreeBSD.org/ports/www.html">www</ulink> 
+      da cole&ccedil;&atilde;o de <foreignphrase>ports</foreignphrase>
+      cont&eacute;m um grande n&uacute;mero de navegadores prontos para
+      serem instalados. Caso n&atilde;o tenha tempo para compilar tudo
+      (isto pode tomar um tempo bem longo em alguns casos) muitos deles
+      est&atilde;o dispon&iacute;veis como pacotes.</para>
 
-    <para><application>KDE</application> and
-      <application>GNOME</application> already provide HTML browsers.
-      Please refer to <xref linkend="x11-wm"> for more information on
-      how to set up these complete desktops.</para>
+    <para><application>KDE</application> e
+      <application>GNOME</application> temb&eacute;m disp&otilde;em de
+      navegadores HTML. Por favor, consulte <xref linkend="x11-wm"> para
+	mais informa&ccedil;&atilde;o sobre como configurar estes
+	<foreignphrase>desktops</foreignphrase> completos.</para>
 
-    <para>If you are looking for light-weight browsers, you should
-      investigate the ports collection for
+    <para>Caso esteja procurando por navegadores mais simples,
+      voc&ecirc; deve investigar a cole&ccedil;&atilde;o de
+      <foreignphrase>ports</foreignphrase> a procura de:
       <filename role="package">www/dillo</filename>,
       <filename role="package">www/links</filename>, or
       <filename role="package">www/w3m</filename>.</para>
 
-    <para>This section covers these applications:</para>
+    <para>Esta se&ccedil;&atilde;o cobres estas aplica&ccedil;&otilde;es</para>
 
     <informaltable>
       <tgroup cols="4">
         <thead>
           <row>
-            <entry>Application Name</entry>
-            <entry>Resources Needed</entry>
-            <entry>Installation from Ports</entry>
-            <entry>Major Dependencies</entry>
+	    <entry>Nome da Aplica&ccedil;&atilde;o</entry>
+	    <entry>Recursos Necess&aacute;rios</entry>
+	    <entry>Instala&ccedil;&atilde;o via
+	      <foreignphrase>ports</foreignphrase></entry>
+            <entry>Principais Depend&ecirc;ncias</entry>
           </row>
         </thead>
 
         <tbody>
           <row>
             <entry><application>Mozilla</application></entry>
-            <entry>heavy</entry>
-            <entry>heavy</entry>
+	    <entry>pesado</entry>
+	    <entry>pesado</entry>
             <entry><application>Gtk+</application></entry>
           </row>
 
           <row>
             <entry><application>&netscape;</application></entry>
-            <entry>heavy</entry>
-            <entry>light</entry>
-            <entry>Linux Binary Compatibility</entry>
+	    <entry>pesado</entry>
+	    <entry>leve</entry>
+            <entry>Compatibilidade de bin&aacute;rios Linux</entry>
           </row>
 
           <row>
             <entry><application>Opera</application></entry>
-            <entry>light</entry>
-            <entry>light</entry>
-            <entry>FreeBSD version:  None.  Linux version:  Linux Binary Compatibility and
-              <application>linux-openmotif</application></entry>
+            <entry>leve</entry>
+            <entry>leve</entry>
+            <entry>Vers&atilde;o FreeBSD:  n&atilde;o.  Vers&atilde;o
+	      Linux:  Compatibilidade de bin&aacute;rios Linux e
+	      <application>linux-openmotif</application></entry>
           </row>
         </tbody>
       </tgroup>
@@ -163,54 +187,66 @@
 	<primary><application>Mozilla</application></primary>
       </indexterm>
 
-      <para><application>Mozilla</application> is perhaps the most
-        suitable browser for your FreeBSD Desktop.  It is modern,
-        stable, and fully ported to FreeBSD.  It features a very
-        standards-compliant HTML display engine.  It provides a mail
-        and news reader.  It even has a HTML composer if you plan to
-        write some web pages yourself.  Users of
-        <application>&netscape;</application> will recognize the
-        similarities with <application>Communicator</application>
-        suite, as both browsers shared the same basis.</para>
+      <para><application>Mozilla</application> &eacute; o navegador
+	provavelmente mais adaptado ao
+	<foreignphrase>Desktop</foreignphrase> FreeBSD. Ele &eacute;
+	moderno, est&aacute;vel, e totalmente convertido para FreeBSD.
+	Seu mecanismo de renderiza&ccedil;&atilde;o atende a uma ampla
+	gama de padr&otilde;es HTML. Prov&ecirc; correio
+	eletr&ocirc;nico e leitor de
+	<foreignphrase>news</foreignphrase>. Tamb&eacute;m
+	disp&otilde;es de um editor de HTML caso voc&ecirc; planeje
+	escrever algumas p&aacute;ginas. Os usu&aacute;rios do
+	<application>&netscape;</application> v&atilde;o reconhecer as
+	semelhan&ccedil;as com o
+	<application>Communicator</application>, j&aacute; que ambos os
+	navegadores compartilham da mesma base.</para>
 
-      <para>On slow machines, with a CPU speed less than 233MHz or
-        with less than 64MB of RAM, <application>Mozilla</application>
-        can be too resource-consuming to be fully usable.  You may
-        want to look at the <application>Opera</application> browser
-        instead, described a little later in this chapter.</para>
+      <para>Em m&aacute;quinas lentas com velocidades de CPU abaixo de
+	233MHz ou com menos de 64MB de RAM,
+	<application>Mozilla<application> pode consumir muitos recursos
+	    para ser plenamente utiliz&aacute;vel. Voc&ecirc; deve
+	    alternativamente buscar utilizar o navegador
+	    <application>Opera</application>, descrito um pouco mais
+	    adiante neste cap&iacute;tulo.</para>
 
-      <para>If you cannot or do not want to compile
-        <application>Mozilla</application> for any reason, the FreeBSD
-        GNOME team has already done this for you.  Just install the
-        package from the network by:</para>
+      <para>Caso voc&ecirc; n&atilde;o queira ou n&atilde;o possa
+	compilar o <application>Mozilla</application> por alguma
+	raz&atilde;o, o grupo FreeBSD GNOME j&aacute; fez isso para
+	voc&ecirc;.  Basta instalar o pacote pela rede com:</para>
 
       <screen>&prompt.root; <userinput>pkg_add -r mozilla</userinput></screen>
 
-      <para>If the package is not available, and you have enough time
-        and disk space, you can get the source for
-        <application>Mozilla</application>, compile it and install it
-        on your system.  This is accomplished by:</para>
+      <para>Havendo indisponibilidade do pacote, e fartura de tempo e
+	espa&ccedil;o em seus discos, voc&ecirc; pode obter o
+	c&oacute;digo fonte do <application>Mozilla</application>,
+	compil&aacute;-lo e instal&aacute;-lo. Isto pode ser realizado
+	com:</para>
 
       <screen>&prompt.root; <userinput>cd /usr/ports/www/mozilla</userinput>
 &prompt.root; <userinput>make install clean</userinput></screen>
 
-      <para>The <application>Mozilla</application> port ensures a
-        correct initialization by running the chrome registry setup
-        with <username>root</username> privileges.  However, if you
-        want to fetch some add-ons like mouse gestures, you must run
-        <application>Mozilla</application> as
-        <username>root</username> to get them properly
-        installed.</para>
+      <para>O <foreignphrase>port</foreignphrase>
+	<application>Mozilla</application> certifica a correta
+	inicializa&ccedil;&atilde;o executando a
+	configura&ccedil;&atilde;o do registro chrome com
+	privil&eacute;gios de <username>root</username>. Contudo, se
+	voc&ecirc; desejar obter alguns aditivos como mouse gestures,
+	voc&ecirc; deve executar <application>Mozilla</application> como
+	<username>root</username> para t&ecirc;-lo devidamente
+	instalado.</para>
 
-      <para>Once you have completed the installation of
-        <application>Mozilla</application>, you do not need to be
-        <username>root</username> any longer.  You can start
-        <application>Mozilla</application> as a browser by typing:</para>
+      <para>Uma vez que seja conclu&iacute;da a instala&ccedil;&atilde;o
+	do <application>Mozilla</application>, voc&ecirc; n&atilde;o
+	necessitar&aacute; mais do status de <username>root</username>.
+	Voc&ecirc; pode inciar o <application>Mozilla</application> como
+	navegador digitando:</para>
 
       <screen>&prompt.user; <userinput>mozilla</userinput></screen>
 
-      <para>You can start it directly as a mail and news reader as
-        shown below:</para>
+      <para>Voc&ecirc; pode incializ&aacute;-lo diretamente como cliente
+	de email ou <foreignphrase>news</foreignphrase> coforme
+	abaixo:</para>
 
       <screen>&prompt.user; <userinput>mozilla -mail</userinput></screen>
     </sect2>
@@ -221,51 +257,62 @@
 	  <author>
 	    <firstname>Tom</firstname>
 	    <surname>Rhodes</surname>
-	    <contrib>Contributed by </contrib>
+	    <contrib>Contribui&ccedil;&atilde;o de </contrib>
 	  </author>
 	</authorgroup>
     </sect2info>
 
-      <title>Mozilla, &java;, and &macromedia; &flash;</title>
+      <title>Mozilla, &java;, e &macromedia; &flash;</title>
       
-      <para>Installing <application>Mozilla</application> is simple, but
-	unfortunately installing <application>Mozilla</application> with
-	support for add-ons like &java; and
-	&macromedia; &flash;
-	consumes both time and disk
-	space.</para>
+      <para>Instalar o <application>Mozilla</application> &eacute;
+	simples, mas instalar <application>Mozilla</application> com
+	suporte para aditivos como &java; e &macromedia; &flash;,
+	infelizmente, consome simultanemente tempo e esp&ccedil;o em
+	disco.</para>
 
-      <para>The first thing is to download the files which will be used
-	with <application>Mozilla</application>.  Take your current web
-	browser up to
-	<ulink url="http://www.sun.com/software/java2/download.html"></ulink> and
-	create an account on their website.  Remember to save the username
-	and password from here as it may be needed in the future.  Download
-	a copy of the file <filename>j2sdk-1_3_1-src.tar.gz</filename> and place this in
-	<filename>/usr/ports/distfiles/</filename> as the port will not
-	fetch it automatically.  This is due to license restrictions.  While
-	we are here, download the <quote>java environment</quote> from
+      <para>A primeira coisa a fazer &eacute; baixar da internet os
+	arquivos que v&atilde;o ser usados com
+	<application>Mozilla</application>. Aponte seu navegador web
+	para <ulink
+	  url="http://www.sun.com/software/java2/download.html"></ulink>
+	e crie uma conta neste s&iacute;tio www. Lembre-se de guardar
+	seu nome de usu&aacute;rio e senha neste s&iacute;tio pois
+	ser&atilde;o necess&aacute;rios no futuro. Baixe uma
+	c&oacute;pia do arquivo
+	<filename>j2sdk-1_3_1-src.tar.gz</filename> e coloque-o em
+	<filename>/usr/ports/distfiles/</filename> visto que o
+	<foreignphrase>port</foreignphrase> n&atilde;o ir&aacute;
+	peg&aacute;-lo automaticamente. Este procedimento deve-se a
+	limita&ccedil;&otilde;es impostas pela licen&ccedil;a do
+	programa. Enquanto isso, baixe o <quote>ambiente java</quote> de
 	<ulink url="http://java.sun.com/webapps/download/Display?BundleId=7905"></ulink>.
-	The filename is <filename>j2sdk-1_3_1_08-linux-i586.bin</filename> and is large (about 25
-	megabytes!).  Like before, this file must be placed into
-	<filename>/usr/ports/distfiles/</filename>.  Finally download a copy
-	of the <quote>java patchkit</quote> from
-	<ulink url="http://www.eyesbeyond.com/freebsddom/java/"></ulink>
-	and place it
-	into <filename>/usr/ports/distfiles/</filename>.</para>
+	O arquivo chama-se
+	<filename>j2sdk-1_3_1_08-linux-i586.bin</filename> e &eacute;
+	grande (aproximadamente 25 megabytes!). Como antes, este arquivo
+	deve ser colocado em <filename>/usr/ports/distfiles/</filename>.
+	Finalmente baixe uma c&oacute;pia do <quote>java
+	  patchkit</quote> de <ulink
+	  url="http://www.eyesbeyond.com/freebsddom/java/"></ulink> e
+	coloque em <filename>/usr/ports/distfiles/</filename>.</para>
       
-      <para>Install the <filename role="package">java/jdk13</filename> port
-	with the standard <command>make install clean</command> and
-	then install the <filename role="package">www/flashpluginwrapper</filename>
-	port.  This port requires
-	<filename role="package">emulators/linux_base</filename> which is a
-	large port.  True that other <application>&flash;</application> plugins exist, however they have
-	not worked for me.</para>
+      <para>Instale o <foreignphrase>port</foreignphrase> <filename
+	  role="package">java/jdk13</filename> como de costume com
+	<command>make install clean</command> e ent&atilde;o instale o
+	<foreignphrase>port</foreignphrase> do <filename
+	  role="package">www/flashpluginwrapper</filename>.  Este
+	<foreignphrase>port</foreignphrase> requer <filename
+	  role="package">emulators/linux_base</filename> que &eacute; um
+	<foreignphrase>software</foreignphrase> grande. &Eacute; fato
+	que existam outros <foreignphrase>plugins</foreignphrase>
+	<application>&flash;</application>, contudo, n&atilde;o
+	funcionaram comigo.</para>
 
-      <para>Install the <filename role="package">www/mozilla</filename> port,
-	if <application>Mozilla</application> is not already installed.</para>
+      <para>Instale o <foreignphrase>port</foreignphrase> <filename
+	  role="package">www/mozilla</filename>, caso ainda n&atilde;o
+	esteja instalado.</para>
 
-      <para>Now copy the <application>&flash;</application> plug-in files with:</para>
+      <para>Agora copie os arquivos do plug-in
+	<application>&flash;</application> com:</para>
     
       <screen>&prompt.root; <userinput>cp /usr/local/lib/flash/libflashplayer.so \
 	/usr/X11R6/lib/browser_plugins/libflashplayer_linux.so</userinput></screen>
@@ -273,29 +320,36 @@
       <screen>&prompt.root; <userinput>cp /usr/local/lib/flash/ShockwaveFlash.class \
 	/usr/X11R6/lib/browser_plugins/</userinput></screen>
 
-      <note><para>If you are using
-	<filename role="package">www/mozilla-devel</filename>,
-	the destination directories will be different.</para></note>
+    <note><para>Caso esteja usando o <filename
+	  role="package">www/mozilla-devel</filename>, os
+	diret&oacute;rios de destino ser&atilde;o
+	diferentes.</para></note>
 
-    <para>Now add the following lines to the top of (but right under
-      <literal>#!/bin/sh</literal>) <application>Mozilla</application> startup script:
+    <para>Agora adicione as seguintes linhas no topo do
+      <foreignphrase>script</foreignphrase> de
+      inicializa&ccedil;&atilde;o do <application>Mozilla</application>
+      (imediatamente ap&oacute;s o <literal>#!/bin/sh</literal>):
       <filename>/usr/X11R6/bin/mozilla</filename>.</para>
 
 <programlisting>LD_PRELOAD=/usr/local/lib/libflashplayer.so.1
 export LD_PRELOAD</programlisting>
 
-      <para>This will enable the <application>&flash;</application> plug-in.</para>
+      <para>Isto vai habilitar o <application>&flash;</application> plug-in.</para>
 
-      <para>Now just start <application>Mozilla</application> with:</para>
+      <para>Agora basta iniciar o <application>Mozilla</application> com:</para>
 
       <screen>&prompt.user; <userinput>mozilla &amp;</userinput></screen>
 
-      <para>And access the <guimenuitem>About Plug-ins</guimenuitem> option from the
-	<guimenu>Help</guimenu> menu.  A list should appear with all the currently
-	available plugins.  <application>&java;</application> and
-	<application>&shockwave; &flash;</application> should both be listed.</para>
+      <para>E acessar a op&ccedil;&atilde;o <guimenuitem>About
+	  Plug-ins</guimenuitem> do <foreignphrase>menu</foreignphrase>
+	<guimenu>Help</guimenu>.  Uma lista com os plugins
+	dispon&iacute;veis deve aparecer. Ambos,
+	<application>&java;</application> e <application>&shockwave;
+	  &flash;</application>, devem estar listados.</para>
     
     </sect2>
+
+<!-- AQUI -->
 
     <sect2>
       <title>&netscape;</title>
