@@ -54,9 +54,11 @@
     </legalnotice>
 
     <abstract>
+
       <para>Este &eacute; um artigo que trata sobre como espelhar o FreeBSD,
 	o mesmo esta em fase de elabora&ccedil;&atilde;o pelos coordenadores do
 	sites espelho.</para>
+
     </abstract>
   </articleinfo>
 
@@ -66,12 +68,15 @@
     <para>Os coordenadores do sistema de espelhos podem ser alcan&ccedil;ados
       atrav&eacute;s do email <email>mirror-admin@FreeBSD.org</email>.  Existe
       a lista de discuss&atilde;o &a.hubs;.</para>
+      
   </sect1>
 
   <sect1 id="mirror-requirements">
     <title>Requisitos para espelhar o FreeBSD</title>
     <sect2 id="mirror-diskspace">
+
       <title>Disk Space</title>
+      
       <para>Espa&ccedil;o em disco &eacute; o requisito mais importantes.
       	Dependendo do conjunto de releases, arquiteturas, e de qu&atilde;o
 	completo voc&ecirc; deseja que seja o seu mirror, uma enorme
@@ -87,6 +92,7 @@
 	10 e 20%) dispon&iacute;vel, al&eacute;m do mencionado abaixo, apenas por
 	seguran&ccedil;a.  Aqui est&atilde;o algumas estimativas aproximadas:</para>
       </para>
+
       <itemizedlist>
         <listitem><para>Servidor de FTP completo: 126 GB</para></listitem>
         <listitem><para>Reposit&oacute;rio CVS: 2.7 GB</para></listitem>
@@ -95,7 +101,9 @@
       </itemizedlist>
     </sect2>
     <sect2 id="mirror-bandwidth">
+
       <title>Conectividade de rede e disponibilidade de banda IP</title>
+
       <para>Obviamente, voc&ecirc; precisa estar conectado a Internet.  A
 	largura de banda requerida depende do uso pretendido para o
 	seu site espelho.  Se voc&ecirc; deseja apenas espelhar algumas
@@ -106,68 +114,77 @@
 	ser&aacute; mesmo mais elevada.  N&oacute;s s&oacute; podemos dar estimativas
 	grosseiras aqui:</para>
       </para>
+      
       <itemizedlist>
          <listitem><para>Site local, sem acesso publico: basicamente n&atilde;o 
 	  existe um min&iacute;mo, mas &lt; 2 Mbps pode tornar o processo de
 	  sincronismo muito lento.</para></listitem>
+
          <listitem><para>Site p&uacute;blico n&atilde;o-oficial: 34 Mbps &eacute;
 	  provavelmente um bom come&ccedil;o.</para></listitem>
+
          <listitem><para>Site Oficial: &gt; 100 Mbps &eacute; o recomendado, 
 	  e o seu servidor deve estar conectado o mais perto possivel
 	  do seu roteador de borda.</para></listitem>
       </itemizedlist>
+
     </sect2>
+    
     <sect2 id="mirror-system">
+
       <title>Requisitos de sistema, CPU e Mem&oacute;ria</title>
-      <para>
-        One thing this depends on the expected number of clients,
-        which is determined by the server's policy. It is
-        also affected by the types of services you want to offer.
-        Plain FTP or HTTP services may not require a huge
-        amount of resources. Watch out if you provide 
-        CVSup, rsync or even AnonCVS. This can have a huge
-        impact on CPU and memory requirements. Especially
-        rsync is considered a memory hog, and CVSup does 
-        indeed consume some CPU. For AnonCVS it might
-        be a nice idea to set up a memory resident file system (MFS) of at least
-        300 MB, so you need to take this into account
-        for your memory requirements. The following
-        are just examples to give you a very rough hint.
-      </para>
-      <para>
-        For a moderately visited site that offers
-        <application>rsync</application>, you might
-        consider a current CPU with around 800MHz - 1 GHz,
-        and at least 512MB RAM. This is probably the
-        minimum you want for an <emphasis>official</emphasis>
-        site.
-      </para>
-      <para>
-        For a frequently used site you definitely need
-        more RAM (consider 2GB as a good start)
-        and possibly more CPU, which could also mean
-        that you need to go for a SMP system.
-      </para>
-      <para>
-        You also want to consider a fast disk subsystem.
-        Operations on the CVS repository require a fast
-        disk subsystem (RAID is highly advised). A SCSI
-        controller that has a cache of its own can also
-        speed up things since most of these services incur a
-        large number of small modifications to the disk.
-      </para>
-    </sect2>
-    <sect2 id="mirror-services">
-      <title>Services to offer</title>
-      <para>
-        Every mirror site is required to have a set of core services
-        available. In addition to these required services, there are
-        a number of optional services that
-        server administrators may choose to offer.  This section explains
-        which services you can provide and how to go about implementing them.
-      </para>
+
+	<para>Isto &eacute; algo que depende do numero esperado de clientes, o
+	  que &eacute; determinado pela politica de uso do servidor.  Ele
+	  tamb&eacute;m &eacute; afetado pelo tipo de servi&ccedil;os que voc&ecirc; deseja
+	  oferecer.  Servi&ccedil;os b&aacute;sicos de FTP ou http podem n&atilde;o
+	  necessitar de uma grande quantidade de recursos.  Mas fique
+	  atento se voc&ecirc; for disponibilizar os servi&ccedil;os de CVSup, rsync
+	  ou mesmo de AnonCVS.  Estes servi&ccedil;os podem ter um grande
+	  impacto nos requisitos de CPU e de mem&oacute;ria.  Especialmente o
+	  rsync o qual &eacute; considerado um devorador de mem&oacute;ria, e o CVSup
+	  certamente consome um pouco da CPU.  No caso do AnonCVS pode
+	  ser interessante configurar um sistema de arquivo residente 
+	  em mem&oacute;ria (MFS) de no minimo 300MB, assim voc&ecirc; precisa
+	  considerar este consumo quando avaliar a mem&oacute;ria requerida.  A
+	  seguir temos alguns exemplos e sugest&otilde;es grosseiras.</para>
+
+	<para>Para um site de visita&ccedil;&atilde;o m&eacute;dia o qual ofere&ccedil;a o servi&ccedil;o
+	  de <application>rsync</application>, voc&ecirc; pode considerar o
+	  uso de um servidor com uma CPU com clock entre 800MHz e 1 GHz,
+	  e com um m&iacute;nimo de 512MB de mem&oacute;ria RAM.  Esta &eacute; provavelmente
+	  a configura&ccedil;&atilde;o m&iacute;nima para um site espelho
+	  <emphasis>oficial</emphasis>.</para>
+
+	<para>Para um site de visita&ccedil;&atilde;o frequente, voc&ecirc; definitivamente
+	  vai precisar de mais mem&oacute;ria RAM (considere 2 GB como um bom
+	  come&ccedil;o) e possivelmente mais poder de processamento (CPU),  o
+	  que pode significar que voc&ecirc; precisa ir para um sistema multi
+	  processado (SMP).</para>
+
+	<para>Voc&ecirc; tamb&eacute;m pode considerar o uso de um subsistema r&aacute;pido
+	  de discos.  As opera&ccedil;&otilde;es em um reposit&oacute;rio CVS necesistam de
+	  um subsistema de discos r&aacute;pido (o uso de RAID &eacute; altamente
+	  desej&aacute;vel).  Uma controladora SCSI que possua cache dedicado
+	  tamb&eacute;m pode melhorar a velocidade uma vez que a maioria destes
+	  servi&ccedil;os incorre na realiza&ccedil;&atilde;o de um grande numero de pequenas
+	  modifica&ccedil;&otilde;es para o disco.</para>
+    
+   </sect2>
+   
+   <sect2 id="mirror-services">
+  
+    <title>Servi&ccedil;os para oferecer</title>
+      
+      <para>Cada site espelho deve disponibilizar obrigatoriamente
+	um conjunto de servi&ccedil;os b&aacute;sicos.  Em adi&ccedil;&atilde;o a estes servi&ccedil;os
+	obrigat&oacute;rios, existe um grande numero de servi&ccedil;os opcionais
+	os quais o administrador do servidor pode optar por oferecer.
+	Esta ir&aacute; detalhar quais servi&ccedil;os voc&ecirc; pode oferecer, bem como
+	detalha como proceder para implementa-los.</para>
+
       <sect3 id="mirror-serv-ftp">
-        <title>FTP (required for FTP fileset)</title>
+        <title>FTP<title>
         <para>
           This is one of the most basic services, and
           it is required for each mirror offering public
