@@ -45,116 +45,135 @@
   <sect1 id="sgml-primer-overview">
     <title>Vis&atilde;o Geral</title>
 
-    <para>Way back when, electronic text was simple to deal with.  Admittedly, 
-      you had to know which character set your document was written in (ASCII, 
-      EBCDIC, or one of a number of others) but that was about it.  Text was
-      text, and what you saw really was what you got.  No frills, no
-      formatting, no intelligence.</para>
+    <para>Antigamente, era simples de se lidar com um texto
+      eletr&ocirc;nico.  Naquela &eacute;poca, voc&ecirc; tinha que saber em qual
+      conjunto de caracteres o seu documento seria escrito (ASCII,
+      EBCDICm ou um dos inumeros outros), e mais nada.  O texto era o
+      texto, e o que voc&ecirc; via era realmente o que voc&ecirc; tinha come&ccedil;ado.
+      Nenhum <literal>frills</literal>, nenhuma formata&ccedil;&atilde;o, nenhuma
+      intelig&ecirc;ncia.</para>
+    
+    <para>Inevit&aacute;velmente, isto n&atilde;o era o suficiente.  Uma vez que
+      voc&ecirc; tem o texto em uma m&aacute;quina num formato utiliz&aacute;vel, voc&ecirc;
+      espera que o equipamento seja capaz de us&aacute;-lo e manipul&aacute;-lo de
+      forma inteligente.  Voc&ecirc; pode desejar indicar que uma determinada
+      frase deve ser enfatizada, ou adicionada a um gloss&aacute;rio, ou ser
+      interligada a outra parte do documento.  Voc&ecirc; pode querer que os
+      nomes dos arquivos sejam exibidos com uma fonte de estilo
+      <quote>typewriter</quote> quando forem exibidos na tela, mas
+      como <quote>it&aacute;lico</quote> quando impresso, ou qualquer outra
+      mir&iacute;ade de outras op&ccedil;&otilde;es para apresenta&ccedil;&atilde;o.</para>
+    
+    <para>Esperava-se que a intelig&ecirc;ncia artificial (AI) torna-se isso
+      f&aacute;cil.  O seu computador leria o documento e identificaria 
+      automaticamente as frases chave, nomes de arquivos, os campos 
+      que o leitor teria que preencher, e muito mais.  Infelizmente, 
+      a vida real n&atilde;o evoluiu como esperado, e os nossos computadores
+      necessitam de algum auxilio antes que eles possam processar
+      significativamente nosso texto.</para>
 
-    <para>Inevitably, this was not enough.  Once you have text in a
-      machine-usable format, you expect machines to be able to use it and
-      manipulate it intelligently.  You would like to indicate that certain
-      phrases should be emphasised, or added to a glossary, or be hyperlinks.
-      You might want filenames to be shown in a <quote>typewriter</quote> style 
-      font for viewing on screen, but as <quote>italics</quote> when printed,
-      or any of a myriad of other options for presentation.</para>
-
-    <para>It was once hoped that Artificial Intelligence (AI) would make this
-      easy.  Your computer would read in the document and automatically
-      identify key phrases, filenames, text that the reader should type in,
-      examples, and more.  Unfortunately, real life has not happened quite
-      like that, and our computers require some assistance before they can
-      meaningfully process our text.</para>
-
-    <para>More precisely, they need help identifying what is what.  You or I
-      can look at
-
+    <para>Mais precisamente, eles precisam de ajuda para identificar
+      o que &eacute; o que.  Voc&ecirc; ou eu podem olhar para
+    
       <blockquote>
-	<para>To remove <filename>/tmp/foo</filename> use &man.rm.1;.</para>
+	<para>Para remover o <filename>/tmp/foo</filename> utilize &man.rm.1;.</para>
 
 	<screen>&prompt.user; <userinput>rm /tmp/foo</userinput></screen>
       </blockquote>
 
-      and easily see which parts are filenames, which are commands to be typed
-      in, which parts are references to manual pages, and so on.  But the
-      computer processing the document cannot.  For this we need
-      markup.</para>
+      E facilmente visualizar quais partes s&atilde;o nomes de arquivos,
+      quais s&atilde;o comandos que devem ser digitados, quais partes s&atilde;o
+      refer&ecirc;ncias &agrave; p&aacute;ginas de manual, etc.  Mas o computador
+      processando o documento n&atilde;o pode.  Para isto n&oacute;s precisamos
+      utilizar uma marca&ccedil;&atilde;o (<literal>markup</literal>).</para>
+
+    <para>A <quote>marca&ccedil;&atilde;o</quote> &eacute; comumente utilizada para
+      descrever a <quote>adi&ccedil;&atilde;o de valor</quote> ou <quote>aumento de
+      custo</quote>.  O termo (term) faz exame de ambos os meios
+      quando aplicados ao texto.  A marca&ccedil;&atilde;o &eacute; um texto adicional
+      incluido no documento, e de alguma forma destacado do conte&uacute;do 
+      do documento, de modo que os programas que forem processar os
+      poder&atilde;o ler as marca&ccedil;&otilde;es e utiliz&aacute;-las aos tomar decis&otilde;es sobre
+      o documento.  Os editores podem ocultar a marca&ccedil;&atilde;o do usu&aacute;rio,
+      de forma que o usu&aacute;rio n&atilde;o se distraia com ele.</para>
     
-    <para><quote>Markup</quote> is commonly used to describe <quote>adding
-      value</quote> or <quote>increasing cost</quote>.  The term takes on both
-      these meanings when applied to text.  Markup is additional text included 
-      in the document, distinguished from the document's content in some way,
-      so that programs that process the document can read the markup and use
-      it when making decisions about the document.  Editors can hide the
-      markup from the user, so the user is not distracted by it.</para>
-
-    <para>The extra information stored in the markup <emphasis>adds
-      value</emphasis> to the document.  Adding the markup to the document
-      must typically be done by a person&mdash;after all, if computers could
-      recognise the text sufficiently well to add the markup then there would
-      be no need to add it in the first place.  This <emphasis>increases the
-      cost</emphasis> (i.e., the effort required) to create the
-      document.</para>
-
-    <para>The previous example is actually represented in this document like
-      this;</para>
-
+    <para>As informa&ccedil;&otilde;es extras armazenadas na marca&ccedil;&atilde;o
+      <emphasis>adicionam valor</emphasis> ao documento.  Tipicamente a 
+      adi&ccedil;&atilde;o da marca&ccedil;&atilde;o ao documento precisa ser realizada por uma
+      pessoa &mdash; apesar de tudo, se os computadores pudessem
+      reconhecer suficientemente bem o texto para adicionar as
+      marca&ccedil;&otilde;es, ent&atilde;o n&atilde;o haveria necessidade de adicion&aacute;-las em
+      primeiro lugar.  Isto <emphasis>aumenta o custo</emphasis> (isto
+      &eacute;, o esfor&ccedil;o requerido) para criar o documento.</para>
+    
+    <para>O exemplo precedente &eacute; representado realmente neste
+      documento como se segue:</para>
+    
     <programlisting><![ CDATA [
 <para>To remove <filename>/tmp/foo</filename> use &man.rm.1;.</para>
 
 <screen>&prompt.user; <userinput>rm /tmp/foo</userinput></screen>]]></programlisting>
 
-    <para>As you can see, the markup is clearly separate from the
-      content.</para>
-
-    <para>Obviously, if you are going to use markup you need to define what
-      your markup means, and how it should be interpreted.  You will need a
-      markup language that you can follow when marking up your
-      documents.</para>
+    <para>Como voc&ecirc; pode ver, a marca&ccedil;&atilde;o est&aacute; claramente separada do
+      conte&uacute;do.</para>
     
-   <para>Of course, one markup language might not be enough.  A markup
-      language for technical documentation has very different requirements
-      than a markup language that was to be used for cookery recipes.  This,
-      in turn, would be very different from a markup language used to describe
-      poetry.  What you really need is a first language that you use to write
-      these other markup languages.  A <emphasis>meta markup
-      language</emphasis>.</para>
+    <para>Obviamente, se voc&ecirc; estiver iniciando no uso de marca&ccedil;&otilde;es,
+      voc&ecirc; precisa definir o que a sua marca&ccedil;&atilde;o significa, e como ela
+      ser&aacute; interpretada.  Voc&ecirc; vai precisar de uma linguagem de
+      marca&ccedil;&atilde;o a qual voc&ecirc; possa seguir quando estiver marcando os
+      seus documentos.</para>
     
-    <para>This is exactly what the Standard Generalized Markup Language (SGML)
-      is.  Many markup languages have been written in SGML, including the two
-      most used by the FDP, HTML and DocBook.</para>
+    <para>Naturalmente, uma linguagem de marca&ccedil;&atilde;o pode n&atilde;o ser o
+      bastante.  Os requisitos de uma linguagem de marca&ccedil;&atilde;o destinada
+      formata&ccedil;&atilde;o de documentos t&eacute;cnicos s&atilde;o diferentes dos requisitos
+      de uma linguagemd e marca&ccedil;&atilde;o destinada a formata&ccedil;&atilde;o de receitas
+      culin&aacute;rias.  Esta, por sua vez, seria muito diferente de uma
+      linguagemd e marca&ccedil;&atilde;o usada para formatar poemas.  O que voc&ecirc;
+      realmente precisa &eacute; de uma linguagem prim&aacute;ria, a qual voc&ecirc; possa
+      utilizar para escrever estas e outras linguagens de marca&ccedil;&atilde;o.
+      Uma <emphasis>meta linguagem de marca&ccedil;&atilde;o</emphasis>.</para>
+   
+    <para>&Eacute; exatamente isso que a <foreignphrase>Standard Generalized 
+      Markup Language</foreignphrase> (SGML) &eacute;.  Muitas linguagens de
+      marca&ccedil;&atilde;o foram escritas em SGML, incluindo as duas mais
+      utilizadas pelo FDP, o HTML e o DocBook.</para>
+      
+    <para>Cada defini&ccedil;&atilde;o de linguagem &eacute; mais corretamente chamada de
+      Defini&ccedil;&atilde;o de tipo de Documento (DTD).  O DTD especifica o nome
+      dos elementos que podem ser utilizados, qual ordem eles aparecem
+      (e se alguma marca&ccedil;&atilde;o pode ser utilizada dentro de outra
+      marca&ccedil;&atilde;o) e as informa&ccedil;&otilde;es relacionadas.  Um DTD &eacute; algumas
+      vezes referenciado como uma <emphasis>aplica&ccedil;&atilde;o</emphasis> do
+      SGML.</para>
     
-    <para>Each language definition is more properly called a Document Type
-      Definition (DTD).  The DTD specifies the name of the elements that can
-      be used, what order they appear in (and whether some markup can be used
-      inside other markup) and related information.  A DTD is sometimes
-      referred to as an <emphasis>application</emphasis> of SGML.</para>
-
-    <para id="sgml-primer-validating">A DTD is a <emphasis>complete</emphasis>
-      specification of all the elements that are allowed to appear, the order
-      in which they should appear, which elements are mandatory, which are
-      optional, and so forth. This makes it possible to write an SGML
-      <emphasis>parser</emphasis> which reads in both the DTD and a document
-      which claims to conform to the DTD.  The parser can then confirm whether
-      or not all the elements required by the DTD are in the document in the
-      right order, and whether there are any errors in the markup.  This is
-      normally referred to as <quote>validating  the document</quote>.</para>
-
+    <para id="sgml-primer-validating">Um DTD &eacute; uma especifica&ccedil;&atilde;o
+      <emphasis>completa</emphasis> de todos os elementos que podem
+      ser utilizados, a ordem em que podem aparecer, quais elementos 
+      s&atilde;o obrigat&oacute;rios, quais s&atilde;o opcionais, e assim por diante.  Isto
+      torna poss&iacute;vel escrever um interpretador (parser) SGML, que leia 
+      ambos os DTD e um documento que reinvidique se adequar ao DTD.
+      O interpretador pode ent&atilde;o confirmar se todos os elementos
+      obrigat&oacute;rios do DTD est&atilde;o (ou n&atilde;o) presentes no documento na ordem
+      correta, e se existem erros na marca&ccedil;&atilde;o.  Isto &eacute; normalmente
+      referenciado como <quote>valida&ccedil;&atilde;o do documento</quote>.</para>
+    
     <note>
-      <para>This processing simply confirms that the choice of elements, their 
-	ordering, and so on, conforms to that listed in the DTD.  It does
-	<emphasis>not</emphasis> check that you have used
-	<emphasis>appropriate</emphasis> markup for the content.  If you
-	tried to mark up all the filenames in your document as function
-	names, the parser would not flag this as an error (assuming, of
-	course, that your DTD defines elements for filenames and functions,
-	and that they are allowed to appear in the same place).</para>
+      <para>Este processamento simplesmente confirma se a escolha dos
+      	elementos, a sua ordena&ccedil;&atilde;o, etc, est&atilde;o de acordo com o listado
+	no DTD.   Ele <emphasis>n&atilde;o</emphasis> verifica se voc&ecirc;
+	utilizou a marca&ccedil;&atilde;o <emphasis>adequada</emphasis> para conte&uacute;do.  
+	Se voc&ecirc;  tentasse marcar todos os nomes de arquivo em seu
+	documento como nomes de fun&ccedil;&otilde;es, o interpretador n&atilde;o iria
+	apontar isto como um erro (assumindo, naturalmente, que a sua
+	DTD define elementos para nomes de arquivos e para fun&ccedil;&otilde;es, e
+	que eles podem ser utilizados nos mesmos lugares).</para>
     </note>
     
-    <para>It is likely that most of your contributions to the Documentation
-      Project will consist of content marked up in either HTML or DocBook,
-      rather than alterations to the DTDs.  For this reason this book will
-      not touch on how to write a DTD.</para>
+    <para>&Eacute; prov&aacute;vel que a maioria das suas contribui&ccedil;&otilde;es ao projeto
+      de documenta&ccedil;&atilde;o ir&atilde;o se constituir de conte&uacute;dos marcados tanto
+      em HTML quanto em DocBook, o que &eacute; melhor que altera&ccedil;&otilde;es nos DTDs.  
+      Por esta raz&atilde;o este livro n&atilde;o ir&aacute; abordar a cria&ccedil;&atilde;o de um
+      DTD.</para>
   </sect1>
   
   <sect1 id="sgml-primer-elements">
