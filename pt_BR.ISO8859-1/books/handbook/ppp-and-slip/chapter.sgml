@@ -248,7 +248,7 @@
 	<title>Criando nós para dispositivos PPP</title>
 	<indexterm><secondary>Criando nós para dispositivos </secondary><primary>PPP</primary></indexterm>
 
-        <para>Em circunstâncias normais a maioria dos usuário irão apenas 
+        <para>Em circunstâncias normais a maioria dos usuários irão apenas 
           precisar de um dispositivo <devicename>tun<devicename>
           (<devicename>/dev/tun0</devicename>).  Referências ao 
           <devicename>tun0</devicename> acima podem ser trocadas por
@@ -278,35 +278,34 @@
       </sect3>
 
       <sect3>
-        <title>Automatic <application>PPP</application> Configuration</title>
+        <title>Configuração automática do <application>PPP</application></title>
 
-	<indexterm><primary>PPP</primary><secondary>configuration</secondary></indexterm>
-	<para>Both <command>ppp</command> and <command>pppd</command>
-	  (the kernel level implementation of PPP) use the configuration
-	  files located in the <filename>/etc/ppp</filename> directory.
-          Examples for user ppp can be found in
+	<indexterm><secondary>Configuração</secondary><primary>PPP</primary></indexterm>
+        <para>Tanto <command>ppp</command> quanto <command>pppd</command>
+	  (a implementação do PPP em modo kernel) usam os arquivos 
+	  de configuração localizados no diretório <filename>/etc/ppp</filename>.
+	  Exemplos para ppp em modo usuário podem ser encontrados em
           <filename>/usr/share/examples/ppp/</filename>.</para>
 
-	<para>Configuring <command>ppp</command> requires that you edit a
-	  number of files, depending on your requirements.  What you put
-	  in them depends to some extent on whether your ISP allocates IP
-	  addresses statically (i.e., you get given one IP address, and
-	  always use that one) or dynamically (i.e., your IP address
-	  changes each time you connect to your ISP).</para>
+        <para>A configuração do <command>ppp</command> requer que você edite
+	  vários arquivos, dependendo dos seus requerimentos. O que você
+	  coloca neles depende se seu provedor aloca endereços IP estaticamente
+	  (ex. foi dado a você um endereço IP que deve ser usado sempre) ou
+	  dinamicamente (ex. seu endereço IP é trocado cada vez que você
+	  se conecta).</para>
 
 	<sect4 id="userppp-staticIP">
-	  <title>PPP and Static IP Addresses</title>
+	  <title>PPP e endereços IP estáticos</title>
 
-	  <indexterm><primary>PPP</primary><secondary>with static IP addresses</secondary></indexterm>
-	  <para>You will need to edit the
-	    <filename>/etc/ppp/ppp.conf</filename> configuration file.  It
-            should look similar to the example below.</para>
+	  <indexterm><primary>PPP</primary><secondary>com endereços IPs estáticos</secondary></indexterm>
+	  <para>Você terá de editar o arquivo de configuração <filename>/etc/ppp/ppp.conf</filename>.
+	  Ele deve parecer similar ao exemplo abaixo.</para>
 
 	  <note>
-	    <para>Lines that end in a <literal>:</literal> start in
-	      the first column (beginning of the line)&mdash; all other
-	      lines should be indented as shown using spaces or
-	      tabs.</para>
+            <para>Linhas que terminal em um <literal>:<literal> começam
+	      na primeira coluna (início da linha)&mdash; todas as outras
+	      linhas devem ser endentadas como mostrado utilizando espaços
+	      ou tabs.</para>
 	  </note>
 
 	  <programlisting>1     default:
@@ -330,16 +329,16 @@
 
 	  <variablelist>
 	    <varlistentry>
-	      <term>Line 1:</term>
+	      <term>Linha 1:</term>
 
 	      <listitem>
-		<para>Identifies the default entry.  Commands in this
-		  entry are executed automatically when ppp is run.</para>
+		<para>Identifica a entrada padrão. Comandos nessa entrada são
+		  executados automaticamente quando o ppp é executado.</para>
 	      </listitem>
 	    </varlistentry>
 
 	    <varlistentry>
-	      <term>Line 2:</term>
+	      <term>Linha 2:</term>
 
 	      <listitem>
 		<para>Enables logging parameters.  When the configuration
