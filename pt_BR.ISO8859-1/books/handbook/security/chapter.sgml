@@ -1179,38 +1179,38 @@
       do sistema de senhas &unix;.</para>
 
     <para>Além da senha, há outras duas partes de dados que são
-      importantes para S/Key e OPIE.  Um que é conhecido como 
+      importantes para o S/Key e OPIE.  Um que é conhecido como 
       <quote>semente</quote> ou <quote>key</quote>, consistindo em duas
-      letras e cinco dígitos.  O outro que é chamado <quote>iteration
-      count</quote>, um número entre 1 e 100.  O S/Key cria a senha
+      letras e cinco dígitos.  O outro que é chamado <quote>contagem de
+      iteração</quote>, um número entre 1 e 100.  O S/Key cria a senha
       de uso único concatenando a semente e a senha secreta,
       então aplicando o hash MD4/MD5 tantas vezes como especificadas pela
-      iteration count e voltando o resultado em seis palavras curtas em 
+      contagem de interação e voltando o resultado em seis palavras curtas em 
       inglês. Estas seis palavras em inglês é sua senha de uso único.  
       O sistema de autenticação (primeiramente PAM) manten-se a
       par de última senha de uso único usada, e o usuário é
       autenticado se o hash da senha fornecida pelo usuário for
       a igual a senha anterior.  Porque um hash de uso único é usado 
       é impossível gerar senhas de uso único futuras se uma usada com
-      sucesso for capturada; o iteration count é decrementado após
+      sucesso for capturada; a contagem de interação é decrementada após
       cada login bem sucedido para manter o usuário e o programa de login
-      em sincronismo.  Quando o iteration count passar de 1, S/Key e OPIE 
+      em sincronismo.  Quando a contagem de iteração passar de 1, o S/Key e OPIE 
       devem ser reinicializados.</para>
 
     <para>Há três programas envolvidos em cada sistema que nós
       discutiremos abaixo.  Os programas 
-      <command>key</command> e <command>opiekey</command> aceitam um
-      iteration count, uma semente, e uma senha secreta, e geram uma senha
+      <command>key</command> e <command>opiekey</command> aceitam uma
+      contagem de iteração, uma semente, e uma senha secreta, e geram uma senha
       de uso único ou uma lista consecutiva de senhas de uso único.  Os
       programas <command>keyinit</command> e <command>opiepasswd</command>
       são usados para inicializar o S/Key e OPIE respectivamente,
-      e trocar senhas, iteration counts, ou sementes; aceitam
-      um passphrase secreto, ou um iteration count, semente, e senha de
+      e trocar senhas, contagem de iteração, ou sementes; aceitam
+      um passphrase secreto, ou uma contagem de iteração, semente, e senha de
       uso único.  Os programas <command>keyinfo</command>
       e <command>opieinfo</command> examinam os arquivos relevantes
       as credenciais (<filename>/etc/skeykeys</filename> ou
       <filename>/etc/opiekeys</filename>) e imprimem invocando a
-      iteration count atual do usuário e a semente.</para>
+      contagem de iteração atual do usuário e a semente.</para>
 
     <para>Há quatro tipos diferentes de operações que nós cobriremos.  O
       primeiro é usando <command>keyinit</command> ou
@@ -1268,7 +1268,7 @@ MOS MALL GOAT ARM AVID COED
         você usará para fazer login, é usada para gerar suas chaves
         login de uso único.  A linha <quote>ID</quote> dá os
 	parâmetros da sua instância particular: seu nome de login, 
-        o iteration count, e semente.  Ao logar o sistema recordará
+        a contagem de iteração, e semente.  Ao logar o sistema recordará
 	estes parâmetros e apresenta-os para você assim você não tem
         que lembra-los.  A última linha dá a senha de uso único particular
         que corresponde a estes parâmetros e sua senha secreta; se
@@ -1277,18 +1277,18 @@ MOS MALL GOAT ARM AVID COED
     </sect2>
 
     <sect2>
-      <title>Insecure Connection Initialization</title>
+      <title>Inicialização da Conexão Insegura</title>
       
-      <para>To initialize or change your secret password over an
-	insecure connection, you will need to already have a secure
-	connection to some place where you can run <command>key</command>
-        or <command>opiekey</command>; this might be in the form of a
-	desk accessory on a &macintosh;, or a shell prompt on a machine you
-	trust.  You will also need to make up an iteration count (100 is
-	probably a good value), and you may make up your own seed or use a
-	randomly-generated one.  Over on the insecure connection (to the
-	machine you are initializing), use the <command>keyinit
-	-s</command> command:</para>
+      <para>Para inicializar ou trocar sua senha secreta sob uma 
+ 	conexão insegura, você precisará já tem uma conexão segura
+	para algum lugar onde você pode executar o <command>key</command>
+        ou <command>opiekey</command>; isto pode ser na forma de um
+	acessório de desktop em um &macintosh;, ou um prompt shell em uma máquina
+	que você confia.  Você precisará também fazer uma contagem de iteração 
+	(100 é provavelmente um bom valor), e você pode fazer sua própria
+	semente ou usar uma gerada randomicamente.  Sob a conexão insegura
+	(para a máquina que você esta inicializando), use o comando
+	<command>keyinit -s</command>:</para>
 
       <screen>&prompt.user; <userinput>keyinit -s</userinput>
 Updating unfurl:
@@ -1301,7 +1301,7 @@ s/key access password:
 s/key access password:<userinput>CURE MIKE BANE HIM RACY GORE</userinput>
 </screen>
 
-      <para>For OPIE, you need to use <command>opiepasswd</command>:</para>
+      <para>Para o OPIE, você precisa usar <command>opiepasswd</command>:</para>
 
       <screen>&prompt.user; <userinput>opiepasswd</userinput>
 
@@ -1318,19 +1318,19 @@ ID mark OTP key is 499 gr4269
 LINE PAP MILK NELL BUOY TROY
 </screen>
 
-      <para>To accept the default seed (which the
-	<command>keyinit</command> program confusingly calls a
-	<literal>key</literal>), press <keycap>Return</keycap>.
-	Then before entering an
-	access password, move over to your secure connection or S/Key desk
-	accessory, and give it the same parameters:</para>
+      <para>Para aceitar a semente padrão (que o programa
+	<command>keyinit</command> confusingly chama de 
+	<literal>key</literal>), pressione <keycap>Return</keycap>.
+	Então antes de entrar uma senha de acesso, vá para sua
+	conexão segura ou acessório de desk S/Key, e aplique os mesmos
+	parâmetros:</para>
 
       <screen>&prompt.user; <userinput>key 100 to17759</userinput>
 Reminder - Do not use this program while logged in via telnet or rlogin.
 Enter secret password: <userinput>&lt;secret password&gt;</userinput>
 CURE MIKE BANE HIM RACY GORE</screen>
 
-      <para>Or for OPIE:</para>
+      <para>Ou para o OPIE:</para>
 
       <screen>&prompt.user; <userinput>opiekey 498 to4268</userinput>
 Using the MD5 algorithm to compute response.
@@ -1339,15 +1339,15 @@ Enter secret pass phrase:
 GAME GAG WELT OUT DOWN CHAT
 </screen>
 
-      <para>Now switch back over to the insecure connection, and copy the
-	one-time password generated over to the relevant program.</para>
+      <para>Agora troque de volta para sua conexão insegura, e copie a
+	senha de uso único gerada over to the relevant program.</para>
     </sect2>
 
     <sect2>
-      <title>Generating a Single One-time Password</title>
+      <title>Gerando uma Senha de Uso Único</title>
 
-      <para>Once you have initialized S/Key or OPIE, when you login you will be 
-	presented with a prompt like this:</para>
+      <para>Uma vez que você tenha inicializado o S/Key ou OPIE, quando você fizer
+	login será apresentado com um prompt como este:</para>
 
 <screen>&prompt.user; <userinput>telnet example.com</userinput>
 Trying 10.0.0.1...
@@ -1360,7 +1360,7 @@ login: <userinput>&lt;username&gt;</userinput>
 s/key 97 fw13894
 Password: </screen>
 
-      <para>Or for OPIE:</para>
+      <para>Ou para o OPIE:</para>
 
 <screen>&prompt.user; <userinput>telnet example.com</userinput>
 Trying 10.0.0.1...
@@ -1373,34 +1373,32 @@ login: <userinput>&lt;username&gt;</userinput>
 otp-md5 498 gr4269 ext
 Password: </screen>
 
-      <para>As a side note, the S/Key and OPIE prompts have a useful feature
-	(not shown here): if you press <keycap>Return</keycap>
-	at the password prompt, the
-	prompter will turn echo on, so you can see what you are
-	typing.  This can be extremely useful if you are attempting to
-	type in a password by hand, such as from a printout.</para>
+      <para>As a side note, os prompts do S/Key e OPIE tem uma característica útil
+	(não mostrada aqui): se você pressionar <keycap>Return</keycap>
+	no prompt de senha, o prompter irá ligar o echo, assim você pode ver o que
+	você está digitando.  Isto pode ser extremamente útil se você estiver
+	tentando digitar uma senha manualmente, como de um impresso.</para>
 
       <indexterm><primary>MS-DOS</primary></indexterm>
       <indexterm><primary>Windows</primary></indexterm>
       <indexterm><primary>MacOS</primary></indexterm>
 
-      <para>At this point you need to generate your one-time password to
-	answer this login prompt.  This must be done on a trusted system
-	that you can run <command>key</command> or
-        <command>opiekey</command> on.  (There are versions of these for DOS,
-	&windows; and &macos; as well.) They need both the iteration count and
-	the seed as command line options.  You can cut-and-paste these
-        right from the login prompt on the machine that you are logging
-        in to.</para>
+      <para>Neste momento você precisa gerar sua senha de uso único para
+	responder este prompt de login.  Isto deve ser feito em um sistema
+	confiável em que você pode executar <command>key</command> ou
+        <command>opiekey</command>.  (Há versões destes para DOS,
+	&windows; e &macos; também.) Necessitam ambos a contagem de iteração e
+	a semente como opções de linha de comando.  Você pode copiar-e-colar estes
+        do prompt de login na máquina a que você está logando.</para>
 
-      <para>On the trusted system:</para>
+      <para>No sistema confiável:</para>
 
       <screen>&prompt.user; <userinput>key 97 fw13894</userinput>
 Reminder - Do not use this program while logged in via telnet or rlogin.
 Enter secret password: 
 WELD LIP ACTS ENDS ME HAAG</screen>
 
-      <para>For OPIE:</para>
+      <para>Para OPIE:</para>
 
       <screen>&prompt.user; <userinput>opiekey 498 to4268</userinput>
 Using the MD5 algorithm to compute response.
@@ -1408,8 +1406,7 @@ Reminder: Don't use opiekey from telnet or dial-in sessions.
 Enter secret pass phrase:
 GAME GAG WELT OUT DOWN CHAT</screen>
 
-      <para>Now that you have your one-time password you can continue
-	logging in:</para>
+      <para>Agora que você tem sua senha de uso único você pode continuar logando:</para>
 
       <screen>login: <userinput>&lt;username&gt;</userinput>
 s/key 97 fw13894
@@ -1421,14 +1418,13 @@ Last login: Tue Mar 21 11:56:41 from 10.0.0.2 ... </screen>
     </sect2>
 
     <sect2>
-      <title>Generating Multiple One-time Passwords</title>
+      <title>Gerando Múltiplas Senhas de Uso Único</title>
 
-      <para>Sometimes you have to go places where you do not have
-	access to a trusted machine or secure connection.  In this case,
-	it is possible to use the <command>key</command> and
-	<command>opiekey</command> commands to
-	generate a number of one-time passwords beforehand to be printed
-	out and taken with you.  For example:</para>
+      <para>As vezes você tem que ir a logares onde você não tem
+	acesso a uma máquina confiável ou uma conexão segura.  Neste caso,
+	é possível usar os comandos <command>key</command> e
+	<command>opiekey</command> para gerar de antemão um número de
+	senhas de uso único para serem impressas e levadas com você.  Por exemplo:</para>
 
       <screen>&prompt.user; <userinput>key -n 5 30 zz99999</userinput>
 Reminder - Do not use this program while logged in via telnet or rlogin.
@@ -1439,7 +1435,7 @@ Enter secret password: <userinput>&lt;secret password&gt;</userinput>
 29: COT MASH BARR BRIM NAN FLAG  
 30: CAN KNEE CAST NAME FOLK BILK</screen>
 
-      <para>Or for OPIE:</para>
+      <para>Ou para o OPIE:</para>
 
       <screen>&prompt.user; <userinput>opiekey -n 5 30 zz99999</userinput>
 Using the MD5 algorithm to compute response.
@@ -1451,79 +1447,80 @@ Enter secret pass phrase: <userinput>&lt;secret password&gt;</userinput>
 29: RIO ODIN GO BYE FURY TIC
 30: GREW JIVE SAN GIRD BOIL PHI</screen>
 
-      <para>The <option>-n 5</option> requests five keys in sequence, the
-	<option>30</option> specifies what the last iteration number
-	should be.  Note that these are printed out in
-	<emphasis>reverse</emphasis> order of eventual use.  If you are
-	really paranoid, you might want to write the results down by hand;
-	otherwise you can cut-and-paste into <command>lpr</command>.  Note
-	that each line shows both the iteration count and the one-time
-	password; you may still find it handy to scratch off passwords as
+      <para>O <option>-n 5</option> pede cinco chaves em sequência, o
+	<option>30</option> especifica o que o último número de iteração deve ser.  
+	Note que estes são impressos em ordem <emphasis>reversa</emphasis> do
+	uso eventual.  Se você for realmente paranóico, você pode querer escrever
+	os resultados manualmente;
+	caso contrário você pode copiar-e-colar no <command>lpr</command>.  Note
+	que cada linha mostra ambos a contagem de iteração e a senha de uso único; 
+	you may still find it handy to scratch off passwords as
 	you use them.</para>
     </sect2>
 
     <sect2>
-      <title>Restricting Use of &unix; Passwords</title>
+      <title>Restringindo o Uso de Senhas &unix;</title>
 
-      <para>S/Key can place restrictions on the use of &unix; passwords based
-	on the host name, user name, terminal port, or IP address of a
-	login session.  These restrictions can be found in the
-	configuration file <filename>/etc/skey.access</filename>.  The
-	&man.skey.access.5; manual page has more information on the complete
-	format of the file and also details some security cautions to be
-	aware of before depending on this file for security.</para>
+      <para>S/Key pode colocar restrições no uso de senhas &unix; baseadas
+	no nome de host, nome de usuário, porta de terminal, ou endereço IP
+	de uma seção de login.  Estas restrições podem ser encontradas no
+	arquivo de configuração <filename>/etc/skey.access</filename>.  A
+	página de manual &man.skey.access.5; tem mais informação no formato
+	completo do arquivo e também detalha alguns cuidados com segurança
+	para se estar ciente antes dependendo deste arquivo para a segurança.
+	</para>
 
-      <para>If there is no <filename>/etc/skey.access</filename> file
-	(this is the default on FreeBSD 4.X systems), then all users will
-	be allowed to use &unix; passwords.  If the file exists, however,
-	then all users will be required to use S/Key unless explicitly
-	permitted to do otherwise by configuration statements in the
-	<filename>skey.access</filename> file.  In all cases, &unix;
-	passwords are permitted on the console.</para>
+      <para>Se não existir o arquivo <filename>/etc/skey.access</filename>
+	(iste é o padrão em sistemas FreeBSD 4.X), então todos os usuários
+	estarão permitidos a usar senhas &unix;.  Se o arquivo existir, entretanto,
+	então todos os usuários estarão requeridos a usar S/Key a menos que permitidos
+	explicitamente para fazer de outra maneira por declarações de configuração no
+	arquivo <filename>skey.access</filename>.  Em todos os casos, senhas &unix;
+	são permitidas no console.</para>
 
-      <para>Here is a sample <filename>skey.access</filename> configuration
-	file which illustrates the three most common sorts of configuration
-	statements:</para>
+      <para>Aqui esta uma amostra do arquivo de configuração 
+	<filename>skey.access</filename> que ilustra os três tipos mais comuns de
+	declarações de configuração:</para>
 
       <programlisting>permit internet 192.168.0.0 255.255.0.0
 permit user fnord
 permit port ttyd0</programlisting>
 
-      <para>The first line (<literal>permit internet</literal>) allows
-	users whose IP source address (which is vulnerable to spoofing)
-	matches the specified value and mask, to use &unix; passwords.  This
-	should not be considered a security mechanism, but rather, a means
-	to remind authorized users that they are using an insecure network
-	and need to use S/Key for authentication.</para>
+      <para>A primeira linha (<literal>permit internet</literal>) permite
+	os usuários cujo endereço IP de origem (que é vulnerável a spoofing)
+	combina com o valor e máscara especificados, para usar senhas &unix;.  Isto
+	não deve ser considerado um mecanismo de segurança, mas preferivelmente, um meio
+	de lemrar usuários autorizados que eles estão usando uma rede insegura
+	e necessitam usar S/Key para autenticação.</para>
 
-      <para>The second line (<literal>permit user</literal>) allows the
-	specified username, in this case <username>fnord</username>, to use
-	&unix; passwords at any time.  Generally speaking, this should only
-	be used for people who are either unable to use the
-	<command>key</command> program, like those with dumb terminals, or
-	those who are uneducable.</para>
+      <para>A segunda linha (<literal>permit user</literal>) permite o nome de
+	usuário especificado, neste caso <username>fnord</username>, usar
+	senhas &unix; a qualquer hora.  Geralmente falando, isto deve somente
+	ser usado para pessoas que são incapazes de usar o programa
+	<command>key</command>, como aquelas com terminais burros, ou
+	aquelas que são mal-educadas.</para>
 
-      <para>The third line (<literal>permit port</literal>) allows all
-	users logging in on the specified terminal line to use &unix;
-	passwords; this would be used for dial-ups.</para>
+      <para>A terceira linha (<literal>permit port</literal>) permite todos
+	os usuários que fizerem login no terminal especificado usar senhas &unix;; 
+	isto seria usado para conexões discadas.</para>
 
-      <para>OPIE can restrict the use of &unix; passwords based on the IP
-	address of a login session just like S/Key does.  The relevant file
-	is <filename>/etc/opieaccess</filename>, which is present by default
-	on FreeBSD 5.0 and newer systems.  Please check &man.opieaccess.5;
-	for more information on this file and which security considerations
-	you should be aware of when using it.</para>
+      <para>O OPIE pode restringir o uso das senhas &unix; baseado no endereço IP
+	de uma seção de login como o S/Key faz.  O arquivo relevante é o
+	<filename>/etc/opieaccess</filename>, que é atualmente padrão no
+	FreeBSD 5.0 e em novos sistemas.  Por favor verifique &man.opieaccess.5;
+	para mais informação deste arquivo e de considerações de segurança
+	que você deve estar ciente ao usar.</para>
 	
-      <para>Here is a sample <filename>opieaccess</filename> file:</para>
+      <para>Aqui esta uma amostra do arquivo <filename>opieaccess</filename>:</para>
 
       <programlisting>permit 192.168.0.0 255.255.0.0</programlisting>
 
-      <para>This line allows users whose IP source address (which is
-	vulnerable to spoofing) matches the specified value and mask,
-	to use &unix; passwords at any time.</para>
+      <para>Esta linha permite os usuários cujo endereço IP de origem (que é vulnerável a
+	spoofing) combina com o valor e a máscara especificados, a usar senhas &unix; em
+	qualquer hora.</para>
 	
-      <para>If no rules in <filename>opieaccess</filename> are matched,
-	the default is to deny non-OPIE logins.</para>
+      <para>Se nenhuma regra no <filename>opieaccess</filename> combinar,
+	o padrão é negar logins não OPIE.</para>
 
     </sect2>
   </sect1>
@@ -1548,63 +1545,63 @@ permit port ttyd0</programlisting>
 
     <title>KerberosIV</title>
 
-    <para>Kerberos is a network add-on system/protocol that allows users to
-      authenticate themselves through the services of a secure server.
-      Services such as remote login, remote copy, secure inter-system file
-      copying and other high-risk tasks are made considerably safer and more
-      controllable.</para>
+    <para>Kerberos é um sistema/protocolo adicional de rede que permite usuários
+      se autenticar através de serviços de um servidor seguro.
+      Serviços tais como login remoto, cópia remota, cópia segura de arquivos
+      entre sistemas e outras tarefas de alto risco são feitas consideravelmente mais
+     seguras e controláveis.</para>
 
-    <para>The following instructions can be used as a guide on how to set up
-      Kerberos as distributed for FreeBSD.  However, you should refer to the
-      relevant manual pages for a complete description.</para>
+    <para>As seguintes instruções podem ser usadas como um guia em como configurar 
+      o Kerberos distribuído para FreeBSD.  Entretanto, você deve consultar as
+      páginas de manual relevantes para uma descrição completa.</para>
 
     <sect2>
-      <title>Installing KerberosIV</title>
+      <title>Instalando KerberosIV</title>
 
       <indexterm><primary>MIT</primary></indexterm>
       <indexterm>
 	<primary>KerberosIV</primary>
-	<secondary>Installing</secondary>
+	<secondary>Instalando</secondary>
       </indexterm>
-      <para>Kerberos is an optional component of &os;.  The easiest
-        way to install this software is by selecting the <literal>krb4</literal> or
-        <literal>krb5</literal> distribution in <application>sysinstall</application>
-        during the initial installation of FreeBSD.  This will install
-        the <quote>eBones</quote> (KerberosIV) or <quote>Heimdal</quote> (Kerberos5)
-        implementation of Kerberos.  These implementations are
-        included because they are developed outside the USA/Canada and
-        were thus available to system owners outside those countries
-        during the era of restrictive export controls on cryptographic
-        code from the USA.</para>
+      <para>Kerberos é um componento opcioinal do &os;.  A maneira mais
+        fácil de instalar este software é selecionando a distribuição 
+	<literal>krb4</literal> ou <literal>krb5</literal> no 
+	<application>sysinstall</application>
+        durante a instalação inicial do FreeBSD.  Isto instalará a implementação
+        <quote>eBones</quote> (KerberosIV) ou <quote>Heimdal</quote> (Kerberos5)
+        do Kerberos.  Estas implementações estão incluídas porque são desenvolvidas
+	fora dos EUA/Canadá e estavam portanto disponíveis aos proprietários de 
+	sistemas fora daqueles países durante a era de controles restritivos de
+	exportação de código criptográfico dos EUA.</para>
 
-      <para>Alternatively, the MIT implementation of Kerberos is
-        available from the ports collection as
+      <para>Alternativamente, a implementação do Kerberos do MIT está
+        disponível na coleção de <literal>ports</literal> como 
         <filename role="package">security/krb5</filename>.</para>
     </sect2>
 
     <sect2>
-      <title>Creating the Initial Database</title>
+      <title>Criando a Base de Dados Inicial</title>
       
-      <para>This is done on the Kerberos server only.  First make sure that
-	you do not have any old Kerberos databases around.  You should change
-	to the directory <filename>/etc/kerberosIV</filename> and check that
-	only the following files are present:</para>
+      <para>Isto é feito somente no servidor Kerberos.  Certifique-se primeiramente
+	que você não tem nenhuma base de dados antiga.  Você pode entrar no
+	diretório <filename>/etc/kerberosIV</filename> e certificar-se de que apenas
+	os seguintes arquivos estejam presentes: </para>
 	  
       <screen>&prompt.root; <userinput>cd /etc/kerberosIV</userinput>
 &prompt.root; <userinput>ls</userinput>
 README		krb.conf        krb.realms</screen>
 	  
-      <para>If any additional files (such as <filename>principal.*</filename>
-	or <filename>master_key</filename>) exist, then use the
-	<command>kdb_destroy</command> command to destroy the old Kerberos
-	database, or if Kerberos is not running, simply delete the extra
-	files.</para>
+      <para>Se alguns arquivos adicionais (tais como <filename>principal.*</filename>
+	ou <filename>master_key</filename>) existir, então use o comando
+	<command>kdb_destroy</command> para destruir a base de dados antiga do Kerberos,
+	ou se o Kerberos não estiver executando, simplesmente delete os arquivos 
+	extras.</para>
 	  
-      <para>You should now edit the <filename>krb.conf</filename> and
-	<filename>krb.realms</filename> files to define your Kerberos realm.
-	In this case the realm will be <literal>EXAMPLE.COM</literal> and the
-	server is <hostid role="fqdn">grunt.example.com</hostid>.  We edit
-	or create the <filename>krb.conf</filename> file:</para>
+      <para>Você deve agora editar os arquivos <filename>krb.conf</filename> e 
+	<filename>krb.realms</filename> para definir seu reino Kerberos.
+	Neste caso o reino será <literal>EXAMPLE.COM</literal> e o 
+	servidor é <hostid role="fqdn">grunt.example.com</hostid>.  Nós editamos
+	ou criamos o arquivo <filename>krb.conf</filename>:</para>
 	  
       <screen>&prompt.root; <userinput>cat krb.conf</userinput>
 EXAMPLE.COM
@@ -1618,24 +1615,23 @@ LCS.MIT.EDU kerberos.lcs.mit.edu
 TELECOM.MIT.EDU bitsy.mit.edu
 ARC.NASA.GOV trident.arc.nasa.gov</screen>
 	  
-      <para>In this case, the other realms do not need to be there.  They are
-	here as an example of how a machine may be made aware of multiple
-	realms.  You may wish to not include them for simplicity.</para>
+      <para>Neste caso, os outros reinos não precisam estar aí.  Eles estão
+	aqui como um exemplo de como uma máquina pode ser feita de 
+	múltiplos reinos.  Você pode desejar não incluí-los para simplificar.</para>
 	  
-      <para>The first line names the realm in which this system works.  The
-	other lines contain realm/host entries.  The first item on a line is a
-	realm, and the second is a host in that realm that is acting as a
-	<quote>key distribution center</quote>.  The words <literal>admin
-	  server</literal> following a host's name means that host also
-	provides an administrative database server.  For further explanation
-	of these terms, please consult the Kerberos manual pages.</para>
+      <para>A primeira linha nomeia o reino em que este sistema trabalha.  As
+	outras linhas contêm entradas reino/host.   O primeiro item em uma linha é
+	um reino, e o segundo é um host nesse reino que está agindo como um 
+	<quote>centro de distribuição de chave</quote>.  As palavras <literal>admin
+	  server</literal> depois de um nome de host significa que o host fornece
+	também um servidor administrativo de base de dados.  Para uma explanação adicional
+	destes termos, consulte por favor as páginas de manual do Kerberos.</para>
 	  
-      <para>Now we have to add <hostid role="fqdn">grunt.example.com</hostid>
-	to the <literal>EXAMPLE.COM</literal> realm and also add an entry to
-	put all hosts in the <hostid role="domainname">.example.com</hostid>
-	domain in the <literal>EXAMPLE.COM</literal> realm.  The
-	<filename>krb.realms</filename> file would be updated as
-	follows:</para>
+      <para>Agora nós temos que adicionar <hostid role="fqdn">grunt.example.com</hostid>
+	ao reino <literal>EXAMPLE.COM</literal> e também adicionar uma entrada 
+	para colocar todos os hosts do domínio <hostid role="domainname">.example.com</hostid>
+	no reino <literal>EXAMPLE.COM</literal>.  O arquivo
+	<filename>krb.realms</filename> seria atualizado como segue:</para>
 	  
       <screen>&prompt.root; <userinput>cat krb.realms</userinput>
 grunt.example.com EXAMPLE.COM
@@ -1644,12 +1640,12 @@ grunt.example.com EXAMPLE.COM
 .MIT.EDU ATHENA.MIT.EDU
 .mit.edu ATHENA.MIT.EDU</screen>
 	  
-      <para>Again, the other realms do not need to be there.  They are here as
-	an example of how a machine may be made aware of multiple realms.  You
-	may wish to remove them to simplify things.</para>
+      <para>Novamente, os outros reinos não precisam estar aí.  Eles estão aqui
+	como um exemplo de como uma máquina pode ser feita de múltiplos reinos.  Você
+	pode desejar removê-los para simplificar as coisas.</para>
 	  
-      <para>The first line puts the <emphasis>specific</emphasis> system into
-	the named realm.  The rest of the lines show how to default systems of
+      <para>A primeira linha coloca o sistema <emphasis>específico</emphasis> no
+	reino nomeado.  O resto das linhas mostra como to default systems of
 	a particular subdomain to a named realm.</para>
 	  
       <para>Now we are ready to create the database.  This only needs to run
