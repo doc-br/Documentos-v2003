@@ -37,7 +37,7 @@
 	utilizando uma conex&atilde;o discada com o FreeBSD e o IPFW, e
 	especificamente como implementar um firewall de
 	filtragem de pacotes em cima de um endere&ccedil;o IP atribuido
-	dinamicamente.  Este documento n&atilde;o aborda a configura&ccedil;&atilde;o da sua
+	din&acirc;micamente.  Este documento n&atilde;o aborda a configura&ccedil;&atilde;o da sua
 	conex&atilde;o PPP propriamente dita.</para>
     </abstract>
   </articleinfo>
@@ -49,7 +49,7 @@
 
      <para>Este documento aborda o processo necess&aacute;rio para
        configurar um firewall de filtragem de pacotes com o freebsd
-       quando o seu IP &eacute; atribuido dinamicamente pelo seu provedor.
+       quando o seu IP &eacute; atribuido din&acirc;micamente pelo seu provedor.
        Realizei todo o esfor&ccedil;o poss&iacute;vel para fazer este documento t&atilde;o
        informativo e correto quanto poss&iacute;vel, seus emails com
        coment&aacute;rios e sugest&otilde;es s&atilde;o bem vindos e devem ser enviados
@@ -196,7 +196,7 @@ ppp_profile="<replaceable>profile</replaceable>"</programlisting>
       &eacute; definir as regras do firewall e ent&atilde;o n&oacute;s poderemos rebootar a
       maquina e o firewall dever&aacute; estar de p&eacute; e rodando quando ela
       subir.  Eu fa&ccedil;o desta forma, outras pessoas podem desejar algo ligeiramente
-      diferente quando forem implementar as suas proprias regras de
+      diferente quando forem implementar as suas pr&oacute;prias regras de
       base.  O que eu tentei fazer foi escrever um conjunto de regras
       que se aplique a maioria dos usu&aacute;rios dialup.  Voc&ecirc; pode
       obviamente modific&aacute;-las adequando-as as suas necessidades,
@@ -265,8 +265,8 @@ $fwcmd add deny log ip from any to any</programlisting>
     <para>Agora voc&ecirc; tem um firewall completamente funcional o qual
       ir&aacute; permitir conex&otilde;es nas portas 22 e 80 e ir&aacute; logar qualquer
       outra tentativa de conex&atilde;o.  Agora, voc&ecirc; j&aacute; esta apto a rebootar o
-      seu equipamento em seguran&ccedil;a e o seu firewall deveria subir
-      perfeitamente.  Se voc&ecirc; achar que isto esta incorreto de alguma
+      seu equipamento com seguran&ccedil;a e o seu firewall dever&aacute; subir
+      perfeitamente.  Se voc&ecirc; achar que isto est&aacute; incorreto de alguma
       forma ou experimentar algum problema, ou tiver alguma sugest&atilde;o
       para melhorar esta p&aacute;gina, por favor envie-me um email.</para>
 
@@ -341,7 +341,7 @@ $fwcmd add deny log ip from any to any</programlisting>
 	    para <emphasis>qualquer</emphasis> coisa que esteja sendo
 	    desviada atrav&eacute;s do dispositivo <devicename>tun0</devicename>.
 	    Tanto quanto os pacotes entrantes falar&atilde;o apenas com o IP
-	    atribuido dinamicamente e <emphasis>n&atilde;o</emphasis> com a
+	    atribuido din&acirc;micamente e <emphasis>n&atilde;o</emphasis> com a
 	    rede interna.  De qualquer forma, observe que voc&ecirc; pode
 	    adicionar uma regra semelhante a <literal>$fwcmd add deny
 	    all from 192.168.0.4:255.255.0.0 to any via tun0</literal>,
@@ -357,7 +357,7 @@ $fwcmd add deny log ip from any to any</programlisting>
 	</question>
 
 	<answer>
-	  <para>Este tutorial assum que voc&ecirc; est&aacute; executando o
+	  <para>Este tutorial assume que voc&ecirc; est&aacute; executando o
 	    <emphasis>userland-ppp</emphasis>, ent&atilde;o o conjunto de
 	    regras disponibilizado opera com a interface
 	    <devicename>tun0</devicename> , a qual corresponde a
@@ -369,7 +369,7 @@ $fwcmd add deny log ip from any to any</programlisting>
 	  <para>Voc&ecirc; tamb&eacute;m deve observar que o &man.pppd.8; por sua
 	    vez utiliza a interface  <devicename>ppp0</devicename>,
 	    assim se voc&ecirc; iniciar a conex&atilde;o com o &man.pppd.8; voc&ecirc;
-	    precisa subistituir as ocorrencias de <devicename>tun0i
+	    precisa subistituir as ocorrencias de <devicename>tun0
 	    </devicename> nas regras por <devicename>ppp0</devicename>.
 	    Uma forma r&aacute;pida de editar as regras do firewall para
 	    refletir esta mudan&ccedil;a &eacute; mostrada abaixo.  O arquivo
