@@ -155,19 +155,21 @@
   <sect1 id="examples-formatted">
     <title>Produzindo sa&iacute;das formatadas</title>
 
-    <para>This section assumes that you have installed the software listed in
-      the <filename role="package">textproc/docproj</filename> port, either by hand, or by
-      using the port.  Further, it is assumed that your software is installed
-      in subdirectories under <filename>/usr/local/</filename>, and the
-      directory where binaries have been installed is in your
-      <envar>PATH</envar>.  Adjust the paths as necessary for your
-      system.</para>
+    <para>Esta sess&atilde;o assume que voc&ecirc; j&aacute; instalou os softwares
+      listados no port <filename role="package">textproc/docproj</filename>,
+      seja via o meta-port ou manualmente.  Al&eacute;m disso, ela tamb&eacute;m
+      assume que os seus softwares est&atilde;o instalados em subdiret&oacute;rios
+      sob o <filename>/usr/local/</filename>, e que os diret&oacute;rios nos
+      quais os bin&aacute;rios foram instalados, est&atilde;o mapeados no seu 
+      <envar>PATH</envar>.  Ajuste os paths conforme a necessidade do
+      seu sistema.</para>
 
     <sect2>
-      <title>Using Jade</title>
+      <title>Usando o Jade</title>
 
       <example>
-	<title>Converting DocBook to HTML (one large file)</title>
+	<title>Convertendo de DocBook para HTML (em um &uacute;nico grande
+	arquivo)</title>
 	
 	<screen>&prompt.user; <userinput>jade -V nochunks \  <co id="examples-co-jade-1-nochunks">
     -c /usr/local/share/sgml/docbook/dsssl/modular/catalog \ <co id="examples-co-jade-1-catalog">
@@ -178,34 +180,38 @@
 
 	<calloutlist>
 	  <callout arearefs="examples-co-jade-1-nochunks">
-	    <para>Specifies the <literal>nochunks</literal> parameter to the
-	      stylesheets, forcing all output to be written to
-	      <abbrev>STDOUT</abbrev> (using Norm Walsh's stylesheets).</para>
+	    <para>Especifique o parametro <literal>nochunks</literal> 
+	    para as folhas de estilo, for&ccedil;ando que todos os outputs sejam 
+	    escritos para a saida padr&atilde;o (<abbrev>STDOUT</abbrev>)
+	    (utilizando as folhas de estilo do Norm Walsh).</para>
 	  </callout>
-
+	    
 	  <callout arearefs="examples-co-jade-1-catalog">
-	    <para>Specifies the catalogs that Jade will need to process.
-	      Three catalogs are required.  The first is a catalog that
-	      contains information about the DSSSL stylesheets.  The second
-	      contains information about the DocBook DTD.  The third contains
-	      information specific to Jade.</para>
+	    <para>Especifique os cat&aacute;logos que o Jade ter&aacute; que
+	    processar.  Tr&ecirc;s cat&aacute;logos s&atilde;o requeridos.  O primeiro &eacute; o
+	    cat&aacute;logo que cont&eacute;m as informa&ccedil;&otilde;es sobre as folhas de
+	    estilo DSSSL. O segundo cont&eacute;m informa&ccedil;&otilde;es sobre o DTD
+	    DoockBook.  E o terceiro cont&eacute;m informa&ccedil;&otilde;es especificas
+	    para o jade.</para>
 	  </callout>
 
 	  <callout arearefs="examples-co-jade-1-dsssl">
-	    <para>Specifies the full path to the DSSSL stylesheet that Jade
-	      will use when processing the document.</para>
+	    <para>Especifique o caminho completo das folhas de estilo
+	    DSSSL as quais o Jade ir&aacute; utilizar quando estiver
+	    processando o documento.</para>
 	  </callout>
 
 	  <callout arearefs="examples-co-jade-1-transform">
-	    <para>Instructs Jade to perform a
-	      <emphasis>transformation</emphasis> from one DTD to another.  In 
-	      this case, the input is being transformed from the DocBook DTD
-	      to the HTML DTD.</para>
+	    <para>Instrua o Jade para realizar uma
+	    <emphasis>transforma&ccedil;&atilde;o</emphasis> de uma DTD para outra.
+	    Neste caso, a entrada ser&aacute; transformada de um DTD DocBook
+	    para um DTD HTML.</para>
 	  </callout>
 
 	  <callout arearefs="examples-co-jade-1-filename">
-	    <para>Specifies the file that Jade should process, and redirects
-	      output to the specified <filename>.html</filename> file.</para>
+	    <para>Espeficique o arquivo que o Jade deve processar, e
+	    redirecione a sa&iacute;da para o arquivo <filename>.html
+	    </filename> desejado.</para>
 	  </callout>
 	</calloutlist>
       </example>
