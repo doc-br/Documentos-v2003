@@ -278,45 +278,50 @@ $fwcmd add deny log ip from any to any</programlisting>
     <qandaset>
       <qandaentry>
 	<question>
-	  <para>Why are you using &man.natd.8; and &man.ipfw.8; when
-	    you could be using the built in &man.ppp.8;
-	    filters?</para>
+	  <para>porque voc&ecirc; esta utilizando o &man.natd.8; e o
+	    &man.ipfw.8; quando voc&ecirc; poderia estar utilizando os filtros
+	    integrantes do &man.ppp.8;?</para>
 	</question>
 
 	<answer>
-	  <para>I will have to be honest and say there is no definitive
-	    reason why I use <command>ipfw</command> and
-	    <command>natd</command> instead of the built in
-	    <command>ppp</command> filters.  From the discussions I have
-	    had with people the consensus seems to be that while
-	    <command>ipfw</command> is certainly more powerful and
-	    more configurable than the <command>ppp</command> filters,
-	    what it makes up for in functionality it loses in being
-	    easy to customize.  One of the reasons I use it is because
-	    I prefer firewalling to be done at a kernel level rather
-	    than by a userland program.</para>
+	  <para>Eu tenho que ser honesto e dizer que n&atilde;o existe
+	    nenhuma raz&atilde;o especial para o porque eu estou utilizando o
+	    <command>ipfw</command> e o <command>natd</command> ao inv&eacute;s
+	    de utilizar o recurso de filtragem nativo do
+	    <command>ppp</command>.  Nas discuss&otilde;es que eu tive
+	    com outras pessoas sobre este assunto, o consenso parece
+	    ser de que enquanto o <command>ipfw</command> &eacute; certamente mais
+	    poderoso e mais configuravel do que a capacidade nativa de
+	    filtragem do <command>ppp</command>, o que ele compensa na
+	    funcionalidade perde em na facilidade de se customizar.
+	    Uma das raz&otilde;es d eo porque eu o utilizo &eacute; porque eu
+	    prefiro ter a filtragem de pacotes realizada a nivel de
+	    kernel do que a nivel de um programa de nivel de
+	    usu&aacute;rio.</para>
 	</answer>
       </qandaentry>
 
       <qandaentry>
         <question>
-	  <para>I get messages like <errorname>limit 100 reached on entry
-	    2800</errorname> and after that I never see more denies in my
-	    logs.  Is my firewall still working?</para>
+	  <para>Eu recebo mensagens do tipo <errorname>limit 100
+	    reached on entry 2800</errorname> e depois disso eu nunca
+	    mais vejo entradas de nega&ccedil;&atilde;o no meu log.  O meu firewall
+	    continua funcionando ?</para>
         </question>
 
 	<answer>
-	  <para>This merely means that the maximum logging count for
-            the rule has been reached.  The rule itself is still
-            working, but it will no longer log until such time as you
-            reset the logging counters.  You can reset the logging
-            counters with the <command>ipfw resetlog</command>
-            command.  Alternatively, you may increase the log limit in
-            your kernel configuration with the
-            <option>IPFIREWALL_VERBOSE_LIMIT</option> option as
-            described above.  You may also change this limit (without
-	    recompiling your kernel and having to reboot) by using the
-	    net.inet.ip.fw.verbose_limit &man.sysctl.8; value.</para>
+	  <para>Isto significa somente que a contagem m&aacute;xima de log
+	    para esta regra foi atingida.  A regra propriamente dita
+	    continua funcionando, mas n&atilde;o ser&aacute; mais logada at&eacute; que
+	    voc&ecirc; resete a contagem do log.  Voce pode resetar esta
+	    contagem com o comando <command>ipfw resetlog</command>.
+	    Alternativamente, voc&ecirc; pode aumentar o limite de log no
+	    seu arquivo de configura&ccedil;&atilde;o do kernel com a op&ccedil;&atilde;o
+	    <option>IPFIREWALL_VERBOSE_LIMIT</option> como descrito
+	    anteriormente.  Voc&ecirc; tamb&eacute;m pode alterar este limite (sem
+	    ter que recompilar seu kernel e sem ter que rebootar)
+	    utilizando o &man.sysctl.8; para ajustar o valor da
+	    vari&aacute;vel net.inet.ip.fw.verbose_limit.</para>
         </answer>
       </qandaentry>
 
