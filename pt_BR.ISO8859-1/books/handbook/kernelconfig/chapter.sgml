@@ -431,10 +431,10 @@ configura&ccedil;&atilde;o e as
     </indexterm>
 
     <para>A seguir um exemplo de arquivo de configura&ccedil;&atilde;o <filename>GENERIC</filename> do kernel
-      com v&aacute;rios coment&aacute;rios adicionais onde seja necess&aacute;rio para
-      esclarecimentos. Este exemplo deveria ser compat&iacute;vel com sua copia em
+      com v&aacute;rios coment&aacute;rios adicionais, onde eles forem necess&aacute;rios, para
+      esclarecimentos. Este exemplo deve se equivaler uma cópia que você tem disponível em
       <filename>/usr/src/sys/i386/conf/GENERIC</filename>. 
-      Para detalhes de todas as op&ccedil;&otilde;es poss&iacute;veis do kernel, veja
+      Para obter detalhes sobre todas as op&ccedil;&otilde;es poss&iacute;veis do kernel, veja
       <filename>/usr/src/sys/i386/conf/LINT</filename>.</para>
 
     <programlisting>#
@@ -457,8 +457,8 @@ configura&ccedil;&atilde;o e as
 #
 # &dollar;FreeBSD: src/sys/i386/conf/GENERIC,v 1.380 2003/03/29 13:36:41 mdodd Exp $</programlisting>
 
-    <para>A seguir as palavra-chaves obrigat&oacute;rias requeridas em 
-      <emphasis>todos</emphasis> os kernels compilados por voc&ecirc;:</para>
+    <para>Em seguida estão as palavra-chaves obrigat&oacute;riamente necessárias em 
+      <emphasis>todos</emphasis> os kernels que você for compilar:</para>
     <indexterm>
       <primary>Op&ccedil;&otilde;es do kernel</primary>
       <secondary>m&aacute;quina</secondary>
@@ -466,7 +466,7 @@ configura&ccedil;&atilde;o e as
 
     <programlisting>m&aacute;quina		i386</programlisting>
 
-    <para>Est&aacute; &eacute; a arquitetura da m&aacute;quina. Deve ser algum desses
+    <para>Est&aacute; &eacute; a arquitetura da m&aacute;quina. Deve ser algum dos seguintes valores:
       <literal>i386</literal>, <literal>pc98</literal>,
       <literal>sparc64</literal>, <literal>alpha</literal>,
       <literal>ia64</literal>, <literal>amd64</literal>, or
@@ -480,46 +480,48 @@ configura&ccedil;&atilde;o e as
 cpu          I586_CPU
 cpu          I686_CPU</programlisting>
 
-    <para>A op&ccedil;&atilde;o acima especifica o tipo da CPU que voc&ecirc; tem em seu sistema.
-      Voc&ecirc; deve ter exemplos m&uacute;ltiplos na linha da CPU (isto &eacute;,
-      n&atilde;o &eacute; certo se voc&ecirc; utiliza 
+    <para>A op&ccedil;&atilde;o acima especifica o tipo da CPU em seu sistema.
+      É possível manter múltiplas entradas desta definição, em casos onde
+	não souber ao certo que classes de CPU devem ser suportadas em seu kernel,
+	nesse caso, as opções escolhidas são
       <literal>I586_CPU</literal> ou <literal>I686_CPU</literal>),
-      entretanto, para personalizar um kernel, &eacute; melhor especificar apenas a CPU que voc&ecirc; tem.
-      Se voc&ecirc; estiver inseguro do tipo da sua CPU, voc&ecirc; pode verificar o arquivo
-      <filename>/var/run/dmesg.boot</filename> para ver suas mensagem do carregamento do seu sistema.</para>
+      entretanto, para personalizar um kernel, &eacute; melhor especificar apenas a CPU que voc&ecirc; dispõe,
+	quando esta puder ser prevista.
+      Se voc&ecirc; estiver inseguro quanto à classe da sua CPU, pode verificar o arquivo
+      <filename>/var/run/dmesg.boot</filename> para verificar as mensagem do carregamento do sistema.</para>
 
     <indexterm>
       <primary>Op&ccedil;&otilde;es do kernel</primary>
-      <secondary>tipo da CPU</secondary>
+      <secondary>classe de CPU</secondary>
 
     </indexterm>
-    <para>Suporte para <literal>I386_CPU</literal> &eacute; fornecido ainda no fonte
-      do &os;, mas &eacute; desativada por padr&atilde;o em ambos -STABLE e
-      -CURRENT. Isto significa que para instalar &os; com um 386-class cpu, voc&ecirc; agora
-      tem as seguintes op&ccedil;&otilde;es:</para>
+    <para>O suporte à <literal>I386_CPU</literal> ainda está disponível no fonte
+      do &os;, mas esta opção agora é desativada por padr&atilde;o em ambos -STABLE e
+      -CURRENT. Isto significa que para instalar o &os; com um processador de classe 386,
+	voc&ecirc; terá que optar por uma das seguintes alternativas:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Instale uma release do &os; antiga e recompile o fonte como
-	  descrito dentro <xref linkend="kernelconfig-building">.</para>
+        <para>Instale uma versão mais antiga do &os; e recompile o sistema como
+	 descrito na <xref linkend="kernelconfig-building">.</para>
       </listitem>
 
       <listitem>
-        <para>Compile o userland e o kernel sobre uma nova m&aacute;quina e instale num
-          386 usando os arquivos precompilados <filename>/usr/obj</filename>
-          (para mais detalhes <xref linkend="small-lan">).</para>
+        <para>Compile as aplicações em nível de usuário e o kernel em outra m&aacute;quina e instale-as
+	 no 386 em questão, usando os arquivos previamente compilados, armazenados em <filename>/usr/obj</filename>
+          (para mais detalhes veja a <xref linkend="small-lan">).</para>
       </listitem>
 
       <listitem>
-        <para>Gere sua pr&oacute;pria release do FreeBSD qual inclui suporte a
-          <literal>I386_CPU</literal> dentro do kernel de instala&ccedil;&atilde;o do
+        <para>Gere sua pr&oacute;pria versão do FreeBSD incluindo suporte a
+          <literal>I386_CPU</literal> no kernel de instala&ccedil;&atilde;o via
           CD-ROM.</para>
       </listitem>
     </itemizedlist>
 
-    <para>A primeira destas op&ccedil;&otilde;es &eacute; provavelmente a mais f&aacute;cil de todas, mas voc&ecirc;
-      necessitar&aacute; de muito espa&ccedil;o em disco numa m&aacute;quina 386-class a qual possa ser
-      dif&iacute;cil de encontrar.</para>
+    <para>A primeira destas op&ccedil;&otilde;es &eacute; provavelmente a mais f&aacute;cil, mas voc&ecirc;
+	necessitar&aacute; de muito espa&ccedil;o em disco numa m&aacute;quina de classe 386, o que pode ser
+	difícil de encontrar.</para>
 
     <indexterm>
       <primary>Op&ccedil;&otilde;es do kernel</primary>
@@ -528,13 +530,13 @@ cpu          I686_CPU</programlisting>
 
     <programlisting>ident          GENERIC</programlisting>
 
-    <para>Est&aacute; &eacute; a identifica&ccedil;&atilde;o do kernel. Voc&ecirc; deve mudar
-      o nome do seu kernel para qualquer um,
-      como exemplo <literal>MYKERNEL</literal> voc&ocirc; deve acompanhar as
-      instru&ccedil;&otilde;es dos pr&oacute;ximos exemplos. O nome que voc&ecirc; colocou na
-      <literal>ident</literal> ser&atilde;o mostrados quando voc&ecirc; carregar o
-      kernel, assim &eacute; usado para dar um nome novo ao kernel um nome diferente se voc&ecirc;
-      quiser manter isto separado do seu kernel atual (isto &eacute; voc&ecirc; quer 
+    <para>Est&aacute; &eacute; a identifica&ccedil;&atilde;o do kernel. Voc&ecirc; pode mudar
+      o nome do seu kernel para qualquer um, mas como exemplo da configuração do nosso kernel
+	customizado, o <literal>MYKERNEL</literal>, voc&ocirc; deve acompanhar as
+      instru&ccedil;&otilde;es dos pr&oacute;ximos exemplos. O nome que voc&ecirc; colocou no
+      <literal>ident</literal> ser&atilde;o mostrados quando o kernel for carregado,
+	de forma que a opção é utilizada para dar um nome novo ao kernel, ou um nome diferente se voc&ecirc;
+      quiser distinguir seu novo kernel do kernel atual (especialmente útil quando quiser 
       compilar um kernel experimental).</para>
     <indexterm>
       <primary>Op&ccedil;&otilde;es do kernel</primary>
@@ -543,22 +545,21 @@ cpu          I686_CPU</programlisting>
 
     <programlisting>maxusers          <replaceable>n</replaceable></programlisting>
 
-    <para>A op&ccedil;&atilde;o <literal>maxusers</literal> ajusta o n&uacute;mero de
-      tabelas importantes do sistema. Este n&uacute;mero &eacute; selecionado para ser aproximadamente
-      igual ao n&uacute;mero de usu&aacute;rios simult&acirc;neos que voc&ecirc; espera ter em sua
+    <para>A op&ccedil;&atilde;o <literal>maxusers</literal> ajusta uma série de
+      tabelas importantes do sistema. Esta opção não deve ser utilizada de forma
+	a se igualar ao n&uacute;mero de usu&aacute;rios simult&acirc;neos esperados em sua
       m&aacute;quina.</para>
 
-    <para>A partir do &os;&nbsp;4.5, o sistema escolhe auto-ajuste desta configura&ccedil;&atilde;o para 
-      voc&ecirc; se voc&ecirc; mudar esta op&ccedil;&atilde;o para <literal>0</literal><footnote>
-	<para>O auto-ajuste do algoritmo ajusta <literal>maxuser</literal> igual
-	  a quantidade de mem&oacute;ria do sistema, com um m&iacute;nimo de 32, e um
+    <para>Desde o &os;&nbsp;4.5, o sistema ajusta automaticamente esta configura&ccedil;&atilde;o, se
+	seu valor for modificado para <literal>0</literal><footnote>
+	<para>O algoritmo de ajuste automático do <literal>maxuser</literal> define o valor igual
+	  a quantidade de mem&oacute;ria do sistema, respeitando o valor m&iacute;nimo de 32, e o
 	  m&aacute;ximo de 384.</para></footnote>.
-      No &os;&nbsp;5.X, <literal>maxusers</literal> ficar&aacute; como padr&atilde;o em
-      <literal>0</literal> se n&atilde;o especificado. Se voc&ecirc; estiver usando uma
-      vers&atilde;o do &os; anterior ao 4.5, ou voc&ecirc; quiser gerenciar voc&ecirc; mesmo isto
-      e quiser ajustar o
-      <literal>maxusers</literal> para o m&iacute;nimo 4, especialmente se voc&ecirc; estiver
-      usando o X Window System ou compilando software. A raz&atilde;o &eacute; que
+      No &os;&nbsp;5.X, <literal>maxusers</literal> é definido por padrão com o valor
+      <literal>0</literal> quando for omitido. Se sua versão do &os; for anterior
+      ao 4.5, ou voc&ecirc; deve definir está variável manualmente sempre, e o valor
+	de <literal>maxusers</literal> deve ser no m&iacute;nimo 4, especialmente se for
+      usando o Sistema de Janelas X, ou compilando programas com frequência. A raz&atilde;o &eacute; que
       a tabela mais importante ajustada com <literal>maxusers</literal> &eacute; o
       n&uacute;mero m&aacute;ximo de processos, que &eacute; ajustado para <literal>20 + 16 *
       maxusers</literal>, assim se voc&ecirc; ajustar <literal>maxusers</literal> para 1,
