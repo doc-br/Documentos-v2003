@@ -185,83 +185,115 @@
 
       <sect3 id="mirror-serv-ftp">
         <title>FTP<title>
-        <para>
-          This is one of the most basic services, and
-          it is required for each mirror offering public
-          FTP distributions. FTP access must be
-          anonymous, and no upload/download ratios
-          are allowed (a ridiculous thing anyway).
-          Upload capability is not required (and <emphasis>must</emphasis>
-          never be allowed for the FreeBSD file space).
-          Also the FreeBSD archive should be available under
-          the path <filename>/pub/FreeBSD</filename>.
-        </para>
-        <para>
-          There is a lot of software available which
-          can be set up to allow anonymous FTP
-          (in alphabetical order).
+	
+        <para>Este &eacute; um dos servi&ccedil;os mais b&aacute;sicos, e ele &eacute; requerido 
+	  em todos os mirrors que oferecem acesso publico &agrave;s
+	  distribui&ccedil;oes via FTP.  O acesso ao FTP deve ser an&ocirc;nimo, e
+	  nao &eacute; permitido o uso de taxas de upload/download (algo
+	  rid&iacute;culo de qualquer forma).  Nao &eacute; necess&aacute;rio ter o upload
+	  de arquivos habilitado (e ele <emphasis>nunca</emphasis> 
+	  deve ser permitido na &aacute;rea onde os arquivos do FreeBSD 
+	  sao mantidos).  Os arquivos do FreeBSD devem ficar
+	  dispon&iacute;veis sob o caminho <filename>/pub/FreeBSD
+	  </filename>.</para>
+	  
+        <para>Abaixo voc&ecirc; encontra diversos softwares dispon&iacute;veis os
+	  quais podem ser configurados para operarem como servidor de
+	  FTP An&ocirc;nimo (em ordem alfab&eacute;tica).</para>
+	
           <itemizedlist>
-            <listitem><para><command>/usr/libexec/ftpd</command>: FreeBSD's own ftpd
-              can be used. Be sure to read &man.ftpd.8;.</para>
-            </listitem>
+	  
             <listitem>
-              <para><filename role="package">ftp/ncftpd</filename>: A commercial package,
-              free for educational use.</para>
+	      <para><command>/usr/libexec/ftpd</command>: 
+		&Eacute; o servidor de FTP nativo do FreeBSD.  Consulte o 
+		&man.ftpd.8;.</para>
             </listitem>
+	    
             <listitem>
-              <para><filename role="package">ftp/oftpd</filename>: An ftpd designed with
-              security as a main focus.</para>
+              <para><filename role="package">ftp/ncftpd</filename>: 
+		Um pacote comercial, gratuito para uso
+		educacional.</para>
             </listitem>
+	    
             <listitem>
-              <para><filename role="package">ftp/proftpd</filename>: A modular and very flexible ftpd.</para>
+              <para><filename role="package">ftp/oftpd</filename>: 
+		Um ftpd desenvolvido com foco principal voltado para a
+		seguran&ccedil;a.</para>
             </listitem>
+	    
             <listitem>
-              <para><filename role="package">ftp/pure-ftpd</filename>: Another ftpd developed with
-                security in mind.</para>
+              <para><filename role="package">ftp/proftpd</filename>: 
+		Um ftpd modular e muito flex&iacute;vel</para>
             </listitem>
-            <listitem><para><filename role="package">ftp/twoftpd</filename>: As above.</para></listitem>
-            <listitem><para><filename role="package">ftp/vsftpd</filename>: The <quote>very secure</quote> ftpd.</para></listitem>
+	    
             <listitem>
-              <para><filename role="package">ftp/wu-ftpd</filename>: The ftpd from Washington
-                University. It has become infamous, because of the huge
-                amount of security issues that have been found in it.
-                If you do choose to use this software be sure to
-                keep it up to date.
-              </para>
+              <para><filename role="package">ftp/pure-ftpd</filename>: 
+		Outro ftpd desenvolvido com foco na seguran&ccedil;a.</para>
+            </listitem>
+	    
+            <listitem>
+	      <para><filename role="package">ftp/twoftpd</filename>: 
+		Ftpd desenvolvido com foco na seguran&ccedil;a.</para>
+	    </listitem>
+	    
+            <listitem>
+	      <para><filename role="package">ftp/vsftpd</filename>: 
+		Um ftpd <quote>muito seguro</quote>.</para>
+	    </listitem>
+	    
+            <listitem>
+              <para><filename role="package">ftp/wu-ftpd</filename>: 
+		O ftpd da universidade de Washington. Ele se tornou
+		impopular, por causa da enorme quantidade de problemas
+		de seguran&ccedil;a que foram descobertos nele.  Se voc&ecirc;
+		optar por utilizar este software, certifique-se de
+		mant&ecirc;-lo atualizado.</para>
             </listitem>
           </itemizedlist>
-          FreeBSD's <application>ftpd</application>, <application>proftpd</application>,
-          <application>wu-ftpd</application> and maybe <application>ncftpd</application>
-          are among the most commonly ones.
-          The others do not have a large userbase among mirror sites.  One
-          thing to consider is that you may need flexibility in limiting
-          how many simultaneous connections are allowed, thus limiting how
-          much network bandwidth and system resources are consumed.
-        </para>
+	  
+	  <para>O <application>ftpd</application> nativo do FreeBSD, 
+	    o <application>proftpd</application>, o <application>wu-ftpd
+	    </application> e talvez o <application>ncftpd</application> 
+	    sao os programas utilizados com mais frequ&ecirc;ncia.  Os
+	    demais nao possuem uma grande base de usu&aacute;rios entre
+	    nossos sites espelho.  Um item a ser considerado &eacute; que
+	    voc&ecirc; pode precisar de flexibilidade para controlar quantas
+	    conexoes simult&acirc;neas serao permitidas no servidor,
+	    limitando quanto da banda IP e dos recursos do sistema sao
+	    consumidos.</para>
       </sect3>
+      
       <sect3 id="mirror-serv-rsync">
-        <title>RSYNC (optional for FTP fileset)</title>
-        <para>
-          <application>rsync</application> is often offered for access to the
-          contents of the FTP area of FreeBSD, so other mirror sites can use your system as their source.  The 
-          protocol is different from FTP in many ways.
-          It is much more
-          bandwidth friendly, as only differences between files
-          are transferred instead of whole files when they change.
-          <application>rsync</application> does require a significant amount of memory for
-          each instance. The size depends on the size of
-          the synced module in terms of the number of directories and 
-          files. <application>rsync</application> can use <command>rsh</command> and
-          <command>ssh</command> (now default) as a transport,
-          or use its own protocol for stand-alone access
-          (this is the preferred method for public rsync servers).
-          Authentication, connection limits, and other restrictions
-          may be applied. There is just one software package
-          available:
-          <itemizedlist>
-            <listitem><para><filename role="package">net/rsync</filename></para></listitem>
+        <title>RSYNC</title>
+
+        <para>O <application>rsync</application> pode ser oferecido
+	  como op&ccedil;ao para acesso ao conte&uacute;do da area de FTP do
+	  FreeBSD, desta forma outros sites espelho podem utilizar o
+	  seu sistema como fonte para o sistema deles.  O protocolo do
+	  rsync &eacute; diferente do FTP em muitos aspectos.  Ele &eacute; muito
+	  mais amig&aacute;vel com rela&ccedil;ao ao consumo de banda IP,  uma vez
+	  que apenas as diferen&ccedil;as entre os arquivos sao tranferidas
+	  ao inv&eacute;s de transferir o arquivo completo quando ele se
+	  altera.  O <application>rsync</application> necessita de uma
+	  grande quantidade de mem&oacute;ria para cada inst&acirc;ncia.  A
+	  quantidade de mem&oacute;ria alocada depende do tamanho do modulo
+	  sincronizado  em termos de numero de diret&oacute;rios e de
+	  arquivos.  O <application>rsync</application> pode utilizar o 
+	  <command>rsh</command> e o <command>ssh</command> (agora &eacute; 
+	  padrao) para transporte dos dados, ou entao utilizar o seu
+	  pr&oacute;prio protocolo para acesso stand-alone (este &eacute; o m&eacute;todo 
+	  preferido para um servidor publico de rsync).  Autentica&ccedil;ao,
+	  limite para o n&uacute;mero de conexoes e outras restri&ccedil;oes podem
+	  ser aplicadas.  At&eacute; o momento s&oacute; existe um pacote de
+	  software dispon&iacute;vel para implementar um servidor de
+	  rsync:</para>
+          
+	  <itemizedlist>
+            <listitem>i
+	      <para><filename role="package">net/rsync</filename></para>
+	    </listitem>
           </itemizedlist>
-        </para>
+      
       </sect3>
       <sect3 id="mirror-serv-http">
         <title>HTTP (required for webpages, optional for FTP fileset)</title>
