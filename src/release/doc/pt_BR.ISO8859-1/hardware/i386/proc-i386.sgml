@@ -47,21 +47,21 @@
     <varname>machdep.hlt_cpus</varname> no sysctl. A página do manual 
     &man.smp.4; tem mais detalhes.</para>
 
-  <para>&os; ira tirar proveito do suporte ao <foreignphrase>Physical Address Extensions</foreignphrase>
+  <para>&os; irá tirar proveito do suporte ao <foreignphrase>Physical Address Extensions</foreignphrase>
    (PAE) em CPUs que suportam esta característica. Um kernel com a opção <literal>PAE</literal>
     habilitada irá detectar memória acima de 4 gigabytes e permiti-o a ser usada pelo sistema.
-    This feature places constraints on the device drivers and other features of
-    &os; which may be used; consulte a página do manual &man.pae.4; para mais detalhes.</para>
+    Esta característica coloca limitações nos dispositivos de controle e outras características
+    do &os; o qual pode ser usada; consulte a página do manual &man.pae.4; para mais detalhes.</para>
 
-  <para>&os; will generally run on i386-based laptops, albeit with
-    varying levels of support for certain hardware features such as
-    sound, graphics, power management, and PCCARD expansion slots.
+  <para>&os; normalmente será executado em computadores portáteis baseados no i386,
+    embora com níveis de suporte variado para determinadas características de hardware
+    como som, gráfico, gerenciamento de energia, e <quote>slots</quote> de expansão PCCARD.
     Estas características tendem a variar de maneira exclusiva entre
     máquinas, e frequentemente requer suporte em casos-especiais no &os; 
     para corrigir bugs e outros contra-tempos.  Na dúvida, uma
-    uma procura dos arquivos do &a.mobile; pode ser útil.</para>
+    procura dos arquivos do &a.mobile; pode ser útil.</para>
 
-  <para>Muitos laptops modernos (bem como muitos desktops) usam o Advanced 
+  <para>Muitos computadores portáteis modernos (bem como muitos desktops) usam o Advanced 
     Configuration e o Power Management (ACPI) por padrão. &os; suporta ACPI
     via referência de implementação da Arquitetura de Componente ACPI da Intel,
     como descrita na página do manual &man.acpi.4;. O uso do ACPI causa
@@ -70,6 +70,10 @@
     ser realizado adicionando a seguinte linha no <filename>/boot/device.hints</filename>:</para>
 
   <programlisting>hint.acpi.0.disabled="1"</programlisting>
+
+  <para>Usuários com problemas de depuração relacionados a ACPI podem achar útil 
+    desabilitar parte das funcionalidades ACPI. A página do manual &man.acpi.4;
+    tem mais informações sobre como ajustar estes valores no momento da inicialização.</para>
 
   <para>Users debugging ACPI-related problems may find it useful to
     disable portions of the ACPI functionality.  The &man.acpi.4;
