@@ -224,11 +224,11 @@ configura&ccedil;&atilde;o e as
       <filename>GENERIC</filename>.</para>
     <indexterm><primary>SunOS</primary></indexterm>
 
-    <para>Se você tiver que compilar um kernel sobre &sunos; ou qualquer outro
-      Sistema Operacional BSD, muito destes arquivos ser&atilde;o muito familiar a você.
-      Se você vier de outro sistema operacional tal como DOS, o  
+    <para>Se voc&ecirc; tiver que compilar um kernel sobre &sunos; ou qualquer outro
+      Sistema Operacional BSD, muito destes arquivos ser&atilde;o muito familiar a voc&ecirc;.
+      Se voc&ecirc; vier de outro sistema operacional tal como DOS, o  
       arquivo de configura&ccedil;&atilde;o <filename>GENERIC</filename> 
-      pode impressionar você, sendo assim siga as descrições do
+      pode impressionar voc&ecirc;, sendo assim siga as descri&ccedil;&otilde;es do
       <link linkend="kernelconfig-config">Arquivo de Configura&ccedil;&atilde;o</link>
       lentamente e com cuidado.</para>
 
@@ -246,8 +246,7 @@ configura&ccedil;&atilde;o e as
 
     <para>Voc&ecirc; deve agora compilar o c&oacute;digo fonte do kernel. Est&atilde;o aqui dois
       procedimentos que voc&ecirc; pode usar para isto, e qual voc&ecirc; usar&aacute;, vai depender de como voc&ecirc; quer recompilar seu 
-kernel, 
-      e a vers&atilde;o do &os; que voc&ecirc; est&aacute; rodando.</para>
+      kernel, e a vers&atilde;o do &os; que voc&ecirc; est&aacute; rodando.</para>
 
     <itemizedlist>
       <listitem>
@@ -620,97 +619,97 @@ pseudo-device   loop          # Network loopback</programlisting>
 
     <programlisting>#makeoptions     DEBUG=-g          #Build kernel with gdb(1) debug symbols</programlisting>
 
-    <para>O processo normal de compilação do &os; não inclui informações sobre
-      problemas com a compilação do kernel e tira a maioria
-      dos símbolos depois que o resultado do kernel é ligado, para salvar algum espaço
-      no local da instalação. Se você estiver fazendo testes com os kernels
-      na -CURRENT ou alterando a seção de desenvolvimento do seu próprio kernel do &os;,
-      Você pode querer descomentar esta linha. Isto irá habilitar o
-      uso da opção <option>-g</option> que habilita informações de problemas   
+    <para>O processo normal de compila&ccedil;&atilde;o do &os; n&atilde;o inclui informa&ccedil;&otilde;es sobre
+      problemas com a compila&ccedil;&atilde;o do kernel e tira a maioria
+      dos s&iacute;mbolos depois que o kernel instalado, para salvar algum espa&ccedil;o
+      no local da instala&ccedil;&atilde;o. Se voc&ecirc; estiver fazendo testes com os kernels
+      na -CURRENT ou alterando a se&ccedil;&atilde;o de desenvolvimento do seu pr&oacute;prio kernel do &os;,
+      Voc&ecirc; pode querer descomentar esta linha. Isto ir&aacute; habilitar o
+      uso da op&ccedil;&atilde;o <option>-g</option> que habilita informa&ccedil;&otilde;es de problemas   
       quando passados para &man.gcc.1;. O mesmo podem ser
-      realizados pelo &man.config.8; opção <option>-g</option>, se
-      você estiver usando a maneira <quote>tradicional</quote> para compilar seu kernel (veja o <xref linkend="kernelconfig-building">
-      para mais informações.).</para>
+      realizados pelo &man.config.8; op&ccedil;&atilde;o <option>-g</option>, se
+      voc&ecirc; estiver usando a maneira <quote>tradicional</quote> para compilar seu kernel (veja o <xref linkend="kernelconfig-building">
+      para mais informa&ccedil;&otilde;es.).</para>
 
     <programlisting>options          MATH_EMULATE      #Support for x87 emulation</programlisting>
 
-    <para>Esta linha permite que o kernel simule um co-processador matemático se
-      seu computador não tiver um (386 ou 486SX). Se você tiver um
+    <para>Esta linha permite que o kernel simule um co-processador matem&aacute;tico se
+      seu computador n&atilde;o for um (386 ou 486SX). Se voc&ecirc; tiver um
       486DX, ou um 386 ou 486SX (com um chip 387 ou 487 separado), ou
-      superior (&pentium;, &pentium;&nbsp;II, etc.), você poderá comentar esta linha.</para>
+      superior (&pentium;, &pentium;&nbsp;II, etc.), voc&ecirc; poder&aacute; comentar esta linha.</para>
 
     <note>
-      <para>As rotinas normais matemáticas do co-processador para emulação vem com o
-	&os; <emphasis>não</emphasis> são muito precisas. Se você quer fazer e não tem
-	um co-processador matemático, e você precisa de melhor precisão, é
-	recomendado que você mude esta opção para
-	<literal>GPL_MATH_EMULATE</literal> para usar o GNU suporte matemático,
-	qual não e incluso por padrão por razões licenciais.</para>
+      <para>As rotinas normais matem&aacute;ticas do co-processador para emula&ccedil;&atilde;o vem com o
+	&os; <emphasis>não</emphasis> s&atilde;o muito precisas. Se voc&ecirc; quer fazer e n&atilde;o tem
+	um co-processador matem&aacute;tico, e voc&ecirc; precisa de melhor precis&atilde;o, &eacute;
+	recomendado que voc&ecirc; mude esta op&ccedil;&atilde;o para
+	<literal>GPL_MATH_EMULATE</literal> para usar o GNU suporte matem&aacute;tico,
+	qual n&atilde;o &eacute; incluso por padr&atilde;o por raz&otilde;es licenciais.</para>
 
-      <para>No &os; 5.X, a emulação mateática é disabilitada por padrão,
-      em outras CPUs que não tem suporte a ponto flotuante matemático native
-      são mais ou menos comuns, e em muitos casos não suportados pelo kernel
-      <filename>GENERIC</filename> sem outras opções adicionais.</para></note>
+      <para>No &os; 5.X, a emula&ccedil;&atilde;o matem&aacute;tica &eacute; desabilitada por padr&atilde;o,
+      em outras CPUs que n&atilde;o tem suporte a ponto flotuante matem&aacute;tico nativo
+      s&atilde;o menos comuns, e em muitos casos n&atilde;o suportados pelo kernel
+      <filename>GENERIC</filename> sem outras op&ccedil;&otilde;es adicionais.</para></note>
 
     <programlisting>options          INET          #InterNETworking</programlisting>
 
-    <para>Suporte a Rede. Deixe isto dentro, mesmo se você não planeja ser
+    <para>Suporte a Rede. Deixe isto dentro, mesmo se voc&ecirc; n&atilde;o planeja ser
       ser conectado a uma rede. Muitos programas requerem ao menos loopback
-      rede (isto é, fazendo conexões de rede dentro do seu PC), assim
-      este é essencialmente imposto.</para>
+      rede (isto &eacute;, fazendo conex&otilde;es de rede dentro do seu PC), assim
+      este &eacute; essencialmente imposto.</para>
 
     <programlisting>options          INET6          #IPv6 communications protocols</programlisting>
 
-    <para>Isto os protocolos de comunicação IPv6.</para>
+    <para>Isto &eacute; protoc&oacute;lo de comunicação IPv6.</para>
 
     <programlisting>options          FFS          #Berkeley Fast Filesystem
 options          FFS_ROOT     #FFS usable as root device [keep this!]</programlisting>
 
-    <para>Isto é o sistema de arquivos básico do HD. Deixe isto dentro se você quiser carregar o HD.
+    <para>Isto &eacute; o sistema de arquivos b&aacute;sico do HD. Deixe isto dentro se voc&ecirc; quiser carregar o HD.
       </para>
 
-    <note><para>Em &os; 5.X, <literal>FFS_ROOT</literal> não é mais    
+    <note><para>Em &os; 5.X, <literal>FFS_ROOT</literal> n&atilde;o &eacute; mais    
     requerido.</para></note>
 
     <programlisting>options          UFS_ACL      #Support for access control lists</programlisting>
 
-    <para>Esta opção, somente está presente na &os;&nbsp;5.X, habilita o suporte do kernel
+    <para>Esta op&ccedil;&atilde;o, somente est&aacute; presente no &os;&nbsp;5.X, habilita o suporte do kernel
       a lista de controle de acesso. Isto conta com o uso de atributos extendidos
-      e <acronym>UFS2</acronym>, e os detalhes são descritas no
-      <xref linkend="fs-acl">.  <acronym>ACL</acronym>s são habilitadas por padrão, e não devem
+      e <acronym>UFS2</acronym>, e os detalhes s&atilde;o descritas no
+      <xref linkend="fs-acl">. <acronym>ACL</acronym>s s&atilde;o habilitadas por padr&atilde;o, e n&atilde;o devem
       ser desabilitadas no kernel se tiverem usado previamente no sistema de arquivos,
-      pois removerá a lista de controle de acessos mudando os
-      arquivos protegidos de forma imprevisível.</para>
+      pois remover&aacute; a lista de controle de acessos mudando os
+      arquivos protegidos de forma imprevis&iacute;vel.</para>
 
     <programlisting>options          UFS_DIRHASH  #Improve performance on big directories</programlisting>
 
-    <para>Está opção inclui funcionalidades para aumentar velocidade de operações de disco em diretórios grandes,
+    <para>Est&aacute; op&ccedil;&atilde;o inclui funcionalidades para aumentar velocidade de opera&ccedil;&otilde;es de disco em diret&oacute;rios grandes,
       a custo de usar
-      memória adicional. Você deseja normalmente guardar isto para um grande
-      servidor, ou interagir com estações de trabalho, e remova isto se você estiverem
-      usando &os; em um pequeno sistema onde memória é um prêmio e
-      velocidade de acesso a disco é menos importante, como um firewall.</para>
+      mem&oacute;ria adicional. Voc&ecirc; deseja normalmente guardar isto para um grande
+      servidor, ou interagir com esta&ccedil;&otilde;es de trabalho, e remova isto se voc&ecirc; estiverem
+      usando &os; em um pequeno sistema onde mem&oacute;ria &eacute; um pr&ecirc;mio e
+      velocidade de acesso a disco &eacute; menos importante, como um firewall.</para>
 
     <programlisting>options          SOFTUPDATES  #Enable FFS Soft Updates support</programlisting>
 
-    <para>Esta opção habilita Soft Updates no kernel, isto irá
-      ajudar a aumentar a velocidade de escrita no acesso ao disco. Mesmo que está
+    <para>Esta op&ccedil;&atilde;o habilita Soft Updates no kernel, isto ir&aacute;
+      ajudar a aumentar a velocidade de escrita no acesso ao disco. Mesmo que est&aacute;
       funcionalidade seja fornecida pelo kernel, isto deve ser voltado para
-      especificar discos. Reveja a saída do &man.mount.8; para ver
-      se Soft Updates está habilitado para seu sistema de discos. Se você não      
-      vendo a opção do 
-<literal>soft-updates</literal> então você necessitará para ativar isto usando o &man.tunefs.8; (para o sistema de 
+      especificar discos. Reveja o &man.mount.8; para ver
+      se Soft Updates est&aacute; habilitado para seu sistema de discos. Se voc&ecirc; n&atilde;o      
+      vendo a op&ccedil;&atilde;o do 
+<literal>soft-updates</literal> ent&atilde;o voc&ecirc; necessitar&aacute; para ativar isto usando o &man.tunefs.8; (para o sistema de 
       arquivos existente) ou &man.newfs.8; (para novo sistema de arquivos)
       comandos.</para>
 
     <programlisting>options          MFS          #Memory Filesystem
 options          MD_ROOT      #MD is a potential root device</programlisting>
 
-    <para>Isto é o mapeamento da memória do Sistema de arquivos. Este é basicamente um disco de RAM
-      para armazenamento rápido de arquivos temporários, útil se você tiver um grande
-      espaço de troca que você queira para ter vantagem. Um lugar perfeito 
-      para mountar uma partição  MFS é no diretório <filename>/tmp</filename>,
-      desde que muitos programas e dados temporários sejam armazenados aqui. Para mountar
+    <para>Isto &eacute; o mapeamento da mem&oacute;ria do Sistema de arquivos. Este &eacute; basicamente um disco de RAM
+      para armazenamento r&aacute;pido de arquivos tempor&aacute;rios, &uacute;til se voc&ecirc; tiver um grande
+      espa&ccedil;o de troca que voc&ecirc; queira para ter vantagem. Um lugar perfeito 
+      para mountar uma parti&ccedil;&atilde;o MFS &eacute; no diret&oacute;rio <filename>/tmp</filename>,
+      desde que muitos programas e dados tempor&aacute;rios sejam armazenados aqui. Para mountar
       uma MFS RAM disk no <filename>/tmp</filename>, adicione a seguinte linha no
       <filename>/etc/fstab</filename>:</para>
 
@@ -718,7 +717,7 @@ options          MD_ROOT      #MD is a potential root device</programlisting>
       <programlisting>/dev/ad1s2b	/tmp mfs rw 0 0</programlisting>
     </informalexample>
 
-    <para>Agora você necessita simplesmente reiniciar, ou rodar o comando
+    <para>Agora voc&ecirc; necessita simplesmente reiniciar, ou rodar o comando
       <command>mount /tmp</command>.</para>
 
     <note><para>No &os; 5.X, &man.md.4;-backed UFS sistema de arquivos são
