@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/mail/chapter.sgml,v 1.2 2003/12/10 15:11:19 jmelo Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/mail/chapter.sgml,v 1.5 2003/12/10 22:07:16 jmelo Exp $
 -->
 
 <chapter id="mail">
@@ -338,90 +338,85 @@
 	<title>Configurando o banco de dados de acesso do <application>sendmail</application>
   	 </title>
 
-    <programlisting>cyberspammer.com                550 We don't accept mail from spammers
-FREE.STEALTH.MAILER@            550 We don't accept mail from spammers
+    <programlisting>cyberspammer.com                550 N&oacute;s n&atilde;o aceitamos mensagens de spammers
+FREE.STEALTH.MAILER@            550 N&oacute;s n&atilde;o aceitamos mensagens de spammers
 another.source.of.spam          REJECT
 okay.cyberspammer.com           OK
 128.32                          RELAY</programlisting>
       </example>
 
-   <para>In this example we have five entries.  Mail senders that
-     match the left hand side of the table are affected by the action
-     on the right side of the table.  The first two examples give an
-     error code to <application>sendmail</application>'s error
-     handling routine.  The message is printed to the remote host when
-     a mail matches the left hand side of the table.  The next entry
-     rejects mail from a specific host on the Internet,
-     <hostid>another.source.of.spam</hostid>.  The next entry accepts
-     mail connections from a host
-     <hostid role="fqdn">okay.cyberspammer.com</hostid>, which is more exact than
-     the <hostid role="domainname">cyberspammer.com</hostid> line above.  More specific
-     matches override less exact matches.  The last entry allows
-     relaying of electronic mail from hosts with an IP address that
-     begins with <hostid>128.32</hostid>.  These hosts would be able
-     to send mail through this mail server that are destined for other
-     mail servers.</para>
+   <para>Neste exemplo n&oacute;s temos cinco entradas.  Remetentes de mensagens que
+     s&atilde;o encontrados do lado esquerdo da tabela s&atilde;o afetados pela a&ccedil;&atilde;o
+     do lado direito da tabela.  Os primeiros dois exemplos d&atilde;o um 
+     erro de c&oacute;digo para a rotina do <application>sendmail</application>
+     A mensagem &eacute; emitida para o host remoto quando &eacute; encontrado o email do lado
+     esquerdo da tabela.  A pr&oacute;xima entrada, rejeita mensagens vindo de um host
+     espec&iacute;fico na internet, <hostid>another.source.of.spam</hostid>.  A pr&oacute;xima entrada aceita
+     conex&otilde;es de mensagens vindo do host <hostid role="fqdn">okay.cyberspammer.com</hostid>, que &eacute;
+     mais exata do que a linha acima <hostid role="domainname">cyberspammer.com</hostid>.  Defini&ccedil;&otilde;es mais
+     espec&iacute;ficas sobreescrevem defini&ccedil;&otilde;es menos exatas.  A &uacute;ltima entrada permite
+     relaying de correio eletr&ocirc;nico vindo dos hosts com endere&ccedil;&otilde; IP que
+     come&ccedil;am com <hostid>128.32</hostid>.  Estes hosts est&atilde;o aptos a
+     enviar mensagens atrav&eacute;s desse servidor de correio que s&atilde;o destinados para outros
+     servidores de correio.  </para>
 
-   <para>When this file is updated, you need to run
-     <command>make</command> in <filename>/etc/mail/</filename> to
-     update the database.</para>
+   <para>Quando este arquivo &eacute; atualizado, voce precisa executar o comando
+     <command>make</command> no diret&oacute;rio <filename>/etc/mail/</filename> para
+     atualizar a base de dados.  </para>
 
    </sect2>
    <sect2>
     <title><filename>/etc/mail/aliases</filename></title>
 
-    <para>The aliases database contains a list of virtual mailboxes
-      that are expanded to other user(s), files, programs or other
-      aliases.  Here are a few examples that can be used in
+    <para>A base de dados de apelidos cont&eacute;m a lista de caixas de mensagens virtuais
+      que &eacute; expandido a outros usu&aacute;rio(s), arquivos, programas ou outros
+      apelidos.  Aqui est&atilde;o alguns exemplos que podem ser usado no
       <filename>/etc/mail/aliases</filename>:</para>
 
       <example>
-	<title>Mail Aliases</title>
+	<title>Apelidos de email</title>
     <programlisting>root: localuser
 ftp-bugs: joe,eric,paul
 bit.bucket:  /dev/null
 procmail: "|/usr/local/bin/procmail"</programlisting>
       </example>
 
-      <para>The file format is simple; the mailbox name on the left
-	side of	the colon is expanded to the target(s) on the right.
-	The
-	first example simply expands the mailbox <username>root</username>
-	to the mailbox <username>localuser</username>, which is then
-	looked up again in the aliases database.  If no match is found,
-	then the message is delivered to the local user
-	<username>localuser</username>.  The next example shows a mail
-	list.  Mail to the mailbox <username>ftp-bugs</username> is
-	expanded to the three local mailboxes <username>joe</username>,
-	<username>eric</username>, and <username>paul</username>.  Note
-	that a remote mailbox could be specified as <literal>user@example.com</literal>.  The
-	next example shows writing mail to a file, in this case
-	<filename>/dev/null</filename>.  The last example shows sending
-	mail to a program, in this case the mail message is written to the
-	standard input of <filename>/usr/local/bin/procmail</filename>
-	through a &unix; pipe.</para>
+      <para>O formato do arquivo &eacute; simples; O nome da caixa de mensagens(email)&eacute; indicado do lado esquerdo
+	dos dois pontos e depois do lado direito eh o destino da mensagens para onde ser&atilde;o direcionadas.
+	O primeiro exemplo simplesmente direciona a caixa de correio de mensagens que chegam para o usu&aacute;rio
+	<username>root</username> para a caixa de correio do usu&aacute;rio <username>localuser</username>, 
+        que &eacute; olhada novamente na base de dados de apelidos.  Se nada for encontrado, ent&atilde;o a mensagem &eacute; entregue,
+	ao usu&aacute;rio local <username>localuser</username>.  O pr&oacute;ximo exemplo mostra uma lista de emails.  
+	Mensagens para a caixa de correio <username>ftp-bugs</username> &eacute;
+	direcionada para tr&ecirc;s caixas de mensagem local, <username>joe</username>,
+	<username>eric</username>, e <username>paul</username>.  Note que uma caixa de mensagens
+	remota pode ser especificada como <literal>usu&aacute;rio@exemplo.com.br</literal>.  O pr&oacute;ximo
+	exemplo mostra escrevendo uma mensagem para um arquivo, neste caso
+	<filename>/dev/null</filename>.  O &uacute;ltimo exemplo mostra enviando mensagens para 
+	um programa, neste caso a mensagem &eacute; escrita para uma entrada padr&atilde;o do
+	<filename>/usr/local/bin/procmail</filename> atrav&eacute;s  do &unix; pipe.</para>
 
-   <para>When this file is updated, you need to run
-   <command>make</command> in <filename>/etc/mail/</filename> to
-   update the database.</para>
+   <para>Quando este arquivo &eacute; atualizado, voc&ecirc; precisa executar o comando
+   <command>make</command> no <filename>/etc/mail/</filename> para
+   atualizar a base de dados.  </para>
   </sect2>
   <sect2>
     <title><filename>/etc/mail/local-host-names</filename></title>
 
-    <para>This is a list of hostnames &man.sendmail.8; is to accept as
-      the local host name.  Place any domains or hosts that
-      <application>sendmail</application> is to be receiving mail for.
-      For example, if this mail server was to accept mail for the
-      domain <hostid role="domainname">example.com</hostid> and the host
-      <hostid role="fqdn">mail.example.com</hostid>, its
-      <filename>local-host-names</filename> might look something like
-      this:</para>
+    <para>Esta &eacute; a lista dos hostnames do &man.sendmail.8; que s&atilde;o aceitos como
+      nomes de host locais.  Coloque qualquer dom&iacute;nio ou host do
+      <application>sendmail</application> que est&aacute; poder&aacute; receber mensagens.
+      Por exemplo, se este servidor aceitar mensagens para este
+      dom&iacute;nio <hostid role="domainname">exemplo.com</hostid> e o host
+      <hostid role="fqdn">mail.exemplo.com</hostid>, o
+      <filename>local-host-names</filename> pode ter algo como
+      isto:</para>
 
     <programlisting>example.com
 mail.example.com</programlisting>
 
-    <para>When this file is updated, &man.sendmail.8; needs to be
-    restarted to read the changes.</para>
+    <para>Quando este arquivo &eacute; atualizado, O &man.sendmail.8; precisar ser
+    reiniciado para ativar as mudan&ccedil;as.  </para>
 
   </sect2>
 
