@@ -435,22 +435,25 @@
   </sect1>
   
   <sect1 id="vinum-examples">
-    <title>Some Examples</title>
+    <title>Alguns exemplos</title>
+    
 
-    <para>Vinum maintains a <emphasis>configuration
-      database</emphasis> which describes the objects known to an
-      individual system.  Initially, the user creates the
-      configuration database from one or more configuration files with
-      the aid of the &man.vinum.8; utility program.  Vinum stores a
-      copy of its configuration database on each disk slice (which
-      Vinum calls a <emphasis>device</emphasis>) under its control.
-      This database is updated on each state change, so that a restart
-      accurately restores the state of each Vinum object.</para>
+    <para>Vinum mantám uma <emphasis>base de dados de
+    configuração</emphasis> onde descreve os objetos conhecidos por um
+    sistema individua.  Inicialmente, o usuário cria o banco de dados de
+    configuração a partir de um ou mais arquivos de configuração com a
+    ajuda do utilitário &man.vinum.8;.  Vinum guarda uma cópia das
+    configurações de seu banco de dados em cada "fatia" de disco (onde o
+    Vinum chama de <emphasis>dispositivo</emphasis>) sobre seu controle.
+    Essa base de dados é atualizada em cada mudança de estado, então,
+    precisamente recupera o estado de cada objeo do Vinum</para>
+    
   
     <sect2>
-      <title>The Configuration File</title>
-      <para>The configuration file describes individual Vinum objects.  The
-	definition of a simple volume might be:</para>
+      <title>O arquivo de configuração</title>
+      <para>O arquivo de configuração descreve os objetos individuais do
+      Vinum.  A definção de um simples volume poderia ser:</para>
+      
 
       <programlisting>
     drive a device /dev/da3h
@@ -458,53 +461,53 @@
       plex org concat
         sd length 512m drive a</programlisting>
 
-      <para>This file describes four Vinum objects:</para>
+      <para>Esse arquivo descreve quatro objetos do Vinum:</para>
+      
 
       <itemizedlist>
 	<listitem>
-	  <para>The <emphasis>drive</emphasis> line describes a disk
-	    partition (<emphasis>drive</emphasis>) and its location
-	    relative to the underlying hardware.  It is given the
-	    symbolic name <emphasis>a</emphasis>.  This separation of
-	    the symbolic names from the device names allows disks to
-	    be moved from one location to another without
-	    confusion.</para>
+	  <para>A linha <emphasis>drive</emphasis> descreve uma partição
+	  de disco (<emphasis>drive</emphasis>) e sua localidade
+	  relativa ao fundamento do 
+	  <foreignphrase>hardware</foreignphrase>.  É dado um nome
+	  simbólico <emphasis>a</emphasis>.  Essa separação entre nomes
+	  simbólicos e nomes de dispositivos permite que os discos sejam
+	  movidos de um lado a outro sem confusão.</para>
 	</listitem>
 
 	<listitem>
-	  <para>The <emphasis>volume</emphasis> line describes a volume.
-	    The only required attribute is the name, in this case
-	    <emphasis>myvol</emphasis>.</para>
+	  <para>A linha <emphasis>volume</emphasis> descreve um volume.
+	  O unico atributo requerido é o nome, nesse caso
+	  <emphasis>myvol</emphasis>.</para 
 	</listitem>
 
 	<listitem>
-	  <para>The <emphasis>plex</emphasis> line defines a plex.
-	    The only required parameter is the organization, in this
-	    case <emphasis>concat</emphasis>.  No name is necessary:
-	    the system automatically generates a name from the volume
-	    name by adding the suffix
-	    <emphasis>.p</emphasis><emphasis>x</emphasis>, where
-	    <emphasis>x</emphasis> is the number of the plex in the
-	    volume.  Thus this plex will be called
-	    <emphasis>myvol.p0</emphasis>.</para>
+	  <para>A linha <emphasis>plex</emphasis> define um plex.  O
+	  único parâmetro requerido é a organização, nesse caso
+	  <emphasis>concat</emphasis>.  nenhum nome é necessário: o
+	  sistema irá automaticamente gerar um nome a partir do volume
+	  adicionando o sufixo  <emphasis>.p</emphasis>
+	  <emphasis>x</emphasis>, onde <emphasis>x</emphasis> é o número
+	  de plexes no volume.  Então, esse plex terá o nome
+	  <emphasis>myvol.p0</emphasis>.</para>
 	</listitem>
 
 	<listitem>
-	  <para>The <emphasis>sd</emphasis> line describes a subdisk.
-	    The minimum specifications are the name of a drive on
-	    which to store it, and the length of the subdisk.  As with
-	    plexes, no name is necessary: the system automatically
-	    assigns names derived from the plex name by adding the
-	    suffix <emphasis>.s</emphasis><emphasis>x</emphasis>,
-	    where <emphasis>x</emphasis> is the number of the subdisk
-	    in the plex.  Thus Vinum gives this subdisk the name
-	    <emphasis>myvol.p0.s0</emphasis>.</para>
+	  <para>A linha <emphasis>sd</emphasis> descreve um subdisco.
+	  As mínimas especificações são os nomes dos discos no qual será
+	  armazenado, e o tamanho do subdisco.  Como nos plexes, nenhum
+	  nome é necessário: o sistema delega automaticamente nomes
+	  provenientes dos plexes adicionando o sufixo
+	  <emphasis>.s</emphasis><emphasis>x</emphasis>, onde
+	  <emphasis>x</emphasis> é o número de subdiscos do plex.  Então
+	  Vinum delega a esse subdisco o nome de
+	  <emphasis>myvol.p0.s0</emphasis>.</para>
 	</listitem>
       </itemizedlist>
 
-      <para>After processing this file, &man.vinum.8; produces the following
-	output:</para>
-
+      <para>Depois de processar esse arquivo, &man.vinum.8; gera a
+      seguinte saida:</para>
+      
       <programlisting>
       &prompt.root; vinum -&gt; <command>create config1</command>
       Configuration summary
@@ -521,7 +524,9 @@
 	
 	S myvol.p0.s0           State: up       PO:        0  B Size:        512 MB</programlisting>
 
-      <para>This output shows the brief listing format of &man.vinum.8;.  It
+      <para>
+      
+      This output shows the brief listing format of &man.vinum.8;.  It
 	is represented graphically in <xref linkend="vinum-simple-vol">.</para>
 
       <para>
