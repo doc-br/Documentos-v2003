@@ -2107,44 +2107,49 @@ sapgw00s   4800/tcp # SAP Secure Gateway   4800 + Instance-Number</programlistin
       </sect3>
 
       <sect3 id="necessarylocales">
-        <title>Necessary Locales</title>
+        <title>Localiza&ccedil;&atilde;o Necess&aacute;ria</title>
 	<indexterm><primary>locale</primary></indexterm>
 
-        <para><application>&sap;</application> requires at least two locales that are not part of
-          the default RedHat installation. &sap; offers the required
-          RPMs as download from their FTP server (which is only
-          accessible if you are a customer with OSS access).  See note
-          0171356 for a list of RPMs you need.</para>
+        <para><application>&sap;</application> requer pelo menos dois 
+	  locais que n&atilde;o s&atilde;o parte da instala&ccedil;&atilde;o 
+	  padr&atilde;o do RedHat.  &sap; oferece os RPMs atrav&eacute;s de 
+	  seu servidor de FTP (que somente &eacute; acess&iacute;vel 
+	  se voc&ecirc; for um cliente com acesso OSS).  Veja a nota 
+          0171356 para a lista de RPMs que voc&ecirc; precisa.</para>
 
-        <para>It is also possible to just create appropriate links
-          (for example from <emphasis>de_DE</emphasis> and
-          <emphasis>en_US</emphasis> ), but we would not recommend this
-          for a production system (so far it worked with the IDES
-          system without any problems, though).  The following locales
-          are needed:</para>
+        <para>Tamb&eacute;m &eacute; poss&iacute;vel criar as 
+	  liga&ccedil;&otilde;es apropriadas (por exemplo de 
+          <emphasis>de_DE</emphasis> e
+          <emphasis>en_US</emphasis> ), mas n&oacute;s n&atilde;o 
+	  recomendamos isto para um ambiente de produ&ccedil;&atilde;o 
+	  (at&eacute; agora funcionou com o sistema IDES sem nenhum 
+	  problema).  As seguintes localiza&ccedil;&otilde;es 
+	  s&atilde;o necess&aacute;rias:</para>
 
         <programlisting>de_DE.ISO-8859-1
 en_US.ISO-8859-1</programlisting>
 
-	<para>Create the links like this:</para>
+	<para>Crie as liga&ccedil;&otilde;es como segue:</para>
 
 	<screen>&prompt.root; <userinput>cd /compat/linux/usr/share/locale</userinput>
 &prompt.root; <userinput>ln -s de_DE de_DE.ISO-8859-1</userinput>
 &prompt.root; <userinput>ln -s en_US en_US.ISO-8859-1</userinput></screen>
 
-        <para>If they are not present, there will be some problems
-          during the installation.  If these are then subsequently
-          ignored (by setting the <literal>STATUS</literal> of the offending steps to
-          <literal>OK</literal> in file <filename>CENTRDB.R3S</filename>), it will be impossible to log onto
-          the <application>&sap;</application> system without some additional effort.</para>
+        <para>Se elas n&atilde;o estiverem presentes, algums problemas 
+	  ocorrer&atilde;o durante a instala&ccedil;&atilde;o.  Se forem ignorados 
+          (configurando-se o <literal>STATUS</literal> dos passos problem&aacute;ticos 
+          para <literal>OK</literal> no arquivo <filename>CENTRDB.R3S</filename>), 
+	  ser&aacute; imposs&iacute;vel efetuar <foreignphrase>logon<foreignphrase> 
+          no sistema <application>&sap;</application> sem um esfor&ccedil;o adicional.</para>
       </sect3>
 
       <sect3 id="kerneltuning">
-        <title>Kernel Tuning</title>
+        <title>Ajustes de Kernel</title>
 	<indexterm><primary>kernel tuning</primary></indexterm>
 
-        <para><application>&sap.r3;</application> systems need a lot of resources.  We therefore
-        added the following parameters to the kernel configuration file:</para>
+        <para>Sistemas <application>&sap.r3;</application> precisam de muitos
+	recursos.  Sendo assim, adicionamos os seguintes par&acirc;metros no 
+	arquivos de configura&ccedil;&atilde;o do <foreignphrase>kernel</foreignphrase></para>
 
         <programlisting># Set these for memory pigs (SAP and Oracle):
 options MAXDSIZ="(1024*1024*1024)"
@@ -2166,47 +2171,52 @@ options SEMMNS=1024 #number of semaphores in system
 options SEMMNI=520 #number of semaphore identifiers
 options SEMUME=100       #number of UNDO keys</programlisting>
 
-        <para>The minimum values are specified in the documentation that
-          comes from &sap;.  As there is no description for Linux, see the
-          HP-UX section (32-bit) for further information. As the system
-	  for the 4.6C SR2 installation has more main memory, the shared
-	  segments can be larger both for <application>&sap;</application>
-	  and <application>&oracle;</application>, therefore choose a larger
-	  number of shared memory pages.</para>
+        <para>Os valores m&iacute;nimos s&atilde;o especificados na 
+	  documenta&ccedil;&atilde;o que vem com o &sap;.  Como n&atilde;o 
+	  exite descri&ccedil;&atilde;o para Linux, veja a se&ccedil;&atilde;o 
+	  HP-UX (32-bit) para mais informa&ccedil;&otilde;es.  Como a 
+	  instala&ccedil;&atilde;o do sistema 4.6C SR2 tem mais mem&oacute;ria, 
+	  os segmentos compartilhados pode ser maiores tanto para o 
+	  <application>&sap;</application> quanto para o 
+	  <application>&oracle;</application>, por esta raz&atilde;o escolha 
+	  um n&uacute;mero maior de p&aacute;ginas de mem&oacute;ria 
+	  compartilhada.</para>
 
-	<note><para>With the default installation of FreeBSD&nbsp;4.5 on &i386;,
-	  leave <literal>MAXDSIZ</literal> and <literal>DFLDSIZ</literal> at 1&nbsp;GB maximum. Otherwise, strange 
-	  errors like <errorname>ORA-27102: out of memory</errorname> and 
+	<note><para>Com a instala&ccedil;&atilde;o padr&atilde;o do FreeBSD&nbsp;4.5 
+	  em um &i386;, deixe <literal>MAXDSIZ</literal> e <literal>DFLDSIZ</literal> 
+	  em 1&nbsp;GB no m&aacute;ximo.  Caso contr&aacute;rio, erros estranhos como 
+	  <errorname>ORA-27102: out of memory</errorname> e 
           <errorname>Linux Error: 12: Cannot allocate memory</errorname>
-          might happen.</para></note>
+          podem acontecer.</para></note>
       </sect3>
     </sect2>
 
     <sect2 id="installingsapr3">
-      <title>Installing &sap.r3;</title>
+      <title>Instalando o &sap.r3;</title>
 
       <sect3 id="preparingsapcdroms">
-        <title>Preparing &sap; CDROMs</title>
+        <title>Preparando os CDROMs do &sap;</title>
 
-        <para>There are many CDROMs to mount and unmount during the
-          installation.  Assuming you have enough CDROM drives, you
-          can just mount them all.  We decided to copy the CDROMs
-          contents to corresponding directories:</para>
+        <para>Existem muitos CDROMs a serem montados e desmontados 
+	  durante a instala&ccedil;&atilde;o.  Assumindo que voc&ecirc; 
+	  possui drives de CDROM suficientes, voc&ecirc; pode montar 
+	  todos.  N&oacute;s decidimos copiar o conte&uacute;do dos 
+	  CDROMs para os diret&oacute;rios correspondentes:</para>
 
 	<programlisting>/oracle/<replaceable>SID</replaceable>/sapreorg/<replaceable>cd-name</replaceable></programlisting>
 
-        <para>where <replaceable>cd-name</replaceable> was one of <filename>KERNEL</filename>, 
+        <para>onde <replaceable>cd-name</replaceable> foi um dos <filename>KERNEL</filename>, 
 	  <filename>RDBMS</filename>, <filename>EXPORT1</filename>,
 	  <filename>EXPORT2</filename>, <filename>EXPORT3</filename>,
 	  <filename>EXPORT4</filename>, <filename>EXPORT5</filename> and 
-	  <filename>EXPORT6</filename> for the 4.6B/IDES installation, and
+	  <filename>EXPORT6</filename> para a instala&ccedil;&atilde;o do 4.6B/IDES, e
 	  <filename>KERNEL</filename>, <filename>RDBMS</filename>,
 	  <filename>DISK1</filename>, <filename>DISK2</filename>,
-	  <filename>DISK3</filename>, <filename>DISK4</filename> and
-	  <filename>LANG</filename> for the 4.6C SR2 installation. All the
-	  filenames on the mounted CDs should be in capital letters,
-	  otherwise use the <option>-g</option> option for mounting. So use the following
-	  commands:</para>
+	  <filename>DISK3</filename>, <filename>DISK4</filename> e
+	  <filename>LANG</filename> para a instala&ccedil;&atilde;o do 4.6C SR2. Todos 
+	  os nomes de arquivos nos CDs montados devem estar em letras mai&uacute;sculas, 
+	  caso contr&aacute;rio use a op&ccedil;&atilde;o <option>-g</option> para montar.  
+	  Ent&atilde;o use os seguintes comandos:</para>
 
         <screen>&prompt.root; <userinput>mount_cd9660 -g /dev/cd0a /mnt</userinput>
 &prompt.root; <userinput>cp -R /mnt/* /oracle/<replaceable>SID</replaceable>/sapreorg/<replaceable>cd-name</replaceable></userinput>
@@ -2214,74 +2224,80 @@ options SEMUME=100       #number of UNDO keys</programlisting>
       </sect3>
 
       <sect3 id="runningtheinstall-script">
-        <title>Running the Installation Script</title>
+        <title>Executando o Script de Instala&ccedil;&atilde;o</title>
 
-	<para>First you have to prepare an <filename class="directory">install</filename> directory:</para>
+	<para>Primeiro voc&ecirc; deve preparar um diret&oacute;rio <filename class="directory">install</filename>:</para>
 
 	<screen>&prompt.root; <userinput>cd /oracle/<replaceable>SID</replaceable>/sapreorg</userinput>
 &prompt.root; <userinput>mkdir install</userinput>
 &prompt.root; <userinput>cd install</userinput></screen>
 
-        <para>Then the installation script is started, which will copy nearly
-          all the relevant files into the <filename class="directory">install</filename> directory:</para>
+        <para>Ent&atilde;o quando o <literal>script</literal> for inicializado, 
+	  o mesmo copiar&aacute; todos os arquivos relevantes para o diret&oacute;rio 
+          <filename class="directory">install</filename>:</para>
 
 	<screen>&prompt.root; <userinput>/oracle/<replaceable>SID</replaceable>/sapreorg/KERNEL/UNIX/INSTTOOL.SH</userinput></screen>
 
-	<para>The IDES installation (4.6B) comes with a fully customized
-	  &sap.r3; demonstration system, so there are six instead of just three
-          EXPORT CDs.  At this point the installation template
-	  <filename>CENTRDB.R3S</filename> is for installing a standard
-	  central instance (<application>&r3;</application> and database), not the IDES central
-	  instance, so one needs to copy the corresponding <filename>CENTRDB.R3S</filename>
-	  from the <filename class="directory">EXPORT1</filename> directory, otherwise <command>R3SETUP</command> will only ask
-	  for three EXPORT CDs.</para>
+	<para>A instala&ccedil;&atilde;o IDES (4.6B) vem com um sistema &sap.r3; de 
+	  demonstra&ccedil;&atilde;o completamente personalizado, ent&atilde;o existem 
+	  seis ao inv&eacute;s de tr&ecirc;s CDs EXPORT.  Neste ponto o modelo  
+	  <filename>CENTRDB.R3S</filename> &eacute; para insta&ccedil;a&ccedil;&atilde;o de 
+	  de uma inst&acirc;ncia central padr&atilde;o (<application>&r3;</application> e 
+	  base de dados), n&atilde;o a inst&acirc;ncia central IDES, sendo necess&aacute;rio 
+	  cpoiar o <filename>CENTRDB.R3S</filename> correspondente do diret&oacute;rio 
+	  <filename class="directory">EXPORT1</filename>, caso contr&aacute;rio o 
+	  <command>R3SETUP</command> perguntar&aacute; apenas pelos tr&ecirc;s CDs 
+	  EXPORT.</para>
 
-	<para>The newer <application>&sap; 4.6C SR2</application> release
-	  comes with four EXPORT CDs. The parameter file that controls
-	  the installation steps is <filename>CENTRAL.R3S</filename>.
-	  Contrary to earlier releases there are no separate installation
-	  templates for a central instance with or without database.
-	  <application>&sap;</application> is using a separate template for database installation. To restart
-	  the installation later it is however sufficient to restart with
-	  the original file.</para>
+	<para>A nova vers&atilde;o do <application>&sap; 4.6C SR2</application> 
+	  vem com quatro CDs EXPORT.  O arquivo de par&acirc;metro que controla 
+	  os passos de instala&ccedil;&atilde;o &eacute; o 
+	  <filename>CENTRAL.R3S</filename>.  Ao contr&aacute;rio das vers&otilde;es 
+	  anteriores n&atilde;o existem modelos de instala&ccedil;&atilde;o separados 
+	  para uma inst&acirc;ncia central com ou sem base de dados.  O 
+	  <application>&sap;</application> est&aacute; usando um modelo separado 
+	  para a instala&ccedil;&atilde;o de base de dados.  Para reiniciar a 
+	  instala&ccedil;&atilde;o posteriormente basta reiniciar com o 
+	  arquivo original.</para>
 
-	<para>During and after installation, <application>&sap;</application> requires
-	  <command>hostname</command> to return the computer name
-	  only, not the fully qualified domain name. So either
-	  set the hostname accordingly, or set an alias with
-	  <command>alias hostname='hostname -s'</command> for
-	  both <username>ora<replaceable>sid</replaceable></username> and 
-	  <username><replaceable>sid</replaceable>adm</username> (and for
-	  <username>root</username> at least during installation
-	  steps performed as <username>root</username>). It is also 
-	  possible to adjust the installed <filename>.profile</filename> and <filename>.login</filename> files of
-	  both users that are installed during 
-	  <application>&sap;</application> installation.</para>
+	<para>Durante e depois da instala&ccedil;&atilde;o, o <application>&sap;</application> 
+	  requer o <command>hostname</command> para retornar apenas o nome do 
+	  computador, n&atilde;o o nome completo de dom&iacute;nio.  Ent&atilde;o 
+	  configure o nome do computador de acordo, ou configure um apelido 
+	  com <command>alias hostname='hostname -s'</command> para 
+	  <username>ora<replaceable>sid</replaceable></username> e
+	  <username><replaceable>sid</replaceable>adm</username> (e para 
+	  <username>root</username> pelo menos durante os passos da 
+	  instala&ccedil;&atilde;o feitos como <username>root</username>). 
+	  Tamb&eacute;m &eacute; poss&iacute;vel ajustar os arquivos 
+	  <filename>.profile</filename> e <filename>.login</filename> existentes 
+	  de ambos os usu&aacute;rios durante a instala&ccedil;&atilde;o do 
+	  <application>&sap;</application>.</para>
       </sect3>
 
       <sect3 id="startr3setup-46B">
-        <title>Start <command>R3SETUP</command> 4.6B</title>
+        <title>Inicialize o <command>R3SETUP</command> 4.6B</title>
 
-        <para>Make sure <envar>LD_LIBRARY_PATH</envar> is set correctly:</para>
+        <para>Certifique-se de que <envar>LD_LIBRARY_PATH</envar> est&aacute; configurada corretamente:</para>
 
         <screen>&prompt.root; <userinput>export LD_LIBRARY_PATH=/oracle/IDS/lib:/sapmnt/IDS/exe:/oracle/805_32/lib</userinput></screen>
 
-        <para>Start <command>R3SETUP</command> as <username>root</username> from 
-	  installation directory:</para>
+        <para>Inicie o <command>R3SETUP</command> como <username>root</username> a 
+	  partir do diret&oacute;rio de instala&ccedil;&atilde;o:</para>
 
         <screen>&prompt.root; <userinput>cd /oracle/IDS/sapreorg/install</userinput>
 &prompt.root; <userinput>./R3SETUP -f CENTRDB.R3S</userinput></screen>
 
-        <para>The script then asks some questions (defaults in brackets,
-        followed by actual input):</para>
+        <para>O <literal>script</literal> faz algumas perguntas (o padr&atilde;o 
+	est&aacute; entre colchetes, seguido da entrada real):</para>
 
         <informaltable>
           <tgroup cols="3">
           <thead>
           <row>
-            <entry>Question</entry>
-            <entry>Default</entry>
-            <entry>Input</entry>
+            <entry>Quest&atilde;o</entry>
+            <entry>Padr&atilde;o</entry>
+            <entry>Entrada</entry>
           </row>
           </thead>
           <tbody>
@@ -2439,47 +2455,50 @@ options SEMUME=100       #number of UNDO keys</programlisting>
           </tgroup>
         </informaltable>
       
-        <para>If you had not copied the CDs to the different locations,
-          then the <application>&sap;</application> installer cannot find the CD needed (identified
-          by the <filename>LABEL.ASC</filename> file on the CD) and would
-          then ask you to insert and mount the CD and confirm or enter
-          the mount path.</para>
+        <para>Se voc&ecirc; n&atilde;o copiou os CDs para locais diferentes, 
+          ent&atilde;o o instalador do <application>&sap;</application> n&atilde;o 
+	  pode encontrar o CD (identificado pelo arquivo 
+          <filename>LABEL.ASC</filename> no CD) e pode ent&atilde;o 
+	  solicitar que voc&ecirc; insira e monte o CD e confirme ou que 
+	  entre um caminho de montagem.</para>
    
-        <para>The <filename>CENTRDB.R3S</filename> might not be
-          error free. In our case, it requested EXPORT4 CD again but
-          indicated the correct key (6_LOCATION, then 7_LOCATION
-          etc.), so one can just continue with entering the correct
-          values.</para>
+        <para><filename>CENTRDB.R3S</filename> pode n&atilde;o estar 
+	  livre de erros.  Em nosso caso, solicitoi o CD EXPORT4 
+	  novamente, mas indicou a chave correta (6_LOCATION, ent&atilde;o 
+	  7_LOCATION, etc.), assim um pode continuar quando entramos 
+	  com os valores corretos.</para>
 
-        <para>Apart from some problems mentioned below, everything
-          should go straight through up to the point where the &oracle;
-          database software needs to be installed.</para>
+        <para>Fora alguns problemas mencionados abaixo, tudo deve correr 
+	  bem at&eacute; o ponto onde a base de dados &oracle; precisa 
+	  ser instalada.</para>
       </sect3>
 
       <sect3 id="startr3setup-46C">
-	<title>Start <command>R3SETUP</command> 4.6C SR2</title>
+	<title>Inicialize o <command>R3SETUP</command> 4.6C SR2</title>
 
-	<para>Make sure <envar>LD_LIBRARY_PATH</envar> is set correctly. This is a
-	  different value from the 4.6B installation with
+	<para>Certifique-se de que <envar>LD_LIBRARY_PATH</envar> est&aacute; 
+	  configurada corretamente.  Este &eacute; um valor diferente da 
+	  da instala&ccedil;&atilde;o 4.6B com o 
 	  <application>&oracle; 8.0.5</application>:</para>
 
 	<screen>&prompt.root; <userinput>export LD_LIBRARY_PATH=/sapmnt/PRD/exe:/oracle/PRD/817_32/lib</userinput></screen>
 
-	<para>Start <command>R3SETUP</command> as user <username>root</username> from installation directory:</para>
+	<para>Inicie o <command>R3SETUP</command> como <username>root</username> 
+	  partir do diret&oacute;rio de instala&ccedil;&atilde;o:</para>
 
 	<screen>&prompt.root; <userinput>cd /oracle/PRD/sapreorg/install</userinput>
 &prompt.root; <userinput>./R3SETUP -f CENTRAL.R3S</userinput></screen>
 
-	<para>The script then asks some questions (defaults in brackets,
-	  followed by actual input):</para>
+	<para>O <literal>script</literal> faz algumas quest&otilde;es (o 
+	  padr&atilde;o est&aacute; entre colchetes, seguido da entrada real):</para>
 
 	<informaltable>
 	  <tgroup cols="3">
 	  <thead>
 	  <row>
-	    <entry>Question</entry>
-	    <entry>Default</entry>
-	    <entry>Input</entry>
+	    <entry>Quest&atilde;o</entry>
+	    <entry>Padr&atilde;o</entry>
+	    <entry>Entrada</entry>
 	  </row>
 	  </thead>
 	  <tbody>
@@ -2587,15 +2606,16 @@ options SEMUME=100       #number of UNDO keys</programlisting>
           </tgroup>
         </informaltable>
       
-        <para>So far, creation of users gives an error during
-	  installation in phases OSUSERDBSID_IND_ORA (for creating
-	  user <username>ora<replaceable>sid</replaceable></username>) and 
-	  OSUSERSIDADM_IND_ORA (creating user 
+        <para>At&eacute; agora, a cria&ccedil;&atilde;o de 
+	  usu&aacute;rios d&aacute; um erro durante a instala&ccedil;&atilde;o 
+	  em OSUSERDBSID_IND_ORA (para criar o usu&aacute;rio 
+	  <username>ora<replaceable>sid</replaceable></username>) e
+	  OSUSERSIDADM_IND_ORA (para criar o usu&aacute;rio 
 	  <username><replaceable>sid</replaceable>adm</username>).</para>
    
-        <para>Apart from some problems mentioned below, everything
-          should go straight through up to the point where the &oracle;
-          database software needs to be installed.</para>
+        <para>Fora alguns problemas mencionados abaixo, tudo deve correr 
+	  bem at&eacute; o ponto onde a base de dados &oracle; 
+	  precisa ser instalada.</para>
       </sect3>
     </sect2>
 
