@@ -58,7 +58,7 @@
 
     <copyright>
       <year>2001</year>
-      <holder>The FreeBSD Documentation Project</holder>
+      <holder>Projeto de documenta&ccedil;&atilde;o do FreeBSD</holder>
     </copyright>
 
     <legalnotice id="trademarks" role="trademarks">
@@ -74,18 +74,18 @@
 	estado s&oacute;lido na cria&ccedil;&atilde;o de sistemas embedded.</para>
     
       <para>Os sistemas Embedded possuem a vantagem de ter a sua
-	estabilidade aumentada devido a ausencia completa de partes
+	estabilidade aumentada devido a aus&ecirc;ncia completa de partes
 	m&oacute;veis (Discos rigidos).  Entretanto &eacute; necess&aacute;rio levar em conta
 	que geralmente estes dispositivos possuem pouco espa&ccedil;o de
 	disco dispon&iacute;vel, al&eacute;m de terem na durabilidade da midia de
 	armazenamento outro fator cr&iacute;tico.</para>
 	
-      <para>Os t&oacute;picos especificos a serem abordados incluiem os tipos
-	atributos das midias de estado s&oacute;lido apropriadas para uso
+      <para>Os t&oacute;picos espec&iacute;ficos a serem abordados incluiem os tipos
+	atributos das m&iacute;dias de estado s&oacute;lido apropriadas para uso
 	como disco no FreeBSD, as op&ccedil;&otilde;es de kernel que s&atilde;o
 	interessantes neste tipo de ambiente, o funcionamento do
 	<filename>rc.diskless</filename> o qual &eacute; respons&aacute;vel por 
-	automatizar a a inicializa&ccedil;&atilde;o deste tipo de sistema e por
+	automatizar a inicializa&ccedil;&atilde;o deste tipo de sistema e por
 	suprir as necessidades de sistemas de arquivos destinados
 	apenas ao modo de leitura, e a configura&ccedil;&atilde;o manual dos sistemas
 	de arquivo.  O artigo ir&aacute; concluir com algumas estrat&eacute;gias
@@ -100,34 +100,34 @@
     <para>O escopo deste artigo ir&aacute; se limitar aos dispositivos de
       disco em estado s&oacute;lido baseados em mem&oacute;ria flash.  A mem&oacute;ria
       flash &eacute; uma mem&oacute;ria em estado s&oacute;lido (sem nenhuma parte m&oacute;vel) a
-      qual n&atilde;o &eacute; vol&aacute;til (a memoria mant&eacute;m os dados mesmo depois que
+      qual n&atilde;o &eacute; vol&aacute;til (a mem&oacute;ria mant&eacute;m os dados mesmo depois que
       todas as fontes de energia s&atilde;o desligadas).  A mem&oacute;ria flash
-      pode suportar um grandes choques fisicos (quedas, etc) e &eacute;
-      razoavelmente r&aacute;pida (a solu&ccedil;&atilde;o de mem&oacute;ria flash abordadas neste
+      pode suportar grandes choques fisicos (quedas, etc) e &eacute;
+      razoavelmente r&aacute;pida (as solu&ccedil;&otilde;es de mem&oacute;ria flash abordadas neste
       artigo s&atilde;o ligeiramente mais lentas que um disco rigido EIDE
-      para as opera&ccedil;&otilde;es de escrita, e muito mais rapida para as
+      para as opera&ccedil;&otilde;es de escrita, e muito mais r&aacute;pidas para as
       opera&ccedil;&otilde;es de leitura).  Um aspecto muito importante das mem&oacute;rias
       flash, e que cada setor possui uma capacidade limitada de
       reescrita.  Voc&ecirc; somente pode escrever, apagar, e escrever de
-      novo para um setor de uma mem&oacute;ria flash um certo numero de de
+      novo para um setor de uma mem&oacute;ria flash um certo n&uacute;mero de de
       vezes antes que o setor se torne permanentemente inutilizado.  
       Embora muitos dispositivos de mem&oacute;ria flash mapeiem
       automaticamente os blocos ruins, e embora alguns deles
       distribuam as opera&ccedil;&otilde;es de escrita atrav&eacute;s de toda a unidade,
       permanece o fato de que existe um limite para o numero de
       opera&ccedil;&otilde;es de escrita que se pode realizar no dispositivo.  As
-      unidades competitivas possuem em suas especifica&ccedil;&atilde;o uma vida
+      unidades competitivas possuem em sua especifica&ccedil;&atilde;o uma vida
       &uacute;til entre 1.000.000 e 10.000.000 de escritas por setor.  Esta
-      vida util &eacute; varia de acordo com a temperatura do
+      vida util &eacute; vari&aacute;vel em fun&ccedil;&atilde;o da temperatura do
       ambiente.</para>
     
     <para>Especificamente, n&oacute;s iremos estar discutindo sobre
       unidades compact-flash compat&iacute;veis com o padr&atilde;o ATA e unidades
       de mem&oacute;ria flash &diskonchip; da M-Systems.  Os cart&otilde;es
       compact-flash compat&iacute;veis com o padr&atilde;o ATA s&atilde;o muito populares
-      como midias de armazenamento para cameras digitais.  O interesse
+      como m&iacute;dias de armazenamento para c&acirc;meras digitais.  O interesse
       particular neste tipo de unidade reside no fato de que elas
-      podem ser conectadas ao barramento IDE, e por serem compativeis 
+      podem ser conectadas ao barramento IDE, e por serem compat&iacute;veis 
       com a especifica&ccedil;&atilde;o ATA.  Consequentemente, com um adapatador 
       muito simples e de baixo custo, estes dispositivos podem ser
       conectados diretamente no barramento IDE de um computador.
@@ -135,28 +135,28 @@
       como o FreeBSD ir&atilde;o enxergar o dispositivo como um disco rigido
       comum (apesar de pequeno).  O produto &diskonchip; da M-Systems
       &eacute; baseado na mesma tecnologia de mem&oacute;ria flash utilizada nos cart&otilde;es
-      compact flash compativeis com o padr&atilde;o ATA, mas s&atilde;o
+      compact flash compat&iacute;veis com o padr&atilde;o ATA, mas s&atilde;o
       comercializados no formato de um DIP (um Circuito Integrado) e
-      n&atilde;o s&atilde;o compativeis com o padr&atilde;o ATA.  Para utilizar este tipo
+      n&atilde;o s&atilde;o compat&iacute;veis com o padr&atilde;o ATA.  Para utilizar este tipo
       de dispositivo, n&atilde;o basta instal&aacute;-lo em uma placa m&atilde;e que possua
       um socket para &diskonchip;, voc&ecirc; tamb&eacute;m precisar&aacute; gerar um novo
       kernel para o seu FreeBSD habilitando o suporte ao driver <quote>
       fla</quote>.  E mais, e isso &eacute; critico, existem dados
-      especificos colocados pelo fabricante no setor de boot deste
+      espec&iacute;ficos colocados pelo fabricante no setor de boot deste
       dispositivo, desta forma voc&ecirc; deve ter o cuidado de n&atilde;o instalar
       o boot loader do FreeBSD (e nenhum outro) quando estiver
       utilizando um &diskonchip;.</para>
       
     <para>Existem outras solu&ccedil;&otilde;es de disco em estado s&oacute;lido, mas eles
       s&atilde;o caros, obscuros e relativamente complicados para serem abordados 
-      dentro do no escopo deste artigo.</para>
+      dentro do escopo deste artigo.</para>
   </sect1>
 
   <sect1 id="kernel">
       <title>Op&ccedil;&otilde;es do Kernel</title>
 
-    <para>Existem poucas as op&ccedil;&otilde;es no kernel que sejam de interesse
-      especifico para a cria&ccedil;&atilde;o de um sistema FreeBSD embedded.</para>
+    <para>Existem poucas op&ccedil;&otilde;es no kernel que sejam de interesse
+      espec&iacute;fico para a cria&ccedil;&atilde;o de um sistema FreeBSD embedded.</para>
     
     <para>Primeiro, todos os sistemas FreeBSD embedded que utilizam
       unidades de mem&oacute;ria flash como sistema de disco estar&atilde;o
