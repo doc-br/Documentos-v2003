@@ -403,61 +403,72 @@
       <sect3 id="mirror-anoncvs">
         <title>AnonCVS (Opcional para um reposit&oacute;rio CVS)</title>
 
-        <para>
-          If you have the CVS repository, you may want to offer
-          anonymous CVS access. A short warning first:
-          There is not much demand for it,
-          it requires some experience, and you need to know
-          what you are doing.
-        </para>
-        <para>
-          Generally there are two ways
-          to access a CVS repository remotely: via
-          <emphasis>pserver</emphasis> or via <command>ssh</command>
-          (we don't consider <command>rsh</command>).
-          For anonymous access, <emphasis>pserver</emphasis> is
-          very well suited, but some still offer <command>ssh</command>
-          access as well. There is a custom crafted
-          <ulink url="ftp://ftp.FreeBSD.org/pub/FreeBSD/development/FreeBSD-CVS/anoncvs.shar">wrapper</ulink>
-          in the CVS repository, to be used as a login-shell for the
-          anonymous ssh account. It does a chroot, and therefore
-          requires the CVS repository to be available under the
-          anonymous user's home-directory.   This may not be possible
-          for all sites. If you just offer <emphasis>pserver</emphasis>
-          this restriction does not apply, but you may run with
-          more security risks. You don't need to install any special
-          software, since &man.cvs.1; comes with
-          FreeBSD. You need to enable access via <command>inetd</command>,
-          so add an entry into your <filename>/etc/inetd.conf</filename>
-          like this:
-          <programlisting>
+        <para>Se voce possui o reposit&oacute;rio CVS, voc&ecirc; pode desejar
+	  disponibiliz&aacute;-lo via cvs an&ocirc;nimo.  Um pequeno aviso antes:
+	  N&atilde;o existe muita demanda para este tipo de acesso, ele
+	  requer alguma experi&ecirc;ncia, e voc&ecirc; precisa saber o que est&aacute;
+	  fazendo.</para>
+        
+	<para>Geralmente h&aacute; duas formas de se acessar um reposit&oacute;rio
+	  CVS remotamente: via <emphasis>pserver</emphasis> ou via 
+	  <command>ssh</command> (n&oacute;s n&atilde;o consideramos o <command>rsh
+	  </command>).  Para acesso an&ocirc;nimo, o uso do
+	  <emphasis>pserver</emphasis> &eacute; mais que suficiente, por&eacute;m
+	  alguns tamb&eacute;m oferecem acesso via <command>ssh</command>.
+	  Existe um crafted <ulink 
+	  url="ftp://ftp.FreeBSD.org/pub/FreeBSD/development/FreeBSD-CVS/anoncvs.shar">wrapper</ulink>
+	  no reposit&oacute;rio CVS, para ser utilizado como shell para uma
+	  conta de ssh an&ocirc;nimo. Ele faz um chroot, e consequentemente
+	  requer que o reposit&oacute;rio CVS esteja dispon&iacute;vel no diret&oacute;rio
+	  home do usu&aacute;rio an&ocirc;nimo.  Isto pode n&atilde;o ser poss&iacute;vel para
+	  todos os sites.  Se voc&ecirc; for oferecer apenas acesso via
+	  <emphasis>pserver</emphasis>, esta restri&ccedil;&atilde;o n&atilde;o se aplica,
+	  mas voc&ecirc; pode ficar sujeito a um risco maior de seguran&ccedil;a.
+	  Voc&ecirc; n&atilde;o precisa  instalar nenhum software especial, uma vez
+	  que o &man.cvs.1; vem por padr&atilde;o na instala&ccedil;&atilde;o b&aacute;sica do
+	  FreeBSD.  Voc&ecirc; precisa habilitar o acesso atrav&eacute;s do
+	  <command>inetd</command>, para isto basta adicionar uma
+	  entrada ao seu <filename>/etc/inetd.conf</filename>
+	  semelhante a esta:</para>
+          
+	  <programlisting>
 cvspserver stream tcp nowait root /usr/bin/cvs cvs -f -l -R -T /anoncvstmp --allow-root=/home/ncvs pserver
           </programlisting>
-          See the manpage for details of the options. Also see the CVS <emphasis>info</emphasis>
-          page about additional ways to make sure access is read-only.
-          It is advised that you create an unprivileged account, 
-          preferably called <username>anoncvs</username>.
-          Also you need to create a file <filename>passwd</filename>
-          in your <filename>/home/ncvs/CVSROOT</filename> and assign a 
-          CVS password (empty or <literal>anoncvs</literal>) to that user.
-          The directory <filename>/anoncvstmp</filename> is a special
-          purpose memory based file system. It is not required but
-          advised since &man.cvs.1; creates a shadow directory 
-          structure in your <filename>/tmp</filename> which is
-          not used after the operation but slows things
-          dramatically if real disk operations are required.
-          Here is an excerpt from <filename>/etc/fstab</filename>,
-          how to set up such a MFS:
+
+	  <para>Consulte o manual para detalhes das op&ccedil;&otilde;es.  Consulte
+	  tamb&eacute;m a p&aacute;gina de <emphasis>info</emphasis> do CVS sobre
+	  formas adicionais de certificar-se de que o acesso &eacute; de
+	  apenas leitura.  Recomenda-se que voc&ecirc; crie uma conta n&atilde;o
+	  privilegiada, preferencialmente chamada <username>anoncvs
+	  </username>.  Voc&ecirc; tamb&eacute;m precisa criar um arquivo
+	  <filename>passwd</filename> no seu 
+	  <filename>/home/ncvs/CVSROOT</filename> e atribuir um
+	  password (em branco ou <literal>anoncvs</literal>) para 
+	  acesso deste usu&aacute;rio ao CVS.  O diret&oacute;rio
+	  <filename>/anoncvstmp</filename> &eacute; um sistema de arquivo
+	  baseado em mem&oacute;ria que tem um prop&oacute;sito especial.  Ele n&atilde;o &eacute;
+	  requerido mas recomendado, uma vez que o &man.cvs.1; cria uma
+	  estrutura de diret&oacute;rios ocultos no seu
+	  <filename>/tmp</filename> a qual n&atilde;o &eacute; utilizada depois da
+	  opera&ccedil;&atilde;o, mas que deixa as coisas dram&aacute;ticamente lentas se
+	  forem necess&aacute;rias opera&ccedil;&otilde;es reais de escrita/leitura para o 
+	  disco.  Aqui est&aacute; um fragmento do <filename>/etc/fstab</filename>,
+          de como configurar um MFS:</para>
+
           <programlisting>
 /dev/da0s1b /anoncvstmp mfs rw,-s=786432,-b=4096,-f=512,-i=560,-c=3,-m=0,nosuid,nodev 0 0
           </programlisting>
-          This is (of course) tuned a lot, and was suggested by &a.jdp;.
-        </para>
+
+	  <para>Esta &eacute; (naturalmente) uma sintaxe ajustada ao m&aacute;ximo, e foi 
+	    sugerida  pelo &a.jdp;.</para>
+
       </sect3>
    </sect2>
   </sect1>
+  
   <sect1 id="mirror-howto">
-    <title>How to Mirror FreeBSD</title>
+    <title>Como espelhar o FreeBSD</title>
+    
     <para>
       Ok, now you know the requirements and how to offer
       the services, but not how to get it. :-)
