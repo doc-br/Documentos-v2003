@@ -544,74 +544,71 @@ cpu          I686_CPU</programlisting>
       igual ao número de usuários simultâneos que você espera ter em sua
       máquina.</para>
 
-    <para>Starting with &os;&nbsp;4.5, the system will auto-tune this setting
-      for you if you explicitly set it to <literal>0</literal><footnote>
-	<para>The auto-tuning algorithm sets <literal>maxuser</literal> equal
-	  to the amount of memory in the system, with a minimum of 32, and a
-	  maximum of 384.</para></footnote>.
-      In &os;&nbsp;5.X, <literal>maxusers</literal> will default to
-      <literal>0</literal> if not specified.  If you are using an
-      version of &os; earlier than 4.5, or you want to manage it
-      yourself you will want to set
-      <literal>maxusers</literal> to at least 4, especially if you are
-      using the X Window System or compiling software.  The reason is that
-      the most important table set by <literal>maxusers</literal> is the
-      maximum number of processes,  which is set to <literal>20 + 16 *
-      maxusers</literal>, so if you set <literal>maxusers</literal> to 1,
-      then you can only have 36 simultaneous processes, including the 18
-      or so that the system starts up at boot time, and the 15 or so you
-      will probably create when you start the X Window System.  Even a
-      simple task like reading a manual page will start up nine processes to
-      filter, decompress, and view it.  Setting
-      <literal>maxusers</literal> to 64 will allow you to have up to 1044
-      simultaneous processes, which should be enough for nearly all uses.
-      If, however, you see the dreaded <errortype>proc table
-      full</errortype> error when trying to start another program, or are
-      running a server with a large number of simultaneous users (like
-      <hostid role="fqdn">ftp.FreeBSD.org</hostid>), you can always
-      increase the number and rebuild.</para>
+    <para>Começando com o &os;&nbsp;4.5, o sistema escolhe auto-ajuste desta configuração para 
+      você se você explicitamente ajustar isto para <literal>0</literal><footnote>
+	<para>O auto-ajuste do algoritmo ajusta <literal>maxuser</literal> igual
+	  a quantidade de memória do sistema, com um mínimo de 32, e um
+	  máximo de 384.</para></footnote>.
+      Em &os;&nbsp;5.X, <literal>maxusers</literal> ficará como padrão em
+      <literal>0</literal> se não specificado. Se você estiver usando uma
+      versão do &os; anterior ao 4.5, ou você quiser gerenciar você mesmo isto
+      e quiser ajustar o
+      <literal>maxusers</literal> para o mínimo 4, especialmente se você estiver
+      usando o X Window System ou compilando software. A razão é que
+      a tabela mais importante ajustada com <literal>maxusers</literal> é o
+      número máximo de processos, uqe é ajustado para <literal>20 + 16 *
+      maxusers</literal>, assim se você ajustar <literal>maxusers</literal> para 1,
+      então você poderá somente ter 36 processos simultâneos, incluindo os 18
+      que o sistema carrega na hora da inicialização, e os 15 que você provavelmente
+      irá criar quando você iniciar o X Window System. Mesmo uma
+      tarefa simples uma leitura de uma página de manual começará levantando nove processos para
+      filtro, decompactando, e vendo isso. Configurando
+      <literal>maxusers</literal> para 64 permitirá você ter carregados 1044
+      processos simultâneos, qual deve ser bastante para quase todo o uso.
+      Se, entretanto, você ver o erro <errortype>proc completo da tabela
+      </errortype> ao tentar iniciar outro programa, ou é
+      um servidor rodando com um grande números de usuários simultâneos (se preferir
+      <hostid role="fqdn">ftp.FreeBSD.org</hostid>), você pode aumentar
+      o número e recompilar.</para>
 
     <note>
-      <para><literal>maxusers</literal> does <emphasis>not</emphasis>
-	limit the number of users which can log into your machine.  It
-	simply sets various table sizes to reasonable values considering
-	the maximum number of users you will likely have on your system
-	and how many processes each of them will be running.  One keyword
-	which <emphasis>does</emphasis> limit the number of simultaneous
-	<emphasis>remote logins and X terminal windows</emphasis> is <link
-	linkend="kernelconfig-ptys"><literal>pseudo-device pty
-	16</literal></link>.</para>
+      <para><literal>maxusers</literal><emphasis>não</emphasis>
+	limita o número de usuários que podem logar em sua máquina. Isto
+	simplesmente ajusta tamanho de várias tabelas aos valores razoáveis considerando
+	o número máximo de usuários e processos que você provavelmente terá rodando em seu sistema.
+	A palavra-chave qual <emphasis>faz</emphasis> limita o número de logins <emphasis>remotos simultâneous e X terminal windows</emphasis>
+	é <link linkend="kernelconfig-ptys"><literal>pseudo-device pty 16</literal></link>.</para>
     </note>
     
-    <programlisting># Floating point support - do not disable.
+    <programlisting># Floating point support - não disabilite.
 device          npx0     at nexus? port IO_NPX irq 13</programlisting>
     
-    <para><literal>npx0</literal> is the interface to the floating point
-      math unit in &os;, which is either the hardware co-processor or
-      the software math emulator.  This is <emphasis>not</emphasis>
-      optional.</para>
+    <para><literal>npx0</literal> é a unidade para o ponto flutuante para unidades matemáticas no
+      &os;, qual é também o hardware co-processador ou
+      o emulador de software matemático. Isto <emphasis>não</emphasis>
+      é opicional.</para>
 
     <programlisting># Pseudo devices - the number indicates how many units to allocate.
 pseudo-device   loop          # Network loopback</programlisting>
 
-    <para>This is the generic loopback device for TCP/IP.  If you telnet
-      or FTP to <hostid>localhost</hostid> (a.k.a., <hostid
-      role="ipaddr">127.0.0.1</hostid>) it will come back at you through
-      this pseudo-device.  This is <emphasis>mandatory</emphasis>.</para>
+    <para>Isto é o dispositivo generic loopback para TCP/IP. Se for telnet
+      ou FTP para <hostid>localhost</hostid> (a.k.a., <hostid
+      role="ipaddr">127.0.0.1</hostid>) isto voltará para você direto através da
+      pseudo-device. Isto é <emphasis>imposto</emphasis>.</para>
 
-    <para>Everything that follows is more or less optional.  See the notes
-      underneath or next to each option for more information.</para>
+    <para>Tudo que segue é mais ou menos opcional. Vejam as notas
+      abaixo ou ao lado para cada opção para ter mais informações.</para>
 
     <programlisting>#To statically compile in device wiring instead of /boot/device.hints
 #hints          "GENERIC.hints"         #Default places to look for devices.</programlisting>
 
-    <para>In &os; 5.X and newer versions the &man.device.hints.5; is
-      used to configure options of the device drivers.  The default
-      location that &man.loader.8; will check at boot time is
-      <filename>/boot/device.hints</filename>.  Using the
-      <literal>hints</literal> option you can compile these hints
-      statically into your kernel.  Then there is no need to create a
-      <filename>device.hints</filename> file in
+    <para>Em &os; 5.X e versões mais novas o &man.device.hints.5; é
+      usado para configurar opções de dispositivos drivers. O padrão
+      da localização &man.loader.8; que verifica na inicialização é
+      <filename>/boot/device.hints</filename>. Usando a opção
+      <literal>hints</literal> você pode compilar estas hints
+      estáticamente dentro do seu kernel. Então não ha nenhuma necessidade de criar um arquivo
+      <filename>device.hints</filename> dentro de
       <filename>/boot</filename>.</para>
 
     <!-- XXX: Add a comment here that explains when compiling hints into the kernel is a good idea and why. -->
