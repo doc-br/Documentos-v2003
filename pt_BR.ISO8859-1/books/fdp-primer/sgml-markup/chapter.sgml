@@ -27,7 +27,7 @@
      ANY WAY OUT OF THE USE OF THIS DOCUMENTATION, EVEN IF ADVISED OF THE
      POSSIBILITY OF SUCH DAMAGE.
 
-     $FreeBSD: doc/en_US.ISO8859-1/books/fdp-primer/sgml-markup/chapter.sgml,v 1.48 2002/08/17 15:23:49 blackend Exp $
+     $FreeBSD: doc/en_US.ISO8859-1/books/fdp-primer/sgml-markup/chapter.sgml,v 1.58 2003/08/31 16:41:34 blackend Exp $
 -->
 
 <chapter id="sgml-markup">
@@ -59,13 +59,12 @@
       break (and other processing) when it is encountered.</para>
   </note>
   
-  <sect1>
+  <sect1 id="sgml-markup-html">
     <title>HTML</title>
     
     <para>HTML, the HyperText Markup Language, is the markup language of
       choice on the World Wide Web.  More information can be found at
-      &lt;URL:<ulink
-	url="http://www.w3.org/">http://www.w3.org/</ulink>&gt;.</para>
+      &lt;URL:<ulink url="http://www.w3.org/"></ulink>&gt;.</para>
 
     <para>HTML is used to markup pages on the FreeBSD web site.  It should not
       (generally) be used to mark up other documentation, 
@@ -293,7 +292,7 @@
 	  <programlisting><![ CDATA [<dl>
   <dt>Term 1</dt>
 
-  <dd><p>Paragraph 1 of definition 1.</p></dd>
+  <dd><p>Paragraph 1 of definition 1.</p>
 
     <p>Paragraph 2 of definition 1.</p></dd>
 
@@ -655,12 +654,17 @@
     </sect2>
   </sect1>
   
-  <sect1>
+  <sect1 id="sgml-markup-docbook">
     <title>DocBook</title>
 
-    <para>DocBook was designed by the <ulink
-	url="http://www.oreilly.com/davenport/">Davenport Group</ulink> to be
-      a DTD for writing technical documentation.  As such, and unlike LinuxDoc
+    <para>DocBook was originally developed by HaL Computer Systems and O'Reilly
+      &amp; Associates to be a DTD for writing technical documentation
+      <footnote><para>A short history can be found under <ulink
+      url="http://www.oasis-open.org/committees/docbook/intro.shtml">
+      http://www.oasis-open.org/committees/docbook/intro.shtml</ulink>.
+      </para></footnote>. Since 1998 it is maintained by the <ulink
+      url="http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=docbook">
+      DocBook Technical Committee</ulink>.   As such, and unlike LinuxDoc
       and HTML, DocBook is very heavily oriented towards markup that
       describes <emphasis>what</emphasis> something is, rather than describing
       <emphasis>how</emphasis> it should be presented.</para>
@@ -670,7 +674,7 @@
 
       <para>Some elements may exist in two forms, <emphasis>formal</emphasis>
 	and <emphasis>informal</emphasis>.  Typically, the formal version of
-	the element will consist of a title followed by the information
+	the element will consist of a title followed by the informal
 	version of the element.  The informal version will not have a
 	title.</para>
     </note>
@@ -725,7 +729,7 @@
 	ways.  In the FreeBSD Documentation Project we are using two primary
 	types of DocBook document: the book and the article.</para>
 
-      <para>A book is organised into <sgmltag>chapter</sgmltag>s.  This is a
+      <para>A book is organized into <sgmltag>chapter</sgmltag>s.  This is a
 	mandatory requirement.  There may be <sgmltag>part</sgmltag>s between
 	the book and the chapter to provide another layer of organisation.
 	The Handbook is arranged in this way.</para>
@@ -738,7 +742,7 @@
       <para>Chapters and sections contain the remainder of the content.</para>
 
       <para>An article is simpler than a book, and does not use chapters.
-	Instead, the content of an article is organised into one or more
+	Instead, the content of an article is organized into one or more
 	sections, using the same <sgmltag>sect1</sgmltag> (and
 	<sgmltag>sect2</sgmltag> and so on) elements that are used in
 	books.</para>
@@ -794,9 +798,7 @@
       &lt;holder role="mailto:<replaceable>your e-mail address</replaceable>"><replaceable>Your name</replaceable>&lt;/holder>
     &lt;/copyright>
 
-    &lt;pubdate role="rcs">&#36;Date&#36;&lt;/pubdate>
-
-    &lt;releaseinfo>&#36;Id&#36;&lt;/releaseinfo>
+    &lt;releaseinfo>&#36;FreeBSD&#36;&lt;/releaseinfo>
 
     &lt;abstract>
       &lt;para><replaceable>Include an abstract of the book's contents here.</replaceable>&lt;/para>
@@ -845,9 +847,7 @@
       &lt;holder role="mailto:<replaceable>your e-mail address</replaceable>"><replaceable>Your name</replaceable>&lt;/holder>
     &lt;/copyright>
 
-    &lt;pubdate role="rcs">&#36;Date&#36;&lt;/pubdate>
-
-    &lt;releaseinfo>&#36;Id&#36;&lt;/releaseinfo>
+    &lt;releaseinfo>&#36;FreeBSD&#36;&lt;/releaseinfo>
 
     &lt;abstract>
       &lt;para><replaceable>Include an abstract of the article's contents here.</replaceable>&lt;/para>
@@ -1741,6 +1741,14 @@ This is the file called 'foo2'</screen>
 	<para>Use <sgmltag>option</sgmltag> to mark up a command's
 	  options.</para>
 
+	<para>When referring to the same command multiple times in
+	  close proximity it is preferred to use the
+	  <literal>&amp;man.<replaceable>command</replaceable>.<replaceable>section</replaceable>;</literal>
+	  notation to markup the first reference and use
+	  <sgmltag>command</sgmltag> to markup subsequent references.
+	  This makes the generated output, especially HTML, appear
+	  visually better.</para>
+
 	<para>This can be confusing, and sometimes the choice is not always
 	  clear.  Hopefully this example makes it clearer.</para>
 
@@ -1889,7 +1897,7 @@ This is the file called 'foo2'</screen>
   <filename>/dev/ttyd0</filename> and <filename>/dev/cuaa0</filename>.</para>
 
 <para>By contrast, the networking devices, such as
-  <devicename>ed0</devicename> do not appear in <filename>/dev</filename>.
+  <devicename>ed0</devicename> do not appear in <filename>/dev</filename>.</para>
 
 <para>In MS-DOS, the first floppy drive is referred to as
   <devicename>a:</devicename>.  In FreeBSD it is

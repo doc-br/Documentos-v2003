@@ -1,5 +1,5 @@
 # 
-# $FreeBSD: doc/en_US.ISO8859-1/books/fdp-primer/Makefile,v 1.10 2001/01/03 10:46:47 nik Exp $
+# $FreeBSD: doc/en_US.ISO8859-1/books/fdp-primer/Makefile,v 1.12 2003/04/22 18:35:42 hrs Exp $
 #
 # Build the FreeBSD Documentation Project Primer.
 #
