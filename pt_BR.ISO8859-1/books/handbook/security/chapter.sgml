@@ -1,7 +1,9 @@
 <!--
-     The FreeBSD Documentation Project
+     The FreeBSD Brazilian Portuguese Documentation Project
 
-     $FreeBSD: doc/en_US.ISO8859-1/books/handbook/security/chapter.sgml,v 1.193 2003/11/25 10:20:27 ceri Exp $
+     $FreeBSD$
+     Original Revision: 1.193
+     
 -->
 
 <chapter id="security">
@@ -10,99 +12,112 @@
       <author>
 	<firstname>Matthew</firstname>
 	<surname>Dillon</surname>
-	<contrib>Much of this chapter has been taken from the
-	security(7) manual page by </contrib>
+	<contrib>Muito deste capítulo foi obtido da página
+	  de manual security(7) </contrib>
       </author>
+      <othercredit>
+	<firstname>Alessandro</firstname>
+	<surname>Martini</surname>
+	  <affiliation>
+	    <address><email>martini@neotech.com.br</email></address>
+          </affiliation>
+	<contrib>Tradução para Português-Brasil de </contrib>
+      </othercredit>
     </authorgroup>
   </chapterinfo>
 
-  <title>Security</title>
-  <indexterm><primary>security</primary></indexterm>
+  <title>Segurança</title>
+  <indexterm><primary>segurança</primary></indexterm>
 
   <sect1 id="security-synopsis">
-    <title>Synopsis</title>
+    <title>Sinopse</title>
 
-    <para>This chapter will provide a basic introduction to system security
-      concepts, some general good rules of thumb, and some advanced topics
-      under &os;.  A lot of the topics covered here can be applied
-      to system and Internet security in general as well.  The Internet
-      is no longer a <quote>friendly</quote> place in which everyone
-      wants to be your kind neighbor.  Securing your system is imperative
-      to protect your data, intellectual property, time, and much more
-      from the hands of hackers and the like.</para>
+    <para>Este capítulo irá fornecer uma instrução básica sobre os 
+      conceitos de segurança do sistema, Algumas regras comuns de 
+      manuseio, e alguns tópicos avançados sobre &os;.  Uma boa 
+      quantidade dos tópicos abordados aqui pode ser aplicada a 
+      segurança do sistema e da Internet de um modo geral.  A Internet
+      não é mais o local <quote>amigável</quote> no qual todos querem 
+      ser seus bons vizinhos.  Garantir a segurança do seu sistema 
+      tornou-se imperativo para proteger seus dados, propridade 
+      intelectual, tempo, e muito mais das mãos de 
+      <acronym>hackers</acronym> e afins.</para>
 
-    <para>FreeBSD provides an array of utilities and mechanisms to
-      ensure the integrity and security of your system and
-      network.</para>
+    <para>FreeBSD dispõe de uma estrutura de utilitários e mecanismos 
+      para assegurar a integridade e a segurança do seu sistema e de 
+      sua rede.</para>
 
-    <para>After reading this chapter, you will know:</para>
+    <para>Lendo este este capítulo, você irá aprender sobre:</para>
 
     <itemizedlist>
       <listitem>
-	<para>Basic system security concepts, in respect to &os;.</para>
+	<para>Conceitos básicos de segurança do sistema, relacionados 
+	  ao &os;.</para>
       </listitem>
 
       <listitem>
-	<para>About the various crypt mechanisms available in &os;,
-	  such as <acronym>DES</acronym> and <acronym>MD5</acronym>.</para>
+	<para>Diversos mecanismos de criptografia, disponíveis no &os;, 
+	  como o <acronym>DES</acronym> e o <acronym>MD5</acronym>.</para>
       </listitem>
 
       <listitem>
-	<para>How to set up one-time password authentication.</para>
+	<para>Como configurar autenticação com senha de uso único.</para>
       </listitem>
 
       <listitem>
-	<para>How to set up <application>KerberosIV</application> on &os;
-	  releases prior to 5.0.</para>
+	<para>Como configurar <application>KerberosIV</application> no &os; 
+	  em versões anteriores a 5.0.</para>
       </listitem>
 
       <listitem>
-	<para>How to set up <application>Kerberos5</application> on
-	  post &os; 5.0 releases.</para>
+	<para>Como configurar <application>Kerberos5</application> em 
+	  versões posteriores a 5.0.</para>
       </listitem>
 
       <listitem>
-	<para>How to create firewalls using <acronym>IPFW</acronym>.</para>
+	<para>Como criar firewalls usando <acronym>IPFW</acronym>.</para>
       </listitem>
 
       <listitem>
-	<para>How to configure IPsec and create a <acronym>VPN</acronym> between
-	&os;/&windows; machines.</para>
+	<para>Como configurar IPsec e criar uma <acronym>VPN</acronym> 
+	  entre maquinas &os;/&windows;.</para>
       </listitem>
      
       <listitem>
-	<para>How to configure and use <application>OpenSSH</application>, &os;'s <acronym>SSH</acronym>
-	  implementation.</para>
+	<para>Como configurar e usar <application>OpenSSH</application>,
+	  a implementa&ccedil;ão do <acronym>SSH</acronym> no &os;.</para>
       </listitem>
 
       <listitem>
-	<para>How to configure and load access control extension
-	  modules using the TrustedBSD <acronym>MAC</acronym> Framework.</para>
+	<para>Como configurar e carregar módulos de extensão de 
+	  controle de acesso usando o Sistema <acronym>MAC</acronym>
+	  do TrustedBSD.</para>
       </listitem>
 
       <listitem>
-	<para>What file system <acronym>ACL</acronym>s are and how to use them.</para>
+	<para>O que é uma Lista de Controle de Acesso do sistema de 
+	  arquivos e como usa-la.</para>
       </listitem>
 
       <listitem>
-	<para>How to utililize the &os; security advisories
-	  publications.</para>
+	<para>Como utilizar as publicações do Conselho de Segurança 
+	  do &os;.</para>
       </listitem>
 
     </itemizedlist>
 
-    <para>Before reading this chapter, you should:</para>
+    <para>Antes de ler este capítulo você precisa:</para>
 
     <itemizedlist>
       <listitem>
-	<para>Understand basic &os; and Internet concepts.</para>
+	<para>Entender os conceitos básicos de &os; e Internet.</para>
       </listitem>
     </itemizedlist>
 
   </sect1>
 
   <sect1 id="security-intro">
-    <title>Introduction</title>
+    <title>Introdução</title>
 
     <para>Security is a function that begins and ends with the system
       administrator.  While all BSD &unix; multi-user systems have some
@@ -287,10 +302,10 @@
   </sect1>
 
   <sect1 id="securing-freebsd">
-    <title>Securing FreeBSD</title>
+    <title>Protegendo FreeBSD</title>
     <indexterm>
-      <primary>security</primary>
-      <secondary>securing FreeBSD</secondary>
+      <primary>Segurança</primary>
+      <secondary>protegendo FreeBSD</secondary>
     </indexterm>
 
     <note>
@@ -909,7 +924,7 @@
 	</listitem>
       </orderedlist>
       
-      <para>If your servers are connected to the Internet via a T3 or
+      <para>If your servers are connected to the Internet iva a T3 or
         better, it may be prudent to manually override both
 	<varname>rtexpire</varname> and <varname>rtminexpire</varname>
 	via &man.sysctl.8;.  Never set either parameter to zero (unless
@@ -969,15 +984,15 @@
 	<author>
 	  <firstname>Bill</firstname>
 	  <surname>Swingle</surname>
-	  <contrib>Parts rewritten and updated by </contrib>
+	  <contrib>Parcialmente reescrito e atualizado por </contrib>
 	</author>
       </authorgroup>
       <!-- 21 Mar 2000 -->
     </sect1info>
 
-    <title>DES, MD5, and Crypt</title>
+    <title>DES, MD5, e Crypt</title>
     <indexterm>
-      <primary>security</primary>
+      <primary>segurança</primary>
       <secondary>crypt</secondary>
     </indexterm>
 
@@ -1050,11 +1065,11 @@
   </sect1>
 
   <sect1 id="one-time-passwords">
-    <title>One-time Passwords</title>
-    <indexterm><primary>one-time passwords</primary></indexterm>
+    <title>Senhas de uso único</title>
+    <indexterm><primary>senhas de uso único</primary></indexterm>
     <indexterm>
-      <primary>security</primary>
-      <secondary>one-time passwords</secondary>
+      <primary>Segurança</primary>
+      <secondary>senhas de uso único</secondary>
     </indexterm>
 
     <para>S/Key is a one-time password scheme based on a one-way hash
@@ -1449,14 +1464,14 @@ permit port ttyd0</programlisting>
 	<author>
 	  <firstname>Mark</firstname>
 	  <surname>Murray</surname>
-	  <contrib>Contributed by </contrib>
+	  <contrib>Contribuição de </contrib>
 	</author>
       </authorgroup>
       <authorgroup>
 	<author>
 	  <firstname>Mark</firstname>
 	  <surname>Dapoz</surname>
-	  <contrib>Based on a contribution by </contrib>
+	  <contrib>Baseado em uma contribuição de </contrib>
 	</author>
       </authorgroup>
     </sect1info>
@@ -1940,7 +1955,7 @@ FreeBSD BUILT-19950429 (GR386) #0: Sat Apr 29 17:50:09 SAT 1995</screen>
 	<author>
 	  <firstname>Tillman</firstname>
 	  <surname>Hodgson</surname>
-	  <contrib>Contributed by </contrib>
+	  <contrib>Contribuição de </contrib>
 	</author>
       </authorgroup>
       <authorgroup>
@@ -2716,7 +2731,7 @@ _kerberos           IN  TXT     EXAMPLE.ORG.</programlisting></note>
 	<author>
 	  <firstname>Gary</firstname>
 	  <surname>Palmer</surname>
-	  <contrib>Contributed by </contrib>
+	  <contrib>Contribuição de </contrib>
 	</author>
 	<author>
 	  <firstname>Alex</firstname>
@@ -2725,10 +2740,10 @@ _kerberos           IN  TXT     EXAMPLE.ORG.</programlisting></note>
       </authorgroup>
     </sect1info>
 
-    <title>Firewalls</title>
+    <title><foreignphrase>Firewalls</foreignphrase></title>
     <indexterm><primary>firewall</primary></indexterm>
     <indexterm>
-      <primary>security</primary>
+      <primary>segurança</primary>
       <secondary>firewalls</secondary>
     </indexterm>
 
@@ -3635,7 +3650,7 @@ _kerberos           IN  TXT     EXAMPLE.ORG.</programlisting></note>
   <sect1 id="openssl">
     <title>OpenSSL</title>
     <indexterm>
-      <primary>security</primary>
+      <primary>segurança</primary>
       <secondary>OpenSSL</secondary>
     </indexterm>
     <indexterm><primary>OpenSSL</primary></indexterm>
@@ -3683,14 +3698,14 @@ _kerberos           IN  TXT     EXAMPLE.ORG.</programlisting></note>
 	  <affiliation>
 	    <address><email>nik@FreeBSD.org</email></address>
           </affiliation>
-          <contrib>Written by </contrib>
+          <contrib>Escrito por </contrib>
         </author>
       </authorgroup>
     </sect1info>
 
-    <title>VPN over IPsec</title>
-    <para>Creating a VPN between two networks, separated by the
-      Internet, using FreeBSD gateways.</para>
+    <title>VPN sobre IPsec</title>
+    <para>Criando uma VPN entre duas redes, separadas pela internet, 
+      usando <foreignphrase>gateways</foreignphrase> FreeBSD.</para>
  
     <sect2>
       <sect2info>
@@ -4613,7 +4628,7 @@ ipfw add 1 allow ipencap from W.X.Y.Z to A.B.C.D
 	<author>
 	  <firstname>Chern</firstname>
 	  <surname>Lee</surname>
-	  <contrib>Contributed by </contrib>
+	  <contrib>Contribuição de </contrib>
 	</author>
 	<!-- 21 April 2001 -->
       </authorgroup>
@@ -4984,15 +4999,16 @@ user@unfirewalled-system.example.org's password: <userinput>*******</userinput><
 	<author>
 	  <firstname>Robert</firstname>
 	  <surname>Watson</surname>
-	  <contrib>Sponsored by DARPA and Network Associates Laboratories.
-	    Contributed by </contrib>
+	  <contrib>Patrocinado por DARPA e Network Associates Laboratories.
+	    Contribuição de </contrib>
 	</author>
       </authorgroup>
     </sect1info>
     <indexterm>
       <primary>MAC</primary>
     </indexterm>
-    <title>Mandatory Access Control (MAC)</title>
+    <title>Controle de Acesso Obrigatório 
+      (MAC-Mandatory Access Control)</title>
 
     <para>FreeBSD 5.0 includes a new kernel security framework, the
       TrustedBSD MAC Framework.  The MAC Framework permits compile-time,
@@ -5247,7 +5263,7 @@ user@unfirewalled-system.example.org's password: <userinput>*******</userinput><
 	<author>
 	  <firstname>Tom</firstname>
 	  <surname>Rhodes</surname>
-	  <contrib>Contributed by </contrib>
+	  <contrib>Contribuição de </contrib>
 	</author>
       </authorgroup>
     </sect1info>
@@ -5383,7 +5399,7 @@ drwxr-xr-x  2 robert  robert  512 Nov 10 11:54 public_html</programlisting>
 	<author>
 	  <firstname>Tom</firstname>
 	  <surname>Rhodes</surname>
-	  <contrib>Contributed by </contrib>
+	  <contrib>Contribuição de </contrib>
 	</author>
       </authorgroup>
     </sect1info>
