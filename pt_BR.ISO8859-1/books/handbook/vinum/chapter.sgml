@@ -28,7 +28,7 @@
 	</listitem>
 
 	<listitem>
-	  <para>Eles podem ser pouco seguro.</para>
+	  <para>Eles podem ser pouco seguros.</para>
 	</listitem>
       </itemizedlist>
   </sect1>
@@ -50,18 +50,17 @@
     <indexterm><primary>RAID</primary>
     <secondary>Software</secondary></indexterm>
    
-    <para><emphasis>Vinum</emphasis> o chamado <emphasis>Gerenciador
-	de Volumes</emphasis> é o disco virtual que trata destes
-	três problemas, vamos analiza-los com mais detalhes.  Soluções
-	para estes problemas tem sido propostas e 
-	implementadas:</para>
+    <para><emphasis>Vinum</emphasis> o chamado <emphasis>Gerenciador de
+    Volumes</emphasis> é o disco virtual que trata destes três
+    problemas, vamos analiza-los com mais detalhes.  Soluções para estes
+    problemas tem sido propostas e implementadas:</para>
 
     <para>os discos estão ficando maiores, mas os requisitos para
-    armazenamento de dados também.  frequentemente você vai querer um
+    armazenamento de dados também.  Frequentemente você vai querer um
     sistema de arquivos maior do que o disco que você tem disponível.
     Reconhecidamente, este problema já não é tão agudo com era a dez
-    anos atrás, mas ele ainda existe.  alguns sistemas resolveram isso
-    criando um dispositivo abstrato onde armazena seus dados em um
+    anos atrás, mas ele ainda existe.  Alguns sistemas resolveram isso
+    criando um dispositivo abstrato onde armazenam seus dados em um
     número de discos.</para>
   </sect1>
 
@@ -74,25 +73,25 @@
     ter multiplas conexões de 100&nbsp;Mbit/s com o mundo externo, bem
     além das taxas de transmisão da maioria dos discos.</para>
     
-    <para>Os discos atuais podem transferir dados sequêncialmente em até
-    70&nbsp;MB/s, mas esse valor este valor é de pouca importância em um
-    ambiente onde muitos processos independentes acessam  um disco, onde
-    eles talvez atinjam apenas uma fração desse valor.  Nesses casos é
-    mais importante observar o problema do ponto de vista do subsystem:
-    o parametro importante é a carga que uma transferência coloca no
+    <para>Os discos atuais podem transferir dados sequencialmente em até
+    70&nbsp;MB/s, mas este valor é de pouca importância em um ambiente
+    onde muitos processos independentes acessam  um disco, onde eles
+    talvez atinjam apenas uma fração desse valor.  Nesses casos é mais
+    importante observar o problema do ponto de vista do subsystem: o
+    parametro importante é a carga que uma transferência coloca no
     subsystem, em outras palavras, o tempo em que a transferência ocupa
     os discos envolvidos.</para>
        
-    <para>Em qualquer disco de transferência, o disco deve primeiramente
-    posicionar as cabeças de leitura e esperar até que o primeiro setor
-    passe em baixo delas e depois sim executar a transferência.  Esses
-    atos podem ser considerados com se fossem atômicos: não faz o menor
-    sentido interromper eles.</para>
+    <para>Em qualquer operação de transferência, o disco
+    deve primeiramente posicionar as cabeças de leitura e esperar até
+    que o primeiro setor passe em baixo delas e depois sim executar a
+    transferência.  Esses atos podem ser considerados com se fossem
+    atômicos: não faz o menor sentido interromper eles.</para>
     
-    <para><anchor id="vinum-latency"> considere uma transferência
+    <para><anchor id="vinum-latency">Considere uma transferência
     típica de aproximadamente 10&nbsp;kB: a geração atual de discos de
     alta performance podem posicionar as cabeças em uma média de
-    3.5&nbsp;ms.  Os discos mais rápidos giram em 15,000&nbsp;rpm,
+    3.5&nbsp;ms.  Os discos mais rápidos giram em 15.000&nbsp;rpm,
     então, a rotação latente média (metade de uma revolução) é de
     2&nbsp;ms.  Em 70&nbsp;MB/s, a transferência propriamente dita, leva
     em torno de 150&nbsp;&mu;s, o que é quase nada comprado com o
@@ -108,7 +107,7 @@
     taxa próxima ao número de discos usados.</para>
 
     <para>O ritmo de transferência exato é, claramente, menor que o
-    número de discos envolvidos: apesar de cada disco é capaz de relizar
+    número de discos envolvidos: apesar de cada disco ser capaz de relizar
     transferencias em paralelo, não existe nenhuma forma de se assegurar
     que as solicitações estão distribuidas de maneira uniforme entre os
     discos.  Inevitavelmente a carga no disco será maior do que no
@@ -126,16 +125,16 @@
     modo em que os dados são compartilhados entre eles.  No
     próximo debate, seria conveniente visualizar um disco como se fosse
     um grande número de setores de dados mapeados numericamente, como as
-    páginas de um livro.  o método mais simples seria dividir o disco
+    páginas de um livro.  O método mais simples seria dividir o disco
     virtual em pequenos grupos de setores consecutivos do tamanho do
-    disco fisico individual e depois armzena-los desse jeito, semelhante
-    a pegar um livro grande e dividi-lo em pequenas sessões.  Esse étodo
+    disco físico individual e depois armzená-los desse jeito, semelhante
+    a pegar um livro grande e dividí-lo em pequenas sessões.  Esse étodo
     é chamado de <emphasis>concatenação</emphasis> e tem a vantagem que
     os discos não precisam ter nenhum tipo de relacionamento quanto a
     tamanho.  Funciona bem quando o acesso ao disco virtual é dividido
     de maneira igual entre os seus espaços mapeados.  quando o acesso é
     concentrado um uma área menor, o aumento no desempenho é menos
-    acentuado. <xref linkend="vinum-concat"> Ilustra a sequência na qual
+    acentuado. A <xref linkend="vinum-concat"> ilustra a seqüência na qual
     as unidades de armazenamento são alocadas em uma organização
     concatenada.</para>
     
@@ -154,31 +153,32 @@
       <secondary>particionamento</secondary>
     </indexterm>
 
-    <para>Um mapeamento alternativo é dividir o address space em
-    componentes menores, de tamanhos iguais e armazena-los
-    sequencialmente em discos diferentes.  Por exemplo, os primeiros 256
+    <para>Um mapeamento alternativo é dividir o espaço de endereçamento em
+    componentes menores, de tamanhos iguais e armazená-los
+    seqüencialmente em discos diferentes.  Por exemplo, os primeiros 256
     setores poderiam ser armazenados no primeiro disco, os 256 setores
     seguintes no próximo disco e assim por diante.  Depois de preencher
     o último disco processo se repete até que os discos estejam cheios.
     Esse mapemento é chamado de <emphasis>striping</emphasis> ou
     <acronym>RAID-0</acronym>.
-
     
     <footnote>
       <indexterm><primary>RAID</primary></indexterm>
     
-      <para><acronym>RAID</acronym> significa <emphasis>Array redundante
-      de discos baratos</emphasis> e oferece várias formas de tolerancia
-      de erros, apesar de que um termo um pouco equivocado, pois não
-      fornece redundância.</para> </footnote>.
-      
+      <para><acronym>RAID</acronym> (Redundant Array of Inexpensive
+      Disks) significa <emphasis>Vetor redundante de discos
+      baratos</emphasis> e oferece várias formas de tolerância de erros,
+      apesar de que um termo um pouco equivocado, pois não fornece
+      redundância.</para>
+    </footnote>
 
-    O striping exige um esforço grande para localizar os dados e
-    isso causa carga adicional de I/O onde a tranferência é distribuida
-    para diversos discos, mas pode também fornecer uma carga constante
-    entre os discos.  <xref linkend="vinum-striped"> ilustra  sequência
-    em que as unidades de armazenamento são alocadas em uma organização
-    striped.</para>
+    O <foreignphrase>striping</foreignphrase> exige um esforço grande
+    para localizar os dados e isso causa carga adicional de I/O onde a
+    tranferência é distribuida para diversos discos, mas pode também
+    fornecer uma carga constante entre os discos.  <xref
+    linkend="vinum-striped"> ilustra  seqüência em que as unidades de
+    armazenamento são alocadas em uma organização
+    <foreignphrase>striped</foreignphrase>.</para>
     
     <para>
       <figure id="vinum-striped">
@@ -194,7 +194,7 @@
       <para>O outro problema com os discos atuais é que eles não são
       confiáveis.  Apesar que a confiança nos discos cresceu
       tremendamente nos últimos anos, esses ainda são um dos componentes
-      do núcleo de em servidor com a maior possibilidade de falhar.  E
+      do núcleo de servidor com a maior possibilidade de falhar.  E
       quando eles falham, os resultados podem ser catastróficos:
       substituir um disco e recuperar seus dados pode levar dias.</para>
       
