@@ -89,7 +89,7 @@
 	      <literal>scd</literal> para o CD-ROM Sony,
 	      <literal>matcd</literal> para CD-ROMs Matsushita/Panasonic
 		<footnote>
-		  <para>O driver &man.matcd.4; foi removidodriver
+		  <para>O driver &man.matcd.4; foi removido
 		    no branch FreeBSD&nbsp;4.X desde 5 de outubro de
 		    2002 e nao existe nos releases do  FreeBSD&nbsp;5.0 e
 		    5.1 .  Contudo, este driver esta de volta no branch
@@ -149,122 +149,127 @@
 
     <para>Vamos dizer que queremos adicionar um novo disco SCSI para 
           uma maquina que possui apenas um unico disco.
-     First desligue o computador
-      e instale o drive no computador seguindo as instrucoes
-      do computador, controladora e, and drive manufacturer.  Due to the
-      wide variations of procedures to do this, the details are beyond
-      the scope of this document.</para>
+     Primeiro, desligue o computador
+      e instale o disco no computador seguindo as instrucoes
+      do computador, controladora e, do fabricante do disco.  Devido
+      as grandes variacoes dos procedimentos para fazer isso, os
+      detalhes estao lame do escopo deste documento.</para>
 
-    <para>Login as user <username>root</username>.  After you have installed the
-      drive, inspect <filename>/var/run/dmesg.boot</filename> to ensure the new
-      disk was found.  Continuing with our example, the newly added drive will
-      be <devicename>da1</devicename> and we want to mount it on
-      <filename>/1</filename> (if you are adding an IDE drive, the device name
-      will be <devicename>wd1</devicename> in pre-4.0 systems, or
-      <devicename>ad1</devicename> in most 4.X systems).</para>
+    <para>Logue como usuario <username>root</username>. Depois de
+      instalado o disco, inspecione <filename>/var/run/dmesg.boot</filename>          para confirmar que o novo disco foi encontrado.
+      Continuando com nosso exemplo, o disco recentemente adicionado 
+      sera <devicename>da1</devicename> e queremos monta-lo em 
+      <filename>/1</filename> (se voce esta adicionando um disco IDE,                 o nome do dispositivo sera <devicename>wd1</devicename> nos sistemas            pre-4.0 , ou
+      <devicename>ad1</devicename> na maioria dos sistemas 4.X ).</para>
 
-    <indexterm><primary>partitions</primary></indexterm>
+    <indexterm><primary>particoes</primary></indexterm>
     <indexterm><primary>slices</primary></indexterm>
     <indexterm>
       <primary><command>fdisk</command></primary>
     </indexterm>
 
-    <para>Because FreeBSD runs on IBM-PC compatible computers, it must
-      take into account the PC BIOS partitions.  These are different
-      from the traditional BSD partitions.  A PC disk has up to four
-      BIOS partition entries.  If the disk is going to be truly
-      dedicated to FreeBSD, you can use the
-      <emphasis>dedicated</emphasis> mode.  Otherwise, FreeBSD will
-      have to live within one of the PC BIOS partitions.  FreeBSD
-      calls the PC BIOS partitions <emphasis>slices</emphasis> so as
-      not to confuse them with traditional BSD partitions.  You may
-      also use slices on a disk that is dedicated to FreeBSD, but used
-      in a computer that also has another operating system installed.
-      This is to not confuse the <command>fdisk</command> utility of
-      the other operating system.</para>
+    <para>Pelo fato do FreeBSD rodar em computadores compativeis com
+      IBM-PC , it must
+      take into account as particoes da BIOS do PC.  Estes sao
+      diferentes das tradicionais particoes BSDs. 
+      Um disco do PC tem at&eacute; no maximo 4 entradas de particoes na
+      BIOS.  Se o disco for totalmente dedicado ao FreeBSD, voce pode 
+      utilizar o modo <emphasis>dedicado</emphasis>.  Do contrario,                   o FreeBSD tera de localizar-se dentro de uma das particoes da                   BIOS do PC.  O FreeBSD chama as particoes da BIOS do PC como                    <emphasis>slices</emphasis> de forma
+      a nao confundir com as particoes tradicionais do BSD.  Voce pode
+      tambem utilizar slices em um disco que esta dedicado para o
+      FreeBSD, mas utilizando em um computador que tambem tenha outro
+      sistema operacional instalado.
+      Isto &eacute; para nao confundir com o utilitario <command>fdisk</command> 
+      de outros sistemas operacionais.</para>
 
-    <para>In the slice case the drive will be added as
-      <filename>/dev/da1s1e</filename>.  This is read as: SCSI disk,
-      unit number 1 (second SCSI disk), slice 1 (PC BIOS partition 1),
-      and <filename>e</filename> BSD partition.  In the dedicated
-      case, the drive will be added simply as
+    <para>No caso do slice, o disco sera adicionado como  
+      <filename>/dev/da1s1e</filename>.  E lido como: disco SCSI ,
+      unidade numero 1 (segundo disco  SCSI ), slice 1 (particao 1 da BIOS            do PC ),
+      e particao BSD <filename>e</filename>.  No caso dedicado,                       o disco sera adicionado simplesmente como
       <filename>/dev/da1e</filename>.</para>
 
     <sect2>
-      <title>Using &man.sysinstall.8;</title>
+      <title>Utilizando o &man.sysinstall.8;</title>
       <indexterm>
         <primary><application>sysinstall</application></primary>
-        <secondary>adding disks</secondary>
+        <secondary>adicionando discos</secondary>
       </indexterm>
       <indexterm>
 	<primary>su</primary>
       </indexterm>
       <procedure>
 	<step>
-	  <title>Navigating <application>Sysinstall</application></title>
+	  <title>Navegando pelo <application>Sysinstall</application></title>
 
-	  <para>You may use <command>/stand/sysinstall</command> to
-	    partition and label a new disk using its easy to use menus.
-	    Either login as user <username>root</username> or use the
-	    <command>su</command> command.  Run
-	    <command>/stand/sysinstall</command> and enter the
-	    <literal>Configure</literal> menu.  Within the
-	    <literal>FreeBSD Configuration Menu</literal>, scroll down and
-	    select the <literal>Fdisk</literal> option.</para>
+	  <para>Voce pode utilizar o <command>/stand/sysinstall</command> para 
+	    particionar e rotular um novo disco facilmente utilizando os menus.
+	    Logue como usuario <username>root</username> or utilize o 
+	    comando <command>su</command>.  Execute
+	    <command>/stand/sysinstall</command> e entre no menu
+	    <literal>Configure</literal> .  Dentro do 
+	    <literal>Menu FreeBSD Configuration </literal>, tecle
+	    para abaixo e selecione a opcao <literal>Fdisk</literal>.</para>
 	</step>
 
 	<step>
-	  <title><application>fdisk</application> Partition Editor</title>
-	  <para>Once inside <application>fdisk</application>, we can type <userinput>A</userinput> to
-	    use the entire disk for FreeBSD.  When asked if you want to
-	    <quote>remain cooperative with any future possible operating
-	      systems</quote>, answer <literal>YES</literal>.  Write the
-	    changes to the disk using <userinput>W</userinput>.  Now exit the
-	    FDISK editor by typing <userinput>q</userinput>.  Next you will be
-	    asked about the Master Boot Record.  Since you are adding a
-	    disk to an already running system, choose
-	    <literal>None</literal>.</para>
+	  <title><application>fdisk</application> Editor de Particoes</title>
+	  <para>Dentro da <application>fdisk</application>, 
+	  nos podemos digitar <userinput>A</userinput> para
+	    utilizar o disco inteiro para o FreeBSD.  Quando
+	    perguntado se voce quer <quote>manter cooperacao com 
+	    qualquer sistema operacional no futuro,
+	    </quote>, responda <literal>YES</literal>. Grave as  
+	    mudancas para o disco utilizando o <userinput>W</userinput>.  
+	    Agora, saia do editor do FDISK digitando <userinput>q</userinput>.  
+	    cwA seguir, sera perguntado sobre o Registro Mestre de
+	    Boot. Desde que estamos adicionando um disco em um sistema 
+	    ja em funcionando , escolha <literal>None</literal>.</para>
 	</step>
 
 	<step>
-	  <title>Disk Label Editor</title>
-	  <indexterm><primary>BSD partitions</primary></indexterm>
+	  <title>Editor de Rotulo do Disco</title>
+	  <indexterm><primary>Particoes BSD </primary></indexterm>
 
-	  <para>Next, you need to exit <application>sysinstall</application>
-            and start it again.  Follow the directions above, although this
-            time choose the <literal>Label</literal> option. This will
-	    enter the <literal>Disk Label Editor</literal>.  This
-	    is where you will create the traditional BSD partitions.  A
-	    disk can have up to eight partitions, labeled
+	  <para>A seguir, voce precisa sair do <application>sysinstall                    </application>
+            e reinicia-lo.  Siga as orientacoes acima, embora desta 
+            vez escolha a opcao <literal>Label</literal>. Entrara
+	    no <literal> Editor de Rotulo do Disco</literal>.  Este 
+	    e o lugar onde serao criados as tradicionais particoes BSD.
+	    Um disco pode ter no maximo 8 particoes, rotuladas de 
 	    <literal>a-h</literal>.
-	    A few of the partition labels have special uses.  The
-	    <literal>a</literal> partition is used for the root partition
-	    (<filename>/</filename>).  Thus only your system disk (e.g,
-	    the disk you boot from) should have an <literal>a</literal>
-	    partition.  The <literal>b</literal> partition is used for
-	    swap partitions, and you may have many disks with swap
-	    partitions.  The <literal>c</literal> partition addresses the
-	    entire disk in dedicated mode, or the entire FreeBSD slice in
-	    slice mode.  The other partitions are for general use.</para>
+	    Alguns rotulos de particoes tem utilizacoes especiais.A
+	    particao <literal>a</literal> e utilizada para representar 
+	    a particao root(<filename>/</filename>).  
+	    Assim, somente seu disco de sistema (por exemplo, 
+	    o disco do qual e dado o boot) deve possuir uma particao
+	    <literal>a</literal>.  A particao  <literal>b</literal> 
+	    e utilizada para identificar as particoes de swap, e voce
+	    pode ter muitos discos com particoes de swap.
+	    A particao <literal>c</literal> partition endereca todo o
+	    disco no modo dedicado , ou o slice inteiro do FreeBSD
+	    no modo slice.  As outras particoes sao para uso gerais.</para>
 
-	  <para><application>sysinstall</application>'s Label editor
-	    favors the <literal>e</literal>
-	    partition for non-root, non-swap partitions.  Within the
-	    Label editor, create a single file system by typing
-	    <userinput>C</userinput>.  When prompted if this will be a FS
-	    (file system) or swap, choose <literal>FS</literal> and type in a
-	    mount point (e.g, <filename>/mnt</filename>).  When adding a
-	    disk in post-install mode, <application>sysinstall</application>
-	    will not create entries
-	    in <filename>/etc/fstab</filename> for you, so the mount point
-	    you specify is not important.</para>
+	  <para>o editor de Rotulos do <application>sysinstall</application>
+	    favors a particao <literal>e</literal>
+	    para particoes nao-swap. Dentro do editor de Rotulo,
+	    crie um unico sistema de arquivos digitando  
+	    <userinput>C</userinput>.  Quando perguntado se este sera
+	    um FS(sistema de arquivo) ou swap, escolha
+	    <literal>FS</literal> e digite um ponto de montagem
+	    (por exemplo, <filename>/mnt</filename>).  Quando
+	    adicionar um disco no modo post-install, 
+	     <application>sysinstall</application>
+	    nao criara as entradas 
+	    no <filename>/etc/fstab</filename> para voce, entao
+	    especificar o ponto de montagem nao e tao importante.</para>
 
-	  <para>You are now ready to write the new label to the disk and
-	    create a file system on it.  Do this by typing
-	    <userinput>W</userinput>.  Ignore any errors from
-	    <application>sysinstall</application> that
-	    it could not mount the new partition.  Exit the Label Editor
-	    and <application>sysinstall</application> completely.</para>
+	  <para>Agora voce esta pronto para escrever o novo rotulo para o
+	  disco e criar um sistema de arquivos nele.
+	    Faca isso digitando
+	    <userinput>W</userinput>.  Ignore quaisquer erros do 
+	    <application>sysinstall</application> que ele nao pode
+	    montar a nova particao.  Saia do Editor de Rotulo 
+	    e do <application>sysinstall</application> completely.</para>
 	</step>
 
 	<step>
