@@ -533,7 +533,7 @@ pcm0: &lt;SB16 DSP 4.11&gt; on sbc0</screen>
       &man.kldload.8;.  Uma vez que o m&oacute;dulo
       <devicename>pcm</devicename> pode ser carregado
       independentemente dos drivers de hardware, a vari&aacute;vel
-      varname>hw.snd.maxautovchans</varname> pode armazenar quantos
+      <varname>hw.snd.maxautovchans</varname> pode armazenar quantos
       canais virtuais ser&atilde;o atribuidos a qualquer dispositivo de som
       atachado ap&oacute;s a inicializa&ccedil;&atilde;o do sistema.</para>
     
@@ -672,7 +672,7 @@ MPEG 1.0 layer III, 128 kbit/s, 44100 Hz joint-stereo
       <title>Codificando arquivos MP3</title>
 
       <para>Hoje em dia, o codificador mp3 escolhido &eacute; o <application>lame</application>.
-	O application>Lame</application> pode ser encontrado no
+	O <application>Lame</application> pode ser encontrado no
 	caminho <filename role="package">audio/lame</filename> da
 	&aacute;rvore do ports.</para>
       
@@ -808,57 +808,62 @@ MPEG 1.0 layer III, 128 kbit/s, 44100 Hz joint-stereo
 
   <title>Reprodu&ccedil;&atilde;o de Video</title>
 
-    <para>Video playback is a very new and rapidly developing application
-      area.  Be patient.  Not everything is going to work as smoothly as
-      it did with sound.</para>
-
-    <para>Before you begin, you should know the model of the video
-      card you have and the chip it uses.  While <application>&xfree86;</application> supports a
-      wide variety of video cards, fewer give good playback
-      performance.  To obtain a list of extensions supported by the
-      X server using your card use the command &man.xdpyinfo.1; while
-      X11 is running.</para>
-
-    <para>It is a good idea to have a short MPEG file which can be
-      treated as a test file for evaluating various players and
-      options.  Since some DVD players will look for DVD media in
-      <filename>/dev/dvd</filename> by default, or have this device
-      name hardcoded in them, you might find it useful to make
-      symbolic links to the proper devices:</para>
-
+    <para>A reprodu&ccedil;&atilde;o de video &eacute; uma area de aplica&ccedil;&atilde;o muito nova e
+      de rapido desenvolvimento.  Seja paciente.  Nem tudo esta
+      funcionando it&atilde;o suavemente como com o som.</para>
+    
+    <para>Antes de voc&ecirc; iniciar, voc&ecirc; deve saber qual o modelo de
+      placa de video que voc&ecirc; possui e qual o chipset que ela utiliza.
+      Apesar do <application>&xfree86;</application> suportar uma
+      ampla variedade de placas de video, poucas possuem uma boa
+      performance de reprodu&ccedil;&atilde;o.  Para obter a lista de extens&otilde;es
+      suportadas pelo servidor X que voc&ecirc; est&aacute; utilizando, utilize o
+      comando &man.xdpyinfo.1; enquanto o X11 estiver sendo
+      executado.</para>
+    
+    <para>&Eacute; uma id&eacute;ia possuir um arquivo MPEG curto, o qual possa ser
+      tratado como um arquivo de teste para avaliar os diversos
+      reprodutores e suas op&ccedil;&otilde;es.  Uma vez que alguns reprodutores de
+      DVD ir&atilde;o procurar por padr&atilde;o uma midia DVD no
+      <filename>/dev/dvd</filename>, ou ent&atilde;o possuem este nome dispositivo 
+      definido estaticamente no c&oacute;digo do programa, voc&ecirc; pode achar
+      util criar links simb&oacute;licos apontando para os dispositivos 
+      apropriados:</para>
+    
       <screen>&prompt.root; <userinput>ln -sf /dev/acd0c /dev/dvd</userinput>
 &prompt.root; <userinput>ln -sf /dev/racd0c /dev/rdvd</userinput></screen>
 
-    <para>On FreeBSD&nbsp;5.X, which uses &man.devfs.5; there
-        is a slightly different set of recommended links:</para>
-
+    <para>No FreeBSD&nbsp;5.X, o qual utiliza &man.devfs.5; existe um
+      conjunto ligeiramente diferente de links recomendados:</para>
+    
       <screen>&prompt.root; <userinput>ln -sf /dev/acd0c /dev/dvd</userinput>
 &prompt.root; <userinput>ln -sf /dev/acd0c /dev/rdvd</userinput></screen>
 
-    <para>Additionally, DVD decryption, which requires invoking
-      special DVD-ROM functions, requires write permission on the DVD
-      devices.</para>
-
+    <para>Adicionalmente, a decodifica&ccedil;&atilde;o de um DVD, a qual necessite
+      da execu&ccedil;&atilde;o de fun&ccedil;&otilde;es especiais do DVD-ROM, exige permiss&atilde;o de
+      escrita no dispositivo de DVD.</para>
+    
     <indexterm>
-      <primary>kernel options</primary>
+      <primary>Op&ccedil;&otilde;es do kernel</primary>
       <secondary>options CPU_ENABLE_SSE</secondary>
     </indexterm>
     <indexterm>
-      <primary>kernel options</primary>
+      <primary>Op&ccedil;&otilde;es do kernel</primary>
       <secondary>options USER_LDT</secondary>
     </indexterm>
 
-    <para>Some of the ports discussed rely on the following kernel
-      options to build correctly.  Before attempting to build, add
-      these options to the kernel configuration file, build a new kernel, and reboot:</para>
-
+    <para>Alguns dos ports discutidos contam com as seguintes op&ccedil;&otilde;es
+      no kernel para compilarem correatmente.  Antes de tentar
+      compil&aacute;-las, adicione estas ope&ccedil;&otilde;es ao arquivo de configura&ccedil;&atilde;o
+      do kernel, compile um novo kernel, e reinicialize:</para>
+    
       <programlisting>option CPU_ENABLE_SSE
 option USER_LDT</programlisting>
 
-    <para>To enhance the shared memory X11 interface, it is
-      recommended that the values of some &man.sysctl.8; variables
-      should be increased:</para>
-
+    <para>Para aumentar a memoria compartilhada dispon&iacute;vel para a
+    interface X11, &eacute; recomendado que os valores de algumas vari&aacute;veis
+    do &man.sysctl.8; sejam aumentadas:</para>
+    
       <programlisting>kern.ipc.shmmax=67108864
 kern.ipc.shmall=32768</programlisting>
 
@@ -869,31 +874,33 @@ kern.ipc.shmall=32768</programlisting>
     <indexterm><primary>SDL</primary></indexterm>
     <indexterm><primary>DGA</primary></indexterm>
 
-    <para>There are several possible ways to display video under X11.
-      What will really work is largely hardware dependent.  Each
-      method described below will have varying quality across
-      different hardware.  Secondly, the rendering of video in X11 is
-      a topic receiving a lot of attention lately, and with each
-      version of <application>&xfree86;</application> there may be significant improvement.</para>
-
-    <para>A list of common video interfaces:</para>
+    <para>H&aacute; diversas maneiras poss&iacute;veis de se exibir um v&iacute;deo sob
+      X11. Qual realmente ir&aacute; funcionar depende largamente do hardware
+      utilizado.  Cada um dos m&eacute;todos descritos abaixo ter&aacute; sua
+      qualidade v&aacute;riando em fun&ccedil;&atilde;o dos diferentes hardwares. Em
+      segundo lugar, a renderiza&ccedil;&atilde;o de video em ambiente X11 &eacute; um t&oacute;pico 
+      que recebe muita aten&ccedil;&atilde;o ultimamente, e cada nova vers&atilde;o do
+      <application>&xfree86;</application>  pode trazer melhorias
+      significativas.</para>
+      
+    <para>Uma lista das interfaces de video mais comuns:</para>
 
     <orderedlist>
     <listitem>
-      <para>X11: normal X11 output using shared memory.</para>
+      <para>X11: Sa&iacute;da normal do X11 utilizando memoria compartilhada.</para>
     </listitem>
     <listitem>
-      <para>XVideo: an extension to the X11
-      interface which supports video in any X11 drawable.</para>
+      <para>XVideo: Uma extens&atilde;o para a interface X11 a qual suporta
+	video em qualquer X11 drawable.</para>
     </listitem>
     <listitem>
-      <para>SDL: the Simple Directmedia Layer.</para>
+      <para>SDL: Camada simples Directmedia.</para>
     </listitem>
     <listitem>
-      <para>DGA: the Direct Graphics Access.</para>
+      <para>DGA: Acesso gr&aacute;fico direto.</para>
     </listitem>
     <listitem>
-      <para>SVGAlib: low level console graphics layer.</para>
+      <para>SVGAlib: Camada gr&aacute;fica para console.</para>
     </listitem>
     </orderedlist>
 
