@@ -321,7 +321,7 @@
 8       set timeout 180
 9       enable dns
 10
-11    provedor:
+11    nome_do_provedor:
 12      set phone "(123) 456 7890"
 13      set authname foo
 14      set authkey bar
@@ -624,7 +624,7 @@ protocol: ppp</screen>
 	    ter definido os endereços da interface e será agora possível
 	    adicionar entradas na tabela de roteamento:</para>
 	
-	  <programlisting>1     provedor:
+	  <programlisting>1     nome_do_provedor:
 2      add default HISADDR</programlisting>
 
 	  <variablelist>
@@ -1092,7 +1092,7 @@ ifconfig_tun0=</programlisting>
 	    vazia, e um arquivo chamado <filename>/etc/start_if.tun0</filename>
 	    deve ser criado.  Esse arquivo deve conter a linha:</para>
 
-	  <programlisting>ppp -auto provedor</programlisting>
+	  <programlisting>ppp -auto nome_do_provedor</programlisting>
 
 	  <para>Esse script é executado no momento da configuração de rede,
 	    iniciando seu daemon ppp em modo automático.  Se você tem uma
@@ -1136,7 +1136,7 @@ ifconfig_tun0=</programlisting>
 	  arquivo <filename>ppp.linkup</filename> para fazer isso
 	  automaticamente:</para>
 
-	<programlisting>1     provedor:
+	<programlisting>1     nome_do_provedor:
 2       delete ALL
 3       add 0 0 HISADDR
 4       !bg sendmail -bd -q30m</programlisting>
@@ -1151,13 +1151,13 @@ ifconfig_tun0=</programlisting>
 
 	<screen>&prompt.root; <userinput>ppp</userinput></screen>
 
-	<para>e então <command>dial provedor</command> para iniciar uma
+	<para>e então <command>dial nome_do_provedor</command> para iniciar uma
 	  sessão PPP, ou, se você quer que o <command>ppp</command>
 	  estabelece as sessões automaticamente quando existir tráfego de
 	  saída (e você não criou o script <filename>start_if.tun0</filename>,
 	  digite:</para>
 
-	<screen>&prompt.root; <userinput>ppp -auto provedor</userinput></screen>
+	<screen>&prompt.root; <userinput>ppp -auto nome_do_provedor</userinput></screen>
       </sect3>
 
       <sect3>
@@ -1975,44 +1975,44 @@ nameserver <replaceable>y.y.y.y</replaceable></programlisting>
 	<author>
 	  <firstname>Jim</firstname>
 	  <surname>Mock</surname>
-	  <contrib>Contributed (from http://node.to/freebsd/how-tos/how-to-freebsd-pppoe.html) by </contrib>
+	  <contrib>Contribuído (from http://node.to/freebsd/how-tos/how-to-freebsd-pppoe.html) por </contrib>
 	</author>
       </authorgroup>
       <!-- 10 Jan 2000 -->
     </sect1info>
 
-    <title>Using PPP over Ethernet (PPPoE)</title>
+    <title>Usando PPP sobre Ethernet (PPPoE)</title>
     <indexterm><primary>PPP</primary><secondary>over Ethernet</secondary></indexterm>
     <indexterm>
       <primary>PPPoE</primary>
       <see>PPP, over Ethernet</see>
     </indexterm>
 
-    <para>This section describes how to set up PPP over Ethernet
+	<para>Esta seção descreve como configurar o PPP sobre Ethernet
       (<acronym>PPPoE</acronym>).</para>
 
     <sect2>
-      <title>Configuring the Kernel</title>
+      <title>Configurando o Kernel</title>
 
-      <para>No kernel configuration is necessary for PPPoE any longer.  If
-	the necessary netgraph support is not built into the kernel, it will
-	be dynamically loaded by <application>ppp</application>.</para>
+	<para>Não é necessária nenhuma configuração no kernel para o PPPoE. Se
+	  o suporte a netgraph não estiver compilado no kernel ele será 
+	  carregado dinamicamente pelo <application>ppp</application>.</para>
     </sect2>
 
     <sect2>
-      <title>Setting Up <filename>ppp.conf</filename></title>
+    	<title>Ajustando o <filename>ppp.conf</filename></title>
 
-      <para>Here is an example of a working
-	<filename>ppp.conf</filename>:</para>
+	<para>Abaixo temos um exemplo de um <filename>ppp.conf</filename>
+	  funcional:</para>
 
       <programlisting>default:
-  set log Phase tun command # you can add more detailed logging if you wish
+  set log Phase tun command # você pode adicionar mais logging se quiser
   set ifaddr 10.0.0.1/0 10.0.0.2/0
 
 nome_do_provedor:
-  set device PPPoE:<replaceable>xl1</replaceable> # replace xl1 with your ethernet device
-  set authname YOURLOGINNAME
-  set authkey YOURPASSWORD
+  set device PPPoE:<replaceable>xl1</replaceable> # troque xl1 pelo seu dispositivo ethernet
+  set authname usuario
+  set authkey senha
   set dial
   set login
   add default HISADDR</programlisting>
@@ -2020,61 +2020,61 @@ nome_do_provedor:
     </sect2>
 
     <sect2>
-      <title>Running <application>ppp</application></title>
+      <title>Executando o <application>ppp</application></title>
 
-      <para>As <username>root</username>, you can run:</para>
+	<para>Como <username>root</username>, você pode executar:</para>
 
       <screen>&prompt.root; <userinput>ppp -ddial nome_do_provedor</userinput></screen>
 
     </sect2>
 
     <sect2>
-      <title>Starting <application>ppp</application> at Boot</title>
+      <title>Iniciando o <application>ppp</application> na Inicialização</title>
 
-      <para>Add the following to your <filename>/etc/rc.conf</filename>
-	file:</para>
+	<para>Adicione o seguinte ao seu arquivo <filename>/etc/rc.conf</filename>:</para>
 
       <programlisting>ppp_enable="YES"
 ppp_mode="ddial"
-ppp_nat="YES"	# if you want to enable nat for your local network, otherwise NO
+ppp_nat="YES"	# se você quer habilitar NAT para sua rede, ou não.
 ppp_profile="nome_do_provedor"</programlisting>
     </sect2>
 
     <sect2>
-      <title>Using a PPPoE Service Tag</title>
+      <title>Usando uma Service Tag no PPPoE</title>
 
-      <para>Sometimes it will be necessary to use a service tag to establish
-	your connection.  Service tags are used to distinguish between
-	different PPPoE servers attached to a given network.</para>
+	<para>Algumas vezes será necessário usar uma <literal>service</literal>
+	  <literal>tag</literal> para estabelecer sua conexão. Service tags são
+	  usadas para distingüir entre diferentes serviços de PPPoE em uma
+	  dada rede.</para>
 
-      <para>You should have been given any required service tag information
-	in the documentation provided by your ISP.  If you cannot locate
-	it there, ask your ISP's tech support personnel.</para>
+	<para>Você deve ter recebido qualquer informação que é requerida
+	  do seu provedor para service tags. Se você não tiver, pergunte 
+	  a equipe técnica do seu provedor.</para>
 
-      <para>As a last resort, you could try the method suggested by the
-	<ulink url="http://www.roaringpenguin.com/pppoe/">Roaring Penguin
-	PPPoE</ulink> program which can be found in the <link
-	linkend="ports">ports collection</link>.  Bear in mind however,
-	this may de-program your modem and render it useless, so
-	think twice before doing it.  Simply install the program shipped
-	with the modem by your provider.  Then, access the
-	<guimenu>System</guimenu> menu from the program.  The name of your
-	profile should be listed there.  It is usually
-	<emphasis>ISP</emphasis>.</para>
+	<para>Como uma último recurso você pode tentar o método sugerido
+	  pelo programa <ulink url="http://www.roaringpenguin.com/pppoe/">Roaring Penguin
+	  PPPoE</ulink> que pode ser localizado na coleção de <link
+	  linkend="ports">ports</link.  Tenha em mente que isso pode desprogramar
+	  seu modem e deixá-lo inutilizável. Portanto pense duas vezes antes de
+	  fazer isto. Simplementes instale o programa fornecido com seu
+	  modem pelo provedor. Então acesse o menu <guimenu>System</guimenu>
+	  pelo programa.  O nome do seu perfil deve estar listado. Ele geralmente
+	  é <emphasis>provedor</emphasis>.</para>
 
-      <para>The profile name (service tag) will be used in the PPPoE
-	configuration entry in <filename>ppp.conf</filename> as the provider
-	part of the <command>set device</command> command (see the &man.ppp.8;
-	manual page for full details).  It should look like this:</para>
+	<para>O perfil (service tag) será utilizado na configuração
+	  do PPPoE no<filename>ppp.conf</filename> como a parte do
+	  provedor no comando <command>set device</command> (veja
+	  &man.ppp.8; para maiores detalhes). Ele deve se parecer
+	  com:</para>
 
       <programlisting>set device PPPoE:<replaceable>xl1</replaceable>:<replaceable>ISP</replaceable></programlisting>
 
-      <para>Do not forget to change <replaceable>xl1</replaceable>
-	to the proper device for your Ethernet card.</para>
-      <para>Do not forget to change <replaceable>ISP</replaceable>
-	to the profile you have just found above.</para>
+	<para>Não esquece de mudar <replaceable>xl1</replaceable>
+	  pelo dispositivo correto para sua placa de rede Ethernet.</replaceable>
+	<para>Não esqueça de trocar <replaceable>provedor<replaceable>
+	  pelo perfil que você acabou de achar.</para>
 
-      <para>For additional information, see:</para>
+	<para>Para mais informações veja:</para>
 
       <itemizedlist>
 	<listitem>
@@ -2095,66 +2095,70 @@ ppp_profile="nome_do_provedor"</programlisting>
 
     <sect2 id="ppp-3com">
 
-      <title>PPPoE with a &tm.3com; <trademark class="registered">HomeConnect</trademark> ADSL Modem Dual Link</title>
+      <title>PPPoE com um &tm.3com; <trademark class="registered">HomeConnect</trademark> ADSL Modem Dual Link</title>
 
-      <para>This modem does not follow <ulink
-	url="http://www.faqs.org/rfcs/rfc2516.html">RFC 2516</ulink>
+	<para>Este modem não segue o <ulink 
+	  url="http://www.faqs.org/rfcs/rfc2516.html">RFC 2516</ulink>
 	(<emphasis>A Method for transmitting PPP over Ethernet
-	(PPPoE)</emphasis>, written by L.  Mamakos, K.  Lidl, J.  Evarts,
-	D.  Carrel, D.  Simone, and R.  Wheeler).  Instead, different packet
-	type codes have been used for the Ethernet frames.  Please complain
-	to <ulink url="http://www.3com.com/">3Com</ulink> if you think it
-	should comply with the PPPoE specification.</para>
+	(PPPoE)</emphasis>, escrito por L.  Mamakos, K.  Lidl, J.  Evarts,
+	D.  Carrel, D.  Simone, and R.  Wheeler). Em vez disso, códigos 
+	diferentes para os pacotes são utilizados em vez de quadros Ethernet.
+	Por favor reclame com a <ulink url="http://www.3com.com/">3Com</ulink>
+	se você acha que ele deveria seguir a especificação PPPoE.</para>
 
-      <para>In order to make FreeBSD capable of communicating with this
-	device, a sysctl must be set.  This can be done automatically at
-	boot time by updating <filename>/etc/sysctl.conf</filename>:</para>
+	<para>Para que o FreeBSD seja capaz de se comunicar com este
+	  dispositivo uma sysctl precisa ser ajustada. Isso pode ser
+	  feito automaticamente na inicialização do sistema atrave
+	  da atualização do arquivo de configuração <filename>/etc/sysctl.conf</filename>:</para>
 
 	<programlisting>net.graph.nonstandard_pppoe=1</programlisting>
 
-      <para>or can be done for immediate effect with the command
-	<command>sysctl net.graph.nonstandard_pppoe=1</command>.</para>
+	<para>ou pode ser utilizado o comando 
+	  <command>sysctl net.graph.nonstandard_pppoe=1</command> para
+	  um efeito imediato.</para>
 
-      <para>Unfortunately, because this is a system-wide setting, it is
-	not possible to talk to a normal PPPoE client or server and a
-	&tm.3com; <trademark class="registered">HomeConnect</trademark> ADSL Modem at the same time.</para>
+	<para>Infelizmente essa modificação tem efeito no sistema inteiro e
+	  não é possível conversar com um servidor PPPoE normal e com um
+	  &tm.3com; <trademark class="registered">HomeConnect</trademark> ADSL Modem
+	  ao mesmo tempo.</para>
 
     </sect2>
   </sect1>
 
   <sect1 id="pppoa">
-    <title>Using <application>PPP</application> over ATM (PPPoA)</title>
+    <title>Usando <application>PPP</application> sobre ATM (PPPoA)</title>
     <indexterm><primary>PPP</primary><secondary>over ATM</secondary></indexterm>
     <indexterm>
       <primary>PPPoA</primary>
       <see>PPP, over ATM</see>
     </indexterm>
 
-    <para>The following describes how to set up PPP over ATM (PPPoA).
-      PPPoA is a popular choice among European DSL providers.</para>
+	<para>O seguinte descreve como ajustar o PPP sobre ATM (PPPoA).
+	  PPPoA é uma escolha popular entre provedor de DSL da Europa.</para>
 
     <sect2>
-      <title>Using PPPoA with the Alcatel &speedtouch; USB</title>
+      <title>Usando PPPoA com o Alcatel &speedtouch; USB</title>
 
-      <para>PPPoA support for this device is supplied as a port in
-	FreeBSD because the firmware is distributed under <ulink
-	url="http://www.speedtouchdsl.com/disclaimer_lx.htm">Alcatel's
-	license agreement</ulink> and can not be redistributed freely
-	with the base system of FreeBSD.</para>
+	<para>Suporte PPPoA para este dispositivo é fornecido como
+	  um port no FreeBSD pois o <literal>firmware</literal> é
+	  fornecido através de um <ulink url="http://www.speedtouchdsl.com/disclaimer_lx.htm">
+	  acordo de licenciamento</ulink> com a 
+	  Alcatel e não pode ser distribuído livremente com o
+	  sistema base do FreeBSD.</para>
 
-      <para>To install the software, simply use the <link
-	  linkend="ports">ports collection</link>.  Install the
-	<filename role="package">net/pppoa</filename> port and follow the
-	instructions provided with it.</para>
+	<para>Para instalar o programa simplesmente use a coleção
+	  de <link linkend="ports">ports</link>. Instale o port
+	  <filename role="package">net/pppoa</filename> e
+	  siga as instruções fornecidas.</para>
 
-      <para>Like many USB devices, the Alcatel &speedtouch; USB needs to
-	download firmware from the host computer to operate properly.
-	It is possible to automate this process in &os; so that this
-	transfer takes place whenever the device is plugged into a USB
-	port.  The following information can be added to the
-	<filename>/etc/usbd.conf</filename> file to enable this
-	automatic firmware transfer.  This file must be edited as the
-	<username>root</username> user.</para>
+	<para>Como muitos dispositivos USB, o Alcatel &speedtouch; USB
+	  precisa fazer o download do firmware do computador para operar
+	  de acordo. É possível automatizar este processo no &os; de modo
+	  que essa transferência aconteça no momento que o dispositivo
+	  foi ligado na porta USB.  A seguinte informação pode ser adicionada
+	  ao arquivo <filename>/etc/usbd.conf</filename> para ativar
+	  essa transferência automática. O arquivo precisar ser
+	  editado como o usuário <username>root</username>.</para>
 
       <programlisting>device "Alcatel SpeedTouch USB"
     devname "ugen[0-9]+"
@@ -2162,31 +2166,29 @@ ppp_profile="nome_do_provedor"</programlisting>
     product 0x4061
     attach "/usr/local/sbin/modem_run -f /usr/local/libdata/mgmt.o"</programlisting>
 
-     <para>To enable the USB daemon, <application>usbd</application>,
-       put the following the line into
-       <filename>/etc/rc.conf</filename>:</para>
+	<para>Para ativar o daemon USB, <application>usbd</application>,
+	  coloque a seguinte linha no <filename>/etc/rc.conf</filename>:</para>
 
      <programlisting>usbd_enable="YES"</programlisting>
 
-     <para>It is also possible to set up
-       <application>ppp</application> to dial up at startup.  To do
-       this add the following lines to
-       <filename>/etc/rc.conf</filename>.  Again, for this procedure
-       you will need to be logged in as the <username>root</username>
-       user.</para>
+	<para>Também é possível ajustar o <application>ppp</application>
+	  para discar na inicilização do sistema. Para fazer isso adicione
+	  as seguintes linhas no <filename>/etc/rc.conf</filename>. Denovo,
+	  para realizar este procedimento você deverá estar <literal>logado</literal>
+	  como <username>root</username>.</para>
 
      <programlisting>ppp_enable="YES"
 ppp_mode="ddial"
 ppp_profile="adsl"</programlisting>
 
-     <para>For this to work correctly you will need to have used the
-       sample <filename>ppp.conf</filename> which is supplied with the
-       <filename role="package">net/pppoa</filename> port.</para>
+	<para>Para que isto funcione corretamente você terá de usar
+	  <filename>ppp.conf</filename> de exemplo fornecido com o
+	  port <filename role="package">net/pppoa</filename>.</para>
 
     </sect2>
 
     <sect2>
-      <title>Using mpd</title>
+      <title>Usando o mpd</title>
 
       <para>You can use <application>mpd</application> to connect to a
 	variety of services, in particular PPTP services.  You can find
