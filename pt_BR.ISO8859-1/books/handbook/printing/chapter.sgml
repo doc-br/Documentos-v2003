@@ -31,89 +31,96 @@
     <indexterm><primary>LPD spooling system</primary></indexterm>
     <indexterm><primary>printing</primary></indexterm>
 
-    <para>FreeBSD can be used to print to a wide variety of printers, from the
-      oldest impact printer to the latest laser printers, and everything in
-      between, allowing you to produce high quality printed output from the
-      applications you run.</para>
+    <para>
+	O FreeBSD pode ser usado para imprimir em uma grande variedade de impressoras, deste as antigas impressoras matricias at&eacute; as modernas laser, permitindo produzir trabalhos de alta qualidade em seus aplicativos preferido.
+    </para>
 
-    <para>FreeBSD can also be configured to act as a print server on a
-      network; in this capacity FreeBSD can receive print jobs from a variety
-      of other computers, including other FreeBSD computers, &windows; and &macos;
-      hosts.  FreeBSD will ensure that one job at a time is printed, and can
-      keep statistics on which users and machines are doing the most printing,
-      produce <quote>banner</quote> pages showing who's printout is who's, and
-      more.</para>
+    <para>
+	O FreeBSD pode tamb&eacute;m ser utilizado como servidor fr impress&atilde;o em uma rede; Com isso, o FreeBSD pode receber trabalhos de impress&atilde;o de uma grande variedade de outros computadores, inclusive de outros FreeBSD, &windows; e &macos;, FreeBSD assegura que apenas um pedido ser&aacute; impresso por vez, e mant&eacute;m a estat&iacute;sticas de cada usu&aacute;rio e de cada m&aacute;quina que fez uso do recurso de impress&atilde;o, produzindo p&aacute;ginas de <quote>banner</quote>, mostrando de quem &eaqcute; a impress&atilde;o na impressora.
+    </para>
 
-    <para>After reading this chapter, you will know:</para>
+    <para>
+	Ap&oacute;s de ler este cap&iacute;tulo, voc&ecirc; estar&aacute; sabendo:
+    </para>
 
     <itemizedlist>
       <listitem>
-	<para>How to configure the FreeBSD print spooler.</para>
+	<para>
+		Como configurar o FreeBSD como um servidor de imprss&atilde;o
+	</para>
       </listitem>
 
       <listitem>
-	<para>How to install print filters, to handle special print jobs
-	  differently, including converting incoming documents to print
-	  formats that your printers understand.</para>
+	<para>
+		Como Instalar filtros de impress&atilde;o, para gerenciar trabalhos de impress&atilde;o especiais diferentemente, incluindo conversores de formatos para o formato padr&atilde;o da sua impressora.
+	</para>
       </listitem>
 
       <listitem>
-	<para>How to enable header, or banner pages on your printout.</para>
+	<para>
+		Como habilitar cabe&ccedil;alhos ou p&aacute;gina de banner &agrave; sua impress&atilde;o.
+	</para>
       </listitem>
 
       <listitem>
-	<para>How to print to printers connected to other computers.</para>
+	<para>
+	Como imprimir em impressoras conectadas em outros computadores.
+	</para>
       </listitem>
 
       <listitem>
-	<para>How to print to printers connected directly to the
-	  network.</para>
+	<para>
+	Como imprimir em impressoras conectadasdiretamente na rede
+	</para>
       </listitem>
 
       <listitem>
-	<para>How to control printer restrictions, including limiting the size
-	  of print jobs, and preventing certain users from printing.</para>
+	<para>
+	Como controlar restri&ccedil;&otilde;es para impressora, incluindo limita&ccedil;&atilde;o de tamanho dos trabalhos de impress&atilde;o e impedindo certos usu&aacute;rios de utilizarem a(s) impressora(s).
+	</para>
       </listitem>
 
       <listitem>
-	<para>How to keep printer statistics, and account for printer
-	  usage.</para>
+	<para>
+	Como mater estat&iacute;sticas de impress&atilde; e de usu&aacute;rios
+	</para>
       </listitem>
 
       <listitem>
-	<para>How to troubleshoot printing problems.</para>
+	<para>
+	Como resolver problemas de impress&atilde;o
+	</para>
       </listitem>
     </itemizedlist>
 
-    <para>Before reading this chapter, you should:</para>
+    <para>
+	Antes de se aventurar na leituta do cap&iacute;tulo, voc&eacirc;e deve:
+	</para>
 
     <itemizedlist>
       <listitem>
-	<para>Know how to configure and install a new kernel 
-	  (<xref linkend="kernelconfig">).</para>
+	<para>
+	Saber como confingurar e instalaer um novo kernel
+	  (<xref linkend="kernelconfig">).
+	</para>
       </listitem>
     </itemizedlist>
   </sect1>
 
   <sect1 id="printing-intro-spooler">
-    <title>Introduction</title>
+    <title>Introdu&ccedil;&atilde;o</title>
 
-    <para>In order to use printers with FreeBSD, you will need to set
-      them up to work with the Berkeley line printer spooling system,
-      also known as the <application>LPD</application> spooling system.
-      It is the standard printer control system in FreeBSD.  This
-      chapter introduces the <application>LPD</application> spooling
-      system, often simply called <application>LPD</application>, and
-      will guide you through its configuration.</para>
+    <para>
+	Para usar impressoras no FreeBSD, voc&eacute; ir&aacute; precisar configurar-lo para trabalhar com o sistema de impress&atilde;o da Barkeley, tamb&eacute; conhecido como sistema de spool <application>LPD</application>.
+	Ele tamb&eacute;m &eacute; o sistema padr&atilde;o de controle do FreeBSD.  Esse cap&iacute;tulo introduz ao sistema de spooling <application>LPD</application>, frequentimente chamado de <application>LPD</application>, e ir&aacute; guia-lo atrav&eacute;s de sua configura&ccedil;&atilde;o.
+	</para>
 
-    <para>If you are already familiar with 
-      <application>LPD</application> or another printer spooling
-      system, you may wish to skip to section <link
-      linkend="printing-intro-setup">Setting up the spooling
-      system</link>.</para>
+    <para>Se voc&ecirc; j&aacute; est&aacute; familiado com <application>LPD</application> ou com outro sistema de impress&atilde;o, voc&ecirc; poder&aacute; pular esta se&ccedil;&atilde;o <link
+      linkend="printing-intro-setup">Configurando o sistema de spooling
+      </link>.</para>
 
-    <para><application>LPD</application> controls everything about a 
-      host's printers.  It is responsible for a number of things:</para>
+    <para><application>LPD</application> controla tudo sobre o servidor de impress&atilde;o.  &Eacute; respons&aacute;vel por um n&uacute;mero de coisas:
+      </para>
 
     <itemizedlist>
       <listitem>

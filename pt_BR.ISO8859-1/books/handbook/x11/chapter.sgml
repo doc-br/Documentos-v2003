@@ -5,165 +5,168 @@
 -->
 
 <chapter id="x11">
-  <title>The X Window System</title>
+  <title>O Sistema de Janela X</title>
 
   <sect1 id="x11-synopsis">
-    <title>Synopsis</title>
+    <title>Sinopse</title>
 
-    <para>FreeBSD uses <application>&xfree86;</application> to provide users with
-      a powerful graphical user interface.  <application>&xfree86;</application>
-      is an open-source implementation of the X Window System.  This chapter
-      will cover installation and configuration of
-      <application>&xfree86;</application> on a FreeBSD system.  For more
-      information on <application>&xfree86;</application> and video hardware that
-      it supports, check the <ulink
-        url="http://www.XFree86.org/">&xfree86;</ulink> web site.</para>
+    <para>O FreeBSD usa <application>&xfree86;</application> para prover aos usuários
+      uma poderosa interface gráfica. <application>&xfree86;</application>
+      é uma implementação de código aberto do Sistema de Janela X. Este capítulo
+      cobrirá a instalação e configuração do
+      <application>&xfree86;</application> num sistema FreeBSD. Para mais
+      informações sobore o <application>&xfree86;</application> e hardware de vídeo
+      suportado, verifique o sítio <ulink
+        url="http://www.XFree86.org/">&xfree86;</ulink>.</para>
 
-    <para>After reading this chapter, you will know:</para>
+    <para>Após ler este capítulo, você saberá:</para>
 
     <itemizedlist>
       <listitem>
-        <para>The various components of the X Window System, and how they
-          interoperate.</para>
+	<para>Os vários componentes do Sistema de Janela X, e como eles
+	  interagem.</para>
       </listitem>
 
       <listitem>
-        <para>How to install and configure
+        <para>Como istalar e configurar o
           <application>&xfree86;</application>.</para>
       </listitem>
 
       <listitem>
-        <para>How to install and use different window managers.</para>
+        <para>Como instalar e utilizar diferentes gerenciadores de janelas.</para>
       </listitem>
 
       <listitem>
-        <para>How to use &truetype; fonts in
+        <para>Como utilizar fontes &truetype; no
           <application>&xfree86;</application>.</para>
       </listitem>
 
       <listitem>
-        <para>How to set up your system for graphical logins
+        <para>Como preparar seu sistema para o uso de <foreignphrase>login</foreignphrase> gráfico
           (<application>XDM</application>).</para>
       </listitem>
     </itemizedlist>
 
-    <para>Before reading this chapter, you should:</para>
+    <para>Antes de ler este capítulo, é recomendável:</para>
 
     <itemizedlist>
-      <listitem><para>Know how to install additional third-party
-        software (<xref linkend="ports">).</para></listitem>
+      <listitem><para>Saber como instalar softwares adicionais de terceiros 
+        (<xref linkend="ports">).</para></listitem>
     </itemizedlist>
   </sect1>
 
   <sect1 id="x-understanding">
-    <title>Understanding X</title>
+    <title>Compreendendo o X</title>
 
-    <para>Using X for the first time can be somewhat of a shock to someone
-      familiar with other graphical environments, such as &microsoft.windows; or
+    <para>Usar o X pela primeira vez pode causar certo impacto em quem já está
+      familiarizado com outros ambientes gráficos, como o &microsoft.windows; ou o
       &macos;.</para>
 
-    <para>It is not necessary to understand all of the details of various
-      X components and how they interact; however, some basic knowledge makes
-      it possible to take advantage of X's strengths.</para>
+    <para>Nao é necessário entender todos os detalhes dos vários componentes do
+      X e como eles interagem; entretanto, algum conhecimento básico torna
+      possível tirar vantagens dos pontos positivos do X.</para>
 
     <sect2>
-      <title>Why X?</title>
+      <title>Por que o X?</title>
 
-      <para>X is not the first window system written for &unix;, but it is the
-        most popular.  X's original development team had worked on another
-        window system before writing X.  That system's name was
-        <quote>W</quote> (for <quote>Window</quote>).  X is just the next
-        letter in the Roman alphabet.</para>
+      <para>O X nao é o primeiro sistema de interface gráfica escrito para o &unix;, mas é o
+        mais popular. O grupo de desenvolvimento original do X já haviam trabalhado em outro
+        sistema de interface gráfica antes de escrever o X. O nome desse sistema era 
+        <quote>W</quote> (de <quote>Window</quote>).  X é apenas a próxima
+        letra no alfabeto Romano.</para>
 
-      <para>X can be called <quote>X</quote>, <quote>X Window System</quote>,
-          <quote>X11</quote>, and other terms.  Calling X11
-          <quote>X Windows</quote> can offend some people;
-          see &man.X.7; for a bit more insight on this.</para>
+      <para>O X pode ser chamado de <quote>X</quote>, <quote>Sistema de Janela X</quote>,
+        <quote>X11</quote>, e outros termos. 
+        Em inglês, o X também é conhecido por <foreignphrase>X Window System</foreignphrase>, e 
+        chamar X11 de 
+        <quote>X Windows</quote> (note o <quote>s</quote>) pode ofender algumas pessoas;
+        veja &man.X.7; para mais dicas sobre isso.</para>
     </sect2>
 
     <sect2>
-      <title>The X Client/Server Model</title>
+      <title>O modelo Cliente/Servidor do X</title>
 
-      <para>X was designed from the beginning to be network-centric, and
-        adopts a <quote>client-server</quote> model.  In the X model, the
-        <quote>X server</quote> runs on the computer that has the keyboard,
-        monitor, and mouse attached.  The server is responsible for managing
-        the display, handling input from the keyboard and mouse, and so on.
-        Each X application (such as <application>XTerm</application>, or
-        <application>&netscape;</application>) is a <quote>client</quote>.  A
-        client sends messages to the server such as <quote>Please draw a
-          window at these coordinates</quote>, and the server sends back
-          messages such as <quote>The user just clicked on the OK
-          button</quote>.</para>
+      <para>O X foi concebido desde o início com foco na rede, e
+        adota um modelo <quote>cliente-servidor</quote>.  No modelo do X, o 
+        <quote>servidor X</quote> executa em um computador que possui teclado,
+        monitor, e mouse conectados. O servidor é responsável por gerenciar
+        o vídeo, tratar as entradas pelo teclado e mouse, e assim por diante.
+        Cada aplicativo do X (como o <application>XTerm</application>, ou 
+        <application>&netscape;</application>) é um <quote>cliente</quote>. Um 
+        cliente envia mensagens para o servidor como <quote>Por favor, desenhe uma
+        janela nestas coordenadas</quote>, e o servidor responde a
+        mensagens como <quote>O usuário acabou de clicar o bot&atilde;o OK
+        </quote>.</para>
 
-      <para>If there is only one computer involved, such as in a home or small
-        office environment, the X server and the X clients will be running on
-        the same computer.  However, it is perfectly possible to run the X
-        server on a less powerful desktop computer, and run X applications
-        (the clients) on, say, the powerful and expensive machine that serves
-        the office.  In this scenario the communication between the X client
-        and server takes place over the network.</para>
+      <para>Se há apenas um computador envolvido, como em casa ou em um ambiente
+        de escritório pequeno, o servidor X e os clientes X estarao executando
+        no mesmo computador. Entretanto, é perfeitamente possível executar o servidor X
+        em um computador de mesa menos poderoso, e executar os aplicativos do X
+        (os clientes), por assim dizer, naquela máquina poderosa e caríssima que serve
+        a todo o escritório. Neste cenário a comunicaç&atilde;o entre o cliente X
+        e o servidor se dá na rede.</para>
 
-      <para>This confuses some people, because the X terminology is
-        exactly backward to what they expect.  They expect the <quote>X
-          server</quote> to be the big powerful machine down the hall, and
-        the <quote>X client</quote> to be the machine on their desk.</para>
+      <para>Isto causa confus&atilde;o a algumas pessoas, pois a terminologia do X é
+        exatamente contrária à que eles esperam. O que se espera é que o <quote>servidor X
+        </quote> seja a máquina grande e poderosa do por&atilde;o e
+        o <quote>cliente X</quote> a máquina sobre suas messas.</para>
 
-      <para>Remember that the X server is the machine with the monitor and
-        keyboard, and the X clients are the programs that display the
-        windows.</para>
+      <para>Lembre-se que o servidor X é a máquina com monitor e
+        teclado, e os clientes X s&atilde;o os programas  que exibem as 
+        janelas.</para>
 
-      <para>There is nothing in the protocol that forces the client and
-        server machines to be running the same operating system, or even to
-        be running on the same type of computer.  It is certainly possible to
-        run an X server on &microsoft.windows; or Apple's &macos;, and there are
-        various free and commercial applications available that do exactly
-        that.</para>
+      <para>N&atilde; há nada no protocolo que force máquinas clientes e 
+        servidoras a estar executando o mesmo sistema operacional ou ainda 
+        no mesmo tipo de computador. É certamente possível 
+        executar um servidor X no &microsoft.windows; ou no &macos; da Apple, e há
+        várias aplicaç&otilde; gratuitas e comerciais disponíveis que fazem exatamente
+        isso.</para>
 
-      <para>The X server that ships with FreeBSD is called
-        <application>&xfree86;</application>, and is available for free, under a
-        license very similar to the FreeBSD license.  Commercial X servers for
-        FreeBSD are also available.</para>
+      <para>O seridor X que é distribuído com o FreeBSD é chamado
+        <application>&xfree86;</application>, e está disponível gratuitamente, sob uma
+        licença muito similar à licença do FreeBSD. Há também servidores X comerciais
+        disponíveis para o FreeBSD.</para>
     </sect2>
 
     <sect2>
-      <title>The Window Manager</title>
+      <title>O Gerenciador de Janela</title>
 
-      <para>The X design philosophy is much like the &unix; design philosophy,
-        <quote>tools, not policy</quote>.  This means that X does not try to
-        dictate how a task is to be accomplished.  Instead, tools are provided
-        to the user, and it is the user's responsibility to decide how to use
-        those tools.</para>
+      <para>A filosofia de concepç&atilde;o do X é muito semelhante a filosofia de concepç&atilde; do &unix;,
+        <quote>ferramentas, n&atilde;o políticas</quote>.  Isso significa que o X n&atilde;o tenta
+        dizer como a tarefa deve ser realizada. Ao invés disso, as ferramentas s&atilde;o fornecidas
+        ao usuário, e é sua responsabilidade decidir como vai usar
+        essas ferramentas.</para>
 
-      <para>This philosophy extends to X not dictating what windows should
-        look like on screen, how to move them around with the mouse, what
-        keystrokes should be used to move between windows (i.e.,
+      <para>Essa filosofia se estende ao X quando o mesmo n&atilde; dita com o quê as janelas devem
+        parecer na exibiç&atilde;o, como movê-las com o mouse, que 
+        atalho deve ser usado para mover-se entre as janelas (i.e.,
         <keycombo action="simul">
           <keycap>Alt</keycap>
           <keycap>Tab</keycap>
-        </keycombo>, in the case of &microsoft.windows;), what the title bars
-        on each window should look like, whether or not they have close
-        buttons on them, and so on.</para>
+        </keycombo>, no caso do &microsoft.windows;), a aparência da barra de títulos
+        em cada janela, se elas devem ou n&atilde;o apresentar
+        bot&otilde;es para fechá-las, e assim por diante.</para>
 
-      <para>Instead, X delegates this responsibility to an application called
-        a <quote>Window Manager</quote>.  There are dozens of window
-        managers available for X: <application>AfterStep</application>,
+      <para>Ao invés disso, o X delega essa responsabilidade para um aplicativo chamado
+        <quote>Gerenciador de Janela</quote> (do inglês 
+        <quote><foreignphrase>Window Manager</foreignphrase></quote>).  Há dúzias de gerenciadores de
+        janela disponíveis para o X: <application>AfterStep</application>,
         <application>Blackbox</application>, <application>ctwm</application>,
         <application>Enlightenment</application>,
         <application>fvwm</application>, <application>Sawfish</application>,
         <application>twm</application>,
-        <application>Window Maker</application>, and more.  Each of these
-        window managers provides a different look and feel; some of them
-        support <quote>virtual desktops</quote>; some of them allow customized
-        keystrokes to manage the desktop; some have a <quote>Start</quote>
-        button or similar device; some are <quote>themeable</quote>, allowing
-        a complete change of look-and-feel by applying a new theme.  These
-        window managers, and many more, are available in the
-        <filename>x11-wm</filename> category of the Ports Collection.</para>
+        <application>Window Maker</application>, e outras.  Cada um desses
+        gerenciadores de janela provêm diferentes visuais e sensaç&otilde; alguns deles
+        suportam <quote>áreas de trabalho virtuais</quote>; alguns permitem personalizar
+        atalhos de teclado para gerenciar a área de trabalho; outros tem um bot&atilde;o <quote>Iniciar</quote>
+        ou dispositivo semelhante; outros s&atilde;o <quote>tematizáveis</quote>, permitindo
+        uma modificaç&atilde; completa no visual e sensaç&otilde;es pela aplicaç&atilde;o de um novo tema.i Estes
+        gerenciadores de janela, e muitos outros, est&atilde;o disponíveis na
+        categoria <filename>x11-wm</filename> da Coleç&atilde;o de <literal>Ports</literal>.</para>
 
-      <para>In addition, the <application>KDE</application> and
-	<application>GNOME</application> desktop environments both have their
-	own window managers which integrate with the desktop.</para>
+      <para>Para completar, ambos ambientes de trabalho <application>KDE</application> e o
+	<application>GNOME</application> têm seus 
+	próprios gerenciadores de janela integrados na área de trabalho.</para>
 
       <para>Each window manager also has a different configuration mechanism;
         some expect configuration file written by hand, others feature

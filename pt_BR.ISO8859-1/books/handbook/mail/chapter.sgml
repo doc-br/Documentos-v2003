@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/mail/chapter.sgml,v 1.7 2003/12/11 20:42:31 jmelo Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/mail/chapter.sgml,v 1.8 2003/12/12 17:44:00 jmelo Exp $
 -->
 
 <chapter id="mail">
@@ -10,14 +10,14 @@
       <author>
 	<firstname>Bill</firstname>
 	<surname>Lloyd</surname>
-	<contrib>Original work by </contrib>
+	<contrib>Trabalho original por </contrib>
       </author>
     </authorgroup>
     <authorgroup>
       <author>
 	<firstname>Jim</firstname>
 	<surname>Mock</surname>
-	<contrib>Rewritten by </contrib>
+	<contrib>Reescrito por </contrib>
 	<!-- 2 Dec 1999 -->
       </author>
     </authorgroup>
@@ -577,93 +577,91 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
 	    <application>sendmail</application>-compat&iacute;vel funcional.  Se
 	    as aplica&ccedil;&otilde;es continuarem a usar os bin&aacute;rios do
 	    <application>sendmail</application> para tentar enviar mensagens 
-	    ap&oacute;s desabilitadoe-mail after you have disabled them, mail could go into an
-	    inactive <application>sendmail</application> queue, and never be delivered.</para>
+	    ap&oacute;s desabilitad, a mensagem ficar&aacute; inativa na fila
+	    do <application>sendmail</application>, e nunca ser&aacute; entregue.</para>
 	</warning>
 
-	<para>If you only want to disable
-	  <application>sendmail</application>'s incoming mail service,
-	  you should set</para>
+	<para>Se voc&ecirc; quer desabilitar o servi&ccedil;co de chegada do
+	  <application>sendmail</application> vo&ecirc; deve configurar, </para>
 
 	  <programlisting>sendmail_enable="NO"</programlisting>
 
-	<para>in <filename>/etc/rc.conf</filename>.  More information on
-	  <application>sendmail</application>'s startup options is
-	  available from the &man.rc.sendmail.8; manual page.</para>
+	<para>no <filename>/etc/rc.conf</filename>.  Maiores informa&ccedil;&otilde;es sobre
+	  as op&ccedil;&otilde;es de inicializa&ccedil;&atilde;o do <application>sendmail</application> est&aacute;
+	  dispon&iacute;vel na p&aacute;gina de manual &man.rc.sendmail.8;.</para>
       </sect3>
     </sect2>
 
     <sect2>
-      <title>Running Your New MTA on Boot</title>
+      <title>Executando seu novo MTA na inicializa&ccedil;&atilde;o do sistema</title>
 
-      <para>You may have a choice of two methods for running your
-	new MTA on boot, again depending on what version of FreeBSD
-	you are running.</para>
+      <para>Voc&ecirc; pode ter dois m&eacute;todos para escolher de como rodar 
+	seu novo MTA na inicializa&ccedil;&atilde;o do sistema, dependendo da vers&atilde;o do FreeBSD
+	que voc&ecirc; est&aacute; rodando.</para>
 
       <sect3>
-	<title>FreeBSD 4.5-STABLE before 2002/4/11
-	  (Including 4.5-RELEASE and Earlier)</title>
+	<title>FreeBSD 4.5-STABLE antes de 2002/4/11
+	  (Incluindo o 4.5-RELEASE e mais recentes)</title>
 
-	<para>Add a script to
-	  <filename>/usr/local/etc/rc.d/</filename> that
-	  ends in <filename>.sh</filename> and is executable by
-	  <username>root</username>.  The script should accept <literal>start</literal> and
-	  <literal>stop</literal> parameters.  At startup time the
-	  system scripts will execute the command</para>
+	<para>Adicione um script em
+	  <filename>/usr/local/etc/rc.d/</filename> com 
+	  extens&atilde;o <filename>.sh</filename> e execut&aacute;vel pelo usu&aacute;rio
+	  <username>root</username>.  Este script deve ser aceito os par&acirc;metrost <literal>start</literal> e
+	  <literal>stop</literal>.  Na hora da inicializa&ccedil;&atilde;o, os scripts do sistema
+	  ir&atilde;o executar o comando</para>
 
 	<programlisting>/usr/local/etc/rc.d/supermailer.sh start</programlisting>
 
-	<para>which you can also use to manually start the server.  At
-	  shutdown time, the system scripts will use the
-	  <literal>stop</literal> option, running the command</para>
+	<para>Que voc&ecirc; tamb&eacute;m pode manualmente inicializar o servidor.  Na hora
+	  sde desligar, os scripts do sistema ir&atilde;o usar a op&ccedil;&atilde;o
+	  <literal>stop</literal>, executando o comando</para>
 
 	<programlisting>/usr/local/etc/rc.d/supermailer.sh stop</programlisting>
 
-	<para>which you can also use to manually stop the server
-	  while the system is running.</para>
+	<para>Que voc&ecirc; tamb&eacute;m pode manualmente parar o servidor
+	  enquanto o sistema est&aacute; rodando.</para>
 
       </sect3>
 
       <sect3>
-	<title>FreeBSD 4.5-STABLE after 2002/4/11
-	  (Including 4.6-RELEASE and Later)</title>
+	<title>FreeBSD 4.5-STABLE depois de 2002/4/11
+	  (Incluindo a 4.6-RELEASE e posteriores)</title>
 
-	<para>With later versions of FreeBSD, you can use the
-	  above method or you can set</para>
+	<para>Com vers&otilde;es mais recentes do FreeBSD, voc&ecirc; pode usar o m&eacute;todo
+	  acima ou voc&ecirc; pode configurar</para>
 
-	<programlisting>mta_start_script="filename"</programlisting>
+	<programlisting>mta_start_script="nomedoarquivo"</programlisting>
 
-	<para>in <filename>/etc/rc.conf</filename>, where
-	  <replaceable>filename</replaceable> is the name of some
-	  script that you want executed at boot to start your
-	  MTA.</para>
+	<para>no <filename>/etc/rc.conf</filename>, onde
+	  <replaceable>nodoarquivo</replaceable> &eacute; o nome de
+	  algum script que voc&egrave; queira executar na inicializa&ccedil;&atilde;o do sistema
+	  para inicializar set MTA.</para>
       </sect3>
 
     </sect2>
 
     <sect2>
-      <title>Replacing <application>sendmail</application> as
-       the System's Default Mailer</title>
+      <title>Substituindo o <application>sendmail</application> como
+       encarregado do envio da correspond&ecirc;ncia do sistema</title>
 
-      <para>The program <application>sendmail</application> is so ubiquitous
-	as standard software on &unix; systems that some software
-	just assumes it is already installed and configured.
-	For this reason, many alternative MTA's provide their own compatible
-	implementations of the <application>sendmail</application>
-	command-line interface; this facilitates using them as
-	<quote>drop-in</quote> replacements for <application>sendmail</application>.</para>
+      <para>O programa <application>sendmail</application> &eacute; t&atilde;o unipresente
+	como aplicativo padr&atilde;o na maioria dos sistemas &unix; que alguns aplicativos
+	assumem que ele j&aacute; esteja instalado e configurado.
+	Por esta raz&atilde;o, muitos dos MTAs anternativos fornece sua pr&oacute;pria implementa&ccedil;&atilde;o
+	de compatibilidade da interface de linha de comando do <application>sendmail</application>; 
+        isto facilita <quote>coloc&aacute;-los</quote> como substitutos do <application>sendmail</application>.</para>
 
-      <para>Therefore, if you are using an alternative mailer,
-	you will need to make sure that software trying to execute
-	standard <application>sendmail</application> binaries such as
-	<filename>/usr/bin/sendmail</filename> actually executes
-	your chosen mailer instead.  Fortunately, FreeBSD provides
-	a system called &man.mailwrapper.8; that does this job for
-	you.</para>
+      <para>Consequentemente, se voc&ecirc; est&aacute; usando um servidor de correio alternativo,
+	voc&ecirc; precisar&aacute; certificar-se de que o aplicativo que tenta executar executar bin&aacute;rios
+	padr&atilde;o do <application>sendmail</application> tais como
+	<filename>/usr/bin/sendmail</filename>,  executa realmente
+	seu servidor de correio escolhido preferivelmente.  Felizmente, o FreeBSD fornece
+	um sistema chamado &man.mailwrapper.8; que faz este trabalho
+	pra voc&ecirc;.</para>
 
-      <para>When <application>sendmail</application> is operating as installed, you will
-	find something like the following
-	in <filename>/etc/mail/mailer.conf</filename>:</para>
+      <para>Quando o <application>sendmail</application> est&aacute; operando como instalado, voc&ecirc; ir&aacute;
+	encontrar algo como abaixo
+	no <filename>/etc/mail/mailer.conf</filename>:</para>
 
 <programlisting>sendmail	 /usr/libexec/sendmail/sendmail
 send-mail	/usr/libexec/sendmail/sendmail
@@ -672,19 +670,19 @@ newaliases	/usr/libexec/sendmail/sendmail
 hoststat	/usr/libexec/sendmail/sendmail
 purgestat	/usr/libexec/sendmail/sendmail</programlisting>
 
-      <para>This means that when any of these common commands
-	(such as <filename>sendmail</filename> itself) are run,
-	the system actually invokes a copy of mailwrapper named <filename>sendmail</filename>, which
-	checks <filename>mailer.conf</filename> and
-	executes <filename>/usr/libexec/sendmail/sendmail</filename>
-	instead.  This system makes it easy to change what binaries
-	are actually executed when these default <filename>sendmail</filename> functions
-	are invoked.</para>
+      <para>Isto significa que quando alguns desses comandos
+	(tais como o pr&oacute;prio <filename>sendmail</filename>) est&atilde;o funcionando,
+	o sistema invoca realmente uma c&oacute;pia do <filename>sendmail</filename> nomeado mailwrapper, que 
+	checa o <filename>mailer.conf</filename> e
+	executa <filename>/usr/libexec/sendmail/sendmail</filename>
+	instead.  Este sistema faz com que seja f&aacute;cil de mudar quais bin&aacute;rios
+	s&atilde;o atualmente executados quando estas func&ccedil;&otilde;es padr&atilde;o do <filename>sendmail</filename>
+	s&atilde;o invocadas.</para>
 
-      <para>Therefore if you wanted
+      <para>Consequentemente se voc&ecirc; quisesse que 
 	<filename>/usr/local/supermailer/bin/sendmail-compat</filename>
-	to be run instead of <application>sendmail</application>, you could change
-	<filename>/etc/mail/mailer.conf</filename> to read:</para>
+	seja executado em vez do <application>sendmail</application>, voc&ecirc; pode mudar o
+	<filename>/etc/mail/mailer.conf</filename> para ler:</para>
 
 <programlisting>sendmail	 /usr/local/supermailer/bin/sendmail-compat
 send-mail	/usr/local/supermailer/bin/sendmail-compat
@@ -696,236 +694,235 @@ purgestat	/usr/local/supermailer/bin/purgestat-compat</programlisting>
 	</sect2>
 
 	<sect2>
-	  <title>Finishing</title>
+	  <title>Finalizando</title>
 
-	<para>Once you have everything configured the way you want it, you should
-	  either kill the <application>sendmail</application> processes that
-	  you no longer need and start the processes belonging to your new
-	  software, or simply reboot.  Rebooting will also
-	  give you the opportunity to ensure that you have correctly
-	  configured your system to start your new MTA automatically on boot.</para>
+	<para>Uma vez que voc&ecirc; tenha tudo configurado como voc&ecirc; quer, voc&ecirc; deve
+	  matar o processo do <application>sendmail</application> que voc&ecirc;
+	  n&atilde;o tem mais necessidade e iniciar o processo do seu novo MTA, ou
+	  simplesmente reiniciar.  Reiniciar o sistema ir&aacute; lhe dar
+	  a oportunidade de assegurar-se que voc&ecirc; configurou corretamente
+	  seu sistema para iniciar automaticamente seu novo MTA na inicializa&ccedil;&atilde;o do sistema.</para>
 
       </sect2>
     </sect1>
 
   <sect1 id="mail-trouble">
-    <title>Troubleshooting</title>
+    <title>Resolu&ccedil;&atilde;o de problemas</title>
     <indexterm>
       <primary>email</primary>
-      <secondary>troubleshooting</secondary>
+      <secondary>Resolu&ccedil;&atilde;o de problemas</secondary>
     </indexterm>
 
     <qandaset>
       <qandaentry>
         <question>
-	<para>Why do I have to use the FQDN for hosts on my site?</para>
+	<para>Porque eu tenho que usar o FQDN para hosts no meu site?</para>
 	</question>
 
 	<answer>
-	<para>You will probably find that the host is actually in a
-	  different domain; for example, if you are in
-	  <hostid role="fqdn">foo.bar.edu</hostid> and you wish to reach
-	  a host called <hostid>mumble</hostid> in the <hostid
-	  role="domainname">bar.edu</hostid> domain, you will have to
-	  refer to it by the fully-qualified domain name, <hostid
-	  role="fqdn">mumble.bar.edu</hostid>, instead of just
+	<para>Voc&ecirc; provavelmente encontrar&aacute; que o host est&aacute;
+	  em um dom&iacute;nio diferente; por exemplo se voc&ecirc; tiver em
+	  <hostid role="fqdn">foo.bar.edu</hostid> e voc&ecirc; deseja alcan&ccedil;ar
+	  um host chamado <hostid>mumble</hostid> no dom&iacute;nio <hostid
+	  role="domainname">bar.edu</hostid>, voc&ecirc; ter&aacute; que consultar-lhe
+	  pelo nome do dom&iacute;nio inteiro, <hostid
+	  role="fqdn">mumble.bar.edu</hostid>, em vez de somente
 	  <hostid>mumble</hostid>.</para>
 
 	<indexterm><primary>BIND</primary></indexterm>
-	<para>Traditionally, this was allowed by BSD BIND resolvers.
-	  However the current version of <application>BIND</application>
-	  that ships with FreeBSD no longer provides default abbreviations
-	  for non-fully qualified domain names other than the domain you
-	  are in. So an unqualified host <hostid>mumble</hostid> must
-	  either be found as <hostid
-	  role="fqdn">mumble.foo.bar.edu</hostid>, or it will be searched
-	  for in the root domain.</para>
+	<para>Tradicionalmente, isto foi permitido pelo resolvedores de nome do BSD.
+	  Entretanto a vers&atilde;o atual do <application>BIND</application>
+	  que vem com o FreeBSD n&atilde;o fornece mais abreviaturas para
+	  nomes de dom&iacute;nios n&atilde;o totalmente qualificados com excess&atilde;o do dom&iacute;nio que voc&ecirc;
+	  est&aacute; dentro. Ent&atilde;o o host <hostid>mumble</hostid> n&atilde;o qualificado deve
+	  ser encontrado como <hostid
+	  role="fqdn">mumble.foo.bar.edu</hostid>, ou ir&aacute; ser procurado
+	  no dom&iacute;nio raiz.</para>
 
-        <para>This is different from the previous behavior, where the
-	  search continued across <hostid
-	  role="domainname">mumble.bar.edu</hostid>, and <hostid
-	  role="domainname">mumble.edu</hostid>. Have a look at RFC 1535
-	  for why this was considered bad practice, or even a security
-	  hole.</para>
+        <para>Isto &eacute; diferente do comportamente anterior, onde a 
+	  busca continuou atrav&eacute;s do <hostid
+	  role="domainname">mumble.bar.edu</hostid>, e <hostid
+	  role="domainname">mumble.edu</hostid>. Veja na RFC 1535
+	  porque isso foi considerado uma m&aacute; pr&aacute;tica, ou mesmo um furo de
+	  seguran&ccedil;a.</para>
 
-        <para>As a good workaround, you can place the line:
+        <para>Como uma boa solu&ccedil;&atilde;o, voc&ecirc; pode colocar a linha:
 
           <programlisting>search foo.bar.edu bar.edu</programlisting>
 
-          instead of the previous:
+          em vez do precedente:
 
           <programlisting>domain foo.bar.edu</programlisting>
 
-          into your <filename>/etc/resolv.conf</filename>.  However, make
-	  sure that the search order does not go beyond the
-	  <quote>boundary between local and public administration</quote>,
-	  as RFC 1535 calls it.</para>
+          no seu <filename>/etc/resolv.conf</filename>.  No entando, certifique-se
+	  que a ordem de busca n&atilde;o vai al&eacute;m do
+	  <quote>limite entre a administra&ccedil;&atilde;o p&uacute;blica e local</quote>,
+	  como a RFC 1535 chama isto.</para>
 	</answer>
       </qandaentry>
 
       <qandaentry>
 	<question>
-	<para><application>sendmail</application> says <errorname>mail
+	<para>O <application>sendmail</application> diz <errorname>mail
 	  loops back to myself</errorname></para>
 	</question>
 
 	<answer>
-	<para>This is answered in the
-	<application>sendmail</application> FAQ as follows:</para>
+	<para>Esta quest&atilde;o &eacute; respondida no FAQ do
+	<application>sendmail</application> como segue:</para>
 
-        <programlisting>I am getting <quote>Local configuration error</quote> messages, such as:
+        <programlisting>Eu estou tendo mensagens de <quote>erros de configura&ccedil;&atilde;o local</quote> como:
 
 553 relay.domain.net config error: mail loops back to myself
 554 &lt;user@domain.net&gt;... Local configuration error
 
-How can I solve this problem?
+Como eu resolvo este problema?
 
-You have asked mail to the domain (e.g., domain.net) to be
-forwarded to a specific host (in this case, relay.domain.net)
-by using an MX record, but the relay machine does not recognize
-itself as domain.net. Add domain.net to /etc/mail/local-host-names
-(if you are using FEATURE(use_cw_file)) or add <quote>Cw domain.net</quote>
-to /etc/mail/sendmail.cf.</programlisting>
+Voc&ecirc; pediu que o correio do dom&iacute;nio (ex., domain.net) para ser
+enviado para um host espec&iacute;fico (neste caso, relay.domain.net)
+usando um registro MX, mas a m&aacute;quina de relay n&atilde;o se reconhece
+como domain.net. Adicione domain.net ao /etc/mail/local-host-names
+(se voc&ecirc; estiver usando FEATURE(use_cw_file)) ou adicione <quote>Cw domain.net</quote>
+ao /etc/mail/sendmail.cf.</programlisting>
 
-        <para>The <application>sendmail</application> FAQ can be found at
-	  <ulink URL="http://www.sendmail.org/faq/"></ulink> and is
-	  recommended reading if you want to do any
-	  <quote>tweaking</quote> of your mail setup.</para>
+        <para>O FAQ do <application>sendmail</application> pode ser encontrado em
+	  <ulink URL="http://www.sendmail.org/faq/"></ulink> e &eacute; recomendado
+	  que voc&ecirc; o leia caso queira fazer algum
+	  <quote>ajuste</quote> da configura&ccedil;&atilde;o do seu correio.</para>
 	</answer>
       </qandaentry>
 
       <indexterm><primary>PPP</primary></indexterm>
       <qandaentry>
         <question>
-	<para>How can I run a mail server on a dial-up PPP host?</para>
+	<para>Como eu posso rodar um servidor de correio em um host com conex&atilde;o discada?</para>
 	</question>
 
 	<answer>
-	<para>You want to connect a FreeBSD box on a LAN to the
-	  Internet.  The FreeBSD box will be a mail gateway for the LAN.
+	<para>Voc&ecirc; quer conectar uma m&aacute;quina em uma <acronym>LAN</acronym> &agrave;
+	  internet.  A m&aacute;quina FreeBSD ser&aacute; a gateway de correio para a <acronym>LAN</acronym>.
 	  The PPP connection is non-dedicated.</para>
 
 	<indexterm><primary>UUCP</primary></indexterm>
 
-	<para>There are at least two ways to do this.  One way is to use
+	<para>H&aacute; pelo menos duas maneiras de fazer isso.  Uma delas &eacute; usar o
 	  UUCP.</para>
 
-	<para>Another way is to get a full-time Internet server to provide secondary MX
-	  services for your domain.  For example, if your company's domain is
-	  <hostid role="domainname">example.com</hostid> and your Internet service provider has
-	  set <hostid role="domainname">example.net</hostid> up to provide secondary MX services
-	  to your domain:</para>
+	<para>A outra maneira &eacute; contratar um servidor internet conectado o tempo todo para fornecer o servi&ccedil;o
+	  de MX secund&aacute;rio para seu dom&iacute;nio.  Por exemplo, se o dom&iacute;nio da sua empresa &eacute;
+	  <hostid role="domainname">exemplo.com</hostid> e seu provedor de servi&ccedil;os internet 
+	  configurou <hostid role="domainname">exemplo.net</hostid> para fornecer servico de MX secund&aacute;rio
+	  para seu dom&iacute;nio:</para>
 
-	<programlisting>example.com.          MX        10      example.com.
-                      MX        20      example.net.</programlisting>
+	<programlisting>exemplo.com.          MX        10      exemplo.com.
+                      MX        20      exemplo.net.</programlisting>
 
-	<para>Only one host should be specified as the final recipient
-	  (add <literal>Cw example.com</literal> in
-	  <filename>/etc/mail/sendmail.cf</filename> on <hostid role="domainname">example.com</hostid>).</para>
+	<para>Somente um host deve ser especifico como recepiente final
+	  (adicione <literal>Cw example.com</literal> em
+	  <filename>/etc/mail/sendmail.cf</filename> no <hostid role="domainname">exemplo.com</hostid>).</para>
 
-	<para>When the sending <command>sendmail</command> is trying to
-	  deliver the mail it will try to connect to you (<hostid role="domainname">example.com</hostid>) over the modem
-	  link.  It will most likely time out because you are not online.
-	  The program <application>sendmail</application> will automatically deliver it to the
-	  secondary MX site, i.e. your Internet provider (<hostid role="domainname">example.net</hostid>).  The secondary MX
-	  site will then periodically try to connect to
-	  your host and deliver the mail to the primary MX host (<hostid role="domainname">example.com</hostid>).</para>
+	<para>Quando o envio do <command>sendmail</command> est&aacute; tentando
+	  entregar a mensagem ele ir&aacute; tentar conectar pra voc&ecirc; (<hostid role="domainname">exemplo.com</hostid>) sobre o link
+	  do modem.  Isto na maioria das vezes provavalmente ir&aacute; dar tempo excedido porque voc&ecirc; est&aacute; conectado.
+	  O programa <application>sendmail</application> ir&aacute; automaticamente entreg&aacute;-lo ao site MX secund&aacute;rio, 
+          ex., seu provedor internet (<hostid role="domainname">exemplo.net</hostid>).  O site MX secund&aacute;rio
+	  ir&aacute; periodicamente ent&atilde;o tentar conectar ao seu host
+	  e entregar as mensagens ao host MX prim&aacute;rio (<hostid role="domainname">exemplo.com</hostid>).</para>
 
-	<para>You might want to use something like this as a login
-	  script:</para>
+	<para>Voc&ecirc; pode querer usar algo assim para um script 
+	  de login:</para>
 
 	<programlisting>#!/bin/sh
-# Put me in /usr/local/bin/pppmyisp
+# Me coloque em /usr/local/bin/pppmyisp
 ( sleep 60 ; /usr/sbin/sendmail -q ) &amp;
 /usr/sbin/ppp -direct pppmyisp</programlisting>
 
-	<para>If you are going to create a separate login script for a
-	  user you could use <command>sendmail -qRexample.com</command>
-	  instead in the script above. This will force all mail in your
-	  queue for <hostid role="domainname">example.com</hostid> to be processed immediately.</para>
+	<para>Se voc&ecirc; criar um script de login separado para um 
+	  usu&aacute;rio voc&ecirc; poderia usar o comando <command>sendmail -qRexemplo.com</command>
+	  preferivelmente no script acima. Isto ir&aacute; for&ccedil;ar todas as mensagens em sua
+	  fila para <hostid role="domainname">exemplo.com</hostid> serem processadas imediatamente.</para>
 
-	<para>A further refinement of the situation is as follows:</para>
+	<para>Um refinamento adicional da situa&ccedil;&atilde;o segue abaixo:</para>
 
-	<para>Message stolen from the &a.isp;.</para>
+	<para>Mensagem retirado da &a.isp;.</para>
 
-	<programlisting>&gt; we provide the secondary MX for a customer. The customer connects to
-&gt; our services several times a day automatically to get the mails to
-&gt; his primary MX (We do not call his site when a mail for his domains
-&gt; arrived). Our sendmail sends the mailqueue every 30 minutes. At the
-&gt; moment he has to stay 30 minutes online to be sure that all mail is
-&gt; gone to the primary MX.
+	<programlisting>&gt; N&oacute;s fornecemos a um cliente um MX secund&aacute;rio. O cliente conecta ao
+&gt; nosso servi&ccedil;o diversas vezes ao dia automaticamente para puxar as mensagens 
+&gt; do seu MX prim&aacute;rio (N&oacute;s nao chamamos o seu site quando uma mensagem para seu dom&iacute;nio
+&gt; chegou). Nosso sendmail envia para a fila de mensagens a cada 30 minutos.  Neste 
+&gt; momento ele tem que permanecer 30 minutos conectado para certificar-se que todas as mensagens
+&gt; est&atilde;o indo para o MX prim&aacute;rio.
 &gt;
-&gt; Is there a command that would initiate sendmail to send all the mails
-&gt; now? The user has not root-privileges on our machine of course.
+&gt; H&aacute; algum comando que inicie o sendmail para enviar todas as mensagens
+&gt; agora? &Eacute; claro que o usu&aacute;rio n&atilde;o tem previl&eacute;gios de root em nossa m&aacute;quina.  
 
-In the <quote>privacy flags</quote> section of sendmail.cf, there is a
-definition Opgoaway,restrictqrun
+Na se&ccedil;&atilde;o <quote>privacy flags</quote> do sendmail.cf, h&aacute; a 
+defini&ccedil;&atilde;o Opgoaway,restrictqrun
 
-Remove restrictqrun to allow non-root users to start the queue processing.
-You might also like to rearrange the MXs. We are the 1st MX for our
-customers like this, and we have defined:
+Retire o restrictqrun para permitir que usu&aacute;rios que n&atilde;o sejam root iniciem o processamento de fila.
+Voc&ecirc; pode querer tamb&eacute;m rearrumar os MXs.  N&oacute;s somos o 1o MX para nossos
+clientes como estes, e n&oacute;s definimos:
 
-# If we are the best MX for a host, try directly instead of generating
-# local config error.
+# Se n&oacute;s formos o melhor MX para o host, tente uma vez diretamente gerar 
+# um erro de configura&ccedil;&atilde;o local.
 OwTrue
 
-That way a remote site will deliver straight to you, without trying
-the customer connection.  You then send to your customer.  Only works for
-<quote>hosts</quote>, so you need to get your customer to name their mail
-machine <quote>customer.com</quote> as well as
-<quote>hostname.customer.com</quote> in the DNS.  Just put an A record in
-the DNS for <quote>customer.com</quote>.</programlisting>
+Essa maneira que o site remoto ir&aacute; entregar diretamente pra voc&ecirc;, sem ficar tentando 
+conex&atilde;o com o cliente.  Voc&ecirc; entao envia para seu cliente.  Somente funciona para
+<quote>hosts</quote>, ent&atilde;o voc&ecirc; precisa obter o nome da m&aacute;quina de correio do seu
+cliente <quote>cliente.com</quote> assim como
+<quote>hostname.cliente.com</quote> no DNS.  Soemnte coloque um registro A no
+DNS para <quote>cliente.com</quote>.</programlisting>
         </answer>
       </qandaentry>
 
       <qandaentry>
         <question>
-	  <para>Why do I keep getting <errorname>Relaying
-	    Denied</errorname> errors when sending mail from other
+	  <para>Por que eu recebo o erro <errorname>Relaying
+	    Denied</errorname> quando envio mensagens a partir de outros
 	    hosts?</para>
 	</question>
 
 	<answer>
-	  <para>In default FreeBSD installations,
- 	    <application>sendmail</application> is configured to only
- 	    send mail from the host it is running on.  For example, if
- 	    a POP3 server is installed, then users will be able to
- 	    check mail from school, work, or other remote locations
- 	    but they still will not be able to send outgoing emails
- 	    from outside locations.  Typically, a few moments after
- 	    the attempt, an email will be sent from
- 	    <application>MAILER-DAEMON</application> with a
- 	    <errorname>5.7 Relaying Denied</errorname> error
- 	    message.</para>
+	  <para>Na instala&ccedil;&atilde;o padr&atilde;o do <application>sendmail</application>
+ 	    FreeBSD, &eacute; configurado para somente
+ 	    enviar mensagem a partir de hosts em que o MTA est&aacute; rodando.  Por exemplo, se
+ 	    um servidor POP3 est&aacute; instalado, ent&atilde;o usu&aacute;rios estar&atilde;o aptos a
+ 	    checar mensagens da escola, trabalho, ou outros locais remotos
+ 	    mas eles ainda nao est&atilde;o aptos a enviar mensagens 
+ 	    a partir de outras localidades de fora.  Tipicamente, em alguns momentos depois
+ 	    da tentativa, um email ser&aacute; enviado do
+ 	    <application>MAILER-DAEMON</application> com a mensagem de erro
+ 	    <errorname>5.7 Relaying Denied</errorname>.</para>
 
-	  <para>There are several ways to get around this.  The most
- 	    straightforward solution is to put your ISP's address in
- 	    a relay-domains file at
- 	    <filename>/etc/mail/relay-domains</filename>.  A quick way
- 	    to do this would be:</para>
+	  <para>H&aacute; diversas maneiras para contornar isso.  A solu&ccedil;&atilde;o mais
+ 	    direta &eacute; colocar o endere&ccedil;o do seu provedor de servi&ccedil;os internet 
+ 	    no arquivo relay-domains em
+ 	    <filename>/etc/mail/relay-domains</filename>.  Uma maneira r&aacute;pida
+ 	    de fazer isso pode ser:</para>
 
-	  <screen>&prompt.root; <userinput>echo "your.isp.example.com" &gt; /etc/mail/relay-domains</userinput></screen>
+	  <screen>&prompt.root; <userinput>echo "seu.provedor.exemplo.com" &gt; /etc/mail/relay-domains</userinput></screen>
 
-	  <para>After creating or editing this file you must restart
-  	    <application>sendmail</application>.  This works great if
-  	    you are a server administrator and do not wish to send mail
-  	    locally, or would like to use a point and click
-  	    client/system on another machine or even another ISP.  It
-  	    is also very useful if you only have one or two email
-  	    accounts set up.  If there is a large number of addresses
-  	    to add, you can simply open this file in your favorite
-  	    text editor and then add the domains, one per line:</para>
+	  <para>Depois de criar ou editar este arquivo voc&ecirc; deve reiniciar o
+  	    <application>sendmail</application>.  isto funciona muito bem se
+  	    voc&ecirc; for um administrador de sistemas e n&atilde;o deseja enviar mensagens
+  	    localmente, ou gostaria de usar um cliente gr&aacute;fico em uma m&aacute;quina ou para
+  	    enviar mensagens atr&aacute;ves de um outro provedor de servi&ccedil;os internet.  Isto
+  	    tamb&eacute;m &eacute; muito &uacute;til se voc&ecirc; tem somente uma ou duas contas
+  	    de email configurada.  Se houver um grande n&uacute;mero de endere&ccedil;os a
+  	    adicionar, voc&ecirc; pode simplesmente abrir esse arquivo no seu editor
+  	    de texto preferido, e ent&atilde;o adicionar os dom&iacute;nios um por linha:</para>
 
-	  <programlisting>your.isp.example.com
-other.isp.example.net
-users-isp.example.org
-www.example.org</programlisting>
+	  <programlisting>seu.provedor.exemplo.com
+outro.provedor.exemplo.net
+usarios-provedor.exemplo.org
+www.exemplo.org</programlisting>
 
-	  <para>Now any mail sent through your system, by any host in
-	    this list (provided the user has an account on your
-	    system), will succeed.  This is a very nice way to allow
-	    users to send mail from your system remotely without
-	    allowing people to send SPAM through your system.</para>
+	  <para>Agora toda mensagem enviada atrav&eacute;s do seu sistema, por qualquer um dos hosts
+	    nesta lista (desde que o usu&aacute;rio tenha uma conta em seu sistema)
+	    system), ser&aacute; sucedida.  Esta &eacute; uma maneira muito agrad&aacute;vel de permitir aos 
+	    usu&aacute;rios o envio de mensagens remotamente a partir de seu sistema sem
+	    permitir que outras pessoas enviem SPAM atrav&eacute;s do seu sistema.</para>
 
 	</answer>
       </qandaentry>
@@ -933,244 +930,242 @@ www.example.org</programlisting>
   </sect1>
 
   <sect1 id="mail-advanced">
-    <title>Advanced Topics</title>
+    <title>T&oacute;picos avan&ccedil;ados</title>
 
-    <para>The following section covers more involved topics such as mail
-      configuration and setting up mail for your entire domain.</para>
+    <para>A seguinte se&ccedil;&atilde;o cobre t&oacute;picos mais comuns como configura&ccedil;&atilde;o de correio
+      e ajuste do correio para seu dom&iacute;nio inteiro.</para>
 
     <sect2 id="mail-config">
-      <title>Basic Configuration</title>
+      <title>Configura&ccedil;&atilde;o b&aacute;sica</title>
       <indexterm>
         <primary>email</primary>
-        <secondary>configuration</secondary>
+        <secondary>configura&ccedil;&atilde;o</secondary>
       </indexterm>
 
-      <para>Out of the box, you should be able to send email to external
-        hosts as long as you have set up
-	<filename>/etc/resolv.conf</filename> or are running your own
-	name server.  If you would like to have mail for your host
-	delivered to the MTA (e.g., <application>sendmail</application>) on your own FreeBSD host, there are two methods:</para>
+      <para>Fora da m&aacute;quina, voc&ecirc; deve pode enviar mensagens para hosts externos
+        como voc&ecirc; configurou no
+	<filename>/etc/resolv.conf</filename> ou rodou o seu pr&oacute;prio
+	servidor de nomes.  Se voc&ecirc; gostaria de receber mensagens em seu host
+	entregue ao MTA (ex., <application>sendmail</application>) em seu pr&oacute;prio host FreeBSD, h&aacute; dois m&eacute;todos:</para>
 
       <itemizedlist>
         <listitem>
-          <para>Run your own name server and have your own domain.  For
-	    example, <hostid
+          <para>Rode seu pr&oacute;prio servidor de nomes e tenham seu pr&oacute;prio dom&iacute;nio.  Por
+	    exemplo, <hostid
 	    role="domainname">FreeBSD.org</hostid></para>
         </listitem>
 
         <listitem>
-          <para>Get mail delivered directly to your host.  This is done by
-	    delivering mail directly to the current DNS name for your
-	    machine.  For example, <hostid
-	    role="fqdn">example.FreeBSD.org</hostid>.</para>
+          <para>Puxe as mensagens entregue diretamente a seu host.  Isto &eacute; feito 
+	    entregando o correio diretamente ao nome atual do DNS da sua
+	    m&aacute;quina.  Por exemplo, <hostid
+	    role="fqdn">exemplo.FreeBSD.org</hostid>.</para>
         </listitem>
       </itemizedlist>
 
       <indexterm><primary>SMTP</primary></indexterm>
-      <para>Regardless of which of the above you choose, in order to have
-        mail delivered directly to your host, it must have a permanent
-        static IP address (not a dynamic address, as with most PPP dial-up configurations).  If you are behind a
-        firewall, it must pass SMTP traffic on to you.  If you want to
-        receive mail directly at your host, you need to be sure of either of two
-        things:</para>
+      <para>Indiferente quais dos m&eacute;todos acima voc&ecirc; escolha, a fim de ter o
+        o correio entregando diretamente para seu host, deve ter um endere&ccedil;o 
+        IP est&aacute;tico (n&atilde;o um endere&ccedil;o din&acirc;mico, como a maioria das conex&otilde;es discadas).  Se voc&ecirc; est&aacute; atr&aacute;s
+        de um firewall, ele deve permitir tr&aacute;fego SMTP para voc&ecirc;.  Se voc&ecirc; quiser 
+        receber mensagens diretamentes em seu host, voc&ecirc; precisa certificar-se de qualquer uma dessas
+        duas coisas:</para>
 
       <itemizedlist>
-        <indexterm><primary>MX record</primary></indexterm>
+        <indexterm><primary>registro MX</primary></indexterm>
         <listitem>
-          <para>Make sure that the (lowest-numbered) MX record in your DNS points to your
-	    host's IP address.</para>
+          <para>Certifique-se que o registro MX (com o menor valor) em seu DNS aponte para o
+	   endere&ccedil;o IP do seu host.</para>
         </listitem>
 
         <listitem>
-          <para>Make sure there is no MX entry in your DNS for your
+          <para>Certifique-se que n&atilde;o h&aacute; entrada MX em seu DNS para seu
 	    host.</para>
         </listitem>
       </itemizedlist>
 
-      <para>Either of the above will allow you to receive mail directly at
-        your host.</para>
+      <para>Qualquer uma das coisas acima ir&aacute; permitir que voc&ecirc; receba mensagens diretamente
+        em seu host.</para>
 
       <para>Try this:</para>
 
       <screen>&prompt.root; <userinput>hostname</userinput>
-example.FreeBSD.org
-&prompt.root; <userinput>host example.FreeBSD.org</userinput>
-example.FreeBSD.org has address 204.216.27.XX</screen>
+exemplo.FreeBSD.org
+&prompt.root; <userinput>host exemplo.FreeBSD.org</userinput>
+exemplo.FreeBSD.org has address 204.216.27.XX</screen>
 
-      <para>If that is what you see, mail directly to
-        <email>yourlogin@example.FreeBSD.org</email> should work without
-        problems (assuming <application>sendmail</application> is
-        running correctly on <hostid role="fqdn">example.FreeBSD.org</hostid>).</para>
+      <para>Se isto for o que voc&ecirc; ver, mensagens diretamente para
+        <email>seulogin@exemplo.FreeBSD.org</email> deve funcionar sem 
+        problemas (presumindo que o <application>sendmail</application> est&aacute;
+        rodando corretamente em <hostid role="fqdn">exemplo.FreeBSD.org</hostid>).</para>
 
-      <para>If instead you see something like this:</para>
+      <para>Se preferivelmente voc&ecirc; ver algo assim:</para>
 
-      <screen>&prompt.root; <userinput>host example.FreeBSD.org</userinput>
-example.FreeBSD.org has address 204.216.27.XX
-example.FreeBSD.org mail is handled (pri=10) by hub.FreeBSD.org</screen>
+      <screen>&prompt.root; <userinput>host exemplo.FreeBSD.org</userinput>
+exemplo.FreeBSD.org has address 204.216.27.XX
+exemplo.FreeBSD.org mail is handled (pri=10) by hub.FreeBSD.org</screen>
 
-      <para>All mail sent to your host (<hostid
-        role="fqdn">example.FreeBSD.org</hostid>) will end up being
-	collected on <hostid>hub</hostid> under the same username instead
-	of being sent directly to your host.</para>
+      <para>Toda mensegam enviada para seu host (<hostid
+        role="fqdn">exemplo.FreeBSD.org</hostid>) terminar&aacute;
+	coletada na <hostid>hub</hostid> sob o mesmo nome de usu&aacute;rio em vez da
+	emiss&atilde;o diretamente ao seu host.</para>
 
-      <para>The above information is handled by your DNS server.  The DNS
-        record that carries mail routing information is the
-        <emphasis>M</emphasis>ail e<emphasis>X</emphasis>change entry.  If
-        no MX record exists, mail will be delivered directly to the host by
-        way of its IP address.</para>
+      <para>A informa&ccedil;&atilde;o acima &eacute; segurada por seu servidor DNS.  O registro DNS
+        que cont&eacute;m a informa&ccedil;&atilde;o de roteamento de correio &eacute; a entrada
+        <emphasis>M</emphasis>ail e<emphasis>X</emphasis>.  Se
+        n&atilde;o existir registro MX, as mensagens ser&atilde;o entregues diretamente para o host 
+        pelo endere&ccedil;o IP.</para>
 
-      <para>The MX entry for <hostid
-        role="fqdn">freefall.FreeBSD.org</hostid> at one time looked like
-        this:</para>
+      <para>A entrada MX para <hostid
+        role="fqdn">freefall.FreeBSD.org</hostid> est&aacute; algo
+        assim:</para>
 
       <programlisting>freefall		MX	30	mail.crl.net
 freefall		MX	40	agora.rdrop.com
 freefall		MX	10	freefall.FreeBSD.org
 freefall		MX	20	who.cdrom.com</programlisting>
 
-      <para>As you can see, <hostid>freefall</hostid> had many MX entries.
-        The lowest MX number is the host that receives mail directly if
-        available; if it is not accessible for some reason, the others
-        (sometimes called <quote>backup MXes</quote>) accept messages
-        temporarily, and pass it along when a lower-numbered host becomes
-        available, eventually to the lowest-numbered host.</para>
+      <para>Como voc&ecirc; pode ver, <hostid>freefall</hostid> tem v&aacute;rias entradas MX.
+        O menor n&uacute;mero MX &eacute; o host que recebe mensagens diretamente se estiver
+        dispon&iacute;vel; se ele n&atilde;o estiver acess&iacute;vel por alguma raz&atilde;o, os outros
+        (as vezes chamado de <quote>backups MXs</quote>) aceitam mensagens
+        temporariamente, e passa quando um host de n&uacute;mero menor se torna
+        dispon&iacute;vel, eventualmente ao host de menor n&uacute;mero.</para>
 
-      <para>Alternate MX sites should have separate Internet connections
-        from your own in order to be most useful.  Your ISP or another
-        friendly site should have no problem providing this service for
-        you.</para>
+      <para>Sites MX alternativos devem ter conex&otilde;es de internet separadas
+        de voc&ecirc; pr&oacute;prio a fim de ser mais &uacute;teis. Seu provedor de internet ou outro
+        local amig&aacute;vel n&atilde;o devem ter problema de fornecer esse servi&ccedil;o para
+        voc&ecirc;.</para>
     </sect2>
 
     <sect2 id="mail-domain">
-      <title>Mail for Your Domain</title>
+      <title>Mensagens de correio para seu dom&iacute;nio</title>
 
-      <para>In order to set up a <quote>mailhost</quote> (a.k.a. mail
-        server) you need to have any mail sent to various workstations
-	directed to it.  Basically, you want to <quote>claim</quote> any
-	mail for any hostname in your domain (in this case <hostid
-	role="fqdn">*.FreeBSD.org</hostid>) and divert it to your mail
-	server so your users can receive their mail on
-	the master mail server.</para>
+      <para>A fim de configurar um <quote>mailhost</quote> (chamado servidor de 
+        correio) voc&ecirc; precisa ter todo o correio emitidos a varias esta&ccedil;&otilde;es 
+	dirigidas a ele.  Basicamente, voc&ecirc; quer <quote>solicitar</quote> qualquer
+	mensagem para qualquer hostname no seu dom&iacute;nio (neste caso <hostid
+	role="fqdn">*.FreeBSD.org</hostid>) e desvi&aacute;-la para seu servidor de correio
+	para que ent&atilde;o seus usu&aacute;rios podem receber suas mensagens 
+	no servidor de correio principal.</para>
 
       <indexterm><primary>DNS</primary></indexterm>
-      <para>To make life easiest, a user account with the same
-        <emphasis>username</emphasis> should exist on both machines.  Use
-	&man.adduser.8; to do this.</para>
+      <para>Para facilitar as coisas, uma conta de usu&aacute;rio com o mesmo
+        <emphasis>nome de usu&aacute;rio</emphasis> deve existir em ambas as m&aacute;quinas.  Use o
+	&man.adduser.8; para fazer isto.</para>
 
-      <para>The mailhost you will be using must be the designated mail
-        exchanger for each workstation on the network.  This is done in
-	your DNS configuration like so:</para>
+      <para>O host de correio que voc&ecirc; estar&aacute; usando deve ser o entregador de correio
+        designado para cada esta&ccedil;&atilde;o na rede.  Isto &eacute; feito na
+	sua configura&ccedil;&atilde;o de DNS, dessa forma:</para>
 
-      <programlisting>example.FreeBSD.org	A	204.216.27.XX		; Workstation
-			MX	10 hub.FreeBSD.org	; Mailhost</programlisting>
+      <programlisting>exemplo.FreeBSD.org	A	204.216.27.XX		; esta&ccedil;&atilde;o
+			MX	10 hub.FreeBSD.org	; host de correio</programlisting>
 
-      <para>This will redirect mail for the workstation to the mailhost no
-        matter where the A record points.  The mail is sent to the MX
-	host.</para>
+      <para>Isto ir&aacute; direcionar&aacute; mensagens para cada esta&ccedil;&atilde;o de trabalho no host de correio
+        n&atilde;o importando onde est&atilde;o os pontos de registro A.  A mensagem &eacute; enviada para o host
+	MX.</para>
 
-      <para>You cannot do this yourself unless you are running a DNS
-        server.  If you are not, or cannot run your own DNS server, talk
-	to your ISP or whoever provides your DNS.</para>
+      <para>Voc&ecirc; n&atilde;o pode fazer isso voc&ecirc; mesmo, ao menos que voc&ecirc; esteja rodando um
+        servidor DNS.  Se voc&ecirc; n&atilde;o tem, ou n&atilde;o pode rodar seu pr&oacute;prio servidor DNS, fale
+	com seu provedor de servi&ccedil;os internet ou com algu&eacute;m que possa lhe fornecer seu DNS.</para>
 
-      <para>If you are doing virtual email hosting, the following
-        information will come in handy.  For this example, we
-	will assume you have a customer with his own domain, in this
-	case <hostid role="domainname">customer1.org</hostid>, and you want
-	all the mail for <hostid role="domainname">customer1.org</hostid>
-	sent to your mailhost, <hostid
-	role="fqdn">mail.myhost.com</hostid>.  The entry in your DNS
-	should look like this:</para>
+      <para>Se voc&ecirc; estiver hospedando emails virtuais, a seguinte informa&ccedil;&atilde;o
+        vir&aacute; em boa hora.  Por exemplo, n&oacute;s 
+	iremos assumir que voc&ecirc; tem um cliente com seu pr&oacute;prio dom&iacute;nio, neste
+	caso <hostid role="domainname">cliente1.org</hostid>, e voc&ecirc; quer que todas
+	mensagens para <hostid role="domainname">cliente1.org</hostid>
+	sejam enviadas para seu host de correio, <hostid
+	role="fqdn">mail.meuhost.com</hostid>.  Sua entrada no DNS
+	deve ficar algo assim:</para>
 
-      <programlisting>customer1.org		MX	10	mail.myhost.com</programlisting>
+      <programlisting>cliente1.org		MX	10	mail.meuhost.com</programlisting>
 
-      <para>You do <emphasis>not</emphasis> need an A record for <hostid role="domainname">customer1.org</hostid> if you only
-        want to handle email for that domain.</para>
+      <para>Voc&ecirc; <emphasis>n&atilde;o</emphasis> precisa de um registro A para <hostid role="domainname">cliente1.org</hostid> se voc&ecirc; quiser
+        somente gerenciar emails para este dom&iacute;nio.</para>
 
       <note>
-	<para>Be aware that pinging <hostid
-	  role="domainname">customer1.org</hostid> will not work unless
-	  an A record exists for it.</para>
+	<para>Esteja ciente que o ping para o <hostid
+	  role="domainname">cliente1.org</hostid> n&atilde;o ir&aacute; funcionar a menos que
+	  um registro A exista para ele.</para>
       </note>
 
-      <para>The last thing that you must do is tell
-        <application>sendmail</application> on your mailhost what domains
-	and/or hostnames it should be accepting mail for.  There are a few
-	different ways this can be done.  Either of the following will
-	work:</para>
+      <para>A &uacute;ltima coisa que voc&ecirc; deve fazer &eacute; dizer ao
+        <application>sendmail</application> no seu host de correio, quais dom&iacute;nios
+	e/ou hostnames devem aceitar mensagens.  H&aacute; algumas maneiras 
+	diferentes que isto pode ser feito.  Qualquer uma das seguintes formas ir&atilde;o
+	funcionar:</para>
 
       <itemizedlist>
         <listitem>
-	  <para>Add the hosts to your
-	  <filename>/etc/mail/local-host-names</filename> file if you are using the
-	  <literal>FEATURE(use_cw_file)</literal>.  If you are using
-	  a version of <application>sendmail</application> earlier than 8.10, the file is
+	  <para>Adicione os hosts no seu arquivo
+	  <filename>/etc/mail/local-host-names</filename> se voc&ecirc; estiver usando o 
+	  <literal>FEATURE(use_cw_file)</literal>.  Se voc&ecirc; estiver usando uma vers&atilde;o do
+	  <application>sendmail</application> anterior a 8.10, o arquivo &eacute;
 	  <filename>/etc/sendmail.cw</filename>.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Add a <literal>Cwyour.host.com</literal> line to your
-	    <filename>/etc/sendmail.cf</filename> or
-	    <filename>/etc/mail/sendmail.cf</filename> if you are using
-	    <application>sendmail</application> 8.10 or higher.</para>
+	  <para>Adicione a linha <literal>Cwseu.host.com</literal> em seu
+	    <filename>/etc/sendmail.cf</filename> ou
+	    <filename>/etc/mail/sendmail.cf</filename> se voc&ecirc; estiver usando o
+	    <application>sendmail</application> 8.10 ou mais recente.</para>
 	</listitem>
       </itemizedlist>
     </sect2>
   </sect1>
   
   <sect1 id="SMTP-UUCP">
-  <title>SMTP with UUCP</title>
+  <title>SMTP com UUCP</title>
 
-    <para>The <application>sendmail</application> configuration that ships with FreeBSD is
-      designed for sites that connect directly to the Internet.  Sites
-      that wish to exchange their mail via UUCP must install another
-      sendmail configuration file.</para>
+    <para>A configura&ccedil;&atilde;o do <application>sendmail</application> que o FreeBSD traz &eacute;
+      voltada para locais que estejam conectados diretamente &agrave; internet.  Locais
+      que desejam trocar mensagens via UUCP devem instalar outro
+      arquivo de configura&ccedil;&atilde;o do sendmail.</para>
 
-    <para>Tweaking <filename>/etc/mail/sendmail.cf</filename> manually
-      is an advanced topic. <application>sendmail</application> version 8 generates config files
-      via &man.m4.1; preprocessing, where the actual configuration
-      occurs on a higher abstraction level. The &man.m4.1
-      configuration files can be found under
+    <para>Ajustar o <filename>/etc/mail/sendmail.cf</filename> manualmente &eacute;
+      um t&oacute;pico avan&ccedil;ado. O <application>sendmail</application> na vers&atilde;o 8 gera os arquivos de
+      configura&ccedil;&atilde;o pelo &man.m4.1; atrav&eacute;s de pr&eacute;-processamento, onde a configura&ccedil;&atilde;o atual ocorre
+      em um n&iacute;vel mais alto de abstra&ccedil;&atilde;o. Os arquivos de configura&ccedil;&atilde;o do  &man.m4.1
+      podem ser encontradas sob
       <filename>/usr/src/usr.sbin/sendmail/cf</filename>.</para>
 
-    <para>If you did not install your system with full sources, the
-      sendmail config stuff has been broken out into a separate source
-      distribution tarball. Assuming you have your FreeBSD source code
-      CDROM mounted, do:</para>
+    <para>Se voc&ecirc; nao tiver instalado seu sistema com todos os fontes, a configura&ccedil;&atilde;o 
+      do sendmail vai estar quebrado em um arquivo de fonte separado na distribui&ccedil;&atilde;o  
+      Assumindo que voc&ecirc; tem o c&oacute;digo fonte do FreeBSD
+      montando em CDROM, fa&ccedil;a:</para>
 
     <screen>&prompt.root; <userinput>cd /cdrom/src</userinput>
 &prompt.root; <userinput>cat scontrib.?? | tar xzf - -C /usr/src/contrib/sendmail</userinput></screen>
 
-    <para>This extracts to only a few hundred kilobytes.  The file
-      <filename>README</filename> in the <filename>cf</filename>
-      directory can serve as a basic introduction to m4
-      configuration.</para>
+    <para>Isto ir&aacute; descompactar somente alguns cem kilobytes.  O arquivo
+      <filename>README</filename> no diret&oacute;rio <filename>cf</filename>
+      pode servir como uma introdu&ccedil;&atilde;o b&aacute;sica a
+      configura&ccedil;&atilde;o do m4.</para>
 
-    <para>The best way to support UUCP delivery is to use the
-      <literal>mailertable</literal> feature.  This creates a database
-      that <application>sendmail</application> can use to make routing decisions.</para>
+    <para>A melhor maneira de suportar a entrega UUCP &eacute; usar a caracter&iacute;stica
+      <literal>mailertable</literal>.  Isto cria uma base de dados
+      que o <application>sendmail</application> pode usar para tomar decis&otilde;es de roteamento.</para>
 
-    <para>First, you have to create your <filename>.mc</filename>
-      file.  The directory
-      <filename>/usr/src/usr.sbin/sendmail/cf/cf</filename> contains a
-      few examples.  Assuming you have named your file
-      <filename>foo.mc</filename>, all you need to do in order to
-      convert it into a valid <filename>sendmail.cf</filename>
-      is:</para>
+    <para>Primeiro, voc&ecirc; deve criar seu arquivo <filename>.mc</filename>  
+      O diret&oacute;rio <filename>/usr/src/usr.sbin/sendmail/cf/cf</filename> cont&eacute;m 
+      alguns exemplos.  Assumindo que voc&ecirc; nomeou seu arquivo como
+      <filename>foo.mc</filename>, tudo que voc&ecirc; precisa fazer &eacute;
+      convert&eacute;-lo em um <filename>sendmail.cf</filename> v&aacute;lido:</para>
 
     <screen>&prompt.root; <userinput>cd /usr/src/usr.sbin/sendmail/cf/cf</userinput>
 &prompt.root; <userinput>make foo.cf</userinput>
 &prompt.root; <userinput>cp foo.cf /etc/mail/sendmail.cf</userinput></screen>
 
-    <para>A typical <filename>.mc</filename> file might look
-        like:</para>
+    <para>Um t&iacute;pico arquivo <filename>.mc</filename> pode ser 
+        dessa forma:</para>
 
-    <programlisting>VERSIONID(`<replaceable>Your version number</replaceable>') OSTYPE(bsd4.4)
+    <programlisting>VERSIONID(`<replaceable>O n&uacute;mero de sua vers&atilde;o</replaceable>') OSTYPE(bsd4.4)
 
 FEATURE(accept_unresolvable_domains)
 FEATURE(nocanonify)
 FEATURE(mailertable, `hash -o /etc/mail/mailertable')
 
-define(`UUCP_RELAY', <replaceable>your.uucp.relay</replaceable>)
+define(`UUCP_RELAY', <replaceable>seu.uucp.relay</replaceable>)
 define(`UUCP_MAX_SIZE', 200000)
 define(`confDONT_PROBE_INTERFACES')
 
@@ -1178,29 +1173,29 @@ MAILER(local)
 MAILER(smtp)
 MAILER(uucp)
 
-Cw    <replaceable>your.alias.host.name</replaceable>
-Cw    <replaceable>youruucpnodename.UUCP</replaceable></programlisting>
+Cw    <replaceable>seu.apelido.host.nome</replaceable>
+Cw    <replaceable>seunomeuucp.UUCP</replaceable></programlisting>
 
-    <para>The lines containing
+    <para>As linhas que cont&eacute;m as caracter&iacute;sticas
       <literal>accept_unresolvable_domains</literal>,
-      <literal>nocanonify</literal>, and
-      <literal>confDONT_PROBE_INTERFACES</literal> features will
-      prevent any usage of the DNS during mail delivery.  The
-      <literal>UUCP_RELAY</literal> clause is needed to support UUCP
-      delivery.  Simply put an Internet hostname there that is able to
-      handle .UUCP pseudo-domain addresses; most likely, you will
-      enter the mail relay of your ISP there.</para>
+      <literal>nocanonify</literal>, e
+      <literal>confDONT_PROBE_INTERFACES</literal> impedir&atilde;o
+      todo o uso do DNS durante a entrega de mensagens.  A op&ccedil;&atilde;o
+      <literal>UUCP_RELAY</literal> &eacute; necess&aacute;ria suportar entrega 
+      UUCP.  Coloque simplesmente um hostname da internet l&aacute; que esteja apto a
+      gerenciar .Endere&ccedil;&otilde;s do pseudo-dom&iacute;nio do UUCP; muito prov&aacute;vel que, voc&ecirc; ir&aacute;
+      entrar l&aacute; no relay de mensagens do seu provedor de servi&ccedil;os internet.</para>
 
-    <para>Once you have this, you need an
-      <filename>/etc/mail/mailertable</filename> file.  If you have
-      only one link to the outside that is used for all your mails,
-      the following file will suffice:</para>
+    <para>Uma vez que voc&ecirc; tenha isto, voc&ecirc; precisa do arquivo
+      <filename>/etc/mail/mailertable</filename>.  Se voc&ecirc; tem 
+      somente um link para fora que estar&aacute; sendo usada para todos os seu emails,
+      a seguinte linha ser&aacute; suficiente:</para>
 
     <programlisting>#
 # makemap hash /etc/mail/mailertable.db &lt; /etc/mail/mailertable
-.                             uucp-dom:<replaceable>your.uucp.relay</replaceable></programlisting>
+.                             uucp-dom:<replaceable>seu.uucp.relay</replaceable></programlisting>
 
-    <para>A more complex example might look like this:</para>
+    <para>Um exemplo mais complexo pode ser como este:</para>
 
     <programlisting>#
 # makemap hash /etc/mail/mailertable.db &lt; /etc/mail/mailertable
@@ -1214,192 +1209,192 @@ if-bus.UUCP                   uucp-dom:if-bus
 .                             uucp-dom:</programlisting>
 
 
-    <para>The first three lines handle special cases where
-      domain-addressed mail should not be sent out to the default
-      route, but instead to some UUCP neighbor in order to
-      <quote>shortcut</quote> the delivery path. The next line handles
-      mail to the local Ethernet domain that can be delivered using
-      SMTP. Finally, the UUCP neighbors are mentioned in the .UUCP
-      pseudo-domain notation, to allow for a
-      <literal><replaceable>uucp-neighbor
-      </replaceable>!<replaceable>recipient</replaceable></literal>
-      override of the default rules. The last line is always a single
-      dot, matching everything else, with UUCP delivery to a UUCP
-      neighbor that serves as your universal mail gateway to the
-      world. All of the node names behind the
-      <literal>uucp-dom:</literal> keyword must be valid UUCP
-      neighbors, as you can verify using the command
+    <para>As primeiras tr&ecirc;s linhas gerenciam especialmente casos onde
+      o dom&iacute;nio endere&ccedil;ado de mensagens n&atilde;o pode ser enviado para fora pela rota
+      padr&atilde;o, mas preferivelmente ser entregue por algum
+      <quote>atalho</quote> vizinho UUCP. As pr&oacute;ximas linhas gerencia
+      para o dom&iacute;nio ethernet local que pode ser entregue usando
+      SMTP. Finalmente, os vizinhos UUCP s&atilde;o mencionados na nota&ccedil;&atilde;o 
+      do pseudo-dom&iacute;nio .UUCP, para permitir um
+      <literal><replaceable>uucp-vizinho de
+      </replaceable>!<replaceable>recipiente</replaceable></literal>
+      sobreescreva as regras padr&otilde;es. A &uacute;ltima linha &eacute; sempre somente um
+      ponto &uacute;nico, colocando tudo mais, com a entrega UUCP a um vizinho 
+      do UUCP que sirva como gateway de correio universal para o
+      mundo. Todos os nomes de esta&ccedil;&atilde;o atr&aacute;s 
+      <literal>uucp-dom:</literal> palavrachave deve ser um vizinho UUCP 
+      v&aacute;lidom como voc&ecirc; pode verificar usando o comando
       <literal>uuname</literal>.</para>
 
-    <para>As a reminder that this file needs to be converted into a
-      DBM database file before use.  The command line to accomplish
-      this is best placed as a comment at the top of the mailertable.
-      You always have to execute this command each time you change
-      your mailertable.</para>
+    <para>Como lembrete, este arquivo necessita ser convertido em uma 
+      base de dados DBM antes de ser usado.  A linha de comando para realizar isto &eacute; 
+      colocada como coment&aacute;rio no alto do mailertable.
+      Voc&ecirc; sempre tem que executar esse comando cada vez que voc&ecirc; modificar
+      seu mailertable.</para>
 
-    <para>Final hint: if you are uncertain whether some particular
-      mail routing would work, remember the <option>-bt</option>
-      option to <application>sendmail</application>. It starts <application>sendmail</application> in <emphasis>address test
-      mode</emphasis>; simply enter <literal>3,0</literal>, followed
-      by the address you wish to test for the mail routing.  The last
-      line tells you the used internal mail agent, the destination
-      host this agent will be called with, and the (possibly
-      translated) address. Leave this mode by typing <keycombo
+    <para>Sugest&atilde;o final: se voc&ecirc; estiver incerto de algum roteamento particular
+      que o correio deveria funcionar, lembre da op&ccedil;ao  <option>-bt</option>
+      do <application>sendmail</application>. Isto inicia o <application>sendmail</application> em <emphasis> modo 
+      de teste de endere&ccedil;os</emphasis>; simplemesnte entre com <literal>3,0</literal>, seguido pelo
+      endere&ccedil;o que voc&ecirc; deseja testar para roteamento de correio.  O ultima
+      linha fala o agente de correio interno usado, o host de destino
+      que esse agente estar&aacute; chamando, e o (possivelmente 
+      traduzindo) endere&ccedil;o. Saida deste modo digitando <keycombo
       action="simul"><keycap>Ctrl</keycap><keycap>D</keycap></keycombo>.</para>
 
     <screen>&prompt.user; <userinput>sendmail -bt</userinput>
 ADDRESS TEST MODE (ruleset 3 NOT automatically invoked)
 Enter &lt;ruleset&gt; &lt;address&gt;
-<prompt>&gt;</prompt> <userinput>3,0 foo@example.com</userinput>
-canonify           input: foo @ example . com
+<prompt>&gt;</prompt> <userinput>3,0 foo@exemplo.com</userinput>
+canonify           input: foo @ exemplo . com
 ...
-parse            returns: $# uucp-dom $@ <replaceable>your.uucp.relay</replaceable> $: foo &lt; @ example . com . &gt;
+parse            returns: $# uucp-dom $@ <replaceable>seu.relay.uucp</replaceable> $: foo &lt; @ exemplo . com . &gt;
 <prompt>&gt;</prompt> <userinput>^D</userinput></screen>
   </sect1>
 
   <sect1 id="SMTP-dialup">
-    <title>Using Mail with a Dialup Connection</title> 
+    <title>Usando o correio com uma conex&atilde;o discada</title> 
 
-    <para>If you have a static IP address, you should not need to
-      adjust anything from the defaults.  Set your host name to your
-      assigned Internet name and <application>sendmail</application> will do the rest.</para>
+    <para>Se voc&ecirc; tiver um endere&ccedil;o IP est&aacute;tico, voc&ecirc; n&atilde;o deve necessitar fazer
+      nenhum ajuste na configura&ccedil;&atilde;o padr&atilde;o.  Coloque o nome atribu&iacute;do a sua esta&ccedil;&atilde;o internet 
+      e o <application>sendmail</application> far&aacute; o resto.</para>
 
-    <para>If you have a dynamically assigned IP number and use a
-      dialup PPP connection to the Internet, you will probably have a
-      mailbox on your ISPs mail server. Let's assume your ISP's domain
-      is <hostid role="domainname">example.net</hostid>, and that your
-      user name is <username>user</username>, you have called your
-      machine <hostid role="fqdn">bsd.home</hostid>, and your ISP has
-      told you that you may use <hostid
-      role="fqdn">relay.example.net</hostid> as a mail relay.</para>
+    <para>Se voc&ecirc; tem um endere&ccedil;o IP din&acirc;mico e usa uma conex&atilde;o
+      discada para se conectar a internet, voc&ecirc; provavelmente tem uma conta de
+      correio no servidor do seu provedor. Vamos assumir que o dom&iacute;nio do seu provedor 
+      &eacute; <hostid role="domainname">exemplo.net</hostid>, e seu nome de 
+      usu&aacute;rio &eacute; <username>usario</username>, voc&ecirc; chamou sua 
+      m&aacute;quina de <hostid role="fqdn">bsd.casa</hostid>, e seu provedor 
+      falou pra voc&ecirc; que pode ser usado <hostid
+      role="fqdn">relay.exemplo.net</hostid> como relay de correio.</para>
 
-    <para>In order to retrieve mail from your mailbox, you must
-      install a retrieval agent. The <application>fetchmail</application> utility
-      is a good choice as it supports many different protocols.
-      Usually, your ISP will provide POP3. If you are using user-PPP,
-      you can automatically fetch your mail when an Internet
-      connection is established with the following entry in
+    <para>A fim de puxar suas mensagems de sua conta de correio no provedor, voc&ecirc; deve
+      instalar um agente puxe essa mensagens. O utilit&aacute;rio <application>fetchmail</application> 
+      &eacute; uma boa escolha que suporta v&aacute;rios tipos diferentes de protocolos.
+      Normalmente, seu provedor internet ir&aacute; fornecer POP3.  Se voc&ecirc; est&aacute; usando PPP no modo usu&aacute;rio,
+      voc&ecirc; pode automaticamente baixar seus emails quando a conex&atilde;o
+      internet estiver estabilizada com a seguinte entrada no seu
       <filename>/etc/ppp/ppp.linkup</filename>:</para>
 
     <programlisting>MYADDR:
-!bg su user -c fetchmail</programlisting>
+!bg su usario -c fetchmail</programlisting>
 
-    <para>If you are using <application>sendmail</application> (as
-      shown below) to deliver mail to non-local accounts, you probably
-      want to have <application>sendmail</application> process your
-      mailqueue as soon as your Internet connection is established.
-      To do this, put this command after the
-      <command>fetchmail</command> command in
+    <para>Se voc&ecirc; estiver usando o <application>sendmail</application> (como
+      mostrado abaixo) para entregar mensagens para contas n&atilde;o locais, voc&ecirc; provavelmente
+      quer mandar o <application>sendmail</application> processar sua
+      fila de mensagens assim que sua conex&atilde;o da internet for estabelecida. 
+      Para fazer isso, coloque este comando depois do comando do
+      <command>fetchmail</command> em
       <filename>/etc/ppp/ppp.linkup</filename>.</para>
 
-    <programlisting>  !bg su user -c "sendmail -q"</programlisting>
+    <programlisting>  !bg su usario -c "sendmail -q"</programlisting>
 
-    <para>Assume that you have an account for
-      <username>user</username> on <hostid
-      role="fqdn">bsd.home</hostid>. In the home directory of
-      <username>user</username> on <hostid
-      role="fqdn">bsd.home</hostid>, create a
-      <filename>.fetchmailrc</filename> file:</para>
+    <para>Assumindo que voc&ecirc; tem uma conta para
+      <username>usuario</username> em <hostid
+      role="fqdn">bsd.casa</hostid>. No diret&oacute;rio home do
+      <username>usuario</username> em <hostid
+      role="fqdn">bsd.casa</hostid>, crie o arquivo
+      <filename>.fetchmailrc</filename>:</para>
 
-    <programlisting>poll example.net protocol pop3 fetchall pass MySecret</programlisting>
+    <programlisting>poll exemplo.net protocol pop3 fetchall pass minhasenha</programlisting>
 
-    <para>This file should not be readable by anyone except
-      <username>user</username> as it contains the password
-      <literal>MySecret</literal>.</para>
+    <para>Este arquivo n&atilde;o deve ser lido por ning&eacute;m exceto o
+      <username>usuario</username> que cont&eacute;m a senha
+      <literal>minhasenha</literal>.</para>
 
-    <para>In order to send mail with the correct
-      <literal>from:</literal> header, you must tell
-      <application>sendmail</application> to use
-      <literal>user@example.net</literal> rather than
-      <literal>user@bsd.home</literal>. You may also wish to tell
-      <application>sendmail</application> to send all mail via <hostid
-      role="fqdn">relay.example.net</hostid>, allowing quicker mail
-      transmission.</para>
+    <para>A fim de enviar o correio com o correto cabe&ccedil;alho
+      <literal>from:</literal>, voc&ecirc; deve dizer ao
+      <application>sendmail</application> para usar
+      <literal>usuario@exemplo.net</literal> em vez de
+      <literal>usuario@bsd.casa</literal>. Voc&ecirc; pode tamb&eacute;m desejar dizer ao
+      <application>sendmail</application> para enviar todas as mensagens por <hostid
+      role="fqdn">relay.exemplo.net</hostid>, permitindo a transmiss&atilde;o mais r&aacute;pida 
+      de mensagens.</para>
 
-    <para>The following <filename>.mc</filename> file should
-      suffice:</para>
+    <para>O seguinte arquivo <filename>.mc</filename> deve ser
+      suficiente:</para>
 
-    <programlisting>VERSIONID(`bsd.home.mc version 1.0')
+    <programlisting>VERSIONID(`bsd.casa.mc version 1.0')
 OSTYPE(bsd4.4)dnl
 FEATURE(nouucp)dnl
 MAILER(local)dnl
 MAILER(smtp)dnl
 Cwlocalhost
-Cwbsd.home
-MASQUERADE_AS(`example.net')dnl
+Cwbsd.casa
+MASQUERADE_AS(`exemplo.net')dnl
 FEATURE(allmasquerade)dnl
 FEATURE(masquerade_envelope)dnl
 FEATURE(nocanonify)dnl
 FEATURE(nodns)dnl
-define(`SMART_HOST', `relay.example.net')
-Dmbsd.home
-define(`confDOMAIN_NAME',`bsd.home')dnl
+define(`SMART_HOST', `relay.exemplo.net')
+Dmbsd.casa
+define(`confDOMAIN_NAME',`bsd.casa')dnl
 define(`confDELIVERY_MODE',`deferred')dnl</programlisting>
 
-    <para>Refer to the previous section for details of how to turn
-      this <filename>.mc</filename> file into a
-      <filename>sendmail.cf</filename> file.  Also, do not forget to
-      restart <application>sendmail</application> after updating
+    <para>Consulte a se&ccedil;&atilde;o anterior para detalhes de como fazer deste
+      arquivo <filename>.mc</filename> um arquivo
+      <filename>sendmail.cf</filename>.  Tamb&eacute;m, n&atilde;o esque&ccedil;a de
+      reiniciar o <application>sendmail</application> depois de atualizar o
       <filename>sendmail.cf</filename>.</para>
   </sect1>
 
   <sect1 id="SMTP-Auth">
-    <title>SMTP Authentication</title>
+    <title>Autentica&ccedil;&atilde;o SMTP</title>
     
-    <para>Having <acronym>SMTP</acronym> Authentication in place on
-      your mail server has a number of benefits.
-      <acronym>SMTP</acronym> Authentication can add another layer
-      of security to <application>sendmail</application>, and has the benefit of giving mobile
-      users who switch hosts the ability to use the same mail server
-      without the need to reconfigure their mail client settings
-      each time.</para>
+    <para>Ter uma autentica&ccedil;&atilde;o <acronym>SMTP</acronym> em seu 
+      servidor de correio tr&aacute;s v&aacute;rios benef&iacute;cios.
+      Autentica&ccedil;&atilde;o <acronym>SMTP</acronym> pode adicionar uma outra camada 
+      de seguran&ccedil;a ao <application>sendmail</application>, e tr&aacute;s o benef&iacute;cio de dar aos
+      usu&aacute;rios m&oacute;veis que alternam seus hosts a possibilidade de usar o mesmo servidor de correio
+      sem a necessidade de reconfigurar seu cliente de correio
+      toda hora.</para>
 
     <procedure>
       <step>
-	<para>Install <filename role="package">security/cyrus-sasl</filename>
-	  from the ports. You can find this port in
+	<para>Instale o <filename role="package">security/cyrus-sasl</filename>
+	  a partir do ports. Voc&ecirc; pode achar este port em
 	  <filename role="package">security/cyrus-sasl</filename>.
-	  <filename role="package">security/cyrus-sasl</filename> has
-	  a number of compile time options to choose from and, for
-	  the method we will be using here, make sure to select the
-	  <option>pwcheck</option> option.</para>
+	  <filename role="package">security/cyrus-sasl</filename> tem
+	  v&aacute;rias op&ccedil;&otilde;es na hora da compila&ccedil;&atilde;o para serem escolhidas, para
+	  o m&eacute;todo que n&oacute;s estaremos usando aqui, certifique-se de selecionar a op&ccedil;&atilde;o
+	  <option>pwcheck</option>.</para>
       </step>
 
 
       <step>
-	<para>After installing <filename role="package">security/cyrus-sasl</filename>,
-	  edit <filename>/usr/local/lib/sasl/Sendmail.conf</filename>
-	  (or create it if it does not exist) and add the following
-	  line:</para>
+	<para>Depois de instalar <filename role="package">security/cyrus-sasl</filename>,
+	  edite o <filename>/usr/local/lib/sasl/Sendmail.conf</filename>
+	  (ou crie-o se n&atilde;o existir) e adicione a seguinte
+	  linha:</para>
 
 	<programlisting>pwcheck_method: passwd</programlisting>
 
-	<para>This method will enable <application>sendmail</application>
-	  to authenticate against your FreeBSD <filename>passwd</filename>
-	  database.  This saves the trouble of creating a new set of usernames
-	  and passwords for each user that needs to use
-	  <acronym>SMTP</acronym> authentication, and keeps the login
-	  and mail password the same.</para>
+	<para>Este m&eacute;todo ir&aacute; habilitar o <application>sendmail</application>
+	  para autenticar na base de dados <filename>passwd</filename> do 
+	  seu FreeBSD.  Isto resolve o problema de criar um novo usu&aacute;rio 
+	  e senha para cada usu&aacute;rio que necessitar a autentica&ccedil;&atilde;o
+	  <acronym>SMTP</acronym>, e mant&eacute;m o login e senha 
+	  e email iguais.</para>
       </step>
 
       <step>
-	<para>Now edit <filename>/etc/make.conf</filename> and add the
-	  following lines:</para>
+	<para>Agora edite o <filename>/etc/make.conf</filename> e adicione as
+	  seguintes linhas:</para>
 
 	<programlisting>SENDMAIL_CFLAGS=-I/usr/local/include/sasl1 -DSASL
 SENDMAIL_LDFLAGS=-L/usr/local/lib
 SENDMAIL_LDADD=-lsasl</programlisting>
 
-	<para>These lines will give <application>sendmail</application>
-	the proper configuration options for linking
-	to <filename role="package">cyrus-sasl</filename> at compile time.
-	Make sure that <filename role="package">cyrus-sasl</filename>
-	has been installed before recompiling
+	<para>Estas linhas ir&atilde;o dar ao <application>sendmail</application>
+	a op&ccedil;ao de configura&ccedil;&atilde;o adequada para linkar
+	para o <filename role="package">cyrus-sasl</filename> no tempo de compila&ccedil;&atilde;o.
+	Certique-se que o <filename role="package">cyrus-sasl</filename>
+	est&aacute; instalado antes de recompilar o
 	<application>sendmail</application>.</para>
       </step>
 
       <step>
-	<para>Recompile <application>sendmail</application> by executing the following commands:</para>
+	<para>Recompile o <application>sendmail</application> executando os seguintes comandos:</para>
 
 	<screen>&prompt.root; <userinput>cd /usr/src/usr.sbin/sendmail</userinput>
 &prompt.root; <userinput>make cleandir</userinput>
@@ -1407,62 +1402,62 @@ SENDMAIL_LDADD=-lsasl</programlisting>
 &prompt.root; <userinput>make</userinput>
 &prompt.root; <userinput>make install</userinput></screen>
 
-	<para>The compile of <application>sendmail</application> should not have any problems
-	  if <filename>/usr/src</filename> has not been changed extensively
-	  and the shared libraries it needs are available.</para>
+	<para>A compila&ccedil;&atilde;o do <application>sendmail</application> n&atilde;o deve ter qualquer problema
+	  se o <filename>/usr/src</filename> n&atilde;o foi alterado bastantehas not been changed bastante
+	  e as bibliotecas compartilhadas necess&aacute;rias est&atilde;o dispon&iacute;veis.</para>
       </step>
 
       <step>
-	<para>After <application>sendmail</application> has been compiled
-	  and reinstalled, edit your <filename>/etc/mail/freebsd.mc</filename>
-	  file (or whichever file you use as your <filename>.mc</filename> file. Many administrators
-	  choose to use the output from &man.hostname.1; as the <filename>.mc</filename> file for
-	  uniqueness).  Add these lines to it:</para>
+	<para>Depois do <application>sendmail</application> ter sido compilado
+	  e reinstalado, edite o seu arquivo <filename>/etc/mail/freebsd.mc</filename>
+	  (ou qualquer arquivo que voc&ecirc; use como arquivo <filename>.mc</filename>.  Muitos administradores
+	  escolhem usar a sa&iacute;da do &man.hostname.1; como como nome do arquivo <filename>.mc</filename>).  
+	  Adicione estas linhas a ele:</para>
 
 	<programlisting>dnl set SASL options
 TRUST_AUTH_MECH(`GSSAPI DIGEST-MD5 CRAM-MD5 LOGIN')dnl
 define(`confAUTH_MECHANISMS', `GSSAPI DIGEST-MD5 CRAM-MD5 LOGIN')dnl
 define(`confDEF_AUTH_INFO', `/etc/mail/auth-info')dnl</programlisting>
 
-	<para>These options configure the different methods available to
-	<application>sendmail</application> for authenticating users.
-	If you would like to use a method other than
-	<application>pwcheck</application>, please see the
-	included documentation.</para>
+	<para>Estas op&ccedil;&otilde;es configuram m&eacute;todos diferentes dispon&iacute;veis para o
+	<application>sendmail</application> autenticar usu&aacute;rios.
+	Se voc&ecirc; gostaria de usar um m&eacute;todo diferente do
+	<application>pwcheck</application>, por favor veja a documenta&ccedil;&atilde;o
+	inclusa do programa.</para>
       </step>
 
       <step>
-	<para>Finally, run &man.make.1; while in <filename>/etc/mail</filename>.
-	  That will run your new <filename>.mc</filename> file and create a <filename>.cf</filename> file named
-	  <filename>freebsd.cf</filename> (or whatever name you have used
-	  for your <filename>.mc</filename> file).  Then use the
-	  command <command>make install restart</command>, which will
-	  copy the file to <filename>sendmail.cf</filename>, and will
-	  properly restart <application>sendmail</application>.
-	  For more information about this process, you should refer
-	  to <filename>/etc/mail/Makefile</filename>.</para>
+	<para>Finalmente, execute &man.make.1; dentro do <filename>/etc/mail</filename>.
+	  Isto ir&aacute; gerar seu novo arquivo <filename>.mc</filename> e criar um arquivo <filename>.cf</filename> chamado
+	  <filename>freebsd.cf</filename> (ou algum outro nome que voc&ecirc; usou 
+	  para seu arquivo <filename>.mc</filename>).  Ent&atilde;o use o 
+	  comando <command>make install restart</command>, que ir&aacute;
+	  copiar o arquivo para o <filename>sendmail.cf</filename>, e ir&aacute;
+	  reiniciar corretamente o <application>sendmail</application>.
+	  Para mais informa&ccedil;&otilde;es sobre este processo, voc&ecirc; deve consultar 
+	  o <filename>/etc/mail/Makefile</filename>.</para>
       </step>
     </procedure>
 
-    <para>If all has gone correctly, you should be able to enter your login
-      information into the mail client and send a test message.
-      For further investigation, set the <option>LogLevel</option> of
-      <application>sendmail</application> to 13 and watch
-      <filename>/var/log/maillog</filename> for any errors.</para>
+    <para>Se tudo ocorreu corretamente, voc&ecirc; deve poder inserir sua informa&ccedil;&atilde;o
+      de login em um cliente de emails e enviar uma mensagem de teste.
+      Para uma investiga&ccedil;&atilde;o mais profunda, configure o <option>LogLevel</option> do
+      <application>sendmail</application> para 13 e observe o
+      <filename>/var/log/maillog</filename> para qualquer erro.</para>
 
-    <para>You may wish to add the following lines to <filename>/etc/rc.conf</filename>
-      so this service will be available after every system boot:</para>
+    <para>Voc&ecirc; pode desejar adicionar as seguintes linhas ao <filename>/etc/rc.conf</filename>
+      para que este servi&ccedil;o esteja dispon&iacute;vel depois de cada reinicializa&ccedil;&atilde;o do sistema:</para>
 
     <programlisting>sasl_pwcheck_enable="YES"
 sasl_pwcheck_program="/usr/local/sbin/pwcheck"</programlisting>
 
-    <para>This will ensure the initialization of <acronym>SMTP_AUTH</acronym> upon system
-      boot.</para>
+    <para>Isto ir&aacute; assegurar que a inicializa&ccedil;&atilde;o do <acronym>SMTP_AUTH</acronym> ser&aacute; feita
+      no carregamento do sistema.</para>
 
-    <para>For more information, please see the <application>sendmail</application>
-      page regarding
+    <para>Para mais informa&ccedil;&otilde;es, por favor veja a p&aacute;gina do <application>sendmail</application>
+      a respeito da
       <ulink url="http://www.sendmail.org/~ca/email/auth.html">
-      <acronym>SMTP</acronym> authentication</ulink>.</para>
+      <acronym>autentica&ccedil;&atilde;o</acronym> SMTP</ulink>.</para>
 
   </sect1>
 

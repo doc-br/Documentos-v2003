@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: doc/en_US.ISO8859-1/books/handbook/basics/chapter.sgml,v 1.118 2003/11/23 17:52:11 ceri Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/basics/chapter.sgml,v 1.1.1.1 2003/11/28 01:13:14 eksffa Exp $
 -->
 
 <chapter id="basics">
@@ -10,84 +10,89 @@
       <author>
         <firstname>Chris</firstname>
 	<surname>Shumway</surname>
-	<contrib>Rewritten by </contrib>
+	<contrib>Reescrito por </contrib>
       </author>
     </authorgroup>
     <!-- 10 Mar 2000 -->
   </chapterinfo>
 
-  <title>UNIX Basics</title>
+  <title>UNIX Básico</title>
   
   <sect1 id="basics-synopsis">
-    <title>Synopsis</title>
+    <title>Sinópse</title>
     <indexterm><primary>basics</primary></indexterm>
 
 
-   <para>The following chapter will cover the basic commands and
-     functionality of the FreeBSD operating system.  Much of this
-     material is relevant for any &unix; like operating system.  Feel
-     free to skim over this chapter if you are familiar with the
-     material.  If you are new to FreeBSD, then you will definitely
-     want to read through this chapter carefully.</para>
+   <para>O capítulo a seguir cobrirá os comandos básicos e
+	funcionalidades do sistema operacional FreeBSD.  A
+	maioria deste material é relevante à qualquer sistema
+	operacional baseado ou similar ao &unix;.  Sinta-se
+	livre para pular este capítulo se você for familiar
+	com o conteúdo deste material.  Se você é um novo
+	usuário FreeBSD, então definitivamente você deve
+	ler todo este capítulo cuidadosamente.</para>
 
-    <para>After reading this chapter, you will know:</para>
+    <para>Após a leitura deste capítulo, você saberá:</para>
 
     <itemizedlist>
       <listitem>
-        <para>How to use the <quote>virtual consoles</quote> of
+        <para>Como usar os <quote>consoles virtuais</quote> do
 	  FreeBSD.</para>
       </listitem>
       <listitem>
-	<para>How &unix; file permissions work.</para>
+	<para>Como as permissões &unix; funcionam.</para>
       </listitem>
       <listitem>
-	<para>The default &os; file system layout.</para>
+	<para>A disposição padrão dos sistemas de arquivos no &os;.</para>
       </listitem>
       <listitem>
-	<para>How to mount and unmount file systems.</para>
+	<para>Como montar e desmontar sistemas de arquivos.</para>
       </listitem>
       <listitem>
-	<para>What processes, daemons, and signals are.</para>
+	<para>O que são <foreignphrase>daemons</foreignphrase>, processos e sinais.</para>
       </listitem>
       <listitem>
-	<para>What a shell is, and how to change your default login
-	environment.</para>
+	<para>O que é uma <literal>shell</literal> (interpretador de comandos) e como
+	modificar seu ambiente padrão de <literal>login</literal>.</para>
       </listitem>
       <listitem>
-	<para>How to use basic text editors.</para>
+	<para>Como utilizar editores de texto básicos.</para>
       </listitem>
       <listitem>
-	<para>What devices and device nodes are.</para>
+	<para>O que são dispositivos e nós de dispositivos.</para>
       </listitem>
       <listitem>
-	<para>What binary format is used under &os;.</para>
+	<para>Que formato binário é usado no &os;.</para>
       </listitem>
       <listitem>
-	<para>How to read manual pages for more information.</para>
+	<para>Como ler as páginas de manual para obter mais informações.</para>
       </listitem>
     </itemizedlist>
 
   </sect1>
 
   <sect1 id="consoles">
-    <title>Virtual Consoles and Terminals</title>
-    <indexterm><primary>virtual consoles</primary></indexterm>
-    <indexterm><primary>terminals</primary></indexterm>
+    <title>Consoles virtuais e terminais</title>
+    <indexterm><primary>consoles virtuais</primary></indexterm>
+    <indexterm><primary>terminais</primary></indexterm>
 
-    <para>FreeBSD can be used in various ways.  One of them is typing commands
-      to a text terminal.  A lot of the flexibility and power of a &unix;
-      operating system is readily available at your hands when using FreeBSD
-      this way.  This section describes what <quote>terminals</quote> and
-      <quote>consoles</quote> are, and how you can use them in FreeBSD.</para>
+    <para>O FreeBSD pode ser utilizado de várias maneiras.  Uma delas
+	é através de comandos digitados em um terminal de texto.  Muito
+	da flexibilidade e do poder de um sistema operacional &unix; é
+	disponível de imediato ao alcance de suas mãos, quando se
+	utiliza o FreeBSD desta maneira.  Esta seção descreve o que
+	são <quote>terminais</quote> e <quote>consoles</quote> e como
+	utiliza-los no FreeBSD.</para>
 
     <sect2 id="consoles-intro">
-      <title>The Console</title>
+      <title>O Console</title>
       <indexterm><primary>console</primary></indexterm>
 
-      <para>If you have not configured FreeBSD to automatically start a
-	graphical environment during startup, the system will present you with
-	a login prompt after it boots, right after the startup scripts finish
-	running.  You will see something similar to:</para>
+      <para>Se você não configurou o FreeBSD para iniciar um ambiente
+	gráfico automaticamente durante sua inicialização, o sistema
+	irá apresentar a você uma tela de <literal>login</literal> assim
+	que for iniciado, logo depois que os <literal>scripts</literal> de
+	inicialização forem executados.  Você verá algo similar a:</para>
 
       <screen>Additional ABI support:.
 Local package initialization:.
@@ -99,144 +104,158 @@ FreeBSD/i386 (pc3.example.org) (ttyv0)
 
 login:</screen>
 
-      <para>The messages might be a bit different on your system, but you will
-	see something similar.  The last two lines are what we are interested
-	in right now.  The second last line reads:</para>
+      <para>A mensagem deve ser um pouco diferente em seu sistema, mas algo similar
+	será apresentado.  As duas últimas linhas são as que nós estamos
+	especialmente interessandos no momento.  Na penúltima linha você
+	pode ler:</para>
 
       <programlisting>FreeBSD/i386 (pc3.example.org) (ttyv0)</programlisting>
 
-      <para>This line contains some bits of information about the system you
-        have just booted.  You are looking at a <quote>FreeBSD</quote>
-	console, running on an Intel or compatible processor of the x86
-	architecture<footnote>
-	  <para>This is what <literal>i386</literal> means.  Note that even if
-	    you are not running FreeBSD on an Intel 386 CPU, this is going to
-	    be <literal>i386</literal>.  It is not the type of your processor,
-	    but the processor <quote>architecture</quote> that is shown
-	    here.</para>
-	</footnote>.  The name of this machine (every &unix; machine has a
-	name) is <hostid>pc3.example.org</hostid>, and you are now looking
-	at its system console&mdash;the <devicename>ttyv0</devicename>
-	terminal.</para>
+      <para>Essa linha oferece algumas informaçòes sobre o sistema
+	que acabou de ser iniciado.  Você está olhando para um
+	console <quote>FreeBSD</quote>, rodando em arquitetura Intel
+	x86 ou compatível<footnote>
+	  <para>É isso que <literal>i386</literal> significa.  Note que mesmo
+	   se você não estiver executando o FreeBSD em um processador Intel 386,
+	   esta informação ainda será apresentada como <literal>i386</literal>.
+	   Não trata-se do tipo de seu processador, mas sim a <quote>
+	   arquitetura</quote> do processador, que é apresentada aqui.</para>
+	</footnote>.  O nome desta maquina (toda maquina &unix; tem um nome)
+	é <hostid>pc3.example.org</hostid>, e agora você está analisando
+	seu console de sistema &mdash; o terminal <devicename>ttyv0
+	</devicename>.</para>
 
-      <para>Finally, the last line is always:</para>
+      <para>Finalmente, a última linha será sempre:</para>
 
       <programlisting>login:</programlisting>
 
-      <para>This is the part where you are supposed to type in your
-	<quote>username</quote> to log into FreeBSD.  The next section
-	describes how you can do this.</para>
+      <para>Este é o local onde você deve digitar seu nome de usuário
+	(<quote>username</quote>) para logar-se no FreeBSD.  A próxima
+	seção descreve como fazê-lo.</para>
     </sect2>
 
     <sect2 id="consoles-login">
-      <title>Logging into FreeBSD</title>
+      <title>Logando-se no FreeBSD</title>
 
-      <para>FreeBSD is a multiuser, multiprocessing system.  This is
-	the formal description that is usually given to a system that can be
-	used by many different people, who simultaneously run a lot of
-	programs on a single machine.</para>
+	<para>FreeBSD é um sistema multiusuário e de multiprocessamento.
+	  Esta é a descrição formal normalmente
+	  dada a um sistema que pode ser usado por pessoas diferentes,
+	  que simultâneamento executam uma
+	  série de programas na mesma estação.</para>
 
-      <para>Every multiuser system needs some way to distinguish one
-	<quote>user</quote> from the rest.  In FreeBSD (and all the
-	&unix; like operating systems), this is accomplished by requiring that
-	every user must <quote>log into</quote> the system before being able
-	to run programs.  Every user has a unique name (the
-	<quote>username</quote>) and a personal, secret key (the
-	<quote>password</quote>).  FreeBSD will ask for these two before
-	allowing a user to run any programs.</para>
+      <para>Todo sistema multiusuário requer uma maneira para fazer
+	distinção entre um <quote>usuário</quote> e os outros.  No
+	FreeBSD (e todo sistema operacional similar ou baseado em &unix;)
+	isso é garantido com a obrigatoriedade de todo usuário <quote>
+	logar-se</quote> ao sistema antes de poder executar qualquer
+	programa.  Todo usuário tem um nome único (o <quote>username</quote>)
+	e uma senha secreta pessoal (o <quote>password</quote>).  O FreeBSD
+	solicitará estas duas informações para permitir que um usuário
+	se logue ao sistema e execute qualquer programa.</para>
 
-      <indexterm><primary>startup scripts</primary></indexterm>
-      <para>Right after FreeBSD boots and finishes running its startup
-	scripts<footnote>
-	  <para>Startup scripts are programs that are run automatically by
-	    FreeBSD when booting.  Their main function is to set things up for
-	    everything else to run, and start any services that you have
-	    configured to run in the background doing useful things.</para>
-	</footnote>, it will present you with a prompt and ask for a valid
-	username:</para>
+      <indexterm><primary>scripts de inicializaçào</primary></indexterm>
+      <para>Assim que o FreeBSD é iniciado e acaba de executar seus
+	<literal>scripts</literal> de inicialização<footnote>
+	  <para><literal>Scripts</literal> de inicialização são programas
+	   executados automaticamente quando o FreeBSD é iniciado.  Sua
+	   principal função é configurar tudo que for necessário para
+	   o resto do sistema funcionar, e iniciar todos os serviços que
+	   você configurou para serem executados em instância de fundo,
+	   (em <foreignphrase>background</foreignphrase> realizado tarefas
+	   úteis.</para>
+	</footnote>, será apresentada a você uma tela que solicitará
+	um usuário válido:</para>
 
       <screen>login:</screen>
 
-      <para>For the sake of this example, let us assume that your username is
-	<username>john</username>.  Type <literal>john</literal> at this prompt and press
-	<keycap>Enter</keycap>.  You should then be presented with a prompt to
-	enter a <quote>password</quote>:</para>
+      <para>Para compreensão deste exemplo, vamos assumir que o seu nome de
+	usuário é <username>john</username>.  Digite <literal>john</literal> na tela
+	de <literal>login</literal> e aperte <keycap>Enter</keycap>.  Em seguida
+	será apresentada a tela que solicita sua <quote>senha</quote> (o <quote>
+	password</quote>):</para>
 
       <screen>login: <userinput>john</userinput>
 Password:</screen>
 
-      <para>Type in <username>john</username>'s password now, and press
-	<keycap>Enter</keycap>.  The password is <emphasis>not
-	echoed!</emphasis>  You need not worry about this right now.  Suffice
-	it to say that it is done for security reasons.</para>
+      <para>Digite agora a senha do usuário <username>john</username> e aperte
+	<keycap>Enter</keycap>.  A senha <emphasis>não é
+	apresentada!</emphasis>  Não é necessário se preocupar com isso agora.
+	É suficiente dizer que o comportamento é este por razões de
+	segurança.</para>
 
-      <para>If you have typed your password correctly, you should by now be
-	logged into FreeBSD and ready to try out all the available
-	commands.</para>
+      <para>Se você digitou sua senha corretamente, você deve ter se logado
+	no FreeBSD e está pronto para testar todos os comandos
+	disponíveis.</para>
 
-      <para>You should see the <acronym>MOTD</acronym> or message of
-	the day followed by a command prompt (a <literal>#</literal>,
-	<literal>$</literal>, or <literal>%</literal> character).  This
-	indicates you have successfully logged into FreeBSD.</para>
+      <para>Você deve ver a <acronym>MOTD</acronym>, a mensagem do dia,
+	seguida do terminal de comandos (um caracter <literal>#</literal>,
+	<literal>$</literal>, ou <literal>%</literal>).  Isso indica
+	que você se logou com sucesso no FreeBSD.</para>
     </sect2>
 
     <sect2 id="consoles-virtual">
-      <title>Multiple Consoles</title>
+      <title>Multiplos Consoles</title>
 
-      <para>Running &unix; commands in one console is fine, but FreeBSD can
-	run many programs at once.  Having one console where commands can be
-	typed would be a bit of a waste when an operating system like FreeBSD
-	can run dozens of programs at the same time.  This is where
-	<quote>virtual consoles</quote> can be very helpful.</para>
+      <para>É legal utilizar um console para executar comandos &unix;,
+	mas o FreeBSD pode executar vários programas de uma vez.  Ter
+	apenas um console onde os comandos são digitados pode ser 
+	considerado um leve desperdício, quando um sistema operacional como
+	o FreeBSD pode rodar dezenas de programas ao mesmo tempo.
+	É aí que os <quote>consoles virtuais</quote> podem se mostrar
+	muito úteis.</para>
 
-      <para>FreeBSD can be configured to present you with many different
-	virtual consoles.  You can switch from one of them to any other
-	virtual console by pressing a couple of keys on your keyboard.  Each
-	console has its own different output channel, and FreeBSD takes care
-	of properly redirecting keyboard input and monitor output as you
-	switch from one virtual console to the next.</para>
+      <para>O FreeBSD pode ser configurado para oferecer vários consoles
+	virtuais diferentes.  Você pode alternar de um para outro apertando
+	um conjunto de teclas em seu teclado.  Cada console tem seu
+	próprio canal de saída, e o FreeBSD cuida de redirecionar as
+	entradas do console para cada console virtual e monitor, e também
+	a saída padrão quando você alterna de um para o próximo console
+	virtual.</para>
 
-      <para>Special key combinations have been reserved by FreeBSD for
-	switching consoles<footnote>
-	  <para>A fairly technical and accurate description of all the details
-	    of the FreeBSD console and keyboard drivers can be found in the
-	    manual pages of &man.syscons.4;, &man.atkbd.4;, &man.vidcontrol.1;
-	    and &man.kbdcontrol.1;.  We will not expand on the details here,
-	    but the interested reader can always consult the manual pages for
-	    a more detailed and thorough explanation of how things
-	    work.</para>
-	</footnote>.  You can use
+      <para>Combinações especiais de teclas foram reservada pelo FreeBSD
+	para controlar a alternância de consoles<footnote>
+	  <para>Uma descrição técnica e considerávelmente acurada de
+	   todos detalhes sobre o console FreeBSD e dispositivos de
+	   teclado pode ser encontrada nas páginas de manuais do &man.syscons.4;, 
+	   &man.atkbd.4;, &man.vidcontrol.1; e &man.kbdcontrol.1;.  Não vamos
+	   entrar nestes detalhes aqui, mas o leitor interessado pode sempre
+	   consultar as páginas de manual para obter explicações mais
+	   detalhadas de como as coisas funcionam.</para>
+	</footnote>.  Você pode usar
 	<keycombo><keycap>Alt</keycap><keycap>F1</keycap></keycombo>,
-	<keycombo><keycap>Alt</keycap><keycap>F2</keycap></keycombo>, through
-	<keycombo><keycap>Alt</keycap><keycap>F8</keycap></keycombo> to switch
-	to a different virtual console in FreeBSD.</para>
+	<keycombo><keycap>Alt</keycap><keycap>F2</keycap></keycombo>, até
+	<keycombo><keycap>Alt</keycap><keycap>F8</keycap></keycombo> para 
+	alternar entre diferentes consoles virtuais no FreeBSD.</para>
 
-      <para>As you are switching from one console to the next, FreeBSD takes
-	care of saving and restoring the screen output.  The result is an
-	<quote>illusion</quote> of having multiple <quote>virtual</quote>
-	screens and keyboards that you can use to type commands for
-	FreeBSD to run.  The programs that you launch on one virtual console
-	do not stop running when that console is not visible.  They continue
-	running when you have switched to a different virtual console.</para>
+      <para>Conforme você estiver alternando entre um console e outro, o
+	FreeBSD se responsabiliza por salvar e restaurar o conteúdo
+	de de cada tela.  O resultado é uma <quote>ilusão</quote> de 
+	múltiplas telas e teclados <quote>virtuais</quote> disponíveis, de
+	forma que você possa digitar qualquer comando para o FreeBSD
+	executar.  Os programas que são iniciados por você em um
+	console virtual não param de ser executados quando o console
+	não está visível.  Eles continuam a ser processados quando
+	acontece alternância de console virtual.</para>
     </sect2>
 
     <sect2 id="consoles-ttys">
-      <title>The <filename>/etc/ttys</filename> File</title>
+      <title>O arquivo <filename>/etc/ttys</filename></title>
 
-      <para>The default configuration of FreeBSD will start up with eight
-        virtual consoles.  This is not a hardwired setting though, and
-        you can easily customize your installation to boot with more
-        or fewer virtual consoles.  The number and settings of the
-        virtual consoles are configured in the
-        <filename>/etc/ttys</filename> file.</para>
+      <para>A configuração padrão do FreeBSD iniciará oito
+	consoles virtuais.  Contudo, esta configuração não é
+	imutável e pode ser fácilmente customizada de forma a
+	possibilitar que o sistema seja iniciado com mais ou
+	menos consoles virtuais.  O número e definições
+	para os consoles virtuais estão configuradas no arquivo
+        <filename>/etc/ttys</filename>.</para>
 
-      <para>You can use the <filename>/etc/ttys</filename> file to configure
-	the virtual consoles of FreeBSD.  Each uncommented line in this file
-	(lines that do not start with a <literal>#</literal> character) contains
-	settings for a single terminal or virtual console.  The default
-	version of this file that ships with FreeBSD configures nine virtual
-	consoles, and enables eight of them.  They are the lines that start with
-	<literal>ttyv</literal>:</para>
+      <para>Você pode usar o arquivo <filename>/etc/ttys</filename> para configurar
+	consoles virtuais do FreeBSD.  Cada linha descomentada neste arquivo
+	(linhas que não começam com o caracter <literal>#</literal>) contém
+	ajustes para um único terminal ou console virtual.  A versão
+	padrão deste arquivo oferece com o FreeBSD nove consoles
+	virtuais, e habilita oito deles.  São as linhas que começam
+	com <literal>ttyv</literal>:</para>
 
       <programlisting># name  getty                           type    status          comments
 #
@@ -251,21 +270,22 @@ ttyv6   "/usr/libexec/getty Pc"         cons25  on  secure
 ttyv7   "/usr/libexec/getty Pc"         cons25  on  secure
 ttyv8   "/usr/X11R6/bin/xdm -nodaemon"  xterm   off secure</programlisting>
 
-      <para>For a detailed description of every column in this file and all
-	the options you can use to set things up for the virtual consoles,
-	consult the &man.ttys.5; manual page.</para>
+      <para>Para obter uma descrição detalhada do significado de cada coluna 
+	deste arquivo e todas opções disponíveis para os consoles virtuais,
+	consulte a página de manual &man.ttys.5;.</para>
     </sect2>
 
     <sect2 id="consoles-singleuser">
-      <title>Single User Mode Console</title>
+      <title>Console de usuário em modo mono-usuário</title>
 
-      <para>A detailed description of what <quote>single user mode</quote> is
-	can be found in <xref linkend="boot-singleuser">.  It is worth noting
-	that there is only one console when you are running FreeBSD in single
-	user mode.  There are no virtual consoles available.  The settings of
-	the single user mode console can also be found in the
-	<filename>/etc/ttys</filename> file.  Look for the line that starts
-	with <literal>console</literal>:</para>
+      <para>Uma descrição detalhada sobre o que é o <quote>modo mono-usuário</quote>
+	pode ser encontrada em <xref linkend="boot-singleuser">.  Vale a pena
+	notar que existe apenas um console disponível quando se está
+	operando o sistema em modo mono-usuário.  Não existem consoles
+	virtuais disponíveis.  As configurações do console em modo
+	mono-usuário também podem ser definidas no arquivo
+	<filename>/etc/ttys</filename>.  Olha na linha que começa
+	com <literal>console</literal>:</para>
 
       <programlisting># name  getty                           type    status          comments
 #
@@ -274,102 +294,104 @@ ttyv8   "/usr/X11R6/bin/xdm -nodaemon"  xterm   off secure</programlisting>
 console none                            unknown off secure</programlisting>
 
       <note>
-        <para>As the comments above the <literal>console</literal> line
-	  indicate, you can edit this line and change <literal>secure</literal> to
-	  <literal>insecure</literal>.  If you do that, when FreeBSD boots
-	  into single user mode, it will still ask for the
-	  <username>root</username> password.</para>
+        <para>Como indicam os comentários acima da linha <literal>console</literal>,
+	  você pode editar esta linha e modificar a entrada <literal>secure</literal>
+	  para <literal>insecure</literal>.  Se você o fizer, quando o FreeBSD
+	  iniciar em modo mono-usuário, ele continuará pedindo a senha do
+	  usuário <username>root</username>.</para>
 
-	<para><emphasis>Be careful when changing this to
-	  <literal>insecure</literal></emphasis>.  If you ever forget
-	  the <username>root</username> password, booting into single user
-	  mode is a bit involved.  It is still possible, but it might be a bit
-	  hard for someone who is not very comfortable with the FreeBSD
-	  booting process and the programs involved.</para>
+	<para><emphasis>Seja cuidadoso ao modificar esta opção para
+	  <literal>insecure</literal></emphasis>.  Se você esquecer
+	  um dia a senha de <username>root</username>, entrar em modo
+	  mono-usuário vai ser um pouco complicado.  Ainda é possível,
+	  mas será um pouco difícil para os usuários ainda não muito
+	  confortáveis com o processo de inicialização do FreeBSD
+	  e os programas envolvidos.</para>
       </note>
     </sect2>
   </sect1>
 
   <sect1 id="permissions">
-    <title>Permissions</title>
+    <title>Permissões</title>
     <indexterm><primary>UNIX</primary></indexterm>
 
-    <para>FreeBSD, being a direct descendant of BSD &unix;, is based on
-      several key &unix; concepts.  The first and
-      most pronounced is that FreeBSD is a multi-user operating system.
-      The system can handle several users all working simultaneously on
-      completely unrelated tasks.  The system is responsible for properly
-      sharing and managing requests for hardware devices, peripherals,
-      memory, and CPU time fairly to each user.</para>
+    <para>FreeBSD, como decendente direto do &unix; BSD, se baseia em inúmeros
+	conceitos chaves do &unix;.  O primeiro e mais citado, é que o FreeBSD
+	é um sistema operacional multi-usuário.  O sistema pode gerenciar
+	inúmeros usuários, todos trabalhando simultaneamente em tarefas
+	completamente distintaso.  O sistema é responsável pelo compartilhamento,
+	e gerencialmente apropriado de pedidos de acesso aos dispositivos de
+	controle de equipamentos, periféricos, de memória, e tempo de processamento,
+	de forma justa entre os usuários.</para>
 
-    <para>Because the system is capable of supporting multiple users,
-      everything the system manages has a set of permissions governing who
-      can read, write, and execute the resource.  These permissions are
-      stored as three octets broken into three pieces, one for the owner of
-      the file, one for the group that the file belongs to, and one for
-      everyone else.  This numerical representation works like
-      this:</para>
+    <para>Pelo fato do sistema poder suportar múltiplos usuários, tudo que
+	o sistema gerencia é composto de um conjunto de permissões que
+	governam quem pode ler, escrever, e executar recursos.  Estas 
+	permissões são armazenadas como três octetos divididos em três
+	partes, uma para o dono do arquivo, uma para o grupo à que o
+	arquivo pertence, e uma para todos os outros usuários.  Sua
+	representação numérica funcionam assim:</para>
 
-    <indexterm><primary>permissions</primary></indexterm>
+    <indexterm><primary>permissões</primary></indexterm>
     <indexterm>
-      <primary>file permissions</primary>
+      <primary>permissões de arquivos</primary>
     </indexterm>
     <informaltable frame="none">
       <tgroup cols="3">
 	<thead>
 	  <row>
-	    <entry>Value</entry>
-	    <entry>Permission</entry>
-	    <entry>Directory Listing</entry>
+	    <entry>Valor</entry>
+	    <entry>Permissões</entry>
+	    <entry>Listagem de diretório</entry>
 	  </row>
 	</thead>
 
 	<tbody>
 	  <row>
 	    <entry>0</entry>
-	    <entry>No read, no write, no execute</entry>
+	    <entry>Sem leitura, sem escrita, sem execussão</entry>
 	    <entry><literal>---</literal></entry>
 	  </row>
 
 	  <row>
 	    <entry>1</entry>
-	    <entry>No read, no write, execute</entry>
+	    <entry>Sem leitura, sem escrita, com execussão</entry>
 	    <entry><literal>--x</literal></entry>
 	  </row>
 
 	  <row>
 	    <entry>2</entry>
-	    <entry>No read, write, no execute</entry>
+	    <entry>Sem leitura, com escrita, sem execussão</entry>
 	    <entry><literal>-w-</literal></entry>
 	  </row>
 
 	  <row>
 	    <entry>3</entry>
-	    <entry>No read, write, execute</entry>
+	    <entry>Sem leitura, com escrita, com execussão</entry>
 	    <entry><literal>-wx</literal></entry>
 	  </row>
 
 	  <row>
 	    <entry>4</entry>
-	    <entry>Read, no write, no execute</entry>
+	    <entry>Com leitura, sem escrita, sem execussão</entry>
 	    <entry><literal>r--</literal></entry>
 	  </row>
 
 	  <row>
 	    <entry>5</entry>
-	    <entry>Read, no write, execute</entry>
+	    <entry>Com leitura, sem escrita, com execussão</entry>
 	    <entry><literal>r-x</literal></entry>
 	  </row>
 
 	  <row>
 	    <entry>6</entry>
-	    <entry>Read, write, no execute</entry>
+	    <entry>Com leitura, com escrita, sem execussão</entry>
 	    <entry><literal>rw-</literal></entry>
 	  </row>
 
 	  <row>
 	    <entry>7</entry>
-	    <entry>Read, write, execute</entry>
+	    <entry>Com leitura, com escrita, com execussão</entry>
 	    <entry><literal>rwx</literal></entry>
 	  </row>
 	</tbody>
@@ -380,11 +402,12 @@ console none                            unknown off secure</programlisting>
     </indexterm>
     <indexterm><primary>directories</primary></indexterm>
 
-    <para>You can use the <option>-l</option> command line
-      argument to &man.ls.1; to view a long directory listing that
-      includes a column with information about a file's permissions
-      for the owner, group, and everyone else.  For example, a
-      <command>ls -l</command> in an arbitrary directory may show:</para>
+    <para>A opção <option>-l</option> pode ser usada junto ao
+	&man.ls.1; para visualizar listagem detalhada do diretório
+	incluindo uma coluna com informações sobre as permissões
+	de cada arquivo, para o dono, grupo, e outros.  Por exemplo,
+	a saída do comando <command>ls -l</command> em um
+	diretório qualquer, mostrará:</para>
 
     <screen>&prompt.user; <userinput>ls -l</userinput>
 total 530
@@ -393,54 +416,58 @@ total 530
 -rw-r--r--  1 root  wheel    7680 Sep  5 12:31 email.txt
 ...</screen>
 
-    <para>Here is how the first column of <command>ls -l</command> is
-      broken up:</para>
+    <para>Aqui está a forma como a primeira coluna do <command>ls -l</command> 
+	é dividida:</para>
 
     <screen>-rw-r--r--</screen>
 
-    <para>The first (leftmost) character
-      tells if this file is a regular file, a directory, a special
-      character device, a socket, or any other special
-      pseudo-file device.  In this case, the <literal>-</literal>
-      indicates a regular file.  The next three characters,
-      <literal>rw-</literal> in this example, give the permissions for the owner of the
-      file.  The next three characters, <literal>r--</literal>, give the
-      permissions for the group that the file belongs to.  The final three
-      characters, <literal>r--</literal>, give the permissions for the
-      rest of the world.  A dash means that the permission is turned off.
-      In the case of this file, the permissions are set so the owner can
-      read and write to the file, the group can read the file, and the
-      rest of the world can only read the file.  According to the table
-      above, the permissions for this file would be
-      <literal>644</literal>, where each digit represents the three parts
-      of the file's permission.</para>
+    <para>O primeiro caracter (o mais à esquerda) indica que
+	se este é um arquivo normal, se é um diretório, um dispositivo
+	especial, um <literal>socket</literal> ou qualquer outro
+	pseudo-dispositivo especial.  Nesse caso, o <literal>-</literal>
+	indica que trata-se de um arquivo regular.  Os próximos três
+	caracteres, <literal>rw-</literal> neste exemplo, indicam as
+	permissões para o dono do arquivo.  Os próximos três caracteres,
+	<literal>r--</literal>, indicam as permissões para o grupo 
+	ao qual o arquivo pertence.  Os três caracteres finais,
+	<literal>r--</literal>, indicam as permissoes para o resto
+	do mundo.  Um hífen indica que a permissão está desligada.
+	No caso deste arquivo, dono ler e escrever neste arquivo, o
+	grupo pode ler o arquivo e o resto do mundo pode também apenas ler
+	o arquivo.  De acordo com a tabela acima, as permissões para
+	o arquivo seriam <literal>644</literal>, onde cada dígito
+	representa as três partes das permissões do arquivo.</para>
 
-    <para>This is all well and good, but how does the system control
-      permissions on devices? FreeBSD actually treats most hardware
-      devices as a file that programs can open, read, and write data to
-      just like any other file.  These special device files are stored on
-      the <filename>/dev</filename> directory.</para>
+    <para>Isso é muito bonito e legal, mas como o sistema controla
+	as permissões nos dispositivos?  FreeBSD na verdade trata
+	a maioria dos dispositivos de <literal>hardware</literal>
+	como arquivos onde os programas podem ler, abrir, e escrever dados,
+	como se fosse qualquer outro arquivo.  Estes arquivos de dispositivos
+	são armazenados no diretório <filename>/dev</filename>.</para>
 
-    <para>Directories are also treated as files.  They have read, write,
-      and execute permissions.  The executable bit for a directory has a
-      slightly different meaning than that of files.  When a directory is
-      marked executable, it means it can be traversed into, that is, it is
-      possible to <quote>cd</quote> (change directory) into it.  This also means that
-      within the directory it is possible to access files whose names are
-      known (subject, of course, to the permissions on the files
-      themselves).</para>
+    <para>Diretórios também são tratados como arquivos comuns.  Eles tem
+	permissões de leitura, escrita e execussão.  O <firstterm>bit</firstterm>
+	de execussão em um diretório tem uma sútil diferença quando
+	comparado a um arquivo.  Quando um diretório é definido como
+	executável, significa que ele pode ser explorado, ou seja, que é
+	possível entrar neste diretório (<quote>cd</quote>).  Também
+	significa que dentro do diretório, pode-se acessar arquivos cujos
+	nomes são conhecidos (de acordo com as permissões dos próprios
+	arquivos, é claro).</para>
 
-    <para>In particular, in order to perform a directory listing,
-      read permission must be set on the directory, whilst to delete a file
-      that one knows the name of, it is necessary to have write
-      <emphasis>and</emphasis> execute permissions to the directory
-      containing the file.</para>
+    <para>Em particular, para realizar a listagem de um diretório,
+	é necessário ter permissões de leitura no mesmo, enquanto
+	para apagar um arquivo cujo nome já é conhecido, é
+	necessário ter permissões de escrita <emphasis>e</emphasis>
+	execussão no diretório onde está o arquivo.</para>
 
-    <para>There are more permission bits, but they are primarily used in
-      special circumstances such as setuid binaries and sticky
-      directories.  If you want more information on file permissions and
-      how to set them, be sure to look at the &man.chmod.1; manual
-      page.</para>
+    <para>Existem outros bits de permissões, mas eles são
+	utilizados em circustâncias especiais como binários
+	como <literal>setuid</literal> e diretórios com
+	opção <literal>sticky</literal>.  Se você deseja obter mais
+	informações sobre as permissões de arquivo e como
+	defini-las, dê uma olhada na página de manual
+	do &man.chmod.1;.</para>
 
     <sect2>
       <sect2info>
@@ -448,264 +475,274 @@ total 530
 	  <author>
 	    <firstname>Tom</firstname>
 	    <surname>Rhodes</surname>
-	    <contrib>Contributed by </contrib>
+	    <contrib>Contribução de</contrib>
 	  </author>
 	</authorgroup>
       </sect2info>
 
-      <title>Symbolic Permissions</title>
-      <indexterm><primary>Permissions</primary><secondary>symbolic</secondary></indexterm>
+      <title>Permissões simbólicas</title>
+      <indexterm><primary>Permissões</primary><secondary>simbólicas</secondary></indexterm>
 
-      <para>Symbolic permissions, sometimes referred to as symbolic expressions,
-	use characters in place of octal values to assign permissions to files
-	or directories.  Symbolic expressions use the syntax of (who) (action)
-	(permissions), where the following values are available:</para>
+      <para>Permissões simbólicas, as vezes se referem à expressões de permissões, ou
+	o uso de caracteres em substituição aos valores octais que
+	atribuem permissões aos arquivos e diretórios.  Expressões simbólicas
+	usam a sintaxe (quem) (ação) (permissões), onde os seguintes valores
+	estão disponíveis:</para>
 
       <informaltable frame="none">
 	<tgroup cols="3">
 	  <thead>
 	    <row>
-	      <entry>Option</entry>
-	      <entry>Letter</entry>
-	      <entry>Represents</entry>
+	      <entry>Opção</entry>
+	      <entry>Letra</entry>
+	      <entry>Representação</entry>
 	    </row>
 	  </thead>
 
 	<tbody>
 	  <row>
-	    <entry>(who)</entry>
+	    <entry>(quem)</entry>
 	    <entry>u</entry>
-	    <entry>User</entry>
+	    <entry>Usuário</entry>
 	  </row>
 
 	  <row>
-	    <entry>(who)</entry>
+	    <entry>(quem)</entry>
 	    <entry>g</entry>
-	    <entry>Group owner</entry>
+	    <entry>Grupo dono</entry>
 	  </row>
 
 	  <row>
-	    <entry>(who)</entry>
+	    <entry>(quem)</entry>
 	    <entry>o</entry>
-	    <entry>Other</entry>
+	    <entry>Outros</entry>
 	  </row>
 
 	  <row>
-	    <entry>(who)</entry>
+	    <entry>(quem)</entry>
 	    <entry>a</entry>
-	    <entry>All (<quote>world</quote>)</entry>
+	    <entry>Todos (<quote>o mundo</quote>)</entry>
 	  </row>
 
 	  <row>
-	    <entry>(action)</entry>
+	    <entry>(ação)</entry>
 	    <entry>+</entry>
-	    <entry>Adding permissions</entry>
+	    <entry>Adicionar permissões</entry>
 	  </row>
 
 	  <row>
-	    <entry>(action)</entry>
+	    <entry>(ação)</entry>
 	    <entry>-</entry>
-	    <entry>Removing permissions</entry>
+	    <entry>Remover permissões</entry>
 	  </row>
 
 	  <row>
-	    <entry>(action)</entry>
+	    <entry>(ação)</entry>
 	    <entry>=</entry>
-	    <entry>Explicitly set permissions</entry>
+	    <entry>Definir permissões explicitamente</entry>
 	  </row>
 
 	  <row>
-	    <entry>(permissions)</entry>
+	    <entry>(permissões)</entry>
 	    <entry>r</entry>
-	    <entry>Read</entry>
+	    <entry>Leitura</entry>
 	  </row>
 
 	  <row>
-	    <entry>(permissions)</entry>
+	    <entry>(permissões)</entry>
 	    <entry>w</entry>
-	    <entry>Write</entry>
+	    <entry>Escrita</entry>
 	  </row>
 
 	  <row>
-	    <entry>(permissions)</entry>
+	    <entry>(permissões)</entry>
 	    <entry>x</entry>
-	    <entry>Execute</entry>
+	    <entry>Execussão</entry>
 	  </row>
 
 	  <row>
-	    <entry>(permissions)</entry>
+	    <entry>(permissões)</entry>
 	    <entry>t</entry>
-	    <entry>Sticky bit</entry>
+	    <entry>Bit de <literal>sticky</literal></entry>
 	  </row>
 
 	  <row>
-	    <entry>(permissions)</entry>
+	    <entry>(permissões)</entry>
 	    <entry>s</entry>
-	    <entry>Set UID or GID</entry>
+	    <entry>Define UID ou GID</entry>
 	  </row>
 	</tbody>
       </tgroup>
     </informaltable>
 
-    <para>These values are used with the &man.chmod.1; command
-      just like before, but with letters.  For an example, you could use
-      the following command to block other users from accessing
-      <replaceable>FILE</replaceable>:</para>
+    <para>Estes valores são usados com o comando &man.chmod.1; exatamente
+	como da forma anterior, mas sem letras.  Por exemplo, você
+	pode usar o seguinte comando para impedir que outros usuários
+	deixem de acessar determinado <replaceable>ARQUIVO</replaceable>:</para>
 
-    <screen>&prompt.user; <userinput>chmod go= FILE</userinput></screen>
+    <screen>&prompt.user; <userinput>chmod go= ARQUIVO</userinput></screen>
 
-    <para>A comma separated list can be provided when more than one set
-      of changes to a file must be made.  For example the following command
-      will remove the groups and <quote>world</quote> write permission
-      on <replaceable>FILE</replaceable>, then it adds the execute
-      permissions for everyone:</para>
+    <para>Pode-se fazer uso de uma lista separado por vírgula, quando
+	se desejar que mais de uma modificação seja realizada no arquivo.
+	Por exemplo, o comando à seguir remove as permissões de escrita
+	para o grupo e <quote>todo o mundo</quote>, no <replaceable>
+	ARQUIVO</replaceable>, e então adiciona permissões de
+	execussão à todos:</para>
 
     <screen>&prompt.user; <userinput>chmod go-w,a+x <replaceable>FILE</replaceable></userinput></screen>
 
 <!--
-    <para>Most users will not notice this, but it should be pointed out
-      that using the octal method will only set or assign permissions to
-      a file; it does not add or delete them.</para>
+    <para>A maioria dos usuários vão perceber isso, mas é importante
+	lembrar que utilizar o método octal de permissões
+	apenas definirá ou modificará permissões em um
+	arquivo; ele não os adiciona ou apaga.</para>
 -->
     </sect2>
   </sect1>
   
   <sect1 id="dirstructure">
-    <title>Directory Structure</title>
-    <indexterm><primary>directory hierarchy</primary></indexterm>
+    <title>Estrutura de Diretórios</title>
+    <indexterm><primary>hierarquia de diretório</primary></indexterm>
 
-    <para>The FreeBSD directory hierarchy is fundamental to obtaining
-      an overall understanding of the system.  The most important
-      concept to grasp is that of the root directory,
-      <quote>/</quote>.  This directory is the first one mounted at
-      boot time and it contains the base system necessary to prepare
-      the operating system for multi-user operation.  The root
-      directory also contains mount points for every other file system
-      that you may want to mount.</para>
+    <para>Conhecer a hierarquia de diretórios do FreeBSD é
+	fundamental para se obter entendimento total do
+	sistema.  O conceito mais importante para se assimilar
+	é o conceito do diretório raiz, o <quote>/</quote>.  Esse
+	diretório é montado inicialmente no momento em que o
+	sistema é carregado, e ele contém o sistema base necessário
+	para preparar o a entrada em modo de operação multi-usuário
+	do sistema operacional.  O diretório raiz contém ainda
+	pontos de montagem para cada outro sistema de
+	arquivos que você queira montar.</para>
 
-    <para>A mount point is a directory where additional file systems can
-      be grafted onto the root file system.  Standard mount points include
-      <filename>/usr</filename>, <filename>/var</filename>,
-      <filename>/mnt</filename>, and <filename>/cdrom</filename>.  These
-      directories are usually referenced to entries in the file
-      <filename>/etc/fstab</filename>.  <filename>/etc/fstab</filename> is
-      a table of various file systems and mount points for reference by the
-      system.  Most of the file systems in <filename>/etc/fstab</filename>
-      are mounted automatically at boot time from the script &man.rc.8;
-      unless they contain the <option>noauto</option> option.  Consult the
-      &man.fstab.5; manual page for more information on the format of the
-      <filename>/etc/fstab</filename> file and the options it
-      contains.</para>
+    <para>Um ponto de montagem é um diretório onde sistemas de
+	arquivos adicionais podem ser acoplados ao sistema de
+	arquivos raiz.  Pontos de montagem padrão incluem
+	<filename>/usr</filename>, <filename>/var</filename>,
+	<filename>/mnt</filename>, e <filename>/cdrom</filename>.  Esses
+	diretórios normalmente são encontrados como entradas
+	dispostas no arquivo <filename>/etc/fstab</filename>.  O <filename>
+	/etc/fstab</filename> é uma tabela com vários sistemas de
+	arquivos e pontos de montagem que o sistema usa como referência.
+	A maioria dos sistemas de arquivos no <filename>/etc/fstab
+	</filename> são montados automaticamente no momento da 
+	inicialização, à partir do <literal>script</literal> &man.rc.8;
+	a não se que eles contenham a opção <option>noauto</option> definida.
+	Consulte a página de manual do &man.fstab.5; para obter mais informações
+	sobre o formato do arquivo <filename>/etc/fstab</filename> e seu
+	conteúdo.</para>
 
-    <para>A complete description of the file system hierarchy is
-      available in &man.hier.7;.  For now, a brief overview of the
-      most common directories will suffice.</para>
+    <para>Uma descrição completa da hierarquia do sistema de arquivos
+	está disponível na página de manual &man.hier.7;.  Por hora, uma
+	breve descrição dos diretórios mais comuns será abordada:</para>
 
     <para>
       <informaltable frame="none">
         <tgroup cols="2">
 	  <thead>
 	    <row>
-	      <entry>Directory</entry>
-	      <entry>Description</entry>
+	      <entry>Diretório</entry>
+	      <entry>Descrição</entry>
 	    </row>
 	  </thead>
 	  <tbody>
             <row>
 	      <entry><filename class="directory">/</filename></entry>
-	      <entry>Root directory of the file system.</entry>
+	      <entry>Diretório raiz do sistema de arquivo.</entry>
             </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/bin/</filename></entry>
-	      <entry>User utilities fundamental to both single-user
-	      and multi-user environments.</entry>
+	      <entry>Utilitários do usuário, fundamentais
+		para os ambientes de multi-usuário e mono-usuário.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/boot/</filename></entry>
-	      <entry>Programs and configuration files used during
-	      operating system bootstrap.</entry>
+	      <entry>Arquivos e programas de configuração que
+		são usados durante o processo de inicialização
+		do sistema operacional.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/boot/defaults/</filename></entry>
-	      <entry>Default bootstrapping configuration files; see
-	      &man.loader.conf.5;.</entry>
+	      <entry>Arquuivos de configuração padrão do sistema de
+		inicializaçào, veja a página de manual &man.loader.conf.5;.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/dev/</filename></entry>
-	      <entry>Device nodes; see &man.intro.4;.</entry>
+	      <entry>Dispositivos de controle; veja &man.intro.4;.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/etc/</filename></entry>
-	      <entry>System configuration files and scripts.</entry>
+	      <entry>Arquivos e scripts de configuração do sistema.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/etc/defaults/</filename></entry>
-	      <entry>Default system configuration files; see &man.rc.8;.</entry>
+	      <entry>Arquivos de configuração padrão do sistema; veja &man.rc.8;.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/etc/mail/</filename></entry>
-	      <entry>Configuration files for mail transport agents such
-		as &man.sendmail.8;.</entry>
+	      <entry>Arquivos de configuração para os agentes de transferência
+		de correio, como o &man.sendmail.8;.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/etc/namedb/</filename></entry>
-	      <entry><command>named</command> configuration files; see
+	      <entry>Arquivos de configuração do <command>named</command>; veja
 	      &man.named.8;.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/etc/periodic/</filename></entry>
-	      <entry>Scripts that are run daily, weekly, and monthly,
-		via &man.cron.8;; see &man.periodic.8;.</entry>
+	      <entry>Scripts que são executados diariamente, semanalmente
+		e mensalmente por meio do &man.cron.8;; veja &man.periodic.8;.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/etc/ppp/</filename></entry>
-	      <entry><command>ppp</command> configuration files; see
+	      <entry>Arquivos de configuração do <command>ppp</command>; veja
 	      &man.ppp.8;.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/mnt/</filename></entry>
-	      <entry>Empty directory commonly used by system administrators as a 
-		temporary mount point.</entry>
+	      <entry>Diretório vazio normalmente utilizado pelos administradores
+		de sistemas como ponto de montagem temporário.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/proc/</filename></entry>
-	      <entry>Process file system; see &man.procfs.5;,
+	      <entry>Sistema de arquivos de processos; veja &man.procfs.5; e
 	      &man.mount.procfs.8;.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/root/</filename></entry>
-	      <entry>Home directory for the <username>root</username>
-	      account.</entry>
+	      <entry>Diretório home da conta de usuário
+		<username>root</username>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><filename class="directory">/sbin/</filename></entry>
-	      <entry>System programs and administration utilities fundamental to
-		both single-user and multi-user environments.</entry>
+	      <entry>Utilitários de programas e administração, fundamentais
+		para os ambientes de multi-usuário e mono-usuário.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/stand/</filename></entry>
-	      <entry>Programs used in a standalone environment.</entry>
+	      <entry>Programas usados no ambiente independente.</entry>
 	    </row>
 	    
 	    
 	    <row>
 	      <entry><filename class="directory">/tmp/</filename></entry>
-	      <entry>Temporary files, usually a &man.mfs.8;
+	      <entry>Arquivos temporários, normalmente um diretório
+		montado em memória com ti ti ti arrumar isso &man.mfs.8; (
 		memory-based file system (the contents of <filename
 		class="directory">/tmp</filename> are usually NOT
 		preserved across a system reboot).</entry>
@@ -714,117 +751,119 @@ total 530
 	    
 	    <row>
 	      <entry><filename class="directory">/usr/</filename></entry>
-	      <entry>The majority of user utilities and applications.</entry>
+	      <entry>A maioria dos utilitários e aplicações de usuários.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/usr/bin/</filename></entry>
-	      <entry>Common utilities, programming tools, and applications.</entry>
+	      <entry>Utilitários comuns, ferramentas de programação
+		e aplicações.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/usr/include/</filename></entry>
-	      <entry>Standard C include files.</entry>
+	      <entry>Arquivos C padrão de inclusão.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/usr/lib/</filename></entry>
-	      <entry>Archive libraries.</entry>
+	      <entry>Bibliotecas.</entry>
 	    </row>
 	    
 	    
 	    <row>
 	      <entry><filename class="directory">/usr/libdata/</filename></entry>
-	      <entry>Miscellaneous utility data files.</entry>
+	      <entry>Arquivos de dados de utilitários variados.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/usr/libexec/</filename></entry>
-	      <entry>System daemons & system utilities (executed by other
-		programs).</entry>
+	      <entry>Daemons & utilitários do sistema (executados por
+		outros programas).</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename
 	      class="directory">/usr/local/</filename></entry>
 
-	      <entry>Local executables, libraries, etc.  Also used as
-	        the default destination for the FreeBSD ports
-	        framework.  Within <filename>/usr/local</filename>,
-	        the general layout sketched out by &man.hier.7; for
-	        <filename>/usr</filename> should be used.  Exceptions
-	        are the man directory, which is directly under
-	        <filename>/usr/local</filename> rather than under
-	        <filename>/usr/local/share</filename>, and the ports
-	        documentation is in
-	        <filename>share/doc/<replaceable>port</replaceable></filename>.
+	      <entry>Executáveis locais, bibliotecas, etc.  Também
+		utilizado como destino padrão para o sistema de
+		Ports.  Dentro de <filename>/usr/local</filename>,
+	        a disposição hierárquica geral é definida pelo
+		&man.hier.7; como o definido pelo <filename>/usr</filename>.
+		Exceto o diretório de páginas de manuais que são
+		diretamente dispostas sob <filename>/usr/local</filename>
+		ao invés de serem sobre <filename>/usr/local/share</filename>,
+		e a documentação das aplicações de terceiros, que ficam
+		sob <filename>share/doc/<replaceable>port</replaceable></filename>.
 	      </entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/usr/obj/</filename></entry>
-	      <entry>Architecture-specific target tree produced by building
-		the <filename>/usr/src</filename> tree.</entry>
+	      <entry>Arquivo de destino dos objetos binários específicos
+		para cada arquitetura, constribuídos à partir da
+		árvore <filename>/usr/src</filename>.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/usr/ports</filename></entry>
-	      <entry>The FreeBSD ports collection (optional).</entry>
+	      <entry>A Coleção de Ports do FreeBSDn (opcional).</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/usr/sbin/</filename></entry>
-	      <entry>System daemons & system utilities (executed by users).</entry>
+	      <entry>Daemons & utilitários do sistema (executados por usuários).</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/usr/share/</filename></entry>
-	      <entry>Architecture-independent files.</entry>
+	      <entry>Arquivos independentes de arquitetura.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/usr/src/</filename></entry>
-	      <entry>BSD and/or local source files.</entry>
+	      <entry>Arquivos de fontes locais e/ou BSD.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename
 	      class="directory">/usr/X11R6/</filename></entry>
-	      <entry>X11R6 distribution executables, libraries, etc
-	      (optional).</entry>
+	      <entry>Executáveis da distribuição do X11R6, bibliotecas,
+		etc (opcional).</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/var/</filename></entry>
-	      <entry>Multi-purpose log, temporary, transient, and spool files.
-	      </entry>
+	      <entry>Arquivos de log de múltiplos propósitos, arquivos
+		temporários, de transição, e arquivos de bobina (spool).</entry>
 	    </row>
 	    
 	    
 	    <row>
 	      <entry><filename class="directory">/var/log/</filename></entry>
-	      <entry>Miscellaneous system log files.</entry>
+	      <entry>Arquivos de logs variados do sistema.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/var/mail/</filename></entry>
-	      <entry>User mailbox files.</entry>
+	      <entry>Arquivos de caixa de corrêio dos usuários.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/var/spool/</filename></entry>
-	      <entry>Miscellaneous printer and mail system spooling directories.
-	      </entry>
+	      <entry>Diretórios de spool de impressão e de correio.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename class="directory">/var/tmp/</filename></entry>
-	      <entry>Temporary files that are kept between system reboots.</entry>
+	      <entry>Arquivos temporários que são mantidos entre
+		reinicializações do sistema.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><filename>/var/yp</filename></entry>
-	      <entry>NIS maps.</entry>
+	      <entry>Mapas NIS.</entry>
 	    </row>
 
 	  </tbody>
@@ -835,62 +874,71 @@ total 530
   </sect1>
 
   <sect1 id="disk-organization">
-      <title>Disk Organization</title>
+      <title>Organização de disco</title>
 
-      <para>The smallest unit of organization that FreeBSD uses to find files
-	is the filename.  Filenames are case-sensitive, which means that
-	<filename>readme.txt</filename> and <filename>README.TXT</filename>
-	are two separate files.  FreeBSD does not use the extension
-	(<filename>.txt</filename>) of a file to determine whether the file is
-	program, or a document, or some other form of data.</para>
+      <para>A menor unidade organizacional que o FreeBSD utiliza
+	para definir os arquivos é o nome de arquivo.  Nome de arquivos
+	são <quote>canse-sensitive</quote>, ou seja fazem distinção
+	entre maiúsculas e minúscilas, o que significa que
+	<filename>readme.txt</filename> e <filename>README.TXT</filename>
+	são dois arquivos distintos.  FreeBSD não utiliza a extensão
+	do arquivo (<filename>.txt</filename>) para determinar se
+	o arquivo é um programa ou um documento, ou ainda qualquer
+	outro tipo de dado.</para>
 
-      <para>Files are stored in directories.  A directory may contain no
-	files, or it may contain many hundreds of files.  A directory can also
-	contain other directories, allowing you to build up a hierarchy of
-	directories within one another.  This makes it much easier to organize
-	your data.</para>
+      <para>Arquivos são armazenados em diretórios.  Um diretório pode
+	não conter arquivo algum, ou pode conter centenas de arquivos.  Um
+	diretório pode ainda conter outros diretórios, permitindo que você
+	construa hierarquias inteiras de diretórios, uns dentro dos outros.
+	Isso torna a organização de seus dados muito mais fácil.</para>
 
-      <para>Files and directories are referenced by giving the file or
-	directory name, followed by a forward slash, <literal>/</literal>,
-	followed by any other directory names that are necessary.  If you have
-	directory <filename>foo</filename>, which contains directory
-	<filename>bar</filename>, which contains the file
-	<filename>readme.txt</filename>, then the full name, or
-	<firstterm>path</firstterm> to the file is
+      <para>Arquivos e diretórios são identificados por seu nome, seguido por
+	uma barra dianteira, <literal>/</literal>, seguido de outros nomes de
+	diretórios, conforme necessário.  Se você tem o diretório
+	<filename>foo</filename>, e dentro dele o diretório 
+	<filename>bar</filename>, que por sua vez contém o arquivo
+	<filename>readme.txt</filename>, então o nome completo, ou
+	o <firstterm>path</firstterm> para este arquivo é
 	<filename>foo/bar/readme.txt</filename>.</para>
 
-      <para>Directories and files are stored in a filesystem.  Each filesystem
-	contains exactly one directory at the very top level, called the
-	<firstterm>root directory</firstterm> for that filesystem.  This root
-	directory can then contain other directories.</para>
+      <para>Diretórios e arquivos são armazenados em um sistema de arquivos.
+	Cada sistema de arquivos contém exatamente um diretório de nível
+	hierárquico interior, chamado de <firstterm>diretório raiz</firstterm>
+	para o sistema de arquivos.  Este diretório raiz pode conter outros
+	diretórios.</para>
 
-      <para>So far this is probably similar to any other operating system you
-	may have used.  There are a few differences; for example, DOS uses
-	<literal>\</literal> to separate file and directory names, while &macos;
-	uses <literal>:</literal>.</para>
+      <para>Certamente isso tudo é similar à qualquer outro sistema
+	operacional que você já usou.  Existem algumas diferenças básicas;
+	por exemplo, DOS usa a barra invertida, <literal>\</literal>, para
+	separar qualquer arquivo ou nome de diretório, enquanto o &macos;
+	utiliza o <literal>:</literal>.</para>
 
-      <para>FreeBSD does not use drive letters, or other drive names in the
-	path.  You would not write <filename>c:/foo/bar/readme.txt</filename>
-	on FreeBSD.</para>
+      <para>O FreeBSD não utiliza letras de dispositivos ou qualquer
+	outro tipo de nome para os dispositivos do sistema de arquivos.
+	Você jamais escreveria <filename>c:/foo/bar/readme.txt</filename>
+	no FreeBSD.</para>
 
-      <para>Instead, one filesystem is designated the <firstterm>root
-	  filesystem</firstterm>.  The root filesystem's root directory is
-	referred to as <literal>/</literal>.  Every other filesystem is then
-	<firstterm>mounted</firstterm> under the root filesystem.  No matter
-	how many disks you have on your FreeBSD system, every directory
-	appears to be part of the same disk.</para>
+      <para>Ao invés disso, um sistema de arquivo é definido como
+	<firstterm>sistema de arquivos raiz</firstterm>.  O diretório
+	raiz do sistema de arquivo raiz é o <literal>/</literal>.  Todo
+	outro sistema de arquivos é montado (<firstterm>mounted</firstterm>)
+	sob este sistema de arquivos.  Não importa
+	quantos discos existam no seu sistema FreeBSD, cada diretório
+	é apresentado como parte do disco.</para>
 
-      <para>Suppose you have three filesystems, called <literal>A</literal>,
-	<literal>B</literal>, and <literal>C</literal>.  Each filesystem has
-	one root directory, which contains two other directories, called
-	<literal>A1</literal>, <literal>A2</literal> (and likewise
-	<literal>B1</literal>, <literal>B2</literal> and
+      <para>Suponha que você tenha três sistemas de arquivos, chamados
+	<literal>A</literal>, <literal>B</literal>, e <literal>C</literal>.
+	Cada sistema de arquivos tem seu próprio diretório raiz,
+	que contém outros dois diretórios chamados
+	<literal>A1</literal>, <literal>A2</literal> (e da mesma forma
+	<literal>B1</literal>, <literal>B2</literal> e
 	<literal>C1</literal>, <literal>C2</literal>).</para>
 
-      <para>Call <literal>A</literal> the root filesystem.  If you used the
-	<command>ls</command> command to view the contents of this directory
-	you would see two subdirectories, <literal>A1</literal> and
-	<literal>A2</literal>.  The directory tree looks like this:</para>
+      <para>Assuma <literal>A</literal> como sistema de arquivos raiz.  Se
+	você usou o comando <command>ls</command> para visualizar o
+	conteúdo deste diretórios, você veria dois subdiretórios, 
+	<literal>A1</literal> e
+	<literal>A2</literal>.  A árvore de diretórios ficaria assim:</para>
 
       <mediaobject>
 	<imageobject>
@@ -906,11 +954,13 @@ total 530
 	</textobject>
       </mediaobject>
 
-      <para>A filesystem must be mounted on to a directory in another
-	filesystem.  So now suppose that you mount filesystem
-	<literal>B</literal> on to the directory <literal>A1</literal>.  The
-	root directory of <literal>B</literal> replaces <literal>A1</literal>,
-	and the directories in <literal>B</literal> appear accordingly:</para>
+      <para>Todo sistema de arquivos deve ser montado em um
+	diretório disposto em outro sistema de arquivos.
+	Então, suponha que você tenha montado o sistema de
+	arquivos  <literal>B</literal> no diretório <literal>A1</literal>.
+	O diretório raiz do <literal>B</literal> substitui <literal>A1</literal>,
+	e os diretórios em <literal>B</literal> se tornam apropriadamente
+	disponíveis:</para>
 
       <mediaobject>
 	<imageobject>
@@ -930,15 +980,16 @@ total 530
 	</textobject>
       </mediaobject>
 
-      <para>Any files that are in the <literal>B1</literal> or
-	<literal>B2</literal> directories can be reached with the path
-	<filename>/A1/B1</filename> or <filename>/A1/B2</filename> as
-	necessary.  Any files that were in <filename>/A1</filename> have been
-	temporarily hidden.  They will reappear if <literal>B</literal> is
-	<firstterm>unmounted</firstterm> from A.</para>
+      <para>Quaisquer arquivos que estejam nos diretórios <literal>B1</literal> ou
+	<literal>B2</literal> podem ser acessados com o <literal>path</literal>
+	<filename>/A1/B1</filename> ou <filename>/A1/B2</filename> conforme
+	necessário.  Qualquer arquivo que estivesse no <filename>/A1</filename>
+	foi temporariamente escondido.  Eles reaparecerão se 
+	<literal>B</literal> for <firstterm>desmontado</firstterm> de 
+	<literal>A</literal>.</para>
 
-      <para>If <literal>B</literal> had been mounted on <literal>A2</literal>
-	then the diagram would look like this:</para>
+      <para>Se <literal>B</literal> foi montado em <literal>A2</literal>
+	então o diagrama será parecido com:</para>
 
       <mediaobject>
 	<imageobject>
@@ -958,13 +1009,13 @@ total 530
 	</textobject>
       </mediaobject>
 
-      <para>and the paths would be <filename>/A2/B1</filename> and
-	<filename>/A2/B2</filename> respectively.</para>
+      <para>e os <literal>paths</literal> seriam <filename>/A2/B1</filename> e
+	<filename>/A2/B2</filename> respectivamente.</para>
 
-      <para>Filesystems can be mounted on top of one another.  Continuing the
-	last example, the <literal>C</literal> filesystem could be mounted on
-	top of the <literal>B1</literal> directory in the <literal>B</literal>
-	filesystem, leading to this arrangement:</para>
+      <para>Os sistemas de arquivos podem ser montados em sobreposição à outros.
+	Prosseguindo com o último exemplo, o sistema de arquivo <literal>C</literal>
+	poderia ser montado sobre o diretório <literal>B1</literal> no sistema de
+	arquivos  <literal>B</literal>, levando ao seguinte arranjo:</para>
 
       <mediaobject>
 	<imageobject>
@@ -988,9 +1039,9 @@ total 530
 	</textobject>
       </mediaobject>
 
-      <para>Or <literal>C</literal> could be mounted directly on to the
-	<literal>A</literal> filesystem, under the <literal>A1</literal>
-	directory:</para>
+      <para>Ou <literal>C</literal> poderia ser montado diretamente no
+	sistema de arquivos <literal>A</literal>, sob o diretório
+	<literal>A1</literal>:</para>
 
       <mediaobject>
 	<imageobject>
@@ -1014,89 +1065,103 @@ total 530
 	</textobject>
       </mediaobject>
 
-      <para>If you are familiar with DOS, this is similar, although not
-	identical, to the <command>join</command> command.</para>
+      <para>Se você tem familiaridade com o DOS, a teoria é parecida, mas não
+	idêntica, ao comando <command>join</command>.</para>
 
-      <para>This is not normally something you need to concern yourself with.
-	Typically you create filesystems when installing FreeBSD and decide
-	where to mount them, and then never change them unless you add a new
-	disk.</para>
+      <para>Normalmente isso não é algo com que você tenha
+	que se preocupar.  Tipicamente basta criar os sistemas de
+	arquivos ao instalar o FreeBSD e decidir onde monta-los, e 
+	depois nunca mais modifica-los, a não ser que você
+	adicione um novo disco.</para>
 
-      <para>It is entirely possible to have one large root filesystem, and not
-	need to create any others.  There are some drawbacks to this approach,
-	and one advantage.</para>
+      <para>É completamente possível ter um sistema de arquivos raiz, e
+	não criar mais nenhum.  Existem alguns problemas com esta abordagem
+	e uma grande desvantagem.</para>
 
       <itemizedlist>
-	<title>Benefits of Multiple Filesystems</title>
+	<title>Benefícios de sistemas de arquivos múltiplos</title>
       
 	<listitem>
-	  <para>Different filesystems can have different <firstterm>mount
-	    options</firstterm>.  For example, with careful planning, the
-	    root filesystem can be mounted read-only, making it impossible for
-	    you to inadvertently delete or edit a critical file.  Separating
-	    user-writable filesystems, such as <filename>/home</filename>,
-	    from other filesystems also allows them to be mounted
-	    <firstterm>nosuid</firstterm>; this option prevents the
-	    <firstterm>suid</firstterm>/<firstterm>guid</firstterm> bits on
-	    executables stored on the filesystem from taking effect, possibly
-	    improving security.</para>
+	  <para>Sistemas de arquivos distintos podem ter <firstterm>opções
+		de montagem</firstterm> distintas.  Por exemplo, com
+		planejamento cuidadoso, o sistema de arquivos raiz
+		pode ser montado como apenas-leitura, criando um ambiente
+		onde será impossível apagar ou editar arquivos críticos
+		inadivertidamente.  Separando sistemas de arquivos
+		que podem ser escritos por todos usuários, como o
+		<filename>/home</filename>, de outros sistemas de
+		arquivos, ainda permite que eles sejam montados com
+		<firstterm>nosuid</firstterm>; esta opção previne
+		que os bits <firstterm>suid</firstterm>/<firstterm>guid</firstterm>
+		sejam atribuídos em arquivos executáveis, não tendo mais
+		efeito no sistema de arquivos em questão, possívelmente
+		complementando a segurança do ambiente.</para>
 	</listitem>
 
 	<listitem>
-	  <para>FreeBSD automatically optimizes the layout of files on a
-	    filesystem, depending on how the filesystem is being used.  So a
-	    filesystem that contains many small files that are written
-	    frequently will have a different optimization to one that contains
-	    fewer, larger files.  By having one big filesystem this
-	    optimization breaks down.</para>
+	  <para>O FreeBSD otimiza a disposição dos arquivos de forma
+		automática, dependendo de como o sistema de arquivos
+		está sendo usado.  Portanto um sistema de arquivos que
+		contém muitos arquivos pequenos que são frequentemente
+		escritos terão regras de otimização distintas daqueles
+		sistemas de arquivos com poucos, mas grandes arquivos.
+		Mantendo um único sistema de arquivos enorme, esta
+		otimização se torna inviável.</para>
 	</listitem>
 	
 	<listitem>
-	  <para>FreeBSD's filesystems are very robust should you lose power.
-	    However, a power loss at a critical point could still damage the
-	    structure of the filesystem.  By splitting your data over multiple
-	    filesystems it is more likely that the system will still come up,
-	    making it easier for you to restore from backup as necessary.</para>
+	  <para>Os sistemas de arquivos do FreeBSD são muito robustos, mesmo
+		em situações de queda de energia.  Contudo, uma interrupção
+		de energia em um ponto crítico pode danificar parcialmente a
+		estrutura do sistema de arquivos.  Dividir os dados em múltiplos
+		sistemas de arquivos aumenta a possibilitado do sistema não
+		ficar indisponível, tornando mais fácil a restauração
+		de cópias de segurança, caso necessário.</para>
 	</listitem>
       </itemizedlist>
 
       <itemizedlist>
-	<title>Benefit of a Single Filesystem</title>
+	<title>Benefícios de um único sistema de arquivos</title>
 
 	<listitem>
-	  <para>Filesystems are a fixed size.  If you create a filesystem when
-	    you install FreeBSD and give it a specific size, you may later
-	    discover that you need to make the partition bigger.  This is not
-	    easily accomplished without backing up, recreating the filesystem
-	    with the new size, and then restoring the backed up data.</para>
+	  <para>Sistemas de arquivos tem tamanho fixo.  Se você criar um
+		sistema de arquivos ao instalar o FreeBSD e definir
+		tamanho específico, posteriormente você pode descobrir
+		que tem a necessidade de uma partição maior.  Não é uma
+		tarefa fácil resolver isso, sem fazer cópias de segurança e
+		recriar o sistema de arquivos com o novo tanaho e depois
+		restaurar a cópia.</para>
 
 	  <important>
-	    <para>FreeBSD&nbsp;4.4 and later versions feature the &man.growfs.8;
-	      command, which makes it possible to increase the size of 
-	      filesystem on the fly, removing this limitation.</para>
+	    <para>A partir do FreeBSD&nbsp;4.4 o comando &man.growfs.8;
+		passou a ser parte do sistema, o que possibilita que o tamanho
+		dos sistemas de arquivos sejam incrementados na hora, acabando
+		com esta limitação.</para>
 	  </important>
 	</listitem>
       </itemizedlist>
     
-      <para>Filesystems are contained in partitions.  This does not have the
-	same meaning as the earlier usage of the term partition in this
-	chapter, because of FreeBSD's &unix; heritage.  Each partition is
-	identified by a letter from <literal>a</literal> through to
-	<literal>h</literal>.  Each partition can contain only one filesystem,
-	which means that filesystems are often described by either their
-	typical mount point in the filesystem hierarchy, or the letter of the
-	partition they are contained in.</para>
+      <para>Sistemas de arquivos são contidos em partições.  Isso não
+	significa a mesma coisa do que a forma de utilização do termo
+	partição anteriormente neste capítulo, por causa da herança
+	&unix; do FreeBSD.  Cada partição é identificada com uma
+	letra que varia de <literal>a</literal> à <literal>h</literal>.
+	Cada partição possui um sistema de arquivos, o que significa que sistemas de
+	arquivos normalmente são identificados ou por seu ponto
+	de montagem na hierarquia do sistema de arquivos, ou pela letra
+	disposta no nome de cada partição.</para>
 
-      <para>FreeBSD also uses disk space for <firstterm>swap
-	  space</firstterm>.  Swap space provides FreeBSD with
-	<firstterm>virtual memory</firstterm>.  This allows your computer to
-	behave as though it has much more memory than it actually does.  When
-	FreeBSD runs out of memory it moves some of the data that is not
-	currently being used to the swap space, and moves it back in (moving
-	something else out) when it needs it.</para>
+      <para>O FreeBSD ainda usa espaço de disco para o <quote>espaço
+	de troca</quote>, ou <firstterm>swap</firstterm>.  Swap oferece
+	características de <firstterm>memória virtual</firstterm> ao FreeBSD.
+	Isso permite que seu computador se comporte como se tivesse
+	mais memória disponível do que na realidade tem.  Quando o
+	FreeBSD excede a memória disponível ele move alguns trechos de dados
+	que não estão sendo utilizados para o espaço de troca, a <litera>
+	swap</literal>, e move esses dados de volta pra memória (descarregando
+	alguma outra coisa para liberar recursos) quando necessário.</para>
 
-      <para>Some partitions have certain conventions associated with
-	them.</para>
+      <para>Algumas partições mantém algumas convenções associadas.</para>
 
       <informaltable frame="none">
 	<tgroup cols="2">
@@ -1105,9 +1170,9 @@ total 530
 
 	  <thead>
 	    <row>
-	      <entry>Partition</entry>
+	      <entry>Partição</entry>
 
-	      <entry>Convention</entry>
+	      <entry>Convenção</entry>
 	    </row>
 	  </thead>
 
@@ -1115,93 +1180,103 @@ total 530
 	    <row>
 	      <entry><literal>a</literal></entry>
 
-	      <entry>Normally contains the root filesystem</entry>
+	      <entry>Normalmente contém o sistema de arquivos raiz</entry>
 	    </row>
 
 	    <row>
 	      <entry><literal>b</literal></entry>
 
-	      <entry>Normally contains swap space</entry>
+	      <entry>Normalmente contém a partição de swap (troca)</entry>
 	    </row>
 
 	    <row>
 	      <entry><literal>c</literal></entry>
 
-	      <entry>Normally the same size as the enclosing slice.  This
-		allows utilities that need to work on the entire slice (for
-		example, a bad block scanner) to work on the
-		<literal>c</literal> partition.  You would not normally create
-		a filesystem on this partition.</entry>
+	      <entry>Normalmente tem o mesmo tamanho da partição
+		inclusa.  Isso permite que alguns utilitários que
+		precisam trabalhar na partição toda (por exemplo,
+		um identificador de blocos defeituosos) funcionem
+		corretamenta na partição <literal>c</literal>.  Você
+		não vai criar um sistema de arquivos de verdade
+		nesta partição.</entry>
 	    </row>
 
 	    <row>
 	      <entry><literal>d</literal></entry>
 
-	      <entry>Partition <literal>d</literal> used to have a special
-		meaning associated with it, although that is now gone.  To
-		this day, some tools may operate oddly if told to work on
-		partition <literal>d</literal>, so
-		<application>sysinstall</application> will not normally create
-		partition <literal>d</literal>.</entry>
+	      <entry>A partição <literal>d</literal> costumava ter um
+		significado especial associado com ela, contudo agora
+		ele desfez.  Hoje em dia algumas ferramentas podem
+		continuar se comportando de forma estranha se
+		indicarmos que ele trabalhe na partição
+		<literal>d</literal>, de forma que o <application>sysinstall
+		</application> não cria mais esta
+		partição.</entry>
 	    </row>
 	  </tbody>
 	</tgroup>
       </informaltable>
 
-      <para>Each partition-that-contains-a-filesystem is stored in what
-	FreeBSD calls a <firstterm>slice</firstterm>.  Slice is FreeBSD's term
-	for what were earlier called partitions, and again, this is because of
-	FreeBSD's &unix; background.  Slices are numbered, starting at 1,
-	through to 4.</para>
+      <para>Cada partição que contém um sistema
+	de arquivos é armazenada em um tipo especial
+	de partição que o FreeBSD chama de <firstterm>slice</firstterm>.  Este
+	termo é utilizado pelo FreeBSD para fazer menção ao que, mais uma fez,
+	costumava ser chamado de partição, e isso se deve à base &unix;
+	por trás do sistema FreeBSD.  Estas partições (<quote>slices</quote>)
+	são numeradas, iniciando do 1, até o 4.</para>
 
 	<indexterm><primary>slices</primary></indexterm>
-	<indexterm><primary>partitions</primary></indexterm>
-	<indexterm><primary>dangerously dedicated</primary></indexterm>
+	<indexterm><primary>partições</primary></indexterm>
+	<indexterm><primary>perigosamente dedicada</primary></indexterm>
 
-      <para>Slice numbers follow
-	the device name, prefixed with an <literal>s</literal>,
-	starting at 1.  So <quote>da0<emphasis>s1</emphasis></quote>
-	is the first slice on the first SCSI drive.  There can only be
-	four physical slices on a disk, but you can have logical
-	slices inside physical slices of the appropriate type.  These
-	extended slices are numbered starting at 5, so
-	<quote>ad0<emphasis>s5</emphasis></quote> is the first
-	extended slice on the first IDE disk.  These devices are used by file
-	systems that expect to occupy a slice.</para> 
+      <para>Número de partições seguem o nome do dispositivo
+	adicionado de um prefixo com o caractér <literal>s</literal>,
+	começando do 1.  Portanto <quote>da0<emphasis>s1</emphasis></quote>
+	é a primeira <literal>slice</literal> de um disco, mas é
+	possível que existam partições lógicas dentro de cada
+	partição física do tipo apropriado.  Estas partições
+	extendidas são numeradas à partir do 5, de forma que
+	<quote>ad0<emphasis>s5</emphasis></quote> seja a 
+	primeira partição extendida do primeiro disco IDE.
+	Estes dispositivos são utilizados por
+	sistemas de arquivos que ocupam esse tipo de
+	partição.</para>
 
-      <para>Slices, <quote>dangerously dedicated</quote> physical
-	drives, and other drives contain
-	<firstterm>partitions</firstterm>, which are represented as
-	letters from <literal>a</literal> to <literal>h</literal>.
-	This letter is appended to the device name, so
-	<quote>da0<emphasis>a</emphasis></quote> is the a partition on
-	the first da drive, which is <quote>dangerously dedicated</quote>.
-	<quote>ad1s3<emphasis>e</emphasis></quote> is the fifth partition
-	in the third slice of the second IDE disk drive.</para>
+      <para>Partições, dispositivos físicos, <quote>perigosamente dedicados</quote>
+	e outros dispositivos contém
+	<firstterm>partições</firstterm> que costumam ser representadas como
+	letras, começando de <literal>a</literal> até <literal>h</literal>.
+	Estas letras são atribuídas ao nome dos dispositivos, de forma que
+	<quote>da0<emphasis>a</emphasis></quote> indique a partição no
+	primeiro dispositivo, que na realidade é <quote>perigosamente dedicado</quote>.
+	<quote>ad1s3<emphasis>e</emphasis></quote> é a quinta partição
+	na primeira <literal>slice</literal> do segundo dispositivo de disco IDE.<para>
 	
-      <para>Finally, each disk on the system is identified.  A disk name
-	starts with a code that indicates the type of disk, and then a number,
-	indicating which disk it is.  Unlike slices, disk numbering starts at
-	0.  Common codes that you will see are listed in 
+      <para>Finalmente, cada disco no sistema esta identificado.  Um nome de disco
+	começa com um código que indica o tipo do disco em questão, e em seguida um número,
+	que indica que disco é esse.  Diferente das partições, a numeração dos discos inicia
+	em 0.  Informações usuais que você encontrará listados em 
 	<xref linkend="install-dev-codes">.</para>
 
-      <para>When referring to a partition FreeBSD requires that you also name
-	the slice and disk that contains the partition, and when referring to
-	a slice you should also refer to the disk name.  Do this by listing
-	the disk name, <literal>s</literal>, the slice number, and then the
-	partition letter.  Examples are shown in 
-	<xref linkend="install-disk-slice-part">.</para>
+      <para>Ao se referir a uma partição, o FreeBSD requer que você nomeie
+	cada <literal>slice</literal> e disco que contenha a partição em questão, e que ao se
+	referir à <literal>slice</literal> você também identifique o nome do disco. Faça
+	isso listado o nome do disco, <literal>s</literal>, o número da
+	<literal>slice</literal>, e em seguida a letra da partição. Exemplos são
+	apresentados em <xref linkend="install-disk-slice-part">.</para>
 
-      <para><xref linkend="install-concept-disk-model"> shows a conceptual
-	model of the disk layout that should help make things clearer.</para>
+      <para><xref linkend="install-concept-disk-model"> apresenta o modelo
+	conceitual das disposições de disco, o que pode ajudar
+	a tornar as coisas mais claras.</para>
 
-      <para>In order to install FreeBSD you must first configure the disk
-	slices, then create partitions within the slice you will use for
-	FreeBSD, and then create a filesystem (or swap space) in each
-	partition, and decide where that filesystem will be mounted.</para>
+      <para>Para instalar o FreeBSD, primeiro você deve configurar os
+	<literal>slices</literal> de disco, e depois criar as partições
+	em cada <literal>slice</literal> destinada ao FreeBSD, e criar um
+	sistema de arquivo (ou <literal>swap</literal>) em cada partição,
+	e decidir onde o sistema de arquivos será montado.</para>
 
       <table frame="none" id="install-dev-codes">
-	<title>Disk Device Codes</title>
+	<title>Códigos de Dispositivos de Disco</title>
 
 	<tgroup cols="2">
           <colspec colwidth="1*">
@@ -1209,9 +1284,9 @@ total 530
 
 	  <thead>
 	    <row>
-	      <entry>Code</entry>
+	      <entry>Código</entry>
 	    
-	      <entry>Meaning</entry>
+	      <entry>Significado</entry>
 	    </row>
 	  </thead>
 
@@ -1219,38 +1294,38 @@ total 530
 	    <row>
 	      <entry><devicename>ad</devicename></entry>
 
-	      <entry>ATAPI (IDE) disk</entry>
+	      <entry>disco ATAPI (IDE)</entry>
 	    </row>
 
 	    <row>
 	      <entry><devicename>da</devicename></entry>
 	      
-	      <entry>SCSI direct access disk</entry>
+	      <entry>disco SCSI de acesso direto</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><devicename>acd</devicename></entry>
 	      
-	      <entry>ATAPI (IDE) CDROM</entry>
+	      <entry>CDROM ATAPI (IDE)</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><devicename>cd</devicename></entry>
 	      
-	      <entry>SCSI CDROM</entry>
+	      <entry>CDROM SCSI</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><devicename>fd</devicename></entry>
 	      
-	      <entry>Floppy disk</entry>
+	      <entry>Disquete</entry>
 	    </row>
 	  </tbody>
 	</tgroup>
       </table>
       
       <example id="install-disk-slice-part">
-	<title>Sample Disk, Slice, and Partition Names</title>
+	<title>Modelo de disco, partição e nomes</title>
 	
 	<informaltable frame="none">
 	  <tgroup cols="2">
@@ -1259,9 +1334,9 @@ total 530
 
 	    <thead>
 	      <row>
-		<entry>Name</entry>
+		<entry>Nome</entry>
 		
-		<entry>Meaning</entry>
+		<entry>Significado</entry>
 	      </row>
 	    </thead>
 	    
@@ -1269,16 +1344,16 @@ total 530
 	      <row>
 		<entry><literal>ad0s1a</literal></entry>
 		
-		<entry>The first partition (<literal>a</literal>) on the first
-		  slice (<literal>s1</literal>) on the first IDE disk
+		<entry>Primeira partição (<literal>a</literal>) na primeira
+		  fatia de disco (slice - <literal>s1</literal>) no primeiro disco IDE
 		  (<literal>ad0</literal>).</entry>
 	      </row>
 
 	      <row>
 		<entry><literal>da1s2e</literal></entry>
 		
-		<entry>The fifth partition (<literal>e</literal>) on the
-		  second slice (<literal>s2</literal>) on the second SCSI disk
+		<entry>Quinta partição (<literal>e</literal>) na segunda fatia
+		  de disco (slice - <literal>s2</literal>) no segundo disco SCSI
 		  (<literal>da1</literal>).</entry>
 	      </row>
 	    </tbody>
@@ -1287,20 +1362,20 @@ total 530
       </example>
 
       <example id="install-concept-disk-model">
-	<title>Conceptual Model of a Disk</title>
+	<title>Modelo conceitual de um disco</title>
 
-	<para>This diagram shows FreeBSD's view of the first IDE disk attached
-	  to the system.  Assume that the disk is 4&nbsp;GB in size, and contains
-	  two 2&nbsp;GB slices (DOS partitions).  The first slice contains a DOS
-	  disk, <devicename>C:</devicename>, and the second slice contains a
-	  FreeBSD installation.  This example FreeBSD installation has three
-	  partitions, and a swap partition.</para>
+	<para>Esse diagrama apresenta a abordagem do FreeBSD para o primeiro disco IDE
+	  ligado ao sistema.  Assuma que o disco tem tamanho de 4&nbsp;GB e
+	  contém duas partições de 2&nbsp;GB (partições DOS).  A primeira 
+	  <literal>slice</literal> contém um disco DOS, o <devicename>C:</devicename>,
+	  e a segunda <literal>slice</literal> contém a instalação do FreeBSD. Esta
+	  instalação FreeBSD de exemplo tem três partições, e uma <literal>swap</literal>.</para>
 
-	<para>The three partitions will each hold a filesystem.  Partition
-	  <literal>a</literal> will be used for the root filesystem,
-	  <literal>e</literal> for the <filename>/var</filename> directory
-	  hierarchy, and <literal>f</literal> for the
-	  <filename>/usr</filename> directory hierarchy.</para>
+	<para>As três partições terão um sistema de arquivos cada.  A partição
+	  <literal>a</literal> será utilizada pelo sistema de arquivos raiz,
+	  <literal>e</literal> será utilizada pela hierarquia de  diretório
+	  <filename>/var</filename>, e <literal>f</literal> pela hierarquia
+	  de diretório <filename>/usr</filename>.</para>
 
         <mediaobject>
           <imageobject>
@@ -1311,25 +1386,25 @@ total 530
 	    <literallayout class="monospaced">.-----------------.  --.
 |                 |    |
 |  DOS / Windows  |    |
-:                 :     >  First slice, ad0s1
+:                 :     >  Primeira slice, ad0s1
 :                 :    |
 |                 |    |
 :=================:  ==:                               --.
-|                 |    |  Partition a, mounted as /      |
-|                 |     > referred to as ad0s2a          |
+|                 |    |  Particao a, montada em  /      |
+|                 |     > chamada de ad0s2a              |
 |                 |    |                                 |
 :-----------------:  ==:                                 |
-|                 |    |  Partition b, used as swap      |
-|                 |     > referred to as ad0s2b          |
+|                 |    |  Particao b, used como swap     |
+|                 |     > chamada de ad0s2b              |
 |                 |    |                                 |
-:-----------------:  ==:                                 |  Partition c, no
-|                 |    |  Partition e, used as /var       > filesystem, all 
-|                 |     > referred to as ad0s2e          |  of FreeBSD slice,
-|                 |    |                                 |  ad0s2c
+:-----------------:  ==:                                 |  Particao c, sem
+|                 |    |  Particao e, usada como /var       > sistema de arquivos, toda 
+|                 |     > chamada de ad0s2e              |  a particao ad0s2c do FreeBSD
+|                 |    |                                 | 
 :-----------------:  ==:                                 |
 |                 |    |                                 |
-:                 :    |  Partition f, used as /usr      |
-:                 :     > referred to as ad0s2f          |
+:                 :    |  Particao f, usada como /usr    |
+:                 :     > chamada de ad0s2f              |
 :                 :    |                                 |
 |                 |    |                                 |
 |                 |  --'                                 |
@@ -1342,45 +1417,44 @@ total 530
 
 
   <sect1 id="mount-unmount">
-    <title>Mounting and Unmounting File Systems</title>
+    <title>Montando e desmontando sistemas de arquivos</title>
 
-    <para>The file system is best visualized as a tree,
-      rooted, as it were, at <filename>/</filename>.
-      <filename>/dev</filename>, <filename>/usr</filename>, and the
-      other directories in the root directory are branches, which may
-      have their own branches, such as
-      <filename>/usr/local</filename>, and so on.</para>
+    <para>O sistema de arquivos pode ser melhor assimilado se for visualizado
+	como uma árvore, cuja raiz é <filename>/</filename>.
+	<filename>/dev</filename>, <filename>/usr</filename>, e outros
+	diretórios na raiz, são os ramos da árvore, que podem ainda ter seus
+	próprios ramos, como <filename>/usr/local</filename>, e assim por diante.</para>
 
-    <indexterm><primary>root file system</primary></indexterm>
-    <para>There are various reasons to house some of these
-      directories on separate file systems.  <filename>/var</filename>
-      contains the directories <filename>log/</filename>,
-      <filename>spool/</filename>,
-      and various types of temporary files, and
-      as such, may get filled up.  Filling up the root file system
-      is not a good idea, so splitting <filename>/var</filename> from
-      <filename>/</filename> is often favorable.</para>
+    <indexterm><primary>sistema de arquivos raiz</primary></indexterm>
+    <para>Existem vários motivos para armazenar alguns destes diretórios
+	em sistemas de arquivos distintos.  <filename>/var</filename>
+	contém os diretórios <filename>log/</filename>,
+	<filename>spool/</filename>,
+	e vários tipos de arquivos temporários, e como tal, pode
+	fácilmente encher.  Encher o sistema de arquivos raiz
+	não é uma boa idéia, de forma que separar o <filename>/var</filename>
+	do <filename>/</filename> é sempre favorável.</para>
 
-    <para>Another common reason to contain certain directory trees on
-      other file systems is if they are to be housed on separate
-      physical disks, or are separate virtual disks, such as <link
-	linkend="network-nfs">Network File System</link> mounts, or CDROM
-      drives.</para>
+    <para>Outra razão usual para manter certas árvores de diretórios
+	em outros sistemas de arquivos é que eles podem ser alojados em
+	discos físicos separados, ou em um disco virtual separado como
+	pontos de montagem <link linkend="network-nfs">NFS</link> ou dispositivos
+	de CDROM.</para>
 
     <sect2 id="disks-fstab">
-      <title>The <filename>fstab</filename> File</title>
+      <title>O arquivo <filename>fstab</filename></title>
       <indexterm>
-	<primary>file systems</primary>
-	<secondary>mounted with fstab</secondary>
+	<primary>sistemas de arquivos</primary>
+	<secondary>montados com fstab</secondary>
       </indexterm>
 
-      <para>During the <link linkend="boot">boot process</link>,
-	file systems listed in <filename>/etc/fstab</filename> are
-	automatically mounted (unless they are listed with the
-	<option>noauto</option> option).</para>
+      <para>Durente o <link linkend="boot">processo de inicialização</link>,
+	os sistemas de arquivos listados no <filename>/etc/fstab</filename> são
+	automaticamente montados (a não ser que eles tenham a opção
+	<option>noauto</option> definida).</para>
 
-      <para>The <filename>/etc/fstab</filename> file contains a list
-	of lines of the following format:</para>
+      <para>O arquivo <filename>/etc/fstab</filename> contém uma lista de
+	linhas no seguinte formato:</para>
 
       <programlisting><replaceable>device</replaceable>       <replaceable>/mount-point</replaceable> <replaceable>fstype</replaceable>     <replaceable>options</replaceable>      <replaceable>dumpfreq</replaceable>     <replaceable>passno</replaceable></programlisting>
 
@@ -1388,46 +1462,48 @@ total 530
 	<varlistentry>
 	  <term><literal>device</literal></term>
 	  <listitem>
-	    <para>A device name (which should exist), as explained in
-	      <xref linkend="disks-naming">.</para>
+	    <para>Um nome de dispositivo (que deve existir), conforme
+		explicado em <xref linkend="disks-naming">.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term><literal>mount-point</literal></term>
+	  <term><literal>mont-point</literal></term>
             
-	  <listitem><para>A directory (which should exist), on which
-	      to mount the file system.</para>
+	  <listitem><para>Um diretório (que deve existir), onde
+		o sistema de arquivos é montado.</para>
 	  </listitem>
 	</varlistentry>
           
 	<varlistentry>
 	  <term><literal>fstype</literal></term>
             
-	  <listitem><para>The file system type to pass to
-		&man.mount.8;.  The default FreeBSD file system is
-	      <literal>ufs</literal>.</para>
+	  <listitem><para>O tipo de sistema de arquivo
+		que será passado ao &man.mount.8;.  O sistema de arquivos
+		padrão do FreeBSD é <literal>ufs</literal>.</para>
 	  </listitem>
 	</varlistentry>
           
 	<varlistentry>
 	  <term><literal>options</literal></term>
             
-	  <listitem><para>Either <option>rw</option> for read-write
-	      file systems, or <option>ro</option> for read-only
-	      file systems, followed by any other options that may be
-	      needed.  A common option is <option>noauto</option> for
-	      file systems not normally mounted during the boot sequence.
-	      Other options are listed in the &man.mount.8; manual page.</para>
+	  <listitem><para>Pode ser <option>rw</option> para sistemas de
+		arquivos com opções de leitura e escrita, ou <option>ro</option>
+		para apenas leitura, seguidos de qualquer outra opção
+		necessária.  Uma opção bastante usual é <option>noauto</option>
+		para os sistemas de arquivos que normalmente não devem
+		ser montados autometicamente pelo processo de inicialização.
+		Outras opções são listadas na página de manual do &man.mount.8;.</para>
 	  </listitem>
 	</varlistentry>
           
 	<varlistentry>
 	  <term><literal>dumpfreq</literal></term>
           
-         <listitem><para>This is used by &man.dump.8; to determine which
-             file systems require dumping.  If the field is missing,
-             a value of zero is assumed.</para>
+         <listitem><para>Essa opção é utilizada pelo &man.dump.8; para determinar
+		que sistema de arquivos devem sofrer o processo de &man.dump.8; (o
+		&man.dump.8; é uma ferramenta para cópia de segurança).  Se o campo
+		não estiver presente, o valor zero é assumido.</para>
          </listitem>
        </varlistentry>
 
@@ -1435,52 +1511,51 @@ total 530
          <term><literal>passno</literal></term>
 
          <listitem>
-           <para>This determines the order in which file systems should
-           be checked.  File systems that should be skipped should have
-           their <literal>passno</literal> set to zero.  The root
-           file system (which needs to be checked before everything
-           else) should have its <literal>passno</literal> set to
-           one, and other file systems' <literal>passno</literal>
-           should be set to values greater than one.  If more than one
-           file systems have the same <literal>passno</literal> then
-           &man.fsck.8; will attempt to check file systems in parallel
-           if possible.</para>
+           <para>Determina a ordem que os sistemas de arquivos devem
+		ser verificados.  Sistemas de arquivos cuja verificação
+		pode ser omitida, devem ter seu <literal>passno</literal>
+		definidos em zero.  O sistema de arquivos raiz (que deve ser
+		verificado antes de todos os outros) deve ter seu <literal>passno</literal>
+		definido como um, e os outros sistemas de arquivos podem ter esta
+		opção definida com um valor maior.  Se mais de um sistema de arquivos
+		disporem do mesmo número, o &man.fsck.8; tentará fazer as verificações
+		de forma paralela, se possível.</para>
          </listitem>
 	</varlistentry>
       </variablelist>
     </sect2>
 
     <sect2 id="disks-mount">
-      <title>The <command>mount</command> Command</title>
+      <title>O comando <command>mount</command></title>
       <indexterm>
-	<primary>file systems</primary>
-	<secondary>mounting</secondary>
+	<primary>sistemas de arquivos</primary>
+	<secondary>montagem</secondary>
       </indexterm>
         
-      <para>The &man.mount.8; command is what is ultimately used to
-	mount file systems.</para>
+      <para>O comando &man.mount.8; é a ferramenta usada para montar
+	sistemas de arquivos.</para>
         
-      <para>In its most basic form, you use:</para>
+      <para>Em sua forma mais básica, basta usar:</para>
 
       <informalexample>
-	<screen>&prompt.root; <userinput>mount <replaceable>device</replaceable> <replaceable>mountpoint</replaceable></userinput></screen>
+	<screen>&prompt.root; <userinput>mount <replaceable>dispositivo</replaceable> <replaceable>ponto de montagem</replaceable></userinput></screen>
       </informalexample>
 
-      <para>There are plenty of options, as mentioned in the
-	  &man.mount.8; manual page, but the most common are:</para>
+      <para>Existem inúmeras opções, e estão todas dispostas na página
+	de manual do &man.mount.8;, mas as mais comuns são:</para>
 
       <variablelist>
-	<title>Mount Options</title>
+	<title>Opções de montagem</title>
 
 	<varlistentry>
 	  <term><option>-a</option></term>
             
 	  <listitem>
-	    <para>Mount all the file systems listed in
-	      <filename>/etc/fstab</filename>. Except those
-	      marked as <quote>noauto</quote>, excluded by the
-	      <option>-t</option> flag, or those that are already
-	      mounted.</para>
+	    <para>Monta todos os sistemas de arquivos listados no
+	      <filename>/etc/fstab</filename>. Exceto aqueles
+		assinalados com a opção <quote>noauto</quote>, excluidos
+		pala opção <option>-t</option>, ou aqueles que já estiverem
+		montados.</para>
 	  </listitem>
 	</varlistentry>
           
@@ -1488,10 +1563,10 @@ total 530
 	  <term><option>-d</option></term>
             
 	  <listitem>
-	    <para>Do everything except for the actual mount system call.
-	      This option is useful in conjunction with the
-	      <option>-v</option> flag to determine what
-	      &man.mount.8; is actually trying to do.</para>
+	    <para>Faz tudo, exceto a efetivação da chamada de sistema
+		para a montagem.  Essa opção é muito útil, em conjunto
+		com a <option>-v</option> para descobrir o que o
+		&man.mount.8; está tentando fazer.</para>
 	  </listitem>
 	</varlistentry>
           
@@ -1499,10 +1574,12 @@ total 530
 	  <term><option>-f</option></term>
 
 	  <listitem>
-	    <para>Force the mount of an unclean file system
-	      (dangerous), or forces the revocation of write access
-	      when downgrading a file system's mount status from
-	      read-write to read-only.</para>
+	    <para>Força a montagem de um sistema de arquivos que não
+		tem garantia de integridade (isso é perigoso), ou
+		força a revogação dos direitos de escrita ao alterar
+		o estado de montagem de um sistema de arquivos que
+		esteja em modo somente leitura, para o modo leitura
+		e escrita.</para>
 	  </listitem>
 	</varlistentry>
           
@@ -1510,23 +1587,24 @@ total 530
           <term><option>-r</option></term>
             
 	  <listitem>
-	    <para>Mount the file system read-only.  This is identical
-	      to using the <option>rdonly</option> argument to the
-	      <option>-o</option> option.</para>
+	    <para>Monta o sistema de arquivos como somente leitura.  Essa opção é
+		idêntica ao argumento <option>rdonly</option> na opção
+	      <option>-o</option>.</para>
 	  </listitem>
 	</varlistentry>
           
 	<varlistentry>
 	  <term><option>-t</option>
-	    <replaceable>fstype</replaceable></term>
+	    <replaceable>tipo de sistema de arquivos</replaceable></term>
 
 	  <listitem>
-	    <para>Mount the given file system as the given file system
-	      type, or mount only file systems of the given type, if
-	      given the <option>-a</option> option.</para>
+	    <para>Monta o sistema de arquivos em questão, como do tipo
+		em atribuído, ou monta apenas sistemas de arquivos do tipo
+		atribuído se for usado em conjunto com a
+		opção <option>-a</option>.</para>
               
-	    <para><quote>ufs</quote> is the default file system
-	      type.</para>
+	    <para><quote>ufs</quote> é o tipo padrão de sistema de
+		 arquivos.</para>
 	  </listitem>
 	</varlistentry>
           
@@ -1534,7 +1612,7 @@ total 530
 	  <term><option>-u</option></term>
             
 	  <listitem>
-	    <para>Update mount options on the file system.</para>
+	    <para>Atualiza opções de montagem no sistema de arquivos.</para>
 	  </listitem>
 	</varlistentry>
           
@@ -1542,7 +1620,7 @@ total 530
 	  <term><option>-v</option></term>
             
 	  <listitem>
-	    <para>Be verbose.</para>
+	    <para>Torna-se verboso.</para>
 	  </listitem>
 	</varlistentry>
           
@@ -1550,21 +1628,21 @@ total 530
 	  <term><option>-w</option></term>
             
 	  <listitem>
-	    <para>Mount the file system read-write.</para>
+	    <para>Monta o sistema de arquivos como leitura e escrita.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
         
-      <para>The <option>-o</option> option takes a comma-separated list of
-	the options, including the following:</para>
+      <para>A opção <option>-o</option> pode utilizar uma lista de opções separadas
+	por vírgula, das quais, as principais são:</para>
         
       <variablelist>
 	<varlistentry>
 	  <term>nodev</term>
             
 	  <listitem>
-	    <para>Do not interpret special devices on the
-	      file system.  This is a useful security option.</para>
+	    <para>Não interpreta dispositivos especiais no sistema de arquivos
+		em questão.  Esta é uma opção útil para segurança.</para>
 	  </listitem>
 	</varlistentry>
           
@@ -1572,8 +1650,8 @@ total 530
 	  <term>noexec</term>
             
 	  <listitem>
-              <para>Do not allow execution of binaries on this
-	      file system.  This is also a useful security option.</para>
+              <para>Não permite execussão de binários neste sistema de arquivos.
+		Também é uma opção muito útil para segurança.</para>
 	  </listitem>
 	</varlistentry>
           
@@ -1581,72 +1659,79 @@ total 530
 	  <term>nosuid</term>
             
 	  <listitem>
-	    <para>Do not interpret setuid or setgid flags on the
-	      file system.  This is also a useful security option.</para>
+	    <para>Não interpreta opções de setuid ou setgid no
+		sistema de arquivos.  É uma opção útil para segurança.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
     </sect2>
 
     <sect2 id="disks-umount">
-      <title>The <command>umount</command> Command</title>
+      <title>O comando <command>umount</command></title>
       <indexterm>
-	<primary>file systems</primary>
-	<secondary>unmounting</secondary>
+	<primary>sistemas de arquivos</primary>
+	<secondary>desmontando</secondary>
       </indexterm>
         
-      <para>The &man.umount.8; command takes, as a parameter, one of a
-	mountpoint, a device name, or the <option>-a</option> or
-	<option>-A</option> option.</para>
+      <para>O comando &man.umount.8; recebe como parâmetro o
+	ponto de montagem, o dispositivo, a opção <option>-a</option> ou
+	a opção <option>-A</option>.</para>
         
-      <para>All forms take <option>-f</option> to force unmounting,
-        and <option>-v</option> for verbosity.  Be warned that
-        <option>-f</option> is not generally a good idea.  Forcibly
-        unmounting file systems might crash the computer or damage data
-        on the file system.</para>
+      <para>Todas estas maneiras podem ter também as opções <option>-f</option>
+	para forçar desmontagem, e <option>-v</option> para ser verboso.  Esteja
+	atento ao fato que a opção <option>-f</option> geralmente não é
+	uma boa idéia.  Desmontar os sistemas de arquivos forçozamente pode
+	causar dano aos dados do sistema de arquivos.</para>
         
-      <para><option>-a</option> and <option>-A</option> are used to
-	unmount all mounted file systems, possibly modified by the
-	file system types listed after <option>-t</option>.
-	<option>-A</option>, however, does not attempt to unmount the
-	root file system.</para>
+      <para><option>-a</option> and <option>-A</option> são usadas para
+	desmontar todos os sistemas de arquivos; este comportamento
+	é possivelmente modificado em conjunto com a opção <option>-t</option>.
+	<option>-A</option>, contudo, não tenta desmontar o sistema de arquivos
+	raiz.</para>
     </sect2>
   </sect1>
 
   <sect1 id="basics-processes">
-    <title>Processes</title>
+    <title>Processos</title>
 
-    <para>FreeBSD is a multi-tasking operating system.  This means that it
-      seems as though more than one program is running at once.  Each program
-      running at any one time is called a <firstterm>process</firstterm>.
-      Every command you run will start at least one new process, and there are
-      a number of system processes that run all the time, keeping the system
-      functional.</para>
+    <para>O FreeBSD é um sistema operacional multi-tarefa.  Isso significa que
+	ele cria um ambiente onde os recursos computacionais são divididos
+	de forma à parecer que mais de um programa é executado ao mesmo tempo.
+	Cada processo sendo executado à qualquer momento, é chamado de
+	um <firstterm>processo</firstterm>.  Todo comando que você executar,
+	iniciará ao menos um novo processo, e existem vários processos do
+	sistema que estão sempre em execussão, mantendo a funcionalidade
+	do ambiente como um todo.</para>
 
-    <para>Each process is uniquely identified by a number called a
-      <firstterm>process ID</firstterm>, or <firstterm>PID</firstterm>, and,
-      like files, each process also has one owner and group.  The owner and
-      group information is used to determine what files and devices the
-      process can open, using the file permissions discussed earlier.  Most
-      processes also have a parent process.  The parent process is the process
-      that started them.  For example, if you are typing commands to the shell
-      then the shell is a process, and any commands you run are also
-      processes.  Each process you run in this way will have your shell as its
-      parent process.  The exception to this is a special process called
-      &man.init.8;.  <command>init</command> is always the first
-      process, so its PID is always 1.  <command>init</command> is started
-      automatically by the kernel when FreeBSD starts.</para>
+    <para>Cada processo é identificado de forma única com um número, que é
+	chamado de identificação do processo, ou <firstterm>process ID</firstterm>, ou
+	então a forma abreviada e mais comum, <firstterm>PID</firstterm>, e,
+	assim como os arquivos, cada processo também tem um dono e grupo.  As
+	informações sobre dono e grupo são utilizadas com o intúito de
+	determinar que arquivos e dispositivos o processo pode abrir, utilizando
+	as permissões discutidas anteriormente.  A maioria dos processos tem ainda
+	um processo pai.  O processo pai é o processo que o iniciou.  Por exemplo,
+	quando você digita um comando em uma <literal>shell</literal>, então
+	essa <literal>shell</literal> é um processo, e todo comando executado
+	é outro processo.  Todo comando executado desta forma terá sua
+	<literal>shell</literal> como o processo pai.  A única excessão
+	é um processo especial chamado de &man.init.8;.  O <command>init</command>
+	é sempre o primeiro processo do sistema, portanto seu PID é sempre 1.  O
+	<command>init</command> é executado automaticamente pelo <literal>kernel</literal>
+	quando o FreeBSD é iniciado.</para>
 
-    <para>Two commands are particularly useful to see the processes on the
-      system, &man.ps.1; and &man.top.1;.  The <command>ps</command> command is used to
-      show a static list of the currently running processes, and can show
-      their PID, how much memory they are using, the command line they were
-      started with, and so on.  The <command>top</command> command displays all the
-      running processes, and updates the display every few seconds, so that
-      you can interactively see what your computer is doing.</para>
+    <para>Dois comandos são particularmente úteis para verificar os processos ativos 
+	no sistema, o &man.ps.1; e o &man.top.1;.  O comando <command>ps</command> é usado
+	para apresentar uma lista estática dos processos sendo executados no momento, e
+	pode apresentar seu PID, quanta memória o processo está utilizando, a linha
+	de comando que o iniciou, e assim por diante.  O comando <command>top</command>
+	apresenta todos os processos em execussão, e atualiza a forma como os apresenta
+	na tela a cada poucos segundos, de forma que você possa acompanhar o que
+	o computador está fazendo.</para>
 
-    <para>By default, <command>ps</command> only shows you the commands that are running
-      and are owned by you.  For example:</para>
+    <para>Por padrão o <command>ps</command> apenas apresenta os comandos
+	que estão sendo executados por você, e cuja propriedade também seja
+	sua. Por exemplo:</para>
 
     <screen>&prompt.user; <userinput>ps</userinput>
   PID  TT  STAT      TIME COMMAND
@@ -1667,32 +1752,34 @@ total 530
   284  v0  IW     0:00.00 /bin/sh /home/nik/.xinitrc
   285  v0  S      0:38.45 /usr/X11R6/bin/sawfish</screen>
 
-    <para>As you can see in this example, the output from &man.ps.1; is
-      organized into a number of columns.  <literal>PID</literal> is the
-      process ID discussed earlier.  PIDs are assigned starting from 1, go up
-      to 99999, and wrap around back to the beginning when you run out.
-      The <literal>TT</literal> column shows the tty the program is running on, and can
-      safely be ignored for the moment.  <literal>STAT</literal> shows the
-      program's state, and again, can be safely ignored.
-      <literal>TIME</literal> is the amount of time the program has been
-      running on the CPU&mdash;this is usually not the elapsed time since
-      you started the program, as most programs spend a lot of time waiting
-      for things to happen before they need to spend time on the CPU.
-      Finally, <literal>COMMAND</literal> is the command line that was used to
-      run the program.</para>
+    <para>Como você pode acompanhar neste exemplo, a saída do comando &man.ps.1;
+	é organizada em várias colunas.  <literal>PID</literal> é a identificação
+	do processo discutida anteriormente.  PIDs são atribuíudos à partir
+	do 1, e vão até 99999, e reiniciam a contagem quando ultrapassa
+	esse valor.  A coluna <literal>TT</literal> postra em que terminal
+	o programa esta sendo executado, e pode seguramente ser ignorado
+	no momento.  <literal>STAT</literal> apresenta o estado atual
+	do programa, e, mais uma vez, vamos ignora-lo por hora.
+	<literal>TIME</literal> indica a quantidade de tempo que o
+	programa está em execussão na CPU em questão &mdash; normalmente
+	não é o tempo total desde que o processo foi iniciado, e sim tempo
+	de execussão, uma vez que vários programas ficam um bom tempo
+	esperando que algo aconteça para eles utilizarem tempo de
+	processamento da CPU.  Finalmente, <literal>COMMAND</literal> é a linha
+	de comando utilizada para executar o programa em questão.</para>
 
-    <para>&man.ps.1; supports a number of different options to change the
-      information that is displayed.  One of the most useful sets is
-      <literal>auxww</literal>.  <option>a</option> displays information
-      about all the running processes, not just your own.  <option>u</option>
-      displays the username of the process' owner, as well as memory usage.
-      <option>x</option> displays information about daemon processes, and
-      <option>ww</option> causes &man.ps.1; to display the full command line,
-      rather than truncating it once it gets too long to fit on the
-      screen.</para>
+    <para>&man.ps.1; suporta uma série de opções distintas que modificam
+	as informações apresentadas.  Um dos cunjuntos mais úteis de
+	opções é <literal>auxww</literal>.  <option>a</option> apresenta
+	informações sobre todos os processos em execussão, não apenas
+	os de sua propriedade.  <option>u</option> apresenta o nome do
+	usuário que é o dono do processo, bem como o uso de memória do mesmo.
+	<option>x</option> apresenta informações sobre processos <literal>
+	daemon</literal>, e <option>ww</option> faz o &man.ps.1; apresentar a linha
+	de comando completa, ao invés de um trecho compactado para caber na tela.</para>
 
-    <para>The output from &man.top.1; is similar.  A sample session looks like
-      this:</para>
+    <para>A saída do &man.top.1; é similar.  Uma sessão modelo teria
+	a seguinte aparência:</para>
 
     <screen>&prompt.user; <userinput>top</userinput>
 last pid: 72257;  load averages:  0.13,  0.09,  0.03    up 0+13:38:33  22:39:10
@@ -1711,202 +1798,216 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
  7059 nik        2   0  7260K  4644K poll     1:38  0.00%  0.00% mutt
 ...</screen>
 
-    <para>The output is split into two sections.  The header (the first five
-      lines) shows the PID of the last process to run, the system load averages
-      (which are a measure of how busy the system is), the system uptime (time
-      since the last reboot) and the current time.  The other figures in the
-      header relate to how many processes are running (47 in this case), how
-      much memory and swap space has been taken up, and how much time the
-      system is spending in different CPU states.</para>
+    <para>A saída está dividida em duas seções.  O cabeçalho (as primeiras
+	cinco linhas) apresenta o PID do último processo executado,
+	a média de carga do sistema (que mede o quanto o sistema está
+	ocupado), e o tempo de atividade initerrupta do sistema (tempo desde
+	a última inicialização - o <foreignphrase>uptime</foreignphrase>).  As
+	outras informações do cabeçalho inidicam quantos processos (47 neste caso)
+	estão ativos, quando de memória e <literal>swap</literal> foi
+	utilizado, e quanto tempo o sistema está gastando em estados
+	diferentes de uso da CPI.</para>
 
-    <para>Below that are a series of columns containing similar information
-      to the output from &man.ps.1;.  As before you can see the PID, the
-      username, the amount of CPU time taken, and the command that was run.
-      &man.top.1; also defaults to showing you the amount of memory space
-      taken by the process.  This is split into two columns, one for total
-      size, and one for resident size&mdash;total size is how much memory the
-      application has needed, and the resident size is how much it is actually
-      using at the moment.  In this example you can see that <application>&netscape;</application> has
-      required almost 30&nbsp;MB of RAM, but is currently only using 9&nbsp;MB.</para>
+    <para>Abaixo está uma série de colunas com informações similares
+	à saída do &man.ps.1;.  Como antes, você pode ver o PID,
+	o usuário, o tempo de CPU utilizado, e o comando executado.
+	&man.top.1; também mostra por padrão a quantidade de memória
+	utilizada pelo processo.  Essa informação é dividida em dois
+	grupos, uma para o tamanho total de memória, e um para o
+	tamanho residente &mdash; tamanho total indica quanta memória
+	a aplicação já precisou, e o tamanho residente é a quantidade
+	em uso no momento.  Nesse exemplo você pode ver que o
+	<application>&netscape;</application> precisou quase de
+	30&nbsp;MB de RAM, mas no momento está usando apenas 9&nbsp;MB.</para>
 
-    <para>&man.top.1; automatically updates this display every two seconds;
-      this can be changed with the <option>s</option> option.</para>
+    <para>&man.top.1; atualiza automaticamente as informações a cada dois seguindos,
+	o que pode ser modificado com a opção <option>s</option>.</para>
   </sect1>
 
   <sect1 id="basics-daemons">
-    <title>Daemons, Signals, and Killing Processes</title>
+    <title>Daemons, sinais e controle de processos</title>
 
-    <para>When you run an editor it is easy to control the editor, tell it to
-      load files, and so on.  You can do this because the editor provides
-      facilities to do so, and because the editor is attached to a
-      <firstterm>terminal</firstterm>.  Some programs are not designed to be
-      run with continuous user input, and so they disconnect from the terminal
-      at the first opportunity.  For example, a web server spends all day
-      responding to web requests, it normally does not need any input from
-      you.  Programs that transport email from site to site are another
-      example of this class of application.</para>
+    <para>Ao usar um editor, é fácil controla-lo, indicar que ele deve
+	carregar arquivos, e assim por diante.  Você pode fazê-lo pois o
+	editor oferece algumas opções para fazê-lo, e por que o editor é
+	diretamente interligado a um <firstterm>terminal</firstterm>.  Alguns
+	programas não são projetados de forma a utilizar informações 
+	contínuas do usuário, e assim ele se desconecta do terminal em sua
+	primeira oportunidade.  Por exemplo, um servidor HTTP passa
+	o tempo todo respondendo requisições da rede, e normalmente ele
+	não necessita intervenção alguma do usuário.  Programas que transportam
+	mensagens de correio de um local para outro, são outro exemplo
+	dessa classe de aplicações.</para>
 
-    <para>We call these programs <firstterm>daemons</firstterm>.  Daemons were
-      characters in Greek mythology; neither good or evil, they were little
-      attendant spirits that, by and large, did useful things for mankind.
-      Much like the web servers and mail servers of today do useful things.
-      This is why the BSD mascot has, for a long time, been the cheerful
-      looking daemon with sneakers and a pitchfork.</para>
+    <para>Chamamos estes programas de <firstterm>daemons</firstterm>.  Daemons são
+	personagens da mitologia Grega; mão são bons, nem maus, eram apenas
+	espíritos assistentes que, na maior parte do tempo, realizavam
+	tarefas úteis para a humanidade.  É por isso que o mascote do BSD,
+	há um bom tempo, é aquele daemon simpático que usa tênis e
+	carrega um tridente.</para>
 
-    <para>There is a convention to name programs that normally run as daemons
-      with a trailing <quote>d</quote>. <application>BIND</application> is the
-      Berkeley Internet Name Daemon (and the actual program that executes is called
-      <command>named</command>), the <application>Apache</application> web
-      server program is called <command>httpd</command>, the line printer
-      spooling daemon is <command>lpd</command> and so on.  This is a
-      convention, not a hard and fast rule; for example, the main mail daemon
-      for the <application>Sendmail</application> application is called
-      <command>sendmail</command>, and not <command>maild</command>, as you
-      might imagine.</para>
+    <para>Existe uma convenção para batizar os programas que normalmente são
+	executados como daemon, que é terminar o nome do programa com um
+	<quote>d</quote>. <application>BIND</application> é o Daemon de
+	Nomes Internet de Berkeley, (<foreignphrase>Berkeley Internet
+	Name Daemon</foreignphrase> - o programa que o executa, é chamado
+	<command>named</command>), O servidor WWW <application>Apache</application>
+	é chamado de <command>httpd</command>, o daemon de impressão em linha
+	é o <command>lpd</command> e assim sucetivamente.  Esta é uma convenção,
+	e não uma regra de rápida assimilação; por exemplo, o daemon principal
+	para a aplicação <application>Sendmail</application> é chamado
+	<command>sendmail</command>, e não <command>maild</command>, como você
+	poderia ter imaginado inicialmente.</para>
 
-    <para>Sometimes you will need to communicate with a daemon process.  These
-      communications are called <firstterm>signals</firstterm>, and you can
-      communicate with a daemon (or with any other running process) by sending it a
-      signal.  There are a number of different signals that you can
-      send&mdash;some of them have a specific meaning, others are interpreted
-      by the application, and the application's documentation will tell you
-      how that application interprets signals.  You can only send a signal to
-      a process that you own.  If you send a signal to someone else's
-      process with &man.kill.1; or &man.kill.2; permission will be denied.
-      The exception to this is the
-      <username>root</username> user, who can send signals to everyone's
-      processes.</para>
+    <para>Algumas vezes será necessário se comunicar com um processo daemon.
+	Essa comunicação é chamada de <firstterm>sinais</firstterm>, e você
+	pode se comunicar com o daemon (ou qualquer outro processo em execussão)
+	enviando-o um sinal.  Existem uma série de sinais diferentes que podem ser
+	enviados&mdash;alguns dos quais tem um significado específico, e outros
+	são interpretados pela aplicação, e a documentação dessa aplicação
+	indicará o que ela faz quando recebe este tipo de sinal.  Você só pode
+	enviar um sinal para os processos que te pertencem.  Se você tentar
+	enviar sinais para um processo que não é seu, com &man.kill.1; ou &man.kill.2;
+	terá permissão negada.  A única excessão é o usuário <username>root</username>,
+	que pode enviar sinais para os processos de todos.</para>
 
-    <para>FreeBSD will also send applications signals in some cases.  If an
-      application is badly written, and tries to access memory that it is not
-      supposed to, FreeBSD sends the process the <firstterm>Segmentation
-	Violation</firstterm> signal (<literal>SIGSEGV</literal>).  If an
-      application has used the &man.alarm.3; system call to be alerted after a
-      period of time has elapsed then it will be sent the Alarm signal
-      (<literal>SIGALRM</literal>), and so on.</para>
+    <para>O FreeBSD em certos casos também enviará sinais às aplicações.  Se uma
+	aplicação for mal escrita e tentar acessar endereços de memória que
+	ele não deve, o FreeBSD envia o sinal de violação de segmento
+	ao processo (<firstterm>Segmentation Violation</firstterm>), conhecido
+	como <literal>SIGSEGV</literal>.  Se alguma aplicação usou a chamada de
+	sistema &man.alarm.3; para solicitar que seja alertada depois de
+	certo período de tempo, o sistema envia o sinal de alerta 
+	(<literal>SIGALRM</literal>) ao processo, e assim por diante.</para>
 
-    <para>Two signals can be used to stop a process,
-      <literal>SIGTERM</literal> and <literal>SIGKILL</literal>.
-      <literal>SIGTERM</literal> is the polite way to kill a process; the
-      process can <emphasis>catch</emphasis> the signal, realize that you want
-      it to shut down, close any log files it may have open, and generally
-      finish whatever it is doing at the time before shutting down.  In some
-      cases a process may even ignore <literal>SIGTERM</literal> if it is in
-      the middle of some task that can not be interrupted.</para>
+    <para>Dois sinais podem ser usados para interromper um processo,
+      <literal>SIGTERM</literal> e <literal>SIGKILL</literal>.
+      <literal>SIGTERM</literal> é uma maneira educada de matar um processo;
+	o processo pode <emphasis>acatar</emphasis> o sinal, entender
+	que você deseja que ele deixe de ser executado, fechar qualquer arquivos
+	de logs que ele tenha aberto, e geralmente terminar a tarefa que ele está
+	realizando no momento, antes de deixar de executar.  Em alguns casos um
+	processo pode ignorar o <literal>SIGTERM</literal> se ele estiver
+	no meio de uma tarefa que não pode ser interrompida.</para>
 
-    <para><literal>SIGKILL</literal> can not be ignored by a process.  This is
-      the <quote>I do not care what you are doing, stop right now</quote>
-      signal.  If you send <literal>SIGKILL</literal> to a process then
-      FreeBSD will stop that process there and then<footnote>
-	<para>Not quite true&mdash;there are a few things that can not be
-	  interrupted.  For example, if the process is trying to read from a
-	  file that is on another computer on the network, and the other
-	  computer has gone away for some reason (been turned off, or the
-	  network has a fault), then the process is said to be
-	  <quote>uninterruptible</quote>.  Eventually the process will time
-	  out, typically after two minutes.  As soon as this time out occurs
-	  the process will be killed.</para>
+    <para><literal>SIGKILL</literal> não pode ser ignorado por qualquer
+	processo.  Este é o sinal que diz ao processo, <quote>Eu não me
+	importo com o que você esteja fazendo, pare agora mesmo</quote>.
+	Se você enviar um <literal>SIGKILL</literal> a qualquer processo,
+	o FreeBSD irá interromper aquele processo<footnote>
+	<para>Não é completamente verdade&mdash;existem algumas poucas
+	  tarefas que não podem ser interrompidas.  Por exemplo, se o processo
+	  está tentando ler um arquivo que está em uma outra estação da rede,
+	  e essa outra estação não está mais disponível por alguma razão (foi
+	  desligado, ou houve falha na rede), então o processo é definido como
+	  um processo que não pode ser interrompido.  Eventualmente ele
+	  irá passar do tempo máximo de atividade permitida, tipicamente
+	  dois minutos (o <foreignphrase>timeout</foreignphrase>).  Tão logo
+	  este período aconteça, o processo é morto.</para>
       </footnote>.</para>
 
-    <para>The other signals you might want to use are
-      <literal>SIGHUP</literal>, <literal>SIGUSR1</literal>, and
-      <literal>SIGUSR2</literal>.  These are general purpose signals, and
-      different applications will do different things when they are
-      sent.</para>
+    <para>Outros sinais que você pode querer conhecer são
+      <literal>SIGHUP</literal>, <literal>SIGUSR1</literal>, e
+      <literal>SIGUSR2</literal>.  Estes são sinais de propósitos
+	gerais, e aplicações distintas terão comportamento distintos
+	ao receber estes sinais.</para>
 
-    <para>Suppose that you have changed your web server's configuration
-      file&mdash;you would like to tell the web server to re-read its
-      configuration.  You could stop and restart <command>httpd</command>, but
-      this would result in a brief outage period on your web server, which may
-      be undesirable.  Most daemons are written to respond to the
-      <literal>SIGHUP</literal> signal by re-reading their configuration
-      file.  So instead of killing and restarting <command>httpd</command> you
-      would send it the <literal>SIGHUP</literal> signal.  Because there is no
-      standard way to respond to these signals, different daemons will have
-      different behavior, so be sure and read the documentation for the
-      daemon in question.</para>
+    <para>Suponha que você modificou o arquivo de configuração do
+	seu servidor HTTP&mdash;você deseja dizer ao daemon para ele
+	reler essa configuração.  Você poderia parar e reiniciar o
+	<command>httpd</command>, mas isso resultaria em uma breve
+	interrupção do serviço, o que pode não ser desejável.  A maioria
+	dos daemons são escritos de forma que respondam a um
+	<literal>SIGHUP</literal> com a releitura de seu arquivo de
+	configuração.  Então, ao invés de matar e reiniciar o processo
+	<command>httpd</command> você enviaria o sinal <literal>
+	SIGHUP</literal> ao processo.  Por não existir uma forma
+	padrão de resposta à estes sinais, cada daemon pode ter um
+	comportamento diferente, de forma que você deve ler a documentação
+	para o programa em questão.</para>
     
-    <para>Signals are sent using the &man.kill.1; command, as this example
-      shows.</para>
+    <para>Sinais são enviados utilizando o comando &man.kill.1;, como mostra
+	o exemplo a seguir:</para>
 
     <procedure>
-      <title>Sending a Signal to a Process</title>
+      <title>Enviando sinal aos processos</title>
 
-      <para>This example shows how to send a signal to &man.inetd.8;.  The
-	  <command>inetd</command> configuration file is
-	<filename>/etc/inetd.conf</filename>, and <command>inetd</command> will re-read
-	this configuration file when it is sent
+      <para>Esse exemplo mostra como enviar sinais ao &man.inetd.8;.  O arquivo
+	de configuração do <command>inetd</command> é o <filename>
+	/etc/inetd.conf</filename>, e o <command>inetd</command> irá reler
+	sua configuração, quando receber o sinal
 	<literal>SIGHUP</literal>.</para>
 
       <step>
-	<para>Find the process ID of the process you want to send the signal
-	  to.  Do this using &man.ps.1; and &man.grep.1;.  The &man.grep.1;
-	  command is used to search through output, looking for the string you
-	  specify.  This command is run as a normal user, and &man.inetd.8; is
-	  run as <username>root</username>, so the <option>ax</option> options
-	  must be given to &man.ps.1;.</para>
+	<para>Encontre o ID do processo que você quer enviar o sinal.
+	 Faça isso com o &man.ps.1; em conjunto com &man.grep.1;.  O &man.grep.1;
+	 é usado para procurar por uma cadeia de caracteres na saída desejada.
+	 O comando é executado como usuário normal, e o &man.inetd.8; é executado
+	 como <username>root</username>, então as opções <option>ax</option> devem
+	 ser usadas com o &man.ps.1;.</para>
 
 	<screen>&prompt.user; <userinput>ps -ax | grep inetd</userinput>
   198  ??  IWs    0:00.00 inetd -wW</screen>
 
-	<para>So the &man.inetd.8; PID is 198.  In some cases the
-	  <literal>grep inetd</literal> command might also occur in this
-	  output.  This is because of the way &man.ps.1; has to find the list
-	  of running processes.</para>
+	<para>Portando o PIDO do &man.inetd.8; é 198.  Em alguns casos o comando
+	  <literal>grep inetd</literal> poderá estar incluso também na saída
+	  desses comandos.  Isso se deve à maneira como o &man.ps.1; procura
+	  na lista de processos em execussão.</para>
       </step>
 
       <step>
-	<para>Use &man.kill.1; to send the signal.  Because &man.inetd.8; is
-	  being run by <username>root</username> you must use &man.su.1; to
-	  become <username>root</username> first.</para>
+	<para>Use &man.kill.1; para enviar sinais.  Pelo fato do &man.inetd.8;
+	  estar sendo executado pelo <username>root</username> você deve usar
+	  o &man.su.1; antes, para se tornar <username>root</username>.</para>
 
 	<screen>&prompt.user; <userinput>su</userinput>
 <prompt>Password:</prompt>
 &prompt.root; <userinput>/bin/kill -s HUP 198</userinput></screen>
 
-	<para>In common with most &unix; commands, &man.kill.1; will not print any
-	  output if it is successful.  If you send a signal to a
-	  process that you do not own then you will see <errorname>kill:
+	<para>Como de costume com a maioria dos comandos &unix;, o
+	  &man.kill.1; não apresentará qualquer mensagem se o resultado
+	  da ação for bem sucedido.  Se você enviou um processo que não é
+	  seu, você verá uma mensagem parecida com <errorname>kill:
 	    <replaceable>PID</replaceable>: Operation not
-	    permitted</errorname>.  If you mistype the PID you will either
-	  send the signal to the wrong process, which could be bad, or, if
-	  you are lucky, you will have sent the signal to a PID that is not
-	  currently in use, and you will see <errorname>kill:
+	    permitted</errorname>.  Se você digitar o PID errôneamente,
+	    ou você vai enviar o sinal ao processo errado, o que pode ser
+	    bem ruin, ou, se você tiver sorte, terá enviado o sinal a
+	    um processo que não está ativo, e verá algo como <errorname>kill:
 	    <replaceable>PID</replaceable>: No such process</errorname>.</para>
 
 	<note>
-	  <title>Why Use <command>/bin/kill</command>?</title>
+	  <title>Por que usar o <command>/bin/kill</command>?</title>
 
-	  <para>Many shells provide the <command>kill</command> command as a
-	    built in command; that is, the shell will send the signal
-	    directly, rather than running <filename>/bin/kill</filename>.
-	    This can be very useful, but different shells have a different
-	    syntax for specifying the name of the signal to send.  Rather than
-	    try to learn all of them, it can be simpler just to use the
-	    <command>/bin/kill <replaceable>...</replaceable></command>
-	    command directly.</para>
+	  <para>Muitos interpretadores de comandos oferecem o comando
+	    <command>kill</command> embutido; ou seja, o interpretador
+	    enviará o sinal diretamente, ao invés de executar o
+	    <filename>/bin/kill</filename>.  Isso pode ser muito útil, mas
+	    interpretadores de comandos distintos podem ter sintaxe
+	    distinta.  Ao invés de aprender a usar cada uma, é bem mais fácil
+	    aprender usar o comando <command>/bin/kill <replaceable>...</replaceable></command>
+	    diretamente.</para>
 	</note>
       </step>
     </procedure>
 
-    <para>Sending other signals is very similar, just substitute
-      <literal>TERM</literal> or <literal>KILL</literal> in the command line
-      as necessary.</para>
+    <para>Enviar outros sinais é muito parecido, basta substituir o
+	<literal>TERM</literal> ou <literal>KILL</literal> na linha de
+	comando, conforme for necessário.</para>
 
     <important>
-      <para>Killing random process on the system can be a bad idea.  In
-	particular, &man.init.8;, process ID 1, is very special.  Running
-	<command>/bin/kill -s KILL 1</command> is a quick way to shutdown your
-	system.  <emphasis>Always</emphasis> double check the arguments you
-	run &man.kill.1; with <emphasis>before</emphasis> you press
-	<keycap>Return</keycap>.</para>
+      <para>Matar processos aleatórios no sistema pode ser uma má idéia.  Em especial o
+	processo cujo ID é 1, o &man.init.8;, que é bem particular.  Enviar um
+	<command>/bin/kill -s KILL 1</command> é uma forma singela de desligar
+	seu sistema.  <emphasis>Sempre</emphasis> verifique duas vezes os argumentos
+	do &man.kill.1; <emphasis>antes</emphasis> de apertar
+	<keycap>Enter</keycap>.</para>
     </important>
   </sect1>
 
   <sect1 id="shells">
     <title>Shells</title>
     <indexterm><primary>shells</primary></indexterm>
-    <indexterm><primary>command line</primary></indexterm>
+    <indexterm><primary>linha de comando</primary></indexterm>
 
     <para>In FreeBSD, a lot of everyday work is done in a command line
       interface called a shell.  A shell's main job is to take commands

@@ -79,44 +79,44 @@
     <para>Tradicionalmente, &os; teve o que foi chamado de kernel
       <quote>monolitico</quote>. Isto significa que o kernel era um
       grande programa, contendo uma lista fixa de dispositivos suportados, e se voc&ecirc; quisesse
-      alterar o comportamento do kernel ent&atilde;o &eacute; voc&ecirc; teria que compilar um novo kernel, e
+      alterar o comportamento do kernel ent&atilde;o &eacute; voc&ecirc; teria que compilar um novo kernel,
       ent&atilde;o reiniciar seu computador com o novo kernel.</para>
 
-    <para>Hoje, &os; est&aacute; movendo-se rapidamente para um modelo onde muitas das funcionalidades do
+    <para>Hoje, o &os; est&aacute; movendo-se rapidamente para um modelo onde muitas das funcionalidades do
       kernel est&aacute; contida em m&oacute;dulos que s&atilde;o carregados e descarregados din&acirc;micamente do kernel conforme necess&aacute;rios.
-      Isto permite que o kernel se adapte ao novo hardware que de-repente
-      torna-se dispon&iacute;vel (tais como PCMCIA cart&otilde;es para laptop), ou para
-      novas funcionalidades serem traduzidas dentro do kernel isso n&atilde;o era
-      necess&aacute;rio quando o kernel era originalmente compilado. Sabemos que issos
-      &eacute; um kernel modular. Coloquialmente eles s&atilde;o chamados KLDs.</para>
+      Isto permite que o kernel se adapte ao novo hardware de repente
+      tornando-se dispon&iacute;vel (tais como cart&otilde;es PCMCIA para laptop), ou para
+      novas funcionalidades a serem traduzidas dentro do kernel isso n&atilde;o era
+      necess&aacute;rio quando o kernel era originalmente compilado. Isso
+      &eacute; conhecido como kernel modular. Coloquialmente eles s&atilde;o chamados KLDs.</para>
 
     <para>Apesar disto, sabemos que ainda &eacute necess&aacute;rio fazer algumas configura&ccedil;&otilde;es est&aacute;ticas no kernel. Em alguns casos 
       isto est&aacute; assim porque a funcionalidades que est&atilde;o amarrada ao kernel e n&atilde;o podem ser carregadas din&acirc;micamente. 
-      Em outros isto pode simplesmente estar porque nenhum tem ainda conseguido o tempo para escrita capaz de carregamento dinamico de modulos do kernel para essa funcionalidade ainda.</para>
+      Em outros casos isto pode simplesmente estar assim porque ningu&eacute;m ainda conseguiu tempo para escrever um m&oacute;dulo do kernel de 
+carregamento din&acirc;mico ainda para essas funcionalidades.</para>
 
     <para>Compilar um kernel personalizado e um dos passos mais importante que cada usu&aacute;rio de
-      &unix; deve saber. Este processo, quando consome tempo, trar&aacute; muitos benef&iacute;cios para o seu sistema &os;.
-      Diferente <filename>GENERIC</filename> do kernel, o qual necessita de suporte de uma
+      &unix; deve saber. Este processo, consome um tempo curto e trar&aacute; muitos benef&iacute;cios para o seu sistema &os;.
+      Diferente do kernel <filename>GENERIC</filename>, o qual necessita de suporte de uma
       abrangente lista de hardware, um kernel personalizado somente cont&eacute;m suporte para o hardware dos
       <emphasis>seus</emphasis> PC's. Isto tem benef&iacute;cios in&uacute;meros, como:</para>
 
     <itemizedlist>
       <listitem>
 	<para>Tempo mais r&aacute;pido para carregar. Posto que o kernel apenas experimentar&aacute; o
-	hardware que voc&ecirc; tiver em seu sistema, o tempo de teste do seu sistema ao carregar a m&aacute;quina diminuir&aacute; drasticamente.</para>
+	hardware que voc&ecirc; tiver em seu sistema, o tempo de testes do seu sistema ao carregar a m&aacute;quina diminuir&aacute; drasticamente.</para>
       </listitem>
 
       <listitem>
 	<para>Menos uso da mem&oacute;ria. Um kernel personalizado usa frequentemente menos mem&oacute;ria
-	  que o <filename>GENERIC</filename> kernel, o que &eacute; importante
+	  que o kernel <filename>GENERIC</filename>, o que &eacute; importante
 	  porque o kernel atual deve sempre estar presente na mem&oacute;ria real.
-	  Para esta raz&atilde;o, um kernel personalizado e &uacute;til especialmente
+	  Por esta raz&atilde;o, um kernel personalizado e &uacute;til especialmente
 	  em um sistema com pouca quantidade de RAM.</para>
       </listitem>
 
       <listitem>
-	<para>Adicionar suporte a hardware. Um kernel personalizado permite a voc&ecirc; adicionar suporte a dispositivos tais como Placas de Som, que não est&atilde;o presentes no
-	  <filename>GENERIC</filename> do kernel.</para>
+	<para>Adicionar suporte a hardware. Um kernel personalizado permite a voc&ecirc; adicionar suporte a dispositivos tais como Placas de Som, que n&atilde;o est&atilde;o presentes no kernel <filename>GENERIC</filename>.</para>
       </listitem>
     </itemizedlist>
   </sect1>
@@ -132,16 +132,17 @@
       Todos os diret&oacute;rios mencionados ser&atilde;o relativos ao diret&oacute;rio principal
       <filename>/usr/src/sys</filename>, que tamb&eacute;m pode ser acessado direto
       <filename>/sys</filename>. H&aacute; um n&uacute;mero de subdiret&oacute;rios que representam partes diferentes do kernel, mas
-      o mais importante, para nossas finalidades, s&atilde;o
+      o mais importante, para nossos objetivos, s&atilde;o
       <filename><replaceable>arch</replaceable>/conf</filename>, onde voc&ecirc;
       editar&aacute; sua configura&ccedil;&atilde;o de kernel personalizado, e
       <filename>compile</filename>, que est&atilde;o na &aacute;rea de prepara&ccedil;&atilde;o onde seu
       kernel ir&aacute; ser compilado. <replaceable>arch</replaceable> representa
       qualquer <filename>i386</filename>, <filename>alpha</filename>, ou
       <filename>pc98</filename> (uma alternativa de se&ccedil;&atilde;o de desenvolvimento de hardware do PC, popular no Jap&atilde;o).  
-      Tudo dentro da arquitetura particular de diret&oacute;rios trata de uma arquitetura apenas; O resto
-      do c&oacute;digo &eacute; comum a todas as plataformas com o &os; podia ser portado potencialmente. Observe a organiza&ccedil;&atilde;o 
-      l&oacute;gica da estrutura de diret&oacute;rio, com cada um dispositivos suportados, sistema de arquivos, e
+      Tudo dentro da arquitetura particular de diret&oacute;rios trata apenas de uma arquitetura. O resto
+      do c&oacute;digo do &os; &eacute; comum para todas as plataformas por ele potencialmente suportado. Observe a 
+organiza&ccedil;&atilde;o 
+      l&oacute;gica da estrutura de diret&oacute;rio, com cada um dos dispositivos suportados, sistema de arquivos, e
       op&ccedil;&otilde;es em seu pr&oacute;prio subdiret&oacute;rio. &os; 5.X e superiores tem suporte para
       <filename>sparc64</filename>, e algumas outras arquiteturas sob
       desenvolvimento.</para>
@@ -153,13 +154,13 @@
 	para fazer isso e rodando
 	<command>/stand/sysinstall</command> como
 	<username>root</username>, escolher
-	<guimenuitem>Configure</guimenuitem>, ent&atilde;o
-	<guimenuitem>Distributions</guimenuitem>, ent&atilde;o
+	<guimenuitem>Configure</guimenuitem>,
+	<guimenuitem>Distributions</guimenuitem>,
 	<guimenuitem>src</guimenuitem>, ent&atilde;o
 	<guimenuitem>sys</guimenuitem>. Se voc&ecirc; tiver alguma avers&atilde;o a
 	<application>sysinstall</application> e voc&ecirc; tem acesso a
 	um <quote>oficial</quote> &os; CDROM, ent&atilde;o voc&ecirc; pode tamb&eacute;m
-	instalar o fonte atrav&eacute;s da linha de commando:</para>
+	instalar o fonte atrav&eacute;s da linha de comando:</para>
 
       <screen>&prompt.root; <userinput>mount /cdrom</userinput>
 &prompt.root; <userinput>mkdir -p /usr/src/sys</userinput>
@@ -167,9 +168,9 @@
 &prompt.root; <userinput>cat /cdrom/src/ssys.[a-d]* | tar -xzvf -</userinput></screen>
     </note>
 
-    <para>Próximo, V&aacute; at&eacute; o diret&oacute;rio
+    <para>Depois, v&aacute; at&eacute; o diret&oacute;rio
       <filename><replaceable>arch</replaceable>/conf</filename>
-      e copie o arquivo de configura&ccedil;&atilde;o <filename>GENERIC</filename> para o
+      e copie o arquivo de configura&ccedil;&atilde;o <filename>GENERIC</filename> com o
       nome que voc&ecirc; quer para o seu kernel. Por exemplo:</para>
 
     <screen>&prompt.root; <userinput>cd /usr/src/sys/i386/conf</userinput>
@@ -210,62 +211,65 @@
         <errortype>permiss&atilde;o negada</errortype>.</para>
     </note>
 
-    <para>Agora, edite <filename>MYKERNEL</filename> com seu editor de texto favorito. Se voc&ecirc; for come&ccedil;ar a configurar, somente o 
-editor eficaz 
-      a escolher provavelmente seja o <application>vi</application>, o qual &eacute; muito complexo para
+    <para>Agora, edite <filename>MYKERNEL</filename> com seu editor de texto favorito. Se voc&ecirc; for come&ccedil;ar a configurar, 
+    provavelmente somente o 
+    <application>vi</application> esteja dispon&iacute;vel, o qual &eacute; muito complexo para
       explicar aqui, mas &eacute; coberto em muitos livros de <link
-      linkend="bibliography">bibliografia</link>. Entretanto, &os; oferece um editor mais f&aacute;cil chamado <application>ee</application> 
-que, se 
+      linkend="bibliography">bibliografia</link>. Entretanto, o &os; oferece um editor mais f&aacute;cil chamado <application>ee</application> 
+      que, se 
       voc&ecirc; for um novato, deve ser o editor de sua escolha.
-      Totalmente livre para mudar as linhas de coment&aacute;rios no alto para refletir sua configura&ccedil;&atilde;o e as 
-altera&ccedil;&otilde;es para diferenciar do 
+      Sensa&ccedil;&atilde;o de liberdade para mudar as linhas de coment&aacute;rios principalmente para pensar sua 
+configura&ccedil;&atilde;o e as 
+      altera&ccedil;&otilde;es para diferenciar do 
       <filename>GENERIC</filename>.</para>
     <indexterm><primary>SunOS</primary></indexterm>
 
-    <para>Se você tiver que compilar um kernel sobre &sunos; ou qualquer outro BSD
-      Sistema Operacional, muito deste arquivo deverá ser muito familiar a você.
-      Se você vier de outro sistema operacional tal como DOS, trabalhar sobre, 
-      o arquivo de configuração <filename>GENERIC</filename> 
-      pode impressionar a você, sendo assim siga as descrições do
-      <link linkend="kernelconfig-config">Arquivo de Configuração</link>
+    <para>Se você tiver que compilar um kernel sobre &sunos; ou qualquer outro
+      Sistema Operacional BSD, muito destes arquivos ser&atilde;o muito familiar a você.
+      Se você vier de outro sistema operacional tal como DOS, o  
+      arquivo de configura&ccedil;&atilde;o <filename>GENERIC</filename> 
+      pode impressionar você, sendo assim siga as descrições do
+      <link linkend="kernelconfig-config">Arquivo de Configura&ccedil;&atilde;o</link>
       lentamente e com cuidado.</para>
 
     <note>
-      <para>É importante você sempre verificar o arquivo
-        <filename>/usr/src/UPDATING</filename>, antes que você execute todas as etapas do update,
+      <para>&Eacute; importante voc&ecirc; sempre verificar o arquivo
+        <filename>/usr/src/UPDATING</filename>, antes que voc&ecirc; execute todas as etapas da atualiza&ccedil;&atilde;o,
         No caso você pode <link
-        linkend="cutting-edge">sincronizar seu código fonte</link> com o
-        código fonte de um projeto mais atrasado do &os;.
-        Neste arquivo todas as importantes edições para atualiação do &os;
-        são datilografadas. <filename>/usr/src/UPDATING</filename> ajuste sempre sua versão do código fonte do &os;, 
-        são mais precisas para novas informações que o handbook.</para>
+        linkend="cutting-edge">sincronizar sua &aacute;rvore de c&oacute;digo</link> com o
+        c&oacute;digo fonte do &uacute;ltimo projeto do &os;.
+        Neste arquivo todas as importantes altera&ccedil;&otilde;es para atualia&ccedil;&atilde;o do &os;
+        s&atilde;o digitadas. Ajuste sempre sua vers&atilde;o do c&oacute;digo fonte do &os; 
+<filename>/usr/src/UPDATING</filename>, 
+        s&atilde;o mais precisas para novas informa&ccedil;&otilde;es que o handbook.</para>
     </note>
 
-    <para>Você deve agora compilar o código fonte do kernel. Estão aqui dois
-      procedimentos que você pode usar para isto, e qual você usará, vai depender de cmo você quer recompilar seu kernel, 
-      e a versão do &os; que você está rodando.</para>
+    <para>Voc&ecirc; deve agora compilar o c&oacute;digo fonte do kernel. Est&atilde;o aqui dois
+      procedimentos que voc&ecirc; pode usar para isto, e qual voc&ecirc; usar&aacute;, vai depender de como voc&ecirc; quer recompilar seu 
+kernel, 
+      e a vers&atilde;o do &os; que voc&ecirc; est&aacute; rodando.</para>
 
     <itemizedlist>
       <listitem>
-	<para>Se você tiver instalado <emphasis>somente</emphasis> o código fonte do kernel,
+	<para>Se voc&ecirc; tiver instalado <emphasis>somente</emphasis> o c&oacute;digo fonte do kernel,
 	  use o procedimento 1.</para>
       </listitem>
 
       <listitem>
-	<para>Se você tiver rodando um &os; versão anterior ao 4.0, e você 
-	  <emphasis>não</emphasis> tiver atualização para o &os;&nbsp;4.0 ou mais atual use
-	  o procedimento <maketarget>make world</maketarget>, use o procedimento 1.
+	<para>Se voc&ecirc; tiver rodando um &os; vers&atilde;o anterior ao 4.0, e voc&ecirc; 
+	  <emphasis>n&atilde;o</emphasis> tiver atualiza&ccedil;zaç&atilde;o para o 4.0 ou mais atual use
+	  o procedimento <maketarget>make world</maketarget>, procedimento 1.
         </para>
       </listitem>
 
       <listitem>
-	<para>Se você estiver recompilando um kernel novo sem atualizar o código fonte
-	  (talvez para adicionar uma nova opção, tal como
-	  <literal>IPFIREWALL</literal>) você teria que usar o outro procedimento.</para>
+	<para>Se voc&ecirc; estiver recompilando um kernel novo sem atualizar o c&oacute;digo fonte
+	  (talvez para adicionar uma nova op&ccedil;&atilde;o, tal como
+	  <literal>IPFIREWALL</literal>) voc&ecirc; teria que usar o outro procedimento.</para>
       </listitem>
 
       <listitem>
-	<para>Se você estiver recompilando o kernel como parte de um processo de um
+	<para>Se voc&ecirc; estiver recompilando o kernel como parte de um processo de um
           <maketarget>make world</maketarget>, use o procedimento 2.
         </para>
       </listitem>
@@ -275,13 +279,13 @@ altera&ccedil;&otilde;es para diferenciar do
       <title>Procedimento 1. Compilando um Kernel da Maneira <quote>Tradicional</quote></title>
       
       <step>
-	<para>Execute &man.config.8; para gerar o código fonte do kernel.</para>
+	<para>Execute &man.config.8; para gerar o c&oacute;digo fonte do kernel.</para>
 	
 	<screen>&prompt.root; <userinput>/usr/sbin/config <replaceable>MYKERNEL</replaceable></userinput></screen>
       </step>
 
       <step>
-	<para>Mude o diretório de configuração. Isto e mostrado após rodar o comando acima mencionado.</para>
+	<para>Mude o diret&oacute;rio de configura&ccedil;&atilde;o. Isto e mostrado ap&oacute;s rodar o comando acima mencionado.</para>
 
 	<screen>&prompt.root; <userinput>cd ../compile/<replaceable>MYKERNEL</replaceable></userinput></screen>
 
@@ -308,7 +312,7 @@ altera&ccedil;&otilde;es para diferenciar do
       <title>Procedimento 2.  Compilando um Kernel Maneira <quote>Nova</quote></title>
       
       <step>
-	<para>Mude o diretório para <filename>/usr/src</filename>.</para>
+	<para>Mude o diret&oacute;rio para <filename>/usr/src</filename>.</para>
 	
 	<screen>&prompt.root; <userinput>cd /usr/src</userinput></screen>
       </step>
@@ -327,9 +331,9 @@ altera&ccedil;&otilde;es para diferenciar do
     </procedure>
     
     <note>
-      <para>Em &os;&nbsp;4.2 e mais antigos troque
-        <literal>KERNCONF=</literal> com <literal>KERNEL=</literal>.
-        4.2-STABLE isso foi colocado antes de Fevereiro, 2001 não reconhece <literal>KERNCONF=</literal>.</para>
+      <para>Em &os;&nbsp;4.2 e anteriores troque
+        <literal>KERNCONF=</literal> por <literal>KERNEL=</literal>.
+        4.2-STABLE isso foi colocado antes de Fevereiro, 2001 ele n&atilde;o reconhece <literal>KERNCONF=</literal>.</para>
     </note>
 
     <indexterm>
@@ -342,53 +346,53 @@ altera&ccedil;&otilde;es para diferenciar do
       <secondary>anonymous</secondary>
     </indexterm>
 
-    <para>Se você <emphasis>não</emphasis> tem atualizado seu código
-      de alguma maneira (você não pode executar <application>CVSup</application>, 
+    <para>Se voc&ecirc; <emphasis>n&atilde;o</emphasis> tem atualizado seu c&oacute;digo
+      de alguma maneira (voc&ecirc; n&atilde;o pode executar <application>CVSup</application>, 
       <application>CTM</application>, ou usar 
-      <application>anoncvs</application>), então você deve usar 
+      <application>anoncvs</application>), ent&atilde;o voc&ecirc; deve usar 
       <command>config</command>, <maketarget>make depend</maketarget>,
-      <command>make</command>, <maketarget>make install</maketarget> nesta sequência.
+      <command>make</command>, <maketarget>make install</maketarget> nesta sequ&ecirc;ncia.
     </para>
 
     <indexterm>
       <primary><filename>kernel.old</filename></primary>
     </indexterm> 
 
-    <para>O novo kernel será copiado para o diretório do root como
-      <filename>/kernel</filename> e o velho kernel será movido para
+    <para>O novo kernel ser&aacute; copiado para o diret&oacute;rio do root como
+      <filename>/kernel</filename> e o velho kernel ser&aacute; movido para
       <filename>/kernel.old</filename>. Agora, desligue o sistema e
-      reinicie para usar seu novo kernel. Caso algo saia errado, há algumas instruções para 
-      <link linkend="kernelconfig-trouble">pesquisa de defeitos</link>no final deste capítulo. 
-      É interessante que você leia the a seção de como recuperar caso seu novo kernel<link
-      linkend="kernelconfig-noboot">does not boot</link>.</para>
+      reinicie para usar seu novo kernel. Caso algo saia errado, h&aacute; algumas instru&ccedil;&otilde;es para 
+      <link linkend="kernelconfig-trouble">pesquisa de defeitos</link> no final deste cap&iacute;tulo. 
+      &Eacute; interessante que voc&ecirc; leia the a se&ccedil;&atilde;o de como recuperar caso seu novo kernel <link
+      linkend="kernelconfig-noboot"> n&atilde;o carregue</link>.</para>
 
     <note>
-      <para>Como do &os; 5.0, o kernel são instalados junto com os
-	módulos em <filename>/boot/kernel</filename>, e os kernels
-	velhos são colocados em <filename>/boot/kernel.old</filename>.
+      <para>No &os; 5.0, o kernel &eacute; instalados junto com os
+	m&oacute;dulos em <filename>/boot/kernel</filename>, e os kernels
+	velhos s&atilde;o colocados em <filename>/boot/kernel.old</filename>.
 	Outros arquivos relacionados ao processo de carregamento, tal como o carregamento do sistema
-	&man.loader.8; e a configurações são armazenadas também em
-	<filename>/boot</filename>. A terceira parte de parsonalização dos módulos
-	normalmente são colocados em <filename>/boot/modules</filename>, embora
-	os usuários devam estar cientes que manter os módulos na sincronização com o
-	kernel compilado é muito importante. Os módulos pretendidos não
+	&man.loader.8; e as configura&ccedil;&otilde;es s&atilde;o armazenadas tamb&eacute;m em
+	<filename>/boot</filename>. A terceira parte de parsonaliza&ccedil;&atilde;o dos m&oacute;dulos
+	normalmente s&atilde;o colocados em <filename>/boot/modules</filename>, embora
+	os usu&aacute;rios devam estar cientes que manter os m&oacute;dulos na sincroniza&ccedil;&atilde;o com o
+	kernel compilado &eacute; muito importante. Os m&oacute;dulos pretendidos n&atilde;o
 	rodar com o kernel compilado podem resultar em instabilidade
 	ou inconformidades.</para>
     </note>
 
     <note>
-      <para>Se você adicionar qualquer dispositivo novo (tal como Placa de Som)
-	e você está rodando &os;&nbsp;4.X ou versôes anteriores, você
-	pode ter que adicionar algum dispositivo de ligação para seu diretório
-	<filename>/dev</filename> antes que você possa usar
-	eles. Para mais informações, de uma olhada na seção <link
-	linkend="kernelconfig-nodes">Making Device Nodes</link>
-	mais tarde neste capítulo.</para>
+      <para>Se voc&ecirc; adicionar qualquer dispositivo novo (tal como Placa de Som)
+	e voc&ecirc; estiver rodando &os;&nbsp;4.X ou vers&otilde;es anteriores, voc&ecirc;
+	pode ter que adicionar algum dispositivo de liga&ccedil;&atilde;o para seu diret&oacute;rio
+	<filename>/dev</filename> antes que voc&ecirc; possa usar
+	eles. Para mais informa&ccedil;&otilde;es, de uma olhada na se&ccedil;&atilde;o <link
+	linkend="kernelconfig-nodes">Fazendo ligacao de dispositivos</link>
+	mais tarde neste cap&iacute;tulo.</para>
     </note>
   </sect1>
 
   <sect1 id="kernelconfig-config">
-    <title>O arquivo de Configuração</title>
+    <title>O arquivo de Configura&ccedil;&atilde;o</title>
     <indexterm>
       <primary>kernel</primary>
       <secondary>LINT</secondary>
@@ -399,39 +403,39 @@ altera&ccedil;&otilde;es para diferenciar do
       <secondary>config file</secondary>
     </indexterm>
 
-    <para>O formato geral do arquivo de configuração é bastante simples.
-      Cada linha contém uma palavra-chave e mais algum argumento. Para
-      simplificar, a maioria das linhas contém somente um argumento. Qualquer coisa
-      que segue um <literal>#</literal> é considerado um comentário e é
-      ignorado. As seguintes seções descrevem cada palavra-chave, geralmente na
-      ordem que são listadas no <filename>GENERIC</filename>, embora
-      algumas palavras-chaves relacionadas sejam agrupadas em uma única seção
+    <para>O formato geral do arquivo de configura&ccedil;&atilde;o &eacute; bastante simples.
+      Cada linha cont&eacute;m uma palavra-chave e mais algum argumento. Para
+      simplificar, a maioria das linhas cont&eacute;m somente um argumento. Qualquer coisa
+      que segue um <literal>#</literal> &eacute; considerado um coment&aacute;rio e &eacute;
+      ignorado. As seguintes se&ccedil;&otilde;es descrevem cada palavra-chave, geralmente na
+      ordem que s&atilde;o listadas no <filename>GENERIC</filename>, embora
+      algumas palavras-chaves relacionadas sejam agrupadas em uma &uacute;nica se&ccedil;&atilde;o
       (tal como Rede) mesmo que sejam descartados durante todo o arquivo
       <filename>GENERIC</filename>. <anchor
-      id="kernelconfig-options"> Uma lista completa de opções e mais
-      detalhes e explicação em linhas dos dispositivos presentes no arquivo de configuração
+      id="kernelconfig-options"> Uma lista completa de op&ccedil;&otilde;es mais
+      detalhes e a explica&ccedil;&atilde;o dos dispositivos presentes no arquivo de configura&ccedil;&atilde;o
       <filename>LINT</filename>, localizado no mesmo
-      diretório do <filename>GENERIC</filename>. Se você tiver na dúvida a
-      respeito sa necessidade de uma linha, verifique primeiramente no
+      diret&oacute;rio do <filename>GENERIC</filename>. Se voc&ecirc; tiver na d&uacute;vida a
+      respeito da necessidade de uma linha, verifique primeiramente no
       <filename>LINT</filename>.</para>
 
-    <note><para>No &os; 5.X e superiores o <filename>LINT</filename> é
-      inexistente. Veja as <filename>NOTES</filename> do arquivo para
-      arquiterura de opções independentes. Algumas opções, principalmente
-      independentes da arquitetura, são armazenadas no arquivo
-      <filename>/usr/src/sys/conf/NOTES</filename>. É aconselhável
-      revisar as opções dentro daqui também.</para></note>
+    <note><para>No &os; 5.X e superiores o <filename>LINT</filename> &eacute;
+      inexistente. Veja as <filename>NOTES</filename> arquivo para
+      arquiterura de op&ccedil;&otilde;es independentes. Algumas op&ccedil;&otilde;es, principalmente
+      independentes da arquitetura, s&atilde;o armazenadas no arquivo
+      <filename>/usr/src/sys/conf/NOTES</filename>. &Eacute; aconselh&aacute;vel
+      revisar as op&ccedil;&otilde;es dentro daqui tamb&eacute;m.</para></note>
 
     <indexterm>
       <primary>kernel</primary>
-      <secondary>Exemplos de arquivo de configuração</secondary>
+      <secondary>Exemplos de arquivo de configura&ccedil;&atilde;o</secondary>
     </indexterm>
 
-    <para>A seguir is an example <filename>GENERIC</filename> kernel
-      configuration file with various additional comments where needed for
-      clarity.  This example should match your copy in
-      <filename>/usr/src/sys/i386/conf/GENERIC</filename> fairly
-      closely.  For details of all the possible kernel options, see
+    <para>A seguir um exemplo de arquivo de configura&ccedil;&atilde;o <filename>GENERIC</filename> do kernel
+      com v&aacute;rios coment&aacute;rios adicionais onde seja necess&aacute;rio para
+      esclarecimentos. Este exemplo deveria ser compat&iacute;vel com sua copia em
+      <filename>/usr/src/sys/i386/conf/GENERIC</filename>. 
+      Para detalhes de todas as op&ccedil;&otilde;es poss&iacute;veis do kernel, veja
       <filename>/usr/src/sys/i386/conf/LINT</filename>.</para>
 
     <programlisting>#
@@ -454,160 +458,161 @@ altera&ccedil;&otilde;es para diferenciar do
 #
 # &dollar;FreeBSD: src/sys/i386/conf/GENERIC,v 1.380 2003/03/29 13:36:41 mdodd Exp $</programlisting>
 
-    <para>A seguir are the obrigatório palavra-chaves requeridas em 
-      <emphasis>todos</emphasis> os kernels compilados por você:</para>
+    <para>A seguir as palavra-chaves obrigat&oacute;rias requeridas em 
+      <emphasis>todos</emphasis> os kernels compilados por voc&ecirc;:</para>
     <indexterm>
-      <primary>Opções do kernel</primary>
-      <secondary>máquina</secondary>
+      <primary>Op&ccedil;&otilde;es do kernel</primary>
+      <secondary>m&aacute;quina</secondary>
     </indexterm>
 
-    <programlisting>máquina		i386</programlisting>
+    <programlisting>m&aacute;quina		i386</programlisting>
 
-    <para>Está é a arquitetura da máquina. Deve ser algum desses
+    <para>Est&aacute; &eacute; a arquitetura da m&aacute;quina. Deve ser algum desses
       <literal>i386</literal>, <literal>pc98</literal>,
       <literal>sparc64</literal>, <literal>alpha</literal>,
       <literal>ia64</literal>, <literal>amd64</literal>, or
       <literal>powerpc</literal>.</para>
 
     <indexterm>
-      <primary>Opções do kernel</primary>
+      <primary>Op&ccedil;&otilde;es do kernel</primary>
       <secondary>cpu</secondary>
     </indexterm>
     <programlisting>cpu          I486_CPU
 cpu          I586_CPU
 cpu          I686_CPU</programlisting>
 
-    <para>A opção acima especifica o tipo da CPU que você tem em seu sistema.
-      Você deve ter exemplos multiplos na linha da CPU (isto é,
-      não é certo se você utiliza 
+    <para>A op&ccedil;&atilde;o acima especifica o tipo da CPU que voc&ecirc; tem em seu sistema.
+      Voc&ecirc; deve ter exemplos m&uacute;ltiplos na linha da CPU (isto &eacute;,
+      n&atilde;o &eacute; certo se voc&ecirc; utiliza 
       <literal>I586_CPU</literal> ou <literal>I686_CPU</literal>),
-      entretanto, para personalizar um kernel, é melhor especificar apenas a CPU que você tem.
-      Se você estiver inseguro do tipo da sua CPU, você pode verificar o arquivo
+      entretanto, para personalizar um kernel, &eacute; melhor especificar apenas a CPU que voc&ecirc; tem.
+      Se voc&ecirc; estiver inseguro do tipo da sua CPU, voc&ecirc; pode verificar o arquivo
       <filename>/var/run/dmesg.boot</filename> para ver suas mensagem do carregamento do seu sistema.</para>
 
     <indexterm>
       <primary>Opções do kernel</primary>
       <secondary>tipo da CPU</secondary>
+
     </indexterm>
-    <para>Suporte para <literal>I386_CPU</literal> é fornecido ainda no fonte
-      do &os;, mas é desativada por padrão em ambos -STABLE e
-      -CURRENT. Isto significa que para instalar &os; com um 386-class cpu, você agora
-      tem as seguintes opções:</para>
+    <para>Suporte para <literal>I386_CPU</literal> &eacute; fornecido ainda no fonte
+      do &os;, mas &eacute; desativada por padr&atilde;o em ambos -STABLE e
+      -CURRENT. Isto significa que para instalar &os; com um 386-class cpu, voc&ecirc; agora
+      tem as seguintes op&ccedil;&otilde;es:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Instale uma release &os; antiga e recompile de fonte como
+        <para>Instale uma release do &os; antiga e recompile o fonte como
 	  descrito dentro <xref linkend="kernelconfig-building">.</para>
       </listitem>
 
       <listitem>
-        <para>Compile o userland e o kernel sobre uma nova máquina e instale num
+        <para>Compile o userland e o kernel sobre uma nova m&aacute;quina e instale num
           386 usando os arquivos precompilados <filename>/usr/obj</filename>
-          (para <xref linkend="small-lan"> mais detalhes).</para>
+          (para mais detalhes <xref linkend="small-lan">).</para>
       </listitem>
 
       <listitem>
-        <para>Gere sua própria release de FreeBSD qual inclui suporte a
-          <literal>I386_CPU</literal> dentro do kernels da instalção do
+        <para>Gere sua pr&oacute;pria release do FreeBSD qual inclui suporte a
+          <literal>I386_CPU</literal> dentro do kernel de instala&ccedil;&atilde;o do
           CD-ROM.</para>
       </listitem>
     </itemizedlist>
 
-    <para>A primeira destas opções é provavelmente a mais fácil de todas, mas você
-      necessitará de muito espaço de disco em uma máquina 386-class a qual possa ser
-      difícil de encontrar.</para>
+    <para>A primeira destas op&ccedil;&otilde;es &eacute; provavelmente a mais f&aacute;cil de todas, mas voc&ecirc;
+      necessitar&aacute; de muito espa&ccedil;o em disco numa m&aacute;quina 386-class a qual possa ser
+      dif&iacute;cil de encontrar.</para>
 
     <indexterm>
-      <primary>Opções do kernel</primary>
+      <primary>Op&ccedil;&otilde;es do kernel</primary>
       <secondary>ident</secondary>
     </indexterm>
 
     <programlisting>ident          GENERIC</programlisting>
 
-    <para>Está é a identificação do kernel. Você deve mudar
+    <para>Est&aacute; &eacute; a identifica&ccedil;&atilde;o do kernel. Voc&ecirc; deve mudar
       o nome do seu kernel para qualquer um,
-      isto é o <literal>MYKERNEL</literal>  você deve acompanhar as
-      instrucões dos próximos exemplos. O nome que você colocou na
-      <literal>ident</literal> serão mostrados quando você carregar o
-      kernel, assim é usado para dar um nome novo ao kernel um nome diferente se você
-      quiser manter isto separado do seu kernel atual (isto é você quer 
+      como exemplo <literal>MYKERNEL</literal> voc&ocirc; deve acompanhar as
+      instru&ccedil;&otilde;es dos pr&oacute;ximos exemplos. O nome que voc&ecirc; colocou na
+      <literal>ident</literal> ser&atilde;o mostrados quando voc&ecirc; carregar o
+      kernel, assim &eacute; usado para dar um nome novo ao kernel um nome diferente se voc&ecirc;
+      quiser manter isto separado do seu kernel atual (isto &eacute; voc&ecirc; quer 
       compilar um kernel experimental).</para>
     <indexterm>
-      <primary>Opções do kernel</primary>
+      <primary>Op&ccedil;&otilde;es do kernel</primary>
       <secondary>maxusers</secondary>
     </indexterm>
 
     <programlisting>maxusers          <replaceable>n</replaceable></programlisting>
 
-    <para>A opção <literal>maxusers</literal> ajusta o tamanho inúmeras
-      tabelas importantes do sistema. Este número é suposto para ser aproximadamente
-      igual ao número de usuários simultâneos que você espera ter em sua
-      máquina.</para>
+    <para>A op&ccedil;&atilde;o <literal>maxusers</literal> ajusta o n&uacute;mero de
+      tabelas importantes do sistema. Este n&uacute;mero &eacute; selecionado para ser aproximadamente
+      igual ao n&uacute;mero de usu&aacute;rios simult&acirc;neos que voc&ecirc; espera ter em sua
+      m&aacute;quina.</para>
 
-    <para>Começando com o &os;&nbsp;4.5, o sistema escolhe auto-ajuste desta configuração para 
-      você se você explicitamente ajustar isto para <literal>0</literal><footnote>
+    <para>A partir do &os;&nbsp;4.5, o sistema escolhe auto-ajuste desta configura&ccedil;&atilde;o para 
+      voc&ecirc; se voc&ecirc; mudar esta op&ccedil;&atilde;o para <literal>0</literal><footnote>
 	<para>O auto-ajuste do algoritmo ajusta <literal>maxuser</literal> igual
-	  a quantidade de memória do sistema, com um mínimo de 32, e um
-	  máximo de 384.</para></footnote>.
-      Em &os;&nbsp;5.X, <literal>maxusers</literal> ficará como padrão em
-      <literal>0</literal> se não specificado. Se você estiver usando uma
-      versão do &os; anterior ao 4.5, ou você quiser gerenciar você mesmo isto
+	  a quantidade de mem&oacute;ria do sistema, com um m&iacute;nimo de 32, e um
+	  m&aacute;ximo de 384.</para></footnote>.
+      No &os;&nbsp;5.X, <literal>maxusers</literal> ficar&aacute; como padr&atilde;o em
+      <literal>0</literal> se n&atilde;o especificado. Se voc&ecirc; estiver usando uma
+      vers&atilde;o do &os; anterior ao 4.5, ou voc&ecirc; quiser gerenciar voc&ecirc; mesmo isto
       e quiser ajustar o
-      <literal>maxusers</literal> para o mínimo 4, especialmente se você estiver
-      usando o X Window System ou compilando software. A razão é que
-      a tabela mais importante ajustada com <literal>maxusers</literal> é o
-      número máximo de processos, uqe é ajustado para <literal>20 + 16 *
-      maxusers</literal>, assim se você ajustar <literal>maxusers</literal> para 1,
-      então você poderá somente ter 36 processos simultâneos, incluindo os 18
-      que o sistema carrega na hora da inicialização, e os 15 que você provavelmente
-      irá criar quando você iniciar o X Window System. Mesmo uma
-      tarefa simples uma leitura de uma página de manual começará levantando nove processos para
+      <literal>maxusers</literal> para o m&iacute;nimo 4, especialmente se voc&ecirc; estiver
+      usando o X Window System ou compilando software. A raz&atilde;o &eacute; que
+      a tabela mais importante ajustada com <literal>maxusers</literal> &eacute; o
+      n&uacute;mero m&aacute;ximo de processos, que &eacute; ajustado para <literal>20 + 16 *
+      maxusers</literal>, assim se voc&ecirc; ajustar <literal>maxusers</literal> para 1,
+      ent&atilde;o voc&ecirc; poder&aacute; somente ter 36 processos simult&acirc;neos, incluindo os 18
+      que o sistema carrega na hora da inicializa&ccedil;&atilde;o, e os 15 que voc&ecirc; provavelmente
+      ir&aacute; criar quando voc&ecirc; iniciar o X Window System. Mesmo uma
+      tarefa simples uma leitura de uma p&aacute;gina de manual come&ccedil;ar&aacute; levantando nove processos para
       filtro, decompactando, e vendo isso. Configurando
-      <literal>maxusers</literal> para 64 permitirá você ter carregados 1044
-      processos simultâneos, qual deve ser bastante para quase todo o uso.
-      Se, entretanto, você ver o erro <errortype>proc completo da tabela
-      </errortype> ao tentar iniciar outro programa, ou é
-      um servidor rodando com um grande números de usuários simultâneos (se preferir
-      <hostid role="fqdn">ftp.FreeBSD.org</hostid>), você pode aumentar
-      o número e recompilar.</para>
+      <literal>maxusers</literal> para 64 permitir&aacute; voc&ecirc; ter carregados 1044
+      processos simult&acirc;neos, qual deve ser bastante para quase todo o uso.
+      Se, entretanto, voc&ecirc; ver o erro <errortype>proc completo da tabela
+      </errortype> ao tentar iniciar outro programa, ou &eacute;
+      um servidor rodando com um grande n&uacute;meros de usu&aacute;rios simult&acirc;neos (se preferir
+      <hostid role="fqdn">ftp.FreeBSD.org</hostid>), voc&ecirc; pode aumentar
+      o n&uacute;mero e recompilar.</para>
 
     <note>
-      <para><literal>maxusers</literal><emphasis>não</emphasis>
-	limita o número de usuários que podem logar em sua máquina. Isto
-	simplesmente ajusta tamanho de várias tabelas aos valores razoáveis considerando
-	o número máximo de usuários e processos que você provavelmente terá rodando em seu sistema.
-	A palavra-chave qual <emphasis>faz</emphasis> limita o número de logins <emphasis>remotos simultâneous e X terminal windows</emphasis>
-	é <link linkend="kernelconfig-ptys"><literal>pseudo-device pty 16</literal></link>.</para>
+      <para><literal>maxusers</literal><emphasis>n&atilde;o</emphasis>
+	limita o n&uacute;mero de usu&aacute;rios que podem logar em sua m&aacute;quina. Isto
+	simplesmente ajusta tamanho de v&aacute;rias tabelas aos valores razo&aacute;veis considerando
+	o n&uacute;mero m&aacute;ximo de usu&aacute;rios e processos que voc&ecirc; provavelmente ter&aacute; rodando em seu sistema.
+	A palavra-chave qual <emphasis>faz</emphasis> limita&ccedil;&atilde;o ao n&uacute;mero de logins <emphasis>remotos simult&acirc;neous e X terminal windows</emphasis>
+	&eacute; <link linkend="kernelconfig-ptys"><literal>pseudo-device pty 16</literal></link>.</para>
     </note>
     
-    <programlisting># Floating point support - não disabilite.
+    <programlisting># Floating point support - n&atilde;o disabilite.
 device          npx0     at nexus? port IO_NPX irq 13</programlisting>
     
-    <para><literal>npx0</literal> é a unidade para o ponto flutuante para unidades matemáticas no
-      &os;, qual é também o hardware co-processador ou
-      o emulador de software matemático. Isto <emphasis>não</emphasis>
-      é opicional.</para>
+    <para><literal>npx0</literal> &eacute; a unidade para o ponto flutuante das unidades matem&aacute;ticas no
+      &os;, qual &eacute; tamb&eacute;m o hardware co-processador ou
+      o emulador de software matem&aacute;tico. Isto <emphasis>n&atilde;o</emphasis>
+      &eacute; opicional.</para>
 
-    <programlisting># Pseudo devices - the number indicates how many units to allocate.
+    <programlisting># Pseudo devices - o n&uacute;mero indica quantas unidades a ser alocadas.
 pseudo-device   loop          # Network loopback</programlisting>
 
-    <para>Isto é o dispositivo generic loopback para TCP/IP. Se for telnet
-      ou FTP para <hostid>localhost</hostid> (a.k.a., <hostid
-      role="ipaddr">127.0.0.1</hostid>) isto voltará para você direto através da
-      pseudo-device. Isto é <emphasis>imposto</emphasis>.</para>
+    <para>Isto &eacute; o dispositivo generic loopback para TCP/IP. Se for telnet
+      ou FTP para <hostid>localhost</hostid> (exemplo, <hostid
+      role="ipaddr">127.0.0.1</hostid>) isto voltar&aacute; para voc&ecirc; direto atrav&eacute;s da
+      pseudo-device. Isto &eacute; <emphasis>imposto</emphasis>.</para>
 
-    <para>Tudo que segue é mais ou menos opcional. Vejam as notas
-      abaixo ou ao lado para cada opção para ter mais informações.</para>
+    <para>Tudo que segue &eacute; mais ou menos opcional. Vejam as notas
+      abaixo ou ao lado para cada op&ccedil;&atilde;o para ter mais informa&ccedil;&otilde;es.</para>
 
     <programlisting>#To statically compile in device wiring instead of /boot/device.hints
 #hints          "GENERIC.hints"         #Default places to look for devices.</programlisting>
 
-    <para>Em &os; 5.X e versões mais novas o &man.device.hints.5; é
-      usado para configurar opções de dispositivos drivers. O padrão
-      da localização &man.loader.8; que verifica na inicialização é
-      <filename>/boot/device.hints</filename>. Usando a opção
-      <literal>hints</literal> você pode compilar estas hints
-      estáticamente dentro do seu kernel. Então não ha nenhuma necessidade de criar um arquivo
+    <para>Em &os; 5.X e vers&otilde;es mais novas o &man.device.hints.5; &eacute;
+      usado para configurar op&ccedil;&otilde;es de dispositivos drivers. O padr&atilde;o
+      da localiza&ccedil;&atilde;o &man.loader.8; que verifica na inicializa&ccedil;&atilde;o &eacute;
+      <filename>/boot/device.hints</filename>. Usando a op&ccedil;&atilde;o
+      <literal>hints</literal> voc&ecirc; pode compilar estas hints
+      est&aacute;ticamente dentro do seu kernel. Ent&atilde;o n&atilde;o h&aacute; nenhuma necessidade de criar um arquivo
       <filename>device.hints</filename> dentro de
       <filename>/boot</filename>.</para>
 

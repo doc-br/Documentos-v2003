@@ -6,7 +6,7 @@
 
 <chapter id="serialcomms">
   <title>Comunica&ccedil;&otilde;es Seriais</title>
-  
+
   <sect1 id="serial-synopsis">
     <title>Sin&oacute;pse</title>
 
@@ -36,7 +36,7 @@
     <itemizedlist>
       <listitem><para>Conhecer como configurar e instalar um novo kernel (<xref
         linkend="kernelconfig">).</para></listitem>
-      <listitem><para>Compreender o sistema de permiss&otilde;es e de processos no ambiente &unix; 
+      <listitem><para>Compreender o sistema de permiss&otilde;es e de processos no ambiente &unix;
         (<xref linkend="basics">).</para></listitem>
       <listitem><para>Ter acesso ao manual t&eacute;cnico do hardware
       serial (Modem ou Placa multi-portas) que voc&ecirc; deseja utilizar
@@ -46,7 +46,7 @@
 
   <sect1 id="serial">
     <title>Introdu&ccedil;&atilde;o</title>
-    
+
     <!-- XXX Write me! -->
 
     <sect2 id="serial-terminology">
@@ -61,7 +61,7 @@
 	    s&atilde;o transmitidos.</para>
 	  </listitem>
 	</varlistentry>
-	  
+
 	<varlistentry>
 	  <term>DTE</term>
 	  <indexterm><primary>DTE</primary></indexterm>
@@ -70,7 +70,7 @@
 	    computador</para>
 	  </listitem>
 	</varlistentry>
-	  
+
 	<varlistentry>
 	  <term>DCE</term>
 	  <indexterm><primary>DCE</primary></indexterm>
@@ -79,7 +79,7 @@
 	    modem</para>
 	  </listitem>
 	</varlistentry>
-	  
+
 	<varlistentry>
 	  <term>RS-232</term>
 	  <indexterm><primary>Cabos RS-232C</primary></indexterm>
@@ -100,14 +100,14 @@
 
     <sect2 id="serial-cables-ports">
       <title>Cabos e Portas</title>
-      
+
       <para>Para conectar um modem ou um terminal ao seu sistema FreeBSD,
 	voc&ecirc; ir&aacute; precisar de uma porta serial em seu computador e do
 	cabo apropriado para conectar o seu dispositivo serial.  Se
 	voc&ecirc; j&aacute; esta familiarizado com o seu dispositivo e com o cabo
 	que ele necessita, voc&ecirc; pode pular tranquilamente esta sess&atilde;o.
 	.</para>
-	  
+
       <sect3 id="term-cables">
 	<title>Cabos</title>
 
@@ -116,7 +116,7 @@
 	  <literal>null-modem</literal> e os cabos padr&atilde;o RS-232.  A
 	  documenta&ccedil;&atilde;o do seu dispositivo ir&aacute; descrever o tipo de cabo
 	  necess&aacute;rio.</para>
-	    
+
 	<sect4 id="term-cables-null">
 	  <title>Cabos Null-Modem</title>
 
@@ -125,11 +125,11 @@
 	  </indexterm>
 	  <para>Um cabo <literal>null-modem</literal> passa alguns sinais,
 	    como o <quote>sinal terra</quote>, de forma direta (sai e
-	    chega no mesmo pino em ambas as pontas), mas chaveia outros 
+	    chega no mesmo pino em ambas as pontas), mas chaveia outros
 	    sinais.  Por exemplo, o pino de <quote>envio de
 	    dados</quote> em uma das pontas do cabo ir&aacute; para o pino
 	    <quote>recebimento de dados</quote> na outra ponta.</para>
-	    
+
 	  <para>Se voce preferir preparar seus pr&oacute;prios cabos, voc&ecirc; pode
 	    contruir um cabo null-modem para utilizar com terminais.
 	    Esta tabela mostra os nomes dos sinais RS-232C e a
@@ -146,7 +146,7 @@
 		  <entry>Sinal</entry>
 		</row>
 	      </thead>
-	      
+
 	      <tbody>
 		<row>
 		  <entry>SG</entry>
@@ -155,7 +155,7 @@
 		  <entry>7</entry>
 		  <entry>SG</entry>
 		</row>
-		
+
 		<row>
 		  <entry>TxD</entry>
 		  <entry>2</entry>
@@ -163,7 +163,7 @@
 		  <entry>3</entry>
 		  <entry>RxD</entry>
 		</row>
-		
+
 		<row>
 		  <entry>RxD</entry>
 		  <entry>3</entry>
@@ -171,7 +171,7 @@
 		  <entry>2</entry>
 		  <entry>TxD</entry>
 		</row>
-		
+
 		<row>
 		  <entry>RTS</entry>
 		  <entry>4</entry>
@@ -179,7 +179,7 @@
 		  <entry>5</entry>
 		  <entry>CTS</entry>
 		</row>
-		
+
 		<row>
 		  <entry>CTS</entry>
 		  <entry>5</entry>
@@ -187,7 +187,7 @@
 		  <entry>4</entry>
 		  <entry>RTS</entry>
 		</row>
-		
+
 		<row>
 		  <entry>DTR</entry>
 		  <entry>20</entry>
@@ -195,7 +195,7 @@
 		  <entry>6</entry>
 		  <entry>DSR</entry>
 		</row>
-		
+
 		<row>
 		  <entry>DCD</entry>
 		  <entry>8</entry>
@@ -203,7 +203,7 @@
 		  <entry>6</entry>
 		  <entry>DSR</entry>
 		</row>
-		
+
 		<row>
 		  <entry>DSR</entry>
 		  <entry>6</entry>
@@ -214,11 +214,11 @@
 	      </tbody>
 	    </tgroup>
 	  </informaltable>
-	  
+
 	  <note>
-	    <para>Conecte o <quote>Data Set Ready</quote> (DSR) e o 
-	      <quote>Data Carrier Detect</quote> (DCD) internamente no 
-	      conector, e ent&atilde;o conecte-os ao <quote>Data Terminal Ready</quote> 
+	    <para>Conecte o <quote>Data Set Ready</quote> (DSR) e o
+	      <quote>Data Carrier Detect</quote> (DCD) internamente no
+	      conector, e ent&atilde;o conecte-os ao <quote>Data Terminal Ready</quote>
 	      (DTR) no conector remoto.</para>
 	  </note>
 	</sect4>
@@ -236,7 +236,7 @@
 	    tamb&eacute;m &eacute; adequado para alguns terminais.</para>
 	</sect4>
       </sect3>
-      
+
       <sect3 id="term-ports">
 	<title>Portas</title>
 
@@ -247,12 +247,12 @@
 
 	<sect4 id="term-portkinds">
 	  <title>Tipos de portas</title>
-	  
+
 	  <para>Existem diversos tipos de portas seriais.  Antes de
 	    comprar ou contruir um cabo, voc&ecirc; precisa ter certeza que
 	    ele ir&aacute; se ajustar a porta existente no seu terminal e no
 	    seu sistema FreeBSD.</para>
-	  
+
 	  <para>A maioria dos terminais ir&atilde;o ter portas DB25.
 	    Computadores pessoais, incluindo PCs rodando FreeBSD,
 	    ter&atilde;o portas DB25 ou portas DB9.  Se voce possui uma placa
@@ -266,15 +266,15 @@
 
 	<sect4 id="term-portnames">
 	  <title>Nomes das Portas</title>
-	  
+
 	  <para>No FreeBSD, voc&ecirc; acessa cada porta serial atrav&eacute;s de uma
 	    entrada no diret&oacute;rio <filename>/dev</filename>.  Existem 2
 	    tipos diferentes de entradas:</para>
-	  
+
 	  <itemizedlist>
 	    <listitem>
 	      <para>As portas utilizadas para receber liga&ccedil;&otilde;es (<literal>
-	      call-in</literal>)s&atilde;o chamadas 
+	      call-in</literal>)s&atilde;o chamadas
 	      <filename>/dev/ttyd<replaceable>N</replaceable></filename>,
 	      onde <replaceable>N</replaceable> &eacute; o numero da porta,
 	      iniciando-se em 0.  Geralmente, voc&ecirc; utiliza as portas
@@ -283,7 +283,7 @@
 	      estabele&ccedil;a o sinal de detec&ccedil;&atilde;o de portadora de dados
 	      (DCD) para funcionar corretamente.</para>
 	    </listitem>
-	    
+
 	    <listitem>
 	      <para>As portas utilizadas para efetuar liga&ccedil;&otilde;es
 	      (<literal>Call-out</literal>), s&atilde;o chamadas
@@ -295,7 +295,7 @@
 	      detec&ccedil;&atilde;o de portadora.</para>
 	    </listitem>
 	  </itemizedlist>
-	  
+
 	  <para>Se voc&ecirc; conectou um terminal a sua primeira porta serial
 	    (<devicename>COM1</devicename> no &ms-dos;), voc&ecirc; ter&aacute; que
 	    utilizar <filename>/dev/ttyd0</filename> para acessar o
@@ -304,26 +304,26 @@
 	    <devicename>COM2</devicename>), utilize
 	    <filename>/dev/ttyd1</filename>, e assim por
 	    diante.</para>
-	  
+
 	</sect4>
       </sect3>
     </sect2>
 
     <sect2>
       <title>Configura&ccedil;&atilde;o do Kernel</title>
-      
+
       <para>O FreeBSD por default suporta 4 portas seriais. No mundo
 	&ms-dos;, elas s&atilde;o conhecidas como
 	<devicename>COM1</devicename>,
 	<devicename>COM2</devicename>,
 	<devicename>COM3</devicename>, e
-	<devicename>COM4</devicename>.  
+	<devicename>COM4</devicename>.
 	O FreeBSD atualmente suporta diversas placas multiseriais,
-	tais como a BocaBoard 1008 e 2016, bem como outras placas 
+	tais como a BocaBoard 1008 e 2016, bem como outras placas
 	multiseriais inteligentes fabricadas com as tecnologias
 	Digiboard e Stallion.  No entando, o kernel default suporta
 	apenas as portas COM normais.</para>
-	
+
       <para>Para verificar se o seu kernel reconhece alguma das suas
 	portas seriais, olhe as mensagens exibidas no console enquanto
 	o kernel esta sendo carregado, ou ent&atilde;o utilize o comando
@@ -331,17 +331,17 @@
 	mensagens exibidas durante o processo de boot do kernel.  Em
 	particular, procure por mensagens que iniciem com os
 	caracteres <literal>sio</literal>.</para>
-	
+
       <tip><para>Para visualizar apenas as mensagens que contenham a palavra
 	<literal>sio</literal>, use o comando:</para>
-      
+
       <screen>&prompt.root; <userinput>/sbin/dmesg | grep 'sio'</userinput></screen>
       </tip>
-	    
+
       <para>Por exemplo, em um sistema com 4 portas seriais, as mensagens
 	especificas do kernel para as portas seriais durante o
 	processo de boot seriam parecidas com essas:</para>
-      
+
       <screen>sio0 at 0x3f8-0x3ff irq 4 on isa
 sio0: type 16550A
 sio1 at 0x2f8-0x2ff irq 3 on isa
@@ -350,7 +350,7 @@ sio2 at 0x3e8-0x3ef irq 5 on isa
 sio2: type 16550A
 sio3 at 0x2e8-0x2ef irq 9 on isa
 sio3: type 16550A</screen>
-	  
+
       <para>Se o seu kernel n&atilde;o reconheceu todas as suas portas seriais,
 	voc&ecirc; provavelmente precisa de um kernel customizado para o seu
 	sistema FreeBSD.  Para informa&ccedil;&otilde;es detalhadas de como
@@ -382,7 +382,7 @@ device		sio3	at isa? port IO_COM4 irq 9</programlisting>
 	previamente em uma vers&atilde;o diferente do FreeBSD porque os
 	<literal>flags</literal> de dispositivo e a sintaxe mudou
 	entre as vers&otilde;es.</para>
-      
+
       <note>
 	<para><literal>port IO_COM1</literal> &eacute; a subistitui&ccedil;&atilde;o para
 	  <literal>port 0x3f8</literal>, <literal>IO_COM2</literal> &eacute; 
@@ -414,7 +414,7 @@ device		sio3	at isa? port IO_COM4 irq 9</programlisting>
       (call-out).  O FreeBSD tamb&eacute;m disponibiliza dispositivos de
       inicializa&ccedil;&atilde;o
       (<filename>/dev/ttyid<replaceable>N</replaceable></filename> 
-      e <filename>/dev/cuaia<replaceable>N</replaceable></filename>) e 
+      e <filename>/dev/cuaia<replaceable>N</replaceable></filename>) e
       dispositivos de <quote>fechamento</quote>
       (<filename>/dev/ttyld<replaceable>N</replaceable></filename> e 
       <filename>/dev/cuala<replaceable>N</replaceable></filename>).
@@ -465,7 +465,7 @@ device		sio3	at isa? port IO_COM4 irq 9</programlisting>
 	<para>Depois de criar os novos arquivos especiais de dispositivo,
 	certifique-se sobre as permiss&otilde;es dos arquivos (especialmente
 	os arquivos <filename>/dev/cua*</filename>), para ter certeza
-	de que apenas os usu&aacute;rios que precisam ter acesso a eles, 
+	de que apenas os usu&aacute;rios que precisam ter acesso a eles,
 	possuem permiss&atilde;o de escrita e de leitura nos mesmos &mdash;
 	voce provavelmente n&atilde;o deseja permitir que os seus usu&aacute;rios
 	m&eacute;dios utilizem seus modens para dial-out.  As permiss&otilde;es
@@ -475,12 +475,12 @@ device		sio3	at isa? port IO_COM4 irq 9</programlisting>
 	<screen>crw-rw----    1 uucp     dialer    28, 129 Feb 15 14:38 /dev/cuaa1
 crw-rw----    1 uucp     dialer    28, 161 Feb 15 14:38 /dev/cuaia1
 crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
-	    
+
 	<para>Estas permiss&otilde;es permitem que o usu&aacute;rio
 	<username>uucp</username> e que os usu&aacute;rios do grupo
 	<username>dialer</username> utilizem os dispositivos de
 	<literal>call-out</literal>.</para>
-	
+
       </sect3>
     </sect2>
 
@@ -497,9 +497,9 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
     dispositivo que normalmente voc&ecirc; ir&aacute; desejar abrir para as suas
     aplica&ccedil;&otilde;es.  Quando um processo abre um dispositivo, ele ir&aacute; ter
     um conjunto padr&atilde;o de configura&ccedil;&otilde;es de I/O para o terminal.</para>
-    
+
     <screen>&prompt.root; <userinput>stty -a -f /dev/ttyd1</userinput></screen>
-	  
+
     <para>Quando voc&ecirc; altera as configura&ccedil;&otilde;es para este dispositivo,
       os ajustes permanecem v&aacute;lidos at&eacute; que o dispositivo seja
       fechado.  Quando ele &eacute; reaberto, ele voltar&aacute; a utilizar as
@@ -511,7 +511,7 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
       o dispositivo <devicename>ttyd5</devicename>, execute:</para>
 
     <screen>&prompt.root; <userinput>stty -f /dev/ttyid5 clocal cs8 ixon ixoff</userinput></screen>
-	  
+
     <indexterm>
       <primary>rc files</primary>
       <secondary><filename>rc.serial</filename></secondary>
@@ -520,29 +520,32 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
     <!-- XXX; /etc/rc.serial is gone in 5.1.
       How do you set default parameters for these devices in 5.X ? -->
 
-    <para>System-wide initialization of the serial devices is
-      controlled in <filename>/etc/rc.serial</filename>.  This file
-      affects the default settings of serial devices.</para>
+    <para>Todo o processo de iniciali&ccedil;&atilde;o dos dispositivos seriais &eacute; controlado
+         pelo arquivo <filename>/etc/rc.serial</filename>. Este arquivo
+         afeta as configura&ccedil;&otilde;es padr&otilde;es dos dispositivos seriais.</para>
 
-    <para>To prevent certain settings from being changed by an
-      application, make adjustments to the <quote>lock state</quote>
-      device.  For example, to lock the speed of
-      <devicename>ttyd5</devicename> to 57600&nbsp;bps, type:</para>
-	  
+    <para>Para impedir que configura&ccedil;&otilde;es sejam modificadas por aplica&ccedil;&otilde;es, configure
+           os dispositivos em <quote>lock state</quote>. Por exemplo, para travar a velocidade
+           do <devicename>ttyd5</devicename> em 57600&nbsp;bps, digite:</para>
+
+
     <screen>&prompt.root; <userinput>stty -f /dev/ttyld5 57600</userinput></screen>
 
-    <para>Now, an application that opens
-      <devicename>ttyd5</devicename> and tries to change the speed of
-      the port will be stuck with 57600&nbsp;bps.</para>
+    <para>Deste momento em diante, as aplica&ccedil;&otilde;es que abrirem o dispositivo <devicename>ttyd5</devicename>
+          e tentarem modificar a velocidade da porta ter&atilde;o sua tentativa ignorada e far&atilde;o uso
+          do dispositivo na velocidade 57600&nbsp;bps.</para>
 
     <indexterm>
       <primary><command>MAKEDEV</command></primary>
     </indexterm>
-    <para>Naturally, you should make the initial state and lock state devices
-      writable only by the <username>root</username> account.</para>
+
+
+    <para>Naturalmente, voc&ecirc; deve definir que os dispositivos que estiverem em estado de inicializa&ccedil;&atilde;o ou travados
+           tenham permiss&atilde;o de escrita somente para a conta <username>root</username>.</para>
+
     </sect2>
   </sect1>
-      
+
   <sect1 id="term">
     <sect1info>
       <authorgroup>
@@ -554,111 +557,116 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
 	<!-- 28 July 1996 -->
       </authorgroup>
     </sect1info>
-    <title>Terminals</title>
-    
+    <title>Terminais</title>
+
     <indexterm><primary>terminals</primary></indexterm>
 
-    <para>Terminals provide a convenient and low-cost way to access 
-      your FreeBSD system when you are not at the computer's console or on
-      a connected network.  This section describes how to use terminals with
-      FreeBSD.</para>
+
+
+    <para>Terminais proporcionam um meio de acesso conveniente e de baixo-custo ao seu sistema FreeBSD
+          quando voc&ecirc; n&atilde;o possui computadores para console ou uma rede para conex&atilde;o.
+          Esta se&ccedil;&atilde;o descreve como utilizar terminais com o FreeBSD.</para>
 
     <sect2 id="term-uses">
-      <title>Uses and Types of Terminals</title>
-      
-      <para>The original &unix; systems did not have consoles.  Instead, people
-	logged in and ran programs through terminals that were connected to
-	the computer's serial ports.  It is quite similar to using a modem and
-	terminal software to dial into a remote system to do text-only
-	work.</para>
-	  
-      <para>Today's PCs have consoles capable of high quality graphics, but
-	the ability to establish a login session on a serial port still exists
-	in nearly every &unix; style operating system today; FreeBSD is no
-	exception.  By using a terminal attached to an unused serial port, you
-	can log in and run any text program that you would normally run on the
-	console or in an <command>xterm</command> window in the X Window
-	System.</para>
-	  
-      <para>For the business user, you can attach many terminals to a FreeBSD
-	system and place them on your employees' desktops.  For a home user, a
-	spare computer such as an older IBM PC or a &macintosh; can be a
-	terminal wired into a more powerful computer running FreeBSD.  You can
-	turn what might otherwise be a single-user computer into a powerful
-	multiple user system.</para>
-	  
-      <para>For FreeBSD, there are three kinds of terminals:</para>
-	  
+      <title>Utilidades e Tipos de Terminais</title>
+
+      <para>Os sistemas &unix; primitivos n&atilde;o possuiam consoles. Diante disso,
+        os usu&aacute;rios conectados executavam seus programas atrav&eacute;s de terminais
+        ligados nas portas seriais dos computadores. Processo muito similar
+        ao uso de um modem e um programa de conex&atilde;o para um sistema remoto, para
+        trabalhos em modo texto puro.</para> 
+
+      <para>Atualmente, os PCs possuem consoles com alta defini&ccedil;&atilde;o gr&aacute;fica, mas
+        as habilidades de estabelecer uma sess&atilde;o de login atrav&eacute;s de uma porta
+        serial foi mantida nos sistemas operacionais &unix; atuais; O FreeBSD
+        n&atilde;o &eacute; uma exce&ccedil;&atilde;o. Utilizando um terminal conectado a uma porta serial
+        voc&ecirc; pode logar-se e rodar programas em modo texto normalmente como 
+        seria feito em um console ou numa janela de <command>xterm</command>
+        do sistema X Window.</para> 
+        
+      <para>Os usu&aacute;rios coorporativos tem a op&ccedil;&atilde;o de conectar diversos terminais
+        num sistema FreeBSD e coloc&aacute;-los nas mesas de trabalho de seus funcion&aacute;rios.
+        Os usu&aacute;rios dom&eacute;sticos podem utilizar de computadores antigos como IBM PCs
+        ou &macintosh; como terminais de um computador de performance superior 
+        rodando FreeBSD. Permitindo que um computador poderoso, que na maioria das vezes 
+        seria utilizado por apenas um usu&aacute;rio, torne-se um sistema para m&uacute;ltiplos
+        usu&aacute;rios.</para>  
+  
+      <para>No FreeBSD tem-se basicamente tr&ecirc;s tipos de terminais:</para>
+
       <itemizedlist>
 	<listitem>
-	  <para><link linkend="term-dumb">Dumb terminals</link></para>
+	  <para><link linkend="term-dumb">Terminais <foreignphrase>Dumb</foreignphrase> ou burros</link></para>
 	</listitem>
 
 	<listitem>
-	  <para><link linkend="term-pcs">PCs acting as terminals</link></para>
+	  <para><link linkend="term-pcs">PCs atuando como terminais</link></para>
 	</listitem>
 
 	<listitem>
-	  <para><link linkend="term-x">X terminals</link></para>
+	  <para><link linkend="term-x">Termianis X</link></para>
 	</listitem>
       </itemizedlist>
 	  
-      <para>The remaining subsections describe each kind.</para>
+      <para>S&atilde;o descritos em sequ&ecirc;ncia cada um dos tipos.</para>
 	  
       <sect3 id="term-dumb">
-	<title>Dumb Terminals</title>
+	<title>Terminais <foreignphrase>Dumb</foreignphrase> ou burros</title>
 
-	<para>Dumb terminals are specialized pieces of hardware that let you
-	  connect to computers over serial lines.  They are called
-	  <quote>dumb</quote> because they have only enough computational power
-	  to display, send, and receive text.  You cannot run any programs on
-	  them.  It is the computer to which you connect them that has all the
-	  power to run text editors, compilers, email, games, and so
-	  forth.</para>
-	    
-	<para>There are hundreds of kinds of dumb terminals made by many
-	  manufacturers, including Digital Equipment Corporation's VT-100 and
-	  Wyse's WY-75.  Just about any kind will work with FreeBSD. Some
-	  high-end terminals can even display graphics, but only certain
-	  software packages can take advantage of these advanced
-	  features.</para>
-	    
-	<para>Dumb terminals are popular in work environments where workers do
-	  not need access to graphical applications such as those provided by
-	  the X Window System.</para>
+        <para>Terminais <foreignphrase>Dumb</foreignphrase> s&atilde;o um tipo caracter&iacute;stico de
+          equipamento para conex&atilde;o em computadores atrav&eacute;s de portas seriais. S&atilde;o chamados
+          <quote>dumb</quote> ou <quote>burros</quote> devido a serem terminais que possuem
+          habilidade &uacute;nica de envio e apresenta&ccedil;&atilde;o de informa&ccedil;&otilde;es em modo texto. N&atilde;o &eacute; 
+          poss&iacute;vel executar nenhum programa neles. A execu&ccedil;&atilde;o dos programas como 
+          editores de texto, compiladores, correio eletr&ocirc;nico, jogos, e outros, &eacute;
+          feita pelo computador em que o terminal est&aacute; conectado.</param>  
+
+        <para>Existem diversos tipos de terminais burros, fabricados pelos mais
+          variados fabricantes, como por exemplo o VT-100 da <foreignphrase>Digital
+          Equipment Corporation</foreignphrase>, ou o WY-75 da <foreignphrase>Wyse</foreignphrase>. 
+          Qualquer que seja o tipo funcionar&aacute; com o FreeBSD. Alguns terminais 
+          mais avan&ccedil;ados podem at&eacute; exibir gr&aacute;ficos, por&eacute;m apenas algums
+          programas podem fazer uso destas funcionalidades.</para>  
+
+        <para>Terminais burros s&atilde;o plataformas de trabalho bastante comuns
+          em locais onde os usu&aacute;rios n&atilde;o necessitam de aplica&ccedil;&otilde;es gr&aacute;ficas
+          como as providas pelo sistema X Window.</para>
+
       </sect3>
 	  
       <sect3 id="term-pcs">
-	<title>PCs Acting as Terminals</title>
+	<title>PCs atuando como terminais</title>
 
-	<para>If a <link linkend="term-dumb">dumb terminal</link> has just
-	  enough ability to display, send, and receive text, then certainly
-	  any spare personal computer can be a dumb terminal. All you need is
-	  the proper cable and some <emphasis>terminal emulation</emphasis>
-	  software to run on the computer.</para>
-	    
-	<para>Such a configuration is popular in homes.  For example, if your
-	  spouse is busy working on your FreeBSD system's console, you can do
-	  some text-only work at the same time from a less powerful personal
-	  computer hooked up as a terminal to the FreeBSD system.</para>
+        <para>Se um <link linkend="term-dumb">terminal burro</link> possui habilidades suficientes para exibir,
+          enviar e receber texto, certamente, qualquer computador poder&aacute; ser
+          utilizado como um terminal burro. Tudo que ser&aacute; preciso &eacute; um cabo
+          apropriado e a <emphasis>emula&ccedil;&atilde;o de terminal</emphasis> 
+          realizada por um programa executado no computador.</para>
+          
+        <para>Tal configura&ccedil;&atilde;o &eacute; comum para uso dom&eacute;stico. Por exemplo, se
+          tem uma pessoa ocupada trabalahndo no seu console do FreeBSD
+          voc&ecirc; pode realizar trabalhos em texto ao mesmo tempo de um computador
+          conectado como um terminal ao FreeBSD.</para>
       </sect3>
 	  
       <sect3 id="term-x">
-	<title>X Terminals</title>
+	<title>Terminais X</title>
 
-	<para>X terminals are the most sophisticated kind of terminal
-	  available.  Instead of connecting to a serial port, they usually
-	  connect to a network like Ethernet.  Instead of being relegated to
-	  text-only applications, they can display any X application.</para>
+        <para>Terminais X s&atilde;o o tipo mais sofisticado de terminais dispon&iacute;veis.
+          Ao inv&eacute;s de serem conectados por portas seriais, estes s&atilde;o usualmente
+          conectados via rede, como por exemplo <foreignphrase>Ethernet</foreignphrase>.
+          No lugar de executarem aplica&ccedil;&otilde;es em modo texto, estes podem exibir
+          qualquer aplica&ccedil;&atilde;o gr&aacute;fica do X Window.</para> 
+
+        <para>Os terminais X s&atilde;o apresentados aqui somente para abordagem geral do tema.
+              Entretanto, este cap&iacute;tulo <emphasis>n&atilde;o</emphasis> abrange a configura&ccedil;&atilde;o
+              ou o uso de terminais X.</para>
 	    
-	<para>We introduce X terminals just for the sake of completeness.
-	  However, this chapter does <emphasis>not</emphasis> cover setup,
-	  configuration, or use of X terminals.</para>
       </sect3>
     </sect2>
     
     <sect2 id="term-config">
-      <title>Configuration</title>
+      <title>Configura&ccedil;&atilde;o</title>
       
       <para>This section describes what you need to configure on your FreeBSD
 	system to enable a login session on a terminal.  It assumes you have
