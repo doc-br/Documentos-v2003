@@ -4294,19 +4294,25 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
           Se eles tentarem imprimir em uma impressora controlada.
 			</para>
 
----
-        <para>As with the <literal>sc</literal> (suppress multiple copies)
-          capability, you need to specify <literal>rg</literal> on remote
-          hosts that also have access to your printers, if you feel it is
-          appropriate (see section <link
-            linkend="printing-advanced-network-rm">Printers Installed on
-            Remote Hosts</link>).</para>
+			<para>
+				Como a op&ccedil;&atilde;o <literal>sc</literal> ( suprime
+			multiplas c&oacute;pias), voc&ecirc; precisasr&aacute; de 
+			especificar a op&ccedil;&atilde;o <literal>rg</literal> na 
+			m&aacute;quina remota (servidor) para ter tamb&eacute;m o acesso 
+			&agrave; impressora, veja a se&ccedil;&atilde;o
+          <link linkend="printing-advanced-network-rm">
+					Impressoras Instaladas em Servidores Remotos
+            </link>).
+			</para>
             
-        <para>For example, we will let anyone access the printer
-          <literal>rattan</literal>, but only those in group
-          <literal>artists</literal> can use <literal>bamboo</literal>.  Here
-          is the familiar <filename>/etc/printcap</filename> for host
-          <hostid>rose</hostid>:</para>
+			<para>
+				Por exemplo, n&oacute;s iremos permitir o acesso de todos a
+			impressora <literal>rattan</literal>, mas somente os 
+			usu&aacute;rios do grupo <literal>artists</literal> poder&atilde;o
+			utilizar a impressora <literal>bamboo</literal>.  Novamente
+			o arquivo <filename>/etc/printcap</filename> &eacute; semelhante
+			ao da m&aacute;quina <hostid>rose</hostid>:
+			</para>
 
         <programlisting>#
 #  /etc/printcap for host rose - restricted group for bamboo
@@ -4322,16 +4328,21 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
         :if=/usr/local/libexec/psif:\
         :df=/usr/local/libexec/psdf:</programlisting>
 
-        <para>Let us leave the other example
-          <filename>/etc/printcap</filename> file (for the host
-          <hostid>orchid</hostid>) alone.  Of course, anyone on
-          <hostid>orchid</hostid> can print to <literal>bamboo</literal>.  It
-          might be the case that we only allow certain logins on
-          <hostid>orchid</hostid> anyway, and want them to have access to the
-          printer.  Or not.</para>
+			<para>
+				Permita-nos mostrar um outro exemplo do arquivo
+		<filename>/etc/printcap</filename> (para a m&aacute;quina
+      <hostid>orchid</hostid>) sozinha.  Claro, qualquer um na m&aacute;quina
+		<hostid>orchid</hostid> pode imprimir para a impressora 
+		<literal>bamboo</literal>.  Neste caso, nos deveremos permitir acesso
+		&agrave; apenas de alguns usu&aacute;rios na m&aacute;quina
+		<hostid>orchid</hostid>, de qualquer maneira, nos estamos controlondo
+		o acesso a impressora.
+			<para>
 
         <note>
-          <para>There can be only one restricted group per printer.</para>
+				<para>
+				S&oacute; podemos restringir apenas um grupo por impressora
+				</para>
         </note>
       </sect3>
       
@@ -4340,43 +4351,60 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 				Controlando o Tamanho do Arquivos Enviados
 			</title>
 
-        <indexterm><primary>print <foreignphrase>jobs</foreignphrase></primary></indexterm>
-        <para>If you have many users accessing the printers, you probably need
-          to put an upper limit on the sizes of the files users can submit to
-          print.  After all, there is only so much free space on the
-          filesystem that houses the spooling directories, and you also need
-          to make sure there is room for the <foreignphrase>jobs</foreignphrase> of other users.</para>
+        <indexterm><primary>print jobs</primary></indexterm>
+
+			<para>
+				Se voc&ecirc; possui muitos usu&aacute;rios acessando a sua
+		impressora, voc&ecirc; provavelmente necessitar&aacute; de limitar
+		o tamanho m&aacute;ximo dos arquivos enviados para a impressora.
+				Al&eacute;m de que, o espa&ccedil;o livre em disco &eacute;
+		limitado, voc&ecirc; dever&aacute; prever o envio de v&aacute;rios
+		trabalhos de impress&atilde;o simultaneos, que poder&atilde;o 
+		consumir uma grande quantidade de espa&ccedil;o em disco.
+			</para>
             
         <indexterm>
-          <primary>print <foreignphrase>jobs</foreignphrase></primary>
+          <primary>print jobs</primary>
           <secondary>controlling</secondary>
         </indexterm>
-        <para><application>LPD</application> enables you to limit the maximum
-	  byte size a file in a job
-          can be with the <literal>mx</literal> capability. The units are in
-          <literal>BUFSIZ</literal> blocks, which are 1024 bytes.  If you put
-	  a zero for this
-          capability, there will be no limit on file size; however, if no
-          <literal>mx</literal> capability is specified, then a default limit
-          of 1000 blocks will be used.</para>
+
+			<para>
+				O systema <application>LPD</application> permite que voc&ecirc;
+		limite o tamanho m&aacute;ximo de um trabalho de impress&atilde;o
+		atrav&eacute;s da op&ccedil;&atilde;o <literal>mx</literal>.  A 
+		unidade padr&atilde;o &eacute; em blocos de  <literal>BUFSIZ</literal>,
+		que s&atilde;o 1024 bytes.  Se voc&ecirc; colocar o valor como zero
+		para esta op&ccedil;&atilde;o, voc&ecirc; n&atilde;o estar&aacute; 
+		limitando o tamanho do arquivo, entretanto se voc&ecirc; 
+		n&atilde;o especificar valor, o padr&atilde;o ser&aacute; utilizado, 
+		que &eacute; de : 1000 blocos.
+			</para>
+
 
         <note>
-          <para>The limit applies to <emphasis>files</emphasis> in a job, and
-            <emphasis>not</emphasis> the total job size.</para>
+			<para>
+				O limite &eacute; aplicado para os <emphasis>arquivos</emphasis> 
+		dentro de um trabalho de impress&atilde;o, e 
+		<emphasis>n&atilde;o</emphasis> ao tamanho total do trabalho de 
+		impress&atilde;o
+			</para>
         </note>
 
-        <para><application>LPD</application> will not refuse a file that is
-	  larger than the limit you
-          place on a printer.  Instead, it will queue as much of the file up
-          to the limit, which will then get printed.  The rest will be
-          discarded.  Whether this is correct behavior is up for
-          debate.</para>
+			<para>
+				O systema <application>LPD</application> n&atilde;o ir&aacute;
+		recusar o arquivo que estiver acima do limite imposto por voc&ecirc;.
+		  Ele colocara na fila de impress&atilde;o apenas a quantidade de bytes
+		at&eacute; o limite.  O resto ser&aacute; descartado.  Ser&aacute;
+		esse o comportamento correto.
+			</para>
             
-        <para>Let us add limits to our example printers
-          <literal>rattan</literal> and <literal>bamboo</literal>.  Since
-          those artists' &postscript; files tend to be large, we will limit them
-          to five megabytes. We will put no limit on the plain text line
-          printer:</para>
+			<para>Iremos utilizar outro exemplo de limites para as 
+			impressoras <literal>rattan</literal> e <literal>bamboo</literal>.  
+			Uma vez que arquivos art&iacute;sticos em &postscript; tentem a
+			ser muito grande, n&oacute;s iremos limitar-los a 5 megabytes.
+			  N&oacute;s iremos deixar sem limite a impressora de texto
+			puro (matricial):
+			</para>
 
         <programlisting>#
 #  /etc/printcap for host rose
@@ -4399,15 +4427,20 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
         :if=/usr/local/libexec/psif:\
         :df=/usr/local/libexec/psdf:</programlisting>
 
-        <para>Again, the limits apply to the local users only.  If you have
-          set up access to your printers remotely, remote users will not get
-          those limits.  You will need to specify the <literal>mx</literal>
-          capability in the remote <filename>/etc/printcap</filename> files as
-          well.  See section <link
-            linkend="printing-advanced-network-rm">Printers Installed      on
-            Remote Hosts</link> for more information on remote
-          printing.</para>
+			<para>
+				Relembrando, os limites s&atilde;o aplicados somente aos
+		usu&aacute;rios locais.  Se voc&ecirc; permite acesso remoto, 
+		usu&aacute;rios remotos n&atilde;o ter&atilde;o este limite.  
+		Voc&ecirc; dever&aacute; especificar na op&ccedil;&atilde;o
+		<literal>mx</literal> no arquivo remoto 
+		<filename>/etc/printcap</filename>.  Veja a se&ccedil;&atilde;o
+		<link linkend="printing-advanced-network-rm">
+			Impressoras Instaladas em Servidores Remotas
+		</link> para mais detalhes.
+			</para>
             
+---
+
         <para>There is another specialized way to limit job sizes from remote
           printers; see section <link
             linkend="printing-advanced-restricting-remote">Restricting Jobs
