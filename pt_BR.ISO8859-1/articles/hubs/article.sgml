@@ -963,90 +963,96 @@ cvspserver stream tcp nowait root /usr/bin/cvs cvs -f -l -R -T /anoncvstmp --all
         <title>Eu sou um site espelho oficial, qual &eacute; o site 
 	  correto para mim?</title>
 
-        <para>
-          In general the description in <xref linkend="mirror-where-simple">
-          still applies. Of course you may want to put some
-          weight on the fact that your upstream should be of
-          a low tier.
-          There are some other considerations about <emphasis>official</emphasis>
-          mirrors that are described in <xref linkend="mirror-official">.
+        <para>Em geral a descri&ccedil;&atilde;o da <xref linkend="mirror-where-simple">
+          continua v&aacute;lido. Naturalmente voc&ecirc; pode desejar colocar
+	  algum peso no fato de que com a sua capacidade de upstream
+	  voc&ecirc; poderia ter um tier menor.  Existem algumas outras
+	  considera&ccedil;&otilde;es sobre os sites espelhos <emphasis>oficiais</emphasis>
+          que s&atilde;o descritos na <xref linkend="mirror-official">.
         </para>
+
       </sect3>
       <sect3 id="mirror-where-master">
-        <title>I want to access the master sites!</title>
-        <para>
-          If you have good reasons and good prerequisites,
-          you may want and get access to one of the 
-          master sites. Access to these sites is 
-          generally restricted, and there are special policies
-          for access. If you are already an <emphasis>official</emphasis>
-          mirror, this certainly helps you getting access.
-          In any other case make sure your country really needs another mirror.
-          If it already has three or more, ask the <quote>zone administrator</quote> (<email>hostmaster@CC.freebsd.org</email>) or &a.hubs; first.</para>
+        <title>Eu quero ter acesso aos servidores mestres!</title>
 
-	<para>
-	  Whoever helped you become, an <emphasis>official</emphasis>
-	  should have helped you gain access to an appropriate upstream
-	  host, either one of the master sites or a suitable Tier-1
-	  site.  If not, you can send email to
-	  <email>mirror-admin@FreeBSD.org</email> to request help with
-	  that.
-        </para>
-        <para>
-          There are three master sites for the FTP fileset and
-          one for the CVS repository (the webpages and docs are
-          obtained from CVS, so there is no need for master).
-        </para>
+        <para>Se voc&ecirc; possui boas raz&otilde;es e bons pr&eacute;-requisitos, voc&ecirc;
+	  pode querer e ter acesso a um dos servidores mestre. O
+	  acesso a estes servidores &eacute; geralmente restrito, e existem
+	  regras especiais para o acesso.  Se voc&ecirc; j&aacute; &eacute; um site
+	  espelho <emphasis>oficial</emphasis>, isto certamente ir&aacute;
+	  auxili&aacute;-lo a conseguir o acesso.  Em qualquer outro caso,
+	  certifique-se que o seu pa&iacute;s realmente precisa de outro site
+	  espelho.  Se ele j&aacute; possui 3 ou mais, pergunte ao
+	  <quote>administrador da zona</quote>
+	  (<email>hostmaster@CC.freebsd.org</email>) ou primeiro ao
+	  &a.hubs;</para>
+
+	<para>Quem quer que tenha lhe ajudado a se tornar um site
+	  espelho oficial, deve ter providenciado para que voc&ecirc;
+	  obtivesse acesso a um servidor de upstream apropriado, seja
+	  ele um dos servidores mestres ou um servidor Tier-1
+	  apropriado.  Se n&atilde;o, voc&ecirc; pode enviar um email para
+	  <email>mirror-admin@FreeBSD.org</email> solicitar ajuda 
+	  com isto.</para>
+
+        <para>Existem 3 servidores master para a &aacute;rvore de FTP e um
+	  um para o reposit&oacute;rio de CVS (as p&aacute;ginas web e a
+	  documenta&ccedil;&atilde;o s&atilde;o obtidos apartir do CVS, assim n&atilde;o h&aacute;
+	  necessidade de se ter um servidor mestre).</para>
+	
         <sect4 id="mirror-where-master-ftp">
+	
           <title>ftp-master.FreeBSD.org</title>
+	  
           <para>
-            This is the master site for the FTP fileset. 
+            Este &eacute; o servidor mestre da &aacute;rvore de FTP. 
           </para>
-          <para>
-            <hostid>ftp-master.FreeBSD.org</hostid> provides
-            <application>rsync</application> and <application>CVSup</application>
-            access, rather in addition to ftp protocol.
-            Refer to <xref linkend="mirror-ftp-rsync"> and
-            <xref linkend="mirror-ftp-cvsup"> how to access
-            via these protocols.
-          </para>
-          <para>
-            Mirrors should be encouraged to also allow <application>rsync</application>
-            access for the FTP contents, since they are
-            <emphasis>Tier-1</emphasis>-mirrors.
-          </para>
+
+          <para>O <hostid>ftp-master.FreeBSD.org</hostid> fornece
+	    acesso via <application>rsync</application> e via 
+	    <application>CVSup</application>, al&eacute;m do protocolo FTP.
+	    Consulte a <xref linkend="mirror-ftp-rsync"> e a
+            <xref linkend="mirror-ftp-cvsup"> para instru&ccedil;&otilde;es de como
+	    acessar utilizando estes protocolos.</para>
+
+          <para>Os sites espelhos s&atilde;o encorajados a tamb&eacute;m
+	    disponibilizarem acesso via <application>rsync
+	    </application> &agrave; &aacute;rea de FTP, desde que sejam
+	    espelhos-<emphasis>Tier-1</emphasis>.</para>
+
         </sect4>
         <sect4 id="mirror-where-master-cvsup">
+
           <title>cvsup-master.FreeBSD.org</title>
-          <para>
-            This is the master site for the CVS repository.
-          </para>
-          <para>
-            <hostid>cvsup-master.FreeBSD.org</hostid> provides
-            <application>CVSup</application> access only.
-            See <xref linkend="mirror-cvs-cvsup"> for details.
-          </para>
-          <para>
-            To get access, you need to contact &a.cvsup-master;.
-            Make sure you read
-            <ulink url="http://people.FreeBSD.org/~jdp/cvsup-access/">FreeBSD CVSup Access Policy</ulink>
-            first!
-          </para>
-          <para>
-            Set up the required authentication by following
-            <ulink url="http://people.FreeBSD.org/~jdp/cvpasswd/">these
-            instructions</ulink>. Make sure you specify the server as
-            <hostid>freefall.FreeBSD.org</hostid> on the <command>cvpasswd</command>
-            command line, as described in this document,
-            even when you are contacting
-            <hostid>cvsup-master.FreeBSD.org</hostid>
+
+          <para>Este &eacute; o servidor mestre do reposit&oacute;rio CVS </para>
+
+          <para>O <hostid>cvsup-master.FreeBSD.org</hostid> fornece
+	    acesso apenas via <application>CVSup</application>.
+	    Consulte a <xref linkend="mirror-cvs-cvsup"> para maiores
+	    detalhes.</para>
+
+          <para>Para obter acesso, voc&ecirc; precisa contactar o &a.cvsup-master;.  
+	    Certifique-se de ter lido antes as <ulink 
+	    url="http://people.FreeBSD.org/~jdp/cvsup-access/">
+	    Regras de acesso ao CVSup do FreeBSD</ulink>!</para>
+          
+	  <para>Configure a autentica&ccedil;&atilde;o necess&aacute;ria seguindo 
+	    <ulink
+	    url="http://people.FreeBSD.org/~jdp/cvpasswd/">estas
+            instru&ccedil;&otilde;es</ulink>.  Certifique-se de que voc&ecirc; especificou 
+	    o servidor como <hostid>freefall.FreeBSD.org</hostid> 
+	    na linha de comando do <command>cvpasswd</command>, como
+	    descrito no documento mencionado acima, mesmo quando voc&ecirc;
+	    estiver contactando o <hostid>cvsup-master.FreeBSD.org
+	    </hostid>
           </para>
         </sect4>
       </sect3>
     </sect2>
   </sect1>
   <sect1 id="mirror-official">
-    <title>Official Mirrors</title>
+    <title>Sites espelhos oficiais</title>
     <para>
       Official mirrors are mirrors that
       <itemizedlist>
