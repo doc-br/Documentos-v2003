@@ -1311,21 +1311,21 @@ ifconfig_tun0=</programlisting>
       <para>O arquivo <filename>/etc/ppp/options</filename> abaixo pode ser
 	utilizado para se conectar a um servidor PPP da Cisco.</para>
 
-      <programlisting>crtscts	 # enable hardware flow control
-modem	   # modem control line
-noipdefault     # remote PPP server must supply your IP address
-		# if the remote host does not send your IP during IPCP
-		# negotiation, remove this option
-passive	 # wait for LCP packets
-domain ppp.foo.com      # put your domain name here
+      <programlisting>crtscts	 # ativa controle de fluxo por hardware
+modem	   # linha de controle do modem
+noipdefault	# o servidor PPP remoto deve definir um endereço IP para você
+		# se a máquina remota não definir o endereço durante a 
+		# negociação IPCP, remova esta opção
+passive		# espera por pacotes LCP
+domain ppp.foo.com      # coloque seu domínio aqui
 
-:&lt;remote_ip&gt;    # put the IP of remote PPP host here
-		# it will be used to route packets via PPP link
-		# if you didn't specified the noipdefault option
-		# change this line to &lt;local_ip&gt;:&lt;remote_ip&gt;
+:&lt;remote_ip&gt;    # ponha o endereço da máquina remota aqui
+		# isso será utilizado para rotear os pacotes pelo link PPP
+		# se você não especificou a opção noipdefault 
+		# mude essa linha para &lt;local_ip&gt;:&lt;remote_ip&gt;
 
-defaultroute    # put this if you want that PPP server will be your
-		# default router</programlisting>
+defaultroute    # coloque isso se você deseja que o servidor PPP seja
+		# o seu roteador padrão</programlisting>
 
       <para>Para conectar:</para>
 
@@ -1454,22 +1454,21 @@ exit</programlisting>
 
       <programlisting>/dev/cuaa1 115200
 
-crtscts		# enable hardware flow control
-modem		# modem control line
+crtscts		# ativa controle de fluxo por hardware
+modem		# linha de controle do modem
 connect "/usr/bin/chat -f /etc/ppp/login.chat.script"
-noipdefault	# remote PPP serve must supply your IP address
-		# if the remote host doesn't send your IP during
-		# IPCP negotiation, remove this option
-passive	 # wait for LCP packets
-domain &lt;your.domain&gt;	# put your domain name here
+noipdefault     # o servidor PPP remoto deve definir um endereço IP para você
+                # se a máquina remota não definir o endereço durante a
+                # negociação IPCP, remova esta opção
+passive         # espera por pacotes LCP
+domain &lt;your.domain&gt;      # coloque seu domínio aqui
+		# ponha o endereço da máquina remota aqui
+                # isso será utilizado para rotear os pacotes pelo link PPP
+                # se você não especificou a opção noipdefault
+                # mude essa linha para &lt;local_ip&gt;:&lt;remote_ip&gt;
 
-:		# put the IP of remote PPP host here
-		# it will be used to route packets via PPP link
-		# if you didn't specified the noipdefault option
-		# change this line to &lt;local_ip&gt;:&lt;remote_ip&gt;
-
-defaultroute	# put this if you want that PPP server will be
-		# your default router</programlisting>
+defaultroute    # coloque isso se você deseja que o servidor PPP seja
+                # o seu roteador padrão</programlisting>
 
       <para><filename>/etc/ppp/login.chat.script</filename>:</para>
 
@@ -1494,17 +1493,17 @@ defaultroute	# put this if you want that PPP server will be
       <para>O arquivo <filename>/etc/ppp/options</filename> deve conter algo
 	similar ao seguinte:</para>
 
-      <programlisting>crtscts			 # Hardware flow control
-netmask 255.255.255.0	   # netmask (not required)
-192.114.208.20:192.114.208.165  # IP's of local and remote hosts
-				# local ip must be different from one
-				# you assigned to the ethernet (or other)
-				# interface on your machine.
-				# remote IP is IP address that will be
-				# assigned to the remote machine
-domain ppp.foo.com	      # your domain
-passive			 # wait for LCP
-modem			   # modem line</programlisting>
+      <programlisting>crtscts			 # Controle de fluxo por hardware
+netmask 255.255.255.0	   # máscara de rede (não requerido)
+192.114.208.20:192.114.208.165	# IP's da máquina remota e local
+				# IP local pode ser diferente do qual
+				# você definiei para a interface ethernet
+				# na sua máquina.
+				# IP remoto é o endereço IP que será definido
+				# para a máquina remota.
+domain ppp.foo.com	      # seu domínio
+passive			 # esperar por LCP
+modem			   # linha do modem</programlisting>
 
       <para>O script <filename>/etc/ppp/pppserv</filename> abaixo irá fazer
 	com que o <application>pppd</application> se comporte como um
@@ -1578,8 +1577,8 @@ inp 5 OK
 out ATH0\13
 inp 5 OK
 echo \13
-out ATS0=1\13   ; change this to out ATS0=0\13 if you want to disable
-		; autoanswer mode
+out ATS0=1\13   ; mude isso para ATS0=0\13 se você quer desabilitar
+		; o modo de atendimento automático.
 inp 5 OK
 echo \13
 exit</programlisting>
@@ -1592,11 +1591,11 @@ exit</programlisting>
 	remota.</para>
 
       <programlisting>;
-; put the com line attached to the modem here:
+; ponha a linha serial a qual o modem está ligado:
 ;
 set line /dev/tty01
 ;
-; put the modem speed here:
+; velocidade do modem:
 ;
 set speed 19200
 set file type binary	    ; full 8 bit file xfer
@@ -1618,9 +1617,9 @@ set input case ignore
 def \%x 0		       ; login prompt counter
 goto slhup
 
-:slcmd			  ; put the modem in command mode
+:slcmd			  ; Poe o modem em modo de comando
 echo Put the modem in command mode.
-clear			   ; Clear unread characters from input buffer
+clear			   ; Limpa caracteres não lidos do buffer de entrada
 pause 1
 output +++		      ; hayes escape sequence
 input 1 OK\13\10		; wait for OK
@@ -1631,23 +1630,23 @@ output at\13
 input 1 OK\13\10
 if fail goto slcmd	      ; if modem doesn't answer OK, try again
 
-:slhup			  ; hang up the phone
-clear			   ; Clear unread characters from input buffer
+:slhup			  ; desliga o telefone
+clear			   ; Limpa caracteres não lidos do buffer de entrada
 pause 1
 echo Hanging up the phone.
 output ath0\13		  ; hayes command for on hook
 input 2 OK\13\10
-if fail goto slcmd	      ; if no OK answer, put modem in command mode
+if fail goto slcmd	      ; se não houve resposta OK, poe o modem em modo de comando
 
-:sldial			 ; dial the number
+:sldial			 ; disca o número
 pause 1
 echo Dialing.
-output atdt9,550311\13\10	       ; put phone number here
-assign \%x 0		    ; zero the time counter
+output atdt9,550311\13\10	       ; ponha o número do telefone aqui
+assign \%x 0		    ; zera o contador de tempo
 
 :look
-clear			   ; Clear unread characters from input buffer
-increment \%x		   ; Count the seconds
+clear			   ; Limpa caracteres não lidos do buffer de entrada
+increment \%x		   ; Conta os segundos
 input 1 {CONNECT }
 if success goto sllogin
 reinput 1 {NO CARRIER\13\10}
@@ -1662,16 +1661,16 @@ if < \%x 60 goto look
 else goto slhup
 
 :sllogin			; login
-assign \%x 0		    ; zero the time counter
+assign \%x 0		    ; Zera o contador de tempo
 pause 1
 echo Looking for login prompt.
 
 :slloop
-increment \%x		   ; Count the seconds
-clear			   ; Clear unread characters from input buffer
+increment \%x		   ; Conta os segundos
+clear			   ; Limpa caracteres não lidos do buffer de entrada
 output \13
 ;
-; put your expected login prompt here:
+; ponha o prompt de login esperado aqui:
 ;
 input 1 {Username: }
 if success goto sluid
@@ -1679,17 +1678,17 @@ reinput 1 {\255}
 if success goto slhup
 reinput 1 {\127}
 if success goto slhup
-if < \%x 10 goto slloop	 ; try 10 times to get a login prompt
-else goto slhup		 ; hang up and start again if 10 failures
+if < \%x 10 goto slloop	 ; tenta 10 vezes conseguir o prompt de login
+else goto slhup		 ; desliga e tenta denovo se falhou 10 vezes
 
 :sluid
 ;
-; put your userid here:
+; ponha seu usuário aqui:
 ;
 output ppp-login\13
 input 1 {Password: }
 ;
-; put your password here:
+; ponha sua senha aqui:
 ;
 output ppp-password\13
 input 1 {Entering SLIP mode.}
