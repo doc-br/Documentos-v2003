@@ -999,7 +999,7 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
 	  </listitem>
 	  
 	  <listitem>
-	    <para>Detecção de portador (<acronym>CD</acronym>)</para>
+	    <para>Detecção de portadora (<acronym>CD</acronym>)</para>
 	  </listitem>
 	  
 	  <listitem>
@@ -1026,101 +1026,90 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
       <sect2>
 	<title>Considerações da Interface Serial</title>
 
-	<para>O FreeBSD tem suporte as interfaces de comunicações NS8250-, NS16450-, NS16550-, e NS16550A- baseadas 
-	  na EIA RS-232C (CCITT V.24).  Os dispositivos 8250 e 16450 que possuem área de troca de caracter único.  O dispositivo 
-          16550 provê áreas de troca de 16 caracteres, o que permite uma melhor perfomance ao sistema.  (Bugs in plain 16550's prevent the use of the
-	  16-character buffer, so use 16550A's if possible).  Because
-	  single-character-buffer devices require more work by the operating
-	  system than the 16-character-buffer devices, 16550A-based serial
-	  interface cards are much preferred. If the system has many active
-	  serial ports or will have a heavy load, 16550A-based cards are
-	  better for low-error-rate communications.</para>
+	<para>O FreeBSD tem suporte as interfaces de comunicações NS8250-, NS16450-, NS16550-, e 
+          NS16550A- baseadas na EIA RS-232C (CCITT V.24).  Os dispositivos 8250 e 16450 que possuem 
+          área de troca de caracter único.  O dispositivo 16550 provê áreas de troca de 16 
+          caracteres, o que permite uma melhor perfomance ao sistema.  (Problemas na implementação 
+          da 16550's evita o uso da área de troca de 16 caracteres, então use a 16550A's 
+          se possível).  Devido a dispositivos de área de troca de caractere único 
+          requerirem maior processamento do sistema operacional que os dispositivos com
+          área de troca de 16 caracteres, prefira utilizar interfaces seriais com sinais baseados em 16550A. Se
+          o sistema possuir diversas portas seriais ativas ou tiver uma carga de serviços muito grande, as
+          placas seriais baseadas em 16550A são melhores para que se tenham taxas baixas de 
+         erros de comunicação.</para> 
       </sect2>
     
     <sect2>
-      <title>Quick Overview</title>
+      <title>Rápida Visão Geral</title>
 
       <indexterm><primary>getty</primary></indexterm>
-      <para>As with terminals, <command>init</command> spawns a
-	<command>getty</command> process for each configured serial
-	port for dial-in connections.  For example, if a modem is
-	attached to <filename>/dev/ttyd0</filename>, the command
-	<command>ps ax</command> might show this:</para>
+      <para>Assim como os terminais, o <command>init</command> iniciará um processo <command>getty</command> para
+        cada porta serial configurada para aceitar conexões discadas. Por exemplo, se
+        um modem está anexado a <filename>/dev/ttyd0</filename> o comando <command>ps ax</command> deve
+        apresentar algo como:</para>
 	  
       <screen> 4850 ??  I      0:00.09 /usr/libexec/getty V19200 ttyd0</screen>
 	    
-      <para>When a user dials the modem's line and the modems connect, the
-	<acronym>CD</acronym> (Carrier Detect) line is reported by the modem.
-	The kernel
-	notices that carrier has been detected and completes
-	<command>getty</command>'s open of the port.  <command>getty</command>
-	sends a <prompt>login:</prompt> prompt at the specified initial line
-	speed.  <command>getty</command> watches to see if legitimate
-	characters are received, and, in a typical configuration, if it finds
-	junk (probably due to the modem's connection speed being different
-	than <command>getty</command>'s speed), <command>getty</command> tries
-	adjusting the line speeds until it receives reasonable
-	characters.</para>
+      <para>Quando um usuário disca para a linha em que o modem está conectado 
+        um sinal de <acronym>CD</acronym> (<foreignphrase>Carrier Detect</foreignphrase> - Detecção de Portadora) 
+        é reportado pelo modem. O kernel anuncia a detecção da portadora e completa a abertura do <command>getty</command>'s daquela 
+        porta.  O <command>getty</command> envia um <foreignphrase>prompt</foreignphrase> <prompt>login:</prompt> para 
+        a linha na velocidade especificada. O <command>getty</command> verifica se os caracteres estão 
+        sendo recebidos corretamente e, numa configuração típica, se ele encontra ruídos de 
+        comunicação (provavelmente a velocidade da conexão do modem é diferente da estabelecida 
+        no  <command>getty</command>), o <command>getty</command> tenta ajustar a velocidade da linha
+        até que possa receber caracteres cabíveis.</para>
 	  
       <indexterm>
         <primary><command>/usr/bin/login</command></primary>
       </indexterm>
-      <para>After the user enters his/her login name,
-	<command>getty</command> executes
-	<filename>/usr/bin/login</filename>, which completes the login
-	by asking for the user's password and then starting the user's
-	shell.</para>
+      <para>Após o usuário informar seu nome de login, o <command>getty</command> executa
+	<filename>/usr/bin/login</filename>, que se responsabiliza pelo login perguntando ao 
+        usuário sua senha e posteriormente iniciando o <foreignphrase>shell</foreignphrase> definido para este.</para>
     </sect2>
     
     
     <sect2>
-      <title>Configuration Files</title>
+      <title>Arquivos de configuração</title>
       
-      <para>There are three system configuration files in the
-	<filename>/etc</filename> directory that you will probably need to
-	edit to allow dial-up access to your FreeBSD system.  The first,
-	<filename>/etc/gettytab</filename>, contains configuration information
-	for the <filename>/usr/libexec/getty</filename> daemon.  Second,
-	<filename>/etc/ttys</filename> holds information that tells
-	<filename>/sbin/init</filename> what <filename>tty</filename> devices
-	should have <command>getty</command> processes running on them.
-	Lastly, you can place port initialization commands in the
-	<filename>/etc/rc.serial</filename> script.</para>
+      <para>Temos três arquivos de configuração do sistema no diretório <filename>/etc</filename> que 
+        provavelmente será necessário editar para permitir acesso discado ao seu sistema FreeBSD. O
+        primeiro deles é o <filename>/etc/gettytab</filename> que contém as informações de configuração 
+        do processo de servidor <filename>/usr/libexec/getty</filename>. O segundo, o <filename>/etc/ttys</filename>, 
+        armazena informaões que descrevem ao <filename>/sbin/init</filename> qual dispositivo <filename>tty</filename>/
+        devem possuir um processo <command>getty</command> rodando sobre eles.
+        E por último, você poderá colocar seus comandos de inicialização 
+        no <foreignphrase>script</foreignphrase> <filename>/etc/rc.serial</filename>.</para>
 	  
-      <para>There are two schools of thought regarding dial-up modems on &unix;.
-	One group likes to configure their modems and systems so that no matter
-	at what speed a remote user dials in, the local computer-to-modem
-	RS-232 interface runs at a locked speed.  The benefit of this
-	configuration is that the remote user always sees a system login
-	prompt immediately.  The downside is that the system does not know
-	what a user's true data rate is, so full-screen programs like Emacs
-	will not adjust their screen-painting methods to make their response
-	better for slower connections.</para>
-	  
-      <para>The other school configures their modems' RS-232 interface to vary
-	its speed based on the remote user's connection speed.  For example,
-	V.32bis (14.4&nbsp;Kbps) connections to the modem might make the modem run
-	its RS-232 interface at 19.2&nbsp;Kbps, while 2400&nbsp;bps connections make the
-	modem's RS-232 interface run at 2400&nbsp;bps. Because
-	<command>getty</command> does not understand any particular modem's
-	connection speed reporting, <command>getty</command> gives a
-	<prompt>login:</prompt> message at an initial speed and watches the
-	characters that come back in response.  If the user sees junk, it is
-	assumed that they know they should press the
-	<keycode>Enter</keycode> key until they see a recognizable
-	prompt.  If the data rates do not match, <command>getty</command> sees
-	anything the user types as <quote>junk</quote>, tries going to the next
-	speed and gives the <prompt>login:</prompt> prompt again.  This
-	procedure can continue ad nauseam, but normally only takes a keystroke
-	or two before the user sees a good prompt.  Obviously, this login
-	sequence does not look as clean as the former
-	<quote>locked-speed</quote> method, but a user on a low-speed
-	connection should receive better interactive response from full-screen
-	programs.</para>
+      <para>Temos dois grupos distintos relativos as conexões com modems em &unix;.
+        Um grupo gosta de configurar seus modems e sistemas para que independendo 
+        da velocidade seja possível discar, porém a interface local RS-232 entre 
+        o computador e o modem rodam numa velocidade travada. O benefício disso é que
+        o usuário remoto sempre vê o prompt de login imediatamente. O negativo disso
+        é que o sistema não sabe qual a verdadeira velocidade do usuário, o que fará 
+        que programas que rodam utilizando toda a tela, como o Emacs, não ajustarão
+        seus métodos de exibição para responderem de maneira melhor quando for executada
+        uma conexão lenta.</para> 
+         
+      <para>O outro grupo configura as interfaces RS-232 de seus modems de maneira a diversificarem
+        suas velocidades baseando-se na velocidade da conexão do usuário remoto. Por exemplo, conexões 
+        V.32bis (14.4&nbsp;Kbps) devem fazer com que o modem execute sua interface RS-232 em 19.2&nbsp;Kbps, enquanto
+        conexões 2400&nbsp;bps farão com que a interface RS-232 do modem rode em 2400&nbsp;bps. Devido ao 
+        <command>getty</command> não entender qualquer particularidade da velocidade reportada
+        do modem ele dára a mensagem <prompt>login:</prompt> na velocidade inicial e observará 
+        os caracteres que terá em resposta. Se o usuário verificar que os caracteres são impróprios
+        ou errôneo, ele assumirá que os usuários deverão saber que devem pressionar a 
+        tecla <keycode>Enter</keycode> até que possa ver um prompt reconhecível. Se as velocidades
+        não combinarem o <command>getty</command> verificará que o usuário está digitando <quote>lixo</quote>,
+        ou seja, caracteres impróprios e tentará estabelecer a próxima velocidade e enviar 
+        o prompt <prompt>login:</prompt> novamente.  Este procedimento poderá perdurar por um tempo, porém
+        normalmente após uma ou duas pressionadas de tecla o usuário verá um prompt bom.  Obviamente, esta
+        sequência de login não aparecerá tão limpa quanto a de método de velocidade travada, mas
+        um usuário de conexão lenta deve receber uma melhor resposta interativa para programas
+        que utilizam toda a tela para exibição.</para>  
 
-      <para>This section will try to give balanced configuration information,
-	but is biased towards having the modem's data rate follow the
-	connection rate.</para>
+      <para>Esta seção tentará prover informações numa configuração balanceada, mas isso será 
+        influenciado tendo em vista a velocidade do modem com a velocidade da conexão.</para>
 
       <sect3>
 	<title><filename>/etc/gettytab</filename></title>
@@ -1128,30 +1117,28 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
   <indexterm>
     <primary><filename>/etc/gettytab</filename></primary>
   </indexterm>
-	<para><filename>/etc/gettytab</filename> is a &man.termcap.5;-style
-	  file of configuration information for &man.getty.8;.  Please see the
-	    &man.gettytab.5; manual page for complete information on the
-	  format of the file and the list of capabilities.</para>
+	<para>O arquivo <filename>/etc/gettytab</filename> é um arquivo de estilos de &man.termcap.5;-style
+	  de informações de configuração para o &man.getty.8;.  Por favor, visite a página de manual
+          do &man.gettytab.5; para informações detalhadas sobre o formato do arquivo e a lista 
+          de habilidades.</para>
 
 	<sect4>
-	  <title>Locked-speed Config</title>
+	  <title>Configuração de velocidade travada</title>
 	  
-	  <para>If you are locking your modem's data communications rate at a
-	    particular speed, you probably will not need to make any changes
-	    to <filename>/etc/gettytab</filename>.</para>
+          <para>Se você está travando a velocidade de comunicação de seu modem numa específica,
+            você provavelmente não precisará fazer qualquer alteração no arquivo <filename>/etc/gettytab</filename>.</para>
 	</sect4>
 
 	<sect4>
-	  <title>Matching-speed Config</title>
+	  <title>Configuração de velocidade compatível</title>
 	  
-	  <para>You will need to set up an entry in
-	    <filename>/etc/gettytab</filename> to give
-	    <command>getty</command> information about the speeds you wish to
-	    use for your modem.  If you have a 2400&nbsp;bps modem, you can
-	    probably use the existing <literal>D2400</literal> entry.</para>
+          <para>Você precisará definir uma entrada no arquivo <filename>/etc/gettytab</filename> para 
+            fornecer informações ao <command>getty</command> sobre velocidades que você deseja
+            utilizar para seu modem. Se você tiver um modem de 2400&nbsp;bps, você provavelmente
+            poderá usar a entrada <literal>D2400</literal> existente.</para>
 	      
 	  <programlisting>#
-# Fast dialup terminals, 2400/1200/300 rotary (can start either way)
+# Terminais de conexões discadas rápidas, giram em torno de 2400/1200/300 (podendo inciar em um deles)
 #
 D2400|d2400|Fast-Dial-2400:\
         :nx=D1200:tc=2400-baud:
@@ -1160,13 +1147,13 @@ D2400|d2400|Fast-Dial-2400:\
 5|D300|Fast-Dial-300:\
         :nx=D2400:tc=300-baud:</programlisting>
 	      
-	  <para>If you have a higher speed modem, you will probably need to
-	    add an entry in <filename>/etc/gettytab</filename>; here is an
-	    entry you could use for a 14.4&nbsp;Kbps modem with a top interface
-	    speed of 19.2&nbsp;Kbps:</para>
+	  <para>Se você possui um modem de alta velocidade, você provavelmente precisará adicionar
+            uma entrada no arquivo <filename>/etc/gettytab</filename>; temos aqui uma
+            entrada que poderia ser utilizada para um modem de 14.4&nbsp;Kbps com 
+            uma interface de velocidade máxima igual a 19.2&nbsp;Kbps:</para>
 	      
 	  <programlisting>#
-# Additions for a V.32bis Modem
+# Adições para modems V.32bis
 #
 um|V300|High Speed Modem at 300,8-bit:\
         :nx=V19200:tc=std.300:
@@ -1179,25 +1166,25 @@ up|V9600|High Speed Modem at 9600,8-bit:\
 uq|V19200|High Speed Modem at 19200,8-bit:\
         :nx=V9600:tc=std.19200:</programlisting>
 	      
-	  <para>This will result in 8-bit, no parity connections.</para>
+	  <para>Isto resultará em conexões de 8 bits sem paridade.</para>
 	      
-	  <para>The example above starts the communications rate at 19.2&nbsp;Kbps
-	    (for a V.32bis connection), then cycles through 9600&nbsp;bps (for
-	    V.32), 2400&nbsp;bps, 1200&nbsp;bps, 300&nbsp;bps, and back to 19.2&nbsp;Kbps.
-	    Communications rate cycling is implemented with the
-	    <literal>nx=</literal> (<quote>next table</quote>) capability.
-	    Each of the lines uses a <literal>tc=</literal> (<quote>table
-	    continuation</quote>) entry to pick up the rest of the
-	    <quote>standard</quote> settings for a particular data rate.</para>
+	  <para>O exemplo acima inicia as velocidade de comunicação em 19.2&nbsp;Kbps
+	    (para conexões V.32bis), então girando em torno de 9600&nbsp;bps (para 
+	    V.32), 2400&nbsp;bps, 1200&nbsp;bps, 300&nbsp;bps, e retornando para 19.2&nbsp;Kbps.
+	    Velocidade de comunicação cíclicas são implementadas com a habilidade 
+	    <literal>nx=</literal> (<quote>próvima tabela</quote>).
+            Cada uma das linhas usa uma entrada <literal>tc=</literal> (<quote>continuação de tabela</quote>) para
+            para a escolha do resto das configurações <quote>padrões</quote> para
+            uma velocidade em específico.</para>
 	      
-	  <para>If you have a 28.8&nbsp;Kbps modem and/or you want to take
-	    advantage of compression on a 14.4&nbsp;Kbps modem, you need to use a
-	    higher communications rate than 19.2&nbsp;Kbps.  Here is an example of
-	    a <filename>gettytab</filename> entry starting a 57.6&nbsp;Kbps:</para>
+	  <para>Se você tem um modem de 28.8&nbsp;Kbps e você quer fazer uso das vantagens de 
+            compressão dos modems de 14.4&nbsp;Kbps, você precisa utilizar velocidades de conexão 
+            maiores que 19.2&nbsp;Kbps.  Aqui temos um exemplo de uma entrada no <filename>gettytab</filename> iniciando
+            em 57.6&nbsp;Kbps:</para>
 	      
 	  <programlisting>#
-# Additions for a V.32bis or V.34 Modem
-# Starting at 57.6 Kbps
+# Adições para modems V.32bis ou V.34
+# Iniciando em 57.6 Kbps
 #
 vm|VH300|Very High Speed Modem at 300,8-bit:\
         :nx=VH57600:tc=std.300:
@@ -1210,10 +1197,9 @@ vp|VH9600|Very High Speed Modem at 9600,8-bit:\
 vq|VH57600|Very High Speed Modem at 57600,8-bit:\
         :nx=VH9600:tc=std.57600:</programlisting>
 
-	  <para>If you have a slow CPU or a heavily loaded system and do
-	    not have 16550A-based serial ports, you may receive 
-	    <errorname>sio</errorname>
-	    <quote>silo</quote> errors at 57.6&nbsp;Kbps.</para>
+	  <para>Caso você tenha uma CPU lenta ou um sistema sobre altas cargas de utilização
+            e não possua portas seriais basedas em 16550A, você poderá receber erros <errorname>sio</errorname>
+	    <quote>silo</quote> em 57.6&nbsp;Kbps.</para>
 	</sect4>
       </sect3>
       
@@ -1223,30 +1209,23 @@ vq|VH57600|Very High Speed Modem at 57600,8-bit:\
 	  <primary><filename>/etc/ttys</filename></primary>
 	</indexterm>
 
-	<para>Configuration of the <filename>/etc/ttys</filename> file
-	  was covered in <xref linkend="ex-etc-ttys">.
-	  Configuration for modems is similar but we must pass a
-	  different argument to <command>getty</command> and specify a
-	  different terminal type.  The general format for both
-	  locked-speed and matching-speed configurations is:</para>
+	<para>A configuração do arquivo <filename>/etc/ttys</filename> é abordada em <xref linkend="ex-etc-ttys">. A
+          configuração para modems é similar porém nos temos que passar um argumento diferente 
+          para o <command>getty</command> e especificar um tipo de terminal diferente. O formato
+          geral para ambas as configurações, velocidade travada e velocidade compatível são:</para>
 	    
 	<programlisting>ttyd0   "/usr/libexec/getty <replaceable>xxx</replaceable>"   dialup on</programlisting>
 	    
-	<para>The first item in the above line is the device special file for
-	  this entry &mdash; <literal>ttyd0</literal> means
-	  <filename>/dev/ttyd0</filename> is the file that this
-	  <command>getty</command> will be watching.  The second item,
-	  <literal>"/usr/libexec/getty
+	<para>O primeiro item da linha acima é o arquivo especial de dispositivo
+          para esta entrada &mdash; <literal>ttyd0</literal> significando que <filename>/dev/ttyd0</filename> é 
+          o arquivo que este <command>getty</command> observará.  O segundo item, <literal>"/usr/libexec/getty
 	    <replaceable>xxx</replaceable>"</literal>
-	  (<replaceable>xxx</replaceable> will be replaced by the initial
-	  <filename>gettytab</filename> capability) is the process
-	  <command>init</command> will run on the device.  The third item,
-	  <literal>dialup</literal>, is the default terminal type.  The fourth
-	  parameter, <literal>on</literal>, indicates to
-	  <command>init</command> that the line is operational.  There can be
-	  a fifth parameter, <literal>secure</literal>, but it should only be
-	  used for terminals which are physically secure (such as the system
-	  console).</para>
+	  (<replaceable>xxx</replaceable> será substituído pela habilidade 
+          inicial do <filename>gettytab</filename>) que será executado no dispositivo pelo 
+          processo <command>init</command>.  O terceiro item, <literal>dialup</literal>, é 
+          o tipo padrão de terminal.  O quarto parâmetro, <literal>on</literal>, diz ao <command>init</command> que 
+          a linha é operacional.  Pode haver um quinto parâmetro, <literal>secure</literal>, mas
+          deve ser utilizado somente para terminais fisicamente seguros (como a console do sistema).</para>
 	    
 	<para>The default terminal type (<literal>dialup</literal> in the
 	  example above) may depend on local preferences.
