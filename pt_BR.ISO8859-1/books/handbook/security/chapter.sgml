@@ -5478,18 +5478,18 @@ drwxr-xr-x  2 robert  robert  512 Nov 10 11:54 public_html</programlisting>
     </indexterm>
     <title>Recomendações de Segurança do &os;</title>
 
-    <para>Like many production quality operating systems, &os; publishes
-      <quote>Security Advisories</quote>.  These advisories are usually
-      mailed to the security lists and noted in the Errata only
-      after the appropriate releases have been patched.  This section
-      will work to explain what an advisory is, how to understand them,
-      and what measures to take in order to patch a system.</para>
+    <para>Como muitos sistemas operacionais com qualidade de produção, &os; publica
+      <quote>Avisos de Segurança</quote>.  Estes avisos são usualmente
+      enviados por email para listas de segurança e listados na Errata somente
+      depois que as <literal>releases</literal> estão devidamente corrigidas.  Esta seção
+      irá explicar o que é um aviso, como entende-lo,
+      e quais os meios para aplicar um <foreignphrase>patch</foreignphrase> em um sistema.</para>
 
     <sect2>
-      <title>What does an advisory look like?</title>
+      <title>Com o que um aviso se parece?</title>
 
-      <para>The &os; security advisories look similar to the one below,
-	taken from the security mailing list.</para>
+      <para>Os avisos de segurança do &os; são similares a este abaixo,
+	retirado da lista de email sobre segurança.</para>
 
       <programlisting>=============================================================================
 &os;-SA-XX:XX.UTIL                                     Security Advisory
@@ -5542,72 +5542,72 @@ VII. References<co id="co-ref"></programlisting>
 
       <calloutlist>
 	<callout arearefs="co-topic">
-	  <para>The topic field indicates exactly what the problem is.
-	    It is basically an introduction to the current security
-	    advisory and notes the utility with the
-	    vulnerability.</para>
+	  <para>O campo <foreignphrase>Topic</foreignphrase> indica exatamente o que é o problema.
+	    Ele é basicamente uma introdução ao aviso de segurança
+	    atual e cita o utilitário com a
+	    vulnerabilidade.</para>
 	</callout>
 
 	<callout arearefs="co-category">
-	  <para>The Category refers to the affected part of the system
-	    which may be one of core, contrib, or ports.  The core
-	    category means that the vulnerability affects a core
-	    component of the &os; operating system.  The contrib
-	    category means that the vulnerability affects software
-	    contributed to the &os; Project, such as
-	    <application>Sendmail</application>.  Finally the ports
-	    category indicates that the vulnerability affects add on
-	    software available as part of the ports collection.</para>
+	  <para>O <foreignphrase>Category</foreignphrase> referencia a parte afetada do sistema
+	    que pode ser <literal>core</literal>, <literal>contrib</literal>, ou <literal>ports</literal>.  A categoria
+	    <literal>core</literal> significa que a vulnerabilidade afeta um componente do 
+	    núcleo do sistema operacional &os;.  A categoria
+	    <literal>contrib</literal> significa que a vulnerabilidade afeta aplicativos
+	    contribuídos ao Projeto &os;, como
+	    <application>Sendmail</application>.  Finalmente a caterogia
+	    <literal>ports</literal> indica que a vulnerabilidade afeta aplicativos adicionais
+	    disponíveis como parte da coleção de ports.</para>
 	</callout>
 
 	<callout arearefs="co-module">
-	  <para>The Module field refers to the component location, for
-	    instance sys.  In this example, we see that the module,
-	    sys, is affected; therefore, this vulnerability
-	    affects a component used within the kernel.</para>
+	  <para>O campo <foreignphrase>Module</foreignphrase> referencia a localização do componente, por
+	    exemplo <quote>sys</quote>. Neste exemplo, nós vemos que o módulo,
+	    <quote>sys</quote>, está afetado; consequentemente, esta vulnerabilidade
+	    afeta um componente usado dentro do <foreignphrase>kernel</foreignphrase>.</para>
 	</callout>
 
 	<callout arearefs="co-announce">
-	  <para>The Announced field reflects the date said security
-	    advisory was published, or announced to the world.  This
-	    means that the security team has verified that the problem
-	    does exist and that a patch has been committed to the &os;
-	    source code repository.</para>
+	  <para>O campo <foreignphrase>Announced</foreignphrase> reflete a data em que o aviso
+	    de segurança foi publicado, ou anunciado ao mundo.  Isto
+	    significa que a equipe de segurança verificou que o problema
+	    existe e que a correcão foi enviada ao repositório de código
+	    fonte do &os;.</para>
 	</callout>
 
 	<callout arearefs="co-credit">
-	  <para>The Credits field gives credit to the individual or
-	    organization who noticed the vulnerability and reported
-	    it.</para>
+	  <para>O campo <foreignphrase>Credits</foreignphrase> dá os créditos ao individuo ou
+	    organização que notou a vulnerabilidade e a
+	    reportou.</para>
 	</callout>
 
 	<callout arearefs="co-affects">
-	  <para>The Affects field explains which releases of &os; are
-	    affected by this vulnerability.  For the kernel, a quick
-	    look over the output from <command>ident</command> on the
-	    affected files will help in determining the revision.
-	    For ports, the version number is listed after the port name
-	    in <filename>/var/db/pkg</filename>.  If the system does not
-	    sync with the &os; <acronym>CVS</acronym> repository and rebuild
-	    daily, chances are that it is affected.</para>
+	  <para>O campo <foreignphrase>Affects</foreignphrase> explica quais as <literal>releases</literal> do &os; são
+	    afetadas por esta vulnerabilidade.  Para o <literal>kernel</literal>, uma rápida
+	    olhada na saída do <command>ident</command> nos
+	    arquivos afetados ajudará em determinar uma revisão.
+	    Para <literal>ports</literal>, o número da versão está listado depois do nome do port
+	    em <filename>/var/db/pkg</filename>.  Se o sistema não faz
+	    sincronização com o repositório <acronym>CVS</acronym> do &os; e é recompilado
+	    diariamente, há possibilidades de estar afetado.</para>
 	</callout>
 
 	<callout arearefs="co-corrected">
-	  <para>The Corrected field indicates the date, time, time
-	    offset, and release that was corrected.</para>
+	  <para>O campo <foreignphrase>Corrected</foreignphrase> indica a data, hora, time
+	    offset, e a <literal>release</literal> que foi corrigida.</para>
 	</callout>
 
 	<callout arearefs="co-only">
-	  <para>The &os; only field indicates whether this vulnerability
-	    affects just &os;, or if it affects other operating systems
-	    as well.</para>
+	  <para>O campo <foreignphrase>&os; only</foreignphrase> indica se esta vulnerabilidade
+	    afeta apenas o &os;, ou se afeta outros sistemas operacionais
+	    também.</para>
 	</callout>
 
 	<callout arearefs="co-backround">
-	  <para>The background field gives information on exactly what
-	    the affected utility is.  Most of the time this is why
-	    the utility exists in &os;, what it is used for, and a bit
-	    of information on how the utility came to be.</para>
+	  <para>O campo <foreignphrase>background</foreignphrase> dá informações sobre exatamente o que é
+	    o utilitário afetado.  Na maioria das vezes porque
+	    o utilitário existe no &os;, para que é usado, e um pouco
+	    de informações sobre como o utilitário vem a ser.</para>
 	</callout>
 
 	<callout arearefs="co-descript">
