@@ -503,41 +503,50 @@ pcm0: &lt;SB16 DSP 4.11&gt; on sbc0</screen>
     </sect2info>
     <title>Utilizando multiplas fontes de som</title>
 
-    <para>It is often desirable to have multiple sources of sound that
-      are able to play simultaneously, such as when
-      <application>esound</application> or
-      <application>artsd</application> do not support sharing of the
-      sound device with a certain application.</para>
-
-    <para>FreeBSD lets you do this through <emphasis>Virtual Sound
-      Channels</emphasis>, which can be set with the &man.sysctl.8;
-      facility.  Virtual channels allow you to multiplex your sound
-      card's playback channels by mixing sound in the kernel.</para>
-
-    <para>To set the number of virtual channels, there are two sysctl
-      knobs which, if you are the <username>root</username> user, can
-      be set like this:</para>
+    <para>&Eacute; frequentemente desej&aacute;vel termos multiplas fontes de som, as
+      quais possam ser reproduzidas simultaneamente, como por exemplo
+      quando o <application>esound</application> ou o
+      <application>artsd</application> n&atilde;o suportam o compartilhamento
+      do dispositivo de som com alguma aplica&ccedil;&atilde;o.</para>
+    
+    <para>O FreeBSD permite que voc&ecirc; fa&ccedil;a isso atrav&eacute;s dos
+      <emphasis>Canais virtuais de som</emphasis>, os quais podem ser
+      configurados atr&aacute;ves do &man.sysctl.8;.  Os canais virtuais
+      permitem que voc&ecirc; multiplexe os canais de reprodu&ccedil;&atilde;o da sua
+      placa de som atrav&eacute;s de uma mixagem do som pelo kernel.</para>
+    
+    <para>Para configurar os canais virtuais, existem 2 vari&aacute;veis do
+      sysctl que precisam ser ajustadas,  se voc&ecirc; &eacute; o usu&aacute;rio
+      <username>root</username>, isto pode ser feito da seguinte
+      forma:</para>
+    
     <screen>&prompt.root; <userinput>sysctl hw.snd.pcm0.vchans=4</userinput>
 &prompt.root; <userinput>sysctl hw.snd.maxautovchans=4</userinput></screen>
 
-    <para>The above example allocates four virtual channels, which is a
-      practical number for everyday use.  <varname>hw.snd.pcm0.vchans</varname>
-      is the number of virtual channels <devicename>pcm0</devicename> has, and is configurable
-      once a device has been attached.
-      <literal>hw.snd.maxautovchans</literal> is the number of virtual channels
-      a new audio device is given when it is attached using
-      &man.kldload.8;.  Since the <devicename>pcm</devicename> module
-      can be loaded independently of the hardware drivers,
-      <varname>hw.snd.maxautovchans</varname> can store how many
-      virtual channels any devices which are attached later will be
-      given.</para>
-
-    <para>If you are not using &man.devfs.5;, you will have to point
-      your applications at <devicename>/dev/dsp0</devicename>.<replaceable>x</replaceable>, where
-      <replaceable>x</replaceable> is 0 to 3 if <varname>hw.snd.pcm.0.vchans</varname> is set
-      to 4 as in the above example.  On a system using &man.devfs.5;, the above will automatically be
-      allocated transparently to the user.</para>
+    <para>O exemplo acima define 4 canais virtuais, o qual &eacute; um numero
+      razo&aacute;vel para uso no dia a dia.  A vari&aacute;vel
+      <varname>hw.snd.pcm0.vchans</varname> define o numero de canais
+      virtuais que o <devicename>pcm0</devicename> possui, e ela &eacute;
+      configur&aacute;vel  uma vez que o dispositivo tenha sido atachado. J&aacute; a
+      vari&aacute;vel <literal>hw.snd.maxautovchans</literal> define o numero
+      de canais virtuais atribuido a um dispositivo atachado via
+      &man.kldload.8;.  Uma vez que o m&oacute;dulo
+      <devicename>pcm</devicename> pode ser carregado
+      independentemente dos drivers de hardware, a vari&aacute;vel
+      varname>hw.snd.maxautovchans</varname> pode armazenar quantos
+      canais virtuais ser&atilde;o atribuidos a qualquer dispositivo de som
+      atachado ap&oacute;s a inicializa&ccedil;&atilde;o do sistema.</para>
+    
+    <para>Se voc&ecirc; n&atilde;o est&aacute; utilizando o &man.devfs.5;,, voc&ecirc; ter&aacute; que
+      apontar a sua aplica&ccedil;&atilde;o para
+      <devicename>/dev/dsp0</devicename>.<replaceable>x</replaceable>,
+      onde <replaceable>x</replaceable> ser&aacute; um valor de 0 a 3 se a
+      vari&aacute;vel <varname>hw.snd.pcm.0.vchans</varname> estiver definida
+      para 4 como no exemplo anterior.  Em um sistema que utilize o
+      &man.devfs.5;, a atribui&ccedil;&atilde;o ocorre de forma autom&aacute;tica e
+      transparente ao usu&aacute;rio.</para>
    </sect2>
+
   </sect1>
 
   <sect1 id="sound-mp3">
@@ -554,37 +563,41 @@ pcm0: &lt;SB16 DSP 4.11&gt; on sbc0</screen>
 
     <title>Audio MP3</title>
 
-    <para>MP3 (MPEG Layer 3 Audio) accomplishes near CD-quality sound,
-      leaving no reason to let your FreeBSD workstation fall short of
-      its offerings.</para>
-
+    <para>Os arquivos de audio MP3 (MPEG Layer 3) oferecem uma qualidade de som
+      pr&oacute;xima a qualidade de um CD de audio convencional, de forma que
+      n&atilde;o existe nenhuma raz&atilde;o para que voc&ecirc; deixe a sua esta&ccedil;&atilde;o de
+      trabalho FreeBSD sem suporte aos mesmos.</para>
+    
     <sect2 id="mp3-players">
       <title>Reprodutores de MP3</title>
 
-      <para>By far, the most popular <application>&xfree86;</application> MP3 player is
-	<application>XMMS</application> (X Multimedia System).  
-	<application>Winamp</application>
-	skins can be used with <application>XMMS</application> since the
-	GUI is almost identical to that of Nullsoft's 
-	<application>Winamp</application>.
-	<application>XMMS</application> also has native plug-in
-	support.</para>
+      <para>De longe, o reprodutor MP3 mais popular no ambiente
+	<application>&xfree86;</application> &eacute; o
+	<application>XMMS</application> (X Multimedia System).  Os
+	skins do <application>Winamp</application> podem ser
+	utilizandos com o <application>XMMS</application> uma vez que
+	a GUI &eacute; quase identica a do Nullsoft's <application>Winamp
+	</application>.  O <application>XMMS</application> tamb&eacute;m
+	possui um suporte nativo a plugins.</para>
+      
+      <para>O <application>XMMS</application> pode ser instalado
+	a partirdo port <filename role="package">multimedia/xmms</filename> 
+	ou ent&atilde;o atrav&eacute;s de um pacote bin&aacute;rio.</para>
+      
+      <para>A interface do <application>XMMS'</application> &eacute;
+	intuitiva, com uma playlist, equalizador gr&aacute;fico, etc.
+	Aqueles que est&atilde;o familizarizados com o
+	<application>Winamp</application> ir&atilde;o achar o
+	<application>XMMS</application> simples de se utilizar.</para>
 
-      <para><application>XMMS</application> can be installed from the
-	<filename role="package">multimedia/xmms</filename> port or package.</para>
+      <para>O port <filename role="package">audio/mpg123</filename> &eacute;
+	uma alternativa, visto que &eacute; um reprodutor de mp3 de linha de
+	comando.</para>
 
-      <para><application>XMMS'</application> interface is intuitive,
-	with a playlist, graphic equalizer, and more.  Those familiar
-	with <application>Winamp</application> will find
-	<application>XMMS</application> simple to use.</para>
-
-      <para>The <filename role="package">audio/mpg123</filename> port is an alternative,
-	command-line MP3 player.</para>
-
-      <para><application>mpg123</application> can be run by specifying
-	the sound device and the MP3 file on the command line, as
-	shown below:</para>
-
+      <para>O <application>mpg123</application> pode ser executado,
+	especificando como parametros na linha de comando, o dispositivo 
+	de som e o arquivo MP3, como ilustrado abaixo:</para>
+      
       <screen>&prompt.root; <userinput>mpg123 -a <replaceable>/dev/dsp1.0</replaceable> Foobar-GreatestHits.mp3</userinput>
 High Performance MPEG 1.0/2.0/2.5 Audio Player for Layer 1, 2 and 3.
 Version 0.59r (1999/Jun/15). Written and copyrights by Michael Hipp.
@@ -599,19 +612,20 @@ Playing MPEG stream from Foobar-GreatestHits.mp3 ...
 MPEG 1.0 layer III, 128 kbit/s, 44100 Hz joint-stereo
 </screen>
 
-      <para><literal>/dev/dsp1.0</literal> should be replaced with the
-	<devicename>dsp</devicename> device entry on your system.</para>
+      <para>O <literal>/dev/dsp1.0</literal>  deve ser substituido com o 
+	dispositivo <devicename>dsp</devicename> correspondente ao do
+	seu sistema.</para>
 
     </sect2>
 
     <sect2 id="rip-cd">
       <title>Ripando trilhas de um CD de audio</title>
 
-      <para>Before encoding a CD or CD track to MP3, the audio data on
-	the CD must be ripped onto the hard drive.  This is done by
-	copying the raw CDDA (CD Digital Audio) data to WAV
-	files.</para>
-
+      <para>Antes de encodar um CD ou uma trilha de CD para MP3, os
+      dados de audio do CD devem ser ripados para o seu disco rigido.
+      Isto &eacute; feito atrav&eacute;s da c&oacute;pia dois dados CDDA brutos (CD Digital 
+      Audio) para arquivos .WAV.</para>
+      
       <para>The <command>cdda2wav</command> tool, which is a part of
 	the <filename role="package">sysutils/cdrtools</filename>
 	suite, is used for ripping audio information from CDs and the
