@@ -3866,7 +3866,7 @@ done
 				Impressoras Intaladas em um Computador Remoto
 			</title>
 
-        <para>
+			<para>
 				O sistema <application>LPD</application> foi construido com
 		suporte para enviar trabalhos de impress&atilde;o para outras 
 		m&aacute;quinas na rede, rodando <application>LPD</application> ( ou
@@ -3877,91 +3877,123 @@ done
 		protocolo <application>LPD</application>.
 			</para>
 
----
-            
-        <para>To enable this kind of remote printing, first install a printer
-          on one host, the <emphasis>printer host</emphasis>, using the simple
-          printer setup described in the <link linkend="printing-simple">Simple
-            Printer Setup</link> section.  Do any advanced setup in <link
-            linkend="printing-advanced">Advanced Printer Setup</link> that you
-          need.  Make sure to test the printer and see if it works with the
-          features of <application>LPD</application> you have enabled.  
-	  Also ensure that the
-          <emphasis>local host</emphasis> has authorization to use the 
-	  <application>LPD</application>
-          service in the <emphasis>remote host</emphasis> (see <link
-            linkend="printing-advanced-restricting-remote">Restricting Jobs
-            from Remote Printers</link>).</para>
+			<para>
+				Para habilitar essa impressora remota, primeiro devemos instalar
+		a impressora em uma m&aacute;quina, que ser&aacute; o
+      <emphasis>servidor de Impress&atilde;o</emphasis>, usando os passos
+		descritos na se&ccedil;&atilde;o
+		<link linkend="printing-simple">
+		Simples Configura&ccedil;&atilde;o de Impressora
+		</link>.  Para configura&ccedil;&atilde;o avan&ccedil;ada veja a 
+		se&ccedil;&atilde;o
+		<link linkend="printing-advanced">
+			Configura&ccedil;&atilde;o Avan&ccedil;ada de Impressora
+		</link>.  Tenha certeza que o teste de imoress&atilde;o funcionou 
+		corretamente para esta impressora.  Tenha certeza que o 
+		<emphasis>computador local</emphasis> tenha autoriza&ccedil;&atilde;o
+		para acessar a <emphasis>m&aacute;quina remota</emphasis> e o 
+		servi&ccedil;o do <application>LPD</application>, veja a 
+		se&ccedil;&atilde;o <link
+            linkend="printing-advanced-restricting-remote">
+			Restringindo os Trabalhos de Impress&atilde;o para
+			M&aacute;quinas Remotas
+            </link>).
+		</para>
             
         <indexterm>
           <primary>printers</primary>
           <secondary>network</secondary>
         </indexterm>
         <indexterm><primary>network printing</primary></indexterm>
-        <para>If you are using a printer with a network interface that is
-          compatible with <application>LPD</application>, then the 
-	  <emphasis>printer host</emphasis> in
-          the discussion below is the printer itself, and the
-          <emphasis>printer name</emphasis> is the name you configured for the
-          printer.  See the documentation that accompanied your printer and/or
-          printer-network interface.</para>
+			<para>
+				Se estiver utilizando uma impressora com interface de rede
+		compat&iacute;vel com <application>LPD</application>, ent&atilde;o
+	   <emphasis>servidor de imporess&atilde;o</emphasis> ser&aacute; a 
+		propria impressora, e o <emphasis>nome da impressora</emphasis> 
+		ser&aacute; o nome que voc&ecirc; configurou para a impressora.
+		Veja a documenta&ccedil;&atilde;o que acompanha a sua impressora e/ou
+		a interface de rede dela.
+			</para>
 
-        <tip>
-          <para>If you are using a Hewlett Packard Laserjet then the printer
-            name <literal>text</literal> will automatically perform the LF to
-            CRLF conversion for you, so you will not require the
-            <filename>hpif</filename> script.</para>
-        </tip>
+			<tip>
+				<para>
+					Se voc&ecirc; esta utulizando uma Hewlett Packard Laserjet 
+		ent&atilde;o o nome da impressora far&aacute; automaticamente a 
+		convers&atilde;o do LF para o CRLF para voc&ecirc;, e ent&atilde;o 
+		voc&ecirc; n&atilde;o necessitar&aacute; do filtro de texto
+		<filename>hpif</filename> para isso.
+				</para>
+			</tip>
             
-        <para>Then, on the other hosts you want to have access to the printer,
-          make an entry in their <filename>/etc/printcap</filename> files with
-          the following:</para>
+			<para>
+				Ent&atilde;o, em outros servidores que voc&ecirc; quizer 
+		ter acesso, dever&aacute; adicionar uma entrada no arquivo
+		<filename>/etc/printcap</filename> como segue:
+			</para>
 
         <orderedlist>
           <listitem>
-            <para>Name the entry anything you want.  For simplicity, though,
-              you probably want to use the same name and aliases as on the
-              printer host.</para>
+            <para>
+					Nomeia a entrada como quiser.  Por simplicidade, voc&ecirc;
+			usar&aacute; o mesmo nome/apelido que estiver no servidor da 
+			impressra.
+				</para>
           </listitem>
           
           <listitem>
-            <para>Leave the <literal>lp</literal> capability blank, explicitly
-              (<literal>:lp=:</literal>).</para>
+            <para>Deixe a op&ccedil;&atilde;o <literal>lp</literal>
+			em branco, fa&ccedil;a isso explicitamente 
+			(<literal>:lp=:</literal>).
+				</para>
           </listitem>
           
           <listitem>
-            <para>Make a spooling directory and specify its location in the
-              <literal>sd</literal> capability.  <application>LPD</application>
-	      will store <foreignphrase>jobs</foreignphrase> here
-              before they get sent to the printer host.</para>
+            <para>
+					Crie um diret&oacute;rio de spool e especifique a sua
+			localiza&ccedil;&atilde;o com a op&ccedil;&atilde;o 
+         <literal>sd</literal>.  O <application>LPD</application>
+	      ir&aacute; armazenar os trabalhos de impress&atilde;o l&aacute;
+         antes de entregar ao servidor de impress&atilde;o
+				</para>
           </listitem>
           
           <listitem>
-            <para>Place the name of the printer host in the
-              <literal>rm</literal> capability.</para>
+            <para>
+					Coloque o nome do servidor da impressora na op&ccedil;&atilde;o
+			<literal>rm</literal>.
+				</para>
           </listitem>
           
           <listitem>
-            <para>Place the printer name on the <emphasis>printer
-                host</emphasis> in the <literal>rp</literal>
-              capability.</para>
+            <para>
+					Coloque o nome a impressora que est&aacute; no servidor
+			de impress&atilde;o n&atilde;o op&ccedil;&atilde;o
+			<literal>rp</literal>
+        		</para>
           </listitem>
         </orderedlist>
 
-        <para>That is it.  You do not need to list conversion filters, page
-          dimensions, or anything else in the
-          <filename>/etc/printcap</filename> file.</para>
+        <para>
+				Feito isso, voc&ecirc; n&atilde;o precisar&aacute; de filtros
+		de entrada, dimesionamento de p&aacute;ginas, ou outra coisa qualquer
+		no arquivo <filename>/etc/printcap</filename>.
+			</para>
 
-        <para>Here is an example.  The host <hostid>rose</hostid> has two
-          printers, <literal>bamboo</literal> and <literal>rattan</literal>.
-          We will enable users on the host <hostid>orchid</hostid> to print
-          to those printers.
-          Here is the <filename>/etc/printcap</filename> file for
-          <hostid>orchid</hostid> (back from section <link
-            linkend="printing-advanced-header-pages-enabling">Enabling Header
-            Pages</link>).  It already had the entry for the printer
-          <literal>teak</literal>; we have added entries for the two printers
-          on the host <hostid>rose</hostid>:</para>
+		<para>
+			Aqui est&aacute; um exemplo.  O servidor <hostid>rose</hostid> 
+		possui duas imopressoras,  <literal>bamboo</literal> e 
+		<literal>rattan</literal>.  Nos iremos permitir que os usu&aacute;rios
+		da m&aacute;quina <hostid>orchid</hostid> possa imprimir nessas
+		impressoras.
+          Aqui est&aacute; o arquivo <filename>/etc/printcap</filename> 
+		para a m&aacute;quina <hostid>orchid</hostid> (veja a 
+		se&ccedil;&atilde;o anteriro
+			<link linkend="printing-advanced-header-pages-enabling">
+				Habilitando P&aacute;ginas de Cabe&ccedil;alho
+         </link>).  Ele j&aacute; possui a entrada para a impressora
+		<literal>teak</literal>; nos iremos adicionar a entrada para as 
+		duas impressoras no servidor <hostid>rose</hostid>:
+		</para>
 
         <programlisting>#
 #  /etc/printcap for host orchid - added (remote) printers on rose
