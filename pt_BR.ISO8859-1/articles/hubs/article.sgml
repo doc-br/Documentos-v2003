@@ -1051,131 +1051,138 @@ cvspserver stream tcp nowait root /usr/bin/cvs cvs -f -l -R -T /anoncvstmp --all
       </sect3>
     </sect2>
   </sect1>
+
   <sect1 id="mirror-official">
     <title>Sites espelhos oficiais</title>
-    <para>
-      Official mirrors are mirrors that
+
+    <para>Um site espelho oficial &eacute; um site espelho que:</para>
+
       <itemizedlist>
+
         <listitem>
-          <para>
-            a) have a <hostid>FreeBSD.org</hostid> DNS entry
-            (usually a CNAME).
-          </para>
+          <para>a) Possui uma entrada <hostid>FreeBSD.org</hostid> no DNS
+	    (usualmente um CNAME).</para>
         </listitem>
+
         <listitem>
-          <para>
-            b) are listed as an official mirror in the FreeBSD
-               documentation (like handbook).
-          </para>
+          <para>b) Est&aacute; listado como um site espelho oficial na
+	    documenta&ccedil;&atilde;o do FreeBSD. (por ex. no handbook).</para>
         </listitem>
       </itemizedlist>
 
-      So far to distinguish official mirrors.
-      Official mirrors are not necessarily <emphasis>Tier-1</emphasis>-mirrors.
-      However you probably won't find a <emphasis>Tier-1</emphasis>-mirror,
-      that is not also official.
-    </para>
+      <para>Por enquanto isso deve ser o suficiente para que voc&ecirc;
+	possa distinguir os sites espelhos oficiais.  Os site espelho 
+	oficiais n&atilde;o s&atilde;o necessariamente espelhos-<emphasis>Tier-1
+	</emphasis>.  Entretanto, voc&ecirc; provavelmente n&atilde;o ir&aacute; e 
+	encontrar um espelho-<emphasis> Tier-1</emphasis>, que n&atilde;o 
+	seja oficial.</para>
+      
     <sect2 id="mirror-official-requirements">
-      <title>Special Requirements for official (tier-1) mirrors</title>
-      <para>
-        It is not so easy to state requirements for all
-        official mirrors, since the project is sort of
-        tolerant here. It is more easy to say,
-        what <emphasis>official tier-1 mirrors</emphasis>
-        are required to. All other official mirrors
-        can consider this a big <emphasis>should</emphasis>.
+      <title>Requisitos especiais para os sites espelho 
+	oficiais (Tier-1)</title>
+
+      <para>N&atilde;o &eacute; assim f&aacute;cil indicar exig&ecirc;ncias para todos os sites
+	espelho oficiais, uma vez que o projeto &eacute; um tanto quanto
+	tolerante neste ponto.  &Eacute; mais facil dizer, o que &eacute; exigido
+	dos <emphasis>sites espelhos oficiais Tier-1</emphasis>.
+	Todos os outros sites espelhos oficiais devem considerar a
+	lista abaixo apenas como orienta&ccedil;&atilde;o.</para>
+
         <note>
-          <para>
-            The following applies mainly to the FTP fileset,
-            since a CVS repository should always be mirrored 
-            completely, and the webpages are a case of 
-            its own.
-          </para>
+          <para>O seguinte aplica-se basicamente a &aacute;rvore de FTP, uma
+	    vez que o reposit&oacute;rio de CVS deve ser sempre espelhado
+	    completamente, assim como as p&aacute;ginas web.</para>
         </note>
-      </para>
+
       <para>
-        Tier-1 mirrors are required to:
+        Os sites espelho Tier-1 devem:
         <itemizedlist>
-          <listitem><para>carry the complete fileset</para></listitem>
-          <listitem><para>allow access to other mirror sites</para></listitem>
-          <listitem><para>provide <application>FTP</application> and 
-            <application>RSYNC</application> access</para></listitem>
+          <listitem><para>Carregar o conjunto de arquivos completo</para></listitem>
+          <listitem><para>Permitir o acesso de outros sites espelho</para></listitem>
+          <listitem><para>Fornecer acesso via <application>FTP</application> e 
+            via <application>RSYNC</application></para></listitem>
         </itemizedlist>
 
-        Furthermore, admins should be subscribed to the &a.hubs;.
-        See <ulink url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/eresources.html#ERESOURCES-MAIL">this link</ulink> for details, how to subscribe.
-      </para>
+      <para>Al&eacute;m disso os administradores devem estar inscritos na
+	&a.hubs;. Consulte <ulink 
+	url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/eresources.html#ERESOURCES-MAIL">
+	este link</ulink> para maiores detalhes de como se inscrever.</para>
+
       <important>
-        <para>It is <emphasis>very</emphasis> important for a hub administrator, especially
-          Tier-1 hub admins, to check the
-          <ulink url="http://www.FreeBSD.org/releng/">release schedule</ulink>
-          for the next FreeBSD release. This is important because it will tell you when the
-          next release is scheduled
-          to come out, and thus giving you time to prepare for the big spike of traffic which follows it.
-        </para>
-        <para>
-          It is also important that hub administrators try to keep their mirrors as up-to-date as
-          possible (again, even more crucial for Tier-1 mirrors). If Mirror1 doesn't update for a
-          while, lower tier mirrors will begin to mirror old data from Mirror1 and thus begins
-          a downward spiral... Keep your mirrors up to date!
-        </para>
+        <para>&Eacute; muito importante para um administrador de um hub,
+	  especialmente para os administradores dos hubs Tier-1, a
+	  verificar o <ulink url="http://www.FreeBSD.org/releng/">
+	  calendario de lan&ccedil;amento</ulink> da pr&oacute;xima vers&atilde;o do
+	  FreeBSD.  Isto &eacute; importante porque ele ir&aacute; lhe dizer quando
+	  est&aacute; previsto o lan&ccedil;amento da pr&oacute;xima vers&atilde;o, dando a voc&ecirc;
+	  tempo para se preparar para o grande pico de tr&aacute;fego que se
+	  segue a este tipo de evento.</para>
+        
+	<para>Tamb&eacute;m &eacute; importante para um adminiustrador de um hub
+	  tentar manter o seu mirror o mais atualizado poss&iacute;vel (de
+	  novo, isto &eacute; mais crucial para os espelhos Tier-1).  Se os
+	  espelhos Tier-1 ficarem um bom tempo sem se atualizarem, os
+	  site espelhos de tiers mais elevados v&atilde;o come&ccedil;ar a espelhar
+	  dados antigos a partir dos mirrors Tier-1, e come&ccedil;a assim
+	  uma espiral descentende... Portanto, mantenha os seus
+	  espelhos atualizados!</para>
       </important>
     </sect2>
+
     <sect2 id="mirror-official-become">
-      <title>How to become official then?</title>
-      <para>
-        An interesting question, especially, since the state
-        of being official comes with some benefits, like a much
-        higher bill from your ISP as more people will be using
-        your site. Also it may be a key requirement to get access
-        to a master site.
-      </para>
-      <para>
-        Before applying, please consider (again) if
-        another official mirror is really needed for
-        your region. Check first with your zone administrator (<email>hostmaster@CC.FreeBSD.org</email>) or, if that fails, ask on the &a.hubs;.
-      </para>
-      <para>Ok, here is how to do it:</para>
+
+      <title>Ent&atilde;o como se tornar oficial?</title>
+
+      <para>Uma pergunta interessante, especialmente se considerado
+      	que estado de "oficial" tr&aacute;s com ele uma s&eacute;rie de beneficios,
+	tais como uma conta cada vez maior do seu ISP a medida que
+	mais pessoas come&ccedil;am a utilizar o seu site.  Tamb&eacute;m pode ser
+	um requisito chave para obter acesso ao servidor
+	mestre.</para>
+
+      <para>Antes de aplicar-se, por favor considere (de novo) se um
+	outro site espelho &eacute; realmente necess&aacute;rio na sua regi&atilde;o.
+	Verifique primeiro com o administrador da sua zona (<email>
+	hostmaster@CC.FreeBSD.org</email>)ou, se isso falhar, pergunte
+	na &a.hubs;.</para>
+	
+      <para>Ok, aqui est&aacute; o que precisa ser feito:</para>
       <procedure>
         <step>
-          <para>
-            Get the mirror running in first place (maybe not
-            using a master site, yet).
-          </para>
+          <para>Coloque o mirror para funcionar em primeiro lugar
+	    (talvez n&atilde;o utilizando um site mestre, ainda).</para>
         </step>
         <step>
           <para>
-            <ulink url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/eresources.html#ERESOURCES-MAIL">Subscribe</ulink> to the &a.hubs;.
+            <ulink url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/eresources.html#ERESOURCES-MAIL">Inscreva-se</ulink> na &a.hubs;.
           </para>
         </step>
         <step>
-          <para>
-            If everything works so far, contact the DNS administrator responsible
-            for your region/country, and ask for a DNS entry for your
-            site. The admin should able to be contacted via
-            <email>hostmaster@CC.FreeBSD.org</email>, where 
-            <emphasis>CC</emphasis> is your country code/TLD.
-            Your DNS entry will be as described
-            in <xref linkend="mirror-where-organization">.
-          </para>
-          <para>
-            If there is no subdomain set up for your
-            country yet, you should contact
-            <email>mirror-admin@FreeBSD.org</email>,
-            or you can try the &a.hubs; first.
-          </para>
+          <para>Se tudo estiver funcionando corretamente, entre em
+	    contato com o administrador de DNS respons&aacute;vel pela sua
+	    regi&atilde;o/pa&iacute;s, e solicite uma entrada no DNS para o seu site.
+	    O administrador pode ser contatado atrav&eacute;s do endere&ccedil;o 
+            <email>hostmaster@CC.FreeBSD.org</email>, onde
+            <emphasis>CC</emphasis> &eacute; c&oacute;digo do seu pa&iacute;s (TLD).  A sua
+	    entrada no DNS ser&aacute; implementada como descrita na
+            <xref linkend="mirror-where-organization">.</para>
+
+          <para>Se n&atilde;o houver nenhum subdominio definido para o seu
+	    pa&iacute;s no momento do seu pedido, voc&ecirc; deve contatar o 
+            <email>mirror-admin@FreeBSD.org</email>, ou voc&ecirc; pode
+	    tentar primeiro a &a.hubs;.</para>
         </step>
         <step>
-          <para>
-            Whoever helps you get an official name should send email
-            to <email>mirror-admin@FreeBSD.org</email> so your site will be
-            added to the mirror list in the
-            <ulink url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook">FreeBSD
-            Handbook</ulink>.
-          </para>
+          <para>Quem quer que seja que lhe ajude a conseguir o nome
+	    oficial (entrada no DNS), deve enviar um email para 
+            <email>mirror-admin@FreeBSD.org</email> para que o seu 
+	    site seja adicionado a lista de sites espelhos oficiais
+	    no <ulink 
+	    url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook">
+	    Handbook do FreeBSD</ulink>.</para>
         </step> 
       </procedure>
-      <para>That is it.</para>
+      <para>E &eacute; isso.</para>
     </sect2>
   </sect1>
   <sect1 id="mirror-statpages">
