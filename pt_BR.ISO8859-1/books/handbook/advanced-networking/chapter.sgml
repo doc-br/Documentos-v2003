@@ -80,7 +80,8 @@
 
     <itemizedlist>
       <listitem>
-	<para>Compreender os princ&iacute;pios dos scripts <filename>/etc/rc</filename> .</para>
+	<para>Compreender os princ&iacute;pios dos scripts 
+	<filename>/etc/rc</filename> .</para>
       </listitem>
 
       <listitem>
@@ -269,7 +270,7 @@ host2.example.com link#1	    UC		0	 0
     </sect2>
 
     <sect2 id="network-routing-default">
-      <title>Default Routes</title>
+      <title>Rotas Padr&atilde;o</title>
 
       <indexterm><primary>default route</primary></indexterm>
       <para>Quando um sistema local precisa fazer uma conex&atilde;o a um
@@ -894,7 +895,7 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
     ser instalados a partir do port <filename
     role="package">net/bsd-airtools</filename>.  Informa&ccedil;&otilde;es sobre
     como instalar ports podem ser encontradas em <xref
-    linkend="ports"> do handbook.</xref></para>
+    linkend="ports"> do handbook.</para>
 
     <para>O programa <command>dstumbler</command> &eacute; a ferramenta
     no pacote que permite a descoberta de pontos de acesso e
@@ -970,7 +971,7 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
 	<author>
 	  <firstname>Pav</firstname>
 	  <surname>Lucistnik</surname>
-	  <contrib>Written by </contrib>
+	  <contrib>Escrito por </contrib>
 	  <affiliation>
 	    <address><email>pav@oook.cz</email></address>
 	  </affiliation>
@@ -981,14 +982,15 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
 
     <indexterm><primary>Bluetooth</primary></indexterm>
     <sect2>
-      <title>Introduction</title>
-      <para>Bluetooth is a wireless technology for creating personal networks
-	operating in the 2.4 GHz unlicensed band, with a range of 10 meters.
-	Networks are usually formed ad-hoc from portable devices such as
-	cellular phones, handhelds and laptops.  Unlike the other popular
-	wireless technology, Wi-Fi, Bluetooth offers higher level service
-	profiles, e.g.  FTP-like file servers, file pushing, voice transport,
-	serial line emulation, and more.</para>
+      <title>Introdu&ccedil;&atilde;o</title>
+      <para>Bluetooth &eacute; uma teconologia sem fio para criar redes
+      pessoais operando na na banda n&atilde;o licenciada de 2.4GHz , com um
+      alcance de 10 metros.  Redes normalmente s&atilde;o formadas sob
+      demanda por dispositivos port&aacute;teis, como telefones celulares,
+      handhelds e laptops.  Diferente de outras populares tecnologias 
+      sem fio, Wi-Fi, o Bluetooth oferece perfis de servi&ccedil;o de alto
+      n&iacute;vel, p.ex.  servidores de arquivos tipo FTP, distribui&ccedil;&atilde;o de 
+      arquivos, transporte de voz, emula&ccedil;&atilde;o de linha serial e mais.</para>
 
       <para>The Bluetooth stack in &os; is implemented using the Netgraph
 	framework (see &man.netgraph.4;).  A broad variety of Bluetooth USB
@@ -1541,60 +1543,60 @@ rfcomm_sppd[94692]: Starting on /dev/ttyp6...</screen>
 	<author>
 	  <firstname>Steve</firstname>
       	  <surname>Peterson</surname>
-	  <contrib>Written by </contrib>
+	  <contrib>Escrito por</contrib>
 	</author>
       </authorgroup>
     </sect1info>
-    <title>Bridging</title>
+    <title>Liga&ccedil;&atilde;o (Bridging)</title>
 
     <sect2>
-      <title>Introduction</title>
+      <title>Introdu&ccedil;&atilde;o</title>
       <indexterm><primary>IP subnet</primary></indexterm>
       <indexterm><primary>bridge</primary></indexterm>
-      <para>It is sometimes useful to divide one physical network
-	(such as an Ethernet segment) into two separate network
-	segments without having to create IP subnets and use a router
-	to connect the segments together.  A device that connects two
-	networks together in this fashion is called a
-	<quote>bridge</quote>.  A FreeBSD system with two network
-	interface cards can act as a bridge.</para>
+      <para>&Agrave;s vezes &eacute; &uacute;til dividir uma rede f&iacute;sica (como um segmento
+      Ethernet) em dois segmentos sem ter que criar subredes IP e usar
+      um roteador para conectar os segmentos.  Um dispositivo que
+      conecta duas redes juntas desta maneira &eacute; chamado de
+      <quote>liga&ccedil;&atilde;o</quote>, ou <quote>ponte</quote>.  Um sistema
+      FreeBSD com duas interfaces de rede pode atuar como uma liga&ccedil;&atilde;o.</para>
 
-      <para>The bridge works by learning the MAC layer addresses
-	(Ethernet addresses) of the devices on each of its network interfaces.
-	It forwards traffic between two networks only when its source and
-	destination are on different networks.</para>
+      <para>A liga&ccedil;&atilde;o funciona aprendendo os endere&ccedil;os da camada MAC
+      (endere&ccedil;os Ethernet) dos dispositivos em cada uma de suas
+      interfaces de rede.  Ela repassa  o tr&aacute;fego entre duas redes
+      somente quando sua origem e destino est&atilde;o em redes diferentes.</para>
 
-      <para>In many respects, a bridge is like an Ethernet switch with very
-	few ports.</para>
+      <para>Em muitos aspectos, uma liga&ccedil;&atilde;o &eacute; como um comutador
+      Ethernet com muito poucas portas.</para>
     </sect2>
 
     <sect2>
-      <title>Situations Where Bridging Is Appropriate</title>
+      <title>Situa&ccedil;&otilde;es Convenientes Para Uso de Liga&ccedil;&atilde;o</title>
 
-      <para>There are two common situations in which a bridge is used
-	today.</para>
+      <para>Atualmente, existem duas situa&ccedil;&otilde;es comuns nas quais
+      liga&ccedil;&otilde;es s&atilde;o implementadas.</para>
 
       <sect3>
-	<title>High Traffic on a Segment</title>
+	<title>Alto Tr&aacute;fego em um segmento</para>
 
-	<para>Situation one is where your physical network segment is
-	  overloaded with traffic, but you do not want for whatever reason to
-	  subnet the network and interconnect the subnets with a
-	  router.</para>
+	<para>A primeira situa&ccedil;&atilde;o &eacute; onde seu segmento de rede f&iacute;sico
+	est&aacute; sobrecarregado com tr&aacute;fego mas voc&ecirc; n&atilde;o quer, por
+	quaisquer raz&otilde;es, subdividir a rede e interconectar as
+	subredes com um roteador.</para>
 
-	<para>Let us consider an example of a newspaper where the Editorial and
-	  Production departments are on the same subnetwork.  The Editorial
-	  users all use server A for file service, and the Production users
-	  are on server B.  An Ethernet is used to connect all users together,
-	  and high loads on the network are slowing things down.</para>
+	<para>Vamos considerar um exemplo de um jornal onde os
+	departamentos Editorial e de Produ&ccedil;&atilde;o est&atilde;o na mesma subrede.
+	Todos os usu&aacute;rios do Editorial usam o servidor A para servir
+	arquivos e os usu&atilde;rios de Produ&ccedil;&atilde;o est&atilde;o no servidor B.  Uma
+	Ethernet &eacute; usada para conectar todos os usu&aacute;rios e altas
+	cargas de tr&aacute;fego na rede est&atilde;o degradando o desempenho.</para>
 
-	<para>If the Editorial users could be segregated on one
-	  network segment and the Production users on another, the two
-	  network segments could be connected with a bridge.  Only the
-	  network traffic destined for interfaces on the
-	  <quote>other</quote> side of the bridge would be sent to the
-	  other network, reducing congestion on each network
-	  segment.</para>
+	<para>Se o os usu&aacute;rios do Editorial pudessem ser segregados em
+	um segmento de rede e os usu&aacute;rios da Produ&ccedil;&atilde;o em outra, ambos
+	segmentos de rede podem ser conectador com uma liga&ccedil;&atilde;o.  Somente 
+	o tr&aacute;fego destinado a interfaces no <quote>outro</quote> 
+	lado da liga&ccedil;&atilde;o poderia ser enviado para a outra rede,
+	reduzindo a congest&atilde;o em cada segmento de rede.</para>
+	
       </sect3>
 
       <sect3>
@@ -1602,117 +1604,121 @@ rfcomm_sppd[94692]: Starting on /dev/ttyp6...</screen>
 	<indexterm><primary>firewall</primary></indexterm>
 	<indexterm><primary>IP Masquerading</primary></indexterm>
 
-	<para>The second common situation is where firewall functionality is
-	  needed without IP Masquerading (NAT).</para>
+	<para>A segunda situa&ccedil;&atilde;o comum &eacute; aquela onde a funcionalidade
+	de firewall &eacute; necess&aacute;ria sem uso de mascaramento de IP
+	(NAT).</para>
 
-	<para>An example is a small company that is connected via DSL
-	  or ISDN to their ISP.  They have a 13 globally-accessible IP
-	  addresses from their ISP and have 10 PCs on their network.
-	  In this situation, using a router-based firewall is
-	  difficult because of subnetting issues.</para>
+	<para>Um exemplo &eacute; uma pequena companhia conectada via DSL ou
+	ISDN ao seu PSI.  Eles possuem 13 endere&ccedil;os IP de seu PSI 
+	globalmente acess&iacute;veis e 10 PCs em sua rede.  Nesta situa&ccedil;&atilde;o, 
+	&eacute; dif&iacute;cil usar um firewall baseado em roteador por quest&otilde;es 
+	de divis&otilde;es de subrede.</para>
 
 	<indexterm><primary>router</primary></indexterm>
 	<indexterm><primary>DSL</primary></indexterm>
 	<indexterm><primary>ISDN</primary></indexterm>
-	<para>A bridge-based firewall can be configured and dropped into the
-	  path just downstream of their DSL/ISDN router without any IP
-	  numbering issues.</para>
+	<para>Um firewall baseado em ponte (bridge) pode ser
+	configurado e inserido no caminho somente de entrada do
+	roteador DSL/ISDN sem quaisquer quest&otilde;es de numera&ccedil;&atilde;o IP.</para>
       </sect3>
     </sect2>
 
     <sect2>
-      <title>Configuring a Bridge</title>
+      <title>Configurando uma Ponte (Bridge)</title>
 
       <sect3>
-	<title>Network Interface Card Selection</title>
+	<title>Sele&ccedil;&atilde;o de Placa Interface de Rede</title>
 
-	<para>A bridge requires at least two network cards to function.
-	  Unfortunately, not all network interface cards as of FreeBSD&nbsp;4.0
-	  support bridging.  Read &man.bridge.4; for details on the cards that
-	  are supported.</para>
+	<para>Uma ponte requer pelo menos duas interfaces de rede para
+	funcionar.  Infelizmente, nem todas as placas interface de
+	rede da &eacute;poca do FreeBSD&nbsp;4.0 suportam liga&ccedil;&otilde;es.  Leia
+	&man.bridge.4; para detalhes sobre placas suportadas.</para>
 
-	<para>Install and test the two network cards before continuing.</para>
+	<para>Instale e teste as duas placas de rede antes de
+	continuar.</para>
       </sect3>
 
       <sect3>
-	<title>Kernel Configuration Changes</title>
+	<title>Altera&ccedil;&otilde;es nas Configura&ccedil;&otilde;es do Kernel</title>
 	<indexterm>
 	  <primary>kernel options</primary>
 	  <secondary>options BRIDGE</secondary>
 	</indexterm>
 
-	<para>To enable kernel support for bridging, add the:</para>
+	<para>Para ativar suporte no kernel para liga&ccedil;&otilde;es, adicione:</para>
 
 	<programlisting>options BRIDGE</programlisting>
 
-	<para>statement to your kernel configuration file, and rebuild your
-	  kernel.</para>
+	<para>ao seu arquivo de configura&ccedil;&atilde;o do kernel e recompile o
+	mesmo.</para>
       </sect3>
 
       <sect3>
-	<title>Firewall Support</title>
+	<title>Suporte a Firewall</title>
 	<indexterm><primary>firewall</primary></indexterm>
-	<para>If you are planning to use the bridge as a firewall, you
-	  will need to add the <varname>IPFIREWALL</varname> option as
-	  well.  Read <xref linkend="firewalls"> for general
-	  information on configuring the bridge as a firewall.</para>
+	<para>Se voc&ecirc; estiver planejando usar a ponte como firewall,
+	voc&ecirc; tamb&eacute;m vai precisar adicionar a op&ccedil;&atilde;o 
+	<varname>IPFIREWALL</varname>.  Leia <xref
+	linkend="firewalls"> para informa&ccedil;&otilde;es gerais sobre
+	configura&ccedil;&atilde;o de ponte como firewall.</para>
 
-	<para>If you need to allow non-IP packets (such as ARP) to flow
-	  through the bridge, there is an undocumented firewall option that
-	  must be set.  This option is
-	  <literal>IPFIREWALL_DEFAULT_TO_ACCEPT</literal>.  Note that this
-	  changes the default rule for the firewall to accept any packet.
-	  Make sure you know how this changes the meaning of your ruleset
-	  before you set it.</para>
+	<para>Se precisar permitir pacotes n&atilde;o-IP (como ARP)
+	trafegarem atrav&eacute;s da ponte, h&aacute; uma op&ccedil;&atilde;o n&atilde;o documentada de
+	firewall que precisa ser ativada.  Esta op&ccedil;&atilde;o &eacute; 
+	<literal>IPFIREWALL_DEFAULT_TO_ACCEPT</literal>.  Note que
+	isto altera a regra padr&atilde;o para que o firewall aceite qualquer
+	pacote.  Certifique-se de que compreende como isto muda o
+	sentido de seu conjunto de regras antes de ativ&aacute;-la.</para>
       </sect3>
 
       <sect3>
-	<title>Traffic Shaping Support</title>
+	<title>Suporte a Formata&ccedil;&atilde;o de Tr&aacute;fego (Traffic Shaping)</title>
 
-	<para>If you want to use the bridge as a traffic shaper, you will need
-	  to add the <literal>DUMMYNET</literal> option to your kernel
-	  configuration.  Read &man.dummynet.4; for further
-	  information.</para>
+	<para>Se voc&ecirc; desejar usar a ponte como formatador de tr&aacute;fego,
+	voc&ecirc; vai precisar adicionar a op&ccedil;&atilde;o <literal>DUMMYNET</literal> 
+	&agrave; sua configura&ccedil;&atilde;o de kernel.  Leia &man.dummynet.4; para
+	maiores informa&ccedil;&otilde;es.</para>
       </sect3>
     </sect2>
 
     <sect2>
-      <title>Enabling the Bridge</title>
+      <title>Ativando a Ponte</title>
 
-      <para>Add the line:</para>
+      <para>Adicione a linha:</para>
 
       <programlisting>net.link.ether.bridge=1</programlisting>
 
-      <para>to <filename>/etc/sysctl.conf</filename> to enable the bridge at
-	runtime, and the line:</para>
+      <para>ao <filename>/etc/sysctl.conf</filename> para ativar a
+      ponte em tempo de execu&ccedil;&atilde;o, e a linha:</para>
 
       <programlisting>net.link.ether.bridge_cfg=<replaceable>if1</replaceable>,<replaceable>if2</replaceable></programlisting>
 
-      <para>to enable bridging on the specified interfaces (replace
-	<replaceable>if1</replaceable> and
-	<replaceable>if2</replaceable> with the names of your two
-	network interfaces).  If you want the bridged packets to be
-	filtered by &man.ipfw.8;, you should add:</para>
+      <para>para ativar a liga&ccedil;&atilde;o nas interfaces especificadas
+      (substitua <replaceable>if1</replaceable> e
+      <replaceable>if2</replaceable> com os nomes de suas duas
+      interfaces de rede).  Se quiser que os pacotes de liga&ccedil;&atilde;o sejam
+      filtrados por &man.ipfw.8;, voc&ecirc; tamb&eacute;m deve adicionar:</para>
 
       <programlisting>net.link.ether.bridge_ipfw=1</programlisting>
 
-      <para>as well.</para>
+      <para>ao arquivo de configura&ccedil;&atilde;o.</para>
     </sect2>
 
     <sect2>
-      <title>Other Information</title>
+      <title>Outras Informa&ccedil;&otilde;es</title>
 
-      <para>If you want to be able to telnet into the bridge from the network,
-	it is OK to assign one of the network cards an IP address.  The
-	consensus is that assigning both cards an address is a bad
-	idea.</para>
+      <para>Se voc&ecirc; precisar efetuar um telnet para a ponte a partir
+      da rede, n&atilde;o h&aacute; problemas em se atribuir um endere&ccedil;o IP a uma
+      das placas de interface de rede.  O consenso &eacute; que n&atilde;o &eacute; boa
+      id&eacute;ia atribuir endere&ccedil;os a ambas as placas.</para>
 
-      <para>If you have multiple bridges on your network, there cannot be more
-	than one path between any two workstations.  Technically, this means
-	that there is no support for spanning tree link management.</para>
+      <para>Se voc&ecirc; tem m&uacute;ltiplas pontes em sua rede, n&atilde;o pode haver
+      mais que um caminho entre duas esta&ccedil;&otilde;es de trabalho.
+      Tecnicamente, isto significa que n&atilde;o h&aacute; suporte para
+      gerenciamento de enlaces spanning tree.</para>
 
-      <para>A bridge can add latency to your ping times, especially for
-	traffic from one segment to another.</para>
+      <para>Uma ponte pode acrescentar lat&ecirc;ncia ao tempo de resposta
+      de pings, especialmente no tr&aacute;fego entre segmentos.</para>
 
     </sect2>
   </sect1>
@@ -7117,76 +7123,80 @@ round-trip min/avg/max/stddev = 2.530/2.643/2.774/0.103 ms</screen>
 	<author>
 	  <firstname>Aaron</firstname>
 	  <surname>Kaplan</surname>
-	  <contrib>Originally Written by </contrib>
+	  <contrib>Originalmente Escrito por </contrib>
 	</author>
       </authorgroup>
       <authorgroup>
 	<author>
 	  <firstname>Tom</firstname>
 	  <surname>Rhodes</surname>
-	  <contrib>Restructured and Added by </contrib>
+	  <contrib>Reestruturado e Adicionado por </contrib>
 	</author>
       </authorgroup>
     </sect1info>
 
     <title>IPv6</title>
-    <para>IPv6 (also know as IPng <quote>IP next generation</quote>) is
-      the new version of the well known IP protocol (also know as
-      <acronym>IPv4</acronym>).  Like the other current *BSD systems,
-      FreeBSD includes the <acronym>KAME</acronym> IPv6 reference implementation.
-      So your FreeBSD system comes with all you will need to experiment with IPv6.
-      This section focuses on getting IPv6 configured and running.</para>
+    <para>IPv6 (tamb&eacute;m conhecido como IPng <quote>IP next 
+    generation</quote>) &eacute; a nova vers&atilde;o do bem conhecido protocolo 
+    IP (tamb&eacute;m conhecido como <acronym>IPv4</acronym>).  Como outros 
+    sistemas *BSD atuais, o FreeBSD inclui a implementa&ccedil;&atilde;o de 
+    refer&ecirc;ncia <acronym>KAME</acronym>.  Ent&atilde;o o seu sistema FreeBSD
+    vem com tudo o que voc&ecirc; via precisar para experi&ecirc;ncias com IPv6.  
+    Esta se&ccedil;&atilde;o enfoca na configura&ccedil;&atilde;o e ativa&ccedil;&atilde;o do IPv6.</para>
 
-    <para>In the early 1990s, people became aware of the rapidly
-      diminishing address space of IPv4.  Given the expansion rate of the
-      Internet there were two major concerns:</para>
+    <para>No in&iacute;cio dos anos 90, as pessoas tomaram conhecimento do
+    r&aacute;pido esgotamento do espa&ccedil;o de endere&ccedil;amento do IPv4.  Dada a
+    taxa de expans&atilde;o da Internet, haviam duas preocupa&ccedil;&otilde;es principais: </para>
 
     <itemizedlist>
       <listitem>
-	<para>Running out of addresses.  Today this is not so much of a concern
-	  anymore since private address spaces
-	  (<hostid role="ipaddr">10.0.0.0/8</hostid>,
+	<para>Esgotamento de endere&ccedil;os.  Hoje isto n&atilde;o &eacute; uma
+	preocupa&ccedil;&atilde;o t&atilde;o grande, uma vez que espa&ccedil;os de endere&ccedil;os
+	privados (<hostid role="ipaddr">10.0.0.0/8</hostid>,
 	  <hostid role="ipaddr">192.168.0.0/24</hostid>,
-	  etc.) and Network Address Translation (<acronym>NAT</acronym>) are
-	  being employed.</para>
+	  etc.) e a Tradu&ccedil;&atilde;o de Endere&ccedil;os de Rede (Network Address 
+	  Translation - <acronym>NAT</acronym>) est&atilde;o sendo empregados.</para>
       </listitem>
 
       <listitem>
-	<para>Router table entries were getting too large.  This is
-	  still a concern today.</para>
-      </listitem>
-    </itemizedlist>
-
-    <para>IPv6 deals with these and many other issues:</para>
-
-    <itemizedlist>
-      <listitem>
-	<para>128 bit address space.  In other words theoretically there are
-	  340,282,366,920,938,463,463,374,607,431,768,211,456 addresses
-	  available.  This means there are approximately
-	  6.67 * 10^27 IPv6 addresses per square meter on our planet.</para>
-      </listitem>
-
-      <listitem>
-	<para>Routers will only store network aggregation addresses in their routing
-	  tables thus reducing the average space of a routing table to 8192
-	  entries.</para>
+	<para>Entrada nas tabelas de roteadores estavam ficando
+	grandes demais.  Hoje isto ainda &eacute; uma preocupa&ccedil;&atilde;o.</para>
       </listitem>
     </itemizedlist>
 
-    <para>There are also lots of other useful features of IPv6 such as:</para>
+    <para>IPv6 trata destas e muitas outras quest&otilde;es:</para>
 
     <itemizedlist>
       <listitem>
-	<para>Address autoconfiguration (RFC2462)</para>
+	<para>Espa&ccedil;o de endere&ccedil;amento de 128 bits.  Em outras
+	palavras, existem te&oacute;ricos 
+	  340,282,366,920,938,463,463,374,607,431,768,211,456
+	  endere&ccedil;os dispon&iacute;veis.  Isto significa que s&atilde;o
+	  aproximadamente 6.67 * 10^27 endere&ccedil;os IPv6 por metro
+	  quadrado em nosso planeta.</para>
       </listitem>
 
       <listitem>
-	<para>Anycast addresses (<quote>one-out-of many</quote>)</para>
+	<para>Roteadores armazenar&atilde;o somente endere&ccedil;os agregados de
+	redes em suas tabelas de roteamento, reduzindo assim, o espa&ccedil;o
+	m&eacute;dio de uma tabela de roteamento para 8192 entradas.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Tamb&eacute;m existem muitas outras caracter&iacute;sticas &uacute;teis do IPv6
+    como:</para>
+
+    <itemizedlist>
+      <listitem>
+	<para>Autoconfigura&ccedil;&atilde;o de endere&ccedil;o (RFC2462)</para>
       </listitem>
 
       <listitem>
-	<para>Mandatory multicast addresses</para>
+	<para>Endere&ccedil;os anycast (<quote>um dentre muitos</quote>)</para>
+      </listitem>
+
+      <listitem>
+	<para>Endere&ccedil;os multicast obrigat&oacute;rios</para>
       </listitem>
 
       <listitem>
@@ -7194,20 +7204,20 @@ round-trip min/avg/max/stddev = 2.530/2.643/2.774/0.103 ms</screen>
       </listitem>
 
       <listitem>
-	<para>Simplified header structure</para>
+	<para>Estrutura simplificada de cabe&ccedil;alho</para>
       </listitem>
 
       <listitem>
-	<para>Mobile <acronym>IP</acronym></para>
+	<para><acronym>IP</acronym> M&oacute;vel</para>
       </listitem>
 
       <listitem>
-	<para>IPv4-to-IPv6 transition mechanisms</para>
+	<para>Mecanismos de transi&ccedil;&atilde;o IPv4-para-IPv6</para>
       </listitem>
     </itemizedlist>
 
 
-    <para>For more information see:</para>
+    <para>Para maiores informa&ccedil;&otilde;es veja:</para>
 
     <itemizedlist>
       <listitem>
@@ -7228,72 +7238,79 @@ round-trip min/avg/max/stddev = 2.530/2.643/2.774/0.103 ms</screen>
     </itemizedlist>
 
     <sect2>
-      <title>Background on IPv6 Addresses</title>
-      <para>There are different types of IPv6 addresses: Unicast, Anycast and
-	Multicast.</para>
+      <title>Fundamentos em Endere&ccedil;os IPv6</title>
+      <para>Existem diferentes tipos de endere&ccedil;os IPv6: Unicast,
+      Anycast e Multicast.</para>
 
-      <para>Unicast addresses are the well known addresses.  A packet sent
-	to a unicast address arrives exactly at the interface belonging to
-	the address.</para>
+      <para>Endere&ccedil;os Unicast s&atilde;o os endere&ccedil;os conhecidos.  Um pacote
+      enviado a um endere&ccedil;o unicast chega exatamente &agrave; interface
+      pertencente ao endere&ccedil;o.</para>
 
-      <para>Anycast addresses are syntactically indistinguishable from unicast
-	addresses but they address a group of interfaces.  The packet destined for
-	an anycast address will arrive at the nearest (in router metric)
-	interface.  Anycast addresses may only be used by routers.</para>
+      <para>Endere&ccedil;os anycast s&atilde;o sintaticamente indistingu&iacute;veis de
+      endere&ccedil;os unicast, mas eles endere&ccedil;am um grupo de interfaces.
+      Um pacote destinado para um endere&ccedil;o anycast vai chegar na
+      interface mais pr&oacute;xima (em m&eacute;trica de roteador).  Endere&ccedil;os
+      anycast somente podem ser usados por roteadores.</para>
 
-      <para>Multicast addresses identify a group of interfaces.  A packet destined
-	for a multicast address will arrive at all interfaces belonging to the
-	multicast group.</para>
+      <para>Endere&ccedil;os multicast identificam um grupo de interfaces.
+      Um pacote destinado a um endere&ccedil;o multicast vai chegar em todas
+      as interfaces pertencentes ao grupo multicast.</para>
 
-	<note><para>The IPv4 broadcast address (usually <hostid role="ipaddr">xxx.xxx.xxx.255</hostid>) is expressed
-	  by multicast addresses in IPv6.</para></note>
+	<note><para>O endere&ccedil;o de difus&atilde;o (broadcast) IPv4
+	(normalmente <hostid role="ipaddr">xxx.xxx.xxx.255</hostid>) 
+	&eacute; expresso por endere&ccedil;os multicast em IPv6.</para></note>
 
-      <para>Reserved IPv6 addresses:</para>
+      <para>Endere&ccedil;os IPv6 Reservados:</para>
 
 <screen>ipv6-address 	prefixlength(Bits)	description	Notes
 
-	::			128 Bits			unspecified cf.  0.0.0.0 in IPv4 address
-	::1			128 Bits			loopback address cf.  127.0.0.1 in IPv4
-	::00:xx:xx:xx:xx	96 Bits				embedded IPv4	The lower 32 bits are the
-								address	IPv4 address.  Also called
-								<quote>IPv4 compatible IPv6
-								address</quote>
-	::ff:xx:xx:xx:xx	96 Bits		IPv4 mapped     The lower 32 bits are the
-						IPv6 address	IPv4 address.  For hosts
-								which do not support IPv6
-	fe80:: - feb::		10 Bits		link-local	cf.  loopback address in
+	::			128 Bits			n&atilde;o especificado cf.  0.0.0.0 em endere&ccedil;o IPv4
+	::1			128 Bits			endere&ccedil;o loopback cf.  127.0.0.1 em IPv4
+	::00:xx:xx:xx:xx	96 Bits				IPv4 embutido	Os 32 bits mais baixos s&atilde;o os
+								endere&ccedil;os	IPv4.  Tamb&eacute;m chamado 
+								<quote>Endere&ccedil;o IPv4 compat&iacute;vel com IPv6
+								</quote>
+	::ff:xx:xx:xx:xx	96 Bits		IPv4 mapeado    Os 32 bits mais baixos s&atilde;o os
+						IPv6 address	endere&ccedil;os IPv4.  Para sistemas
+								que n&atilde;o suportam IPv6
+	fe80:: - feb::		10 Bits		link-local	cf.  endere&ccedil;o loopback em
 						IPv4
-	fec0:: - fef::		10 Bits		site-local
+	fec0:: - fef::		10 Bits		locais ao s&iacute;tio
 	ff::			8 Bits		multicast
-	001 (base 2)		3 Bits		global unicast	All global unicast
-								addresses are assigned from
-								this pool.  The first 3 Bits
-								are <quote>001</quote>.</screen>
+	001 (base 2)		3 Bits		unicast globais	Todos os endere&ccedil;os unicast globais
+								s&atilde;o atribu&iacute;dos deste
+								conjunto.  Os 3 primeiros Bits
+								s&atilde;o <quote>001</quote>.</screen>
 
     </sect2>
 
     <sect2>
-      <title>Reading IPv6 Addresses</title>
-      <para>The canonical form is represented as: <hostid role="ip6addr">x:x:x:x:x:x:x:x</hostid>, each
-	<quote>x</quote> being a 16 Bit hex value.  For example
-	<hostid role="ip6addr">FEBC:A574:382B:23C1:AA49:4592:4EFE:9982</hostid></para>
+      <title>Lendo Endere&ccedil;os IPv6</title>
+      <para>A forma can&ocirc;nica &eacute; representada como: <hostid
+      role="ip6addr">x:x:x:x:x:x:x:x</hostid>, cada 
+      <quote>x</quote> sendo um valor hexadecimal de 16 
+      Bits.  Por exemplo <hostid
+      role="ip6addr">FEBC:A574:382B:23C1:AA49:4592:4EFE:9982</hostid></para>
 
-      <para>Often an address will have long substrings of all zeros
-	therefore each such substring can be abbreviated by <quote>::</quote>.
-	For example <hostid role="ip6addr">fe80::1</hostid>
-	corresponds to the canonical form
-	<hostid role="ip6addr">fe80:0000:0000:0000:0000:0000:0000:0001</hostid></para>
+      <para>Freq&uuml;entemente um endere&ccedil;o ter&aacute; longas subs&eacute;ries 
+      compostas por zerosr, ent&atilde;o cada subs&eacute;rie pode ser abreviada por
+      <quote>::</quote>. Por exemplo <hostid 
+      role="ip6addr">fe80::1</hostid> corresponde &agrave; forma can&ocirc;nica 
+      <hostid 
+      role="ip6addr">fe80:0000:0000:0000:0000:0000:0000:0001</hostid></para>
 
-      <para>A third form is to write the last 32 Bit part in the
-	well known (decimal) IPv4 style with dots <quote>.</quote>
-	as separators.  For example
-	<hostid role="ip6addr">2002::10.0.0.1</hostid>
-	corresponds to the (hexadecimal) canonical representation
-	<hostid role="ip6addr">2002:0000:0000:0000:0000:0000:0a00:0001</hostid>
-	which in turn is equivalent to
-	writing <hostid role="ip6addr">2002::a00:1</hostid></para>
+      <para>Uma terceira forma &eacute; escrever a &uacute;ltima parte de 32 Bits na
+      forma conhecida (decimal), estilo IPv4, com pontos 
+      <quote>.</quote> como separadores.  Por exemplo, 
+      <hostid role="ip6addr">2002::10.0.0.1</hostid> corresponde &agrave;
+      representa&ccedil;&atilde;o can&ocirc;nica (hexadecimal)
+      <hostid role="ip6addr">2002:0000:0000:0000:0000:0000:0a00:0001</hostid>
+       que por sua vez equivale a escrever 
+       <hostid role="ip6addr">2002::a00:1</hostid></para>
 
-      <para>By now the reader should be able to understand the following:</para>
+
+      <para>Agora, os leitores devem ser capazes de compreender o
+      seguinte:</para>
 
       <screen>&prompt.root; <userinput>ifconfig</userinput></screen>
 
@@ -7305,69 +7322,79 @@ round-trip min/avg/max/stddev = 2.530/2.643/2.774/0.103 ms</screen>
 	 status: active</programlisting>
 
       <para><hostid role="ip6addr">fe80::200:21ff:fe03:8e1%rl0</hostid>
-	is an auto configured link-local address.  It includes the
-	scrambled Ethernet MAC as part of the auto configuration.</para>
+      &eacute; um endere&ccedil;o auto-configurado tipo enlace-local.  Ele inclui o
+      MAC Ethernet misturado como parte da auto-configura&ccedil;&atilde;o.</para>
 
-      <para>For further information on the structure of IPv6 addresses
-	see RFC2373.</para>
+      <para>Para maiores informa&ccedil;&otilde;es sobre a estrutura dos endere&ccedil;os
+      IPv6, veja a RFC2373.</para>
     </sect2>
 
     <sect2>
-      <title>Getting Connected</title>
+      <title>Conectando-se</title>
 
-      <para>Currently there are four ways to connect to other IPv6 hosts and networks:</para>
+      <para>Atualmente existem quatro formas de se conectar a outros
+      sistemas e redes IPv6:</para>
 
       <itemizedlist>
 	<listitem>
-	  <para>Join the experimental 6bone</para>
+	  <para>Associar-se ao 6bone experimental</para>
 	</listitem>
 
 	<listitem>
-	  <para>Getting an IPv6 network from your upstream provider.  Talk to your
-	    Internet provider for instructions.</para>
+	  <para>Obtendo uma rede IPv6 de seu provedor de
+	  conectividade.  Procure seu provedor Internet para
+	  instru&ccedil;&otilde;es.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Tunnel via 6-to-4</para>
+	  <para>Tunelamento via 6-para-4</para>
 	</listitem>
 
 	<listitem>
-	  <para>Use the freenet6 port if you are on a dial-up connection.</para>
+	  <para>Usar o port freenet6 se estiver em uma conex&atilde;o
+	  discada.</para>
 	</listitem>
       </itemizedlist>
 
-      <para>Here we will talk on how to connect to the 6bone since it currently seems
-	to be the most popular way.</para>
+      <para>Aqui vamos falar sobre como se conectar ao 6bone uma vez
+      que atualmente parece ser a forma mais popular.</para>
 
-      <para>First take a look at the 6bone site and find a 6bone connection nearest to
-	you.  Write to the responsible person and with a little bit of luck you
-	will be given instructions on how to set up your connection.  Usually this
-	involves setting up a GRE (gif) tunnel.</para>
+      <para>Primeiro, veja a p&aacute;gina do 6bone e encontre a conex&atilde;o para
+      o 6bone mais pr&oacute;xima de voc&ecirc;.  Escreva para a pessoa respons&aacute;vel
+      e com um pouco de sorte voc&ecirc; receber&aacute; instru&ccedil;&otilde;es sobre como
+      configurar sua conex&atilde;o.  Geralmente isto envolve preparar um
+      t&uacute;nel GRE (gif).</para>
 
-      <para>Here is a typical example on setting up a &man.gif.4; tunnel:</para>
+      <para>Aqui est&aacute; um exemplo t&iacute;pico de como preparar um t&uacute;nel
+      &man.gif.4;:</para>
 
       <screen>&prompt.root; <userinput>ifconfig gif0 create</userinput>
 &prompt.root; <userinput>ifconfig gif0</userinput>
 gif0: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1280
-&prompt.root; <userinput>ifconfig gif0 tunnel <replaceable>MY_IPv4_ADDR</replaceable>  <replaceable>HIS_IPv4_ADDR</replaceable></userinput>
-&prompt.root; <userinput>ifconfig gif0 inet6 alias <replaceable>MY_ASSIGNED_IPv6_TUNNEL_ENDPOINT_ADDR</replaceable></userinput></screen>
+&prompt.root; <userinput>ifconfig gif0 tunnel <replaceable>MEU_END_IPv4</replaceable>  <replaceable>END_IPv4_DELE</replaceable></userinput>
+&prompt.root; <userinput>ifconfig gif0 inet6 alias <replaceable>MEU_END_IPv6_ATRIBUIDO_COMO_PONTO_FINAL_DO_T&Uacute;NEL</replaceable></userinput></screen>
 
-      <para>Replace the capitalized words by the information you received from the
-	upstream 6bone node.</para>
+      <para>Substitua as palavras em mai&uacute;sculas pela informa&ccedil;&atilde;o
+      recebida do n&oacute; 6bone de n&iacute;vel superior.</para>
 
-      <para>This establishes the tunnel.  Check if the tunnel is working by &man.ping6.8;
-	'ing <hostid role="ip6addr">ff02::1%gif0</hostid>.  You should receive two ping replies.</para>
+      <para>Isto estabelece o t&uacute;nel.  Verifique se o t&uacute;nel est&aacute;
+      funcionando usando &man.ping6.8; <hostid
+      role="ip6addr">ff02::1%gif0</hostid>.  Voc&ecirc; deve receber duas
+      respostas do ping.</para>
 
-	<note><para>In case you are intrigued by the address <hostid role="ip6addr">ff02:1%gif0</hostid>, this is a
-	  multicast address.  <literal>%gif0</literal> states that the multicast address at network
-	  interface <devicename>gif0</devicename> is to be used.  Since we <command>ping</command> a multicast address the
-	  other endpoint of the tunnel should reply as well).</para></note>
+	<note><para>Em caso de voc&ecirc; estar intrigado pelo endere&ccedil;o
+	<hostid role="ip6addr">ff02:1%gif0</hostid>, isto &eacute; um
+	endere&ccedil;o multicast.  <literal>%gif0</literal> indica que o 
+	endere&ccedil;o multicast na interface de rede 
+	<devicename>gif0</devicename> deve ser usado.  Uma vez que 
+	n&oacute;s usamos <command>ping</command> para um endere&ccedil;o multicast, 
+	o outro ponto final do t&uacute;nel deve responder tamb&eacute;m).</para></note>
 
-      <para>By now setting up a route to your 6bone uplink should be rather
-	straightforward:</para>
+      <para>Agora, configurar a rota para sua conex&atilde;o ao 6bone deve
+      ser bem clara:</para>
 
       <screen>&prompt.root; <userinput>route add -inet6 default -interface gif0</userinput>
-&prompt.root; <userinput>ping6 -n <replaceable>MY_UPLINK</replaceable></userinput></screen>
+&prompt.root; <userinput>ping6 -n <replaceable>MINHA_CONEX&Atilde;O</replaceable></userinput></screen>
 
       <screen>&prompt.root; <userinput>traceroute6 www.jp.FreeBSD.org</userinput>
 (3ffe:505:2008:1:2a0:24ff:fe57:e561) from 3ffe:8060:100::40:2, 30 hops max, 12 byte packets
@@ -7378,36 +7405,39 @@ gif0: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1280
      5 3ffe:1800:0:ff00::4 400.131 ms 396.324 ms 394.769 ms
      6 3ffe:1800:0:3:290:27ff:fe14:cdee 394.712 ms 397.19 ms 394.102 ms</screen>
 
-      <para>This output will differ from machine to machine.  By now you should be
-	able to reach the IPv6 site <ulink url="http://www.kame.net">www.kame.net</ulink>
-	and see the dancing tortoise &mdash; that is if you have a IPv6 enabled browser such as
-	<filename role="package">www/mozilla</filename>.</para>
+      <para>Esta sa&iacute;da vai ser diferente de m&aacute;quina para m&aacute;quina.
+      Agora voc&ecirc; deve ser capaz de alcan&ccedil;ar o s&iacute;tio IPv6 <ulink
+      url="http://www.kame.net">www.kame.net</ulink> e ver a tartaruga
+      dan&ccedil;ante &mdash; se voc&ecirc; tiver um navegador pronto para IPv6,
+      como o <filename role="package">www/mozilla</filename>.</para>
 
     </sect2>
 
     <sect2>
-      <title>DNS in the IPv6 World</title>
-      <para>There are two new types of DNS records for IPv6:</para>
+      <title>DNS no Mundo IPv6</title>
+      <para>Existem duas novas formas de registros DNS para IPv6:</para>
 
       <itemizedlist>
 	<listitem>
-	  <para>AAAA records,</para>
+	  <para>Registros AAAA,</para>
 	</listitem>
 
 	<listitem>
-	  <para>A6 records</para>
+	  <para>Registros A6</para>
 	</listitem>
       </itemizedlist>
 
-      <para>Using AAAA records is straightforward.  Assign your hostname to the new
-	IPv6 address you just got by adding:</para>
+      <para>Usar registros AAAA &eacute; bem direto.  Atribua seu nome de
+      sistema ao novo endere&ccedil;o IPv6 que voc&ecirc; rec&eacute;m obteve
+      adicionando:</para>
 
-      <programlisting>MYHOSTNAME	   AAAA    MYIPv6ADDR</programlisting>
+      <programlisting>MEUNOMEDESISTEMA	   AAAA    MEUENDIPv6</programlisting>
 
-      <para>To your primary zone DNS file.  In case you do not serve your own
-	<acronym>DNS</acronym> zones ask your <acronym>DNS</acronym> provider.
-	Current versions of <application>bind</application> (version 8.3 and 9)
-	support AAAA records.</para>
+      <para>ao seu arquivo DNS de zona prim&aacute;ria.  No caso de voc&ecirc; n&atilde;o
+      servir suas pr&oacute;prias zonas <acronym>DNS</acronym> pe&ccedil;a ao seu
+      provedor <acronym>DNS</acronym>.  Vers&otilde;es atuais do
+      <application>bind</application> (vers&otilde;es 8.3 e 9) suportam
+      registros AAAA.</para>
     </sect2>
   </sect1>
 
