@@ -136,7 +136,8 @@
 	<para>
 		Ele abilita os usu&aacute;rios a enviar arquivos para serem 
 	impressos; Esses envios s&atilde;o chamados de 
-	<emphasis><foreignphrase>jobs</foreignphrase></emphasis>.
+	<emphasis><foreignphrase>jobs</foreignphrase></emphasis> ( trabalhos de
+	impress&atilde;o ).
 	</para>
       </listitem>
 
@@ -153,8 +154,8 @@
 		Ele pode imprimir <emphasis>cabe&ccedil;alhos</emphasis> (tamb&eacute;m
 		conechido como <emphasis>banner</emphasis> ou 
 		<emphasis>burst</emphasis> ent&atilde;o os usu&aacute;rios
-		podem com facilidade encontrar seus <foreignphrase>jobs</foreignphrase> que foram impressos
-		na pilha de impressos.
+		podem com facilidade encontrar seus trabalhos de impress&atilde;o
+		 na pilha de impressos.
 	  </para>
       </listitem>
 
@@ -175,9 +176,9 @@
 
       <listitem>
 	<para>
-	Ele pode executar filtros especiais para formatar <foreignphrase>jobs</foreignphrase> para
-	serem impressos em v&aacute;rias linguagens de impressora ou para
-	compatibilizar as impressoras.
+	Ele pode executar filtros especiais para formatar trabalhos de 
+	impress&atilde;o para serem impressos em v&aacute;rias linguagens de 
+	impressora ou para compatibilizar as impressoras.
 	</para>
       </listitem>
 
@@ -187,7 +188,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>Atraves do arquivo de configura&ccedil;&atilde;o
+    <para>Atrav&eacute;s do arquivo de configura&ccedil;&atilde;o
       (<filename>/etc/printcap</filename>), e por providenciar
 	programas especiais de filtro, voc&ecirc; pode abilitar o
 	systema <application>LPD</application> para fazer tudo ou
@@ -1898,13 +1899,13 @@ $%&amp;'()*+,-./01234567
           
 	<para>
 		Tamb&eacute;m, o FreeBSD vem com um 
-        <filename>/usr/libexec/lpr/lpf</filename>, que funciona com a maioria
-	das impressoras que podem imprimir texto puro.  
-		( Ele that works with many
-        printers that can print plain text.  (It handles backspacing and tabs
-        in the file, and does accounting, but that is about all it does.)
+	<filename>/usr/libexec/lpr/lpf</filename>, que funciona com a maioria
+	das impressoras que podem imprimir texto puro.  (Ele manipula caraceteres
+	de retorno <foreignphrase>backspaces</foreignphrase> e 
+	tabula&ccedil;&otilde;es no arquivo, e faz a contabilidade, mas isso
+	&eacute; tudo que ele faz).
 	Existem v&aacute;rios filtros e componentes de filtro na 
-	cole&ccedil;&atilde;o de Ports do FessBSD.
+	Cole&ccedil;&atilde;o de Ports do FreeBSD.
 	</para>
           
 	<para>
@@ -2597,7 +2598,7 @@ exit 2</programlisting>
 			o arquivo DVI atraves da op&ccedil;&atilde;o <option>-d</option>. 
 				Veja a se&ccedil;&atilde;o <link
 			linkend="printing-lpr-options-format">
-			Op&ccedil;&atilde;oes de Formata&ccedil;&atilde;o e Convers&atilde;o
+			Op&ccedil;&otilde;es de Formata&ccedil;&atilde;o e Convers&atilde;o
 			</link> mostra uma listar de op&ccedil;&otilde;es de convers&atilde;o
 			</para>
               
@@ -3165,25 +3166,31 @@ exit 0</programlisting>
 			n&atilde;o fornece nenhuma informa&ccedil;&atilde;o do usu&aacute;rio
 			ou do computador para o filtro de sa&iacute;da).
 			</para>
+            
+			<para>
+				Para uma &uacute;nica impressora, o sistema 
+			<application>LPD</application> permite tanto filtros de sa&iacute;da
+			e de texto ou de outro tipo.  Na maioria dos casos o sistema
+	  		<application>LPD</application> ir&aacute; iniciar o filtro de 
+			sa&iacute;da para imprimir a p&aacute;gina de cabe&ccedil;alho (
+			veja a se&ccedil;&atilde;o <link
+            linkend="printing-advanced-header-pages">P&aacute;ginas de
+			Cabe&ccedil;alho</link>) somente.  O sistema 
+         <application>LPD</application> ent&atilde;o agurada o filtro de
+			sa&iacute;da <emphasis>terminar</emphasis> pelo envio de uma 
+			sequ&ecirc;ncia de dois bytes para o filtro: os caracterres ASCII
+			031 seguido pelo 001.  Quando ofiltro ve esses dois bytes (031, 001),
+			ele deve parar com um envio do sinal <literal>SIGSTOP</literal> para
+			si mesmo.  Quando o sistema <application>LPD</application> termina a
+			execu&ccedil;&atilde;o de outros filtros, ele ir&aacute; reinicializar
+			o filtro de sa&iacute;da pelo envio do sinal 
+			<literal>SIGCONT</literal> para ele.
+			</para>
+            
 ---
-            
-        <para>On a single printer, <application>LPD</application>
-	  allows both an output filter and text or other filters.  In
-	  such cases, <application>LPD</application> will start the
-	  output filter
-          to print the header page (see section <link
-            linkend="printing-advanced-header-pages">Header Pages</link>)
-          only.  <application>LPD</application> then expects the
-	  output filter to <emphasis>stop
-            itself</emphasis> by sending two bytes to the filter: ASCII 031
-          followed by ASCII 001.  When an output filter sees these two bytes
-          (031, 001), it should stop by sending <literal>SIGSTOP</literal>
-	  to itself.  When 
-	  <application>LPD</application>'s
-          done running other filters, it will restart the output filter by
-          sending <literal>SIGCONT</literal> to it.</para>
-            
-        <para>If there is an output filter but <emphasis>no</emphasis> text
+
+			<para>
+				If there is an output filter but <emphasis>no</emphasis> text
           filter and <application>LPD</application> is working on a plain
 	  text job, <application>LPD</application> uses the output
           filter to do the job.  As stated before, the output filter will
