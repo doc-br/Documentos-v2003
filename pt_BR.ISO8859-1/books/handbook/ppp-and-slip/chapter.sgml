@@ -2725,7 +2725,7 @@ water.CS.Example localhost.Example.  UGH	34 47641234 lo0 -       0.438
       </sect3>
 
       <sect3>
-	<title>Rápida Introduão</title>
+	<title>Rápida Introdução</title>
 
 	<para>Na configuração típica, usar o FreeBSD como um servidor
 	  SLIP funciona da seguinte forma: um usuário SLIP disca para
@@ -2786,15 +2786,15 @@ water.CS.Example localhost.Example.  UGH	34 47641234 lo0 -       0.438
       </sect3>
 
       <sect3>
-	<title>Kernel Configuration</title>
+	<title>Configuração do Kernel</title>
 	<indexterm><primary>kernel</primary><secondary>configuration</secondary></indexterm>
-	<para>FreeBSD's default kernels usually come with two SLIP
-	  interfaces defined (<devicename>sl0</devicename> and
-	  <devicename>sl1</devicename>); you can use <command>netstat
-	  -i</command> to see whether these interfaces are defined in your
-	  kernel.</para>
+	<para>O kernel padrão do FreeBSD vem com duas interfaces
+	  SLIP definidas (<devicename>sl0</devicename> e 
+	  <devicename>sl1</devicename>); você pode usar <command>netstat
+	  -i</command> para ver se alguma dessas interfaces está
+	  definida no seu kernel.</para>
 
-	<para>Sample output from <command>netstat -i</command>:</para>
+	<para>Exemplo do <command>netstat -i</command>:</para>
 
 	<screen>Name Mtu   Network     Address	    Ipkts Ierrs    Opkts Oerrs Coll
 ed0   1500 &lt;Link&gt;0.0.c0.2c.5f.4a	 291311     0   174209     0   133
@@ -2804,75 +2804,70 @@ lo0   65535 loop	localhost	     79     0       79     0     0
 sl0*  296   &lt;Link&gt;			     0     0	0     0     0
 sl1*  296   &lt;Link&gt;			     0     0	0     0     0</screen>
 
-	<para>The <devicename>sl0</devicename> and
-	  <devicename>sl1</devicename> interfaces shown from
-	  <command>netstat -i</command> indicate that there are
-	  two SLIP interfaces built into the kernel.  (The asterisks after
-	  the <literal>sl0</literal> and <literal>sl1</literal> indicate
-	  that the interfaces are <quote>down</quote>.)</para>
+	<para>As interfaces <devicename>sl0</devicename> e
+	  <devicename>sl1</devicename> mostradas pelo
+	  <command>netstat -i</command> indicam que existem
+	  duas interfaces SLIP no kernel. (O asterisco depois de
+	  <literal>sl0</literal> e <literal>sl1</literal> indica
+	  que as interfaces estão <quote>desligadas</quotes>.)</para>
 
-	<para>However, FreeBSD's default kernel does not come configured
-	  to forward packets (by default, your FreeBSD machine will not act
-	  as a
-	  router) due to Internet RFC requirements for Internet hosts (see
-	  RFCs 1009 [Requirements for Internet Gateways], 1122
-	  [Requirements for Internet Hosts &mdash; Communication Layers],
-	  and perhaps 1127 [A Perspective on the Host Requirements RFCs]).
-	  If you want your FreeBSD SLIP Server to act as a router, you
-	  will have to edit the <filename>/etc/rc.conf</filename> file and
-	  change the setting of the <literal>gateway_enable</literal> variable to
-	  <option>YES</option>.</para>
+	<para>Entretanto, o kernel padrão do FreeBSD não vem configurado
+	  para encaminhar pacotes (por padrão, uma máquina FreeBSD não 
+	  funciona como roteador) devido aos requerimentos do RFC para
+	  hosts da Internet (ver RFCs 1009 [Requeriments for Internet Gateways],
+	  1222 [Requirements for Internet Hosts &mdash; Communication Layers],
+	  e talvez 1127 [A Perspective on the Host Requirements]). Se você
+	  quer que seu servidor SLIP haja como um roteador, edite o
+	  arquivo <filename>/etc/rc.conf</filename> e troque o valor
+	  da opção <literal>gateway_enable</literal> para <option>YES</option>.</para>
 
-	<para>You will then need to reboot for the new settings to take
-	  effect.</para>
+	<para>Você precisará reiniciar para que as novas definições 
+	  entrem em ação.</para>
 
-	<para>You will notice that near the end of the default kernel
-	  configuration file (<filename>/sys/i386/conf/GENERIC</filename>)
-	  is a line that reads:</para>
+	<para>Você notará que perto do final da configuração do 
+	  kernel padrão (<filename>/sys/i386/conf/GENERIC</filename>) 
+	  haverá uma linha assim:</para>
 
 	<programlisting>pseudo-device sl 2</programlisting>
 
 	<indexterm><primary>SLIP</primary></indexterm>
-	<para>This is the line that defines the number of SLIP devices
-	  available in the kernel; the number at the end of the line is
-	  the maximum number of SLIP connections that may be operating
-	  simultaneously.</para>
+	<para>Essa é a linha que define o número de dispositivos SLIP
+	  disponíveis no kernel; o número no final da linha é o máximo
+	  número de conexões SLIP que podem estar operando ao mesmo
+	  tempo.</para>
 
-	<para>Please refer to <xref linkend="kernelconfig"> on
-	  Configuring the FreeBSD Kernel for help in
-	  reconfiguring your kernel.</para>
+	<para>Por favor veja <xref linkend="kernelconfig"> em Configurando
+	  o kernel do FreeBSD para maiores informações sobre como
+	  reconfigurar seu kernel.</para>
       </sect3>
 
       <sect3>
-	<title>Sliplogin Configuration</title>
+	<title>Configuração do Sliplogin</title>
 
-	<para>As mentioned earlier, there are three files in the
-	  <filename>/etc/sliphome</filename> directory that are part of
-	  the configuration for <filename>/usr/sbin/sliplogin</filename>
-	  (see &man.sliplogin.8; for the actual manual page for
-	  <command>sliplogin</command>): <filename>slip.hosts</filename>,
-	  which defines the SLIP users and their associated IP
-	  addresses; <filename>slip.login</filename>, which usually just
-	  configures the SLIP interface; and (optionally)
-	  <filename>slip.logout</filename>, which undoes
-	  <filename>slip.login</filename>'s effects when the serial
-	  connection is terminated.</para>
+	<para>Como mencionado anteriormente, existem três arquivos no
+	  diretório <filename>/etc/sliphome</filename> que são parte
+	  da configuração do <filename>/usr/sbin/sliplogin</filename>
+	  (veja &man.sliplogin.8; para a página manual do <command>sliplogin</command>): 
+	  <filename>slip.hosts</filename>, que define os usuários SLIP
+	  associados aos endereços IP; <filename>slip.login</filename>,
+	  que geralmente configura a interface SLIP; e (opcionalmente)
+	  <filename>slip.logout</filename>, que desfaz o que o
+	  <filename>slip.login</filename> fez quando a conexão serial
+	  for terminada.</para>
 
 	<sect4>
 	  <title><filename>slip.hosts</filename> Configuration</title>
 
-	  <para><filename>/etc/sliphome/slip.hosts</filename> contains
-	    lines which have at least four items separated by
-	    whitespace:</para>
+	  <para><filename>/etc/sliphome/slip.hosts</filename> contém
+	    linhas que têm até quatro ítens separados por espaços:</para>
 
 	  <itemizedlist>
 	    <listitem>
-	      <para>SLIP user's login ID</para>
+	      <para>Login ID do usuários SLIP</para>
 	    </listitem>
 
 	    <listitem>
-	      <para>Local address (local to the SLIP server) of the SLIP
-		link</para>
+	      <para>Endereço local (local para o servidor SLIP) do link SLIP</para>
 	    </listitem>
 
 	    <listitem>
@@ -2880,21 +2875,19 @@ sl1*  296   &lt;Link&gt;			     0     0	0     0     0</screen>
 	    </listitem>
 
 	    <listitem>
-	      <para>Network mask</para>
+	      <para>Máscara de Rede</para>
 	    </listitem>
 	  </itemizedlist>
 
-	  <para>The local and remote addresses may be host names
-	    (resolved to IP addresses by
-	    <filename>/etc/hosts</filename> or by the domain name
-	    service, depending on your specifications in the file
-	    <filename>/etc/nsswitch.conf</filename> on
-	    FreeBSD&nbsp;5.X, in <filename>/etc/host.conf</filename>
-	    if you use FreeBSD&nbsp;4.X), and the network mask may be
-	    a name that can be resolved by a lookup into
-	    <filename>/etc/networks</filename>.  On a sample system,
-	    <filename>/etc/sliphome/slip.hosts</filename> looks like
-	    this:</para>
+	  <para>Os endereços local e remoto podem ser nomes
+	    (traduzidos para endereços IP pelo <filename>/etc/hosts</filename> 
+	    ou por um serviço de nomes, dependendo das suas especificações
+	    no <filename>/etc/nsswitch.conf</filename> no FreeBSD&nbsp;5.X
+	    ou <filename>/etc/host.conf</filename> no FreeBSD&nbsp;4.X), e
+	    a máscara de rede pode ser um nome que será traduzido pelo
+	    <filename>/etc/networks</filename>.  Em um sistema de
+	    exemplo o arquivo <filename>/etc/sliphome/slip.hosts</filename>
+	    pode se parecer com isso:</para>
 
 	  <programlisting>#
 # login local-addr      remote-addr     mask	    opt1    opt2
@@ -2902,121 +2895,114 @@ sl1*  296   &lt;Link&gt;			     0     0	0     0     0</screen>
 #
 Shelmerg dc-slip       sl-helmerg      0xfffffc00      autocomp</programlisting>
 
-	  <para>At the end of the line is one or more of the
-	    options.</para>
+	  <para>No final da linha existe uma ou mais opções.</para>
 
 	  <itemizedlist>
 	    <listitem>
-	      <para><option>normal</option> &mdash; no header
-		compression</para>
+	      <para><option>normal</option> &mdash; sem compressão de cabeçalho</para>
 	    </listitem>
 
 	    <listitem>
-	      <para><option>compress</option> &mdash; compress
-		headers</para>
+	      <para><option>compress</option> &mdash; comprime os cabeçalhos</para>
 	    </listitem>
 
 	    <listitem>
-	      <para><option>autocomp</option> &mdash; compress headers if
-		the remote end allows it</para>
+	      <para><option>autocomp</option> &mdash; comprime os cabeçalhos se a 
+	        ponta remota permitir isso</para>
 	    </listitem>
 
 	    <listitem>
-	      <para><option>noicmp</option> &mdash; disable ICMP packets
-		(so any <quote>ping</quote> packets will be dropped instead
-		of using up your bandwidth)</para>
+	      <para><option>noicmp</option> &mdash; disabilita pacotes ICMP
+	        (portanto qualquer pacote <quote>ping</quote> será descartado
+		em vez de utilizar sua conexão)</para>
 	    </listitem>
 	  </itemizedlist>
 
   	  <indexterm><primary>SLIP</primary></indexterm>
   	  <indexterm><primary>TCP/IP networking</primary></indexterm>
-	  <para>Your choice of local and remote addresses for your SLIP
-	    links depends on whether you are going to dedicate a TCP/IP
-	    subnet or if you are going to use <quote>proxy ARP</quote> on
-	    your SLIP server (it is not <quote>true</quote> proxy ARP, but
-	    that is the terminology used in this section to describe it).
-	    If you are not sure which method to select or how to assign IP
-	    addresses, please refer to the TCP/IP books referenced in
-	    the SLIP Prerequisites (<xref linkend="slips-prereqs">)
-	    and/or consult your IP network manager.</para>
+	  <para>Sua escolha de endereçocs locais e remotos para os links
+	    SLIP depende se você irá dedicar uma sub-rede ou se irá
+	    utilizar <quote>proxy ARP</quote> no servidor SLIP (não é
+	    proxy ARP <quote>verdadeiro</quote> mas essa é a terminologia
+	    utilizada nessa seção para descrever isso). Se você não
+	    tem certeza de qual método escolher ou como definir os 
+	    endereços IP, por favor veja os livros sobre TCP/IP na
+	    listagem de pré-requisitos (<xref linkend="slips-prereqs">)
+	    e/ou consulte seu gerente de rede.</para>
 
-	  <para>If you are going to use a separate subnet for your SLIP
-	    clients, you will need to allocate the subnet number out of
-	    your assigned IP network number and assign each of your SLIP
-	    client's IP numbers out of that subnet.  Then, you will
-	    probably need to configure a static route to the SLIP
-	    subnet via your SLIP server on your nearest IP router.</para>
+	  <para>Se você vai utilizar uma rede separada para seus clientes
+	    SLIP, você deverá alocar os endereços IP para seus clientes
+	    dentre os disponíveis para essa rede escolhida. Então, você
+	    provavelmente precisará configurar uma rota estática para
+	    essa rede SLIP através do seu servidor SLIP no roteador
+	    mais próximo.</para>
 
   	  <indexterm><primary>Ethernet</primary></indexterm>
-	  <para>Otherwise, if you will use the <quote>proxy ARP</quote>
-	    method, you will need to assign your SLIP client's IP
-	    addresses out of your SLIP server's Ethernet subnet, and you
-	    will also need to adjust your
-	    <filename>/etc/sliphome/slip.login</filename> and
-	    <filename>/etc/sliphome/slip.logout</filename> scripts to use
-	    &man.arp.8; to manage the proxy-ARP entries in the SLIP
-	    server's ARP table.</para>
+	  <para>Caso você use <quote>proxy ARP</quote>, você precisará
+	    definir os endereços IP dos seus clientes SLIP dentro os
+	    disponíveis na rede Ethernet do seu servidor e também deverá
+	    ajustar o <filename>/etc/sliphome/slip.login</filename> e
+	    <filename>/etc/sliphome/slip.logout</filename> para usarem
+	    &man.arp.8; para gerenciar as entradas proxy-ARP na tabela
+	    ARP do servidor SLIP.</para>
 	</sect4>
 
 	<sect4>
-	  <title><filename>slip.login</filename> Configuration</title>
+	  <title>Configuração do <filename>slip.login</filename></title>
 
-	  <para>The typical <filename>/etc/sliphome/slip.login</filename>
-	    file looks like this:</para>
+	  <para>Um <filename>/etc/sliphome/slip.login</filename> típico
+	    se parece com o abaixo:</para>
 
 	  <programlisting>#!/bin/sh -
 #
 #       @(#)slip.login 5.1 (Berkeley) 7/1/90
 
 #
-# generic login file for a slip line.  sliplogin invokes this with
-# the parameters:
+# arquivo de login generico para uma linha slip. sliplogin invoca
+# isso com os seguintes parametros:
 #      1	2	 3	4	  5	 6     7-n
 #   slipunit ttyspeed loginname local-addr remote-addr mask opt-args
 #
 /sbin/ifconfig sl$1 inet $4 $5 netmask $6</programlisting>
 
-	  <para>This <filename>slip.login</filename> file merely runs
-	    <command>ifconfig</command> for the appropriate SLIP interface
-	    with the local and remote addresses and network mask of the
-	    SLIP interface.</para>
+	  <para>Esse arquivo <filename>slip.login</filename> meramente
+	    executa o comando <command>ifconfig</command> para a interface
+	    SLIP apropriada com os endereços local e remoto e a máscara
+	    de rede da interface.</para>
 
-	  <para>If you have decided to use the <quote>proxy ARP</quote>
-	    method (instead of using a separate subnet for your SLIP
-	    clients), your <filename>/etc/sliphome/slip.login</filename>
-	    file will need to look something like this:</para>
+	  <para>Se você decidiu utilizar <quote>proxy ARP</quote>
+	    (em vez de alocar uma sub-rede para seus clientes SLIP)
+	    seu <filename>/etc/sliphome/slip.login</filename>
+	    irá se paracer com o abaixo:</para>
 
 	  <programlisting>#!/bin/sh -
 #
 #       @(#)slip.login 5.1 (Berkeley) 7/1/90
 
 #
-# generic login file for a slip line.  sliplogin invokes this with
-# the parameters:
+# arquivo de login generico para uma linha slip. sliplogin invoca
+# isso com os seguintes parametros:
 #      1	2	 3	4	  5	 6     7-n
 #   slipunit ttyspeed loginname local-addr remote-addr mask opt-args
 #
 /sbin/ifconfig sl$1 inet $4 $5 netmask $6
-# Answer ARP requests for the SLIP client with our Ethernet addr
+# Responde requisicoes ARP para o cliente SLIP com nosso endereco Ethernet
 /usr/sbin/arp -s $5 00:11:22:33:44:55 pub</programlisting>
 
-	  <para>The additional line in this
-	    <filename>slip.login</filename>, <command>arp -s
-	    &#36;5 00:11:22:33:44:55 pub</command>, creates an ARP entry
-	    in the SLIP server's ARP table.  This ARP entry causes the
-	    SLIP server to respond with the SLIP server's Ethernet MAC
-	    address whenever another IP node on the Ethernet asks to
-	    speak to the SLIP client's IP address.</para>
+	  <para>Essa linha adicional, <command>arp -s &#36;5 00:11:22:33:44:55 pub</command>
+	  cria uma entrada na tabela ARP do servidor. Essa entrada faz
+	  com que o servidor responda com o endereço MAC do próprio 
+	  servidor quando alguma outra máquina na rede Ethernet desejar
+	  falar com endereço IP do cliente SLIP.</para>
 
   	  <indexterm><primary>Ethernet</primary><secondary>MAC address</secondary></indexterm>
-	  <para>When using the example above, be sure to replace the
-	    Ethernet MAC address (<hostid
-	    role="mac">00:11:22:33:44:55</hostid>) with the MAC address of
-	    your system's Ethernet card, or your <quote>proxy ARP</quote>
-	    will definitely not work!  You can discover your SLIP server's
-	    Ethernet MAC address by looking at the results of running
-	    <command>netstat -i</command>; the second line of the output
-	    should look something like:</para>
+	  <para>Quando estiver utilizando o exemplo acima tenha certeza
+	    de trocar o endereço MAC (<hostid role="mac">00:11:22:33:44:55</hostid>)
+	    pelo endereço da placa de rede Ethernet do seu sistema ou 
+	    o <quote>proxy ARP</quote> definitivamente não funcionará! Você
+	    pode descobrir o endereço MAC do seu servidor olhando a
+	    saída do comando <command>netstat -i</command>; a segunda linha
+	    deve se parecer com isso:</para>
 
 	  <screen>ed0   1500 &lt;Link&gt;0.2.c1.28.5f.4a	 191923	0   129457     0   116</screen>
 
