@@ -5956,45 +5956,49 @@ zone "10.168.192.in-addr.arpa" in {
       um arquivo se ele foi modificado desde uma certa hora.  Servi&ccedil;os
       como o &man.cron.8; executam comandos em uma hora espec&iacute;fica.
       Se o rel&oacute;gio est&aacute; errado, estes comandos podem n&atilde;o ser
-      executados quando esperado.</para>
+      executados no momento esperado.</para>
 
       <indexterm>
 	<primary>NTP</primary>
 	<secondary>ntpd</secondary>
       </indexterm>
-      <para>FreeBSD ships with the &man.ntpd.8; NTP server which can
-	be used to query other NTP servers to set the clock on your
-	machine or provide time services to others.</para>
+      <para>O FreeBSD &eacute; disponibilizado com o servidor &man.ntpd.8;
+      que pode ser usado para consultar outros servidores NTP para
+      ajustar o rel&oacute;gio em sua m&aacute;quina ou fornecer servi&ccedil;os de hora
+      para outros.</para>
     </sect2>
 
     <sect2>
-      <title>Choosing Appropriate NTP Servers</title>
+      <title>Escolhendo os Servidores NTP Adequados</title>
 
       <indexterm>
 	<primary>NTP</primary>
 	<secondary>choosing servers</secondary>
       </indexterm>
 
-      <para>In order to synchronize your clock, you will need to find
-	one or more NTP servers to use.  Your network administrator or
-	ISP may have set up an NTP server for this purpose&mdash;check
-	their documentation to see if this is the case.  There is a
-	<ulink
-	url="http://www.eecis.udel.edu/~mills/ntp/servers.html">list of
-	publicly accessible NTP servers</ulink> which you can use to
-	find an NTP server near to you.  Make sure you are aware of
-	the policy for any servers you choose, and ask for permission
-	if required.</para>
+      <para>Para sincronizar seu rel&oacute;gio, voc&ecirc; vai precisar encontrar
+      um ou mais servidores NTP para usar.  Seu administrador de rede
+      ou Provedor de Servi&ccedil;os Internet podem ter configurado um
+      servidor NTP para este prop&oacute;sito&mdash;verifique sua
+      documenta&ccedil;&atilde;o para confirmar se este &eacute; o caso.  Existe uma 
+      <ulink 
+      url="http://www.eecis.udel.edu/~mills/ntp/servers.html">lista 
+      de servidores NTP publicamente acess&iacute;veis</ulink> os quais
+      podem ser usados para encontrar um servidor NTP pr&oacute;ximo a voc&ecirc;.
+      Certifique-se de estar ciente da pol&iacute;tica de qualquer
+      servidor escolhido e, se necess&aacute;rio, solicite permiss&atilde;o para
+      uso.</para>
 
-      <para>Choosing several unconnected NTP servers is a good idea in
-	case one of the servers you are using becomes unreachable or
-	its clock is unreliable.  &man.ntpd.8; uses the responses it
-	receives from other servers intelligently&mdash;it will favor
-	unreliable servers less than reliable ones.</para>
+      <para>Escolher alguns servidores NTP n&atilde;o conectados &eacute; uma boa
+      id&eacute;ia no caso de algum dos servidores que voc&ecirc; estiver usando 
+      se tornar inalcan&ccedil;avel ou seu rel&oacute;gio n&atilde;o for confi&aacute;vel.  
+      &man.ntpd.8; usa as respostas recebidas de outros servidores de
+      forma inteligente&mdash;ele vai favorecer os servidores mais
+      confi&aacute;veis em detrimento dos menos confi&aacute;veis.</para>
     </sect2>
 
     <sect2>
-      <title>Configuring Your Machine</title>
+      <title>Configurando Sua M&aacute;quina</title>
 
       <indexterm>
 	<primary>NTP</primary>
@@ -6002,27 +6006,28 @@ zone "10.168.192.in-addr.arpa" in {
       </indexterm>
 
       <sect3>
-	<title>Basic Configuration</title>
+	<title>Configura&ccedil;&atilde;o B&aacute;sica</title>
 	<indexterm><primary>ntpdate</primary></indexterm>
 
-	<para>If you only wish to synchronize your clock when the
-	  machine boots up, you can use &man.ntpdate.8;.  This may be
-	  appropriate for some desktop machines which are frequently
-	  rebooted and only require infrequent synchronization, but
-	  most machines should run &man.ntpd.8;.</para>
+	<para>Se voc&ecirc; somente deseja sicronizar seu rel&oacute;gio quando a
+	m&aacute;quina for inicializada, voc&ecirc; pode usar &man.ntpdate.8;.
+	Isto pode ser adequado para algumas m&aacute;quinas desktop as quais
+	s&atilde;o freq&uuml;entemente reinicializadas e necessitam somente de
+	sincroniza&ccedil;&otilde;es esparsas, mas a maioria das m&aacute;quinas deveria
+	executar &man.ntpd.8;.<para>
 
-	<para>Using &man.ntpdate.8; at boot time is also a good idea
-	  for machines that run &man.ntpd.8;.  The &man.ntpd.8; program changes the
-	  clock gradually, whereas &man.ntpdate.8; sets the clock, no
-	  matter how great the difference between a machine's current
-	  clock setting and the correct time.</para>
+	<para>Usando &man.ntpdate.8; na inicializa&ccedil;&atilde;o tamb&eacute;m &eacute; uma boa
+	id&eacute;ia para m&aacute;quinas que rodam &man.ntpd.8;.  O programa
+	&man.ntpd.8; altera o rel&oacute;gio gradualmente, ao passo que o
+	&man.ntpdate.8; ajusta o rel&oacute;gio, qualquer que seja a
+	diferen&ccedil;a entre a hora atual do rel&oacute;gio e a hora correta.</para>
 
-	<para>To enable &man.ntpdate.8; at boot time, add
-	  <literal>ntpdate_enable="YES"</literal> to
-	  <filename>/etc/rc.conf</filename>.  You will also need to
-	  specify all servers you wish to synchronize with and any
-	  flags to be passed to &man.ntpdate.8; in
-	  <varname>ntpdate_flags</varname>.</para>
+	<para>Para ativar o &man.ntpdate.8; durante a inicializa&ccedil;&atilde;o,
+	adicione <literal>ntpdate_enable="YES"</literal> ao 
+	<filename>/etc/rc.conf</filename>.  Voc&ecirc; tamb&eacute;m vai precisar
+	especificar todos os servidores com os quais deseja
+	sincronizar e quaisquer par&acirc;metros a serem passados ao
+	&man.ntpdate.8; em <varname>ntpdate_flags</varname>.</para>
       </sect3>
 
       <sect3>
@@ -6031,12 +6036,12 @@ zone "10.168.192.in-addr.arpa" in {
 	  <secondary>ntp.conf</secondary>
 	</indexterm>
 
+	<title>Configura&ccedil;&atilde;o Geral</title>
 	<title>General Configuration</title>
 
-	<para>NTP is configured by the
-	  <filename>/etc/ntp.conf</filename> file in the format
-	  described in &man.ntp.conf.5;.  Here is a simple
-	  example:</para>
+	<para>O NTP &eacute; configurado pelo arquivo 
+	<filename>/etc/ntp.conf</filename> no formato descrito em
+	&man.ntp.conf.5;.  Aqui est&aacute; um exemplo simples:</para>
 
 	<programlisting>server ntplocal.example.com prefer
 server timeserver.example.org
@@ -6044,102 +6049,104 @@ server ntp2a.example.net
 
 driftfile /var/db/ntp.drift</programlisting>
 
-	<para>The <literal>server</literal> option specifies which
-	  servers are to be used, with one server listed on each line.
-	  If a server is specified with the <literal>prefer</literal>
-	  argument, as with <hostid
-	  role="fqdn">ntplocal.example.com</hostid>, that server is
-	  preferred over other servers.  A response from a preferred
-	  server will be discarded if it differs significantly from
-	  other servers' responses, otherwise it will be used without
-	  any consideration to other responses.  The
-	  <literal>prefer</literal> argument is normally used for NTP
-	  servers that are known to be highly accurate, such as those
-	  with special time monitoring hardware.</para>
+	<para>A op&ccedil;&atilde;o<literal>server</literal> especifica quais
+	servidores devemser usados, com um servidor por linha.  Se um
+	servidor &eacute; especificado com o argumento 
+	<literal>prefer</literal>, como em <hostid
+	role="fqdn">ntplocal.example.com</hostid>, este servidor &eacute;
+	preferido sobre os demais servidores.  Uma resposta de um servidor
+	preferido ser&aacute; descartada se ela diferir muito das respostas
+	dos demais servidores, caso contr&aacute;rio ser&aacute; usada
+	desconsiderando as outras respostas.  O argumento 
+	<literal>prefer</literal> normalmente &eacute; usado para servidores
+	NTP que s&atilde;o reconhecidamente de alta precis&atilde;o, como os que
+	possuem hardware especial para monitoramento da hora.</para>
 
-	<para>The <literal>driftfile</literal> option specifies which
-	  file is used to store the system clock's frequency offset.
-	  The &man.ntpd.8; program uses this to automatically compensate for the
-	  clock's natural drift, allowing it to maintain a reasonably
-	  correct setting even if it is cut off from all external time
-	  sources for a period of time.</para>
+	<para>A op&ccedil;&atilde;o <literal>driftfile</literal> especifica qual
+	arquivo &eacute; usado para armazenar a compensa&ccedil;&atilde;o de freq&uuml;&ecirc;ncia do
+	rel&oacute;gio do sistema.  O programa &man.ntpd.8; usa isto para
+	compensar automaticamente as varia&ccedil;&otilde;es naturais do 
+	rel&oacute;gio, permitindo que seja mantida uma configura&ccedil;&atilde;o correta 
+	mesmo que seja cortada a conex&atilde;o de todas as fontes externas
+	de hora durante um per&iacute;odo de tempo.</para>
 
-	<para>The <literal>driftfile</literal> option specifies which
-	  file is used to store information about previous responses
-	  from the NTP servers you are using.  This file contains
-	  internal information for NTP.  It should not be modified by
-	  any other process.</para>
+	<para>A op&ccedil;&atilde;o <literal>driftfile</literal> especifica qual
+	arquivo &eacute; usado para armazenar informa&ccedil;&otilde;es sobre as respostas
+	recebidas anteriormente dos servidores NTP que voc&ecirc; estiver
+	usando.  Este arquivo cont&eacute;m informa&ccedil;&otilde;es internas para o NTP.
+	Ele n&atilde;o deve ser alterado por nenhum outro processo.</para>
+
       </sect3>
 
       <sect3>
-	<title>Controlling Access to Your Server</title>
+	<title>Controlando acesso ao Seu Servidor</title>
 
-	<para>By default, your NTP server will be accessible to all
-	  hosts on the Internet.  The <literal>restrict</literal>
-	  option in <filename>/etc/ntp.conf</filename> allows you to control which
-	  machines can access your server.</para>
+	<para>Por padr&atilde;o, seu servidor NTP ser&aacute; acess&iacute;vel a todos os
+	sistemas na Internet.  A op&ccedil;&atilde;o <literal>restrict</literal> em 
+	<filename>/etc/ntp.conf</filename> permite que voc&ecirc; controle 
+	quais m&aacute;quinas podem acessar seu servidor.</para>
 
-	<para>If you want to deny all machines from accessing your NTP
-	  server, add the following line to
-	  <filename>/etc/ntp.conf</filename>:</para>
+	<para>Se voc&ecirc; quer negar acesso a todas as m&aacute;quinas ao seu
+	servidor NTP, adicione a seguinte linha ao
+	<filename>/etc/ntp.conf</filename>:</para>
 
 	<programlisting>restrict default ignore</programlisting>
 
-	<para>If you only want to
-	  allow machines within your own network to synchronize their
-	  clocks with your server, but ensure they are not allowed to
-	  configure the server or used as peers to synchronize
-	  against, add</para>
+	<para>Se voc&ecirc; quer permitir que somente m&aacute;quinas em sua 
+	rede sincronizem seus rel&oacute;gios com seu servidor, mas
+	assegurar que n&atilde;o lhes seja permitido configurar o servidor ou
+	usada como pares (peers) de sincronismo, adicione</para>
 
 	<programlisting>restrict 192.168.1.0 mask 255.255.255.0 notrust nomodify notrap</programlisting>
 
-	<para>instead, where <hostid role="ipaddr">192.168.1.0</hostid> is
-	  an IP address on your network and <hostid
-	  role="netmask">255.255.255.0</hostid> is your network's
-	  netmask.</para>
+	<para>onde <hostid role="ipaddr">192.168.1.0</hostid> 
+	&eacute; um endere&ccedil;o IP em sua rede e <hostid
+	role="netmask">255.255.255.0</hostid> &eacute; a m&aacute;scara de subrede
+	de sua rede.</para>
 
-	<para><filename>/etc/ntp.conf</filename> can contain multiple
-	  <literal>restrict</literal> options.  For more details, see
-	  the <literal>Access Control Support</literal> subsection of
-	  &man.ntp.conf.5;.</para>
+	<para><filename>/etc/ntp.conf</filename> pode conter
+	m&uacute;ltiplas op&ccedil;&otilde;es <literal>restrict</literal>.  Para mais
+	detalhes, veja a subse&ccedil;&atilde;o <literal>Access Control Support</literal>
+	de &man.ntp.conf.5;.</para>
+
       </sect3>
     </sect2>
 
     <sect2>
-      <title>Running the NTP Server</title>
+      <title>Executando o Servidor NTP</title>
 
-      <para>To ensure the NTP server is started at boot time, add the
-	line <literal>xntpd_enable="YES"</literal> to
-	<filename>/etc/rc.conf</filename>.  If you wish to pass
-	additional flags to &man.ntpd.8;, edit the
-	<varname>xntpd_flags</varname> parameter in
-	<filename>/etc/rc.conf</filename>.</para>
+      <para>Para assegurar que o servidor NTP &eacute; iniciado durante a
+      inicializa&ccedil;&atilde;o, adicione a linha 
+      <literal>xntpd_enable="YES"</literal>.  Se voc&ecirc; deseja passar
+      par&acirc;metros adicionais ao &man.ntpd.8;, edite o par&acirc;metro
+      <varname>xntpd_flags</varname> no 
+      <filename>/etc/rc.conf</filename>.</para>
 
-      <para>To start the server without rebooting your machine, run
-	<command>ntpd</command> being sure to specify any additional
-	parameters from <varname>xntpd_flags</varname> in
-	<filename>/etc/rc.conf</filename>.  For example:</para>
-      <screen>&prompt.root; <userinput>ntpd -p /var/run/ntpd.pid</userinput></screen>
+      <para>Para iniciar o servidor sem reinicializar a m&aacute;quina, rode
+      <command>ntpd</command> certificando de especificar quaisquer
+      par&acirc;metros adicionais de <varname>xntpd_flags</varname> em 
+      <filename>/etc/rc.conf</filename>.  Por exemplo:</para>
+      <screen>&prompt.root; 
+      <userinput>ntpd -p /var/run/ntpd.pid</userinput></screen>
 
       <note>
-	<para>Under &os;&nbsp;5.X, various options in
-	  <filename>/etc/rc.conf</filename> have been renamed.  Thus,
-	  you have to replace every instance of <literal>xntpd</literal>
-	  with <literal>ntpd</literal> in the options above.</para></note>
+	<para>No &os;&nbsp;5.X, v&aacute;rias op&ccedil;&otilde;es foram renomeadas no
+	<filename>/etc/rc.conf</filename>.  Assim, voc&ecirc; vai ter que
+	trocar cada ocorr&ecirc;ncia de <literal>xntpd</literal> por
+	<literal>ntpd</literal> nas op&ccedil;&otilde;es acima.</para></note>
     </sect2>
 
     <sect2>
-      <title>Using ntpd with a Temporary Internet
-	Connection</title>
+      <title>Usando o ntpd com uma Conex&atilde;o Internet Tempor&aacute;ria</title>
 
-      <para>The &man.ntpd.8; program does not need a permanent
-	connection to the Internet to function properly.  However, if
-	you have a temporary connection that is configured to dial out
-	on demand, it is a good idea to prevent NTP traffic from
-	triggering a dial out or keeping the connection alive.  If you
-	are using user PPP, you can use <literal>filter</literal>
-	directives in <filename>/etc/ppp/ppp.conf</filename>.  For
-	example:</para>
+      <para>O programa &man.ntpd.8; n&atilde;o precisa de uma conex&atilde;o
+      permanente &agrave; Internet para funcionar corretamente.  
+      Entretanto, se voc&ecirc; tem uma conex&atilde;o tempor&aacute;ria que est&aacute;
+      configurada para discar por demanda, &eacute; uma boa id&eacute;ia evitar que
+      o tr&aacute;fego NTP de disparar uma conex&atilde;o discada ou de manter a
+      conex&atilde;o ativa.  Se voc&ecirc; estiver usando o usu&aacute;rio PPP, voc&ecirc; pode
+      usar diretrizes <literal>filter</literal> em
+      <filename>/etc/ppp/ppp.conf</filename>.  Por exemplo:</para>
 
       <programlisting> set filter dial 0 deny udp src eq 123
  # Prevent NTP traffic from initiating dial out
@@ -6150,23 +6157,22 @@ driftfile /var/db/ntp.drift</programlisting>
  # Prevent outgoing NTP traffic from keeping the connection open
  set filter alive 2 permit 0/0 0/0</programlisting>
 
-      <para>For more details see the <literal>PACKET
-	FILTERING</literal> section in &man.ppp.8; and the examples in
-	<filename>/usr/share/examples/ppp/</filename>.</para>
+      <para>Para maiores detalhes, veja a se&ccedil;&atilde;o <literal>FILTRAGEM DE
+      PACOTES</literal> em &man.ppp.8; e os exemplos em
+      <filename>/usr/share/examples/ppp/</filename>.</para>
 
       <note>
-	<para>Some Internet access providers block low-numbered ports,
-	  preventing NTP from functioning since replies never
-	  reach your machine.</para>
+	<para>Alguns provedores de acesso Internet bloqueiam portas de
+	n&uacute;meros baixos impedindo o NTP de funcionar, uma vez que as
+	respostas nunca alcan&ccedil;am sua m&aacute;quina.</para>
       </note>
     </sect2>
 
     <sect2>
-      <title>Further Information</title>
+      <title>Mais Informa&ccedil;&otilde;es</title>
 
-      <para>Documentation for the NTP server can be found in
-	<filename>/usr/share/doc/ntp/</filename> in HTML
-	format.</para>
+      <para>Documenta&ccedil;&atilde;o para o servidor NTP podem ser encontradas em
+      <filename>/usr/share/doc/ntp/</filename> em formato HTML.</para>
     </sect2>
   </sect1>
 
@@ -6180,13 +6186,15 @@ driftfile /var/db/ntp.drift</programlisting>
 	</author>
       </authorgroup>
     </sect1info>
-    <title>Network Address Translation</title>
+    <title>Tradu&ccedil;&atilde;o de Endere&ccedil;o de Rede (NAT)</title>
 
     <sect2 id="network-natoverview">
-      <title>Overview</title>
+      <title>Vis&atilde;o Geral</title>
       <indexterm>
 	<primary><application>natd</application></primary>
       </indexterm>
+      <para>O daemon de Tradu&ccedil;&atilde;o de Endere&ccedil;o de Rede do FreeBSD,
+      geralmente conhecido como &man.natd.8; </para>
       <para>FreeBSD's Network Address Translation daemon, commonly known as
 	&man.natd.8; is a daemon that accepts incoming raw IP packets,
 	changes the source to the local machine and re-injects these packets
