@@ -163,7 +163,7 @@
 
     <orderedlist>
       <listitem>
-	<para>Ataque de negação de serviços(<Foreignphrase>DoS-Denial of service attacks</foreignphrase>).</para>
+	<para>Ataque de negação de serviços (<foreignphrase>DoS-Denial of service attacks</foreignphrase>).</para>
       </listitem>
 
       <listitem>
@@ -184,83 +184,96 @@
     </orderedlist>
 
     <indexterm>
-      <primary>DoS attacks</primary>
-      <see>Denial of Service (DoS)</see>
+      <primary>Ataques DoS</primary>
+      <see>Negação de Serviço-Denial of Service (DoS)</see>
     </indexterm>
     <indexterm>
-      <primary>security</primary>
-      <secondary>DoS attacks</secondary>
-      <see>Denial of Service (DoS)</see>
+      <primary>segurança</primary>
+      <secondary>Ataques DoS</secondary>
+      <see>Negação de Serviço-Denial of Service (DoS)</see>
     </indexterm>
-    <indexterm><primary>Denial of Service (DoS)</primary></indexterm>
+    <indexterm><primary>Negação de Serviço-Denial of Service (DoS)</primary></indexterm>
 
-    <para>A denial of service attack is an action that deprives the
-      machine of needed resources.  Typically, DoS attacks are
-      brute-force mechanisms that attempt to crash or otherwise make a
-      machine unusable by overwhelming its servers or network stack.  Some
-      DoS attacks try to take advantage of bugs in the networking
-      stack to crash a machine with a single packet.  The latter can only
-      be fixed by applying a bug fix to the kernel.  Attacks on servers
-      can often be fixed by properly specifying options to limit the load
-      the servers incur on the system under adverse conditions.
-      Brute-force network attacks are harder to deal with.  A
-      spoofed-packet attack, for example, is nearly impossible to stop,
-      short of cutting your system off from the Internet.  It may not be
-      able to take your machine down, but it can saturate your
-      Internet connection.</para>
+    <para>Um ataque de negação de serviço é uma ação que torna 
+      indisponíveis à máquina os recursos necessários.  Tipicamente,
+      um ataque DoS é um mecanismo de força bruta que tenta travar ou 
+      então tornar a maquina temporariamente inutilizável entupindo um
+      serviço ou a capacidade da rede.  Alguns ataques DoS tentam tirar
+      vantagem de falhas na camada de rede para travar a máquina com um 
+      único pacote.  Este último somente pode ser corrigido aplicando
+      a correção da falha ao kernel.  Ataques a servidores frequentemente
+      podem ser corrigidos por uma configuração adequada dos limites da 
+      carga que os servidores impõe ao sistema sob condições adversas. 
+      Ataques de força Bruta por rede são muito difíceis de tratar. Um
+      ataque por pacote falsificado-<foreignphrase>spoofed-packet</foreignphrase>, 
+      por exemplo, é quase impossível de parar, colocando seu sistema 
+      repentinamente fora da internet.  Ele pode não ser capaz de colocar
+      seu equipamento fora de operação, mas ele pode saturar sua conexão
+      com a internet.</para>
 
     <indexterm>
-      <primary>security</primary>
-      <secondary>account compromises</secondary>
+      <primary>segurança</primary>
+      <secondary>Comprometimento de contas de usuário</secondary>
     </indexterm>
 
-    <para>A user account compromise is even more common than a DoS
-      attack.  Many sysadmins still run standard 
+    <para>Um ataque às contas de usuário é até mais comum que um ataque 
+      DoS. Muitos administradores de sistema ainda executam servidores 
+      padrão de
       <application>telnetd</application>, <application>rlogind</application>,
       <application>rshd</application>,
-      and <application>ftpd</application> servers on their machines.
-      These servers, by default, do
-      not operate over encrypted connections.  The result is that if you
-      have any moderate-sized user base, one or more of your users logging
-      into your system from a remote location (which is the most common
-      and convenient way to login to a system) will have his or her
-      password sniffed.  The attentive system admin will analyze his
-      remote access logs looking for suspicious source addresses even for
-      successful logins.</para>
+      and <application>ftpd</application> em suas máquinas.  Estes 
+      Servidores, por padrão, não operam dentro de conexões encriptadas. 
+      o resultado é que se você tem qualquer base de usuários de tamanho
+      moderado, um ou mais dos seus usuários que conectam em seu sistema 
+      de um local remoto (o qual é o mais comum e conveniente meio de 
+      conectar a um sistema) terão a sua senha descoberta. O administrador
+      de sistema atencioso irá analizar seus logs de acesso remoto
+      buscando por endereços de origem suspeita mesmo para autenticações
+      bem sucedidas.</para>
 
-    <para>One must always assume that once an attacker has access to a
-      user account, the attacker can break <username>root</username>.
-      However, the reality is that in a well secured and maintained system,
-      access to a user account does not necessarily give the attacker
-      access to <username>root</username>.  The distinction is important
-      because without access to <username>root</username> the attacker
-      cannot generally hide his tracks and may, at best, be able to do
-      nothing more than mess with the user's files, or crash the machine.
-      User account compromises are very common because users tend not to
-      take the precautions that sysadmins take.</para>
-
+    <para>Deve-se sempre assumir que uma vez o intruso tem acesso a
+      conta de usuário, ele pode tomar a conta de <username>root</username>. 
+      De qualquer forma, a realidade é que em um sistema bem seguro e
+      com boa manutenção, acessar uma conta e usuário não irá 
+      necesáriamente dar ao intruso acesso ao <username>root</username>. 
+      Esta distinção é importante porque sem o acesso a conta de 
+      <username>root</username> o intruso geralmente não poderá esconder 
+      suas pistas e talvez, melhor ainda, esteja apto somente a nada
+      mais que bagunçar os arquivos do usuário, ou travar a maquina. 
+      o Comprometimento da conta de usuário é muito comum porque usuários 
+      tendem a não tomar as precauções que um administrador de sistema
+      toma.</para>
+      
     <indexterm>
-      <primary>security</primary>
-      <secondary>backdoors</secondary>
+      <primary>segurança</primary>
+      <secondary>Criação de portas de acesso clandestinas(<foreignphrase>Backdoors</foreignphrase>)</secondary>
     </indexterm>
 
-    <para>System administrators must keep in mind that there are
-      potentially many ways to break <username>root</username> on a machine.
-      The attacker may know the <username>root</username> password,
-      the attacker may find a bug in a root-run server and be able
-      to break <username>root</username> over a network
-      connection to that server, or the attacker may know of a bug in
-      a suid-root program that allows the attacker to break
-      <username>root</username> once he has broken into a user's account.
-      If an attacker has found a way to break <username>root</username>
-      on a machine, the attacker may not have a need
-      to install a backdoor.  Many of the <username>root</username> holes
-      found and closed to date involve a considerable amount of work
-      by the attacker to cleanup after himself, so most attackers install
-      backdoors.  A backdoor provides the attacker with a way to easily
-      regain <username>root</username> access to the system, but it
-      also gives the smart system administrator a convenient way
-      to detect the intrusion.
+    <para>Administradores de sistema precisam ter em mente que ali 
+      existem potencialmente muitas maneiras de violar uma conta 
+      <username>root</username> em uma maquina.  O intruso pode conhecer 
+      a senha de <username>root</username>, o intruso pode encontrar uma
+      falha em um servidor rodando com o usuário <username>root</username>
+      e obter acesso através de uma conexão de rede para este servidor, 
+      ou o intruso pode conhecer uma falha em um programa com provilégios
+      de <username>root</username> que permite ao intruso violar a conta
+      <username>root</username> uma vez que ele tenha invadido o sistema
+      através de uma contra de usuário. Se um intruso encontrou uma 
+      maneira de violar a conta de <username>root</username> em uma 
+      maquina, ele pode não ter a necessidade de instalar uma porta de 
+      acesso clandestina-<foreignphrase>backdoor</foreignphrase>. 
+      Muitas das falhas em contas <username>root</username> encontradas 
+      e corrigidas até hoje envolveram um considerável esforço do intruso 
+      par limpar suas pistas, então a maioria dos intrusos instala uma 
+      porta de acesso clandestina-<foreignphrase>backdoor</foreignphrase>. 
+      Uma porta de acesso clandestina-<foreignphrase>backdoor</foreignphrase>
+      fornece ao intruso uma maneira fácil e conveniente retomar o acesso
+      pela conta de <username>root</username> do sistema, mas isto permite
+      ao administrador de sistema uma maneira conveniente para detectar
+      a intrusão.
+      
+
+
       Making it impossible for an attacker to install a backdoor may
       actually be detrimental to your security, because it will not
       close off the hole the attacker found to break in the first
