@@ -13,21 +13,22 @@
   <title>O Gerenciador de Volumes Vinum</title>
   
   <sect1 id="vinum-synopsis">
-    <title>Sin&oacute;pse</title>
+    <title>Sinópse</title>
 
-    <para>N&atilde;o importa quais discos voc&ecirc; tem, eles sempre
-    ter&atilde;o limita&ccedil;&otilde;es:</para>
+    <para>Não importa quais discos você tem, eles sempre terão
+     limitações
+    
       <itemizedlist>
 	<listitem>
-	  <para>Eles podem ser muito pequenos.</para>
+	  <para>Eles podem ser pequenos demais.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Eles podem ser muito lentos.</para>
+	  <para>Eles podem ser lentos demais.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Eles pode ser pouco seguros.</para>
+	  <para>Eles podem ser pouco seguro.</para>
 	</listitem>
       </itemizedlist>
   </sect1>
@@ -38,23 +39,21 @@
 	<author>
 	  <firstname>Greg</firstname>
 	  <surname>Lehey</surname>
-	  <contrib>Originalmente escrito por </contrib>
+	  <contrib>Originally written by </contrib>
 	</author>
       </authorgroup>
     </sect1info>
 
-    <title>Discos s&atilde;o muito pequenos</title>
+    <title>Discos são muito pequenos</title>
 
     <indexterm><primary>Vinum</primary></indexterm>
     <indexterm><primary>RAID</primary>
     <secondary>Software</secondary></indexterm>
-    
-    <para><emphasis>Vinum</emphasis> o chamado <emphasis>Gerenciador de
-      Volumes</emphasis>, o disco virtual que trata destes tr&ecirc;s
-      problemas. Tomemos em maior detalhe. V&aacute;rias
-      solu&ccedil;&otilde;es para estes problemas tem sido propostas e
-      implementadas:</para>
-
+   
+    <para><emphasis>Vinum</emphasis> o chamado <emphasis>Gerenciador
+	de Volumes</emphasis>, o disco virtual que trata destes
+	três problemas.  Tomemos em maior detalhe.  Várias soluções para
+	estes problemas tem sido propostas e implementadas:</para>
 
     <para>Disks are getting bigger, but so are data storage
       requirements.  Often you will find you want a file system that
@@ -713,85 +712,89 @@
   </sect1>
   
   <sect1 id="vinum-object-naming">
-    <title>Object Naming</title>
+    <title>Nomenclatura de objetos</title>
 
-    <para>As described above, Vinum assigns default names to plexes
-      and subdisks, although they may be overridden.  Overriding the
-      default names is not recommended: experience with the VERITAS
-      volume manager, which allows arbitrary naming of objects, has
-      shown that this flexibility does not bring a significant
-      advantage, and it can cause confusion.</para>
+    <para>Como descrito assima, Vinum desigina nomes padrões
+    para plexes e subdisks, embora você possa sobrescreve-los.
+    Sobrescrever os nomes padrões, não é recomenado: experiências com o
+    com o gerenciador de volumes VERITAS, que permite nomes arbitrários
+    para objetos, tem mostrado que essa flexibilidade não tras uma
+    vantágem significativa e pode causar confusão.</para>
 
-    <para>Names may contain any non-blank character, but it is
-      recommended to restrict them to letters, digits and the
-      underscore characters.  The names of volumes, plexes and
-      subdisks may be up to 64 characters long, and the names of
-      drives may be up to 32 characters long.</para>
-
-    <para>Vinum objects are assigned device nodes in the hierarchy
-      <filename>/dev/vinum</filename>.  The configuration shown above
-      would cause Vinum to create the following device nodes:</para>
+    <para>Nomes podem conter qualquer caracter não nulo, mas é
+    recomendado que estes sejam restritos a letras, digitos e caracteres
+    underscore.  Os nomes dos volumes, plexes e subdiscos podem ser
+    formados por até 64 caracteres, e o nome dos drives por até
+    32.</para>
+    
+    <para>Objetos do Vinum são dispositivos designados na
+    hierarquia <filename>/dev/vinum</filename>.  a configuração descrita
+    abaixo causaria o Vinum a criar o seguinte node de
+    despositivo:</para>
+    
 
     <itemizedlist>
       <listitem>
-	<para>The control devices
-	  <devicename>/dev/vinum/control</devicename> and
-	  <devicename>/dev/vinum/controld</devicename>, which are used
-	  by &man.vinum.8; and the Vinum daemon respectively.</para>
+	<para>Os dispositivos de controle
+	<devicename>/dev/vinum/control</devicename> e
+	<devicename>/dev/vinum/controld</devicename>, no qual são usados
+	por &man.vinum.8; e pelo daemon de Vinum respectivamente.</para> 
+      </listitem> 
+	      
+
+      <listitem>
+	<para>Entrada de dispositivo de caracter e bloco para cada
+	volume.  Esses são os principais dispositivos usados pelo Vinum.
+	Os nomes dos dispoitivos bloco é o nome do volume, enquanto os
+	do caracter seguem as tradições BSD de prepending (preceder) a
+	letra <emphasis>r</emphasis> ao nome.  Por isso a configurção
+	abaixo incluiria os dispositivos bloco
+	<devicename>/dev/vinum/myvol</devicename>,
+	<devicename>/dev/vinum/mirror</devicename>,
+	<devicename>/dev/vinum/striped</devicename>,
+	<devicename>/dev/vinum/raid5</devicename> e
+	<devicename>/dev/vinum/raid10</devicename>, e o dispositivos
+	caracter <devicename>/dev/vinum/rmyvol</devicename>,
+	<devicename>/dev/vinum/rmirror</devicename>,
+	<devicename>/dev/vinum/rstriped</devicename>,
+	<devicename>/dev/vinum/rraid5</devicename> e
+	<devicename>/dev/vinum/rraid10</devicename>.  obviament existe m
+	problema aqui: é possível ter dois olumes chamados
+	<emphasis>r</emphasis> e <emphasis>rr</emphasis>, mas ocorreria um
+	conflito criando o node do  dispositivo
+	<devicename>/dev/vinum/rr</devicename>: seria um dispositivo de
+	caracter para o volume <emphasis>r</emphasis> ou um dispositivo
+	bloco para o volume <emphasis>rr</emphasis>?  Atualmente Vinum
+	não endereça o conflito: o primeiro volume definido levará o
+	nome.</para> 
       </listitem>
 
       <listitem>
-	<para>Block and character device entries for each volume.
-	  These are the main devices used by Vinum.  The block device
-	  names are the name of the volume, while the character device
-	  names follow the BSD tradition of prepending the letter
-	  <emphasis>r</emphasis> to the name.  Thus the configuration
-	  above would include the block devices
-	  <devicename>/dev/vinum/myvol</devicename>,
-	  <devicename>/dev/vinum/mirror</devicename>,
-	  <devicename>/dev/vinum/striped</devicename>,
-	  <devicename>/dev/vinum/raid5</devicename> and
-	  <devicename>/dev/vinum/raid10</devicename>, and the
-	  character devices
-	  <devicename>/dev/vinum/rmyvol</devicename>,
-	  <devicename>/dev/vinum/rmirror</devicename>,
-	  <devicename>/dev/vinum/rstriped</devicename>,
-	  <devicename>/dev/vinum/rraid5</devicename> and
-	  <devicename>/dev/vinum/rraid10</devicename>.  There is
-	  obviously a problem here: it is possible to have two volumes
-	  called <emphasis>r</emphasis> and <emphasis>rr</emphasis>,
-	  but there will be a conflict creating the device node
-	  <devicename>/dev/vinum/rr</devicename>: is it a character
-	  device for volume <emphasis>r</emphasis> or a block device
-	  for volume <emphasis>rr</emphasis>?  Currently Vinum does
-	  not address this conflict: the first-defined volume will get
-	  the name.</para>
+	<para>Um diretório <devicename>/dev/vinum/drive</devicename> com
+	entradas para cada disco.  Essas entradas são na verdade links
+	simbólicos para os disco nodes correspondentes.<.para>
       </listitem>
 
       <listitem>
-	<para>A directory <devicename>/dev/vinum/drive</devicename>
-	  with entries for each drive.  These entries are in fact
-	  symbolic links to the corresponding disk nodes.</para>
-      </listitem>
-
-      <listitem>
-	<para>A directory <filename>/dev/vinum/volume</filename> with
-	  entries for each volume.  It contains subdirectories for
-	  each plex, which in turn contain subdirectories for their
-	  component subdisks.</para>
+	<para>Um diretório <filename>/dev/vinum/volume</filename> com
+	entradas para cada volume, que contém um subdiretório para cada
+	plex, que por sua vez contém subdiretórios para seus
+	subdiscos.</para>
       </listitem>
 
       <listitem>
 	<para>The directories
 	  <devicename>/dev/vinum/plex</devicename>,
 	  <devicename>/dev/vinum/sd</devicename>, and
-	  <devicename>/dev/vinum/rsd</devicename>, which contain block
-	  device nodes for each plex and block and character device
-	  nodes respectively for each subdisk.</para>
+	  <devicename>/dev/vinum/rsd</devicename>, onde contém um
+	  node de dispositivo bloco para cada plex e um node de
+	  dispositivo bloco e caracter para cada subdisco,
+	  respectivamente.</para>
       </listitem>
     </itemizedlist>
 
-    <para>For example, consider the following configuration file:</para>
+    <para>Por exemplo, considere o seguinte arquivo de
+    configuração:</para>
 	<programlisting>
 	drive drive1 device /dev/sd1h
 	drive drive2 device /dev/sd2h
@@ -802,10 +805,11 @@
         sd length 100m drive drive1
         sd length 100m drive drive2
         sd length 100m drive drive3
-        sd length 100m drive drive4</programlisting>
+        sd length 100m drive drive4
+	</programlisting>
 
-    <para>After processing this file, &man.vinum.8; creates the following
-      structure in <filename>/dev/vinum</filename>:</para>
+    <para>Depois de processar esse arquivo, &man.vinum.8; cria a
+    seguinte estrutura em <filename>/dev/vinum</filename>:</para>
 
     <programlisting>
 	brwx------  1 root  wheel   25, 0x40000001 Apr 13 16:46 Control
@@ -866,43 +870,44 @@
     brwxr-xr--  1 root  wheel   25, 0x20200002 Apr 13 16:46 s64.p0.s2
     brwxr-xr--  1 root  wheel   25, 0x20300002 Apr 13 16:46 s64.p0.s3</programlisting>
 
-    <para>Although it is recommended that plexes and subdisks should
-      not be allocated specific names, Vinum drives must be named.
-      This makes it possible to move a drive to a different location
-      and still recognize it automatically.  Drive names may be up to
-      32 characters long.</para>
-
+    <para>Apesar de não ser recomendado alocalçao de nomes específicos
+    para plexes e subdiscos, os discos do Vinum devem ser nomeados.
+    Isso torna possível mover um disco para uma outra localidade e ainda
+    sim reconhace-lo automaticamente.  Os nomes dos discos podem conter
+    até 32 caracteres.</para>
+    
     <sect2>
-      <title>Creating File Systems</title>
+      <title>Criando sistema de arquivos </title>
 
-	<para>Volumes appear to the system to be identical to disks,
-	  with one exception.  Unlike &unix; drives, Vinum does
-	  not partition volumes, which thus do not contain a partition
-	  table.  This has required modification to some disk
-	  utilities, notably &man.newfs.8;, which previously tried to
-	  interpret the last letter of a Vinum volume name as a
-	  partition identifier.  For example, a disk drive may have a
-	  name like <devicename>/dev/ad0a</devicename> or
-	  <devicename>/dev/da2h</devicename>.  These names represent
-	  the first partition (<devicename>a</devicename>) on the
-	  first (0) IDE disk (<devicename>ad</devicename>) and the
-	  eighth partition (<devicename>h</devicename>) on the third
-	  (2) SCSI disk (<devicename>da</devicename>) respectively.
-	  By contrast, a Vinum volume might be called
-	  <devicename>/dev/vinum/concat</devicename>, a name which has
-	  no relationship with a partition name.</para>
-
-	<para>Normally, &man.newfs.8; interprets the name of the disk and
-	  complains if it cannot understand it.  For example:</para>
-
+	<para>Volumes e discos parecem idênticos para um sistema, com
+	uma exessão.  Ao contrário de discos &unix;, Vinum não particiona
+	volumes, no qual então, não possui uma tabela de partições.
+	Isso exigiu uma mudança em alguns utilitários de discos como
+	&man.newfs.8;, onde previamente interpretou a última letra de um 
+	nome de volume de Vinum como um	identificador de partições.  Por
+	exemplo, uma partição de disco pode ter um nome como
+	<devicename>/dev/ad0a</devicename> ou
+	<devicename>/dev/da2h</devicename>.  Esses nomes representam a
+	primeira partição (<devicename>a</devicename>) no primeiro (0)
+	disco IDE (<devicename>ad</devicename>) e a oitava partição
+	(<devicename>h</devicename>) no terceiro disco SCSI (2)
+	(<devicename>da</devicename>), respectivamente.  Em contraste,
+	um volume Vinum pode ser chamado de
+	<devicename>/dev/vinum/concat</devicename>, um nome que não tem
+	nenhum relacionamento com o nome da partição.</para>
+	
+	  
+	<para>Normalmente, &man.newfs.8; interpreta o nome do disco e
+	reclama se não entender.  Por exemplo:</para>
+	
 	<screen>&prompt.root; <userinput>newfs /dev/vinum/concat</userinput>
 newfs: /dev/vinum/concat: can't figure out file system partition</screen>
 
-	<note><para>The following is only valid for FreeBSD versions
-	  prior to 5.0:</para></note>
+	<note><para>O que segue só é valido para as versões de freeBSD
+	anteriores a 5.0:</para></note>
 
-	<para>In order to create a file system on this volume, use the
-	  <option>-v</option> option to &man.newfs.8;:</para>
+	<para>Para criar um sistema de arquivos nesse volume, use a
+	opção <option>-v</option> para &man.newfs.8;:</para>
 
 	<screen>&prompt.root; <userinput>newfs -v /dev/vinum/concat</userinput></screen>
 
@@ -910,27 +915,29 @@ newfs: /dev/vinum/concat: can't figure out file system partition</screen>
   </sect1>
   
   <sect1 id="vinum-config">
-    <title>Configuring Vinum</title>
+    <title>Configurando Vinum</title>
 
-    <para>The <filename>GENERIC</filename> kernel does not contain
-      Vinum.  It is possible to build a special kernel which includes
-      Vinum, but this is not recommended.  The standard way to start
-      Vinum is as a kernel module (<acronym>kld</acronym>).  You do
-      not even need to use &man.kldload.8; for Vinum: when you start
-      &man.vinum.8;, it checks whether the module has been loaded, and
-      if it is not, it loads it automatically.</para>
-
+    <para>O kernel <filename>GENERIC</filename> não contém Vinum.  É
+    possível construir um kernel especial para incluir o Vinum, mas não
+    é recomendado.  A maneira simples de iniciar o Vinum é com o módulo
+    de kernel (<acronym>kld</acronym>).  Você nem precisa usar
+    &man.kldload.8; para Vinum: quando você inicia &man.vinum.8;, ele
+    verifica se o modulo foi carregado ou não, e o carrega
+    automaticamente.</para>
+    
+    
 
     <sect2>
-      <title>Startup</title>
+      <title>Inicialização</title>
 
-      <para>Vinum stores configuration information on the disk slices
-	in essentially the same form as in the configuration files.
-	When reading from the configuration database, Vinum recognizes
-	a number of keywords which are not allowed in the
-	configuration files.  For example, a disk configuration might
-	contain the following text:</para>
-
+      <para>Vinum armazena as informações de configuração das fatias de
+      disco essencialmente da mesma forma que os arquivos de
+      configuração.  Quando lendo do banco de dados de configuração,
+      Vinum reconhece algumas palavras chave que não são permitidas nos
+      arquivos de configuração.  Por exemplo, uma configuração de disco
+      talves contenha o seguinte texto:</para>
+      
+      
 	<programlisting>volume myvol state up
 volume bigraid state down
 plex name myvol.p0 state up org concat vol myvol
@@ -951,170 +958,189 @@ sd name bigraid.p0.s2 drive c plex bigraid.p0 state initializing len 4194304b dr
 sd name bigraid.p0.s3 drive d plex bigraid.p0 state initializing len 4194304b driveoff set 1573129b plexoffset 12582912b
 sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b driveoff set 1573129b plexoffset 16777216b</programlisting>
   
-	<para>The obvious differences here are the presence of
-	  explicit location information and naming (both of which are
-	  also allowed, but discouraged, for use by the user) and the
-	  information on the states (which are not available to the
-	  user).  Vinum does not store information about drives in the
-	  configuration information: it finds the drives by scanning
-	  the configured disk drives for partitions with a Vinum
-	  label.  This enables Vinum to identify drives correctly even
-	  if they have been assigned different &unix; drive
-	  IDs.</para>
-  
+	<para>A diferença clara aqui é a presença explicita de
+	informações sobre localidade e nomenclatura (Sendo as duas no
+	caso permitidas, mas desencorajadas) e também informações sobre
+	os estados (mas não são disponíveis para o usuário).  Vinum não
+	armazena informações sobre os disco nas informações de
+	configuração: ele acha os drives by scanning the configured
+	disk drives for partitions with a Vinum label.  Isso abilita o
+	Vinum a identificar discos corretamente, mesmo que eles tenham
+	sido rotulados com uma diferente nomeação de drives
+	&unix;.</para>
+	
+	
       <sect3 id="vinum-rc-startup">
-	<title>Automatic Startup</title>
+	<title>Inicialização Automática</title>
 
-        <para>In order to start Vinum automatically when you boot the
-	  system, ensure that you have the following line in your
-	  <filename>/etc/rc.conf</filename>:</para>
+        <para>Para iniciar o Vinum automaticamente quando você boota o
+	sistema, afirme-se de que você tem a seguinte linha no seu
+	<filename>/etc/rc.conf</filename>:</para>
+	
 
 	<programlisting>start_vinum="YES"		# set to YES to start vinum</programlisting>
 
-	<para>If you do not have a file
-	  <filename>/etc/rc.conf</filename>, create one with this
-	  content.  This will cause the system to load the Vinum
-	  <acronym>kld</acronym> at startup, and to start any objects
-	  mentioned in the configuration.  This is done before
-	  mounting file systems, so it is possible to automatically
-	  &man.fsck.8; and mount file systems on Vinum volumes.</para>
+	<para>Se o seu sistema não possuir o arquivo
+	<filename>/etc/rc.conf</filename>, crie um com esse conteúdo.
+	Isso fará com que o sistema carregue o Vinum
+	<acronym>kld</acronym> na inicialização, e inicie qualquer
+	objeto citado na configuração.  Isso é feito antes de montar os
+	sistemas de arquivos, então, é possível fazer automaticamente um 
+	&man.fsck.8; e montar os sistemas de arquivo nos volumes de
+	Vinum.</para>
+	
 
-	<para>When you start Vinum with the <command>vinum
-	  start</command> command, Vinum reads the configuration
-	  database from one of the Vinum drives.  Under normal
-	  circumstances, each drive contains an identical copy of the
-	  configuration database, so it does not matter which drive is
-	  read.  After a crash, however, Vinum must determine which
-	  drive was updated most recently and read the configuration
-	  from this drive.  It then updates the configuration if
-	  necessary from progressively older drives.</para>
-
+	<para>Quando você inicia Vinum com o comando <command>vinum
+	start</command>, Vinum lê a base de dados de configuração de um
+	dos discos do Vinum.  Sobre circunstâncias normais, cada um dos
+	discos contém uma cópia idêntica da base de dados de
+	configuração, então não importa que disco é lido.  Embora, após
+	uma pane, Vinum tem que determinar qual o disco foi atualizado
+	mais recentemente e ler as configurações desse disco.  E então
+	as atualiza, se necessário, progressivamente do	disco mais
+	velho.</para>
+	
       </sect3>
     </sect2>
   </sect1>
 
   <sect1 id="vinum-root">
-    <title>Using Vinum for the Root Filesystem</title>
+    <title>Usando Vinum para o sistemas de arquivos raiz</title>
+    
 
-    <para>For a machine that has fully-mirrored filesystems using
-      Vinum, it is desirable to also mirror the root filesystem.
-      Setting up such a configuration is less trivial than mirroring
-      an arbitrary filesystem because:</para>
+    <para>Para uma máquina que esta espelhada por inteiro usando Vinum,
+    é desejável espelhar também o sistema de arquivos raiz.  Setar
+    tal configuração é menos trivial do que espelhar um disco
+    arbitrário:</para>
 
     <itemizedlist>
       <listitem>
-	<para>The root filesystem must be available very early during
-	  the boot process, so the Vinum infrastructure must already be
-	  available at this time.</para>
+	<para>O sistema de arquivos raiz deve estar disponível bem
+	cedo durante o processo de inicialização, então a infraestrutura
+	do Vinum deveria estar disponível também nessa hora.</para> 
       </listitem>
-      <listitem>
-	<para>The volume containing the root filesystem also contains
-	  the system bootstrap and the kernel, which must be read
-	  using the host system's native utilities (e. g. the BIOS on
-	  PC-class machines) which often cannot be taught about the
-	  details of Vinum.</para>
+      <listitem><para>O volume contendo os arquivos de sistema raiz também
+      contém o bootstap de sistema e o kernel, no qual tem que ser lido
+      pela utilidade nativa de sistema (ex. A BIOS no caso dos PC's)
+      onde frequentemente não pode ser ensinada sobre os detalhes do
+      Vinum.</para>
       </listitem>
     </itemizedlist>
 
-    <para>In the following sections, the term <quote>root
-      volume</quote> is generally used to describe the Vinum volume
-      that contains the root filesystem.  It is probably a good idea
-      to use the name <literal>"root"</literal> for this volume, but
-      this is not technically required in any way.  All command
-      examples in the following sections assume this name though.</para>
+    <para>Nas sessões que seguem, o termo <quote>root volume</quote> é
+    usado para descrevero volume de Vinum que contém os sistemas de
+    arquivo raiz.  É provávelmente uma boa idéia usar o nome
+    <literal>"root"</literal> para esse volume, mas isso não é de
+    maneira nenhuma obrigatório.  Apesar de que todos os exemplos
+    de comandos nas sessões seguintes assumem esse nome.</para>
+
+
 
     <sect2>
-      <title>Starting up Vinum Early Enough for the Root
-	Filesystem</title>
+      <title>Iniciando o Vinum a tempo para o sistema de arquivos raiz
+      </title>
 
-      <para>There are several measures to take for this to
-	happen:</para>
+      <para>Existem algumas medidas a se tomar para que isso aconteça:
+      </para>
 
       <itemizedlist>
 	<listitem>
-	  <para>Vinum must be available in the kernel at boot-time.
-	    Thus, the method to start Vinum automatically described in
-	    <xref linkend="vinum-rc-startup"> is not applicable to
-	    accomplish this task, and the
-	    <literal>start_vinum</literal> parameter must actually
-	    <emphasis>not</emphasis> be set when the following setup
-	    is being arranged.	The first option would be to compile
-	    Vinum statically into the kernel, so it is available all
-	    the time, but this is usually not desirable.  There is
-	    another option as well, to have
-	    <filename>/boot/loader</filename> (<xref
-	    linkend="boot-loader">) load the vinum kernel module
-	    early, before starting the kernel.	This can be
-	    accomplished by putting the line</para>
+	  <para>Vinum precisa estar disponível no kernel na hora do
+	  boot.  Então, o método para iniciar automaticamente o Vinum
+	  descrito em <xref linkend="vinum-rc-startup"> não é aplicável
+	  nesse caso, e o parâmetro <literal>start_vinum</literal> não
+	  pode estar ativado quando a seguinte configuração estiver
+	  sendo arrumada.  A primeira opção seria compilar o Vinum
+	  staticamente no kernel, então estara disponível o tempo todo,
+	  mas isso também não e sempre desejável.  Existe outra opção no
+	  entanto, que seria fazer com que o
+	  <filename>/boot/loader</filename> (<xref
+	  linkend="boot-loader">) carregue o módulo de kenel do vinum
+	  cedo, antes de iniciar o kernel.  Isso pode ser feito
+	  adicionando a seguinte linha</para>
+	  
 
 	  <para><literal>vinum_load="YES"</literal></para>
 
-	  <para>into the file
+	  <para>no arquivo
 	    <filename>/boot/loader.conf</filename>.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Vinum must be initialized early since it needs to
-	    supply the volume for the root filesystem.	By default,
-	    the Vinum kernel part is not looking for drives that might
-	    contain Vinum volume information until the administrator
-	    (or one of the startup scripts) issues a <command>vinum
-	    start</command> command.</para>
+	  <para>Vinum deve ser iniciado cedo pois ele precisa suprir o
+	  volume para os arquivos de sistemas raiz.  Por padrão, a parte
+	  do kernel do vinum não esta procurando por discos que possam
+	  conter informações de volume de vinum até que o administrador
+	  (ou um dos scripts de inicialização) lance o comando
+	  <command>vinum start</command>.</para>
+	  
 
-	  <note><para>The following paragraphs are outlining the steps
-	    needed for FreeBSD 5.x and above.  The setup required for
-	    FreeBSD 4.x differs, and is described below in <xref
-	    linkend="vinum-root-4x">.</para></note>
+	  <note><para>Os parágrafos seguintes descrevem os passos
+	  necessários para o FreeBSD 5.x e superiores.  os passos
+	  obrigatórios para o 4.x, são diferentes e estão descritos a
+	  baixo em <xref linkend="vinum-root-4x">.</para></note>
+	  
 
-	  <para>By placing the line:</para>
+	  <para>colocando a linha:</para>
+	  
 
 	  <para><literal>vinum.autostart="YES"</literal></para>
 
-	  <para>into <filename>/boot/loader.conf</filename>, Vinum is
-	    instructed to automatically scan all drives for Vinum
-	    information as part of the kernel startup.</para>
+	  <para>em <filename>/boot/loader.conf</filename>, Vinum é
+	    instruido para procurar automaticamente em todos os discos
+	    por informações úteis a ele como parte da inicialização do
+	    kernel.</para> 
 
-	  <para>Note that it is not necessary to instruct the kernel
-	    where to look for the root filesystem.
-	    <filename>/boot/loader</filename> looks up the name of the
-	    root device in <filename>/etc/fstab</filename>, and passes
-	    this information on to the kernel.	When it comes to mount
-	    the root filesystem, the kernel figures out from the
-	    devicename provided which driver to ask to translate this
-	    into the internal device ID (major/minor number).</para>
+	  <para>Note que não é necesário ensinar ao kernel aonde
+	  procurar pelos arquivos de sistema raiz.
+	  <filename>/boot/loader</filename> procura o nome do
+	  dispositivo raiz em <filename>/etc/fstab</filename>, e passa
+	  essa informação para o kernel.  Quando chega a hora de montar
+	  os arquivos de sistema raiz, o kernel descobre a partir do nome
+	  do dispositivo fornecido qual é o disco que se deve pedir para
+	  passar o nome do dispositivo raiz para um numero de
+	  identificação interna de dispostivo.</para>
+	  
 	</listitem>
       </itemizedlist>
     </sect2>
 
     <sect2>
-      <title>Making a Vinum-based Root Volume Accessible to the
-	Bootstrap</title>
+      <title>Tornando um volume raiz baseado em vinum accessível para o
+      <literal>Bootstrap</literal>
+      
 
-      <para>Since the current FreeBSD bootstrap is only 7.5 KB of
-	code, and already has the burden of reading files (like
-	<filename>/boot/loader</filename>) from the UFS filesystem, it
-	is sheer impossible to also teach it about internal Vinum
-	structures so it could parse the Vinum configuration data, and
-	figure out about the elements of a boot volume itself.	Thus,
-	some tricks are necessary to provide the bootstrap code with
-	the illusion of a standard <literal>"a"</literal> partition
-	that contains the root filesystem.</para>
-
-      <para>For this to be possible at all, the following requirements
-	must be met for the root volume:</para>
+      <para>Visto que o atual <literal>Bootstrap</literal> do FreeBSD
+      contém apenas 7.5 KB de código, e já tem o trabalho de ler
+      arquivos de UFS (como <filename>/boot/loader</filename>), é
+      completamente impossível ensiná-lo também sobre as estruturas
+      internas do vinum para que ele possa analizar os dados de
+      configuração do vinum, e descobrir sozinho os elementos de um
+      volume de inicialização.  Dessa forma, alguns truques são
+      necessários para fornecer ao código do
+      <literal>bootstrap</literal> a ilusão de que ele é uma partição
+      <literal>"a"</literal> padrão que contém o arquivo de sistem
+      raiz.</para>
+     
+      
+      <para>Para que isso se torne possível, os seguintes requisitos
+      para o volume rzia devem ser compridos:</para>
+      
 
       <itemizedlist>
 	<listitem>
-	  <para>The root volume must not be striped or RAID-5.</para>
+	  <para>o volume raiz não pode estar parido ou em RAID-5.</para>
 	</listitem>
 
 	<listitem>
-	  <para>The root volume must not contain more than one
-	    concatenated subdisk per plex.</para>
+	  <para>Um volume raiz não pode conter mais de um sublink
+	  concatenado por plex.
 	</listitem>
       </itemizedlist>
 
-      <para>Note that it is desirable and possible that there are
+      <para>
+      
+      Note that it is desirable and possible that there are
 	multiple plexes, each containing one replica of the root
 	filesystem.  The bootstrap process will, however, only use one
 	of these replica for finding the bootstrap and all the files,
@@ -1383,46 +1409,50 @@ Subdisk root.p1.s0:
     </sect2>
 
     <sect2 id="vinum-root-4x">
-      <title>Differences for FreeBSD 4.x</title>
+      <title>Diferença para o freeBSD 4.x</title>
 
-      <para>Under FreeBSD 4.x, some internal functions required to
-	make Vinum automatically scan all disks are missing, and the
-	code that figures out the internal ID of the root device is
-	not smart enough to handle a name like
-	<devicename>/dev/vinum/root</devicename> automatically.
-	Therefore, things are a little different here.</para>
-
-      <para>Vinum must explicitly be told which disks to scan, using a
-	line like the following one in
-	<filename>/boot/loader.conf</filename>:</para>
-
+      <para>Com o freeBSD 4.x, algumas funções internas são obrigatórias
+      para fazer com que o vinum procure por todos os discos, e o código
+      que desobre o número de identidade interno do dispositivo raiz não
+      é inteligênte suficiente para suportar nomes como
+      <devicename>/dev/vinum/root</devicename> automaticamente.  Então,
+      as coisas são um pouco diferentes aqui.</para>
+     
+      <para>Vinum precisa ser informado dos discos exatos que ele tem
+      que procurar, use uma linha parecida com a seguinte em
+      <filename>/boot/loader.conf</filename>:</para>
+      
       <para><literal>vinum.drives="/dev/<replaceable>da0</replaceable>
 	/dev/<replaceable>da1</replaceable>"</literal></para>
 
-      <para>It is important that all drives are mentioned that could
-	possibly contain Vinum data.  It does not harm if
-	<emphasis>more</emphasis> drives are listed, nor is it
-	necessary to add each slice and/or partition explicitly, since
-	Vinum will scan all slices and partitions of the named drives
-	for valid Vinum headers.</para>
+      <para>É importante que todos os discos que contém dados do vinum
+      sejam mencionados.  Não será prejudicial se discos a
+      <emphasis>mais</emphasis> forem listados, e nem é necessário
+      adicionar cada fatia ou cada partição explicitamente, porque o
+      vinum irá procurar  por cabeçalhos válidos para ele em todos as
+      partições dos discos citados.</para>
+      
 
-      <para>Since the routines used to parse the name of the root
-	filesystem, and derive the device ID (major/minor number) are
-	only prepared to handle <quote>classical</quote> device names
-	like <devicename>/dev/ad0s1a</devicename>, they cannot make
-	any sense out of a root volume name like
-	<devicename>/dev/vinum/root</devicename>.  For that reason,
-	Vinum itself needs to pre-setup the internal kernel parameter
-	that holds the ID of the root device during its own
-	initialization.	 This is requested by passing the name of the
-	root volume in the loader variable
-	<literal>vinum.root</literal>.	The entry in
-	<filename>/boot/loader.conf</filename> to accomplish this
-	looks like:</para>
-
+      <para>a partir do momento em que as rotinas usadas para passar o
+      nome do arquivo de sistema raiz e para produzir o device ID
+      (major/minor number) estão preparadas apenas para suportar nomes
+      de dispositivos <quote>clássicos</quote> como
+      <devicename>/dev/ad0s1a</devicename>, eles não podem fazer o menor
+      sentido em um nome de volume raiz do tipo
+      <devicename>/dev/vinum/root</devicename>.  Por esta razão, o
+      próprio vinum precisa setar antecipadamente o parâmero interno de
+      kernel que armazena o número de identidade do dispositivo raiz
+      durante a sua inicialização.  Isso é feito setando a variável
+      <literal>vinum.root</literal> com o valor do nome do volume
+      raiz.  A entrada em <filename>/boot/loader.conf</filename> para
+      efetuar essa tarefa se parece com:</para>
+      
       <para><literal>vinum.root="root"</literal></para>
 
-      <para>Now, when the kernel initialization tries to find out the
+      <para>Agora, quando a inicialização do kernel tenta descobrir o
+      dispositivo raiz a ser montado, vê se algum modulo de kernel 
+      
+      Now, when the kernel initialization tries to find out the
 	root device to mount, it sees whether some kernel module has
 	already pre-initialized the kernel parameter for it.  If that
 	is the case, <emphasis>and</emphasis> the device claiming the
