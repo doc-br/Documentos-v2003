@@ -99,53 +99,53 @@
   <sect1 id="using-localization">
     <title>Usando a localiza&ccedil;&atilde;o</title>
 
-    <para>In all its splendor, I18N is not FreeBSD-specific and is a
-      convention.  We encourage you to help FreeBSD in following this
-      convention.</para>
+    <para>Em todo seu esplendor, I18N n&atilde;o &eacute; espec&iacute;fico ao FreeBSD e &eacute; uma
+      conven&ccedil;&atilde;o.  N&oacute;s incentivamos voc&ecirc; a ajudar a serguir esta
+      conven&ccedil;&atilde;o.</para>
     <indexterm><primary>locale</primary></indexterm>
 
-    <para>Localization settings are based on three main terms:
-      Language Code, Country Code, and Encoding.  Locale names are
-      constructed from these parts as follows:</para>
+    <para>Configura&ccedil;&otilde;es de localiza&ccedil;&atilde;o s&atilde;o baseadas em tr&ecirc;s termos principais:
+      C&oacute;digo de l&iacute;ngua, C&oacute;digo de pa&iacute;s, e Condifica&ccedil;&atilde;o.  Nomes de locale s&atilde;o
+      constru&iacute;dos a partir dessas partes que seguem:</para>
 
     <programlisting><replaceable>LanguageCode</replaceable>_<replaceable>CountryCode</replaceable>.<replaceable>Encoding</replaceable></programlisting>
 
     <sect2>
-      <title>Language and Country Codes</title>
-      <indexterm><primary>language codes</primary></indexterm>
-      <indexterm><primary>country codes</primary></indexterm>
+      <title>C&oacute;digos de l&iacute;ngua e pa&iacute;s</title>
+      <indexterm><primary>c&oacute;digos de l&iacute;nguas</primary></indexterm>
+      <indexterm><primary>c&oacute;digos de pa&iacute;ses</primary></indexterm>
 
-      <para>In order to localize a FreeBSD system to a specific language
-	(or any other I18N-supporting &unix; like systems), the user needs to find out
-	the codes for the specify country and language (country
-	codes tell applications what variation of given
-	language to use).  In addition, web
-	browsers, SMTP/POP servers, web servers, etc. make decisions based on
-	them.  The following are examples of language/country codes:</para>
+      <para>A fim do sistema FreeBSD localizar l&iacute;nguas espec&iacute;ficas
+	(ou qualquer outra suportada  no I18N em sistemas &unix; like), o usu&aacute;rio precisa procurar pelos
+	c&oacute;digos para pa&iacute;s e l&iacute;ngua espec&iacute;ficos (c&oacute;digos de
+	pa&iacute;s fala para a aplica&ccedil;&atilde;o que varia&ccedil;&atilde;o de 
+	l&iacute;ngua deve ser usada).  E tamb&eacute;m, navegadores
+	web, servidores SMTP/POP, servidores web, etc. Fa&ccedil;a decis&otilde;es baseada
+	nelas.  Os seguintes exemplos s&atilde;o de c&oacute;digos de l&iacute;ngua/pa&iacute;s:</para>
 
       <informaltable frame="none">
 	<tgroup cols="2">
 	  <thead>
 	    <row>
-	      <entry>Language/Country Code</entry>
-	      <entry>Description</entry>
+	      <entry>C&oacute;digo de L&iacute;ngua/Pa&iacute;s</entry>
+	      <entry>Descri&ccedil;&atilde;o</entry>
 	    </row>
 	  </thead>
 
 	  <tbody>
 	    <row>
 	      <entry>en_US</entry>
-	      <entry>English - United States</entry>
+	      <entry>Ingl&ecirc;s - Estados Unidos</entry>
 	    </row>
 
 	    <row>
 	      <entry>ru_RU</entry>
-	      <entry>Russian for Russia</entry>
+	      <entry>Russo para Russia</entry>
 	    </row>
 
 	    <row>
 	      <entry>zh_TW</entry>
-	      <entry>Traditional Chinese for Taiwan</entry>
+	      <entry>Tradicional Chin&ecirc;s para Taiwan</entry>
 	    </row>
 	  </tbody>
 	</tgroup>
@@ -154,104 +154,103 @@
     </sect2>
 
     <sect2>
-      <title>Encodings</title>
-      <indexterm><primary>encodings</primary></indexterm>
+      <title>Codifica&ccedil;&otilde;es</title>
+      <indexterm><primary>codifica&ccedil;&otilde;es</primary></indexterm>
       <indexterm><primary>ASCII</primary></indexterm>
 
-      <para>Some languages use non-ASCII encodings that are 8-bit, wide
-	or multibyte characters, see &man.multibyte.3; for more
-	details. Older applications do not recognize them
-	and mistake them for control characters.  Newer applications
-	usually do recognize 8-bit characters.  Depending on the
-	implementation, users may be required to compile an application
-	with wide or multibyte characters support, or configure it correctly.
-	To be able to input and process wide or multibyte characters, the <ulink 
-	url="../../../../ports/index.html">FreeBSD Ports collection</ulink> has provided
-	each language with different programs.  Refer to the I18N
-	documentation in the respective FreeBSD Port.</para>
+      <para>Algumas l&iacute;nguas usam codifica&ccedil;&otilde;es n&atilde;o-ASCII que s&atilde;o 8-bit, caracteres
+	wide ou  multibyte, veja &man.multibyte.3; para mais
+	detalhes. Aplica&ccedil;&otilde;es mais velhas n&atilde;o os reconhecem
+	e os confundem por caracteres de controle.  Aplica&ccedil;&otilde;es mais novas
+	geralmente reconhecem caracteres 8-bit.  Dependendo da 
+	implementa&ccedil;&atilde;o, usu&aacute;rios podem necessitar compilar a aplica&ccedil;&atilde;o
+	com suporte a caracteres wide ou multibyte, ou configura-lo corretamente.
+	Para poder entrar e processar caracteres wide ou multibyte, a <ulink 
+	url="../../../../ports/index.html">Cole&ccedil;&atilde;o de Ports do FreeBSD</ulink> fornece
+	cada l&iacute;ngua com programas diferentes.  Consulte a documenta&ccedil;&atilde;o do I18N
+	no respectivo port do FreeBSD.</para>
 
-      <para>Specifically, the user needs to look at the application
-	documentation to decide on how to configure it correctly or to
-	pass correct values into the configure/Makefile/compiler.</para>
+      <para>Especialmente, o usu&aacute;rio deve olhar a documenta&ccedil;&atilde;o
+	da aplica&ccedil;&atilde;o para decidir como configura-la corretamente ou
+	para passar valores corretos ao configure/Makefile/compilador.</para>
 
-      <para>Some things to keep in mind are:</para>
+      <para>Algumas coisas que voc&ecirc; deve ter sempre em mente s&atilde;o:</para>
 
       <itemizedlist>
 	<listitem>
-	  <para>Language specific single C chars character sets
-	  (see &man.multibyte.3;), i.e.,
+	  <para>Conjunto de caracteres &uacute;nicos da linguagem C
+	  (veja &man.multibyte.3;), ex.,
 	    ISO-8859-1, ISO-8859-15, KOI8-R, CP437.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Wide or multibyte encodings, i.e. EUC, Big5.</para>
+	  <para>Codifica&ccedil;&otilde;es Wide ou multibyte, ex. EUC, Big5.</para>
 	</listitem>
       </itemizedlist>
 
-      <para>You can check the active list of character sets at the
+      <para>Voc&ecirc; pode verificar a lista ativa de caracteres configurados em
 	<ulink
 	url="http://www.iana.org/assignments/character-sets">IANA Registry</ulink>.</para>
 
       <note>
-      <para>FreeBSD versions 4.5 and up use X11-compatible locale
-	encodings instead.</para>
+      <para>As vers&otilde;es do FreeBSD 4.5 e acima usam prefrivelmente condifica&ccedil;&otilde;es
+	do locale X11-compat&iacute;vel.</para>
       </note>
 
     </sect2>
 
     <sect2>
-      <title>I18N Applications</title>
+      <title>Aplica&ccedil;&otilde;es I18N</title>
 
-      <para>In the FreeBSD Ports and Package system, I18N applications
-	have been named with <literal>I18N</literal> in their names for
-	easy identification.  However, they do not always support the
-	language needed.</para>
+      <para>No sistema de Ports e Pacotes do FreeBSD, aplica&ccedil;&otilde;es I18N
+	s&atilde;o nomeadas com <literal>I18N</literal> em seus nomes para
+	f&aacute;cil identifica&ccedil;&atilde;o.  Entretanto, elas nem sempre suportam a
+	l&iacute;ngua necessitada.</para>
     </sect2>
 
     <sect2 id="setting-locale">
-      <title>Setting Locale</title>
+      <title>Configurando Locale</title>
 
-      <para>Usually it is sufficient to export the value of the locale name
-        as <envar>LANG</envar> in the login shell.  This could be done in
-	the user's <filename>~/.login_conf</filename> file or in the
-	startup file of the user's shell (<filename>~/.profile</filename>,
+      <para>Geralmente &eacute; suficiente exportar o valor do nome do locale
+        como <envar>LANG</envar> no login da shell.  Isto deve ser feito no
+	arquivo <filename>~/.login_conf</filename> dos usu&aacute;rios ou no
+	arquivo de inicializa&ccedil;&atilde;o dos usu&aacute;rios da shell em (<filename>~/.profile</filename>,
 	<filename>~/.bashrc</filename>, <filename>~/.cshrc</filename>).
-	There is no need to set the locale subsets such as
-	<envar>LC_CTYPE</envar>, <envar>LC_CTIME</envar>.  Please
-	refer to language-specific FreeBSD documentation for more
-	information.</para>
+	N&atilde;o &eacute; necess&aacute;rio configurar subconjuntos do locale subsets como o
+	<envar>LC_CTYPE</envar>, <envar>LC_CTIME</envar>.  Por favor 
+	consulte a documenta&ccedil;&atilde;o do FreeBSD sobre l&iacute;nguas-espec&iacute;ficas para mais
+	informa&ccedil;&otilde;es.</para>
 
-      <para>You should set the following two environment variables in your configuration
-	files:</para>
+      <para>Voc&ecirc; deve configurar as duas seguintes vari&aacute;veis de ambiente em seus arquivos
+	de configura&ccedil;&atilde;o:</para>
 
       <itemizedlist>
         <indexterm><primary>POSIX</primary></indexterm>
         <listitem>
-	  <para><envar>LANG</envar> for &posix; &man.setlocale.3; family
-	    functions</para>
+	  <para><envar>LANG</envar> para fun&ccedil;&otilde;es da famlia &posix; &man.setlocale.3;</para>
 	</listitem>
 
         <indexterm><primary>MIME</primary></indexterm>
 	<listitem>
-	  <para><envar>MM_CHARSET</envar> for applications' MIME character
-	    set</para>
+	  <para><envar>MM_CHARSET</envar> para configurar caracteres MIME 
+	    em aplica&ccedil;&otilde;es.</para>
 	</listitem>
       </itemizedlist>
 
-      <para>This includes the user shell configuration, the specific application
-        configuration, and the X11 configuration.</para>
+      <para>Isto inclui a configura&ccedil;&atilde;o shell do usu&aacute;rio, a configura&ccedil;&atilde;o espec&iacute;fica de
+        aplica&ccedil;&atilde;o, e configura&ccedil;&atilde;o do X11.</para>
 
       <sect3>
-	<title>Setting Locale Methods</title>
+	<title>Configurando m&eacute;todos de Locale</title>
         <indexterm><primary>locale</primary></indexterm>
         <indexterm><primary>login class</primary></indexterm>
 
-	<para>There are two methods for setting locale, and both are
-	  described below.  The first (recommended one) is by assigning
-	  the environment variables in <link linkend="login-class">login
-	  class</link>, and the second is by adding the environment
-	  variable assignments to the system's shell <link
-	  linkend="startup-file">startup file</link>.</para>
+	<para>H&aacute; dois m&eacute;todos para configurar o locale, e ambos est&atilde;o
+	  descritos abaixo.  O primeiro (recomendado um) &eacute; atribu&iacute;ndo
+	  as vari&aacute;veis de ambiente em <link linkend="login-class">classe de
+	  login</link>, e o segundo &eacute; adicionando as atribui&ccedil;&otilde;es da vari&aacute;vel
+	  de ambiente ao <link linkend="startup-file">arquivo de inicializa&ccedil;&atilde;o</link>
+          do sistema shell.</para>
 
 	<sect4 id="login-class">
 	  <title>Login Classes Method</title>
