@@ -524,40 +524,38 @@
 	
 	S myvol.p0.s0           State: up       PO:        0  B Size:        512 MB</programlisting>
 
-      <para>
+      <para>Essa saida mostra um pequeno formato de listagem do
+      &man.vinum.8;.  É representado graficamente em <xref
+      linkend="vinum-simple-vol">.</para>
       
-      This output shows the brief listing format of &man.vinum.8;.  It
-	is represented graphically in <xref linkend="vinum-simple-vol">.</para>
-
       <para>
 	<figure id="vinum-simple-vol">
-	  <title>A Simple Vinum Volume</title>
+	  <title>Um simples volume de Vinum</title>
 	  <graphic fileref="vinum/vinum-simple-vol">
 	</figure>
       </para>
 
-      <para>This figure, and the ones which follow, represent a
-	volume, which contains the plexes, which in turn contain the
-	subdisks.  In this trivial example, the volume contains one
-	plex, and the plex contains one subdisk.</para>
-
-      <para>This particular volume has no specific advantage over a
-	conventional disk partition.  It contains a single plex, so it
-	is not redundant.  The plex contains a single subdisk, so
-	there is no difference in storage allocation from a
-	conventional disk partition.  The following sections
-	illustrate various more interesting configuration
-	methods.</para>
+      <para>Essa figura, e as outra que seguem, representam um volume,
+      no qual contém plexes, que por sua vez possuem subdiscos.  Nesse
+      exemplo trivial, o volume contém um plex, e o plex contém um
+      subdisco.</para>
+      
+      <para>Esse volume em particular não tem nenhuma vantágem
+      específica sobre uma partição de um disco convencional.  Contém um
+      único plex, então, não é redundante.  O plex contém um único
+      subdisco, então a alocação de dados não se difere de uma partição
+      de disco convencional.  As sessões seguintes exemplificam diversos
+      métodos de configuração mais interessantes.</para>
     </sect2>
 
     <sect2>
-      <title>Increased Resilience: Mirroring</title>
+      <title>Crescimento na confiança: Espelhamento</title>
 
-      <para>The resilience of a volume can be increased by mirroring.
-	When laying out a mirrored volume, it is important to ensure
-	that the subdisks of each plex are on different drives, so
-	that a drive failure will not take down both plexes.  The
-	following configuration mirrors a volume:</para>
+      <para>A confiança em um volume pode ser aumentada com
+      espelhamento.  Quando planejando um espelhamento de volume, é
+      importante se assegurar que o subdisco de cada plex esta em
+      partições diferentes, para que uma falha de disco não derrube os
+      dois plexes.  A seguinte configuração espelha um volume:</para>
 
       <programlisting>
 	drive b device /dev/da4h
@@ -567,12 +565,12 @@
 	  plex org concat
 	    sd length 512m drive b</programlisting>
 
-      <para>In this example, it was not necessary to specify a
-	definition of drive <emphasis>a</emphasis> again, since Vinum
-	keeps track of all objects in its configuration database.
-	After processing this definition, the configuration looks
-	like:</para>
-
+      <para>Nesse exemplo, Não foi necessário especificar uma definição
+      de uma partição <emphasis>a</emphasis> novamente, a partir do
+      momento que o vinum armazena todos os objetos em sua base de
+      dados de configuração.  Depois de processar essa definição, a
+      configuração se parece com:</para>
+      
 
       <programlisting>
 	Drives:         2 (4 configured)
@@ -594,25 +592,31 @@
 	S mirror.p0.s0          State: up       PO:        0  B Size:        512 MB
 	S mirror.p1.s0          State: empty    PO:        0  B Size:        512 MB</programlisting>
 	
-      <para><xref linkend="vinum-mirrored-vol"> shows the structure
-	graphically.</para>
+      <para><xref linkend="vinum-mirrored-vol"> mostra a estrutura
+      graficamente.</para>
 
       <para>
 	<figure id="vinum-mirrored-vol">
-	  <title>A Mirrored Vinum Volume</title>
+	  <title>Um volume de Vinum espelhado</title>
 	  <graphic fileref="vinum/vinum-mirrored-vol">
 	</figure>
       </para>
 
-      <para>In this example, each plex contains the full 512&nbsp;MB
-	of address space.  As in the previous example, each plex
-	contains only a single subdisk.</para>
+      <para>Nesse esemplo, cada plex contém os 512&nbsp;MB de espaço de
+      endereço.  E como no exemplo anterior, cada plex contém um único
+      subdisco.</para>
     </sect2>
 
     <sect2>
-      <title>Optimizing Performance</title>
+      <title>Otimizando Performance</title>
 
-      <para>The mirrored volume in the previous example is more
+      <para>O espelhamento do volume no exemplo anterior é mais
+      resistente a falha do que o volume não espelhado, mas sua
+      performance é menor: cada escrita no volume requer a escrita em
+      dois discos, usando assim duas vezes mais largura de banda de
+      disco
+      
+      The mirrored volume in the previous example is more
 	resistant to failure than an unmirrored volume, but its
 	performance is less: each write to the volume requires a write
 	to both drives, using up a greater proportion of the total
