@@ -450,117 +450,124 @@ setenv SGML_CATALOG_FILES /usr/doc/en_US.ISO8859-1/share/sgml/catalog:$SGML_CATA
 	</step>
 
 	<step>
-	  <para>Try and validate this file using an SGML parser.</para>
+	  <para>Tente validar este arquivo utilizando um interpretador
+	  SGML.</para>
 
-	  <para>Part of <filename role="package">textproc/docproj</filename> is the
-	    &man.nsgmls.1; <link linkend="sgml-primer-validating">validating
-	    parser</link>.  Normally, &man.nsgmls.1; reads in a document
-	    marked up according to an SGML DTD and returns a copy of the
-	    document's Element Structure Information Set (ESIS, but that is
-	    not important right now).</para>
-
-	  <para>However, when &man.nsgmls.1; is given the <option>-s</option>
-	    parameter, &man.nsgmls.1; will suppress its normal output, and
-	    just print error messages.  This makes it a useful way to check to
-	    see if your document is valid or not.</para>
-
-	  <para>Use &man.nsgmls.1; to check that your document is
-	    valid;</para>
+	  <para>Um dos componentes do <filename role="package">textproc/docproj
+	    </filename> &eacute; o &man.nsgmls.1;, um <link 
+	    linkend="sgml-primer-validating">interpretador de valida&ccedil;&atilde;o</link>.
+	    Normalmente, o &man.nsgmls.1; l&ecirc; um documento marcado de
+	    acordo com um DTD SGML e retorna uma c&oacute;pia do conjunto de
+	    informa&ccedil;&otilde;es sobre a estrutura dos elementos (ESIS, mas
+	    isso n&atilde;o &eacute; importante agora).</para>
+	    
+	  <para>Entretanto, quando o &man.nsgmls.1; &eacute; executado com o
+	    param&ecirc;tro <option>-s</option>, ele ir&aacute; suprimir o output
+	    normal, e imprimir apenas as mensagens de erro.  Isto o
+	    torna um meio &uacute;til de verificar se o seu documento &eacute;
+	    v&aacute;lido ou n&atilde;o.</para>
+	  
+	  <para>Utilize o &man.nsgmls.1; para verificar se o seu documento i
+	    &eacute; v&aacute;lido:</para>
 
           <screen>&prompt.user; <userinput>nsgmls -s example.sgml</userinput></screen>
 
-	  <para>As you will see, &man.nsgmls.1; returns without displaying any
-	    output.  This means that your document validated
-	    successfully.</para>
+	  <para>Como voc&ecirc; ir&aacute; ver, o &man.nsgmls.1; ir&aacute; executar sem
+	    retornar nenhuma mensagem.  Isto significa que o seu
+	    documento foi validado com sucesso.</para>
 	</step>
 
 	<step>
-	  <para>See what happens when required elements are omitted.  Try
-	    removing the <sgmltag>title</sgmltag> and
-	    <sgmltag>/title</sgmltag> tags, and re-run the validation.</para>
+	  <para>Veja o que acontece quando um elemento obrigat&oacute;rio &eacute;
+	    omitido.  Tente remover as tags <sgmltag>title</sgmltag> e 
+	    <sgmltag>/title</sgmltag>, e execute novamente a 
+	    valida&ccedil;&atilde;o.</para>
 
           <screen>&prompt.user; <userinput>nsgmls -s example.sgml</userinput>
 nsgmls:example.sgml:5:4:E: character data is not allowed here
 nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 
-	  <para>The error output from &man.nsgmls.1; is organized into
-	    colon-separated groups, or columns.</para>
-
+	  <para>As mensagens de erro emitidas pelo &man.nsgmls.1; 
+	    s&atilde;o organizadas em grupos separados por dois pontos, ou
+	    colunas.</para>
+	  
 	  <informaltable frame="none">
 	    <tgroup cols="2">
 	      <thead>
 		<row>
-		  <entry>Column</entry>
-		  <entry>Meaning</entry>
+		  <entry>Coluna</entry>
+		  <entry>Prop&oacute;sito</entry>
 		</row>
 	      </thead>
 	      
 	      <tbody>
 		<row>
 		  <entry>1</entry>
-		  <entry>The name of the program generating the error.  This
-		    will always be <literal>nsgmls</literal>.</entry>
+		  <entry>O nome do programa que est&aacute; gerando o erro.  
+		    Ela ser&aacute; sempre <literal>nsgmls</literal>.</entry>
 		</row>
 
 		<row>
 		  <entry>2</entry>
-		  <entry>The name of the file that contains the error.</entry>
+		  <entry>O nome do arquivo que cont&eacute;m o erro.</entry>
 		</row>
 
 		<row>
 		  <entry>3</entry>
-		  <entry>Line number where the error appears.</entry>
+		  <entry>N&uacute;mero da linha na qual o erro aparece.</entry>
 		</row>
 
 		<row>
 		  <entry>4</entry>
-		  <entry>Column number where the error appears.</entry>
+		  <entry>N&uacute;mero da coluna na qual o erro aparece.</entry>
 		</row>
 
 		<row>
 		  <entry>5</entry>
-		  <entry>A one letter code indicating the nature of the
-		    message.  <literal>I</literal> indicates an informational
-		    message, <literal>W</literal> is for warnings, and
-		    <literal>E</literal> is for errors<footnote>
-		      <para>It is not always the fifth column either.
-			<command>nsgmls -sv</command> displays
+		  <entry>Um c&oacute;digo de uma letra indicando a natureza
+		    da mensagem.  <literal>I</literal> indica uma mensagem 
+		    informativa, <literal>W</literal> &eacute; para um aviso, e
+		    <literal>E</literal> &eacute; para um erro
+		    <footnote>
+		      <para> Ele n&atilde;o est&aacute; sempre na quinta coluna.  O
+			<command>nsgmls -sv</command> exibe
 			<literal>nsgmls:I: SP version "1.3"</literal>
-			(depending on the installed version).  As you can see,
-			this is an informational message.</para>
-		    </footnote>, and <literal>X</literal> is for
-		    cross-references.  As you can see, these messages are
-		    errors.</entry>
+			(depende da vers&atilde;o instalada).  Como voc&ecirc; pode ver,
+			esta &eacute; uma mensagem informativa.</para>
+		    </footnote>, e <literal>X</literal> &eacute; para uma
+		    refer&ecirc;ncia cruzada.  Como voce pode ver, estas mensagens
+		    s&atilde;o erros.</entry>
 		</row>
 
 		<row>
 		  <entry>6</entry>
-		  <entry>The text of the error message.</entry>
+		  <entry>O texto da mensagem de erro.</entry>
 		</row>
 	      </tbody>
 	    </tgroup>
 	  </informaltable>
 
-	  <para>Simply omitting the <sgmltag>title</sgmltag> tags has
-	    generated 2 different errors.</para>
+	  <para>A simples omiss&atilde;o das tags <sgmltag>title</sgmltag> 
+	    gerou 2 erros diferentes.</para>
 
-	  <para>The first error indicates that content (in this case,
-	    characters, rather than the start tag for an element) has occurred
-	    where the SGML parser was expecting something else.  In this case,
-	    the parser was expecting to see one of the start tags for elements
-	    that are valid inside <sgmltag>head</sgmltag> (such as
+	  <para>O primeiro erro indica que o conteudo (neste caso,
+	    caracteres, ou melhor a tag de inicio de um elemento)
+	    ocorreu onde o interpretador SGML estava esperando outra
+	    coisa.  Neste caso, o interpretador estava esperando
+	    encontrar uma das tags de in&iacute;cio para os elementos que s&atilde;o
+	    v&aacute;lidos dentro do <sgmltag>head</sgmltag> (como a
 	    <sgmltag>title</sgmltag>).</para>
 
-	  <para>The second error is because <sgmltag>head</sgmltag> elements
-	    <emphasis>must</emphasis> contain a <sgmltag>title</sgmltag>
-	    element.  Because it does not &man.nsgmls.1; considers that the
-	    element has not been properly finished.  However, the closing tag
-	    indicates that the element has been closed before it has been
-	    finished.</para>
+	  <para>O segundo erro &eacute; porque o elemento <sgmltag>head</sgmltag>
+	    <emphasis>deve</emphasis> conter o elemento <sgmltag>title
+	    </sgmltag>.  Por causa disso o &man.nsgmls.1; considera
+	    que o elemento n&atilde;o foi corretamente finalizado.
+	    Entretanto, a tag de finaliza&ccedil;&atilde;o indica que o elemento foi
+	    fechado antes que estivesse terminado.</para>
 	</step>
 
 	<step>
-	  <para>Put the <literal>title</literal> element back in.</para>
+	  <para>Coloque de volta o elemento <literal>title</literal>.</para>
 	</step>
       </procedure>
     </sect2>
