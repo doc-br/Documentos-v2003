@@ -164,105 +164,116 @@ natd_flags="-dynamic"</programlisting>
   </sect1>
 
   <sect1>
-    <title>Desabilite a tradu&ccedil;&atilde;o de endere&ccedil;o de rede do PPP</title>
+    <title>Desabilite a tradu&ccedil;&atilde;o de endere&ccedil;os de rede do PPP</title>
 
-    <para>You may already be using PPP's built in network address
-      translation (NAT).  If that is the case then you will have to disable
-      it, as these examples use &man.natd.8; to do the same.</para>
-
-    <para>If you already have a block of entries to
-      automatically start PPP, it probably looks like this:</para>
-
+    <para>Voc&ecirc; j&aacute; pdoe estar utilizando a tradu&ccedil;&atilde;o de endere&ccedil;os de
+      rede (NAT) integrante do PPP.  Se este &eacute; o caso ent&atilde;o voc&ecirc; ter&aacute;
+      que desabilit&aacute;-lo, como estes exemplos utilize o &man.natd.8;
+      para fazer o mesmo.</para>
+    
+    <para>Se voc&ecirc; j&aacute; tiver um bloco de entradas para iniciar
+      automaticamente o PPP, ele provavelmente ir&aacute; se parecer com
+      este:</para>
+    
     <programlisting>ppp_enable="YES"
 ppp_mode="auto"
 ppp_nat="YES"
 ppp_profile="<replaceable>profile</replaceable>"</programlisting>
 
-    <para>If so, you will need to specifically disable
-      <literal>ppp_nat</literal> by making sure you have
-      <literal>ppp_nat="NO"</literal> in <filename>/etc/rc.conf</filename>. You will
-      also need to remove any <literal>nat enable yes</literal> or
-      <literal>alias enable yes</literal> in
+    <para>Se assim, voc&ecirc; necessitar&aacute; desabilitar especificamente o
+      <literal>ppp_nat</literal> certificando-se de que voc&ecirc; tenha a
+      entrada <literal>ppp_nat="NO"</literal> no seu
+      <filename>/etc/rc.conf</filename>.  Voc&ecirc; tamb&eacute;m necessitar&aacute;
+      remover qualquer entrada <literal>nat enable yes</literal> ou
+      <literal>alias enable yes</literal> que voc&ecirc; tenha no seu
       <filename>/etc/ppp/ppp.conf</filename>.</para>
   </sect1>
 
   <sect1 id="rules">
-    <title>The rule set for the firewall</title>
+    <title>O conjunto de regras para o firewall</title>
 
-    <para>We are nearly done now.  All that remains now is to define
-      the firewall rules and then we can reboot and the firewall
-      should be up and running.  I realize that everyone will want
-      something slightly different when it comes to their rule base.
-      What I have tried to do is write a rule base that suits most dialup
-      users.  You can obviously modify it to your needs by using the
-      following rules as the foundation for your own rule base.  First,
-      let's start with the basics of closed firewalling.  What you
-      want to do is deny everything by default and then only open up
-      for the things you really need.  Rules should be in the order of
-      allow first and then deny.  The premise is that you add the
-      rules for your allows, and then everything else is
-      denied. :)</para>
-
-    <para>Now, let's make the dir <filename
-      class="directory">/etc/firewall</filename>. Change into the
-      directory and edit the file <filename>fwrules</filename> as we
-      specified in <filename>rc.conf</filename>.  Please note that you
-      can change this filename to anything you wish.  This guide just
-      gives an example of a filename. </para>
-
-    <para>Now, let's look at a sample firewall file, that is commented
-      nicely.</para>
-
-    <programlisting># Define the firewall command (as in /etc/rc.firewall) for easy
-# reference.  Helps to make it easier to read.
+    <para>N&oacute;s estamos pr&oacute;ximos do final agora.  Tudo o que resta agora
+      &eacute; definir as regras do firewall e ent&atilde;o n&oacute;s podemos rebootar a
+      maquina e o firewall dever&aacute; estar de p&eacute; e rodando.  Eu fa&ccedil;o
+      desta forma, as outras pessoas podem desejar algo liveiramente
+      diferente quando forem implementar as suas proprias regras de
+      base.  O que eu tentei fazer foi escrever um conjunto de regras
+      que se aplique a maioria dos usu&aacute;rios dialup.  Voc&ecirc; pode
+      obviamente modifica-las adequando-as as suas necessidades,
+      utilizando as regras seguintes como ponto de partida para a
+      cria&ccedil;&atilde;o das suas proprias regras.  Primeiro, vamos iniciar com
+      um firewall fechado b&aacute;sico.  O que voc&ecirc; precisa fazer &eacute; negar
+      tudo por padr&atilde;o, e ent&atilde;o liberar o acesso apenas as coisas que
+      voc&ecirc; realmente precisar.  As regras devem estar dispostas de
+      forma a liberar primeiro e ent&atilde;o negar.  A premissa &eacute; que voc&ecirc;
+      adicione as regras para o que for liberado, e ent&atilde;o tudo mais &eacute;
+      negado. :)</para>
+    
+    <para>Agora, vamos criar o diret&oacute;rio <filename class="directory">
+      /etc/firewall</filename>.  Entre no diret&oacute;rio e edite o arquivo
+      <filename>fwrules</filename> como n&oacute;s especificamos no
+      <filename>rc.conf</filename>.  Por favor observe que voc&ecirc; pode
+      alterar este nome de arquivo para qualquer coisa que deseje.
+      Este guia apenas d&aacute; apenas um exemplo de nome de arquivo.</para>
+    
+    <para>Agora, vamos examinar um arquivo com exemplos de regras de
+      firewall, as quais est&atilde;o devidamente comentadas.</para>
+    
+    <programlisting>
+# Define o caminho completo do comando de firewall (assim como no
+# /etc/rc.firewall) para facilitar a referencia. Ajuda a tornar o
+# script mais simples de ser lido.
 fwcmd="/sbin/ipfw"
 
-# Force a flushing of the current rules before we reload.
+# For&ccedil;a uma limpeza das regras atuais antes de recarregar.
 $fwcmd -f flush
 
-# Divert all packets through the tunnel interface.
+# Desvia todos os pacotes atrav&eacute;s da interface de tunel.
 $fwcmd add divert natd all from any to any via tun0
 
-# Allow all connections that have dynamic rules built for them,
-# but deny established connections that don't have a dynamic rule.
-# See ipfw(8) for details.
+# Libera todas as conex&otilde;es que possuem uma regra din&acirc;mica construida
+# para ela, mas nega as conex&otilde;es estabelecidas que n&atilde;o possuirem uma
+# regra din&acirc;mica.  Consulte o ipfw(8) para maiores detalhes.
 $fwcmd add check-state
 $fwcmd add deny tcp from any to any established
 
-# Allow all localhost connections
+# Libera todas as conex&otilde;es do localhost
 $fwcmd add allow tcp from me to any out via lo0 setup keep-state
 $fwcmd add deny  tcp from me to any out via lo0
 $fwcmd add allow ip  from me to any out via lo0 keep-state
 
-# Allow all connections from my network card that I initiate
+# Libera todas as conex&otilde;es iniciadas a partir da minha placa de rede
 $fwcmd add allow tcp from me to any out xmit any setup keep-state
 $fwcmd add deny  tcp from me to any
 $fwcmd add allow ip from me to any out xmit any keep-state
 
-# Everyone on the Internet is allowed to connect to the following
-# services on the machine.  This example specifically allows connections
-# to sshd and a webserver.
+# O acesso de qualquer pessoa na internet esta liberado para os
+# seguintes servi&ccedil;os na maquina.  Este exemplo libera especificamente
+# conex&otilde;es destinadas ao sshd e a um servidor web.
 $fwcmd add allow tcp from any to me dst-port 22,80 in recv any setup keep-state
 
-# This sends a RESET to all ident packets.
+# Isto envia um RESET para todos os pacotes de ident.
 $fwcmd add reset log tcp from any to me 113 in recv any
 
-# Enable ICMP: remove type 8 if you don't want your host to be pingable
+# Habilita o ICMP: remova o tipo 8 se voc&ecirc; n&atilde;o desejar que 
+# seu servidor responda a pings
 $fwcmd add allow icmp from any to any icmptypes 0,3,8,11,12,13,14
 
-# Deny all the rest.
+# Nege todo o restante.
 $fwcmd add deny log ip from any to any</programlisting>
 
-    <para>You now have a fully functional firewall that will allow on
-      connections to ports 22 and 80 and will log any other connection
-      attempts. Now, you should be able to safely reboot and your firewall
-      should come up fine. If you find this incorrect in anyway or experience
-      any problems, or have any suggestions to improve this page, please
-      email me.</para>
+    <para>Agora voc&ecirc; tem um firewall completamente funcional o qual
+    ir&aacute; permitir conex&otilde;es nas portas 22 e 80 e ir&aacute; logar qualquer
+    outra tentativa de conex&atilde;o.  Agora, voc&ecirc; j&aacute; esta apto a rebootar o
+    seu equipamento em seguran&ccedil;a e o seu firewall deveria subir
+    perfeitamente.  Se voc&ecirc; achar que isto esta incorreto de alguma
+    forma ou experimentar algum problema, ou tiver alguma sugest&atilde;o
+    para mlehorar esta p&aacute;gina, por favor envie-me um email.M/para>
+    
   </sect1>
 
   <sect1>
-    <title>Questions</title>
+    <title>Perguntas</title>
 
     <qandaset>
       <qandaentry>
