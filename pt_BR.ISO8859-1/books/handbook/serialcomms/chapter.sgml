@@ -29,26 +29,36 @@
     utiliza comunica&ccedil;&otilde;es
     seriais.</para>
 
-    <para>Ap&oacute;s ler este capitulo voc&ecirc; ir&aacute; conhecer:</para>
+    <para>Ap&oacute;s ler este cap&iacute;tulo
+          voc&ecirc; ir&aacute; conhecer:</para>
     <itemizedlist>
-      <listitem><para>Como conectar terminais ao seu sistema FreeBSD
+      <listitem><para>Como conectar terminais 
+          ao seu sistema FreeBSD
 	  .</para></listitem>
-      <listitem><para>Como utilizar um modem para discar para um servidor remoto
+      <listitem><para>Como utilizar um modem para 
+          discar para um servidor remoto
 	  .</para></listitem>
-      <listitem><para>Como permitir que usu&aacute;rios remotos se conectem
-      ao seu sistema atrav&eacute;s de um modem.</para></listitem>
-      <listitem><para>Como efetuar boot utilizando um console serial.</para></listitem>
+      <listitem><para>Como permitir que usu&aacute;rios
+           remotos se conectem
+           ao seu sistema atrav&eacute;s de um
+           modem.</para></listitem>
+      <listitem><para>Como efetuar boot utilizando
+            um console serial.</para></listitem>
     </itemizedlist>
 
-    <para>Antes de ler este capitulo, voce deve:</para>
+    <para>Antes de ler este cap&iacute;tulo, voc&ecirc; deve:</para>
     <itemizedlist>
-      <listitem><para>Conhecer como configurar e instalar um novo kernel (<xref
+      <listitem><para>Conhecer como configurar 
+        e instalar um novo kernel (<xref
         linkend="kernelconfig">).</para></listitem>
-      <listitem><para>Compreender o sistema de permiss&otilde;es e de processos no ambiente &unix;
+      <listitem><para>Compreender o sistema de 
+        permiss&otilde;es e de processos no ambiente &unix;
         (<xref linkend="basics">).</para></listitem>
-      <listitem><para>Ter acesso ao manual t&eacute;cnico do hardware
-      serial (Modem ou Placa multi-portas) que voc&ecirc; deseja utilizar
-      com o FreeBSD.</para></listitem>
+      <listitem><para>Ter acesso ao manual t&eacute;cnico
+         do hardware
+         serial (Modem ou Placa multi-portas) que
+         voc&ecirc; deseja utilizar
+         com o FreeBSD.</para></listitem>
     </itemizedlist>
   </sect1>
 
@@ -65,7 +75,8 @@
 	<varlistentry>
 	  <term>bps</term>
 	  <listitem>
-	    <para>Bits por segundo &mdash; &eacute; a taxa com que os dados
+	    <para>Bits por segundo &mdash; &eacute; a
+            taxa com que os dados
 	    s&atilde;o transmitidos.</para>
 	  </listitem>
 	</varlistentry>
@@ -74,7 +85,8 @@
 	  <term>DTE</term>
 	  <indexterm><primary>DTE</primary></indexterm>
 	  <listitem>
-	    <para>Equipamento Terminal de Dados &mdash; por exemplo, o seu
+	    <para>Equipamento Terminal de Dados &mdash;
+            por exemplo, o seu
 	    computador</para>
 	  </listitem>
 	</varlistentry>
@@ -83,7 +95,8 @@
 	  <term>DCE</term>
 	  <indexterm><primary>DCE</primary></indexterm>
 	  <listitem>
-	    <para>Equipamento de Comunica&ccedil;&atilde;o de Dados &mdash;  seu
+	    <para>Equipamento de Comunica&ccedil;&atilde;o
+            de Dados &mdash;  seu
 	    modem</para>
 	  </listitem>
 	</varlistentry>
@@ -92,37 +105,52 @@
 	  <term>RS-232</term>
 	  <indexterm><primary>Cabos RS-232C</primary></indexterm>
 	  <listitem>
-	    <para>Padr&atilde;o EIA para hardwares de comunica&ccedil;&atilde;o serial</para>
+	    <para>Padr&atilde;o EIA para hardwares de
+            comunica&ccedil;&atilde;o serial</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
 
-      <para>Quando fala sobre taxa de comunica&ccedil;&atilde;o de dados, esta sess&atilde;o
-	n&atilde;o usa o termo <quote>baud</quote>.  Baud se refere ao
-	numero de estados de transi&ccedil;&atilde;o el&eacute;tricas que ocorrem em um
+      <para>Quando fala sobre taxa de comunica&ccedil;&atilde;o
+        de dados, esta sess&atilde;o
+	n&atilde;o usa o termo <quote>baud</quote>.  Baud
+        se refere ao
+	n&uacute;mero de estados de transi&ccedil;&atilde;o el&eacute;tricas
+        que ocorrem em um
 	determinado periodo de tempo, enquanto <quote>bps</quote>
-	(bits por segundo) &eacute; o termo <emphasis>correto</emphasis> a
-	ser utilizado (ao menos ele n&atilde;o parece incomodar completamente
+	(bits por segundo) &eacute; o termo
+        <emphasis>correto</emphasis> a
+	ser utilizado (ao menos ele n&atilde;o parece incomodar
+        completamente
 	os teimosos).</para>
     </sect2>
 
     <sect2 id="serial-cables-ports">
       <title>Cabos e Portas</title>
 
-      <para>Para conectar um modem ou um terminal ao seu sistema FreeBSD,
-	voc&ecirc; ir&aacute; precisar de uma porta serial em seu computador e do
-	cabo apropriado para conectar o seu dispositivo serial.  Se
-	voc&ecirc; j&aacute; esta familiarizado com o seu dispositivo e com o cabo
-	que ele necessita, voc&ecirc; pode pular tranquilamente esta sess&atilde;o.
+      <para>Para conectar um modem ou um terminal ao
+        seu sistema FreeBSD,
+	voc&ecirc; ir&aacute; precisar de uma porta
+        serial em seu computador e do
+	cabo apropriado para conectar o seu dispositivo
+        serial.  Se
+	voc&ecirc; j&aacute; esta familiarizado com
+        o seu dispositivo e com o cabo
+	que ele necessita, voc&ecirc; pode pular
+        tranquilamente esta sess&atilde;o.
 	.</para>
 
       <sect3 id="term-cables">
 	<title>Cabos</title>
 
-	<para>H&aacute; diversos tipos diferentes de cabos seriais.  Os dois
-	  tipos mais comuns para os nossos prop&oacute;sitos s&atilde;o os cabos
-	  <literal>null-modem</literal> e os cabos padr&atilde;o RS-232.  A
-	  documenta&ccedil;&atilde;o do seu dispositivo ir&aacute; descrever o tipo de cabo
+	<para>H&aacute; diversos tipos diferentes
+          de cabos seriais.  Os dois
+	  tipos mais comuns para os nossos prop&oacute;sitos
+          s&atilde;o os cabos
+	  <literal>null-modem</literal> e os cabos
+          padr&atilde;o RS-232.  A
+	  documenta&ccedil;&atilde;o do seu dispositivo
+          ir&aacute; descrever o tipo de cabo
 	  necess&aacute;rio.</para>
 
 	<sect4 id="term-cables-null">
@@ -131,17 +159,22 @@
 	  <indexterm>
 	    <primary>Cabo null-modem</primary>
 	  </indexterm>
-	  <para>Um cabo <literal>null-modem</literal> passa alguns sinais,
-	    como o <quote>sinal terra</quote>, de forma direta (sai e
-	    chega no mesmo pino em ambas as pontas), mas chaveia outros
-	    sinais.  Por exemplo, o pino de <quote>envio de
-	    dados</quote> em uma das pontas do cabo ir&aacute; para o pino
-	    <quote>recebimento de dados</quote> na outra ponta.</para>
+	  <para>Um cabo <literal>null-modem</literal> passa
+            alguns sinais, como o <quote>sinal terra</quote>, de
+            forma direta (sai e
+	    chega no mesmo pino em ambas as pontas), mas
+            chaveia outros sinais.  Por exemplo, o pino
+            de <quote>envio de dados</quote> em uma das
+            pontas do cabo ir&aacute; para o pino
+	    <quote>recebimento de dados</quote> na
+            outra ponta.</para>
 
-	  <para>Se voce preferir preparar seus pr&oacute;prios cabos, voc&ecirc; pode
-	    contruir um cabo null-modem para utilizar com terminais.
-	    Esta tabela mostra os nomes dos sinais RS-232C e a
-	    numera&ccedil;&atilde;o dos pinos em um conector DB-25.</para>
+	  <para>Se voce preferir preparar seus
+            pr&oacute;prios cabos, voc&ecirc; pode
+	    contruir um cabo null-modem para utilizar
+            com terminais. Esta tabela mostra os nomes dos
+            sinais RS-232C e a numera&ccedil;&atilde;o dos
+            pinos em um conector DB-25.</para>
 
 	  <informaltable frame="none">
 	    <tgroup cols="5">
@@ -225,8 +258,10 @@
 
 	  <note>
 	    <para>Conecte o <quote>Data Set Ready</quote> (DSR) e o
-	      <quote>Data Carrier Detect</quote> (DCD) internamente no
-	      conector, e ent&atilde;o conecte-os ao <quote>Data Terminal Ready</quote>
+	      <quote>Data Carrier Detect</quote>
+              (DCD) internamente no
+	      conector, e ent&atilde;o conecte-os ao
+              <quote>Data Terminal Ready</quote>
 	      (DTR) no conector remoto.</para>
 	  </note>
 	</sect4>
@@ -235,60 +270,83 @@
 	  <title>Cabos Padr&atilde;o RS-232C</title>
 	  <indexterm><primary>Cabos RS-232C</primary></indexterm>
 
-	  <para>Um cabo serial padr&atilde;o trafega todos os sinais de forma
-	    direta (sai e chega no mesmo pino em ambas as pontas).
-	    Isto &eacute;, o pino de <quote>envio de dados</quote> em uma
-	    ponta do cabo, ir&aacute; para o pino <quote>envio de
-	    dados</quote> na outra ponta.  Este &eacute; o tipo de cabo
-	    utilizado para conectar um modem ao seu sistema FreeBSD, e
-	    tamb&eacute;m &eacute; adequado para alguns terminais.</para>
+	  <para>Um cabo serial padr&atilde;o
+            trafega todos os sinais de forma
+	    direta (sai e chega no mesmo pino
+            em ambas as pontas).
+	    Isto &eacute;, o pino de <quote>envio de
+            dados</quote> em uma
+	    ponta do cabo, ir&aacute; para o
+            pino <quote>envio de
+	    dados</quote> na outra ponta.  Este &eacute; o
+            tipo de cabo
+	    utilizado para conectar um modem ao seu
+            sistema FreeBSD, e
+	    tamb&eacute;m &eacute; adequado para alguns
+            terminais.</para>
 	</sect4>
       </sect3>
 
       <sect3 id="term-ports">
 	<title>Portas</title>
 
-	<para>Portas seriais s&atilde;o os dispositivos atrav&eacute;s dos quais os
-	  dados s&atilde;o transferidos entre um host FreeBSD e um terminal.
-	  Esta sess&atilde;o descreve os tipos de portas que existem e como
+	<para>Portas seriais s&atilde;o os dispositivos
+          atrav&eacute;s dos quais os
+	  dados s&atilde;o transferidos entre um host
+          FreeBSD e um terminal.
+	  Esta sess&atilde;o descreve os tipos de
+          portas que existem e como
 	  elas s&atilde;o reconhecidas no FreeBSD.</para>
 
 	<sect4 id="term-portkinds">
 	  <title>Tipos de portas</title>
 
 	  <para>Existem diversos tipos de portas seriais.  Antes de
-	    comprar ou contruir um cabo, voc&ecirc; precisa ter certeza que
-	    ele ir&aacute; se ajustar a porta existente no seu terminal e no
+	    comprar ou contruir um cabo, voc&ecirc; precisa
+            ter certeza que
+	    ele ir&aacute; se ajustar a porta existente
+            no seu terminal e no
 	    seu sistema FreeBSD.</para>
 
 	  <para>A maioria dos terminais ir&atilde;o ter portas DB25.
 	    Computadores pessoais, incluindo PCs rodando FreeBSD,
-	    ter&atilde;o portas DB25 ou portas DB9.  Se voce possui uma placa
-	    multiserial para o seu PC, voce poder&aacute; ter portas RJ-12 ou
+	    ter&atilde;o portas DB25 ou portas DB9.  Se
+            voce possui uma placa
+	    multiserial para o seu PC, voce poder&aacute; ter
+            portas RJ-12 ou
 	    portas RJ-45.</para>
 
-	  <para>Consulte a documenta&ccedil;&atilde;o que acompanha o seu hardware para
-	    obter a especifica&ccedil;&atilde;o do tipo de porta que ele utiliza.
-	    Uma inspe&ccedil;&atilde;o visual da porta costuma ajudar tamb&eacute;m.</para>
+	  <para>Consulte a documenta&ccedil;&atilde;o que
+            acompanha o seu hardware para
+	    obter a especifica&ccedil;&atilde;o do tipo
+            de porta que ele utiliza.
+	    Uma inspe&ccedil;&atilde;o visual da porta
+            costuma ajudar tamb&eacute;m.</para>
 	</sect4>
 
 	<sect4 id="term-portnames">
 	  <title>Nomes das Portas</title>
 
-	  <para>No FreeBSD, voc&ecirc; acessa cada porta serial atrav&eacute;s de uma
-	    entrada no diret&oacute;rio <filename>/dev</filename>.  Existem 2
+	  <para>No FreeBSD, voc&ecirc; acessa cada porta
+            serial atrav&eacute;s de uma
+	    entrada no diret&oacute;rio 
+            <filename>/dev</filename>.  Existem 2
 	    tipos diferentes de entradas:</para>
 
 	  <itemizedlist>
 	    <listitem>
-	      <para>As portas utilizadas para receber liga&ccedil;&otilde;es (<literal>
+	      <para>As portas utilizadas para receber
+              liga&ccedil;&otilde;es (<literal>
 	      call-in</literal>)s&atilde;o chamadas
 	      <filename>/dev/ttyd<replaceable>N</replaceable></filename>,
-	      onde <replaceable>N</replaceable> &eacute; o numero da porta,
-	      iniciando-se em 0.  Geralmente, voc&ecirc; utiliza as portas
+	      onde <replaceable>N</replaceable> &eacute; o
+              numero da porta,
+	      iniciando-se em 0.  Geralmente, voc&ecirc; utiliza 
+              as portas
 	      <literal>call-in</literal> para terminais.  As portas
 	      <literal>call-in</literal> necessitam que a linha serial
-	      estabele&ccedil;a o sinal de detec&ccedil;&atilde;o de portadora de dados
+	      estabele&ccedil;a o sinal de detec&ccedil;&atilde;o de
+              portadora de dados
 	      (DCD) para funcionar corretamente.</para>
 	    </listitem>
 
@@ -296,7 +354,8 @@
 	      <para>As portas utilizadas para efetuar liga&ccedil;&otilde;es
 	      (<literal>Call-out</literal>), s&atilde;o chamadas
 	      <filename>/dev/cuaa<replaceable>N</replaceable></filename>.
-	      Voc&ecirc; normalmente n&atilde;o utiliza este tipo de porta para
+	      Voc&ecirc; normalmente n&atilde;o utiliza este tipo de
+              porta para
 	      terminais, usando-as apenas para modens.  Voc&ecirc; pode
 	      utilizar uma porta <literal>Call-out</literal> sempre
 	      que o cabo serial ou o terminal n&atilde;o suportar o sinal de
@@ -304,8 +363,10 @@
 	    </listitem>
 	  </itemizedlist>
 
-	  <para>Se voc&ecirc; conectou um terminal a sua primeira porta serial
-	    (<devicename>COM1</devicename> no &ms-dos;), voc&ecirc; ter&aacute; que
+	  <para>Se voc&ecirc; conectou um terminal a sua
+            primeira porta serial
+	    (<devicename>COM1</devicename> no &ms-dos;), voc&ecirc;
+            ter&aacute; que
 	    utilizar <filename>/dev/ttyd0</filename> para acessar o
 	    terminal.  Se o terminal estiver conectado a segunda
 	    porta serial (tamb&eacute;m conhecida como
@@ -334,7 +395,8 @@
 
       <para>Para verificar se o seu kernel reconhece alguma das suas
 	portas seriais, olhe as mensagens exibidas no console enquanto
-	o kernel esta sendo carregado, ou ent&atilde;o utilize o comando
+	o kernel esta sendo carregado, ou ent&atilde;o utilize
+        o comando
 	<command>/sbin/dmesg</command> para visualizar novamente as
 	mensagens exibidas durante o processo de boot do kernel.  Em
 	particular, procure por mensagens que iniciem com os
@@ -365,7 +427,8 @@ sio3: type 16550A</screen>
 	configurar o seu kernel, por favor consultexref 
 	linkend="kernelconfig">.</para>
 
-      <para>As linhas de device relevantes em seu arquivo de configura&ccedil;&atilde;o
+      <para>As linhas de device relevantes em seu arquivo de
+        configura&ccedil;&atilde;o
 	do kernel, ir&atilde;o se paracer com estas, para o
 	FreeBSD&nbsp;4.X:</para>
       
@@ -379,26 +442,32 @@ device		sio3	at isa? port IO_COM4 irq 9</programlisting>
 
       <programlisting>device		sio</programlisting>
 
-      <para>No FreeBSD&nbsp;4.X; voc&ecirc; pode comentar ou remover por completo as linhas dos
-	dispositivos que voc&ecirc; n&atilde;o possui , no caso do FreeBSD&nbsp;5.X
+      <para>No FreeBSD&nbsp;4.X; voc&ecirc; pode comentar ou remover
+        por completo as linhas dos
+	dispositivos que voc&ecirc; n&atilde;o possui , no caso do
+        FreeBSD&nbsp;5.X
 	voc&ecirc; tem que editar o seu arquivo
 	<filename>/boot/device.hints</filename> para configurar as
 	suas portas seriais.  Por favor consulte a p&aacute;gina de manual do
-	&man.sio.4; para maiores informa&ccedil;&otilde;es sobre a configura&ccedil;&atilde;o de
+	&man.sio.4; para maiores informa&ccedil;&otilde;es sobre a
+        configura&ccedil;&atilde;o de
 	portas seriais e de placas muiltiseriais.  Tenha cuidado se
-	voc&ecirc; estiver utilizando um arquivo de configura&ccedil;&atilde;o usado
+	voc&ecirc; estiver utilizando um arquivo de
+        configura&ccedil;&atilde;o usado
 	previamente em uma vers&atilde;o diferente do FreeBSD porque os
 	<literal>flags</literal> de dispositivo e a sintaxe mudou
 	entre as vers&otilde;es.</para>
 
       <note>
-	<para><literal>port IO_COM1</literal> &eacute; a subistitui&ccedil;&atilde;o para
+	<para><literal>port IO_COM1</literal> &eacute; a
+          subistitui&ccedil;&atilde;o para
 	  <literal>port 0x3f8</literal>, <literal>IO_COM2</literal> &eacute; 
 	  <literal>0x2f8</literal>, <literal>IO_COM3</literal> &eacute; 
 	  <literal>0x3e8</literal>, e <literal>IO_COM4</literal> &eacute;
 	  <literal>0x2e8</literal>, os quais s&atilde;o os endere&ccedil;os mais 
 	  comumente utilizados para as respectivas portas seriais.  As
-	  interrup&ccedil;&otilde;es 4, 3, 5, e 9 s&atilde;o as linhas de interrup&ccedil;&atilde;o
+	  interrup&ccedil;&otilde;es 4, 3, 5, e 9 s&atilde;o as linhas
+          de interrup&ccedil;&atilde;o
 	  normalmente solicitadas. Observe tamb&eacute;m que as portas
 	  seriais comuns <emphasis>n&atilde;o podem</emphasis> compartilhar
 	  IRQ no barramento ISA (as placas multiseriais possuem
@@ -411,10 +480,12 @@ device		sio3	at isa? port IO_COM4 irq 9</programlisting>
     <sect2>
       <title>Arquivos especiais de dispositivo</title>
       
-      <para>A maioria dos dispositivos no kernel s&atilde;o acessados atrav&eacute;s
+      <para>A maioria dos dispositivos no kernel s&atilde;o acessados
+      atrav&eacute;s
       de <quote>arquivos especiais de dispositivos</quote>, que est&atilde;o
       localizados no diret&oacute;rio <filename>/dev</filename>.  Os
-      dispositivos <devicename>sio</devicename> s&atilde;o acessados atrav&eacute;s
+      dispositivos <devicename>sio</devicename> s&atilde;o acessados
+      atrav&eacute;s
       dos dispositivos
       <filename>/dev/ttyd<replaceable>N</replaceable></filename>
       (dial-in) e
@@ -426,16 +497,21 @@ device		sio3	at isa? port IO_COM4 irq 9</programlisting>
       dispositivos de <quote>fechamento</quote>
       (<filename>/dev/ttyld<replaceable>N</replaceable></filename> e 
       <filename>/dev/cuala<replaceable>N</replaceable></filename>).
-      Os dispositivos de inicializa&ccedil;&atilde;o s&atilde;o utilizados para inicializar
-      os parametros das portas de comunica&ccedil;&atilde;o cada vez que elas s&atilde;o
+      Os dispositivos de inicializa&ccedil;&atilde;o s&atilde;o utilizados
+      para inicializar
+      os parametros das portas de comunica&ccedil;&atilde;o cada vez
+      que elas s&atilde;o
       abertas, como por exemplo o <literal>crtscts</literal> para os
       modens que utilizam a sinaliza&ccedil;&atilde;o <literal>RTS/CTS</literal>
       para controle de fluxo.  Os dispositivos de fechamento s&atilde;o
       utilizados para travar flags nas portas para prevenir que
-      usu&aacute;rios ou programas mudem certos parametros; veja as p&aacute;ginas
+      usu&aacute;rios ou programas mudem certos parametros; veja 
+      as p&aacute;ginas
       de manual do &man.termios.4; &man.sio.4;, and &man.stty.1; para
-      informa&ccedil;&otilde;es sobre a configura&ccedil;&atilde;o de terminais, fechamento e
-      inicializa&ccedil;&atilde;o de dispositivos, e configura&ccedil;&atilde;o das op&ccedil;&otilde;es de
+      informa&ccedil;&otilde;es sobre a configura&ccedil;&atilde;o de
+      terminais, fechamento e
+      inicializa&ccedil;&atilde;o de dispositivos, e
+      configura&ccedil;&atilde;o das op&ccedil;&otilde;es de
       terminal, respectivamente.</para>
       
       <sect3>
@@ -502,16 +578,21 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
     <para>O dispositivo
     <devicename>ttyd<replaceable>N</replaceable></devicename> (ou
     <devicename>cuaa<replaceable>N</replaceable></devicename>) &eacute; o
-    dispositivo que normalmente voc&ecirc; ir&aacute; desejar abrir para as suas
-    aplica&ccedil;&otilde;es.  Quando um processo abre um dispositivo, ele ir&aacute; ter
-    um conjunto padr&atilde;o de configura&ccedil;&otilde;es de I/O para o terminal.</para>
+    dispositivo que normalmente voc&ecirc; 
+    ir&aacute; desejar abrir para as suas
+    aplica&ccedil;&otilde;es.  Quando um processo abre um 
+    dispositivo, ele ir&aacute; ter
+    um conjunto padr&atilde;o de configura&ccedil;&otilde;es 
+    de I/O para o terminal.</para>
 
     <screen>&prompt.root; <userinput>stty -a -f /dev/ttyd1</userinput></screen>
 
-    <para>Quando voc&ecirc; altera as configura&ccedil;&otilde;es para este dispositivo,
+    <para>Quando voc&ecirc; altera as configura&ccedil;&otilde;es
+      para este dispositivo,
       os ajustes permanecem v&aacute;lidos at&eacute; que o dispositivo seja
       fechado.  Quando ele &eacute; reaberto, ele voltar&aacute; a utilizar as
-      configura&ccedil;&otilde;es padr&otilde;es.  Para fazer altera&ccedil;&otilde;es na configura&ccedil;&atilde;o
+      configura&ccedil;&otilde;es padr&otilde;es.  Para
+      fazer altera&ccedil;&otilde;es na configura&ccedil;&atilde;o
       padr&atilde;o, voc&ecirc; deve abrir e ajustar as configura&ccedil;&otilde;es de
       <quote>estado inicial</quote> do dispositivo.  Por exemplo, para
       habilitar o modo <option>CLOCAL</option>, comunica&ccedil;&atilde;o de 8 bits
@@ -528,19 +609,25 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
     <!-- XXX; /etc/rc.serial is gone in 5.1.
       How do you set default parameters for these devices in 5.X ? -->
 
-    <para>Todo o processo de iniciali&ccedil;&atilde;o dos dispositivos seriais &eacute; controlado
+    <para>Todo o processo de iniciali&ccedil;&atilde;o dos dispositivos 
+         seriais &eacute; controlado
          pelo arquivo <filename>/etc/rc.serial</filename>. Este arquivo
-         afeta as configura&ccedil;&otilde;es padr&otilde;es dos dispositivos seriais.</para>
+         afeta as configura&ccedil;&otilde;es padr&otilde;es dos 
+         dispositivos seriais.</para>
 
-    <para>Para impedir que configura&ccedil;&otilde;es sejam modificadas por aplica&ccedil;&otilde;es, configure
-           os dispositivos em <quote>lock state</quote>. Por exemplo, para travar a velocidade
+    <para>Para impedir que configura&ccedil;&otilde;es sejam
+           modificadas por aplica&ccedil;&otilde;es, configure
+           os dispositivos em <quote>lock state</quote>. Por exemplo, para
+           travar a velocidade
            do <devicename>ttyd5</devicename> em 57600&nbsp;bps, digite:</para>
 
 
     <screen>&prompt.root; <userinput>stty -f /dev/ttyld5 57600</userinput></screen>
 
-    <para>Deste momento em diante, as aplica&ccedil;&otilde;es que abrirem o dispositivo <devicename>ttyd5</devicename>
-          e tentarem modificar a velocidade da porta ter&atilde;o sua tentativa ignorada e far&atilde;o uso
+    <para>Deste momento em diante, as aplica&ccedil;&otilde;es que abrirem
+          o dispositivo <devicename>ttyd5</devicename>
+          e tentarem modificar a velocidade da porta ter&atilde;o sua
+          tentativa ignorada e far&atilde;o uso
           do dispositivo na velocidade 57600&nbsp;bps.</para>
 
     <indexterm>
@@ -548,8 +635,10 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
     </indexterm>
 
 
-    <para>Naturalmente, voc&ecirc; deve definir que os dispositivos que estiverem em estado de inicializa&ccedil;&atilde;o ou travados
-           tenham permiss&atilde;o de escrita somente para a conta <username>root</username>.</para>
+    <para>Naturalmente, voc&ecirc; deve definir que os dispositivos que estiverem
+          em estado de inicializa&ccedil;&atilde;o ou travados
+          tenham permiss&atilde;o de escrita somente
+          para a conta <username>root</username>.</para>
 
     </sect2>
   </sect1>
@@ -571,40 +660,58 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
 
 
 
-    <para>Terminais proporcionam um meio de acesso conveniente e de baixo-custo ao seu sistema FreeBSD
-          quando voc&ecirc; n&atilde;o possui computadores para console ou uma rede para conex&atilde;o.
-          Esta se&ccedil;&atilde;o descreve como utilizar terminais com o FreeBSD.</para>
+    <para>Terminais proporcionam um meio de acesso conveniente e
+          de baixo-custo ao seu sistema FreeBSD
+          quando voc&ecirc; n&atilde;o possui computadores para
+          console ou uma rede para conex&atilde;o.
+          Esta se&ccedil;&atilde;o descreve como utilizar
+          terminais com o FreeBSD.</para>
 
     <sect2 id="term-uses">
       <title>Utilidades e Tipos de Terminais</title>
 
-      <para>Os sistemas &unix; primitivos n&atilde;o possuiam consoles. Diante disso,
-        os usu&aacute;rios conectados executavam seus programas atrav&eacute;s de terminais
-        ligados nas portas seriais dos computadores. Processo muito similar
-        ao uso de um modem e um programa de conex&atilde;o para um sistema remoto, para
+      <para>Os sistemas &unix; primitivos n&atilde;o possuiam
+        consoles. Diante disso,
+        os usu&aacute;rios conectados executavam seus
+        programas atrav&eacute;s de terminais
+        ligados nas portas seriais dos computadores. Processo
+        muito similar
+        ao uso de um modem e um programa de conex&atilde;o para um
+        sistema remoto, para
         trabalhos em modo texto puro.</para> 
 
-      <para>Atualmente, os PCs possuem consoles com alta defini&ccedil;&atilde;o gr&aacute;fica, mas
-        as habilidades de estabelecer uma sess&atilde;o de login atrav&eacute;s de uma porta
+      <para>Atualmente, os PCs possuem consoles com alta defini&ccedil;&atilde;o
+        gr&aacute;fica, mas
+        as habilidades de estabelecer uma sess&atilde;o de login atrav&eacute;s de
+        uma porta
         serial foi mantida nos sistemas operacionais &unix; atuais; O FreeBSD
-        n&atilde;o &eacute; uma exce&ccedil;&atilde;o. Utilizando um terminal conectado a uma porta serial
+        n&atilde;o &eacute; uma exce&ccedil;&atilde;o. Utilizando
+        um terminal conectado a
+        uma porta serial
         voc&ecirc; pode logar-se e rodar programas em modo texto normalmente como 
         seria feito em um console ou numa janela de <command>xterm</command>
         do sistema X Window.</para> 
         
-      <para>Os usu&aacute;rios coorporativos tem a op&ccedil;&atilde;o de conectar diversos terminais
-        num sistema FreeBSD e coloc&aacute;-los nas mesas de trabalho de seus funcion&aacute;rios.
-        Os usu&aacute;rios dom&eacute;sticos podem utilizar de computadores antigos como IBM PCs
+      <para>Os usu&aacute;rios coorporativos tem a op&ccedil;&atilde;o de
+        conectar diversos terminais
+        num sistema FreeBSD e coloc&aacute;-los nas mesas de trabalho de
+        seus funcion&aacute;rios.
+        Os usu&aacute;rios dom&eacute;sticos podem utilizar de computadores
+        antigos como IBM PCs
         ou &macintosh; como terminais de um computador de performance superior 
-        rodando FreeBSD. Permitindo que um computador poderoso, que na maioria das vezes 
-        seria utilizado por apenas um usu&aacute;rio, torne-se um sistema para m&uacute;ltiplos
+        rodando FreeBSD. Permitindo que um computador poderoso, que
+        na maioria das vezes 
+        seria utilizado por apenas um usu&aacute;rio, torne-se um sistema para
+        m&uacute;ltiplos
         usu&aacute;rios.</para>  
   
       <para>No FreeBSD tem-se basicamente tr&ecirc;s tipos de terminais:</para>
 
       <itemizedlist>
 	<listitem>
-	  <para><link linkend="term-dumb">Terminais <foreignphrase>Dumb</foreignphrase> ou burros</link></para>
+	  <para><link linkend="term-dumb">Terminais 
+           <foreignphrase>Dumb</foreignphrase> ou
+           burros</link></para>
 	</listitem>
 
 	<listitem>
@@ -621,23 +728,37 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
       <sect3 id="term-dumb">
 	<title>Terminais <foreignphrase>Dumb</foreignphrase> ou burros</title>
 
-        <para>Terminais <foreignphrase>Dumb</foreignphrase> s&atilde;o um tipo caracter&iacute;stico de
-          equipamento para conex&atilde;o em computadores atrav&eacute;s de portas seriais. S&atilde;o chamados
-          <quote>dumb</quote> ou <quote>burros</quote> devido a serem terminais que possuem
-          habilidade &uacute;nica de envio e apresenta&ccedil;&atilde;o de informa&ccedil;&otilde;es em modo texto. N&atilde;o &eacute; 
-          poss&iacute;vel executar nenhum programa neles. A execu&ccedil;&atilde;o dos programas como 
-          editores de texto, compiladores, correio eletr&ocirc;nico, jogos, e outros, &eacute;
-          feita pelo computador em que o terminal est&aacute; conectado.</para>  
+        <para>Terminais <foreignphrase>Dumb</foreignphrase> s&atilde;o um
+          tipo caracter&iacute;stico de
+          equipamento para conex&atilde;o em computadores
+          atrav&eacute;s de portas seriais. S&atilde;o chamados
+          <quote>dumb</quote> ou <quote>burros</quote> devido
+          a serem terminais que possuem
+          habilidade &uacute;nica de envio e apresenta&ccedil;&atilde;o
+          de informa&ccedil;&otilde;es em modo texto. N&atilde;o &eacute; 
+          poss&iacute;vel executar nenhum programa
+          neles. A execu&ccedil;&atilde;o dos programas como 
+          editores de texto, compiladores, correio
+          eletr&ocirc;nico, jogos, e outros, &eacute;
+          feita pelo computador em que o
+          terminal est&aacute; conectado.</para>  
 
-        <para>Existem diversos tipos de terminais burros, fabricados pelos mais
-          variados fabricantes, como por exemplo o VT-100 da <foreignphrase>Digital
-          Equipment Corporation</foreignphrase>, ou o WY-75 da <foreignphrase>Wyse</foreignphrase>. 
-          Qualquer que seja o tipo funcionar&aacute; com o FreeBSD. Alguns terminais 
-          mais avan&ccedil;ados podem at&eacute; exibir gr&aacute;ficos, por&eacute;m apenas algums
+        <para>Existem diversos tipos de terminais burros, fabricados
+          pelos mais
+          variados fabricantes, como por exemplo o
+          VT-100 da <foreignphrase>Digital
+          Equipment Corporation</foreignphrase>, ou o WY-75 da
+          <foreignphrase>Wyse</foreignphrase>. 
+          Qualquer que seja o tipo funcionar&aacute; com o
+          FreeBSD. Alguns terminais 
+          mais avan&ccedil;ados podem at&eacute; exibir
+          gr&aacute;ficos, por&eacute;m apenas algums
           programas podem fazer uso destas funcionalidades.</para>  
 
-        <para>Terminais burros s&atilde;o plataformas de trabalho bastante comuns
-          em locais onde os usu&aacute;rios n&atilde;o necessitam de aplica&ccedil;&otilde;es gr&aacute;ficas
+        <para>Terminais burros s&atilde;o plataformas
+          de trabalho bastante comuns
+          em locais onde os usu&aacute;rios n&atilde;o necessitam
+          de aplica&ccedil;&otilde;es gr&aacute;ficas
           como as providas pelo sistema X Window.</para>
 
       </sect3>
@@ -645,29 +766,41 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
       <sect3 id="term-pcs">
 	<title>PCs atuando como terminais</title>
 
-        <para>Se um <link linkend="term-dumb">terminal burro</link> possui habilidades suficientes para exibir,
-          enviar e receber texto, certamente, qualquer computador poder&aacute; ser
-          utilizado como um terminal burro. Tudo que ser&aacute; preciso &eacute; um cabo
+        <para>Se um <link linkend="term-dumb">terminal burro</link> possui
+          habilidades suficientes para exibir,
+          enviar e receber texto, certamente, qualquer
+          computador poder&aacute; ser
+          utilizado como um terminal burro. Tudo que ser&aacute; preciso
+          &eacute; um cabo
           apropriado e a <emphasis>emula&ccedil;&atilde;o de terminal</emphasis> 
           realizada por um programa executado no computador.</para>
           
-        <para>Tal configura&ccedil;&atilde;o &eacute; comum para uso dom&eacute;stico. Por exemplo, se
+        <para>Tal configura&ccedil;&atilde;o &eacute; comum para uso
+          dom&eacute;stico. Por exemplo, se
           tem uma pessoa ocupada trabalahndo no seu console do FreeBSD
-          voc&ecirc; pode realizar trabalhos em texto ao mesmo tempo de um computador
+          voc&ecirc; pode realizar trabalhos em texto ao
+          mesmo tempo de um computador
           conectado como um terminal ao FreeBSD.</para>
       </sect3>
 	  
       <sect3 id="term-x">
 	<title>Terminais X</title>
 
-        <para>Terminais X s&atilde;o o tipo mais sofisticado de terminais dispon&iacute;veis.
-          Ao inv&eacute;s de serem conectados por portas seriais, estes s&atilde;o usualmente
-          conectados via rede, como por exemplo <foreignphrase>Ethernet</foreignphrase>.
-          No lugar de executarem aplica&ccedil;&otilde;es em modo texto, estes podem exibir
-          qualquer aplica&ccedil;&atilde;o gr&aacute;fica do X Window.</para> 
+        <para>Terminais X s&atilde;o o tipo mais sofisticado
+          de terminais dispon&iacute;veis.
+          Ao inv&eacute;s de serem conectados por
+          portas seriais, estes s&atilde;o usualmente
+          conectados via rede, como por exemplo
+          <foreignphrase>Ethernet</foreignphrase>.
+          No lugar de executarem aplica&ccedil;&otilde;es em
+          modo texto, estes podem exibir
+          qualquer aplica&ccedil;&atilde;o gr&aacute;fica do
+          X Window.</para> 
 
-        <para>Os terminais X s&atilde;o apresentados aqui somente para abordagem geral do tema.
-              Entretanto, este cap&iacute;tulo <emphasis>n&atilde;o</emphasis> abrange a configura&ccedil;&atilde;o
+        <para>Os terminais X s&atilde;o apresentados aqui
+              somente para abordagem geral do tema.
+              Entretanto, este cap&iacute;tulo <emphasis>n&atilde;o</emphasis>
+              abrange a configura&ccedil;&atilde;o
               ou o uso de terminais X.</para>
 	    
       </sect3>
@@ -676,18 +809,24 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
     <sect2 id="term-config">
       <title>Configura&ccedil;&atilde;o</title>
 
-      <para>Esta sess&atilde;o descreve o que &eacute; necess&aacute;rio configurar no seu sistema FreeBSD
-        para habilitar o <foreignphrase>login</foreignphrase> e utiliza&ccedil;&atilde;o atrav&eacute;s de um terminal.
-        &Eacute; assumido aqui que voc&ecirc; tenha previamente habilitado o suporte para portas seriais no seu kernel
-        e que voc&ecirc; tenha feito a conex&atilde;o f&iacute;sica do terminal na porta serial.</para> 
+      <para>Esta sess&atilde;o descreve o que &eacute; necess&aacute;rio
+        configurar no seu sistema FreeBSD
+        para habilitar o <foreignphrase>login</foreignphrase> e
+        utiliza&ccedil;&atilde;o atrav&eacute;s de um terminal.
+        &Eacute; assumido aqui que voc&ecirc; tenha
+        previamente habilitado o suporte para portas seriais no seu kernel
+        e que voc&ecirc; tenha feito a conex&atilde;o
+        f&iacute;sica do terminal na porta serial.</para> 
       
 
       <para>Relembrando o <xref linkend="boot"> que descreve que o processo
-        <command>init</command> &eacute; respons&aacute;vel pelo controle e in&iacute;cializa&ccedil;&atilde;o 
+        <command>init</command> &eacute; respons&aacute;vel pelo 
+        controle e in&iacute;cializa&ccedil;&atilde;o 
         de todos os processos ao iniciar o sistema.  Uma das atividades executadas
         pelo <command>init</command> &eacute; ler o arquivo <filename>/etc/ttys</filename>
         e iniciar o processo <command>getty</command> nos terminais disponibilizados.
-	O processo <command>getty</command> &eacute; respons&aacute;vel pela leitura do nome de <foreignphrase>login</foreignphrase>
+	O processo <command>getty</command> &eacute; respons&aacute;vel 
+        pela leitura do nome de <foreignphrase>login</foreignphrase>
 	e pela inicializa&ccedil;&atilde;o do programa <command>login</command>.</para>
 	  
       <para>Assim, para configurar os terminais para o seu sistema FreeBSD 
@@ -695,14 +834,17 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
 
       <procedure>
 	<step>
-	  <para>Adicione uma linha no arquivo <filename>/etc/ttys</filename> para a entrada
-	    do diret&oacute;rio <filename>/dev</filename> indicando a porta serial caso esta n&atilde;o esteja 
+	  <para>Adicione uma linha no arquivo <filename>/etc/ttys</filename> 
+            para a entrada
+	    do diret&oacute;rio <filename>/dev</filename> indicando a 
+            porta serial caso esta n&atilde;o esteja 
             descrita no arquivo.</para>
 	</step>
 
 	<step>
 	  <para>Especifique que o <command>/usr/libexec/getty</command> deve ser executado
-            na porta, e indique um tipo apropriado de <replaceable>getty</replaceable> no arquivo <filename>/etc/gettytab</filename>.</para>
+            na porta, e indique um tipo apropriado de <replaceable>getty</replaceable> no 
+            arquivo <filename>/etc/gettytab</filename>.</para>
 	</step>
 
 	<step>
@@ -722,36 +864,53 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
 	</step>
       </procedure>
       
-      <para>Como passo opcional, voc&ecirc; pode desejar criar um tipo de <replaceable>getty</replaceable> 
-        personalizado para utilizar no passo 2 fazendo uma entrada no arquivo <filename>/etc/gettytab</filename>.
-        Este cap&iacute;tulo n&atilde;o explica como fazer isso; &eacute; recomend&aacute;vel que voc&ecirc; leia as p&aacute;ginas de manual &man.gettytab.5;
-        e a &man.getty.8; para informa&ccedil;&otilde;es detalhadas deste processo.</para>
+      <para>Como passo opcional, voc&ecirc; pode desejar 
+        criar um tipo de <replaceable>getty</replaceable> 
+        personalizado para utilizar no passo 2 fazendo 
+        uma entrada no arquivo <filename>/etc/gettytab</filename>.
+        Este cap&iacute;tulo n&atilde;o explica como fazer isso; &eacute; 
+        recomend&aacute;vel que voc&ecirc; leia as p&aacute;ginas de 
+        manual &man.gettytab.5;
+        e a &man.getty.8; para informa&ccedil;&otilde;es detalhadas 
+        deste processo.</para>
       
       <sect3 id="term-etcttys">
 	<title>Adicionando uma entrada no arquivo <filename>/etc/ttys</filename></title>
 
-	<para>O arquivo <filename>/etc/ttys</filename> lista todas as portas do seu sistema FreeBSD em que voc&ecirc;
+	<para>O arquivo <filename>/etc/ttys</filename> lista todas as portas do 
+          seu sistema FreeBSD em que voc&ecirc;
           deseja permitir <foreignphrase>logins</foreignphrase>. Por exemplo,
-	  o primeiro console virtual que &eacute; definido em uma entrada deste arquivo &eacute; o <filename>ttyv0</filename>.  Voc&ecirc;
-          pode realizar <foreignphrase>login</foreignphrase> devido esta entrada.  Este arquivo tamb&eacute;m cont&eacute;m
-          entradas para outros consoles virtuais, portas seriais, e pseudo-ttys.  Para um terminal f&iacute;sico,
-          apenas liste a porta serial que est&aacute; em <filename>/dev</filename> numa entrada sem a parte do 
+	  o primeiro console virtual que &eacute; definido em uma entrada deste 
+          arquivo &eacute; o <filename>ttyv0</filename>.  Voc&ecirc;
+          pode realizar <foreignphrase>login</foreignphrase> devido esta entrada.  Este 
+          arquivo tamb&eacute;m cont&eacute;m
+          entradas para outros consoles virtuais, portas seriais, e pseudo-ttys.  Para 
+          um terminal f&iacute;sico,
+          apenas liste a porta serial que est&aacute; em <filename>/dev</filename> numa 
+          entrada sem a parte do 
           <filename>/dev</filename> (por exemplo, 
 	  <devicename>/dev/ttyv0</devicename> deve ser listado como 
 	  <devicename>ttyv0</devicename>).</para>
 
-	<para>A instala&ccedil;&atilde;o padr&atilde;o do FreeBSD inclui no arquivo <filename>/etc/ttys</filename>
-          o suporte para as quatro primeiras portas seriais: <filename>ttyd0</filename> &agrave; <filename>ttyd3</filename>.  Se 
-          voc&ecirc; conectar fisicamente um terminal em uma destas portas n&atilde;o ser&aacute; necess&aacute;rio editar o <filename>/etc/ttys</filename>
-          pois as entradas referentes a estes terminais j&aacute; constar&atilde;o no arquivo.</para>
+	<para>A instala&ccedil;&atilde;o padr&atilde;o do 
+          FreeBSD inclui no arquivo <filename>/etc/ttys</filename>
+          o suporte para as quatro primeiras portas 
+          seriais: <filename>ttyd0</filename> &agrave; <filename>ttyd3</filename>.  Se 
+          voc&ecirc; conectar fisicamente um terminal em 
+          uma destas portas n&atilde;o ser&aacute; necess&aacute;rio editar o <filename>/etc/ttys</filename>
+          pois as entradas referentes a estes terminais 
+          j&aacute; constar&atilde;o no arquivo.</para>
 
 	<example id="ex-etc-ttys">
 	  <title>Adicionando entradas de terminais em <filename>/etc/ttys</filename></title> 
 
-	  <para>Vamos supor que gostar&iacute;amos de conectar dois terminais ao sistema: um Wyse-50 e um velho IBM PC 286 executando
+	  <para>Vamos supor que gostar&iacute;amos de conectar dois 
+            terminais ao sistema: um Wyse-50 e um velho IBM PC 286 executando
             o programa de terminal <application>Procomm</application>, que emula um terminal VT-100.
-            N&oacute;s conectamos o Wyse na segunda porta serial e o 286 na sexta porta serial (uma porta de uma placa multi-serial).
-	    As entradas correspondentes a esta configura&ccedil;&atilde;o no arquivo <filename>/etc/ttys</filename>
+            N&oacute;s conectamos o Wyse na segunda porta serial e 
+            o 286 na sexta porta serial (uma porta de uma placa multi-serial).
+	    As entradas correspondentes a esta configura&ccedil;&atilde;o no 
+            arquivo <filename>/etc/ttys</filename>
             deveriam ser algo como abaixo:</para>
 
 	  <programlisting>ttyd1<co 
@@ -765,128 +924,190 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
       
 	  <calloutlist>
 	    <callout arearefs="co-ttys-line1col1">
-	      <para>O primeiro campo normalmente especifica o nome de arquivo do terminal e ele &eacute; localizado em
+	      <para>O primeiro campo normalmente especifica o 
+               nome de arquivo do terminal e ele &eacute; localizado em
 	      <filename>/dev</filename>.</para>
 	    </callout>
 	    <callout arearefs="co-ttys-line1col2">
 
-	      <para>O segundo campo &eacute; o comando executado para esta linha, que &eacute; usualmente &man.getty.8;.
-	        <command>getty</command> que inicializa e abre a via de comunica&ccedil;&atilde;o, definindo a velocidade, al&eacute;m de perguntar
-                por um nome de usu&aacute;rio e em seguida executar o programa &man.login.1;.</para>
+	      <para>O segundo campo &eacute; o comando executado para 
+                esta linha, que &eacute; usualmente &man.getty.8;.
+	        <command>getty</command> que inicializa e abre a via 
+                de comunica&ccedil;&atilde;o, definindo a 
+                velocidade, al&eacute;m de perguntar
+                por um nome de usu&aacute;rio e em seguida executar 
+                o programa &man.login.1;.</para>
 
-	      <para>O programa <command>getty</command> aceita um(opcional) par&acirc;metro em sua linha de comando
+	      <para>O programa <command>getty</command> aceita um(opcional) 
+                par&acirc;metro em sua linha de comando
                 que define o tipo do <replaceable>getty</replaceable>.  Um tipo de
-		<replaceable>getty</replaceable> determina as caracter&iacute;sticas de comunica&ccedil;&atilde;o 
-                de um terminal, como taxa de bps e paridade. O programa <command>getty</command>
-                l&ecirc; estas caracter&iacute;sticas do arquivo <filename>/etc/gettytab</filename>.</para>
+		<replaceable>getty</replaceable> determina as 
+                caracter&iacute;sticas de comunica&ccedil;&atilde;o 
+                de um terminal, como taxa de bps e 
+                paridade. O programa <command>getty</command>
+                l&ecirc; estas caracter&iacute;sticas do 
+                arquivo <filename>/etc/gettytab</filename>.</para>
 
 	      <para>O arquivo <filename>/etc/gettytab</filename>
-		cont&eacute;m v&aacute;rias entradas de terminais, tanto de terminais novos quanto de antigos. Em quase todos os casos, 
-                as entradas que iniciam com o texto <literal>std</literal> funcionar&atilde;o para os terminais 
+		cont&eacute;m v&aacute;rias entradas de terminais, tanto de 
+                terminais novos quanto de antigos. Em quase todos os casos, 
+                as entradas que iniciam com o 
+                texto <literal>std</literal> funcionar&atilde;o 
+                para os terminais 
                 conectados fisicamente. Estas entradas ignoram paridade.
 		H&aacute; uma entrada <literal>std</literal> para cada taxa de bps
-		de 110 &agrave; 115200.  &Eacute; claro que voc&ecirc; pode adicionar suas pr&oacute;prias entradas neste arquivo. A p&aacute;gina de manual &man.gettytab.5;
+		de 110 &agrave; 115200.  &Eacute; claro que voc&ecirc; pode 
+                adicionar suas pr&oacute;prias entradas 
+                neste arquivo. A p&aacute;gina de manual &man.gettytab.5;
                 possui maiores informa&ccedil;&otilde;es sobre o assunto.</para>
 
-	      <para>Quando estiver configurando o tipo de <replaceable>getty</replaceable>
-		no arquivo <filename>/etc/ttys</filename>, tenha certeza de que as configura&ccedil;&otilde;es de comunica&ccedil;&atilde;o
+	      <para>Quando estiver configurando o tipo 
+                de <replaceable>getty</replaceable>
+		no arquivo <filename>/etc/ttys</filename>, tenha certeza de 
+                que as configura&ccedil;&otilde;es de comunica&ccedil;&atilde;o
                 do terminal sejam equivalentes.</para>
 	    
-	      <para>Para o nosso exemplo, o Wyse-50 n&atilde;o usa paridade e conecta &agrave; 38400&nbsp;bps.  O 286&nbsp;PC n&atilde;o usa paridade
+	      <para>Para o nosso exemplo, o Wyse-50 n&atilde;o usa paridade e 
+                conecta &agrave; 38400&nbsp;bps.  O 286&nbsp;PC n&atilde;o usa paridade
                 e conecta &agrave; 19200&nbsp;bps.</para>
 
 	    </callout>
 
 	    <callout arearefs="co-ttys-line1col3">
 
-	      <para>O terceiro campo &eacute; o tipo de terminal usualmente conectado atrav&eacute;s desta tty.  Para portas<foreignphrase>dial-up</foreignphrase>,
+	      <para>O terceiro campo &eacute; o tipo de terminal usualmente 
+                conectado atrav&eacute;s desta tty.  Para 
+                portas<foreignphrase>dial-up</foreignphrase>,
 		<literal>unknown</literal> ou
 		<literal>dialup</literal> s&atilde;o tipicamente definidos neste campo 
-                desde que usu&aacute;rios possam fazer <foreignphrase>dial up</foreignphrase> com praticamente
+                desde que usu&aacute;rios possam 
+                fazer <foreignphrase>dial up</foreignphrase> com praticamente
                 qualquer tipo de terminal ou programa.  Para terminais f&iacute;sicos
-                o tipo n&atilde;o muda, portanto, voc&ecirc; pode colocar um tipo real de terminal neste campo,
-                baseando-se na cole&ccedil;&atilde;o de terminais do arquivo &man.termcap.5;.</para>
+                o tipo n&atilde;o muda, portanto, voc&ecirc; pode colocar 
+                um tipo real de terminal neste campo,
+                baseando-se na cole&ccedil;&atilde;o de 
+                terminais do arquivo &man.termcap.5;.</para>
 
-	      <para>Para o nosso exemplo, o Wyse-50 usa um tipo real de terminal enquanto o 286 PC executa o programa
-                <application>Procomm</application> emulando um terminal VT-100.</para>
+	      <para>Para o nosso exemplo, o Wyse-50 usa um tipo real 
+                de terminal enquanto o 286 PC executa o programa
+                <application>Procomm</application> emulando um 
+                terminal VT-100.</para>
 
 	    </callout>
 
 	    <callout arearefs="co-ttys-line1col4">
-	      <para>O quarto campo especifica se a porta deve ser ativada.
-	        Colocando um <literal>on</literal> neste campo far&aacute; com 
-	        que o processo <command>init</command> inicie o programa especificado no segundo campo,
-	        <command>getty</command>.  Caso voc&ecirc; defina <literal>off</literal> neste campo
-                o <command>getty</command> n&atilde;o ser&aacute; iniciado, o que resultar&aacute; na impossibilidade de 
+	      <para>O quarto campo especifica se 
+                a porta deve ser ativada.
+	        Colocando um <literal>on</literal> neste 
+                campo far&aacute; com 
+	        que o processo <command>init</command> inicie 
+                o programa especificado no segundo campo,
+	        <command>getty</command>.  Caso voc&ecirc; defina 
+                <literal>off</literal> neste campo
+                o <command>getty</command> n&atilde;o ser&aacute; iniciado, o 
+                que resultar&aacute; na impossibilidade de 
                 <foreignphrase>logins</foreignphrase> nesta porta.</para>
 	    </callout>
 
 	    <callout arearefs="co-ttys-line1col5">
-	      <para>O campo final &eacute; usado para especificar se a porta ser&aacute; segura.
-	        Definindo a porta como segura significar&aacute; que esta &eacute; confi&aacute;vel ao ponto de permitir
-	        que a conta <username>root</username> (ou qualquer outra conta com UID 0)
+	      <para>O campo final &eacute; usado para 
+                especificar se a porta ser&aacute; segura.
+	        Definindo a porta como segura significar&aacute; que 
+                esta &eacute; confi&aacute;vel ao ponto de permitir
+	        que a conta <username>root</username> (ou 
+                qualquer outra conta com UID 0)
                 possa realizar <foreignphrase>login</foreignphrase> desta porta. 
-	        Definindo como n&atilde;o segura far&aacute; com que n&atilde;o seja permitido <foreignphrase>logins</foreignphrase> com 
+	        Definindo como n&atilde;o segura far&aacute; 
+                com que n&atilde;o seja permitido
+                <foreignphrase>logins</foreignphrase> com 
                 direitos de acesso como os do <username>root</username>.
-	        Numa porta n&atilde;o segura os usu&aacute;rios devem fazer acesso ao sistema atrav&eacute;s de contas
-	        sem privil&eacute;gios de superusu&aacute;rio, e atrav&eacute;s do uso do &man.su.1; ou algum m&eacute;todo similar
+	        Numa porta n&atilde;o segura os usu&aacute;rios
+                devem fazer acesso ao sistema atrav&eacute;s de contas
+	        sem privil&eacute;gios de superusu&aacute;rio, e atrav&eacute;s 
+                do uso do &man.su.1; ou algum m&eacute;todo similar
                 adquirir os privil&eacute;gios.</para>
 
-	      <para>&Eacute; altamente recomand&aacute;vel que voc&ecirc; defina com <quote>insecure</quote>
+	      <para>&Eacute; altamente recomand&aacute;vel que 
+                voc&ecirc; defina com <quote>insecure</quote>
 	        tanto os terminais quanto as portas n&atilde;o habilitadas.
-                &Eacute; bastante f&aacute;cil fazer o acesso e utilizar <command>su</command>
-	        caso voc&ecirc; precise de privil&eacute;gios de superusu&aacute;rio.</para>
+                &Eacute; bastante f&aacute;cil fazer o 
+                acesso e utilizar <command>su</command>
+	        caso voc&ecirc; precise de privil&eacute;gios de 
+                superusu&aacute;rio.</para>
 	    </callout>
 	  </calloutlist>
 	</example>
       </sect3>  
 
       <sect3 id="term-hup">
-	<title>For&ccedil;ando o <command>init</command> a reler o <filename>/etc/ttys</filename></title>
+	<title>For&ccedil;ando o <command>init</command> a 
+         reler o <filename>/etc/ttys</filename></title>
 
-	<para>Ap&oacute;s ter realizado as configura&ccedil;&otilde;es necess&aacute;rias no arquivo
-	  <filename>/etc/ttys</filename> voc&ecirc; deve enviar um sinal SIGHUP
-	  (<foreignphrase>hangup</foreignphrase>) para o processo <command>init</command>
-          para for&ccedil;a-lo a reler as configura&ccedil;&otilde;es e execut&aacute;-las como descrito no arquivo. Por exemplo:</para>
+	<para>Ap&oacute;s ter realizado as 
+          configura&ccedil;&otilde;es necess&aacute;rias no arquivo
+	  <filename>/etc/ttys</filename> voc&ecirc; deve 
+          enviar um sinal SIGHUP
+	  (<foreignphrase>hangup</foreignphrase>) para o 
+          processo <command>init</command>
+          para for&ccedil;a-lo a reler as configura&ccedil;&otilde;es e 
+          execut&aacute;-las como descrito no arquivo. Por exemplo:</para>
 
 
 	<screen>&prompt.root; <userinput>kill -HUP 1</userinput></screen>
 
 	<note>
-	  <para><command>init</command> &eacute; sempre o primeiro processo a ser executado no sistema, portanto, ele sempre
+	  <para><command>init</command> &eacute; sempre o primeiro 
+            processo a ser executado no sistema, portanto, ele sempre
             ter&aacute; o PID 1.</para>
 	</note>
 
-	<para>Se tudo foi configurado corretamente, todos os cabos devidamente conectados,
-          e os terminais ligados, ent&atilde;o o processo <command>getty</command>
-          deve estar sendo executado em cada um dos terminais e voc&ecirc; j&aacute; poder&aacute;
-	  ver os <foreignphrase>prompts</foreignphrase> de <foreignphrase>login</foreignphrase>.</para>
+	<para>Se tudo foi configurado corretamente, todos 
+          os cabos devidamente conectados,
+          e os terminais ligados, ent&atilde;o o 
+          processo <command>getty</command>
+          deve estar sendo executado em cada um dos 
+          terminais e voc&ecirc; j&aacute; poder&aacute;
+	  ver os <foreignphrase>prompts</foreignphrase> de 
+          <foreignphrase>login</foreignphrase>.</para>
       </sect3>
     </sect2>
     
     <sect2 id="term-debug">
       <title>Resolu&ccedil;&atilde;o de problemas na sua conex&atilde;o</title>
       
-      <para>Mesmo com a maior aten&ccedil;&atilde;o aos detalhes, algo pode ainda estar errado 
-        enquanto configuramos um terminal. Aqui temos uma lista de sintomas e algumas sugest&otilde;es para corre&ccedil;&atilde;o de eventuais problemas.</para>
+      <para>Mesmo com a maior aten&ccedil;&atilde;o aos 
+        detalhes, algo pode ainda estar errado 
+        enquanto configuramos um terminal. Aqui temos uma 
+        lista de sintomas e algumas sugest&otilde;es para 
+        corre&ccedil;&atilde;o de eventuais problemas.</para>
       
       <sect3>
-	<title>O <foreignphrase>Prompt de Login</foreignphrase> n&atilde;o aparece</title>
+	<title>O <foreignphrase>Prompt de Login</foreignphrase> 
+          n&atilde;o aparece</title>
 
 	<para>Tenha certeza de que seu terminal est&aacute; conectado e ligado.
-          Caso seja um computador pessoal atuando como terminal tenha certeza de que est&aacute; executando o 
-          o programa de emula&ccedil;&atilde;o de terminal na porta correta.</para>
+          Caso seja um computador pessoal atuando como terminal 
+          tenha certeza de que est&aacute; executando o 
+          o programa de emula&ccedil;&atilde;o de 
+          terminal na porta correta.</para>
 
-	<para>Certifique-se de que os cabos entre seu terminal e o computador FreeBSD estejam 
-          conectados firmemente. Confirme estar utilizando o tipo de cabo correto 
+	<para>Certifique-se de que os cabos entre seu 
+          terminal e o computador FreeBSD estejam 
+          conectados firmemente. Confirme estar 
+          utilizando o tipo de cabo correto 
 	  para esta conex&atilde;o.</para>
 
-	<para>Certifique-se de que seu terminal e seu sistema FreeBSD est&atilde;o configurados com a mesma
-          velocidade em bps e com a mesma configura&ccedil;&atilde;o de paridade. Caso seja um terminal com tela, verifique
-          os controles de contraste e brilho. Caso seja um terminal de impress&atilde;o, certifique-se de este possui 
+	<para>Certifique-se de que seu terminal e 
+          seu sistema FreeBSD est&atilde;o configurados com a mesma
+          velocidade em bps e com a mesma configura&ccedil;&atilde;o de 
+          paridade. Caso seja um terminal com tela, verifique
+          os controles de contraste e brilho. Caso seja um 
+          terminal de impress&atilde;o, certifique-se de este possui 
           papel e tinta em quantidade suficiente.</para> 
 
-	<para>Certifique-se de que o processo <command>getty</command> est&aacute; rodando e servindo um terminal. Por exemplo, para obter uma lista dos processos <command>getty</command>
+	<para>Certifique-se de que o processo <command>getty</command> 
+          est&aacute; rodando e servindo um terminal. Por exemplo, para 
+          obter uma lista dos processos <command>getty</command>
           em execu&ccedil;&atilde;o use o <command>ps</command>, digite:</para>
 
         <screen>&prompt.root; <userinput>ps -axww|grep getty</userinput></screen>
@@ -894,42 +1115,62 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
 	<para>Voc&ecirc; dever&aacute;  ver uma entrada referente ao terminal. Por
           exemplo, a listagem seguinte mostra um <command>getty</command>
           sendo executado na segunda porta serial a <literal>ttyd1</literal>
-          e este est&aacute;  usando o par&acirc;metro <literal>std.38400</literal> referente a entrada no <filename>/etc/gettytab</filename>:</para>
+          e este est&aacute;  usando o par&acirc;metro
+          <literal>std.38400</literal> referente a entrada 
+          no <filename>/etc/gettytab</filename>:</para>
 
 	<screen>22189  d1  Is+    0:00.03 /usr/libexec/getty std.38400 ttyd1</screen>
 
-	<para>Caso n&atilde;o se tenha um processo <command>getty</command> em execu&ccedil;&atilde;o,
-          verifique se voc&ecirc; ativou a porta no <filename>/etc/ttys</filename>.
+	<para>Caso n&atilde;o se tenha um 
+          processo <command>getty</command> em execu&ccedil;&atilde;o,
+          verifique se voc&ecirc; ativou 
+          a porta no <filename>/etc/ttys</filename>.
 	  Lembre-se tamb&eacute;m de executar <command>kill -HUP 1</command>
 	  ap&oacute;s modificar o arquivo <filename>ttys</filename>.</para>
 
 	<para>Caso o processo <command>getty</command> esteja rodando e o terminal
           n&atilde;o apresente o <foreignphrase>prompt de login</foreignphrase>
-          ou apresente sem permitir a digita&ccedil;&atilde;o, seu terminal ou cabo podem n&atilde;o suportar a verifica&ccedil;&atilde;o de conex&atilde;o(<foreignphrase>handshaking</foreignphrase>). Tente
-          modificar a entrada no <filename>/etc/ttys</filename> de <literal>std.38400</literal> para
-	  <literal>3wire.38400</literal> lembrando de executar <command>kill -HUP 1</command> ap&oacute;s
-          alterar o <filename>/etc/ttys</filename>. O <literal>3wire</literal> &eacute; uma entrada
-          similar ao <literal>std</literal>, por&eacute;m ignora a verifica&ccedil;&atilde;o de conex&atilde;o. Voc&ecirc; pode reduzir
-          a velocidade ou ativar o controle de fluxo quando utilizar <literal>3wire</literal>, para
-          prevenir estouro de &aacute;reas de troca(<foreignphrase>buffer overflows</foreignphrase>).</para>
+          ou apresente sem permitir a digita&ccedil;&atilde;o, seu 
+          terminal ou cabo podem n&atilde;o suportar a verifica&ccedil;&atilde;o de 
+          conex&atilde;o(<foreignphrase>handshaking</foreignphrase>). Tente
+          modificar a entrada no <filename>/etc/ttys</filename> 
+          de <literal>std.38400</literal> para
+	  <literal>3wire.38400</literal> lembrando de 
+          executar <command>kill -HUP 1</command> ap&oacute;s
+          alterar o <filename>/etc/ttys</filename>. O 
+          <literal>3wire</literal> &eacute; uma entrada
+          similar ao <literal>std</literal>, por&eacute;m ignora 
+          a verifica&ccedil;&atilde;o de conex&atilde;o. Voc&ecirc; pode reduzir
+          a velocidade ou ativar o controle de 
+          fluxo quando utilizar <literal>3wire</literal>, para
+          prevenir estouro de &aacute;reas de 
+          troca(<foreignphrase>buffer overflows</foreignphrase>).</para>
 
       </sect3>
 
       <sect3>
-	<title>Caso apare&ccedil;am caracteres estranhos ao inv&eacute;s do <foreignphrase>Prompt de Login</foreignphrase></title>
+	<title>Caso apare&ccedil;am caracteres estranhos ao inv&eacute;s 
+         do <foreignphrase>Prompt de Login</foreignphrase></title>
 
-	<para>Certifique-se de que o terminal e o FreeBSD tenham a velocidade e a configura&ccedil;&atilde;o
-          de paridade compat&iacute;veis. Verifique no processo <command>getty</command> se o tipo de <replaceable>getty</replaceable>
-          correto est&aacute; em uso.  Se n&atilde;o, edite o <filename>/etc/ttys</filename> e execute <command>kill
+	<para>Certifique-se de que o terminal e o FreeBSD 
+          tenham a velocidade e a configura&ccedil;&atilde;o
+          de paridade compat&iacute;veis. Verifique no 
+          processo <command>getty</command> se o tipo 
+          de <replaceable>getty</replaceable>
+          correto est&aacute; em uso.  Se n&atilde;o, edite 
+          o <filename>/etc/ttys</filename> e execute <command>kill
 	  -HUP 1</command>.</para>
 
       </sect3>
 
       <sect3>
-	<title>Caracteres aparecem duplicados; a senha aparece quando digitada</title>
+	<title>Caracteres aparecem duplicados; a 
+         senha aparece quando digitada</title>
 
-	<para>Altere o terminal (ou o programa de emula&ccedil;&atilde;o de terminal)
-	  de <quote>half duplex</quote> ou <quote>local echo</quote> para <quote>full duplex.</quote></para>
+	<para>Altere o terminal (ou o programa de 
+          emula&ccedil;&atilde;o de terminal)
+	  de <quote>half duplex</quote> ou <quote>local echo</quote> 
+          para <quote>full duplex.</quote></para>
 
       </sect3>
     </sect2>
@@ -955,28 +1196,41 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
     <title>Servi&ccedil;o de Dial-in</title>
     <indexterm><primary>dial-in service</primary></indexterm>
 
-    <para>Configurar o seu sistema FreeBSD para o servi&ccedil;oo de <foreignphrase>dial-in</foreignphrase> &eacute;
-      similar ao processo de configurar terminais exceto que voc&ecirc; ter&aacute; de discar com <quote>modems</quote>.</para>
+    <para>Configurar o seu sistema FreeBSD para o servi&ccedil;oo 
+      de <foreignphrase>dial-in</foreignphrase> &eacute;
+      similar ao processo de configurar terminais exceto 
+      que voc&ecirc; ter&aacute; de discar com <quote>modems</quote>.</para>
 
       <sect2>
 	<title>Modems Externos vs. Internos</title>
 
-	<para>Modems externos s&atilde;o mais convenientes para <foreignphrase>dial-up</foreignphrase>, devido
-          a permitirem ser configurados via par&acirc;metros armazenados em RAM n&atilde;o vol&aacute;til e eles possuem
-          indicadores luminosos que demonstram o estado de sinais RS-232 importantes. Luzes piscantes
-          impressionam visitantes, e tamb&eacute;m s&atilde;o &uacute;teis na verifica&ccedil;&atilde;o do correto funcionamento do modem.</para>
+	<para>Modems externos s&atilde;o mais convenientes 
+          para <foreignphrase>dial-up</foreignphrase>, devido
+          a permitirem ser configurados via par&acirc;metros armazenados 
+          em RAM n&atilde;o vol&aacute;til e eles possuem
+          indicadores luminosos que demonstram o estado de 
+          sinais RS-232 importantes. Luzes piscantes
+          impressionam visitantes, e tamb&eacute;m s&atilde;o &uacute;teis 
+          na verifica&ccedil;&atilde;o do correto funcionamento do modem.</para>
 
-	<para>Modems internos usualmente n&atilde;o permitem configura&ccedil;&otilde;es via RAM n&atilde;o vol&aacute;til, limitando
-          a serem realizadas somente atrav&eacute;s de chaves DIP.  Caso seu modem possua algum indicador
-          luminoso ser&aacute;, provavelmente, dif&iacute;cil ver as luzes enquanto seu sistema estiver no
+	<para>Modems internos usualmente n&atilde;o permitem 
+          configura&ccedil;&otilde;es via 
+          RAM n&atilde;o vol&aacute;til, limitando
+          a serem realizadas somente atrav&eacute;s 
+          de chaves DIP.  Caso seu modem possua algum indicador
+          luminoso ser&aacute;, provavelmente, dif&iacute;cil 
+          ver as luzes enquanto seu sistema estiver no
           local pr&oacute;prio.</para>
 
       <sect3>
 	<title>Modems e Cabos</title>
 	<indexterm><primary>modem</primary></indexterm>
 
-	<para>Se voc&ecirc; estiver utilizando um modem externo ent&atilde;o ser&aacute; necess&aacute;rio utilizar um cabo apropriado. Um
-          cabo serial do padr&atilde;o RS-232 longo o suficiente com todos os fios necess&aacute;rios aos sinais:</para>
+	<para>Se voc&ecirc; estiver utilizando um modem 
+          externo ent&atilde;o ser&aacute; necess&aacute;rio 
+          utilizar um cabo apropriado. Um
+          cabo serial do padr&atilde;o RS-232 longo o suficiente 
+          com todos os fios necess&aacute;rios aos sinais:</para>
 
 	<itemizedlist>
 	  <listitem>
@@ -1004,7 +1258,8 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
 	  </listitem>
 
 	  <listitem>
-	    <para>Detec&ccedil;&atilde;o de portadora (<acronym>CD</acronym>)</para>
+	    <para>Detec&ccedil;&atilde;o de 
+              portadora (<acronym>CD</acronym>)</para>
 	  </listitem>
 
 	  <listitem>
@@ -1012,18 +1267,28 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
 	  </listitem>
 	</itemizedlist>
 
-	<para>O FreeBSD necessita dos sinais <acronym>RTS</acronym> e <acronym>CTS</acronym> para
-          controle de fluxo sobre velocidades acima de 2400&nbsp;bps, o sinal <acronym>CD</acronym> serve
-          para detectar que a chamada foi respondida e a linha estabilizada, e o sinal
-          <acronym>DTR</acronym> para reiniciar o modem depois de uma se&ccedil;&atilde;o completa. Alguns
-          cabos n&atilde;o possuem todos os fios necess&aacute;rios aos sinais, ent&atilde;o, se voc&ecirc; tiver problemas
-          com a fase de login que n&atilde;o prosegue ap&oacute;s a linha ter sido estabelecida, voc&ecirc;
+	<para>O FreeBSD necessita dos sinais <acronym>RTS</acronym> 
+          e <acronym>CTS</acronym> para
+          controle de fluxo sobre velocidades acima 
+          de 2400&nbsp;bps, o sinal <acronym>CD</acronym> serve
+          para detectar que a chamada foi 
+          respondida e a linha estabilizada, e o sinal
+          <acronym>DTR</acronym> para reiniciar o modem 
+          depois de uma se&ccedil;&atilde;o completa. Alguns
+          cabos n&atilde;o possuem todos os fios necess&aacute;rios 
+          aos sinais, ent&atilde;o, se voc&ecirc; tiver problemas
+          com a fase de login que n&atilde;o prosegue ap&oacute;s 
+          a linha ter sido estabelecida, voc&ecirc;
           deve ter um problema com o seu cabo.</para>
 
-	<para>Assim como outros sistemas operacionais &unix;, o FreeBSD usa de sinais f&iacute;sicos
-          para localizar quando uma chamada foi respondida ou a linha estabelecida e para
-          reiniciar o modem ap&oacute;s uma chamada. O FreeBSD evita enviar comandos para o modem
-          ou observar por estados reportados pelo modem. Se voc&ecirc; est&aacute; acostumado a conectar modems
+	<para>Assim como outros sistemas operacionais &unix;, o 
+          FreeBSD usa de sinais f&iacute;sicos
+          para localizar quando uma chamada foi respondida 
+          ou a linha estabelecida e para
+          reiniciar o modem ap&oacute;s uma chamada. O FreeBSD evita 
+          enviar comandos para o modem
+          ou observar por estados reportados pelo modem. Se voc&ecirc; 
+          est&aacute; acostumado a conectar modems
           a sistemas PC-BBS, isto deve parecer impr&oacute;prio.</para>
       </sect3>
       </sect2>
@@ -1031,16 +1296,27 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
       <sect2>
 	<title>Considera&ccedil;&otilde;es da Interface Serial</title>
 
-	<para>O FreeBSD tem suporte as interfaces de comunica&ccedil;&atilde;o NS8250-, NS16450-, NS16550-, e
-          NS16550A- baseadas na EIA RS-232C (CCITT V.24).  Os dispositivos 8250 e 16450 que possuem
-          &aacute;rea de troca de caractere &uacute;nico.  O dispositivo 16550 prov&ecirc; &aacute;reas de troca de 16
-          caracteres, o que garante uma melhor perfomance ao sistema.  (Problemas na implementa&ccedil;&atilde;o
-          da 16550's evita o uso da &aacute;rea de troca de 16 caracteres, ent&atilde;o use a 16550A's
-          se poss&iacute;vel).  Devido a dispositivos de &aacute;rea de troca de caractere &uacute;nico
-          requerirem maior processamento do sistema operacional que os dispositivos com
-          &aacute;rea de troca de 16 caracteres, prefira utilizar interfaces seriais com sinais baseados em 16550A. Se
-          o sistema possuir diversas portas seriais ativas ou tiver uma carga de servi&ccedil;os muito grande, as
-          placas seriais baseadas em 16550A s&atilde;o melhores para que se tenham taxas baixas de
+	<para>O FreeBSD tem suporte as interfaces de comunica&ccedil;&atilde;o 
+          NS8250-, NS16450-, NS16550-, e
+          NS16550A- baseadas na EIA RS-232C 
+          (CCITT V.24).  Os dispositivos 8250 e 16450 que possuem
+          &aacute;rea de troca de caractere 
+          &uacute;nico.  O dispositivo 16550 prov&ecirc; 
+          &aacute;reas de troca de 16
+          caracteres, o que garante uma melhor perfomance ao 
+          sistema.  (Problemas na implementa&ccedil;&atilde;o
+          da 16550's evita o uso da &aacute;rea de troca de 16 
+          caracteres, ent&atilde;o use a 16550A's
+          se poss&iacute;vel).  Devido a dispositivos de &aacute;rea 
+          de troca de caractere &uacute;nico
+          requerirem maior processamento do sistema 
+          operacional que os dispositivos com
+          &aacute;rea de troca de 16 caracteres, prefira 
+          utilizar interfaces seriais com sinais baseados em 16550A. Se
+          o sistema possuir diversas portas seriais ativas 
+          ou tiver uma carga de servi&ccedil;os muito grande, as
+          placas seriais baseadas em 16550A s&atilde;o melhores 
+          para que se tenham taxas baixas de
          erros de comunica&ccedil;&atilde;o.</para>
       </sect2>
 
@@ -1048,72 +1324,123 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
       <title>R&aacute;pida Vis&atilde;o Geral</title>
 
       <indexterm><primary>getty</primary></indexterm>
-      <para>Assim como os terminais, o <command>init</command> iniciar&aacute; um processo <command>getty</command> para
-        cada porta serial configurada para aceitar conex&otilde;es discadas. Por exemplo, se
-        um modem est&aacute; anexado a <filename>/dev/ttyd0</filename> o comando <command>ps ax</command> deve
+      <para>Assim como os terminais, o <command>init</command> 
+        iniciar&aacute; um processo 
+        <command>getty</command> para
+        cada porta serial configurada para aceitar 
+        conex&otilde;es discadas. Por exemplo, se
+        um modem est&aacute; anexado a <filename>/dev/ttyd0</filename> o 
+        comando <command>ps ax</command> deve
         apresentar algo como:</para>
 
       <screen> 4850 ??  I      0:00.09 /usr/libexec/getty V19200 ttyd0</screen>
 
-      <para>Quando um usu&aacute;rio disca para a linha em que o modem est&aacute; conectado
-        um sinal de <acronym>CD</acronym> (<foreignphrase>Carrier Detect</foreignphrase> - Detec&ccedil;&atilde;o de Portadora)
-        &eacute; reportado pelo modem. O kernel anuncia a detec&ccedil;&atilde;o da portadora e completa a abertura do <command>getty</command> daquela
-        porta.  O <command>getty</command> envia um <foreignphrase>prompt</foreignphrase> <prompt>login:</prompt> para
-        a linha na velocidade especificada. O <command>getty</command> verifica se os caracteres est&atilde;o
-        sendo recebidos corretamente e, numa configura&ccedil;&atilde;o t&iacute;pica, se ele encontra ru&iacute;dos de
-        comunica&ccedil;&atilde;o (provavelmente a velocidade da conex&atilde;o do modem &eacute; diferente da estabelecida
-        no  <command>getty</command>), o <command>getty</command> tenta ajustar a velocidade da linha
+      <para>Quando um usu&aacute;rio disca para a 
+        linha em que o modem est&aacute; conectado
+        um sinal de <acronym>CD</acronym>
+        (<foreignphrase>Carrier Detect</foreignphrase> - 
+        Detec&ccedil;&atilde;o de Portadora)
+        &eacute; reportado pelo modem. O kernel anuncia a 
+        detec&ccedil;&atilde;o da portadora e completa 
+        a abertura do <command>getty</command> daquela
+        porta.  O <command>getty</command> envia um <foreignphrase>prompt
+        </foreignphrase> <prompt>login:</prompt> para
+        a linha na velocidade especificada. O <command>getty</command> 
+        verifica se os caracteres est&atilde;o
+        sendo recebidos corretamente e, numa configura&ccedil;&atilde;o 
+        t&iacute;pica, se ele encontra ru&iacute;dos de
+        comunica&ccedil;&atilde;o (provavelmente a velocidade da 
+        conex&atilde;o do modem &eacute; diferente da estabelecida
+        no  <command>getty</command>), o <command>getty</command> 
+        tenta ajustar a velocidade da linha
         at&eacute; que possa receber caracteres cab&iacute;veis.</para>
 
       <indexterm>
         <primary><command>/usr/bin/login</command></primary>
       </indexterm>
-      <para>Ap&oacute;s o usu&aacute;rio informar seu nome de login, o <command>getty</command> executa
-	<filename>/usr/bin/login</filename>, que se responsabiliza pelo login perguntando ao
-        usu&aacute;rio sua senha e posteriormente iniciando o <foreignphrase>shell</foreignphrase> definido para este.</para>
+      <para>Ap&oacute;s o usu&aacute;rio informar 
+        seu nome de login, o <command>getty</command> executa
+	<filename>/usr/bin/login</filename>, que se 
+        responsabiliza pelo login perguntando ao
+        usu&aacute;rio sua senha e posteriormente iniciando 
+        o <foreignphrase>shell</foreignphrase> definido para este.</para>
     </sect2>
 
 
     <sect2>
       <title>Arquivos de configura&ccedil;&atilde;o</title>
 
-      <para>Temos tr&ecirc;s arquivos de configura&ccedil;&atilde;o do sistema no diret&oacute;rio <filename>/etc</filename> que
-        provavelmente ser&aacute; necess&aacute;rio editar para permitir acesso discado ao seu sistema FreeBSD. O
-        primeiro deles &eacute; o <filename>/etc/gettytab</filename> que cont&eacute;m as informa&ccedil;&otilde;es de configura&ccedil;&atilde;o
-        do processo de servidor <filename>/usr/libexec/getty</filename>. O segundo, o <filename>/etc/ttys</filename>,
-        armazena informa&ccedil;&otilde;es que descrevem ao <filename>/sbin/init</filename> quais dispositivos <filename>tty</filename>
+      <para>Temos tr&ecirc;s arquivos de configura&ccedil;&atilde;o do 
+        sistema no diret&oacute;rio <filename>/etc</filename> que
+        provavelmente ser&aacute; necess&aacute;rio editar para 
+        permitir acesso discado ao seu sistema FreeBSD. O
+        primeiro deles &eacute; o <filename>/etc/gettytab</filename> que 
+        cont&eacute;m as informa&ccedil;&otilde;es de configura&ccedil;&atilde;o
+        do processo de servidor <filename>/usr/libexec/getty</filename>. O 
+        segundo, o <filename>/etc/ttys</filename>,
+        armazena informa&ccedil;&otilde;es que descrevem 
+        ao <filename>/sbin/init</filename> quais 
+        dispositivos <filename>tty</filename>
         devem possuir um processo <command>getty</command> rodando sobre eles.
-        E por &uacute;ltimo, voc&ecirc; poder&aacute; colocar seus comandos de inicializa&ccedil;&atilde;o
-        no <foreignphrase>script</foreignphrase> <filename>/etc/rc.serial</filename>.</para>
+        E por &uacute;ltimo, voc&ecirc; poder&aacute; colocar seus 
+        comandos de inicializa&ccedil;&atilde;o
+        no <foreignphrase>script</foreignphrase> 
+        <filename>/etc/rc.serial</filename>.</para>
 
-      <para>Temos dois grupos distintos relativos as conex&otilde;es com modems em &unix;.
-        Um grupo gosta de configurar seus modems e sistemas para que independendo
-        da velocidade seja poss&iacute;vel discar, por&eacute;m a interface local RS-232 entre
-        o computador e o modem roda numa velocidade travada. O benef&iacute;cio disso &eacute; que
-        o usu&aacute;rio remoto sempre ver&aacute; o prompt de login imediatamente. O negativo disso
-        &eacute; que o sistema n&atilde;o sabe qual a verdadeira velocidade do usu&aacute;rio, o que far&aacute;
-        que programas que rodam utilizando toda a tela, como o Emacs, n&atilde;o ajustarem
-        seus m&eacute;todos de exibi&ccedil;&atilde;o para responderem de maneira melhor quando for executada
+      <para>Temos dois grupos distintos relativos as 
+        conex&otilde;es com modems em &unix;.
+        Um grupo gosta de configurar seus modems e 
+        sistemas para que independendo
+        da velocidade seja poss&iacute;vel discar, por&eacute;m 
+        a interface local RS-232 entre
+        o computador e o modem roda numa velocidade travada. O 
+        benef&iacute;cio disso &eacute; que
+        o usu&aacute;rio remoto sempre ver&aacute; o prompt 
+        de login imediatamente. O negativo disso
+        &eacute; que o sistema n&atilde;o sabe qual a verdadeira 
+        velocidade do usu&aacute;rio, o que far&aacute;
+        que programas que rodam utilizando toda a tela, como 
+        o Emacs, n&atilde;o ajustarem
+        seus m&eacute;todos de exibi&ccedil;&atilde;o para responderem 
+        de maneira melhor quando for executada
         uma conex&atilde;o lenta.</para>
 
-      <para>O outro grupo configura as interfaces RS-232 de seus modems de maneira a diversificarem
-        suas velocidades baseando-se na velocidade da conex&atilde;o do usu&aacute;rio remoto. Por exemplo, conex&otilde;es
-        V.32bis (14.4&nbsp;Kbps) devem fazer com que o modem execute sua interface RS-232 em 19.2&nbsp;Kbps, enquanto
-        conex&otilde;es 2400&nbsp;bps far&atilde;o com que a interface RS-232 do modem rode em 2400&nbsp;bps. Devido ao
-        <command>getty</command> n&atilde;o entender qualquer particularidade da velocidade reportada
-        do modem ele dar&aacute; a mensagem <prompt>login:</prompt> na velocidade inicial e observar&aacute;
-        os caracteres que ter&aacute; em resposta. Se o usu&aacute;rio verificar que os caracteres s&atilde;o impr&oacute;prios
-        ou err&ocirc;neo, ele assumir&aacute; que os usu&aacute;rios dever&atilde;o saber que devem pressionar a
-        tecla <keycode>Enter</keycode> at&aacute; que possa ver um prompt reconhec&iacute;vel. Se as velocidades
-        n&atilde;o combinarem o <command>getty</command> verificar&aacute; que o usu&aacute;rio est&aacute;  digitando <quote>lixo</quote>,
-        ou seja, caracteres impr&oacute;prios e tentar&aacute; estabelecer a pr&oacute;xima velocidade e enviar
-        o prompt <prompt>login:</prompt> novamente.  Este procedimento poder&aacute; perdurar por um tempo, por&eacute;m
-        normalmente ap&oacute;s uma ou duas pressionadas de tecla o usu&aacute;rio ver&aacute; um prompt bom.  Obviamente, esta
-        sequ&ecirc;ncia de login n&atilde;o aparecer&aacute; t&atilde;o limpa quanto a de m&eacute;todo de velocidade travada, mas
-        um usu&aacute;rio de conex&atilde;o lenta deve receber uma melhor resposta interativa para programas
+      <para>O outro grupo configura as interfaces RS-232 de 
+        seus modems de maneira a diversificarem
+        suas velocidades baseando-se na velocidade da conex&atilde;o
+        do usu&aacute;rio remoto. Por exemplo, conex&otilde;es
+        V.32bis (14.4&nbsp;Kbps) devem fazer com que o modem execute 
+        sua interface RS-232 em 19.2&nbsp;Kbps, enquanto
+        conex&otilde;es 2400&nbsp;bps far&atilde;o com que a interface 
+        RS-232 do modem rode em 2400&nbsp;bps. Devido ao
+        <command>getty</command> n&atilde;o entender qualquer 
+        particularidade da velocidade reportada
+        do modem ele dar&aacute; a mensagem <prompt>login:</prompt> na 
+        velocidade inicial e observar&aacute;
+        os caracteres que ter&aacute; em resposta. Se o usu&aacute;rio 
+        verificar que os caracteres s&atilde;o impr&oacute;prios
+        ou err&ocirc;neo, ele assumir&aacute; que os usu&aacute;rios 
+        dever&atilde;o saber que devem pressionar a
+        tecla <keycode>Enter</keycode> at&aacute; que possa ver um prompt 
+        reconhec&iacute;vel. Se as velocidades
+        n&atilde;o combinarem o <command>getty</command> verificar&aacute; 
+        que o usu&aacute;rio est&aacute;  digitando <quote>lixo</quote>,
+        ou seja, caracteres impr&oacute;prios e tentar&aacute; estabelecer a 
+        pr&oacute;xima velocidade e enviar
+        o prompt <prompt>login:</prompt> novamente.  Este procedimento poder&aacute; 
+        perdurar por um tempo, por&eacute;m
+        normalmente ap&oacute;s uma ou duas pressionadas de tecla o 
+        usu&aacute;rio ver&aacute; um prompt bom.  Obviamente, esta
+        sequ&ecirc;ncia de login n&atilde;o aparecer&aacute; t&atilde;o 
+        limpa quanto a de m&eacute;todo de velocidade travada, mas
+        um usu&aacute;rio de conex&atilde;o lenta deve 
+        receber uma melhor resposta interativa para programas
         que utilizam toda a tela para exibi&ccedil;&atilde;o.</para>
 
-      <para>Esta se&ccedil;&atilde;o tentar&aacute; prover informa&ccedil;&otilde;es numa configura&ccedil;&atilde;o balanceada, mas isso ser&aacute;        influenciado tendo em vista a velocidade do modem com a velocidade da conex&atilde;o.</para>
+      <para>Esta se&ccedil;&atilde;o tentar&aacute; prover 
+          informa&ccedil;&otilde;es numa configura&ccedil;&atilde;o balanceada, 
+          mas isso ser&aacute; influenciado tendo em vista a velocidade do 
+          modem com a velocidade da conex&atilde;o.</para>
 
       <sect3>
 	<title><filename>/etc/gettytab</filename></title>
@@ -1121,9 +1448,12 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
   <indexterm>
     <primary><filename>/etc/gettytab</filename></primary>
   </indexterm>
-	<para>O arquivo <filename>/etc/gettytab</filename> &eacute; um arquivo de estilos de &man.termcap.5;-style
-	  de informa&ccedil;&otilde;es de configura&ccedil;&atilde;o para o &man.getty.8;.  Por favor, visite a p&aacute;gina de manual
-          do &man.gettytab.5; para informa&ccedil;&otilde;es detalhadas sobre o formato do arquivo e a lista
+	<para>O arquivo <filename>/etc/gettytab</filename> &eacute; 
+          um arquivo de estilos de &man.termcap.5;-style
+	  de informa&ccedil;&otilde;es de configura&ccedil;&atilde;o 
+          para o &man.getty.8;.  Por favor, visite a p&aacute;gina de manual
+          do &man.gettytab.5; para informa&ccedil;&otilde;es 
+          detalhadas sobre o formato do arquivo e a lista
           de habilidades.</para>
 
 	<sect4>
