@@ -15,14 +15,6 @@
 	<contrib>Muito deste capítulo foi obtido da página
 	  de manual security(7) </contrib>
       </author>
-      <othercredit>
-	<firstname>Douglas</firstname>
-	<surname>Santos</surname>
-	  <affiliation>
-	    <address><email>douglas@conectra.com.br</email></address>
-          </affiliation>
-	<contrib>Tradução para Português-Brasil de </contrib>
-      </othercredit>
     </authorgroup>
   </chapterinfo>
 
@@ -332,7 +324,7 @@
       <title>Comando vs. Protocolo</title>
       <para>Durante todo este documento, nós vamos usar o texto em
        <application>negrito</application> para referenciar a um 
-       comando ou apilação.  Será usado para exemplos como ssh, desde
+       comando ou aplicação.  Será usado para exemplos como ssh, desde
        que seja um protocolo bem como um comando.</para>
     </note>
 
@@ -341,14 +333,14 @@
         linkend="security-intro">última seção</link> deste capítulo.</para>
 
     <sect2 id="securing-root-and-staff">
-      <title>Assegurando a conta <username>root</username> e contas do
+      <title>Protegendo a conta <username>root</username> e contas do
 	sistema</title>
       <indexterm>
         <primary><command>su</command></primary>
       </indexterm>
 
-      <para>Primeiramente, não perca tempo assegurando as contas do
-	sistema se você não assegurou a conta <username>root</username>.
+      <para>Primeiramente, não perca tempo protegendo as contas do
+	sistema se você não protegeu a conta <username>root</username>.
 	A maioria dos sistemas tem uma senha atribuída a conta 
 	<username>root</username>.  A primeira coisa que você faz é 
 	assumir que a senha está <emphasis>sempre</emphasis> 
@@ -407,26 +399,26 @@
 	mecanismo <groupname>wheel</groupname> é melhor do que nada,
 	esta não é necessariamente a opção mais segura.</para>
 
-      <para>An indirect way to secure staff accounts, and ultimately
-        <username>root</username> access is to use an alternative
-	login access method and
-        do what is known as <quote>starring</quote> out the encrypted
-        password for the staff accounts.  Using the &man.vipw.8;
-        command, one can replace each instance of an encrypted password
-        with a single <quote><literal>*</literal></quote> character.
-	This command will update the <filename>/etc/master.passwd</filename>
-	file and user/password database to disable password-authenticated
-        logins.</para>
+      <para>Uma maneira indireta de proteger contas do sistema, e
+	finalmente acesso <username>root</username> é usar um método 
+	de login de acesso alternativo e fazer o que é conhecido
+	como <quote>starring</quote> em senhas criptografadas para
+	as contas do sistema.  Usando o comando &man.vipw.8;, pode
+	substituir cada instância de uma senha criptografada com
+	um único carácter <quote><literal>*</literal></quote>.
+	Este comando atualizará o arquivo <filename>/etc/master.passwd
+	</filename> e a base de dados de usuários/senhas para
+	desabilitar logins autenticados por senha.</para>
 
-      <para>A staff account entry such as:</para>
+      <para>Uma entrada de contas do sistema como:</para>
 
       <programlisting>foobar:R9DT/Fa1/LV9U:1000:1000::0:0:Foo Bar:/home/foobar:/usr/local/bin/tcsh</programlisting>
 
-      <para>Should be changed to this:</para>
+      <para>Deveria ser trocada para:</para>
 
       <programlisting>foobar:*:1000:1000::0:0:Foo Bar:/home/foobar:/usr/local/bin/tcsh</programlisting>
 
-      <para>This change will prevent normal logins from occurring,
+      <para>Esta mudança impedirá que logins normais ocorram,
         since the encrypted password will never match
         <quote><literal>*</literal></quote>.  With this done,
 	staff members must use
