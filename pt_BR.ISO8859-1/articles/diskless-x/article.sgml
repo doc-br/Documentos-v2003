@@ -67,7 +67,7 @@
   </articleinfo>
   
   <sect1>
-    <title>Creating the boot floppy (On the diskless system)</title>
+    <title>Criando o diskete de boot (No sistema diskless)</title>
     
     <para>Since the network boot loaders will not work with some of the TSR's
       and such that &ms-dos; uses, it is best to create a dedicated boot floppy
@@ -171,29 +171,30 @@ Searching for server...</screen>
   </sect1>
   
   <sect1>
-    <title>Allowing systems to boot across the network (On the server)</title>
+    <title>Permitindo que os sistemas deem boot atrav&eacute;s da rede (No servidor)</title>
     
-    <para>Make sure the <filename>/etc/inetd.conf</filename> file has entries
-      for tftp and bootps. Mine are listed below:</para>
+    <para>Certifique-se que o arquivo <filename>/etc/inetd.conf</filename> 
+      Possui as entradas para os servi&ccedil;os de tftp e bootps. As minhas entradas 
+	est&atilde;o listadas abaixo:</para>
     
     <programlisting>tftp	dgram	udp	wait	nobody	/usr/libexec/tftpd	tftpd /tftpboot
-#
-# Additions by who ever you are
 bootps  dgram  udp  wait  root  /usr/libexec/bootpd bootpd /etc/bootptab</programlisting>
     
-    <para>If you have to change the <filename>/etc/inetd.conf</filename> file,
-      send a <literal>HUP</literal> signal to &man.inetd.8;.  To do this, get the
-      process ID of <command>inetd</command> with <command>ps -ax | grep inetd | grep -v
-	grep</command>.  Once you have it, send it a <literal>HUP</literal> signal.  Do this by
-      <command>kill -HUP &lt;pid&gt;</command>.  This will force <command>inetd</command> to
-      re-read its config file.</para>
-
-    <para>Did you remember to note the <literal>addr</literal> line from the
-      output of the boot loader on the diskless system? Guess what, here is
-      where you need it.</para>
-
-    <para>Add an entry to <filename>/etc/bootptab</filename> (maybe creating the
-      file).  It should be laid out identical to this:</para>
+    <para>Se voc&ecirc; precisou alterar o arquivo <filename>/etc/inetd.conf</filename>
+      envie um sinal de <literal>HUP</literal> para o &man.inetd.8;.
+      Para fazer isso, obtenha o numero de processo do <command>inetd</command>
+      com o comando <command>ps -ax | grep inetd | grep -v grep</command>.  Uma vez que 
+      voc&ecirc; saiba qual &eacute; o numero do processo, envie o sinal de <literal>HUP</literal>
+      Fa&ccedil;a isso atrav&eacute;s do comando <command>kill -HUP &lt;pid&gt;</command>.  Isto ir&aacute; 
+      for&ccedil;ar o <command>inetd</command> a reler o seu arquivo de configura&ccedil;&atilde;o.</para>
+    
+    <para>Voc&ecirc; se lembrou de anotar a linha de <literal>endere&ccedil;o
+      </literal> do output do boot loader no sistema diskless?
+      Descubra qual &eacute;, pois aqui voc&ecirc; vai precisar dele.</para>
+    
+    <para>Adicione uma entrada ao arquivo <filename>/etc/bootptab</filename> (
+      Voc&ecirc; pode precisar criar o arquivo).  Ele deve ser id&ecirc;ntico a
+      este:</para>
 
     <programlisting>altair:\
         :ht=ether:\
@@ -205,92 +206,99 @@ bootps  dgram  udp  wait  root  /usr/libexec/bootpd bootpd /etc/bootptab</progra
         :gw=199.246.76.1:\
         :vm=rfc1048:</programlisting>
     
-    <para>The lines are as follows:</para>
+    <para>As linhas s&atilde;o as seguintes:</para>
 
     <informaltable frame="none">
       <tgroup cols="2">
 	<tbody>
 	  <row>
 	    <entry><literal>altair</literal></entry>
-	    <entry>the diskless systems name without the domain name.</entry>
+	    <entry>O nome do sistema diskless sem o nome de dominio.</entry>
 	  </row>
 
 	  <row>
 	    <entry><literal>ht=ether</literal></entry>
-	    <entry>the hardware type of <quote>ethernet</quote>.</entry>
+	    <entry>Especifica o tipo de hardware como <quote>ethernet</quote>.</entry>
 	  </row>
 
 	  <row>
 	    <entry><literal>ha=004001432666</literal></entry>
-	    <entry>the hardware address (the number noted above).</entry>
+	    <entry>O endere&ccedil;o de hardware da placa de rede (MAC
+	      Address).</entry>
 	  </row>
 
 	  <row>
 	    <entry><literal>sm=255.255.255.0</literal></entry>
-	    <entry>the subnet mask.</entry>
+	    <entry>A mascara de rede.</entry>
 	  </row>
 
 	  <row>
 	    <entry><literal>hn</literal></entry>
-	    <entry>tells server to send client's hostname to the
-	      client.</entry>
+	    <entry>Diz ao servidor para enviar o hostname do cliente
+	      para o cliente.</entry>
 	  </row>
 
 	  <row>
 	    <entry><literal>ds=199.246.76.1</literal></entry>
-	    <entry>tells the client who the domain server is.</entry>
+	    <entry>Diz ao cliente quem &eacute; o servidor de dominio.</entry>
 	  </row>
 
 	  <row>
 	    <entry><literal>ip=199.246.76.2</literal></entry>
-	    <entry>tells the client what its IP address is.</entry>
+	    <entry>Diz ao cliente qual &eacute; o seu endere&ccedil;o IP.</entry>
 	  </row>
 
 	  <row>
 	    <entry><literal>gw=199.246.76.1</literal></entry>
-	    <entry>tells the client what the default gateway is.</entry>
+	    <entry>Diz ao cliente qual &eacute; o seu gateway padr&atilde;o.</entry>
 	  </row>
 
 	  <row>
 	    <entry><literal>vm=...</literal></entry>
-	    <entry>just leave it there.</entry>
+	    <entry>Apenas deixe ele aqui<entry>
 	  </row>
 	</tbody>
       </tgroup>
     </informaltable>
 
     <note>
-      <para>Be sure to set up the IP addresses correctly, the addresses above
-	are my own.</para>
+      <para>Certifique-se de configurar o seu endere&ccedil;o IP corretamente, 
+	o endere&ccedil;o acima &eacute; o meu pr&oacute;prio.</para>
     </note>
 
-    <para>Create the directory <filename>/tftpboot</filename> on the server it will contain the
-      configuration files for the diskless systems that the server will serve.
-      These files will be named <filename>cfg.<replaceable>ip</replaceable></filename> where <replaceable>ip</replaceable> is the IP
-      address of the diskless system.  The config file for <hostid>altair</hostid> is
-      <filename>/tftpboot/cfg.199.246.76.2</filename>.  The contents is:</para>
-
+    <para>Crie o diret&oacute;rio <filename>/tftpboot</filename> no servidor
+      o qual ir&aacute; conter os arquivos de configura&ccedil;&atilde;o do sistema
+      diskless ao qual o servidor ir&aacute; servir.  Estes arquivos ser&atilde;o
+      nomeados <filename>cfg.<replaceable>ip</replaceable></filename>
+      onde <replaceable>ip</replaceable> &eacute; o endere&ccedil;o IP do sistema
+      diskless.  O arquivo de configura&ccedil;&atilde;o para o host
+      <hostid>altair</hostid> &eacute; o
+      <filename>/tftpboot/cfg.199.246.76.2</filename>. E o seu
+      conte&uacute;do &eacute;:</para>
+    
     <programlisting>rootfs 199.246.76.1:/DiskLess/rootfs/altair
 hostname altair.example.com</programlisting>
 
-    <para>The line <literal>hostname altair.example.com</literal> simply tells
-      the diskless system what its fully qualified domain name is.</para>
-
-    <para>The line <literal>rootfs
-	199.246.76.1:/DiskLess/rootfs/altair</literal> tells the diskless
-      system where its NFS mountable root filesystem is located.</para>
-
+    <para>A linha <literal>hostname altair.example.com</literal>
+      simplesmente instrui o sistema diskless sobre qual &eacute; o seu nome de
+      dominio completo.</para>
+    
+    <para>A linha <literal>rootfs 199.246.76.1:/DiskLess/rootfs/altair</literal> 
+      instrui o sistema diskless sobre onde o seu sistema de arquivos raiz
+      mont&aacute;vel via NFS est&aacute; localizado.</para>
+      
     <note>
-      <para>The NFS mounted root filesystem will be mounted <emphasis>read
-	  only</emphasis>.</para>
+      <para>O sistema de arquivo raiz, montado via NFS, ser&aacute; montado em <emphasis>modo de 
+	apenas leitura</emphasis>.
     </note>
     
-    <para>The hierarchy for the diskless system can be re-mounted allowing
-      read-write operations if required.</para>
+    <para>Se for preciso a hierarquia para o sistema diskless pode ser re-montado
+    permitindo opera&ccedil;&otilde;es de leitura e escrita.</para>
     
-    <para>I use my spare 386DX-40 as a dedicated X terminal.</para>
+    <para>Eu utilizo o meu 386DX-40 reserva como um terminal X
+      dedicado.</para>
 
-    <para>The hierarchy for <hostid>altair</hostid> is:</para>
+    <para>A hierarquia para o host <hostid>altair</hostid> &eacute;:</para>
 
     <literallayout>/
 /bin
@@ -303,7 +311,7 @@ hostname altair.example.com</programlisting>
 /var
 /var/run</literallayout>
 
-    <para>The actual list of files is:</para>
+    <para>A lista atual de arquivos &eacute; seguinte:</para>
 
     <screen>-r-xr-xr-x  1 root  wheel  779984 Dec 11 23:44 ./kernel
 -r-xr-xr-x  1 root    bin  299008 Dec 12 00:22 ./bin/sh
@@ -319,40 +327,40 @@ hostname altair.example.com</programlisting>
 -r-xr-xr-x  1 root  wheel    1992 Jun 10  1995 ./dev/MAKEDEV.local
 -r-xr-xr-x  1 root  wheel   24419 Jun 10  1995 ./dev/MAKEDEV</screen>
     
-    <para>If you are not using &man.devfs.5; (which is the default
-      in FreeBSD&nbsp;5.X), you should make sure that you
-      do not forget to run <command>MAKEDEV all</command> in the
-      <filename>dev</filename> directory.</para>
+    <para>Se voc&ecirc; n&atilde;o estiver utilizando o &man.devfs.5; (o que &eacute;
+      default no FreeBSD&nbsp;5.X), voc&ecirc; n&atilde;o deve se esquecer de 
+      de executar o comando <command>MAKEDEV all</command> dentro do
+      diret&oacute;rio <filename>dev</filename>.</para>
 
-    <para>My <filename>/etc/rc</filename> for <hostid>altair</hostid>
-      is:</para>
+    <para>O meu arquivo <filename>/etc/rc</filename> no host <hostid>altair</hostid>
+      &eacute; o que se segue:</para>
 
 <programlisting>#!/bin/sh
 #
 PATH=/bin:/
 export PATH
 #
-# configure the localhost
+# configura o localhost
 /sbin/ifconfig lo0 127.0.0.1
 #
-# configure the ethernet card
+# configura a placa de rede
 /sbin/ifconfig ed0 199.246.76.2 netmask 0xffffff00
 #
-# mount the root filesystem via NFS
+# monta o sistema de arquivos raiz via NFS
 /sbin/mount antares:/DiskLess/rootfs/altair /
 #
-# mount the /usr filesystem via NFS
+# monta o sistema de arquivos /usr via NFS
 /sbin/mount antares:/DiskLess/usr /usr
 #
 /usr/X11R6/bin/XF86_SVGA -query antares -xf86config /etc/XF86Config.altair > /dev/null 2>&1
 #
-# Reboot after X exits
+# Reboota depois que sair do X
 /sbin/reboot
 #
-# We blew up....
+# Finaliza o script
 exit 1</programlisting>
 
-    <para>Any comments and all questions welcome.</para>
+    <para>Qualquer coment&aacute;rio e todas as perguntas s&atilde;o bem vindas.</para>
   </sect1>
 </article>
 
