@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/serialcomms/chapter.sgml,v 1.4 2003/12/09 03:26:06 ebrandi Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/serialcomms/chapter.sgml,v 1.5 2003/12/09 14:21:26 ebrandi Exp $
 -->
 
 <chapter id="serialcomms">
@@ -92,56 +92,63 @@
       <para>
 	Quando fala sobre taxa de comunica&ccedil;&atilde;o de dados, esta sess&atilde;o
 	n&atilde;o usa o termo <quote>baud</quote>.  Baud se refere ao
-	numero de estados de transi&ccedil;&otilde;es el&eacute;tricos que ocorrem em um
+	numero de estados de transi&ccedil;&atilde;o el&eacute;tricas que ocorrem em um
 	determinado periodo de tempo, enquanto <quote>bps</quote>
 	(bits por segundo) &eacute; o termo <emphasis>correto</emphasis> a
-	ser utilizado (at least it does not seem to bother the 
-	curmudgeons quite as much).</para>
+	ser utilizado (ao menos ele n&atilde;o parece incomodar completamente
+	tanto quanto os <literal>curmudgeons</literal>).</para>
     </sect2>
 
     <sect2 id="serial-cables-ports">
       <title>Cabos e Portas</title>
       
-      <para>To connect a modem or terminal to your FreeBSD system, you
-	will need a serial port on your computer and the proper cable to connect
-	to your serial device.  If you are already familiar with your
-	hardware and the cable it requires, you can safely skip this
-	section.</para>
+      <para>
+	Para conectar um modem ou um terminal ao seu sistema FreeBSD,
+	voc&ecirc; ir&aacute; precisar de uma porta serial em seu computador e do
+	cabo apropriado para conectar o seu dispositivo serial.  Se
+	voc&ecirc; j&aacute; esta familiarizado com o seu dispositivo e com o cabo
+	que ele necessita, voc&ecirc; pode pular tranquilamente esta sess&atilde;o.
+	.</para>
 	  
       <sect3 id="term-cables">
 	<title>Cabos</title>
 
-	<para>There are several different kinds of serial cables.  The
-	  two most common types for our purposes are null-modem cables
-	  and standard (<quote>straight</quote>) RS-232 cables.  The documentation
-	  for your hardware should describe the type of cable
-	  required.</para>
+	<para>
+	  H&aacute; diversos tipos diferentes de cabos seriais.  Os dois
+	  tipos mais comuns para os nossos prop&oacute;sitos s&atilde;o os cabos
+	  <literal>null-modem</literal> e os cabos padr&atilde;o RS-232.  A
+	  documenta&ccedil;&atilde;o do seu dispositivo ir&aacute; descrever o tipo de cabo
+	  necess&aacute;rio.</para>
 	    
 	<sect4 id="term-cables-null">
 	  <title>Cabos Null-Modem</title>
 
 	  <indexterm>
-	    <primary>null-modem cable</primary>
+	    <primary>Cabo null-modem</primary>
 	  </indexterm>
-	  <para>A null-modem cable passes some signals, such as <quote>signal
-	    ground</quote>, straight through, but switches other signals.  For
-	    example, the <quote>send data</quote> pin on one end goes to the
-	    <quote>receive data</quote> pin on the other end.</para>
-	      
-	  <para>If you like making your own cables, you can construct
-	    a null-modem cable for use with
-	    terminals.  This table shows the RS-232C signal names and the pin
-	    numbers on a DB-25 connector.</para>
+	  <para>
+	    Um cabo <literal>null-modem</literal> passa alguns sinais,
+	    como o <quote>sinal terra</quote>, de forma direta (sai e
+	    chega no mesmo pino em ambas as pontas), mas chaveia outros 
+	    sinais.  Por exemplo, o pino de <quote>envio de
+	    dados</quote> em uma das pontas do cabo ir&aacute; para o pino
+	    <quote>recebimento de dados</quote> na outra ponta.</para>
+	    
+	  <para>
+	    Se voce preferir preparar seus pr&oacute;prios cabos, voc&ecirc; pode
+	    contruir um cabo null-modem para utilizar com terminais.
+	    Esta tabela mostra os nomes dos sinais RS-232C e a
+	    numera&ccedil;&atilde;o dos pinos em um conector DB-25.</para>
 
 	  <informaltable frame="none">
 	    <tgroup cols="5">
 	      <thead>
 		<row>
-		  <entry>Signal</entry>
-		  <entry>Pin #</entry>
+		  <entry>Sinal</entry>
+		  <entry>Pino #</entry>
 		  <entry></entry>
-		  <entry>Pin #</entry>
-		  <entry>Signal</entry>
+		  <entry>Pino #</entry>
+		  <entry>Sinal</entry>
 		</row>
 	      </thead>
 	      
@@ -149,7 +156,7 @@
 		<row>
 		  <entry>SG</entry>
 		  <entry>7</entry>
-		  <entry>connects to</entry>
+		  <entry>conecta-se ao</entry>
 		  <entry>7</entry>
 		  <entry>SG</entry>
 		</row>
@@ -157,7 +164,7 @@
 		<row>
 		  <entry>TxD</entry>
 		  <entry>2</entry>
-		  <entry>connects to</entry>
+		  <entry>conecta-se ao</entry>
 		  <entry>3</entry>
 		  <entry>RxD</entry>
 		</row>
@@ -165,7 +172,7 @@
 		<row>
 		  <entry>RxD</entry>
 		  <entry>3</entry>
-		  <entry>connects to</entry>
+		  <entry>conecta-se ao</entry>
 		  <entry>2</entry>
 		  <entry>TxD</entry>
 		</row>
@@ -173,7 +180,7 @@
 		<row>
 		  <entry>RTS</entry>
 		  <entry>4</entry>
-		  <entry>connects to</entry>
+		  <entry>conecta-se ao</entry>
 		  <entry>5</entry>
 		  <entry>CTS</entry>
 		</row>
@@ -181,7 +188,7 @@
 		<row>
 		  <entry>CTS</entry>
 		  <entry>5</entry>
-		  <entry>connects to</entry>
+		  <entry>conecta-se ao</entry>
 		  <entry>4</entry>
 		  <entry>RTS</entry>
 		</row>
@@ -189,7 +196,7 @@
 		<row>
 		  <entry>DTR</entry>
 		  <entry>20</entry>
-		  <entry>connects to</entry>
+		  <entry>conecta-se ao</entry>
 		  <entry>6</entry>
 		  <entry>DSR</entry>
 		</row>
@@ -205,7 +212,7 @@
 		<row>
 		  <entry>DSR</entry>
 		  <entry>6</entry>
-		  <entry>connects to</entry>
+		  <entry>conecta-se ao</entry>
 		  <entry>20</entry>
 		  <entry>DTR</entry>
 		</row>
@@ -214,10 +221,10 @@
 	  </informaltable>
 	  
 	  <note>
-	    <para>Connect <quote>Data Set Ready</quote> (DSR) and
-	      <quote>Data Carrier Detect</quote> (DCD) internally in the
-	      connector hood, and then to <quote>Data Terminal
-	        Ready</quote> (DTR) in the remote hood.</para>
+	    <para>Conecte o <quote>Data Set Ready</quote> (DSR) e o 
+	      <quote>Data Carrier Detect</quote> (DCD) internamente no 
+	      conector, e ent&atilde;o conecte-os ao <quote>Data Terminal Ready</quote> 
+	      (DTR) no conector remoto.</para>
 	  </note>
 	</sect4>
 
