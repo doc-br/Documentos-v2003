@@ -1012,29 +1012,29 @@ device          atkbdc0    at isa? port IO_KBD</programlisting>
 
     <programlisting>device          psm0       at atkbdc? irq 12</programlisting>
 
-    <para>Use este dispositivo se o plug do seu mouse for na porta PS/2.</para>
+    <para>Use este dispositivo caso seu mouse seja do tipo que requer conectores PS/2.</para>
 
     <programlisting>device          vga0        at isa?</programlisting>
 
-    <para>O driver de video.</para>
+    <para>Dispositivo de controle de vídeo.</para>
 
     <programlisting># splash screen/screen saver
 pseudo-device          splash</programlisting>
 
-    <para>Splash screen na inicializa&ccedil;&atilde;o! Protetores de tela requerem isto
-      tamb&eacute;m.</para>
+    <para>Possibilita que seja adicionada uma tela de sobreposição (bitmap) na inicialização do sistema.
+	Protetores de tela também exijem suporte a este dispositivo.</para>
 
     <programlisting># syscons is the default console driver, resembling an SCO console
 device          sc0          at isa?</programlisting>
 
-    <para><literal>sc0</literal> &eacute; o driver padr&atilde;o da console, que
-      se assemelha a console de um SCO. Desde a maioria de acessos a console de programas tela cheia a
-      console atrav&eacute;s de um terminal base de dados como biblioteca
-      <filename>termcap</filename>, isto n&atilde;o deve importar se voc&ecirc; usar
-      <literal>vt0</literal>, o driver compat&iacute;vel com a console <literal>VT220</literal>.
-      Quando voc&ecirc; logar, voc&ecirc; seta a vari&aacute;vel
-      <envar>TERM</envar> para <literal>scoansi</literal> se
-      programas de tela cheia tiver irrita&ccedil;&atilde;o rodando sobre esta console.</para>
+    <para><literal>sc0</literal> é o dispositivo padrão de controle do console do sistema,
+	e se assenelha ao console de sistema SCO.  A maioria dos terminais requerem este suporte
+	mesmo terminais que fazem uso do mapeamento <filename>termcap</filename>, mas não deve
+	ser relevante quando o dispositivo <literal>vt0</literal> for utilizado, uma vez que
+	este é compatível com o console <literal>VT220</literal>.  Neste caso, ao se logar,
+	basta definir a variável de ambiente <envar>TERM</envar> como <literal>scoansi</literal>
+	especialmente alguma aplicação que ocupe a tela inteira apresentar inconformidades
+	no console.</para>
 
     <programlisting># Enable this and PCVT_FREEBSD for pcvt vt220 compatible console driver
 #device          vt0     at isa?
@@ -1043,29 +1043,28 @@ device          sc0          at isa?</programlisting>
 # If you have a ThinkPAD, uncomment this along with the rest of the PCVT lines
 #options         PCVT_SCANSET=2   # IBM keyboards are non-std</programlisting>
 
-    <para>Isto &eacute; um driver VT220 compat&iacute;vel com console, compat&iacute;vel para
-      VT100/102. Isto trabalha bem em laptops que tenham hardware
-      incompat&iacute;vel com <literal>sc0</literal>. Ajuste tamb&eacute;m a vari&aacute;vel do seu
-      <envar>TERM</envar> para <literal>vt100</literal> ou
-      <literal>vt220</literal> quando voc&ecirc; logar. Este driver pode ser usado
-      para conectar um grande n&uacute;mero de diferentes m&aacute;quinas
-      sobre a rede, onde <filename>termcap</filename> ou
-      <filename>terminfo</filename> entradas para o dispositivo <literal>sc0</literal>
-      n&atilde;o esteja muitas vezes dispon&iacute;vel &mdash; <literal>vt100</literal>
-      deve estar virtualmente dispon&iacute;vel para toda plataforma.</para>
+    <para>Trata-se de um dispositivo de controle VT220 compat&iacute;vel com o console, padrões
+      VT100/102.  Esta opção é aconselhada para computadores móveis que tenham problemas de
+	compatibilidade com <literal>sc0</literal>.  Ajuste tamb&eacute;m o valor da vari&aacute;vel
+	<envar>TERM</envar> para <literal>vt100</literal> ou
+      <literal>vt220</literal> logar-se no terminal.  Este dispositivo pode ser usado
+      para interconectar um grande n&uacute;mero de diferentes m&aacute;quinas em um ambiente
+      de rede, onde <filename>termcap</filename> ou
+      <filename>terminfo</filename> contenham entradas para o dispositivo
+	<literal>sc0</literal> &mdash; <literal>vt100</literal>
+      deve estar virtualmente dispon&iacute;vel em todas estações.</para>
 
     <programlisting># Power management support (see LINT for more options)
 device          apm0     at nexus? disable flags 0x20  # Advanced Power Management</programlisting>
 
-    <para>Suporte a Avan&ccedil;ado Gerenciamento de Energia. Usado para laptops.</para>
+    <para>Suporte à Gerenciamento Avançado de Energia. Usado especialmente em laptops.</para>
 
     <programlisting># PCCARD (PCMCIA) support
 device          card
 device          pcic0    at isa? irq 10 port 0x3e0 iomem 0xd0000
 device          pcic1    at isa? irq 11 port 0x3e2 iomem 0xd4000 disable</programlisting>
 
-    <para>Suporte PCMCIA. Se voc&ecirc; estiver usando um
-      laptop.</para>
+    <para>Suporte PCMCIA.  Especialmente útil em laptop.</para>
 
     <programlisting># Serial (COM) ports
 device          sio0     at isa? port IO_COM1 flags 0x10 irq 4
