@@ -16,81 +16,81 @@
     <!-- Feb 2000 -->
   </chapterinfo>
 
-  <title>Usuários e Administração Básica de contas</title>
+  <title>Usu&aacute;rios e Administra&ccedil;&atilde;o B&aacute;sica de contas</title>
   
   <sect1 id="users-synopsis">
-    <title>Sinópse</title>
+    <title>Sin&oacute;pse</title>
     
-    <para>O FreeBSD permite que várias pessoas usem o computador ao mesmo tempo.
-      Obviamente, somente um daqueles usuários pode sentar-se na frente da tela e 
+    <para>O FreeBSD permite que v&aacute;rias pessoas usem o computador ao mesmo tempo.
+      Obviamente, somente um daqueles usu&aacute;rios pode sentar-se na frente da tela e 
       do teclado ao mesmo tempo.
       <footnote>
-	<para>Bem, ao menos que você enganchar acima dos terminais múltiplos, mas nós iremos
+	<para>Bem, ao menos que voc&ecirc; enganchar acima dos terminais m&uacute;ltiplos, mas n&oacute;s iremos
 	guardar isso para <xref linkend="serialcomms">.</para>
-      </footnote>, mas qualquer número de usuarios podem logar atravéz de uma rede.
-      Para usar o sistema qualquer usuário deve ter uma conta.</para>
+      </footnote>, mas qualquer n&uacute;mero de usuarios podem logar atrav&eacute;z de uma rede.
+      Para usar o sistema qualquer usu&aacute;rio deve ter uma conta.</para>
     
     <para>Depois de ler este cap&iacute;tulo, voce ir&aacute; saber:</para>
 
     <itemizedlist>
       <listitem>
-	<para>A diferença entre várias contas de usuários no sistema FreeBSD.</para>
+	<para>A diferen&ccedil;a entre v&aacute;rias contas de usu&aacute;rios no sistema FreeBSD.</para>
       </listitem>
 
       <listitem>
-	<para>Como adicionar uma conta de  usuário.</para>
+	<para>Como adicionar uma conta de  usu&aacute;rio.</para>
       </listitem>
 
       <listitem>
-	<para>Como remover uma conta de usuário.</para>
+	<para>Como remover uma conta de usu&aacute;rio.</para>
       </listitem>
 
       <listitem>
-	<para>Como alterar os detalhes de uma conta de usuário, como o nome 
+	<para>Como alterar os detalhes de uma conta de usu&aacute;rio, como o nome 
         completo do usuario, ou a shell preferida.</para>
       </listitem>
 
       <listitem>
-	<para>Como se ajustar os limites básicos por conta, para controlar os 
-        recursos tais como memória e tempo de uso do CPU que usuários e grupos 
+	<para>Como se ajustar os limites b&aacute;sicos por conta, para controlar os 
+        recursos tais como mem&oacute;ria e tempo de uso do CPU que usu&aacute;rios e grupos 
         de contas podem acessar.</para>
       </listitem>
 
       <listitem>
-	<para>Como usar grupos para facilitar a administração de contas.</para>
+	<para>Como usar grupos para facilitar a administra&ccedil;&atilde;o de contas.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Antes de ler este capítulo, você deve::</para>
+    <para>Antes de ler este cap&iacute;tulo, voc&ecirc; deve::</para>
 
     <itemizedlist>
       <listitem>
-	<para>Entender o básico de &unix, e FreeBSD (<xref
+	<para>Entender o b&aacute;sico de &unix, e FreeBSD (<xref
 	    linkend="basics">).</para>
       </listitem>
     </itemizedlist>
   </sect1>
 
   <sect1 id="users-introduction">
-    <title>Introdução</title>
+    <title>Introdu&ccedil;&atilde;o</title>
 
-    <para>Todo o acesso ao sistema é conseguido atravéz das contas, e
-      todos os processos são executados por usuários, assim usuários e 
-      administração de contas são integralmente importantes em sistemas FreeBSD.</para>
+    <para>Todo o acesso ao sistema &eacute; conseguido atrav&eacute;z das contas, e
+      todos os processos s&atilde;o executados por usu&aacute;rios, assim usu&aacute;rios e 
+      administra&ccedil;&atilde;o de contas s&atilde;o integralmente importantes em sistemas FreeBSD.</para>
     
-    <para>Todas as contas em um sistema FreeBSD tem determinadas informações
+    <para>Todas as contas em um sistema FreeBSD tem determinadas informa&ccedil;&otilde;es
        associada a ela para indentificar a conta.</para>
 
     <variablelist>
       <varlistentry>
-	<term>Nome do usuário</term>
+	<term>Nome do usu&aacute;rio</term>
 
         <listitem>
-          <para>O nome do usuário será digitado no prompt <prompt>login:</prompt>.
-            Os nomes de usuários devem ser unicos em um computador, você não pode
-            ter dois usuários com o mesmo nome. Há um número de regras para criar
-            nomes válidos de usuários, documentadas em &man.passwd.5;; você usuaria
-            tipicamente nomes de usuários que consistem em oito ou poucos caracteres 
+          <para>O nome do usu&aacute;rio ser&aacute; digitado no prompt <prompt>login:</prompt>.
+            Os nomes de usu&aacute;rios devem ser unicos em um computador, voc&ecirc; n&atilde;o pode
+            ter dois usu&aacute;rios com o mesmo nome. H&aacute; um n&uacute;mero de regras para criar
+            nomes v&aacute;lidos de usu&aacute;rios, documentadas em &man.passwd.5;; voc&ecirc; usuaria
+            tipicamente nomes de usu&aacute;rios que consistem em oito ou poucos caracteres 
             todos minusculos.</para>
 	</listitem>
       </varlistentry>         
@@ -101,23 +101,23 @@
 
 	<listitem>
           <para>Cada conta tem uma senha associada com ela. A Senha pode ser
-             vazia, neste caso nenhuma senha será solicitada para acessar o 
-             sistema. Isso é normalmente uma idéia muito ruim; todas as contas
+             vazia, neste caso nenhuma senha ser&aacute; solicitada para acessar o 
+             sistema. Isso &eacute; normalmente uma id&eacute;ia muito ruim; todas as contas
              devem ter uma senha.</para>
          </listitem>
       </varlistentry>
 
       <varlistentry>
-	<term>Usuário ID (UID)</term>
+	<term>Usu&aacute;rio ID (UID)</term>
 
 	<listitem>
-	  <para>O UID é um número de 0 até 65536 usado para identificar de forma 
-            única os usuários no sistema. Internamento o FreeBSD usa o UID 
-            para identificar usuários&mdash; qualquer comando do FreeBSD será
-            liberado para um usuário específico convertendo seu UID depois de 
-            utilizar o comando. Isso que dizer que você pode ter contas com 
-            diferentes nomes de usuários com o mesmo UID. Tanto quanto para 
-            o FreeBSD são um usuário apenas. É improvável que você necessitará 
+	  <para>O UID &eacute; um n&uacute;mero de 0 at&eacute; 65536 usado para identificar de forma 
+            &uacute;nica os usu&aacute;rios no sistema. Internamento o FreeBSD usa o UID 
+            para identificar usu&aacute;rios&mdash; qualquer comando do FreeBSD ser&aacute;
+            liberado para um usu&aacute;rio espec&iacute;fico convertendo seu UID depois de 
+            utilizar o comando. Isso que dizer que voc&ecirc; pode ter contas com 
+            diferentes nomes de usu&aacute;rios com o mesmo UID. Tanto quanto para 
+            o FreeBSD s&atilde;o um usu&aacute;rio apenas. &Eacute; improv&aacute;vel que voc&ecirc; necessitar&aacute; 
             sempre fazer isto.</para> 
 	</listitem>
       </varlistentry>
@@ -127,11 +127,11 @@
 	<term>Grupo ID (GID)</term>
 
 	<listitem>
-	  <para>O GID é um número de 0 até 65536 usado para identificar de forma
-            única o grupo primário que o usuário pertence. Os grupos são um mecanismo
-            para controlar o acesso aos recursos baseados em GID ao invéz de UID.
-            Isto pode significativamente reduzir o tamanho de arquivos de configurações.
-            Um usuário pode também estar em mais de um grupo.</para>
+	  <para>O GID &eacute; um n&uacute;mero de 0 at&eacute; 65536 usado para identificar de forma
+            &uacute;nica o grupo prim&aacute;rio que o usu&aacute;rio pertence. Os grupos s&atilde;o um mecanismo
+            para controlar o acesso aos recursos baseados em GID ao inv&eacute;z de UID.
+            Isto pode significativamente reduzir o tamanho de arquivos de configura&ccedil;&otilde;es.
+            Um usu&aacute;rio pode tamb&eacute;m estar em mais de um grupo.</para>
 	</listitem>
       </varlistentry>
 
@@ -139,71 +139,71 @@
 	<term>Classe de Login</term>
 
         <listitem>
-	  <para>Classe de login são uma extenção para o mecanismo de grupos que
-            fornecem a flexibilidade adicional à adaptar o sistema aos usuários
+	  <para>Classe de login s&atilde;o uma exten&ccedil;&atilde;o para o mecanismo de grupos que
+            fornecem a flexibilidade adicional &agrave; adaptar o sistema aos usu&aacute;rios
             diferentes.</para>
 	</listitem>
       </varlistentry>
 
 
       <varlistentry>
-	<term>Tempo de alteração da senha</term>
+	<term>Tempo de altera&ccedil;&atilde;o da senha</term>
 
 	<listitem>
-	  <para>Por padrão o FreeBSD não força os usuários a trocar as suas senhas
-            periodicamente. Você pode fazer isto baseado por usuário, forçando alguns
-            ou todos seus usuários para mudar suas senhas depois de um determinado 
+	  <para>Por padr&atilde;o o FreeBSD n&atilde;o for&ccedil;a os usu&aacute;rios a trocar as suas senhas
+            periodicamente. Voc&ecirc; pode fazer isto baseado por usu&aacute;rio, for&ccedil;ando alguns
+            ou todos seus usu&aacute;rios para mudar suas senhas depois de um determinado 
             tempo.</para> 
 	</listitem>
       </varlistentry>
 
 
       <varlistentry>
-	<term>Tempo de expiração da conta</term>
+	<term>Tempo de expira&ccedil;&atilde;o da conta</term>
 
 	<listitem>
-	  <para>Por padrão o FreeBSD não expira as contas. Se você estiver
-            criando uma conta que você sabe que tem um tempo limitado de uso,
-            por exemplo, em uma escolha onde você tem contas para os estudantes,
-            você pode especificar quando a conta expira. Após a expiração do tempo
-            o cliente não poderá logar no sistema, embora diretórios e arquivos do 
-            cliente permanecerão.</para>
+	  <para>Por padr&atilde;o o FreeBSD n&atilde;o expira as contas. Se voc&ecirc; estiver
+            criando uma conta que voc&ecirc; sabe que tem um tempo limitado de uso,
+            por exemplo, em uma escolha onde voc&ecirc; tem contas para os estudantes,
+            voc&ecirc; pode especificar quando a conta expira. Ap&oacute;s a expira&ccedil;&atilde;o do tempo
+            o cliente n&atilde;o poder&aacute; logar no sistema, embora diret&oacute;rios e arquivos do 
+            cliente permanecer&atilde;o.</para>
          </listitem>
       </varlistentry>
 
 
       <varlistentry>
-	<term>Nome completo dos usuários</term>
+	<term>Nome completo dos usu&aacute;rios</term>
 
 	<listitem>
-	  <para>O nome único do usuário identifica a conta para o FreeBSD, mas
-            não reflete necessariamente o nome real do usuário. Esta informação
+	  <para>O nome &uacute;nico do usu&aacute;rio identifica a conta para o FreeBSD, mas
+            n&atilde;o reflete necessariamente o nome real do usu&aacute;rio. Esta informa&ccedil;&atilde;o
             pode ser associada com a conta.</para>
 	</listitem>
       </varlistentry>
  
 
       <varlistentry>
-	<term>Diretório <foreignphrase>Home</foreignphrase></term>
+	<term>Diret&oacute;rio <foreignphrase>Home</foreignphrase></term>
 
 	<listitem>
-	  <para>O Diretório <foreignphrase>Home</foreignphrase> é o caminho completo
-            para o diretório do sistema em que o usuário logará no sistema. Uma convenção
-            comum deve pôr todos os diretórios home do usuário sob <filename>/home/<replaceable>usuário</replaceable></filename>.
-            O usuário armazenaria seus arquivos pessoais em seu diretório home, e 
-            todos os diretórios que puderem criar dentro dele.</para>
+	  <para>O Diret&oacute;rio <foreignphrase>Home</foreignphrase> &eacute; o caminho completo
+            para o diret&oacute;rio do sistema em que o usu&aacute;rio logar&aacute; no sistema. Uma conven&ccedil;&atilde;o
+            comum deve p&ocirc;r todos os diret&oacute;rios home do usu&aacute;rio sob <filename>/home/<replaceable>usu&aacute;rio</replaceable></filename>.
+            O usu&aacute;rio armazenaria seus arquivos pessoais em seu diret&oacute;rio home, e 
+            todos os diret&oacute;rios que puderem criar dentro dele.</para>
          </listitem>
       </varlistentry>
 
 
 
       <varlistentry>
-	<term><foreignphrase>Shell</foreignphrase> do usuário</term>
+	<term><foreignphrase>Shell</foreignphrase> do usu&aacute;rio</term>
 
 	<listitem>
-	  <para>A shell fornece o ambiente de usuário padrão para interagir com
-            o sistema. Existem muitos tipos diferentes de shells, e os usuários
-            experientes terão suas próprias preferências, que podem ser refletidas
+	  <para>A shell fornece o ambiente de usu&aacute;rio padr&atilde;o para interagir com
+            o sistema. Existem muitos tipos diferentes de shells, e os usu&aacute;rios
+            experientes ter&atilde;o suas pr&oacute;prias prefer&ecirc;ncias, que podem ser refletidas
             para os ajustes de contas.</para>
 	</listitem>
       </varlistentry>
@@ -211,48 +211,48 @@
 
 
     <para>Existem tres tipos de contas: o <link
-	linkend="users-superuser">super usuário</link>, <link
-	linkend="users-system">usuários do sistema</link>, e <link
-	linkend="users-user">usuários</link>.  A conta super usuário
-      normalmente chamada de <username>root</username>, é usada para 
-      administrar o sistema sem limitação de privilegios. Usuários do
-      sistema executam serviços.  Finalmente, usuários são usadas por 
-      pessoas, que poderão logar, ler e-mail, e assim por diante.</para>
+	linkend="users-superuser">super usu&aacute;rio</link>, <link
+	linkend="users-system">usu&aacute;rios do sistema</link>, e <link
+	linkend="users-user">usu&aacute;rios</link>.  A conta super usu&aacute;rio
+      normalmente chamada de <username>root</username>, &eacute; usada para 
+      administrar o sistema sem limita&ccedil;&atilde;o de privilegios. Usu&aacute;rios do
+      sistema executam servi&ccedil;os.  Finalmente, usu&aacute;rios s&atilde;o usadas por 
+      pessoas, que poder&atilde;o logar, ler e-mail, e assim por diante.</para>
   </sect1>
     
   <sect1 id="users-superuser">
-    <title>O super usuário</title>
+    <title>O super usu&aacute;rio</title>
     
     <indexterm>
       <primary>contas</primary>
-      <secondary>super usuário (root)</secondary>
+      <secondary>super usu&aacute;rio (root)</secondary>
     </indexterm>
-    <para>A conta super usuário, normalmente chamada
-      <username>root</username>, vem pré configurada para facilitar
-      a administração do sistema, e não deve ser usada para tarefas
-      cotidianas como envio e recebimento de e-mail, exploração geral
-      do sistema, ou para programação.</para>
+    <para>A conta super usu&aacute;rio, normalmente chamada
+      <username>root</username>, vem pr&eacute; configurada para facilitar
+      a administra&ccedil;&atilde;o do sistema, e n&atilde;o deve ser usada para tarefas
+      cotidianas como envio e recebimento de e-mail, explora&ccedil;&atilde;o geral
+      do sistema, ou para programa&ccedil;&atilde;o.</para>
 
   
-    <para>Isto é porque o super usuário, ao contrário dos usuários normais,
-      podem operar sem limites, e o emprego errado do super usuário pode 
-      resultar em um espetacular desastre. As contas de usuários são 
-      incapazes de destruir o sistema atravéz de um erro, assim que é geralmente
-      melhor usar um usuário normal quando possível, a menos que você 
-      necessite de um privilégio extra.</para>
+    <para>Isto &eacute; porque o super usu&aacute;rio, ao contr&aacute;rio dos usu&aacute;rios normais,
+      podem operar sem limites, e o emprego errado do super usu&aacute;rio pode 
+      resultar em um espetacular desastre. As contas de usu&aacute;rios s&atilde;o 
+      incapazes de destruir o sistema atrav&eacute;z de um erro, assim que &eacute; geralmente
+      melhor usar um usu&aacute;rio normal quando poss&iacute;vel, a menos que voc&ecirc; 
+      necessite de um privil&eacute;gio extra.</para>
 
    
-    <para>Você deve sempre dobrar e triplicar a verificação dos comandos 
-      que você emite com o super usuário, desde que um espaço extra ou um
-      caracter faltante podem significar a perda irreparável dos dados.</para>
+    <para>Voc&ecirc; deve sempre dobrar e triplicar a verifica&ccedil;&atilde;o dos comandos 
+      que voc&ecirc; emite com o super usu&aacute;rio, desde que um espa&ccedil;o extra ou um
+      caracter faltante podem significar a perda irrepar&aacute;vel dos dados.</para>
    
 
-    <para>Assim, a primeira coisa que você deve fazer após ter lido este
-      capítulo é criar um usuário sem privilégios para você mesmo para 
-      uso geral se você não tiver já. Isto aplica-se igualmente se você está 
-      rodando em uma máquina multi usuários ou mono usuário.
-      Mais tarde neste capítulo, nós discutimos como criar clientes adicionais,
-      e como mudar entre o usuário e o super usuário.</para>
+    <para>Assim, a primeira coisa que voc&ecirc; deve fazer ap&oacute;s ter lido este
+      cap&iacute;tulo &eacute; criar um usu&aacute;rio sem privil&eacute;gios para voc&ecirc; mesmo para 
+      uso geral se voc&ecirc; n&atilde;o tiver j&aacute;. Isto aplica-se igualmente se voc&ecirc; est&aacute; 
+      rodando em uma m&aacute;quina multi usu&aacute;rios ou mono usu&aacute;rio.
+      Mais tarde neste cap&iacute;tulo, n&oacute;s discutimos como criar clientes adicionais,
+      e como mudar entre o usu&aacute;rio e o super usu&aacute;rio.</para>
   </sect1>
     
   <sect1 id="users-system">
@@ -263,10 +263,10 @@
       <secondary>sistema</secondary>
     </indexterm>
   
-    <para>Usuários do sistema são usados para rodar serviços como DNS,
-      correio, servidores web, e assim por diante. A razão para isso é 
-      segurança, se todos os serviços rodarem com super usuários, poderiam
-      agir sem restrições.</para>
+    <para>Usu&aacute;rios do sistema s&atilde;o usados para rodar servi&ccedil;os como DNS,
+      correio, servidores web, e assim por diante. A raz&atilde;o para isso &eacute; 
+      seguran&ccedil;a, se todos os servi&ccedil;os rodarem com super usu&aacute;rios, poderiam
+      agir sem restri&ccedil;&otilde;es.</para>
 
     <indexterm>
       <primary>conta</primary>
@@ -276,7 +276,7 @@
       <primary>conta</primary>
       <secondary><username>operator</username></secondary>
     </indexterm>
-    <para>Exemplos de usuários de sistema são <username>daemon</username>,
+    <para>Exemplos de usu&aacute;rios de sistema s&atilde;o <username>daemon</username>,
       <username>operator</username>, <username>bind</username> (para o Domain
       Name Service), e <username>news</username>. Frequentemente os administradores
       de sistemas criam <username>httpd</username> para rodar um servidor de web.</para> 
@@ -285,32 +285,32 @@
       <primary>contas</primary>
       <secondary><username>nobody</username></secondary>
     </indexterm>
-    <para><username>nobody</username> é o usuário genérico sem privilégios do
-      sistema de usuários. Entretanto, é importante manter na sua mente que vários
-      serviços usam <username>nobody</username>, e vários arquivos e processos irão
-      associar com ele, sendo assim mais privilegiado o usuários torna-se.</para>
+    <para><username>nobody</username> &eacute; o usu&aacute;rio gen&eacute;rico sem privil&eacute;gios do
+      sistema de usu&aacute;rios. Entretanto, &eacute; importante manter na sua mente que v&aacute;rios
+      servi&ccedil;os usam <username>nobody</username>, e v&aacute;rios arquivos e processos ir&atilde;o
+      associar com ele, sendo assim mais privilegiado o usu&aacute;rios torna-se.</para>
   </sect1>
 
   <sect1 id="users-user">
-    <title>Contas de usuários</title>
+    <title>Contas de usu&aacute;rios</title>
 
     <indexterm>
       <primary>contas</primary>
-      <secondary>usuários</secondary>
+      <secondary>usu&aacute;rios</secondary>
     </indexterm>
-    <para>As contas de usuários é o primeiro caminho para pessoas reais  
-      acessarem o sistema, e estas contas isolam o usuário e o ambiente,
-      impedindo os usuários danifiquem o sistema ou outros usuários, e 
-      permitem que usuários customize seu ambiente sem afetar outros.</para>
+    <para>As contas de usu&aacute;rios &eacute; o primeiro caminho para pessoas reais  
+      acessarem o sistema, e estas contas isolam o usu&aacute;rio e o ambiente,
+      impedindo os usu&aacute;rios danifiquem o sistema ou outros usu&aacute;rios, e 
+      permitem que usu&aacute;rios customize seu ambiente sem afetar outros.</para>
 
-    <para>Cada pessoa que acessa seu sistema deve ter uma conta de usuário.
-      Isto permite que você procure quem está fazendo o que, e previna
-      que pessoas alterem outros usuários, configurações ou lerem outros
+    <para>Cada pessoa que acessa seu sistema deve ter uma conta de usu&aacute;rio.
+      Isto permite que voc&ecirc; procure quem est&aacute; fazendo o que, e previna
+      que pessoas alterem outros usu&aacute;rios, configura&ccedil;&otilde;es ou lerem outros
       e-mails e assim por diante.</para>
 
-    <para>Cada usuário pode ajustar seu próprio ambiente para acomodar
+    <para>Cada usu&aacute;rio pode ajustar seu pr&oacute;prio ambiente para acomodar
       seu uso no sistema, para usar uma shell alternativa, editor, 
-      key bindings e língua.</para>
+      key bindings e l&iacute;ngua.</para>
   </sect1>
 
   <sect1 id="users-modifying">
@@ -321,9 +321,9 @@
       <secondary>modificando</secondary>
     </indexterm>
 
-    <para>Existem uma variedade de comandos diferentes disponíveis no 
-      ambiente &unix; para manipular contas de usuários. Os comandos mais
-      comuns são sumariados abaixo, seguido por uns exemplos mais detalhados
+    <para>Existem uma variedade de comandos diferentes dispon&iacute;veis no 
+      ambiente &unix; para manipular contas de usu&aacute;rios. Os comandos mais
+      comuns s&atilde;o sumariados abaixo, seguido por uns exemplos mais detalhados
       de seu uso.</para>
       
 
@@ -332,30 +332,30 @@
 	<thead>
 	  <row>
 	    <entry>Comando</entry>
-	    <entry>Sumário</entry>
+	    <entry>Sum&aacute;rio</entry>
 	  </row>
 	</thead>
 	<tbody>
 	  <row>
 	    <entry>&man.adduser.8;</entry>
-	    <entry>O comando recomendado para adicionar novos usuários.</entry>
+	    <entry>O comando recomendado para adicionar novos usu&aacute;rios.</entry>
 	  </row>
 	  <row>
 	    <entry>&man.rmuser.8;</entry>
-	    <entry>O comando recomendado para excluir usuários.</entry>
+	    <entry>O comando recomendado para excluir usu&aacute;rios.</entry>
 	  </row>
 	  <row>
 	    <entry>&man.chpass.1;</entry>
-            <entry>Uma ferramenta flexivel para alterar informações de usuários.</entry>
+            <entry>Uma ferramenta flexivel para alterar informa&ccedil;&otilde;es de usu&aacute;rios.</entry>
 	  </row>
 	  <row>
 	    <entry>&man.passwd.1;</entry>
-            <entry>Um simples comando para alterar a senha do usuário</entry>
+            <entry>Um simples comando para alterar a senha do usu&aacute;rio</entry>
 	  </row>
 	  <row>
 	    <entry>&man.pw.8;</entry>
-            <entry>Uma podereosa e flexível ferramenta para alterar todos os aspectos
-             das contas de usuários.</entry>
+            <entry>Uma podereosa e flex&iacute;vel ferramenta para alterar todos os aspectos
+             das contas de usu&aacute;rios.</entry>
 	  </row>
 	</tbody>
       </tgroup>
@@ -374,34 +374,34 @@
       <indexterm>
         <primary><filename class=directory>/usr/share/skel</filename></primary>
       </indexterm>
-      <indexterm><primary>diretório esqueleto</primary></indexterm>
-       <para>&man.adduser.8; é um programa simples para adicionar novos usuários.
+      <indexterm><primary>diret&oacute;rio esqueleto</primary></indexterm>
+       <para>&man.adduser.8; &eacute; um programa simples para adicionar novos usu&aacute;rios.
          Cria entradas nos arquivos <filename>passwd</filename> e 
-         <filename>group</filename>. Criará também um diretório home para o 
-         usuário novo, copia os arquivos de configuração padrão 
+         <filename>group</filename>. Criar&aacute; tamb&eacute;m um diret&oacute;rio home para o 
+         usu&aacute;rio novo, copia os arquivos de configura&ccedil;&atilde;o padr&atilde;o 
          (<quote>dotfiles</quote>) de <filename>/usr/share/skel</filename>, e
-         pode opcionalmente enviar ao usuário novo uma mensagem de boas vindas.</para>
+         pode opcionalmente enviar ao usu&aacute;rio novo uma mensagem de boas vindas.</para>
 
        <para>Em &os;&nbsp;5.0, &man.adduser.8; foi rescrito de Perl script para 
          um shell script que trabalha-se evoluntariamente em torno do &man.pw.8;, 
-         assim seu uso é ligeiramente diferente em &os; 4.X e em &os; 5.X.</para>
+         assim seu uso &eacute; ligeiramente diferente em &os; 4.X e em &os; 5.X.</para>
 
 
-      <para>Para criar uma configuração inicial, use
+      <para>Para criar uma configura&ccedil;&atilde;o inicial, use
        	<command>adduser -s -config_create</command>.
 	<footnote>  
-          <para>O <option>-s</option> faz &man.adduser.8; por padrão ficar quieto.
-            Nós usamos <option>-v</option> mais tarde quando queremos
-            mudar padrões.</para>
+          <para>O <option>-s</option> faz &man.adduser.8; por padr&atilde;o ficar quieto.
+            N&oacute;s usamos <option>-v</option> mais tarde quando queremos
+            mudar padr&otilde;es.</para>
         </footnote>
-        Em seguida, nós configuramos os padrões do &man.adduser.8;, e criamos
-        a nossa primeira conta de usuário, desde que estamos usando
-        <username>root</username> para uso normal é evil e nasty.</para>
+        Em seguida, n&oacute;s configuramos os padr&otilde;es do &man.adduser.8;, e criamos
+        a nossa primeira conta de usu&aacute;rio, desde que estamos usando
+        <username>root</username> para uso normal &eacute; evil e nasty.</para>
         
 
       <example>
 	<title>Configurando <command>adduser</command> e adicionando um
-	  usuário no &os;&nbsp;4.X</title>
+	  usu&aacute;rio no &os;&nbsp;4.X</title>
 
 	<screen>&prompt.root; <userinput>adduser -v</userinput>
 Use option ``-silent'' if you don't want to see all warnings and questions.
@@ -450,27 +450,27 @@ Goodbye!
 &prompt.root;</screen>
       </example>
 
-      <para>Em resumo, nós mudamos a shell padrão para <application>zsh</application>
-      (uma shell adicional encontrada na coleção de ports), e desligamos o envio
-      de um e-mail de boas vindas para o usuário adicionado. Nós salvamos as configurações,
+      <para>Em resumo, n&oacute;s mudamos a shell padr&atilde;o para <application>zsh</application>
+      (uma shell adicional encontrada na cole&ccedil;&atilde;o de ports), e desligamos o envio
+      de um e-mail de boas vindas para o usu&aacute;rio adicionado. N&oacute;s salvamos as configura&ccedil;&otilde;es,
       criamos uma conta para <username>jru</username>, e certificamos que 
-      <username>jry</username> está dentro do grupo <username>wheel</username> (de 
+      <username>jry</username> est&aacute; dentro do grupo <username>wheel</username> (de 
       modo que possa supor o papel de <username>root</username> com o comando &man.su.1;.)</para>
       <note>
-        <para>A senha que você digita não é ecoada, nem é mostrado asteriscos.
-        Certifique-se que você não digite erradamente a senha duas vezes.
+        <para>A senha que voc&ecirc; digita n&atilde;o &eacute; ecoada, nem &eacute; mostrado asteriscos.
+        Certifique-se que voc&ecirc; n&atilde;o digite erradamente a senha duas vezes.
         </para>
       </note>
 
       <note>
 	<para>Use exatamente &man.adduser.8; sem argumentos de agora em diante,
-        e você não terá que fazer mudanças padrões. Se o programa pedir que você
-        mude os padrões, saia do programa, e tente a opção <option>-s</option>.</para>
+        e voc&ecirc; n&atilde;o ter&aacute; que fazer mudan&ccedil;as padr&otilde;es. Se o programa pedir que voc&ecirc;
+        mude os padr&otilde;es, saia do programa, e tente a op&ccedil;&atilde;o <option>-s</option>.</para>
       </note>
 
 
       <example>
-	<title>Adicionando um usuário em um  &os;&nbsp;5.X</title>
+	<title>Adicionando um usu&aacute;rio em um  &os;&nbsp;5.X</title>
 
 	<screen>&prompt.root; <userinput>adduser</userinput>
 Username: <userinput>jru</userinput>
@@ -513,55 +513,55 @@ Goodbye!
         <secondary>removendo</secondary>
       </indexterm>
 
-      <para>Você pode usar o &man.rmuser.8; para remover completamente um usuário
+      <para>Voc&ecirc; pode usar o &man.rmuser.8; para remover completamente um usu&aacute;rio
         do sistema. &man.rmuser.8; executa as seguintes etapas:</para>
 
       <procedure>
 	<step>
-          <para>Remove as entradas &man.crontab.1; do usuário (se tiver algum).</para>
+          <para>Remove as entradas &man.crontab.1; do usu&aacute;rio (se tiver algum).</para>
 	</step>
 	<step>
-          <para>Remove todos os trabalhos &man.at.1; que pertence ao usuário.</para>
+          <para>Remove todos os trabalhos &man.at.1; que pertence ao usu&aacute;rio.</para>
 	</step>
 	<step>
-          <para>Mata todos os processos controlados pelo usuário.</para>
+          <para>Mata todos os processos controlados pelo usu&aacute;rio.</para>
 	</step>
 	<step>
-          <para>Remove o usuário do arquivo de senha local do sistema</para>
+          <para>Remove o usu&aacute;rio do arquivo de senha local do sistema</para>
 	</step>
 	<step>
-          <para>Remove o diretório home do usuário (se este for controlado pelo usuário)</para>
+          <para>Remove o diret&oacute;rio home do usu&aacute;rio (se este for controlado pelo usu&aacute;rio)</para>
 	</step>
 	<step>
-          <para>Remove o arquivo de entrada de e-mail que pertence ao usuário em 
+          <para>Remove o arquivo de entrada de e-mail que pertence ao usu&aacute;rio em 
             <filename>/var/mail</filename>.</para>
 	</step>
 	<step>
-          <para>Remove todos os arquivos controlados pelo usuário na area 
-            temporária de gravação de arquivos como <filename>/tmp</filename>.</para>
+          <para>Remove todos os arquivos controlados pelo usu&aacute;rio na area 
+            tempor&aacute;ria de grava&ccedil;&atilde;o de arquivos como <filename>/tmp</filename>.</para>
 	</step>
 	<step>
-          <para>Finalmente, remove o nome do usuário de todos os grupos que ele 
+          <para>Finalmente, remove o nome do usu&aacute;rio de todos os grupos que ele 
             pertence em <filename>/etc/group</filename>.
 	    
             <note>
-              <para>Se um grupo ficar vazio e o nome do grupo é o mesmo que 
-                o nome do usuário, o grupo será removido; isto complementa 
-               os grupos originais por usuário que é criado pelo &man.adduser.8;.</para>
+              <para>Se um grupo ficar vazio e o nome do grupo &eacute; o mesmo que 
+                o nome do usu&aacute;rio, o grupo ser&aacute; removido; isto complementa 
+               os grupos originais por usu&aacute;rio que &eacute; criado pelo &man.adduser.8;.</para>
             </note>
 
 	  </para>
 	</step>
       </procedure>
 
-      <para>&man.rmuser.8; não pode ser usado para remover contas de super usuários,
-        desde aquela é quase sempre uma indicação da destruição maciça.</para> 
+      <para>&man.rmuser.8; n&atilde;o pode ser usado para remover contas de super usu&aacute;rios,
+        desde aquela &eacute; quase sempre uma indica&ccedil;&atilde;o da destrui&ccedil;&atilde;o maci&ccedil;a.</para> 
    
-      <para>Por padrão, um modo interativo é usado, que tenta se certificar você 
-        para saber o que você está fazendo.</para>
+      <para>Por padr&atilde;o, um modo interativo &eacute; usado, que tenta se certificar voc&ecirc; 
+        para saber o que voc&ecirc; est&aacute; fazendo.</para>
 
       <example>
-	<title><command>rmuser</command> Remoção interativa de contas</title>
+	<title><command>rmuser</command> Remo&ccedil;&atilde;o interativa de contas</title>
 
 	<screen>&prompt.root; <userinput>rmuser jru</userinput>
 Matching password entry:
@@ -582,24 +582,24 @@ Removing files belonging to jru from /var/tmp/vi.recover: done.
       <title><command>chpass</command></title>
 
       <indexterm><primary><command>chpass</command></primary></indexterm>
-       <para>&man.chpass.1; altera informações da base de dados do usuário tais como 
-        senhas, shells e informações pessoais.</para>
+       <para>&man.chpass.1; altera informa&ccedil;&otilde;es da base de dados do usu&aacute;rio tais como 
+        senhas, shells e informa&ccedil;&otilde;es pessoais.</para>
 
-       <para>Apenas administradores do sistema, como o super usuário, podem alterar
-         informações e senhas de outros usuários com &man.chpass.1;.</para>
+       <para>Apenas administradores do sistema, como o super usu&aacute;rio, podem alterar
+         informa&ccedil;&otilde;es e senhas de outros usu&aacute;rios com &man.chpass.1;.</para>
 
-      <para>Quando passado sem opções, com exceção de um usuário opcional, 
-        &man.chpass.1; abrirá um editor contendo as informações do usuário. 
-        Quando o usuário sair do editor, a base de dados do usuário será 
-        atualizada com as novas informações.</para>
+      <para>Quando passado sem op&ccedil;&otilde;es, com exce&ccedil;&atilde;o de um usu&aacute;rio opcional, 
+        &man.chpass.1; abrir&aacute; um editor contendo as informa&ccedil;&otilde;es do usu&aacute;rio. 
+        Quando o usu&aacute;rio sair do editor, a base de dados do usu&aacute;rio ser&aacute; 
+        atualizada com as novas informa&ccedil;&otilde;es.</para>
 
       <note>
-        <para>Em &os;&nbsp;5.X, você irá ser questionado sua senha depois que 
-          sair do editor se você não for um super usuário.</para>
+        <para>Em &os;&nbsp;5.X, voc&ecirc; ir&aacute; ser questionado sua senha depois que 
+          sair do editor se voc&ecirc; n&atilde;o for um super usu&aacute;rio.</para>
       </note>
 
       <example>
-	<title>Interativo <command>chpass</command> pelo super usuário</title>
+	<title>Interativo <command>chpass</command> pelo super usu&aacute;rio</title>
 
 	<screen>#Changing user database information for jru.
 Login: jru
@@ -618,11 +618,11 @@ Home Phone:
 Other information:</screen>
       </example>
 
-      <para>O usuário normal pode alterar somente um subconjunto pequeno
-        destas informações, e somente para eles.</para>
+      <para>O usu&aacute;rio normal pode alterar somente um subconjunto pequeno
+        destas informa&ccedil;&otilde;es, e somente para eles.</para>
 
       <example>
-	<title>Interativo <command>chpass</command> pelo usuário normal</title>
+	<title>Interativo <command>chpass</command> pelo usu&aacute;rio normal</title>
 
 	<screen>#Changing user database information for jru.
 Shell: /usr/local/bin/zsh
@@ -634,10 +634,10 @@ Other information:</screen>
       </example>
 
       <note>
-        <para>&man.chfn.1; e &man.chsh.1; são justamente links para &man.chpass.1;,
-          como são &man.ypchpass.1;, &man.ypchfn.1;, e &man.ypchsh.1;. suporte a NIS 
-          é automático, assim especificar <literal>yp</literal> antes do comando não
-          é necessário. Se isto está confuso para você, não se preocupe, NIS será coberto
+        <para>&man.chfn.1; e &man.chsh.1; s&atilde;o justamente links para &man.chpass.1;,
+          como s&atilde;o &man.ypchpass.1;, &man.ypchfn.1;, e &man.ypchsh.1;. suporte a NIS 
+          &eacute; autom&aacute;tico, assim especificar <literal>yp</literal> antes do comando n&atilde;o
+          &eacute; necess&aacute;rio. Se isto est&aacute; confuso para voc&ecirc;, n&atilde;o se preocupe, NIS ser&aacute; coberto
           em <xref linkend="advanced-networking">.</para>
        </note>
 
@@ -651,13 +651,13 @@ Other information:</screen>
         <primary>contas</primary>
         <secondary>alterando a senha</secondary>
       </indexterm>
-       <para>&man.passwd.1; é a maneira usual para mudar sua própria senha
-        como um usuário, ou a senha de um outro usuário com o super usuário.</para>
+       <para>&man.passwd.1; &eacute; a maneira usual para mudar sua pr&oacute;pria senha
+        como um usu&aacute;rio, ou a senha de um outro usu&aacute;rio com o super usu&aacute;rio.</para>
 
       <note>
-         <para>Os usuários devem digitar dentro sua senha original antes de mudar
+         <para>Os usu&aacute;rios devem digitar dentro sua senha original antes de mudar
            sua senha, para impedir que uma pessoa desautorizada mude sua senha 
-           quando o usuário está ausente de seu console.</para>
+           quando o usu&aacute;rio est&aacute; ausente de seu console.</para>
       </note>
 
       <example>
@@ -673,7 +673,7 @@ passwd: done</screen>
       </example>
 
       <example>
-        <title>Alterando a senha de outro usuário como o super usuário</title>
+        <title>Alterando a senha de outro usu&aacute;rio como o super usu&aacute;rio</title>
 
         <screen>&prompt.root; <userinput>passwd jru</userinput>
 Changing local password for jru.
@@ -684,7 +684,7 @@ passwd: done</screen>
       </example>
 
       <note>
-        <para>Como com &man.chpass.1;, &man.yppasswd.1; são justamente um link para
+        <para>Como com &man.chpass.1;, &man.yppasswd.1; s&atilde;o justamente um link para
            &man.passwd.1;, assim o NIS trabalha com um ou outro comando.</para>
       </note>
     </sect2>
@@ -694,74 +694,74 @@ passwd: done</screen>
       <title><command>pw</command></title>
       <indexterm><primary><command>pw</command></primary></indexterm>
 
-      <para>&man.pw.8; é um comando utilitário para criar, remover, alterar e 
-        mostrar usuários e grupos. Isto funciona como um <foreignphrase>front end</foreignphrase>
-        para os arquivos do sistema de usuários e grupos. &man.pw.8 tem um
-        conjunto muito completo de opções e comandos que faz apropriado para o
-        uso em scripts shell, mas os usuários novos podem encontar mais 
-        complicações do que os outros comandos apresentados aqui.</para>
+      <para>&man.pw.8; &eacute; um comando utilit&aacute;rio para criar, remover, alterar e 
+        mostrar usu&aacute;rios e grupos. Isto funciona como um <foreignphrase>front end</foreignphrase>
+        para os arquivos do sistema de usu&aacute;rios e grupos. &man.pw.8 tem um
+        conjunto muito completo de op&ccedil;&otilde;es e comandos que faz apropriado para o
+        uso em scripts shell, mas os usu&aacute;rios novos podem encontar mais 
+        complica&ccedil;&otilde;es do que os outros comandos apresentados aqui.</para>
     </sect2>
 
 
   </sect1>
 
   <sect1 id="users-limiting">
-    <title>Limitando usuários</title>
+    <title>Limitando usu&aacute;rios</title>
 
-    <indexterm><primary>limitando usuários</primary></indexterm>
+    <indexterm><primary>limitando usu&aacute;rios</primary></indexterm>
     <indexterm>
       <primary>contas</primary>
       <secondary>limitando</secondary>
     </indexterm>
    
-    <para>Se você tiver usuários, a abilidade de limitar seu uso do sistema pode
+    <para>Se voc&ecirc; tiver usu&aacute;rios, a abilidade de limitar seu uso do sistema pode
       ter vindo em sua mente. FreeBSD fornece diversas maneiras que um 
       administrador pode limitar a quantidade de recursos do sistema que um 
-      indivíduo pode usar. Estes limites são divididos em duas seções: quotas
+      indiv&iacute;duo pode usar. Estes limites s&atilde;o divididos em duas se&ccedil;&otilde;es: quotas
       do disco, e outros limites de recursos.</para>
 
     <indexterm><primary>quotas</primary></indexterm>
     <indexterm>
-      <primary>limitando usuários</primary>
+      <primary>limitando usu&aacute;rios</primary>
       <secondary>quotas</secondary>
     </indexterm>
     <indexterm><primary>quotas de disco</primary></indexterm>
     
-    <para>As quotas de disco limitam o uso do disco aos usuários, e 
-      fornecem uma maneira de verificar rapidamente esse uso sem calculá-lo
-      todas as vezes. As quotas são discutidas em <xref linkend="quotas">.</para>
+    <para>As quotas de disco limitam o uso do disco aos usu&aacute;rios, e 
+      fornecem uma maneira de verificar rapidamente esse uso sem calcul&aacute;-lo
+      todas as vezes. As quotas s&atilde;o discutidas em <xref linkend="quotas">.</para>
 
     <para>Os outros limites de recurso incluem maneiras de limitar a quantidade
-      de uso do CPU, memória e outros recursos que um usuário pode consumir. Estes
-      são definidos usando classes do início de uma sessão e discutidos aqui.</para>
+      de uso do CPU, mem&oacute;ria e outros recursos que um usu&aacute;rio pode consumir. Estes
+      s&atilde;o definidos usando classes do in&iacute;cio de uma sess&atilde;o e discutidos aqui.</para>
 
     <indexterm>
       <primary><filename>/etc/login.conf</filename></primary>
     </indexterm>
-    <para>As classes de login são definidas em <filename>/etc/login.conf</filename>. A
-      semântica precisa é além do espaço desta seção, mas é descrita em detalhe na página
-      de manual &man.login.conf.5;. É suficiente dizer que cada usuário está atribuído a uma
-      classe do início de uma sessão (<literal>default</literal> por padrão), e que cada classe
-      do início de uma sessão tem um jogo das potencialidades do início de uma sessão associadas
-      com ela. Uma potencialidade do início de uma sessão é um par <literal><replaceable>nome</replaceable>
-      =<replaceable>valor</replaceable></literal>, onde <replaceable>nome</replaceable> é
-      previamente conhecido e <replaceable>valor</replaceable> é uma string arbitrária processada
-      conformente dependendo do nome. Ajustando classe de login e as potencialidades são
-      descritas também em &man.login.conf.5;</para>
+    <para>As classes de login s&atilde;o definidas em <filename>/etc/login.conf</filename>. A
+      sem&acirc;ntica precisa &eacute; al&eacute;m do espa&ccedil;o desta se&ccedil;&atilde;o, mas &eacute; descrita em detalhe na p&aacute;gina
+      de manual &man.login.conf.5;. &Eacute; suficiente dizer que cada usu&aacute;rio est&aacute; atribu&iacute;do a uma
+      classe do in&iacute;cio de uma sess&atilde;o (<literal>default</literal> por padr&atilde;o), e que cada classe
+      do in&iacute;cio de uma sess&atilde;o tem um jogo das potencialidades do in&iacute;cio de uma sess&atilde;o associadas
+      com ela. Uma potencialidade do in&iacute;cio de uma sess&atilde;o &eacute; um par <literal><replaceable>nome</replaceable>
+      =<replaceable>valor</replaceable></literal>, onde <replaceable>nome</replaceable> &eacute;
+      previamente conhecido e <replaceable>valor</replaceable> &eacute; uma string arbitr&aacute;ria processada
+      conformente dependendo do nome. Ajustando classe de login e as potencialidades s&atilde;o
+      descritas tamb&eacute;m em &man.login.conf.5;</para>
       
-    <para>Os limites de recurso são diferentes das potencialidades de login de uma
-     sessão do vanilla em duas maneiras. Primeira, para cada limite, há um limite macio
-    (atual) e duro. Um limite macio pode ser ajustado pelo usuário ou pela aplicação, mas pode
-    ser não mais altamente do que o limite duro. O último pode ser abaixado pelo usuário, mas
+    <para>Os limites de recurso s&atilde;o diferentes das potencialidades de login de uma
+     sess&atilde;o do vanilla em duas maneiras. Primeira, para cada limite, h&aacute; um limite macio
+    (atual) e duro. Um limite macio pode ser ajustado pelo usu&aacute;rio ou pela aplica&ccedil;&atilde;o, mas pode
+    ser n&atilde;o mais altamente do que o limite duro. O &uacute;ltimo pode ser abaixado pelo usu&aacute;rio, mas
     nunca ser levantado. Em segundo, a maioria de limites de recursos aplicam-se por processo
-    a um usuário específico, não usuário ao todo. Nota, entretanto, que estas diferenças estão
-    exijidas pela manipulação específica dos limites, não pela execução da estrutura da potencialidade
-    no login de uma sessão (isto é, não são <emphasis>realmente</emphasis> um exemplo especial 
+    a um usu&aacute;rio espec&iacute;fico, n&atilde;o usu&aacute;rio ao todo. Nota, entretanto, que estas diferen&ccedil;as est&atilde;o
+    exijidas pela manipula&ccedil;&atilde;o espec&iacute;fica dos limites, n&atilde;o pela execu&ccedil;&atilde;o da estrutura da potencialidade
+    no login de uma sess&atilde;o (isto &eacute;, n&atilde;o s&atilde;o <emphasis>realmente</emphasis> um exemplo especial 
     de potencialidades de login).</para>
 
-    <para>E assim, sem mais nada adicional, estão abaixo os limites mais comums 
+    <para>E assim, sem mais nada adicional, est&atilde;o abaixo os limites mais comums 
       usando limite de recursos (o resto, junto com todas as potencialidades restantes
-      de login de uma sessão, podem ser encontradas em &man.login.conf.5;).</para>
+      de login de uma sess&atilde;o, podem ser encontradas em &man.login.conf.5;).</para>
 
     <variablelist>
       <varlistentry>
@@ -770,18 +770,18 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>coredumpsize</primary></indexterm>
     <indexterm>
-      <primary>limitando usuários</primary>
+      <primary>limitando usu&aacute;rios</primary>
       <secondary>coredumpsize</secondary>
     </indexterm>
    
           <para>O limite em tamanho de um arquivo core gerado pelo um programa, por
-            razões óbvias, subordinado a outros limites no uso do disco (ex: 
-            <literal>filesize</literal>, ou quota de disco). Não obstante, é usado
-            frequentemente como um método menos severo de controlar o consumo do espaço
-            de disco: uma vez que usuários não geram os arquivos de core eles mesmo, e logo
-            não os deletam (por não saber que existem) fazer esta configuração pode evitar 
-            que eles fiquem sem espaço em disco devido o crash de uma aplicação com grande 
-            consumo de memória por exemplo o (ex: <application>emacs</application>).</para>
+            raz&otilde;es &oacute;bvias, subordinado a outros limites no uso do disco (ex: 
+            <literal>filesize</literal>, ou quota de disco). N&atilde;o obstante, &eacute; usado
+            frequentemente como um m&eacute;todo menos severo de controlar o consumo do espa&ccedil;o
+            de disco: uma vez que usu&aacute;rios n&atilde;o geram os arquivos de core eles mesmo, e logo
+            n&atilde;o os deletam (por n&atilde;o saber que existem) fazer esta configura&ccedil;&atilde;o pode evitar 
+            que eles fiquem sem espa&ccedil;o em disco devido o crash de uma aplica&ccedil;&atilde;o com grande 
+            consumo de mem&oacute;ria por exemplo o (ex: <application>emacs</application>).</para>
 
 	</listitem>
       </varlistentry>
@@ -792,18 +792,18 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>cputime</primary></indexterm>
     <indexterm>
-      <primary>limitando usuários</primary>
+      <primary>limitando usu&aacute;rios</primary>
       <secondary>cputime</secondary>
     </indexterm>
-          <para>Esta é a quantidade máxima de tempo do processador central 
-           que o processo de um usuário pode consumir. Os processos que 
-           desrespeitarem serão matados pelo kernel.
+          <para>Esta &eacute; a quantidade m&aacute;xima de tempo do processador central 
+           que o processo de um usu&aacute;rio pode consumir. Os processos que 
+           desrespeitarem ser&atilde;o matados pelo kernel.
 	    <note>
 	  
-              <para>Este é um limite de <emphasis>tempo</emphasis> no processador central,
-              não porcentagem do processador central como indicado em alguns campos por &man.top.1;
-              e &man.ps.1;. Um limite no último é, na altura deste documento, não possível, e seria 
-              inútil: um compilador&mdash; pode legitamente usar facilmente quase 100% de um 
+              <para>Este &eacute; um limite de <emphasis>tempo</emphasis> no processador central,
+              n&atilde;o porcentagem do processador central como indicado em alguns campos por &man.top.1;
+              e &man.ps.1;. Um limite no &uacute;ltimo &eacute;, na altura deste documento, n&atilde;o poss&iacute;vel, e seria 
+              in&uacute;til: um compilador&mdash; pode legitamente usar facilmente quase 100% de um 
               processador central por algum tempo.</para>
 	    </note>
 	  </para>
@@ -816,13 +816,13 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>filesize</primary></indexterm>
     <indexterm>
-      <primary>limitando usuários</primary>
+      <primary>limitando usu&aacute;rios</primary>
       <secondary>filesize</secondary>
     </indexterm>
-          <para>Este é o tamanho máximo de um arquivo que um usuário pode 
-           possuir. Ao contrário da  <link linkend="quotas">quota de disco</link>,
-           este limite é reforçado em arquivos individuais, não de todo o conjunto 
-           de arquivos que um usuário possui.
+          <para>Este &eacute; o tamanho m&aacute;ximo de um arquivo que um usu&aacute;rio pode 
+           possuir. Ao contr&aacute;rio da  <link linkend="quotas">quota de disco</link>,
+           este limite &eacute; refor&ccedil;ado em arquivos individuais, n&atilde;o de todo o conjunto 
+           de arquivos que um usu&aacute;rio possui.
 	</listitem>
       </varlistentry>
 
@@ -832,17 +832,17 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>maxproc</primary></indexterm>
         <indexterm>
-      <primary>limitando usuários</primary>
+      <primary>limitando usu&aacute;rios</primary>
       <secondary>maxproc</secondary>
     </indexterm>
-          <para>Este é o número máximo de processos que um usuário pode rodar.
-            Isto inclui processos foreground e background igualmente. Por razões
-            óbvias, isto não pode ser maior do que o limite do sistema especificado
-            por &man.sysctl.8; <varname>kern.maxproc</varname>. Note também que configurando
-            isso para um valor pequeno vai prejudicar a produtividade do usuário: é frequentemente
-            útil logar multiplas vezes e executar processos. Algumas tarefas, tais como 
-            compilar um programa grande, também geram multiplos processos (ex: &man.make.1;, 
-            &man.cc.1; e outros intermediários).</para>
+          <para>Este &eacute; o n&uacute;mero m&aacute;ximo de processos que um usu&aacute;rio pode rodar.
+            Isto inclui processos foreground e background igualmente. Por raz&otilde;es
+            &oacute;bvias, isto n&atilde;o pode ser maior do que o limite do sistema especificado
+            por &man.sysctl.8; <varname>kern.maxproc</varname>. Note tamb&eacute;m que configurando
+            isso para um valor pequeno vai prejudicar a produtividade do usu&aacute;rio: &eacute; frequentemente
+            &uacute;til logar multiplas vezes e executar processos. Algumas tarefas, tais como 
+            compilar um programa grande, tamb&eacute;m geram multiplos processos (ex: &man.make.1;, 
+            &man.cc.1; e outros intermedi&aacute;rios).</para>
 	</listitem>
       </varlistentry>
 
@@ -852,13 +852,13 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>memorylocked</primary></indexterm>
     <indexterm>
-      <primary>limitando usuários</primary>
+      <primary>limitando usu&aacute;rios</primary>
       <secondary>memorylocked</secondary>
     </indexterm>
-	  <para>Este é a quantidade máxima de memória quem um processo pode 
-            requerir para reservar na memória principal (ex: veja &man.mlock.2;).
-            Alguns programas críticos do sistema, tais como &man.amd.8;, reserva
-            na memória principal como evento troca, não contribuindo a uma degradação
+	  <para>Este &eacute; a quantidade m&aacute;xima de mem&oacute;ria quem um processo pode 
+            requerir para reservar na mem&oacute;ria principal (ex: veja &man.mlock.2;).
+            Alguns programas cr&iacute;ticos do sistema, tais como &man.amd.8;, reserva
+            na mem&oacute;ria principal como evento troca, n&atilde;o contribuindo a uma degrada&ccedil;&atilde;o
             do sistema em tempo real.</para>
 	</listitem>
       </varlistentry>
@@ -869,13 +869,13 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>memoryuse</primary></indexterm>
     <indexterm>
-      <primary>limitando usuários</primary>
+      <primary>limitando usu&aacute;rios</primary>
       <secondary>memoryuse</secondary>
     </indexterm>
-          <para>Esta é a quantidade máxima de memória que um processo pode 
-            consumir durante todo o tempo. Isso inclue o uso da memória principal e a 
-            <foreignphrase>swap</foreignphrase>. Isto não é um controle total de restrição de 
-            consumo de memória, mas é um bom começo</para>
+          <para>Esta &eacute; a quantidade m&aacute;xima de mem&oacute;ria que um processo pode 
+            consumir durante todo o tempo. Isso inclue o uso da mem&oacute;ria principal e a 
+            <foreignphrase>swap</foreignphrase>. Isto n&atilde;o &eacute; um controle total de restri&ccedil;&atilde;o de 
+            consumo de mem&oacute;ria, mas &eacute; um bom come&ccedil;o</para>
 	</listitem>
       </varlistentry>
 
@@ -885,13 +885,13 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>openfiles</primary></indexterm>
     <indexterm>
-      <primary>limitando usuários</primary>
+      <primary>limitando usu&aacute;rios</primary>
       <secondary>openfiles</secondary>
     </indexterm>
-          <para>Esta é a quantidade máxima de arquivos que um processo pode ter
-            aberto. No FreeBSD, arquivos são usados também para representar 
+          <para>Esta &eacute; a quantidade m&aacute;xima de arquivos que um processo pode ter
+            aberto. No FreeBSD, arquivos s&atilde;o usados tamb&eacute;m para representar 
             <foreignphrase>sockets</foreignphrase> e canais IPC; tenha assim cuidado
-            para não ajustar este demasiadamente baixo. O limite para este é definido
+            para n&atilde;o ajustar este demasiadamente baixo. O limite para este &eacute; definido
             por &man.sysctl.8; <varname>kern.maxfiles</varname>.</para>
 	</listitem>
       </varlistentry>
@@ -902,13 +902,13 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>sbsize</primary></indexterm>
     <indexterm>
-      <primary>limitando usuários</primary>
+      <primary>limitando usu&aacute;rios</primary>
       <secondary>sbsize</secondary>
     </indexterm>
-          <para>Esta é a quantidade máxima de memória da rede, e assim os mbufs,
-            um usuário podem consumir. Isto originado como uma resposta a um ataque
+          <para>Esta &eacute; a quantidade m&aacute;xima de mem&oacute;ria da rede, e assim os mbufs,
+            um usu&aacute;rio podem consumir. Isto originado como uma resposta a um ataque
             velho de DoS criando muitos dos <foreignphrase>sockets</foreignphrase>,
-            mas pode geralmente ser usado para limitar a comunicação da rede.</para>
+            mas pode geralmente ser usado para limitar a comunica&ccedil;&atilde;o da rede.</para>
 	</listitem>
       </varlistentry>
 
@@ -918,11 +918,11 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>stacksize</primary></indexterm>
     <indexterm>
-      <primary>limitando usuários</primary>
+      <primary>limitando usu&aacute;rios</primary>
       <secondary>stacksize</secondary>
     </indexterm>
-          <para>Este é o tamanho máximo que uma pilha dos processos pode vir.
-            Este sozinho não é suficiente para limitar a quantidade de memória que
+          <para>Este &eacute; o tamanho m&aacute;ximo que uma pilha dos processos pode vir.
+            Este sozinho n&atilde;o &eacute; suficiente para limitar a quantidade de mem&oacute;ria que
             um programa pode usar, consequentemente, deve ser usado em conjunto com
             outros limites.</para>
 	</listitem>
@@ -930,52 +930,52 @@ passwd: done</screen>
     </variablelist>
 
     <para>Existem outras coisas para recordar ao ajustar limites de recurso.
-      Logo em seguinda estão alguns pontos gerais, sugestões, e comentários variados.</para>
+      Logo em seguinda est&atilde;o alguns pontos gerais, sugest&otilde;es, e coment&aacute;rios variados.</para>
 
     <itemizedlist>
       <listitem>
-        <para>Os processos que são iniciados no sistema pelo
-          <filename>/etc/rc</filename> são atribuídos à classe de login
+        <para>Os processos que s&atilde;o iniciados no sistema pelo
+          <filename>/etc/rc</filename> s&atilde;o atribu&iacute;dos &agrave; classe de login
           <literal>daemon</literal>.</para>
       </listitem>
 
       <listitem>
         <para>Embora o <filename>/etc/login.conf</filename> que vem com o 
-          sistema é uma fonte boa de valores razoáveis para a maioria dos limites,
-          apenas você, administrador, pode saber o que é apropriado para o seu 
+          sistema &eacute; uma fonte boa de valores razo&aacute;veis para a maioria dos limites,
+          apenas voc&ecirc;, administrador, pode saber o que &eacute; apropriado para o seu 
           sistema. Ajustar um limite demasiadamente elevado pode abrir seu sistema
-          até o abuso, quando o ajustar demasiadamente baixo pode pôr uma tensão sobre
+          at&eacute; o abuso, quando o ajustar demasiadamente baixo pode p&ocirc;r uma tens&atilde;o sobre
           a produtividade.
       </listitem>
 
       <listitem>
-        <para>Os usuários do sistema de janela X (X11) devem provavelmente ser
-          concedidos mais recursos do que outros usuários. X11 por si só usa poucos
-          recursos, mas incentiva também usuários à rodar programas simultaneos.</para>
+        <para>Os usu&aacute;rios do sistema de janela X (X11) devem provavelmente ser
+          concedidos mais recursos do que outros usu&aacute;rios. X11 por si s&oacute; usa poucos
+          recursos, mas incentiva tamb&eacute;m usu&aacute;rios &agrave; rodar programas simultaneos.</para>
       </listitem>
 
       <listitem>
-        <para>Recorde que muitos limites se aplicam aos processos individuais, não
-          usuário como um todo. Por exemplo, ajustar <varname>openfiles</varname> para
-          50 significa que cada processo que o usuário rodar, pode abrir até 50 arquivos.
-          Assim, a quantidade bruta de arquivos que um usuário pode abrir é o valor 
+        <para>Recorde que muitos limites se aplicam aos processos individuais, n&atilde;o
+          usu&aacute;rio como um todo. Por exemplo, ajustar <varname>openfiles</varname> para
+          50 significa que cada processo que o usu&aacute;rio rodar, pode abrir at&eacute; 50 arquivos.
+          Assim, a quantidade bruta de arquivos que um usu&aacute;rio pode abrir &eacute; o valor 
           <literal>openfiles</literal> multiplicado pelo <literal>maxproc</literal>.
-          Isto também se aplica ao consumo de memória.</para>
+          Isto tamb&eacute;m se aplica ao consumo de mem&oacute;ria.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Para uma informação adicional sobre limites de recursos e classes de login 
-      e capacidades em geral, consulte por favor as páginas de manuais relevantes: 
+    <para>Para uma informa&ccedil;&atilde;o adicional sobre limites de recursos e classes de login 
+      e capacidades em geral, consulte por favor as p&aacute;ginas de manuais relevantes: 
       &man.cap.mkdb.1;, &man.getrlimit.2;, &man.login.conf.5;.</para>
   </sect1>
 
   <sect1 id="users-personalizing">
-    <title>Personalizando usuários</title>
+    <title>Personalizando usu&aacute;rios</title>
 
-    <para>A localização é um ambiente ajustado pelo administrador ou pelo usuário 
-      do sistema para acomodar línguas diferentes, conjunto de caracteres, data e padrões
-      de tempo diferentes, e assim por diante. Isto é discutido no capítulo sobre 
-      <link linkend="l10n">localização</link>.</para>
+    <para>A localiza&ccedil;&atilde;o &eacute; um ambiente ajustado pelo administrador ou pelo usu&aacute;rio 
+      do sistema para acomodar l&iacute;nguas diferentes, conjunto de caracteres, data e padr&otilde;es
+      de tempo diferentes, e assim por diante. Isto &eacute; discutido no cap&iacute;tulo sobre 
+      <link linkend="l10n">localiza&ccedil;&atilde;o</link>.</para>
   </sect1>
 
   <sect1 id="users-groups">
@@ -990,25 +990,25 @@ passwd: done</screen>
       <secondary>grupos</secondary>
     </indexterm>    
 
-    <para>Um grupo é simplesmente uma lista de usuários. Os grupos são identificados
+    <para>Um grupo &eacute; simplesmente uma lista de usu&aacute;rios. Os grupos s&atilde;o identificados
       por nome e GID (grupo ID).  No FreeBSD (e na maioria de outros sistemas &unix),
-      os dois fatores que o kernel usa para decidir se um processo está permitido fazer
-      algo é seu usuário ID e a lista dos grupos que ele pertence. Ao contrário de um 
-      usuário ID, um processo tem uma lista dos grupos associados com ele. Você pode
-      ouvir algumas coisas, consultar o <quote>group ID</quote> de um usuário ou de um
+      os dois fatores que o kernel usa para decidir se um processo est&aacute; permitido fazer
+      algo &eacute; seu usu&aacute;rio ID e a lista dos grupos que ele pertence. Ao contr&aacute;rio de um 
+      usu&aacute;rio ID, um processo tem uma lista dos grupos associados com ele. Voc&ecirc; pode
+      ouvir algumas coisas, consultar o <quote>group ID</quote> de um usu&aacute;rio ou de um
       processo; na maioria das vezes isto significa apenas o primeiro grupo da lista.</para>
 
-   <para>O nome do grupo ao mapa do ID do grupo está em <filename>/etc/group</filename>.
-      Este é um arquivo de texto plano com quatro campos delimitadores. O primeiro campo é 
-      o nome do grupo, o segundo é a senha encriptada, o terceiro é o grupo ID, e o 
-      quarto é a lista dos membros delimitado por virgula. Pode com segurança ser editado 
-      na mão (que supõem naturalmente, que você não irá fazer nenhum erro de sintaxe!).
-      Para uma descrição mais completa da sintaxe, veja a página de manual &man.group.5;.</para>
+   <para>O nome do grupo ao mapa do ID do grupo est&aacute; em <filename>/etc/group</filename>.
+      Este &eacute; um arquivo de texto plano com quatro campos delimitadores. O primeiro campo &eacute; 
+      o nome do grupo, o segundo &eacute; a senha encriptada, o terceiro &eacute; o grupo ID, e o 
+      quarto &eacute; a lista dos membros delimitado por virgula. Pode com seguran&ccedil;a ser editado 
+      na m&atilde;o (que sup&otilde;em naturalmente, que voc&ecirc; n&atilde;o ir&aacute; fazer nenhum erro de sintaxe!).
+      Para uma descri&ccedil;&atilde;o mais completa da sintaxe, veja a p&aacute;gina de manual &man.group.5;.</para>
 
-    <para>Se você não quiser editar manualmente o <filename>/etc/group</filename>, 
-      você pode usar o comando &man.pw.8; para adicionar e editar grupos. Por exemplo,
-      para adicionar um grupo chamado <groupname>teamtwo</groupname> e confirmar então
-      que existe você pode usar:</para>
+    <para>Se voc&ecirc; n&atilde;o quiser editar manualmente o <filename>/etc/group</filename>, 
+      voc&ecirc; pode usar o comando &man.pw.8; para adicionar e editar grupos. Por exemplo,
+      para adicionar um grupo chamado <groupname>teamtwo</groupname> e confirmar ent&atilde;o
+      que existe voc&ecirc; pode usar:</para>
 
     <example>
       <title>Adicionando um grupo usando &man.pw.8;</title>
@@ -1018,27 +1018,27 @@ passwd: done</screen>
 teamtwo:*:1100:</screen>
     </example>
 
-    <para>O número <literal>1100</literal> acima está o grupo ID do grupo
+    <para>O n&uacute;mero <literal>1100</literal> acima est&aacute; o grupo ID do grupo
       <groupname>teamtwo</groupname>. Agora,
-      <groupname>teamtwo</groupname> não tem nenhum membro, e é por esta razão inútil.
+      <groupname>teamtwo</groupname> n&atilde;o tem nenhum membro, e &eacute; por esta raz&atilde;o in&uacute;til.
       Vamos mudar aquele convidado <username>jru</username> para o grupo 
       <groupname>teamtwo</groupname>.</para>
 
     <example>
-      <title>Adicionando alguém a um grupo usando &man.pw.8;</title>
+      <title>Adicionando algu&eacute;m a um grupo usando &man.pw.8;</title>
 
       <screen>&prompt.root; <userinput>pw groupmod teamtwo -M jru</userinput>
 &prompt.root; <userinput>pw groupshow teamtwo</userinput>
 teamtwo:*:1100:jru</screen>
     </example>
 
-    <para>O argumento opção <option>-M</option> é uma lista de usuários que serão 
-     membros do grupo delimitados por virgula. Das seções precedentes, nós sabemos
-     que o arquivo de senha também contém um grupo para cada usuário.O último (o usuário)
-     é adicionado automaticamente à lista do grupo pelo sistema; o usuário não mostrará acima
+    <para>O argumento op&ccedil;&atilde;o <option>-M</option> &eacute; uma lista de usu&aacute;rios que ser&atilde;o 
+     membros do grupo delimitados por virgula. Das se&ccedil;&otilde;es precedentes, n&oacute;s sabemos
+     que o arquivo de senha tamb&eacute;m cont&eacute;m um grupo para cada usu&aacute;rio.O &uacute;ltimo (o usu&aacute;rio)
+     &eacute; adicionado automaticamente &agrave; lista do grupo pelo sistema; o usu&aacute;rio n&atilde;o mostrar&aacute; acima
      como um membro ao usar o comando <option>groupshow</option> para &man.pw.8;,
      ou ferramenta similar. Ou seja &man.pw.8; manipula somente o arquivo 
-     <filename>/etc/group</filename>; nunca tentará ler adicionalmente dados do
+     <filename>/etc/group</filename>; nunca tentar&aacute; ler adicionalmente dados do
      <filename>/etc/passwd</filename>.</para>
 
     <example>
@@ -1048,12 +1048,12 @@ teamtwo:*:1100:jru</screen>
 uid=1001(jru) gid=1001(jru) groups=1001(jru), 1100(teamtwo)</screen>
     </example>
 
-    <para>Como você pode ver, <username>jru</username> é um membro dos grupos
+    <para>Como voc&ecirc; pode ver, <username>jru</username> &eacute; um membro dos grupos
       <groupname>jru</groupname> e <groupname>teamtwo</groupname>.</para>
 
-    <para>Para maiores informações sobre &man.pw.8;, veja está página de manual, e para
-      maiores informações sobre o formato do <filename>/etc/group</filename>, consulte a
-      página de manual &man.group.5;.</para>
+    <para>Para maiores informa&ccedil;&otilde;es sobre &man.pw.8;, veja est&aacute; p&aacute;gina de manual, e para
+      maiores informa&ccedil;&otilde;es sobre o formato do <filename>/etc/group</filename>, consulte a
+      p&aacute;gina de manual &man.group.5;.</para>
   </sect1>
 </chapter>
 
