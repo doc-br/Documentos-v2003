@@ -1351,38 +1351,37 @@ pseudo-device   pty           # Pseudo-ttys (telnet etc)</programlisting>
 	  </listitem>
 
 	  <listitem>
-	    <para>Alguns valores ajustáveis no kernel  sistemas tunables determinam o uso do recurso da mem&oacute;ria
-	      pela quantidade de mem&oacute;ria f&iacute;sica dispon&iacute;vel. Alguns
-	      tunables podem desnecessariamente sobre-alocar devido a
-	      natureza da grande mam&oacute;ria de um sistema <acronym>PAE</acronym>.
-	      Um exemplo &eacute; o <option>kern.maxvnodes</option>
-	      sysctl, que controla o n&uacute;mero m&aacute;ximo de vnodes permitidos
-	      no kernel. Recomenda-se para ajustar este e outros
-	      tais tunables a um valor raso&aacute;vel.</para>
+	    <para>Alguns valores ajustáveis no kernel do sistema são baseados na quantidade
+	      de memória que foi configurada no kernel, estaticamente, no momento da
+	      compilação deste.  Alguns destes valores podem ter necessidade de serem realocados
+	      devido à natureza do suporte à muita memória disponível em sistemas com
+	      <acronym>PAE</acronym>. Um bom exemplo é a MIB ajustável via &man.sysctl.8;,
+	      <option>kern.maxvnodes</option>, que controla o número máximo de vnodes
+	      que podem ser alocados no kernel.  É recomendado que este e outros valores
+	      ajustáveis sejam redefinidos à um valor rasoável, em sistemas
+	      com <filename>PAE</filename>.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>Pode ser necess&aacute;rio aumentar o espa&ccedil;o do endere&ccedil;o 
-	      (<acronym>KVA</acronym>) virtual do kernel ou diminuir a
-	      quantidade de recursos especificados do kernel que &eacute; pesadamente usado
-	      (veja acima) a fim de evitar a exaust&atilde;o do <acronym>KVA</acronym>.
-	      A op&ccedil;&atilde;o do kernel <option>KVA_PAGES</option>
-	      pode ser usado para aumentar o espa&ccedil;o do
-	      <acronym>KVA</acronym>.</para>
+	    <para>Pode ser necess&aacute;rio aumentar o espa&ccedil;o virtual de endereçamento
+	     do kernel (<acronym>KVA</acronym>) ou diminuir a quantidade de recursos
+	     utilizados com maior demanda no kernel, objetivando evitar a exaustão do <acronym>KVA</acronym>.
+		A opção <option>KVA_PAGES</option> pode ser usada na configuração do kernel para aumentar
+		o espaço disponível para o <aconym>KVA</acronym>.</para>
 	  </listitem>
 	</itemizedlist>
 
-	<para>Para preocupa&ccedil;&atilde;o com performance e estabilidade, recomenda-se 
-	  consultar o &man.tuning.7; p&aacute;gina do manual. A &man.pae.4;
-	  p&aacute;gina do manual cont&eacute;m informa&ccedil;&atilde;o moderna do &os;'s
-	  para suporte <acronym>PAE</acronym>.</para>
+	<para>Para mais dicas sobre performance e estabilidade, é recomendado a leitura da
+	  página de manual &man.tuning.7;. A página de manual &man.pae.4;
+	  cont&eacute;m informa&ccedil;&atilde;o recentes sobre o suporte <acronym>PAE</acronym>
+	  no &os;.</para>
     </sect2>
   </sect1>
 
   <sect1 id="kernelconfig-nodes">
-    <title>Fazendo Liga&ccedil;&atilde;o dos Dispositivos</title>
+    <title>Criando Dispositivos de Controle</title>
 
-    <indexterm><primary>dispositivos ligados</primary></indexterm>
+    <indexterm><primary>dispositivos de controle</primary></indexterm>
     <indexterm>
       <primary><command>MAKEDEV</command></primary>
     </indexterm>
@@ -1598,4 +1597,3 @@ pseudo-device   pty           # Pseudo-ttys (telnet etc)</programlisting>
      sgml-parent-document: ("../book.sgml" "part" "chapter")
      End:
 -->
-
