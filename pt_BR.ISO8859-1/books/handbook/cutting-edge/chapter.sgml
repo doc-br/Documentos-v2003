@@ -531,7 +531,7 @@
       v&aacute;rias vezes por dia na m&aacute;quina CTM principal, as mudan&ccedil;as s&atilde;o 
       comprimidas, estampadas com um n&uacute;mero sequencial e codificadas para 
       transmiss&atilde;o por correio eletr&ocirc;nico (apenas em caracteres ASCII 
-      imprim&iacute;veis).  Uma vez recebidos, estes <quotes>deltas CTM</quote> 
+      imprim&iacute;veis).  Uma vez recebidos, estes <quote>deltas CTM</quote> 
       podem ser manipulados pelo utilit&aacute;rio &man.ctm.rmail.1; que 
       decodificar&aacute; automaticamente, verificar&aacute; e aplicar&aacute; as mudan&ccedil;as nos 
       fontes do usu&aacute;rio.  Este processo &eacute; bem mais eficiente do que o 
@@ -621,85 +621,87 @@
     </sect2>
 
     <sect2>
-      <title>Check <filename>/etc/make.conf</filename></title>
+      <title>Verifique o <filename>/etc/make.conf</filename></title>
       <indexterm>
         <primary><filename>make.conf</filename></primary>
       </indexterm>
 
-      <para>Examine the files
-	<filename>/etc/defaults/make.conf</filename> and
-	<filename>/etc/make.conf</filename>.  The first contains some
-	default defines &ndash; most of which are commented out.  To
-	make use of them when you rebuild your system from source, add
-	them to <filename>/etc/make.conf</filename>.  Keep in mind that
-	anything you add to <filename>/etc/make.conf</filename> is also
-	used every time you run <command>make</command>, so it is a good
-	idea to set them to something sensible for your system.</para>
+      <para>Examine os arquivos 
+	<filename>/etc/defaults/make.conf</filename> e
+	<filename>/etc/make.conf</filename>.  O primeiro cont&eacute;m algumas 
+	defini&ccedil;&otilde;es padr&atilde;o &ndash; muitas comentadas.  Para fazer uso 
+	delas quando voc&ecirc; reconstruir seu sistema dos fontes, adicione-as 
+	ao arquivo <filename>/etc/make.conf</filename>.  Tenha em mente 
+	que qualquer coisa que voc&ecirc; adicione ao arquivo <filename>
+	/etc/make.conf</filename> tamb&eacute;m &eacute; usado sempre que voc&ecirc; executar 
+	o comando <command>make</make>, ent&atilde;o &eacute; uma boa id&eacute;ia configur&aacute;-lo 
+	para alguma coisa sens&iacute;vel para seu sistema.</para>
 
-      <para>A typical user will probably want to copy the
-	<makevar>CFLAGS</makevar> and
-	<makevar>NOPROFILE</makevar> lines found in
-	<filename>/etc/defaults/make.conf</filename> to
-	<filename>/etc/make.conf</filename> and uncomment them.</para>
+      <para>Um usu&aacute;rio t&iacute;pico provavelmente copiar&aacute; as linhas 
+	<makevar>CFLAGS</makevar> e
+	<makevar>NOPROFILE</makevar> encontradas em 
+	<filename>/etc/defaults/make.conf</filename> para 
+	<filename>/etc/make.conf</filename> e remover&aacute; seus coment&aacute;rios.</para>
 
-      <para>Examine the other definitions (<makevar>COPTFLAGS</makevar>, 
-	<makevar>NOPORTDOCS</makevar> and so
-	on) and decide if they are relevant to you.</para>
+      <para>Examine outras defini&ccedil;&otilde;es (<makevar>COPTFLAGS</makevar>, 
+	<makevar>NOPORTDOCS</makevar> e assim por diante) 
+	e decida se elas s&atilde;o relevantes para voc&ecirc;.<para>
     </sect2>
 
     <sect2>
-      <title>Update the Files in <filename>/etc</filename></title>
+      <title>Atualize os Arquivos em <filename>/etc</filename></title>
 
-      <para>The <filename>/etc</filename> directory contains a large part
-	of your system's configuration information, as well as scripts
-	that are run at system startup.  Some of these scripts change from
-	version to version of FreeBSD.</para>
+      <para>O diret&oacute;rio <filename>/etc</filename> cont&eacute;m grande parte da 
+	informa&ccedil;&atilde;o de configura&ccedil;&atilde;o do seu sistema, assim como <literal>
+	scripts</literal> que s&atilde;o executados na inicializa&ccedil;&atilde;o do sistema.  Alguns 
+	destes <literal>scripts</literal> mudam de vers&atilde;o para vers&atilde;o do 
+	FreeBSD.</para>
 
-      <para>Some of the configuration files are also used in the day to
-	day running of the system.  In particular,
+      <para>Alguns dos arquivos de configura&ccedil;&atilde;o tamb&eacute;m s&atilde;o usados diariamente 
+	na execu&ccedil;&atilde;o do sistema.  Particularmente, o 
 	<filename>/etc/group</filename>.</para>
 
-      <para>There have been occasions when the installation part of
-        <quote>make world</quote> has expected certain usernames or groups
-	to exist.  When performing an upgrade it is likely that these
-	users or groups did not exist. This caused problems when upgrading.</para>
+      <para>Existiram ocasi&otilde;es em que algumas partes da instala&ccedil;&atilde;o do 
+        <quote>make world</quote> esperava encontrar certos nomes de 
+	usu&aacute;rios ou grupos no sistema.  Ao fazer uma atualiza&ccedil;&atilde;o &eacute; 
+	bem prov&aacute;vel que estes usu&aacute;rios ou grupos n&atilde;o existissem.  Isto 
+	causava problemas na atualiza&ccedil;&atilde;o.</para>
 
-      <para>A recent example of this is when the
-	<username>smmsp</username> user was added.  Users had the
-	installation process fail for them when
-	&man.mtree.8; was trying to create
-	<filename>/var/spool/clientmqueue</filename>.</para>
+      <para>Um exemplo recente foi quando o usu&aacute;rio <username>smmsp
+	</username> foi adicionado.  Os usu&aacute;rios tiveram falhas no 
+	processo de instala&ccedil;&atilde;o quando o &man.mtree.8; tentava criar 
+	o arquivo <filename>/var/spool/clientmqueue</filename>.</para>
 
-      <para>The solution is to examine
-	<filename>/usr/src/etc/group</filename> and compare its list of
-	groups with your own.  If there are any groups in the new file that
-	are not in your file then copy them over.  Similarly, you should
-	rename any groups in <filename>/etc/group</filename> which have
-	the same GID but a different name to those in
+      <para>A solu&ccedil;&atilde;o &eacute; examinar o arquivo 
+	<filename>/usr/src/etc/group</filename> e comparar com o seu 
+	arquivo de grupos.  Se existirem grupos no arquivo novo que n&atilde;o 
+	existirem no seu ent&atilde;o copie-os.  Similarmente, voc&ecirc; deve 
+	renomear quaisquer grupos no <filename>/etc/group</filename> que 
+	possuirem o mesmo GID mas um nome diferente dos que est&atilde;o em 
 	<filename>/usr/src/etc/group</filename>.</para>
 
-      <para>Since 4.6-RELEASE you can run &man.mergemaster.8; in
-	pre-buildworld mode by providing the <option>-p</option> option.
-	This will compare only those files that are essential for the success
-	of <maketarget>buildworld</maketarget> or
-	<maketarget>installworld</maketarget>.  If your old version of
-	<command>mergemaster</command> does not support <option>-p</option>,
-	use the new version in the source tree when running for the first
-	time:</para>
+      <para>Desde o 4.6-RELEASE voc&ecirc; pode executar o &man.mergemaster.8;  
+	antes da constru&ccedil;&atilde;o do sistema com a op&ccedil;&atilde;o <option>-p</option>.  
+	Isto comparar&aacute; apenas aqueles arquivos que s&atilde;o essenciais para o 
+	sucesso do <maketarget>buildworld</maketarget> ou <maketarget>
+	installworld</maketarget>.  Se a sua vers&atilde;o antiga do <command>
+	mergemasger</command> n&atilde;o suportar a op&ccedil;&atilde;o <option>-p</option>, 
+	use a vers&atilde;o mais nova na &aacute;rvore dos fontes ao execut&aacute;-lo pela 
+	primeira vez:</para>
 
       <screen>&prompt.root; <userinput>cd /usr/src/usr.sbin/mergemaster</userinput>
 &prompt.root; <userinput>./mergemaster.sh -p</userinput></screen>
 
       <tip>
-	<para>If you are feeling particularly paranoid, you can check your
-	  system to see which files are owned by the group you are
-	  renaming or deleting:</para>
+	<para>Se voc&ecirc; est&aacute; se sentindo particularmente paran&oacute;ico, voc&ecirc; pode 
+	  checar seu sistema para ver quais arquivos foram possuidos pelo 
+	  grupo que voc&ecirc; est&aacute; renomeando ou apagando:</para>
 
 	<screen>&prompt.root; <userinput>find / -group <replaceable>GID</replaceable> -print</userinput></screen>
 
-	<para>will show all files owned by group
-	  <replaceable>GID</replaceable> (which can be either a group name
-	  or a numeric group ID).</para>
+	<para>mostrar&aacute; tdos os arquivos pertencidos pelo grupo 
+	  <replaceable>GID</replaceable> (que pode ser um nome de grupo 
+	  ou um ID num&eacute;rico de grupo).</para>
       </tip>
     </sect2>
 
