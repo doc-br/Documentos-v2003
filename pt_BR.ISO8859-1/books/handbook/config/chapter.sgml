@@ -223,40 +223,41 @@
   </sect1>
 
   <sect1 id="configtuning-core-configuration">
-    <title>Core Configuration</title>
+    <title>Configura&ccedil;&atilde;o Principal</title>
 
     <indexterm>
       <primary>rc files</primary>
       <secondary><filename>rc.conf</filename></secondary>
     </indexterm>
 
-    <para>The principal location for system configuration information
-      is within <filename>/etc/rc.conf</filename>.  This file
-      contains a wide range of configuration information, principally
-      used at system startup to configure the system.  Its name
-      directly implies this; it is configuration information for the
-      <filename>rc*</filename> files.</para>
+    <para>O local principal para informa&ccedil;&otilde;es de configura&ccedil;&atilde;o de sistema 
+      est&aacute; dentro de <filename>/etc/rc.conf</filename>.  Este arquivo
+      cont&eacute;m uma grande quantidade de infora&ccedil;&otilde;es de configura&ccedil;&atilde;o, 
+      essencialmente usadas na inicializa&ccedil;&atilde;o do sistema.  Seu nome 
+      implica diretamente nisto;  &eacute; a informa&ccedil;&atilde;o de configura&ccedil;&atilde;o para 
+      os arquivos <filename>rc*</filename>.</para>
 
-    <para>An administrator should make entries in the
-      <filename>rc.conf</filename> file to
-      override the default settings from
-      <filename>/etc/defaults/rc.conf</filename>.  The defaults file
-      should not be copied verbatim to <filename>/etc</filename> - it
-      contains default values, not examples.  All system-specific
-      changes should be made in the <filename>rc.conf</filename>
-      file itself.</para>
+    <para>Um administrador deve inserir entradas no arquivo 
+      <filename>rc.conf</filename> para sobrepor 
+      as configura&ccedil;&otilde;es padr&atilde;o em  
+      <filename>/etc/defaults/rc.conf</filename>.  Os arquivos padr&atilde;o 
+      n&atilde;o devem ser copiados para <filename>/etc</filename> - pois 
+      cont&eacute;m valores padr&otilde;es, n&atilde;o exemplos. Todas mudan&ccedil;as de sistema 
+      especificas devem ser feitas diretamente no arquivo <filename>rc.conf</filename>
+      </para>
 
-    <para>A number of strategies may be applied in clustered
-      applications to separate site-wide configuration from
-      system-specific configuration in order to keep administration
-      overhead down.  The recommended approach is to place site-wide
-      configuration into another file,
-      such as <filename>/etc/rc.conf.site</filename>, and then include
-      this file into <filename>/etc/rc.conf</filename>, which will
-      contain only system-specific information.</para>
+    <para>Uma variedade de estrat&eacute;gias podem ser aplicadas em 
+      aplica&ccedil;&otilde;es em <foreignphrase>cluster</foreignphrase> 
+      para separar configura&ccedil;&otilde;es globais de sistema das configura&ccedil;&otilde;es 
+      espec&iacute;ficas com o intuito de diminuir a carga de administra&ccedil;&atilde;o.  O 
+      procedimento adotado &eacute; o de colocar configura&ccedil;&otilde;es globais 
+      em outro arquivo, 
+      como <filename>/etc/rc.conf.site</filename>, e ent&atilde;o incluir este 
+      arquivo em <filename>/etc/rc.conf</filename>, que possuir&aacute; 
+      apenas informa&ccedil;&otilde;es espec&iacute;ficas de sistema.</para>
 
-    <para>As <filename>rc.conf</filename> is read by &man.sh.1; it is
-      trivial to achieve this.  For example:</para>
+    <para>Como o <filename>rc.conf</filename> &eacute; lido pelo &man.sh.1; &eacute; simples 
+      fazer isto.  Por exemplo:</para>
 
     <itemizedlist>
       <listitem><para>rc.conf:</para>
@@ -270,42 +271,43 @@
 	blanktime="100"</programlisting></listitem>
     </itemizedlist>
 
-    <para>The <filename>rc.conf.site</filename> file can then be
-      distributed to every system using <command>rsync</command> or a
-      similar program, while the <filename>rc.conf</filename> file
-      remains unique.</para>
+    <para>O arquivo <filename>rc.conf.site</filename> pode ser distribu&iacute;do 
+      para todos os sistemas usando-se <command>rsync</command> ou um 
+      programa similar, enquanto que o arquivo <filename>rc.conf</filename> 
+      permanece &uacute;nico.</para>
 
-    <para>Upgrading the system using &man.sysinstall.8;
-      or <command>make world</command> will not overwrite the
-      <filename>rc.conf</filename>
-      file, so system configuration information will not be lost.</para>
+    <para>Atualizar o sistema usando o &man.sysinstall.8;
+      ou <command>make world</command> n&atilde;o sobrescrever&aacute; o arquivo  
+      <filename>rc.conf</filename>, assim a configura&ccedil;&atilde;o de 
+      sistema n&atilde;o ser&aacute; perdida.</para>
 
   </sect1>
 
   <sect1 id="configtuning-appconfig">
-    <title>Application Configuration</title>
+    <title>Configura&ccedil;&atilde;o de Aplica&ccedil;&otilde;es</title>
 
-    <para>Typically, installed applications have their own
-      configuration files, with their own syntax, etc.  It is
-      important that these files be kept separate from the base
-      system, so that they may be easily located and managed by the
-      package management tools.</para>
+    <para>Tipicamente, aplica&ccedil;&otilde;es instaladas possuem seus pr&oacute;prios 
+      arquivos de configura&ccedil;&atilde;o, com sua pr&oacute;pria sintaxe, etc.  &Eacute;
+      importante que estes arquivos sejam mantidos separados do 
+      sistema base, para que eles possam ser facilmente localizados e 
+      gerenciados pelas ferramentas de gerenciamento de pacotes.</para>
 
     <indexterm><primary>/usr/local/etc</primary></indexterm>
 
-    <para>Typically, these files are installed in
-      <filename>/usr/local/etc</filename>.  In the case where an
-      application has a large number of configuration files, a
-      subdirectory will be created to hold them.</para>
+    <para>Tipicamente, estes arquivos s&atilde;o instalados em 
+      <filename>/usr/local/etc</filename>.  No caso em que uma 
+      aplica&ccedil;&atilde;o possui um grande n&uacute;mero de arquivos de configura&ccedil;&atilde;o, 
+      um subdiret&oacute;rio ser&aacute; criado para abrig&aacute;-los.</para>
 
-    <para>Normally, when a port or package is installed, sample
-      configuration files are also installed.  These are usually
-      identified with a <filename>.default</filename> suffix.  If there
-      are no existing
-      configuration files for the application, they will be created by
-      copying the <filename>.default</filename> files.</para>
+    <para>Normalmente, quando um <literal>port</literal> ou pacote 
+      &eacute; instalado, arquivos de configura&ccedil;&atilde;o de exemplo tamb&eacute;m s&atilde;o 
+      instalados.  Estes arquivos normalmente s&atilde;o identificados como 
+      tendo o sufixo <filename>.default</filename>.  Se n&atilde;o 
+      existirem arquivos de configura&ccedil;&atilde;o para a aplica&ccedil;&atilde;o, eles ser&atilde;o 
+      criados atrav&eacute;s da c&oacute;pia dos arquivos 
+      <filename>.default</filename>.</para>
 
-    <para>For example, consider the contents of the directory
+    <para>Por exempli, considere o conte&uacute;do do diret&oacute;rio 
     <filename>/usr/local/etc/apache</filename>:</para>
 
 <literallayout class="monospaced">-rw-r--r--  1 root  wheel   2184 May 20  1998 access.conf
@@ -319,9 +321,10 @@
 -rw-r--r--  1 root  wheel   7980 May 20  1998 srm.conf
 -rw-r--r--  1 root  wheel   7933 May 20  1998 srm.conf.default</literallayout>
 
-    <para>The file sizes show that only the <filename>srm.conf</filename>
-      file has been changed.  A later update of the <application>Apache</application> port would not
-      overwrite this changed file.</para>
+    <para>O tamanho dos arquivos mostram que apenas o arquivo <filename>srm.conf</filename>
+      foi modificado.  Uma atualiza&ccedil;&atilde;o posterior do <literal>port</literal> do 
+      <application>Apache</application> n&atilde;o sobrescrever&aacute; 
+      este arquivo modificado.</para>
 
   </sect1>
 
