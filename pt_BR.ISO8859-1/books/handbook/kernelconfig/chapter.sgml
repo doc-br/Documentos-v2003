@@ -1404,48 +1404,48 @@ pseudo-device   bpf           # Berkeley packet filter</programlisting>
   </sect1>
 
   <sect1 id="kernelconfig-nodes">
-    <title>Fazendo Ligação dos Dispositivos</title>
+    <title>Fazendo Liga&ccedil;&atilde;o dos Dispositivos</title>
 
     <indexterm><primary>dispositivos ligados</primary></indexterm>
     <indexterm>
       <primary><command>MAKEDEV</command></primary>
     </indexterm>
 
-    <note><para>Se você estiver rodando &os;&nbsp;5.0 ou posteriores
-      você poderá com segurança pular está seção. Estas versões usam
-      &man.devfs.5; para alocar ligação entre dispositivos transparentes para o usuário.</para></note>
+    <note><para>Se voc&ecirc; estiver rodando &os;&nbsp;5.0 ou posteriores
+      voc&ecirc; poder&aacute; com seguran&ccedil;a pular est&aacute; se&ccedil;&atilde;o. Estas vers&otilde;es usam
+      &man.devfs.5; para alocar liga&ccedil;&atilde;o entre dispositivos transparentes para o usu&aacute;rio.</para></note>
 
-    <para>Quase cada dispositivo no kernel tem uma  
-      <quote>ligação</quote> correspondente no diretório <filename>/dev</filename>.
-      Esta ligação olha como arquivos regulares, mas são realmente entradas especiais
+    <para>Quase todos dispositivo no kernel tem uma  
+      <quote>ligação</quote> correspondente no diret&oacute;rio <filename>/dev</filename>.
+      Voc&ecirc; visualiza esta liga&ccedil;&atilde;o como arquivos regulares, mas s&atilde;o realmente entradas especiais
       no kernel que os programas usam para acessar os dispositivos.
-      O shell script <filename>/dev/MAKEDEV</filename>, que é
-      executado quando você instala primeiramente o sistema operacional, cria
-      quase todas os dispositivos de ligação suportados. Entretanto, isto não
-      cria <emphasis>todos</emphasis>, assim quando você adiciona suporte para
-      um novo dispositivo, isto faz apropriadamente que a entrada são
-      neste diretório, e senão, adiciona este. Está aqui um exemplo simples:</para>
+      O shell script <filename>/dev/MAKEDEV</filename>, que &eacute;
+      executado quando voc&ecirc; instala primeiramente o sistema operacional, cria
+      quase todas os dispositivos de liga&ccedil;&atilde;o suportados. Entretanto, isto n&atilde;o
+      cria <emphasis>todos</emphasis>, assim quando voc&ecirc; adiciona suporte para
+      um novo dispositivo, isto faz apropriadamente a entrada
+      neste diret&oacute;rio e adiciona este. Est&aacute; aqui um exemplo simples:</para>
 
-    <para>Supondo que você adicione suporte de um IDE CD-ROM ao kernel. A linha
-      a adicionar é:</para>
+    <para>Supondo que voc&ecirc; adicione suporte de um IDE CD-ROM ao kernel. A linha
+      a adicionar &eacute;:</para>
 
     <programlisting>device acd0</programlisting>
 
-    <para>Isto significa que você deve procurar alguma entrada que começe com
-      <filename>acd0</filename> no diretório <filename>/dev</filename>,
+    <para>Isto significa que voc&ecirc; deve procurar alguma entrada que comece com
+      <filename>acd0</filename> no diret&oacute;rio <filename>/dev</filename>,
       possivelmente seguidas por uma letra, tal como
       <literal>c</literal>, ou precedido por uma letra
-      <literal>r</literal>, que significa um dispositivo <quote>raw</quote>. It
-      turns out daqueles arquivos que não estão lá, assim você deve mudar para o diretório e o tipo para
+      <literal>r</literal>, que significa um dispositivo <quote>raw</quote>. Estes
+      turns daqueles arquivos que n&atilde;o est&atilde;o l&aacute;, assim voc&ecirc; deve mudar para o diret&oacute;rio e o tipo para
       <filename>/dev</filename>:</para>
 
     <indexterm>
       <primary><command>MAKEDEV</command></primary></indexterm>
     <screen>&prompt.root; <userinput>sh MAKEDEV acd0</userinput></screen>
 
-    <para>Quando este script terminar, você encontrará agora uma entrada
+    <para>Quando este script terminar, voc&ecirc; encontrar&aacute; agora uma entrada
       <filename>acd0c</filename> e <filename>racd0c</filename>
-      em <filename>/dev</filename> assim que você executar
+      em <filename>/dev</filename> assim que voc&ecirc; executar
       corretamente.</para>
 
     <para>Para Placas de Som, o seguinte comando cria as entradas apropriadas:</para>
@@ -1453,51 +1453,51 @@ pseudo-device   bpf           # Berkeley packet filter</programlisting>
     <screen>&prompt.root; <userinput>sh MAKEDEV snd0</userinput></screen>
 
     <note>
-      <para>Ao criar ligação para dispositivos tais como Placas de Som, se
-	outra pessoa tiver acesso a sua maquina, pode ser necessário 
+      <para>Ao criar liga&ccedil;&atilde;o para dispositivos tais como Placas de Som, se
+	outra pessoa tiver acesso a sua m&aacute;quina, pode ser necess&aacute;rio 
 	proteger os dispositivos contra acesso externo adicionando os arquivos no
 	<filename>/etc/fbtab</filename>. Veja &man.fbtab.5; para maiores
-	informações.</para>
+	informa&ccedil;&otilde;es.</para>
     </note>
 
     <para>Siga este simples procedimentos para outros dispositivos
-      non-<filename>GENÉRICOS</filename> que não tiverem
+      n&atilde;o <filename>GEN&Eacute;RICOS</filename> que n&atilde;o tiverem
       entradas.</para>
 
     <note>
       <para>Todas as controladoras SCSI usam a mesma entrada no
-	<filename>/dev</filename>, assim você não necessita criar
-	este. Também, as placas de rede e SLIP/PPP pseudo-devices não
-	tem entradas em <filename>/dev</filename> em tudo, assim você não
-	tem que preocupar-se sobre estes também.</para>
+	<filename>/dev</filename>, assim voc&ecirc; n&atilde;o necessita criar
+	este. Tamb&eacute;m, as placas de rede e SLIP/PPP pseudo-devices n&atilde;o
+	tem entradas em <filename>/dev</filename> em tudo, assim voc&ecirc; n&atilde;o
+	tem que preocupar-se sobre estes tamb&eacute;m.</para>
     </note>
   </sect1>
 
   <sect1 id="kernelconfig-trouble">
     <title>Se algo der errado</title>
 
-    <para>Há 5 categorias de problema que podem ocorrer ao construir um kernel personalizado.
+    <para>H&aacute; 5 categorias de problema que podem ocorrer ao construir um kernel personalizado.
       São:</para>
 
     <variablelist>
       <varlistentry>
-	<term>Falhas na <command>configuração</command>:</term>
+	<term>Falhas na <command>configura&ccedil;&atilde;o</command>:</term>
 
 	<listitem>
-	  <para>Se o &man.config.8; comando falhar quando você
-	    dar esta descrição seu kernel, você provavelmente fez um
+	  <para>Se o comando &man.config.8; falhar, e
+	    der esta descri&ccedil;&atilde;o do seu kernel, voc&ecirc; provavelmente fez algum
 	    erro simples em algum lugar. Felizmente,
-	    &man.config.8; imprimirá o número da linha que está com
-	    problema, assim você pode tranquilamente pular para isto com o
-	    <application>vi</application>. Por exemplo, se você ver:</para>
+	    &man.config.8; imprimir&aacute; o n&uacute;mero da linha que est&aacute; com
+	    problema, assim voc&ecirc; pode tranquilamente pular para isto com o
+	    <application>vi</application>. Por exemplo, se voc&ecirc; ver:</para>
 
 	  <screen>config: line 17: syntax error</screen>
 
-	  <para>Você pode chegar ao problema pelo <application>vi</application> 
+	  <para>Voc&ecirc; pode chegar ao problema pelo <application>vi</application> 
 	    procurando <command>17G</command> no mode de comando. Certifique-se que o
-	    teclado está corretamente classificado, comparando o kernel
-	    <filename>GENÉRICO</filename> com uma outra
-	    referência.</para>
+	    teclado est&aacute; corretamente configurado, comparando o kernel
+	    <filename>GEN&Eacute;RICO</filename> com uma outra
+	    refer&ecirc;ncia.</para>
 	</listitem>
       </varlistentry>
 
@@ -1506,27 +1506,27 @@ pseudo-device   bpf           # Berkeley packet filter</programlisting>
 
 	<listitem>
 	  <para>Se o comando <command>make</command> falhar, isso normalmente
-	    significa que tem erros em suas descrições do kernel, mas não bastante
-	    grave para &man.config.8; travá-lo. Novamente, olhe
-	    sobre sua configuração, e se você ainda não pode resolver o problema,
-	    envie um e-mail para o &a.questions; com sua configuração do kernel,
+	    significa que tem erros em suas descri&ccedil;&otilde;es do kernel, mas n&atilde;o bastante
+	    grave para &man.config.8; trav&aacute;-lo. Novamente, olhe
+	    sobre sua configura&ccedil;&atilde;o, e se voc&ecirc; ainda n&atilde;o pode resolver o problema,
+	    envie um e-mail para &a.questions; com sua configura&ccedil;&atilde;o do kernel,
 	    e isto deve ser diagnosticado mais rapidamente.</para>
 	</listitem>
       </varlistentry>
 
       <varlistentry>
-	<term>Falha na instalação do kernel:</term>
+	<term>Falha na instala&ccedil;&atilde;o do kernel:</term>
 	
 	<listitem>
-	  <para>Se o kernel perfeitamente estiver compilado, mas não instalou
-	    (o comando <command>make install</command> ou
+	  <para>Se o kernel estiver perfeitamente compilado, e n&atilde;o foi instalado
+	    (ou o comando <command>make install</command> ou
 	    <command>make installkernel</command> falhar,
-	    a primeira coisa a se fazer  é checar se seu sistema está rodando em
-	    securelevel 1 ou mais elevado (veja &man.init.8;). A instalação do kernel
-	    tenta remover a área de memória que contem informação do
-	    seu kernel e coloca a área de memória num novo um.
-	    Desde que o securelevel 1 ou mais elevado impede a desconfiguração da área de memória
-	    para alguns arquivos no sistema, a instalação do kernel necessita
+	    a primeira coisa a se fazer &eacute; checar se seu sistema est&aacute; rodando em
+	    securelevel 1 ou mais elevado (veja &man.init.8;). A instala&ccedil;&atilde;o do kernel
+	    tenta remover a &aacute;rea de mem&oacute;ria que cont&eacute;m informa&ccedil;&atilde;o do
+	    seu kernel e coloca a &aacute;rea de mem&oacute;ria num novo um.
+	    Desde que o securelevel 1 ou mais elevado impede a desconfigura&ccedil;&atilde;o da &aacute;rea de mem&oacute;ria
+	    para alguns arquivos no sistema, a instala&ccedil;&atilde;o do kernel necessita
 	    se executado no securelevel 0 ou seja baixo.</para>
 	</listitem>
       </varlistentry>
