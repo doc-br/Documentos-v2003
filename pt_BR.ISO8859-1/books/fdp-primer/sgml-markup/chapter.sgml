@@ -1117,148 +1117,151 @@ O'Reilly & Associates como um DTD para escrever documenta&ccedil;&atilde;o t&eac
 	<title>Dicas, notas, cuidados, informa&ccedil;&otilde;es importantes e 
 	sidebars.</title>
 	  
-	<para>You may need to include extra information separate from the
-	  main body of the text.  Typically this is <quote>meta</quote>
-	  information that the user should be aware of.</para>
+	<para>Voc&ecirc; talvez precise incluir informa&ccedil;&otilde;es extras 
+	  separadas do corpo principal do texto.  Tipicamente isso &eacute; <quote>meta</quote>
+	  informa&ccedil;&atilde;o que o usu&aacute;rio deve tomar conhecimento.</para>
 	
-	<para>Depending on the nature of the information, one of
+	<para>Dependendo da natureza da informa&ccedil;&atilde;o, um elemento
 	  <sgmltag>tip</sgmltag>, <sgmltag>note</sgmltag>,
 	  <sgmltag>warning</sgmltag>, <sgmltag>caution</sgmltag>, and
-	  <sgmltag>important</sgmltag> should be used.  Alternatively, if the
-	  information is related to the main text but is not one of the above,
-	  use <sgmltag>sidebar</sgmltag>.</para>
+	  <sgmltag>important</sgmltag> deve ser usado. Alternativamente, se a 
+          informa&ccedil;&atilde;o &eacute; relacionada ao corpo principal do texto e 
+          n&atilde;o se encaixa em nunhum dos objetos acima, use <sgmltag>sidebar</sgmltag>.
+	 </para>
 
-	<para>The circumstances in which to choose one of these elements over
-	  another is unclear.  The DocBook documentation suggests;</para>
+	<para>As circunst&acirc;ncias na qual se deve escolher um elemento ao inv&eacute;s 
+	do outro n&atilde;o &eacute; clara. A documenta&ccedil;&atilde;o do DocBokk sugere:
+       </para>
 	
 	<itemizedlist>
 	  <listitem>
-	    <para>A Note is for information that should be heeded by all
-	      readers.</para>
+	    <para>O <sgmltag>note</sgmltag> &eacute; uma informa&ccedil;&atilde;o que deve 
+	    ser lida por todos os leitores.</para>
 	  </listitem>
 	  
 	  <listitem>
-	    <para>An Important element is a variation on Note.</para>
+	    <para>Um <sgmltag>important</sgmltag> &eacute; uma varia&ccedil;&atilde;o do 
+	    <sgmltag>note</sgmltag>.</para>
 	  </listitem>
 	  
 	  <listitem>
-	    <para>A Caution is for information regarding possible data loss
-	      or software damage.</para>
+	    <para>O <sgmltag>caution</sgmltag> &eacute; usado para as informa&ccedil;&otilde;es 
+	      sobre perda de dados ou danos ao software.</para>
 	  </listitem>
 	  
 	  <listitem>
-	    <para>A Warning is for information regarding possible hardware
-	      damage or injury to life or limb.</para>
+	    <para>O <sgmltag>warning</sgmltag> &eacute; usado para informa&ccedil;&otilde;es 
+	      sobre poss&iacute;veis danos no hardware ou defeito sem conserto ou limb.</para>
 	  </listitem>
 	</itemizedlist>
 	
 	<example>
 	  <title><sgmltag>warning</sgmltag></title>
 	  
-	  <para>Use:</para>
+	  <para>Uso:</para>
 	  
-	  <programlisting><![ CDATA [<warning>
-  <para>Installing FreeBSD may make you want to delete Windows from your
-    hard disk.</para>
-</warning>]]></programlisting>
+	  <programlisting><![ RCDATA [<warning>
+             <para>Instalando FreeBSD talvez fa&ccedil;a com que voc&ecirc; queira 
+               desinstalar o windows do seu Hard disk.</para>
+           </warning>]]></programlisting>
 	  </example>
 	  
 	<!-- Need to do this outside of the example -->
 	<warning>
-	  <para>Installing FreeBSD may make you want to delete Windows from
-	    your hard disk.</para>
+	  <para>Instalando FreeBSD talvez fa&ccedil;a com que voc&ecirc; queira 
+               desinstalar o windows do seu Hard disk.</para>
 	</warning>	  
       </sect3>
       
       <sect3>
-	<title>Lists and procedures</title>
+	<title>Listas e procedimentos</title>
 	
-	<para>You will often need to list pieces of information to the user,
-	  or present them with a number of steps that must be carried out in
-	  order to accomplish a particular goal.</para>
+	<para>Voc&ecirc; frequentemente vai precisar listar peda&ccedil;os 
+	  de informa&ccedil;&otilde;es para o usu&aacute;rio, ou present eles com um 
+	  n&uacute;mero de passos que devem ser seguidos para alcan&ccedil;ar um 
+	  objetivo particular.</para>
 	
-	<para>In order to do this, use <sgmltag>itemizedlist</sgmltag>,
-	  <sgmltag>orderedlist</sgmltag>, or
-	  <sgmltag>procedure</sgmltag><footnote><para>There are other types of
-	      list element in DocBook, but we are not concerned with those at
-	      the moment.</para>
+	<para>Para fazer isso, use <sgmltag>itemizedlist</sgmltag>,
+	  <sgmltag>orderedlist</sgmltag>, ou
+	  <sgmltag>procedure</sgmltag><footnote><para>. H&aacute; outros tipos de 
+	  elementos de lista no DocBook, mas n&atilde;o vamos nos preocupar com eles
+	  no momento.</para>
 	  </footnote>
 	</para>
 	  
-	<para><sgmltag>itemizedlist</sgmltag> and
-	  <sgmltag>orderedlist</sgmltag> are similar to their counterparts in
-	  HTML, <sgmltag>ul</sgmltag> and <sgmltag>ol</sgmltag>.  Each one
-	  consists of one or more <sgmltag>listitem</sgmltag> elements, and
-	  each <sgmltag>listitem</sgmltag> contains one or more block
-	  elements.  The <sgmltag>listitem</sgmltag> elements are analogous to
-	  HTML's <sgmltag>li</sgmltag> tags.  However, unlike HTML, they are
-	  required.</para>
+	<para><sgmltag>itemizedlist</sgmltag> e
+	  <sgmltag>orderedlist</sgmltag> s&atilde;o similares aos seus equivalentes em HTML,
+	  <sgmltag>ul</sgmltag> e <sgmltag>ol</sgmltag>.  Cada um consiste de um ou mais
+	  elementos <sgmltag>listitem</sgmltag>, e cada <sgmltag>listitem</sgmltag>
+	  cont&eacute;m um ou mais elementos de bloco. O elemento <sgmltag>listitem</sgmltag>
+	  &eacute; analogo &agrave; <sgmltag>li</sgmltag>do HTML. Entretanto, ao 
+	  contr&aacute;rio de HTML, elas s&atilde;o obrigat&oacute;rias.</para>
 	
-	<para><sgmltag>procedure</sgmltag> is slightly different.  It consists
-	  of <sgmltag>step</sgmltag>s, which may in turn consists of more
-	  <sgmltag>step</sgmltag>s or <sgmltag>substep</sgmltag>s.  Each
-	  <sgmltag>step</sgmltag> contains block elements.</para>
+	<para><sgmltag>procedure</sgmltag> &eacute; ligeiramente diferente. Consiste de 
+	<sgmltag>step</sgmltag>s, que por sua vez consiste de mais <sgmltag>step</sgmltag>s 
+	ou <sgmltag>substep</sgmltag>s. Cada <sgmltag>step</sgmltag> 
+	cont&eacute;m elementos de bloco.</para>
 
 	<example>
 	  <title><sgmltag>itemizedlist</sgmltag>,
-	    <sgmltag>orderedlist</sgmltag>, and
+	    <sgmltag>orderedlist</sgmltag>, e
 	    <sgmltag>procedure</sgmltag></title>
 	  
-	  <para>Use:</para>
+	  <para>Uso:</para>
 	    
-	  <programlisting><![ CDATA [<itemizedlist>
+	  <programlisting><![ RCDATA [<itemizedlist>
   <listitem>
-    <para>This is the first itemized item.</para>
+    <para>Esse &eacute; o primeiro item itemized.</para>
   </listitem>
 
   <listitem>
-    <para>This is the second itemized item.</para>
+    <para>Esse &eacute; o segundo item itemized.</para>
   </listitem>
 </itemizedlist>
 
 <orderedlist>
   <listitem>
-    <para>This is the first ordered item.</para>
+    <para>Esse &eacute; o primeiro item ordenado.</para>
   </listitem>
 
   <listitem>
-    <para>This is the second ordered item.</para>
+    <para>Esse &eacute; o segundo item ordenado.</para>
   </listitem>
 </orderedlist>
 
 <procedure>
   <step>
-    <para>Do this.</para>
+    <para>Fa&ccedil;a isso.</para>
   </step>
 
   <step>
-    <para>Then do this.</para>
+    <para>Depois fa&ccedil;a isso.</para>
   </step>
 
   <step>
-    <para>And now do this.</para>
+    <para>E agora fa&ccedil;a isso.</para>
   </step>
 </procedure>]]></programlisting>
 	  
-	  <para>Appearance:</para>
+	  <para>Apar&ecirc;ncia:</para>
 	  
 	  <itemizedlist>
 	    <listitem>
-	      <para>This is the first itemized item.</para>
+	      <para>Esse &eacute; o primeiro item itemized.</para>
 	    </listitem>
 	    
 	    <listitem>
-	      <para>This is the second itemized item.</para>
+              <para>Esse &eacute; o segundo item itemized.</para>
 	    </listitem>
 	  </itemizedlist>
 	  
 	  <orderedlist>
 	    <listitem>
-	      <para>This is the first ordered item.</para>
+              <para>Esse &eacute; o primeiro item ordenado.</para>
 	    </listitem>
 	    
 	    <listitem>
-	      <para>This is the second ordered item.</para>
+              <para>Esse &eacute; o segundo item ordenado.</para>
 	    </listitem>
 	  </orderedlist>
 	</example>
@@ -1267,32 +1270,31 @@ O'Reilly & Associates como um DTD para escrever documenta&ccedil;&atilde;o t&eac
 	
 	<procedure>
 	  <step>
-	    <para>Do this.</para>
+            <para>Fa&ccedil;a isso.</para>
 	  </step>
 	  
 	  <step>
-	    <para>Then do this.</para>
+            <para>Depois fa&ccedil;a isso.</para>
 	  </step>
 	  
 	  <step>
-	    <para>And now do this.</para>
+            <para>E agora fa&ccedil;a isso.</para>
 	  </step>
 	</procedure>	  
       </sect3>
       
       <sect3>
-	<title>Showing file samples</title>
+	<title>Mostrando arquivos de exemplo</title>
 	
-	<para>If you want to show a fragment of a file (or perhaps a complete
-	  file) to the user, wrap it in the <sgmltag>programlisting</sgmltag>
-	  element.</para>
+	<para>Se voc&ecirc; quiser mostrar um trecho de um arquivo (ou talvez um 
+	  arquivo inteiro) ao usu&aacute;rio, use o elemento <sgmltag>programlisting</sgmltag>
+        </para>
 	  
-	<para>White space and line breaks within
-	  <sgmltag>programlisting</sgmltag> <emphasis>are</emphasis>
-	  significant.  In particular, this means that the opening tag should
-	  appear on the same line as the first line of the output, and the
-	  closing tag should appear on the same line as the last line of the
-	  output, otherwise spurious blank lines may be included.</para>
+	<para>Espa&ccedil;os e quebras de linha <emphasis>s&atilde;o</emphasis> importantes
+	  dentro do <sgmltag>programlisting</sgmltag>. Em particular, isso significa que a
+	  tag de abertura deve aparecer na mesma linha que a primeira linha do programa, e a
+	  tag de fechamento deve estar na &uacute;ltima linha do programa, do contr&aacute;rio
+	  linhas em branco espurias podem ser incluidas.</para>
 	  
 	<example>
 	  <title><sgmltag>programlisting</sgmltag></title>
