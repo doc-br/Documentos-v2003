@@ -3150,119 +3150,119 @@ PORTVERSION=   1.0</programlisting>
           nova biblioteca for instalada (geralmente
           <filename><makevar>PREFIX</makevar>/lib</filename>) durante
           <maketarget>post-install</maketarget> target para registra-lo dentro
-          shared library cache.  This variable, when defined, will also
-          facilitate addition of an appropriate
-          <literal>@exec /sbin/ldconfig -m</literal> and
-          <literal>@unexec /sbin/ldconfig -R</literal> pair into your
-          <filename>pkg-plist</filename> file, so that a user who installed
-          the package can start using the shared library immediately and
-          deinstallation will not cause the system to still believe the
-          library is there.</para>
+          do cache da biblioteca compartilhada.  Esta vari&aacute;vel, quando definida, tamb&eacute;m
+          facilitar&aacute; a adi&ccedil;&atilde;o de um apropriado
+          <literal>@exec /sbin/ldconfig -m</literal> e
+          <literal>@unexec /sbin/ldconfig -R</literal> pair dentro de seu
+          aerquivo <filename>pkg-plist</filename>, assim que um usu&aacute;rio que instalou
+          o pacote possa come&ccedil;ar usar a biblioteca compartilhada imediatamente e
+          a desinstala&ccedil;&atilde;o n&atilde;o far&aacute; o sistema ainda acreditar que a
+          biblioteca est&aacute; l&aacute;.</para>
 
-        <para>If you need, you can override the default location where the new
-          library is installed by defining the <makevar>LDCONFIG_DIRS</makevar>
-          make variable, which should contain a list of directories into which
-          shared libraries are to be installed.  For example if your port
-          installs shared libraries into
-          <filename><makevar>PREFIX</makevar>/lib/foo</filename> and
-          <filename><makevar>PREFIX</makevar>/lib/bar</filename> directories
-          you could use the following in your
+        <para>Se voc&ecirc; necessitar, voc&ecirc; pode sobrescrever a default location onde a nova
+          biblioteca for instalada definindo <makevar>LDCONFIG_DIRS</makevar>
+          make variable, qual deve conter uma lista de diret&oacute;rios dentro da qual
+          as bibliotecas compartilhadas ser&atilde;o instaladas.  Por exemplo se seu port
+          instala bibliotecas compartilhadas dentro dos
+          diret&oacute;rios <filename><makevar>PREFIX</makevar>/lib/foo</filename> e
+          <filename><makevar>PREFIX</makevar>/lib/bar</filename>
+          voc&ecirc; pode usar as seguintes em seu
           <filename>Makefile</filename>:</para>
 
         <programlisting>INSTALLS_SHLIB= yes
 LDCONFIG_DIRS=  %%PREFIX%%/lib/foo %%PREFIX%%/lib/bar</programlisting>
 
-        <para>Note that content of <makevar>LDCONFIG_DIRS</makevar> is passed
-          through &man.sed.1; just like the rest of <filename>pkg-plist</filename>,
-          so <makevar>PLIST_SUB</makevar> substitutions also apply here.  It is
-          recommended that you use <literal>%%PREFIX%%</literal> for
-          <makevar>PREFIX</makevar>, <literal>%%LOCALBASE%%</literal> for
-          <makevar>LOCALBASE</makevar> and <literal>%%X11BASE%%</literal> for
+        <para>Note que indice de <makevar>LDCONFIG_DIRS</makevar> &eacute; passado
+          atrav&eacute;s do &man.sed.1; s&oacute; como o resto do <filename>pkg-plist</filename>,
+          assim  substitui&ccedil;&otilde;es do <makevar>PLIST_SUB</makevar> tamb&eacute;m aplica aqui.  &Eacute;
+          recomendado que voc&ecirc; use <literal>%%PREFIX%%</literal> para
+          <makevar>PREFIX</makevar>, <literal>%%LOCALBASE%%</literal> para
+          <makevar>LOCALBASE</makevar> e <literal>%%X11BASE%%</literal> para
           <makevar>X11BASE</makevar>.</para>
       </sect1>
 
     <sect1 id="porting-restrictions">
-      <title>Ports with distribution restrictions</title>
+      <title>Ports com restri&ccedil;&otilde;es de distribui&ccedil;&atilde;o</title>
 
-      <para>Licenses vary, and some of them place restrictions on how the
-	application can be packaged, whether it can be sold for profit, and so
-	on.</para> 
+      <para>As licen&ccedil;as variam, e algumas delas colocam restri&ccedil;&otilde;es em como a
+	aplica&ccedil;&atilde;o pode ser empacotada, whether it possa ser vendido por lucro, e assim
+	por diante.</para> 
 
       <important>
-	<para>It is your responsibility as a porter to read the licensing
-	  terms of the software and make sure that the FreeBSD project will
-	  not be held accountable for violating them by redistributing the
-	  source or compiled binaries either via FTP or CDROM. If in doubt,
-	  please contact the &a.ports;.</para>
+	<para> &Eacute; sua responsabilidade como um porter ler os termos de
+	  licenciamento do software e certificar-se que o projeto FreeBSD
+	  n&atilde;o segura respons&aacute;vel por viola-los redistribuindo o
+	  fonte ou bin&aacute;rios compilados either via FTP ou CDROM. Se em d&uacute;vida,
+	  por favor contate o &a.ports;.</para>
       </important>
       
-      <para>In situations like this, the following variables can be set.  In
-	addition, <filename>ports/LEGAL</filename> should also be
-	updated.</para>
+      <para>Nas situa&ccedil;&otilde;es como esta, as seguintes vari&aacute;veis pode ser definidas.  Em
+	adi&ccedil;&atilde;o, <filename>ports/LEGAL</filename> deve tam&eacute;m ser
+	atualizado.</para>
 
       <sect2>
 	<title><makevar>NO_PACKAGE</makevar></title>
 
-	<para>This variable indicates that we may not generate a binary
-	  package of the application.  However, the port's
-	  <makevar>DISTFILES</makevar> files may be freely distributed.</para>
+	<para>Esta vari&aacute;vel indica que n&oacute;s n&atilde;o podemos gerar um pacote
+	  bin&aacute;rio da aplica&ccedil;&atilde;o.  Entretanto, arquivos
+	  <makevar>DISTFILES</makevar> do port podem ser livremente distribu&iacute;dos.</para>
 
-	<para><makevar>NO_PACKAGE</makevar> should also be used if the binary
-	  package is not generally useful, and the application should always
-	  be compiled from the source code.  For example, if the application
-	  has configuration information that is site specific hard coded in to
-	  it at compile time.</para>
+	<para><makevar>NO_PACKAGE</makevar>  deve tamb&eacute;m ser usado se o pacote
+	  bin&aacute;rio n&atilde;o for geralmente &uacute;til, e a aplica&ccedil;&atilde;o deve sempre
+	  ser compilada do c&oacute;digo fonte.  Por exemplo, se a aplica&ccedil;&atilde;o
+	  tiver a informa&ccedil;&atilde;o da configura&ccedil;&atilde;o em que &eacute; espec&iacute;fico do local hard codicado
+	  dentro dele no tempo de compilar.</para>
 
-	<para><makevar>NO_PACKAGE</makevar> should be set to a string
-	  describing the reason why the package should not be
-	  generated.</para>
+	<para><makevar>NO_PACKAGE</makevar> deve ser definido a uma string
+	  descrevendo a raz&atilde;o porque o pacote n&atilde;o deve ser
+	  gerado.</para>
       </sect2>
 
       <sect2>
 	<title><makevar>NO_CDROM</makevar></title>
 
-	<para>This variable indicates that although we are allowed to generate
-	  binary packages, we are not allowed to put those packages, or the
-	  port's <makevar>DISTFILES</makevar>, on to CDROM for resale.  The
-	  <makevar>DISTFILES</makevar> will still be available via FTP.</para>
+	<para>Esta vari&aacute;vel indica que embora sejamos permitidos n&oacute;s gerar
+	  pacotes bin&aacute;rios, n&atilde;o estamos permitidos n&oacute;s p&ocirc;r aqueles pacotes, ou
+	  os <makevar>DISTFILES</makevar> do port, no CDROM para revenda.  Os
+	  <makevar>DISTFILES</makevar> ainda ser&aacute; dispon&iacute;vel via FTP.</para>
 
-	<para><makevar>NO_PACKAGE</makevar> and <makevar>NO_CDROM</makevar>
-	  can be set simultaneously.</para>
+	<para><makevar>NO_PACKAGE</makevar> e <makevar>NO_CDROM</makevar>
+	  pode ser definida simultaneamente.</para>
       </sect2>
 
       <sect2>
 	<title><makevar>RESTRICTED</makevar></title>
 
-	<para>Set this variable if the application's license also forbids us
-	  from mirroring the application's <makevar>DISTFILES</makevar> via
+	<para>Defina esta vari&aacute;vel se a licen&ccedil;a da aplica&ccedil;&atilde;o tamb&eacute;m nos pro&iacute;be
+	  de espelhar os <makevar>DISTFILES</makevar> das aplica&ccedil;&otilde;es via
 	  FTP.</para>
 
-	<para>Also set this if the application's license has general
-	  restrictions on who may use it, e.g. the application is for
-	  non-commercial use only.</para>
+	<para>Tamb&eacute;m defina esta se a licen&ccedil;a da aplica&ccedil;&atilde;o tem restri&ccedil;&otilde;es
+	  gerais em quem pode usar, ex. a aplica&ccedil;&atilde;o &eacute; para
+	  uso n&atilde;o-comercial somente.</para>
       </sect2>
 
       <sect2>
 	<title><makevar>RESTRICTED_FILES</makevar></title>
 
-	<para>If only some of the distribution files are restricted then set
-	  this variable to list them.  It defaults to <literal>${DISTFILES}
+	<para>Se somnete alguns dos arquivos de distribui&ccedil;&atilde;o s&atilde;o restritos ent&atilde;o defina
+	  esta vari&aacute;vel para lista-los.  It defaults to <literal>${DISTFILES}
 	    ${PATCHFILES}</literal>.</para>
       </sect2>
     </sect1>
 
     <sect1 id="using-perl">
-      <title>Using <literal>perl</literal></title>
+      <title>Usando o <literal>perl</literal></title>
 
       <table frame="none">
-	<title>Variables for ports that use <literal>perl</literal></title>
+	<title>Vari&aacute;veis para os ports que usam o <literal>perl</literal></title>
 
 	<tgroup cols="2">
 	  <thead>
 	    <row>
-	      <entry>Variable</entry>
+	      <entry>Vari&aacute;vel</entry>
 	      
-	      <entry>Means</entry>
+	      <entry>Significado</entry>
 	    </row>
 	  </thead>
 
@@ -3270,13 +3270,13 @@ LDCONFIG_DIRS=  %%PREFIX%%/lib/foo %%PREFIX%%/lib/bar</programlisting>
 	    <row>
 	      <entry><makevar>USE_PERL5</makevar></entry>
 
-	      <entry>Says that the port uses <literal>perl 5</literal> to build and run.</entry>
+	      <entry>Diz que o port usa <literal>perl 5</literal> para construir e executar.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>PERL_CONFIGURE</makevar></entry>
 
-	      <entry>Configure using Perl's MakeMaker.  It implies
+	      <entry>Configure usando MakeMaker do Perl.  Implica
 	        <makevar>USE_PERL5</makevar>.</entry>
 	    </row>
 	  </tbody>
@@ -3285,7 +3285,7 @@ LDCONFIG_DIRS=  %%PREFIX%%/lib/foo %%PREFIX%%/lib/bar</programlisting>
 	<tgroup cols="2">
 	  <thead>
 	    <row>
-	      <entry>Read only variables</entry>
+	      <entry>Vari&aacute;veis somente Leitura</entry>
 	    </row>
 	  </thead>
 
@@ -3293,28 +3293,28 @@ LDCONFIG_DIRS=  %%PREFIX%%/lib/foo %%PREFIX%%/lib/bar</programlisting>
 	    <row>
 	      <entry><makevar>PERL_VERSION</makevar></entry>
 	      
-	      <entry>The full version of <literal>perl</literal> installed (e.g.,
+	      <entry>A vers&atilde;o completa do <literal>perl</literal> instalado (ex.,
 		<literal>5.00503</literal>).</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><makevar>PERL_VER</makevar></entry>
 	      
-	      <entry>The short version of <literal>perl</literal> installed (e.g.,
+	      <entry>A vers&atilde;o curta do <literal>perl</literal> instalado(ex.,
 		<literal>5.005</literal>).</entry>
 	    </row>
 
             <row>
               <entry><makevar>PERL_LEVEL</makevar></entry>
 
-              <entry>The installed <literal>perl</literal> version as an integer of the form <literal>MNNNPP</literal>
-                (e.g., <literal>500503</literal>).</entry>
+              <entry>A vers&atilde;o instalada do <literal>perl</literal> como um inteiro da forma <literal>MNNNPP</literal>
+                (ex., <literal>500503</literal>).</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><makevar>PERL_ARCH</makevar></entry>
 	      
-	      <entry>Where <literal>perl</literal> stores architecture dependent libraries.
+	      <entry>Onde o <literal>perl</literal> armazena bibliotecas dependente da arquitetura.
 		Defaults to <literal>${ARCH}-freebsd</literal>.</entry>
 	    </row>
 	  </tbody>
@@ -3323,44 +3323,44 @@ LDCONFIG_DIRS=  %%PREFIX%%/lib/foo %%PREFIX%%/lib/bar</programlisting>
     </sect1>
 
     <sect1 id="using-x11">
-      <title>Using X11</title>
+      <title>Usando o X11</title>
 
       <table frame="none">
-	<title>Variables for ports that use X</title>
+	<title>Vari&aacute;veis para os ports  que usam o X</title>
 
 	<tgroup cols="2">
 	  <tbody>
 	    <row>
 	      <entry><makevar>USE_X_PREFIX</makevar></entry>
 
-	      <entry>The port installs in <makevar>X11BASE</makevar>, not
+	      <entry>O port instala em <makevar>X11BASE</makevar>, n&atilde;o em
 		<makevar>PREFIX</makevar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>USE_XLIB</makevar></entry>
 
-	      <entry>The port uses the X libraries.</entry>
+	      <entry>O port usa as bibliotecas do X.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>USE_MOTIF</makevar></entry>
 
-	      <entry>The port uses the Motif toolkit.  Implies
+	      <entry>O port usa o toolkit Motif.  Implica
 		<makevar>USE_XPM</makevar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>USE_IMAKE</makevar></entry>
 	      
-	      <entry>The port uses <command>imake</command>.  Implies
+	      <entry>O port usa <command>imake</command>.  Implica
 		<makevar>USE_X_PREFIX</makevar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>XMKMF</makevar></entry>
 	      
-	      <entry>Set to the path of <command>xmkmf</command> if not in the
+	      <entry>Define o path do <command>xmkmf</command> se n&atilde;o no
 		<envar>PATH</envar>.  Defaults to <literal>xmkmf
 		  -a</literal>.</entry>
 	    </row>
@@ -3370,19 +3370,19 @@ LDCONFIG_DIRS=  %%PREFIX%%/lib/foo %%PREFIX%%/lib/bar</programlisting>
     </sect1>
 
     <sect1 id="using-automake">
-      <title>Using <command>automake</command>, <command>autoconf</command>,
-	and <command>libtool</command></title>
+      <title>Usando o <command>automake</command>, <command>autoconf</command>,
+	e <command>libtool</command></title>
 
       <table frame="none">
-	<title>Variables for ports that use automake, autoconf or
+	<title>Vari&aacute;veis para os ports que usam o automake, autoconf ou
 	  libtool</title>
 
 	<tgroup cols="2">
 	  <thead>
 	    <row>
-	      <entry>Variable</entry>
+	      <entry>Vari&aacute;vel</entry>
 
-	      <entry>Means</entry>
+	      <entry>Significado</entry>
 	    </row>
 	  </thead>
 
@@ -3390,169 +3390,169 @@ LDCONFIG_DIRS=  %%PREFIX%%/lib/foo %%PREFIX%%/lib/bar</programlisting>
 	    <row>
 	      <entry><makevar>USE_AUTOMAKE</makevar></entry>
 
-	      <entry>The port uses <command>automake</command>.  Implies
-		<makevar>USE_AUTOCONF</makevar> and
+	      <entry>O port usa o <command>automake</command>.  Implica
+		<makevar>USE_AUTOCONF</makevar> e
 		<literal><makevar>USE_AUTOMAKE_VER</makevar>?=14</literal>.</entry>
 	      </row>
 		
 	    <row>
 	      <entry><makevar>AUTOMAKE</makevar></entry>
 
-	      <entry>The full path for <command>automake</command> if it is
-		not in the <envar>PATH</envar>.</entry>
+	      <entry>O path completo para o <command>automake</command> se n&atilde;o est&aacute;
+		no <envar>PATH</envar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>USE_AUTOMAKE_VER</makevar></entry>
 
-	      <entry>The port uses <command>automake</command>.  Valid values
-		for this variable are <literal>14</literal> and
-		<literal>15</literal>, and sets the
-		<makevar>AUTOMAKE_DIR</makevar> and
-		<makevar>ACLOCAL_DIR</makevar> variables
-		appropriately.</entry>
+	      <entry>O port usa o <command>automake</command>.  Valores v&aacute;lidos
+		para esta vari&aacute;vel s&atilde;o <literal>14</literal> e
+		<literal>15</literal>, e define as
+		vari&aacute;veis <makevar>AUTOMAKE_DIR</makevar> e
+		<makevar>ACLOCAL_DIR</makevar>
+		apropriadamente.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>AUTOMAKE_ARGS</makevar></entry>
 
-	      <entry>One or more command line arguments to pass to
-		<makevar>AUTOMAKE</makevar> if
-		<makevar>USE_AUTOMAKE_VER</makevar> is set.</entry>
+	      <entry>Um ou mais argumentos da linha de comando para passar ao
+		<makevar>AUTOMAKE</makevar> se o
+		<makevar>USE_AUTOMAKE_VER</makevar> &eacute; definido.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>AUTOMAKE_ENV</makevar></entry>
 
-	      <entry>One or more environment variables to set (and their
-		values) before running <makevar>AUTOMAKE</makevar>.</entry>
+	      <entry>Uma ou mais vari&aacute;veis de ambiente para definir (e seus
+		valores) antes da execu&ccedil;&atilde;o <makevar>AUTOMAKE</makevar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>ACLOCAL</makevar></entry>
 
-	      <entry>Set to the path of the GNU <command>aclocal</command> if
-		it is not in the <envar>PATH</envar>.  The default is set
-		according to the <makevar>USE_AUTOMAKE_VER</makevar>
-		variable.</entry>
+	      <entry>Define o path do GNU <command>aclocal</command> se
+		ele n&atilde;o est&aacute; no <envar>PATH</envar>.  O default &eacute; definido
+		de acordo com vari&aacute;vel
+		<makevar>USE_AUTOMAKE_VER</makevar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>ACLOCAL_DIR</makevar></entry>
 	      
-	      <entry>Set to the path of the GNU <command>aclocal</command>
-		shared directory.  The default is set according to the
-		<makevar>USE_AUTOMAKE_VER</makevar> variable.</entry>
+	      <entry>Define ao path do GNU <command>aclocal</command>
+		shared directory.  O default &eacute; definido de acordo com a
+		vari&aacute;vel <makevar>USE_AUTOMAKE_VER</makevar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>AUTOMAKE_DIR</makevar></entry>
 
-	      <entry>Set to the path of the GNU <command>automake</command>
-		shared directory.  The default is set according to the
-		<makevar>USE_AUTOMAKE_VER</makevar> variable.</entry>
+	      <entry>Define ao path do GNU <command>automake</command>
+		shared directory.  O default &eacute; definido de acordo com a
+		vari&aacute;vel <makevar>USE_AUTOMAKE_VER</makevar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>USE_AUTOCONF_VER</makevar></entry>
 
-	      <entry>Specifies that the port uses <command>autoconf</command>.
-		The default value is 213.</entry>
+	      <entry>Especifica que o port use <command>autoconf</command>.
+		O valor default &eacute; 213.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>USE_AUTOCONF</makevar></entry>
 
-	      <entry>Specifies that the port uses <command>autoconf</command>.
-		Implies <literal>GNU_CONFIGURE</literal> and
+	      <entry>Especifica que o port use <command>autoconf</command>.
+		Implica <literal>GNU_CONFIGURE</literal> e
 		<literal>USE_AUTOCONF_VER?=213</literal>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>AUTOCONF</makevar></entry>
 
-	      <entry>Set to the path of GNU <command>autoconf</command> if it
-		is not in the <envar>PATH</envar>.  The default is set
-		according to the <makevar>USE_AUTOCONF_VER</makevar>
-		variable.</entry>
+	      <entry>Define ao path do GNU <command>autoconf</command> se ele
+		n&atilde;o est&aacute; no <envar>PATH</envar>.  O default est&aacute; definido
+		de acordo com a vari&aacute;vel
+		<makevar>USE_AUTOCONF_VER</makevar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>AUTOCONF_ARGS</makevar></entry>
 
-	      <entry>Command line arguments to pass to
+	      <entry>Argumentos da linha de comando para passar ao
 		<command>autoconf</command>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>AUTOCONF_ENV</makevar></entry>
 
-	      <entry>Set these
-		<literal><replaceable>variable</replaceable>=<replaceable>value</replaceable></literal> 
-		pairs in the environment before running
+	      <entry>Define estes pares
+		<literal><replaceable>vari&aacute;vel</replaceable>=<replaceable>valor</replaceable></literal> 
+		no ambiente antes da execu&ccedil;&atilde;o do
 		<command>autoconf</command>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>AUTOHEADER</makevar></entry>
 
-	      <entry>Set to the path of GNU <command>autoheader</command> if
-		it is not in the <envar>PATH</envar>.  The default is set
-		according to <makevar>USE_AUTOCONF_VER</makevar>.</entry>
+	      <entry>Define ao path do GNU <command>autoheader</command> se
+		ele n&atilde;o est&aacute; no <envar>PATH</envar>.  O default est&aacute; definido
+		de acordo com <makevar>USE_AUTOCONF_VER</makevar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>AUTORECONF</makevar></entry>
 
-	      <entry>Set to the path of GNU <command>autoreconf</command> if
-		it is not in the <envar>PATH</envar>.  The default is set
-		according to <makevar>USE_AUTOCONF_VER</makevar>.</entry>
+	      <entry>Define ao path do GNU <command>autoreconf</command> se
+		ele n&atilde;o est&aacute; no <envar>PATH</envar>.  O default est&aacute; definido
+		de acordo com <makevar>USE_AUTOCONF_VER</makevar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>AUTOSCAN</makevar></entry>
 
-	      <entry>Set to the path of GNU <command>autoscan</command> if it
-		is not set in the <envar>PATH</envar>.  The default is set
-		according to <makevar>USE_AUTOCONF_VER</makevar>.</entry>
+	      <entry>Define ao path do GNU <command>autoscan</command> se ele
+		n&atilde;o est&aacute; no <envar>PATH</envar>.  O default est&aacute; definido
+		de acordo com <makevar>USE_AUTOCONF_VER</makevar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>AUTOIFNAMES</makevar></entry>
 
-	      <entry>Set to the path of GNU <command>autoifnames</command> if
-		it is not set in the <envar>PATH</envar>.  The default is set
-		according to <makevar>USE_AUTOCONF_VER</makevar>.</entry>
+	      <entry>Define ao path do GNU <command>autoifnames</command> se
+		ele n&atilde;o est&aacute; definido no <envar>PATH</envar>.  O default est&aacute; definido
+		de acordo com <makevar>USE_AUTOCONF_VER</makevar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>USE_LIBTOOL</makevar></entry>
 
-	      <entry>The port uses <command>libtool</command>.  Implies
+	      <entry>O port usa <command>libtool</command>.  Implica
 		<makevar>GNU_CONFIGURE</makevar>.</entry>
 	      </row>
 	    
 	    <row>
 	      <entry><makevar>LIBTOOL</makevar></entry>
 
-	      <entry>Set to the path of <command>libtool</command> if it is
-		not set in the <envar>PATH</envar>.</entry>
+	      <entry>Define ao path do <command>libtool</command> se ele n&atilde;o
+		est&aacute; definido no <envar>PATH</envar>.</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><makevar>LIBTOOLFILES</makevar></entry>
 
-	      <entry>The files to patch for <command>libtool</command>.
-		Defaults to <literal>aclocal.m4</literal> if
-		<makevar>USE_AUTOCONF</makevar> is defined,
-		<literal>configure</literal> otherwise.</entry>
+	      <entry>Os arquivos ao patch para <command>libtool</command>.
+		Defaults to <literal>aclocal.m4</literal> se
+		<makevar>USE_AUTOCONF</makevar> est&aacute; definido,
+		<literal>configure</literal> caso contr&aacute;rio.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>LIBTOOLFLAGS</makevar></entry>
 
-	      <entry>Additional flags to pass to
-		<command>ltconfig</command>.  Defaults to
+	      <entry>Adicionais flags to passar ao
+		<command>ltconfig</command>.  Defaults ao
 		<literal>--disable-ltlibs</literal>.</entry>
 	    </row>
 	  </tbody>
@@ -3561,69 +3561,69 @@ LDCONFIG_DIRS=  %%PREFIX%%/lib/foo %%PREFIX%%/lib/bar</programlisting>
     </sect1>
 
     <sect1 id="using-gnome">
-      <title>Using GNOME</title>
+      <title>Usando o GNOME</title>
 
-      <para>The FreeBSD/GNOME project uses a system called
-	<literal>GNOMENG</literal> to define which GNOME components a
-	particular port uses. A
-	<ulink url="http://www.FreeBSD.org/gnome/docs/porting.html">comprehensive
-	list of these variables</ulink> exists within the FreeBSD/GNOME
-	project's homepage.</para>
+      <para>O projeto FreeBSD/GNOME usa um sistema chamado
+	<literal>GNOMENG</literal> para definir quais componentes do GNOME um
+	particular port usa. Uma
+	<ulink url="http://www.FreeBSD.org/gnome/docs/porting.html">compreensiva
+	lista destas vari&aacute;veis</ulink> existe com a homepage do
+	projeto do FreeBSD/GNOME.</para>
 
     </sect1>
 
     <sect1 id="using-kde">
-      <title>Using KDE</title>
+      <title>Usando o KDE</title>
 
       <table frame="none">
-	<title>Variables for ports that use KDE</title>
+	<title>VVari&aacute;veis para os ports que usam o KDE</title>
 
 	<tgroup cols="2">
 	  <tbody>
 	    <row>
 	      <entry><makevar>USE_QT_VER</makevar></entry>
 
-	      <entry>The port uses Qt toolkit.  Possible values are
-		<literal>1</literal>, <literal>2</literal> and
-		<literal>3</literal>;  each specify the major version
-		of Qt to use.  Sets both <makevar>MOC</makevar> and
-		<makevar>QTCPPFLAGS</makevar>to default appropriate
-		values.</entry>
+	      <entry>O port usa o toolkit do Qt.  Poss&iacute;veis valores s&atilde;o
+		<literal>1</literal>, <literal>2</literal> e
+		<literal>3</literal>;  cada um especifica a vers&atilde;o principal
+		do Qt para uso.  Defina ambos <makevar>MOC</makevar> e
+		<makevar>QTCPPFLAGS</makevar>aos valores default
+		apropriados.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>USE_KDELIBS_VER</makevar></entry>
 
-	      <entry>The port uses KDE libraries.  Possible values are
-		<literal>1</literal>, <literal>2</literal> and
-		<literal>3</literal>;  each specify the major version
-		of KDE to use.  Implies <makevar>USE_QT_VER</makevar>
-		of the appropriate version.</entry>
+	      <entry>O port usa bibliotecas do KDE.  Poss&iacute;veis valores s&atilde;o
+		<literal>1</literal>, <literal>2</literal> e
+		<literal>3</literal>;  cada um especifica a vers&atilde;o principal
+		do KDE para uso.  Implica <makevar>USE_QT_VER</makevar>
+		da vers&atilde;o apropriada.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>USE_KDEBASE_VER</makevar></entry>
 
-	      <entry>The port uses KDE base.  Possible values are
-		<literal>1</literal>, <literal>2</literal> and
-		<literal>3</literal>;  each specify the major version
-		of KDE to use.  Implies <makevar>USE_KDELIBS_VER</makevar>
-		of the appropriate version.</entry>
+	      <entry>O port usa a base do KDE.  Poss&iacute;veis valores s&atilde;o
+		<literal>1</literal>, <literal>2</literal> e
+		<literal>3</literal>;  cada um especifica a vers&atilde;o principal
+		de KDE para uso.  Implica <makevar>USE_KDELIBS_VER</makevar>
+		da vers&atilde;o apropriada.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>MOC</makevar></entry>
 
-	      <entry>Set to the path of <command>moc</command>.
-		Default set according to <makevar>USE_QT_VER</makevar>
-		value.</entry>
+	      <entry>Defina ao path do <command>moc</command>.
+		Default set de acordo com o valor do
+		<makevar>USE_QT_VER</makevar>.</entry>
 	    </row>
 
 	    <row>
 	      <entry><makevar>QTCPPFLAGS</makevar></entry>
 
-	      <entry>Set the <makevar>CPPFLAGS</makevar> to use when
-		processing Qt code.  Default set according to
+	      <entry>Defina o <makevar>CPPFLAGS</makevar> para usar quando
+		processando o c&oacute;digo Qt.  Default set de acordo com
 		<makevar>USE_QT_VER</makevar> value.</entry>
 	    </row>
 	  </tbody>
@@ -3633,31 +3633,31 @@ LDCONFIG_DIRS=  %%PREFIX%%/lib/foo %%PREFIX%%/lib/bar</programlisting>
     </sect1>
 
     <sect1 id="using-bison">
-      <title>Using Bison</title>
+      <title>Usando Bison</title>
 
       <para></para>
     </sect1>
 
     <sect1 id="using-java">
-      <title>Using Java</title>
+      <title>Usando Java</title>
 
       <para></para>
     </sect1>
 
     <sect1 id="using-python">
-      <title>Using Python</title>
+      <title>Usando Python</title>
 
       <para></para>
     </sect1>
 
     <sect1 id="using-emacs">
-      <title>Using Emacs</title>
+      <title>Usando Emacs</title>
 
       <para></para>
     </sect1>
 
     <sect1 id="using-ruby">
-      <title>Using Ruby</title>
+      <title>Usando Ruby</title>
 
       <para></para>
     </sect1>
@@ -3836,19 +3836,19 @@ LDCONFIG_DIRS=  %%PREFIX%%/lib/foo %%PREFIX%%/lib/bar</programlisting>
     <chapter id="porting-masterdir">
       <title><makevar>MASTERDIR</makevar></title>
 
-      <para>If your port needs to build slightly different versions of
-        packages by having a variable (for instance, resolution, or paper
-        size) take different values, create one subdirectory per package to
-        make it easier for users to see what to do, but try to share as many
-        files as possible between ports.  Typically you only need a very short
-        <filename>Makefile</filename> in all but one of the directories if you
-        use variables cleverly.  In the sole <filename>Makefile</filename>,
-        you can use <makevar>MASTERDIR</makevar> to specify the directory
-        where the rest of the files are.  Also, use a variable as part of
-        <link linkend="porting-pkgname"><makevar>PKGNAMESUFFIX</makevar></link> so
-        the packages will have different names.</para>
+      <para>Se seu port necessita construir vers&otilde;es ligeiramente diferentes dos
+        pacotes tendo uma vari&aacute;vel (por exemplo, resolu&ccedil;&atilde;o, ou tamanho do
+        papel) pegue valores diferentes, crie um subdiret&oacute;rio por pacote para
+        faze-lo mais facilmente aos usu&aacute;rios ver o que fazer, mas tentar compartilhar assim varios
+        arquivos quanto poss&iacute;vel entre os ports.  Tipicamente voc&ecirc; somente necessita um muito curto
+        <filename>Makefile</filename> em tudo mas um dos diret&oacute;rios se voc&ecirc;
+        usar vari&aacute;veis inteligentes.  No &uacute;nico <filename>Makefile</filename>,
+        voc&ecirc; pode usar <makevar>MASTERDIR</makevar> para especificar o diret&oacute;rio
+        onde o resto dos arquivos est&atilde;o.  Tamb&eacute;m, use uma vari&aacute;vel como parte do
+        <link linkend="porting-pkgname"><makevar>PKGNAMESUFFIX</makevar></link> assim
+        os pacotes ter&atilde;o nomes diferentes.</para>
 
-      <para>This will be best demonstrated by an example.  This is part of
+      <para>Isto ser&aacute; demonstrado melhor por um exemplo.  Isto &eacute; parte  do
         <filename>japanese/xdvi300/Makefile</filename>;</para>
 
       <programlisting>PORTNAME=       xdvi
@@ -3865,12 +3865,12 @@ RESOLUTION?=   300
        @${FALSE}
 .endif</programlisting>
 
-      <para><filename role="package">japanese/xdvi300</filename> also has all the regular
-        patches, package files, etc.  If you type <command>make</command>
-        there, it will take the default value for the resolution (300) and
-        build the port normally.</para>
+      <para><filename role="package">japanese/xdvi300</filename>  tem tamb&eacute;m todos os regular
+        patches, arquivos do pacote, etc.  Se voc&ecirc; digita <command>make</command>
+        l&aacute;, ele pegar&aacute; o valor default para a resolu&ccedil;&atilde;o (300) e
+        construir&aacute; o port normalmente.</para>
 
-      <para>As for other resolutions, this is the <emphasis>entire</emphasis>
+      <para>Assim para outras resolu&ccedil;&otilde;es, este &eacute; o <emphasis>inteiro</emphasis>
         <filename>xdvi118/Makefile</filename>:</para>
 
       <programlisting>RESOLUTION=     118
@@ -3878,34 +3878,34 @@ MASTERDIR=      ${.CURDIR}/../xdvi300
 
 .include "${MASTERDIR}/Makefile"</programlisting>
 
-      <para>(<filename>xdvi240/Makefile</filename> and
-        <filename>xdvi400/Makefile</filename> are similar).  The
-        <makevar>MASTERDIR</makevar> definition tells
-        <filename>bsd.port.mk</filename> that the regular set of
-        subdirectories like <makevar>FILESDIR</makevar> and
-        <makevar>SCRIPTDIR</makevar> are to be found under
-        <filename>xdvi300</filename>.  The <literal>RESOLUTION=118</literal>
-        line will override the <literal>RESOLUTION=300</literal> line in
-        <filename>xdvi300/Makefile</filename> and the port will be built with
-        resolution set to 118.</para>
+      <para>(<filename>xdvi240/Makefile</filename> e
+        <filename>xdvi400/Makefile</filename> s&atilde;o similares).  A
+        defini&ccedil;&atilde;o <makevar>MASTERDIR</makevar> diz ao
+        <filename>bsd.port.mk</filename> que a defini&ccedil;&atilde;o regular de
+        subdiret&oacute;rios como <makevar>FILESDIR</makevar> e
+        <makevar>SCRIPTDIR</makevar> are ser encontrado abaixo de
+        <filename>xdvi300</filename>.  A linha <literal>RESOLUTION=118</literal>
+        sobreescrever&aacute; a linha <literal>RESOLUTION=300</literal> em
+        <filename>xdvi300/Makefile</filename> e o port ser&aacute; construido com a
+        resolu&ccedil;&atilde;o definida a 118.</para>
     </chapter>
 
     <chapter id="shared">
-      <title>Shared library versions</title>
+      <title>Vers&otilde;es da biblioteca compartilhada</title>
 
-      <para>Please read our <ulink url="../developers-handbook/policies-shlib.html">policy on
-        shared library versioning</ulink> to understand what to do with
-        shared library versions in general.  Do not blindly assume software
-        authors know what they are doing; many of them do not.  It is very
-        important that these details are carefully considered, as we have
-        quite a unique situation where we are trying to have dozens of
-        potentially incompatible software pairs co-exist. Careless port
-        imports have caused great trouble regarding shared libraries in the
-        past (ever wondered why the port <filename>jpeg-6b</filename> has a
-        shared library version of 9?). If in doubt, send a message to the
-        &a.ports;.  Most of the time, your job ends by determining the right
-        shared library version and making appropriate patches to implement
-        it.</para>
+      <para>Por favor leia nossa <ulink url="../developers-handbook/policies-shlib.html">pol&iacute;tica na
+         biblioteca compartilhada versioning</ulink>  para compreender o que fazer com
+        vers&otilde;es da biblioteca compartilhada em geral.  N&atilde;o blindly assume software
+        authors know  sabe o que est&aacute; fazendo; muitos deles n&atilde;o.  &Eacute; muito
+        importante que estes detalhes s&atilde;o cuidadosamente considerados, assim n&oacute;s temos
+        quite a unique situation onde n&oacute;s estamos tentando ter d&uacute;zias de
+        pares de software potencialmente incompat&iacute;veis co-existindo.  Importa&ccedil;&otilde;es
+        de ports descuidadas tem causado grandes problemas considerando bibliotecas compartilhadas no
+        passado (sempre queria saber por que o port <filename>jpeg-6b</filename> tem uma
+        vers&atilde;o da biblioteca compartilhada de 9?). Se em d&uacute;vida, envie uma mensagem ao
+        &a.ports;.  Na maioria das vezes, seu trabalho termina determinando a correta
+        vers&atilde;o da biblioteca compartilhada e fazendo patches apropriados para
+        implement&aacute;-lo.</para>
 
 <!--
       <para>However, if there is a port which is a different version of the
@@ -3929,54 +3929,54 @@ MASTERDIR=      ${.CURDIR}/../xdvi300
     <chapter id="porting-manpages">
       <title>Manpages</title>
 
-      <para>The <makevar>MAN[1-9LN]</makevar> variables will automatically add
-        any manpages to <filename>pkg-plist</filename> (this means you must
-        <emphasis>not</emphasis> list manpages in the
-        <filename>pkg-plist</filename>&mdash;see <link
-          linkend="porting-plist">generating PLIST</link> for more).  It also
-        makes the install stage automatically compress or uncompress manpages
-        depending on the setting of <makevar>NOMANCOMPRESS</makevar> in
+      <para>As vari&aacute;veis <makevar>MAN[1-9LN]</makevar> automaticamente adicionar&atilde;o
+        quaisquer manpages ao <filename>pkg-plist</filename> (isto significa que voc&ecirc;
+        <emphasis>n&atilde;o</emphasis> tem que listar manpages no
+        <filename>pkg-plist</filename>&mdash;veja <link
+          linkend="porting-plist">gerando PLIST</link> para mais).  Tamb&eacute;m
+        faz o est&aacute;gio de instalar automaticamente compressa ou descompressa manpages
+        dependendo das defini&ccedil;&otilde;es do <makevar>NOMANCOMPRESS</makevar> no
         <filename>/etc/make.conf</filename>.</para>
 
-      <para>If your port tries to install multiple names for manpages using
-        symlinks or hardlinks, you must use the <makevar>MLINKS</makevar>
-        variable to identify these.  The link installed by your port will
-        be destroyed and recreated by <filename>bsd.port.mk</filename>
-        to make sure it points to the correct file.  Any manpages
-        listed in MLINKS must not be listed in the
+      <para>Se seu port tenta instalar nomes multiplos para manpages usando
+        symlinks ou hardlinks, voc&ecirc; tem que usar a vari&aacute;vel <makevar>MLINKS</makevar>
+        para identificar estes.  O link instalado pelo seu port ser&aacute;
+        destru&iacute;do e recriado pelo <filename>bsd.port.mk</filename>
+        para certificar-se que ele indica ao arquivo correto.  Quaisquer manpages
+        listadas em MLINKS n&atilde;o tem que ser listada no
         <filename>pkg-plist</filename>.</para>
 
-      <para>To specify whether the manpages are compressed upon installation,
-        use the <makevar>MANCOMPRESSED</makevar> variable. This variable can
-        take three values, <literal>yes</literal>, <literal>no</literal> and
-        <literal>maybe</literal>. <literal>yes</literal> means manpages are
-        already installed compressed, <literal>no</literal> means they are
-        not, and <literal>maybe</literal> means the software already respects
-        the value of <makevar>NOMANCOMPRESS</makevar> so
-        <filename>bsd.port.mk</filename> does not have to do anything
-        special.</para>
+      <para>Para especificar whether o manpages s&atilde;o comprimidas na instala&ccedil;&atilde;o,
+        use a vari&aacute;vel <makevar>MANCOMPRESSED</makevar>. Esta vari&aacute;vel pode
+        ter tr&ecirc;s valores, <literal>yes</literal>, <literal>no</literal> e
+        <literal>maybe</literal>. <literal>yes</literal> significa que manpages est&atilde;o
+        j&aacute; instaladas comprimidas, <literal>no</literal> significa  que elas
+        n&atilde;o est&atilde;o, e <literal>maybe</literal> significa que o software j&aacute; cumpre
+        o valor do <makevar>NOMANCOMPRESS</makevar> assim
+        <filename>bsd.port.mk</filename> n&atilde;o tem que fazer nada
+        especial.</para>
 
-      <para><makevar>MANCOMPRESSED</makevar> is automatically set to
-        <literal>yes</literal> if <makevar>USE_IMAKE</makevar> is set and
-        <makevar>NO_INSTALL_MANPAGES</makevar> is not set, and to
-        <literal>no</literal> otherwise.  You do not have to explicitly define
-        it unless the default is not suitable for your port.</para>
+      <para>O <makevar>MANCOMPRESSED</makevar> &eacute; automaticamente dfinido a
+        <literal>yes</literal> se <makevar>USE_IMAKE</makevar> &eacute; definido e
+        <makevar>NO_INSTALL_MANPAGES</makevar> n&atilde;o &eacute; definido, e para
+        <literal>no</literal> ao contr&aacute;rio.  Voc&ecirc; n&atilde;o tem que defini-lo explicitamnete
+        ao menos que o default n&atilde;o &eacute; suitable para seu port.</para>
 
-      <para>If your port anchors its man tree somewhere other than
-        <makevar>PREFIX</makevar>, you can use the
-        <makevar>MANPREFIX</makevar> to set it.  Also, if only manpages in
-        certain sections go in a non-standard place, such as some <literal>perl</literal> modules
-        ports, you can set individual man paths using
-        <makevar>MAN<replaceable>sect</replaceable>PREFIX</makevar> (where
-        <replaceable>sect</replaceable> is one of <literal>1-9</literal>,
-        <literal>L</literal> or <literal>N</literal>).</para>
+      <para>Se seu port anchors its man tree em outro algum lugar que
+        <makevar>PREFIX</makevar>, voc&ecirc; pode usar o
+        <makevar>MANPREFIX</makevar> para defini-lo.  Tamb&eacute;m, se somente manpages em
+        certain sections go in a non-standard place, como alguns ports do
+        m&oacute;dulos <literal>perl</literal>, voc&ecirc; pode definir paths do man individual usando
+        <makevar>MAN<replaceable>sect</replaceable>PREFIX</makevar> (onde
+        <replaceable>sect</replaceable> &eacute; um de <literal>1-9</literal>,
+        <literal>L</literal> ou <literal>N</literal>).</para>
 
-      <para>If your manpages go to language-specific subdirectories, set the
-        name of the languages to <makevar>MANLANG</makevar>.  The value of
-        this variable defaults to <literal>""</literal> (i.e., English
-        only).</para>
+      <para>Se seus manpages forem aos subdiret&oacute;rios de lingua-espec&iacute;fica, defina o
+        nome das linguas ao <makevar>MANLANG</makevar>.  O valor desta
+        vari&aacute;vel defaults to <literal>""</literal> (ex., somente
+        Ingl&ecirc;s).</para>
 
-      <para>Here is an example that puts it all together.</para>
+      <para>Aqui est&aacute; um exemplo que colocamos eles todos juntos.</para>
 
       <programlisting>MAN1=          foo.1
 MAN3=          bar.3
@@ -3986,7 +3986,7 @@ MANLANG=       "" ja
 MAN3PREFIX=    ${PREFIX}/share/foobar
 MANCOMPRESSED= yes</programlisting>
 
-      <para>This states that six files are installed by this port;</para>
+      <para>Teste estados que seis arquivos s&atilde;o instalados por este port;</para>
 
           <programlisting>${PREFIX}/man/man1/foo.1.gz
 ${PREFIX}/man/ja/man1/foo.1.gz
@@ -3995,149 +3995,149 @@ ${PREFIX}/share/foobar/man/ja/man3/bar.3.gz
 ${PREFIX}/man/man4/baz.4.gz
 ${PREFIX}/man/ja/man4/baz.4.gz</programlisting>
 
-      <para>Additionally <filename>${PREFIX}/man/man8/alt-name.8.gz</filename>
-        may or may not be installed by your port.  Regardless, a
-        symlink will be made to join the foo(1) manpage and
-        alt-name(8) manpage.</para>
+      <para>Adicionalmente <filename>${PREFIX}/man/man8/alt-name.8.gz</filename>
+        pode or n&atilde;o ser instalado por seu port.  Regardless, um
+        symlink ser&aacute; criado para juntar o manpage foo(1) e
+        manpage alt-name(8).</para>
 
     </chapter>
 
     <chapter id="porting-motif">
-      <title>Ports that require Motif</title>
+      <title>Ports que necessitam Motif</title>
 
-      <para>There are many programs that require a Motif library (available
-        from several commercial vendors, while there is a free clone reported
-        to be able to run many applications in
-        <filename role="package">x11-toolkits/lesstif</filename>) to compile.  Since it is a
-        popular toolkit and their licenses usually permit redistribution of
-        statically linked binaries, we have made special provisions for
-        handling ports that require Motif in a way that we can easily compile
-        binaries linked either dynamically (for people who are compiling from
-        the port) or statically (for people who distribute packages).</para>
+      <para>H&aacute; muitos programas que necessitam um biblioteca do Motif (dispon&iacute;vel
+        de diversos commercial vendors, enquanto h&aacute; um clone livre relatado
+        para ser capaz de executar muitas aplica&ccedil;&otilde;es no
+        <filename role="package">x11-toolkits/lesstif</filename>) para compilar.  Desde que ele &eacute; um
+        popular toolkit e suas licen&ccedil;as normalmente permitem redistribui&ccedil;&atilde;o dos
+        bin&aacute;rios linkados estaticamente, n&oacute;s temos feito clausulas especiais para
+        manusear ports que necessitam o Motif de um modo que n&oacute;s podemos facilmente compilar
+        bin&aacute;rios linkados either din&acirc;micamente (para pessoas que est&atilde;o compilando do
+        port) ou estaticamente (para pessoas que distribuem pacotes).</para>
 
       <sect1 id="motif-use">
         <title><makevar>USE_MOTIF</makevar></title>
 
-        <para>If your port requires Motif, define this variable in the
-          <filename>Makefile</filename>.  This will prevent people who do not own a copy of Motif
-          from even attempting to build it.</para>
+        <para>Se seu port necessita o Motif, defina esta vari&aacute;vel no
+          <filename>Makefile</filename>.  Isto impedir&aacute; pessoas que n&atilde;o possui uma c&oacute;pia do Motif
+          de mesmo que tentando constru&iacute;-lo.</para>
       </sect1>
 
       <sect1 id="motif-lib">
         <title><makevar>MOTIFLIB</makevar></title>
 
-        <para>This variable will be set by <filename>bsd.port.mk</filename> to
-          be the appropriate reference to the Motif library.  Please patch the
-          source to use this wherever the Motif library is referenced in the
-          <filename>Makefile</filename> or
+        <para>Esta vari&aacute;vel ser&aacute; definida pelo <filename>bsd.port.mk</filename> para
+          ser a refer&ecirc;ncia apropriada a biblioteca do Motif.  Por favor patch o
+          fonte para usar isto onde quer que a biblioteca do Motif est&aacute; refer&ecirc;nciada no
+          <filename>Makefile</filename> ou
           <filename>Imakefile</filename>.</para>
 
-        <para>There are two common cases:</para>
+        <para>H&aacute; dois casos comuns:</para>
 
         <itemizedlist>
           <listitem>
-            <para>If the port refers to the Motif library as
-              <literal>-lXm</literal> in its <filename>Makefile</filename> or
-              <filename>Imakefile</filename>, simply substitute
-              <literal>&dollar;{MOTIFLIB}</literal> for it.</para>
+            <para>Se o port refere a biblioteca do Motif assim
+              <literal>-lXm</literal> em seu <filename>Makefile</filename> ou
+              <filename>Imakefile</filename>, simplesmente substitua
+              <literal>&dollar;{MOTIFLIB}</literal> para ele.</para>
           </listitem>
 
           <listitem>
-            <para>If the port uses <literal>XmClientLibs</literal> in its
-              <filename>Imakefile</filename>, change it to
+            <para>Se o port usa <literal>XmClientLibs</literal> em seu
+              <filename>Imakefile</filename>, mude-o para
               <literal>&dollar;{MOTIFLIB} &dollar;{XTOOLLIB}
                 &dollar;{XLIB}</literal>.</para>
           </listitem>
 
         </itemizedlist>
 
-        <para>Note that <makevar>MOTIFLIB</makevar> (usually) expands to
-          <literal>-L/usr/X11R6/lib -lXm</literal> or
-          <literal>/usr/X11R6/lib/libXm.a</literal>, so there is no need to
-          add <literal>-L</literal> or <literal>-l</literal> in front.</para>
+        <para>Note que <makevar>MOTIFLIB</makevar> (geralmente) expande a
+          <literal>-L/usr/X11R6/lib -lXm</literal> ou
+          <literal>/usr/X11R6/lib/libXm.a</literal>, assim n&atilde;o h&aacute; nenhuma necessidade
+          para adicionar <literal>-L</literal> ou <literal>-l</literal> na frente.</para>
       </sect1>
     </chapter>
 
     <chapter id="x11-fonts">
-      <title>X11 fonts</title>
+      <title>Fontes do X11</title>
 
-      <para>If your port installs fonts for the X Window System, put them in
+      <para>Se seu port instala fontes para o X Window System, coloque-os em
         <filename><makevar>X11BASE</makevar>/lib/X11/fonts/local</filename>.
-        This directory is new to <application>XFree86 3.3.3</application>.  If it does not exist,
-        please create it, and print out a message urging the user to update
-        their <application>XFree86</application> to 3.3.3 or newer, or at least add this directory to the
-        font path in <filename>/etc/XF86Config</filename>.</para>
+        Este diret&oacute;rio &eacute; novo para <application>XFree86 3.3.3</application>.  Se n&atilde;o existir,
+        por favor crie-o, e print out um mensagem urging o usu&aacute;rio para atualizar
+        suas <application>XFree86</application> para 3.3.3 ou mais nova, ou ao menos adicione
+        este diret&oacute;rio ao path da fonte em <filename>/etc/XF86Config</filename>.</para>
     </chapter>
 
     <chapter id="porting-info">
-      <title>Info files</title>
+      <title>Arquivos Info</title>
 
-      <para>If your package needs to install GNU info files, they should be
-        listed in the <makevar>INFO</makevar> variable (without the trailing
-        <literal>.info</literal>), and appropriate installation/deinstallation
-        code will be automaticaly added to the temporary
-        <filename>pkg-plist</filename> before package registration.</para>
+      <para>Se seu pacote necessitar instalar arquivos GNU info, eles devem ser
+        listados na vari&aacute;vel <makevar>INFO</makevar> (sem o trailing
+        <literal>.info</literal>), e apropriada instala&ccedil;&atilde;o/desinstala&ccedil;&atilde;o
+        code ser&aacute; automaticamente adicionado ao tempor&aacute;rio
+        <filename>pkg-plist</filename> antes da registra&ccedil;&atilde;o do pacote.</para>
     </chapter>
 
     <chapter id="pkg-files">
-      <title>The <filename>pkg-<replaceable>*</replaceable></filename> files</title>
+      <title>Os arquivos <filename>pkg-<replaceable>*</replaceable></filename></title>
 
-      <para>There are some tricks we have not mentioned yet about the
-        <filename>pkg-<replaceable>*</replaceable></filename> files
-        that come in handy sometimes.</para>
+      <para>H&aacute; alguns truques que n&oacute;s n&atilde;o mencionamos ainda sobre os
+        arquivos <filename>pkg-<replaceable>*</replaceable></filename>
+        que vem acess&iacute;vel &agrave;s vezes.</para>
 
       <sect1 id="porting-message">
         <title><filename>pkg-message</filename></title>
 
-        <para>If you need to display a message to the installer, you may place
-          the message in <filename>pkg-message</filename>.  This capability is
-          often useful to display additional installation steps to be taken
-          after a &man.pkg.add.1; or to display licensing
-          information.</para>
+        <para>Se voc&ecirc; necessitar indicar uma mensagem ao instalador, voc&ecirc; pode colocar 
+          a mensagem em <filename>pkg-message</filename>.  Esta capability &eacute;
+          frequentemente &uacute;til mostrar as etapas adicionais da instala&ccedil;&atilde;o a ser feitas
+          ap&oacute;s um &man.pkg.add.1; ou mostrar informa&ccedil;&atilde;o de
+          licenceamento.</para>
 
         <note>
-          <para>The <filename>pkg-message</filename> file does not need to be
-            added to <filename>pkg-plist</filename>.  Also, it will not get
-            automatically printed if the user is using the port, not the
-            package, so you should probably display it from the
-            <maketarget>post-install</maketarget> target yourself.</para>
+          <para>O arquivo <filename>pkg-message</filename> n&atilde;o precisa ser
+            adicionado ao <filename>pkg-plist</filename>.  Tamb&eacute;m, n&atilde;o come&ccedil;ar&aacute;
+            automaticamente printed se o usu&aacute;rio est&aacute; usando o port, n&atilde;o o
+            pacote, assim voc&ecirc; deve provavelmente mostra-lo do target
+            <maketarget>post-install</maketarget> voc&ecirc; mesmo.</para>
         </note>
       </sect1>
 
       <sect1 id="pkg-install">
         <title><filename>pkg-install</filename></title>
 
-        <para>If your port needs to execute commands when the binary package
-          is installed with &man.pkg.add.1; you can do this via the
-          <filename>pkg-install</filename> script.  This script will
-          automatically be added to the package, and will be run twice by
-          &man.pkg.add.1;.  The first time as
+        <para>Se seu port necessitar executar comandos quando o pacote bin&aacute;rio
+          est&aacute; instalado com &man.pkg.add.1;  voc&ecirc; pode fazer isto atrav&eacute;s do
+          script <filename>pkg-install</filename>.  Este script
+          automaticamente ser&aacute; adicionado ao pacote, e ser&aacute; executado duas vezes pelo
+          &man.pkg.add.1;.  A primeira vez como
           <literal>&dollar;{SH} pkg-install &dollar;{PKGNAME}
-          PRE-INSTALL</literal> and the second time as
+          PRE-INSTALL</literal>  e a segunda vez como
           <literal>&dollar;{SH} pkg-install &dollar;{PKGNAME} POST-INSTALL</literal>. 
-          <literal>&dollar;2</literal> can be tested to determine which mode
-          the script is being run in.  The <envar>PKG_PREFIX</envar>
-          environmental variable will be set to the package installation
-          directory.  See &man.pkg.add.1; for
-          additional information.</para>
+          <literal>&dollar;2</literal>  podem ser testados para determinar qual modo
+          o script est&aacute; sendo executado.  A vari&aacute;vel ambiental
+          <envar>PKG_PREFIX</envar> ser&aacute; definida o diret&oacute;rio de instala&ccedil;&atilde;o do
+          pacote.  Veja &man.pkg.add.1; para
+          informa&ccedil;&atilde;o adicional.</para>
 
         <note>
-          <para>This script is not run automatically if you install the port
-            with <command>make install</command>.  If you are depending on it
-            being run, you will have to explicitly call it from your port's
-            <filename>Makefile</filename>.</para>
+          <para>Este script n&atilde;o &eacute; executado automaticamente se voc&ecirc; instala o port
+            com <command>make install</command>.  Se voc&ecirc; est&aacute; dependendo dele
+            ser executado, voc&ecirc; ter&aacute; que explicitamente cham&aacute;-lo de seu <filename>Makefile</filename>
+            port.</para>
         </note>
       </sect1>
 
       <sect1 id="pkg-deinstall">
         <title><filename>pkg-deinstall</filename></title>
 
-        <para>This script executes when a package is removed.</para>
+        <para>Este script executa quando um pacote &eacute; removido.</para>
 
         <para>
-          This script will be run twice by &man.pkg.delete.1;.
-          The first time as <literal>&dollar;{SH} pkg-install &dollar;{PKGNAME}
-          DEINSTALL</literal> and the second time as
+          Este script ser&aacute; executado duas vezes pelo &man.pkg.delete.1;.
+          A primeira vez como <literal>&dollar;{SH} pkg-install &dollar;{PKGNAME}
+          DEINSTALL</literal>  e a segunda vez como
           <literal>&dollar;{SH} pkg-install &dollar;{PKGNAME} POST-DEINSTALL</literal>.
         </para>
       </sect1>
@@ -4145,97 +4145,97 @@ ${PREFIX}/man/ja/man4/baz.4.gz</programlisting>
       <sect1 id="pkg-req">
         <title><filename>pkg-req</filename></title>
 
-        <para>If your port needs to determine if it should install or not, you
-          can create a <filename>pkg-req</filename> <quote>requirements</quote>
-          script.  It will be invoked automatically at
-          installation/deinstallation time to determine whether or not
-          installation/deinstallation should proceed.</para>
+        <para>Se seu port precisa determinar se ele deve instalar ou n&atilde;o, voc&ecirc;
+          pode criar um script das <quote>necessidades</quote> do <filename>pkg-req</filename>.
+          Ser&aacute; invocado automaticamente no
+          tempo de instala&ccedil;&atilde;o/desinstala&ccedil;&atilde;o para determinar se ou n&atilde;o
+          a instala&ccedil;&atilde;o/desinstala&ccedil;&atilde;o deve proseguir.</para>
 
-        <para>The script will be run at installation time by
-          &man.pkg.add.1; as
+        <para>O script ser&aacute; executado no tempo instala&ccedil;&atilde;o pelo
+          &man.pkg.add.1; como
           <literal>pkg-req &dollar;{PKGNAME} INSTALL</literal>.
-          At deinstallation time it will be run by
-          &man.pkg.delete.1; as
+          No tempo da desinstala&ccedil;&atilde;o ser&aacute; executado pelo
+          &man.pkg.delete.1; como
           <literal>pkg-req &dollar;{PKGNAME} DEINSTALL</literal>.</para>
       </sect1>
 
       <sect1 id="porting-plist">
-        <title>Changing <filename>pkg-plist</filename> based on make
-          variables</title>
+        <title>Mudando o <filename>pkg-plist</filename> baseado nas
+          vari&aacute;veis do make</title>
 
-        <para>Some ports, particularly the <literal>p5-</literal> ports,
-          need to change their <filename>pkg-plist</filename> depending on
-          what options they are configured with (or version of
-          <literal>perl</literal>, in the case of <literal>p5-</literal>
-          ports).  To make this easy, any instances in the
-          <filename>pkg-plist</filename> of <literal>%%OSREL%%</literal>,
-          <literal>%%PERL_VER%%</literal>, and
-          <literal>%%PERL_VERSION%%</literal> will be substituted for
-          appropriately.  The value of <literal>%%OSREL%%</literal> is the
-          numeric revision of the operating system (e.g.,
-          <literal>2.2.7</literal>).  <literal>%%PERL_VERSION%%</literal> is
-          the full version number of <literal>perl</literal> (e.g.,
-          <literal>5.00502</literal>) and <literal>%%PERL_VER%%</literal>
-          is the <literal>perl</literal> version number minus
-          the patchlevel (e.g., <literal>5.005</literal>).</para>
+        <para>Alguns ports, particularmente os ports <literal>p5-</literal>,
+          precisam mudar seus <filename>pkg-plist</filename> dependendo de
+          que op&ccedil;&otilde;es eles s&atilde;o configurados com (ou vers&atilde;o do
+          <literal>perl</literal>, neste caso do ports
+          <literal>p5-</literal>).  Para fazer isto f&aacute;cil, quaisquer instancias no
+          <filename>pkg-plist</filename> do <literal>%%OSREL%%</literal>,
+          <literal>%%PERL_VER%%</literal>, e
+          <literal>%%PERL_VERSION%%</literal> ser&aacute; substituida
+          apropriadamente.  O valor de <literal>%%OSREL%%</literal> &eacute; a
+          revis&atilde;so num&eacute;rica do sistema operacional (ex.,
+          <literal>2.2.7</literal>).  <literal>%%PERL_VERSION%%</literal> &eacute;
+          o numero da vers&atilde;o completa do <literal>perl</literal> (ex.,
+          <literal>5.00502</literal>) e <literal>%%PERL_VER%%</literal>
+          &eacute; o numero da vers&atilde;o do <literal>perl</literal> menos
+          o patchlevel (ex., <literal>5.005</literal>).</para>
 
-        <para>If you need to make other substitutions, you can set the
-          <makevar>PLIST_SUB</makevar> variable with a list of
+        <para>Se voc&ecirc; precisar fazer outras substitui&ccedil;&otilde;es, voc&ecirc; pode definir a
+          vari&aacute;vel <makevar>PLIST_SUB</makevar> com uma lista de pares 
           <literal><replaceable>VAR</replaceable>=<replaceable>VALUE</replaceable></literal>
-          pairs and instances of
-          <literal>%%<replaceable>VAR</replaceable>%%</literal> will be
-          substituted with <replaceable>VALUE</replaceable> in the
+          e exemplos de
+          <literal>%%<replaceable>VAR</replaceable>%%</literal> ser&aacute;
+          substitu&iacute;da com o <replaceable>VALUE</replaceable> no
           <filename>pkg-plist</filename>.</para>
 
-        <para>For instance, if you have a port that installs many files in a
-          version-specific subdirectory, you can put something like
+        <para>Por exemplo, se voc&ecirc; tiver um port que instale muitos arquivos no
+          subdiret&oacute;rio da espec&iacute;fica-vers&atilde;o, voc&ecirc; pode colocaralgo como
 
           <programlisting>OCTAVE_VERSION= 2.0.13
 PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 
-          in the <filename>Makefile</filename> and use
-          <literal>%%OCTAVE_VERSION%%</literal> wherever the version shows up
-          in <filename>pkg-plist</filename>.  That way, when you upgrade the port,
-          you will not have to change dozens (or in some cases, hundreds) of
-          lines in the <filename>pkg-plist</filename>.</para>
+          no <filename>Makefile</filename> e usar
+          <literal>%%OCTAVE_VERSION%%</literal> onde quer que a vers&atilde;o apare&ccedil;a
+          no <filename>pkg-plist</filename>.  Essa maneira, quando voc&ecirc; upgrade o port,
+          n&atilde;o ter&aacute; que mudar d&uacute;zias (ou em alguns casos, centenas) de
+          linhas no <filename>pkg-plist</filename>.</para>
 
-        <para>This substitution (as well as addition of any <link
-          linkend="porting-manpages">manual pages</link>) will be done between
-          the <maketarget>pre-install</maketarget> and
-          <maketarget>do-install</maketarget> targets, by reading from
-          <makevar>PLIST</makevar> and writing to <makevar>TMPPLIST</makevar>
+        <para>Esta substitui&ccedil;&atilde;o (assim bem como adi&ccedil;&atilde;o de alguns <link
+          linkend="porting-manpages">manual pages</link>) ser&atilde;o feitas entre
+          o <maketarget>pre-install</maketarget> e
+          <maketarget>do-install</maketarget> targets, lendo de
+          <makevar>PLIST</makevar> e escrevendo ao <makevar>TMPPLIST</makevar>
           (default:
-          <filename><makevar>WRKDIR</makevar>/.PLIST.mktmp</filename>).  So if
-          your port builds <makevar>PLIST</makevar> on the fly, do so in or
-          before <maketarget>pre-install</maketarget>.  Also, if your port
-          needs to edit the resulting file, do so in
-          <maketarget>post-install</maketarget> to a file named
+          <filename><makevar>WRKDIR</makevar>/.PLIST.mktmp</filename>).  Assim se
+          seu port construir <makevar>PLIST</makevar> on the fly, fa&ccedil;a assim ou
+          antes de <maketarget>pre-install</maketarget>.  Tamb&eacute;m, se seu port
+          precisa de editar o arquivo resultante, fa&ccedil;a assim que o
+          <maketarget>post-install</maketarget> a um arquivo chamado
           <makevar>TMPPLIST</makevar>.</para>
       </sect1>
 
       <sect1 id="pkg-names">
-        <title id="porting-pkgfiles">Changing the names of
-          <filename>pkg-<replaceable>*</replaceable></filename> files</title>
+        <title id="porting-pkgfiles">Mudando os nomes dos
+          arquivos <filename>pkg-<replaceable>*</replaceable></filename></title>
 
-        <para>All the names of <filename>pkg-<replaceable>*</replaceable></filename> files
-          are defined using variables so you can change them in your
-          <filename>Makefile</filename> if need be.  This is especially useful
-          when you are sharing the same <filename>pkg-<replaceable>*</replaceable></filename> files
-          among  several ports or have to write to one of the above files (see
-          <link linkend="porting-wrkdir">writing to places other than
-          <makevar>WRKDIR</makevar></link> for why it is a bad idea to write
-          directly into the <filename>pkg-<replaceable>*</replaceable></filename> subdirectory).</para>
+        <para>Todos os nomes dos arquivos <filename>pkg-<replaceable>*</replaceable></filename>
+          s&atilde;o definidos usando vari&aacute;veis assim voc&ecirc; pode mud&aacute;-las em seu
+          <filename>Makefile</filename> se mprecisar ser.  Isto &eacute; especialmente &uacute;til
+          quando voc&ecirc; est&aacute; compartilhando os mesmos arquivos <filename>pkg-<replaceable>*</replaceable></filename>
+          entre diversos ports ou ter que escrever a um dos arquivos acima (veja
+          <link linkend="porting-wrkdir">escrevendo a outros lugares que
+          <makevar>WRKDIR</makevar></link> for porque ele &eacute; uma m&aacute; id&eacute;ia escrever
+          diretamente dentro do subdiret&oacute;rio <filename>pkg-<replaceable>*</replaceable></filename>).</para>
 
-        <para>Here is a list of variable names and their default
-          values.  (<makevar>PKGDIR</makevar> defaults to
+        <para>Aqui est&aacute; uma lista de nomes de vari&aacute;veis e seus valores
+          default.  (<makevar>PKGDIR</makevar> defaults to
           <makevar>${MASTERDIR}</makevar>.)</para>
 
         <informaltable frame="none">
           <tgroup cols="2">
             <thead>
               <row>
-                <entry>Variable</entry>
-                <entry>Default value</entry>
+                <entry>Vari&aacute;vel</entry>
+                <entry>Valor Default</entry>
               </row>
             </thead>
 
@@ -4278,353 +4278,353 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
           </tgroup>
         </informaltable>
 
-        <para>Please change these variables rather than overriding
-          <makevar>PKG_ARGS</makevar>.  If you change
-          <makevar>PKG_ARGS</makevar>, those files will not correctly be
-          installed in <filename>/var/db/pkg</filename> upon install from a
+        <para>Por favor mude estas vari&aacute;veis melhor que sobrescrevendo
+          <makevar>PKG_ARGS</makevar>.  Se voc&ecirc; mudar
+          <makevar>PKG_ARGS</makevar>, aqueles arquivos n&atilde;o ser&atilde;o corretamente
+          instalados sobre <filename>/var/db/pkg</filename> instale de um
           port.</para>
       </sect1>
     </chapter>
 
   <chapter id="testing">
-    <title>Testing your port</title>
+    <title>Testando seu port</title>
 
       <sect1 id="testing-portlint">
         <title>Portlint</title>
 
-        <para>Do check your work with <link
+        <para>Verifique seu trabalho com o <link
             linkend="porting-portlint"><command>portlint</command></link>
-          before you submit or commit it.</para>
+           antes que voc&ecirc; o envie ou commit.</para>
       </sect1>
 
 
       <sect1 id="porting-prefix">
         <title><makevar>PREFIX</makevar></title>
 
-        <para>Do try to make your port install relative to
-          <makevar>PREFIX</makevar>.  (The value of this variable will be set
-          to <makevar>LOCALBASE</makevar> (default
-          <filename>/usr/local</filename>), unless
-          <makevar>USE_X_PREFIX</makevar> or <makevar>USE_IMAKE</makevar> is
-          set, in which case it will be <makevar>X11BASE</makevar> (default
+        <para>Tente fazer seu port instalar relativo ao
+          <makevar>PREFIX</makevar>.  (O valor desta vari&aacute;vel se&aacute; definida
+          ao <makevar>LOCALBASE</makevar> (default
+          <filename>/usr/local</filename>), ao menos
+          <makevar>USE_X_PREFIX</makevar> ou <makevar>USE_IMAKE</makevar> &eacute;
+          definido, em qual caso ele ser&aacute; <makevar>X11BASE</makevar> (default
           <filename>/usr/X11R6</filename>).</para>
 
-        <para>Not hard-coding <filename>/usr/local</filename> or
-          <filename>/usr/X11R6</filename> anywhere in the source will make the
-          port much more flexible and able to cater to the needs of other
-          sites.  For X ports that use <command>imake</command>, this is
-          automatic; otherwise, this can often be done by simply replacing the
-          occurrences of <filename>/usr/local</filename> (or
-          <filename>/usr/X11R6</filename> for X ports that do not use imake)
-          in the various <filename>scripts/Makefile</filename>s in the port to read
-          <makevar>PREFIX</makevar>, as this variable is automatically passed
-          down to every stage of the build and install processes.</para>
+        <para>N&atilde;o hard-coding <filename>/usr/local</filename> ou
+          <filename>/usr/X11R6</filename> qualquer lugar no fonte far&aacute; o
+          port muito mais flexivel e capaz de atender as necessidades dos outros
+          locais.  Para ports do X que usam <command>imake</command>, isto &eacute;
+          autom&aacute;tico; caso contr&aacute;rio, isto pode frequentemente ser feito simplesmente
+          substituindo as ocorr&ecirc;ncias de <filename>/usr/local</filename> (ou
+          <filename>/usr/X11R6</filename> para ports do X que n&atilde;o usam imake)
+          nos v&aacute;rios <filename>scripts/Makefile</filename>s no port para ler
+          <makevar>PREFIX</makevar>, assim esta vari&aacute;vel &eacute; automaticamente passada
+          abaixo a todo est&aacute;gio do processo de constru&ccedil;&atilde;o e instala&ccedil;&atilde;o.</para>
 
-	<para>Make sure your application is not installing things in 
-	<filename>/usr/local</filename> instead of <makevar>PREFIX</makevar>.
-	A quick test for this is to do this is:</para>
+	<para>Certifique-se que sua aplica&ccedil;&atilde;o n&atilde;o est&aacute; instalando coisas em 
+	<filename>/usr/local</filename> ao inv&eacute;s de <makevar>PREFIX</makevar>.
+	Um teste r&aacute;pido para isto &eacute; fazer isto:</para>
 
 	<screen>&prompt.root; <userinput>make clean; make package PREFIX=/var/tmp/<replaceable>port-name</replaceable></userinput></screen>
 	
-	<para>If anything is installed outside of <makevar>PREFIX</makevar>, 
-	making the package creation process will complain that it
-	cannot find the files.</para>
+	<para>Se qualquer coisa for instalada fora do <makevar>PREFIX</makevar>, 
+	fazendo o processo da cria&ccedil;&atilde;o do pacote queixar&aacute; que ele
+	n&atilde;o pode encontrar os arquivos.</para>
 
 	<!-- XXX This paragraph is confusing and poorly indented. -->
-	<para>This does not test for the existence of internal references,
-	or correct use of <makevar>LOCALBASE</makevar> for references to
+	<para>Isto n&atilde;o testa a exist&ecirc;ncia de refer&ecirc;ncias internas,
+	ou corrige o uso de <makevar>LOCALBASE</makevar> a  refer&ecirc;ncias ao
 	files from other ports.  Testing the installation in
 	<filename>/var/tmp/<replaceable>port-name</replaceable></filename>
-	to do that while you have it installed would do that.</para>
+	para fazer que enquanto voc&ecirc; tenha-o instalado faria aquilo.</para>
 
-        <para>Do not set <makevar>USE_X_PREFIX</makevar> unless your port
-          truly requires it (i.e., it links against X libs or it needs to
-          reference files in <makevar>X11BASE</makevar>).</para>
+        <para>N&atilde;o defina <makevar>USE_X_PREFIX</makevar> ao menos que seu port
+          verdadeiramente necessite-o (ex., ele linka contra libs do X ou ele precisa
+          referenciar arquivos em <makevar>X11BASE</makevar>).</para>
 
-        <para>The variable <makevar>PREFIX</makevar> can be reassigned in your
-          <filename>Makefile</filename> or in the user's environment.
-          However, it is strongly discouraged for individual ports to set this
-          variable explicitly in the <filename>Makefile</filename>s.</para>
+        <para>A vari&aacute;vel <makevar>PREFIX</makevar> pode ser reassigned em seu
+          <filename>Makefile</filename> ou no ambiente do usu&aacute;rio.
+          Entretanto, ele &eacute; fortemente desencorajado a ports individuais para definir esta
+          vari&aacute;vel explicitamente no <filename>Makefile</filename>s.</para>
 
-        <para>Also, refer to programs/files from other ports with the
-          variables mentioned above, not explicit pathnames.  For instance, if
-          your port requires a macro <literal>PAGER</literal> to be the full
-          pathname of <command>less</command>, use the compiler flag:
+        <para>Tamb&eacute;m, refer aos programas/arquivos de outros ports com as
+          vari&aacute;veis mencionadas acima, n&atilde;o explicita pathnames.  Por exemplo, se
+          seu port necessita de um macro <literal>PAGER</literal> para ser o
+          pathname completo do <command>less</command>, use a flag do compilador:
 
           <programlisting>-DPAGER=\"&dollar;{PREFIX}/bin/less\"</programlisting>
 
-          or
+          ou
 
           <programlisting>-DPAGER=\"&dollar;{LOCALBASE}/bin/less\"</programlisting>
 
-          if this is an X port, instead of
-          <literal>-DPAGER=\"/usr/local/bin/less\"</literal>. This way it will
-          have a better chance of working if the system administrator has
-          moved the whole <filename>/usr/local</filename> tree somewhere else.</para>
+          se este &eacute; um port do X, ao inv&eacute;s de
+          <literal>-DPAGER=\"/usr/local/bin/less\"</literal>. Esta maneira ele
+          ter&aacute; um chance melhor de trabalho se o administrador do sistema
+          moveu toda a arvore <filename>/usr/local</filename> em algum lugar mais.</para>
       </sect1>
 
       <sect1 id="testing-freshports">
-	<title>FreshPorts sanity tests</title>
+	<title>Teste de sanidade do FreshPorts</title>
 
-	<para><ulink url="http://www.FreshPorts.org/">FreshPorts</ulink> has
-	  a sanity test feature which automatically tests each commit to the
-	  FreeBSD ports tree.  If subscribed to this service, you will be
-	  notified of any errors which FreshPorts detects during sanity
-	  testing of your commits.</para>
+	<para>O <ulink url="http://www.FreshPorts.org/">FreshPorts</ulink> tem
+	  uma caracterisca teste de sanidade qual automaticamente testa cada commit a
+	  arvore do ports do FreeBSD.  Se subscribed to este servi&ccedil;o, voc&ecirc; ser&aacute;
+	  notificado de quaisquer erros qual o FreshPorts detecta durante o teste de
+	  sanidade de seus commits.</para>
 
-	<para>If you wish to use this service, all you need is a FreshPorts
-	  account.  If your registered email address is
-	  <literal>@FreeBSD.org</literal>, you'll see the opt-in link on the
-          right hand side of the webpages.
-	  For those of you who already have a FreshPorts account, but are not
-	  using your <literal>@FreeBSD.org</literal> email address,
-	  just change your email to <literal>@FreeBSD.org</literal>, subscribe,
-          then change it back again.</para>
+	<para>Se voc&ecirc; desejar usar este servi&ccedil;o, tudo que voc&ecirc; necessita &eacute; uma
+	  conta do FreshPorts.  Se seu endere&ccedil;o de email registrado &eacute;
+	  <literal>@FreeBSD.org</literal>, voc&ecirc; ver&aacute; o link opt-in no
+          no lado da m&atilde;o direta das p&aacute;guina da web.
+	  Para aqueles como voc&ecirc; que j&aacute; tem uma conta do FreshPorts, mas n&atilde;o est&atilde;o
+	  usando seu endere&ccedil;o de email <literal>@FreeBSD.org</literal>,
+	  s&oacute; mude seu email para <literal>@FreeBSD.org</literal>, subscribe,
+          ent&atilde;o mude-o de volta novamente.</para>
       </sect1>
   </chapter>
 
     <chapter id="port-upgrading">
       <title>Upgrading</title>
 
-      <para>When you notice that a port is out of date compared to the latest
-        version from the original authors, first make sure you have the latest
-        port.  You can find them in the
-        <filename>ports/ports-current</filename> directory of the FTP mirror
-        sites.  You may also use <application>CVSup</application> to keep your whole ports collection
-        up-to-date, as described in the <ulink url="../handbook/synching.html#CVSUP-CONFIG">Handbook</ulink>.</para>
+      <para>Quando voc&ecirc; notice que um port est&aacute; fora da data comparado ao ultima
+        vers&atilde;o do autores originais, primeiro certifique-se que voc&ecirc; tenha o ultimo
+        port.  Voc&ecirc; pode encontr&aacute;-los no
+        diret&oacute;rio <filename>ports/ports-current</filename> dos sites espelhos do
+        FTP.  Voc&ecirc; pode tamb&eacute;m usar <application>CVSup</application>  manter sua cole&ccedil;&atilde;o inteira dos ports
+        up-to-date, como descrito no <ulink url="../handbook/synching.html#CVSUP-CONFIG">Handbook</ulink>.</para>
 
-      <para>The next step is to send an email to the maintainer, if one is
-        listed in the port's <filename>Makefile</filename>.  That person may
-        already be working on an upgrade, or have a reason to not upgrade the
-        port right now (because of, for example, stability problems of the new
-        version).</para>
+      <para>O pr&oacute;ximo passo &eacute; enviar um email aoe mantedor, se ele est&aacute;
+        listado no <filename>Makefile</filename> do port.  Essa pessoa pode
+        j&aacute; estar trabalhando em uma atualiza&ccedil;&atilde;o, ou ter uma raz&atilde;o para n&atilde;o upgrade o
+        port exato agora (por causa de, por exemplo, problemas de estabilidade da nova
+        vers&atilde;o).</para>
 
-      <para>If the maintainer asks you to do the upgrade or there is not any
-        such person to begin with, please make the upgrade and send the
-        recursive diff (either unified or context diff is fine, but port
-        committers appear to prefer unified diff more) of the new and old
-        ports directories to us (e.g., if your modified port directory is
-        called <filename>superedit</filename> and the original is in our tree
-        as <filename>superedit.bak</filename>, then send us the result of
-        <command>diff -ruN superedit.bak superedit</command>).  Please examine
-        the output to make sure all the changes make sense.  The best way to
-        send us the diff is by including it via &man.send-pr.1; (category
-        <literal>ports</literal>).  If you are the maintainer for the port,
-	be sure to put <literal>[maintainer update]</literal> at the beginning
-	of your synopsis line and/or set the <quote>Class</quote> of your PR
-	to <literal>maintainer-update</literal>.  Please mention any added or
-	deleted files in the message, as they have to be explicitly specified
-	to CVS when doing a commit.  If the diff is more than about 20KB,
-	please compress and uuencode it; otherwise, just include it in the PR
+      <para>Se o mantedor pedir que voc&ecirc; fa&ccedil;a o melhoramento ou n&atilde;o h&aacute; qualquer
+        such pessoa para come&ccedil;ar com, por favor fa&ccedil;a o upgrade e envie o
+        diff recursivo (either unified ou contexto diff &eacute; muito bom, mas o port
+        committers parecem preferir unified diff more) do novo e antigos
+        diret&oacute;rios ports a n&oacute;s (ex., se seu port modificado &eacute;
+        chamado <filename>superedit</filename> e o original est&aacute; em nossa arvore
+        como <filename>superedit.bak</filename>, ent&atilde;o envie-nos o resultado do
+        <command>diff -ruN superedit.bak superedit</command>).  Por favor examine
+        a sa&iacute;da para certificar-se que todas as mudan&ccedil;as fa&ccedil;a sentido.  A melhor maneira
+        para nos enviar o diff &eacute; incluindo ele atrav&eacute;s &man.send-pr.1; (categoria
+        <literal>ports</literal>).  Se voc&ecirc; for o mantedor para o port,
+	be sure para colocar <literal>[atualiza&ccedil;&atilde;o do mantedor]</literal> no come&ccedil;o
+	da sua linha de sinopse e/ou defina a <quote>Class</quote> de seu PR
+	ao <literal>maintainer-update</literal>.  Por favor mencione quaisquer arquivos 
+	adicionados ou apagados na mensagem, as eles temm que ser explicitamente espec&iacute;ficado
+	ao CVS quando fazendo um commit.  Se o diff &eacute; maior que 20KB,
+	por favor comprima e uuencode ele; caso controrio, s&oacute; inclua-o no PR
 	as is.</para>
 
       <important>
-	<para>If your upgrade is motivated by security concerns or a
-	  serious fault in the currently committed port, please notify
-	  the &a.portmgr; to request immediate rebuilding and
-	  redistribution of your port's package.  Unsuspecting users
-	  of &man.pkg.add.1; will otherwise continue to install the
-	  old version via <command>pkg_add -r</command> for several
-	  weeks.</para>
+	<para> Se seu upgrade &eacute; motivado por interesses da segun&ccedil;a ou uma
+	  falta s&eacute;ria no port committed atualmente, por favor notif&iacute;que
+	  o &a.portmgr; para pedir imediata reconstru&ccedil;&atilde;o e
+	  redistribui&ccedil;&atilde;o de seu pacote do port.  Usu&aacute;rios confiantes
+	  do &man.pkg.add.1; caso contr&aacute;rio continuar&aacute; instalar a
+	  vers&atilde;o antiga atrav&eacute;s do <command>pkg_add -r</command> por v&aacute;rias
+	  semanas.</para>
       </important>
 
       <note>
-        <para>Once again, please use &man.diff.1; and not &man.shar.1; to send
-          updates to existing ports!</para>
+        <para>Mais uma vez, por favor use &man.diff.1; e n&atilde;o &man.shar.1; para enviar
+          atualizac&otilde;es a ports existente!</para>
       </note>
     </chapter>
 
     <chapter id="porting-dads">
-      <title>Dos and Don'ts</title>
+      <title>Fazer e N&atilde;o Fazer</title>
 
-      <para>Here is a list of common dos and don'ts that you encounter during
-        the porting process.  You should check your own port against this list,
+      <para>Est&aacute; aqui uma lista de comuns fazer e n&atilde;o fazer que voc&ecirc; encontra durante
+        o processo de porting.  Voc&ecirc; deve verificar seu pr&oacute;prio port against esta lista,
         but you can also check ports in the PR database that others have
-        submitted.  Submit any comments on ports you check as described in
-        <ulink url="../../articles/contributing/contrib-how.html#CONTRIB-GENERAL">Bug Reports and General
-          Commentary</ulink>.  Checking ports in the PR database will both make
-        it faster for us to commit them, and prove that you know what you are
-        doing.</para>
+        submitted.  Envie quaisquer coment&aacute;rios no ports que voc&ecirc; verificou assim descrito no
+        <ulink url="../../articles/contributing/contrib-how.html#CONTRIB-GENERAL">Bug Reports e Coment&aacute;rio
+          Geral</ulink>.  Verificando ports na base de dados do PR database ambos far&atilde;o
+        it mais r&aacute;pido para n&oacute;s commit -los, e provar que voc&ecirc; sabe o que voc&ecirc; est&aacute;
+        fazendo.</para>
 
       <sect1 id="dads-strip">
-        <title>Stripping Binaries</title>
+        <title>Bin&aacute;rios Stripping</title>
 
-        <para>Do not strip binaries manually unless you have to.  All binaries
-          should be stripped, but the <maketarget>INSTALL_PROGRAM</maketarget>
-          macro will install and strip a binary at the same time (see the next
-          section).</para>
+        <para>N&atilde;o strip bin&aacute;rios manualmente ao menos que voc&ecirc; tenha.  Todos bin&aacute;rios
+          devem ser stripped, mas o macro <maketarget>INSTALL_PROGRAM</maketarget>
+          instalar&aacute; e strip um bin&aacute;rio ap mesmo tempo (veja a pr&oacute;xima
+          se&ccedil;&atilde;o).</para>
 
-        <para>If you need to strip a file, but do not wish to use the
-          <makevar>INSTALL_PROGRAM</makevar> macro,
-          <makevar>${STRIP_CMD}</makevar> will strip your program.  This is
-          typically done within the <literal>post-install</literal>
-          target.  For example:</para>
+        <para>Se voc&ecirc; necessitar strip um arquivo, mas n&atilde;o deseje usar o
+          macro <makevar>INSTALL_PROGRAM</makevar>,
+          <makevar>${STRIP_CMD}</makevar> will strip seu programa.  Isto &eacute;
+          feito tipicamente com o <literal>post-install</literal>
+          target.  Por exemplo:</para>
 
         <programlisting>post-install:
         ${STRIP_CMD} ${PREFIX}/bin/xdl</programlisting>
 
-        <para>Use the &man.file.1; command on the installed executable to
-          check whether the binary is stripped or not.  If it does not say
-          <literal>not stripped</literal>, it is stripped.  Additionally,
-          &man.strip.1; will not strip a previously stripped program; it
-          will instead exit cleanly.</para>
+        <para>Use o comando  &man.file.1; nos execut&aacute;veis instalados para
+          verificar se o bin&aacute;rio est&aacute; stripped ou n&atilde;o.  Se ele n&atilde;o diz
+          <literal>not stripped</literal>, ele est&aacute; stripped.  Adicionalmente,
+          &man.strip.1; will not strip um programa anteoriormente previously stripped; ele
+          ao inv&eacute;s sair&aacute; claramnete.</para>
       </sect1>
 
       <sect1 id="dads-install">
         <title>INSTALL_* macros</title>
 
-        <para>Do use the macros provided in <filename>bsd.port.mk</filename>
-          to ensure correct modes and ownership of files in your own
+        <para>Use os macros fornecidos em <filename>bsd.port.mk</filename>
+          para assegurar modos corretos e ownership dos arquivos em seu pr&oacute;prio
           <maketarget>*-install</maketarget> targets.</para>
 
         <itemizedlist>
           <listitem>
-            <para><makevar>INSTALL_PROGRAM</makevar> is a command to install
-              binary executables.</para>
+            <para><makevar>INSTALL_PROGRAM</makevar> &eacute; um comando para instalar
+              execut&aacute;veis bin&aacute;rios.</para>
           </listitem>
 
           <listitem>
-            <para><makevar>INSTALL_SCRIPT</makevar> is a command to install
-              executable scripts.</para>
+            <para><makevar>INSTALL_SCRIPT</makevar> &eacute; um comando para instalar
+              scripts execut&aacute;veis.</para>
           </listitem>
 
           <listitem>
-            <para><makevar>INSTALL_DATA</makevar> is a command to install
-              sharable data.</para>
+            <para><makevar>INSTALL_DATA</makevar> &eacute; um comando para instalar
+              dados compartilhaveis.</para>
           </listitem>
 
           <listitem>
-            <para><makevar>INSTALL_MAN</makevar> is a command to install
-              manpages and other documentation (it does not compress
-              anything).</para>
+            <para><makevar>INSTALL_MAN</makevar> &eacute; um comando para instalar
+              manpages e outras documenta&ccedil;&otilde;es (ele n&atilde;o comprime
+              qualquer coisa).</para>
           </listitem>
         </itemizedlist>
 
-        <para>These are basically the <command>install</command> command with
-          all the appropriate flags.  See below for an example on how to use
-          them.</para>
+        <para>Estes s&atilde;o basicamente o comando <command>install</command> com
+          todos flags apropriadas.  Veja abaixo para um exemplo em como
+          us&aacute;-los.</para>
       </sect1>
 
       <sect1 id="porting-wrkdir">
         <title><makevar>WRKDIR</makevar></title>
 
-        <para>Do not write anything to files outside
-          <makevar>WRKDIR</makevar>.  <makevar>WRKDIR</makevar> is the only
-          place that is guaranteed to be writable during the port build (see
+        <para>N&atilde;o escreva qualquer coisa aos arquivos do lado de fora do
+          <makevar>WRKDIR</makevar>.  <makevar>WRKDIR</makevar> &eacute; o &uacute;nico
+         lugar que &eacute; garantido para ser grav&aacute;vel durante a constru&ccedil;&atilde;o do port (veja
           <ulink url="../handbook/ports-using.html#PORTS-CD">
-          compiling ports from CDROM</ulink> for an
-          example of building ports from a read-only tree).  If you need to
-          modify one of the <filename>pkg-<replaceable>*</replaceable></filename>
-          files, do so by <link
-          linkend="porting-pkgfiles">redefining a variable</link>, not by
-          writing over it.</para>
+          compilando ports do CDROM</ulink> para um
+          exemplo de constru&ccedil;&atilde;o de ports de uma arvore somente-leitura).  Se voc&ecirc; necessitar
+          modificar um dos arquivos <filename>pkg-<replaceable>*</replaceable></filename>,
+           fa&ccedil;a assim <link
+          linkend="porting-pkgfiles">redefinindo a vari&aacute;vel</link>, n&atilde;o
+          escrevendo sobre ele.</para>
       </sect1>
 
       <sect1 id="porting-wrkdirprefix">
         <title><makevar>WRKDIRPREFIX</makevar></title>
 
-        <para>Make sure your port honors <makevar>WRKDIRPREFIX</makevar>.
-          Most ports do not have to worry about this.  In particular, if you
-          are referring to a <makevar>WRKDIR</makevar> of another port, note
-          that the correct location is
-          <filename><makevar>WRKDIRPREFIX</makevar><makevar>PORTSDIR</makevar>/<replaceable>subdir</replaceable>/<replaceable>name</replaceable>/work</filename> not <filename><makevar>PORTSDIR</makevar>/<replaceable>subdir</replaceable>/<replaceable>name</replaceable>/work</filename> or <filename><makevar>.CURDIR</makevar>/../../<replaceable>subdir</replaceable>/<replaceable>name</replaceable>/work</filename> or some such.</para>
+        <para>Certifique-se que seu port honors <makevar>WRKDIRPREFIX</makevar>.
+          A maioria dos ports n&atilde;o t&ecirc;m que preocupar-se sobre isto.  Em particular, se voc&ecirc;
+          est&aacute; referindo a um <makevar>WRKDIR</makevar> de um outro port, note
+          que a posi&ccedil;&atilde;o correta &eacute;
+          <filename><makevar>WRKDIRPREFIX</makevar><makevar>PORTSDIR</makevar>/<replaceable>subdir</replaceable>/<replaceable>name</replaceable>/work</filename> not <filename><makevar>PORTSDIR</makevar>/<replaceable>subdir</replaceable>/<replaceable>name</replaceable>/work</filename> ou <filename><makevar>.CURDIR</makevar>/../../<replaceable>subdir</replaceable>/<replaceable>name</replaceable>/work</filename> or some such.</para>
 
-        <para>Also, if you are defining <makevar>WRKDIR</makevar> yourself,
-          make sure you prepend
+        <para>Tamb&eacute;m, se voc&ecirc; est&aacute; definindo <makevar>WRKDIR</makevar> voc&ecirc; mesmo,
+          certifique-se que voc&ecirc; prepend
           <literal>&dollar;{WRKDIRPREFIX}&dollar;{.CURDIR}</literal> in the
           front.</para>
       </sect1>
 
       <sect1 id="porting-versions">
-        <title>Differentiating operating systems and OS versions</title>
+        <title>Diferenciando sistemas operacionais e vers&otilde;es de OS/title>
 
-        <para>You may come across code that needs modifications or conditional
-          compilation based upon what version of Unix it is running under.  If
-          you need to make such changes to the code for conditional
-          compilation, make sure you make the changes as general as possible
-          so that we can back-port code to FreeBSD 1.x systems and cross-port
-          to other BSD systems such as 4.4BSD from CSRG, BSD/386, 386BSD,
-          NetBSD, and OpenBSD.</para>
+        <para>Voc&ecirc; pode vir atrav&eacute;s do c&oacute;digo que necessita as modifica&ccedil;&otilde;es ou a compila&ccedil;&atilde;o
+          condicional baseadas em que vers&atilde;o do Unix est&aacute; executando sobre.  Se
+           voc&ecirc; necessitar fazer tais mudan&ccedil;as ao c&oacute;digo para a compila&ccedil;&atilde;o
+          condicional, certifique-se que voc&ecirc; fez as mudan&ccedil;as tanto geral quanto poss&iacute;vel
+          assim que n&oacute;s podemos back-port code aos sistemas FreeBSD 1.x e cross-port
+          a outros sistemas BSD como 4.4BSD de CSRG, BSD/386, 386BSD,
+          NetBSD, e OpenBSD.</para>
 
-        <para>The preferred way to tell 4.3BSD/Reno (1990) and newer versions
-          of the BSD code apart is by using the <literal>BSD</literal> macro
-          defined in <filename>&lt;sys/param.h&gt;</filename>.  Hopefully that
-          file is already included; if not, add the code:</para>
+        <para>A maneira preferida para dizer 4.3BSD/Reno (1990) e novas vers&otilde;es
+          do c&oacute;digo BSD code apart &eacute; usando o <literal>BSD</literal> macro
+          definido no <filename>&lt;sys/param.h&gt;</filename>.  Hopefully that
+          arquivo est&aacute; j&aacute; incluido; se n&atilde;o, adicione o c&oacute;digo:</para>
 
         <programlisting>#if (defined(__unix__) || defined(unix)) &amp;&amp; !defined(USG)
 #include &lt;sys/param.h&gt;
 #endif</programlisting>
 
-        <para>to the proper place in the <filename>.c</filename> file.  We
-          believe that every system that defines these two symbols has
-          <filename>sys/param.h</filename>.  If you find a system that
-          does not, we would like to know.  Please send mail to the
+        <para>ao lugar apropriado no arquivo <filename>.c</filename>.  N&oacute;s
+          acreditamos que cada sistema que define estes dois s&iacute;mbolos tem
+          <filename>sys/param.h</filename>.  Se voc&ecirc; encontrasse um sistema que
+          n&atilde;o, n&oacute;s gostar&iacute;amos de saber.  Por favor envie o mail ao
           &a.ports;.</para>
 
-        <para>Another way is to use the GNU Autoconf style of doing
-          this:</para>
+        <para>Uma outra maneira &eacute; usar o estilo GNU Autoconf de fazer
+          isto:</para>
 
         <programlisting>#ifdef HAVE_SYS_PARAM_H
 #include &lt;sys/param.h&gt;
 #endif</programlisting>
 
-        <para>Do not forget to add <literal>-DHAVE_SYS_PARAM_H</literal> to the
-          <makevar>CFLAGS</makevar> in the <filename>Makefile</filename> for
-          this method.</para>
+        <para>N&atilde;o se esque&ccedil;a de adicionar <literal>-DHAVE_SYS_PARAM_H</literal> ao
+          <makevar>CFLAGS</makevar> no <filename>Makefile</filename> para
+          este m&eacute;todo.</para>
 
-        <para>Once you have <filename>sys/param.h</filename> included, you may
-          use:</para>
+        <para>Uma vez que voc&ecirc; tenha <filename>sys/param.h</filename> inclu&iacute;do, voc&ecirc; pode
+          usar:</para>
 
         <programlisting>#if (defined(BSD) &amp;&amp; (BSD &gt;= 199103))</programlisting>
 
-        <para>to detect if the code is being compiled on a 4.3 Net2 code base
-          or newer (e.g. FreeBSD 1.x, 4.3/Reno, NetBSD 0.9, 386BSD, BSD/386
-          1.1 and below).</para>
+        <para>para detectar se o c&oacute;digo &eacute; being compilado em um c&oacute;digo base do  4.3 Net2
+          ou mais novo (ex. FreeBSD 1.x, 4.3/Reno, NetBSD 0.9, 386BSD, BSD/386
+          1.1 e acima).</para>
 
         <para>Use:</para>
 
         <programlisting>#if (defined(BSD) &amp;&amp; (BSD &gt;= 199306))</programlisting>
 
-        <para>to detect if the code is being compiled on a 4.4 code base or
-          newer (e.g. FreeBSD 2.x, 4.4, NetBSD 1.0, BSD/386 2.0 or
-          above).</para>
+        <para>para detectar se o c&oacute;digo est&aacute; sendo compilado em um c&oacute;digo base do 4.4 ou
+          mais novo (ex. FreeBSD 2.x, 4.4, NetBSD 1.0, BSD/386 2.0 ou
+          acima).</para>
 
-        <para>The value of the <literal>BSD</literal> macro is
-          <literal>199506</literal> for the 4.4BSD-Lite2 code base.  This is
-          stated for informational purposes only.  It should not be used to
-          distinguish between versions of FreeBSD based only on 4.4-Lite vs.
-          versions that have merged in changes from 4.4-Lite2.  The
-          <literal>__FreeBSD__</literal> macro should be used instead.</para>
+        <para>O valor  do macro <literal>BSD</literal> &eacute;
+          <literal>199506</literal> para c&oacute;digo base do 4.4BSD-Lite2.  Isto &eacute;
+          indicado para prop&oacute;sitos informacionais somente.  Ele n&atilde;o deve ser usado para
+          distingui&ccedil;&atilde;o entre vers&otilde;es do FreeBSD baseado somente no 4.4-Lite vs.
+          vers&otilde;es que tenham unido-se em mudan&ccedil;as do 4.4-Lite2.  O
+          macro do <literal>__FreeBSD__</literal> deve ser usado ao inv&eacute;s.</para>
 
         <para>Use sparingly:</para>
 
         <itemizedlist>
           <listitem>
-            <para><literal>__FreeBSD__</literal> is defined in all versions of
-              FreeBSD.  Use it if the change you are making
-              <emphasis>only</emphasis> affects FreeBSD.  Porting gotchas like
-              the use of <literal>sys_errlist[]</literal> vs
-              <function>strerror()</function> are Berkeley-isms, not FreeBSD
-              changes.</para>
+            <para><literal>__FreeBSD__</literal> &eacute; definido em todas vers&otilde;es do
+              FreeBSD.  Use-o se a mudan&ccedil;a que voc&ecirc; est&aacute; fazendo 
+              <emphasis>somente</emphasis> afetar&aacute; o FreeBSD.  Porting gotchas como
+              o use de <literal>sys_errlist[]</literal> vs
+              <function>strerror()</function> s&atilde;o Berkeley-isms, n&atilde;o mudan&ccedil;as do
+              FreeBSD.</para>
           </listitem>
 
           <listitem>
-            <para>In FreeBSD 2.x, <literal>__FreeBSD__</literal> is defined to
-              be <literal>2</literal>.  In earlier versions, it is
-              <literal>1</literal>.  Later versions will bump it to match
-              their major version number.</para>
+            <para>No FreeBSD 2.x, <literal>__FreeBSD__</literal> &eacute; definido
+              ser <literal>2</literal>.  Em mais novas vers&otilde;es, ele &eacute;
+              <literal>1</literal>.  Ultaimas vers&otilde;es will bump it to match
+              seu numero de vers&atilde;o principal.</para>
           </listitem>
 
           <listitem>
-            <para>If you need to tell the difference between a FreeBSD 1.x
-              system and a FreeBSD 2.x or 3.x system, usually the right answer
-              is to use the <literal>BSD</literal> macros described above.  If
-              there actually is a FreeBSD specific change (such as special
-              shared library options when using <command>ld</command>) then it
-              is OK to use <literal>__FreeBSD__</literal> and <literal>#if
-                __FreeBSD__ &gt; 1</literal> to detect a FreeBSD 2.x and later
-              system.  If you need more granularity in detecting FreeBSD
-              systems since 2.0-RELEASE you can use the following:</para>
+            <para>Se voc&ecirc; necessita dizer as diferen&ccedil;as entre um sistema
+              FreeBSD 1.x e um sistema FreeBSD 2.x ou 3.x, usually a resposta certa
+              &eacute; para usar os macros <literal>BSD</literal> descrito acima.  Se
+              h&aacute; atualmente uma mudan&ccedil;a espec&iacute;fica de FreeBSD (tal como op&ccedil;&otilde;es
+              especiais da biblioteca compartilhada ao usar <command>ld</command>) ent&atilde;o
+              est&aacute; OK para usar <literal>__FreeBSD__</literal> e <literal>#if
+                __FreeBSD__ &gt; 1</literal>  para detectar um FreeBSD 2.x e sistemas
+              posteriores.  Se voc&ecirc; necessitar mais granularidade em detectar sistemas do
+              FreeBSD desde 2.0-RELEASE voc&ecirc; pode usar o seguinte:</para>
 
             <programlisting>#if __FreeBSD__ &gt;= 2
 #include &lt;osreldate.h&gt;
@@ -4635,14 +4635,14 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 	  </listitem>
 	</itemizedlist>
 
-        <para>In the hundreds of ports that have been done, there have only
-          been one or two cases where <literal>__FreeBSD__</literal> should
-          have been used.  Just because an earlier port screwed up and used it
-          in the wrong place does not mean you should do so too.</para>
+        <para>Nas centenas de ports que feitos, houve somente
+          um ou dois casos onde <literal>__FreeBSD__</literal> devia
+          ser usado.  S&oacute; porque um port anterior screwed up e usou-o
+          no lugar errado n&atilde;o significa que voc&ecirc; deve fazer assim tamb&eacute;m.</para>
       </sect1>
 
       <sect1 id="freebsd-versions">
-        <title>__FreeBSD_version values</title>
+        <title>Valores de __FreeBSD_version</title>
 
 		<informaltable frame="none">
 		<tgroup cols="2">
@@ -4670,7 +4670,7 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>2.2-CURRENT before 2.1</entry>
+		    <entry>2.2-CURRENT antes do 2.1</entry>
 		    <entry>199508</entry>
 		  </row>
 
@@ -4680,7 +4680,7 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>2.2-CURRENT before 2.1.5</entry>
+		    <entry>2.2-CURRENT antes do 2.1.5</entry>
 		    <entry>199512</entry>
 		  </row>
 
@@ -4690,7 +4690,7 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>2.2-CURRENT before 2.1.6</entry>
+		    <entry>2.2-CURRENT antes do 2.1.6</entry>
 		    <entry>199608</entry>
 		  </row>
 
@@ -4711,21 +4711,21 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 
 		  <row>
 		    <entry>2.2.1-RELEASE</entry>
-		    <entry>220000 (no change)</entry>
+		    <entry>220000 (nehuma mudan&ccedil;a)</entry>
 		  </row>
 
 		  <row>
 		    <entry>2.2-STABLE after 2.2.1-RELEASE</entry>
-		    <entry>220000 (no change)</entry>
+		    <entry>220000 (nehuma mudan&ccedil;a)</entry>
 		  </row>
 
 		  <row>
-		    <entry>2.2-STABLE after texinfo-3.9</entry>
+		    <entry>2.2-STABLE depois do texinfo-3.9</entry>
 		    <entry>221001</entry>
 		  </row>
 
 		  <row>
-		    <entry>2.2-STABLE after top</entry>
+		    <entry>2.2-STABLE depois do top</entry>
 		    <entry>221002</entry>
 		  </row>
 
@@ -4735,7 +4735,7 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>2.2-STABLE after 2.2.2-RELEASE</entry>
+		    <entry>2.2-STABLE depois do 2.2.2-RELEASE</entry>
 		    <entry>222001</entry>
 		  </row>
 
@@ -4745,12 +4745,12 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>2.2-STABLE after 2.2.5-RELEASE</entry>
+		    <entry>2.2-STABLE depois do 2.2.5-RELEASE</entry>
 		    <entry>225001</entry>
 		  </row>
 
 		  <row>
-		    <entry>2.2-STABLE after ldconfig -R merge</entry>
+		    <entry>2.2-STABLE depois do ldconfig -R merge</entry>
 		    <entry>225002</entry>
 		  </row>
 
@@ -4765,12 +4765,12 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>2.2-STABLE after 2.2.7-RELEASE</entry>
+		    <entry>2.2-STABLE depois do 2.2.7-RELEASE</entry>
 		    <entry>227001</entry>
 		  </row>
 
 		  <row>
-		    <entry>2.2-STABLE after &man.semctl.2; change</entry>
+		    <entry>2.2-STABLE depois do &man.semctl.2; change</entry>
 		    <entry>227002</entry>
 		  </row>
 
@@ -4780,32 +4780,32 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>2.2-STABLE after 2.2.8-RELEASE</entry>
+		    <entry>2.2-STABLE depois do 2.2.8-RELEASE</entry>
 		    <entry>228001</entry>
 		  </row>
 
 		  <row>
-		    <entry>3.0-CURRENT before &man.mount.2; change</entry>
+		    <entry>3.0-CURRENT antes da mudan&ccedil;a do &man.mount.2;</entry>
 		    <entry>300000</entry>
 		  </row>
 
 		  <row>
-		    <entry>3.0-CURRENT after &man.mount.2; change</entry>
+		    <entry>3.0-CURRENT depois da mudan&ccedil;a do &man.mount.2;</entry>
 		    <entry>300001</entry>
 		  </row>
 
 		  <row>
-		    <entry>3.0-CURRENT after &man.semctl.2; change</entry>
+		    <entry>3.0-CURRENT depois da mudan&ccedil;a do &man.semctl.2;</entry>
 		    <entry>300002</entry>
 		  </row>
 
 		  <row>
-		    <entry>3.0-CURRENT after ioctl arg changes</entry>
+		    <entry>3.0-CURRENT depois da mudan&ccedil;a do arg do ioctl</entry>
 		    <entry>300003</entry>
 		  </row>
 
 		  <row>
-		    <entry>3.0-CURRENT after ELF conversion</entry>
+		    <entry>3.0-CURRENT depois da convers&atilde;o ELF</entry>
 		    <entry>300004</entry>
 		  </row>
 
@@ -4815,12 +4815,12 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>3.0-CURRENT after 3.0-RELEASE</entry>
+		    <entry>3.0-CURRENT depois do 3.0-RELEASE</entry>
 		    <entry>300006</entry>
 		  </row>
 
 		  <row>
-		    <entry>3.0-STABLE after 3/4 branch</entry>
+		    <entry>3.0-STABLE depois do 3/4 branch</entry>
 		    <entry>300007</entry>
 		  </row>
 
@@ -4830,13 +4830,13 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>3.1-STABLE after 3.1-RELEASE</entry>
+		    <entry>3.1-STABLE depois do 3.1-RELEASE</entry>
 		    <entry>310001</entry>
 		  </row>
 
 		  <row>
-		    <entry>3.1-STABLE after C++ constructor/destructor order
-		      change</entry>
+		    <entry>3.1-STABLE depois da mudan&ccedil;a da ordem do C++
+		      constructor/destructor</entry>
 		    <entry>310002</entry>
 		  </row>
 
@@ -4851,8 +4851,8 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>3.2-STABLE after binary-incompatible IPFW and
-		      socket changes</entry>
+		    <entry>3.2-STABLE depois das mudan&ccedil;as de incompatibilidade-bin&aacute;ria do
+		      IPFW e socket</entry>
 		    <entry>320002</entry>
 		  </row>
 
@@ -4867,8 +4867,8 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>3.3-STABLE after adding &man.mkstemp.3;
-		      to libc</entry>
+		    <entry>3.3-STABLE depois de adicionar &man.mkstemp.3;
+		      a libc</entry>
 		    <entry>330002</entry>
 		  </row>
 
@@ -4893,24 +4893,24 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after 3.4 branch</entry>
+		    <entry>4.0-CURRENT depois 3.4 branch</entry>
 		    <entry>400000</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after change in dynamic linker
-		      handling</entry>
+		    <entry>4.0-CURRENT depois da mun&ccedil;a no manuseamenteo do linker
+		      din&acirc;mico</entry>
 		    <entry>400001</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after C++ constructor/destructor
-		      order change</entry>
+		    <entry>4.0-CURRENT depois das mudan&ccedil;as da ordem do C++
+		      constructor/destructor</entry>
 		    <entry>400002</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after functioning &man.dladdr.3;</entry>
+		    <entry>4.0-CURRENT depois do funcionamento do &man.dladdr.3;</entry>
 		    <entry>400003</entry>
 		  </row>
 
@@ -4923,73 +4923,73 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after &man.suser.9; API change
-		      (also 4.0-CURRENT after newbus)</entry>
+		    <entry>4.0-CURRENT depois da mudan&ccedil;a do API do &man.suser.9;
+		      (tamb&eacute;m 4.0-CURRENT ap&oacute;s newbus)</entry>
 		    <entry>400005</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after cdevsw registration change</entry>
+		    <entry>4.0-CURRENT depois da mudan&ccedil;a da registra&ccedil;&atilde;o do cdevsw</entry>
 		    <entry>400006</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after the addition of so_cred for
-		      socket level credentials</entry>
+		    <entry>4.0-CURRENT depois da adi&ccedil;&atilde;o do so_cred a
+		      credenciais do n&iacute;vel do socket</entry>
 		    <entry>400007</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after the addition of a poll syscall
+		    <entry>4.0-CURRENT depois da adi&ccedil;&atilde;o de um poll syscall
 		      wrapper to libc_r</entry>
 		    <entry>400008</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after the change of the kernel's
-		      <literal>dev_t</literal> type to <literal>struct
-		      specinfo</literal> pointer</entry>
+		    <entry>4.0-CURRENT depois das mudan&ccedil;a do tipo
+		      <literal>dev_t</literal> do kernel ao ponteiro
+		      <literal>struct specinfo</literal></entry>
 		    <entry>400009</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after fixing a hole
-		      in &man.jail.2;</entry>
+		    <entry>4.0-CURRENT depois do conserto  de um furo
+		      no &man.jail.2;</entry>
 		    <entry>400010</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after the <literal>sigset_t</literal>
-		      datatype change</entry>
+		    <entry>4.0-CURRENT depois da mudan&ccedil;a do tipo de dado
+		      <literal>sigset_t</literal></entry>
 		    <entry>400011</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after the cutover to the GCC 2.95.2
-		      compiler</entry>
+		    <entry>4.0-CURRENT depois do cutover ao compilador
+		      GCC 2.95.2</entry>
 		    <entry>400012</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after adding pluggable linux-mode
+		    <entry>4.0-CURRENT depois de adicionar pluggable linux-mode
 		      ioctl handlers</entry>
 		    <entry>400013</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after importing OpenSSL</entry>
+		    <entry>4.0-CURRENT depois de importar o OpenSSL</entry>
 		    <entry>400014</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after the C++ ABI change in GCC 2.95.2
-		      from -fvtable-thunks to -fno-vtable-thunks by
-		      default</entry>
+		    <entry>4.0-CURRENT depois da mudan&ccedil;a do C++ ABI no GCC 2.95.2
+		      de -fvtable-thunks a -fno-vtable-thunks por
+		      padr&atilde;o</entry>
 		    <entry>400015</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-CURRENT after importing OpenSSH</entry>
+		    <entry>4.0-CURRENT depois de importar do OpenSSH</entry>
 		    <entry>400016</entry>
 		  </row>
 
@@ -4999,25 +4999,25 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>4.0-STABLE after 4.0-RELEASE</entry>
+		    <entry>4.0-STABLE depois do 4.0-RELEASE</entry>
 		    <entry>400018</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-STABLE after the introduction of delayed
-		      checksums.</entry>
+		    <entry>4.0-STABLE depois da introdu&ccedil;&atilde;o do checksums
+		      atrasado.</entry>
 		    <entry>400019</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-STABLE after merging libxpg4 code into
+		    <entry>4.0-STABLE depois da unir o c&oacute;digo libxpg4 dentro da
 		      libc.</entry>
 		    <entry>400020</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.0-STABLE after upgrading Binutils to 2.10.0, ELF
-		      branding changes, and tcsh in the base system.</entry>
+		    <entry>4.0-STABLE depois de upgrading Binutils a 2.10.0, mudan&ccedil;as do
+		      ELF branding, e tcsh na base do sistema.</entry>
 		    <entry>400021</entry>
 		  </row>
 
@@ -5027,13 +5027,13 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>4.1-STABLE after 4.1-RELEASE</entry>
+		    <entry>4.1-STABLE depois do 4.1-RELEASE</entry>
 		    <entry>410001</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.1-STABLE after &man.setproctitle.3; moved from
-		      libutil to libc.</entry>
+		    <entry>4.1-STABLE depois de movido o &man.setproctitle.3; de
+		      libutil a libc.</entry>
 		    <entry>410002</entry>
 		  </row>
 
@@ -5043,7 +5043,7 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>4.1.1-STABLE after 4.1.1-RELEASE</entry>
+		    <entry>4.1.1-STABLE depois do 4.1.1-RELEASE</entry>
 		    <entry>411001</entry>
 		  </row>
 
@@ -5053,8 +5053,8 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>4.2-STABLE after combining libgcc.a and
-		      libgcc_r.a, and associated GCC linkage changes.</entry>
+		    <entry>4.2-STABLE depois das mudan&ccedil;as de  combinar libgcc.a e
+		      libgcc_r.a, e associado GCC linkage.</entry>
 		    <entry>420001</entry>
 		  </row>
 
@@ -5064,12 +5064,12 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>4.3-STABLE after wint_t introduction.</entry>
+		    <entry>4.3-STABLE depois da introdu&ccedil;&atilde;o do wint_t.</entry>
 		    <entry>430001</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.3-STABLE after PCI powerstate API merge.</entry>
+		    <entry>4.3-STABLE depois da unir API powerstate do  PCI.</entry>
 		    <entry>430002</entry>
 		  </row>
 
@@ -5079,19 +5079,19 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>4.4-STABLE after d_thread_t introduction.</entry>
+		    <entry>4.4-STABLE depois da introdu&ccedil;&atilde;o do d_thread_t.</entry>
 		    <entry>440001</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.4-STABLE after mount structure changes (affects
-		      filesystem klds).</entry>
+		    <entry>4.4-STABLE depois das mudan&ccedil;as da estrutura do mount (afeta
+		      klds do sistemas de arquivo).</entry>
 		    <entry>440002</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.4-STABLE after the userland components of smbfs
-		      were imported.</entry>
+		    <entry>4.4-STABLE depois que componetes a nivel de usu&aacute;rio do smbfs
+		      foram importados.</entry>
 		    <entry>440003</entry>
 		  </row>
 
@@ -5101,27 +5101,27 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
 		  </row>
 
 		  <row>
-		    <entry>4.5-STABLE after the usb structure element rename.</entry>
+		    <entry>4.5-STABLE depois do renome do elementos da estrutura do usb.</entry>
 		    <entry>450001</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.5-STABLE after the
+		    <entry>4.5-STABLE depois da vari&aacute;vel
 		      <literal>sendmail_enable</literal> &man.rc.conf.5;
-		      variable was made to take the value
+		      foi feita pegar o valor
 		      <literal>NONE</literal>.</entry>
 		    <entry>450004</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.5-STABLE after moving to XFree86 4 by default
-		      for package builds.</entry>
+		    <entry>4.5-STABLE depois de mover o XFree86 4 por padr&atilde;o
+		      para pacotes construidos.</entry>
 		    <entry>450005</entry>
 		  </row>
 
 		  <row>
-		    <entry>4.5-STABLE after accept filtering was fixed so
-		      that is no longer susceptible to an easy DoS.</entry>
+		    <entry>4.5-STABLE depois de accept filtering foi consertado assim
+		      que n&atilde;o &eacute; mais sucet&iacute;vel a um f&aacute;cil DoS.</entry>
 		    <entry>450006</entry>
 		  </row>
 
@@ -5647,103 +5647,103 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
             </informaltable>
 
         <note>
-          <para>Note that 2.2-STABLE sometimes identifies itself as
-            <quote>2.2.5-STABLE</quote> after the 2.2.5-RELEASE.  The pattern
-            used to be year followed by the month, but we decided to change it
-            to a more straightforward major/minor system starting from 2.2.
-            This is because the parallel development on several branches made
-            it infeasible to classify the releases simply by their real
-            release dates.  If you are making a port now, you do not have to
-            worry about old -CURRENTs; they are listed here just for your
-            reference.</para>
+          <para>Note que 2.2-STABLE sometimes se identifica  como
+            <quote>2.2.5-STABLE</quote> ap&oacute;s o 2.2.5-RELEASE.  The pattern
+            used para ser anos seguido pelo m&ecirc;s, mas n&oacute;s decidimos mud&aacute;-lo
+            para um mais sistema maior/menor direto iniciando do 2.2.
+             Isto &eacute; porque o desenvolvimento paralelo em diversas branches made
+            it infeasible para classificar as releases simplesmente pelas suas datas
+            reais de release.  Se voc&ecirc; est&aacute; fazendo um port agora, voc&ecirc; n&atilde;o tem que
+            se precocupar sobre old -CURRENTs; eles s&atilde;o listados aqui somente para sua
+            refer&ecirc;ncia.</para>
         </note>
       </sect1>
 
       <sect1 id="dads-after-port-mk">
-        <title>Writing something after
+        <title>Escrevendo algo ap&oacute;s
           <filename>bsd.port.mk</filename></title>
 
-        <para>Do not write anything after the <literal>.include
-            &lt;bsd.port.mk&gt;</literal> line.  It usually can be avoided by
-          including <filename>bsd.port.pre.mk</filename> somewhere in the
-          middle of your <filename>Makefile</filename> and
-          <filename>bsd.port.post.mk</filename> at the end.</para>
+        <para>N&atilde;o escreva qualquer coisa ap&oacute;s a linha do <literal>.include
+            &lt;bsd.port.mk&gt;</literal>.  Geralmente pode ser evitada
+          incluindo <filename>bsd.port.pre.mk</filename>  em algum lugar no
+          meio de seu <filename>Makefile</filename> e
+          <filename>bsd.port.post.mk</filename> no fim.</para>
 
         <note>
-          <para>You need to include either the
-            <filename>bsd.port.pre.mk</filename>/<filename>bsd.port.post.mk</filename> pair or
-            <filename>bsd.port.mk</filename> only; do not mix these two usages.</para>
+          <para> Voc&ecirc; necessita incluir ambos os par
+            <filename>bsd.port.pre.mk</filename>/<filename>bsd.port.post.mk</filename> ou
+            somente <filename>bsd.port.mk</filename>; n&atilde;o misture este dois usos.</para>
         </note>
 
-        <para><filename>bsd.port.pre.mk</filename> only defines a few
-          variables, which can be used in tests in the
+        <para>O <filename>bsd.port.pre.mk</filename> define somente algumas
+          vari&aacute;veis, que podem ser usadas em testes no
           <filename>Makefile</filename>, <filename>bsd.port.post.mk</filename>
-          defines the rest.</para>
+           define o descanso.</para>
 
-        <para>Here are some important variables defined in
-          <filename>bsd.port.pre.mk</filename> (this is not the complete list,
-          please read <filename>bsd.port.mk</filename> for the complete
-          list).</para>
+        <para>Aqui est&atilde;o algumas vari&aacute;veis importantes definidas no
+          <filename>bsd.port.pre.mk</filename> (esta n&atilde;o &eacute; a lista completa,
+          por favor leia <filename>bsd.port.mk</filename> para a lista
+          completa).</para>
 
         <informaltable frame="none">
           <tgroup cols="2">
             <thead>
               <row>
-                <entry>Variable</entry>
-                <entry>Description</entry>
+                <entry>Vari&aacute;vel</entry>
+                <entry>Descri&ccedil;&atilde;o</entry>
               </row>
             </thead>
 
             <tbody>
               <row>
                 <entry><makevar>ARCH</makevar></entry>
-                <entry>The architecture as returned by <command>uname
-                    -m</command> (e.g., <literal>i386</literal>)</entry>
+                <entry>A arquitetura como retornada pelo <command>uname
+                    -m</command> (ex., <literal>i386</literal>)</entry>
               </row>
 
               <row>
                 <entry><makevar>OPSYS</makevar></entry>
-                <entry>The operating system type, as returned by
-                  <command>uname -s</command> (e.g.,
+                <entry>O tipo de sistema operacional, assim retornado pelo
+                  <command>uname -s</command> (ex.,
                   <literal>FreeBSD</literal>)</entry>
               </row>
 
               <row>
                 <entry><makevar>OSREL</makevar></entry>
-                <entry>The release version of the operating system (e.g.,
-                  <literal>2.1.5</literal> or
+                <entry>A vers&atilde;o do release do sistema operacional (ex.,
+                  <literal>2.1.5</literal> ou
                   <literal>2.2.7</literal>)</entry>
               </row>
 
               <row>
                 <entry><makevar>OSVERSION</makevar></entry>
-                <entry>The numeric version of the operating system, same as
+                <entry>A vers&atilde;o num&eacute;rica do sistema operacional, o mesmo que
                   <link
                     linkend="freebsd-versions"><literal>__FreeBSD_version</literal></link>.</entry>
               </row>
 
               <row>
                 <entry><makevar>PORTOBJFORMAT</makevar></entry>
-                <entry>The object format of the system
-                  (<literal>aout</literal> or <literal>elf</literal>)</entry>
+                <entry>O formato do objeto do sistema
+                  (<literal>aout</literal> ou <literal>elf</literal>)</entry>
               </row>
 
               <row>
                 <entry><makevar>LOCALBASE</makevar></entry>
-                <entry>The base of the <quote>local</quote> tree (e.g.,
+                <entry>A base da arvore <quote>local</quote> (ex.,
                   <literal>/usr/local/</literal>)</entry>
               </row>
 
               <row>
                 <entry><makevar>X11BASE</makevar></entry>
-                <entry>The base of the <quote>X11</quote> tree (e.g.,
+                <entry>A base da arvore do <quote>X11</quote> (ex.,
                   <literal>/usr/X11R6</literal>)</entry>
               </row>
 
               <row>
                 <entry><makevar>PREFIX</makevar></entry>
-                <entry>Where the port installs itself (see <link
-                    linkend="porting-prefix">more on
+                <entry>Onde o port se instala (veja <link
+                    linkend="porting-prefix">mais em
                     <makevar>PREFIX</makevar></link>).</entry>
               </row>
             </tbody>
@@ -5751,13 +5751,13 @@ PLIST_SUB=      OCTAVE_VERSION=${OCTAVE_VERSION}</programlisting>
         </informaltable>
 
         <note>
-          <para>If you have to define the variables
-            <makevar>USE_IMAKE</makevar>, <makevar>USE_X_PREFIX</makevar>, or
-            <makevar>MASTERDIR</makevar>, do so before including
+          <para> Se voc&ecirc; tem que definir as vari&aacute;veis
+            <makevar>USE_IMAKE</makevar>, <makevar>USE_X_PREFIX</makevar>, ou
+            <makevar>MASTERDIR</makevar>, fa&ccedil;a assim antes de incluir o
             <filename>bsd.port.pre.mk</filename>.</para>
         </note>
 
-        <para>Here are some examples of things you can write after
+        <para>Est&atilde;o aqui alguns exemplos das coisas que voc&ecirc; pode escrever ap&oacute;s o
           <filename>bsd.port.pre.mk</filename>:</para>
 
         <programlisting># no need to compile lang/perl5 if perl5 is already in system
@@ -5780,24 +5780,24 @@ post-install:
       </sect1>
 
       <sect1 id="dads-documentation">
-        <title>Install additional documentation</title>
+        <title>Instale a documenta&ccedil;&atilde;o adicional</title>
 
-        <para>If your software has some documentation other than the standard
-          man and info pages that you think is useful for the user, install it
-          under <filename><makevar>PREFIX</makevar>/share/doc</filename>.
-          This can be done, like the previous item, in the
+        <para>Se seu software tiver alguma documenta&ccedil;&atilde;o outra que o man padr&atilde;o
+          e p&aacute;ginas de info que voc&ecirc; pense que &eacute; &uacute;til ao usu&aacute;rio, instale-o
+          sob <filename><makevar>PREFIX</makevar>/share/doc</filename>.
+          Isto pode ser feito, como o item anterior, no
           <maketarget>post-install</maketarget> target.</para>
 
-        <para>Create a new directory for your port.  The directory name should
-          reflect what the port is.  This usually means
-          <makevar>PORTNAME</makevar>. However, if you
-          think the user might want different versions of the port to be
-          installed at the same time, you can use the whole
-          <makevar>PKGNAME</makevar>.</para>
+        <para>Cr&iacute;e um novo diret&oacute;rio para seu port.  O nome do diret&oacute;rio deve
+          refletir o que o port &eacute;.  Isto significa geralmente
+          <makevar>PORTNAME</makevar>. Entretanto, se voc&ecirc;
+          pensa que o usu&aacute;rio p&ocirc;de querer vers&otilde;es diferentes do port para ser
+          instalado ao mesmo tempo, voc&ecirc; pode usar o
+          <makevar>PKGNAME</makevar> inteiro.</para>
 
-        <para>Make the installation dependent to the variable
-          <makevar>NOPORTDOCS</makevar> so that users can disable it in
-          <filename>/etc/make.conf</filename>, like this:</para>
+        <para>Fac&aacute; as depend&ecirc;ncias da instala&ccedil;&atilde;o a vari&aacute;vel
+          <makevar>NOPORTDOCS</makevar> assim que os usu&aacute;rios podem disabilit&aacute;-lo no
+          <filename>/etc/make.conf</filename>, como este:</para>
 
         <programlisting>post-install:
 .if !defined(NOPORTDOCS)
@@ -5805,77 +5805,77 @@ post-install:
         ${INSTALL_MAN} ${WRKSRC}/docs/xvdocs.ps ${DOCSDIR}
 .endif</programlisting>
 
-	<para>Here are some variables and how they are expanded when used
-	  in the <filename>Makefile</filename>:</para>
+	<para>Aqui est&atilde;o algumas vari&aacute;veis e como elas s&atilde;o expandidas quando usadas
+	  no <filename>Makefile</filename>:</para>
 
 	<itemizedlist>
 	  <listitem>
-	    <para><literal>${DATADIR}</literal> gets expanded to
+	    <para><literal>${DATADIR}</literal>  come&ccedil;a expandido  a
 	      <filename>${PREFIX}/share/${PORTNAME}</filename>.</para>
 	  </listitem>
 	  
 	  <listitem>
-	    <para><literal>${DOCSDIR}</literal> gets expanded to
+	    <para><literal>${DOCSDIR}</literal>  come&ccedil;a expandido  a
 	      <filename>${PREFIX}/share/doc/${PORTNAME}</filename>.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para><literal>${EXAMPLESDIR}</literal> gets expanded to
+	    <para><literal>${EXAMPLESDIR}</literal>  come&ccedil;a expandido  a
 	      <filename>${PREFIX}/share/examples/${PORTNAME}</filename>.</para>
 	  </listitem>
 	</itemizedlist>
 
-	<para>All documentation files and directories installed should
-	  be included in <filename>pkg-plist</filename> with the
-	  <literal>%%PORTDOCS%%</literal> prefix, for example:</para>
+	<para>Todos arquivos de documenta&ccedil;&atilde;o e diret&oacute;rios instalados devem
+	  ser inclu&iacute;dos no <filename>pkg-plist</filename> com o prefixo
+	  <literal>%%PORTDOCS%%</literal>, por exemplo:</para>
 
 	<programlisting>%%PORTDOCS%%%%DOCSDIR%%/AUTHORS
 %%PORTDOCS%%%%DOCSDIR%%/CONTACT
 %%PORTDOCS%%@dirrm %%DOCSDIR%%</programlisting>
 
-        <para>You can also use the <filename>pkg-message</filename> file to
-          display messages upon installation.  See the <link
-          linkend="porting-message">using
-          <filename>pkg-message</filename></link> section for
-          details.</para>
+        <para>Voc&ecirc; pode tamb&eacute;m usar o arquivo <filename>pkg-message</filename> para
+          mostrar mensagens sobre instala&ccedil;&atilde;o.  Veja a se&ccedil;&atilde;o <link
+          linkend="porting-message">usando o
+          <filename>pkg-message</filename></link> para
+          detalhes.</para>
 
         <note>
-          <para><filename>pkg-message</filename> does not need to be added to
+          <para><filename>pkg-message</filename>  n&atilde;o necessita ser adicionada  ao
             <filename>pkg-plist</filename>.</para>
         </note>
       </sect1>
 
       <sect1 id="dads-subdirs">
-        <title>Subdirectories</title>
+        <title>Subdiret&oacute;rios</title>
 
-        <para>Try to let the port put things in the right subdirectories of
-          <makevar>PREFIX</makevar>.  Some ports lump everything and put it in
-          the subdirectory with the port's name, which is incorrect.  Also,
-          many ports put everything except binaries, header files and manual
-          pages in the a subdirectory of <filename>lib</filename>, which does
-          not bode well with the BSD paradigm.  Many of the files should be
-          moved to one of the following: <filename>etc</filename>
-          (setup/configuration files), <filename>libexec</filename>
-          (executables started internally), <filename>sbin</filename>
-          (executables for superusers/managers), <filename>info</filename>
-          (documentation for info browser) or  <filename>share</filename>
-          (architecture independent files).  See &man.hier.7; for details;
-          the rules governing
-          <filename>/usr</filename> pretty much apply to
-          <filename>/usr/local</filename> too.  The exception are ports
-          dealing with USENET <quote>news</quote>.  They may use
-          <filename><makevar>PREFIX</makevar>/news</filename> as a destination
-          for their files.</para>
+        <para>Tente deixar o port colocar coisas no subdiret&oacute;rios certos do
+          <makevar>PREFIX</makevar>.  Alguns ports lump tudo e colocam ele no
+          subdiret&oacute;rio com o nome do port, qual est&aacute; incorreto.  Tamb&eacute;m,
+          muitos ports colocam tudo exceto bin&aacute;rios, arquivos header e p&aacute;ginas do
+          manual e um subdiret&oacute;rio do <filename>lib</filename>, qual n&atilde;o faz
+          bode bem com o paradigma do BSD.  Muitos dos arquivos devem ser
+          movidos a um dos seguintes: <filename>etc</filename>
+          (arquivos de setup/configura&ccedil;&atilde;o), <filename>libexec</filename>
+          (execut&aacute;veis iniciados internamente), <filename>sbin</filename>
+          (execut&aacute;veis para superusu&aacute;rios/gerenciadores), <filename>info</filename>
+          (documenta&ccedil;&atilde;o para navegadores de info) ou  <filename>share</filename>
+          (arquivos independentes de arquitetura).  Veja &man.hier.7; para detalhes;
+          as regras governando o
+          <filename>/usr</filename> muito aplic&aacute;vel ao
+          <filename>/usr/local</filename> tamb&eacute;m.  A exce&ccedil;&atilde;o s&atilde;o ports
+          concordam com USENET <quote>news</quote>.  Eles podem usar
+          <filename><makevar>PREFIX</makevar>/news</filename> como um destino
+          para seus arquivos.</para>
       </sect1>
 
       <sect1 id="porting-cleaning">
-        <title>Cleaning up empty directories</title>
+        <title>Cleaning up dos diret&oacute;rios vazios</title>
 
-        <para>Do make your ports clean up after themselves when they are
-          deinstalled.  This is usually accomplished by adding
-          <literal>@dirrm</literal> lines for all directories that are
-          specifically created by the port.  You need to delete subdirectories
-          before you can delete parent directories.</para>
+        <para>Fa&ccedil;a seus ports clean up ap&oacute;s eles mesmos quando eles s&atilde;o
+          desinstalados.  Isto &eacute; geralmente acomplished pelo adicionando
+          linhas <literal>@dirrm</literal> para todos diret&oacute;rios que s&atilde;o
+          especificamente criados pelo port.  Voc&ecirc; necessita apagar subdiret&oacute;rios
+          antes que voc&ecirc; possa apagar os diret&oacute;rios pais.</para>
 
         <programlisting> :
 lib/X11/oneko/pixmaps/cat.xpm
@@ -5885,34 +5885,33 @@ lib/X11/oneko/sounds/cat.au
 @dirrm lib/X11/oneko/sounds
 @dirrm lib/X11/oneko</programlisting>
 
-        <para>However, sometimes <literal>@dirrm</literal> will give you
-          errors because other ports also share the same subdirectory.  You
-          can call <command>rmdir</command> from <literal>@unexec</literal> to
-          remove only empty directories without warning.</para>
+        <para>Entretanto, as vezes <literal>@dirrm</literal> dar&aacute; a voc&ecirc;
+          erros porque outros ports tamb&eacute;m compartilham o mesmo subdiret&oacute;rio.  Voc&ecirc;
+          pode chamar o <command>rmdir</command> de <literal>@unexec</literal> para
+          remover somente diret&oacute;rios vazios sem avisos.</para>
 
         <programlisting>@unexec rmdir %D/share/doc/gimp 2>/dev/null || true</programlisting>
 
-        <para>This will neither print any error messages nor cause
-          &man.pkg.delete.1; to exit abnormally even if
-          <filename><makevar>PREFIX</makevar>/share/doc/gimp</filename> is not
-          empty due to other ports installing some files in there.</para>
+        <para>Isto will neither imprimir any mensagens de erro nor cause
+          &man.pkg.delete.1; para sair abnormally even sen&atilde;o est&aacute;
+          vazio due para outros ports instalando alguns arquivos l&aacute;.</para>
       </sect1>
 
       <sect1 id="dads-uid">
         <title>UIDs</title>
 
-        <para>If your port requires a certain user to be on the installed
-          system, let the <filename>pkg-install</filename> script call
-          <command>pw</command> to create it automatically.  Look at
-          <filename role="package">net/cvsup-mirror</filename> for an example.</para>
+        <para>Se seu port necessita de um determinado usu&aacute;rio para ser no sistema
+          instalado, deixe o script <filename>pkg-install</filename> chamar o
+          <command>pw</command> para cria-lo automaticamente.  Olhe em
+          <filename role="package">net/cvsup-mirror</filename> para um exemplo.</para>
 
-        <para>If your port must use the same user/group ID number when it is
-          installed as a binary package as when it was compiled, then you must
-          choose a free UID from 50 to 999 and register it below.  Look at
-          <filename role="package">japanese/Wnn</filename> for an example.</para>
+        <para>Se seu port tem que usar o mesmo numero de ID do usu&aacute;rio/grupo quando ele &eacute;
+          instalado como pacote bin&aacute;rio como quando ele foi compilado, ent&atilde;o voc&ecirc; tem que
+          escolher um UID livre de 50 a 999 e registr&aacute;-lo abaixo.  Olhe em
+          <filename role="package">japanese/Wnn</filename> para um exemplo.</para>
 
-        <para>Make sure you do not use a UID already used by the system or
-          other ports.  This is the current list of UIDs between 50 and
+        <para>Certifique-se que voc&ecirc; n&atilde;o usa um UID usado j&aacute; pelo sistema ou
+          outros ports.  Esta &eacute; a lista atual de UIDs entre 50 e
           999.</para>
 
 	<!-- Please keep this list sorted by uid -->
@@ -5954,229 +5953,229 @@ ldap:*:389:389:OpenLDAP Server:/nonexistent:/sbin/nologin
 drweb:*:426:426:Dr.Web Mail Scanner:/nonexistent:/sbin/nologin
 bacula:*:910:910:Bacula Daemon:/var/db/bacula:/sbin/nologin</programlisting>
 
-        <para>Please include a notice when you submit a port (or an upgrade)
-          that reserves a new UID or GID in this range.  This allows us to
-          keep the list of reserved IDs up to date.</para>
+        <para>Por favor inclua uma observa&ccedil;&atilde;o quando voc&ecirc; enviar um port (ou um upgrade)
+          que reserve um novo UID ou GID nesta escala.  Isto permite-nos
+          manter a lista de IDs reservados atualizados.</para>
       </sect1>
 
       <sect1 id="dads-rational">
-        <title>Do things rationally</title>
+        <title>Fa&ccedil;a coisas racionalmente</title>
 
-        <para>The <filename>Makefile</filename> should do things simply and
-          reasonably.  If you can make it a couple of lines shorter or more
-          readable, then do so.  Examples include using a make
-          <literal>.if</literal> construct instead of a shell
-          <literal>if</literal> construct, not redefining
-          <maketarget>do-extract</maketarget> if you can redefine
-          <makevar>EXTRACT*</makevar> instead, and using
-          <makevar>GNU_CONFIGURE</makevar> instead of <literal>CONFIGURE_ARGS
+        <para>O <filename>Makefile</filename> deve fazer coisas simples e
+          razoavelmente.  Se voc&ecirc; pode faze-lo um couple de linhas mais curto ou mais
+          leg&iacute;vel, ent&atilde;o fa&ccedil;a assim.  Exemplos incluem usando uma constru&ccedil;&atilde;o do
+          <literal>.if</literal> do make ao inv&eacute;s de uma constru&ccedil;&atilde;o do
+          <literal>if</literal> do shell, n&atilde;o redefinindo
+          <maketarget>do-extract</maketarget> se voc&ecirc; pode redefinir
+          <makevar>EXTRACT*</makevar> ao inv&eacute;s, e usando
+          <makevar>GNU_CONFIGURE</makevar> ao inv&eacute;s de <literal>CONFIGURE_ARGS
             += --prefix=&dollar;{PREFIX}</literal>.</para>
       </sect1>
 
       <sect1 id="dads-cc">
-	<title>Respect both <makevar>CC</makevar> and
+	<title>Respeite ambos <makevar>CC</makevar> e
 	  <makevar>CXX</makevar></title>
 
-	<para>The port should respect both <makevar>CC</makevar>
-	  and <makevar>CXX</makevar> variables.  If it does not,
-	  please add <literal>NO_PACKAGE=ignores either cc or
-	  cxx</literal> to the <filename>Makefile</filename>.</para>
+	<para>O port deve respeitar ambos vari&aacute;veis <makevar>CC</makevar>
+	  e <makevar>CXX</makevar>.  Se ele n&atilde;o faz,
+	  por favor adicione <literal>NO_PACKAGE=ignora ambos cc ou
+	  cxx</literal> ao <filename>Makefile</filename>.</para>
 
-	<para>An example of a <filename>Makefile</filename> respecting
-	  both <makevar>CC</makevar> and <makevar>CXX</makevar>
-	  variables follows.  Note the <makevar>?=</makevar>:</para>
+	<para>Um exemplo de um <filename>Makefile</filename> respeitando
+	  ambas seguintes vari&aacute;veis <makevar>CC</makevar>
+	  e <makevar>CXX</makevar>.  Note que o <makevar>?=</makevar>:</para>
 
 	<programlisting>CC ?= gcc</programlisting>
 	<programlisting>CXX ?= g++</programlisting>
 
-	<para>Here is an example which respects neither
-	  <makevar>CC</makevar> nor <makevar>CXX</makevar>
-	  variables:</para>
+	<para>Aqui est&aacute; um exemplo qual n&atilde;o respeita as
+	  vari&aacute;veis <makevar>CC</makevar>
+	  nem <makevar>CXX</makevar>:</para>
       
 	<programlisting>CC = gcc</programlisting>
 	<programlisting>CXX = g++</programlisting>
 
-	<para>Both <makevar>CC</makevar> and <makevar>CFLAGS</makevar>
-	  variables can be defined on FreeBSD systems in
-	  <filename>/etc/make.conf</filename>.  The first example
-	  defines a value if it was not previously set in
-	  <filename>/etc/make.conf</filename>, preserving any
-	  system-wide definitions.  The second example clobbers
-	  anything previously defined.</para>
+	<para>Ambas vari&aacute;veis <makevar>CC</makevar> e <makevar>CFLAGS</makevar>
+	  podem ser definidas no sistema do FreeBSD no
+	  <filename>/etc/make.conf</filename>.  O primeiro exemplo
+	  define um valor se ele n&atilde;o foi anteriormente definido no
+	  <filename>/etc/make.conf</filename>, preservando quaisquer
+	  defini&ccedil;&otilde;es system-wide.  O segundo exemplo clobbers
+	  quaisquer coisas anteriormente definidas.</para>
       </sect1>
 
       <sect1 id="dads-cflags">
-        <title>Respect <makevar>CFLAGS</makevar></title>
+        <title>Respeite as <makevar>CFLAGS</makevar></title>
 
-        <para>The port should respect the <makevar>CFLAGS</makevar> variable.
-          If it does not, please add <literal>NO_PACKAGE=ignores
-            cflags</literal> to the <filename>Makefile</filename>.</para>
+        <para>O port deve respeitas as vari&aacute;veis <makevar>CFLAGS</makevar>.
+          Se ele n&atilde;o faz, por favor adicione <literal>NO_PACKAGE=ignores
+            cflags</literal> ao <filename>Makefile</filename>.</para>
 
-	<para>An example of a <filename>Makefile</filename> respecting
-	  the <makevar>CFLAGS</makevar> variable follows.  Note the
+	<para>Um exemplo de um <filename>Makefile</filename> respeitando
+	  a seguinte vari&aacute;vel <makevar>CFLAGS</makevar>.  Note o
 	  <makevar>+=</makevar>:</para>
 
 	<programlisting>CFLAGS += -Wall -Werror</programlisting>
 
-	<para>Here is an example which does not respect the
-	  <makevar>CFLAGS</makevar> variable:</para>
+	<para>Aqui est&aacute; um exemplo qual n&atilde;o respeita a
+	  vari&aacute;vel <makevar>CFLAGS</makevar>:</para>
 
 	<programlisting>CFLAGS = -Wall -Werror</programlisting>
 
-	<para>The <makevar>CFLAGS</makevar> variable is defined on
-	  FreeBSD systems in <filename>/etc/make.conf</filename>.  The
-	  first example appends additional flags to the
-	  <makevar>CFLAGS</makevar> variable, preserving any system-wide
-	  definitions.  The second example clobbers anything previously
-	  defined.</para>
+	<para>A vari&aacute;vel <makevar>CFLAGS</makevar> &eacute; definida no
+	  sistema do FreeBSD no <filename>/etc/make.conf</filename>.  O
+	  primeiro  exemplo appends adicinais flags a
+	  vari&aacute;vel <makevar>CFLAGS</makevar>, preservando quaisquer defini&ccedil;&otilde;es
+	  system-wide.  O segundo exemplo clobbers quaisquer anteriormente
+	  definidos.</para>
       </sect1>
 
       <sect1 id="dads-config">
-        <title>Configuration files</title>
+        <title>Arquivos de Configura&ccedil;&atilde;o</title>
 
-        <para>If your port requires some configuration files in
+        <para>Se seu port necessita alguns arquivos de configura&ccedil;&atilde;o no
           <filename><makevar>PREFIX</makevar>/etc</filename>, do
-          <emphasis>not</emphasis> just install them and list them in
-          <filename>pkg-plist</filename>.  That will cause
-          &man.pkg.delete.1; to delete files carefully edited by
-          the user and a new installation to wipe them out.</para>
+          <emphasis>not</emphasis> just instale-os e liste-os no
+          <filename>pkg-plist</filename>.  Aquilo far&aacute;
+          &man.pkg.delete.1; apagar arquivos cuidadosamente editados pelo
+          usu&aacute;rio e uma nova instala&ccedil;&atilde;o para wipe them out.</para>
 
-        <para>Instead, install sample files with a suffix
+        <para>Ao inv&eacute;s, instale arquivos de exemplos com um sufixo
           (<filename><replaceable>filename</replaceable>.sample</filename>
-          will work well) and print out a <link
-            linkend="porting-message">message</link> pointing out that the
-          user has to copy and edit the file before the software can be made
-          to work.</para>
+          funcionar&aacute; bem) e imprima uma <link
+            linkend="porting-message">mensagem</link> indicando out que o
+          usu&aacute;rio tem que copiar e editar os arquivos antes que o software possa ser feito
+          para executar.</para>
       </sect1>
 
       <sect1 id="dads-freedback">
         <title>Feedback</title>
 
-        <para>Do send applicable changes/patches to the original
-          author/maintainer for inclusion in next release of the code.  This
-          will only make your job that much easier for the next
+        <para>Envie mudan&ccedil;as/patches aplic&aacute;veis ao autor/mantedor
+          original para inclus&atilde;o no pr&oacute;xima release do c&oacute;digo.  Isto
+          somente far&aacute; seu trabalho muito mais f&aacute;cil a pr&oacute;xima
           release.</para>
       </sect1>
 
       <sect1 id="dads-readme">
         <title><filename>README.html</filename></title>
 
-        <para>Do not include the <filename>README.html</filename> file.  This
-          file is not part of the cvs collection but is generated using the
-          <command>make readme</command> command.
+        <para>N&atilde;o inclua o arquivo <filename>README.html</filename>.  Este
+          arquivo n&atilde;o &eacute; parte da cole&ccedil;&atilde;o do cvs mas &eacute; gerado usando o
+          comando <command>make readme</command>.
         </para>
       </sect1>
 
       <sect1 id="dads-broken">
-        <title>Marking a port <makevar>BROKEN</makevar>, <makevar>FORBIDDEN</makevar>, or otherwise</title>
+        <title>Marcando um port como <makevar>BROKEN</makevar>, <makevar>FORBIDDEN</makevar>, ou de outra maneira</title>
 
-	<para>Invariably there will come a time when a particular port
-	will contain a security vulnerability, will be radically
-	broken and needs many hours of tender loving care, or is
-	generally obsoleted, but for one reason or another should
-	remain in the tree (and get fixed, right?).  To designate a
-	port as broken, there are three <command>make</command>
-	variables that can be used in a port's
-	<filename>Makefile</filename>.  The value of the following
-	<command>make</command> variables will be the reason that is
-	given back to users for why the port was marked as broken.
-	Please use the correct <command>make</command> variable as
-	each make variable conveys radically different meanings to
-	both users, and to automated systems that parse
+	<para>Invariavelmente there will come a time quando um port particular
+	conter&aacute; uma vulnerabilidade de seguran&ccedil;a, ser&aacute; radical
+	broken e necessita de muitas horas de tender loving care, ou est&aacute;
+	geralmente obsoleto, mas por uma raz&atilde;o ou uma outra deve
+	remain na arvore (e ser consertada, certo?).  Para designar um
+	port como broken, h&aacute; tr&ecirc;s vari&aacute;veis <command>make</command>
+	que podem ser usadas em um
+	<filename>Makefile</filename> do port.  O valor das seguintes vari&aacute;veis do
+	<command>make</command> ser&atilde;o a raz&atilde;o que &eacute;
+	given back aos usu&aacute;rios para porque o port foi marcado como broken.
+	Por favor use a vari&aacute;vel correta do <command>make</command> assim
+	cada vari&aacute;vel do make conveys radicalmente diferentes significados a
+	ambos usu&aacute;rios, e para sistemas automatizados que analise o
 	<filename>Makefile</filename>s.</para>
 
 	<itemizedlist>
 	  <listitem>
-	    <para><makevar>BROKEN</makevar> is reserved for ports that
-	      do not work and should not be installed by users.  This
-	      will prevent users from installing the port, however,
-	      ports marked as <makevar>BROKEN</makevar> will still be
-	      built by <ulink url="http://bento.FreeBSD.org/">the
-	      Bento cluster</ulink>.  Do mark ports as
-	      <makevar>BROKEN</makevar> if you want users to not
-	      install this port, but you still want to have it built
-	      by Bento.</para>
+	    <para>O <makevar>BROKEN</makevar> &eacute; reservado para os ports que
+	      n&atilde;o funcionam e n&atilde;o devem ser instalados pelos usu&aacute;rios.  Isto
+	      will prevent usu&aacute;rios de instalarem o port, entretanto,
+	      o ports foi marcado como <makevar>BROKEN</makevar> ainda ser&aacute;
+	      construido pelo <ulink url="http://bento.FreeBSD.org/">
+	      Bento cluster</ulink>.  Marque os ports como
+	      <makevar>BROKEN</makevar> se voc&ecirc; quer que os usu&aacute;rios n&atilde;o
+	      instalem este port, mas voc&ecirc; ainda quer te-lo construido
+	      pelo Bento.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para><makevar>FORBIDDEN</makevar> is used for ports that
-	      do contain a security vulnerability or induce grave
-	      concern regarding the security of a FreeBSD system with
-	      a given port installed (ex: a reputably insecure program
-	      or a program that provides easily exploitable services).
-	      Ports should be marked as <makevar>FORBIDDEN</makevar>
-	      as soon as a particular piece of software has a
-	      vulnerability and there is no released upgrade.  Ideally
-	      ports should be upgraded as soon as possible when a
-	      security vulnerability is discovered so as to reduce the
-	      number of vulnerable FreeBSD hosts (we like being known
-	      for being secure), however sometimes there is a
-	      noticeable time gap between disclosure of a
-	      vulnerability and an updated software release of a piece
-	      of vulnerable software.  Do not mark a port
-	      <makevar>FORBIDDEN</makevar> for any reason other than
-	      security.</para>
+	    <para>O <makevar>FORBIDDEN</makevar> &eacute; usado para os ports que
+	      cont&eacute;m uma vulnerabilidade de seguran&ccedil;a ou induzir grave
+	      interesse a respeito da seguran&ccedil;a de um sistema FreeBSD com
+	      um given port instalado (ex: a reputably insecure program
+	      ou um programa que disponibiliza facilmente servi&ccedil;os exploit&aacute;veis).
+	      Os ports devem ser marcados como <makevar>FORBIDDEN</makevar>
+	      assim que um pe&ccedil;a particular do software tenha uma
+	      vulnerabilidade e  n&atilde;o h&aacute; released upgrade.  Idealmente
+	      ports devem ser upgraded assim que poss&iacute;vel quando uma
+	      vulnerabilidade de seguran&ccedil;a &eacute; discoberta so as to reduce the
+	      numero de vulnerabilidades do hosts FreeBSD (n&oacute;s gostamos de saber
+	      para estar seguro), entretanto as vezes h&aacute; uma
+	      noticeable time gap entre descoberta de uma
+	      vulnerabilidade e uma release de software atualizado de uma pe&ccedil;a
+	      do software vulner&aacute;vel.  N&atilde;o marque um port
+	      <makevar>FORBIDDEN</makevar> por quaisquer raz&atilde;o outra que
+	      seguran&ccedil;a.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para><makevar>IGNORE</makevar> is reserved for ports that
-	      should not be built for one reason or another.  Users
-	      and <ulink url="http://bento.FreeBSD.org/">the Bento
-	      cluster</ulink> cluster will not, under any
-	      circumstances, build ports marked as
-	      <makevar>IGNORE</makevar>.  If in doubt, do use
-	      <makevar>IGNORE</makevar> to prevent a port from being
-	      built.</para>
+	    <para>O <makevar>IGNORE</makevar> &eacute; reservado para ports que
+	      n&atilde;o devem ser construidos por uma raz&atilde;o ou uma outra.  Usu&aacute;rios
+	      e <ulink url="http://bento.FreeBSD.org/"> o Bento
+	      cluster</ulink> cluster n&atilde;o far&atilde;o, sob quaisquer
+	      circunst&acirc;ncias, os ports construidos marcados como
+	      <makevar>IGNORE</makevar>.  Se em d&uacute;vida, use
+	      <makevar>IGNORE</makevar> para prevent um port de ser
+	      construido.</para>
 	  </listitem>
 
 	</itemizedlist>
 
-	<para>Do remember that these variables are to be used as a
-	  last resort if a port is not upgradeable.  Permanently
-	  broken ports should be removed from the tree
-	  entirely.</para>
+	<para>Lembre que estas vari&aacute;veis s&atilde;o para ser usadas como um
+	  ultimo recurso se um port n&atilde;o &eacute; upgradeable.  Permanentemente
+	  broken ports devem ser removidos da arvore
+	  inteiramente.</para>
       </sect1>
 
       <sect1 id="dads-misc">
         <title>Miscellanea</title>
 
-        <para>The files
-          <filename>pkg-descr</filename> and <filename>pkg-plist</filename>
-          should each be double-checked.  If you are reviewing a port and feel
-          they can be worded better, do so.</para>
+        <para>Os arquivos
+          <filename>pkg-descr</filename> e <filename>pkg-plist</filename>
+          cada seve ser verificados-em-dobro.  Se voc&ecirc; est&aacute; revendo um port e sente
+          que eles podem ser expremido melhor, fa&ccedil;a assim.</para>
 
-        <para>Do not copy more copies of the GNU General Public License into
-          our system, please.</para>
+        <para>N&atilde;o copie mais copias da Licen&ccedil;a P&uacute;blica Geral do GNU dentro
+          de nosso sistema, por favor.</para>
 
-        <para>Please be careful to note any legal issues! Do not let us
-          illegally distribute software!</para>
+        <para>Por favor seja cuidadoso para anotar quaisquer legal issues! N&atilde;o deixe-nos
+          distribuir software ilegalmente!</para>
       </sect1>
 
       <sect1 id="dads-stuck">
         <title>If you are stuck&hellip;</title>
 
-        <para>Do look at existing examples and the
-          <filename>bsd.port.mk</filename> file before asking us questions!
+        <para>Olhe em exemplos existentes e o
+          arquivo <filename>bsd.port.mk</filename> antes de nos perguntar!
           <!-- smiley --><emphasis>;-)</emphasis></para>
 
-        <para>Do ask us questions if you have any trouble! Do not just beat
-          your head against a wall! <!-- smiley
+        <para>Pergunte nos se voc&ecirc; tenha qualquer problema! N&atilde;o s&oacute; bata
+          sua cabe&ccedil;a contra a parede! <!-- smiley
           --><emphasis>:-)</emphasis></para>
       </sect1>
     </chapter>
 
     <chapter id="porting-samplem">
-      <title>A Sample <filename>Makefile</filename></title>
+      <title>Um exemplo de <filename>Makefile</filename></title>
 
-      <para>Here is a sample <filename>Makefile</filename> that you can use to
-        create a new port.  Make sure you remove all the extra comments (ones
-        between brackets)!</para>
+      <para>Aqui est&aacute; um exemplo de <filename>Makefile</filename> that you can use to
+        create a new port.  Certifique-se que voc&ecirc; remova todos os coment&aacute;rios extras (uns
+        entre brackets)!</para>
 
-      <para>It is recommended that you follow this format (ordering of
-        variables, empty lines between sections, etc.).  This format is
-        designed so that the most important information is easy to locate.  We
-        recommend that you use <link
-          linkend="porting-portlint">portlint</link> to check the
+      <para>Recomenda-se que voc&ecirc; siga este formato (ordering of
+        vari&aacute;veis, linhas vazias entre as se&ccedil;&otilde;es, etc.).  Este formato &eacute;
+        projetado de modo que a informa&ccedil;&atilde;o a mais importante seja f&aacute;cil de localizar.  N&oacute;s
+        recomendamos que voc&ecirc; use <link
+          linkend="porting-portlint">portlint</link> para verificar o
         <filename>Makefile</filename>.</para>
 
       <programlisting>[the header...just to make it easier for us to identify the ports.]
@@ -6264,75 +6263,75 @@ pre-install:
     </chapter>
 
     <chapter id="porting-autoplist">
-      <title>Automated package list creation</title>
+      <title>Cria&ccedil;&atilde;o automatizada da lista do pacote</title>
 
-      <para>First, make sure your port is almost complete, with only
-        <filename>pkg-plist</filename> missing.</para>
+      <para>Primeiro, certifique-se que seu port est&aacute; quase completo, com somente
+        <filename>pkg-plist</filename> faltando.</para>
 
-      <para>Next, create a temporary directory tree into which your port can be
-        installed, and install any dependencies.
-	<replaceable>port-type</replaceable> should be <literal>local</literal>
-	for non-X ports and <literal>x11-4</literal> or <literal>x11</literal>
-	for ports which install into the directory hierarchy of XFree86 4
-	or an earlier XFree86 release, respectively.</para>
+      <para>Pr&oacute;ximo, crie uma arvore de diret&oacute;rio tempor&aacute;rio dentro da qual seu port possa ser
+        instalado, e instala quaiquer depend&ecirc;ncias.
+	<replaceable>port-type</replaceable> deve ser <literal>local</literal>
+	para ports n&atilde;o-X e <literal>x11-4</literal> ou <literal>x11</literal>
+	para ports qual instala dentro da hierarquia do diret&oacute;rio do XFree86 4
+	ou uma anterior XFree86 release, respectivamente.</para>
 
       <screen>&prompt.root; <userinput>mkdir /var/tmp/<replaceable>port-name</replaceable></userinput>
 &prompt.root; <userinput>mtree -U -f /etc/mtree/BSD.<replaceable>port-type</replaceable>.dist -d -e -p /var/tmp/<replaceable>port-name</replaceable></userinput>
 &prompt.root; <userinput>make depends PREFIX=/var/tmp/<replaceable>port-name</replaceable></userinput></screen>
 
-      <para>Store the directory structure in a new file.</para>
+      <para>Armazene a estrutura de diret&oacute;rio em um novo arquivo.</para>
 
       <screen>&prompt.root; <userinput>(cd /var/tmp/<replaceable>port-name</replaceable> && find -d * -type d) | sort &gt; OLD-DIRS</userinput></screen>
 
-      <para>Create an empty <filename>pkg-plist</filename> file:</para>
+      <para>Crie um arquivo  <filename>pkg-plist</filename> vazio:</para>
 
       <screen>&prompt.root; <userinput>touch pkg-plist</userinput></screen>
 
-      <para>If your port honors <makevar>PREFIX</makevar> (which it should)
-        you can then install the port and create the package list.</para>
+      <para>Se seu port honors <makevar>PREFIX</makevar> (which it should)
+        voc&ecirc; pode ent&atilde;o instalar o port e criar a lista de pacote.</para>
 
       <screen>&prompt.root; <userinput>make install PREFIX=/var/tmp/<replaceable>port-name</replaceable></userinput>
 &prompt.root; <userinput>(cd /var/tmp/<replaceable>port-name</replaceable> && find -d * \! -type d) | sort &gt; pkg-plist</userinput></screen>
 
-      <para>You must also add any newly created directories to the packing
-        list.</para>
+      <para>Voc&ecirc; tem que tamb&eacute;m adicionar quaiquer diret&oacute;rios criados recentemente a lista de
+        empacotamento.</para>
 
       <screen>&prompt.root; <userinput>(cd /var/tmp/<replaceable>port-name</replaceable> && find -d * -type d) | sort | comm -13 OLD-DIRS - | sort -r | sed -e 's#^#@dirrm #' &gt;&gt; pkg-plist</userinput></screen>
 
-      <para>Finally, you need to tidy up the packing list by hand; it is not
-        <emphasis>all</emphasis> automated.  Manual pages should be listed in
-        the port's <filename>Makefile</filename> under
-        <makevar>MAN<replaceable>n</replaceable></makevar>, and not in the
-        package list.  User configuration files should be removed, or
-        installed as
+      <para>Finalmente, voc&ecirc; necessita to tidy up a lista de empacotamento pela m&atilde;o; ele n&atilde;o &eacute;
+        <emphasis>todo</emphasis> automatizado.  P&aacute;ginas do manual devem ser listadas no
+        <filename>Makefile</filename> do port sob
+        <makevar>MAN<replaceable>n</replaceable></makevar>, e n&atilde;o na
+        lista de pacotes.  Arquivos de configura&ccedil;&atilde;o do usu&aacute;rio devem ser removidos, ou
+        instalados como
         <filename><replaceable>filename</replaceable>.sample</filename>.
-        The <filename>info/dir</filename> file should not be listed
-        and appropriate <filename>install-info</filename> lines should
-        be added as noted in the <link linkend="porting-info">info
-        files</link> section.  Any
-        libraries installed by the port should be listed as specified in the
-        <link linkend="porting-shlibs">shared libraries</link> section.</para>
+        O arquivo <filename>info/dir</filename> n&atilde;o deve ser listado
+        e apropriadas linhas <filename>install-info</filename> devem
+        ser adicionadas como notas na se&ccedil;&atilde;o <link linkend="porting-info">info
+        files</link>.  Quaisquer
+        bibliotecas instaladas pelo port devem ser listadas como especificada na
+        se&ccedil;&atilde;o <link linkend="porting-shlibs">bibliotecas compartilhadas</link>.</para>
 
-      <para>Alternatively, use the <command>plist</command> script in
-	<filename>/usr/ports/Tools/scripts/</filename> to build the
-	package list automatically.</para>
+      <para>Alternativamente, use o script <command>plist</command> no
+	<filename>/usr/ports/Tools/scripts/</filename> para construir a
+	lista de pacote automaticamente.</para>
     </chapter>
 
     <chapter id="changes">
-      <title>Changes to this document and the ports system</title>
+      <title>Mudan&ccedil;as a este documento e sistema ports</title>
 
-      <para>If you maintain a lot of ports, you should consider following the
-        &a.ports;.  Important changes to the way ports work will be announced
-        there.  You can always find more detailed information on the latest
-        changes by looking at <ulink
-          url="http://www.FreeBSD.org/cgi/cvsweb.cgi/ports/Mk/bsd.port.mk"> the
-          bsd.port.mk CVS log</ulink>.</para>
+      <para>Se voc&ecirc; mantem muitos ports, voc&ecirc; deve considerar o seguinte
+        &a.ports;.  Mudan&ccedil;as importantes ao modo que o ports funcione ser anunciado
+        l&aacute;.  Voc&ecirc; pode sempre encontrar mais informa&ccedil;&otilde;es detalhadas das ultimas
+        mudan&ccedil;as olhando em <ulink
+          url="http://www.FreeBSD.org/cgi/cvsweb.cgi/ports/Mk/bsd.port.mk"> o
+          log CVS do bsd.port.mk</ulink>.</para>
 
-      <para>Other resources to assist port maintainers include a list of
-	<ulink url="http://bento.FreeBSD.org/">package building logs and
-	errors </ulink> and the <ulink
-	  url="http://people.FreeBSD.org/~fenner/portsurvey/">FreeBSD
-	  Ports distfiles survey</ulink>.</para>
+      <para>Outros recursos para assist mantedores do port inclui uma lista de
+	<ulink url="http://bento.FreeBSD.org/">pacotes construindo logs e
+	errors </ulink> e o <ulink
+	  url="http://people.FreeBSD.org/~fenner/portsurvey/">exame do distfiles
+	  do Ports do FreeBSD</ulink>.</para>
     </chapter>
 </book>
 
