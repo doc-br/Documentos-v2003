@@ -101,30 +101,30 @@
   </sect1>
   
   <sect1>
-    <title>Install the web pages into your web server</title>
+    <title>Instalando as web pages em seu Web Server</title>
     
     <procedure>
       <step>
-	<para>If you have moved out of the <filename>en</filename>
-	  directory, change back to it.</para>
+	<para>Se voc&ecircle; se mover para fora do diret&oacute;rio  <filename>en</filename>
+	  volte para atr&aacutez dele.</para>
 	
 	  <screen>&prompt.root; <userinput>cd <replaceable>path</replaceable>/www/en</userinput></screen>
       </step>
 
       <step>
-	<para>Run the &man.make.1; <maketarget>install</maketarget> target,
-	  setting the <makevar>DESTDIR</makevar> variable to the name of the 
-	  directory you want to install the files to.</para>
+	<para>Execute o comando &man.make.1; <maketarget>install</maketarget>,
+	  setando a vari&aacute;vel <makevar>DESTDIR</makevar> para o nome do diret&oacute;rio 
+	  para onde quer instalar.</para>
 	
 	<screen>&prompt.root; <userinput>make DESTDIR=<replaceable>/usr/local/www</replaceable> install</userinput></screen>
       </step>
 
       <step>
-	<para>If you have previously installed the web pages into the same
-	  directory the install process will not have deleted any old or
-	  outdated pages.  For example, if you build and install a new copy
-	  of the site every day, this command will find and delete all
-	  files that have not been updated in three days.</para>
+	<para>Se voc&ecircle; instalar previamente as web pages dentro diret&oacute;rio o processo de instala&ccedil;&atilde;
+         n&atilde;o ter&aacute; deletado qualquer paginas velhas ou fora da data. Por exemplo, se voc&ecircle; compilar e instalar
+         uma nova c&oacute;pia do site todos os dias, este comando ir&aacute; procurar e deletar todos os arquivos que nao tem
+         atualiza&ccedil;&otilde;es em tres dias.</para>
+
 	
 	<screen>&prompt.root; <userinput>find <replaceable>/usr/local/www</replaceable> -ctime 3 -print0 | xargs -0 rm</userinput></screen>
       </step>
@@ -132,14 +132,14 @@
   </sect1>
   
   <sect1>
-    <title>Environment variables</title>
+    <title>Vari&aacute;veis de ambiente</title>
     
     <variablelist>
       <varlistentry>
 	<term><envar>CVSROOT</envar></term>
 	
 	<listitem>
-	  <para>Location of the CVS tree. Essential.</para>
+	  <para>Localiza&ccedil;&atilde;o da &aacute;rvore do CVS. Essencial.</para>
 	  
 	  <screen><userinput>&prompt.root; CVSROOT=/home/ncvs; export CVSROOT</userinput></screen>
 	</listitem>
@@ -149,16 +149,15 @@
 	<term><makevar>ENGLISH_ONLY</makevar></term>
 	
 	<listitem>
-	  <para>If set and not empty, the makefiles will build and
-	    install only the English documents. All translations will be
-	    ignored. E.g.:</para>
+	  <para>Se setado e n&atilde;o vazio, o makefiles ir&aacute; compilar e
+	    instalar apenas a documenta&ccedil;&atilde;o em Ingles. Todas tradu&ccedil;&otilde;es ser&atilde;o ignoradas. E.g.:</para>
 	  
 	  <screen>&prompt.root; <userinput>make ENGLISH_ONLY=YES all install</userinput></screen>
 
-	  <para>If you want unset the variable
-	    <makevar>ENGLISH_ONLY</makevar> and build all pages, including
-	    translations, set the variable <makevar>ENGLISH_ONLY</makevar>
-	    to an empty value</para>
+	  <para>Se voc&ecircle; quiser unset a vari&aacute;vel
+	    <makevar>ENGLISH_ONLY</makevar> e compile todas as paginas, incluindo
+	    tradu&ccedil;&otilde;es, sete a vari&aacute;vel <makevar>ENGLISH_ONLY</makevar>
+	    para um valor vazio.</para>
 	  
 	  <screen>&prompt.root; <userinput>make ENGLISH_ONLY="" all install clean</userinput></screen>
 	</listitem>
@@ -168,9 +167,9 @@
 	<term><makevar>WEB_ONLY</makevar></term>
 	
 	<listitem>
-	  <para>If set and not empty, the makefiles will build and install
-	    only the HTML pages from the www directory. All documents from
-	    the doc directory (Handbook, FAQ, Tutorials) will be ignored.
+	  <para>Se setada e n&atilde;o vazia, o makefiles ira compila e instalar
+	    apenas as HTML pages do diret&oacute;rio www. Todos os documentos do
+	    diret&oacute;rio doc (Handbook, FAQ, Tutorais) ser&aatilde;o ignorados..
 	    E.g.:</para>
 	  
 	  <screen>&prompt.root; <userinput>make WEB_ONLY=YES all install</userinput></screen>
@@ -181,22 +180,22 @@
 	<term><makevar>NOPORTSCVS</makevar></term>
 	
 	<listitem>
-	  <para>If set, the makefiles will not checkout files from the ports
-	    cvs repository. Instead, it will copy the files from
-	    <filename>/usr/ports</filename> (or where the variable
-	    <envar>PORTSBASE</envar> points to).</para>
+	  <para>Se setada, o makefiles n&atilde;o fara checkout dos arquivos do ports do 
+	    cvs repository. Inv&eacute;z disso, voc&ecircle; poder&aacute; copiar os arquivos do 
+	    <filename>/usr/ports</filename> (ou a onde a vari&aacute;vel 
+	    <envar>PORTSBASE</envar> apontar).</para>
 	</listitem>
       </varlistentry>
     </variablelist>
     
-    <para><envar>CVSROOT</envar> is an environment variable. You must set it
-      on the command line or in your dot files (~/.profile).</para>
+    <para><envar>CVSROOT</envar> &eacute; uma vari&aacute;vel de ambiente. Voc&ecircle; deve configurar atrav&eacute;z
+      da linha de comando ou dos seus arquivos escondidos (~/.profile).</para>
     
     <para><makevar>WEB_ONLY</makevar>, <makevar>ENGLISH_ONLY</makevar> and
-      <makevar>NOPORTSCVS</makevar> are makefile variables. You can set the
-      variables in <filename>/etc/make.conf</filename>,
-      <filename>Makefile.inc</filename> or as environment variables on the
-      command line or in your dot files.</para>
+      <makevar>NOPORTSCVS</makevar> s&atilde;o vari&aacute;veis do makefile. Voc&ecircle; pode setar as
+      vari&aacute;veis em <filename>/etc/make.conf</filename>,
+      <filename>Makefile.inc</filename> ou como vari&aacute;veis de ambiente com
+      os comandos de linha ou em seus arquivos escondindos.</para>
   </sect1>
 </chapter>
   
