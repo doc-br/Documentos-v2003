@@ -1188,38 +1188,41 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
   <sect1 id="sgml-primer-include">
     <title>Utilizando entidades para incluir arquivos</title>
     
-    <para>Entities (both <link
-	linkend="sgml-primer-general-entities">general</link> and <link
-	linkend="sgml-primer-parameter-entities">parameter</link>) are
-      particularly useful when used to include one file inside another.</para>
+    <para>As entidades (ambas <link
+	linkend="sgml-primer-general-entities">gerais</link> e <link
+	linkend="sgml-primer-parameter-entities">parametros</link>)
+	s&atilde;o particularmente &uacute;teis quando utilizadas para incluir um
+	arquivo dentro de outro.</para>
 
     <sect2 id="sgml-primer-include-using-gen-entities">
       <title>Utilizando entidades gerais para incluir arquivos</title>
       
-      <para>Suppose you have some content for an SGML book organized into
-	files, one file per chapter, called
+      <para>Suponha que voc&ecirc; possui algum conteudo para um livro SGML
+	organizado em arquivos, um arquivo por capitulo, chamados
 	<filename>chapter1.sgml</filename>,
-	<filename>chapter2.sgml</filename>, and so forth, with a
-	<filename>book.sgml</filename> file that will contain these
-	chapters.</para>
-
-      <para>In order to use the contents of these files as the values for your
-	entities, you declare them with the <literal>SYSTEM</literal> keyword.
-	This directs the SGML parser to use the contents of the named file as
-	the value of the entity.</para>
-
+	<filename>chapter2.sgml</filename>, e assim por diante, com um
+	arquivo <filename>book.sgml</filename> que ir&aacute; conter este
+	cap&iacute;tulos.</para>
+	
+      <para>A fim de utilizar o conte&uacute;do destes arquivos como os
+	valores para as suas entidades, voc&ecirc; as declara com a palavra
+	chave <literal>SYSTEM</literal>.  Isto direciona o
+	interpretador SGML para utilizar o conteudo dos arquivos
+	nomeados como o valor da entidade.</para>
+      
       <example>
-	<title>Using general entities to include files</title>
+	<title>Utilizando entiades gerais para incluir
+	  arquivos</title>
 	
 	<programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
 <!ENTITY chapter.1 SYSTEM "chapter1.sgml">
 <!ENTITY chapter.2 SYSTEM "chapter2.sgml">
 <!ENTITY chapter.3 SYSTEM "chapter3.sgml">
-<!-- And so forth -->
+<!-- e assim por diante -->
 ]>
 
 <html>
-  <!-- Use the entities to load in the chapters -->
+  <!-- Utilize as entidades para carregar os cap&iacute;tulos -->
 
   &chapter.1;
   &chapter.2;
@@ -1228,57 +1231,60 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
       </example>
       
       <warning>
-	<para>When using general entities to include other files within a
-	  document, the files being included
-	  (<filename>chapter1.sgml</filename>,
-	  <filename>chapter2.sgml</filename>, and so on) <emphasis>must
-	    not</emphasis> start with a DOCTYPE declaration.  This is a syntax
-	  error.</para>
+	<para>Quando utilizar uma entidade geral para incluir outros
+	  arquivos em um documento, os arquivos que estiverem sendo
+	  inclusos ((<filename>chapter1.sgml</filename>,
+	  <filename>chapter2.sgml</filename>, etc) <emphasis>n&atilde;o
+	  devem</emphasis> inciar com uma declara&ccedil;&atilde;o DOCTYPE.  Isto &eacute;
+	  um erro de sintaxe.</para>
       </warning>
     </sect2>
     
     <sect2>
-      <title>Utilizando entidades de par&acirc;metro Para incluir arquivos</title>
+      <title>Utilizando entidades de par&acirc;metro para incluir arquivos</title>
       
-      <para>Recall that parameter entities can only be used inside an SGML
-	context.  Why then would you want to include a file within an SGML
-	context?</para>
-
-      <para>You can use this to ensure that you can reuse your general
-	entities.</para>
-
-      <para>Suppose that you had many chapters in your document, and you
-	reused these chapters in two different books, each book organising the
-	chapters in a different fashion.</para>
-
-      <para>You could list the entities at the top of each book, but this
-	quickly becomes cumbersome to manage.</para>
-
-      <para>Instead, place the general entity definitions inside one file,
-	and use a parameter entity to include that file within your
-	document.</para>
-
+      <para>Recorde-se que uma entidade de parametro s&oacute; pode ser
+	utilizada dentro de um contexto SGML.  Por que ent&atilde;o voc&ecirc;
+	desejaria incluir um arquivo dentro de um contexto do
+	SGML?</para>
+      
+      <para>Voc&ecirc; pode utilizar isto para assegurar-se de que voc&ecirc; pode
+	re-utilizar as suas entidades gerais.</para>
+      
+      <para>Suponha que voc&ecirc; possui muitos capitulos em seu documento,
+	e voc&ecirc; reutiliza estes capitulos em 2 livros diferentes, cada
+	livro organizando os capitulos de uma forma diferente.</para>
+      
+      <para>Voc&ecirc; pode listar as entidades no topo de cada livro, mas
+      isto rapidamente torna-se incomodo de gerenciar.</para>
+      
+      <para>Em vez de disso, coloque as defini&ccedil;&otilde;es das suas entidades
+	gerais em um arquivo, e utilize uma entidade de marametro para
+	incluir este arquivo dentro do seu documento.</para>
+      
       <example>
-	<title>Using parameter entities to include files</title>
+	<title>Utilizando entidades de parametro para incluir
+	  arquivos.</title>
 
-	<para>First, place your entity definitions in a separate file, called
-	  <filename>chapters.ent</filename>.  This file contains the
-	  following;</para>
-	  
+	<para>Primeiro, coloque as suas defini&ccedil;&otilde;es de entidades em um
+	arquivo separado, chamado <filename>chapters.ent</filename>.
+	Este arquivo cont&eacute;m o seguinte;</para>
+	
 	<programlisting><![ CDATA [<!ENTITY chapter.1 SYSTEM "chapter1.sgml">
 <!ENTITY chapter.2 SYSTEM "chapter2.sgml">
 <!ENTITY chapter.3 SYSTEM "chapter3.sgml">]]></programlisting>
 
-	<para>Now create a parameter entity to refer to the contents of the
-	  file.  Then use the parameter entity to load the file into the
-	  document, which will then make all the general entities available
-	  for use.  Then use the general entities as before;</para>
-
+	<para>Agora crie uma entidade de parametro para referenciar o
+	  conte&uacute;do do arquivo. E ent&atilde;o utilize a entidade de parametro
+	  para carregar o arquivo no seu documento, o que tornar&aacute;
+	  todas as entidades gerais dispon&iacute;veis para uso. Feito isso,
+	  utilize as entidades gerais como antes;</para>
+	
 	<programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
-<!-- Define a parameter entity to load in the chapter general entities -->
+<!-- Define uma entidade de parametro para carregar as entidades gerais de capitulo -->
 <!ENTITY % chapters SYSTEM "chapters.ent">
 
-<!-- Now use the parameter entity to load in this file -->
+<!-- Agora utilize a entidade de parametro para carregar neste arquivo -->
 %chapters;
 ]>
 
@@ -1298,18 +1304,18 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 
 	<procedure>
 	  <step>
-	    <para>Create three files, <filename>para1.sgml</filename>,
-	      <filename>para2.sgml</filename>, and
+	    <para>Crie tr&ecirc;s arquivos, <filename>para1.sgml</filename>,
+	      <filename>para2.sgml</filename>, e 
 	      <filename>para3.sgml</filename>.</para>
 
-	    <para>Put content similar to the following in each file;</para>
+	    <para>Coloque um conte&uacute;do similar ao seguinte em cada arquivo;</para>
 
-	    <programlisting><![ CDATA [<p>This is the first paragraph.</p>]]></programlisting>
+	    <programlisting><![ CDATA [<p>Este &eacute; o primeiro paragrafo.</p>]]></programlisting>
 	  </step>
 
 	  <step>
-	    <para>Edit <filename>example.sgml</filename> so that it looks like
-	      this;</para>
+	    <para>Edite o arquivo <filename>example.sgml</filename>
+	      para que ele se pare&ccedil;a com este;</para>
 
 	    <programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
 <!ENTITY version "1.1">
@@ -1320,11 +1326,11 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 
 <html>
   <head>
-    <title>An example HTML file</title>
+    <title>Um exemplo de arquivo HTML</title>
   </head>
 
   <body>
-    <p>The current version of this document is: &version;</p>
+    <p>A vers&atilde;o atual deste documento &eacute;: &version;</p>
 
     &para1;
     &para2;
@@ -1334,32 +1340,32 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	  </step>
 
 	  <step>
-	    <para>Produce <filename>example.html</filename> by normalising
-	      <filename>example.sgml</filename>.</para>
+	    <para>Produza o arquivo <filename>example.html</filename> atrav&eacute;s da 
+	      normaliza&ccedil;&atilde;o do arquivo <filename>example.sgml</filename>.</para>
 
             <screen>&prompt.user; <userinput>sgmlnorm -d example.sgml > example.html</userinput></screen>
 	  </step>
 
 	  <step>
-	    <para>Load <filename>example.html</filename> into your web
-	      browser, and confirm that the
-	      <filename>para<replaceable>n</replaceable>.sgml</filename> files
-	      have been included in <filename>example.html</filename>.</para>
+	    <para>Carregue o arquivo <filename>example.html</filename> no seu navegador web,
+	      e confirme que os arquivos <filename>para<replaceable>n</replaceable>.sgml</filename>
+	      foram incluidos no <filename>example.html</filename>.</para>
 	  </step>
 	</procedure>
       </sect3>
 
       <sect3>
-	<title>Use parameter entities to include files</title>
+	<title>Utilizando uma entidade de parametro para incluir
+	  arquivos.</title>
 
 	<note>
-	  <para>You must have taken the previous steps first.</para>
+	  <para>Voc&ecirc; deve ter executado os passos anteriores primeiro.</para>
 	</note>
 	
 	<procedure>
 	  <step>
-	    <para>Edit <filename>example.sgml</filename> so that it looks like
-	      this;</para>
+	    <para>Edite o arquivo <filename>example.sgml</filename> para que ele se 
+	      pare&ccedil;a com este;</para>
 	    
 	    <programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
 <!ENTITY % entities SYSTEM "entities.sgml"> %entities;
@@ -1367,11 +1373,11 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 
 <html>
   <head>
-    <title>An example HTML file</title>
+    <title>Um exemplo de arquivo HTML</title>
   </head>
 
   <body>
-    <p>The current version of this document is: &version;</p>
+    <p>A vers&atilde;o atual deste documento &eacute;: &version;</p>
 
     &para1;
     &para2;
@@ -1381,8 +1387,8 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	  </step>
 
 	  <step>
-	    <para>Create a new file, <filename>entities.sgml</filename>, with
-	      this content:</para>
+	    <para>Crie um novo arquivo chamado <filename>entities.sgml</filename>, com 
+	      este conte&uacute;do:</para>
 
 	    <programlisting><![ CDATA [<!ENTITY version "1.1">
 <!ENTITY para1 SYSTEM "para1.sgml">
@@ -1391,17 +1397,17 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	  </step>
 
 	  <step>
-	    <para>Produce <filename>example.html</filename> by normalising
-	      <filename>example.sgml</filename>.</para>
+	    <para>Produza o arquivo <filename>example.html</filename>
+	      atrav&eacute;s da normaliza&ccedil;&atilde;o do arquivo <filename>example.sgml</filename>.</para>
 
             <screen>&prompt.user; <userinput>sgmlnorm -d example.sgml > example.html</userinput></screen>
 	  </step>
 
 	  <step>
-	    <para>Load <filename>example.html</filename> into your web
-	      browser, and confirm that the
-	      <filename>para<replaceable>n</replaceable>.sgml</filename> files
-	      have been included in <filename>example.html</filename>.</para>
+	    <para>Carregue o arquivo <filename>example.html</filename> no seu navegador web
+	      e confirme que os arquivos 
+	      <filename>para<replaceable>n</replaceable>.sgml</filename> 
+	      foram incluidos no arquivo <filename>example.html</filename>.</para>
 	  </step>
 	</procedure>
       </sect3>
