@@ -1559,48 +1559,47 @@ pseudo-device   bpf           # Berkeley packet filter</programlisting>
 	      <filename>kernel.old</filename> porque ao instalar um
 	      novo kernel, o <filename>kernel.old</filename> é sobscrevido
 	      com o último kernel instalado que pode não se funcional.
-	      Also, as soon as possible, move the working kernel to the
-	      proper <filename>kernel</filename> location or commands such
-	      as &man.ps.1; will not work properly.  The proper command to
-	      <quote>unlock</quote> the kernel file that
-	      <command>make</command> installs (in order to move another
-	      kernel back permanently) is:</para>
+	      Tambem, o mais cedo possivel, realize a movimentacao do kernel para a
+	      localizacao apropriada <filename>kernel</filename> com comandos tal
+	      como &man.ps.1; nao trabalhara corretamente. O comando apropriado 
+	      <quote>destrava</quote> o arquivo do kernel que
+	      <command>faz</command> a instacao (a fim de move-los permanentemente para
+	      uma outra parte traseira do kernel) e:</para>
 
 	    <screen>&prompt.root; <userinput>chflags noschg /kernel</userinput></screen>
 
-	    <para>If you find you cannot do this, you are probably running
-	      at a &man.securelevel.8; greater than zero.  Edit
-	      <literal>kern_securelevel</literal> in
-	      <filename>/etc/rc.conf</filename> and set it to
-	      <literal>-1</literal>, then reboot.  You can change it back
-	      to its previous setting when you are happy with your new
+	    <para>Se voce encontrar voce nao pode fazer isto, voce estara rodando provavelmente
+	      em um &man.securelevel.8; mais extremamente em zero. Edite o
+	      <literal>kern_securelevel</literal> em
+	      <filename>/etc/rc.conf</filename> e ajuste isto para
+	      <literal>-1</literal>, entao reinicie. Voce pode mudar isto para tras
+	      para esta configuracao anterior quando voce e feliz com seu novo
 	      kernel.</para>
 
-	    <para>And, if you want to <quote>lock</quote> your new kernel
-	      into place, or any file for that matter, so that it cannot
-	      be moved or tampered with:</para>
+	    <para>E, se voce quiser <quote>travar</quote> seu novo kernel
+	      dentro de um local, ou algum arquivo para importacao, de algum mod que nao
+	      possa ser movido ou alterado:</para>
 
 	    <screen>&prompt.root; <userinput>chflags schg /kernel</userinput></screen>
 
-	    <para>In &os; 5.X, kernels are not installed with the
-	    system immutable flag, so this is unlikely to be the source
-	    of the problem you are experiencing.</para></note>
+	    <para>No &os; 5.X, o kernel nao sao instalados com o
+	    sistema one a area de memoria nao pode ser mudado, assim como esta e improvavel ser a fonte 
+	    do problema que voce esta experimentando.</para></note>
 	</listitem>
       </varlistentry>
 
       <varlistentry>
-	<term>The kernel works, but &man.ps.1; does not work
-	  any more:</term>
+	<term>O trabalho do kernel, mas nao trabalha mais algum &man.ps.1;:</term>
 
 	<listitem>
-	  <para>If you have installed a different version of the kernel
-	    from the one that the system utilities have been built with,
-	    for example, a 4.X kernel on a 3.X system, many system-status
-	    commands like &man.ps.1; and &man.vmstat.8; will not work any
-	    more.  You must recompile the <filename>libkvm</filename>
-	    library as well as these utilities.  This is one reason it is
-	    not normally a good idea to use a different version of the
-	    kernel from the rest of the operating system.</para>
+	  <para>Se voce tiver instado uma versao diferente do kernel
+	    de um sistema de utilizades que estiveram sido construidas com,
+	    por exemplo, um kernel 4.X em um sistema 3.X, muitos comandos de status do sistema
+	    como &man.ps.1; e &man.vmstat.8; nao funcionara
+	    mais. Voce deve recompilar a biblioteca <filename>libkvm</filename>
+	    como pode se util. Isto e uma razao que normalmente
+	    nao e uma boa ideia usar uma versao diferente do
+	    kernel do resto do sistema operacional.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
