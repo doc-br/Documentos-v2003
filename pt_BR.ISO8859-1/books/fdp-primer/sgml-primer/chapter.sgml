@@ -179,53 +179,58 @@
   <sect1 id="sgml-primer-elements">
     <title>Elementos, tags, e atributos</title>
 
-    <para>All the DTDs written in SGML share certain characteristics.  This is
-      hardly surprising, as the philosophy behind SGML will inevitably show
-      through. One of the most obvious manifestations of this philosophy is
-      that of <emphasis>content</emphasis> and
-      <emphasis>elements</emphasis>.</para>
+    <para>Todos os DTDs escritos em SGML compartilham certas
+      caracter&iacute;sticas.  Isto &eacute; uma dura surpresa, porque a filosofia
+      por de tr&aacute;s do SGML se mostrar&aacute; completamente inevit&aacute;vel.  Uma
+      das manifesta&ccedil;&otilde;es mais &oacute;bvias desta filosofia est&aacute; no <emphasis>
+      conte&uacute;do</emphasis> e nos <emphasis>elementos</emphasis>.</para>
+    
+    <para>A sua documenta&ccedil;&atilde;o (independente se &eacute; uma un&iacute;ca p&aacute;gina web
+      ou um livro longo) &eacute; composta de conte&uacute;do.  Este conte&uacute;do &eacute; ent&atilde;o
+      dividido (e de novo subdividido) em elementos.  O prop&oacute;sito da
+      adi&ccedil;&atilde;o de marca&ccedil;&otilde;es &eacute; atribuir nome e identidade para os limites destes
+      elementos de forma a possibilitar o processamento adicional.</para>
+    
+    <para>Por exemplo, considere um livro t&iacute;pico.  No n&iacute;vel mais alto,
+      o livro por si s&oacute; &eacute; um elemento.  Este elemento <quote>livro
+      </quote> (book) obviamente cont&eacute;m cap&iacute;tulos, os quais tamb&eacute;m podem 
+      ser considerados elementos em sua pr&oacute;pria forma.  Cada cap&iacute;tulo
+      ir&aacute; conter mais elementos, tais como par&aacute;grafos, cita&ccedil;&otilde;es, notas
+      de rodap&eacute;, etc.  Cada par&aacute;grafo pode conter elementos
+      adicionais, identificando o conte&uacute;do que era de discurso direto,
+      ou o nome de um personagem da hist&oacute;ria.</para>
 
-    <para>Your documentation (whether it is a single web page, or a lengthy
-      book) is considered to consist of content.  This content is then divided
-      (and further subdivided) into elements.  The purpose of adding markup is
-      to name and identify the boundaries of these elements for further
-      processing.</para>
+    <para>Voc&ecirc; pode preferir pensar nisto como uma
+      <quote>quebra</quote> do conte&uacute;do.  No n&iacute;vel mais alto voc&ecirc; tem
+      um peda&ccedil;o, o Livro.  Olhando um pouco mais abaixo, voc&ecirc; tem mais
+      peda&ccedil;os, os cap&iacute;tulos individuais.  Estes est&atilde;o divididos em
+      peda&ccedil;os ainda enores, os par&aacute;grafos, notas de rodap&eacute;, nomes de
+      personagens, etc.</para>
 
-    <para>For example, consider a typical book.  At the very top level, the
-      book is itself an element.  This <quote>book</quote> element obviously
-      contains chapters, which can be considered to be elements in their own
-      right.  Each chapter will contain more elements, such as paragraphs,
-      quotations, and footnotes.  Each paragraph might contain further
-      elements, identifying content that was direct speech, or the name of a
-      character in the story.</para>
+    <para>Observe que voc&ecirc; pode fazer esta diferencia&ccedil;&atilde;o entre os
+      diferentes elementos do conte&uacute;do sem recorrer a nenhum termo
+      SGML. <literal>It really is surprisingly straightforward.<literal>  
+      Voc&ecirc; pode fazer isso utilizando uma caneta de marca&ccedil;&atilde;o e uma
+      c&oacute;pia impressa do livro, utilizando diferentes cores para
+      indicar os diferentes peda&ccedil;os do conte&uacute;do.</para>
 
-    <para>You might like to think of this as <quote>chunking</quote> content.
-      At the very top level you have one chunk, the book.  Look a little
-      deeper, and you have more chunks, the individual chapters.  These are
-      chunked further into paragraphs, footnotes, character names, and so
-      on.</para>
+    <para>Naturalmente, n&oacute;s n&atilde;o possuimos uma caneta eletronica de
+      marca&ccedil;&atilde;o, assim n&oacute;s necessitamos de alguma outra maneira de
+      indicar a que elemento cada pe&ccedil;a de conte&uacute;do pertence.  Nas
+      linguagens escritas em SGML (HTML, DocBook, etc) isto &eacute; feito
+      atrav&eacute;s do uso de <emphasis>tags</emphasis>.</para>
+    
+    <para>Uma tag &eacute; utilizada para identificar onde um elemento
+      particular come&ccedil;a e onde ele termina.  <emphasis>A tag n&atilde;o &eacute; uma
+      parte pr&oacute;pria do elemento</emphasis>.  Porque cada DTD foi
+      normalmente escrito para marcar um tipo espec&iacute;fico de
+      informa&ccedil;&atilde;o, cada um deles reconhecer&aacute; diferentes elementos, e
+      ter&aacute; nomes diferentes para cada tag.</para>
 
-    <para>Notice how you can make this differentiation between different
-      elements of the content without resorting to any SGML terms.  It really
-      is surprisingly straightforward.  You could do this with a highlighter
-      pen and a printout of the book, using different colors to indicate
-      different chunks of content.</para>
-
-    <para>Of course, we do not have an electronic highlighter pen, so we need
-      some other way of indicating which element each piece of content belongs
-      to.  In languages written in SGML (HTML, DocBook, et al) this is done by
-      means of <emphasis>tags</emphasis>.</para>
-
-    <para>A tag is used to identify where a particular element starts, and
-      where the element ends.  <emphasis>The tag is not part of the element
-      itself</emphasis>. Because each DTD was normally written to mark up
-      specific types of information, each one will recognise different
-      elements, and will therefore have different names for the tags.</para>
-
-    <para>For an element called <replaceable>element-name</replaceable> the
-      start tag will normally look like
-      <literal>&lt;<replaceable>element-name</replaceable>&gt;</literal>.  The
-      corresponding closing tag for this element is
+    <para>Para um elemento chamado <replaceable>element-name</replaceable> 
+      a tag de in&iacute;cio normalmente ir&aacute; se paracer com 
+      <literal>&lt;<replaceable>element-name</replaceable>&gt;</literal>.  
+      E a tag correspondente de fechamento para este elemento seria
       <literal>&lt;/<replaceable>element-name</replaceable>&gt;</literal>.</para>
 
     <example>
