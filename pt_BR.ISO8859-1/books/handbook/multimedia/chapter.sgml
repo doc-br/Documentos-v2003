@@ -34,7 +34,7 @@
       &eacute; mais limitada do que o numero de aplica&ccedil;&otilde;es para som.  Por
       exemplo, enquanto este capitulo est&aacute; sendo escrito, n&atilde;o existe
       uma boa aplica&ccedil;&atilde;o de
-      <phoreignphrase>re-encoding</phoreingphrase> na cole&ccedil;&atilde;o de ports
+      <FOREIGNPHRASE>re-encoding</foreignphrase> na cole&ccedil;&atilde;o de ports
       do FreeBSD, a qual possa ser utilizada para converter arquivos
       de um formato para outro, da mesma forma que podemos fazer com
       arquivos de audio utilizando o <filename role="package">audio/sox
@@ -326,51 +326,54 @@ device csa</programlisting>
 
     <indexterm><primary>n&oacute;s de dispositivo</primary></indexterm>
 
-    <para>After you reboot, log in and check for the device in the
-      <filename>/var/run/dmesg.boot</filename> file, as shown below:</para>
+    <para>Depois que voc&ecirc; reinicializar, loge no sistema e verifique se o seu dispositivo 
+      est&aacute; sendo listado no arquivo <filename>/var/run/dmesg.boot</filename>, 
+      como mostrado abaixo:</para>
 
     <screen>&prompt.root; <userinput>grep pcm /var/run/dmesg.boot</userinput>
 pcm0: &lt;SB16 DSP 4.11&gt; on sbc0</screen>
 
-    <para>The output from your system may look different.  If no
-      <devicename>pcm</devicename> devices show up, something went
-      wrong earlier.  If that happens, go through your kernel
-      configuration file again and make sure you chose the correct
-      device.  Common problems are listed in <xref
-      linkend="troubleshooting">.</para>
-
+    <para>A sa&iacute;da para o seu sistema pode parecer diferente.  Se o
+      dispositivo <devicename>pcm</devicename> n&atilde;o for exibido, algo
+      de errado ocorreu anteriormente.  Se isto acontecer, verifique
+      novamente o arquivo de configura&ccedil;&atilde;o do seu kernel e
+      certifique-se de que voc&ecirc; escolheu o dispositivo correto.  Os
+      problemas mais comuns est&atilde;o listados em <xref linkend="troubleshooting">
+      .</para>
+    
     <note>
-      <para>If you are running FreeBSD&nbsp;5.0 or later, you can
-	safely skip the rest of this section.  These versions use
-	&man.devfs.5; to automatically create devices nodes.</para>
+      <para>Se voc&ecirc; estiver executando o FreeBSD&nbsp;5.0 ou
+      posterior, voc&ecirc; pode pular tranquilamente o resto desta sess&atilde;o.
+      Estas vers&otilde;es utilizam um &man.devfs.5; para criar
+      automaticamente os n&oacute;s de dispositivos.</para>
     </note>
-
-    <para>If the previous command returned
-      <devicename>pcm0</devicename>, you will have to run the
-      following as <username>root</username>:</para>
-
+      
+    <para>Se o comando pr&eacute;vio retornou <devicename>pcm0</devicename>,
+      voc&ecirc; ter&aacute; que executar os seguintes comandos, logado como
+      <username>root</username>:</para>
+    
     <screen>&prompt.root; <userinput>cd /dev</userinput>
 &prompt.root; <userinput>sh MAKEDEV snd0</userinput></screen>
 
-    <para>If the command returned <devicename>pcm1</devicename>,
-      follow the same steps as shown above, replacing
-      <devicename>snd0</devicename> with
+    <para>Se o comando retornou <devicename>pcm1</devicename>, siga os
+      mesmos passos mostrados acima, subistituindo
+      <devicename>snd0</devicename> por
       <devicename>snd1</devicename>.</para>
-
+    
     <note>
-      <para>The above commands will <emphasis>not</emphasis> create a
-	<devicename>/dev/snd</devicename> device!</para>
+      <para>Os comandos acima <emphasis>n&atilde;o</emphasis> ir&atilde;o criar o
+	dispositivo <devicename>/dev/snd</devicename>!</para>
     </note>
 
-    <para><command>MAKEDEV</command> will create a group of device
-      nodes, including:</para>
-
+    <para>O <command>MAKEDEV</command> ir&aacute; criar um grupo de n&oacute;s de
+      dispositivo, incluindo:</para>
+    
     <informaltable frame="none">
       <tgroup cols="2">
 	<thead>
 	  <row>
-	    <entry>Device</entry>
-	    <entry>Description</entry>
+	    <entry>Dispositivo</entry>
+	    <entry>Descri&ccedil;&atilde;o</entry>
 	  </row>
 	</thead>
 
