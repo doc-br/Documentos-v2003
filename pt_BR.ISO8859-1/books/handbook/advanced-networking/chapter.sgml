@@ -5586,7 +5586,6 @@ exemplo.org.  IN SOA ns1.exemplo.org.  admin.exemplo.org. (
 	    respons&aacute;vel por esta zona, com a @ trocada.  (
 	    <email>admin@exemplo.org</email> &eacute; substitu&iacute;do por
 	    <literal>admin.exemplo.org</literal>)</para></listitem>
-	    </listitem>
 	  </varlistentry>
 
 	  <varlistentry>
@@ -5650,7 +5649,7 @@ www	     IN CNAME	@</programlisting>
 	servidor de correio, e 10 a prioridade daquele servidor de
 	correio.</para>
 
-	<<para>Algu&eacute;m pode ter v&aacute;rios servidores de correio, com
+	<para>Algu&eacute;m pode ter v&aacute;rios servidores de correio, com
 	prioridades de 3, 2 e 1.  Um servidor de correio tentando
 	fazer uma entrega para 
 	<hostid role="domainname">exemplo.org</hostid> tentaria
@@ -5687,21 +5686,23 @@ www	     IN CNAME	@</programlisting>
     </sect2>
 
     <sect2>
-      <title>Caching Name Server</title>
+      <title>Servidor de Nomes de Cache</title>
       <indexterm>
 	<primary>BIND</primary>
 	<secondary>caching name server</secondary>
       </indexterm>
-      <para>
-	A caching name server is a name server that is not
-	authoritative for any zones.  It simply asks queries of its own,
-	and remembers them for later use.  To set one up, just configure
-	the name server as usual, omitting any inclusions of zones.
-</para>
+
+      <para>Um servidor de nome para cache &eacute; um tipo de servidor de
+      nome que n&atilde;o &eacute; autoritativo autoritativo para nenhuma zona.  Ele
+      simplesmente efetua buscas por conta pr&oacute;pria e se recorda delas
+      para uso futuro.  Para configurar um, apenas configure o
+      servidor de nome normalmente, omitindo quaisquer inclus&otilde;es de
+      zonas.</para>
+
     </sect2>
 
     <sect2 id="network-named-sandbox">
-      <title>Running <application>named</application> in a Sandbox</title>
+      <title>Rodando o <application>named</application> em Um Diret&oacute;rio Restrito (Sandbox)</title>
       <indexterm>
 	<primary>BIND</primary>
 	<secondary>running in a sandbox</secondary>
@@ -5710,35 +5711,38 @@ www	     IN CNAME	@</programlisting>
       <indexterm>
 	<primary><command>chroot</command></primary>
       </indexterm>
-      <para>For added security you may want to run &man.named.8; as an
-	unprivileged user, and configure it to &man.chroot.8; into a
-	sandbox directory.  This makes everything outside of the sandbox
-	inaccessible to the <application>named</application> daemon.  Should
-	<application>named</application> be compromised, this will help to
-	reduce the damage that can be caused.  By default, FreeBSD has a user
-	and a group called <groupname>bind</groupname>, intended for this
-	use.</para>
 
-      <note><para>Various people would recommend that instead of configuring
-	<application>named</application> to <command>chroot</command>, you
-	should run <application>named</application> inside a &man.jail.8;.
-	This section does not attempt to cover this situation.</para>
-      </note>
+      <para>Para seguran&ccedil;a adicional, voc&ecirc; pode querer rodar o
+      &man.named.8; com um usu&aacute;rio n&atilde;o priviliegiado e configur&aacute;-lo
+      para fazer &man.chroot.8; dentro de um diret&oacute;rio restrito 
+      (sandbox).  Isto torna tudo fora da sandbox inacess&iacute;vel para o
+      daemon <application>named</application>.  Caso o 
+      <application>named</application> seja atacado, isto ajudar&aacute; 
+      a reduzir os danos que podem ser causados.  Por padr&atilde;o, o
+      FreeBSD tem um usu&aacute;rio e um grupo chamados
+      <groupname>bind</groupname>, planejado para este uso.</para>
 
-      <para>Since <application>named</application> will not be able to
-	access anything outside of the sandbox (such as shared
-	libraries, log sockets, and so on), there are a number of steps
-	that need to be followed in order to allow
-	<application>named</application> to function correctly.  In the
-	following checklist, it is assumed that the path to the sandbox
-	is <filename>/etc/namedb</filename> and that you have made no
-	prior modifications to the contents of this directory.  Perform
-	the following steps as <username>root</username>.</para>
+      <note><para>Diversas pessoas recomendariam que ao inv&eacute;s de
+      configurar o <application>named</application> para fazer
+      <command>chroot</command>, voc&ecirc; deveria rod&aacute;-lo dentro de um
+      &man.jail.8;.  Esta se&ccedil;&atilde;o n&atilde;o tenta abordar esta situa&ccedil;&atilde;o.
+      </para></note>
+
+
+      <para>Uma vez que o <application>named</application> n&atilde;o ser&aacute;
+      capaz de acessar nada fora da sandbox, (como bibliotecas
+      compartilhadas, sockets de logs e assim por diante), h&aacute; uma
+      s&eacute;rie de passos que devem ser seguidos para permitir o correto
+      funcionamento do <application>named</application>.  Na seguinte
+      lista de verifica&ccedil;&atilde;o, &eacute; assumido que o caminho para a sandbox &eacute;
+      <filename>/etc/namedb</filename> e que voc&ecirc; n&atilde;o fez modifica&ccedil;&otilde;es
+      pr&eacute;vias ao conte&uacute;do deste diret&oacute;rio.  Execute os seguintes
+      passos como usu&aacute;rio <username>root</username>.</para>
 
       <itemizedlist>
 	<listitem>
-	  <para>Create all directories that <application>named</application>
-	    expects to see:</para>
+	  <para>Crie todos os diret&oacute;rios que o
+	  <application>named</application> espera encontrar:</para>
 
 	  <screen>&prompt.root; <userinput>cd /etc/namedb</userinput>
 &prompt.root; <userinput>mkdir -p bin dev etc var/tmp var/run master slave</userinput>
@@ -5748,14 +5752,16 @@ www	     IN CNAME	@</programlisting>
 
 	  <calloutlist>
 	    <callout arearefs="chown-slave">
-	      <para><application>named</application> only needs write access to
-		these directories, so that is all we give it.</para>
+	      <para>O <application>named</application> precisa de
+	      acesso para grava&ccedil;&atilde;o somente nestes diret&oacute;rios, ent&atilde;o &eacute;
+	      tudo que vamos lhe fornecer.</para>
 	    </callout>
 	  </calloutlist>
 	</listitem>
 
 	<listitem>
-	  <para>Rearrange and create basic zone and configuration files:</para>
+	  <para>Rearrume e crie uma zona b&aacute;sica e arquivos de
+	  configura&ccedil;&atilde;o:</para>
 	  <screen>&prompt.root; <userinput>cp /etc/localtime etc</userinput><co id="localtime">
 &prompt.root; <userinput>mv named.conf etc && ln -sf etc/named.conf</userinput>
 &prompt.root; <userinput>mv named.root master</userinput>
