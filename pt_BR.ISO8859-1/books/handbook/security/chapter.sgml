@@ -453,7 +453,7 @@
 	para um atacante pode quebrar qualquer tipo de segurança
 	que você colocou.  Isto é definitivamente um problema que você
 	deve considerar, mas você também deve considerar o fato de que
-	a grande maioira da violações ocorre remotamente, através da
+	a grande maioira da violações ocorrem remotamente, através da
 	rede, de pessoas que não tem acesso físico a sua estação de
 	trabalho ou servidores.</para>
       <indexterm><primary>KerberosIV</primary></indexterm>
@@ -501,7 +501,7 @@
       </indexterm>
 
       <para>O administrador de sistemas prudente somente executa serviços
-	que necessita, nem mais, nem menos.  Estaja previnido que serviços
+	que necessita, nem mais, nem menos.  Esteja previnido que serviços
 	de terçeiros são frequentemente os mais sujeitos a falhas.  Por 
 	exemplo, executando uma versão antiga do <application>imapd
 	</application> ou <application>popper</application> é como dar
@@ -529,54 +529,60 @@
 	<application>rlogind</application>, então desligue estes
 	serviços!</para>
       
-      <para>FreeBSD now defaults to running
+      <para>FreeBSD agora por padrão executa 
 	<application>ntalkd</application>,
-	<application>comsat</application>, and
-	<application>finger</application> in a sandbox.  Another program
-	which may be a candidate for running in a sandbox is &man.named.8;.
-	<filename>/etc/defaults/rc.conf</filename> includes the arguments
-	necessary to run <application>named</application> in a sandbox in a
-	commented-out form.  Depending on whether you are installing a new
-	system or upgrading an existing system, the special user accounts
-	used by these sandboxes may not be installed.  The prudent
-	sysadmin would research and implement sandboxes for servers
-	whenever possible.</para>
+	<application>comsat</application>, e
+	<application>finger</application> em um sandbox.  Um outro
+	programa que pode ser candidato para executar em um sandbox
+	é &man.named.8;.
+	<filename>/etc/defaults/rc.conf</filename> inclui os argumentos
+	necessários para executar <application>named</application> em um
+	sandbox em um formulário comentado.  Dependendo se você esta
+	instalando um sistema novo ou atualizando um sistema existente,
+	contas especiais de usuário usadas por estes sandboxes podem 
+	não estar instaladas.  O administrador de sistemas prudente
+	pesquisa e implementa sandboxes para serviços sempre que
+	possível.</para>
       <indexterm>
         <primary><application>sendmail</application></primary>
       </indexterm>
 
-      <para>There are a number of other servers that typically do not run
-	in sandboxes: <application>sendmail</application>,
+      <para>Há um número de outros serviços que tipicamente não executam
+	em sandboxes: <application>sendmail</application>,
 	<application>popper</application>,
 	<application>imapd</application>, <application>ftpd</application>,
-	and others.  There are alternatives to some of these, but
-	installing them may require more work than you are willing to
-	perform (the convenience factor strikes again).  You may have to
-	run these servers as <username>root</username> and rely on other
-	mechanisms to detect break-ins that might occur through them.</para>
+	e outros.  Há alternativas para alguns destes, mas
+	instalá-las pode exigir mais trabalho do que você está disposto
+	a executar (o fator conveniência ataca outra vez).  Você pode ter
+	que executar estes serviços como <username>root</username> e 
+	confiar em outros mecanismos para detectar violações que podem
+	ocorrer através deles.</para>
 
-      <para>The other big potential <username>root</username> holes in a
-	system are the
-	suid-root and sgid binaries installed on the system.  Most of
-	these binaries, such as <application>rlogin</application>, reside
-	in <filename>/bin</filename>, <filename>/sbin</filename>,
-	<filename>/usr/bin</filename>, or <filename>/usr/sbin</filename>.
-	While nothing is 100% safe, the system-default suid and sgid
-	binaries can be considered reasonably safe.  Still,
-	<username>root</username> holes are occasionally found in these
-	binaries.  A <username>root</username> hole was found in
-	<literal>Xlib</literal> in 1998 that made
-	<application>xterm</application> (which is typically suid)
-	vulnerable.  It is better to be safe than sorry and the prudent
-	sysadmin will restrict suid binaries, that only staff should run,
-	to a special group that only staff can access, and get rid of
-	(<command>chmod 000</command>) any suid binaries that nobody uses.
-	A server with no display generally does not need an
-	<application>xterm</application> binary.  Sgid binaries can be
-	almost as dangerous.  If an intruder can break an sgid-kmem binary,
-	the intruder might be able to read <filename>/dev/kmem</filename>
-	and thus read the encrypted password file, potentially compromising
-	any passworded account.  Alternatively an intruder who breaks
+      <para>Os outros furos com grande potencial <username>root</username>
+	em um sistema são os binários suid-root e sgid instalados no 
+	sistema.  A maioria destes binários, tais como 
+	<application>rlogin</application>, residem em
+	<filename>/bin</filename>, <filename>/sbin</filename>,
+	<filename>/usr/bin</filename>, ou <filename>/usr/sbin</filename>.
+	Enquanto nada é 100% seguro, os binários suid e sgid padrões
+	do sistema podem ser considerados razoalvelmente seguros.  
+	Apesar disso, furos <username>root</username> são encontrados
+	ocasionalmente nestes binários.  Um furo <username>root</username>
+	foi encontrado no <literal>Xlib</literal> em 1998 que fez o
+	<application>xterm</application> (que é tipicamente suid)
+	vulnerável.  É melhor estar seguro do que lamentar-se e o
+	administrador de sistemas prudente restringirá binários suid,
+	somente aqueles que usuários do sistema devem executar, a um
+	grupo especial que somente estes usuários podem acessar, e
+	começa a se livrar (<command>chmod 000</command>) de todos os 
+	binários suid que ninguém usa.
+	Um servidor sem monitor geralmente não necessita um binário 
+	<application>xterm</application>.  Binários sgid podem ser
+	quase sempre perigosos.  Se um invasor puder violar um 
+	binário sgid-kmem, o invasor provavelmente será capaz de
+	ler o <filename>/dev/kmem</filename> e assim ler o arquivo
+	de senhas criptografadas, comprometendo potencialmente
+	qualquer conta com senha.  Alternatively an intruder who breaks
 	group <literal>kmem</literal> can monitor keystrokes sent through
 	pty's, including pty's used by users who login through secure
 	methods.  An intruder that breaks the <groupname>tty</groupname>
