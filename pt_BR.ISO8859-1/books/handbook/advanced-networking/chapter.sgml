@@ -6194,36 +6194,41 @@ driftfile /var/db/ntp.drift</programlisting>
 	<primary><application>natd</application></primary>
       </indexterm>
       <para>O daemon de Tradu&ccedil;&atilde;o de Endere&ccedil;o de Rede do FreeBSD,
-      geralmente conhecido como &man.natd.8; </para>
-      <para>FreeBSD's Network Address Translation daemon, commonly known as
-	&man.natd.8; is a daemon that accepts incoming raw IP packets,
-	changes the source to the local machine and re-injects these packets
-	back into the outgoing IP packet stream.  &man.natd.8; does this by changing
-	the source IP address and port such that when data is received back,
-	it is able to determine the original location of the data and forward
-	it back to its original requester.</para>
+      geralmente conhecido como &man.natd.8; &eacute; o daemon que aceita
+      pacotes IP entrantes n&atilde;o modificados, altera a origem para a
+      m&aacute;quina local e re-injeta estes pacotes de volta ao fluxo de
+      pacotes IP saintes.  &man.natd.8; faz isso mudando o endere&ccedil;o IP
+      de origem e a porta, de forma que, quando o dado &eacute; recebido de
+      volta, &eacute; capaz de determinar sua localiza&ccedil;&atilde;o original e 
+      repass&aacute;-lo ao seu solicitante original.</para>
+
       <indexterm><primary>Internet connection sharing</primary></indexterm>
       <indexterm><primary>IP masquerading</primary></indexterm>
-      <para>The most common use of NAT is to perform what is commonly known as
-	Internet Connection Sharing.</para>
+      <para>O uso mais comum do NAT &eacute; executar o que &eacute; mais geralmente
+      conhecido como Compartilhamento de Conex&atilde;o Internet.</para>
     </sect2>
 
     <sect2 id="network-natsetup">
-      <title>Setup</title>
-      <para>Due to the diminishing IP space in IPv4, and the increased number
-	of users on high-speed consumer lines such as cable or DSL, people are
-	increasingly in need of an Internet Connection Sharing solution.  The
-	ability to connect several computers online through one connection and
-	IP address makes &man.natd.8; a reasonable choice.</para>
+      <title>Estrutura</title>
+      <para>Dada a redu&ccedil;&atilde;o do espa&ccedil;o de endere&ccedil;amento IP no IPv4, e o
+      elevado n&uacute;mero de usu&aacute;rios em linhas de alta velocidade para
+      consumidores, como cabo ou DSL, as pessoas est&atilde;o
+      progressivamente precisando de uma solu&ccedil;&atilde;o de Compartilhamento
+      de Conex&atilde;o Internet.  A capacidade de conectar v&aacute;rios
+      computadores online atrav&eacute;s de uma conex&atilde;o e endere&ccedil;o IP torna o
+      &man.natd.8; uma escolha razo&aacute;vel.</para>
 
-      <para>Most commonly, a user has a machine connected to a cable or DSL
-	line with one IP address and wishes to use this one connected computer to
-	provide Internet access to several more over a LAN.</para>
 
-      <para>To do this, the FreeBSD machine on the Internet must act as a
-	gateway.  This gateway machine must have two NICs&mdash;one for connecting
-	to the Internet router, the other connecting to a LAN.  All the
-	machines on the LAN are connected through a hub or switch.</para>
+      <para>Freq&uuml;entemente, um usu&aacute;rio tem uma m&aacute;quina conectada a uma
+      linha DSL ou cabo com um endere&ccedil;o IP e deseja usar este
+      computador conectado para oferecer acesso Internet a diversos
+      mais atrav&eacute;s de uma rede local.</para>
+
+      <para>Para isto, a m&aacute;quina FreeBSD na Internet precisa atuar
+      como um gateway.  Esta m&aacute;quina precisa ter duas placas de rede
+      &mdash;uma para conectar ao roteador Internet, a outra para
+      conectar a uma rede local.  Todas as m&aacute;quinas na rede local s&atilde;o
+      conectadas atrav&eacute;s de um concentrador ou comutador.</para>
 
       <mediaobject>
 	<imageobject>
@@ -6243,15 +6248,15 @@ driftfile /var/db/ntp.drift</programlisting>
 	</textobject>
 
 	<textobject>
-	  <phrase>Network Layout</phrase>
+	  <phrase>Diagrama da Rede</phrase>
 	</textobject>
       </mediaobject>
 
-      <para>A setup like this is commonly used to share an Internet
-	connection.  One of the <acronym>LAN</acronym> machines is
-	connected to the Internet.  The rest of the machines access
-	the Internet through that <quote>gateway</quote>
-	machine.</para>
+      <para>Uma configura&ccedil;&atilde;o como esta &eacute; geralmente usada para
+      compartilhar uma conex&atilde;o Internet.  Uma das m&aacute;quinas da
+      <acronym>LAN</acronym> est&aacute; conectada &agrave; Internet.  As demais
+      m&aacute;quinas acessam a Internet atrav&eacute;s daquela m&aacute;quina 
+      <quote>gateway</quote>.</para>
     </sect2>
 
     <sect2 id="network-natdkernconfiguration">
@@ -6259,17 +6264,19 @@ driftfile /var/db/ntp.drift</programlisting>
 	<primary>kernel</primary>
 	<secondary>configuration</secondary>
       </indexterm>
-      <title>Configuration</title>
-      <para>The following options must be in the kernel configuration
-	file:</para>
+      <title>Configura&ccedil;&atilde;o</title>
+      <para>As seguintes op&ccedil;&otilde;es precisam estar no arquivo de 
+      configura&ccedil;&atilde;o do kernel:</para>
       <programlisting>options IPFIREWALL
 options IPDIVERT</programlisting>
 
-      <para>Additionally, at choice, the following may also be suitable:</para>
+      <para>Adicionalmente, por escolha, o seguinte tamb&eacute;m pode ser
+      apropriado:</para>
       <programlisting>options IPFIREWALL_DEFAULT_TO_ACCEPT
 options IPFIREWALL_VERBOSE</programlisting>
 
-      <para>The following must be in <filename>/etc/rc.conf</filename>:</para>
+      <para>O seguinte precisaa estar no 
+      <filename>/etc/rc.conf</filename>:</para>
 
       <programlisting>gateway_enable="YES"
 firewall_enable="YES"
@@ -6283,46 +6290,53 @@ natd_flags=""</programlisting>
 	  <tbody>
 	    <row>
 	      <entry>gateway_enable="YES"</entry>
-	      <entry>Sets up the machine to act as a gateway.  Running
-		<command>sysctl net.inet.ip.forwarding=1</command>
-		would have the same effect.</entry>
+	      <entry>Configura a m&aacute;quina parar atuar como um gateway.
+	      Executando 
+	      <command>sysctl net.inet.ip.forwarding=1</command> 
+	      causaria o mesmo efeito.</entry>
 	    </row>
 	    <row><entry>firewall_enable="YES"</entry>
-	     <entry>Enables the firewall rules in
-	       <filename>/etc/rc.firewall</filename> at boot.</entry>
+	     <entry>Ativa as regras do firewall em
+	     <filename>/etc/rc.firewall</filename> durante a
+	     inicializa&ccedil;&atilde;o.</entry>
 	    </row>
 	    <row><entry>firewall_type="OPEN"</entry>
-	      <entry>This specifies a predefined firewall ruleset that
-		allows anything in.  See
-		<filename>/etc/rc.firewall</filename> for additional
-		types.</entry>
+	      <entry>Isto especifica um conjunto predefinido de
+	      regras do firewall, permitindo a entrada de qualquer
+	      coisa.  Veja <filename>/etc/rc.firewall</filename> 
+	      para tipos adicinais.</entry>
 	    </row>
 	    <row>
 	      <entry>natd_interface="fxp0"</entry>
-	      <entry>Indicates which interface to forward packets through
-		(the interface connected to the Internet).</entry>
+	      <entry>Indica a qual interface repassar pacotes (a
+	      interface conectada &agrave; Internet).</entry>
 	    </row>
 	    <row>
 	      <entry>natd_flags=""</entry>
-	      <entry>Any additional configuration options passed to
-		&man.natd.8; on boot.</entry>
+	      <entry>Quaisquer op&ccedil;&otilde;es de configura&ccedil;&atilde;o passadas ao
+	      &man.natd.8; durante a inicializa&ccedil;&atilde;o.</entry>
 	    </row>
 	  </tbody>
 	</tgroup>
       </informaltable>
 
-      <para>Having the previous options defined in
-	<filename>/etc/rc.conf</filename> would run
-	<command>natd -interface fxp0</command> at boot.  This can also
-	be run manually.</para>
+      <para>Tendo as op&ccedil;&otilde;es anteriores definidas em
+      <filename>/etc/rc.conf</filename> seria executado 
+      <command>natd -interface fxp0</command> durante a inicializa&ccedil;&atilde;o.
+      Ele tamb&eacute;m pode ser executado manualmente.</para>
 
-      <para>Each machine and interface behind the LAN should be
-	assigned IP address numbers in the private network space as
-	defined by <ulink
-	url="ftp://ftp.isi.edu/in-notes/rfc1918.txt">RFC 1918</ulink>
-	and have a default gateway of the <application>natd</application> machine's internal IP
-	address.</para>
+      <para>Cada m&aacute;quina e interface na rede local deveria ter
+      n&uacute;meros de endere&ccedil;os IP atribu&iacute;dos no espa&ccedil;o de rede privado
+      como definido por <ulink
+      url="ftp://ftp.isi.edu/in-notes/rfc1918.txt">RFC 1918</ulink> 
+      e ter como o gateway padr&atilde;o, o endere&ccedil;o IP interno da 
+      m&aacute;quina <application>natd</application>.</para>
 
+      <para>Por exemplo, o cliente <hostid>A</hostid> e 
+      <hostid>B</hostid> na rede local possuem endere&ccedil;os IP
+      <hostid role="ipaddr">192.168.0.2</hostid> e 
+      <hostid role="ipaddr">192.168.0.3</hostidrole>, enquanto a 
+      interface de rede local da m&aacute;quina natd</para>
       <para>For example, client <hostid>A</hostid> and
 	<hostid>B</hostid> behind the LAN have IP addresses of <hostid
 	role="ipaddr">192.168.0.2</hostid> and <hostid
