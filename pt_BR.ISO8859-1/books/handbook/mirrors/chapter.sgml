@@ -289,7 +289,7 @@
           &eacute; muito mais eficiente no uso dos recursos de rede e utiliza
           a tecnologia mais sofisticada dos dois, mas a um pre&ccedil;o.  
 	  Para usar o <application>CVSup</application>, um cliente especial dever&aacute; primeiramente
-          dever&aacute; ser instalado e configurado antes que qualquer bit possa ser transferido, depois disto
+          ser instalado e configurado antes que qualquer bit possa ser transferido, depois disto
 	  a transfer&ecirc;ncia se dar&aacute; em grandes peda&ccedil;os identificados pelo
           <application>CVSup</application> como
 	  <emphasis>collections</emphasis>.</para>
@@ -580,40 +580,38 @@
       </sect2>
 
       <sect2>
-	<title>Usando o <application>CTM</application> pela primeira vez
+	<title>Usando o <application>CTM</application> pela Primeira Vez
 	</title>
 
 	<para>Antes de come&ccedil;ar a usar os <quote>deltas</quote> <application>CTM</application>,
 	  voc&ecirc; precisar&aacute; estabelecer uma posi&ccedil;&atilde;o de 
-	  in&iacute;cio para para os <quote>deltas</quote> que ser&atilde;o produzidos a partir
+	  in&iacute;cio para os <quote>deltas</quote> que ser&atilde;o produzidos a partir
 	  dele.</para>
 
 	<para>Primeiro voc&ecirc; precisa determinar o que voc&ecirc; j&aacute; tem.  
 	  Voc&ecirc; pode iniciar de um diret&oacute;rio <quote>vazio</quote>.  
+	  Voc&ecirc; deve usar um <quote>Empty Delta</quote> para iniciar sua &aacute;rvore CTM.  
 	  Existe a inten&ccedil;&atilde;o de que no futuro sejam distribuidos
 	  <quote>deltas iniciais</quote> em CDs, mas atualmente isso ainda
 	  n&atilde;o &eacute; feito.</para>
 
-	<para>Considerando que a &aacute;rvore de diret&oacute;rios do 
-	  FreeBSD tem dezenas de Megabytes &eacute; prefer&iacute;vel que
-	  voc&ecirc; j&aacute; comece de alguma coisa.  
-	  Se voc&ecirc; tem um <foreignphrase>-RELEASE CD</foreignphrase>, 
-	  voc&ecirc; pode copiar a &aacute;rvore inicial de diret&oacute;rios
+	<para>Considerando que a &aacute;rvore de diret&oacute;rios
+	  tem dezenas de Megabytes, &eacute; prefer&iacute;vel
+	  iniciar a partir de algo que voc&ecirc; tenha &agrave; m&atilde;o.  
+	  Se voc&ecirc; tiver um <foreignphrase>-RELEASE CD</foreignphrase>, 
+	  voc&ecirc; poder&aacute; copiar a &aacute;rvore inicial de diret&oacute;rios
 	  dele.  Isso j&aacute; economizar&aacute; muito tempo de 
 	  transfer&ecirc;ncia de dados.</para>
 
 	<para>Voc&ecirc; pode reconhecer os <quote>deltas</quote> iniciais
 	  pelo <literal>X</literal> seguindo o n&uacute;mero
-	  (<filename>src-cur.3210XEmpty.gz</filename> por exemplo).  O
-	  que segue ao <literal>X</literal> corresponde ao arquivo inicial  
-	  de seu procedimento de atualiza&ccedil;&atilde;o autom&aacute;tica
-	  usando o CTM.   <filename>Empty</filename> &eacute; um diret&oacute;rio
+	  (<filename>src-cur.3210XEmpty.gz</filename>, por exemplo).  A designa&ccedil;&atilde;o
+	  que segue o <literal>X</literal> corresponde a origem da <quote>semente</quote> inicial que
+	  voc&ecirc; possui.   <filename>Empty</filename> &eacute; um diret&oacute;rio
 	  vazio.  Como regra um novo arquivo <filename>XEmpty</filename> &eacute;
-	  gerado a cada 100 <quote>deltas</quote>.  Lembre-se que quando se
-	  reinicia o procedimento de atualiza&ccedil;&atilde;o com um 
-	  <filename>XEmpty</filename> o primeiro arquivo de atualiza&ccedil;&atilde;o
-	  &eacute; enorme.  Arquivos de 70 a 80 Megabytes de dados compactados com
-          o <command>gzip</command> s&atilde;o comuns.</para>
+	  gerado a cada 100 <quote>deltas</quote>.  A prop&oacute;sito, os arquivos s&atilde;o
+	  enormes!  Arquivos de 70 a 80 Megabytes de dados compactados com
+          o <command>gzip</command> s&atilde;o comuns para os deltas <filename>XEmpty</filename>.</para>
 
 	<para>Uma vez que voc&ecirc; escolheu um <quote>delta</quote> para iniciar
 	  voc&ecirc; tamb&eacute;m precisar&aacute; de todos com n&uacute;meros
@@ -621,7 +619,7 @@
       </sect2>
 
       <sect2>
-	<title>Usando o <application>CTM</application> no dia a dia</title>
+	<title>Usando o <application>CTM</application> no Dia a Dia</title>
 
 	<para>Para aplicar os <quote>deltas</quote> recebidos &aacute; sua instala&ccedil;&atilde;o,
 	digite:</para>
