@@ -2093,137 +2093,149 @@ kern.maxfiles: 2088 -> 5000</screen>
 	<title>TCP Bandwidth Delay Product</title>
 
 	<indexterm>
-	  <primary>TCP Bandwidth Delay Product Limiting</primary>
+	  <primary>Limita&ccedil;&atilde;o de Produto de Atraso de Banda TCP</primary>
 	  <secondary><varname>net.inet.tcp.inflight_enable</varname></secondary>
 	</indexterm>
 
-	<para>The TCP Bandwidth Delay Product Limiting is similar to
-	  TCP/Vegas in <application>NetBSD</application>.  It can be
-	  enabled by setting <varname>net.inet.tcp.inflight_enable</varname>
-	  sysctl variable to <literal>1</literal>.  The system will attempt
-	  to calculate the bandwidth delay product for each connection and
-	  limit the amount of data queued to the network to just the amount
-	  required to maintain optimum throughput.</para>
+	<para>A Limita&ccedil;&atilde;o do Produto de Atraso de Banda TCP &eacute; similar ao 
+	  TCP/Vegas no <application>NetBSD</application>.  Pode ser habilitado 
+	  atrav&eacute;s da configura&ccedil;&atilde;o da vari&aacute;vel sysctl 
+	  <varname>net.inet.tcp.inflight_enable</varname> para o valor 
+	  <literal>1</literal>.  O sistema tentar&aacute; calcular o produto do atraso 
+	  de banda para cada conex&atilde;o e limitar a quantidade de dados 
+	  enfileirados para a rede para apenas a quantidade requerida, com 
+	  o objetivo de otimizar a quantidade de dados entrando e 
+	  saindo.</para>
 
-	<para>This feature is useful if you are serving data over modems,
-	  Gigabit Ethernet, or even high speed WAN links (or any other link
-	  with a high bandwidth delay product), especially if you are also
-	  using window scaling or have configured a large send window.  If
-	  you enable this option, you should also be sure to set
-	  <varname>net.inet.tcp.inflight_debug</varname> to
-	  <literal>0</literal> (disable debugging), and for production use
-	  setting <varname>net.inet.tcp.inflight_min</varname> to at least
-	  <literal>6144</literal> may be beneficial.  However, note that
-	  setting high minimums may effectively disable bandwidth limiting
-	  depending on the link.  The limiting feature reduces the amount of
-	  data built up in intermediate route and switch packet queues as
-	  well as reduces the amount of data built up in the local host's
-	  interface queue.  With fewer packets queued up, interactive
-	  connections, especially over slow modems, will also be able to
-	  operate with lower <emphasis>Round Trip Times</emphasis>.  However,
-	  note that this feature only effects data transmission (uploading
-	  / server side).  It has no effect on data reception (downloading).
+	<para>Esta caracter&iacute;stica &eacute; &uacute;til se voc&ecirc; est&aacute; servindo dados 
+	  atrav&eacute;s de modems, Gigabit Ethernet, ou at&eacute; mesmo links WAN de 
+	  alta velocidade (ou qualquer outro link com um alto produto de 
+	  atraso de banda), especialmente se voc&ecirc; tamb&eacute;m est&aacute; usando 
+	  escalamento de janela ou possui uma grande janela de envio 
+	  configurada.  Se voc&ecirc; habilitar esta op&ccedil;&atilde;o, voc&ecirc; deve ter 
+	  certeza de configurar a vari&aacute;vel 
+	  <varname>net.inet.tcp.inflight_debug</varname> para 
+	  <literal>0</literal> (desabilitar depura&ccedil;&atilde;o), e para produ&ccedil;&atilde;o 
+	  configurar <varname>net.inet.tcp.inflight_min</varname> para pelo 
+	  menos <literal>6144</literal> pode ser ben&eacute;fico.  Entretanto, 
+	  note que configurar valores m&iacute;nimos altos pode efetivamente 
+	  desabilitar a limita&ccedil;&atilde;o de banda dependendo do link.  A 
+	  caracter&iacute;stica de limita&ccedil;&atilde;o reduz a quantidade de dados 
+	  constru&iacute;dos na roda intermedi&aacute;ria e trocar as filas de pacotes 
+	  assim como reduzir a quantidade de dados constru&iacute;dos na interface 
+	  de enfileiramento da m&aacute;quina local.  Com poucos pacotes enfileirados, 
+	  conex&otilde;es ineterativas, especialmente sob modems lentos, tamb&eacute;m 
+	  ser&atilde;o capazes de operar com tempos reduzidos de <foreigphrase>
+	  <emphasis>Round Trip</emphasis></foreignphrase>.  Entretanto, 
+	  note que esta caracter&iacute;stica tem efeito apenas na transmiss&atilde;o 
+	  de dados (envio de dados / lado do servidor).  N&atilde;o tem efeito 
+	  na recep&ccedil;&atilde;o de dados <foreignphrase>(download)</foreignphrase>
 	</para>
 
-	<para>Adjusting <varname>net.inet.tcp.inflight_stab</varname> is
-	  <emphasis>not</emphasis> recommended.  This parameter defaults to
-	  20, representing 2 maximal packets added to the bandwidth delay
-	  product window calculation.  The additional window is required to
-	  stabilize the algorithm and improve responsiveness to changing
-	  conditions, but it can also result in higher ping times over slow
-	  links (though still much lower than you would get without the
-	  inflight algorithm).  In such cases, you may wish to try reducing
-	  this parameter to 15, 10, or 5; and may also have to reduce
-	  <varname>net.inet.tcp.inflight_min</varname> (for example, to
-	  3500) to get the desired effect.  Reducing these parameters
-	  should be done as a last resort only.</para>
+	<para>Ajustar o valor de <varname>net.inet.tcp.inflight_stab</varname> 
+	  <emphasis>n&atilde;o</emphasis> &eacute; recomendado.  Este par&acirc;metro tem valor 
+	  20 como padr&atilde;o, representando 2 pacotes m&aacute;ximos adicionados ao 
+	  c&aacute;lculo de janela de produto de atraso de banda.  A janela 
+	  adicional &eacute; requerida para estabilizar o algoritmo e melhorar 
+	  a resposta em condi&ccedil;&otilde;es de mudan&ccedil;a, mas tamb&eacute;m pode resultar em 
+	  tempos altos de ping em links lentos (ainda mais lentos do que 
+	  voc&ecirc; teria sem o algoritmo <literal>inflight</literal>).  Nestes 
+	  casos, voc&ecirc; pode querer tentar reduzir este par&acirc;metro para 15, 10 
+	  ou 5; e talvez tenha que reduzir a vari&aacute;vel 
+	  <varname>net.inet.tcp.inflight_min</varname> (por exemplo, para 
+	  3500) para obter o efeito desejado.  Reduzir estes par&acirc;metros 
+	  deve ser um recurso de &uacute;ltima tentativa.</para>
       </sect3>
     </sect2>
   </sect1>
 
   <sect1 id="adding-swap-space">
-    <title>Adding Swap Space</title>
+    <title>Adicionando Espa&ccedil;o de Swap</title>
 
-    <para>No matter how well you plan, sometimes a system does not run
-      as you expect.  If you find you need more swap space, it is
-      simple enough to add.  You have three ways to increase swap
-      space: adding a new hard drive, enabling swap over NFS, and
-      creating a swap file on an existing partition.</para>
+    <para>N&atilde;o importa o que voc&ecirc; planeje, algumas vezes o sistema 
+      n&atilde;o se roda como voc&ecirc; espera.  Se voc&ecirc; acha que precisa de 
+      mais espa&ccedil;o de swap, &eacute; simples adicionar.  Voc&ecirc; tem tr&ecirc;s 
+      maneiras de fazer isso: adicionar um novo disco, habilitar 
+      swap atrav&eacute;s de NFS, e criar um arquivo de swap em uma 
+      parti&ccedil;&atilde;o existente.</para>
 
     <sect2 id="new-drive-swap">
-      <title>Swap on a New Hard Drive</title>
+      <title>Swap em um Novo Disco R&iacute;gido</title>
 
-      <para>The best way to add swap, of course, is to use this as an
-	excuse to add another hard drive.  You can always use another
-	hard drive, after all.  If you can do this, go reread the
-	discussion of <ulink
-	url="configtuning-initial.html#SWAP-DESIGN">swap space
-	</ulink> from the <ulink
-	url="configtuning-initial.html">Initial Configuration</ulink>
-	section of the Handbook for some suggestions on how to best
-	arrange your swap.</para>
+      <para>A melhor maneira de adicionar swap, claro, &eacute; usar isto 
+	como desculpa para adicionar outro disco r&iacute;gido.  Voc&ecirc; pode 
+	sempre usar outro disco r&iacute;gido afinal de contas.  Se voc&ecirc; puder 
+	fazer isto, releia a discuss&atilde;o <ulink 
+	url="configtuning-initial.html#SWAP-DESIGN"> espa&ccedil;o de swap 
+	</ulink> da se&ccedil;&atilde;o do Handbook <ulink
+	url="configtuning-initial.html">Configura&ccedil;&atilde;o Inicial</ulink>
+	para sugest&otilde;es de quais os melhores meios para arrumar seu 
+	swap.</para>
     </sect2>
 
     <sect2 id="nfs-swap">
-      <title>Swapping over NFS</title>
+      <title>Swap atrav&eacute;s de NFS</title>
 
-      <para>Swapping over NFS is only recommended if you do not have a
-	local hard disk to swap to.  Swapping over NFS is slow and
-	inefficient in versions of &os; prior to 4.X.  It is
-	reasonably fast and efficient in 4.0-RELEASE and newer.  Even
-	with newer versions of &os;, NFS swapping will be limited
-	by the available network bandwidth and puts an additional
-	burden on the NFS server.</para>
+      <para>Fazer swap atrav&eacute;s de NFS somente &eacute; recomendado 
+	se voc&ecirc; n&atilde;o possui um disco local para fazer swap. &Eacute; 
+	lento e ineficiente em vers&otilde;es do &os; anteriores a 
+	4.X.  &Eacute; razoavelmente r&aacute;pido na 4.0-RELEASE e superior.  
+	Mesmo com vers&otilde;es mais novas do &os;, swap de NFS ser&aacute; 
+	limitado pela largura de banda da rede colocando uma 
+	carga extra no servidor NFS.</para>
     </sect2>
 
     <sect2 id="create-swapfile">
-      <title>Swapfiles</title>
+      <title>Arquivos de Swap</title>
 
-      <para>You can create a file of a specified size to use as a swap
-	file.  In our example here we will use a 64MB file called
-	<filename>/usr/swap0</filename>.  You can use any name you
-	want, of course.</para>
+      <para>Voc&ecirc; pode criar um arquifo de tamanho espec&iacute;fico 
+	para utilizar como arquivo de swap.  Em nosso exemplo 
+	usaremos um arquivo de 64MB chamado <filename>/usr/swap0
+	<filename>.  Voc&ecirc; pode usar qualquer nome que desejar, 
+	&eacute; claro.</para>
 
       <example>
-        <title>Creating a Swapfile on &os; 4.X</title>
+        <title>Criando um Arquivo de Swap no &os; 4.X</title>
 
       <orderedlist>
         <listitem>
-          <para>Be certain that your kernel configuration includes
-            the vnode driver.  It is <emphasis>not</emphasis> in recent versions of
-            <filename>GENERIC</filename>.</para>
+          <para>Tenha certeza de que seu arquivo de configura&ccedil;&atilde;o de 
+	    <foreignphrase>kernel<foreignphrase> inclui o driver 
+	    <literal>vnode</literal>.  Ele 
+	    <emphasis>n&atilde;o</emphasis> est&aacute; nas vers&otilde;es recentes do 
+	    arquivo <filename>GENERIC</filename>.</para>
 
           <programlisting>pseudo-device   vn 1   #Vnode driver (turns a file into a device)</programlisting>
         </listitem>
 
 	<listitem>
-	  <para>create a vn-device:</para>
+	  <para>crie um vn-device:</para>
 	  <screen>&prompt.root; <userinput>cd /dev</userinput>
 &prompt.root; <userinput>sh MAKEDEV vn0</userinput></screen>
 	</listitem>
 
 	<listitem>
-	  <para>create a swapfile (<filename>/usr/swap0</filename>):</para>
+	  <para>crie um arquivo de swap (<filename>/usr/swap0</filename>):</para>
 
 	  <screen>&prompt.root; <userinput>dd if=/dev/zero of=/usr/swap0 bs=1024k count=64</userinput></screen>
 	</listitem>
 
 	<listitem>
-	  <para>set proper permissions on (<filename>/usr/swap0</filename>):</para>
+	  <para>configure as permiss&otilde;es apropriadas em (<filename>/usr/swap0</filename>):</para>
 
 	  <screen>&prompt.root; <userinput>chmod 0600 /usr/swap0</userinput></screen>
 	</listitem>
 
 	<listitem>
-	  <para>enable the swap file in <filename>/etc/rc.conf</filename>:</para>
+	  <para>habilite o arquivo de swap em <filename>/etc/rc.conf</filename>:</para>
 
 	  <programlisting>swapfile="/usr/swap0"   # Set to name of swapfile if aux swapfile desired.</programlisting>
 	</listitem>
 
 	<listitem>
 
-          <para>Reboot the machine or to enable the swap file immediately,
-            type:</para>
+          <para>Reinicialize a m&aacute;quina ou habilite o arquivo de swap 
+	    imediatamente, digite:</para>
 
           <screen>&prompt.root; <userinput>vnconfig -e /dev/vn0b /usr/swap0 swap</userinput></screen>
         </listitem>
@@ -2231,39 +2243,40 @@ kern.maxfiles: 2088 -> 5000</screen>
 
       </example>
       <example>
-	<title>Creating a Swapfile on &os; 5.X</title>
+	<title>Criando um Arquivo de Swap no &os; 5.X</title>
 
       <orderedlist>
 	<listitem>
-	  <para>Be certain that your kernel configuration includes
-	    the memory disk driver (&man.md.4;).  It is default in
-	    <filename>GENERIC</filename> kernel.</para>
+	  <para>Tenha certeza de que seu arquivo de configura&ccedil;&atilde;o 
+	    de <foreignphrase>kernel</foreignphrase> tenha o 
+	    driver de mem&oacute;ria (&man.md.4;).  Est&aacute; no <filename>
+	    GENERIC</filename> por padr&atilde;o.</para>
 
 	  <programlisting>device   md   # Memory "disks"</programlisting>
 	</listitem>
 
 	<listitem>
-	  <para>create a swapfile (<filename>/usr/swap0</filename>):</para>
+	  <para>crie um arquivo de swap (<filename>/usr/swap0</filename>):</para>
 
 	  <screen>&prompt.root; <userinput>dd if=/dev/zero of=/usr/swap0 bs=1024k count=64</userinput></screen>
 	</listitem>
 
 	<listitem>
-	  <para>set proper permissions on (<filename>/usr/swap0</filename>):</para>
+	  <para>configure as permiss&otilde;es em (<filename>/usr/swap0</filename>):</para>
 
 	  <screen>&prompt.root; <userinput>chmod 0600 /usr/swap0</userinput></screen>
 	</listitem>
 
 	<listitem>
-	  <para>enable the swap file in <filename>/etc/rc.conf</filename>:</para>
+	  <para>habilite o arquivo de swap no <filename>/etc/rc.conf</filename>:</para>
 
 	  <programlisting>swapfile="/usr/swap0"   # Set to name of swapfile if aux swapfile desired.</programlisting>
 	</listitem>
 
 	<listitem>
 
-	  <para>Reboot the machine or to enable the swap file immediately,
-            type:</para>
+	  <para>Reinicialize a m&aacute;quina ou habilite o arquivo de swap 
+	    imediatamente, digite:</para>
 
 	  <screen>&prompt.root; <userinput>mdconfig -a -t vnode -f /usr/swap0 -u 0 && swapon /dev/md0</userinput></screen>
         </listitem>
@@ -2279,7 +2292,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	<author>
 	  <firstname>Hiten</firstname>
 	  <surname>Pandya</surname>
-	  <contrib>Written by </contrib>
+	  <contrib>Escrito por </contrib>
 	</author>
 	<author>
 	  <firstname>Tom</firstname>
@@ -2288,146 +2301,154 @@ kern.maxfiles: 2088 -> 5000</screen>
       </authorgroup>
     </sect1info>
 
-    <title>Power and Resource Management</title>
+    <title>Gerenciamento de Energia e Recursos</title>
 
-    <para>It is very important to utilize hardware resources in an
-      efficient manner.  Before <acronym>ACPI</acronym> was introduced,
-      it was very difficult and inflexible for operating systems to manage
-      the power usage and thermal properties of a system.  The hardware was
-      controlled by some sort of <acronym>BIOS</acronym> embedded
-      interface, such as <emphasis>Plug and Play BIOS (PNPBIOS)</emphasis>, or
-      <emphasis>Advanced Power Management (APM)</emphasis> and so on.
-      Power and Resource Management is one of the key components of a modern
-      operating system.  For example, you may want an operating system to
-      monitor system limits (and possibly alert you) in case your system
-      temperature increased unexpectedly.</para>
+    <para>&Eacute; muito importante utilizar os recursos de hardware de 
+      maneira eficiente.  Antes do <acronym>ACPI</acronym> ser 
+      introduzido, era muito dif&iacute;cil e inflex&iacute;fel para os sistemas 
+      operacionais gerenciar o uso de energia e propriedades 
+      t&eacute;rmicas de um sistema.  O hardware era controlado por algum 
+      tipo de interface <acronym>BIOS</acronym> embarcada, ou 
+      <emphasis>Plug and Play BIOS (PNPBIOS)</emphasis>, ou 
+      <emphasis>Gerenciamento de Energia Avan&ccedil;ado (APM)</emphasis> 
+      e assim por diante.  Gerenciamento de Energia e Recursos &eacute; um 
+      dos componentes chave de um sistema operacional moderno.  Por 
+      exemplo, voc&ecirc; pode querer que o sistema operacional monitore 
+      os limites do sistema (e poss&iacute;velmente alertar voc&ecirc;) caso a 
+      temperatura do seu sistema aumente inesperadamente.</para>
 
-    <para>In this section of the &os; Handbook, we will provide
-      comprehensive information about <acronym>ACPI</acronym>.  References
-      will be provided for further reading at the end.  Please be aware
-      that <acronym>ACPI</acronym> is available on &os;&nbsp;5.X and
-      above systems as a default kernel module.  For &os;&nbsp;4.9,
-      <acronym>ACPI</acronym> can be enabled by adding the line
-      <literal>device acpi</literal> to a kernel configuration and
-      rebuilding.</para>
+    <para>Nesta se&ccedil;&atilde;o do Handbook do &os; ofereceremos informa&ccedil;&otilde;es 
+      sobre <acronym>ACPI</acronym>.  Daremos refer&ecirc;ncias de leituras 
+      mais completas no final.  Por favor, saiba que o <acronym>ACPI
+      </acronym> est&aacute; dispon&iacute;vel no &os;&nbsp;5.X e superiores como 
+      um m&oacute;dulo padr&atilde;o de <foreignphrase>kernel</foreignphrase>.  Para 
+      o &os;&nbsp;4.9, <acronym>ACPI</acronym> pode ser habilitado 
+      adicionando-se a linha <literal>device acpi</literal> ao arquivo 
+      de comfigura&ccedil;&atilde;o do <foreignphrase>kernel<foreignphrase> e 
+      recompilando-se o sistema.</para>
 
     <sect2 id="acpi-intro">
-      <title>What Is ACPI?</title>
+      <title>O que &eacute; ACPI?</title>
 
-      <para>Advanced Configuration and Power Interface
-	(<acronym>ACPI</acronym>) is a standard written by
-	an alliance of vendors to provide a standard interface for
-	hardware resources and power management (hence the name).
-	It is a key element in <emphasis>Operating System-directed
-	configuration and Power Management</emphasis>, i.e.: it provides
-	more control and flexibility to the operating system
-	(<acronym>OS</acronym>).
-	Modern systems <quote>stretched</quote> the limits of the
-	current Plug and Play interfaces (such as APM, which is used in
-	&os;&nbsp;4.X), prior to the introduction of
-	<acronym>ACPI</acronym>.  <acronym>ACPI</acronym> is the direct
-	successor to <acronym>APM</acronym>
-	(Advanced Power Management).</para>
+      <para>Configura&ccedil;&atilde;o Avan&ccedil;ada e Interface de Energia 
+	(<acronym>ACPI</acronym>) &eacute; um padr&atilde;o escrito por um 
+	cons&oacute;rcio de fornecedores para oferecer um padr&atilde;o de 
+	interface para recursos de hardware e gerenciamento 
+	de energia.  &Eacute; um elemento chave na <emphasis>Configura&ccedil;&atilde;o 
+	direcionada ao Sistema e Gerenciamento de Energia</emphasis>, 
+	i.e.: oferece mais controle e flexibilidade para o sistema 
+	operacional (<acronym>SO</acronym>).  Sistemas modernos, 
+	<quote>arrebentaram</quote> os limites das interfaces 
+	<literal>Plug and Play</literal> atuais (tais como APM, que 
+	&eacute; usada no &os;&nbsp;4.X), antes da introdu&ccedil;&atilde;o do <acronym>
+	ACPI</acronym>.  <acronym>ACPI</acronym> &eacute; o sucessor 
+	direto do <acronym>APM</acronym> (Gerenciamento Avan&ccedil;ado 
+	de Energia).</para>
     </sect2>
 
     <sect2 id="acpi-old-spec">
-      <title>Shortcomings of Advanced Power Management (APM)</title>
+      <title>Contratempos do Gerenciamento Avan&ccedil;ado de Energia (APM)</title>
 
-      <para>The <emphasis>Advanced Power Management (APM)</emphasis>
-      facility control's the power usage of a system based on its
-      activity.  The APM BIOS is supplied by the (system) vendor and
-      it is specific to the hardware platform.  An APM driver in the
-      OS mediates access to the <emphasis>APM Software Interface</emphasis>,
-      which allows management of power levels.</para>
+      <para>O <emphasis>Gerenciamento Avan&ccedil;ado de Energia (APM)</emphasis>
+      facilita o controle do uso de energia de um sistema baseado em sua 
+      atividade.  A BIOS APM &eacute; oferecida pelo fornecedor (do sistem) e &eacute; 
+      espec&iacute;fica &agrave; plataforma de hardware.  Um driver APM no SO media o 
+      acesso ao <emphasis>Programa de Interface APM</emphasis>, que 
+      permite o gerenciamento de n&iacute;veis de energia.</para>
 
-      <para>There are four major problems in APM.  Firstly, power
-      management is done by the (vendor-specific) BIOS, and the OS
-      does not have any knowledge of it.  One example of this, is when
-      the user sets idle-time values for a hard drive in the APM BIOS,
-      that when exceeded, it (BIOS) would spin down the hard drive,
-      without the consent of the OS.  Secondly, the APM logic is
-      embedded in the BIOS, and it operates outside the scope of the
-      OS.  This means users can only fix problems in their APM BIOS by
-      flashing a new one into the ROM; which, is a very dangerous
-      procedure, and if it fails, it could leave the system in an
-      unrecoverable state. Thirdly, APM is a vendor-specific
-      technology, which, means that there is a lot or parity
-      (duplication of efforts) and bugs found in one vendor's BIOS,
-      may not be solved in others.  Last but not the least, the APM
-      BIOS did not have enough room to implement a sophisticated power
-      policy, or one that can adapt very well to the purpose of the
-      machine.</para>
+      <para>Existem quatro problemas principais no APM. Primeiro, 
+      o gerenciamento de energia &eacute; feito pela BIOS (espec&iacute;fica 
+      do fornecedor), e o SO n&atilde;o tem nenhum conhecimento dela.  Um 
+      exemplo disso &eacute; quando o usu&aacute;rio configura valores de tempo 
+      ocioso para discos r&iacute;gidos na BIOS APM que, quando excedidos, 
+      ela (BIOS) desliga o disco sem o consentimento do SO.  Segundo, 
+      a l&oacute;gica do APM &eacute; embarcada na BIOS, e opera fora do escopo 
+      do SO.  Isto significa que os usu&aacute;rios s&oacute; podem consertar 
+      problemas em suas BIOS APM gravando uma nova ROM; que &eacute; um 
+      procedimento extremamente perigoso, e se falhar, pode levar 
+      o sistema &agrave; um estado irrecuper&aacute;vel.  Terceiro, APM &eacute; uma 
+      tecnologia espec&iacute;fica do fornecedor, o que significa que 
+      existem muitas paridades (duplica&ccedil;&atilde;o de esfor&ccedil;os) e falhas 
+      encontradas nas BIOS destes fornecedores que podem n&atilde;o ser 
+      consertadas nas de outros fornecedores.  &Uacute;ltima mas n&atilde;o menos 
+      importante, a BIOS APM n&atilde;o possui espa&ccedil;o suficiente para 
+      implementar uma pol&iacute;tica sofisticada de energia, ou uma que 
+      possa se adaptar bem ao prop&oacute;sito da m&aacute;quina.</para>
       
-      <para><emphasis>Plug and Play BIOS (PNPBIOS)</emphasis> was
-      unreliable in many situations.  PNPBIOS is 16-bit technology,
-      so the OS has to use 16-bit emulation in order to
-      <quote>interface</quote> with PNPBIOS methods.</para>
+      <para><emphasis>BIOS Plug and Play (PNPBIOS)</emphasis> era
+      incofi&aacute;vel em muitas situa&ccedil;&otilde;es.  PNPBIOS &eacute; uma tecnologia 
+      de 16 bits, assim o SO tem que emular 16 bits para 
+      fazer <quote>interface</quote> com os m&eacute;todos PNPBIOS.</para>
 
-      <para>The &os; <acronym>APM</acronym> driver is documented in
-      the &man.apm.4; manual page.</para>
+      <para>O driver <acronym>APM</acronym> do &os; est&aacute; 
+      documentado na p&aacute;gina de manual &man.apm.4;.</para>
     </sect2>
 
     <sect2 id="acpi-config">
-      <title>Configuring <acronym>ACPI</acronym></title>
+      <title>Configurando <acronym>ACPI</acronym></title>
 
-      <para>The <filename>acpi.ko</filename> driver is loaded by default
-	at start up by the &man.loader.8; and should <emphasis>not</emphasis>
-	be compiled into the kernel.  The reasoning behind this is that modules
-	are easier to work with, say if switching to another <filename>acpi.ko</filename>
-	without doing a kernel rebuild.  This has the advantage of making testing easier.
-	Another reason is that starting <acronym>ACPI</acronym> after a system has been
-	brought up is not too useful, and in some cases can be fatal.  In doubt, just
-	disable <acronym>ACPI</acronym> all together. This driver should not and can not
-	be unloaded because the system bus uses it for various hardware interactions.
-	<acronym>ACPI</acronym> can be disabled with the &man.acpiconf.8; utility.
-	In fact most of the interaction with <acronym>ACPI</acronym> can be done via
-	&man.acpiconf.8;.  Basically this means, if anything about <acronym>ACPI</acronym>
-	is in the &man.dmesg.8; output, then most likely it is already running.</para>
+      <para>O driver <filename>acpi.ko</filename> &eacute; carregado por padr&atilde;o 
+	na inicializa&ccedil;&atilde;o pelo &man.loader.8; e <emphasis>n&atilde;o</emphasis> deve 
+	ser compilado no <foreignphrase>kernel</foreignphrase>.  A raz&atilde;o 
+	por tr&aacute;s disso &eacute; que os m&oacute;dulos s&atilde;o mais f&aacute;ceis de se trabalhar, 
+	digamos trocar para outro <filename>acpi.ko</filename> sem que seja 
+	preciso recompilar o <foreignphrase>kernel</foreignphrase>.  Isto 
+	tem a vantagem de facilitar os testes.  Uma outra raz&atilde;o &eacute; que 
+	inicializar o <acronym>ACPI</acronym> depois do sistema estar no ar 
+	n&atilde;o &eacute; t&atilde;o &uacute;til, e em alguns casos pode ser fatal.  Na d&uacute;vida, 
+	apenas desabilite o <acronym>ACPI</acronym>.  Este driver n&atilde;o deve 
+	e n&atilde;o pode ser desabilitado pois o barramento do sistema o usa para 
+	v&aacute;rias intera&ccedil;&otilde;es de hardware.  O <acronym>ACPI</acronym> pode ser 
+	desabilitado com o utilit&aacute;rio &man.acpiconf.8;.  Na verdade, a maior 
+	parte das intera&ccedil;&otilde;es com o <acronym>ACPI</acronym> pode ser feita 
+	atravpes do &man.acpiconf.8;.  Basicamente isto significa que se 
+	qualquer coisa a respeito do <acronym>ACPI</acronym> estiver na sa&iacute;da 
+	do &man.dmesg.8;, ent&atilde;o priovavelmente j&aacute; estar&aacute; rodando.</para>
 
-      <note><para><acronym>ACPI</acronym> and <acronym>APM</acronym> cannot coexist and
-	should be used separately.  The last one to load will terminate if the driver
-	notices the other running.</para></note>
+      <note><para><acronym>ACPI</acronym> e <acronym>APM</acronym> n&atilde;o podem 
+	coexistir e devem ser usados separadamente.  O &uacute;ltimo a ser carregado 
+	ser&aacute; finalizado se o driver tiver not&iacute;cias que o outro est&aacute; sendo 
+	executado.</para></note>
 
-      <para>In the simplest form, <acronym>ACPI</acronym> can be used to put the
-	system into a sleep mode with &man.acpiconf.8;, the <option>-s</option>
-	flag, and a <literal>1-5</literal> option.  Most users will only need
-	<literal>1</literal>.  Option <literal>5</literal> will do a soft-off
-	which is the same action as:</para>
+      <para>Nma forma mais simples, o <acronym>ACPI</acronym> pode ser usado 
+	para colocar o sistema em modo de espera com a op&ccedil;&atilde;o <option>-s
+	</option> e <literal>1-5</literal> do &man.acpiconf.8;.</para>
 
       <screen>&prompt.root; <userinput>halt -p</userinput></screen>
 
-      <para>The other options are available.  Check out the &man.acpiconf.8;
-	manual page for more information.</para>
+      <para>Outras op&ccedil;&otilde;es est&atilde;o dispon&iacute;veis.  Confira a p&aacute;gina de manual 
+	&man.acpiconf.8; para mais informa&ccedil;&otilde;es.</para>
     </sect2>
 
     <sect2 id="acpi-debug">
-      <title>Debugging and Disabling <acronym>ACPI</acronym></title>
+      <title>Depurando e Desabilitando o <acronym>ACPI</acronym></title>
 
-      <para>Almost everything in <acronym>ACPI</acronym> is transparent, until
-	it does not work.  That is usually when you as a user will know there
-	is something not working properly.  The &man.acpi.4; driver
-	supports many debugging options, it is even possible to
-	selectively disable some parts of the <acronym>ACPI</acronym>
-	system.  For more information about debugging facilities, read
-	the &man.acpi.4; manual page.</para>
+      <para>Quase tudo no <acronym>ACPI</acronym> &eacute; tranparente, 
+	at&eacute; que n&atilde;o funcione.  Voc&ecirc; como usu&aacute;rio saber&aacute; quando 
+	alguma coisa n&atilde;o funcionar de acordo.  O driver &man.acpi.4; 
+	suporte v&aacute;rias op&ccedil;&otilde;es de depura&ccedil;&atilde;o, &eacute; at&eacute; poss&iacute;vel 
+	seletivamente desabilitar algumas partes algumas partes do 
+	sistema <acronym>ACPI</acronym>.  Para mais informa&ccedil;&otilde;es a 
+	respeito de facildades de depura&ccedil;&atilde;o leia a p&aacute;gina de manual 
+	&man.acpi.4;.</para>
 
-      <para>Sometimes for various reasons, the
-	<filename>acpi.ko</filename> module must be unloaded.  This
-	can only be done at boot time by the &man.loader.8;.  You can
-	type at &man.loader.8; prompt the command
-	<command>unset acpi_load</command> each time you boot the
-	system, or to stop the autoloading of the
-	&man.acpi.4; driver add the following line to the
-	<filename>/boot/loader.conf</filename> file:</para>
+      <para>Algumas vezes, por v&aacute;rias raz&otilde;es, o m&oacute;dulo <filename>
+	acpi.ko</filename> deve ser descarregado.  Isto s&oacute; pode ser 
+	feito no momento da inicializa&ccedil;&atilde;o pelo &man.loader.8;.  Voc&ecirc; 
+	pode digitar no prompt do &man.loader.8; o comando <command>
+	unset acpi_load</command> cada vez que voc&ecirc; inicializar o 
+	sistema, para interromper o carregamento autom&aacute;tico do 
+	driver &man.acpi.4; adicione a seguinte linha no arquivo 
+	<filename>/boot/loader.conf</filename>:</para>
 
       <programlisting>exec="unset acpi_load"</programlisting>
 
-      <para>&os;&nbsp;5.1-RELEASE and later come with a boot-time menu
-	that controls how &os; is booted.  One of the proposed options
-	is to turn off <acronym>ACPI</acronym>.  So to disable
-	<acronym>ACPI</acronym> just select
+      <para>&os;&nbsp;5.1-RELEASE e superiores vem com um menu 
+	em tempo de inicializa&ccedil;&atilde;o que controla como o &os; &eacute; 
+	inicializado.  Uma das op&ccedil;&otilde;es propostas &eacute; a de desligar 
+	o <acronym>ACPI</acronym>.  Para desabilit&aacute;-lo selecione 
 	<guimenuitem>2. Boot &os; with ACPI disabled</guimenuitem>
-	in the menu.</para>
+	no menu.</para>
 
     </sect2>
   </sect1>
