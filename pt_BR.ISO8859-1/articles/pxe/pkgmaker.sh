@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# The FreeBSD Documentation Project
+# The FreeBSD Brazilian Portuguese Documentation Project
+#
+# Original revision: 1.1
+#
 # $Wintelcom: src/freebsd/pxe/doc/pkgmaker.sh,v 1.1 2000/07/14 12:42:05 bright Exp $
 # $FreeBSD: doc/en_US.ISO8859-1/articles/pxe/pkgmaker.sh,v 1.1 2003/06/17 08:21:40 alfred Exp $
 

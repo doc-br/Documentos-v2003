@@ -1,4 +1,10 @@
 # $FreeBSD: doc/en_US.ISO8859-1/articles/pxe/Makefile,v 1.4 2003/08/08 09:56:24 simon Exp $
+#
+# The FreeBSD Documentation Project
+# The FreeBSD Brazilian Portuguese Documentation Project
+#
+# Original revision: 1.4
+#
 
 DOC?= article
 
