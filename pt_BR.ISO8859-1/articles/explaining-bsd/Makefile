@@ -1,5 +1,5 @@
 # 
-# $FreeBSD: doc/en_US.ISO8859-1/articles/explaining-bsd/Makefile,v 1.1 2001/03/14 18:10:08 nik Exp $
+# $FreeBSD: articles/explaining-bsd/Makefile,v 1.1 2003/12/10 22:29:04 ebrandi Exp $
 #
 
 MAINTAINER=grog@FreeBSD.org
@@ -21,4 +21,3 @@ SRCS=  article.sgml
 
 DOC_PREFIX?= ${.CURDIR}/../../..
 .include "${DOC_PREFIX}/share/mk/doc.project.mk"
-
