@@ -374,35 +374,36 @@ local: lsof-4.56.4.tgz remote: lsof-4.56.4.tgz
 	removida. O &man.pkg.add.1; ir&aacute; buscar automaticamente a
 	ultima vers&atilde;o do aplicativo.</para>
 
-      <para>Package files are distributed in <filename>.tgz</filename>
-          and <filename>.tbz</filename> formats.  You can find them at <ulink
-          url="ftp://ftp.FreeBSD.org/pub/FreeBSD/ports/packages/"></ulink>,
-          or on the FreeBSD CD-ROM distribution.  Every CD on the
-          FreeBSD 4-CD set (and the PowerPak, etc.) contains packages
-          in the <filename>/packages</filename> directory.  The layout
-          of the packages is similar to that of the
-          <filename>/usr/ports</filename> tree.  Each category has its
-          own directory, and every package can be found within the
-          <filename>All</filename> directory.
+      <para>
+	Os pacotes s&atilde;o distribuidos no formato
+	<filename>.tgz</filename> e <filename>.tbz</filename>, voc&ecirc;
+	pode encontra-los em <ulink
+	url="ftp://ftp.FreeBSD.org/pub/FreeBSD/ports/packages/"></ulink>,
+	ou nos CDs de instala&ccedil;&atilde;o do FreeBSD. Todos os CDs do set de 4
+	CDs de instala&ccedil;&atilde;o do FreeBSD (e do PowerPack, etc) cont&eacute;m
+	pacotes no diret&oacute;rio <filename>/packages</filename>.
+	O layout do diret&oacute;rio packages &eacute; similar ao encontrado na
+	&aacute;rvore <filename>/usr/ports</filename>. Cada categoria possui
+	seu pr&oacute;prio diret&oacute;rio, e cada pacote pode ser encontrado no
+	diret&oacute;rio <filename>All</filename>.
       </para>
 
-      <para>The directory structure of the package system matches the
-        ports layout; they work with each other to form the entire
-        package/port system.
+      <para>A estrutura do diret&oacute;rio do sistema de pacotes &eacute;
+      identica ao layout do ports; eles trabalham em conjunto para
+      formar o sistema de pacotes/ports.
       </para>
 
     </sect2>
 
     <sect2>
-      <title>Managing Packages</title>
+      <title>Gerenciando Pacotes</title>
 
       <indexterm>
         <primary>packages</primary>
         <secondary>managing</secondary>
       </indexterm>
-      <para>&man.pkg.info.1; is a utility that lists and describes 
-        the various packages installed.
-      </para>
+      <para>O &man.pkg.info.1; &eacute; um utilit&aacute;rio que lista e descreve os
+      varios pacotes instalados.</para>
 
       <indexterm>
         <primary><command>pkg_info</command></primary>
@@ -411,10 +412,10 @@ local: lsof-4.56.4.tgz remote: lsof-4.56.4.tgz
 cvsup-16.1          A general network file distribution system optimized for CV
 docbook-1.2         Meta-port for the different versions of the DocBook DTD
 ...</screen>
-      <para>&man.pkg.version.1; is a utility that summarizes the
-        versions of all installed packages.  It compares the package 
-        version to the current version found in the ports tree.
-      </para> 
+      <para>O &man.pkg.version.1; &eacute; um utilit&aacute;rio que sumariza a
+      vers&atilde;o de todos os pacotes instalados. Ele compara a vers&atilde;o do
+      pacote instalado com a vers&atilde;o atual encontrada na &aacute;rvore do
+      ports.</para> 
       <indexterm>
         <primary><command>pkg_version</command></primary>
       </indexterm>
@@ -423,9 +424,9 @@ cvsup                       =
 docbook                     =
 ...</screen>
 
-      <para>The symbols in the second column indicate the relative age
-        of the installed version and the version available in the
-        local ports tree.</para>
+      <para>Os simbolos na segunda coluna indicam a idade relativa da
+      vers&atilde;o instadada e da vers&atilde;o disponivel na &aacute;rvore local do
+      ports.</para>
 
       <informaltable frame="none">
         <tgroup cols="2">
@@ -438,27 +439,29 @@ docbook                     =
 
  	  <tbody>
   	    <row>
-	    <entry>=</entry> <entry>The version of the
-	    installed package matches the one found in the
-	    local ports tree.</entry>
+	    <entry>=</entry> <entry>A vers&atilde;o instalada do pacote &eacute;
+	    identica a vers&atilde;o dispon&iacute;vel na &aacute;rvore local do ports.
+	    </entry>
   	    </row>
  
         <row><entry>&lt;</entry>
-	<entry>The installed version is older than the one available
-	in the ports tree.</entry>
+	<entry>A vers&atilde;o instalada do pacote &eacute; mais antiga que a vers&atilde;o
+	disponivel na &aacute;rvore local do ports.
+	</entry>
 	</row>
 
-        <row><entry>&gt;</entry><entry>The installed version is newer
-          than the one found in the local ports tree. (The local ports
-          tree is probably out of date.)</entry></row>
+        <row><entry>&gt;</entry><entry>A vers&atilde;o instalada do pacote &eacute;
+	mais rescente que a vers&atilde;o disponivel na &aacute;rvore local do
+	ports. (Provavelmente sua &aacute;rvore do ports est&aacute; desatualizada)
+        </entry></row>
 
-        <row><entry>?</entry><entry>The installed package cannot be
-	  found in the ports index.  (This can happen, for instance, if an
-	  installed port is removed from the ports collection or
-	  renamed.)</entry></row>
+        <row><entry>?</entry><entry>
+	  O pacote instalado n&atilde;o foi localizado no indice do ports.
+	  (Isto pode ocorrer, por exemplo, se um aplicativo instalado
+	  for removido da aravore do ports ou ent&atilde;o renomeado).
+	  </entry></row>
 
-        <row><entry>*</entry><entry>There are multiple versions of the
-        package.</entry></row>
+        <row><entry>*</entry><entry>Existem multiplas vers&otilde;es do pacote.</entry></row>
 
 	</tbody>
 	</tgroup>
@@ -466,7 +469,7 @@ docbook                     =
     </sect2>
 
     <sect2>
-      <title>Deleting a Package</title>
+      <title>Deletando um pacote</title>
       <indexterm>
         <primary><command>pkg_delete</command></primary>
       </indexterm>
@@ -474,25 +477,26 @@ docbook                     =
         <primary>packages</primary>
         <secondary>deleting</secondary>
       </indexterm>
-      <para>To remove a previously installed software package, use the
-	&man.pkg.delete.1; utility.
+      <para>
+	Para remover um pacote pr&eacute;viamente instalado, utilize o
+	utilit&aacute;rio &man.pkg.delete.1;.
       </para>
 
       <screen>&prompt.root; <userinput>pkg_delete <replaceable>xchat-1.7.1</replaceable></userinput></screen>
     </sect2>
 
     <sect2>
-      <title>Miscellaneous</title>
-      <para>All package information is stored within the 
-        <filename>/var/db/pkg</filename> directory.  The installed
-	file list and descriptions of each package can be found within 
-        files in this directory.
+      <title>Miscelanea</title>
+      <para>Todas as informa&ccedil;&otilde;es dos pacotes &eacute; armazenada no diret&oacute;rio
+      <filename>/var/db/pkg</filename>. A lista de arquivos instalados
+      e a descri&ccedil;&atilde;o de cada pacote pode ser encontrada nos arquivos
+      destes diretorios.
       </para>
     </sect2>
   </sect1>
   
   <sect1 id="ports-using">
-    <title>Using the Ports Collection</title>
+    <title>Usando a cole&ccedil;&atilde;o de ports</title>
 
     <para>The following sections provide basic instructions on using the
       ports collection to install or remove programs from your
