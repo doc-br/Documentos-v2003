@@ -272,7 +272,7 @@ altera&ccedil;&otilde;es para diferenciar do
     </itemizedlist>
     
     <procedure>
-      <title>Procedimento 1.  Compilando um Kernel da Maneira <quote>Tradicional</quote></title>
+      <title>Procedimento 1. Compilando um Kernel da Maneira <quote>Tradicional</quote></title>
       
       <step>
 	<para>Execute &man.config.8; para gerar o código fonte do kernel.</para>
@@ -415,19 +415,19 @@ altera&ccedil;&otilde;es para diferenciar do
       respeito sa necessidade de uma linha, verifique primeiramente no
       <filename>LINT</filename>.</para>
 
-    <note><para>In &os; 5.X and above the <filename>LINT</filename> is
-      non-existent.  See the <filename>NOTES</filename> file for
-      architecture dependent options.  Some options, mainly
-      architecture independent ones, are stored in the
-      <filename>/usr/src/sys/conf/NOTES</filename> file.  It is
-      advisable to review the options in here also.</para></note>
+    <note><para>No &os; 5.X e superiores o <filename>LINT</filename> é
+      inexistente. Veja as <filename>NOTES</filename> do arquivo para
+      arquiterura de opções independentes. Algumas opções, principalmente
+      independentes da arquitetura, são armazenadas no arquivo
+      <filename>/usr/src/sys/conf/NOTES</filename>. É aconselhável
+      revisar as opções dentro daqui também.</para></note>
 
     <indexterm>
       <primary>kernel</primary>
-      <secondary>example config file</secondary>
+      <secondary>Exemplos de arquivo de configuração</secondary>
     </indexterm>
 
-    <para>The following is an example <filename>GENERIC</filename> kernel
+    <para>A seguir is an example <filename>GENERIC</filename> kernel
       configuration file with various additional comments where needed for
       clarity.  This example should match your copy in
       <filename>/usr/src/sys/i386/conf/GENERIC</filename> fairly
@@ -454,51 +454,50 @@ altera&ccedil;&otilde;es para diferenciar do
 #
 # &dollar;FreeBSD: src/sys/i386/conf/GENERIC,v 1.380 2003/03/29 13:36:41 mdodd Exp $</programlisting>
 
-    <para>The following are the mandatory keywords required in
-      <emphasis>every</emphasis> kernel you build:</para>
+    <para>A seguir are the obrigatório palavra-chaves requeridas em 
+      <emphasis>todos</emphasis> os kernels compilados por você:</para>
     <indexterm>
-      <primary>kernel options</primary>
-      <secondary>machine</secondary>
+      <primary>Opções do kernel</primary>
+      <secondary>máquina</secondary>
     </indexterm>
 
-    <programlisting>machine		i386</programlisting>
+    <programlisting>máquina		i386</programlisting>
 
-    <para>This is the machine architecture.  It must be either
+    <para>Está é a arquitetura da máquina. Deve ser algum desses
       <literal>i386</literal>, <literal>pc98</literal>,
       <literal>sparc64</literal>, <literal>alpha</literal>,
       <literal>ia64</literal>, <literal>amd64</literal>, or
       <literal>powerpc</literal>.</para>
 
     <indexterm>
-      <primary>kernel options</primary>
+      <primary>Opções do kernel</primary>
       <secondary>cpu</secondary>
     </indexterm>
     <programlisting>cpu          I486_CPU
 cpu          I586_CPU
 cpu          I686_CPU</programlisting>
 
-    <para>The above option specifies the type of CPU you have in your
-      system.  You may have multiple instances of the CPU line (i.e.,
-      you are not sure whether you should use
-      <literal>I586_CPU</literal> or <literal>I686_CPU</literal>),
-      however, for a custom kernel, it is best to specify only the CPU
-      you have.  If you are unsure of your CPU type, you can check the
-      <filename>/var/run/dmesg.boot</filename> file to view your boot
-      up messages.</para>
+    <para>A opção acima especifica o tipo da CPU que você tem em seu sistema.
+      Você deve ter exemplos multiplos na linha da CPU (isto é,
+      não é certo se você utiliza 
+      <literal>I586_CPU</literal> ou <literal>I686_CPU</literal>),
+      entretanto, para personalizar um kernel, é melhor especificar apenas a CPU que você tem.
+      Se você estiver inseguro do tipo da sua CPU, você pode verificar o arquivo
+      <filename>/var/run/dmesg.boot</filename> para ver suas mensagem do carregamento do seu sistema.</para>
 
     <indexterm>
-      <primary>kernel options</primary>
-      <secondary>cpu type</secondary>
+      <primary>Opções do kernel</primary>
+      <secondary>tipo da CPU</secondary>
     </indexterm>
-    <para>Support for <literal>I386_CPU</literal> is still provided in the
-      source of &os;, but it is disabled by default in both -STABLE and
-      -CURRENT.  This means that to install &os; with a 386-class cpu, you now
-      have the following options:</para>
+    <para>Suporte para <literal>I386_CPU</literal> é fornecido ainda no fonte
+      do &os;, mas é desativada por padrão em ambos -STABLE e
+      -CURRENT. Isto significa que para instalar &os; com um 386-class cpu, você agora
+      tem as seguintes opções:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Install an older &os; release and rebuild from source as
-	  described in <xref linkend="kernelconfig-building">.</para>
+        <para>Instale uma release &os; antiga e recompile de fonte como
+	  descrito dentro <xref linkend="kernelconfig-building">.</para>
       </listitem>
 
       <listitem>
