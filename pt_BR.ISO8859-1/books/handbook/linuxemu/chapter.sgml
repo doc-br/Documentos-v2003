@@ -3406,121 +3406,135 @@ options SHMMAXPGS=393216
 	4 ou 8 bytes do arquivo) para ver se era um bin&aacute;rio conhecido 
 	do sistema, e se fosse, invocaria o carregador do bin&aacute;rio.</para>
 
-      <para>If it was not the binary type for the system, the
-	&man.execve.2; call returned a failure, and the shell attempted to
-	start executing it as shell commands.</para>
+      <para>Se n&atilde;o fosse o tipo de bin&aacute;rio para o sistema, o 
+	&man.execve.2; retornaria uma falha, e o <foreignphrase>shell</foreignphrase> 
+	tentaria execut&aacute;-lo como um comando.</para>
 
-      <para>The assumption was a default of <quote>whatever the current
-	shell is</quote>.</para>
+      <para>Assumiasse que o padr&atilde;o era <quote>qualquer que fosse o 
+	shell</quote>.</para>
 
-      <para>Later, a hack was made for &man.sh.1; to examine the first two
-	characters, and if they were <literal>:\n</literal>, then it
-	invoked the &man.csh.1; shell instead (we believe SCO first made
-	this hack).</para>
+      <para>Mais tarde, um ajuste foi feito no &man.sh.1; para examinar os 
+	dois primeiros caracteres, e se eles fossem <literal>:\n</literal>, 
+	ent&atilde;o o <foreingphrase>shell</foreignphrase> &man.csh.1; seria 
+	invocado (acreditamos a SCO foi a primeira a fazer este ajuste).</para>
 
-      <para>What FreeBSD does now is go through a list of loaders, with a
-	generic <literal>#!</literal> loader that knows about interpreters
-	as the characters which follow to the next whitespace next to
-	last, followed by a fallback to
+      <para>O que o FreeBSD faz agora &eacute; ir &agrave; uma lista de 
+	carregadores, com um carregador <literal>#!</literal> gen&eacute;rico 
+	que sabe a respeito dos interpretadores como os caracteres que seguem 
+	o pr&oacute;ximo espa&ccedil;o em branco pr&oacute;ximo ao&uacute;ltimo 
+	caracter, seguidos de um retorno para 
 	<filename>/bin/sh</filename>.</para>
       <indexterm><primary>ELF</primary></indexterm>
 
-      <para>For the Linux ABI support, FreeBSD sees the magic number as an
-	ELF binary (it makes no distinction between FreeBSD, &solaris;,
-	Linux, or any other OS which has an ELF image type, at this
-	point).</para>
+      <para>Para o suporte ABI pra Linux, o FreeBSD v&ecirc; o n&uacute;mero 
+	m&aacute;gico como um bin&aacute;rio ELF (n&atilde;o faz 
+	distin&ccedil;&atilde;o entre FreeBSD, &solaris;, Linux ou qualquer 
+	outro SO que possui um tipo de imagem ELF, neste momento).</para>
       <indexterm><primary>Solaris</primary></indexterm>
 
-      <para>The ELF loader looks for a specialized
-	<emphasis>brand</emphasis>, which is a comment section in the ELF
-	image, and which is not present on SVR4/&solaris; ELF
-	binaries.</para>
+      <para>O carregador ELF procura por uma <emphasis>marca</emphasis> 
+	especializada, que &eacute; uma se&ccedil;&atilde;o de coment&aacute;rio 
+	na imagem ELF, que n&atilde;o est&aacute; presente nos bin&aacute;rios 
+	ELF do SVR4/&solaris;.</para>
 
-      <para>For Linux binaries to function, they must be
-	<emphasis>branded</emphasis> as type <literal>Linux</literal>
-	from &man.brandelf.1;:</para>
+      <para>Para que os bin&aacute;rios Linux funcionem, eles devem estar 
+	<emphasis>marcados</emphasis> como tipo <literal>Linux</literal>
+	de &man.brandelf.1;:</para>
 
       <screen>&prompt.root; <userinput>brandelf -t Linux file</userinput></screen>
 
-      <para>When this is done, the ELF loader will see the
-	<literal>Linux</literal> brand on the file.</para>
+      <para>Quando isto estiver feito, o carregador ELF ver&aacute; 
+	a marca <literal>Linux</literal> no arquivo.</para>
       <indexterm>
         <primary>ELF</primary>
 	<secondary>branding</secondary>
       </indexterm>
 
-      <para>When the ELF loader sees the <literal>Linux</literal> brand,
-	the loader replaces a pointer in the <literal>proc</literal>
-	structure.  All system calls are indexed through this pointer (in
-	a traditional &unix; system, this would be the
-	<literal>sysent[]</literal> structure array, containing the system
-	calls).  In addition, the process is flagged for special handling of
-	the trap vector for the signal trampoline code, and several other
-	(minor) fix-ups that are handled by the Linux kernel
-	module.</para>
+      <para>Quando o carregador ELF v&ecirc; uma marca <literal>Linux</literal>,
+	ele substiui um ponteiro na estrutura do <literal>proc</literal>.
+	Todas as chamadas de sistema indexadas atrav&eacute;s deste ponteiro 
+	(em um sistema &unix; tradicional, que pode ser a estrutura de 
+	<literal>array</literal> <literal>sysent[]</literal>, contendo as 
+	chamadas de sistema).  Adicionalmente, o processo &eacute; marcado 
+	para uma manipula&ccedil;&atilde;o especial do vetor para um 
+	c&oacute;digo de sinal trampolim, e uma s&eacute;rie de outros 
+	(pequenos) ajustes que s&atilde;o manipulados pelo m&oacute;dulo 
+	<foreignphrase>kernel</foreignphrase> do Linux.</para>
 
-      <para>The Linux system call vector contains, among other things, a
-	list of <literal>sysent[]</literal> entries whose addresses reside
-	in the kernel module.</para>
+      <para>O vetor de chamada Linux cont&eacute;m, entre outras coisas, 
+	uma lista de entradas <literal>sysent[]</literal> as quais seus 
+	endere&ccedil;os residem no m&oacute;dulo de <foreignphrase>
+	kernel</foreignphrase>.</para>
 
-      <para>When a system call is called by the Linux binary, the trap
-	code dereferences the system call function pointer off the
-	<literal>proc</literal> structure, and gets the Linux, not the
-	FreeBSD, system call entry points.</para>
+      <para>Quando uma chamada de sistema &eacute; feita por um bin&aacute;rio 
+	Linux, o c&oacute;digo de armadilha diferencia o ponteiro da fun&ccedil;&atilde;o 
+	de chamada de sistema como estando fora da estrutura <literal>proc</literal>, 
+	e pega os pontos de entrada de chamada de sistema Linux, e n&atilde;o 
+	FreeBSD.</para>
 
-      <para>In addition, the Linux mode dynamically
-	<emphasis>reroots</emphasis> lookups; this is, in effect, what the
-	<option>union</option> option to file system mounts
-	(<emphasis>not</emphasis> the <literal>unionfs</literal> file system type!) does.  First, an attempt
-	is made to lookup the file in the
-	<filename>/compat/linux/<replaceable>original-path</replaceable></filename>
-	directory, <emphasis>then</emphasis> only if that fails, the
-	lookup is done in the
-	<filename>/<replaceable>original-path</replaceable></filename>
-	directory.  This makes sure that binaries that require other
-	binaries can run (e.g., the Linux toolchain can all run under
-	Linux ABI support).  It also means that the Linux binaries can
-	load and execute FreeBSD binaries, if there are no corresponding
-	Linux binaries present, and that you could place a &man.uname.1;
-	command in the <filename>/compat/linux</filename> directory tree
-	to ensure that the Linux binaries could not tell they were not
-	running on Linux.</para>
+      <para>Al&eacute;m disso, o modo Linux dinamicamente <emphasis>redireciona
+	</emphasis> as procuras; que &eacute;, na verdade, o que a op&ccedil;&atilde;o 
+	<option>union</option> faz para as montagens de sistema de arquivo 
+	(<emphasis>n&atilde;o</emphasis> o tipo de sistema de arquivo 
+	<literal>unionfs</literal>!).  Primeiro, uma tentativa &eacute; feita 
+	no diret&oacute;rio <filename>/compat/linux/<replaceable>original-path</replaceable></filename>,
+	<emphasis>ent&atilde;o</emphasis> se falhar, a procura &eacute; feita no 
+	diret&oacute;rio <filename>/<replaceable>original-path</replaceable></filename>.
+	Isto certifica que os bin&aacute;rios que requerem outros bin&aacute;rios 
+	possam ser executados (e.g., o <foreignphrase>toolchain</foreignphrase> Linux 
+	pode rodar sob o suporte ABI Linux).  Isto tamb&eacute;m significa que 
+	os bin&aacute;rios Linux pode carregar e executar bin&aacute;rios FreeBSD, 
+	se n&atilde;o bin&aacute;rios Linux correspondentes presentes, e que 
+	e que voc&ecirc; possa colocar um comando &man.uname.1; na &aacute;rvore 
+	do diret&oacute;rio <filename>/compat/linux</filename> para ter certeza 
+	de que os bin&aacute;rios Linux n&atilde;o possam dizer que eles 
+	n&atilde;o est&atilde;o rodando no Linux.</para>
 
-      <para>In effect, there is a Linux kernel in the FreeBSD kernel; the
-	various underlying functions that implement all of the services
-	provided by the kernel are identical to both the FreeBSD system
-	call table entries, and the Linux system call table entries: file
-	system operations, virtual memory operations, signal delivery,
-	System V IPC, etc&hellip;  The only difference is that FreeBSD
-	binaries get the FreeBSD <emphasis>glue</emphasis> functions, and
-	Linux binaries get the Linux <emphasis>glue</emphasis> functions
-	(most older OS's only had their own <emphasis>glue</emphasis>
-	functions: addresses of functions in a static global
-	<literal>sysent[]</literal> structure array, instead of addresses
-	of functions dereferenced off a dynamically initialized pointer in
-	the <literal>proc</literal> structure of the process making the
-	call).</para>
+      <para>Efetivamente, existe um <foreignphrase>kernel</foreignphrase> 
+	Linux dentro no <foreignphrase>kernel</foreignphrase> do FreeBSD; 
+	as mais variadas func&ccedil;&otilde;es internas que implementam 
+	todos os servi&ccedil;os oferecidos pelo <foreignphrase>kernel</foreignphrase> 
+	s&atilde;o id&ecirc;nticos de ambas as entradas das tabelas de 
+	chamadas de sistema do FreeBSD, e as entradas das tabelas de 
+	chamada do Linux: opera&ccedil;&otilde;es de sistema de arquivo, 
+	opera&ccedil;&otilde;es de mem&oacute;ria virtual, entrega de 
+	sinais, IPC do SystemV, etc&hellip; A &uacute;nica diferen&ccedil;a 
+	&eacute; que os bin&aacute;rios do FreeBSD obt&eacute;m fun&ccedil;&otilde;es 
+	<quote><emphasis>cola</emphasis></quote> FreeBSD e bin&aacute;rios Linux obt&eacute;m 
+	fun&ccedil;&otilde;es <quote><emphasis>cola</emphasis></quote> Linux (SO's muito mais 
+	antigos possuem suas pr&oacute;prias fun&ccedil;&otilde;es 
+	<quote><emphasis>cola</emphasis></quote>: endere&ccedil;amento 
+	de fun&ccedil;&otilde;es em uma estrutura <literal>array sysent[]</literal> 
+	est&aacute;tica global, ao inv&eacute;s de endere&ccedil;amento de 
+	fun&ccedil;&otilde;es n&atilde;o referenciadas de um ponteiro 
+	dinamicamente incializado na estrutura <literal>proc</literal> 
+	da realiza&ccedil;&atilde;o da chamada do processo).</para>
 
-      <para>Which one is the native FreeBSD ABI?  It does not matter.
-	Basically the only difference is that (currently; this could
-	easily be changed in a future release, and probably will be after
-	this) the FreeBSD <emphasis>glue</emphasis> functions are
-	statically linked into the kernel, and the Linux <emphasis>glue</emphasis> functions
-	can be statically linked, or they can be accessed via a kernel
-	module.</para>
+      <para>Qual &eacute; a ABI nativa do FreeBSD?  N&atilde;o importa.  
+	Basicamente a &uacute;nica diferen&ccedil;a &eacute; que (atualmente; 
+	isso pode ser facilmente modificado em uma vers&atilde;o futura, e 
+	e provavelmente ser&aacute; depois disso) as fun&ccedil;&otilde;es 
+	<quote><emphasis>cola</emphasis></quote> FreeBSD s&atilde;o 
+	estaticamente ligadas no <foreignphrase>kernel</foreignphrase>, e 
+	as fun&ccedil;&otilde;es <quote><emphasis>cola</emphasis></quote> 
+	do Linux podem ser estaticamente ligadas, ou podem ser acessadas 
+	atrav&eacute;s de um m&oacute;dulo de <foreignphrase>kernel</foreignphrase>.</para>
 
-      <para>Yeah, but is this really emulation?  No.  It is an ABI
-	implementation, not an emulation.  There is no emulator (or
-	simulator, to cut off the next question) involved.</para>
+      <para>Sim, mas isso realmente &eacute; emula&ccedil;&atilde;o?  
+	N&atilde;o.  &Eacute; uma implementa&ccedil;&atilde;o ABI.  
+	N&atilde;o existe emulador envolvido (ou simulador, para 
+	cortar a pr&oacute;xima quest&atilde;o).</para>
 
-      <para>So why is it sometimes called <quote>Linux emulation</quote>?
-	To make it hard to sell FreeBSD!  Really, it
-	is because the historical implementation was done at a time when
-	there was really no word other than that to describe what was
-	going on; saying that FreeBSD ran Linux binaries was not true, if
-	you did not compile the code in or load a module, and there needed
-	to be a word to describe what was being loaded&mdash;hence
-	<quote>the Linux emulator</quote>.</para>
+      <para>Ent&atilde;o por que &eacute; chamado de <quote>emula&ccedil;&atilde;o Linux</quote>?
+	Para fazer com que seja dif&iacute;cil vender o FreeBSD! Verdade, 
+	&eacute; porque a implementa&ccedil;&atilde;o hist&oacute;rica 
+	foi feita numa &eacute;poca quando n&atilde;o havia outra palavra 
+	al&eacute;m desta para descrever o que estava acontecendo; dizer 
+	que o FreeBSD executava bin&aacute;rios Linux n&atilde;o era verdade, 
+	se voc&ecirc; n&atilde;o compilou o c&oacute;digo ou carregou o 
+	m&oacute;dulo, ent&atilde;o existia uma express&atilde;o para 
+	descrever o que estava sendo executado&mdash;
+	<quote>o emulador Linux</quote>.</para>
     </sect2>
   </sect1>
 </chapter>
