@@ -1181,7 +1181,7 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
 	    </row>
 	    <row>
 	      <entry><filename>/etc/mail</filename></entry>
-	      <entry>Configura&ccedil;&atilde;o extra do &man.sendmail.8; configuration, outros 
+	      <entry>Configura&ccedil;&atilde;o extra do &man.sendmail.8;, outros 
 		arquivos de configura&ccedil;&atilde;o de Agentes de Transporde de Correio.
 	      </entry>
 	    </row>
@@ -1193,8 +1193,8 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
 	    </row>
 	    <row>
 	      <entry><filename>/etc/namedb</filename></entry>
-	      <entry>Configura&ccedil;&atilde;o padr&atilde;o dos dados do &man.named.8; data.  Normalmente 
-		o arquivo <filename>named.conf</filename> e arquivos de zonz 
+	      <entry>Configura&ccedil;&atilde;o padr&atilde;o dos dados do &man.named.8;.  Normalmente 
+		o arquivo <filename>named.conf</filename> e arquivos de zona 
 		s&atilde;o armazenados aqui.</entry>
 	    </row>
 	    <row>
@@ -1268,7 +1268,7 @@ nameserver 147.11.100.30</programlisting>
 	<note><para>Apenas as op&ccedil;&otilde;es <literal>search</literal> e
 	  <literal>domain</literal> devem ser usadas.</para></note>
 
-	<para>Se voc&ecirc; estiver usando, geralmente o &man.dhclient.8; reescreve o
+	<para>Se voc&ecirc; estiver usando geralmente o &man.dhclient.8;, ele reescreve o
 	  <filename>resolv.conf</filename> com a informa&ccedil;&atilde;o recebida do 
 	  servidor DHCP.</para>
       </sect3>
@@ -1286,7 +1286,7 @@ nameserver 147.11.100.30</programlisting>
 	  Adicionalmente, o arquivo 
 	  <filename>/etc/hosts</filename> pode ser usado para oferecer uma 
 	  base local de nomes Internet, reduzindo a necessidade de pesquisa externa 
-	  para nome mais comumente usados.</para>
+	  para nomes geralmente mais usados.</para>
 
 	<programlisting># &dollar;&os;&dollar;
 #
@@ -1322,18 +1322,18 @@ nameserver 147.11.100.30</programlisting>
 	<para>O arquivo <filename>/etc/hosts</filename> possui o seguinte formato:
 	  </para>
 
-	<programlisting>[Internet address] [official hostname] [alias1] [alias2] ...</programlisting>
+	<programlisting>[Endere&ccedil;o Internet] [hostname oficial] [apelido1] [apelido2] ...</programlisting>
 
 	<para>Por exemplo:</para>
 
-	<programlisting>10.0.0.1 myRealHostname.example.com myRealHostname foobar1 foobar2</programlisting>
+	<programlisting>10.0.0.1 meuHostnameReal.exemplo.com meuHostnamereal foobar1 foobar2</programlisting>
 
 	<para>Consulte &man.hosts.5; para mais informa&ccedil;&otilde;es.</para>
       </sect3>
     </sect2>
 
     <sect2>
-      <title>Configura&ccedil;ao dos Arquivos de Log</title>
+      <title>Configura&ccedil;&atilde;o dos Arquivos de Log</title>
 
       <indexterm><primary>log files</primary></indexterm>
 
@@ -1344,7 +1344,7 @@ nameserver 147.11.100.30</programlisting>
 
 	<para><filename>syslog.conf</filename> &eacute; um arquivo de configura&ccedil;&atilde;o para 
 	  o programa &man.syslogd.8;.  Indica que tipo de mensagens do 
-	  of <command>syslog</command> s&atilde;o armazenadas nos arquivos 
+	  <command>syslog</command> s&atilde;o armazenadas nos arquivos 
 	  de log.</para>
 
 	<programlisting># &dollar;&os;&dollar;
@@ -1379,7 +1379,7 @@ cron.*                                          /var/log/cron
 !ppp
 *.*                                             /var/log/ppp.log</programlisting>
 
-	<para>Consulte a p&aacute;gina de manual &man.syslog.conf.5; para mais 
+	<para>Consulte a p&aacute;gina de manual do &man.syslog.conf.5; para mais 
 	  informa&ccedil;&atilde;o.</para>
       </sect3>
 
@@ -1389,15 +1389,15 @@ cron.*                                          /var/log/cron
 	<indexterm><primary>newsyslog.conf</primary></indexterm>
 
 	<para><filename>newsyslog.conf</filename> &eacute; o arquivo de configura&ccedil;&atilde;o 
-	  para &man.newsyslog.8;, um programa que normalmente &eacute; agendado para ser executado pelo 
+	  para o &man.newsyslog.8;, um programa que normalmente &eacute; agendado para ser executado pelo 
 	  &man.cron.8;.  O &man.newsyslog.8; determina quando os arquivos de 
 	  log necessitam ser arquivados ou reorganizados.  
-	  <filename>logfile</filename> &eacute; renomeado para 
-	  <filename>logfile.0</filename>, <filename>logfile.0</filename>
-	  &eacute; renomeado para <filename>logfile.1</filename>, e assim sucessivamente.
+	  <filename>arquivolog</filename> &eacute; renomeado para 
+	  <filename>arquivolog.0</filename>, <filename>arquivolog.0</filename>
+	  &eacute; renomeado para <filename>arquivolog.1</filename>, e assim sucessivamente.
 	  Alternativamente, os arquivos de log podem ser arquivados no formato &man.gzip.1;, 
-	  fazendo com que sejam nomeados: <filename>logfile.0.gz</filename>,
-	  <filename>logfile.1.gz</filename>, e assim sucessivamente.</para>
+	  fazendo com que sejam nomeados: <filename>arquivolog.0.gz</filename>,
+	  <filename>arquivolog.1.gz</filename>, e assim sucessivamente.</para>
 
 	<para><filename>newsyslog.conf</filename> indica os arquivos de log 
 	  a serem gerenciados, quantos devem ser mantidos, e quando devem 
@@ -1439,7 +1439,7 @@ cron.*                                          /var/log/cron
 
       <para><filename>sysctl.conf</filename> se parece muito com o 
 	<filename>rc.conf</filename>.  Os valores s&atilde;o ajustados no formato 
-	<literal>variable=value</literal>.  
+	<literal>vari&aacute;vel=valor</literal>.  
 	Os valores especificados s&atilde;o configurados antes do sistema 
 	alcan&ccedil;ar o modo multi usu&aacute;rio.  Nem todas as vari&aacute;veis s&atilde;o 
 	ajust&aacute;veis neste modo.</para>
@@ -1455,7 +1455,7 @@ compat.linux.osrelease=4.3-STABLE</programlisting>
   </sect1>
 
   <sect1 id="configtuning-sysctl">
-    <title>Sintonizando com o sysctl</title>
+    <title>Ajustando com o sysctl</title>
 
     <indexterm><primary>sysctl</primary></indexterm>
     <indexterm>
@@ -1463,13 +1463,13 @@ compat.linux.osrelease=4.3-STABLE</programlisting>
       <secondary>with sysctl</secondary>
     </indexterm>
 
-    <para>&man.sysctl.8; &eacute; uma interface que permite que voc&ecirc; fa&ccedil;a mudan&ccedil;as 
+    <para>O &man.sysctl.8; &eacute; uma interface que permite que voc&ecirc; fa&ccedil;a mudan&ccedil;as 
       em um sistema &os; em tempo real.  Isto inclui muitas op&ccedil;&otilde;es 
       avan&ccedil;adas da pilha TCP/IP e sistema de mem&oacute;ria virtual que 
       podem ser configurados atrav&eacute;s do &man.sysctl.8;.</para>
 
     <para>Na sua ess&ecirc;ncia, o &man.sysctl.8; tem duas fun&ccedil;&otilde;es: 
-      ler e modificar configura&ccedil;&otilde;es de sistema.</para>
+      ler e modificar configura&ccedil;&otilde;es do sistema.</para>
 
     <para>Para ver todas as vari&aacute;veis que podem ser lidas:</para>
 
@@ -1520,8 +1520,8 @@ kern.maxfiles: 2088 -> 5000</screen>
     <para>Casos como este acima geralmente requerem a modifica&ccedil;&atilde;o de 
       algumas configura&ccedil;&otilde;es padr&atilde;o do &man.sysctl.8; que s&atilde;o apenas 
       para leitura.  Para mudar esta situa&ccedil;&atilde;o o usu&aacute;rio pode colocar 
-      <quote>OIDs</quote> de &man.sysctl.8; em seu arquivo 
-      <filename>/boot/loader.conf.local</filename>.  Configura&ccedil;&otilde;es 
+      <quote>OIDs</quote> de &man.sysctl.8; em seu arquivo local
+      <filename>/boot/loader.conf</filename>.  Configura&ccedil;&otilde;es 
       padr&atilde;o est&atilde;o localizadas no arquivo <filename>/boot/defaults/loader.conf</filename>.
       </para>
 
@@ -1535,7 +1535,7 @@ kern.maxfiles: 2088 -> 5000</screen>
   </sect1>
 
   <sect1 id="configtuning-disk">
-    <title>Sintonizando Discos</title>
+    <title>Ajustando Discos</title>
 
     <sect2>
       <title>Vari&aacute;veis Sysctl</title>
@@ -1549,19 +1549,19 @@ kern.maxfiles: 2088 -> 5000</screen>
 
 	<para>A vari&aacute;vel sysctl <varname>vfs.vmiodirenable</varname> pode 
 	  ser configurada tanto para 0 (desligada) ou 1 (ligada);  onde 
-	  o padr&atilde;o &eacute; 1.  Esta vari&aacute;vel como os diret&oacute;rios s&atilde;o guardados 
-	  pelo sistema.  Muitos diret&oacute;rios s&atilde;o pequenos, utilizando apenas 
+	  o padr&atilde;o &eacute; 1.  Esta vari&aacute;vel controla como os diret&oacute;rios s&atilde;o 
+	  cacheados pelo sistema.  Muitos diret&oacute;rios s&atilde;o pequenos, utilizando apenas 
 	  um fragmento (tipicamente 1&nbsp;K) no sistema de arquivos 
 	  e menos no cache do <foreignphrase>buffer</foreignphrase> 
 	  (tipicamente 512&nbsp;bytes).  Entretanto, ao operar em modo 
-	  padr&atilde;o o cache do <foreignphrase>buffer</foreignphrase> guardar&aacute; 
+	  padr&atilde;o o cache do <foreignphrase>buffer</foreignphrase> ir&aacute; cachear 
 	  apenas um n&uacute;mero fixo de diret&oacute;rio ainda que voc&ecirc; tenha uma grande 
 	  quantidade de mem&oacute;ria.  Ligar este sysctl permite que o cache do 
 	  <foreignphrase>buffer</foreignphrase> use o 
-	  <literal>VM Page Cache</literal> para guardar os diret&oacute;rios, 
-	  fazendo que toda mem&oacute;ria dispon&iacute;vel possa ser usada para 
-	  guardar diret&oacute;rios.  Entretanto, o m&iacute;nimo de mem&oacute;ria usada 
-	  para guardar um diret&oacute;rio &eacute; o tamanho de uma p&aacute;gina f&iacute;sica 
+	  <literal>VM Page Cache</literal> para cachear os diret&oacute;rios, 
+	  fazendo com que toda mem&oacute;ria dispon&iacute;vel possa ser usada para 
+	  cachear diret&oacute;rios.  Entretanto, o m&iacute;nimo de mem&oacute;ria usada 
+	  para cachear um diret&oacute;rio &eacute; o tamanho de uma p&aacute;gina f&iacute;sica 
 	  (tipicamente 4&nbsp;K) ao inv&eacute;s de 512&nbsp;bytes.  Recomendamos 
 	  que esta vari&aacute;vel seja ligada se voc&ecirc; estiver usando servi&ccedil;os 
 	  que manipulem um grande n&uacute;mero de arquivos.  Servi&ccedil;os como web 
@@ -1583,7 +1583,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  sistema de arquivos fa&ccedil;a uma escrita completa assim que uma 
 	  seq&uuml;&ecirc;ncia de <literal>clusters</literal> seja coletada, 
 	  isto tipicamente ocorre numa escrita de grandes arquivos 
-	  sequenciais.  A id&eacute;ia e evitar a satura&ccedil;&atilde;o do cache do  
+	  sequenciais.  A id&eacute;ia &eacute; evitar a satura&ccedil;&atilde;o do cache do  
 	  <foreignphrase>buffer</foreignphrase> com <foreignphrase>buffers</foreignphrase> 
 	  sujos quando isto n&atilde;o beneficiar a performance de E/S.  Entretanto, 
 	  isto pode paralizar processos, e sob algumas circunst&acirc;ncias voc&ecirc; 
@@ -1598,12 +1598,12 @@ kern.maxfiles: 2088 -> 5000</screen>
  	</indexterm>
 
  	<para>A vari&aacute;vel sysctl <varname>vfs.hirunningspace</varname> 
- 	  determina a quantidade excedente de escrita de I/O pode ser 
+ 	  determina a quantidade excedente de escrita de I/O que pode ser 
 	  enfileirada nos controladores de disco globais do sistema 
-	  em qualquer ocasi&atilde;o.  O padr&atilde;o normalmente &eacute; suficiente mas 
+	  em qualquer ocasi&atilde;o.  O padr&atilde;o normalmente &eacute; suficiente, mas 
 	  em m&aacute;quinas com muitos discos voc&ecirc; pode querer aumentar para 
 	  quatro ou cinco <emphasis>megabytes</emphasis>.  Note que 
-	  configurar um valor alto (excedendo o gatilho do buffer de 
+	  configurar um valor alto (excedendo o ponto inicial do buffer de 
 	  escrita do cache) pode levar a uma performance de 
 	  <foreignphrase>clustering</foreignphrase> degradante.  N&atilde;o 
 	  configure esta vari&aacute;vel com um valor arbitrariamente alto!  
@@ -1613,7 +1613,7 @@ kern.maxfiles: 2088 -> 5000</screen>
  	<para>Existem outras vari&aacute;veis sysctl de cache de buffer e 
 	  p&aacute;gina VM.  N&atilde;o recomendamos a modifica&ccedil;&atilde;o de seus valores.  
 	  Assim como no &os; 4.3, o sistema VM realiza um excelente 
-	  trabalho sintonizando-se automaticamente.</para>
+	  trabalho ajustando-se automaticamente.</para>
        </sect3>
 
        <sect3>
@@ -1633,7 +1633,7 @@ kern.maxfiles: 2088 -> 5000</screen>
  	  <varname>vm.swap_idle_threshold1</varname> e
  	  <varname>vm.swap_idle_threshold2</varname> permite que voc&ecirc; 
 	  diminua mais rapidamente a prioridade das p&aacute;ginas de 
-	  mem&oacute;ria associadas &agrave; processos ociosos do o algoritmo 
+	  mem&oacute;ria associadas &agrave; processos ociosos do algoritmo 
 	  padr&atilde;o de <literal>pageout</literal>.  Isto d&aacute; uma ajuda ao 
 	  <literal>daemon de pageout</literal>.  N&atilde;o ligue esta op&ccedil;&atilde;o 
 	  a menos que voc&ecirc; precise, pois a troca que voc&ecirc; est&aacute; fazendo 
@@ -1657,7 +1657,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  Isto reduziu a largura de banda de escrita em discos IDE e 
 	  foi considerado necess&aacute;rio devido a s&eacute;rias quest&otilde;es de consist&ecirc;ncia 
 	  de dados introduzidas pelos fabricantes de discos r&iacute;gidos.  O 
-	  problema &eacute; que discos IDE mentem quando se uma escrita &eacute; 
+	  problema &eacute; que discos IDE mentem quando uma escrita &eacute; 
 	  completada.  Com o cache de escrita de IDE ligado, estes discos 
 	  n&atilde;o somente escrevem dados no disco fora de ordem, mas algumas 
 	  vezes atrasar&aacute; a escrita de alguns blocos indefinidamente quando 
@@ -1705,14 +1705,14 @@ kern.maxfiles: 2088 -> 5000</screen>
       <indexterm><primary>Soft Updates</primary></indexterm>
       <indexterm><primary>tunefs</primary></indexterm>
 
-      <para>O programa &man.tunefs.8; pode ser usado para fazer uma 
-	sintonia fina no sistema de arquivos.  Este programa possui 
+      <para>O programa &man.tunefs.8; pode ser usado para fazer um 
+	ajuste fino no sistema de arquivos.  Este programa possui 
 	muitas op&ccedil;&otilde;es, mas por enquanto vamos nos preocupar apenas 
 	em ligar e desligar o <foreignphrase>Soft Upatades</foreignphrase> 
 	da seguinte maneira:</para>
 
-      <screen>&prompt.root; <userinput>tunefs -n enable /filesystem</userinput>
-&prompt.root; <userinput>tunefs -n disable /filesystem</userinput></screen>
+      <screen>&prompt.root; <userinput>tunefs -n enable /sistemadearquivos</userinput>
+&prompt.root; <userinput>tunefs -n disable /sistemadearquivos</userinput></screen>
 
       <para>Um sistema de arquivos n&atilde;o pode ser modificado com o 
 	&man.tunefs.8; enquanto estiver montado.  Uma boa hora para 
@@ -1724,8 +1724,8 @@ kern.maxfiles: 2088 -> 5000</screen>
 	cria&ccedil;&atilde;o do sistema de arquivos, atrav&eacute;s da op&ccedil;&atilde;o 
 	<literal>-U</literal> do &man.newfs.8;.</para></note>
 
-      <para><foreignphrase>Soft Updates</foreignphrase> melhora 
-	drasticamente a performance do <foreignphrase>meta-data</foreignphrase>, 
+      <para>O <foreignphrase>Soft Updates</foreignphrase> melhora 
+	drasticamente a performance do <foreignphrase>meta-dados</foreignphrase>, 
 	principalmente a cria&ccedil;&atilde;o e elimina&ccedil;&atilde;o de arquivos, atrav&eacute;s do 
 	uso de um cache de mem&oacute;ria.  Recomendamos o uso do 
 	<foreignphrase>Soft Updates</foreignphrase> em todos os seus 
@@ -1737,8 +1737,8 @@ kern.maxfiles: 2088 -> 5000</screen>
 	segundo plano.  Se seu sistema der problema voc&ecirc; pode perder mais 
 	dados do que da outra maneira.  Segundo, o 
 	<foreignphrase>Soft Updates</foreignphrase> atrasa a libera&ccedil;&atilde;o de 
-	blocos de sistema de arquivo.  Se voc&ecirc; possui um sistema de 
-	arquivo (como o root) que est&aacute; praticamente lotado, fazer uma 
+	blocos do sistema de arquivo.  Se voc&ecirc; possui um sistema de 
+	arquivo (como a ra&iacute;z) que est&aacute; praticamente lotado, fazer uma 
 	atualiza&ccedil;&atilde;o geral tipo <command>make installworld</command>, pode 
 	fazer com que o sistema de arquivos fique sem espa&ccedil;o e falhe a 
 	atualiza&ccedil;&atilde;o.</para>
@@ -1769,10 +1769,10 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  estado consistente.  Um arquivo &eacute; criado de forma 
 	  completa ou n&atilde;o de qualquer forma.  Se os blocos de 
 	  dados de um arquivo n&atilde;o encontrar seu caminho do 
-	  cache de buffer no disco na hora do problema, &man.fsck.8; 
+	  cache de buffer no disco na hora do problema, o &man.fsck.8; 
 	  ser&aacute; capaz de reconhecer e reparar o sistema de arquivos 
-	  configurando o tamanho de arquivo para 0.  Al&eacute;m disso, 
-	  a implementa&ccedil;&atilde;o &eacute; clara e simples.  A disvantagem &eacute; que 
+	  configurando o tamanho do arquivo para 0.  Al&eacute;m disso, 
+	  a implementa&ccedil;&atilde;o &eacute; clara e simples.  A desvantagem &eacute; que 
 	  as mudan&ccedil;as de meta-dados s&atilde;o lentas.  O comando 
 	  <command>rm -r</command>, por exemplo, toca em todos os 
 	  arquivos em um diret&oacute;rio sequencialmente, mas cada 
@@ -1784,7 +1784,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  desenrolar de hierarquias grandes 
 	  (<command>tar -x</command>).</para>
 
-	<para>O segundo caso &eacute; o de atualiza&ccedil;&otilde;es assincronas de 
+	<para>O segundo caso &eacute; o de atualiza&ccedil;&otilde;es ass&iacute;ncronas de 
 	  meta-dados.  Isto &eacute; o padr&atilde;o para Linux/ext2fs e 
   	  <command>mount -o async</command> para ufs nos *BSD.  Todas 
 	  as atualiza&ccedil;&otilde;es de meta-dados s&atilde;o simplesmente passadas 
@@ -1794,9 +1794,9 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  esperar at&eacute; que cada atualiza&ccedil;&atilde;o de meta-dados tenha sido 
 	  escrita em disco, uma vez que todas as opera&ccedil;&otilde;es que causam 
 	  grandes quantidades de atualiza&ccedil;&atilde;o de meta-dados trabalhem 
-	  mais r&aacute;pido que no caso sincrono.  Al&eacute;m disso, a 
+	  mais r&aacute;pido que no caso s&iacute;ncrono.  Al&eacute;m disso, a 
 	  implementa&ccedil;&atilde;o &eacute; simples e limpa, possuindo um baixo risco 
-	  de falhas na codifica&ccedil;&atilde;o. A disvantagem &eacute; que n&atilde;o existe 
+	  de falhas na codifica&ccedil;&atilde;o. A desvantagem &eacute; que n&atilde;o existe 
 	  garantia para um estado consistente do sistema de 
 	  arquivos.  Se ocorrer uma falha durante uma opera&ccedil;&atilde;o que 
 	  atualizou grandes quantidades de meta-dados (como uma 
@@ -1830,11 +1830,11 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  a regi&atilde;o cont&iacute;gua do disco, n&atilde;o existem grandes 
 	  dist&acirc;ncias a serem percorridas pela cabe&ccedil;a do disco, 
 	  mesmo durante opera&ccedil;&otilde;es pesadas, fazendo com que estas 
-	  opera&ccedil;&otilde;es mais r&aacute;pidas do que as atualiza&ccedil;&otilde;es 
-	  sincronas.  Al&eacute;m disso, a complexidade de implementa&ccedil;&atilde;o 
+	  opera&ccedil;&otilde;es sejam mais r&aacute;pidas do que as atualiza&ccedil;&otilde;es 
+	  s&iacute;ncronas.  Al&eacute;m disso, a complexidade de implementa&ccedil;&atilde;o 
 	  &eacute; um tanto quanto limitada, fazendo com que o risco 
-	  de exist&ecirc;ncia de falhas na codifica&ccedil;&atilde;o sejam menors.  A 
-	  disvantagem &eacute; que todos os meta-dados s&atilde;o escritos 
+	  de exist&ecirc;ncia de falhas na codifica&ccedil;&atilde;o sejam menores.  A 
+	  desvantagem &eacute; que todos os meta-dados s&atilde;o escritos 
 	  duas vezes (uma vez na regi&atilde;o de 
 	  <foreignphrase>logging</foreignphrase> e outra 
 	  no local apropriado) causando perda de performance 
@@ -1861,20 +1861,20 @@ kern.maxfiles: 2088 -> 5000</screen>
 	   acordo com seu posicionamento, assim n&atilde;o podem estar 
 	   no disco antes de seus meta-dados).  Se o sistema der 
 	   pane, a conseq&uuml;&ecirc;ncia ser&aacute; um <quote>log rewind</quote>: 
-	   todas as opera&ccedil;&otilde;es que n&atilde;o encotraram seu caminho para 
+	   todas as opera&ccedil;&otilde;es que n&atilde;o encontraram seu caminho para 
 	   o disco parecem nunca ter ocorrido.  Um estado consistente 
 	   de sistema de arquivo &eacute; mantido como se fosse de 30 a 
 	   60 segundos antes.  O algoritmo utilizado garante que 
-	   todos os recursos em uso sejam marcados como seus mapas 
+	   todos os recursos em uso sejam marcados com seus mapas 
 	   de bits apropriados: blocos e inodos.  Depois de uma pane, 
 	   a &uacute;nica aloca&ccedil;&atilde;o de erros de recursos que ocorre s&atilde;o os 
 	   marcados como <quote>used</quote> que na verdade s&atilde;o 
-	   <quote>free</quote>.  &man.fsck.8; reconhece esta 
+	   <quote>free</quote>.  O &man.fsck.8; reconhece esta 
 	   situa&ccedil;&atilde;o, e libera os recursos que n&atilde;o estejam em 
 	   uso.  &Eacute; seguro ignorar o estado sujo do sistema de arquivo 
 	   ap&oacute;s uma pane for&ccedil;ando mont&aacute;-lo com <command>
-	   mount -u</command>.  Para liberar recursos que podem 
-	   estar ociosos, &man.fsck.8; necessita ser executado 
+	   mount -f</command>.  Para liberar recursos que podem 
+	   estar ociosos, o &man.fsck.8; necessita ser executado 
 	   posteriormente.  Esta &eacute; a id&eacute;ia atr&aacute;s do <emphasis>
 	   background fsck</emphasis>: no momento da inicializa&ccedil;&atilde;o 
 	   do sistema, apenas um <foreignphrase>snapshot</foreignphrase> 
@@ -1891,7 +1891,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 
 	 <para>A vantagem &eacute; que as opera&ccedil;&otilde;es de meta-dados 
 	   s&atilde;o quase t&atilde;o r&aacute;pidas quando as atualiza&ccedil;&otilde;es 
-	   assincronas (mais r&aacute;pidas do que com <emphasis>
+	   ass&iacute;ncronas (mais r&aacute;pidas do que com <emphasis>
 	   logging</emphasis>, que precisa escrever os 
 	   meta-dados duas vezes).  As desvantagem s&atilde;o a 
 	   complexidade do c&oacute;digo (implicando em um alto 
@@ -1901,7 +1901,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	   existem algumas peculiaridades que temos que lidar.  Depois  
 	   de uma pane, o estado do sistema de arquivos parece 
 	   estar algo como <quote>antigo</quote>.  Em situa&ccedil;&otilde;es 
-	   onde a op&ccedil;&atilde;o sincrona pode ter causado alguns 
+	   onde a op&ccedil;&atilde;o s&iacute;ncrona pode ter causado alguns 
 	   arquivos de tamanho zero ap&oacute;s o <command>fsck</command>, 
 	   estes arquivos n&atilde;o existem em um sistema de arquivo 
 	   com Soft Update, pois nem os meta-dados e os conte&uacute;dos 
@@ -1919,7 +1919,7 @@ kern.maxfiles: 2088 -> 5000</screen>
   </sect1>
 
   <sect1 id="configtuning-kernel-limits">
-    <title>Sintonizando Limites do Kernel</title>
+    <title>Ajustando Limites do Kernel</title>
 
     <indexterm>
       <primary>tuning</primary>
