@@ -588,125 +588,125 @@ EndSection</programlisting>
         <author>
           <firstname>Murray</firstname>
           <surname>Stokely</surname>
-          <contrib>Contributed by </contrib>
+          <contrib>Com contribuiç&otilde;es de </contrib>
         </author>
       </authorgroup>
     </sect1info>
-    <title>Using Fonts in &xfree86;</title>
+    <title>Usando fontes no &xfree86;</title>
 
     <sect2 id="type1">
-    <title>Type1 Fonts</title>
-    <para>The default fonts that ship with
-    <application>&xfree86;</application> are less than ideal for typical
-    desktop publishing applications.  Large presentation fonts show up
-    jagged and unprofessional looking, and small fonts in
-    <application>&netscape;</application> are almost completely unintelligible.
-    However, there are several free, high quality Type1 (&postscript;) fonts
-    available which can be readily used
-    with <application>&xfree86;</application>, either version 3.X or
-    version 4.X.  For instance, the URW font collection
-    (<filename role="package">x11-fonts/urwfonts</filename>) includes
-    high quality versions of standard type1 fonts (<trademark class="registered">Times Roman</trademark>,
-    <trademark class="registered">Helvetica</trademark>, <trademark class="registered">Palatino</trademark> and others).  The Freefonts collection
-    (<filename role="package">x11-fonts/freefonts</filename>) includes
-    many more fonts, but most of them are intended for use in
-    graphics software such as the <application>Gimp</application>, and are not
-    complete enough to serve as screen fonts.  In addition,
-    <application>&xfree86;</application> can be configured to use
-    &truetype; fonts with a minimum of effort: see the
-    <link linkend="truetype">section on &truetype; fonts</link> later.</para>
+      <title>Fontes <literal>Type1</literal></title>
+      <para>As fontes padr&atilde;o que s&atilde;o distribuídas com
+        o <application>&xfree86;</application> est&atilde;o aquém do ideal para aplicaç&otilde;es
+        comuns de editoraç&atilde;o eletrônica. Fontes grandes em apresentaç&otilde;es aparecem
+        recortadas e com aparência nada profissional, e fontes pequenas no
+        <application>&netscape;</application> s&atilde;o quase ininteligíveis.
+        Entretanto, há várias fontes <literal>Type1</literal> (&postscript;) gratuitas e de alta qualidade 
+        disponíveis as quais podem ser usadas imediatamente 
+        com o <application>&xfree86;</application>, seja a vers&atilde;o 3.X ou
+        a vers&atilde;o 4.X.  Por exemplo, a coleç&atilde;o de fontes URW
+        (<filename role="package">x11-fonts/urwfonts</filename>) inclui
+        vers&otilde;es de alta qualidade de fontes <literal>type1</literal> padr&atilde;o (<trademark class="registered">Times Roman</trademark>,
+        <trademark class="registered">Helvetica</trademark>, <trademark class="registered">Palatino</trademark> e outras). A coleç&atilde;o <literal>Freefonts</literal>
+        (<filename role="package">x11-fonts/freefonts</filename>) inclui
+        muitas outras fontes, mas a maioria delas s&atilde;o destinadas ao uso em
+        softwares de manipulaç&atilde;o de gráficos como o <application>Gimp</application>, n&atilde;o sendo
+        suficientemente compleats para o uso como fontes de tela. Para completar,
+        o <application>&xfree86;</application> pode ser configurado para usar 
+        fontes &truetype; com um mínimo de esforço: veja 
+        <link linkend="truetype">seç&atilde;o sobre fontes &truetype;</link> adiante.</para>
 
-    <para>To install the above Type1 font collections from the ports
-        collection, run the following commands:</para>
+      <para>Para instalar as coleç&otilde;es de fontes <literal>Type1</literal> acima da coleç&atilde;o de 
+	<literal>ports</literal>, execute os comandos a seguir:</para>
 
-    <screen>&prompt.root; <userinput>cd /usr/ports/x11-fonts/urwfonts</userinput>
+      <screen>&prompt.root; <userinput>cd /usr/ports/x11-fonts/urwfonts</userinput>
 &prompt.root; <userinput>make install clean</userinput></screen>
 
-    <para>And likewise with the freefont or other collections.  To tell the X
-      server that these fonts exist, add an appropriate line to the
-      <filename>XF86Config</filename> file (in <filename>/etc/</filename> for
-      <application>&xfree86;</application> version 3, or in
-      <filename>/etc/X11/</filename> for version 4), which reads:</para>
+      <para>E da mesma forma para o <literal>freefont</literal> e outras coleç&otilde;es. Para dizer ao servidor X
+        que estas fontes existem, adicione a linha apropriada ao
+        arquivo <filename>XF86Config</filename> (em <filename>/etc/</filename> para 
+        <application>&xfree86;</application> vers&atilde;o 3, ou em
+        <filename>/etc/X11/</filename> para a vers&atilde;o 4), onde se lê:</para>
 
       <programlisting>FontPath "/usr/X11R6/lib/X11/fonts/URW/"</programlisting>
 
-      <para>Alternatively, at the command line in the X session
-        run:</para>
+      <para>Alternativamente, na linha de comandos da sess&atilde;o X
+        execute:</para>
 
       <screen>&prompt.user; <userinput>xset fp+ /usr/X11R6/lib/X11/fonts/URW</userinput>
 &prompt.user; <userinput>xset fp rehash</userinput></screen>
 
-      <para>This will work but will be lost when the X session is closed,
-    unless it is added to the startup file (<filename>~/.xinitrc</filename>
-    for a normal <command>startx</command> session,
-    or <filename>~/.xsession</filename> when logging in through a
-    graphical login manager like <application>XDM</application>).
-    A third way is to use the new
-    <filename>XftConfig</filename> file: see the
-    section on <link linkend="antialias">anti-aliasing</link>.
-    </para>
+      <para>Isso vai funcionar mas será perdido quando a sess&atilde;o do X for fechada,
+        a menos que seja adicionada ao arquivo de inicializaç&atilde;o (<filename>~/.xinitrc</filename>
+        para uma sess&atilde;o normal via <command>startx</command>,
+        ou <filename>~/.xsession</filename> quando o registro (<literal>login</literal>) for feito via
+        um gerenciador de registro gráfico como o <application>XDM</application>).
+        Uma terceira forma é utilizar o novo arquivo
+        <filename>XftConfig</filename>: consulte a seç&atilde;o
+        sobre <link linkend="antialias">anti-aliasing</link>.
+        </para>
     </sect2>
 
     <sect2 id="truetype">
-    <title>&truetype; Fonts</title>
+    <title>Fontes &truetype;</title>
 
-    <indexterm><primary>TrueType Fonts</primary></indexterm>
-    <indexterm><primary>fonts</primary>
+    <indexterm><primary>Fontes TrueType</primary></indexterm>
+    <indexterm><primary>fontes</primary>
       <secondary>TrueType</secondary>
     </indexterm>
 
-    <para><application>&xfree86; 4.X</application> has built in support
-    for rendering &truetype; fonts.  There are two different modules
-    that can enable this functionality.  The freetype module is used
-    in this example because it is more consistent with the other font
-    rendering back-ends.  To enable the freetype module just add the
-    following line to the <literal>"Module"</literal> section of the
-    <filename>/etc/X11/XF86Config</filename> file.</para>
+    <para>O <application>&xfree86; 4.X</application> tem suporte incorporado
+      para a exibiç&atilde;o produzida de fontes &truetype;.  Há dois módulos diferentes
+      que podem permitir essa funcionalidade. O módulo <literal>freetype</literal> é utilizado
+      neste exemplo por ser mais coerente com outros suportes para produç&atilde;o de
+      fontes. Para habilitar o módulo <literal>freetype</literal> basta acrescentar
+      a linha a seguir à seç&atilde;o <literal>"Module"</literal> do
+      arquivo <filename>/etc/X11/XF86Config</filename>.</para>
 
     <programlisting>Load  "freetype"</programlisting>
 
-    <para>For <application>&xfree86; 3.3.X</application>, a separate
-      &truetype; font server is needed.
-      <application>Xfstt</application> is commonly used for
-      this purpose.  To install <application>Xfstt</application>,
-      simply install the port
+    <para>Para o <application>&xfree86; 3.3.X</application>, um servidor
+      de fontes &truetype; separado se faz necessário.
+      O <application>Xfstt</application> é de uso comum para
+      esta finalidade. Para instalar o <application>Xfstt</application>,
+      basta instalar o <literal>port</literal>
       <filename role="package">x11-servers/Xfstt</filename>.</para>
 
-    <para>Now make a directory for the &truetype; fonts (for example,
+    <para>Crie uma pasta para as fontes &truetype; (por exemplo,
       <filename>/usr/X11R6/lib/X11/fonts/TrueType</filename>)
-      and copy all of the &truetype; fonts into this directory.  Keep in
-      mind that &truetype; fonts cannot be directly taken from a
-      &macintosh;; they must be in &unix;/DOS/&windows; format for use by
-      <application>&xfree86;</application>.  Once the files have been
-      copied into this directory, use
-      <application>ttmkfdir</application> to create a
-      <filename>fonts.dir</filename> file, so that the X font renderer
-      knows that these new files have been installed.
-      <command>ttmkfdir</command> is available from the FreeBSD
-      Ports Collection as
+      e copie todas as fontes &truetype; nesta pasta. Tenha em mente
+      que as fontes &truetype; n&atilde;o podem ser importadas diretamente de um
+      &macintosh;; elas precisam esta no formato &unix;/DOS/&windows; para que possa ser usada pelo
+      <application>&xfree86;</application>. Uma vez que os arquivos tenham sido
+      copiados para esta pasta, use o 
+      <application>ttmkfdir</application> para criar um arquivo
+      <filename>fonts.dir</filename>, de modo que o produtor de fontes do X
+      saiba que estes novos arquivos foram instalados.
+      O <command>ttmkfdir</command> está disponível na
+      Coleç&atilde;o de <literal>Ports</literal> do FreeBSD como
       <filename role="package">x11-fonts/ttmkfdir</filename>.</para>
 
     <screen>&prompt.root; <userinput>cd /usr/X11R6/lib/X11/fonts/TrueType</userinput>
 &prompt.root; <userinput>ttmkfdir > fonts.dir</userinput></screen>
 
-    <para>Now add the &truetype; directory to the font
-      path.  This is just the same as described above for <link
-      linkend="type1">Type1</link> fonts, that is, use</para>
+    <para>Agora adicione a pasta &truetype; no caminho para as fontes (o <foreignphrase>font
+      path</foreignphrase>). Esta é a mesma descriç&atilde;o utilizada anteriormente para as fontes <link
+      linkend="type1">Type1</link>, isto é, utilize</para>
 
     <screen>&prompt.user; <userinput>xset fp+ /usr/X11R6/lib/X11/fonts/TrueType</userinput>
 &prompt.user; <userinput>xset fp rehash</userinput></screen>
 
-    <para>or add a <option>FontPath</option> line to the
-       <filename>XF86Config</filename> file.</para>
+    <para>ou adicione uma linha <option>FontPath</option> ao arquivo
+       <filename>XF86Config</filename>.</para>
 
-      <para>That's it.  Now <application>&netscape;</application>,
-        <application>Gimp</application>,
-        <application>&staroffice;</application>, and all of the other X
-        applications should now recognize the installed &truetype;
-        fonts.  Extremely small fonts (as with text in a high resolution
-        display on a web page) and extremely large fonts (within
-        <application>&staroffice;</application>) will look much better
-        now.</para>
+      <para>Isso é tudo. Agora o <application>&netscape;</application>,
+        o <application>Gimp</application>,
+        o <application>&staroffice;</application>, e todos os outros aplicativos
+        do X devem estar reconhecendo as fontes &truetype; instaladas.
+        Fontes muito pequenas (como um texto em um vídeo de alta resoluç&atilde;o
+        de uma página da internet) e fontes muito grandes (dentro do
+        <application>&staroffice;</application>) v&atilde;o ter uma aparência muito melhor
+        agora.</para>
     </sect2>
 
     <sect2 id="antialias">
@@ -715,8 +715,8 @@ EndSection</programlisting>
         <author>
           <firstname>Joe Marcus</firstname>
           <surname>Clarke</surname>
-          <contrib>Updated for &xfree86; 4.3 by </contrib>
-          <!-- May 2003 -->
+          <contrib>Atualizado para o &xfree86; 4.3 por </contrib>
+          <!-- Maio 2003 -->
         </author>
       </authorgroup>
     </sect2info>
