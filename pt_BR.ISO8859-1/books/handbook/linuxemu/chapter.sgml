@@ -547,7 +547,7 @@ disco.example.com 7115-70839-20412</screen>
 	  <firstname>Aaron</firstname>
 	  <surname>Kaplan</surname>
 <!--	  <address><email>aaron@lo-res.org</email></address>-->
-	  <contrib>Contributed by </contrib>
+	  <contrib>Contribui&ccedil;&atilde;o de </contrib>
 	</author>
       </authorgroup>
       <authorgroup>
@@ -555,7 +555,7 @@ disco.example.com 7115-70839-20412</screen>
 	  <firstname>Robert</firstname>
 	  <surname>Getschmann</surname>
 <!--	  <address><email>rob@getschmann.org</email></address>-->
-	  <contrib>Thanks to </contrib>
+	  <contrib>Agracedimentos &agrave; </contrib>
 	</author>
       </authorgroup>
     </sect1info>
@@ -566,35 +566,40 @@ disco.example.com 7115-70839-20412</screen>
       <secondary><application>Maple</application></secondary>
     </indexterm>
 
-    <para><application>&maple;</application> is a commercial mathematics program similar to
-      <application>&mathematica;</application>.  You must purchase this software from <ulink
-      url="http://www.maplesoft.com/"></ulink> and then register there
-      for a license file.  To install this software on FreeBSD, please
-      follow these simple steps.</para>
+    <para><application>&maple;</application> &eacute; um programa comercial 
+      similar ao <application>&mathematica;</application>.  Voc&ecirc; 
+      deve comprar este programa em <ulink
+      url="http://www.maplesoft.com/"></ulink> e fazer o registro para 
+      obter um arquivo de licen&ccedil;a.  Para instalar este software no 
+      FreeBSD, por favor siga estes passos simples.</para>
 
       <procedure>
-	<step><para>Execute the <filename>INSTALL</filename> shell
-	  script from the product distribution.  Choose the
-	  <quote>RedHat</quote> option when prompted by the
-	  installation program.  A typical installation directory
-	  might be <filename
+	<step><para>Execute o <literal>shell script</literal> 
+	  <filename>INSTALL</filename> da distribui&ccedil;&atilde;o 
+	  do produto.  Escolha a op&ccedil;&atilde;o 
+	  <quote>RedHat</quote> quando o programa de instala&ccedil;&atilde;o 
+	  perguntar.  Um diret&oacute;rio t&iacute;pico de 
+	  instala&ccedil;&atilde;o pode ser <filename 
 	  class="directory">/usr/local/maple</filename>.</para></step>
 
-        <step><para>If you have not done so, order a license for <application>&maple;</application>
-	  from Maple Waterloo Software (<ulink url="http://register.maplesoft.com/"></ulink>)
-	  and copy it to
+        <step><para>Se voc&ecirc; n&atilde;o solicitou, pe&ccedil;a 
+	  uma licen&ccedil;a para o <application>&maple;</application>
+	  na Maple Waterloo Software (<ulink url="http://register.maplesoft.com/"></ulink>)
+	  e copie-a para o arquivo 
 	  <filename>/usr/local/maple/license/license.dat</filename>.</para></step>
 
-        <step><para>Install the <application>FLEXlm</application>
+        <step><para>Instale o gerenciador de licen&ccedil;as 
+	  <application>FLEXlm</application> executando o <literal>
+	  script shell</literal> de instala&ccedil;&atilde;o 
 	  license manager by running the
-	  <filename>INSTALL_LIC</filename> install shell script that
-	  comes with <application>&maple;</application>.  Specify the
-	  primary hostname for your machine for the license
-	  server.</para></step>
+	  <filename>INSTALL_LIC</filename> que vem junto com o 
+	  <application>&maple;</application>.  Especifique o nome 
+	  do servidor prim&aacute;rio na sua m&aacute;quina para 
+	  o servidor de licen&ccedil;a.</para></step>
 
-        <step><para>Patch the
+        <step><para>Corrija o arquivo 
           <filename>/usr/local/maple/bin/maple.system.type</filename>
-          file with the following:</para>
+          com o seguinte:</para>
 <programlisting>   ----- snip ------------------
 *** maple.system.type.orig      Sun Jul  8 16:35:33 2001
 --- maple.system.type   Sun Jul  8 16:35:51 2001
@@ -610,22 +615,24 @@ disco.example.com 7115-70839-20412</screen>
         # We have two Linux implementations, one for Red Hat and
    ----- snip end of patch -----</programlisting>
 
-	<para>Please note that after the <literal>"FreeBSD"|\</literal> no other
-	  whitespace should be present.</para>
+	<para>Note que depois do <literal>"FreeBSD"|\</literal> 
+	  n&atilde;o deve existir espa&ccedil;o em branco</para>
 
-	<para>This patch instructs <application>&maple;</application> to
-	  recognize <quote>FreeBSD</quote> as a type of Linux system.
-	  The <filename>bin/maple</filename> shell script calls the
-	  <filename>bin/maple.system.type</filename> shell script
-	  which in turn calls <command>uname -a</command> to find out the operating
-	  system name. Depending on the OS name it will find out which
-	  binaries to use.</para></step>
+	<para>Esta corre&ccedil;ao instrui o <application>&maple;</application> 
+	  a reconhecer o <quote>FreeBSD</quote> como um tipo de sistema 
+	  Linux.  O <literal>script shell</literal> <filename>bin/maple</filename> 
+	  chama o <literal>script shell</literal> 
+	  <filename>bin/maple.system.type</filename> que por sua vez executa 
+	  <command>uname -a</command> para descobrir o nome do sistema 
+	  operacional.  Dependendo do nome do sistema operacional ele 
+	  saber&aacute; que bin&aacute;rios utilizar.</para></step>
 
-      <step><para>Start the license server.</para>
+      <step><para>Inicialize o Servidor de Licen&ccedil;as.</para>
 
-	<para>The following script, installed as
-	  <filename>/usr/local/etc/rc.d/lmgrd.sh</filename> is a
-	  convenient way to start up <command>lmgrd</command>:</para>
+	<para>O seguinte <literal>script</literal>, instalado como 
+	  <filename>/usr/local/etc/rc.d/lmgrd.sh</filename> &eacute; 
+	  uma maneira conveniente de inicializar o 
+	  <command>lmgrd</command>:</para>
 
 	<programlisting>   ----- snip ------------
 
@@ -655,27 +662,29 @@ exit 0
    ----- snip ------------</programlisting></step>
 
 
-      <step><para>Test-start <application>&maple;</application>:</para>
+      <step><para>Inicialize o <application>&maple;</application>:</para>
 	<screen>&prompt.user; <userinput>cd /usr/local/maple/bin</userinput>
 &prompt.user; <userinput>./xmaple</userinput></screen>
 
-	<para>You should be up and running. Make sure to write
-	  Maplesoft to let them know you would like a native FreeBSD
-	  version!</para></step>
+	<para>Ele deve estar executando.  Escreva para a Maplesoft para 
+	  faz&ecirc;-los saber que voc&ecirc; gostaria de uma vers&ccedil;ao 
+	  nativa para FreeBSD!</para></step>
     </procedure>
 
     <sect2>
-      <title>Common Pitfalls</title>
+      <title>Problemas Comuns</title>
 
       <itemizedlist>
-	<listitem><para>The <application>FLEXlm</application> license manager can be a difficult
-	  tool to work with.  Additional documentation on the subject
-	  can be found at <ulink
+	<listitem><para>O gerenciador de licen&ccedil;as 
+	  <application>FLEXlm</application> pode ser uma ferramenta 
+	  dif&iacute;cil de se trabalhar.  Informa&ccedil;&otilde;es 
+	  adicionais sobre o assunto pode ser encontradas em <ulink 
 	  url="http://www.globetrotter.com/"></ulink>.</para></listitem>
 
-	<listitem><para><command>lmgrd</command> is known to be very picky
-	  about the license file and to core dump if there are any
-	  problems.  A correct license file should look like this:</para>
+	<listitem><para><command>lmgrd</command> &eacute; conhecido 
+	  por ser problem&aacute;tico com o arquivo de licen&ccedil;a 
+	  e com despejo de mem&oacute;ria.  Um arquivo de licen&ccedil;a 
+	  correto se parece com:</para>
 
 <programlisting># =======================================================
 # License File for UNIX Installations ("Pointer File")
@@ -689,12 +698,14 @@ FEATURE Maple maplelmg 2000.0831 permanent 1 XXXXXXXXXXXX \
          ISSUED=11-may-2000 NOTICE=" Technische Universitat Wien" \
          SN=XXXXXXXXX</programlisting>
 
-	  <note><para>Serial number and key 'X''ed out. <hostid>chillig</hostid> is a
-	    hostname.</para></note>
+	  <note><para>Aqui letra <quote>X</quote> aparece no lugar do 
+	    n&uacute;mero de s&eacute;rie e da chave.  E 
+	    <hostid>chillig</hostid> &eacute; o nome do servidor.
+	    </para></note>
 
-  	  <para>Editing the license file works as long as you do not
- 	    touch the <quote>FEATURE</quote> line (which is protected by the
- 	    license key).</para></listitem>
+  	  <para>Editar o arquivo de licen&ccedil;a funciona se voc&ecirc; 
+ 	    n&atilde;o mexer na linha <quote>FEATURE</quote> (que &eacute; 
+ 	    protegida pela chave de licen&ccedil;a).</para></listitem>
       </itemizedlist>
     </sect2>
   </sect1>
