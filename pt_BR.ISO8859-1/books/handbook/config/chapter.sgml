@@ -344,7 +344,7 @@
       <filename>/usr/local/etc/rc.d</filename>, que ser&aacute; invocado na inicializa&ccedil;&atilde;o 
       do sistema com o argumento <option>start</option>, e no desligamento  
       do sistema com o argumento <option>stop</option>.
-      Este &eacute; a maneira recomendada de incializar servi&ccedil;os globais de sistema 
+      Esta &eacute; a maneira recomendada de incializar servi&ccedil;os globais de sistema 
       que s&atilde;o executados sob o usu&aacute;rio <username>root</username>, ou que 
       esperam ser inicializados como <username>root</username>.
       Estes <literal>scripts</literal> s&atilde;o registrados como parte da 
@@ -385,7 +385,7 @@ exit 0
       <filename>FooBar.sh</filename> em
       <filename>/usr/local/etc/rc.d</filename> e ter certeza de que ele &eacute; execut&aacute;vel.  Voc&ecirc; 
       pode fazer com que um <literal>script</literal> executador de comandos seja 
-      execut&aacute;vel com &man.chmod.1; como mostrado abaixo:</para>
+      execut&aacute;vel com o &man.chmod.1; como mostrado abaixo:</para>
 
     <screen>&prompt.root; <userinput>chmod 755 <replaceable>FooBar.sh</replaceable></userinput></screen>
 
@@ -400,10 +400,10 @@ exit 0
       habilitados incluindo-se comandos no arquivo 
       <filename>/etc/rc.local</filename>.  Como no &os;&nbsp;3.1 n&atilde;o existe 
       o arquivo <filename>/etc/rc.local</filename>; mas se for criado pelo 
-      administrador ele ser&aacute; honrado pelo sistema.  Note que 
+      administrador ele ser&aacute; executado pelo sistema.  Note que 
       o arquivo <filename>rc.local</filename> &eacute; geralmente considerado como um 
-      local derradeiro; se existir um lugar melhor para inicializar o 
-      servi&ccedil;o, coloque o <literal>script</literal> neste lugar.</para>
+      local de &uacute;ltimo recurso; se existir um lugar melhor para inicializar o 
+      servi&ccedil;o, coloque o <literal>script</literal> neste lugar melhor.</para>
 
     <note><para><emphasis>N&atilde;o</emphasis> coloque qualquer comando no 
       arquivo <filename>/etc/rc.conf</filename>.  Para inicializar <literal>daemons</literal>, 
@@ -492,7 +492,7 @@ HOME=/var/log
 
       <callout arearefs="co-field-descr">
 	<para>Esta linha define um total de sete campos. Aqui s&atilde;o listados os valores 
-	  values <literal>minute</literal>, <literal>hour</literal>,
+	  <literal>minute</literal>, <literal>hour</literal>,
 	  <literal>mday</literal>, <literal>month</literal>, <literal>wday</literal>,
 	  <literal>who</literal>, e <literal>command</literal>.  Estes s&atilde;o
           praticamente autoexplicativos. Minute &eacute; o tempo em minutos em que o
@@ -541,7 +541,7 @@ HOME=/var/log
 	<command>crontab</command>.  O uso mais comum
 	&eacute;:</para>
 
-      <screen>&prompt.root; <userinput>crontab crontab</userinput></screen>
+      <screen>&prompt.root; <userinput>crontab arquivo-crontab</userinput></screen>
 
       <para>Existe tamb&eacute;m uma op&ccedil;&atilde;o para listar os arquivos 
 	<filename>crontab</filename> instalados, basta passar a op&ccedil;&atilde;o 
@@ -574,12 +574,11 @@ HOME=/var/log
 
     <indexterm><primary>rcNG</primary></indexterm>
 
-    <para>&os; recentemente integrou o sistema de inicializa&ccedil;&atilde;o 
+    <para>O &os; recentemente integrou o sistema de inicializa&ccedil;&atilde;o 
       <filename>rc.d</filename> do NetBSD. Os usu&aacute;rios podem notar os 
       arquivos no diret&oacute;rio 
       <filename>/etc/rc.d</filename>.  Muitos destes arquivos s&atilde;o para 
       servi&ccedil;os b&aacute;sicos que podem ser controlados com os par&acirc;metros 
-      are for basic services which can be controlled with the
       <option>start</option>, <option>stop</option>,
       e <option>restart</option>.
       Por exemplo, o &man.sshd.8; pode ser reinicializado com o seguinte 
@@ -660,8 +659,8 @@ sshd is running as pid 433.</screen>
 
     <screen>Starting background file system checks in 60 seconds.</screen>
 
-    <para>Portanto, este arquivo &eacute; usado para checagem de sistema de 
-      arquivo em segundo plano, que &eacute; feita durante a inicializa&ccedil;&atilde;o.
+    <para>Portanto, este arquivo &eacute; usado para checagem do sistema de 
+      arquivos em segundo plano, que &eacute; feita durante a inicializa&ccedil;&atilde;o.
       </para>
 
     <para>Muitos servi&ccedil;os de sistema dependem de outros sevi&ccedil;os para 
@@ -745,7 +744,7 @@ sshd is running as pid 433.</screen>
 	e veja se a sua placa &eacute; suportada.</para>
 
       <para>Uma vez que a placa possui suporte, voc&ecirc; precisa determinar 
-	o <literal>dirver</literal> para ela.  O arquivo
+	o <literal>driver</literal> para ela.  O arquivo
 	<filename>/usr/src/sys/i386/conf/LINT</filename> te dar&aacute; uma lista 
 	de drivers de placa de rede com alguma informa&ccedil;&atilde;o sobre os 
 	<literal>chipsets</literal> suportados.  Se voc&ecirc; estiver com 
@@ -788,7 +787,7 @@ ukphy1:  10baseT, 10baseT-FDX, 100baseTX, 100baseTX-FDX, auto</screen>
 	do <literal>driver</literal> para saber o que adicionar ao seu 
 	arquivo de configura&ccedil;&atilde;o do <foreignphrase>kernel</foreignphrase>.  Para 
 	maiores informa&ccedil;&otilde;es de como recompilar seu <foreignphrase>kernel</foreignphrase> 
-	por favor veja <xref linkend="kernelconfig">.  Se a sua placa foi 
+	por favor veja o <xref linkend="kernelconfig">.  Se a sua placa foi 
 	detectada pelo seu <foreignphrase>kernel</foreignphrase> 
 	(<filename>GENERIC</filename>) durante a inicializa&ccedil;&atilde;o voc&ecirc; n&atilde;o 
 	precisa construir um novo kernel.</para>
@@ -950,7 +949,7 @@ tun0: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1500</screen>
 ifconfig_dc1="inet 10.0.0.1 netmask 255.255.255.0 media 10baseT/UTP"</programlisting>
 
       <para>Voc&ecirc; precisa substituir <devicename>dc0</devicename>,
-	<devicename>dc1</devicename>, e assim por sucessivamente, com 
+	<devicename>dc1</devicename>, e assim sucessivamente, com 
 	nomes de dispositivos corretos para suas placas, e os endere&ccedil;os 
 	apropriados.  Voc&ecirc; deve ler as p&aacute;ginas de manual do 
 	<literal>driver</literal> e &man.ifconfig.8; para mais detalhes 
@@ -980,7 +979,7 @@ ifconfig_dc1="inet 10.0.0.1 netmask 255.255.255.0 media 10baseT/UTP"</programlis
 	sejam aplicadas, e verifique se seu sistema reinicializa 
 	sem erros de configura&ccedil;&atilde;o.</para>
 
-      <para>Ap&oacute;s reinicializar o sistema, voc&ecirc; dere testar as 
+      <para>Ap&oacute;s reinicializar o sistema, voc&ecirc; deve testar as 
 	interfaces de rede.</para>
 
       <sect3>
@@ -1041,7 +1040,7 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
       <para>Resolu&ccedil;&atilde;o de problemas de configura&ccedil;&atilde;o de <literal>hardware</literal>
 	e <literal>software</literal> sempre &eacute; doloroso, e uma dor que pode 
 	ser aliviada atrav&eacute;s da checagem de coisas simples antes de 
-	quaquer coisa.  Seu cabo de rede est&aacute; conectado?  Voc&ecirc; configurou 
+	qualquer coisa.  Seu cabo de rede est&aacute; conectado?  Voc&ecirc; configurou 
 	os servi&ccedil;os de rede corretamente?  Voc&ecirc; configurou o 
 	<foreignphrase>firewall</foreignphrase> corretamente?  A placa de 
 	rede que voc&ecirc; est&aacute; usando &eacute; suportada pelo &os;?  Sempre verifique 
@@ -1050,12 +1049,12 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
 	Verifique os arquivos das listas de discuss&atilde;o, ou procure na 
 	Internet.</para>
 
-      <para>Se a placa funcionar, e performance estiver ruim, vale 
+      <para>Se a placa funcionar, e a performance estiver ruim, vale 
 	dar uma lida na p&aacute;gina de manual &man.tuning.7;.  Voc&ecirc; tamb&eacute;m 
 	pode verificar configura&ccedil;&otilde;es de rede incorretas, que podem 
 	provocar lentid&atilde;o nas conex&otilde;es.</para>
 
-      <para>Alguns usu&aacute;rios passam pro problemas de um ou dois <quote>device
+      <para>Alguns usu&aacute;rios passam por problemas de um ou dois <quote>device
 	timeouts</quote>, que &eacute; normal em algumas placas.  Se eles 
 	continuarem, ou come&ccedil;ar a incomodar, voc&ecirc; pode querer ter certeza 
 	de que o dispositivo n&atilde;o est&aacute; conflitando com outro dispositivo.  
@@ -1076,7 +1075,7 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
 	estiver desconectado.  Verifique a sa&iacute;da do comando 
 	<command>netstat -rn</command> e tenha certeza de que exista 
 	uma rota v&aacute;lida para a m&aacute;quina que voc&ecirc; est&aacute; tentando 
-	alcan&ccedil;ar.  Se n&atilde;o existir, leia 
+	alcan&ccedil;ar.  Se n&atilde;o existir, leia o 
 	<xref
 	linkend="advanced-networking">.</para>
 
@@ -1086,7 +1085,7 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
 	<foreignphrase>kernel</foreignphrase> mas n&atilde;o existirem regras definidas, 
 	ent&atilde;o a pol&iacute;tica padr&atilde;o &eacute; de negar todo o tr&aacute;fego, at&eacute; mesmo as 
 	requisi&ccedil;&otilde;es de <command>ping</command>!  
-	Leia <xref
+	Leia a <xref
 	linkend="firewalls"> para maiores informa&ccedil;&otilde;es.</para>
 
       <para>Algumas vezes a performance da placa &eacute; ruim, ou abaixo do 
@@ -1118,7 +1117,7 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
       <filename>/etc/rc.conf</filename>.</para>
 
     <para>Uma entrada de <literal>alias</literal> para a interface 
-      <devicename>fxp0</devicename> parece com:</para>
+      <devicename>fxp0</devicename> &eacute; assim:</para>
 
 <programlisting>ifconfig_fxp0_alias0="inet xxx.xxx.xxx.xxx netmask xxx.xxx.xxx.xxx"</programlisting>
 
@@ -1140,7 +1139,7 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
       com a m&aacute;scara <hostid role="netmask">255.255.255.0</hostid>
       e &agrave; rede <hostid role="ipaddr">202.0.75.16</hostid> com a 
       m&aacute;scara <hostid role="netmask">255.255.255.240</hostid>.
-      Queremos que o sistema respondar de <hostid role="ipaddr">10.1.1.1</hostid>
+      Queremos que o sistema responda de <hostid role="ipaddr">10.1.1.1</hostid>
       &agrave; <hostid role="ipaddr">10.1.1.5</hostid> e de 
       <hostid role="ipaddr">202.0.75.17</hostid> &agrave; 
       <hostid role="ipaddr">202.0.75.20</hostid>.</para>
