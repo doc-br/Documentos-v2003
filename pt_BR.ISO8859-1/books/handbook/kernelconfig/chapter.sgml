@@ -94,29 +94,28 @@
       isto est&aacute; assim porque a funcionalidades que est&atilde;o amarrada ao kernel e n&atilde;o podem ser carregadas din&acirc;micamente. 
       Em outros isto pode simplesmente estar porque nenhum tem ainda conseguido o tempo para escrita capaz de carregamento dinamico de modulos do kernel para essa funcionalidade ainda.</para>
 
-    <para>Compilar um kernel personalizado e um dos passos mais importante que cada usuário de
-      &unix; deve saber. Este processo, quando consome tempo, trará muitos benefícios para o seu sistema &os;.
+    <para>Compilar um kernel personalizado e um dos passos mais importante que cada usu&aacute;rio de
+      &unix; deve saber. Este processo, quando consome tempo, trar&aacute; muitos benef&iacute;cios para o seu sistema &os;.
       Diferente <arquivo>GENERIC</arquivo> do kernel, o qual necessita de suporte de uma
-      abrangente lista de hardware, um kernel personalizado somente contém suporte para o hardware dos
-      <emphasis>seus</emphasis> PC's. Isto tem benefícios inúmeros
-      , como:</para>
+      abrangente lista de hardware, um kernel personalizado somente cont&eacute;m suporte para o hardware dos
+      <emphasis>seus</emphasis> PC's. Isto tem benef&iacute;cios in&uacute;meros, como:</para>
 
     <itemizedlist>
       <listitem>
-	<para>Tempo mais rápido para carregar. Posto que o kernel apenas experimentará o
-	hardware que você tiver em seu sistema, o tempo de teste do seu sistema ao carregar a máquina diminuirá drasticamente.</para>
+	<para>Tempo mais r&aacute;pido para carregar. Posto que o kernel apenas experimentar&aacute; o
+	hardware que voc&ecirc; tiver em seu sistema, o tempo de teste do seu sistema ao carregar a m&aacute;quina diminuir&aacute; drasticamente.</para>
       </listitem>
 
       <listitem>
-	<para>Menos uso da memória. Um kernel personalizado usa frequentemente menos memória
-	  que o <filename>GENERIC</filename> kernel, o que é importante
-	  porque o kernel atual deve sempre estar presente na memória real.
-	  Para esta razão, um kernel personalizado e útil especialmente
+	<para>Menos uso da mem&oacute;ria. Um kernel personalizado usa frequentemente menos mem&oacute;ria
+	  que o <filename>GENERIC</filename> kernel, o que &eacute; importante
+	  porque o kernel atual deve sempre estar presente na mem&oacute;ria real.
+	  Para esta raz&atilde;o, um kernel personalizado e &uacute;til especialmente
 	  em um sistema com pouca quantidade de RAM.</para>
       </listitem>
 
       <listitem>
-	<para>Adicionar suporte a hardware. Um kernel personalizado permite a você adicionar suporte a dispositivos tais como Placas de Som, que não estão presentes no
+	<para>Adicionar suporte a hardware. Um kernel personalizado permite a voc&ecirc; adicionar suporte a dispositivos tais como Placas de Som, que não est&atilde;o presentes no
 	  <filename>GENERIC</filename> do kernel.</para>
       </listitem>
     </itemizedlist>
@@ -129,37 +128,38 @@
       <secondary>Compilando / instalando</secondary>
     </indexterm>
 
-    <para>Primeiramente, devemos ir rapidamente até o  diretório de configuração do kernel.
-      Todos os diretórios mencionados serão relativos ao diretório principal
-      <filename>/usr/src/sys</filename>, que também pode ser acessado direto
-      <filename>/sys</filename>. Há um número de subdiretórios que representam partes diferentes do kernel, mas
-      o mais importante, para nossas finalidades, são
-      <filename><replaceable>arch</replaceable>/conf</filename>, onde você
-      editará sua configuração de kernel personalizado, e
-      <filename>compile</filename>, que estão na área de preparação onde seu
-      kernel irá ser compilado. <replaceable>arch</replaceable> representa
+    <para>Primeiramente, devemos ir rapidamente at&eacute; o  diret&oacute;rio de configura&ccedil;&atilde;o do kernel.
+      Todos os diret&oacute;rios mencionados ser&atilde;o relativos ao diret&oacute;rio principal
+      <filename>/usr/src/sys</filename>, que tamb&eacute;m pode ser acessado direto
+      <filename>/sys</filename>. H&aacute; um n&uacute;mero de subdiret&oacute;rios que representam partes diferentes do kernel, mas
+      o mais importante, para nossas finalidades, s&atilde;o
+      <filename><replaceable>arch</replaceable>/conf</filename>, onde voc&ecirc;
+      editar&aacute; sua configura&ccedil;&atilde;o de kernel personalizado, e
+      <filename>compile</filename>, que est&atilde;o na &aacute;rea de prepara&ccedil;&atilde;o onde seu
+      kernel ir&aacute; ser compilado. <replaceable>arch</replaceable> representa
       qualquer <filename>i386</filename>, <filename>alpha</filename>, ou
-      <filename>pc98</filename> (uma alternativa de seção de desenvolvimento de hardware do PC, popular no Japan).  
-      Tudo dentro da arquitetura particular de diretórios trata de uma arquitetura apenas; O resto
-      do código é comum a todas as plataformas com o &os; podia ser portado potencialmente. Observe a organização lógica da estrutura de diretório, com cada um dispositivos suportados, sistema de arquivos, e
-      opções em seu próprio subdiretório.  &os; 5.X e superiores tem suporte para
+      <filename>pc98</filename> (uma alternativa de se&ccedil;&atilde;o de desenvolvimento de hardware do PC, popular no Jap&atilde;o).  
+      Tudo dentro da arquitetura particular de diret&oacute;rios trata de uma arquitetura apenas; O resto
+      do c&oacute;digo &eacute; comum a todas as plataformas com o &os; podia ser portado potencialmente. Observe a organiza&ccedil;&atilde;o 
+      l&oacute;gica da estrutura de diret&oacute;rio, com cada um dispositivos suportados, sistema de arquivos, e
+      op&ccedil;&otilde;es em seu pr&oacute;prio subdiret&oacute;rio. &os; 5.X e superiores tem suporte para
       <filename>sparc64</filename>, e algumas outras arquiteturas sob
       desenvolvimento.</para>
 
     <note>
-      <para>If there is <emphasis>not</emphasis> a
-	<filename>/usr/src/sys</filename> directory on your system,
-	then the kernel source has not been installed.  The easiest
-	way to do this is by running
-	<command>/stand/sysinstall</command> as
-	<username>root</username>, choosing
-	<guimenuitem>Configure</guimenuitem>, then
-	<guimenuitem>Distributions</guimenuitem>, then
-	<guimenuitem>src</guimenuitem>, then
-	<guimenuitem>sys</guimenuitem>.  If you have an aversion to
-	<application>sysinstall</application> and you have access to
-	an <quote>official</quote> &os; CDROM, then you can also
-	install the source from the command line:</para>
+      <para>Se <emphasis>não</emphasis> tiver o diret&oacute;rio
+	<filename>/usr/src/sys</filename> no seu sistema,
+	ent&atilde;o o source do kernel n&atilde;o foi instalado. A maneira mais f&aacute;cil
+	para fazer isso e rodando
+	<command>/stand/sysinstall</command> como
+	<username>root</username>, escolher
+	<guimenuitem>Configure</guimenuitem>, ent&atilde;o
+	<guimenuitem>Distributions</guimenuitem>, ent&atilde;o
+	<guimenuitem>src</guimenuitem>, ent&atilde;o
+	<guimenuitem>sys</guimenuitem>. Se voc&ecirc; tiver alguma avers&atilde;o a
+	<application>sysinstall</application> e voc&ecirc; tem acesso a
+	um <quote>oficial</quote> &os; CDROM, ent&atilde;o voc&ecirc; pode tamb&eacute;m
+	instalar o fonte atrav&eacute;s da linha de commando:</para>
 
       <screen>&prompt.root; <userinput>mount /cdrom</userinput>
 &prompt.root; <userinput>mkdir -p /usr/src/sys</userinput>
@@ -167,36 +167,36 @@
 &prompt.root; <userinput>cat /cdrom/src/ssys.[a-d]* | tar -xzvf -</userinput></screen>
     </note>
 
-    <para>Next, move to the
-      <filename><replaceable>arch</replaceable>/conf</filename> directory
-      and copy the <filename>GENERIC</filename> configuration file to the
-      name you want to give your kernel.  For example:</para>
+    <para>Próximo, V&aacute; at&eacute; o diret&oacute;rio
+      <filename><replaceable>arch</replaceable>/conf</filename>
+      e copie o arquivo de configura&ccedil;&atilde;o <filename>GENERIC</filename> para o
+      nome que voc&ecirc; quer para o seu kernel. Por exemplo:</para>
 
     <screen>&prompt.root; <userinput>cd /usr/src/sys/i386/conf</userinput>
 &prompt.root; <userinput>cp GENERIC MYKERNEL</userinput></screen>
 
-    <para>Traditionally, this name is in all capital letters and, if you
-      are maintaining multiple &os; machines with different hardware,
-      it is a good idea to name it after your machine's hostname.  We will
-      call it <filename>MYKERNEL</filename> for the purpose of this
-      example.</para>
+    <para>Tradicionalmente, este nome tem todas as principais letras e, se voc&ecirc;s
+      s&atilde;o mantenedores de m&uacute;ltiplos &os; m&aacute;quinas com diferentes hardware,
+      &Eacute; uma boa id&eacute;ia nome&aacute;-lo para o hostname da sua m&aacute;quina. N&oacute;s normalmente
+      alteramos isto <filename>MYKERNEL</filename> para a finalidade deste
+      exemplo.</para>
 
     <tip>
-      <para>Storing your kernel config file directly under
-	<filename>/usr/src</filename> can be a bad idea.  If you are
-	experiencing problems it can be tempting to just delete
-	<filename>/usr/src</filename> and start again.  Five seconds after
-	you do that you realize that you have deleted your custom kernel
-	config file.  Do not edit <filename>GENERIC</filename>
-	directly, as it may get overwritten the next time you
-	<link linkend="cutting-edge">update your source tree</link>, and
-	your kernel modifications will be lost.</para>
+      <para>Guardar os arquivos de configura&ccedil;&atilde;o do seu kernel abaixo do directly
+	<filename>/usr/src</filename> pode ser uma m&aacute; id&eacute;ia. Se voc&ecirc; sentir problemas
+	para apenas ajustar delete o
+	<filename>/usr/src</filename> e comece novamente. Cinco segundos depois
+	que voc&ecirc; realizou que voc&ecirc; teve que deletar seu arquivo de configura&ccedil;&atilde;o de kernel personalizado. N&atilde;o 
+        edite 
+        diretamente o arquivo <filename>GENERIC</filename>,
+	pois da pr&oacute;xima vez que voc&ecirc;s forem 
+	<link linkend="cutting-edge">atualizar seu c&oacute;digo da &aacute;rvore</link>, 
+	as suas antigas modifica&ccedil;&otilde;es do kernel ser&atilde;o perdidas.</para>
 
-      <para>You might want to keep your kernel config file elsewhere, and then
-	create a symbolic link to the file in the <filename>i386</filename>
-	directory.</para>
+      <para>Voc&ecirc; querer manter em outro local seu arquivo de configura&ccedil;&atilde;o do kernel, e ent&atilde;o
+	criar um link simb&oacute;lico do arquivo para o diret&oacute;rio <filename>i386</filename>.</para>
 
-      <para>For example:</para>
+      <para>Por exemplo:</para>
 
       <screen>&prompt.root; <userinput>cd /usr/src/sys/i386/conf</userinput>
 &prompt.root; <userinput>mkdir /root/kernels</userinput>
