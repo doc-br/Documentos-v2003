@@ -611,16 +611,17 @@
     </sect2>
 
     <sect2>
-      <title>Otimizando Performance</title>
+      <title>Otimizando a Performance</title>
 
       <para>O espelhamento do volume no exemplo anterior é mais
-      resistente a falha do que o volume não espelhado, mas sua
+      resistente a falhas do que o volume não espelhado, mas sua
       performance é menor: cada escrita no volume requer a escrita em
       dois discos, usando assim mais largura de banda de disco.  
-      Quando se quer considerar a peformance é indicado uma aproximação
-      diferente: ao invés de espelhar, os dados são striped entre o
-      maior numero de partições possíveis.  A configuração seguinte
-      mostra um volume com um plex striped entre quatro
+      Quando se quer considerar a peformance é indicado uma abordagem
+      diferente: ao invés de espelhar, os dados são segmentados dentre o
+      maior numero de partições possível.  A configuração seguinte
+      mostra um volume com um plex
+      <foreignphrase>striped</foreignphrase> entre quatro
       partições:</para>
       
 	<programlisting>
@@ -633,7 +634,7 @@
 	  sd length 128m drive c
 	  sd length 128m drive d</programlisting>
 
-      <para>Como antes, não é necessário definir as partições que ja são
+      <para>Como antes, não é necessário definir as partições que já são
       conhecidas pelo vinum.  Depois de processar essa definição, a
       configuração se parece com:</para>
       
@@ -667,24 +668,25 @@
 
       <para>
 	<figure id="vinum-striped-vol">
-	  <title>Um volume do vinum Striped</title>
+	  <title>Um volume Vinum <foreignphrase>Striped</foreignphrase></title>
 	  <graphic fileref="vinum/vinum-striped-vol">
 	</figure>
       </para>
 
       <para>Esse volume é representado em
-	<xref linkend="vinum-striped-vol">.  A escuridão dos stripes
-	indica a porção junto ao espaço endereçado do plex: os stripes
-	mais claros vem primeiro, os mais escuros por último.</para>
+	<xref linkend="vinum-striped-vol">.  O sombreado dos
+	<foreignphrase>stripes</foreignphrase> indica a porção junto ao
+	espaço endereçado do plex: os stripes mais claros vem primeiro,
+	os mais escuros por último.</para>
     </sect2>
 
     <sect2>
-      <title>Estabilidade e performance</title>
+      <title>Estabilidade e Performance</title>
 
       <para><anchor id="vinum-resilience">Com o hardware necessário, é
       possível construir volumes que apresentam tanto acréscimo de
-      performance quanto de estabilidade quando comparado as partições &unix;
-      comuns.  Um típico arquivo de configuração pode ser:</para>
+      performance quanto de estabilidade quando comparados às partições &unix;
+      comuns.  Um arquivo de configuração típico pode ser:</para>
       
       <programlisting>
 	volume raid10
@@ -701,18 +703,17 @@
         sd length 102480k drive a
         sd length 102480k drive b</programlisting>
 
-      <para>Os subdiscos do segundo plex estão offset por duas partições
-      daquela do primeiro plex: isso ajuda a garantir que não acontecerá
-      escrita no mesmo subdisco, mesmo que a transferência aconteça
-      sobre dois discos.</para>
-      
+      <para>Os subdiscos do segundo plex estão deslocados por dois
+      discos em relação ao primeiro plex: isso ajuda a garantir que não
+      acontecerá escrita no mesmo subdisco, mesmo que a transferência
+      aconteça sobre dois discos.</para>
       
       <para><xref linkend="vinum-raid10-vol"> representa a estrutura
 	desse volume.</para>
 
       <para>
 	<figure id="vinum-raid10-vol">
-	  <title>Um volume do vinum striped espelhado</title>
+	  <title>Um Volume Vinum Striped e Espelhado</title>
 	  <graphic fileref="vinum/vinum-raid10-vol">
         </figure>
       </para>
@@ -722,65 +723,63 @@
   <sect1 id="vinum-object-naming">
     <title>Nomenclatura de objetos</title>
 
-    <para>Como descrito assima, Vinum desigina nomes padrões
-    para plexes e subdisks, embora você possa sobrescreve-los.
+    <para>Como descrito assima, Vinum designa nomes padrões
+    para plexes e subdisks, embora você possa sobrescrevê-los.
     Sobrescrever os nomes padrões, não é recomenado: experiências com o
-    com o gerenciador de volumes VERITAS, que permite nomes arbitrários
-    para objetos, tem mostrado que essa flexibilidade não tras uma
-    vantágem significativa e pode causar confusão.</para>
+    gerenciador de volumes VERITAS, que permite nomes arbitrários
+    para objetos, têm mostrado que essa flexibilidade não trás 
+    vantagem significativa e pode causar confusão.</para>
 
     <para>Nomes podem conter qualquer caracter não nulo, mas é
     recomendado que estes sejam restritos a letras, digitos e caracteres
-    underscore.  Os nomes dos volumes, plexes e subdiscos podem ser
+    de sublinhado.  Os nomes dos volumes, plexes e subdiscos podem ser
     formados por até 64 caracteres, e o nome dos drives por até
     32.</para>
     
     <para>Objetos do Vinum são dispositivos designados na
-    hierarquia <filename>/dev/vinum</filename>.  a configuração descrita
-    abaixo causaria o Vinum a criar o seguinte node de
-    despositivo:</para>
-    
+    hierarquia <filename>/dev/vinum</filename>.  A configuração descrita
+    acima faria o Vinum a criar os seguintes nós de despositivo:</para>
 
     <itemizedlist>
       <listitem>
 	<para>Os dispositivos de controle
 	<devicename>/dev/vinum/control</devicename> e
-	<devicename>/dev/vinum/controld</devicename>, no qual são usados
-	por &man.vinum.8; e pelo daemon de Vinum respectivamente.</para> 
+	<devicename>/dev/vinum/controld</devicename>, os quais são usados
+	por &man.vinum.8; e pelo daemon do Vinum respectivamente.</para> 
       </listitem> 
-	      
 
       <listitem>
 	<para>Entrada de dispositivo de caracter e bloco para cada
 	volume.  Esses são os principais dispositivos usados pelo Vinum.
-	Os nomes dos dispoitivos bloco é o nome do volume, enquanto os
-	do caracter seguem as tradições BSD de prepending (preceder) a
-	letra <emphasis>r</emphasis> ao nome.  Por isso a configurção
-	abaixo incluiria os dispositivos bloco
+	Os nomes dos dispoitivos de bloco são o nome do volume, enquanto os
+	de caracter seguem a tradição BSD de preceder a letra
+	<emphasis>r</emphasis> ao nome.  Por isso a configurção abaixo
+	incluiria os dispositivos de bloco
 	<devicename>/dev/vinum/myvol</devicename>,
 	<devicename>/dev/vinum/mirror</devicename>,
 	<devicename>/dev/vinum/striped</devicename>,
 	<devicename>/dev/vinum/raid5</devicename> e
-	<devicename>/dev/vinum/raid10</devicename>, e o dispositivos
+	<devicename>/dev/vinum/raid10</devicename>, e os dispositivos de
 	caracter <devicename>/dev/vinum/rmyvol</devicename>,
 	<devicename>/dev/vinum/rmirror</devicename>,
 	<devicename>/dev/vinum/rstriped</devicename>,
 	<devicename>/dev/vinum/rraid5</devicename> e
-	<devicename>/dev/vinum/rraid10</devicename>.  obviament existe m
-	problema aqui: é possível ter dois olumes chamados
+	<devicename>/dev/vinum/rraid10</devicename>.  óbviamente existe
+	um problema aqui: é possível ter dois volumes chamados
 	<emphasis>r</emphasis> e <emphasis>rr</emphasis>, mas ocorreria um
-	conflito criando o node do  dispositivo
+	conflito criando o nó do dispositivo
 	<devicename>/dev/vinum/rr</devicename>: seria um dispositivo de
 	caracter para o volume <emphasis>r</emphasis> ou um dispositivo
 	bloco para o volume <emphasis>rr</emphasis>?  Atualmente Vinum
-	não endereça o conflito: o primeiro volume definido levará o
+	não trata este conflito: o primeiro volume definido levará o
 	nome.</para> 
       </listitem>
 
       <listitem>
 	<para>Um diretório <devicename>/dev/vinum/drive</devicename> com
-	entradas para cada disco.  Essas entradas são na verdade links
-	simbólicos para os disco nodes correspondentes.<.para>
+	entradas para cada disco.  Essas entradas são na verdade
+	<foreignphrase>links</foreignphrase> simbólicos para os discos
+	nós correspondentes.</para>
       </listitem>
 
       <listitem>
@@ -791,18 +790,17 @@
       </listitem>
 
       <listitem>
-	<para>The directories
+	<para>Os diretórios
 	  <devicename>/dev/vinum/plex</devicename>,
-	  <devicename>/dev/vinum/sd</devicename>, and
+	  <devicename>/dev/vinum/sd</devicename>, e
 	  <devicename>/dev/vinum/rsd</devicename>, onde contém um
-	  node de dispositivo bloco para cada plex e um node de
-	  dispositivo bloco e caracter para cada subdisco,
+	  nó de dispositivo de bloco para cada plex e um nó de
+	  dispositivo de bloco e caracter para cada subdisco,
 	  respectivamente.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Por exemplo, considere o seguinte arquivo de
-    configuração:</para>
+    <para>Por exemplo, considere o seguinte arquivo de configuração:</para>
 	<programlisting>
 	drive drive1 device /dev/sd1h
 	drive drive2 device /dev/sd2h
@@ -879,22 +877,22 @@
     brwxr-xr--  1 root  wheel   25, 0x20300002 Apr 13 16:46 s64.p0.s3</programlisting>
 
     <para>Apesar de não ser recomendado alocação de nomes específicos
-    para plexes e subdiscos, os discos do Vinum devem ser nomeados.
+    para plexes e subdiscos, os discos Vinum devem ser nomeados.
     Isso torna possível mover um disco para uma outra localidade e ainda
-    sim reconhace-lo automaticamente.  Os nomes dos discos podem conter
+    sim reconhacê-lo automaticamente.  Os nomes dos discos podem conter
     até 32 caracteres.</para>
     
     <sect2>
-      <title>Criando sistema de arquivos </title>
+      <title>Criando Sistemas de Arquivos</title>
 
-	<para>Volumes e discos parecem idênticos para um sistema, com
-	uma exessão.  Ao contrário de discos &unix;, Vinum não particiona
-	volumes, no qual então, não possui uma tabela de partições.
+	<para>Volumes e discos parecem idênticos para o sistema, com
+	uma excessão.  Ao contrário de discos &unix;, Vinum não particiona
+	volumes, assim, não possui uma tabela de partições.
 	Isso exigiu uma mudança em alguns utilitários de discos como
-	&man.newfs.8;, onde previamente interpretou a última letra de um 
-	nome de volume de Vinum como um	identificador de partições.  Por
-	exemplo, uma partição de disco pode ter um nome como
-	<devicename>/dev/ad0a</devicename> ou
+	&man.newfs.8;, que previamente tentava interpretar a última
+	letra de um nome de volume Vinum como um identificador de
+	partições.  Por exemplo, uma partição de disco pode ter um nome
+	como <devicename>/dev/ad0a</devicename> ou
 	<devicename>/dev/da2h</devicename>.  Esses nomes representam a
 	primeira partição (<devicename>a</devicename>) no primeiro (0)
 	disco IDE (<devicename>ad</devicename>) e a oitava partição
@@ -906,12 +904,12 @@
 	
 	  
 	<para>Normalmente, &man.newfs.8; interpreta o nome do disco e
-	reclama se não entender.  Por exemplo:</para>
+	reclama se não entendê-lo.  Por exemplo:</para>
 	
 	<screen>&prompt.root; <userinput>newfs /dev/vinum/concat</userinput>
 newfs: /dev/vinum/concat: can't figure out file system partition</screen>
 
-	<note><para>O que segue só é valido para as versões de freeBSD
+	<note><para>O que segue só é valido para as versões de FreeBSD
 	anteriores a 5.0:</para></note>
 
 	<para>Para criar um sistema de arquivos nesse volume, use a
@@ -933,18 +931,15 @@ newfs: /dev/vinum/concat: can't figure out file system partition</screen>
     verifica se o modulo foi carregado ou não, e o carrega
     automaticamente.</para>
     
-    
-
     <sect2>
       <title>Inicialização</title>
 
-      <para>Vinum armazena as informações de configuração das fatias de
-      disco essencialmente da mesma forma que os arquivos de
-      configuração.  Quando lendo do banco de dados de configuração,
-      Vinum reconhece algumas palavras chave que não são permitidas nos
-      arquivos de configuração.  Por exemplo, uma configuração de disco
-      talves contenha o seguinte texto:</para>
-      
+      <para>Vinum armazena as informações de configuração das partições de
+        disco essencialmente da mesma forma que os arquivos de
+	configuração.  Quando lê do banco de dados de configuração,
+	Vinum reconhece algumas palavras chave que não são permitidas
+	nos arquivos de configuração.  Por exemplo, uma configuração de
+	disco talvez contenha o seguinte texto:</para>
       
 	<programlisting>volume myvol state up
 volume bigraid state down
@@ -970,20 +965,19 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 	informações sobre localidade e nomenclatura (Sendo as duas no
 	caso permitidas, mas desencorajadas) e também informações sobre
 	os estados (mas não são disponíveis para o usuário).  Vinum não
-	armazena informações sobre os disco nas informações de
-	configuração: ele acha os drives by scanning the configured
-	disk drives for partitions with a Vinum label.  Isso abilita o
+	armazena informações sobre os discos nas informações de
+	configuração: ele acha as informações pesquisando nos discos
+	configurados por partições identificadas como Vinum.  Isso habilita o
 	Vinum a identificar discos corretamente, mesmo que eles tenham
-	sido rotulados com uma diferente nomeação de drives
-	&unix;.</para>
-	
+	sido rotulados com uma identificação de drives &unix;
+	diferente.</para>
 	
       <sect3 id="vinum-rc-startup">
 	<title>Inicialização Automática</title>
 
-        <para>Para iniciar o Vinum automaticamente quando você boota o
-	sistema, afirme-se de que você tem a seguinte linha no seu
-	<filename>/etc/rc.conf</filename>:</para>
+        <para>Para iniciar o Vinum automaticamente quando você
+	inicializa o sistema, certifique-se de que você tem a seguinte linha
+	no seu <filename>/etc/rc.conf</filename>:</para>
 	
 
 	<programlisting>start_vinum="YES"		# set to YES to start vinum</programlisting>
@@ -994,7 +988,7 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 	<acronym>kld</acronym> na inicialização, e inicie qualquer
 	objeto citado na configuração.  Isso é feito antes de montar os
 	sistemas de arquivos, então, é possível fazer automaticamente um 
-	&man.fsck.8; e montar os sistemas de arquivo nos volumes de
+	&man.fsck.8; e montar os sistemas de arquivo nos volumes
 	Vinum.</para>
 	
 
