@@ -20,7 +20,7 @@
 <!ENTITY % teams PUBLIC "-//FreeBSD//ENTITIES DocBook Team Entities//EN">
 %teams;
 
-<!ENTITY % mailing-lists PUBLIC "-//FreeBSD//ENTITIES DocBook Mailing List Entities//EN">
+<!ENTITY % mailing-lists PUBLIC "-//FreeBSD//ENTITIES DocBook Mailing List Entities//PTBR">
 %mailing-lists;
 
 <!ENTITY % release PUBLIC "-//FreeBSD//ENTITIES Release Specification//EN">
@@ -60,7 +60,7 @@ e ocasionalmente funcionalidade.</para>
 
     <para>Por essas ras&otilde;es, o Time de Engenharia de Vers&otilde;es
 	(<foreignphrase>The Release Engineering Team</foreignphrase>)
-	<emphasis>n&atilde;o</emphasis> aconselha a atualiza&cced
+	<emphasis>n&atilde;o</emphasis> aconselha a atualiza&ccedil;&atilde;o
 	precipitada (&agrave;s cegas) de vers&otilde;es anteriores do FreeBSD para
 	o 5.0. Especificamente, aos usu&aacute;rios mais conservadores, recomendamos
 	a utiliza&ccedil;&atilde;o dos <foreignphrase>releases</foreignphrase> 4.
@@ -81,7 +81,7 @@ e ocasionalmente funcionalidade.</para>
 	de vista pr&aacute;tico, implica na necessidade de criar e distribuir uma
 	vers&atilde;o de lan&ccedil;amento antes!)</para>
 
-    <para>Esse artigo descreve algumas das quest&otilde;es envolvidas na instala&ccedil;&ati
+    <para>Esse artigo descreve algumas das quest&otilde;es envolvidas na instala&ccedil;&atilde;o
 	e uso do FreeBSD 5.0-RELEASE.Iniciamos com uma breve
 	vis&atilde;o geral do processo de lan&ccedil;amento do FreeBSD. Em seguida
 	apresentamos algumas das mais not&aacute;veis novas caracter&iacute;sticas
@@ -139,9 +139,9 @@ e ocasionalmente funcionalidade.</para>
     <para>Mais informa&ccedil;&otilde;es sobre os processos de engenharia de vers&otilde;es
       do &os; podem ser encontradas nas <ulink
       url="http://www.FreeBSD.org/releng/index.html">p&aacute;ginas
-      Web sobre Engenharia de Vers&otilde;es</a> e no artigo sobre a <ulink
+      Web sobre Engenharia de Vers&otilde;es</ulink> e no artigo sobre a <ulink
       url="http://www.freebsd.org/doc/en_US.ISO8859-1/articles/releng/index.html">Engenharia
-      de Vers&otilde;es do &os;.</para>
+      de Vers&otilde;es do &os;</ulink>.</para>
 
   </sect1>
 
@@ -166,7 +166,7 @@ e ocasionalmente funcionalidade.</para>
       <listitem>
         <para>KSE: Kernel Scheduled Entities ou Entidades Agendadas pelo Kernel
           permitem que um &uacute;nico processo tenha m&uacute;ltiplas <foreignphrase>threads</foreignphrase>, 
-          no n&iacute;vel de kernel, similar ao Agendamento de Ativa&ccedil;&otildees
+          no n&iacute;vel de kernel, similar ao Agendamento de Ativa&ccedil;&otilde;es
           (<foreignphrase>Scheduler Activations</foreignphrase>).</para>
       </listitem>
  
@@ -179,7 +179,6 @@ e ocasionalmente funcionalidade.</para>
       <listitem>
         <para>GCC: A cadeia de ferramentas de compila&ccedil;&atilde;o &eacute;
           baseada agora no GCC 3.2.1, ao inv&eacute;s do GCC 2.95.<replaceable>X</replaceable>.</para>
-        </para>
       </listitem> 
  
       <listitem>
@@ -378,7 +377,7 @@ e ocasionalmente funcionalidade.</para>
         Isto permite, entre outras coisas, o uso de um kernel&nbsp; <literal>GENERIC</literal>
         ao inv&eacute;s de um kernel diminu&iacute;do nas imagens de disquete. Em
         teoria, qualquer sistema capaz de carregar os CDROMs de instala&ccedil;&atilde;o
-        do Microsoft Windows NT 4 deve conseguir lidar com os CDROMs do FreeBSD 5.0.</part>
+        do Microsoft Windows NT 4 deve conseguir lidar com os CDROMs do FreeBSD 5.0.</para>
 
     </sect2>
 
@@ -421,18 +420,18 @@ e ocasionalmente funcionalidade.</para>
         de cabe&ccedil;alhos obsoletos com atuais.</para>
 
       <para><filename>MAKEDEV</filename> n&atilde;o &eacute; mais dispon&iacute;vel ou requerido.
-        FreeBSD &release.5x; usa um dispositivo de filesystem, que cria automaticamente nos
+        O FreeBSD 5.X usa um dispositivo de filesystem, que cria automaticamente nos
         de dispositivo sob demanda. Para mais informac&ccedil;&otilde;es, veja &man.devfs.5;.</para>
 
       <para>UFS2 &eacute; o formato em-disco padr&atilde;o para sistemas de arquivos criados
         usando &man.newfs.8;. Para todas as plataformas exceto pc98, &eacute; tamb&eacute;m por padr&atilde;o
         para sistemas de arquivos criados usando a tela de nomea&ccedil;&atilde;o; (<foreignphrase>labeling</foreignphrase>)
-        de discos no &man.sysinstall.8;. Devido &os; &release.4x; compreender somente UFS1 (n&atilde;o UFS2),
-        as parti&ccedil&otilde;es de disco que precisam ser acessados pelo por ambos os &release.5x; e &release.4x;
+        de discos no &man.sysinstall.8;. Devido FreeBSD 4.X compreender somente UFS1 (n&atilde;o UFS2),
+        as parti&ccedil&otilde;es de disco que precisam ser acessados pelo por ambos os FreeBSD 5.X e FreeBSD 4.X;
         devem ser criadas com UFS1. Isto pode ser especificado usando a op&ccedil;&atilde;o 
         <option>-O1</option> no &man.newfs.8;, ou sob a tela de nomea&ccedil;&atilde;o; (<foreignphrase>labeling</foreignphrase>)
         &man.sysinstall.8;. Esta situa&ccedil;&atilde;o deve surgir muitas vezes com uma &uacute;nica m&aacute;quina
-        com <foreignphrase>dual-boot</foreignphrase> &os; &release.4x; e &os; &release.5x;. Note que n&atilde;o h&aacute;
+        com <foreignphrase>dual-boot</foreignphrase> FreeBSD 4.X e FreeBSD 5.X. Note que n&atilde;o h&aacute;
         nenhuma maneira de converter sistema de arquivos entre os dois formatos em-disco (ao inv&&eacute;s de fazer backup
         re-criando o sistema de arquivo, e restaurando).</para>        
 
