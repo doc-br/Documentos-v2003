@@ -380,47 +380,48 @@ multi on</programlisting>
 	<author>
 	  <firstname>Murray</firstname>
 	  <surname>Stokely</surname>
-	  <contrib>Updated for Mathematica 4.X by </contrib>
+	  <contrib>Atualizado para Mathematica 4.X por </contrib>
 	</author>
       </authorgroup>
       <authorgroup>
 	<author>
 	  <firstname>Bojan</firstname>
 	  <surname>Bistrovic</surname>
-	  <contrib>Merged with work by </contrib>
+	  <contrib>Unido ao trabalho de </contrib>
 	</author>
       </authorgroup>
     </sect1info>
-    <title>Installing &mathematica;</title>
+    <title>Instalando o &mathematica;</title>
 
     <indexterm>
       <primary>applications</primary>
       <secondary><application>Mathematica</application></secondary>
     </indexterm>
 
-    <para>This document describes the process of installing the Linux
-      version of <application>&mathematica; 4.X</application> onto
-      a FreeBSD system.</para>
+    <para>Este documento descreve o processo de instala&ccedil;&atilde;o 
+      da vers&atilde;o Linix do <application>&mathematica; 4.X</application> 
+      em um sistema FreeBSD.</para>
 
-    <para>The Linux version of <application>&mathematica;</application>
-      runs perfectly under FreeBSD
-      however the binaries shipped by Wolfram need to be branded so that
-      FreeBSD knows to use the Linux ABI to execute them.</para>
+    <para>A vers&atilde;o Linux do <application>&mathematica;</application>
+      roda perfeitamente sob o FreeBSD, entretanto os bin&aacute;rios 
+      distribu&iacute;dos por Wolfram precisam ser marcados para que o 
+      FreeBSD saiba que deve usar o Linux ABI para execut&aacute;los.</para>
 
-    <para>The Linux version of <application>&mathematica;</application>
-      or <application>&mathematica; for Students</application> can
-      be ordered directly from Wolfram at
+    <para>A vers&atilde;o Linux do <application>&mathematica;</application>
+      ou <application>&mathematica; para Estudantes</application> pode ser
+      solicitada diretamente em 
       <ulink url="http://www.wolfram.com/"></ulink>.</para>
 
     <sect2>
-      <title>Branding the Linux Binaries</title>
+      <title>Marcando os Bin&aacute;rios Linux</title>
 
-      <para>The Linux binaries are located in the <filename>Unix</filename>
-	directory of the <application>&mathematica;</application> CDROM
-	distributed by Wolfram.  You
-	need to copy this directory tree to your local hard drive so that
-	you can brand the Linux binaries with &man.brandelf.1; before
-	running the installer:</para>
+      <para>Os bin&aacute;rios Linux est&atilde;o localizados no 
+	diret&oacute;rio <filename>Unix</filename> do CDROM do 
+	<application>&mathematica;</application> distribu&iacute;do por  
+	Wolfram.  Voc&ecirc; precisa copiar esta &aacute;rvore de 
+	diret&oacute;rio para o seu disco local para que voc&ecirc; possa 
+	marcar os bin&aacute;rios Linux com &man.brandelf.1; antes de 
+	executar o instalador:</para>
 
       <screen>&prompt.root; <userinput>mount /cdrom</userinput>
 &prompt.root; <userinput>cp -rp /cdrom/Unix/ /localdir/</userinput>
@@ -433,74 +434,80 @@ multi on</programlisting>
 &prompt.root; <userinput>cd /localdir/Installers/Linux/</userinput>
 &prompt.root; <userinput>./MathInstaller</userinput></screen>
 
-      <para>Alternatively, you can simply set the default ELF brand
-	to Linux for all unbranded binaries with the command:</para>
+      <para>Alternativamente, voc&ecirc; pode simplesmente configurar 
+	a marca ELF Linux padr&atilde;o para todos os bin&aacute;rios 
+	n&atilde;o marcados com o comando:</para>
       <screen>&prompt.root; <userinput>sysctl kern.fallback_elf_brand=3</userinput></screen>
-      <para>This will make FreeBSD assume that unbranded ELF binaries
-	use the Linux ABI and so you should be able to run the
-	installer straight from the CDROM.</para>
+      <para>Isto far&aacute; o FreeBSD assumir que os bin&aacute;rios ELF 
+	n&atilde;o marcados usam o Linux ABI e assim voc&ecirc; deve ser 
+	capaz de executar o instalador direto do CDROM.</para>
     </sect2>
 
     <sect2>
-      <title>Obtaining Your &mathematica; Password</title>
+      <title>Obtendo Sua Senha do &mathematica;</title>
 
-      <para>Before you can run <application>&mathematica;</application>
-	you will have to obtain a
-	password from Wolfram that corresponds to your <quote>machine
-	ID</quote>.</para>
+      <para>Antes que voc&ecirc; possa executar o <application>&mathematica;</application>
+	voc&ecirc; precisar&aacute; obter uma senha do Wolfram, que 
+	corresponde a sua <quote>ID de m&aacute;quina</quote>.</para>
       <indexterm>
 	<primary>Ethernet</primary>
 	<secondary>MAC address</secondary>
       </indexterm>
 
-      <para>Once you have installed the Linux compatibility runtime
-	libraries and unpacked <application>&mathematica;</application>
-	you can obtain the
-	<quote>machine ID</quote> by running the program
-	<command>mathinfo</command> in the installation directory.  This
-	machine ID is based solely on the MAC address of your first
-	Ethernet card.</para>
+      <para>Uma vez instaladas as bibliotecas Linux de compatibilidade 
+	em tempo de execu&ccedil;&atilde;o e desempacotado o 
+	<application>&mathematica;</application> voc&ecirc; pode 
+	obter a <quote>ID de m&aacute;quina</quote> executando o programa 
+	<command>mathinfo</command> no diret&oacute;rio de instala&ccedil;&atilde;o.  
+	Esta ID de m&aacute;quina &eacute; baseada somente no endere&ccedil;o MAC 
+	da sua primeira placa de Ethernet.</para>
 
       <screen>&prompt.root; <userinput>cd /localdir/Files/SystemFiles/Installation/Binaries/Linux</userinput>
 &prompt.root; <userinput>mathinfo</userinput>
 disco.example.com 7115-70839-20412</screen>
 
-      <para>When you register with Wolfram, either by email, phone or fax,
-	you will give them the <quote>machine ID</quote> and they will
-	respond with a corresponding password consisting of groups of
-	numbers.  You can then enter this information when you attempt to
-	run <application>&mathematica;</application> for the first time
-	exactly as you would for any other
-	<application>&mathematica;</application> platform.</para>
+      <para>Ao obter o registro com a Wolfram, seja por correio 
+	eletrônico, telefone ou fax, voc&ecirc; fornecer&aacute; a eles 
+	a <quote>ID da m&aacute;quina</quote> e eles responder&atilde;o 
+	com uma senha que consiste em um grupo de n&uacute;meros.  
+	Voc&ecirc; pode ent&atilde;o entrar com esta informa&ccedil;&atilde;o 
+	quando tentar executar o <application>&mathematica;</application> 
+	pela primeira vez, exatamente da mesma maneira que voc&ecirc; 
+	faria para qualquer outra plataforma do 
+	<application>&mathematica;</application>.</para>
     </sect2>
 
     <sect2>
-      <title>Running the &mathematica; Frontend over a Network</title>
+      <title>Executando o Frontend do &mathematica; atrav&eacute;s da Rede</title>
 
-      <para><application>&mathematica;</application> uses some special
-	fonts to display characters not
-	present in any of the standard font sets (integrals, sums, Greek
-	letters, etc.).  The X protocol requires these fonts to be install
-	<emphasis>locally</emphasis>.  This means you will have to copy
-	these fonts from the CDROM or from a host with
+      <para><application>&mathematica;</application> usa algumas fontes 
+	especiais para mostrar caracteres n&atilde;o presentes em qualquer 
+	conjunto padr&atilde;o de fontes (integrais, somas, letras Gregas, 
+	etc.).  O protocolo X requer que estas fontes sejam instaladas 
+	<emphasis>localmente</emphasis>.  Isto significa que voc&ecirc; 
+	precisa copiar estas fontes do CDROM ou de uma m&aacute;quina com o 
 	<application>&mathematica;</application>
-	installed to your local machine.  These fonts are normally stored
-	in <filename>/cdrom/Unix/Files/SystemFiles/Fonts</filename> on the
-	CDROM, or
-	<filename>/usr/local/mathematica/SystemFiles/Fonts</filename> on
-	your hard drive.  The actual fonts are in the subdirectories
-	<filename>Type1</filename> and <filename>X</filename>.  There are
-	several ways to use them, as described below.</para>
+	instalado para o seu sistema local.  Estas fontes normalmente 
+	s&atilde;o armazenadas em 
+	<filename>/cdrom/Unix/Files/SystemFiles/Fonts</filename> no CDROM ou em 
+	<filename>/usr/local/mathematica/SystemFiles/Fonts</filename> em seu 
+	disco r&iacute;gido.  As fontes atuais est&atilde;o em 
+	subdiret&oacute;rios em <filename>Type1</filename> e 
+	<filename>X</filename>.  Existem v&aacute;rias maneiras de 
+	utiliz&aacute;-las, como descrito abaixo.</para>
 
-      <para>The first way is to copy them into one of the existing font
-	directories in <filename>/usr/X11R6/lib/X11/fonts</filename>.
-	This will require editing the <filename>fonts.dir</filename> file,
-	adding the font names to it, and changing the number of fonts on
-	the first line.  Alternatively, you should also just be able to
-	run &man.mkfontdir.1; in the directory you have copied
-	them to.</para>
+      <para>A primeira maneira &eacute; copi&aacute;-las em um dos 
+	diret&oacute;rios de fontes existente em 
+	<filename>/usr/X11R6/lib/X11/fonts</filename>.
+	Para isto voc&ecirc; precisar&aacute; editar o arquivo 
+	<filename>fonts.dir</filename>, adicionando os nomes das fontes 
+	a ele, e modificando o n&uacute;mero de fontes na primeira linha.  
+	Alternativamente, voc&ecirc; tamb&eacute;m deve ser capaz de 
+	executar o &man.mkfontdir.1; no diret&oacute;rio ao qual voc&ecirc; 
+	as copiou.</para>
 
-      <para>The second way to do this is to copy the directories to
+      <para>A segunda maneira de fazer isto &eacute; copiar os 
+	diret&oacute;rios para 
 	<filename>/usr/X11R6/lib/X11/fonts</filename>:</para>
 
       <screen>&prompt.root; <userinput>cd /usr/X11R6/lib/X11/fonts</userinput>
@@ -514,22 +521,22 @@ disco.example.com 7115-70839-20412</screen>
 &prompt.root; <userinput>cd ../MathType1</userinput>
 &prompt.root; <userinput>mkfontdir</userinput></screen>
 
-      <para>Now add the new font directories to your font path:</para>
+      <para>Agora adicione os novos diret&oacute;rios de fontes ao seu caminho de fontes:</para>
 
       <screen>&prompt.root; <userinput>xset fp+ /usr/X11R6/lib/X11/fonts/X</userinput>
 &prompt.root; <userinput>xset fp+ /usr/X11R6/lib/X11/fonts/MathType1</userinput>
 &prompt.root; <userinput>xset fp rehash</userinput></screen>
 
-      <para>If you are using the <application>&xfree86;</application> server, you can have these font
-	directories loaded automatically by adding them to your
-	<filename>XF86Config</filename> file.</para>
+      <para>Se voc&ecirc; est&aacute; usando o servidor <application>&xfree86;</application>, 
+	voc&ecirc; pode ter estas fontes carregadas automaticamente adicionando-as 
+	ao seu arquivo <filename>XF86Config</filename>.</para>
       <indexterm><primary>fonts</primary></indexterm>
 
-      <para>If you <emphasis>do not</emphasis> already have a directory
-	called <filename>/usr/X11R6/lib/X11/fonts/Type1</filename>, you
-	can change the name of the <filename>MathType1</filename>
-	directory in the example above to
-	<filename>Type1</filename>.</para>
+      <para>Se voc&ecirc; j&aacute; <emphasis>n&atilde;o</emphasis> possui 
+	um diret&oacute;rio chamado 
+	<filename>/usr/X11R6/lib/X11/fonts/Type1</filename>, voc&ecirc;  
+	pode mudar o nome do diret&oacute;rio <filename>MathType1</filename>
+	do exemplo acima para <filename>Type1</filename>.</para>
     </sect2>
   </sect1>
 
