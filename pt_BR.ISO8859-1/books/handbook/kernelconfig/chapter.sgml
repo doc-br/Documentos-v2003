@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.25 2003/12/10 21:17:57 surf Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.26 2003/12/11 17:36:27 surf Exp $
 -->
 
 <chapter id="kernelconfig">
@@ -1399,73 +1399,71 @@ pseudo-device   bpf           # Berkeley packet filter</programlisting>
   </sect1>
 
   <sect1 id="kernelconfig-nodes">
-    <title>Making Device Nodes</title>
+    <title>Fazendo Ligação dos Dispositivos</title>
 
-    <indexterm><primary>device nodes</primary></indexterm>
+    <indexterm><primary>dispositivos ligados</primary></indexterm>
     <indexterm>
       <primary><command>MAKEDEV</command></primary>
     </indexterm>
 
-    <note><para>If you are running &os;&nbsp;5.0 or later
-      you can safely skip this section.  These versions use
-      &man.devfs.5; to allocate device nodes transparently for the user.</para></note>
+    <note><para>Se você estiver rodando &os;&nbsp;5.0 ou posteriores
+      você poderá com segurança pular está seção. Estas versões usam
+      &man.devfs.5; para alocar ligação entre dispositivos transparentes para o usuário.</para></note>
 
-    <para>Almost every device in the kernel has a corresponding
-      <quote>node</quote> entry in the <filename>/dev</filename> directory.
-      These nodes look like regular files, but are actually special
-      entries into the kernel which programs use to access the device.
-      The shell script <filename>/dev/MAKEDEV</filename>, which is
-      executed when you first install the operating system, creates
-      nearly all of the device nodes supported.  However, it does not
-      create <emphasis>all</emphasis> of them, so when you add support for
-      a new device, it pays to make sure that the appropriate entries are
-      in this directory, and if not, add them.  Here is a simple
-      example:</para>
+    <para>Quase cada dispositivo no kernel tem uma  
+      <quote>ligação</quote> correspondente no diretório <filename>/dev</filename>.
+      Esta ligação olha como arquivos regulares, mas são realmente entradas especiais
+      no kernel que os programas usam para acessar os dispositivos.
+      O shell script <filename>/dev/MAKEDEV</filename>, que é
+      executado quando você instala primeiramente o sistema operacional, cria
+      quase todas os dispositivos de ligação suportados. Entretanto, isto não
+      cria <emphasis>todos</emphasis>, assim quando você adiciona suporte para
+      um novo dispositivo, isto faz apropriadamente que a entrada são
+      neste diretório, e senão, adiciona este. Está aqui um exemplo simples:</para>
 
-    <para>Suppose you add the IDE CD-ROM support to the kernel.  The line
-      to add is:</para>
+    <para>Supondo que você adicione suporte de um IDE CD-ROM ao kernel. A linha
+      a adicionar é:</para>
 
     <programlisting>device acd0</programlisting>
 
-    <para>This means that you should look for some entries that start with
-      <filename>acd0</filename> in the <filename>/dev</filename>
-      directory, possibly followed by a letter, such as
-      <literal>c</literal>, or preceded by the letter
-      <literal>r</literal>, which means a <quote>raw</quote> device.  It
-      turns out that those files are not there, so you must change to the
-      <filename>/dev</filename> directory and type:</para>
+    <para>Isto significa que você deve procurar alguma entrada que começe com
+      <filename>acd0</filename> no diretório <filename>/dev</filename>,
+      possivelmente seguidas por uma letra, tal como
+      <literal>c</literal>, ou precedido por uma letra
+      <literal>r</literal>, que significa um dispositivo <quote>raw</quote>. It
+      turns out daqueles arquivos que não estão lá, assim você deve mudar para o diretório e o tipo para
+      <filename>/dev</filename>:</para>
 
     <indexterm>
       <primary><command>MAKEDEV</command></primary></indexterm>
     <screen>&prompt.root; <userinput>sh MAKEDEV acd0</userinput></screen>
 
-    <para>When this script finishes, you will find that there are now
-      <filename>acd0c</filename> and <filename>racd0c</filename> entries
-      in <filename>/dev</filename> so you know that it executed
-      correctly.</para>
+    <para>Quando este script terminar, você encontrará agora uma entrada
+      <filename>acd0c</filename> e <filename>racd0c</filename>
+      em <filename>/dev</filename> assim que você executar
+      corretamente.</para>
 
-    <para>For sound cards, the following command creates the appropriate
-      entries:</para>
+    <para>Para Placas de Som, o seguinte comando cria as entradas apropriadas:</para>
 
     <screen>&prompt.root; <userinput>sh MAKEDEV snd0</userinput></screen>
 
     <note>
-      <para>When creating device nodes for devices such as sound cards, if
-	other people have access to your machine, it may be desirable to
-	protect the devices from outside access by adding them to the
-	<filename>/etc/fbtab</filename> file.  See &man.fbtab.5; for more
-	information.</para>
+      <para>Ao criar ligação para dispositivos tais como Placas de Som, se
+	outra pessoa tiver acesso a sua maquina, pode ser necessário 
+	proteger os dispositivos contra acesso externo adicionando os arquivos no
+	<filename>/etc/fbtab</filename>. Veja &man.fbtab.5; para maiores
+	informações.</para>
     </note>
 
-    <para>Follow this simple procedure for any other
-      non-<filename>GENERIC</filename>  devices which do not have
-      entries.</para>
+    <para>Siga este simples procedimentos para outros dispositivos
+      non-<filename>GENÉRICOS</filename> que não tiverem
+      entradas.</para>
 
     <note>
-      <para>All SCSI controllers use the same set of
-	<filename>/dev</filename> entries, so you do not need to create
-	these.  Also, network cards and SLIP/PPP pseudo-devices do not
-	have entries in <filename>/dev</filename> at all, so you do not
+      <para>Todas as controladoras SCSI usam a mesma entrada no
+	<filename>/dev</filename>, assim você não necessita criar
+	este. Também, as placas de rede e SLIP/PPP pseudo-devices não
+	tem entradas em <filename>/dev</filename> em tudo, so you do not
 	have to worry about these either.</para>
     </note>
   </sect1>
