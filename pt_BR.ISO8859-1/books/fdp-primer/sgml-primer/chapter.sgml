@@ -1463,7 +1463,7 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	  conte&uacute;do o interpretador esta esperando encontrar, e o que
 	  far&aacute; com ele quando o encontrar.</para>
 	
-	<para>Os dois modelos de conte&uacute;do que voc&ecirc; provavelmente ira
+	<para>Os dois modelos de conte&uacute;do que voc&ecirc; provavelmente ir&aacute;
 	  achar mais &uacute;teis s&atilde;o o <literal>CDATA</literal> e o 
 	  <literal>RCDATA</literal>.</para>
 	
@@ -1540,52 +1540,54 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	<title><literal>INCLUDE</literal> and
 	  <literal>IGNORE</literal></title>
 	
-	<para>If the keyword is <literal>INCLUDE</literal> then the contents
-	  of the marked section will be processed.  If the keyword is
-	  <literal>IGNORE</literal> then the marked section is ignored and
-	  will not be processed.  It will not appear in the output.</para>
-
+	<para>Se a palavra chave for <literal>INCLUDE</literal> ent&atilde;o
+	  o conteudo da sess&atilde;o marcada ser&aacute; processado.  Se a palavra
+	  chave for <literal>IGNORE</literal> ent&atilde;o a sess&atilde;o marcada
+	  ser&aacute; ignorada e n&atilde;o ser&aacute; processada.  Ela n&atilde;o ir&aacute; aparecer no
+	  output.</para>
+	
 	<example>
-	  <title>Using <literal>INCLUDE</literal> and
-	    <literal>IGNORE</literal> in marked sections</title>
+	  <title>Utilizando <literal>INCLUDE</literal> e
+	    <literal>IGNORE</literal> nas sess&otilde;es marcadas</title>
 
 	  <programlisting>&lt;![ INCLUDE [
-  This text will be processed and included.
+  Este texto ser&aacute; processado e incluido.
 ]]&gt;
 
 &lt;![ IGNORE [
-  This text will not be processed or included.
+  Este texto n&atilde;o ser&aacute; processado nem incluido.
 ]]&gt;</programlisting>
 	</example>
 	
-	<para>By itself, this is not too useful.  If you wanted to remove text
-	  from your document you could cut it out, or wrap it in
-	  comments.</para>
+	<para>Por si s&oacute;, isto n&atilde;o &eacute; muito &uacute;til.  Se voc&ecirc; desejar remover o texto
+	  do seu documento voc&ecirc; pode corta-lo fora, ou coment&aacute;-lo.</para>
 	  
-	<para>It becomes more useful when you realise you can use <link
-	    linkend="sgml-primer-parameter-entities">parameter entities</link>
-	  to control this.  Remember that parameter entities can only be used
-	  in SGML contexts, and the keyword of a marked section
-	  <emphasis>is</emphasis> an SGML context.</para>
+	<para>Torna-se mais &uacute;til quando voc&ecirc; utilizar <link
+	  linkend="sgml-primer-parameter-entities">entidades de
+	  parametro</link> para control&aacute;-lo.  Lembre-se que entiades
+	  de parametro so podem ser utilizadas em um contexto SGML, e
+	  que a palavra chave de uma sess&atilde;o marcada
+	  <emphasis>&eacute;</emphasis> um contexto SGML.</para>
 
-	<para>For example, suppose that you produced a hard-copy version of
-	  some documentation and an electronic version.  In the electronic
-	  version you wanted to include some extra content that was not to
-	  appear in the hard-copy.</para>
-
-	<para>Create a parameter entity, and set its value to
-	  <literal>INCLUDE</literal>.  Write your document, using marked
-	  sections to delimit content that should only appear in the
-	  electronic version.  In these marked sections use the parameter
-	  entity in place of the keyword.</para>
-
-	<para>When you want to produce the hard-copy version of the document,
-	  change the parameter entity's value to <literal>IGNORE</literal> and
-	  reprocess the document.</para>
-
+	<para>Por exemplo, suponha que voc&ecirc; produza uma c&oacute;pia impressa
+	  e uma vers&atilde;o eletr&ocirc;nica de alguma documenta&ccedil;&atilde;o.  Voc&ecirc; pode
+	  desejar incluir na vers&atilde;o eletr&ocirc;nica algum conte&uacute;do extra, o
+	  qual n&atilde;o deve aparecer na vers&atilde;o impressa.</para>
+	
+	<para>Crie uma entidade de parametro, e configure seu valor
+	  para <literal>INCLUDE</literal>.  Escreva seu documento,
+	  usando uma sess&atilde;o marcada para delimitar o conteudo que deve
+	  aparecer apenas na vers&atilde;o eletr&ocirc;nica.  Nesta sess&atilde;o marcada
+	  utilize a entidade de parametro no lugar da palavra
+	  chave.</para>
+	
+	<para>Quando voc&ecirc; desejar produzir uma c&oacute;pia impressa do
+	  documento, altere o valor da entidade de parametro para
+	  <literal>IGNORE</literal> e reprocesse o documento.</para>
+	
 	<example>
-	  <title>Using a parameter entity to control a marked
-	    section</title>
+	  <title>Utilizando uma entidade de parametro para controlar
+	    uma sess&atilde;o marcada</title>
 	  
 	  <programlisting>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
 &lt;!ENTITY % electronic.copy "INCLUDE">	     
@@ -1594,18 +1596,18 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 ...
 
 &lt;![ %electronic.copy [
-  This content should only appear in the electronic
-  version of the document.
+  Este conteudo deve aparecer apenas na vers&atilde;o eletronica do
+  documento.
 ]]&gt;</programlisting>
 
-	  <para>When producing the hard-copy version, change the entity's
-	    definition to;</para>
+	  <para>Quando for produzir uma vers&atilde;o impressa do documento, altere 
+	    a defini&ccedil;&atilde;o da entidade para;</para>
 	  
 	  <programlisting>&lt;!ENTITY % electronic.copy "IGNORE"></programlisting>
 
-	  <para>On reprocessing the document, the marked sections that use
-	    <literal>%electronic.copy</literal> as their keyword will be
-	    ignored.</para>
+	  <para>Ao reprocessar o documento, a sess&atilde;o marcada que
+	    utilizar a entidade <literal>%electronic.copy</literal>
+	    como a sua palavra chave ser&aacute; ignorada.</para>
 	</example>
       </sect3>
     </sect2>
@@ -1615,8 +1617,8 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 
       <procedure>
 	<step>
-	  <para>Create a new file, <filename>section.sgml</filename>, that
-	    contains the following;</para>
+	  <para>Crie um novo arquivo chamado <filename>section.sgml</filename>, o qual 
+	    deve conter o seguinte conte&uacute;do;</para>
 
 	  <programlisting>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
 &lt;!ENTITY % text.output "INCLUDE">
@@ -1624,42 +1626,41 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 
 &lt;html>
   &lt;head>
-    &lt;title>An example using marked sections&lt;/title>
+    &lt;title>Um exemplo utilizando uma sess&atilde;o marcada.&lt;/title>
   &lt;/head>
 
   &lt;body>	    
-    &lt;p>This paragraph &lt;![ CDATA [contains many &lt;
-      characters (&lt; &lt; &lt; &lt; &lt;) so it is easier
-      to wrap it in a CDATA marked section ]]&gt;&lt;/p>
+    &lt;p>Este paragr&aacute;fo &lt;![ CDATA [contem muitos caracteres &lt;
+      (&lt; &lt; &lt; &lt; &lt;) de forma que &eacute; mais simples utilizar
+      uma sess&atilde;o marcada do tipo CDATA ]]&gt;&lt;/p>
 
     &lt;![ IGNORE [
-    &lt;p>This paragraph will definitely not be included in the
-      output.&lt;/p>
+    &lt;p>Este paragr&aacute;fo definitivamente n&atilde;o ser&aacute; incluido
+      no output.&lt;/p>
     ]]&gt;
 
     &lt;![ <![ CDATA [%text.output]]> [
-    &lt;p>This paragraph might appear in the output, or it
-      might not.&lt;/p>
+    &lt;p>Este paragr&aacute;fo pode ou n&atilde;o aparecer no output.&lt;/p>
 
-    &lt;p>Its appearance is controlled by the <![CDATA[%text.output]]>
-      parameter entity.&lt;/p>	    
+    &lt;p>A sua ocorr&ecirc;ncia &eacute; controlada pela entidade de parametro <![CDATA[%text.output]]>
+      .&lt;/p>	    
     ]]&gt;
   &lt;/body>
 &lt;/html></programlisting>	    
 	</step>
 
 	<step>
-	  <para>Normalise this file using &man.sgmlnorm.1; and examine the
-	    output.  Notice which paragraphs have appeared, which have
-	    disappeared, and what has happened to the content of the CDATA
-	    marked section.</para>
+	  <para>Normalize este arquivo utilizando o &man.sgmlnorm.1; e
+	    examine o output.  Observe quais paragrafos apareceram,
+	    quais desapareceram e o que aconteceu com o conte&uacute;do da
+	    sess&atilde;o marcada como CDATA.</para>
 	</step>
 
 	<step>
-	  <para>Change the definition of the <literal>text.output</literal>
-	    entity from <literal>INCLUDE</literal> to
-	    <literal>IGNORE</literal>.  Re-normalise the file, and examine the
-	    output to see what has changed.  </para>
+	  <para>Altere a defini&ccedil;&atilde;o da entidade <literal>text.output</literal>
+	    de <literal>INCLUDE</literal> para <literal>IGNORE</literal>.  
+	    Re-normalize o arquivo, e analise o output para ver o que
+	    foi alterado.</para>
 	</step>
       </procedure>
     </sect2>
