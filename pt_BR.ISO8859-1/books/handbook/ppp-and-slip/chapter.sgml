@@ -1745,64 +1745,64 @@ exit 1
 
 	<screen>&prompt.root;<userinput>dmesg | grep sio</userinput></screen>
 
-	<para>You should get some pertinent output about the
-	  <devicename>sio</devicename> devices.  These are the COM
-	  ports we need.  If your modem acts like a standard serial
-	  port then you should see it listed on
-	  <devicename>sio1</devicename>, or COM2.  If so, you are not
-	  required to rebuild the kernel, you just need to make the
-	  serial device.  You can do this by changing your directory
-	  to <filename>/dev</filename> and running the
-	  <filename>MAKEDEV</filename> script like above.  Now make
-	  the serial devices with:</para>
+	<para>Você deve ver alguma informações sobre dispositivos
+	  <devicename>sio</devicename>. Essas são as portas COM que
+	  nós precisamos. Se seu modem age como uma porta serial padrão
+	  então você deve ele listado como <devicename>sio1</devicename>,
+	  ou COM2. Neste caso você não precisa recompilar seu kernel,
+	  você precisa apenas criar o dispositivo serial. Você pode
+	  fazer isso indo em <filename>/dev</filename> e rodando o
+	  script <filename>MAKEDEV</filename> como acima. Agora crie
+	  os dispositivos seriais com:</para>
 
 	<screen>&prompt.root; <userinput>sh MAKEDEV cuaa0 cuaa1 cuaa2 cuaa3</userinput></screen>
 
-	<para>which will create the serial devices for your system.
-	  When matching up sio modem is on <devicename>sio1</devicename> or
-	  <acronym>COM2</acronym> if you are in DOS, then your
-	  modem device would be <devicename>/dev/cuaa1</devicename>.</para>
+	<para>que irá criar os dispositivos seriais para seu sistema. Se seu
+	  modem estiver em <devicename>sio1</devicename> ou <acronym>COM2</acronym>
+	  se você está no DOS, então este modem será <devicename>/dev/cuaa1</devicename>.</para>
     </sect2>
 
     <sect2>
-      <title>Connecting Manually</title>
+      <title>Conectando Manualmente</title>
 
-      <para>Connecting to the Internet by manually controlling
-	<command>ppp</command> is quick, easy, and a great way to
-	debug a connection or just get information on how your
-	<acronym>ISP</acronym> treats <command>ppp</command> client
-	connections.  Lets start <application>PPP</application> from
-	the command line.  Note that in all of our examples we will
-	use <emphasis>example</emphasis> as the hostname of the
-	machine running <application>PPP</application>.  You start
-	<command>ppp</command> by just typing
-	<command>ppp</command>:</para>
+	<para>Conectar a Internet através do controle manual do 
+	  <command>ppp</command> é rápido, fácil e uma boa forma
+	  de depurar uma conexão ou apenas ver como seu provedor
+	  gerencia conexões de clientes ppp. Vamos iniciar 
+	  o <application>PPP</application> pela linha de comando.
+	  Note que todos os nossos exemplos irão utilizar 
+	  <emphasis>exemplo</emphasis> como o hostname da máquina
+	  rodando o <application>PPP</application>. Você inicia
+	  o <command>ppp</command> digitando apenas 
+	  <command>ppp</command>:</para>
 
       <screen>&prompt.root; <userinput>ppp</userinput></screen>
 
-      <para>We have now started <command>ppp</command>.</para>
+      <para>Nós iniciámos o <command>ppp</command>.</para>
 
-      <screen>ppp ON example&gt; <userinput>set device <devicename>/dev/cuaa1</devicename></userinput></screen>
+      <screen>ppp ON exemplo&gt; <userinput>set device <devicename>/dev/cuaa1</devicename></userinput></screen>
 
-      <para>We set our modem device, in this case it is
-	<devicename>cuaa1</devicename>.</para>
+	<para>Ajustamos o dispositivo do modem, nesse caso 
+	  <devicename>cuaa1</devicename>.</para>
 
-      <screen>ppp ON example&gt; <userinput>set speed 115200</userinput></screen>
+      <screen>ppp ON exemplo&gt; <userinput>set speed 115200</userinput></screen>
 
-      <para>Set the connection speed, in this case we
-	are using 115,200 <acronym>kbps</acronym>.</para>
+	<para>Ajusta a velocidade de conexão, nesse caso estamos
+	  utilizando 115,200 <acronym>kbps</acronym>.</para>
 
-      <screen>ppp ON example&gt; <userinput>enable dns</userinput></screen>
+      <screen>ppp ON exemplo&gt; <userinput>enable dns</userinput></screen>
 
-      <para>Tell <command>ppp</command> to configure our
-	resolver and add the nameserver lines to
-	<filename>/etc/resolv.conf</filename>.  If <command>ppp</command>
-	cannot determine our hostname, we can set one manually later.</para>
+	<para>Dizemos ao <command>ppp</command> que configure
+	  nosso <literal>resolver</literal> e adicione as linhas
+	  <literal>nameserver</literal> ao <filename>/etc/resolv.conf</filename>.
+	  Se o <command>ppp</command> não puder determinar seu
+	  <literal>hostname</literal> nõs podemos ajustá-lo manualmente
+	  mais tarde.</para>
 
-      <screen>ppp ON example&gt; <userinput>term</userinput></screen>
+      <screen>ppp ON exemplo&gt; <userinput>term</userinput></screen>
 
-      <para>Switch to <quote>terminal</quote> mode so that we can manually
-	control the modem.</para>
+	<para>Mude para o modo <quote>terminal</quote> para que possamos
+	controlar o modem manualmente.</para>
 
       <programlisting>deflink: Entering terminal mode on <devicename>/dev/cuaa1</devicename>
 type '~h' for help</programlisting>
@@ -1811,163 +1811,156 @@ type '~h' for help</programlisting>
 	OK
 	<userinput>atdt<replaceable>123456789</replaceable></userinput></screen>
 
-      <para>Use <command>at</command> to initialize the modem,
-	then use <command>atdt</command> and the number for your
-	<acronym>ISP</acronym> to begin the dial in process.</para>
+	<para>Utilize <command>at</command> para inicializar o modem,
+	  e então <command>atdt</command> e o número do seu provedor
+	  para iniciar o processo de discagem.</para>
 
       <screen>CONNECT</screen>
 
-      <para>Confirmation of the connection, if we are going to have
-	any connection problems, unrelated to hardware, here is where
-	we will attempt to resolve them.</para>
+	<para>Sinal de confirmação da conexão. Se nós formos ter
+	  qualquer problema, não relacionado ao hardware, é aqui que
+	  tentaremos resolvê-lo.</para>
 
-      <screen>ISP Login:<userinput>myusername</userinput></screen>
+      <screen>ISP Login:<userinput>usuario</userinput></screen>
 
-      <para>Here you are prompted for a username, return the
-	prompt with the username that was provided by the
-	<acronym>ISP</acronym>.</para>
+	<para>Aqui um usuário é requerido. Digite o usuário que
+	  lhe foir informado pelo provedor.</para>
 
-      <screen>ISP Pass:<userinput>mypassword</userinput></screen>
+      <screen>ISP Pass:<userinput>senha</userinput></screen>
 
-      <para>This time we are prompted for a password, just
-	reply with the password that was provided by the
-	<acronym>ISP</acronym>.  Just like logging into
-	&os;, the password will not echo.</para>
+	<para>Agora é a vez da senha, apenas responda com a senha
+	  que o provedor lhe informou. Da mesma maneira como
+	  entramos no sistema, a senha não será mostrada aqui.</para>
 
       <screen>Shell or PPP:<userinput>ppp</userinput></screen>
 
-      <para>Depending on your <acronym>ISP</acronym> this prompt
-	may never appear.  Here we are being asked if we wish to
-	use a shell on the provedor, or to start
-	<command>ppp</command>.  In this example, we have chosen
-	to use <command>ppp</command> as we want an Internet
-	connection.</para>
+	<para>Dependendo do seu provedor este prompt pode não
+	  aparecer. Aqui estamos sendo indagados se nós gostaríamos
+	  de usar uma <literal>shell</literal> no provedor ou iniciar
+	  o <command>ppp</command>. Neste exemplo nós escolhemos
+	  <command>ppp</command> pois queremos uma conexão com a
+	  Internet.</para>
 
-      <screen>Ppp ON example&gt;</screen>
+      <screen>Ppp ON exemplo&gt;</screen>
 
-      <para>Notice that in this example the first <option>p</option>
-	has been capitalized.  This shows that we have successfully
-	connected to the <acronym>ISP</acronym>.</para>
+	<para>Note que neste exemplo o primeiro <option>p</option>
+	  está maiúsculo agora. Isso mostra que nós nos conectamos
+	  com sucesso ao provedor.</para>
 
-      <screen>PPp ON example&gt;</screen>
+      <screen>PPp ON exemplo&gt;</screen>
 
-      <para>We have successfully authenticated with our
-	<acronym>ISP</acronym> and are waiting for the
-	assigned <acronym>IP</acronym> address.</para>
+	<para>Nós nos autenticamos com sucesso junto ao provedor
+	  e estamos esperando o endereço IP que vai ser fornecido.</para>
 
-      <screen>PPP ON example&gt;</screen>
+      <screen>PPP ON exemplo&gt;</screen>
 
-      <para>We have made an agreement on an <acronym>IP</acronym>
-	address and successfully completed our connection.</para>
+	<para>Nós fizemos um acordo sobre o endereço IP e completamos
+	  com sucesso nossa conexão.</para>
 
-      <screen>PPP ON example&gt;<userinput>add default HISADDR</userinput></screen>
+      <screen>PPP ON exemplo&gt;<userinput>add default HISADDR</userinput></screen>
 
-      <para>Here we add our default route, we need to do this before
-	we can talk to the outside world as currently the only
-	established connection is with the peer.  If this fails due to
-	existing routes you can put a bang character
-	<literal>!</literal> in front of the <option>add</option>.
-	Alternatively, you can set this before making the actual
-	connection and it will negotiate a new route
-	accordingly.</para>
+	<para>Aqui nós adicionar a rota padrão. Precisamos fazer isso
+	  antes de conversar com o mundo exterior pois no momento
+	  a única conexão estabelecida é com a ponta remota. Se
+	  isso falhar devido a já haver uma rota existente você
+	  pode colocar o caractere <literal>!</literal> na frente
+	  da opção <option>add</option>. Você também pode fazer isso
+	  antes de iniciar a conexão e o programa irá negociar uma rota
+	  de acordo.</para>
 
-      <para>If everything went good we should now have an active
-	connection to the Internet, which could be thrown into the
-	background using <keycombo
-	action="simul"><keycap>CTRL</keycap>
-	<keycap>z</keycap></keycombo> If you notice the
-	<command>PPP</command> return to <command>ppp</command> then
-	we have lost our connection.  This is good to know because it
-	shows our connection status.  Capital P's show that we have a
-	connection to the <acronym>ISP</acronym> and lowercase p's
-	show that the connection has been lost for whatever reason.
-	<command>ppp</command> only has these 2 states.</para>
+	<para>Se tudo correu bem nós devemos ter uma conexão ativa
+	  com a Internet agora, que deve ser jogada para o segundo
+	  plano usando <keycombo action="simul"><keycap>CTRL</keycap>
+	  <keycap>z</keycap></keycombo> Se você notar que o 
+	  <command>PPP</command> retornou para <command>ppp</command>
+	  então nós perdemos nossa conexão.  É bom saber isso pois
+	  ele lhe informa o estado atual da conexão. P's maiúsculos
+	  inidicam que nós temos uma conexão com o provedor e p's
+	  minúsculos indicam que a conexão foi perdido por um
+	  motivo qualquer. O comando <command>ppp</command> tem
+	  apenas dois estados.</para>
 
       <sect3>
-	<title>Debugging</title>
+	<title>Depuração</title>
 
-	<para>If you have a direct line and cannot seem to make a
-	  connection, then turn hardware flow
-	  <acronym>CTS/RTS</acronym> to off with the <option>set
-	  ctsrts off</option>.  This is mainly the case if you are
-	  connected to some <application>PPP</application> capable
-	  terminal servers, where <application>PPP</application> hangs
-	  when it tries to write data to your communication link, so
-	  it would be waiting for a <acronym>CTS</acronym>, or Clear
-	  To Send signal which may never come.  If you use this option
-	  however, you should also use the <option>set accmap</option>
-	  option, which may be required to defeat hardware dependent
-	  on passing certain characters from end to end, most of the
-	  time XON/XOFF.  See the &man.ppp.8; manual page for more
-	  information on this option, and how it is used.</para>
+	<para>Se você tem uma linha direta e não consegue realizar
+	  a conexão tente desativar controle de fluxo por hardware
+	  <acronym>CTS/RTS</acronym> com a opção <option>set ctsrts
+	  off</option>.  Isso pode ocorrer caso você esteja conectado
+	  a um servidor PPP onde o <application>PPP</application>
+	  trava quando ele tenta enviar os dados pelo seu <literal>
+	  link</literal> de comunicação.  Ele estaria esperando
+	  por um sinal <acronym>CTS</acronym>, ou Clear To Send (Livre
+	  para Enviar), que pode nunca chegar. Entretanto se você
+	  ativar esta opção você deve também usar <option>set accmap</option>
+	  que pode ser requerido para cancelar o hardware que
+	  depende do envio de certos caracteres de ponta a ponta, na
+	  maior parte do tempo XON/XOFF.  Veja a página manual 
+	  &man.ppp.8; para maiores informações sobre esta opção
+	  e como ela é utilizada.</para>
 
-	<para>If you have an older modem, you may need to use the
-	  <option>set parity even</option>.  Parity is set at none
-	  be default, but is used for error checking (with a large
-	  increase in traffic) on older modems and some
-	  <acronym>ISP</acronym>s.  You may need this option for
-	  the Compuserve <acronym>ISP</acronym>.</para>
+	<para>Se você tem um modem antigo pode ter que utilizar
+	  a opção <option>set parity even</option>.  Paridade é 
+	  ajustada para <literal>none</literal> por padrão, mas
+	  é utilizada para verificação de erros (com um aumento
+	  no tráfego) em modens antigos e alguns provedores. Você
+	  pode precisar desta opção no provedor Compuserve.</para>
 
-	<para><application>PPP</application> may not return to the
-	  command mode, which is usually a negotiation error where
-	  the <acronym>ISP</acronym> is waiting for your side to start
-	  negotiating.  At this point, using the <command>~p</command>
-	  command will force ppp to start sending the configuration
-	  information.</para>
+	<para>O <application>PPP</application> pode não retornar
+	  para o modo de comando, o que geralmente indica um erro
+	  de negociação onde o provedor está aguardando que você
+	  inicie a negociação. Nesse ponto, usar o comando
+	  <command>~p</command> irá forçar o ppp a enviar as
+	  informações de configuração.</para>
 
-	<para>If you never obtain a login prompt, then most likely you
-	  need to use <acronym>PAP</acronym> or
-	  <acronym>CHAP</acronym> authentication instead of the
-	  &unix; style in the example above.  To use
-	  <acronym>PAP</acronym> or <acronym>CHAP</acronym> just add
-	  the following options to <application>PPP</application>
-	  before going into terminal mode:</para>
+	<para>Se você nunca ver um prompt de login você terá de
+	  utilizar <acronym>PAP</acronym> ou <acronym>CHAP</acronym>
+	  para fazer a autenticação em vez do estilo &unix; no
+	  exemplo acima. Para usar <acronym>PAP</acronym> ou
+	  <acronym>CHAP</acronym> apenas adicione as seguintes
+	  opções no <application>PPP</application> antes de 
+	  entrar em modo terminal:</para>
 
-	<screen>ppp ON example&gt; <userinput>set authname <replaceable>myusername</replaceable></userinput></screen>
+	<screen>ppp ON exemplo&gt; <userinput>set authname <replaceable>usuario</replaceable></userinput></screen>
 
-	<para>Where <replaceable>myusername</replaceable> should be
-	  replaced with the username that was assigned by the
-	  <acronym>ISP</acronym>.</para>
+	<para>Onde <replaceable>usuario</replaceable> deve ser trocado
+	  pelo usuário que foi definido pelo seu provedor.</para>
 
-	<screen>ppp ON example&gt; <userinput>set authkey <replaceable>mypassword</replaceable></userinput></screen>
+	<screen>ppp ON exemplo&gt; <userinput>set authkey <replaceable>senha</replaceable></userinput></screen>
 
-	<para>Where <replaceable>mypassword</replaceable> should be
-	  replaced with the password that was assigned by the
-	  <acronym>ISP</acronym>.</para>
+	<para>Onde <replaceable>senha</replaceable> deve ser trocado
+	  pela senha que foi definida pelo seu provedor.</para>
 
-	<para>If you connect fine, but cannot seem to find any domain
-	  name, try to use &man.ping.8; with an <acronym>IP</acronym>
-	  address and see if you can get any return information.  If
-	  you experience 100 percent (100%) packet loss, then it is most
-	  likely that you were not assigned a default route.  Double
-	  check that the option <option>add default HISADDR</option>
-	  was set during the connection.  If you can connect to a
-	  remote <acronym>IP</acronym> address then it is possible
-	  that a resolver address has not been added to the
-	  <filename>/etc/resolv.conf</filename>.  This file should
-	  look like:</para>
+	<para>Se você conectar sem problemas mas não conseguir achar
+	  nenhum domínio, tente utilizar o &man.ping.8; com um 
+	  endereço <acronym>IP</acronym> e ver se você consegue
+	  alguma informação. Se sua ver 100% de perda de pacotes
+	  (<literal>packet</literal> <literal>loss</literal>) então
+	  poderá indicar que uma rota padrão não foi definida. Verifique
+	  novamente que a opção <option>add default HISADDR</option>
+	  foi definida durante a conexão. Se você conseguir conectar
+	  a um endereço IP remoto então é possível que um servidor
+	  de nomes não foi adicionado ao <filename>/etc/resolv.conf</filename>.
+	  Esse arquivo deve se parecer com:</para>
 
-	<programlisting>domain <replaceable>example.com</replaceable>
+	<programlisting>domain <replaceable>exemplo.com.br</replaceable>
 nameserver <replaceable>x.x.x.x</replaceable>
 nameserver <replaceable>y.y.y.y</replaceable></programlisting>
 
-	<para>Where <replaceable>x.x.x.x</replaceable> and
-	  <replaceable>y.y.y.y</replaceable> should be replaced with
-	  the <acronym>IP</acronym> address of your
-	  <acronym>ISP</acronym>'s DNS servers.  This information may
-	  or may not have been provided when you signed up, but a
-	  quick call to your <acronym>ISP</acronym> should remedy
-	  that.</para>
+	<para>Onde <replaceable>x.x.x.x</replaceable> e 
+	  <replaceable>y.y.y.y</replaceable> devem ser trocados
+	  pelos endereços IP dos servidores de DNS do seu provedor.
+	  Essa informação pode ser definida pelo seu provedor, ou não.
+	  Ligue para seu provedor e peça que lhe informem estes endereços.</para>
 
-	<para>You could also have &man.syslog.3; provide a logging
-	  function for your <application>PPP</application> connection.
-	  Just add:</para>
-
+	<para>Você pode fazer com que o &man.syslog.3; ative a função
+	  de <literal>logging</literal> para sua conexão <application>PPP</application></para>
+	  
 	<programlisting>!ppp
 *.*     /var/log/ppp.log</programlisting>
 
-	<para>to <filename>/etc/syslog.conf</filename>.  In most cases, this
-	  functionality already exists.</para>
+	<para>no <filename>/etc/syslog.conf</filename>.  Na maioria dos casos
+	  esta funcionalidade já existe.</para>
 
       </sect3>
     </sect2>
