@@ -332,11 +332,11 @@
       <title>Comando vs. Protocolo</title>
       <para>Durante todo este documento, nós vamos usar o texto em
        <application>negrito</application> para referenciar a um 
-       comando ou apilação.  Será usado para partes como ssh, deste
+       comando ou apilação.  Será usado para exemplos como ssh, desde
        que seja um protocolo bem como um comando.</para>
     </note>
 
-    <para>As seções que seguem vão cobrir os métodos de segurar
+    <para>As seções que seguem vão cobrir os métodos de assegurar
       seu sistema FreeBSD que foram mencionadas na <link
         linkend="security-intro">última seção</link> deste capítulo.</para>
 
@@ -357,53 +357,55 @@
 	console da máquina.  O que isso significa é que você não deve
 	possibilitar o uso da senha fora do console ou possivelmente
 	com o comando &man.su.1;.  Por exemplo, certifique-se de que
-	seus pty's estão especificados como sendo insecure no arquivo
-	<filename>/etc/ttys</filename> file so that direct
-	<username>root</username> logins
-	via <command>telnet</command> or <command>rlogin</command> are
-	disallowed.  If using other login services such as
-        <application>sshd</application>, make sure that direct
-	<username>root</username> logins are disabled there as well.
-	You can do this by editing
-        your <filename>/etc/ssh/sshd_config</filename> file, and making
-        sure that <literal>PermitRootLogin</literal> is set to
-        <literal>NO</literal>.  Consider every access method &ndash;
-        services such as FTP often fall through the cracks.
-	Direct <username>root</username> logins should only be allowed
-	via the system console.</para>
+	seus terminais <literal>pty</literal> estão especificados 
+	como sendo <literal>insecure</literal> no arquivo <filename>
+	/etc/ttys</filename> de modo que logins diretos como 
+	<username>root</username> via <command>telnet</command> ou 
+	<command>rlogin</command> serão rejeitados.  Se estiver 
+	usando outros serviços de login tais como <application>sshd
+	</application>, certifique-se de que logins diretos como 
+	<username>root</username> estão desabilitados também.  
+	Você pode fazer isso editando seu arquivo <filename>
+	/etc/ssh/sshd_config</filename>, e certificando-se de que 
+	<literal>PermitRootLogin</literal> está ajustada para 
+	<literal>NO</literal>.  Considere cada método de acesso 
+	&ndash; serviços tais como <acronym>FTP
+	</acronym> often fall through the cracks.
+	Logins diretos como <username>root</username> somente devem
+	ser permitidos através do console do sistema.</para>
       <indexterm>
         <primary><groupname>wheel</groupname></primary>
       </indexterm>
 
-      <para>Of course, as a sysadmin you have to be able to get to
-	<username>root</username>, so we open up a few holes.
-	But we make sure these holes require additional password
-	verification to operate.  One way to make <username>root</username>
-	accessible is to add appropriate staff accounts to the
-	<groupname>wheel</groupname> group (in
-	<filename>/etc/group</filename>).  The staff members placed in the
-	<groupname>wheel</groupname> group are allowed to
-	<command>su</command> to <username>root</username>.
-	You should never give staff
-	members native <groupname>wheel</groupname> access by putting them in the
-	<groupname>wheel</groupname> group in their password entry.  Staff
-	accounts should be placed in a <groupname>staff</groupname> group, and
-	then added to the <groupname>wheel</groupname> group via the
-	<filename>/etc/group</filename> file.  Only those staff members
-	who actually need to have <username>root</username> access
-	should be placed in the
-	<groupname>wheel</groupname> group.  It is also possible, when using
-	an authentication method such as Kerberos, to use Kerberos'
-	<filename>.k5login</filename> file in the <username>root</username>
-	account to allow a &man.ksu.1; to <username>root</username>
-	without having to place anyone at all in the
-	<groupname>wheel</groupname> group.  This may be the better solution
-	since the <groupname>wheel</groupname> mechanism still allows an
-	intruder to break <username>root</username> if the intruder
-	has gotten hold of your
-	password file and can break into a staff account.  While having
-	the <groupname>wheel</groupname> mechanism is better than having
-	nothing at all, it is not necessarily the safest option.</para>
+      <para>Certamente, como um administrador do sistema você tem 
+	que ser capaz de pegar <username>root</username>, assim nós 
+	abrimos alguns furos. Mas nos certificamos que estes furos 
+	exigam uma senha adicional para operar.  Uma maneira para 
+	fazer o <username>root</username> acessível é adicionar 
+	contas apropriadas ao grupo <groupname>wheel</groupname> (em
+	<filename>/etc/group</filename>).  Os membros colocados no 
+	grupo <groupname>wheel</groupname> são permitidos usar 
+	<command>su</command> para <username>root</username>.
+	Você nunca deve dar aos membros do sistema acesso nativo ao 
+	<groupname>wheel</groupname> colocando-os no grupo 
+	<groupname>wheel</groupname> em sua entrada no arquivo de 
+	senhas.  Contas do sistema devem ser colocadas em um grupo 
+	<groupname>staff</groupname>, e então ser adicionados ao 
+	grupo <groupname>wheel</groupname> através do arquivo 
+	<filename>/etc/group</filename>.  Somente aqueles membros que
+	realmente necessitam ter acesso <username>root</username> 
+	devem ser colocados no grupo <groupname>wheel</groupname>.  
+	É possivel também, quando usar um método de autenticação tal
+	como Kerberos, usar o arquivo <filename>.k5login</filename> 
+	do Kerberos na conta <username>root</username> para permitir
+	um &man.ksu.1; para <username>root</username> sem ter que 
+	colocar qualquer um no grupo <groupname>wheel</groupname>.  
+	Esta pode ser a melhor solução visto que o mecanismo 
+	<groupname>wheel</groupname> ainda permite que um invasor
+	viole o <username>root</username> se conseguir seu arquivo de
+	senhas e invadir uma conta do sistema.  Enquanto ter o
+	mecanismo <groupname>wheel</groupname> é melhor do que nada,
+	esta não é necessariamente a opção mais segura.</para>
 
       <para>An indirect way to secure staff accounts, and ultimately
         <username>root</username> access is to use an alternative
