@@ -5934,7 +5934,7 @@ zone "10.168.192.in-addr.arpa" in {
 	<author>
 	  <firstname>Tom</firstname>
 	  <surname>Hukins</surname>
-	  <contrib>Contributed by </contrib>
+	  <contrib>Contribu&iacute;do por </contrib>
 	</author>
       </authorgroup>
     </sect1info>
@@ -5943,19 +5943,20 @@ zone "10.168.192.in-addr.arpa" in {
     <indexterm><primary>NTP</primary></indexterm>
 
     <sect2>
-      <title>Overview</title>
+      <title>Vis&atilde;o Geral</title>
 
-      <para>Over time, a computer's clock is prone to drift.  As time
-	passes, the computer's clock becomes less accurate.  NTP
-	(Network Time Protocol) is one way to ensure your clock is
-	right.</para>
-
-      <para>Many Internet services rely on, or greatly benefit from,
-	computers' clocks being accurate.  For example, a Web server
-	may receive requests to send a file if it has modified since a
-	certain time.  Services such as &man.cron.8; run commands at a
-	given time.  If the clock is inaccurate, these commands may
-	not run when expected.</para>
+      <para>Ao longo do tempo, o rel&oacute;gio de um computador tende 
+      a deslizar.  Enquanto o tempo passa, o rel&oacute;gio do computador se
+      torna menos preciso.  O NTP (Network Time Protocol) &eacute; uma forma
+      de assegurar que o seu rel&oacute;gio est&aacute; correto.</para>
+      
+      <para>Muitos servi&ccedil;os Internet dependem, ou muito se beneficiam,
+      da precis&atilde;o do rel&oacute;gio do computador estar correto.  Por
+      exemplo, um servidor Web pode receber solicita&ccedil;&otilde;es para enviar
+      um arquivo se ele foi modificado desde uma certa hora.  Servi&ccedil;os
+      como o &man.cron.8; executam comandos em uma hora espec&iacute;fica.
+      Se o rel&oacute;gio est&aacute; errado, estes comandos podem n&atilde;o ser
+      executados quando esperado.</para>
 
       <indexterm>
 	<primary>NTP</primary>
@@ -6875,35 +6876,36 @@ server-program-arguments</programlisting>
   </sect1>
 
   <sect1 id="network-plip">
-    <title>Parallel Line IP (PLIP)</title>
+    <title>IP em Linha Paralela (PLIP)</title>
 
     <indexterm><primary>PLIP</primary></indexterm>
     <indexterm><primary>Parallel Line IP</primary></indexterm>
 
-    <para>PLIP lets us run TCP/IP between parallel ports.  It is
-      useful on machines without network cards, or to install on
-      laptops.  In this section, we will discuss:</para>
+    <para>PLIP nos permite usar TCP/IP entre portas paralelas.  &Eacute; &uacute;til
+    em m&aacute;quinas sem placas de rede, ou para instalar em laptops.
+    Nesta se&ccedil;&atilde;o vamos examinar:</para>
 
     <itemizedlist>
       <listitem>
-	<para>Creating a parallel (laplink) cable.</para>
+	<para>Criando um cabo paralelo (laplink).</para>
       </listitem>
 
       <listitem>
-	<para>Connecting two computers with PLIP.</para>
+	<para>Conectando dois computadores com PLIP.</para>
       </listitem>
     </itemizedlist>
 
     <sect2 id="network-create-parallel-cable">
-      <title>Creating a Parallel Cable</title>
+      <title>Criando um Cabo Paralelo</title>
 
-      <para>You can purchase a parallel cable at most computer supply
-	stores.  If you cannot do that, or you just want to know how
-	it is done, the following table shows how to make one out of a normal parallel
-	printer cable.</para>
+      <para>Voc&ecirc; pode comprar um cabo paralelo na maioria das lojas de
+      suprimentos de inform&aacute;tica.  Se voc&ecirc; n&atilde;o puder fazer isso, ou
+      voc&ecirc; apenas quer saber como um cabo &eacute; feito, a tabela a seguir
+      mostra como fazer um a partir de um cabo paralelo para
+      impressora.</para>
 
       <table>
-	<title>Wiring a Parallel Cable for Networking</title>
+	<title>Conectando um Cabo Paralelo para Conex&atilde;o em Rede</title>
 
 	<tgroup cols="5">
 	  <thead>
@@ -7018,81 +7020,84 @@ BUSY</literallayout></entry>
     </sect2>
 
     <sect2 id="network-plip-setup">
-      <title>Setting Up PLIP</title>
+      <title>Configurando o PLIP</title>
 
-      <para>First, you have to get a laplink cable.
-	Then, confirm that both computers have a kernel with &man.lpt.4; driver
-	support:</para>
+      <para>Primeiro, voc&ecirc; precisa obter um cabo laplink.  Depois,
+      certifique-se de que ambos os computadores possuem um kernel com
+      suporte do gerenciador de dispositivos &man.lpt.4;:</para>
 
       <screen>&prompt.root; <userinput>grep lp /var/run/dmesg.boot</userinput>
 lpt0: &lt;Printer&gt; on ppbus0
 lpt0: Interrupt-driven port</screen>
 
-      <para>The parallel port must be an interrupt driven port, under
-	&os;&nbsp;4.X, you should have a line similar to the the
-	following on in your kernel configuration file:</para>
+      <para>A porta paralela precisa ser uma porta gerenciada por
+      interrup&ccedil;&otilde;es.  No &os;&nbsp;4.X, voc&ecirc; deve ter uma linha similar
+      &agrave; seguinte em seu arquivo de configura&ccedil;&atilde;o do kernel:</para>
 
       <programlisting>device ppc0 at isa?  irq 7</programlisting>
 
-      <para>Under &os;&nbsp;5.X, the
-	<filename>/boot/device.hints</filename> file should contain the
-	following lines:</para>
+      <para>No &os;&nbsp;5.X, o arquivo
+      <filename>/boot/device.hints</filename> deve conter as seguintes
+      linhas:</para>
 
-      <programlisting>hint.ppc.0.at="isa"
-hint.ppc.0.irq="7"</programlisting>
+      <programlisting>hint.ppc.0.at="isa" 
+      hint.ppc.0.irq="7"</programlisting>
 
-      <para>Then check if the kernel configuration file has a
-	<literal>device plip</literal> line or if the
-	<filename>plip.ko</filename> kernel module is loaded.  In both
-	cases the parallel networking interface shoud appears when you
-	directly use the &man.ifconfig.8; command.  Under
-	&os;&nbsp;4.X like this:</para>
+      <para>Ent&atilde;o verifique se o arquivo de configura&ccedil;&atilde;o do kernel tem
+      uma linha <literal>device plip</literal> ou se o m&oacute;dulo de
+      kernel <filename>plip.ko</filename> est&aacute; carregado.  Em ambos os
+      casos, a interface de rede paralela deve aparecer quando voc&ecirc;
+      usar diretamente o comando &man.ifconfig.8;.  No &os;&nbsp;4.X
+      assim:</para>
 
       <screen>&prompt.root; <userinput>ifconfig lp0</userinput>
 lp0: flags=8810&lt;POINTOPOINT,SIMPLEX,MULTICAST&gt; mtu 1500</screen>
 
-      <para>and for &os;&nbsp;5.X:</para>
+      <para>e no &os;&nbsp;5.X:</para>
 
       <screen>&prompt.root; <userinput>ifconfig plip0</userinput>
 plip0: flags=8810&lt;POINTOPOINT,SIMPLEX,MULTICAST&gt; mtu 1500</screen>
 
-      <note><para>The device name used for parallel interface is
-	different between &os;&nbsp;4.X
-	(<devicename>lp<replaceable>X</replaceable></devicename>)
-	and &os;&nbsp;5.X
-	(<devicename>plip<replaceable>X</replaceable></devicename>).</para></note>
+      <note><para>O nome do dispositivo usado para a interface
+      paralela &eacute; diferente entre o &os;&nbsp;4.X 
+      (<devicename>lp<replaceable>X</replaceable></devicename>) 
+      e o &os;&nbsp;5.X 
+      (<devicename>plip<replaceable>X</replaceable></devicename>).</para></note>
 
-      <para>Plug in the laplink cable into the parallel interface on
-	both computers.</para>
+      <para>Conecte o cabo laplink na interface paralela em ambos os
+      computadores.</para>
 
-      <para>Configure the network interface parameters on both
-	sites as <username>root</username>.  For example, if you want connect
-	the host <hostid>host1</hostid> running &os;&nbsp;4.X with <hostid>host2</hostid> running &os;&nbsp;5.X:</para>
+      <para>Configure os par&acirc;metros da interface de rede nos dois
+      s&iacute;tios como <username>root</username>.  Por exemplo, se voc&ecirc;
+      quer conectar o sistema <hostid>host1</hostid> executando
+      &os;&nbsp;4.X com <hostid>host2</hostid> executando &os;&nbsp;5.X:</para>
 
       <programlisting>		 host1 &lt;-----&gt; host2
 IP Address    10.0.0.1      10.0.0.2</programlisting>
 
-      <para>Configure the interface on <hostid>host1</hostid> by doing:</para>
+      <para>Configure a interface em <hostid>host1</hostid> fazendo:</para>
 
       <screen>&prompt.root; <userinput>ifconfig lp0 10.0.0.1 10.0.0.2</userinput></screen>
 
-      <para>Configure the interface on <hostid>host2</hostid> by doing:</para>
+      <para>Configure a interface no <hostid>host2</hostid> fazendo:</para>
 
       <screen>&prompt.root; <userinput>ifconfig plip0 10.0.0.2 10.0.0.1</userinput></screen>
 
 
-      <para>You now should have a working connection.  Please read the
-	manual pages &man.lp.4; and &man.lpt.4; for more details.</para>
+      <para>Voc&ecirc; agora deve ter uma conex&atilde;o funcionando.  Por favor
+      leia as p&aacute;ginas de manual &man.lp.4; e &man.lpt.4; para mais
+      detalhes.</para>
 
-      <para>You should also add both hosts to
-	<filename>/etc/hosts</filename>:</para>
+      <para>Voc&ecirc; deve tamb&eacute;m adicionar ambas os sistemas ao 
+      <filename>/etc/hosts</filename>:</para>
 
       <programlisting>127.0.0.1	       localhost.my.domain localhost
 10.0.0.1		host1.my.domain host1
 10.0.0.2		host2.my.domain</programlisting>
 
-      <para>To confirm the connection works, go to each host and ping
-	the other.  For example, on <hostid>host1</hostid>:</para>
+      <para>Para confirmar que a conex&atilde;o funciona, v&aacute; a cada sistema e
+      fa&ccedil;a um ping para o outro.  Por exemplo, em 
+      <hostid>host1</hostid>:</para>
 
 	  <screen>&prompt.root; <userinput>ifconfig lp0</userinput>
 lp0: flags=8851&lt;UP,POINTOPOINT,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
