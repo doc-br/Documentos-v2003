@@ -1492,16 +1492,15 @@ pseudo-device   pty           # Pseudo-ttys (telnet etc)</programlisting>
 	<term>Falha na instala&ccedil;&atilde;o do kernel:</term>
 	
 	<listitem>
-	  <para>Se o kernel estiver perfeitamente compilado, e n&atilde;o foi instalado
-	    (ou o comando <command>make install</command> ou
-	    <command>make installkernel</command> falhar,
-	    a primeira coisa a se fazer &eacute; checar se seu sistema est&aacute; rodando em
-	    securelevel 1 ou mais elevado (veja &man.init.8;). A instala&ccedil;&atilde;o do kernel
-	    tenta remover a &aacute;rea de mem&oacute;ria que cont&eacute;m informa&ccedil;&atilde;o do
-	    seu kernel e coloca a &aacute;rea de mem&oacute;ria num novo um.
-	    Desde que o securelevel 1 ou mais elevado impede a desconfigura&ccedil;&atilde;o da &aacute;rea de mem&oacute;ria
-	    para alguns arquivos no sistema, a instala&ccedil;&atilde;o do kernel necessita
-	    se executado no securelevel 0 ou seja baixo.</para>
+	  <para>Se o kernel estiver perfeitamente compilado, e n&atilde;o foi instalado corretamente
+	    (no caso do comando comando <command>make install</command> ou
+	    <command>make installkernel</command> ter falhado),
+	    a primeira prividência a se tormar é verificar se seu sistema não está sendo executado
+	    com nível de segurança positivo (<literal>securelevel</literal> 1 ou superior - veja &man.init.8;).
+	    O processo de instalação do kernel tenta modifcar a região de memória que armazena
+	    informações sobre o kernel, e coloca esta memória em uma outra região.
+	    Se o nível de segurança for 1 ou superior, o acesso direto à memória não é permitido. A instalação do
+	    kernel precisar ser feita no nível de segurança 0 ou inferior.</para>
 	</listitem>
       </varlistentry>
 
