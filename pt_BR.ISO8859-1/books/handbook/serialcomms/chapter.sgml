@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/serialcomms/chapter.sgml,v 1.5 2003/12/09 14:21:26 ebrandi Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/serialcomms/chapter.sgml,v 1.6 2003/12/09 14:51:43 ebrandi Exp $
 -->
 
 <chapter id="serialcomms">
@@ -96,7 +96,7 @@
 	determinado periodo de tempo, enquanto <quote>bps</quote>
 	(bits por segundo) &eacute; o termo <emphasis>correto</emphasis> a
 	ser utilizado (ao menos ele n&atilde;o parece incomodar completamente
-	tanto quanto os <literal>curmudgeons</literal>).</para>
+	os teimosos).</para>
     </sect2>
 
     <sect2 id="serial-cables-ports">
@@ -230,95 +230,113 @@
 
 	<sect4 id="term-cables-std">
 	  <title>Cabos Padr&atilde;o RS-232C</title>
-	  <indexterm><primary>RS-232C cables</primary></indexterm>
+	  <indexterm><primary>Cabos RS-232C</primary></indexterm>
 
-	  <para>A standard serial cable passes all the RS-232C signals
-	    straight-through.  That is, the <quote>send data</quote> pin on one
-	    end of the cable goes to the <quote>send data</quote> pin on the
-	    other end. This is the type of cable to use to connect a modem to your
-	    FreeBSD system, and is also appropriate for some
-	    terminals.</para>
+	  <para>
+	    Um cabo serial padr&atilde;o trafega todos os sinais de forma
+	    direta (sai e chega no mesmo pino em ambas as pontas).
+	    Isto &eacute;, o pino de <quote>envio de dados</quote> em uma
+	    ponta do cabo, ir&aacute; para o pino <quote>envio de
+	    dados</quote> na outra ponta.  Este &eacute; o tipo de cabo
+	    utilizado para conectar um modem ao seu sistema FreeBSD, e
+	    tamb&eacute;m &eacute; adequado para alguns terminais.</para>
 	</sect4>
       </sect3>
       
       <sect3 id="term-ports">
-	<title>Ports</title>
+	<title>Portas</title>
 
-	<para>Serial ports are the devices through which data is transferred
-	  between the FreeBSD host computer and the terminal. This section
-	  describes the kinds of ports that exist and how they are addressed
-	  in FreeBSD.</para>
+	<para>
+	  Portas seriais s&atilde;o os dispositivos atrav&eacute;s dos quais os
+	  dados s&atilde;o transferidos entre um host FreeBSD e um terminal.
+	  Esta sess&atilde;o descreve os tipos de portas que existem e como
+	  elas s&atilde;o reconhecidas no FreeBSD.</para>
 
 	<sect4 id="term-portkinds">
-	  <title>Kinds of Ports</title>
+	  <title>Tipos de portas</title>
 	  
-	  <para>Several kinds of serial ports exist.  Before you purchase or
-	    construct a cable, you need to make sure it will fit the ports on
-	    your terminal and on the FreeBSD system.</para>
-	      
-	  <para>Most terminals will have DB25 ports.  Personal computers,
-	    including PCs running FreeBSD, will have DB25 or DB9 ports. If you
-	    have a multiport serial card for your PC, you may have RJ-12 or
-	    RJ-45 ports.</para>
-	      
-	  <para>See the documentation that accompanied the hardware for
-	    specifications on the kind of port in use.  A visual inspection of
-	    the port often works too.</para>
+	  <para>
+	    Existem diversos tipos de portas seriais.  Antes de
+	    comprar ou contruir um cabo, voc&ecirc; precisa ter certeza que
+	    ele ir&aacute; se ajustar a porta existente no seu terminal e no
+	    seu sistema FreeBSD.</para>
+	  
+	  <para>
+	    A maioria dos terminais ir&atilde;o ter portas DB25.
+	    Computadores pessoais, incluindo PCs rodando FreeBSD,
+	    ter&atilde;o portas DB25 ou portas DB9.  Se voce possui uma placa
+	    multiserial para o seu PC, voce poder&aacute; ter portas RJ-12 ou
+	    portas RJ-45.</para>
+
+	  <para>
+	    Consulte a documenta&ccedil;&atilde;o que acompanha o seu hardware para
+	    obter a especifica&ccedil;&atilde;o do tipo de porta que ele utiliza.
+	    Uma inspe&ccedil;&atilde;o visual da porta costuma ajudar tamb&eacute;m.</para>
 	</sect4>
 
 	<sect4 id="term-portnames">
-	  <title>Port Names</title>
+	  <title>Nomes das Portas</title>
 	  
-	  <para>In FreeBSD, you access each serial port through an entry in
-	    the <filename>/dev</filename> directory.  There are two different
-	    kinds of entries:</para>
-	      
+	  <para>
+	    No FreeBSD, voc&ecirc; acessa cada porta serial atrav&eacute;s de uma
+	    entrada no diret&oacute;rio <filename>/dev</filename>.  Existem 2
+	    tipos diferentes de entradas:</para>
+	  
 	  <itemizedlist>
 	    <listitem>
-	      <para>Call-in ports are named
-		<filename>/dev/ttyd<replaceable>N</replaceable></filename>
-		where <replaceable>N</replaceable> is the port number,
-		starting from zero.  Generally, you use the call-in port for
-		terminals.  Call-in ports require that the serial line assert
-		the data carrier detect (DCD) signal to work correctly.</para>
+	      <para>As portas utilizadas para receber liga&ccedil;&otilde;es (<literal>
+	      call-in</literal>)s&atilde;o chamadas 
+	      <filename>/dev/ttyd<replaceable>N</replaceable></filename>,
+	      onde <replaceable>N</replaceable> &eacute; o numero da porta,
+	      iniciando-se em 0.  Geralmente, voc&ecirc; utiliza as portas
+	      <literal>call-in</literal> para terminais.  As portas
+	      <literal>call-in</literal> necessitam que a linha serial
+	      estabele&ccedil;a o sinal de detec&ccedil;&atilde;o de portadora de dados
+	      (DCD) para funcionar corretamente.</para>
 	    </listitem>
 	    
 	    <listitem>
-	      <para>Call-out ports are named
-		<filename>/dev/cuaa<replaceable>N</replaceable></filename>.
-		You usually do not use the call-out port for terminals, just
-		for modems.  You may use the call-out port if the serial cable
-		or the terminal does not support the carrier detect
-		signal.</para>
+	      <para>As portas utilizadas para efetuar liga&ccedil;&otilde;es
+	      (<literal>Call-out</literal>), s&atilde;o chamadas
+	      <filename>/dev/cuaa<replaceable>N</replaceable></filename>.
+	      Voc&ecirc; normalmente n&atilde;o utiliza este tipo de porta para
+	      terminais, usando-as apenas para modens.  Voc&ecirc; pode
+	      utilizar uma porta <literal>Call-out</literal> sempre
+	      que o cabo serial ou o terminal n&atilde;o suportar o sinal de
+	      detec&ccedil;&atilde;o de portadora.</para>
 	    </listitem>
 	  </itemizedlist>
 	  
-	  <para>If you have connected a terminal to the first serial port
-	    (<devicename>COM1</devicename> in &ms-dos;), then you will
-	    use <filename>/dev/ttyd0</filename> to refer to the terminal.  If
-	    the terminal is on the second serial port (also known as
-	    <devicename>COM2</devicename>), use
-	    <filename>/dev/ttyd1</filename>, and so forth.</para>
-
+	  <para>
+	    Se voc&ecirc; conectou um terminal a sua primeira porta serial
+	    (<devicename>COM1</devicename> no &ms-dos;), voc&ecirc; ter&aacute; que
+	    utilizar <filename>/dev/ttyd0</filename> para acessar o
+	    terminal.  Se o terminal estiver conectado a segunda
+	    porta serial (tamb&eacute;m conhecida como
+	    <devicename>COM2</devicename>), utilize
+	    <filename>/dev/ttyd1</filename>, e assim por
+	    diante.</para>
+	  
 	</sect4>
       </sect3>
     </sect2>
 
     <sect2>
-      <title>Kernel Configuration</title>
+      <title>Configura&ccedil;&atilde;o do Kernel</title>
       
-      <para>FreeBSD supports four serial ports by default.  In the
-	&ms-dos; world, these are known as
+      <para>
+	O FreeBSD por default suporta 4 portas seriais. No mundo
+	&ms-dos;, elas s&atilde;o conhecidas como
 	<devicename>COM1</devicename>,
 	<devicename>COM2</devicename>,
-	<devicename>COM3</devicename>, and 
-	<devicename>COM4</devicename>.  FreeBSD currently supports
-	<quote>dumb</quote> multiport serial interface cards, such as
-	the BocaBoard 1008 and 2016, as well as more
-	intelligent multi-port cards such as those made by Digiboard
-	and Stallion Technologies.  However, the default kernel only looks
-	for the standard COM ports.</para>
-	  
+	<devicename>COM3</devicename>, e
+	<devicename>COM4</devicename>.  
+	O FreeBSD atualmente suporta diversas placas multiseriais,
+	tais como a BocaBoard 1008 e 2016, bem como outras placas 
+	multiseriais inteligentes fabricadas com as tecnologias
+	Digiboard e Stallion.  No entando, o kernel default suporta
+	apenas as portas COM normais.</para>
+	
       <para>To see if your kernel recognizes any of your serial ports, watch
 	for messages while the kernel is booting, or use the
 	<command>/sbin/dmesg</command> command to replay the kernel's boot
