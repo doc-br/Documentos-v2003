@@ -11,7 +11,7 @@
     <title>&Iacute;ndice</title>
 
     <para>Este cap&iacute;tulo aborda alguns dos servi&ccedil;os de redes
-    usados com mais frequ&ecirc;ncia em sistemas &unix;.  Vamos
+    usados com mais freq&uuml;&ecirc;ncia em sistemas &unix;.  Vamos
     abordar como definir, configurar, testar e manter todos
     os servi&ccedil;os de rede que o FreeBSD usa.  Adicionalmente,
     existem exemplos de arquivos de configura&ccedil;&atilde;o
@@ -138,10 +138,10 @@ default		 outside-gw	    UGSc       37      418      ppp0
 localhost	 localhost	    UH		0      181       lo0
 test0		 0:e0:b5:36:cf:4f   UHLW	5    63288       ed0     77
 10.20.30.255     link#1		    UHLW	1     2421
-example.com      link#1		    UC		0	 0
+exemplo.com      link#1		    UC		0	 0
 host1		 0:e0:a8:37:8:1e    UHLW	3     4601       lo0
 host2		 0:e0:a8:37:8:1e    UHLW	0	 5	 lo0 =>
-host2.example.com link#1	    UC		0	 0
+host2.exemplo.com link#1	    UC		0	 0
 224		 link#1		    UC		0	 0</screen>
 
       <indexterm><primary>default route</primary></indexterm>
@@ -163,13 +163,13 @@ host2.example.com link#1	    UC		0	 0
 	<primary>Ethernet</primary>
 	<secondary>MAC address</secondary>
       </indexterm>
-      <para>A pr&oacute;xima coisa que chama a aten&ccedil;&atilde;o s&atilde;o os endere&ccedil;os
+      <para>As pr&oacute;ximas coisas que chamam a aten&ccedil;&atilde;o s&atilde;o os endere&ccedil;os
       come&ccedil;ando com <hostid role="mac">0:e0:</hostid>.  Estes s&atilde;o
       endere&ccedil;os de hardware Ethernet, tamb&eacute;m conhecidos como
       endere&ccedil;os MAC.  O FreeBSD ir&aacute; identificar automaticamente
       quaisquer m&aacute;quinas (no exemplo <hostid>test0</hostid>) na
       Ethernet local e adicionar uma rota direta para aquela m&aacute;quina
-      pela interface Ethernet, <devicename>ed0</devicename>.  H&aacute; tamb&eacute;m
+      pela interface Ethernet, <devicename>ed0</devicename>.  H&aacute;, tamb&eacute;m,
       um tempo de expira&ccedil;&atilde;o (timeout) associado a este tipo de rota,
       que &eacute; usado em caso de n&atilde;o se receber mais transmiss&otilde;es da m&aacute;quina
       dentro de um prazo espec&iacute;fico de tempo.  Quando isto acontece, a
@@ -184,7 +184,7 @@ host2.example.com link#1	    UC		0	 0
       local (<hostid role="ipaddr">10.20.30.255</hostid> &eacute; o endere&ccedil;o
       de difus&atilde;o (broadcast) para a subrede
       <hostid role="ipaddr">10.20.30</hostid>, e
-      <hostid role="domainname">example.com</hostid> &eacute; o nome de dom&iacute;nio
+      <hostid role="domainname">exemplo.com</hostid> &eacute; o nome de dom&iacute;nio
       associado &agrave;quela subrede).  A designa&ccedil;&atilde;o <literal>link#1</literal>
       refere-se &agrave; primeira placa Ethernet na m&aacute;quina.  Voc&ecirc; ir&aacute; notar que
       nenhuma interface adicional &eacute; especificada para aquelas.</para>
@@ -206,7 +206,7 @@ host2.example.com link#1	    UC		0	 0
 	se&ccedil;&atilde;o sobre Ethernet por raz&otilde;es pelas quais far&iacute;amos isso).  O
 	s&iacute;mbolo <literal>=&gt;</literal> ap&oacute;s a interface
 	<devicename>lo0</devicename> diz que n&atilde;o somente estamos
-	usando a loopback (uma vez que este endere&ccedil;o tamb&eacute;m refere-se
+	usando a loopback (uma vez que este endere&ccedil;o tamb&eacute;m se refere
 	&agrave; maquina local), mas especificamente que &eacute; um apelido.  Tais
 	rotas somente surgem nas m&aacute;quinas que suportam o apelido;
 	todas as outras m&aacute;quinas na rede local simplesmente ter&atilde;o uma
@@ -215,7 +215,7 @@ host2.example.com link#1	    UC		0	 0
       <para>A &uacute;ltima linha (subrede de destino <literal>224</literal>) trata
 	do uso de multicast, que ser&aacute; abordado em outra se&ccedil;&atilde;o.</para>
 
-      <para>Finalmente, dversos atributos de cada rota pode ser vistos
+      <para>Finalmente, diversos atributos de cada rota podem ser vistos
 	na coluna <literal>Flags</literal>.  Abaixo est&aacute; uma breve
 	tabela contendo algumas destas flags e seus significados:</para>
 
@@ -301,7 +301,7 @@ host2.example.com link#1	    UC		0	 0
 [Local2]  &lt;--ether--&gt;  [Local1]  &lt;--PPP--&gt; [ISP-Serv]  &lt;--ether--&gt;  [T1-GW]
       </literallayout>
 
-      <para>Os sistemas <hostid>Local1</hostid> and
+      <para>Os sistemas <hostid>Local1</hostid> e
 	<hostid>Local2</hostid> est&atilde;o em seu s&iacute;tio local.
 	<hostid>Local1</hostid> est&aacute; conectado a um PSI por uma conex&atilde;o
 	PPP discada.  Este servidor PPP est&aacute; conectado por uma rede
@@ -405,7 +405,7 @@ host2.example.com link#1	    UC		0	 0
       filtragem de pacotes ou um firewall de seguran&ccedil;a em cada uma ou
       em ambas as dire&ccedil;&otilde;es.</para>
 
-      <para>Se voc&ecirc; deseja que esta m&aacute;quina na pr&aacute;tica passe adiante
+      <para>Se voc&ecirc; deseja que esta m&aacute;quina, na pr&aacute;tica, passe adiante
       pacotes entre as duas interfaces, voc&ecirc; precisa dizer ao FreeBSD
       para permitir esta capacidade.</para>
     </sect2>
@@ -427,7 +427,7 @@ host2.example.com link#1	    UC		0	 0
       <para>Esta op&ccedil;&atilde;o ir&aacute; ajustar a vari&aacute;vel do &man.sysctl.8;
       chamada <varname>net.inet.ip.forwarding</varname> para
 	<literal>1</literal>.  Se voc&ecirc; precisar parar o roteamento
-	temporariamente, voc&ecirc; voc&ecirc; pode reajust&aacute;-la para
+	temporariamente, voc&ecirc; pode reajust&aacute;-la para
 	<literal>0</literal>.</para>
 
       <para>Seu novo roteador precisar&aacute; de rotas para saber aonde
@@ -437,7 +437,7 @@ host2.example.com link#1	    UC		0	 0
       (ambas as vers&otilde;es 1 e 2) e IRDP.  O suporte para BGP v4, OSPF v2
       e outros protocolos de roteamento sofisticados est&atilde;o dispon&iacute;veis
       com o pacote <filename role="package">net/zebra</filename>.
-      Produtos comerciais como o gated tamb&eacute;m est&atilde;o dispon&iacute;veis para
+      Produtos comerciais, como o gated, tamb&eacute;m est&atilde;o dispon&iacute;veis para
       solu&ccedil;&otilde;es mais complexas de roteamento.</para>
 
 <indexterm><primary>BGP</primary></indexterm>
@@ -471,11 +471,11 @@ host2.example.com link#1	    UC		0	 0
       ao seu PSI?</para>
 
       <para>H&aacute; um sistema (muito parecido com a informa&ccedil;&atilde;o DNS
-      disttribu&iacute;da) que mant&eacute;m resgistros de todos os espa&ccedil;os de
+      distribu&iacute;da) que mant&eacute;m registros de todos os espa&ccedil;os de
       endere&ccedil;amento designados, e que define seu ponto de conex&atilde;o &agrave;
       Espinha Dorsal Internet.  A <quote>Espinha Dorsal</quote> s&atilde;o
       os principais canais que carregam o tr&aacute;fego da Internet atrav&eacute;s
-      do pa&iacute;s e ao redor do mundo.  Cada m&aacute;quina de espinha dorsal t&ecirc;m
+      do pa&iacute;s e ao redor do mundo.  Cada m&aacute;quina de espinha dorsal tem
       uma c&oacute;pia de um conjunto mestre de tabelas, as quais direcionam
       tr&aacute;fego a uma determinada rede e a um provedor de espinha dorsal
       espec&iacute;fico e, de l&aacute;, abaixo na cadeia de provedores de servi&ccedil;os
@@ -526,8 +526,8 @@ host2.example.com link#1	    UC		0	 0
       <para>Al&eacute;m disso, o daemon de roteamento multicast
       &man.mrouted.8; precisa ser configurado para ativar t&uacute;neis e
       DVMRP atrav&eacute;s do <filename>/etc/mrouted.conf</filename>.  Mais
-      detalhes sobre a configura&ccedil;&atilde;o multicast podem ser encontradas
-      nas p&aacute;gina de manual do mrouted.</para>
+      detalhes sobre as configura&ccedil;&otilde;es multicast podem ser encontrados
+      nas p&aacute;ginas de manual do mrouted.</para>
     </sect2>
   </sect1>
 
@@ -567,7 +567,7 @@ host2.example.com link#1	    UC		0	 0
        <para>BSS &eacute; o modo tipicamente utilizado.  O modo BSS &eacute;
 	tamb&eacute;m chamado de modo infra-estrutura.  Neste modo, uma
 	quantidade de pontos de acesso sem fio est&atilde;o conectados a uma
-	rede cabeada.  Cada rede sem fio t&ecirc;m seu pr&oacute;prio nome.  Este
+	rede cabeada.  Cada rede sem fio tem seu pr&oacute;prio nome.  Este
 	nome &eacute; chamado SSID da rede.</para>
 
        <para>Clientes sem fio conectam-se a estes pontos de acesso.
@@ -1584,15 +1584,6 @@ rfcomm_sppd[94692]: Starting on /dev/ttyp6...</screen>
 	ao dispositivo remoto se ele suporta troca de fun&ccedil;&atilde;o.  H&aacute; uma
 	op&ccedil;&atilde;o HCI para desabilitar a troca de fun&ccedil;&atilde;o na ponta local.</para>
 
-	<para>Some older Bluetooth devices do not support role switching.
-	  By default, when &os; is accepting a new connection, it tries to
-	  perform role switch and become a master.  Devices, which do not
-	  support this will not be able to connect.  Note the role switching is
-	  performed when a new connection is being established, so it is not
-	  possible to ask the remote device if it does support role switching.
-	  There is a HCI option to disable role switching on the local
-	  side.</para>
-
 	<screen>&prompt.root; <userinput>hccontrol -n ubt0hci write_node_role_switch 0</userinput></screen>
 
       </sect3>
@@ -2048,7 +2039,7 @@ mountd_flags="-r"</programlisting>
       onde <filename>/usr</filename> e <filename>/exports</filename> 
       s&atilde;o sistemas de arquivos locais:</para>
 
-      <programlisting># Export src and ports to client01 and client02, but only
+      <programlisting># Exporte src e ports ao cliente01 e cliente02, mas somente o 
 # cliente01 tem privil&eacute;gios de root nele
 /usr/src /usr/ports -maproot=root    cliente01
 /usr/src /usr/ports	       cliente02
@@ -2426,8 +2417,6 @@ Exports list on foobar:
 	<para>Os arquivos de inicializa&ccedil;&atilde;o padr&atilde;o do sistema est&atilde;o em
 	<filename>/etc</filename> para detectar e suportar a partida
 	de um sistema sem disco.</para>
-	<para>Standard system startup files exist in <filename>/etc</filename>
-	  to detect and support a diskless system startup.</para>
       </listitem>
 
       <listitem>
@@ -4943,7 +4932,7 @@ dhcp_flags=""</programlisting>
 	  composto de declara&ccedil;&otilde;es relativas a subredes e servidores, e
 	  &eacute;, talvez, melhor explicado usando um exemplo:</para>
 
-	  <programlisting>option domain-name "example.com";<co id="domain-name">
+	  <programlisting>option domain-name "exemplo.com";<co id="domain-name">
 option domain-name-servers 192.168.4.100;<co id="domain-name-servers">
 option subnet-mask 255.255.255.0;<co id="subnet-mask">
 
@@ -4958,7 +4947,7 @@ subnet 192.168.4.0 netmask 255.255.255.0 {
 
 host mailhost {
   hardware ethernet 02:03:04:05:06:07;<co id="hardware">
-  fixed-address mailhost.example.com;<co id="fixed-address">
+  fixed-address mailhost.exemplo.com;<co id="fixed-address">
 }</programlisting>
 
 	  <calloutlist>
@@ -5525,9 +5514,9 @@ zone
 	o named em uma sandbox</link>.</para>
 
 	<programlisting>/*
-zone "example.com" {
+zone "exemplo.com" {
 	type slave;
-	file "s/example.com.bak";
+	file "s/exemplo.com.bak";
 	masters {
 		192.168.1.1;
 	};
@@ -6275,7 +6264,7 @@ zone "10.168.192.in-addr.arpa" in {
 	<filename>/etc/ntp.conf</filename> no formato descrito em
 	&man.ntp.conf.5;.  Aqui est&aacute; um exemplo simples:</para>
 
-	<programlisting>server ntplocal.example.com prefer
+	<programlisting>server ntplocal.exemplo.com prefer
 server timeserver.example.org
 server ntp2a.example.net
 
@@ -6285,7 +6274,7 @@ driftfile /var/db/ntp.drift</programlisting>
 	servidores devem ser usados, com um servidor por linha.  Se um
 	servidor &eacute; especificado com o argumento
 	<literal>prefer</literal>, como em <hostid
-	role="fqdn">ntplocal.example.com</hostid>, este servidor &eacute;
+	role="fqdn">ntplocal.exemplo.com</hostid>, este servidor &eacute;
 	preferido sobre os demais servidores.  Uma resposta de um servidor
 	preferido ser&aacute; descartada se ela diferir muito das respostas
 	dos demais servidores, caso contr&aacute;rio ser&aacute; usada
