@@ -720,127 +720,128 @@ options          MD_ROOT      #MD is a potential root device</programlisting>
     <para>Agora voc&ecirc; necessita simplesmente reiniciar, ou rodar o comando
       <command>mount /tmp</command>.</para>
 
-    <note><para>No &os; 5.X, &man.md.4;-backed UFS sistema de arquivos são
-      usados para sistema de arquivos de memória melhor que MFS. Informação  
-      configurando sistema de arquivos memória-suportandos pode ser encontrada nas páginas de manual
-      para &man.mdconfig.8; e &man.mdmfs.8;, e no <xref linkend="disks-virtual">. Em consequência, a
-      <literal>MFS</literal> a opção não é mais suportada.</para></note>
+    <note><para>No &os; 5.X, &man.md.4;-backed UFS sistema de arquivos s&atilde;o
+      usados para sistema de arquivos de mem&oacute;ria melhor que MFS. Informa&ccedil;&atilde;o  
+      de configura&ccedil;&atilde;o do sistema de arquivos de mem&oacute;ria-suportandos pode ser encontrada no manual
+      em &man.mdconfig.8; e &man.mdmfs.8;, e no <xref linkend="disks-virtual">. Em consequ&ecirc;ncia, a op&ccedil;&atilde;o
+      <literal>MFS</literal> n&atilde;o &eacute; mais suportada.</para></note>
 
     <indexterm>
-      <primary>Opções do kernel options</primary>
+      <primary>Op&ccedil;&otilde;es do kernel options</primary>
       <secondary>NFS</secondary>
     </indexterm>
     <indexterm>
-      <primary>Opções do kernel</primary>
+      <primary>Op&ccedil;&otilde;es do kernel</primary>
       <secondary>NFS_ROOT</secondary>
     </indexterm>
     <programlisting>options          NFS          #Network Filesystem
 options          NFS_ROOT     #NFS usable as root device, NFS required</programlisting>
 
-    <para>O sistema de arquivos de rede. A menos que você planeje mountar partições
-      do Unix &unix; arquivo do servidor sobre TCP/IP, você pode comentar esta
+    <para>O sistema de arquivos de rede. A menos que voc&ecirc; n&atilde;o planeje mountar parti&ccedil;&otilde;es
+      do Unix &unix; arquivo do servidor sobre TCP/IP, voc&ecirc; pode comentar esta
       linha.</para>
 
     <indexterm>
-      <primary>opções do kernel</primary>
+      <primary>Op&ccedil;&otilde;es do kernel</primary>
       <secondary>MSDOSFS</secondary>
     </indexterm>
     <programlisting>options          MSDOSFS      #MSDOS Filesystem</programlisting>
 
-    <para>O sistema de arquivos &ms-dos;. A menos que você planeje mountar uma partição no seu disco formatada em DOS
-      na hora da inicialização, você pode com segurança comentar isto.
-      Isto será carregado automaticamente na primeira vez que você mountar uma partição DOS,
-      como descrito acima. Também, o excelente software
-      <application>mtools</application> (na coleção do ports)
-      permite que você acesse disquetes DOS sem ter que mountá-los e
-      desmontá-los (e não é requer <literal>MSDOSFS</literal>).</para>
+    <para>Sistema de arquivos &ms-dos;. A menos que voc&ecirc; planeje mountar uma parti&ccedil;&atilde;o no seu disco formatada em DOS
+      na hora da inicializa&ccedil;&atilde;o, voc&ecirc; pode com seguran&ccedil;a comentar isto.
+      Isto ser&aacute; carregado automaticamente na primeira vez que voc&ecirc; mountar uma parti&ccedil;&atilde;o DOS,
+      como descrito acima. Tamb&eacute;m, o excelente software
+      <application>mtools</application> (na cole&ccedil;&atilde;o do ports)
+      permite que voc&ecirc; acesse disquetes DOS sem ter que mount&aacute;-los e
+      desmont&aacute;-los (e n&atilde;o requer <literal>MSDOSFS</literal>).</para>
 
     <programlisting>options          CD9660       #ISO 9660 Filesystem
 options          CD9660_ROOT  #CD-ROM usable as root, CD9660 required</programlisting>
 
-    <para>O sistema de arquivos ISO 9660 para CDROMs. COmentando isto se você 
-      não tiver um drive de CDROM ou somente montar dados de CDs ocasionalmente (desde que
-      seja carregado dinamicamente na primeira vez que você montar um CD dados).
-      CDs de audio não necessitam desde Sistema de Arquivos.</para>
+    <para>O sistema de arquivos ISO 9660 &eacute; para CDROMs. Comentando isto se voc&ecirc;  
+      n&atilde;o tiver um drive de CDROM ou somente montar dados de CDs ocasionalmente (desde que
+      seja carregado dinamicamente na primeira vez que voc&ecirc; montar um CD de dados).
+      CDs de audio n&atilde;o necessitam desde Sistema de Arquivos.</para>
 
     <programlisting>options          PROCFS       #Process filesystem</programlisting>
 
-    <para>O sistema de arquivos process. Este sistema de arquivo é <quote>pretendido</quote>
+    <para>O sistema de arquivos process. Este sistema de arquivo &eacute; <quote>pretendido</quote>
       mountar em <filename>/proc</filename> que permite
-      programas como &man.ps.1; para voc ter mais informações de qual
-      processo está rodando. No &os; 5.X, o uso do <literal>PROCFS</literal>
-      não é mais requerido pela maioria de circunstâncias, a maioria
+      programas como &man.ps.1; para voc&ecirc; ter mais informa&ccedil;&otilde;es de qual
+      processo est&aacute; rodando. No &os; 5.X, o uso do <literal>PROCFS</literal>
+      n&atilde;o &eacute; mais requerido por v&aacute;rias circunst&acirc;ncias, a maioria
       erros e ferramentas de monitoramento tem que ser adaptado para rodar sobre
-      <literal>PROCFS</literal>. Em adição, 5.X-CURRENT kernels
-      que usam <literal>PROCFS</literal> devem agora também incluir
+      <literal>PROCFS</literal>. Em adi&ccedil;&atilde;o, 5.X-CURRENT kernel
+      que usam <literal>PROCFS</literal> devem agora tamb&eacute;m incluir
       suporte para <literal>PSEUDOFS</literal>:</para>
 
     <programlisting>options          PSEUDOFS     #Pseudo-filesystem framework</programlisting>
 
-    <para><literal>PSEUDOFS</literal> não está disponível nos &os; 4.X.
-      Ao contrário nos &os; 4.X, novas instalações do &os; 5.X não montará
-      o processo do sistema de arquivos por default.</para>
+    <para><literal>PSEUDOFS</literal> n&atilde;o est&aacute; dispon&iacute;vel nos &os; 4.X.
+      Ao contr&aacute;rio dos &os; 4.X, as novas instala&ccedil;&otilde;es do &os; 5.X n&atilde;o montar&aacute;
+      o processo do sistema de arquivos por padr&atilde;o.</para>
 
     <programlisting>options          COMPAT_43    #Compatible with BSD 4.3 [KEEP THIS!]</programlisting>
 
-    <para>Compatibilidade com 4.3BSD. Deixe isto dentro; alguns programas agirão
-      estranhamente se você comentar isto.</para>
+    <para>Compatibilidade com BSD 4.3. Deixe isto descomentado, alguns programas agir&atilde;o
+      estranhamente se voc&ecirc; comentar isto.</para>
 
     <programlisting>options          COMPAT_FREEBSD4     #Compatible with &os;4</programlisting>
 
-    <para>Esta opção é requerida no &os;&nbsp;5.X &i386; e Sistemas Alpha
-      para suporte aplicativos compilados ou outras versões do &os;
-      que usam outro sistema de chamadas interfaces. Recomenda-se que esta opção
+    <para>Esta op&ccedil;&atilde;o &eacute; requerida no &os;&nbsp;5.X &i386; e Sistemas Alpha
+      para suporte aplicativos compilados ou outras vers&otilde;es do &os;
+      que usam outro sistema de interfaces de chamadas. Recomenda-se que esta op&ccedil;&atilde;o
       seja usada sobre todos &i386; e sistemas Alpha que podem
       rodar outros aplicativos; plataformas que ganham suporte somente em
-      5.X, tal como ia64 e &sparc64;, não requer está opção.</para>
+      5.X, tal como ia64 e &sparc64;, n&atilde;o requer est&aacute; op&ccedil;&atilde;o.</para>
 
     <programlisting>options          SCSI_DELAY=15000    #Delay (in ms) before probing SCSI</programlisting>
 
     <para>Isso faz com que o kernel pare por 15 segundos antes de experimentar
-      cada dispositivo SCSI em seu sistema. Se você somente tiver IDE hard drives,
-      você poderá ignorar isto, você provavelmente queira baixar este número,
-      talvez a 5 segundos, para acelerar a inicialização. Naturalmente, se
-      você fizer isto, e &os; tenha problema em reconhecer seus dispositivos SCSI,
-      você terá que levantá-lo de maneira alternativa.</para>
+      cada dispositivo SCSI em seu sistema. Se voc&ecirc; somente tiver IDE hard drives,
+      voc&ecirc; poder&aacute; ignorar isto, voc&ecirc; provavelmente queira baixar este n&uacute;mero,
+      talvez a 5 segundos, para acelerar a inicializa&ccedil;&atilde;o. Naturalmente, se
+      voc&ecirc; fizer isto, e &os; tenha problema em reconhecer seus dispositivos SCSI,
+      voc&ecirc; ter&aacute; que levant&aacute;-lo de maneira alternativa.</para>
 
     <programlisting>options          UCONSOLE            #Allow users to grab the console</programlisting>
 
-    <para>Permite que usuários peguem a console, que é usado por usuários do X.
-      Por exemplo, você pode criar um <application>xterm</application> da console
+    <para>Permite que usu&aacute;rios peguem a console, que &eacute; usado por usu&aacute;rios do X.
+      Por exemplo, voc&ecirc; pode criar um <application>xterm</application> da console
       para digitar<command>xterm
       -C</command>, que indica tudo em &man.write.1;,
-      &man.talk.1;, e todas as outras mensagens que você receber, assim como
+      &man.talk.1;, e todas as outras mensagens que voc&ecirc; receber, assim como
       algumas mensagens de console emitidas pelo kernel.</para>
 
-    <note><para>Em &os; 5.X, <literal>UCONSOLE</literal> não é
+    <note><para>No &os; 5.X, <literal>UCONSOLE</literal> n&atilde;o &eacute;
       mais requerido.</para></note>
 
     <programlisting>options          USERCONFIG          #boot -c editor</programlisting>
 
-    <para>Esta opção permite que você carregue as configurações do editor do menu carregado.</para>
+    <para>Esta op&ccedil;&atilde;o permite a voc&ecirc; carregar e editar as configura&ccedil;&otilde;es do menu de inicializa&ccedil;&atilde;o.</para>
 
     <programlisting>options          VISUAL_USERCONFIG   #visual boot -c editor</programlisting>
 
-    <para>Esta opção permite a você carregar a configuração visual editor
-      do menu de carregamento.</para>
+    <para>Esta op&ccedil;&atilde;o permite a voc&ecirc; carregar e editar as configura&ccedil;&otilde;es do menu de inicializa&ccedil;&atilde;o em modo 
+	gr&aacute;fico. 
+    </para>
 
-      <note><para>Do &os; versions 5.0 e posteriores, o opção <literal>USERCONFIG</literal> foi
-	oposta em favor da novo método &man.device.hints.5;.
-	Para maiores informações sobre &man.device.hints.5; por favor
+      <note><para>Do &os; versions 5.0 e posteriores, o op&ccedil;&atilde;o <literal>USERCONFIG</literal> foi
+	colocada em favor do novo m&eacute;todo &man.device.hints.5;.
+	Para maiores informa&ccedil;&otilde;es sobre &man.device.hints.5; por favor
 	visite <xref linkend="device-hints">.</para></note>
 
     <programlisting>options          KTRACE              #ktrace(1) support</programlisting>
 
-    <para>Isto permite seguir o processo do kernel, que é usado na
-      verificação dos erros.</para>
+    <para>Isto permite seguir o processo do kernel, que &eacute; usado na
+      verifica&ccedil;&atilde;o dos erros.</para>
 
     <programlisting>options          SYSVSHM             #SYSV-style shared memory</programlisting>
 
-    <para>Está opção fornece compartilhamento de memória para o Sistema V. O uso
-      mais comum deste é o XSHM extensão em X, com muitos
-      programas de gráficos-intensivos que darão automaticamente vantagem para acréscimo de velocidade.
-      Se você usa X, você deverá definitivamente incluir
+    <para>Est&aacute; op&ccedil;&atilde;o fornece compartilhamento de mem&oacute;ria para o Sistema V. O uso
+      mais comum deste &eacute; o XSHM extens&atilde;o em X, com muitos
+      programas de gr&aacute;ficos-intensivos que dar&atilde;o automaticamente vantagem para acr&eacute;scimo de velocidade.
+      Se voc&ecirc; usa X, voc&ecirc; dever&aacute; definitivamente incluir
       este.</para>
 
     <programlisting>options          SYSVSEM             #SYSV-style semaphores</programlisting>
