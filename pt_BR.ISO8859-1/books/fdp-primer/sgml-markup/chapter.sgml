@@ -33,64 +33,79 @@
 <chapter id="sgml-markup">
   <title>SGML Markup</title>
 
-  <para>This chapter describes the two markup languages you will encounter
-    when you contribute to the FreeBSD documentation project.  Each section
-    describes the markup language, and details the markup that you are likely
-    to want to use, or that is already in use.</para>
+  <para>Esse cap&iacute;tulo descreve as duas linguagens de 
+    marca&ccedil;&atilde; que voc&ecirc; vai encontar quando for
+    contribuir para o projeto de documenta&ccedil;&atilde;o do FreeBSD.
+    Cada sess&atilde;o descreve a markup language, e detalha a markup que
+    voc&ecirc; provavelmente vai querer usar ou ja esta sendo
+    usada.</para>
+ 
 
-  <para>These markup languages contain a large number of elements, and it can
-    be confusing sometimes to know which element to use for a particular
-    situation.  This section goes through the elements you are most likely to
-    need, and gives examples of how you would use them.</para>
+  <para>Essas linguagens de marca&ccedil;&atilde;o contem um grande
+    n&uacute;mero de elementos, e as vezes pode ficar confuso escolher 
+    qual elemento usar em uma situa&ccedil;&atilde;o espec&iacute;fica. 
+    Essa section fala dos elementos mais prov&aacute;veis de voc&ecirc;
+    precisar e te da exemplos de como voc&ecirc; os usaria.
   
-  <para>This is <emphasis>not</emphasis> an exhaustive list of elements, since
-    that would just reiterate the documentation for each language.  The aim of
-    this section is to list those elements more likely to be useful to you.
-    If you have a question about how best to markup a particular piece of
-    content, please post it to the &a.doc;.</para>
+  <para>Isso <emphasis>n&atilde;o</emphasis> &eacute; uma lista
+    detalhada de elementos, desde que apenas ratifica a
+    documenta&ccedil;&atilde;o para cada linguagem.  O alvo dessa
+    sess&atilde;o &eacute; para listar os elementos mais &uacute;tis para
+    voc&ecirc;. Se voc&ecirc; tiver alguma d&uacute;vida em como melhor
+    marcar um peda&ccedil;o espec&iacute;fico do seu documento, por favor
+    envie para a &a.doc;.</para>
 
   <note>
-    <title>Inline vs. block</title>
+   <literal> <title>Inline vs. block</title></literal>
     
-    <para>In the remainder of this document, when describing elements,
-      <emphasis>inline</emphasis> means that the element can occur within a
-      block element, and does not cause a line break.  A
-      <emphasis>block</emphasis> element, by comparison, will cause a line
-      break (and other processing) when it is encountered.</para>
+    <para>No remainder desse documento, quando descrevendo elementos
+    <emphasis>inline</emphasis> significa que o elemento pode ocorrer
+    dentro de um bloco de elemetos, e n&atilde;o causa quebra de linha.
+    Um elemento <emphasis>block</emphasis>, por compara&ccedil;&atilde;o,
+    vai causar uma quebra de linha (e outros processamentos) quando esta
+    &eacute; encontrada.
+    
   </note>
   
   <sect1 id="sgml-markup-html">
     <title>HTML</title>
     
-    <para>HTML, the HyperText Markup Language, is the markup language of
-      choice on the World Wide Web.  More information can be found at
-      &lt;URL:<ulink url="http://www.w3.org/"></ulink>&gt;.</para>
+    <para>HTML, Linguagem de marca&ccedil;&atilde;o de Hypertexto,
+    &eacute; a linguagem de escolha da teia mundial de computadores.
+    Mais informa&ccedil;&otilde;es podem ser encontradas em 
+    &lt;URL:<ulink url="http://www.w3.org/"></ulink>&gt;.</para>
+    
+    <para>HTML &eacute; usado para marca&ccedil;&atilde;o de
+    p&aacute;ginas no web site do FreeBSD.  N&atilde;o deveria ser usado
+    (geralmente) para marcar outros tipos de documentos ja que o
+    <literal>DocBook</literal> oferece uma maior variedade de
+    elementos.  Consequentemente, voc&ecirc; normalmente vai encontrar
+    p&aacute;ginas em HTML se estiver escrevendo para o s&iacute;tio www.</para>
+    
 
-    <para>HTML is used to markup pages on the FreeBSD web site.  It should not
-      (generally) be used to mark up other documentation, 
-      since DocBook offers a
-      far richer set of elements to choose from.  Consequently, you will
-      normally only encounter HTML pages if you are writing for the web
-      site.</para>
-
-    <para>HTML has gone through a number of versions, 1, 2, 3.0, 3.2, and the
-      latest, 4.0 (available in both <emphasis>strict</emphasis> and
-      <emphasis>loose</emphasis> variants).</para>
-	  
-    <para>The HTML DTDs are available from the ports collection in the
-      <filename role="package">textproc/html</filename> port.  They are automatically
-      installed as part of the <filename role="package">textproc/docproj</filename>
-      port.</para>
+    <para>HTML ja passou por algumas vers&otilde;es, 1, 2, 3.0, 3.2 e a
+    &uacute;ltima, 4.0 (dispon&iacute;vel nas duas variantes,
+    <literal><emphasis>strict</emphasis></literal> e
+    <literal><emphasis>loose</emphasis></literal>).</para>
+    
+   
+   <para>Os HTML DTD's est&atilde;o dispon&iacute;veis nas
+      cole&ccedil;&otilde;es de <literal>ports</literal> na
+      <filename role="package">textproc/html</filename><literal>port</litera>.
+      Elas s&atilde;o automaticamente instaladas como parte do <filename
+      role="package">textproc/docproj</filename><literal>port</literal></para>
 
     <sect2>
-      <title>Formal Public Identifier (FPI)</title>
+      <title>identificador p&uacute;blico formal (FPI)</title>
 
-      <para>There are a number of HTML FPIs, depending upon the version (also
-	known as the level) of HTML that you want to declare your document to
-	be compliant with.</para>
-
-      <para>The majority of HTML documents on the FreeBSD web site comply with
-	the loose version of HTML 4.0.</para>
+      <para>O n&uacute;mero de FPI no HTML depende da vers&agrave;o
+      (tamb&eacute;m conhecida como n&iacute;vel) do HTML que voc&ecirc;
+      quer declarar compat&iacute;vel com seu documento.</para>
+      
+      <para>A maioria dos documentos HTML no sit&iacute;o www do FreeBSD
+      est&atilde;o de acordo com a vers&atilde;o
+      <literal>loose</literal> do HTML 4.0.</para>
+      
 
       <programlisting>PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"</programlisting>
     </sect2>
@@ -98,23 +113,26 @@
     <sect2>
       <title>Sectional elements</title>
 
-      <para>An HTML document is normally split into two sections.  The first
-	section, called the <emphasis>head</emphasis>, contains
-	meta-information about the document, such as its title, the name of
-	the author, the parent document, and so on.  The second section, the
-	<emphasis>body</emphasis>, contains the content that will be displayed
-	to the user.</para>
-
-      <para>These sections are indicated with <sgmltag>head</sgmltag> and
-	<sgmltag>body</sgmltag> elements respectively.  These elements are
-	contained within the top-level <sgmltag>html</sgmltag> element.</para>
-
+      <para>Um documento HTML &eacute; normalmente dividido em duas
+      partes.  A primeira &eacute; chamada de
+      <emphasis>head</emphasis>, que cont&eacute;m
+      meta-informa&ccedil;&atilde;o sobre o documento, como o
+      t&iacute;tulo, o nome do autor e assim por diante.  A segunda
+      parte, <emphasis>body</emphasis> &eacute; aonde fica o
+      conte&uacute;do que vai ser exibido para o usu&aacute;rio.</para> 
+      
+      <para>Essas partes s&atilde;o formadas por elementos
+      espec&iacute;ficos para <sgmltag>head</sgmltag> e
+      <sgmltag>body</sgmltag>, respectivamente.  Esses elementos
+      est&atilde;o contidos dentro de um elemento <sgmltag>html</sgmltag>
+      de alto-n&iacute;vel.</para>  
+      
       <example>
-	<title>Normal HTML document structure</title>
+	<title>Estrutura normal de um documeno HTML</title>
 
 	<programlisting>&lt;html>
   &lt;head>
-	  &lt;title><replaceable>The document's title</replaceable>&lt;/title>
+	  &lt;title><replaceable>T&iacute;tulo do documento</replaceable>&lt;/title>
   &lt;/head>
 
   &lt;body>
@@ -132,314 +150,353 @@
       <sect3>
 	<title>Headings</title>
 
-	<para>HTML allows you to denote headings in your document, at up to
-	  six different levels.</para>
+	<para>O HTML permite a denota&ccedil;&atilde;o de headings no
+	seu documento, em at&eacute; seis n&iacute;veis
+	diferentes.</para>
+	
 
-	<para>The largest and most prominent heading is <sgmltag>h1</sgmltag>,
-	  then <sgmltag>h2</sgmltag>, continuing down to
-	  <sgmltag>h6</sgmltag>.</para>
-
-	<para>The element's content is the text of the heading.</para>
+	<para>O maior e mais prominent heading &eacute; o
+	<sgmltag>h1</sgmltag>, depois vem o <sgltag>h2</sgltag>, e
+	assim por diante at&eacute; <sgmltag>h6</sgmltag>.</para>
+	
+	<para>O conte&uacute;do dos elementos &eacute; o texto de um
+	heading.</para>
+	
 
 	<example>
 	  <title><sgmltag>h1</sgmltag>, <sgmltag>h2</sgmltag>, etc.</title>
 
 	  <para>Use:</para>
 
-	  <programlisting><![ CDATA [<h1>First section</h1>
+	  <programlisting><![ CDATA [<h1>Primeira sess&atilde;o</h1>
 
-<!-- Document introduction goes here -->
+<!-- a inrodu&ccedil;&atilde;o do documento entra aqui -->
 
-<h2>This is the heading for the first section</h2>
+<h2>Este &eacute; o heading da primeira sess&atilde;o</h2>
 
-<!-- Content for the first section goes here -->
+<!-- O conte&uacute;do da primeira sess&atilde;o entra aqui -->
 
-<h3>This is the heading for the first sub-section</h3>
+<h3>Este &eacute; o heading da primeira sub-sess&atilde;o</h3>
 
-<!-- Content for the first sub-section goes here -->
+<!-- O conte&uacute;do da primeira sub-sess&atilde;o entra aqui -->
 
-<h2>This is the heading for the second section</h2>
+<h2>Este &eacute; o heading para a segundo sess&atilde;o</h2>
 
-<!-- Content for the second section goes here -->]]></programlisting>	    
+<!-- O conte&uacute;do da segunda sess&atilde;o entra aqui -->]]></programlisting>	    
 	</example>
 	
-	<para>Generally, an HTML page should have one first level heading
-	  (<sgmltag>h1</sgmltag>).  This can contain many second level
-	  headings (<sgmltag>h2</sgmltag>), which can in turn contain many
-	  third level headings.  Each
-	  <sgmltag>h<replaceable>n</replaceable></sgmltag> element should have
+	<para>Geralmente, uma p&aacute;gina HTML deveria ter um heading
+	de primeiro n&iacute;vel (<sgmltag>h1</sgmltag>). Esse poderia
+	conter muitos heading de segundo n&iacute;vel
+	(<sgmltag>h2</sgmltag>), onde por sua vez pode  conter muitos
+	headings de terceiro n&iacute;vel.  Cada 
+	 <sgmltag>h<replaceable>n</replaceable></sgmltag> deveria ter 
 	  the same element, but one further up the hierarchy, preceding it.
 	  Leaving gaps in the numbering is to be avoided.</para>
 
 	<example>
-	  <title>Bad ordering of
-	    <sgmltag>h<replaceable>n</replaceable></sgmltag> elements</title>
+	  <title>M&aacute; organiza&ccedil;&atilde;o de elementos
+	    <sgmltag>h<replaceable>n</replaceable></sgmltag></title>
 
 	  <para>Use:</para>
 
-	  <programlisting><![ CDATA [<h1>First section</h1>
+	  <programlisting><![ CDATA [<h1>Primeira sess&atilde;o</h1>
 
 <!-- Document introduction -->
 
-<h3>Sub-section</h3>
+<h3>Sub-sess&atilde;o</h3>
 
 <!-- This is bad, <h2> has been left out -->]]></programlisting>
 	</example>
       </sect3>
       
       <sect3>
-	<title>Paragraphs</title>
+	<title>Par&aacute;grafos</title>
 
-	<para>HTML supports a single paragraph element,
-	  <sgmltag>p</sgmltag>.</para>
+	<para>HTML suporta elementos formados de um &uacute;nico
+	par&aacute;grafo <sgmltag>p</sgmltag>.</para>
 
 	<example>
 	  <title><sgmltag>p</sgmltag></title>
 
 	  <para>Use:</para>
 
-	  <programlisting><![ CDATA [<p>This is a paragraph.  It can contain just about any
-  other element.</p>]]></programlisting>
+	  <programlisting><![ CDATA [<p>Isso &eacute; um
+	  par&aacute;grafo.  Pode conter qualquer outro elemento.
+	  </p>]]></programlisting>
 	</example>
       </sect3>
 
       <sect3>
 	<title>Block quotations</title>
 
-	<para>A block quotation is an extended quotation from another document
-	  that should not appear within the current paragraph.</para>
-
+	<para>Uma block quotation &eacute; uma quotation extendida de um
+	outro documento que n&atilde;o deveria aparecer dentro do
+	par&aacute;grafo em quest&atilde;o.</para>
+	
 	<example>
 	  <title><sgmltag>blockquote</sgmltag></title>
 
 	  <para>Use:</para>
 
-	  <programlisting><![ CDATA [<p>A small excerpt from the US Constitution:</p>
+	  <programlisting><![ CDATA [<p>Um pequen excerto da
+	  constitui&ccedil;&atilde;o Americana:</p>
+	  
 
-<blockquote>We the People of the United States, in Order to form
-  a more perfect Union, establish Justice, insure domestic
-  Tranquility, provide for the common defence, promote the general
-  Welfare, and secure the Blessings of Liberty to ourselves and our
-  Posterity, do ordain and establish this Constitution for the
-  United States of America.</blockquote>]]></programlisting>
+<blockquote>N&oacute;s, people dos Estados Unidos, com o objetivo de
+  fazer uma uni&atilde;o mais perfeita, estabeler justi&ccedil;a,
+  garantir tranquilidade dom&eacute;stica, provide for the common
+  defence, promover bem estar geral, assegurar as ben&ccedil;&otilde;es da
+  liberdade para n&oacute;s mesmos e nossa posteridade, Ordene e
+  estabele&ccedil;a essa constitui&ccedil;&atilde;o para os estados Unidos
+  da Am&eacute;rica.</blockquote>]]></programlisting>
+
 	</example>
       </sect3>
 
       <sect3>
-	<title>Lists</title>
+	<title>Listas</title>
 
-	<para>You can present the user with three types of lists, ordered,
-	  unordered, and definition.</para>
+	<para>Voc&ecirc; pode apresentar ao usu&aacute;rio com treis
+	tipos de listas, ordenadas, desordenadas e definidas.</para>
+	
 
-	<para>Typically, each entry in an ordered list will be numbered, while
-	  each entry in an unordered list will be preceded by a bullet point.
-	  Definition lists are composed of two sections for each entry.  The
-	  first section is the term being defined, and the second section is
-	  the definition of the term.</para>
+	<para>Tipicamente, cada entrada em uma lista ordenada, &eacute;
+	numerada enquanto nas listas desordenadas ser&atilde;o
+	processadas por um bullet point.  Listas definidas s&atilde;o
+	compostas de duas sectons para cada entrada  A primeira section
+	&eacute; o termo sendo definido, e a segunda, &eacute; a
+	defini&ccedil;&atilde;o do termo.</para>
+	
 
-	<para>Ordered lists are indicated by the <sgmltag>ol</sgmltag>
-	  element, unordered lists by the <sgmltag>ul</sgmltag> element, and
-	  definition lists by the <sgmltag>dl</sgmltag> element.</para>
+	<para>As Listas ordenadas, desordenadas e definidas,
+	s&atilde;o indicadas pelo element <sgmltag>ol</sgmltag>,
+	<sgmltag>ul</sgmltag> e	<sgmltag>dl</sgmltag>,
+	respectivamente.</para>
 
-	<para>Ordered and unordered lists contain listitems, indicated by the
-	  <sgmltag>li</sgmltag> element.  A listitem can contain textual
-	  content, or it may be further wrapped in one or more
-	  <sgmltag>p</sgmltag> elements.</para>
+	
+	<para>Listas ordenadas e desordenadas cont&eacute;m listitems,
+	indicadas por <sgmltag>li</sgmltag> element.  Um listitem pode
+	conter texto, ou pode at&eacute; estar amarrada em um ou mais 
+	<sgmltag>p</sgmltag> elements.</para>
 
-	<para>Definition lists contain definition terms
-	  (<sgmltag>dt</sgmltag>) and definition descriptions
-	  (<sgmltag>dd</sgmltag>).  A definition term can only contain inline
-	  elements.  A definition description can contain other block
-	  elements.</para>
+
+	<para>Listas definidas cont&eacute;m termos definidos
+	 (<sgmltag>dt</sgmltag>) e tamb&eacute;m
+	 descri&ccedil;&otilde;es definidas(<sgmltag>dd</sgmltag>).
+	 Um termo definido pode conter apenas nline elements.  Uma
+	 descri&ccedil;&atilde;o definida pode conter other block
+	 elements.</para>
+	
 
 	<example>
 	  <title><sgmltag>ul</sgmltag> and <sgmltag>ol</sgmltag></title>
 
 	  <para>Use:</para>
 
-	  <programlisting><![ CDATA [<p>An unordered list.  Listitems will probably be
+	  <programlisting><![ CDATA [<p>Lista desordenada.  Listitems
+	  provavelmente ser&atilde;o precedidos de bullets.</p>
+	  
+	  An unordered list.  Listitems will probably be
   preceded by bullets.</p>
 
 <ul>
-  <li>First item</li>
+  <li>Primeiro item</li>
 
-  <li>Second item</li>
+  <li>Segundo item</li>
 
-  <li>Third item</li>
+  <li>Terceiro item</li>
 </ul>
 
-<p>An ordered list, with list items consisting of multiple
+<p>Uma lista ordenada, com listitems consisting multiplos
+par&aacute;grafos.  Cada item (Obs.: n&atilde;o cada pr&aacute;grafo)
+ser&aacute; numerado.</p>
+
+An ordered list, with list items consisting of multiple
   paragraphs.  Each item (note: not each paragraph) will be
   numbered.</p>
 
 <ol>
-  <li><p>This is the first item.  It only has one paragraph.</p></li>
+  <li><p>Esse &eacute; o primeiro item.  S&oacute; pode conter um
+  par&aacute;grafo.</p></li>
 
-  <li><p>This is the first paragraph of the second item.</p>
+  <li><p>Esse &eacute; o primeiro par&aacute;grafo do segundo item.</p>
 
-    <p>This is the second paragraph of the second item.</p></li>
-
-  <li><p>This is the first and only paragraph of the third
+    <p>Esse &eacute; o segundo par&aacute;grafo do segundo
     item.</p></li>
+
+  <li><p>Esse &eacute; o primeiro e &uacute;nico par&aacute;grafo do
+  terceiro item.</p></li>
+  
 </ol>]]></programlisting>
 	</example>
 
 	<example>
-	  <title>Definition lists with <sgmltag>dl</sgmltag></title>
+	  <title>Listas definidas com <sgmltag>dl</sgmltag></title>
 
 	  <para>Use:</para>
 
 	  <programlisting><![ CDATA [<dl>
-  <dt>Term 1</dt>
+  <dt>Termo 1</dt>
 
-  <dd><p>Paragraph 1 of definition 1.</p>
+  <dd><p>Par&aacute;grafo 1 da defini&ccedil;&atilde;o 1.</p>
 
-    <p>Paragraph 2 of definition 1.</p></dd>
+    <p>Par&aacute;grafo 2 da defini&ccedil;&atilde;o 1.</p></dd>
 
-  <dt>Term 2</dt>
+  <dt>Termo 2</dt>
 
-  <dd><p>Paragraph 1 of definition 2.</p></dd>
+  <dd><p>Par&aacute;grafo 1 da defini&ccedil;&atilde;o 2.</p></dd>
 
-  <dt>Term 3</dt>
+  <dt>Termo 3</dt>
 
-  <dd>Paragraph 1 of definition 3.  Note that the &lt;p&gt;
-    element is not required in the single paragraph case.</dd>
+  <dd>Par&aacute;grafo 1 da defini&ccedil;&atilde;o 3.  Note que o
+  elemento &lt;p&gt;n&atilde;o &eacute; exigido nos casos de
+  um s&oacute; par&aacute;grafo.</dd>
 </dl>]]></programlisting>
 	</example>
       </sect3>
 
       <sect3>
-	<title>Pre-formatted text</title>
+	<title>Texto pr&eacute;-formatado</title>
 
-	<para>You can indicate that text should be shown to the user exactly
-	  as it is in the file.  Typically, this means that the text is shown
-	  in a fixed font, multiple spaces are not merged into one, and line
-	  breaks in the text are significant.</para>
-
-	<para>In order to do this, wrap the content in the
-	  <sgmltag>pre</sgmltag> element.</para>
+	<para>Voc&ecirc; pode definir que o texto ser&aacute; exibido
+	para o usu&aacute;rio da maneira exata em quefoi  editado.
+	Tipicamente, isso significa que o texto ser&aacute; exibido com
+	uma fonte fixa, que multiplos espa&ccedil;os n&atilde;o
+	ser&atilde;o unificados, e que as quebras de linhas ser&atilde;o
+	levadas em conta.</para>
+	
+	<para>Para fazer isso, amarre o conte&uacute;do no
+	<sgmltag>pre</sgmltag> element.</para>
 
 	<example>
 	  <title><sgmltag>pre</sgmltag></title>
 
-	  <para>You could use <sgmltag>pre</sgmltag> to mark up an e-mail
-	    message;</para>
+	  <para>Voc&ecirc; poderia usar <sgmltag>pre</sgmltag> para
+	  marcar uma mensagem de e-mail;</para>
 
 	  <programlisting><![ CDATA [<pre>  From: nik@FreeBSD.org
   To: freebsd-doc@FreeBSD.org
   Subject: New documentation available
 
-  There is a new copy of my primer for contributors to the FreeBSD
-  Documentation Project available at
+  Est&aacute; dispon&iacute;vel uma nova c&oacute;pia do my primer para
+  contribuidores do projeto de documenta&ccedil;&atilde;o do FreeBSD em
 
     <URL:http://people.FreeBSD.org/~nik/primer/index.html>
 
-  Comments appreciated.
+  Coment&aacute;rios s&agrave;o bem vindos.
 
   N</pre>]]></programlisting>
 	</example>
       </sect3>
 
       <sect3>
-	<title>Tables</title>
+	<title>Tabelas</title>
 
 	<note>
-	  <para>Most text-mode browsers (such as Lynx) do not render tables
-	    particularly effectively.  If you are relying on the tabular
-	    display of your content, you should consider using alternative
-	    markup to prevent confusion.</para>
+	  <para>Muitos navegadores de modo texto (como Lynx) n&atilde;o
+	  interpretam tabelas de maneira efici&ecirc;nte. Se voc&ecirc;
+	  est&aacute; confiando no visual tabular do seu
+	  conte&uacute;do, voc&ecirc; deveria considerar uma segunda
+	  alternativa para n&atilde;o gerar confus&atilde;o.</para>
 	</note>
 
-	<para>Mark up tabular information using the <sgmltag>table</sgmltag>
-	  element.  A table consists of one or more table rows
-	  (<sgmltag>tr</sgmltag>), each containing one or more cells of table
-	  data (<sgmltag>td</sgmltag>).  Each cell can contain other block
-	  elements, such as paragraphs or lists.  It can also contain another
-	  table (this nesting can repeat indefinitely).  If the cell only
-	  contains one paragraph then you do not need to include the
-	  <sgmltag>p</sgmltag> element.</para>
-
+	<para>Marque as informa&ccedil;&otilde;es tabulares usando o
+	elemento <sgmltag>table</sgmltag>.  um tabela consiste em uma ou
+	mais linhas, cada uma contendo uma ou mais celulas.  Cada celula
+	pode conter outro bloco de elementos como par&aacute;grafos ou
+	listas.  Pode tamb&eacute;m conter outra tabela (esse nesting
+	pode se repetir indefinidamente).  Se a celula conter apenas um
+	par&aacute;grafo, voc&ecirc; n&atilde;o precisa usar o elemento
+	<emphasis>p</emphasis>.</para>
+	
 	<example>
-	  <title>Simple use of <sgmltag>table</sgmltag></title>
+	  <title>Uso simples da <sgmltag>tabela</sgmltag></title>
 
 	  <para>Use:</para>
 
-	  <programlisting><![ CDATA [<p>This is a simple 2x2 table.</p>
+	  <programlisting><![ CDATA [<p>Esta &eacute; uma tabela simples
+	  2x2.</p>
 
 <table>
   <tr>
-    <td>Top left cell</td>
+    <td>Celula esquerda superior</td>
 
-    <td>Top right cell</td>
+    <td>Celula direita superior</td>
   </tr>
 
   <tr>
-    <td>Bottom left cell</td>
+    <td>Celula esquerda inferior</td>
 
-    <td>Bottom right cell</td>
+    <td>Celula direita inferior</td>
   </tr>
 </table>]]></programlisting></example>
 
-	<para>A cell can span multiple rows and columns.  To indicate this,
-	  add the <literal>rowspan</literal> and/or <literal>colspan</literal>
-	  attributes, with values indicating the number of rows of columns
-	  that should be spanned.</para>
-
+	<para>uma celula pode se expandir em multiplas linhas e colunas.
+	Para indicar isso, adicione os atributos
+	<literal>rowspan</literal> e/ou <literal>colspan</literal>, com
+	valores indicando os n&uacute;meros de linhas e colunas que
+	deveriam ser expandido.</para>
+	
 	<example>
-	  <title>Using <literal>rowspan</literal></title>
+	  <title>Usando <literal>rowspan</literal></title>
 
 	  <para>Use:</para>
 
-	  <programlisting><![ CDATA [<p>One tall thin cell on the left, two short cells next to
-  it on the right.</p>
-
+	  <programlisting><![ CDATA [<p>Uma comprida e fina c&eacute;lula na
+	  esquerda, duas c&eacute;lulas baixas ao lado na direita.</p>
+	  
 <table>
   <tr>
-    <td rowspan="2">Long and thin</td>
+    <td rowspan="2">Comprida e fina</td>
   </tr>
 
   <tr>
-    <td>Top cell</td>
+    <td>c&eacute;lula superior</td>
 
-    <td>Bottom cell</td>
+    <td>c&eacute;lula inferior</td>
   </tr>
 </table>]]></programlisting>
 	</example>
 
 	<example>
-	  <title>Using <literal>colspan</literal></title>
+	  <title>Usando <literal>colspan</literal></title>
 
 	  <para>Use:</para>
 
-	  <programlisting><![ CDATA [<p>One long cell on top, two short cells below it.</p>
-
+	  <programlisting><![ CDATA [<p>Uma longa c&eacute;lula em cima,
+	  duas c&eacute;lulas baixas em baixo.</p>
+	  
 <table>
   <tr>
-    <td colspan="2">Top cell</td>
+    <td colspan="2">c&eacute;lula superior</td>
   </tr>
 
   <tr>
-    <td>Bottom left cell</td>
+    <td>c&eacute;lula esquerda inferior</td>
 
-    <td>Bottom right cell</td>
+    <td>c&eacute;lula direita superior</td>
   </tr>
 </table>]]></programlisting>
 	</example>
 
 	<example>
-	  <title>Using <literal>rowspan</literal> and
-	    <literal>colspan</literal> together</title>
+	  <title>Usando <literal>rowspan</literal> e
+	    <literal>colspan</literal> juntos</title>
 
 	  <para>Use:</para>
 
-	  <programlisting><![ CDATA [<p>On a 3x3 grid, the top left block is a 2x2 set of
-  cells merged into one.  The other cells are normal.</p>
-
+	  <programlisting><![ CDATA [<p>Numa cadeia 3x3, o bloco
+	  esquerdo superior &eacute; um conjunto de c&eacute;lulas
+	  concatenadas em uma s&oacute;.  As outras c&eacute;lulas
+	  s&atilde;o normais.</p>
+	  
 <table>
   <tr>
-    <td colspan="2" rowspan="2">Top left large cell</td>
+    <td colspan="2" rowspan="2">C&eacute;lula grande superior da
+    esquerda</td>
 
-    <td>Top right cell</td>
+    <td>C&eacute;lula direita superior</td>
   </tr>
 
   <tr>
@@ -447,15 +504,15 @@
          this row, the first <td> will occur on its
          right -->
 	    
-    <td>Middle right cell</td>
+    <td>C&eacute;lula do meio &agrave; direita</td>
   </tr>
 
   <tr>
-    <td>Bottom left cell</td>
+    <td>C&eacute;lula esquerda inferior</td>
 
-    <td>Bottom middle cell</td>
+    <td>C&eacute;lula inferior do meio</td>
 
-    <td>Bottom right cell</td>
+    <td>C&eacute;lula direita inferioir</td>
   </tr>
 </table>]]></programlisting>
 	</example>
@@ -463,51 +520,58 @@
     </sect2>
 
     <sect2>
-      <title>In-line elements</title>
+      <title>Elementos in-line</title>
 
       <sect3>
-	<title>Emphasising information</title>
+	<title>Enfatizando a informa&ccedil;&atilde;o</title>
 
-	<para>You have two levels of emphasis available in HTML,
-	  <sgmltag>em</sgmltag> and <sgmltag>strong</sgmltag>.
-	  <sgmltag>em</sgmltag> is for a normal level of emphasis and
-	  <sgmltag>strong</sgmltag> indicates stronger emphasis.</para>
+	<para>Voc&ecirc; tem dois n&iacute;veis de enfas&ecirc;
+	dispon&iacute;vel em HTML, <sgmltag>em</sgmltag> e
+	<sgmltag>strong</sgmltag>.  <sgmltag>em</sgmltag> &eacute; para
+	um n&iacute;vel normal de emphas&ecirc; e
+	<sgmltag>strong</sgmltag> indica uma emfas&ecirc; mais
+	forte.</para>
+	
 
-	<para>Typically, <sgmltag>em</sgmltag> is rendered in italic and
-	  <sgmltag>strong</sgmltag> is rendered in bold.  This is not always
-	  the case, however, and you should not rely on it.</para>
+	<para>Tipicamente, <sgmltag>em</sgmltag> &eacute; representado
+	em it&aacute;lico e <sgmltag>strong</sgmltag> &eacute;
+	representado em negrito. Por&eacute;m, esse  n&atilde;o &eacute;
+	sempre o caso, ent&atilde;o voc&ecirc; n&atilde;o deveria depender 
+	disso.</para>
 
 	<example>
-	  <title><sgmltag>em</sgmltag> and <sgmltag>strong</sgmltag></title>
+	  <title><sgmltag>em</sgmltag> e <sgmltag>strong</sgmltag></title>
 
 	  <para>Use:</para>
 
-	  <programlisting><![ CDATA [<p><em>This</em> has been emphasised, while
-  <strong>this</strong> has been strongly emphasised.</p>]]></programlisting>
+	  <programlisting><![ CDATA [<p><em>Isso</em> foi enfatizado, while
+  <strong>Isso</strong> foi fortemente enfatizado.</p>]]></programlisting>
 	</example>
       </sect3>
 
       <sect3>
-	<title>Bold and italics</title>
+	<title>Negrito e It&aacute;lico</title>
 
-	<para>Because HTML includes presentational markup, you can also
-	  indicate that particular content should be rendered in bold or
-	  italic.  The elements are <sgmltag>b</sgmltag> and
-	  <sgmltag>i</sgmltag> respectively.</para>
-
+	<para>Devido ao HTML incluirs presentational markup, voc&ecirc;
+	tamb&eacute;m pode idicar que um conte&uacute;do em particular
+	deve ser interpretado em negrito ou it&aacute;lico.  Os
+	elementoss&atilde;o <sgmltag>b</sgmltag> e <sgmltag>i</sgmltag>
+	respectivamente.</para>
+	
 	<example>
-	  <title><sgmltag>b</sgmltag> and <sgmltag>i</sgmltag></title>
+	  <title><sgmltag>b</sgmltag> e <sgmltag>i</sgmltag></title>
 
-	  <programlisting><![ CDATA [<p><b>This</b> is in bold, while <i>this</i> is
-  in italics.</p>]]></programlisting>
+	  <programlisting><![ CDATA [<p><b>Isso</b> est&aacute; em
+	  negrito, enquanto <i>Isso</i> est&aacute; em it&aacute;lico.</p>]]></programlisting>
 	</example>
       </sect3>
 
       <sect3>
-	<title>Indicating fixed pitch text</title>
+	<title>Indicando pitch fixo de texto</title>
 
-	<para>If you have content that should be rendered in a fixed pitch
-	  (typewriter) typeface, use <sgmltag>tt</sgmltag> (for
+	<para>Se voc&ecirc; tem um conte&uacute;do que deve ser
+	interpretado em um pitch fixo (m&aacute;quina de escrever)
+	typeface, use <sgmltag>tt</sgmltag> (para
 	  <quote>teletype</quote>).</para>
 
 	<example>
@@ -515,24 +579,29 @@
 
 	  <para>Use:</para>
 
-	  <programlisting><![ CDATA [<p>This document was originally written by
-  Nik Clayton, who can be reached by e-mail as
-  <tt>nik@FreeBSD.org</tt>.</p>]]></programlisting>
+	  <programlisting><![ CDATA [<p>Esse documento foi originalmente
+	  escrito por Nik Clayton,que pode ser encontrado no
+	  endere&ccedil;o de correio eletr&ocirc;nico
+	  <tt>nik@FreeBSD.org</tt>.</p>]]></programlisting>
 	</example>
       </sect3>
 
       <sect3>
-	<title>Content size</title>
+	<title>Tamanho do conte&uacute;do</title>
 
-	<para>You can indicate that content should be shown in a larger or
-	  smaller font.  There are three ways of doing this.</para>
+	<para>voc&ecirc; pode indicar que o conte&uacute;do deve ser
+	mostrado em uma maior ou menor fonte.  Existem treis maneiras de
+	se fazer isso.</para>
 
 	<orderedlist>
 	  <listitem>
-	    <para>Use <sgmltag>big</sgmltag> and <sgmltag>small</sgmltag>
-	      around the content you wish to change size.  These tags can be
-	      nested, so <literal>&lt;big&gt;&lt;big&gt;This is much
-		bigger&lt;/big&gt;&lt;/big&gt;</literal> is possible.</para>
+	    <para>Use <sgmltag>big</sgmltag> e <sgmltag>small</sgmltag>
+		em volta do conte&uacute;do que voc&ecirc; deseja
+		alterar o tamanho.  Essas
+		<foreingphrase>tags</foreingphrase> podem ser nested,
+		ent&atilde;o <literal>&lt;big&gt;&lt;big&gt; Isso
+		&eacute; muito maior&lt;/big&gt;&lt;/big&gt;</literal>
+		&eacute; poss&iacute;vel.</para>
 	  </listitem>
 
 	  <listitem>
@@ -569,48 +638,763 @@
     </sect2>
 
     <sect2>
+      
+      AQUI
+      
+
+
+4.1.5 Links
+Note: Links são também elementos in-line.
+
+4.1.5.1 Linking com outros documentos no WWW.  In order to incluir 
+um link para outro documento no WWW você precisa saber a URL do 
+documento que você gostaria de linkar. 
+
+Os links são indicados com <a>, e os atributos hrefs contém a URL do 
+documento target.  O conteúdo do elemento se torna o link, e é 
+normalmente apontado ao usuário de alguma forma (sublinhado, cor 
+diferente, mudança no cursor do mouse quando passado em cima do link, 
+e assim por diante).
+
+Example 4-17. Using <a href="...">
+
+Use:
+
+<p>More information is available at the
+  <a href="http://www.FreeBSD.org/">FreeBSD web site</a>.</p>
+Esse link levará o usuário ao topo da página do documento escolhido.
+
+4.1.5.2 Linkando à outras partes do documento
+Linkando a um ponto em outro documento (ou no mesmo) exige que o 
+autor do documento tenha incluido ancoras ao mesmo para você poder 
+linkar a elas.
+
+Ancoras são indicadas com <a> e o nome do atributo no lugar do href.
+
+
+Example 4-18. Using <a name="...">
+
+Use:
+
+<p><a name="para1">This</a> paragraph can be referenced
+  in other links with the name <tt>para1</tt>.</p>
+To link to a named part of a document, write a normal link to that 
+document, but include the name of the anchor after a # symbol.
+
+Example 4-19. Linking to a named part of another document
+
+Assume that the para1 example resides in a document called foo.html.
+
+<p>More information can be found in the
+  <a href="foo.html#para1">first paragraph</a> of
+  <tt>foo.html</tt>.</p>
+Se você está linkando à uma ancora dentro do próprio documento 
+então você pode omitir a URL e apenas incluir o nome da ancora 
+(depois de #)
+
+Example 4-20. Linkando para uma parte nomeada no mesmo documento
+
+Assuma que o exemplo para1 está neste documento
+
+<p>More information can be found in the
+  <a href="#para1">first paragraph</a> of this
+  document.</p>
+
+
+
+4.2 DocBook
+DocBook foi originalmente desenvolvido por HaL Computer Systems and 
+O'Reilly & Associates para ser um DTD para escrita técnica de 
+documentos [1].  Desde 1998 tem sido atualizado pelo comite técnico
+de DokBook.  As such, e ao contrário de LinuxDoc e HTML, DocBook 
+fortemente orientado a marcação que descreve o algo é em vez de 
+descrever como este deve ser apresentado.
+
+Formal vs. informal: Alguns elementos podem existir de duas formas,
+formal e informal.  Tipicamente, a versão formal dos elementos será 
+seguida de um pouco da versão informal dos elementos e a versão 
+informal não será seguida da formal.
+
+O DTD do DocBook está disponível para a ports collection no port
+textproc/docbook.  E e´automaticamente instalado como parte do port
+textproc/docbook
+
+
+4.2.1 extenções FreeBSD
+O projeto de documentação FreeBSD extendeu o DTD do DocBokk 
+adicionando alguns elementos.  Esses elementos servem para fazer
+as marcações mais precisas.
+
+
+Where a FreeBSD specific element is listed below it is clearly marked.
+
+Até o final deste documento, o termo ``DocBook´´ representa a versão 
+do DTD do DocBook extendida pelo FreeBSD.
+
+Note: Não há nada nessas extenções que seja específico do FreeBSD,
+simplesmente foi percebido que elas seriam enhancements para esse
+projeto em particular.  Se alguém se interessar em colaborar on a
+standard DocBook extension set, por favor entre em conteto com 
+Nik Clayton <nik@FreeBSD.org>.
+
+
+As extenções FreeBSD não estão (Atualmente) no ports collection.
+Elas estão armazenadas em uma árvore de CVS do FreeBSd como
+doc/share/sgml/freebsd.dtd.
+
+
+
+
+4.2.2 Indentificador público comum (FPI)
+Em compliance com os guidelines do DocBook para a escrita de 
+customização de FPI, o FPI para o FreeBSD extended DocBook DTD é:
+
+
+PUBLIC "-//FreeBSD//DTD DocBook V4.1-Based Extension//EN"
+
+4.2.3 estrutura de documentos
+DocBook permite que você estruture sua documentação de várias maneiras.
+No projeto de documentação do FreeBSD nós estamos utilizando dois
+tipos primários de documentos DocBook: O livro e o artigo.
+
+
+Um livro é organizado em <chapter>s.  Isso é requerimento mandatory.
+Pode haver <part>s entre o livro e o capítulo para prover outra camada 
+de organização.  O Handbook é desenhado desta maneira.
+
+Um capítulo pode (ou não) uma ou mais sessões. estas são indicadas pelo
+elemento <sect1>.  Se umasessão contém outra sessão, então use <sect2>
+e assim por diante até <sect5>.
+
+Capítulos e sessões contém o remainder do conteúdo.
+
+um artigo é mais simple do que um livro, e não usa capítulos.  O 
+conteúdo de um artigo é organizado em uma ou mais sessões, usando
+os mesmos elementos <sect1>, <sect2>, ...) que são usados 
+nos livros
+
+Obviamente, você deve considerar a natureza da documentação que você 
+esta escrevendo para poder decidir se é melhor uma marcação formatada
+como um livro ou um artigo.  Artigos suportam bem as informações que 
+não precisam ser divididas em capítulos, isto é, relativamente pequena,
+mais ou menos de 20 à 25 paginas de conteúdo.  Livros suportam melhor
+informações que se dividem em capítulos com apendices e conteúdos 
+similares.
+
+Os tutoriais de FreeBSD são todos marcados como artigos, enquanto esse
+documento, o FreeBSD FAQ, e o FreeBSD handbook, são marcados como 
+livro.
+
+
+
+4.2.3.1 Começando um livro
+O conteúdo desse livro está contido dentro do elemento <book>.
+Assim como podendo conter marcação estruturada, esse elemento pode
+conter elementos que incluam informações adicionais sobre livro.  Isso
+é meta-informação, usado para referência, ou é conteúdo adicional usado
+para produzir uma página de título.
+
+Essas informações adicionais devem estar contidas dentro do elemento 
+<bookinfo>.
+
+
+Example 4-21. Boilerplate <book> with <bookinfo>
+
+<book>
+  <bookinfo>
+    <title>Seu título aqui</title>
+    
+    <author>
+      <firstname>Seu primeiro nome aqui</firstname>
+      <surname>Seu sobrenome</surname>
+      <affiliation>
+        <address><email>Seu endereço de correio eletrônico aqui</email></address>
+      </affiliation>
+    </author>
+
+    <copyright>
+      <year>1998</year>
+      <holder role="mailto:your e-mail address">Seu nome</holder>
+    </copyright>
+
+    <releaseinfo>$FreeBSD$</releaseinfo>
+
+    <abstract>
+      <para>Inclua um abstract do cnteúdo do sua livro aqui.</para>
+    </abstract>
+  </bookinfo>
+
+  ...
+
+</book>
+
+
+
+
+
+4.2.3.2 Começando um artigo
+O conteúdo do artigo deve estar contido dentro do elemento <article>.
+Assim como contém marcação estruturada, esse elemento pode conter 
+elementos que incluam informações adicionais sobre o artigo.  Isso
+ou é meta-informação, usado para referência, ou é conteúdo adicional usado
+para produzir uma página de título
+
+Essas informações adicionais devem estar contidas dentro de 
+<articleinfo>.
+
+
+Example 4-22. Boilerplate <article> with <articleinfo>
+
+<article>
+  <articleinfo>
+    <title>Seu título aqui</title>
+    
+    <author>
+      <firstname>Seu primeiro nome</firstname>
+      <surname>Seu sobrenome</surname>
+      <affiliation>
+        <address><email>Seu endereço de correio eletrônico</email></address>
+      </affiliation>
+    </author>
+
+    <copyright>
+      <year>1998</year>
+      <holder role="mailto:Seu endereço de correio eletrônico">Seu nome</holder>
+    </copyright>
+
+    <releaseinfo>$FreeBSD$</releaseinfo>
+
+    <abstract>
+      <para>Inclua um abstract do conteúdo do artigo aqui.</para>
+    </abstract>
+  </articleinfo>
+
+  ...
+
+</article>
+4.2.3.3 Indicando capítulos
+Use <chpter> para marcar seus capítulos.  Cada capítulo tem 
+mandatóriamente um título <title>.  Artigos não contém capítulos, estes
+são reservados para os livros.
+
+Example 4-23. Capítulo simples
+
+
+<chapter>
+  <title>O título do capítulo</title>
+
+  ...
+</chapter>
+Um capítulo não pode ser vazio; este precisa conter elementos em adição
+ao <title>.  Se você precisar incluir um cápitulo vazio então você 
+precisa incluir um parágrafo vazio.
+
+
+Example 4-24. Capítulos vazios
+
+<chapter>
+  <title>Esse é um capítulo vazio</title>
+
+  <para></para>
+</chapter>
+
+4.2.3.4 Sessões abaixo dos capítulos
+Em livros, capítulos podem (mas não é obrigatóriamente necessário) ser
+quebrados em sessões, sub-sessões, e assim por diante, sessão é o 
+principal elemento de estrutura, e cada artigo deve conter pelo menos
+uma sessão.  Use o elemento <sectn>.  O `n´ indica o número de sessões,
+no qual indica o nível de sessão.
+
+
+A primeira <secn> é <sect1>.  Você pode ter uma ou mais desta em um 
+só capítulo.  Elas podem conter um ou mais elementos <sect2>, e assim 
+por diante, até <sect5>.
+
+
+
+Example 4-25. Sessões em cap[itulos
+
+<chapter>
+  <title>Um capítulo simples</title>
+
+  <para>Algum texto dentro do capítulo</para>
+
+  <sect1>
+    <title>Primeira sessão (1.1)</title>
+
+    ...
+  </sect1>
+
+  <sect1>
+    <title>Seunda sessão (1.2)</title>
+
+    <sect2>
+      <title>Primeira sub-sessão (1.2.1)</title>
+
+      <sect3>
+        <title>Primeira sub-sub-sessão (1.2.1.1)</title>
+
+        ...
+      </sect3>
+    </sect2>
+
+    <sect2>
+      <title>Segunda sub-sessão (1.2.2)</title>
+
+      ...
+    </sect2>
+  </sect1>
+</chapter>
+Note: Esse exemplo inclui números de sessões nos títulos de sssões.
+Você não deve fazer isso no seu documento.  O adicionamento dos números
+de sessões é trabalho do stylesheets (of whici more later), e você não
+precisa gerencia-lôs.
+
+
+4.2.3.5 Subdividindo usando <part>s
+Você pode introduzir outra camada de organização entre <book> e 
+<capítulo> com uma ou mais <part>s.  Isso não pode ser feito em um
+<article>.
+
+
+
+<part>
+  <title>Introdução</title>
+
+  <chapter>
+    <title>Overview</title>
+
+    ...
+  </chapter>
+
+  <chapter>
+    <title>O que é FreeBSD?</title>
+
+    ...
+  </chapter>
+
+  <chapter>
+    <title>História</title>
+
+    ...
+  </chapter>
+</part>
+
+
+
+
+4.2.4 Elementos Blocos
+4.2.4.1 Parágrafos
+DocBook suporta treis tipos de parágrafos: <formalpara>, <para>, e 
+<simpara>.
+
+
+Na maioria das vezes você só vai precisar uasr <para>.  <formalpara> 
+inclui um elemento <title>, e <simpara> disallows alguns elementos
+from within <para>. Stick with <para>.
+
+
+Example 4-26. <para>
+
+Use:
+
+<para>Isso é um parágrafo.  E pode conter quase qualquer outro
+elemento.</para>
+
+Appearance:
+
+Isso é um parágrafo. E pode conter quase qualquer outro elemento.
+
+4.2.4.2 citações em bloco <blockquote>
+Uma citação em bloco é um citação extendida vinda de outro documento
+e deve aparecer dentro do parágrafo em questão. Você provávelmente não
+usar isso frequentemente.
+
+Citações em bloco pode opcionalmente conter um título e um atribuição
+(ou eles podem ser deixados sem atributos)
+
+
+Example 4-27. <blockquote>
+
+Use:
+
+<para>A small excerpt from the US Constitution;</para>
+          
+<blockquote>
+  <title>Preamble to the Constitution of the United States</title>
+
+  <attribution>Copied from a web site somewhere</attribution>
+        
+  <para>We the People of the United States, in Order to form a more 
+perfect Union, establish Justice, insure domestic Tranquility, provide 
+for the common defence, promote the general Welfare, and secure the 
+Blessings of Liberty to ourselves and our Posterity, do ordain and 
+establish this Constitution for the United States of America.</para>
+</blockquote>
+
+Appearance:
+
+  Preamble to the Constitution of the United States
+
+We the People of the United States, in Order to form a more perfect 
+Union, establish Justice, insure domestic Tranquility, provide for the 
+common defence, promote the general Welfare, and secure the Blessings 
+of Liberty to ourselves and our Posterity, do ordain and establish this
+ Constitution for the United States of America.
+   
+--Copiado de um web site em qualquer   
+
+4.2.4.3 Dicas, notas, cuidados, informações importantes e sidebars.
+
+
+Você talvez precise incluir informações extras separadas do corpo 
+principal do texto,  Tipicamente isso é ``meta´´ informação que o usuário
+deve tomar conhecimento.
+
+Dependendo da natureza da informação, um elemento <tip>, <note>,
+<warning>,<caution>, deve ser usado.  Alternativamente, se a 
+informação é relacionada ao corpo principal do texto e não se 
+encaixa em nunhum dos objetos acima, então use <sidebar>
+
+As circunstâncias na qual se deve escolher um elemento ao invés do 
+outro não é clara. A documentação do DocBokk sugere:
+
+O <note> é uma informação que deve ser lida por todos os 
+leitores. 
+
+An Important element is a variation on Note.
+
+O <caution> é usado para as informações sobre perda de dados ou danos
+no software.
+
+O <warning> é usado para informações sobre possíveis danos no hardware
+ou defeito sem conserto ou limb.
+
+
+Example 4-28. <warning>
+
+
+Use:
+
+<warning>
+  <para> Instalando FreeBSD talvez faça com que você tenha que 
+desinstalar o windows do seu Hard disk.</para>
+</warning>
+
+Warning: Instalando FreeBSD talvez faça com que você tenha que 
+desinstalar o windows do seu Hard disk.
+
+
+4.2.4.4 Listas e procedimentos
+Você frequentemente vai precisar listar pedaços de informações para
+o usuário, ou present eles com um número de passos que devem ser 
+seguidos para alcançar um objetivo particular.
+
+Para fazer isso, use <itemizedlist>, <orderedlist>, ou <procedure>
+[2]
+
+
+<itemizedlist> e <orderedlist> são similares com os seus 
+correspondentes em HTML, <ul> and <ol>. Cada um consiste em um ou 
+mais elemento <listitem>, e cada <listitem> contém um ou mais elementos
+bloco.  O elemento <listitem> é analogo à tag <li> do HTML. Porém,
+ao contrário do HTML, <listitem> é requerido.
+
+
+<procedure> é slightly diferente.  É formado por passos <step>, o qual
+pode ser formado de mais passos ou sub-passos <sub-step>.  Cada passo
+contém elementos bloco.
+
+
+Example 4-29. <itemizedlist>, <orderedlist>, and <procedure>
+
+Use:
+
+<itemizedlist>
+  <listitem>
+    <para>Esse é o primeiro item itemized.</para>
+  </listitem>
+
+  <listitem>
+    <para>Esse é o segundo item itemized.</para>
+  </listitem>
+</itemizedlist>
+
+<orderedlist>
+  <listitem>
+    <para>Esse é o primeiro item ordenado.</para>
+  </listitem>
+
+  <listitem>
+    <para>Esse é o segundo item ordenado.</para>
+  </listitem>
+</orderedlist>
+
+<procedure>
+  <step>
+    <para>Faça isso.</para>
+  </step>
+
+  <step>
+    <para>Depois faça isso.</para>
+  </step>
+
+  <step>
+    <para>E agora faça isso.</para>
+  </step>
+</procedure>
+
+Appearance:
+
+Esse é o primeiro item ordenado.
+
+Esse é o segundo item itemized.
+
+Esse é o primeiro item ordenado.
+
+Esse é o segundo item ordenado.
+
+
+Faça isso.
+
+Depois faça isso.
+
+E agora faça isso.
+
+
+
+
+4.2.4.5 Showing file samples
+If you want to show a fragment of a file (or perhaps a complete file) to the user, wrap it in the <programlisting> element.
+
+White space and line breaks within <programlisting> are significant. In particular, this means that the opening tag should appear on the same line as the first line of the output, and the closing tag should appear on the same line as the last line of the output, otherwise spurious blank lines may be included.
+
+Example 4-30. <programlisting>
+
+Use:
+
+<para>When you have finished, your program should look like
+  this;</para>
+
+<programlisting>#include &lt;stdio.h&gt;
+
+int
+main(void)
+{
+    printf("hello, world\n");
+}</programlisting>
+Notice how the angle brackets in the #include line need to be referenced by their entities instead of being included literally.
+
+Appearance:
+
+When you have finished, your program should look like this;
+
+#include <stdio.h>
+
+int
+main(void)
+{
+    printf("hello, world\n");
+}
+4.2.4.6 Callouts
+A callout is a mechanism for referring back to an earlier piece of text or specific position within an earlier example without linking to it within the text.
+
+To do this, mark areas of interest in your example (<programlisting>, <literallayout>, or whatever) with the <co> element. Each element must have a unique id assigned to it. After the example include a <calloutlist> that refers back to the example and provides additional commentary.
+
+Example 4-31. <co> and <calloutlist>
+
+<para>When you have finished, your program should look like
+  this;</para>
+
+<programlisting>#include &lt;stdio.h&gt; <co id="co-ex-include">
+
+int <co id="co-ex-return">
+main(void)
+{
+    printf("hello, world\n"); <co id="co-ex-printf">
+}</programlisting>
+
+<calloutlist>
+  <callout arearefs="co-ex-include">
+    <para>Includes the standard IO header file.</para>
+  </callout>
+
+  <callout arearefs="co-ex-return">
+    <para>Specifies that <function>main()</function> returns an
+      int.</para>
+  </callout>
+
+  <callout arearefs="co-ex-printf">
+    <para>The <function>printf()</function> call that writes
+      <literal>hello, world</literal> to standard output.</para>
+  </callout>
+</calloutlist>
+Appearance:
+
+When you have finished, your program should look like this;
+
+#include <stdio.h> 
+
+int 
+main(void)
+{
+    printf("hello, world\n"); 
+}
+ 
+Includes the standard IO header file. 
+ 
+Specifies that main() returns an int. 
+ 
+The printf() call that writes hello, world to standard output. 
+4.2.4.7 Tables
+Unlike HTML, you do not need to use tables for layout purposes, as the stylesheet handles those issues for you. Instead, just use tables for marking up tabular data.
+
+In general terms (and see the DocBook documentation for more detail) a table (which can be either formal or informal) consists of a <table> element. This contains at least one <tgroup> element, which specifies (as an attribute) the number of columns in this table group. Within the tablegroup you can then have one <thead> element, which contains elements for the table headings (column headings), and one <tbody> which contains the body of the table.
+
+Both <tgroup> and <thead> contain <row> elements, which in turn contain <entry> elements. Each <entry> element specifies one cell in the table.
+
+Example 4-32. <informaltable>
+
+Use:
+
+<informaltable>
+  <tgroup cols="2">
+    <thead>
+      <row>
+        <entry>This is column head 1</entry>
+        <entry>This is column head 2</entry>
+      </row>
+    </thead>
+
+    <tbody>
+      <row>
+        <entry>Row 1, column 1</entry>
+        <entry>Row 1, column 2</entry>
+      </row>
+
+      <row>
+        <entry>Row 2, column 1</entry>
+        <entry>Row 2, column 2</entry>
+      </row>
+    </tbody>
+  </tgroup>
+</informaltable>
+Appearance:
+
+This is column head 1 This is column head 2 
+Row 1, column 1 Row 1, column 2 
+Row 2, column 1 Row 2, column 2 
+
+If you do not want a border around the table the frame attribute can be added to the <informaltable> element with a value of none (i.e., <informaltable frame="none">).
+
+Example 4-33. Tables where frame="none"
+
+Appearance:
+
+This is column head 1 This is column head 2 
+Row 1, column 1 Row 1, column 2 
+Row 2, column 1 Row 2, column 2 
+
+4.2.4.8 Examples for the user to follow
+A lot of the time you need to show examples for the user to follow. Typically, these will consist of dialogs with the computer; the user types in a command, the user gets a response back, they type in another command, and so on.
+
+A number of distinct elements and entities come into play here.
+
+<screen> 
+Everything the user sees in this example will be on the computer screen, so the next element is <screen>.
+
+Within <screen>, white space is significant.
+
+<prompt>, &prompt.root; and &prompt.user; 
+Some of the things the user will be seeing on the screen are prompts from the computer (either from the operating system, command shell, or application). These should be marked up using <prompt>.
+
+As a special case, the two shell prompts for the normal user and the root user have been provided as entities. Every time you want to indicate the user is at a shell prompt, use one of &prompt.root; and &prompt.user; as necessary. They do not need to be inside <prompt>.
+
+Note: &prompt.root; and &prompt.user; are FreeBSD extensions to DocBook, and are not part of the original DTD.
+
+<userinput> 
+When displaying text that the user should type in, wrap it in <userinput> tags. It will probably be displayed differently to the user.
+
+Example 4-34. <screen>, <prompt>, and <userinput>
+
+Use:
+
+<screen>&prompt.user; <userinput>ls -1</userinput>
+foo1
+foo2
+foo3
+&prompt.user; <userinput>ls -1 | grep foo2</userinput>
+foo2
+&prompt.user; <userinput>su</userinput>
+<prompt>Password: </prompt>
+&prompt.root; <userinput>cat foo2</userinput>
+This is the file called 'foo2'</screen>
+Appearance:
+
+% ls -1
+foo1
+foo2
+foo3
+% ls -1 | grep foo2
+foo2
+% su
+Password: 
+# cat foo2
+This is the file called 'foo2'
+Note: Even though we are displaying the contents of the file foo2, it is not marked up as <programlisting>. Reserve <programlisting> for showing fragments of files outside the context of user actions.
+
+      TERMINA
+
+
       <title>Links</title>
 
       <note>
-	<para>Links are also in-line elements.</para>
-      </note>
+	<para>Links s&atilde;o tamb&eacute;m elementos in-line.</para>	
+	</note>
 
       <sect3>
-	<title>Linking to other documents on the WWW</title>
+	<title>Linking com outros documentos no WWW.</title>
 
-	<para>In order to include a link to another document on the WWW you
-	  must know the URL of the document you want to link to.</para>
+	<para>In order to incluir um link para outro documento WWW
+	voc&ecirc; precisa precisa saber a URL do documento que
+	voc&ecirc; gostaria linkar.</para>
+	
+	
+	<para>Os links s&atilde;o indicados com <a>, e os atributos
+	hrefs cont&eacute;m a URL do documento target.  O
+	conte&uacute;do do elemento se torna o link, e &eacute;
+	normalmente apontado ao usu&aacute;rio de alguma forma
+	(sublinhando, cor diferente, mudan&ccedil;a no cursor do mouse
+	quando passa em cima do link, e assim por diante).</para>
 
-	<para>The link is indicated with <sgmltag>a</sgmltag>, and the
-	  <literal>href</literal> attribute contains the URL of the target
-	  document.  The content of the element becomes the link, and is
-	  normally indicated to the user in some way (underlining, change of
-	  color, different mouse cursor when over the link, and so
-	  on).</para>
+	
 
 	<example>
 	  <title>Using <literal>&lt;a href="..."&gt;</literal></title>
 
 	  <para>Use:</para>
 
-	  <programlisting><![ CDATA [<p>More information is available at the
-  <a href="http://www.FreeBSD.org/">FreeBSD web site</a>.</p>]]></programlisting>
+	  <programlisting><![ CDATA [<p>Mais informa&ccedil;&atilde;o
+	  est&aacute; dispon&iacute;vel no <a
+	  href="http://www.FreeBSD.org/">Web site do
+	  FreeBSD</a>.</p>]]></programlisting>
 	</example>
 
-	<para>These links will take the user to the top of the chosen
-	  document.</para>
+	<para>Esse link levar&aacute; o usu&aacute;rio ao topo da pagina
+	do documento escolido.</para>
       </sect3>
       
       <sect3>
-	<title>Linking to other parts of documents</title>
+	<title>Linking &agrave; outras partes do documento</title>
 
-	<para>Linking to a point within another document (or within the same
-	  document) requires that the document author include anchors that you
-	  can link to.</para>
+	<para>Fazer um link para um ponto em outro documento (ou no
+	mesmo) exige que o autor do documento a seu linkado tenha
+	incluido ancoras ao mesmo para voc&ecirc; poder linkar a
+	elas.</para>
+	
 
-	<para>Anchors are indicated with <sgmltag>a</sgmltag> and the
-	  <literal>name</literal> attribute instead of
-	  <literal>href</literal>.</para>
+	<para>Ancoras s&atilde;o indicadas com  <sgmltag>a</sgmltag> e o
+	nome do atributo no lugar do <literal>href</literal>.</para>
 
 	<example>
 	  <title>Using <literal>&lt;a name="..."&gt;</literal></title>
@@ -626,25 +1410,33 @@
 	  <literal>#</literal> symbol.</para>
 
 	<example>
-	  <title>Linking to a named part of another document</title>
+	  <title>Linkando para uma parte nomeada no mesmo
+	  documento</title>
+	  
 
-	  <para>Assume that the <literal>para1</literal> example resides in a
-	    document called <filename>foo.html</filename>.</para>
+	  <para>Assuma que o exemplo <literal>para1</literal> esteja
+	  nesse documento chamado <filename>foo.html</filename>.</para>
+	  
 
-	  <programlisting><![ CDATA [<p>More information can be found in the
-  <a href="foo.html#para1">first paragraph</a> of
-  <tt>foo.html</tt>.</p>]]></programlisting>
-	</example>
+	  <programlisting><![ CDATA [<p>Mais informa&ccedil;&otilde;es
+	  podem ser encontradas no <a href="foo.html#para1">primeiro
+	  par&aacute;grafo</a> de
+	  <tt>foo.html</tt>.</p>]]><programlisting>
+	  </example>
+	  
 
-	<para>If you are linking to a named anchor within the same document
-	  then you can omit the document's URL, and just include the name of
-	  the anchor (with the preceding <literal>#</literal>).</para>
+	<para>Se voc&ecirc; est&aacute; linkando para uma ancora nomeada
+	dentro do mesmo documento, ent&atilde;o voc&ecirc; n&atilde;o
+	precisa incluir a URL, apenas o nome da ancora sendo precedido
+	de <literal>#</literal>).</para>
 
 	<example>
-	  <title>Linking to a named part of the same document</title>
-
-	  <para>Assume that the <literal>para1</literal> example resides in
-	    this document</para>
+	 <title>Linking para uma parte nomeada de um mesmo
+	 documento</title>
+	 
+	 <para>Assume que o exemplo <literal>para1</literal> est&aacute;
+	 nesse documento</para>
+	
 
 	  <programlisting><![ CDATA [<p>More information can be found in the
   <a href="#para1">first paragraph</a> of this
@@ -657,49 +1449,69 @@
   <sect1 id="sgml-markup-docbook">
     <title>DocBook</title>
 
-    <para>DocBook was originally developed by HaL Computer Systems and O'Reilly
-      &amp; Associates to be a DTD for writing technical documentation
-      <footnote><para>A short history can be found under <ulink
+    <para>DocBook foi originalmente desenvolvido por HaL Computer
+    Systems and O'Reilly &amp; Associates para ser um DTD para escrita
+    t&eacute;cnica de documentos.
+    <footnote><para>Uma pequena hist&oacute;ria pode ser encontrada em <ulink
       url="http://www.oasis-open.org/committees/docbook/intro.shtml">
       http://www.oasis-open.org/committees/docbook/intro.shtml</ulink>.
-      </para></footnote>. Since 1998 it is maintained by the <ulink
+      </para></footnote>. Desde 1998 tem sido atualizado pelo <ulink
       url="http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=docbook">
-      DocBook Technical Committee</ulink>.   As such, and unlike LinuxDoc
-      and HTML, DocBook is very heavily oriented towards markup that
-      describes <emphasis>what</emphasis> something is, rather than describing
-      <emphasis>how</emphasis> it should be presented.</para>
+      comite t&eacute;cnico de DocBook</ulink>.  Ao
+      contr&aacute;rio de LinuxDoc e HTML, DocBook &eacute; fortemente
+      orientado a marca&ccedil;&atilde;o que descreve <emphasis>o
+      que</emphasis> algo &eacute; em vez de descrever como este deve
+      ser apresetado.</para>
 
     <note>
       <title><literal>formal</literal> vs. <literal>informal</literal></title>
 
-      <para>Some elements may exist in two forms, <emphasis>formal</emphasis>
-	and <emphasis>informal</emphasis>.  Typically, the formal version of
-	the element will consist of a title followed by the informal
-	version of the element.  The informal version will not have a
-	title.</para>
+      <para>Alguns elementos podesm existirde duas formas, formal e
+      informal.  Tipicamente, a vers&atilde;o formal dos elementos
+      &eacute; constituida de um t&iacute;tulo seguida da vers&atilde;o
+      informal do elemento.  Avers&atilde;o informal, por sua vez,
+      n&atilde;o possui um t&iacute;tulo.</para>
     </note>
     
-    <para>The DocBook DTD is available from the ports collection in the
-      <filename role="package">textproc/docbook</filename> port.  It is automatically
-      installed as part of the <filename role="package">textproc/docproj</filename>
-      port.</para>
+    <para>O DTD do DocBook est&aacute; dispon&iacute;vel para a ports
+    collection no port <filename
+    role="package">textproc/docbook</filename>.  E &eacute;
+    automaticamente instalado como parte do port <filename
+    role="package">textproc/docbook</filename>.</para>
     
     <sect2>
-      <title>FreeBSD extensions</title>
-
-      <para>The FreeBSD Documentation Project has extended the DocBook DTD by
-	adding some new elements.  These elements serve to make some of the
-	markup more precise.</para>
+      <title>Exten&ccedil;&otilde;es FreeBSD</title>
+	
+      <para>O projeto de documenta&ccedil;&atilde;o
+      FreeBSD extendeu o DTD do DocBook adicionando
+      alguns elementos.  Esses elementossrvem para
+      fazer as marca&ccedil;&otilde;es mais
+      precisas.</para>
+      
 
       <para>Where a FreeBSD specific element is listed below it is clearly
 	marked.</para>
 
-      <para>Throughout the rest of this document, the term
+      <para>At&eacute; o final deste documento, o
+      termo "DocBook" representa a vers&atilde;o do
+      DTD do Docbook extendida pelo FreeBSD.
+      
+      Throughout the rest of this document, the term
 	<quote>DocBook</quote> is used to mean the FreeBSD extended DocBook
 	DTD.</para>
       
       <note>
-	<para>There is nothing about these extensions that is FreeBSD
+	<para>N&atilde;o h&aacute; nada nessas
+	exten&ccedil;&otilde;es que seja
+	espec&iacute;fico do FreeBSD, simplismente
+	foi percebido que elas seriam enhancements
+	para esse projeto em particular.  Se
+	algu&eacute;m se interessar em colaboraron
+	a Standard DocBook extention set, por
+	favorentre em contato com Nik Clayton
+	<nik@FreeBSD.org>.
+	
+	There is nothing about these extensions that is FreeBSD
 	  specific, it was just felt that they were useful enhancements for
 	  this particular project.  Should anyone from any of the other *nix
 	  camps (NetBSD, OpenBSD, Linux, &hellip;) be interested in
@@ -707,32 +1519,52 @@
 	  touch with &a.nik;.</para>
       </note>
 
-      <para>The FreeBSD extensions are not (currently) in the ports
+      <para>As exten&ccedil;&otilde;es FreeBSD
+      n&atilde;o est&atilde;o (atualmente) no ports
+      collectio.  Elas est&atilde;o armazendas em
+      uma &aacute;rvore de CVS do FreeBSD como
+      doc/share/sgml/freebsd.dtd.
+      
+      The FreeBSD extensions are not (currently) in the ports
 	collection.  They are stored in the FreeBSD CVS tree, as <ulink
 	url="http://www.FreeBSD.org/cgi/cvsweb.cgi/doc/share/sgml/freebsd.dtd">doc/share/sgml/freebsd.dtd</ulink>.</para>
     </sect2>
 
     <sect2>
-      <title>Formal Public Identifier (FPI)</title>
+      <title>Identificador publ&iacute;co formal (FPI)</title>
 
-      <para>In compliance with the DocBook guidelines for writing FPIs for
-	  DocBook customisations, the FPI for the FreeBSD extended DocBook DTD
-	  is;</para>
+      <para>Em compliance com os guidelines do
+      DocBook para a escrita de
+      customiza&ccedil;&atilde;o de FPI, o FPI para
+      o FreeBSD extended DocBook &eacute;: </para>
 
 	<programlisting>PUBLIC "-//FreeBSD//DTD DocBook V4.1-Based Extension//EN"</programlisting>
     </sect2>
 
     <sect2>
-      <title>Document structure</title>
+      <title>Estrutura de documentos</title>
 
-      <para>DocBook allows you to structure your documentation in several
+      <para>DocBook perite que voc&ecirc; estruture
+      sua documenta&ccedil;&atilde;o de
+      v&aacute;rias maneiras.  No projeto de
+      documenta&ccedil;&atilde;o do FreeBSD
+      n&oacute;s estamos utilizando dois tipos
+      prim&aacute;rios de documentos DocBook: O
+      livro e o artigo.</para>
+      
+      DocBook allows you to structure your documentation in several
 	ways.  In the FreeBSD Documentation Project we are using two primary
 	types of DocBook document: the book and the article.</para>
 
-      <para>A book is organized into <sgmltag>chapter</sgmltag>s.  This is a
-	mandatory requirement.  There may be <sgmltag>part</sgmltag>s between
-	the book and the chapter to provide another layer of organisation.
-	The Handbook is arranged in this way.</para>
+      <para>Um livro &eacute; organizado em
+      cap&iacute;tulos, <sgmltag>chapter</sgmltag>,
+      Isso &eacute; requerimento
+      obrigat&oacute;rio.  Pode haver
+      <sgmltag>part<sgmltag>s entre o livro e o
+      cap&iacute;tulo para prover outra camada de
+      organiza&ccedil;&atilde;o.  O handbook
+      &eacute; desenhado desta maneira.</para>
+      
 
       <para>A chapter may (or may not) contain one or more sections.  These
 	are indicated with the <sgmltag>sect1</sgmltag> element.  If a section
