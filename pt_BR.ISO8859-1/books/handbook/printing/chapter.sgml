@@ -5116,13 +5116,17 @@ active kelly    9    /etc/host.conf, /etc/hosts.equiv   88 bytes
 	arquivo &eacute; t&atilde;o grande que n&atilde;o cabe, ent&atilde;o
 	o comando &man.lpq.1; mostra os pontos da &aacute;rvore.
 		</para>
+      <para>
+			A primeira linha da sa&iacute;da do comando &man.lpq.1; &eacute;
+	igualmente importante: ela informa o que a impressora est&aacute;
+	fazendo ( ou o que o <application>LPD</application pensa que ela 
+	fazendo em &uacute;ltima inst&acirc;ncia ).
+		</para>
 
-      <para>The very first line of the output from &man.lpq.1; is also useful:
-	it tells what the printer is currently doing (or at least what 
-	<application>LPD</application> thinks the printer is doing).</para>
-
-      <para>The &man.lpq.1; command also support a <option>-l</option> option
-	to generate a detailed long listing.  Here is an example of
+      <para>
+			O comando &man.lpq.1; suporta tamb&eacute;m a op&ccedil;&atilde;o
+	<option>-l</option> para gerar uma longa lista detalhada.  Aqui 
+	est&aacute; um exemplo
 	<command>lpq -l</command>:</para>
 	    
       <screen>waiting for bamboo to become ready (offline ?)
@@ -5139,45 +5143,63 @@ mary: 3rd                                [job 011rose]
 
     <sect2 id="printing-lprm">
 		<title>
-			Removendo a Impress&atilde;o 
-			( <foreignphrase>Jobs</foreignphrase>
+			Removendo a Trabalhso de Impress&atilde;o 
 		</title>
       
-      <para>If you change your mind about printing a job, you can remove the
-	job from the queue with the &man.lprm.1; command.  Often, you can
-	even use &man.lprm.1; to remove an active job, but some or all of the
-	job might still get printed.</para>
+		<para>
+			Voc&ecirc; pode remover um trabalho de impress&atilde;o da 
+	fila com o comando &man.lprm.1;.  Frequentemente, voc&ecirc; ir&aacute;
+	utilizar o comando &man.lprm.1; para remover o trabalho de 
+	impress&atilde;o ativo, mas muitas das vezes ou todas as vezes, a 
+	impress&atilde;o continua.
+		</para>
 	  
-      <para>To remove a job from the default printer, first use
-	  &man.lpq.1; to find the job number.  Then type:</para>
+      <para>
+			Para remover o trabalho de impress&atilde;o da impressora 
+	padr&atilde;o, voc&egrave; dever&aacute; primeiro encontrar o n&uacute;mero
+	do trabalho de impress&atilde;o com o comando &man.lpq.1;, ent&atilde;o
+	digite:
+		</para>
 	  
       <screen>&prompt.user; <userinput>lprm <replaceable>job-number</replaceable></userinput></screen>
 	    
-      <para>To remove the job from a specific printer, add the
-	<option>-P</option> option.  The following command removes job number
-	10 from the queue for the printer <literal>bamboo</literal>:</para>
+      <para>
+			Para remover o trabalho de impress&atilde;o de uma impressora
+	especifica, voc&ecirc; deve utilizar a op&ccedil;&atilde;o
+	<option>-P</option>.  O comando &agrave; seguir remove o trabalho de 
+	impress&atilde;o de n&uacute;mero 10 da fila de impress&atilde;o da 
+	imrpessora <literal>bamboo</literal>:
+		</para>
 	    
       <screen>&prompt.user; <userinput>lprm -P bamboo 10</userinput></screen>
       
-      <para>The &man.lprm.1; command has a few shortcuts:</para>
+      <para>
+			O comando &man.lprm.1; possui alguns atalhos:
+		</para>
       
       <variablelist>
 	<varlistentry>
 	  <term>lprm -</term>
 
 	  <listitem>
-	    <para>Removes all <foreignphrase>jobs</foreignphrase> (for the default printer) belonging to
-	      you.</para>
+		<para>
+			Remove todos os trabalhos de impress&atilde;o ( para a impressora
+	padr&atilde;o ) pertencente a voc&ecirc;.
+		</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term>lprm <replaceable>user</replaceable></term>
+	  <term>lprm <replaceable>usu&aacute;rio</replaceable></term>
 	  
 	  <listitem>
-	    <para>Removes all <foreignphrase>jobs</foreignphrase> (for the default printer) belonging to
-	      <replaceable>user</replaceable>.  The superuser can remove other
-	      users' <foreignphrase>jobs</foreignphrase>; you can remove only your own <foreignphrase>jobs</foreignphrase>.</para>
+		<para>
+			Remove todos os trabalhos de impress&atilde;o ( para a impressora
+	padr&atilde;o ) pertencentes ao usu&aacute;rio 
+	<replaceable>usu&aacute;rio</replaceable>.  Somente o super-usu&aacute;rio
+	pode remover os trabalhos de impress&atilde;o de outros usu&aacute;rios,
+	e voc&ecirc; s&otilde; pode remover os seus pr&oacute;prios.
+		</para>
 	  </listitem>
 	</varlistentry>
 
@@ -5185,29 +5207,37 @@ mary: 3rd                                [job 011rose]
 	  <term>lprm</term>
 	  
 	  <listitem>
-	    <para>With no job number, user name, or <option>-</option>
-	      appearing on the command line,
-		    &man.lprm.1; removes the currently active job on the
-	      default printer, if it belongs to you.  The superuser can remove
-	      any active job.</para>
+		<para>
+			Sem o n&uacute;mero do trabalho de impress&atilde;o, ou com a
+	op&ccedil;&atilde;o <option>-</option> aparecendo na linha de comando,
+	&man.lprm.1; ir&aacute; remover o trabalho de impress&atilde;o ativo
+	( corrente ) da impressora padr&atilde;o se este for pertencente a 
+	voc&ecirc;, caso contr&aacute;rio s&oacute; o super-usu&aacute;rio
+	poder&aacute; remove-lo.
+		</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
       
-      <para>Just use the <option>-P</option> option with the above shortcuts
-	to operate on a specific printer instead of the default. For example,
-	the following command removes all <foreignphrase>jobs</foreignphrase> for the current user in the
-	queue for the printer named <literal>rattan</literal>:</para>
+		<para>
+			Utilize a op&ccedil;&atilde;o <option>-P</option> para poder
+	especificar a impressora sem ser a padr&atilde;o.  Por exemplo, o
+	seguinte comando remove todos os trabalhos de impress&atilde;o para o
+	usu&aacute;rio corrente na fila da impressora chamada de
+	<literal>rattan</literal>:
+		</para>
 	  
       <screen>&prompt.user; <userinput>lprm -P rattan -</userinput></screen>
 	  
       <note>
-	<para>If you are working in a networked environment, &man.lprm.1; will
-	  let you remove <foreignphrase>jobs</foreignphrase> only from the
-	  host from which the <foreignphrase>jobs</foreignphrase> were submitted, even if the same printer is
-	  available from other hosts. The following command sequence
-	  demonstrates this:</para>
-	      
+		<para>
+			Se voc&ecirc; esta trabalhando em um ambiente de rede, o 
+	comando &man.lprm.1; permitir&aacute; &agrave; voc&ecirc; remover os
+	trabalhos de impress&atilde;o apenas enviados pela m&aacute;quina que
+	os enviou.  Veja a sequ&ecirc;ncia de comandos abaixo para demosntrar 
+	isso:
+		</para>
+
 	<screen>&prompt.user; <userinput>lpr -P rattan myfile</userinput>
 &prompt.user; <userinput>rlogin orchid</userinput>
 &prompt.user; <userinput>lpq -P rattan</userinput>
@@ -5225,42 +5255,61 @@ cfA013rose dequeued
     </sect2>
     
     <sect2 id="printing-lpr-options">
-		<title>Beyond Plain Text: Printing Options</title>
+		<title>
+			Al&eacute;m do Texto Puro: Op&ccedil;&otilde;ess de 
+			Impress&atilde;o
+		</title>
       
-      <para>The &man.lpr.1; command supports a number of options that control
-	formatting text, converting graphic and other file formats, producing
-	multiple copies, handling of the job, and more.  This section
-	describes the options.</para>
+		<para>
+			O comando &man.lpr.1; suporta um n&uacute;mero de 
+	op&ccedil;&otilde;es que controla a formata&ccedil;&atilde;o do texto,
+	converte graphico e outros formatos de arquivos, produzindo 
+	multiplas c&oacute;pias, manipulando o trabalho de impress&atilde;o, e
+	muito mais.  Essa se&ccedil;&atilde;o descreve as op&ccedil;&otilde;es.
+		</para>
 	  
       <sect3 id="printing-lpr-options-format">
 	<title>
 		Op&ccedil;&otilde;es de Formata&ccedil;&atilde;o e Convers&atilde;o
 	</title>
 
-	<para>The following &man.lpr.1; options control formatting of the
-	  files in the job.  Use these options if the job does not contain
-	  plain text or if you want plain text formatted through the
-	    &man.pr.1; utility.</para>
+		<para>
+			As seguintes op&ccedil;&otilde;es do comando &man.lpr.1 controla a
+	formata&ccedil;&atilde;o dos arquivos no trabalho de imrpess&atilde;o.
+	  Use essas op&ccedil;&otilde;es se o trabalho de impress&atilde;o 
+	n&atilde;o contiver texto puro ou se voc&ecirc; quizer uma sa&iacute;da
+	formatada de texto puro atrav&eacute;s do utilit&aacute;rio
+	&man.pr.1;.
+		</para>
 	    
         <indexterm><primary>&tex;</primary></indexterm>
-	<para>For example, the following command prints a DVI file (from the
-	  &tex; typesetting system) named <filename>fish-report.dvi</filename>
-	  to the printer named <literal>bamboo</literal>:</para>
+		<para>
+			Por exemplo, o comando a seguir imprime um arquivo DVI ( de um 
+	systema &tex;) chamado de <filename>fish-report.dvi</filename> para 
+	a impressora chamada de  <literal>bamboo</literal>:
+		</para>
 	      
 	<screen>&prompt.user; <userinput>lpr -P bamboo -d fish-report.dvi</userinput></screen>
 	      
-	<para>These options apply to every file in the job, so you cannot mix
-	  (say) DVI and ditroff files together in a job. Instead, submit the
-	  files as separate <foreignphrase>jobs</foreignphrase>, using a different conversion option for each
-	  job.</para>
+		<para>
+			Essas op&ccedil;&otilde;es &eacute; aplicada em cada arquivo do 
+	trabalho de impress&atilde;o, voc&ecirc; n&atilde;o pode misturar (digamos)
+	arquivos nos formatos DVI e ditroff no mesmo trabalho de impress&atilde;o.
+	  Sendo assim envie separadamente os arquivos, usando op&ccedil;&otilde;es
+	de convers&atilde;o diferentes para cada um deles.
+		</para>
 
 	<note>
-	  <para>All of these options except <option>-p</option> and
-	    <option>-T</option> require conversion filters installed for the
-	    destination printer.  For example, the <option>-d</option> option
-	    requires the DVI conversion filter.  Section <link
-	      linkend="printing-advanced-convfilters">Conversion
-	      Filters</link> gives details.</para>
+		<para>
+			Para todas essas op&ccedil;&otilde;ess, exceto as 
+	<option>-p</option> e <option>-T</option>, requerem um filtro conversor
+	instalado para a impressora de destino.  Por exemplo, a op&ccedil;&atilde;o
+	<option>-d</option> precisa do filtro de convers&atilde;o para DVI.  A
+	se&ccedil;&atilde;o
+		<link linkend="printing-advanced-convfilters">
+			Filtros Conversores
+		</link> d&aacute; mais detalhes.
+		</para>
 	</note>
 
 	<variablelist>
@@ -5268,7 +5317,7 @@ cfA013rose dequeued
 	    <term><option>-c</option></term>
 
 	    <listitem>
-	      <para>Print cifplot files.</para>
+	      <para>imprime arquivos do tipo cifplot.</para>
 	    </listitem>
 	  </varlistentry>
 	  
@@ -5276,7 +5325,7 @@ cfA013rose dequeued
 	    <term><option>-d</option></term>
 	    
 	    <listitem>
-	      <para>Print DVI files.</para>
+	      <para>Imprime arquivos do tipo DVI.</para>
 	    </listitem>
 	  </varlistentry>
 	  
@@ -5284,7 +5333,7 @@ cfA013rose dequeued
 	    <term><option>-f</option></term>
 	    
 	    <listitem>
-	      <para>Print FORTRAN text files.</para>
+	      <para>Imprime arquivos do tipo FORTRAN.</para>
 	    </listitem>
 	  </varlistentry>
 	  
@@ -5292,22 +5341,27 @@ cfA013rose dequeued
 	    <term><option>-g</option></term>
 	    
 	    <listitem>
-	      <para>Print plot data.</para>
+	      <para>Imprime arquivos do tipo plot.</para>
 	    </listitem>
 	  </varlistentry>
 	  
 	  <varlistentry>
-	    <term><option>-i <replaceable>number</replaceable></option></term>
+	    <term><option>-i <replaceable>n&uacute;mero</replaceable></option></term>
 		  
 	    <listitem>
-	      <para>Indent the output by <replaceable>number</replaceable>
-		columns; if you omit <replaceable>number</replaceable>, indent
-		by 8 columns.  This option works only with certain conversion
-		filters.</para>
+			<para>
+				Para alinhar a sa&iacute;da por um 
+		<replaceable>n&uacute;mero</replaceable> de colunas; se voc&ecirc; 
+		omitir <replaceable>n&uacute;mero</replaceable>, o alinhamento
+		ser&aacute; de 8 colunas.  Essa op&ccedil;&atilde;o trabalha
+		somente com alguns filtros conversores.
+			</para>
 
 	      <note>
-		<para>Do not put any space between the <option>-i</option> and
-		  the number.</para>
+				<para>
+					N&atilde;o coloque nenhum espa&ccedil;o entre a 
+	op&ccedil;&atilde;o <option>-i</option> e o n&uacute;mero.
+				</para>
 	      </note>
 	    </listitem>
 	  </varlistentry>
@@ -5316,8 +5370,9 @@ cfA013rose dequeued
 	    <term><option>-l</option></term>
 	    
 	    <listitem>
-	      <para>Print literal text data, including control
-		characters.</para>
+	      <para>Imprime arquivo do tipo literal, incluindo caracteres
+	de controle.
+			</para>
 	    </listitem>
 	  </varlistentry>
 	  
@@ -5325,7 +5380,9 @@ cfA013rose dequeued
 	    <term><option>-n</option></term>
 	    
 	    <listitem>
-	      <para>Print ditroff (device independent troff) data.</para>
+	      <para>Imprime arquivo do tipo ditroff (troff independente do 
+	dispositivo).
+			</para>
 	    </listitem>
 	  </varlistentry>
 	  
@@ -5333,8 +5390,10 @@ cfA013rose dequeued
 	    <term>-p</term>
 	    
 	    <listitem>
-	      <para>Format plain text with &man.pr.1; before printing.  See
-		  &man.pr.1; for more information.</para>
+			<para>
+				Formata o texto puro com o comando &man.pr.1; antes da 
+	impress&atilde;o.  Veja &man.pr.1; para maiores informa&ccedil;&otilde;es.
+			</para>
 	    </listitem>
 	  </varlistentry>
 	  
@@ -5342,10 +5401,12 @@ cfA013rose dequeued
 	    <term><option>-T <replaceable>t&iacute;tulo</replaceable></option></term>
 	    
 	    <listitem>
-	      <para>Use <replaceable>t&iacute;tulo</replaceable> on the
-		  &man.pr.1; header instead of the file name.  This option has
-		effect only when used with the <option>-p</option>
-		option.</para>
+			<para>
+				Usa o <replaceable>t&iacute;tulo</replaceable> no 
+		cabe&ccedil;alho do comando &man.pr.1; ao invez do nome do arquivo.
+		  Essa op&ccedil;&atilde;o afeta somente quando usado em conjunto com
+		a op&ccedil;&atilde;o <option>-p</option>.
+			</para>
 	    </listitem>
 	  </varlistentry>
 	  
@@ -5353,7 +5414,7 @@ cfA013rose dequeued
 	    <term><option>-t</option></term>
 	    
 	    <listitem>
-	      <para>Print troff data.</para>
+	      <para>Imprime arquivo do tipo troff.</para>
 	    </listitem>
 	  </varlistentry>
 	  
@@ -5361,25 +5422,29 @@ cfA013rose dequeued
 	    <term><option>-v</option></term>
 	    
 	    <listitem>
-	      <para>Print raster data.</para>
+	      <para>Imprime arquivo do Tipo raster.</para>
 	    </listitem>
 	  </varlistentry>
 	</variablelist>
 		    
-	<para>Here is an example: this command prints a nicely formatted
-	  version of the &man.ls.1; manual page on the default printer:</para>
+	<para>
+		Aqui um exemplo:  Esse comando imprime uma vers&atilde;o da 
+	p&aacute;gina de manual do comando &man.ls.1; na impressora padr&atilde;o:
+	</para>
 	    
 	<screen>&prompt.user; <userinput>zcat /usr/share/man/man1/ls.1.gz | troff -t -man | lpr -t</userinput></screen>
 	      
-	<para>The &man.zcat.1; command uncompresses the source of the
-	  &man.ls.1; manual page and passes it to the &man.troff.1;
-	  command, which formats that source and makes GNU troff
-	  output and passes it to &man.lpr.1;, which submits the job
-	  to the <application>LPD</application> <foreignphrase>spooler</foreignphrase>.  Because we 
-	  used the <option>-t</option>
-	  option to &man.lpr.1;, the <foreignphrase>spooler</foreignphrase> will convert the GNU
-	  troff output into a format the default printer can
-	  understand when it prints the job.</para>
+	<para>
+		O comando &man.zcat.1; descompacta o c&oacute;digo fonte da 
+	p&aacute;gina do manual &man.ls.1; e transfere para o comando &man.troff.1;,
+	o qual formata o c&oacute;digo a faz a sa&iacute;da do GNU troff ir para
+	&man.lpr.1;, o qual envia o trabalho de impress&atilde;o para o 
+	<foreignphrase>spooler</foreignphrase> do<application>LPD</application>.
+	  Por causa do uso da op&ccedil;&atilde;o <option>-t</option> para o
+	comando &man.lpr.1;, o spooler ir&aacute; converter a sa&iacute;da do 
+	GNU troff em um formato que a impressora possa compreender e et&atilde;o
+	ser&aacute; impresso o trabalho de impress&atilde;o.
+	</para>
       </sect3>
       
       <sect3 id="printing-lpr-options-job-handling">
@@ -5387,26 +5452,33 @@ cfA013rose dequeued
 		Op&ccedil;&otilde;es de Manipula&ccedil;&atilde;o de Impress&atilde;o
 	</title>
 
-	<para>The following options to &man.lpr.1; tell 
-	  <application>LPD</application> to handle the job
-	  specially:</para>
+	<para>
+		As op&ccedil;&otilde;ess a seguir para o comando &man.lpr.1;
+	informa ao <application>LPD</application> como manipular os 
+	trabalhos de impress&atilde;o:
+	</para>
       
 	<variablelist>
 	  <varlistentry>
-	    <term>-# <replaceable>copies</replaceable></term>
+	    <term>-# <replaceable>c&oacute;pias</replaceable></term>
 
 	    <listitem>
-	      <para>Produce a number of <replaceable>copies</replaceable> of
-		each file in the job instead of just one copy.  An
-		administrator may disable this option to reduce printer
-		wear-and-tear and encourage photocopier usage.  See section
-		<link
-		  linkend="printing-advanced-restricting-copies">Restricting
-		  Multiple Copies</link>.</para>
+			<para>
+				Produz o n&uacute;mero de <replaceable>c&oacute;pias</replaceable>
+		de cada arquivo no trabalho de impress&atilde;o ao inves de uma 
+		&uacute;nica c&oacute;pia.  O administrador pode desabilitar essa 
+		op&ccedil;&atilde;o para reduzir o desgaste da impressora e insentivar
+		a fotoc&oacute;pia.  Veja a se&ccedil;&atilde;o
+		<link linkend="printing-advanced-restricting-copies">
+			Restringindo o N&uacute;mero de C&oacute;pias
+		</link>.
+			</para>
 
-	      <para>This example prints three copies of
-		<filename>parser.c</filename> followed by three copies of
-		<filename>parser.h</filename> to the default printer:</para>
+			<para>
+				Esse exemplo imprime tres c&oacute;pias do arquivo
+		<filename>parser.c</filename> seguido de tres c&oacute;pias do
+		arquivo <filename>parser.h</filename> na impressora padr&atilde;o:
+			</para>
 		      
 	      <screen>&prompt.user; <userinput>lpr -#3 parser.c parser.h</userinput></screen>
 	    </listitem>
@@ -5416,12 +5488,15 @@ cfA013rose dequeued
 	    <term>-m</term>
 	    
 	    <listitem>
-	      <para>Send mail after completing the print job.  With this
-		option, the <application>LPD</application> system will send
-		mail to your account when it
-		finishes handling your job.  In its message, it will tell you
-		if the job completed successfully or if there was an error,
-		and (often) what the error was.</para>
+			<para>
+				Envia um e-mail apos o t&eacute;rmino da impress&atilde;o do
+		trabalho de impress&atilde;o.  Com essa op&ccedil;&atilde;o, o
+		sistema <application>LPD</application> ir&aacute; enviar um e-mal para 
+		a sua conta quando ele terminar de gerenciar seu trabalho de 
+		impress&atilde;o.  Na mensagem, ele ira informar &agrave; voc&ecirc;
+		se a impress&atilde;o terminou com sucesso ou com falhas e,
+		geralmente, qual foi o erro ocorrido.
+			</para>
 	    </listitem>
 	  </varlistentry>
 	  
@@ -5429,29 +5504,40 @@ cfA013rose dequeued
 	    <term>-s</term>
 	    
 	    <listitem>
-	      <para>Do not copy the files to the spooling directory, but make
-		symbolic links to them instead.</para>
+			<para>
+				N&atilde;o faz c&oacute;pias de os arquivos para o 
+	diret&oacute;rio de spooling, mas ao inves disso, ele cria um link 
+	simb&oacute;lico.
+	</para>
 		    
-	      <para>If you are printing a large job, you probably want to use
-		this option.  It saves space in the spooling directory (your
-		job might overflow the free space on the filesystem where the
-		spooling directory resides).  It saves time as well since 
-		<application>LPD</application>
-		will not have to copy each and every byte of your job to the
-		spooling directory.</para>
+	      <para>
+				Se voc&ecirc; est&aacute; imprimindo um trabalho de 
+	impress&atilde;o grande, provavelmente essa op&ccedil;&atilde;o ir&aacute;
+	ajuda-lo.  Isso economiza espa&ccedil;o no diret&oacute;rio de 
+	spooling, voc&ecirc; pode ter um consumo maior que o seu espa&ccedil;o 
+	dispon&iacute;vel no sistema do arquivo onde fica esse diret&oacute;rio.
+	  Isso economiza tempo porque o <application>LPD</application> n&atilde;o
+	precisa copiar o arquivo cada vez que o seu trabalho de impress&atilde;o
+	for impresso.
+		</para>
 		    
-	      <para>There is a drawback, though: since 
-		<application>LPD</application> will refer to the
-		original files directly, you cannot modify or remove them
-		until they have been printed.</para>
+		<para>
+			Entretanto, existe um custo: deste que o 
+	<application>LPD</application> ir&aacute; acessar o arquivo 
+	original diretamente, voc&ecirc; n&atilde;o poder&aacute; modifica-lo
+	ou remove-lo at&eacute; que tenha terminado a sua impress&atilde;o.
+		</para>
 	      
 	      <note>
-		<para>If you are printing to a remote printer, 
-		  <application>LPD</application> will
-		  eventually have to copy files from the local host to the
-		  remote host, so the <option>-s</option> option will save
-		  space only on the local spooling directory, not the remote.
-		  It is still useful, though.</para>
+		<para>
+			Se voc&ecirc; est&aacute; imprimindo para uma impressora
+	remota, o <application>LPD</application> ir&aacute; eventualmeten que 
+	copiar os arquivos da m&aacute;quina local para a m&aacute;quina
+	remota, ent&atilde;o a op&ccedil;&atilde;o <option>-s</option> 
+	ir&aacute; apenas economizar espa&ccedil;o na m&aacute;quina local,
+	n&atilde;o na m&aacute;quina remota.  Ainda assim &eacute; uma
+	op&ccedil;&atilde;o muito &uacute;til.
+		</para>
 	      </note>
 	    </listitem>
 	  </varlistentry>
