@@ -1161,56 +1161,58 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
   </sect1>
 
   <sect1 id="configtuning-configfiles">
-    <title>Configuration Files</title>
+    <title>Arquivos de Configura&ccedil;&atilde;o</title>
 
     <sect2>
-      <title><filename>/etc</filename> Layout</title>
-      <para>There are a number of directories in which configuration
-	information is kept.  These include:</para>
+      <title>Estrutura do <filename>/etc</filename></title>
+      <para>Existem v&aacute;rios diret&oacute;rios onde as informa&ccedil;&otilde;es 
+        de configura&ccedil;&atilde;o s&atilde;o mantidas.  Incluindo:</para>
 
       <informaltable frame="none">
 	<tgroup cols="2">
 	  <tbody>
 	    <row>
 	      <entry><filename>/etc</filename></entry>
-	      <entry>Generic system configuration information; data here is
-		system-specific.</entry>
+	      <entry>Informa&ccedil;&atilde;o gen&eacute;rica de configura&ccedil;&atilde;o;  aqui os dados 
+                s&atilde;o espec&iacute;ficos do sistema.</entry>
 	    </row>
 	    <row>
 	      <entry><filename>/etc/defaults</filename></entry>
-	      <entry>Default versions of system configuration files.</entry>
+	      <entry>Vers&otilde;es padr&atilde;o dos arquivos de configura&ccedil;&atilde;o do sistema.</entry>
 	    </row>
 	    <row>
 	      <entry><filename>/etc/mail</filename></entry>
-	      <entry>Extra &man.sendmail.8; configuration, other
-		MTA configuration files.
+	      <entry>Configura&ccedil;&atilde;o extra do &man.sendmail.8; configuration, outros 
+		arquivos de configura&ccedil;&atilde;o de Agentes de Transporde de Correio.
 	      </entry>
 	    </row>
 	    <row>
 	      <entry><filename>/etc/ppp</filename></entry>
-	      <entry>Configuration for both user- and kernel-ppp programs.
+	      <entry>Configura&ccedil;&atilde;o para programas ppp de usu&aacute;rio e de 
+		<foreignphrase>kernel</foreignkernel>.
 	      </entry>
 	    </row>
 	    <row>
 	      <entry><filename>/etc/namedb</filename></entry>
-	      <entry>Default location for &man.named.8; data.  Normally
-		<filename>named.conf</filename> and zone files are stored
-                here.</entry>
+	      <entry>Configura&ccedil;&atilde;o padr&atilde;o dos dados do &man.named.8; data.  Normalmente 
+		o arquivo <filename>named.conf</filename> e arquivos de zonz 
+		s&atilde;o armazenados aqui.</entry>
 	    </row>
 	    <row>
 	      <entry><filename>/usr/local/etc</filename></entry>
-	      <entry>Configuration files for installed applications.
-		May contain per-application subdirectories.</entry>
+	      <entry>Arquivos de configura&ccedil;&atilde;o para aplica&ccedil;&otilde;es instaladas.  Pode 
+		conter subdiret&oacute;rios por aplica&ccedil;&atilde;o.</entry>
 	    </row>
 	    <row>
 	      <entry><filename>/usr/local/etc/rc.d</filename></entry>
-	      <entry>Start/stop scripts for installed applications.</entry>
+	      <entry><literal>Scripts</literal> de inicializa&ccedil;&atilde;o/parada 
+		para aplica&ccedil;&otilde;es instaladas.</entry>
 	    </row>
 	    <row>
 	      <entry><filename>/var/db</filename></entry>
-	      <entry>Automatically generated system-specific database files,
-                 such as the package database, the locate database, and so
-                 on</entry>
+	      <entry>Arquivos de banco de dados espec&iacute;ficos de sistema gerados 
+		 automaticamente, como base da dados de pacotes, a base de dados 
+		 <literal>locate</literal>, e assim por diante.</entry>
 	    </row>
 	  </tbody>
 	</tgroup>
@@ -1218,7 +1220,7 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
     </sect2>
 
     <sect2>
-      <title>Hostnames</title>
+      <title>Nomes de Servidores</title>
 
       <indexterm><primary>hostname</primary></indexterm>
       <indexterm><primary>DNS</primary></indexterm>
@@ -1230,10 +1232,10 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
 	  <primary><filename>resolv.conf</filename></primary>
 	</indexterm>
 
-	<para><filename>/etc/resolv.conf</filename> dictates how &os;'s
-	  resolver accesses the Internet Domain Name System (DNS).</para>
+	<para>O arquivo <filename>/etc/resolv.conf</filename> determina como o
+	  resolvedor do &os; acessa o Sistema de Nome de Dom&iacute;nios da Internet (DNS).</para>
 
-	<para>The most common entries to <filename>resolv.conf</filename> are:
+	<para>As entradas mais comuns no arquivo <filename>resolv.conf</filename> s&atilde;o:
 	</para>
 
 	<informaltable frame="none">
@@ -1241,35 +1243,35 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
 	    <tbody>
 	      <row>
 		<entry><literal>nameserver</literal></entry>
-		<entry>The IP address of a name server the resolver
-		  should query.  The servers are queried in the order
-		  listed with a maximum of three.</entry>
+		<entry>O endere&ccedil;o IP do servidor de nomes que o resolvedor 
+		  deve pesquisar.  Os servidores s&atilde;o na ordem em que est&atilde;o listados 
+		  num m&aacute;ximo de tr&ecirc;s.</entry>
 	      </row>
 	      <row>
 		<entry><literal>search</literal></entry>
-		<entry>Search list for hostname lookup.  This is normally
-		  determined by the domain of the local hostname.</entry>
+		<entry>Lista de pesquisa para a procura do nome de servidor.  Normalmente 
+		  determinado pelo dom&iacute;nio do servidor local.</entry>
 	      </row>
 	      <row>
 		<entry><literal>domain</literal></entry>
-		<entry>The local domain name.</entry>
+		<entry>O nome do dom&iacute;nio local.</entry>
 	      </row>
 	    </tbody>
 	  </tgroup>
 	</informaltable>
 
-	<para>A typical <filename>resolv.conf</filename>:</para>
+	<para>Um <filename>resolv.conf</filename> t&iacute;pico:</para>
 
 	<programlisting>search example.com
 nameserver 147.11.1.11
 nameserver 147.11.100.30</programlisting>
 
-	<note><para>Only one of the <literal>search</literal> and
-	  <literal>domain</literal> options should be used.</para></note>
+	<note><para>Apenas as op&ccedil;&otilde;es <literal>search</literal> e
+	  <literal>domain</literal> devem ser usadas.</para></note>
 
-	<para>If you are using DHCP, &man.dhclient.8; usually rewrites
-	  <filename>resolv.conf</filename> with information received from the
-	  DHCP server.</para>
+	<para>Se voc&ecirc; estiver usando, geralmente o &man.dhclient.8; reescreve o
+	  <filename>resolv.conf</filename> com a informa&ccedil;&atilde;o recebida do 
+	  servidor DHCP.</para>
       </sect3>
 
       <sect3>
@@ -1277,15 +1279,15 @@ nameserver 147.11.100.30</programlisting>
 
 	<indexterm><primary>hosts</primary></indexterm>
 
-	<para><filename>/etc/hosts</filename> is a simple text
-	  database reminiscent of the old Internet.  It works in
-	  conjunction with DNS and NIS providing name to IP address
-	  mappings.  Local computers connected via a LAN can be placed
-	  in here for simplistic naming purposes instead of setting up
-	  a &man.named.8; server.  Additionally,
-	  <filename>/etc/hosts</filename> can be used to provide a
-	  local record of Internet names, reducing the need to query
-	  externally for commonly accessed names.</para>
+	<para>O arquivo <filename>/etc/hosts</filename> &eacute; uma base em texto 
+	  remanescente da velha Internet.  Funciona em conjunto com o servidores 
+	  DNS e NIS oferecendo mapeamento de nome para endere&ccedil;os IP.  Computadores 
+	  locais conectados &agrave; Rede Local podem ser colocados aqui para prop&oacute;sitos 
+	  simples de nomeamento ao inv&eacute;s de configurar um servidor &man.named.8;.  
+	  Adicionalmente, o arquivo 
+	  <filename>/etc/hosts</filename> pode ser usado para oferecer uma 
+	  base local de nomes Internet, reduzindo a necessidade de pesquisa externa 
+	  para nome mais comumente usados.</para>
 
 	<programlisting># &dollar;&os;&dollar;
 #
@@ -1318,21 +1320,21 @@ nameserver 147.11.100.30</programlisting>
 # rs.internic.net, directory `/templates').
 #</programlisting>
 
-	<para><filename>/etc/hosts</filename> takes on the simple format
-	  of:</para>
+	<para>O arquivo <filename>/etc/hosts</filename> possui o seguinte formato:
+	  </para>
 
 	<programlisting>[Internet address] [official hostname] [alias1] [alias2] ...</programlisting>
 
-	<para>For example:</para>
+	<para>Por exemplo:</para>
 
 	<programlisting>10.0.0.1 myRealHostname.example.com myRealHostname foobar1 foobar2</programlisting>
 
-	<para>Consult &man.hosts.5; for more information.</para>
+	<para>Consulte &man.hosts.5; para mais informa&ccedil;&otilde;es.</para>
       </sect3>
     </sect2>
 
     <sect2>
-      <title>Log File Configuration</title>
+      <title>Configura&ccedil;ao dos Arquivos de Log</title>
 
       <indexterm><primary>log files</primary></indexterm>
 
@@ -1341,10 +1343,10 @@ nameserver 147.11.100.30</programlisting>
 
 	<indexterm><primary>syslog.conf</primary></indexterm>
 
-	<para><filename>syslog.conf</filename> is the configuration file
-	  for the &man.syslogd.8; program.  It indicates which types
-	  of <command>syslog</command> messages are logged to particular
-	  log files.</para>
+	<para><filename>syslog.conf</filename> &eacute; um arquivo de configura&ccedil;&atilde;o para 
+	  o programa &man.syslogd.8;.  Indica que tipo de mensagens do 
+	  of <command>syslog</command> s&atilde;o armazenadas nos arquivos 
+	  de log.</para>
 
 	<programlisting># &dollar;&os;&dollar;
 #
@@ -1378,8 +1380,8 @@ cron.*                                          /var/log/cron
 !ppp
 *.*                                             /var/log/ppp.log</programlisting>
 
-	<para>Consult the &man.syslog.conf.5; manual page for more
-	  information.</para>
+	<para>Consulte a p&aacute;gina de manual &man.syslog.conf.5; para mais 
+	  informa&ccedil;&atilde;o.</para>
       </sect3>
 
       <sect3>
@@ -1387,22 +1389,22 @@ cron.*                                          /var/log/cron
 
 	<indexterm><primary>newsyslog.conf</primary></indexterm>
 
-	<para><filename>newsyslog.conf</filename> is the configuration
-	  file for &man.newsyslog.8;, a program that is normally scheduled
-	  to run by &man.cron.8;.  &man.newsyslog.8; determines when log
-	  files require archiving or rearranging.
-	  <filename>logfile</filename> is moved to
+	<para><filename>newsyslog.conf</filename> &eacute; o arquivo de configura&ccedil;&atilde;o 
+	  para &man.newsyslog.8;, um programa que normalmente &eacute; agendado para ser executado pelo 
+	  &man.cron.8;.  O &man.newsyslog.8; determina quando os arquivos de 
+	  log necessitam ser arquivados ou reorganizados.  
+	  <filename>logfile</filename> &eacute; renomeado para 
 	  <filename>logfile.0</filename>, <filename>logfile.0</filename>
-	  is moved to <filename>logfile.1</filename>, and so on.
-	  Alternatively, the log files may be archived in &man.gzip.1; format
-	  causing them to be named: <filename>logfile.0.gz</filename>,
-	  <filename>logfile.1.gz</filename>, and so on.</para>
+	  &eacute; renomeado para <filename>logfile.1</filename>, e assim sucessivamente.
+	  Alternativamente, os arquivos de log podem ser arquivados no formato &man.gzip.1;, 
+	  fazendo com que sejam nomeados: <filename>logfile.0.gz</filename>,
+	  <filename>logfile.1.gz</filename>, e assim sucessivamente.</para>
 
-	<para><filename>newsyslog.conf</filename> indicates which log
-	  files are to be managed, how many are to be kept, and when
-	  they are to be touched.  Log files can be rearranged and/or
-	  archived when they have either reached a certain size, or at a
-	  certain periodic time/date.</para>
+	<para><filename>newsyslog.conf</filename> indica os arquivos de log 
+	  a serem gerenciados, quantos devem ser mantidos, e quando devem 
+	  ser modificados.  Arquivos de log podem ser rearranjados e/ou 
+	  arquivados ao chegarem &agrave; um determinado tamanho, ou em um 
+	  per&iacute;odo de tempo/data.</para>
 
 	<programlisting># configuration file for newsyslog
 # &dollar;&os;&dollar;
@@ -1425,8 +1427,8 @@ cron.*                                          /var/log/cron
 /var/log/monthly.log                    640  12    *    $M1D0 Z
 /var/log/console.log                    640  5     100  *     Z</programlisting>
 
-	<para>Consult the &man.newsyslog.8; manual page for more
-	  information.</para>
+	<para>Consulte p&aacute;gina de manual do &man.newsyslog.8; para mais 
+	  informa&ccedil;&atilde;o.</para>
       </sect3>
     </sect2>
 
@@ -1436,15 +1438,16 @@ cron.*                                          /var/log/cron
       <indexterm><primary>sysctl.conf</primary></indexterm>
       <indexterm><primary>sysctl</primary></indexterm>
 
-      <para><filename>sysctl.conf</filename> looks much like
-	<filename>rc.conf</filename>.  Values are set in a
-	<literal>variable=value</literal>
-	form.  The specified values are set after the system goes into
-	multi-user mode.  Not all variables are settable in this mode.</para>
+      <para><filename>sysctl.conf</filename> se parece muito com o 
+	<filename>rc.conf</filename>.  Os valores s&atilde;o ajustados no formato 
+	<literal>variable=value</literal>.  
+	Os valores especificados s&atilde;o configurados antes do sistema 
+	alcan&ccedil;ar o modo multi usu&aacute;rio.  Nem todas as vari&aacute;veis s&atilde;o 
+	ajust&aacute;veis neste modo.</para>
 
-      <para>A sample <filename>sysctl.conf</filename> turning off logging
-	of fatal signal exits and letting Linux programs know they are really
-	running under &os;:</para>
+      <para>Um exemplo de <filename>sysctl.conf</filename> desligando a emiss&atilde;o de 
+	log de sinais de sa&iacute;das fatais fazendo com que os programas Linux saibam 
+	que est&atilde;o realmente sendo executados sob o &os;.</para>
 
       <programlisting>kern.logsigexit=0       # Do not log fatal signal exits (e.g. sig 11)
 compat.linux.osname=&os;
