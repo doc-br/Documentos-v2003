@@ -490,7 +490,7 @@ boot:</screen>
       <secondary>interacao do boot</secondary>
     </indexterm>
     
-    <para>Once the kernel is loaded by either <link
+    <para>Uma vez que o kernel e carregado pelo either <link
 	linkend="boot-loader">loader</link> (como usado) ou <link
 	linkend="boot-boot1">boot2</link> (passando o carregador), isto
       examina suas boot flags, se existir, e ajusta seu comportamento como
@@ -695,7 +695,7 @@ boot:</screen>
 	e inicializado o modo single-user.</para>
 
       <example id="boot-insecure-console">
-	<title>An Insecure Console em <filename>/etc/ttys</filename></title>
+	<title>Um Insecure Console em <filename>/etc/ttys</filename></title>
 
 	<programlisting># name  getty                           type    status          comments
 #
@@ -705,13 +705,13 @@ console none                            unknown off insecure</programlisting>
       </example>
 
       <note>
-	<para>An <literal>insecure</literal> console means that you
-	  consider your physical security to the console to be
-	  insecure, and want to make sure only someone who knows the
-	  <username>root</username> password may use single-user mode, and it
-	  does not mean that you want to run your console insecurely.  Thus,
-	  if you want security, choose <literal>insecure</literal>,
-	  not <literal>secure</literal>.</para>
+	<para>Uma console <literal>insecure</literal> significa que voce
+	  considera sua seguranca fisica para a console ser
+	  insecure, e quiser para fazer isto somente quem saiba a senha do
+	  <username>root</username> pode usar o modo single-user, e isto
+	  nao nao dignifica que voce pode rodar sua console insecurely. Assim,
+	  se voce quiser seguranca, escolha <literal>insecure</literal>,
+	  nao <literal>secure</literal>.</para>
       </note>
     </sect2>
     
@@ -719,62 +719,62 @@ console none                            unknown off insecure</programlisting>
       <title>Multi-User Mode</title>
       <indexterm><primary>multi-user mode</primary></indexterm>
       
-      <para>If &man.init.8; finds your file systems to be
-	in order, or once the user has finished in <link
-	  linkend="boot-singleuser">single-user mode</link>, the
-	system enters multi-user mode, in which it starts the
-	resource configuration of the system.</para>
+      <para>Se &man.init.8; encontra seus arquivos de sistema para ser
+	em ordem, ou uma vez que o usuario terminou em <link
+	  linkend="boot-singleuser">modo single-user</link>, o
+	sistema entra em modo  multi-user, onde comeca a
+	configuracao dos recursos do sistema.</para>
 
       <sect3 id="boot-rc">
-      <indexterm><primary>rc files</primary></indexterm>
-	<title>Resource Configuration (rc)</title>
+      <indexterm><primary>arquivos rc</primary></indexterm>
+	<title>Recursos de Configuracao (rc)</title>
 
-	<para>The resource configuration system reads in
-	  configuration defaults from
-	  <filename>/etc/defaults/rc.conf</filename>, and
-	  system-specific details from
-	  <filename>/etc/rc.conf</filename>, and then proceeds to
-	  mount the system file systems mentioned in
-	  <filename>/etc/fstab</filename>, start up networking
-	  services, start up miscellaneous system daemons, and
-	  finally runs the startup scripts of locally installed
-	  packages.</para>
+	<para>O recurso de configuracao do sistema le dentro
+	  configuracoes padroes do
+	  <filename>/etc/defaults/rc.conf</filename>, e o
+	  sistema-especifica detalhes do
+	  <filename>/etc/rc.conf</filename>, e entao procede a
+	  mountagem do sistema de arquivos mencionados em
+	  <filename>/etc/fstab</filename>, iniciando os servicos da rede,
+	  inicializando varios daemons do sistema, e
+	  finalmente executando os scripts de inicializacao de pacotes instalados
+	  localmente.</para>
 
-	<para>The &man.rc.8; manual page is a good reference to the resource
-	  configuration system, as is examining the scripts
+	<para>A pagina do manual &man.rc.8; e uma boa referencia para o recurso de
+	  configuracao do sistema, como sao examinados os scripts
 	  themselves.</para>
       </sect3>
     </sect2>
   </sect1>
 
   <sect1 id="boot-shutdown">
-    <title>Shutdown Sequence</title>
+    <title>Sequencia do Shutdown</title>
     <indexterm>
       <primary><command>shutdown</command></primary>
     </indexterm>
 
-    <para>Upon controlled shutdown, via &man.shutdown.8;,
-      &man.init.8; will attempt to run the script
-      <filename>/etc/rc.shutdown</filename>, and then proceed to send
-      all processes the <literal>TERM</literal> signal, and subsequently 
-      the <literal>KILL</literal> signal to any that do not terminate 
+    <para>Sob controle o shutdown, via &man.shutdown.8;,
+      &man.init.8; tentara rodar o script
+      <filename>/etc/rc.shutdown</filename>, e entao proceder o envio de
+      todos os processos do <literal>TERM</literal>, e subsequente 
+      do <literal>KILL</literal> tambem alguns que nao terminarem 
       timely.</para>
 
-    <para>To power down a FreeBSD machine on architectures and systems
-      that support power management, simply use the command
-      <command>shutdown -p now</command> to turn the power off
-      immediately.  To just reboot a FreeBSD system, just use
-      <command>shutdown -r now</command>.  You need to be
-      <username>root</username> or a member of
-      <groupname>operator</groupname> group to run &man.shutdown.8;.
-      The &man.halt.8; and &man.reboot.8; commands can also be used,
-      please refer to their manual pages and to &man.shutdown.8;'s one
-      for more informations.</para>
+    <para>Para suportar baixar uma maquina FreeBSD sobre arquiteturas e sistemas
+      que suportam power management, simplesmente use o comando
+      <command>shutdown -p now</command> para turnar power off
+      imediatamente. Para justamente reboot o sistema FreeBSD, justamente use
+      <command>shutdown -r now</command>. Voce necessitara ser
+      <username>root</username> ou um membro do
+      grupo <groupname>operator</groupname> para rodar &man.shutdown.8;.
+      O &man.halt.8; e comandos &man.reboot.8; podem ate ser usados,
+      consultando por favor seus manuais de referencia e &man.shutdown.8; 
+      para maiores informacoes.</para>
 
     <note>
-      <para>Power management requires &man.acpi.4; support in the kernel
-	or loaded as module for FreeBSD&nbsp;5.X and &man.apm.4;
-	support for FreeBSD&nbsp;4.X.</para>
+      <para>Power management requer &man.acpi.4; suporte no kernel
+	ou carregar algum modulo para FreeBSD&nbsp;5.X e &man.apm.4;
+	suporte para FreeBSD&nbsp;4.X.</para>
     </note>
 
   </sect1>
