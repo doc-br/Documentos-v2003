@@ -1130,7 +1130,7 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
 	</sect4>
 
 	<sect4>
-	  <title>Configuração de velocidade compatível</title>
+	  <title>Configuração de velocidades compatíveis</title>
 	  
           <para>Você precisará definir uma entrada no arquivo <filename>/etc/gettytab</filename> para 
             fornecer informações ao <command>getty</command> sobre velocidades que você deseja
@@ -1212,7 +1212,7 @@ vq|VH57600|Very High Speed Modem at 57600,8-bit:\
 	<para>A configuração do arquivo <filename>/etc/ttys</filename> é abordada em <xref linkend="ex-etc-ttys">. A
           configuração para modems é similar porém nos temos que passar um argumento diferente 
           para o <command>getty</command> e especificar um tipo de terminal diferente. O formato
-          geral para ambas as configurações, velocidade travada e velocidade compatível são:</para>
+          geral para ambas as configurações, velocidade travada e velocidades compatíveis são:</para>
 	    
 	<programlisting>ttyd0   "/usr/libexec/getty <replaceable>xxx</replaceable>"   dialup on</programlisting>
 	    
@@ -1227,60 +1227,49 @@ vq|VH57600|Very High Speed Modem at 57600,8-bit:\
           a linha é operacional.  Pode haver um quinto parâmetro, <literal>secure</literal>, mas
           deve ser utilizado somente para terminais fisicamente seguros (como a console do sistema).</para>
 	    
-	<para>The default terminal type (<literal>dialup</literal> in the
-	  example above) may depend on local preferences.
-	  <literal>dialup</literal> is the traditional default terminal type
-	  on dial-up lines so that users may customize their login scripts to
-	  notice when the terminal is <literal>dialup</literal> and
-	  automatically adjust their terminal type.  However, the author finds
-	  it easier at his site to specify <literal>vt102</literal> as the
-	  default terminal type, since the users just use VT102 emulation on
-	  their remote systems.</para>
+	<para>O tipo padrão de terminal (no exemplo acima é um <literal>dialup</literal>)
+          poderá depender das configurações nativas. O tipo <literal>dialup</literal> 
+          é o padrão para terminais de linhas de acesso discado, portanto, os usuários podem
+          personalizar seus scripts de login para que estes informem que o tipo do terminal
+          é <literal>dialup</literal> e automaticamente sejam feitos ajustes. Entretanto, o 
+          autor deste acha mais fácil para suas configurações definir o tipo padrão 
+          como <literal>vt102</literal>, desde que os usuários somente usem a emulação de 
+          VT102 em seus sistemas.</para>
 	    
-	<para>After you have made changes to <filename>/etc/ttys</filename>,
-	  you may send the <command>init</command> process a
-	  <acronym>HUP</acronym> signal to re-read the file.  You can use the
-	  command
-
-	<screen>&prompt.root; <userinput>kill -HUP 1</userinput></screen>
-
-	  to send the signal.  If this is your first time setting up the
-	  system, you may want to wait until your modem(s) are properly
-          configured and connected before signaling <command>init</command>.
+	<para>Depois de realizar estas alterações no <filename>/etc/ttys</filename> 
+	  você deve enviar um sinal <acronym>HUP</acronym> para o processo <command>init</command>
+          para que este releia o arquivo e aplique as alterações.  Você pode usar o comando
+	  <screen>&prompt.root; <userinput>kill -HUP 1</userinput></screen> para enviar o sinal. Caso
+          esta seja a primeira vez que você configura o sistema, você pode esperar até que
+          seus modems estejam conectados e configurados corretamente para depois 
+          sinalizar ao <command>init</command>.
 	  </para>
 
 	<sect4>
-	  <title>Locked-speed Config</title>
+	  <title>Configuração de velocidade travada ou fixa</title>
 	  
-	  <para>For a locked-speed configuration, your
-	    <filename>ttys</filename> entry needs to have a fixed-speed entry
-	    provided to <command>getty</command>.  For a modem whose port
-	    speed is locked at 19.2&nbsp;Kbps, the <filename>ttys</filename> entry
-	    might look like this:</para>
+	  <para>Para configurações de velocidade fixa sua entrada em <filename>ttys</filename>
+            precisa especificar ao <command>getty</command> a velocidade.  Para um modem
+            com a velociade da porta fixa em 19.2&nbsp;Kbps, a entrada em <filename>ttys</filename> entry
+	    deve algo como isso:</para>
 	      
 	  <programlisting>ttyd0   "/usr/libexec/getty std.19200"   dialup on</programlisting>
 	      
-	  <para>If your modem is locked at a different data rate,
-	    substitute the appropriate value for
-	    <literal>std.<replaceable>speed</replaceable></literal>
-	    instead of <literal>std.19200</literal>.  Make sure that
-	    you use a valid type listed in
-	    <filename>/etc/gettytab</filename>.</para>
+	  <para>Caso seu modem esteja com a velocidade fixa diferente, substitua pelo valor apropriado
+            utilizando <literal>std.<replaceable>velocidade</replaceable></literal>
+	    no lugar de <literal>std.19200</literal>. Certifique-se de utilizar um tipo válido
+            no arquivo <filename>/etc/gettytab</filename>.</para>
 	</sect4>
 
 	<sect4>
-	  <title>Matching-speed Config</title>
+	  <title>Configuração de velocidades compatíveis</title>
 	  
-	  <para>In a matching-speed configuration, your
-	    <filename>ttys</filename> entry needs to reference the appropriate
-	    beginning <quote>auto-baud</quote> (sic) entry in
-	    <filename>/etc/gettytab</filename>.  For example, if you added the
-	    above suggested entry for a matching-speed modem that starts at
-	    19.2&nbsp;Kbps (the <filename>gettytab</filename> entry containing the
-	    <literal>V19200</literal> starting point), your
-	    <filename>ttys</filename> entry might look like this:</para>
-	      
-	  <programlisting>ttyd0   "/usr/libexec/getty V19200"   dialup on</programlisting>
+	  <para>Na configuração de velocidades compatíveis, sua entrada em 
+	    <filename>ttys</filename> precisa referenciar o início apropriado <quote>auto-baud</quote> (sic) 
+            em <filename>/etc/gettytab</filename>.  Por exemplo, se você adicionar acima a entrada sugerida para
+            iniciar em 19.2&nbsp;Kbps (a entrada em <filename>gettytab</filename> contém o ponto de início
+            <literal>V19200</literal>), sua entrada em <filename>ttys</filename> deve parecer com isso:</para>
+            <programlisting>ttyd0   "/usr/libexec/getty V19200"   dialup on</programlisting>
 	</sect4>
       </sect3>
 	  
@@ -1291,19 +1280,15 @@ vq|VH57600|Very High Speed Modem at 57600,8-bit:\
 	  <secondary><filename>rc.serial</filename></secondary>
 	</indexterm>
 
-	<para>High-speed modems, like V.32, V.32bis, and V.34 modems,
-	  need to use hardware (<filename>RTS/CTS</filename>) flow
-	  control. You can add <command>stty</command> commands to
-	  <filename>/etc/rc.serial</filename> to set the hardware flow
-	  control flag in the FreeBSD kernel for the modem
-	  ports.</para>
+	<para>Modems de alta velocidade como V.32, V.32bis, e V.34 precisam usar o controle físico
+          de fluxo (<filename>RTS/CTS</filename>). Você pode acidicionar o 
+          comando <command>stty</command> no arquivo <filename>/etc/rc.serial</filename> para
+          definir o controle físico de fluxo do kernel do FreeBSD na porta do modem.</para>
 	    
-	<para>For example to set the <literal>termios</literal> flag
-	  <varname>crtscts</varname> on serial port #1's
-	  (<devicename>COM2</devicename>) dial-in and dial-out initialization
-	  devices, the following lines could be added to
-	  <filename>/etc/rc.serial</filename>:</para>
-	<programlisting># Serial port initial configuration
+	<para>Por exemplo, para definir a configuração de <varname>crtscts</varname>, <literal>termios</literal>,
+        na primeira porta serial de dispositivos de discagem (<devicename>COM2</devicename>) as seguintes
+        linhas poderiam ser adicionadas ao <filename>/etc/rc.serial</filename>:</para>
+	<programlisting># Configuração de inicialização de porta serial
 stty -f /dev/ttyid1 crtscts
 stty -f /dev/cuaia1 crtscts</programlisting>
 	    	    
@@ -1311,284 +1296,254 @@ stty -f /dev/cuaia1 crtscts</programlisting>
     </sect2>
     
     <sect2>
-      <title>Modem Settings</title>
+      <title>Configurações do Modem</title>
       
-      <para>If you have a modem whose parameters may be permanently set in
-	non-volatile RAM, you will need to use a terminal program (such as
-	Telix under &ms-dos; or <command>tip</command> under FreeBSD) to set the
-	parameters.  Connect to the modem using the same communications speed
-	as the initial speed <command>getty</command> will use and configure
-	the modem's non-volatile RAM to match these requirements:</para>
+      <para>Caso você possua um modem que possibilite que seus parâmetros possam ser definidos
+        em RAM não volátil, você precisará utilizar um programa de terminal (como o Telix sobre 
+        &ms-dos; ou o <command>tip</command> sobre o FreeBSD) para definir os parâmetros.  Conecte
+        ao modem utilizando como inicial a mesma velocidade de comunicação que o 
+	<command>getty</command> utilizará e configure o modem com RAM não volátil 
+        combinando com os seguintes requerimentos:</para>
 	  
       <itemizedlist>
 	<listitem>
-	  <para><acronym>CD</acronym> asserted when connected</para>
+	  <para><acronym>CD</acronym> alertou quando conectado</para>
 	</listitem>
 
 	<listitem>
-	  <para><acronym>DTR</acronym> asserted for operation; dropping DTR
-	    hangs up line and resets modem</para>
+	  <para><acronym>DTR</acronym> alertou quando em operação; apagando DTR
+	    e conectando a linha, e reinicia o modem</para>
 	</listitem>
 
 	<listitem>
-	  <para><acronym>CTS</acronym> transmitted data flow control</para>
+	  <para><acronym>CTS</acronym> alertou a transmissão do controle de fluxo</para>
 	</listitem>
 
 	<listitem>
-	  <para>Disable <acronym>XON/XOFF</acronym> flow control</para>
+	  <para>Desativa o controle de fluxo <acronym>XON/XOFF</acronym></para>
 	</listitem>
 
 	<listitem>
-	  <para><acronym>RTS</acronym> received data flow control</para>
+	  <para><acronym>RTS</acronym> controle de fluxo de dados recebidos</para>
 	</listitem>
 
 	<listitem>
-	  <para>Quiet mode (no result codes)</para>
+	  <para>Modo silencioso (não retorna códigos)</para>
 	</listitem>
 
 	<listitem>
-	  <para>No command echo</para>
+	  <para>Sem retorno de comando</para>
 	</listitem>
       </itemizedlist>
       
-      <para>Please read the documentation for your modem to find out what
-	commands and/or DIP switch settings you need to give it.</para>
+      <para>Por favor, leia a documentação do seu modem para identificar quais comandos e configurações
+       de chaves DIP você precisará dar ao modem.</para>
       
-      <para>For example, to set the above parameters on a &usrobotics;
-	&sportster; 14,400 external modem, one could give these commands to
-	the modem:</para>
+      <para>Por exemplo, para definir os parâmetros acima num modem externo &usrobotics;
+	&sportster; 14,400 você poderia dar estes comandos ao modem:</para>
       
       <programlisting>ATZ
 AT&amp;C1&amp;D2&amp;H1&amp;I0&amp;R2&amp;W</programlisting>
 	  
-      <para>You might also want to take this opportunity to adjust other
-	settings in the modem, such as whether it will use V.42bis and/or MNP5
-	compression.</para>
+      <para>Pode pode querer também usar esta oportunidade para fazer outros ajustes
+        na configuração do modem, como por exemplo se este utilizará compressão V.42bis ou MNP5.</para>
 	  
-      <para>The &usrobotics; &sportster; 14,400 external modem also has some DIP switches
-	that need to be set; for other modems, perhaps you can use these
-	settings as an example:</para>
+      <para>O modem externo &usrobotics; &sportster; 14,400 também possui algumas chaves DIP
+        que necessitam ser configuradas; para outros modems talvez possa utilizar estas 
+        configurações, por exemplo:</para>
       
       <itemizedlist>
 	<listitem>
-	  <para>Switch 1: UP &mdash; DTR Normal</para>
+	  <para>Switch 1: PARA CIMA &mdash; DTR Normal</para>
 	</listitem>
 
 	<listitem>
-	  <para>Switch 2: N/A (Verbal Result Codes/Numeric Result
-	    Codes)</para>
+	  <para>Switch 2: N/D (Códigos verbais como resultado/Códigos numéricos como resultado)</para>
 	</listitem>
 
 	<listitem>
-	  <para>Switch 3: UP &mdash; Suppress Result Codes</para>
+	  <para>Switch 3: PARA CIMA &mdash; Supressão de códigos de resultado</para>
 	</listitem>
 
 	<listitem>
-	  <para>Switch 4: DOWN &mdash; No echo, offline commands</para>
+	  <para>Switch 4: PARA BAIXO &mdash; Sem emissão de comandos quando desconectado</para>
 	</listitem>
 
 	<listitem>
-	  <para>Switch 5: UP &mdash; Auto Answer</para>
+	  <para>Switch 5: PARA CIMA &mdash; Resposta automática</para>
 	</listitem>
 
 	<listitem>
-	  <para>Switch 6: UP &mdash; Carrier Detect Normal</para>
+	  <para>Switch 6: PARA CIMA &mdash; Detecção normal de portadora</para>
 	</listitem>
 
 	<listitem>
-	  <para>Switch 7: UP &mdash; Load NVRAM Defaults</para>
+	  <para>Switch 7: PARA CIMA &mdash; Carregar padrões da NVRAM</para>
 	</listitem>
 
 	<listitem>
-	  <para>Switch 8: N/A (Smart Mode/Dumb Mode)</para>
+	  <para>Switch 8: N/D (Modo inteligente/Modo burro)</para>
 	</listitem>
       </itemizedlist>
       
-      <para>Result codes should be disabled/suppressed for dial-up modems to
-	avoid problems that can occur if <command>getty</command> mistakenly
-	gives a <prompt>login:</prompt> prompt to a modem that is in command
-	mode and the modem echoes the command or returns a result
-	code.  This sequence can result in a extended, silly conversation
- 	between <command>getty</command> and the modem.</para>
+      <para>Códigos de resultados devem ser suprimidos para modems de discagem o que evitará problemas
+        que podem ocorrer se erroneamente o <command>getty</command> dar um prompt de <prompt>login:</prompt>
+        para o modem que estiver em modo de comando e o modem neste estado retornaria o comando ou
+        o código de resultado. Esta sequência pode resultar numa conversa boba entre o 
+ 	<command>getty</command> e o modem.</para>
 	  
       <sect3>
-	<title>Locked-speed Config</title>
+	<title>Configuração de velocidade travada ou fixa</title>
 
-	<para>For a locked-speed configuration, you will need to configure the
-	  modem to maintain a constant modem-to-computer data rate independent
-	  of the communications rate.  On a &usrobotics; &sportster; 14,400 external
-	  modem, these commands will lock the modem-to-computer data rate at
-	  the speed used to issue the commands:</para>
+	<para>Para a configuração de velocidade fixa será necessário definir no modem que este 
+          mantenha constante a velocidade de comunicação entre ele e o computador independente
+          da velocidade de comunicação. Num modem externo &usrobotics; &sportster; 14,400 estes
+          comandos fixarão a velocidade de comunicação entre o modem e o computador na velocidade
+          fornecida pelos comandos:</para>
 	    
 	<programlisting>ATZ
 AT&amp;B1&amp;W</programlisting>
       </sect3>
 	  
       <sect3>
-	<title>Matching-speed Config</title>
+	<title>Configuração de velocidades compatíveis</title>
 
-	<para>For a variable-speed configuration, you will need to configure
-	  your modem to adjust its serial port data rate to match the incoming
-	  call rate.  On a &usrobotics; &sportster; 14,400 external modem, these commands
-	  will lock the modem's error-corrected data rate to the speed used to
-	  issue the commands, but allow the serial port rate to vary for
-	  non-error-corrected connections:</para>
+	<para>Para a configuração de velocidades compatíveis ou variáveis você precisará configurar
+          seu modem para que este ajuste sua velocidade de acordo com a velocidade que for percebida
+          na chamada. Num modem externo &usrobotics; &sportster; 14,400 estes comandos travarão 
+          a velocidade de correção de erros na mesma que for utilizada no envio dos comandos, porém
+          permitirá à porta serial variar conexões sem correção de erros:</para>
 	    
 	<programlisting>ATZ
 AT&amp;B2&amp;W</programlisting>
       </sect3>
 	  
       <sect3>
-	<title>Checking the Modem's Configuration</title>
+	<title>Verificando a configuração do modem</title>
 
-	<para>Most high-speed modems provide commands to view the modem's
-	  current operating parameters in a somewhat human-readable fashion.
-	  On the &usrobotics; &sportster; 14,400 external modems, the command
-	  <command>ATI5</command> displays the settings that are stored in the
-	  non-volatile RAM.  To see the true operating parameters of the modem
-	  (as influenced by the modem's DIP switch settings), use the commands
-	  <command>ATZ</command> and then <command>ATI4</command>.</para>
+	<para>A maioria dos modems de alta velocidade disponibiliza comandos para verificação 
+          dos parâmetros correntes de operação numa forma humanamente legível. Em um modem externo
+          &usrobotics; &sportster; 14,400 o comando <command>ATI5</command> lista as configurações
+          armazenadas em RAM não volátil. Para verificar as configurações reais de operação do 
+          modem (como determinadas nas configurações das chaves DIP), use o 
+          comando <command>ATZ</command> e então <command>ATI4</command>.</para>
 	    
-	<para>If you have a different brand of modem, check your modem's
-	  manual to see how to double-check your modem's configuration
-	  parameters.</para>
+	<para>Se você tem um tipo diferente de modem verifique o manual para saber como rechecar
+          as configurações feitas.</para>
+
       </sect3>
     </sect2>
     
     <sect2>
-      <title>Troubleshooting</title>
+      <title>Resolução de Problemas</title>
       
-      <para>Here are a few steps you can follow to check out the dial-up modem
-	on your system.</para>
+      <para>Temos aqui alguns passos que você pode seguir para verificar o modem 
+        no seu sistema em relação a discagem e atendimento.</para>
       
       <sect3>
-	<title>Checking Out the FreeBSD System</title>
+	<title>Checagem do sistema FreeBSD</title>
 
-	<para>Hook up your modem to your FreeBSD system, boot the system, and,
-	  if your modem has status indication lights, watch to see whether the
-	  modem's <acronym>DTR</acronym> indicator lights when the
-	  <prompt>login:</prompt> prompt appears on the system's console
-	  &mdash; if it lights up, that should mean that FreeBSD has started a
-	  <command>getty</command> process on the appropriate communications
-	  port and is waiting for the modem to accept a call.</para>
-	    
-	<para>If the <acronym>DTR</acronym> indicator does not light, login to
-	  the FreeBSD system through the console and issue a <command>ps
-	    ax</command> to see if FreeBSD is trying to run a
-	  <command>getty</command> process on the correct port. You should see
-	  lines like these among the processes displayed:</para>
+	<para>Conecte fisicamente seu modem no seu sistema FreeBSD, inicie o sistema e
+          se seu modem tiver luzes que indicam seu estado, observe se a luz indicadora <acronym>DTR</acronym>
+          é sinalizada quando o prompt <prompt>login:</prompt> aparece no console do sistema 
+          &mdash; se a luz acender, significa que o FreeBSD iniciou o processo <command>getty</command> 
+          na porta correta de comunicação e está esperando pelo modem para aceitar uma chamada.</para>
+
+	<para>Se a luz indicadora <acronym>DTR</acronym> não acender, execute login no sistema 
+            FreeBSD no console e através  do comando <command>ps ax</command> se o FreeBSD 
+            está tentando executar o processo <command>getty</command> na porta correta. Você
+            deve ver uma linha como essa em meio aos processos listados:</para>
 
 	<screen>  114 ??  I      0:00.10 /usr/libexec/getty V19200 ttyd0
   115 ??  I      0:00.10 /usr/libexec/getty V19200 ttyd1</screen>
 	    
-	<para>If you see something different, like this:</para>
+	<para>Se você ver algo diferente, como isso:</para>
 	  
 	  <screen>  114 d0  I      0:00.10 /usr/libexec/getty V19200 ttyd0</screen>
 	    
-	<para>and the modem has not accepted a call yet, this means that
-	  <command>getty</command> has completed its open on the
-	  communications port.  This could indicate a problem with the cabling
-	  or a mis-configured modem, because <command>getty</command> should
-	  not be able to open the communications port until
-	  <acronym>CD</acronym> (carrier detect) has been asserted by the
-	  modem.</para>
-	    
-	<para>If you do not see any <command>getty</command> processes waiting
-	  to open the desired
-	  <filename>ttyd<replaceable>N</replaceable></filename> port,
-	  double-check your entries in <filename>/etc/ttys</filename> to see
-	  if there are any mistakes there.  Also, check the log file
-	  <filename>/var/log/messages</filename> to see if there are any log
-	  messages from <command>init</command> or <command>getty</command>
-	  regarding any problems.  If there are any messages, triple-check the
-	  configuration files <filename>/etc/ttys</filename> and
-	  <filename>/etc/gettytab</filename>, as well as the appropriate
-	  device special files <filename>/dev/ttydN</filename>, for any
-	  mistakes, missing entries, or missing device special files.</para>
+	<para>e o modem ainda não ter aceitado uma chamada, isso significa que o <command>getty</command> 
+          completou a abertura das portas de comunicação.  Isto pode indicar um problema com o cabo
+          ou uma mal configuração do modem, devido ao <command>getty</command> não estar habilitado
+          a abrir a porta de comunicação até que o <acronym>CD</acronym> (detecção de portadora) seja
+          informado pelo modem.</para>
+
+	<para>Caso você não veja nenhum processo <command>getty</command> indicado para abrir a porta
+	  <filename>ttyd<replaceable>N</replaceable></filename> designada, recheque suas entradas
+          no arquivo <filename>/etc/ttys</filename> para ver se não há erros. Verifique também o arquivo
+          de log <filename>/var/log/messages</filename> para ver se não há nenhuma mensagem de log
+          do <command>init</command> ou do <command>getty</command> relativa a um problema. Se houver
+          verifique novamente os arquivos de configuração <filename>/etc/ttys</filename> e o
+          <filename>/etc/gettytab</filename>, assim como o arquivo especial de dispositivo 
+          <filename>/dev/ttydN</filename>, buscando por qualquer erro, entradas erradas ou arquivos
+          especiais de dispositivos perdidos.</para> 
       </sect3>
       
       <sect3>
-	<title>Try Dialing In</title>
+	<title>Tentando conectar-se ao sistema discando para ele</title>
 
-	<para>Try dialing into the system; be sure to use 8 bits, no parity,
-	  and 1
-	  stop bit on the remote system.  If you do not get a prompt right
-	  away, or get garbage, try pressing <keycode>Enter</keycode>
-	  about once per second.  If you still do not see a
-	  <prompt>login:</prompt> prompt after a while, try sending a
-	  <command>BREAK</command>. If you are using a high-speed modem to do
-	  the dialing, try dialing again after locking the dialing modem's
-	  interface speed (via <command>AT&amp;B1</command> on a &usrobotics;
-	  &sportster; modem, for example).</para>
+	<para>Tente discar para o sistema; tenha certeza de usar 8 bits, sem paridade, e 1 bit
+          de parada no sistema remoto. Se você não conseguir um prompt correto, ou receber
+          caracteres impróprios, tente pressionar <keycode>Enter</keycode> uma vez por segundo. Se ainda
+          assim você não ver um prompt <prompt>login:</prompt> tente enviar um comando <command>BREAK</command>. Caso
+          você esteja utilizando um modem de alta velocidade para a conexão discada, tente discar novamente após
+          o travamento da velocidade da interface para a linha de discagem(via o comando <command>AT&amp;B1</command> como num modem &usrobotics;
+          &sportster;,  por exemplo).</para>)
 	    
-	<para>If you still cannot get a <prompt>login:</prompt> prompt, check
-	  <filename>/etc/gettytab</filename> again and double-check
-	  that</para>
+	<para>Se você ainda assim não conseguir um prompt <prompt>login:</prompt>, verifique novamente o
+	  <filename>/etc/gettytab</filename> e recheque que</para>
 
 	<itemizedlist>
 	  <listitem>
-	    <para>The initial capability name specified in
-	      <filename>/etc/ttys</filename> for the line matches a name of a
-	      capability in <filename>/etc/gettytab</filename></para>
+	    <para>O nome da capacidade inicial especificada no <filename>/etc/ttys</filename> para 
+              a linha combina com o nome da capacidade em <filename>/etc/gettytab</filename></para>
 		</listitem>
 		
 	  <listitem>
-	    <para>Each <literal>nx=</literal> entry matches another
-	      <filename>gettytab</filename> capability name</para>
+	    <para>Cada entrada <literal>nx=</literal> combine com outro nome de capacidade <filename>gettytab</filename></para>
 	  </listitem>
 	  
 	  <listitem>
-	    <para>Each <literal>tc=</literal> entry matches another
-	      <filename>gettytab</filename> capability name</para>
+	    <para>Cada entrada <literal>tc=</literal> combine com outro nome de capacidade <filename>gettytab</filename></para>
 	  </listitem>
 	</itemizedlist>
 
-	<para>If you dial but the modem on the FreeBSD system will not answer,
-	  make sure that the modem is configured to answer the phone when
-	  <acronym>DTR</acronym> is asserted.  If the modem seems to be
-	  configured correctly, verify that the <acronym>DTR</acronym> line is
-	  asserted by checking the modem's indicator lights (if it has
-	  any).</para>
+	<para>Se você disca mas o modem no sistema FreeBSD não responde, certifique-se de que o modem
+          está configurado para responder a chamada telefônica quando <acronym>DTR</acronym> é informado. Se
+          o modem parecer estar configurado corretamente, verifique se o <acronym>DTR</acronym> da linha
+          é informado observando as luzes indicadoras do modem(se ele tiver alguma).</para>
 	    
-	<para>If you have gone over everything several times and it still does
-	  not work, take a break and come back to it later.  If it still does
-	  not work, perhaps you can send an electronic mail message to the
-	  &a.questions; describing your modem and your problem, and the good
-	  folks on the list will try to help.</para>
+	<para>Se você tiver feito tudo isso diversas vezes e ainda assim não funcionar, dê um descanso
+          e tente mais tarde. Se ainda assim não funcionar, você pode, talvez, enviar um email 
+          para &a.questions; descrevendo seu modem e seu problema e povo bom da lista tentará te ajudar.</para>
       </sect3>
     </sect2>
     
   </sect1>
   
   <sect1 id="dialout">
-    <title>Dial-out Service</title>
+    <title>Serviço de Dial-out</title>
     <indexterm><primary>dial-out service</primary></indexterm>
     
-    <para>The following are tips for getting your host to be able to connect
-      over the modem to another computer.  This is appropriate for
-      establishing a terminal session with a remote host.</para>
+    <para>A seguir, dicas para que seu sistema conecte, através de um modem, em outro computador.  Isto 
+      é apropriado para estabilizar uma sessão de terminal com um sistema remoto.</para>
     
-    <para>This is useful to log onto a BBS.</para>
+    <para>Isto pode ser útil para logar em uma BBS.</para>
     
-    <para>This kind of connection can be extremely helpful to get a file on
-      the Internet if you have problems with PPP.  If you need to FTP
-      something and PPP is broken, use the terminal session to FTP it. Then
-      use zmodem to transfer it to your machine.</para>
+    <para>Este tipo de conexão pode ser de extremo auxílio para conseguir um arquivo na Internet
+      caso você tenha problemas com PPP. Caso você precise de fazer FTP de algo e o PPP falhar, use
+      a sessão de terminal para o FTP. Então use zmodem para tranferir o arquivo pra a sua máquina.</para>
 
     <sect2>
-      <title>My Stock Hayes Modem Is Not Supported, What Can I Do?</title>
+      <title>Meu modem Stock Hayes não é suportado, o que posso fazer?</title>
       
-      <para>Actually, the manual page for <command>tip</command> is out of date.
-	There is a generic Hayes dialer already built in. Just use
-	<literal>at=hayes</literal> in your <filename>/etc/remote</filename>
-	file.</para>
+      <para>Atualmente, a página de manual para o <command>tip</command> está desatualizada. Há um discador
+        genérico para Hayes já embutido. Só é necessário usar <literal>at=hayes</literal> no seu
+        arquivo <filename>/etc/remote</filename>.</para>
 	  
-      <para>The Hayes driver is not smart enough to recognize some of the
-	advanced features of newer modems&mdash;messages like
-	<literal>BUSY</literal>, <literal>NO DIALTONE</literal>, or
-	<literal>CONNECT 115200</literal> will just confuse it.  You should
-	turn those messages off when you use <command>tip</command> (using
-	<command>ATX0&amp;W</command>).</para>
+      <para>O driver Hayes não é inteligente o bastante para reconhecer algumas das avançadas funcionalidades
+        do modems modems&mdash;messages mais novos como <literal>BUSY</literal>, <literal>NO DIALTONE</literal>, ou
+        <literal>CONNECT 115200</literal> apenas irão confundi-lo. Você deve desativar estas mensagens 
+        quando utilizar o <command>tip</command> (utilizando <command>ATX0&amp;W</command>).</para>
 	  
       <para>Also, the dial timeout for <command>tip</command> is 60 seconds.
 	Your modem should use something less, or else tip will think there is
