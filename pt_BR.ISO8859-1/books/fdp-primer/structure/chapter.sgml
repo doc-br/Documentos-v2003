@@ -33,14 +33,28 @@
 <chapter id="structure">
   <title>Structuring documents under <filename>doc/</filename></title>
 
+  <title>Estruturando documentos sob <filename>doc/</filename></title>
+
   <para>The <filename>doc/</filename> tree is organized in a particular
     fashion, and the documents that are part of the FDP are in turn organized
     in a particular fashion.  The aim is to make it simple to add new
     documentation into the tree and:</para>
 
+  <para>A &aacute;rvore <filename>doc/</filename> &eacute; organizada
+    de uma forma particular, e os documentos que comp&otilde;o o
+    &a.ptbr.p.fdpp; devem ser por isso organizados de forma
+    particular.  O objetivo &eacute; tornar simples a
+    adi&ccedil;&atilde;o de nova documenta&ccedil;&atilde;o &agrave;
+    &aacute;rvore, e:</para>
+
   <orderedlist>
     <listitem>
       <para>make it easy to automate converting the document to other formats</para>
+    </listitem>
+
+    <listitem>
+      <para>facilitar a automati&ccedil;&atilde;o da conver&ccedil;&atilde;o
+        de documentos para outros formatos</para>
     </listitem>
 
     <listitem>
@@ -50,8 +64,19 @@
     </listitem>
 
     <listitem>
+      <para>promover consist&ecirc;ncia entre diferentes formas de
+        organizar a documenta&ccedil;&atilde;o, facilitar a troca
+        entre diferentes documentos XXX</para>
+    </listitem>
+
+    <listitem>
       <para>make it easy to decide where in the tree new documentation should
 	be placed</para>
+    </listitem>
+
+    <listitem>
+      <para>facilitar a decis&atilde;o de onde na &aacute;rvore nova
+        documenta&ccedil&atilde;o deveria ser colocada</para>
     </listitem>
   </orderedlist>
 
@@ -60,19 +85,38 @@
     encodings.  It is important that the structure of the documentation tree
     does not enforce any particular defaults or cultural preferences.</para>
 
+  <para>Al&eacute;m disso, a &aacute;rvore de
+    documenta&ccedil;&atilde;o tem de acomodar
+    documenta&ccedil;&atilde;o que pode estar em muitas diferentes
+    l&iacute;ngua e muitas diferentes codifica&ccedil;&otilde;es.
+    &Eacute; importante que a estrutura da &aacute;rvore de
+    documenta&ccedil;&atilde;o n&atilde;o force nenhum padr&atilde;o
+    particular ou prefer&ecirc;ncia cultural.</para>
+
   <sect1 id="structure-top">
     <title>The top level, <filename>doc/</filename></title>
+    <title>O n&iacute;vel superior, <filename>doc/</filename></title>
 
     <para>There are two types of directory under <filename>doc/</filename>,
       each with very specific directory names and meanings.</para>
 
+    <para>Existem dois tipos de diret&oacute;rios sob
+      <filename>doc/</filename>, cada um com nomes de
+      diret&oacute;rios e significados muito espec&iacute;ficos.</para>
+
     <segmentedlist>
       <segtitle>Directory</segtitle>
 
+      <segtitle>Diret&oacute;rio</segtitle>
+
       <segtitle>Meaning</segtitle>
+
+      <segtitle>Significado</segtitle>
 
       <seglistitem>
 	<seg><filename>share/</filename></seg>
+
+        <seg><filename>share/</filename></seg>
 	
 	<seg>Contains files that are not specific to the various translations
 	  and encodings of the documentation.  Contains subdirectories to
@@ -81,10 +125,23 @@
 	  <filename>share/mk</filename>, while the additional SGML support
 	  files (such as the FreeBSD extended DocBook DTD) are in
 	  <filename>share/sgml</filename>.</seg>
+
+        <seg>Cont&eacute;m arquivos que n&atilde;o s&atilde;o
+          espec&iacute;ficos as v&aacute;rias tradu&ccedil;&otilde;es
+          e codifica&ccedil;&otilde;es da documenta&ccedil;&otilde;o.
+          Cont&eacute;m subdiret&oacute;rios para maior categorizar a
+          informa&ccedil;&atilde;o.  Por exemplo, os arquivos que
+          comp&otilde;e a infraestrutura de #man.make.1; encontram-se
+          em <filename>share/mk</filename>, enquanto os arquivos
+          adicionais para suporte SGML (como FreeBSD DocBook DTD
+          extendido) encontram-se em
+          <filename>share/sgml</filename>.</seg>
       </seglistitem>
 
       <seglistitem>
 	<seg><filename><replaceable>lang</replaceable>.<replaceable>encoding</replaceable>/</filename></seg>
+
+	<seg><filename><replaceable>l&iacute;ngua</replaceable>.<replaceable>codifica&ccedil;&atilde;o</replaceable>/</filename></seg>
 	
 	<seg>One directory exists for each available translation and encoding
 	  of the documentation, for example
@@ -95,59 +152,122 @@
 	  same language but in more than one encoding.  This also completely
 	  isolates us from any problems that might be caused by a switch to
 	  Unicode.</seg>
+
+        <seg>Um diret&oacute;rio existe para cada
+          tradu&ccedil;&atilde;o e codifica&ccedil;&atilde;o da
+          documenta&ccedil;&atilde;o, por ex.
+          <filename>en_US.ISO8859-1/</filename> e
+          <filename>zh_TW.Big5/</filename>.  Os nomes s&atilde;o
+          longos, mas ao especificar completamente a l&iacute;ngua e
+          codifica&ccedil;&atilde;o prevenimos qualquer futura dor de
+          cabe&ccedil;a caso um time de tradu&ccedil;&atilde;o queira
+          prover a documenta&ccedil;&atilde;o na mesma l&iacute;ngua
+          mas em mais de uma codifica&ccedil;&atilde;o.  Isto
+          tamb&eacute;m nos insula completamente de quaisquer
+          problemas que possam ser causados por uma mudan&ccedil;a
+          para Unicode.</seg>
       </seglistitem>
     </segmentedlist>
   </sect1>
 
   <sect1 id="structure-locale">
     <title>The
-      <filename><replaceable>lang</replaceable>.<replaceable>encoding</replaceable>/</filename> directories</title>
+      <filename><replaceable>lang</replaceable>.<replaceable>encoding</replaceable>/</filename> 
+      directories</title>
+
+    <title>Os diret&oacute;rios
+      <filename><replaceable>l&iacute;ngua</replaceable>.<replaceable>codifica&ccedil;&atilde;o</replaceable></filename></title>
 
     <para>These directories contain the documents themselves.  The
-	documentation is split into up to three more categories at this
-	level, indicated by the different directory names.</para>
+      documentation is split into up to three more categories at this
+      level, indicated by the different directory names.</para>
+
+    <para>Estes diret&oacute;rios cont&eacute;m os documentos
+      propriamente ditos.  A documenta&ccedil;&atilde;o &eacute;
+      dividida em at&eacute; tr&ecirc;s mais categorias neste
+      n&iacute;vel, indicadas pelos diferentes nomes de
+      diret&oacute;rios.</para>
 
     <segmentedlist>
       <segtitle>Directory</segtitle>
 
+      <segtitle>Diret&oacute;rio</segtitle>
+
       <segtitle>Contents</segtitle>
+
+      <segtitle>Conte&uacute;do</segtitle>
 
       <seglistitem>
 	<seg><filename>articles</filename></seg>
-	
-	<seg>Documentation marked up as a DocBook <sgmltag>article</sgmltag> 
-	  (or equivalent).  Reasonably short, and broken up into sections.
-	  Normally only available as one HTML file.</seg>
+
+	<seg>Documentation marked up as a DocBook
+          <sgmltag>article</sgmltag> (or equivalent).  Reasonably
+          short, and broken up into sections. Normally only available
+          as one HTML file.</seg>
+
+        <seg>Documenta&ccedil;&atilde;o <foreignphrase>marked
+            up</foreignphrase> como DocBook <sgmltag>article</sgmltag>
+          (ou equivalente).  Razoavelmente pequena, e separada em
+          se&ccedil;&otilde;es.  Normalmente somente dispon&iacute;vel
+          como um arquivo HTML. XXX</seg>
       </seglistitem>
 	
       <seglistitem>
 	<seg><filename>books</filename></seg>
-	
-	<seg>Documentation marked up as a DocBook <sgmltag>book</sgmltag> (or
-	  equivalent).  Book length, and broken up into chapters.  Normally
-	  available as both one large HTML file (for people with fast
-	  connections, or who want to print it easily from a browser) and
-	  as a collection of linked, smaller files.</seg>
+
+	<seg>Documentation marked up as a DocBook
+          <sgmltag>book</sgmltag> (or equivalent).  Book length, and
+          broken up into chapters.  Normally available as both one
+          large HTML file (for people with fast connections, or who
+          want to print it easily from a browser) and as a collection
+          of linked, smaller files.</seg>
+
+        <seg>Documenta&ccedil;&atilde;o <foreignphrase>marked
+            up</foreignphrase> como DocBook <sgmltag>book</sgmltag>
+          (ou equivalente).  Com extens&atilde;o de livro
+          (<foreignphrase>book length</foreignphrase>), e separada em
+          cap&iacute;tulos.  Normalmente dispon&iacute;vel tanto como
+          um grande arquivo HTML (para pessoas com conex&otilde;es
+          r&aacute;pidas, ou que queiram imprim&iacute;-la facilmente
+          a partir de um navegador Internet) quanto como uma
+          cole&ccedil;&atilde;o de pequenos arquivos
+          interligados.</seg>
       </seglistitem>
 
       <seglistitem>
 	<seg><filename>man</filename></seg>
 	
-	<seg>For translations of the system manual pages.  This directory will 
-	  contain one or more
-	  <filename>man<replaceable>n</replaceable></filename> directories,
-	  corresponding to the sections that have been translated.</seg>
+	<seg>For translations of the system manual pages.  This
+          directory will contain one or more
+          <filename>man<replaceable>n</replaceable></filename>
+          directories, corresponding to the sections that have been
+          translated.</seg>
+
+        <seg>Para tradu&ccedil;&otilde;es de p&aacute;ginas de manual
+          do sistema.  Este diret&oacute;rio conter&aacute; um ou mais
+          diret&oacute;rios
+          <filename>man<replaceable>n</replaceable></filename>,
+          correspondendo as se&ccedil;&otilde;es que foram
+          traduzidas.</seg>
       </seglistitem>
     </segmentedlist>
 
     <para>Not every
-      <filename><replaceable>lang</replaceable>.<replaceable>encoding</replaceable></filename> directory will contain all of these directories.  It depends
-      on how much translation has been accomplished by that translation
+      <filename><replaceable>lang</replaceable>.<replaceable>encoding</replaceable></filename> 
+      directory will contain all of these directories.  It depends on
+      how much translation has been accomplished by that translation
       team.</para>
+
+    <para>Nem todo diret&oacute;rio
+      <filename><replaceable>l&iacute;ngua</replaceable>.<replaceable>codifica&ccedil;&atilde;o</replaceable></filename> 
+      conter&aacute; todos estes diret&oacute;rios.  Isto
+      depender&aacute; de quanta tradu&ccedil;&atilde;o foi realizada
+      pelo time de tradu&ccedil;&atilde;o.</para>
   </sect1>
   
   <sect1 id="structure-document">
     <title>Document specific information</title>
+    <title>Informa&ccedil;&atilde;o espec&iacute;fica XXXXX </title>
 
     <para>This section contains specific notes about particular documents
       managed by the FDP.</para>
