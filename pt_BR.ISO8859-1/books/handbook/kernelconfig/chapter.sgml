@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.21 2003/12/09 19:35:07 surf Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.22 2003/12/10 10:18:41 surf Exp $
 -->
 
 <chapter id="kernelconfig">
@@ -952,7 +952,7 @@ device          atapicd                 # ATAPI CDROM drives</programlisting>
 
     <programlisting>device          atapist                 # ATAPI tape drives</programlisting>
 
-    <para>This is needed along with <literal>device ata</literal> for
+    <para>Isto é necessário junto com <literal>device ata</literal> para
       ATAPI tape drives.</para>
 
     <programlisting>options         ATA_STATIC_ID           #Static device numbering</programlisting>
@@ -1149,13 +1149,13 @@ device          wx         # Intel Gigabit Ethernet Card (<quote>Wiseman</quote>
     <programlisting># PCI Ethernet NICs that use the common MII bus controller code.
 device          miibus     # MII bus support</programlisting>
 
-    <para>MII bus support is required for some PCI 10/100 Ethernet NICs,
-      namely those which use MII-compliant transceivers or implement
-      transceiver control interfaces that operate like an MII.  Adding
-      <literal>device miibus</literal> to the kernel config pulls in
-      support for the generic miibus API and all of the PHY drivers,
-      including a generic one for PHYs that are not specifically handled
-      by an individual driver.</para>
+    <para>O suporte a MII bus é requerido para algumas Placas de Rede PCI 10/100 NICs,
+      ou seja aqueles que usam transceivers MII-compliant ou implementam
+      controle de interface transceiver o operam como um MII. Adicionando
+      <literal>dispositivo miibus</literal> para a configuração do kernel puxam 
+      suporte para um genérico miibus API e todos drivers de PHY,
+      incluindo um genérico para PHYs que não são specificados na negociação
+      por um driver individual.</para>
 
     <programlisting>device          dc         # DEC/Intel 21143 and various workalikes
 device          rl         # RealTek 8129/8139
@@ -1167,30 +1167,30 @@ device          vr         # VIA Rhine, Rhine II
 device          wb         # Winbond W89C840F
 device          xl         # 3Com 3c90x (<quote>Boomerang</quote>, <quote>Cyclone</quote>)</programlisting>
 
-    <para>Drivers that use the MII bus controller code.</para>
+    <para>Drivers que usam o código do controlador MII bus.</para>
 
     <programlisting># ISA Ethernet NICs.
 device          ed0    at isa? port 0x280 irq 10 iomem 0xd8000
 device          ex
 device          ep
-# WaveLAN/IEEE 802.11 wireless NICs. Note: the WaveLAN/IEEE really
-# exists only as a PCMCIA device, so there is no ISA attachment needed
-# and resources will always be dynamically assigned by the pccard code.
+# WaveLAN/IEEE 802.11 wireless NICs. Nota: o WaveLAN/IEEE really
+# existe somente como um dispositivo PCMCIA, assim não há acessório ISA necesário
+# e recursos serão atribuídos dinamicamente pelo código do pccard.
 device          wi
-# Aironet 4500/4800 802.11 wireless NICs. Note: the declaration below will
-# work for PCMCIA and PCI cards, as well as ISA cards set to ISA PnP
-# mode (the factory default). If you set the switches on your ISA
-# card for a manually chosen I/O address and IRQ, you must specify
-# those parameters here.
+# Aironet 4500/4800 802.11 wireless NICs. Nota: a declaração abaixo trabalhará
+# para cartões PCMCIA e PCI, bem como um cartão ISA seta para modo ISA PnP
+# (o padrão de fábrica). Se você ajustar os jumpers no seu cartão ISA
+# para um endereço de I/O e IRQ manualmente, você deve especificar
+# os parametros aqui.
 device          an
-# The probe order of these is presently determined by i386/isa/isa_compat.c.
+# A ordem experimentada está presente e determinado por i386/isa/isa_compat.c.
 device          ie0    at isa? port 0x300 irq 10 iomem 0xd0000
 device          fe0    at isa? port 0x300
 device          le0    at isa? port 0x300 irq 5 iomem 0xd0000
 device          lnc0   at isa? port 0x280 irq 10 drq 0
 device          cs0    at isa? port 0x300
 device          sn0    at isa? port 0x300 irq 10
-# requires PCCARD (PCMCIA) support to be activated
+# requerer suporte PCCARD (PCMCIA) para ser ativado
 #device         xe0    at isa?</programlisting>
 
     <para>ISA Ethernet drivers.  See
