@@ -24,7 +24,7 @@
     </authorgroup>
   </chapterinfo>
 
-  <title>Configurando o Kernel do FreeBSD</title>
+  <title>Configurando o kernel do FreeBSD</title>
 
   <sect1 id="kernelconfig-synopsis">
     <title>Sin&oacute;pse</title>
@@ -74,7 +74,7 @@
   </sect1>
 
   <sect1 id="kernelconfig-custom-kernel">
-    <title>Porque Compilar um Kernel Personalisado?</title>
+    <title>Porque compilar um kernel personalisado?</title>
 
     <para>Tradicionalmente, &os; teve o que foi chamado de kernel
       <quote>monolitico</quote>. Isto significa que o kernel era um
@@ -122,7 +122,7 @@
   </sect1>
 
   <sect1 id="kernelconfig-building">
-    <title> Compilando e Instalando um Kernel Personalizado</title>
+    <title> Compilando e instalando um kernel personalizado</title>
     <indexterm>
       <primary>kernel</primary>
       <secondary>Compilando / instalando</secondary>
@@ -205,136 +205,131 @@
     </tip>
 
     <note>
-      <para>You must execute these and all of the following commands under
-	the <username>root</username> account or you will get
-        <errortype>permission denied</errortype> errors.</para>
+      <para>Voc&ecirc; deve executar todos estes comandos sobre
+	a conta do <username>root</username> sen&atilde;o voc&ecirc; dar&aacute; erros
+        <errortype>permiss&atilde;o negada</errortype>.</para>
     </note>
 
-    <para>Now, edit <filename>MYKERNEL</filename> with your favorite text
-      editor.  If you are just starting out, the only editor available
-      will probably be <application>vi</application>, which is too complex to
-      explain here, but is covered well in many books in the <link
-      linkend="bibliography">bibliography</link>.  However, &os; does
-      offer an easier editor called <application>ee</application> which, if
-      you are a beginner, should be your editor of choice.  Feel free to
-      change the comment lines at the top to reflect your configuration or
-      the changes you have made to differentiate it from
+    <para>Agora, edite <filename>MYKERNEL</filename> com seu editor de texto favorito. Se voc&ecirc; for come&ccedil;ar a configurar, somente o 
+editor eficaz 
+      a escolher provavelmente seja o <application>vi</application>, o qual &eacute; muito complexo para
+      explicar aqui, mas &eacute; coberto em muitos livros de <link
+      linkend="bibliography">bibliografia</link>. Entretanto, &os; oferece um editor mais f&aacute;cil chamado <application>ee</application> 
+que, se 
+      voc&ecirc; for um novato, deve ser o editor de sua escolha.
+      Totalmente livre para mudar as linhas de coment&aacute;rios no alto para refletir sua configura&ccedil;&atilde;o e as 
+altera&ccedil;&otilde;es para diferenciar do 
       <filename>GENERIC</filename>.</para>
     <indexterm><primary>SunOS</primary></indexterm>
 
-    <para>If you have built a kernel under &sunos; or some other BSD
-      operating system, much of this file will be very familiar to you.
-      If you are coming from some other operating system such as DOS, on
-      the other hand, the <filename>GENERIC</filename> configuration file
-      might seem overwhelming to you, so follow the descriptions in the
-      <link linkend="kernelconfig-config">Configuration File</link>
-      section slowly and carefully.</para>
+    <para>Se você tiver que compilar um kernel sobre &sunos; ou qualquer outro BSD
+      Sistema Operacional, muito deste arquivo deverá ser muito familiar a você.
+      Se você vier de outro sistema operacional tal como DOS, trabalhar sobre, 
+      o arquivo de configuração <filename>GENERIC</filename> 
+      pode impressionar a você, sendo assim siga as descrições do
+      <link linkend="kernelconfig-config">Arquivo de Configuração</link>
+      lentamente e com cuidado.</para>
 
     <note>
-      <para>Be sure to always check the file
-        <filename>/usr/src/UPDATING</filename>, before you perform any update
-        steps, in the case you <link
-        linkend="cutting-edge">sync your source tree</link> with the
-        latest sources of the &os; project.
-        In this file all important issues with updating &os;
-        are typed out.  <filename>/usr/src/UPDATING</filename> always fits
-        your version of the &os; source, and is therefore more accurate
-        for new information than the handbook.</para>
+      <para>É importante você sempre verificar o arquivo
+        <filename>/usr/src/UPDATING</filename>, antes que você execute todas as etapas do update,
+        No caso você pode <link
+        linkend="cutting-edge">sincronizar seu código fonte</link> com o
+        código fonte de um projeto mais atrasado do &os;.
+        Neste arquivo todas as importantes edições para atualiação do &os;
+        são datilografadas. <filename>/usr/src/UPDATING</filename> ajuste sempre sua versão do código fonte do &os;, 
+        são mais precisas para novas informações que o handbook.</para>
     </note>
 
-    <para>You must now compile the source code for the kernel.  There are two
-      procedures you can use to do this, and the one you will use depends on
-      why you are rebuilding the kernel, and the version of &os; you are
-      running.</para>
+    <para>Você deve agora compilar o código fonte do kernel. Estão aqui dois
+      procedimentos que você pode usar para isto, e qual você usará, vai depender de cmo você quer recompilar seu kernel, 
+      e a versão do &os; que você está rodando.</para>
 
     <itemizedlist>
       <listitem>
-	<para>If you have installed <emphasis>only</emphasis> the kernel
-	  source code, use procedure 1.</para>
+	<para>Se você tiver instalado <emphasis>somente</emphasis> o código fonte do kernel,
+	  use o procedimento 1.</para>
       </listitem>
 
       <listitem>
-	<para>If you are running a &os; version prior to 4.0, and you are
-	  <emphasis>not</emphasis> upgrading to &os;&nbsp;4.0 or higher using
-	  the <maketarget>make world</maketarget> procedure, use procedure 1.
+	<para>Se você tiver rodando um &os; versão anterior ao 4.0, e você 
+	  <emphasis>não</emphasis> tiver atualização para o &os;&nbsp;4.0 ou mais atual use
+	  o procedimento <maketarget>make world</maketarget>, use o procedimento 1.
         </para>
       </listitem>
 
       <listitem>
-	<para>If you are building a new kernel without updating the source
-	  code (perhaps just to add a new option, such as
-	  <literal>IPFIREWALL</literal>) you can use either procedure.</para>
+	<para>Se você estiver recompilando um kernel novo sem atualizar o código fonte
+	  (talvez para adicionar uma nova opção, tal como
+	  <literal>IPFIREWALL</literal>) você teria que usar o outro procedimento.</para>
       </listitem>
 
       <listitem>
-	<para>If you are rebuilding the kernel as part of a
-          <maketarget>make world</maketarget> process, use procedure 2.
+	<para>Se você estiver recompilando o kernel como parte de um processo de um
+          <maketarget>make world</maketarget>, use o procedimento 2.
         </para>
       </listitem>
     </itemizedlist>
     
     <procedure>
-      <title>Procedure 1.  Building a Kernel the <quote>Traditional</quote> Way</title>
+      <title>Procedimento 1.  Compilando um Kernel da Maneira <quote>Tradicional</quote></title>
       
       <step>
-	<para>Run &man.config.8; to generate the kernel source code.</para>
+	<para>Execute &man.config.8; para gerar o código fonte do kernel.</para>
 	
 	<screen>&prompt.root; <userinput>/usr/sbin/config <replaceable>MYKERNEL</replaceable></userinput></screen>
       </step>
 
       <step>
-	<para>Change into the build directory.  This is printed out after running the aforementioned
-	  command.</para>
+	<para>Mude o diretório de configuração. Isto e mostrado após rodar o comando acima mencionado.</para>
 
 	<screen>&prompt.root; <userinput>cd ../compile/<replaceable>MYKERNEL</replaceable></userinput></screen>
 
-	<para>For &os; version prior to 5.0, use instead:</para>
+	<para>Para &os; version anterior a 5.0, usa-se preferivelmente:</para>
 
 	<screen>&prompt.root; <userinput>cd ../../compile/<replaceable>MYKERNEL</replaceable></userinput></screen>
       </step>
 
       <step>
-	<para>Compile the kernel.</para>
+	<para>Compilando o kernel.</para>
 	
 	<screen>&prompt.root; <userinput>make depend</userinput>
 &prompt.root; <userinput>make</userinput></screen>
       </step>
 
       <step>
-	<para>Install the new kernel.</para>
+	<para>Instalando o novo kernel.</para>
 	
 	<screen>&prompt.root; <userinput>make install</userinput></screen>
       </step>
     </procedure>
 
     <procedure>
-      <title>Procedure 2.  Building a Kernel the <quote>New</quote>
-	Way</title>
+      <title>Procedimento 2.  Compilando um Kernel Maneira <quote>Nova</quote></title>
       
       <step>
-	<para>Change to the <filename>/usr/src</filename> directory.</para>
+	<para>Mude o diretório para <filename>/usr/src</filename>.</para>
 	
 	<screen>&prompt.root; <userinput>cd /usr/src</userinput></screen>
       </step>
 
       <step>
-	<para>Compile the kernel.</para>
+	<para>Compilando o kernel.</para>
 	
 	<screen>&prompt.root; <userinput>make buildkernel KERNCONF=<replaceable>MYKERNEL</replaceable></userinput></screen>
       </step>
 
       <step>
-	<para>Install the new kernel.</para>
+	<para>Instalando o novo kernel.</para>
 
 	<screen>&prompt.root; <userinput>make installkernel KERNCONF=<replaceable>MYKERNEL</replaceable></userinput></screen>
       </step>
     </procedure>
     
     <note>
-      <para>In &os;&nbsp;4.2 and older you must replace
-        <literal>KERNCONF=</literal> with <literal>KERNEL=</literal>.
-        4.2-STABLE that was fetched before Feb 2nd, 2001 does not
-        recognize <literal>KERNCONF=</literal>.</para>
+      <para>Em &os;&nbsp;4.2 e mais antigos troque
+        <literal>KERNCONF=</literal> com <literal>KERNEL=</literal>.
+        4.2-STABLE isso foi colocado antes de Fevereiro, 2001 não reconhece <literal>KERNCONF=</literal>.</para>
     </note>
 
     <indexterm>
@@ -347,54 +342,53 @@
       <secondary>anonymous</secondary>
     </indexterm>
 
-    <para>If you have <emphasis>not</emphasis> upgraded your source
-      tree in any way (you have not run <application>CVSup</application>, 
-      <application>CTM</application>, or used 
-      <application>anoncvs</application>), then you should use the 
+    <para>Se você <emphasis>não</emphasis> tem atualizado seu código
+      de alguma maneira (você não pode executar <application>CVSup</application>, 
+      <application>CTM</application>, ou usar 
+      <application>anoncvs</application>), então você deve usar 
       <command>config</command>, <maketarget>make depend</maketarget>,
-      <command>make</command>, <maketarget>make install</maketarget> sequence.
+      <command>make</command>, <maketarget>make install</maketarget> nesta sequência.
     </para>
 
     <indexterm>
       <primary><filename>kernel.old</filename></primary>
     </indexterm> 
 
-    <para>The new kernel will be copied to the root directory as
-      <filename>/kernel</filename> and the old kernel will be moved to
-      <filename>/kernel.old</filename>.  Now, shutdown the system and
-      reboot to use your new kernel.  In case something goes wrong, there are
-      some <link linkend="kernelconfig-trouble">troubleshooting</link>
-      instructions at the end of this chapter.  Be sure to read the
-      section which explains how to recover in case your new kernel <link
+    <para>O novo kernel será copiado para o diretório do root como
+      <filename>/kernel</filename> e o velho kernel será movido para
+      <filename>/kernel.old</filename>. Agora, desligue o sistema e
+      reinicie para usar seu novo kernel. Caso algo saia errado, há algumas instruções para 
+      <link linkend="kernelconfig-trouble">pesquisa de defeitos</link>no final deste capítulo. 
+      É interessante que você leia the a seção de como recuperar caso seu novo kernel<link
       linkend="kernelconfig-noboot">does not boot</link>.</para>
 
     <note>
-      <para>As of &os; 5.0, kernels are installed along with their
-	modules in <filename>/boot/kernel</filename>, and old kernels
-	will be backed up in <filename>/boot/kernel.old</filename>.
-	Other files relating to the boot process, such as the boot
-	&man.loader.8; and configuration are also stored in
-	<filename>/boot</filename>.  Third party or custom modules
-	may be placed in <filename>/boot/modules</filename>, although
-	users should be aware that keeping modules in sync with the
-	compiled kernel is very important.  Modules not intended
-	to run with the compiled kernel may result in instability
-	or incorrectness.</para>
+      <para>Como do &os; 5.0, o kernel são instalados junto com os
+	módulos em <filename>/boot/kernel</filename>, e os kernels
+	velhos são colocados em <filename>/boot/kernel.old</filename>.
+	Outros arquivos relacionados ao processo de carregamento, tal como o carregamento do sistema
+	&man.loader.8; e a configurações são armazenadas também em
+	<filename>/boot</filename>. A terceira parte de parsonalização dos módulos
+	normalmente são colocados em <filename>/boot/modules</filename>, embora
+	os usuários devam estar cientes que manter os módulos na sincronização com o
+	kernel compilado é muito importante. Os módulos pretendidos não
+	rodar com o kernel compilado podem resultar em instabilidade
+	ou inconformidades.</para>
     </note>
 
     <note>
-      <para>If you have added any new devices (such as sound cards)
-	and you are running &os;&nbsp;4.X or previous versions, you
-	may have to add some device nodes to your
-	<filename>/dev</filename> directory before you can use
-	them. For more information, take a look at <link
+      <para>Se você adicionar qualquer dispositivo novo (tal como Placa de Som)
+	e você está rodando &os;&nbsp;4.X ou versôes anteriores, você
+	pode ter que adicionar algum dispositivo de ligação para seu diretório
+	<filename>/dev</filename> antes que você possa usar
+	eles. Para mais informações, de uma olhada na seção <link
 	linkend="kernelconfig-nodes">Making Device Nodes</link>
-	section later on in this chapter.</para>
+	mais tarde neste capítulo.</para>
     </note>
   </sect1>
 
   <sect1 id="kernelconfig-config">
-    <title>The Configuration File</title>
+    <title>O arquivo de Configuração</title>
     <indexterm>
       <primary>kernel</primary>
       <secondary>LINT</secondary>
@@ -405,20 +399,20 @@
       <secondary>config file</secondary>
     </indexterm>
 
-    <para>The general format of a configuration file is quite simple.
-      Each line contains a keyword and one or more arguments.  For
-      simplicity, most lines only contain one argument.  Anything
-      following a <literal>#</literal> is considered a comment and
-      ignored.  The following sections describe each keyword, generally in
-      the order they are listed in <filename>GENERIC</filename>, although
-      some related keywords have been grouped together in a single section
-      (such as Networking) even though they are actually scattered
-      throughout the <filename>GENERIC</filename> file.  <anchor
-      id="kernelconfig-options"> An exhaustive list of options and more
-      detailed explanations of the device lines is present in the
-      <filename>LINT</filename> configuration file, located in the same
-      directory as <filename>GENERIC</filename>.  If you are in doubt as
-      to the purpose or necessity of a line, check first in
+    <para>O formato geral do arquivo de configuração é bastante simples.
+      Cada linha contém uma palavra-chave e mais algum argumento. Para
+      simplificar, a maioria das linhas contém somente um argumento. Qualquer coisa
+      que segue um <literal>#</literal> é considerado um comentário e é
+      ignorado. As seguintes seções descrevem cada palavra-chave, geralmente na
+      ordem que são listadas no <filename>GENERIC</filename>, embora
+      algumas palavras-chaves relacionadas sejam agrupadas em uma única seção
+      (tal como Rede) mesmo que sejam descartados durante todo o arquivo
+      <filename>GENERIC</filename>. <anchor
+      id="kernelconfig-options"> Uma lista completa de opções e mais
+      detalhes e explicação em linhas dos dispositivos presentes no arquivo de configuração
+      <filename>LINT</filename>, localizado no mesmo
+      diretório do <filename>GENERIC</filename>. Se você tiver na dúvida a
+      respeito sa necessidade de uma linha, verifique primeiramente no
       <filename>LINT</filename>.</para>
 
     <note><para>In &os; 5.X and above the <filename>LINT</filename> is
