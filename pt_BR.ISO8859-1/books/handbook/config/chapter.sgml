@@ -741,7 +741,7 @@ sshd is running as pid 433.</screen>
       <para>Antes de come&ccedil;ar, voc&ecirc; deve saber o modelo da placa que 
 	voc&ecirc; possui, o chip que ela usa, se &eacute; PCI ou ISA.
 	&os; tem suporte &agrave; uma grande variedade de plavas PCI e ISA.  
-	Verifiqye a Lista de Compatibilidade de Hardware da sua vers&atilde;o 
+	Verifique a Lista de Compatibilidade de Hardware da sua vers&atilde;o 
 	e veja se a sua placa &eacute; suportada.</para>
 
       <para>Uma vez que a placa possui suporte, voc&ecirc; precisa determinar 
@@ -786,7 +786,7 @@ ukphy1:  10baseT, 10baseT-FDX, 100baseTX, 100baseTX-FDX, auto</screen>
 	o suporte para a sua placa no <foreignphrase>kernel</foreignphrase>.  Verifique 
 	o arquivo <filename>/usr/src/sys/i386/conf/LINT</filename> e a p&aacute;gina de manual 
 	do <literal>driver</literal> para saber o que adicionar ao seu 
-	arquivo de configura&ccedil;&atilde;o do <foreignphrase>kernel<foreignphrase>.  Para 
+	arquivo de configura&ccedil;&atilde;o do <foreignphrase>kernel</foreignphrase>.  Para 
 	maiores informa&ccedil;&otilde;es de como recompilar seu <foreignphrase>kernel</foreignphrase> 
 	por favor veja <xref linkend="kernelconfig">.  Se a sua placa foi 
 	detectada pelo seu <foreignphrase>kernel</foreignphrase> 
@@ -901,12 +901,12 @@ tun0: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1500</screen>
 	</listitem>
 
 	<listitem>
-	  <para>Possui um endere&ccedil;o MAC oara a placa (<literal>ether</literal>)
+	  <para>Possui um endere&ccedil;o MAC para a placa (<literal>ether</literal>)
 	    is <hostid role="mac">00:a0:cc:da:da:da</hostid></para>
 	</listitem>
 
 	<listitem>
-	  <para>A sele&ccedil;&atilde;o f&iacute;sica de m&iacute;dia est&aacute; no modo de auto sele&ccedil;&atilde;o 
+	  <para>A sele&ccedil;&atilde;o f&iacute;sica de m&iacute;dia est&aacute; no modo autom&aacute;tico 
 	    (<literal>media: Ethernet autoselect (100baseTX
 	    &lt;full-duplex&gt;)</literal>).  Podemos ver que o dispositivo
 	    <devicename>dc1</devicename> foi configurado para 
@@ -1010,7 +1010,8 @@ PING 192.168.1.3 (192.168.1.3): 56 data bytes
 5 packets transmitted, 5 packets received, 0% packet loss
 round-trip min/avg/max/stddev = 0.074/0.083/0.108/0.013 ms</screen>
 
-	<para>Now we have to ping another machine on the LAN:</para>
+	<para>Agora temos que usar o <command>ping</command> para outra 
+	  m&aacute;quina na Rede Local:</para>
 
 <screen>&prompt.user; <userinput>ping -c5 192.168.1.2</userinput>
 PING 192.168.1.2 (192.168.1.2): 56 data bytes
@@ -1100,51 +1101,52 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
   </sect1>
 
   <sect1 id="configtuning-virtual-hosts">
-    <title>Virtual Hosts</title>
+    <title>Servidores Virtuais</title>
 
     <indexterm><primary>virtual hosts</primary></indexterm>
     <indexterm><primary>IP aliases</primary></indexterm>
 
-    <para>A very common use of &os; is virtual site hosting, where
-      one server appears to the network as many servers.  This is
-      achieved by assigning multiple network addresses to a single
-      interface.</para>
+    <para>Um uso muito comum do &os; &eacute; a hospedagem virtual de 
+      servidores, onde um servidor parece ser muitos para a rede.  Isto
+      &eacute; feito designando-se multiplos endere&ccedil;os de rede para 
+      uma &uacute;nica interface.</para>
 
-    <para>A given network interface has one <quote>real</quote> address,
-      and may have any number of <quote>alias</quote> addresses.
-      These aliases are
-      normally added by placing alias entries in
+    <para>Uma interface de rede possui um endere&ccedil;o <quote>real</quote>,
+      e pode possuir qualquer n&uacute;mero de endere&ccedil;os de <quote>alias</quote>.
+      Estes <literal>aliases</literal> normalmente s&atilde;o 
+      adicionados atrav&eacute;s de entradas no arquivo 
       <filename>/etc/rc.conf</filename>.</para>
 
-    <para>An alias entry for the interface <devicename>fxp0</devicename>
-      looks like:</para>
+    <para>Uma entrada de <literal>alias</literal> para a interface 
+      <devicename>fxp0</devicename> parece com:</para>
 
 <programlisting>ifconfig_fxp0_alias0="inet xxx.xxx.xxx.xxx netmask xxx.xxx.xxx.xxx"</programlisting>
 
-    <para>Note that alias entries must start with alias0 and proceed
-      upwards in order, (for example, _alias1, _alias2, and so on).
-      The configuration process will stop at the first missing number.
+    <para>Note que as entradas de <literal>alias</literal> devem 
+      come&ccedil;ar com alias0 e continuar em ordem crescente, por 
+      (por exemplo, _alias1, _alias2, e assim sucessivamente).  O 
+      processo de configura&ccedil;&atilde;o se encerrar&aacute; assim que faltar um n&uacute;mero.
     </para>
 
-    <para>The calculation of alias netmasks is important, but
-      fortunately quite simple.  For a given interface, there must be
-      one address which correctly represents the network's netmask.
-      Any other addresses which fall within this network must have a
-      netmask of all <literal>1</literal>s.</para>
+    <para>O c&aacute;lculo das m&aacute;scaras de <literal>alias</literal> &eacute; importante, 
+      mas ainda bem que &eacute; bem simples.  Para uma interface qualquer, deve 
+      existir um endere&ccedil;o que represente corretamente a m&aacute;scara de rede.  
+      Quaisquer outros endere&ccedil;os dentro desta rede devem ter a 
+      m&aacute;scara de <literal>1</literal>s.</para>
 
-    <para>For example, consider the case where the
-      <devicename>fxp0</devicename> interface is
-      connected to two networks, the <hostid role="ipaddr">10.1.1.0</hostid>
-      network with a netmask of <hostid role="netmask">255.255.255.0</hostid>
-      and the <hostid role="ipaddr">202.0.75.16</hostid> network with
-      a netmask of <hostid role="netmask">255.255.255.240</hostid>.
-      We want the system to appear at <hostid role="ipaddr">10.1.1.1</hostid>
-      through <hostid role="ipaddr">10.1.1.5</hostid> and at
-      <hostid role="ipaddr">202.0.75.17</hostid> through
+    <para>Por exemplo, considere o caso onde a interface 
+      <devicename>fxp0</devicename> &eacute; conectada &agrave; duas redes, a 
+      rede <hostid role="ipaddr">10.1.1.0</hostid>
+      com a m&aacute;scara <hostid role="netmask">255.255.255.0</hostid>
+      e &agrave; rede <hostid role="ipaddr">202.0.75.16</hostid> com a 
+      m&aacute;scara <hostid role="netmask">255.255.255.240</hostid>.
+      Queremos que o sistema respondar de <hostid role="ipaddr">10.1.1.1</hostid>
+      &agrave; <hostid role="ipaddr">10.1.1.5</hostid> e de 
+      <hostid role="ipaddr">202.0.75.17</hostid> &agrave; 
       <hostid role="ipaddr">202.0.75.20</hostid>.</para>
 
-    <para>The following entries configure the adapter correctly for
-      this arrangement:</para>
+    <para>As seguintes entradas configuram a placa para este 
+      arranjo:</para>
 
 <programlisting> ifconfig_fxp0="inet 10.1.1.1 netmask 255.255.255.0"
  ifconfig_fxp0_alias0="inet 10.1.1.2 netmask 255.255.255.255"
