@@ -923,13 +923,14 @@ newfs: /dev/vinum/concat: can't figure out file system partition</screen>
   <sect1 id="vinum-config">
     <title>Configurando Vinum</title>
 
-    <para>O kernel <filename>GENERIC</filename> não contém Vinum.  É
-    possível construir um kernel especial para incluir o Vinum, mas não
-    é recomendado.  A maneira simples de iniciar o Vinum é com o módulo
-    de kernel (<acronym>kld</acronym>).  Você nem precisa usar
-    &man.kldload.8; para Vinum: quando você inicia &man.vinum.8;, ele
-    verifica se o modulo foi carregado ou não, e o carrega
-    automaticamente.</para>
+    <para>O <literal>kernel</literal> <filename>GENERIC</filename> não
+    contém Vinum.  É possível construir um <literal>kernel</literal>
+    especial para incluir o Vinum, mas não é recomendado.  A maneira
+    simples de iniciar o Vinum é com o módulo de
+    <literal>kernel</literal> (<acronym>kld</acronym>).  Você nem
+    precisa usar &man.kldload.8; para Vinum: quando você inicia
+    &man.vinum.8;, ele verifica se o modulo foi carregado ou não, e o
+    carrega automaticamente.</para>
     
     <sect2>
       <title>Inicialização</title>
@@ -994,12 +995,12 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 
 	<para>Quando você inicia Vinum com o comando <command>vinum
 	start</command>, Vinum lê a base de dados de configuração de um
-	dos discos do Vinum.  Sobre circunstâncias normais, cada um dos
+	dos discos Vinum.  Sobre circunstâncias normais, cada um dos
 	discos contém uma cópia idêntica da base de dados de
 	configuração, então não importa que disco é lido.  Embora, após
-	uma pane, Vinum tem que determinar qual o disco foi atualizado
+	uma pane, Vinum tenha que determinar qual o disco foi atualizado
 	mais recentemente e ler as configurações desse disco.  E então
-	as atualiza, se necessário, progressivamente do	disco mais
+	as atualiza, se necessário, progressivamente no	disco mais
 	velho.</para>
 	
       </sect3>
@@ -1007,39 +1008,37 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
   </sect1>
 
   <sect1 id="vinum-root">
-    <title>Usando Vinum para o sistemas de arquivos raiz</title>
+    <title>Usando Vinum para o Sistema de Arquivos Raiz</title>
     
 
     <para>Para uma máquina que esta espelhada por inteiro usando Vinum,
-    é desejável espelhar também o sistema de arquivos raiz.  Setar
+    é desejável espelhar também o sistema de arquivos raiz.  Executar
     tal configuração é menos trivial do que espelhar um disco
     arbitrário:</para>
 
     <itemizedlist>
       <listitem>
 	<para>O sistema de arquivos raiz deve estar disponível bem
-	cedo durante o processo de inicialização, então a infraestrutura
-	do Vinum deveria estar disponível também nessa hora.</para> 
+	cedo durante o processo de inicialização, então a infra-estrutura
+	Vinum deveria estar disponível também nessa hora.</para> 
       </listitem>
       <listitem><para>O volume contendo os arquivos de sistema raiz também
-      contém o bootstap de sistema e o kernel, no qual tem que ser lido
-      pela utilidade nativa de sistema (ex. A BIOS no caso dos PC's)
-      onde frequentemente não pode ser ensinada sobre os detalhes do
-      Vinum.</para>
+      contém o bootstap de sistema e o <literal>kernel</literal>, no
+      qual tem que ser lido pela utilidade nativa de sistema (ex. A BIOS
+      no caso dos PC's) onde frequentemente não pode ser ensinada sobre
+      os detalhes do Vinum.</para>
       </listitem>
     </itemizedlist>
 
     <para>Nas sessões que seguem, o termo <quote>root volume</quote> é
-    usado para descrevero volume de Vinum que contém os sistemas de
-    arquivo raiz.  É provávelmente uma boa idéia usar o nome
+    usado para descrever o volume Vinum que contém os sistemas de
+    arquivo raiz.  É provavelmente uma boa idéia usar o nome
     <literal>"root"</literal> para esse volume, mas isso não é de
     maneira nenhuma obrigatório.  Apesar de que todos os exemplos
     de comandos nas sessões seguintes assumem esse nome.</para>
 
-
-
     <sect2>
-      <title>Iniciando o Vinum a tempo para o sistema de arquivos raiz
+      <title>Iniciando o Vinum a Tempo Para o Sistema de Arquivos Raiz
       </title>
 
       <para>Existem algumas medidas a se tomar para que isso aconteça:
@@ -1047,20 +1046,20 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 
       <itemizedlist>
 	<listitem>
-	  <para>Vinum precisa estar disponível no kernel na hora do
-	  boot.  Então, o método para iniciar automaticamente o Vinum
-	  descrito em <xref linkend="vinum-rc-startup"> não é aplicável
-	  nesse caso, e o parâmetro <literal>start_vinum</literal> não
-	  pode estar ativado quando a seguinte configuração estiver
-	  sendo arrumada.  A primeira opção seria compilar o Vinum
-	  staticamente no kernel, então estara disponível o tempo todo,
-	  mas isso também não e sempre desejável.  Existe outra opção no
-	  entanto, que seria fazer com que o
-	  <filename>/boot/loader</filename> (<xref
+	  <para>Vinum precisa estar disponível no
+	  <literal>kernel</literal> na hora do boot.  Então, o método
+	  para iniciar automaticamente o Vinum descrito em <xref
+	  linkend="vinum-rc-startup"> não é aplicável nesse caso, e o
+	  parâmetro <literal>start_vinum</literal>
+	  <emphasis>não</emphasis> pode estar ativado quando a seguinte
+	  configuração estiver sendo arrumada.  A primeira opção seria
+	  compilar o Vinum staticamente no <literal>kernel</literal>,
+	  então estará disponível o tempo todo, mas isso também não é
+	  sempre desejável.  Existe outra opção no entanto, que seria
+	  fazer com que o <filename>/boot/loader</filename> (<xref
 	  linkend="boot-loader">) carregue o módulo de kenel do vinum
-	  cedo, antes de iniciar o kernel.  Isso pode ser feito
-	  adicionando a seguinte linha</para>
-	  
+	  cedo, antes de iniciar o <literal>kernel</literal>.  Isso pode
+	  ser feito adicionando a seguinte linha</para>
 
 	  <para><literal>vinum_load="YES"</literal></para>
 
@@ -1071,106 +1070,103 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 	<listitem>
 	  <para>Vinum deve ser iniciado cedo pois ele precisa suprir o
 	  volume para os arquivos de sistemas raiz.  Por padrão, a parte
-	  do kernel do vinum não esta procurando por discos que possam
-	  conter informações de volume do vinum até que o administrador
-	  (ou um dos scripts de inicialização) lance o comando
-	  <command>vinum start</command>.</para>
-	  
+	  do <literal>kernel</literal> do vinum não esta procurando por
+	  discos que possam conter informações de volume Vinum até que o
+	  administrador (ou um dos scripts de inicialização) lance o
+	  comando <command>vinum start</command>.</para>
 
 	  <note><para>Os parágrafos seguintes descrevem os passos
-	  necessários para o FreeBSD 5.x e superiores.  os passos
+	  necessários para o FreeBSD 5.x e superiores.  Os passos
 	  obrigatórios para o 4.x, são diferentes e estão descritos a
 	  baixo em <xref linkend="vinum-root-4x">.</para></note>
 	  
-
-	  <para>colocando a linha:</para>
-	  
+	  <para>Colocando a linha:</para>
 
 	  <para><literal>vinum.autostart="YES"</literal></para>
 
 	  <para>em <filename>/boot/loader.conf</filename>, Vinum é
-	    instruido para procurar automaticamente em todos os discos
+	    instruído para procurar automaticamente em todos os discos
 	    por informações úteis a ele como parte da inicialização do
-	    kernel.</para> 
+	    <literal>kernel</literal>.</para> 
 
-	  <para>Note que não é necesário ensinar ao kernel aonde
-	  procurar pelos arquivos de sistema raiz.
-	  <filename>/boot/loader</filename> procura o nome do
-	  dispositivo raiz em <filename>/etc/fstab</filename>, e passa
-	  essa informação para o kernel.  Quando chega a hora de montar
-	  os arquivos de sistema raiz, o kernel descobre a partir do nome
-	  do dispositivo fornecido qual é o disco que se deve pedir para
-	  passar o nome do dispositivo raiz para um numero de
-	  identificação interna de dispostivo.</para>
+	  <para>Note que não é necesário ensinar ao
+	  <literal>kernel</literal> aonde procurar pelos arquivos de
+	  sistema raiz.  <filename>/boot/loader</filename> procura o
+	  nome do dispositivo raiz em <filename>/etc/fstab</filename>, e
+	  passa essa informação para o <literal>kernel</literal>.
+	  Quando chega a hora de montar os arquivos de sistema raiz, o
+	  <literal>kernel</literal> descobre a partir do nome do
+	  dispositivo fornecido qual é o disco que se deve pedir para
+	  passar o nome do dispositivo raiz para um ID interno de
+	  dispostivo (número maior/menor).</para>
 	  
 	</listitem>
       </itemizedlist>
     </sect2>
 
     <sect2>
-      <title>Tornando um volume raiz baseado em vinum accessível para o
-      <literal>Bootstrap</literal>
-      
+      <title>Tornando um Volume Raiz Baseado em Vinum Accessível Para o
+      Bootstrap</title>
 
       <para>Visto que o atual <literal>Bootstrap</literal> do FreeBSD
       contém apenas 7.5 KB de código, e já tem o trabalho de ler
-      arquivos de UFS (como <filename>/boot/loader</filename>), é
+      arquivos no UFS (como <filename>/boot/loader</filename>), é
       completamente impossível ensiná-lo também sobre as estruturas
-      internas do vinum para que ele possa analizar os dados de
-      configuração do vinum, e descobrir sozinho os elementos de um
+      internas do Vinum para que ele possa analizar seus dados de
+      configuração, e descobrir sozinho os elementos de um
       volume de inicialização.  Dessa forma, alguns truques são
       necessários para fornecer ao código do
       <literal>bootstrap</literal> a ilusão de que ele é uma partição
-      <literal>"a"</literal> padrão que contém o arquivo de sistem
+      <literal>"a"</literal> padrão que contém o arquivo de sistema
       raiz.</para>
      
-      
       <para>Para que isso se torne possível, os seguintes requisitos
-      para o volume rzia devem ser compridos:</para>
+      para o volume razia devem ser compridos:</para>
       
-
       <itemizedlist>
 	<listitem>
-	  <para>o volume raiz não pode estar partido ou em RAID-5.</para>
+	  <para>O volume raiz não pode estar partido ou em RAID-5.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Um volume raiz não pode conter mais de um sublink
+	  <para>Um volume raiz não pode conter mais de um subdisco
 	  concatenado por plex.
 	</listitem>
       </itemizedlist>
 
-      <para>Note que é desejado e possivel que existam multiplos plexes,
+      <para>Note que é desejado e possível que existam múltiplos plexes,
       cada um contendo uma réplica do sistema de arquivos raiz.  O
-      processo de bootstrap ira, entretanto, usar somente uma delas para
-      achar o bootstrap e todos os arquivos, até que o próprio kernel
-      monte os sistemas de arquivos.  cada subdisco dentro desse plex
-      ira então precisar da sua própria partição imaginária
-      <literal>"a"</literal>, para que o dispositivo correspondente se
-      torne bootável.  Não é strictly necessário que cada uma dessa falsa
-      partição <literal>"a"</literal> se encontre no mesmo offset junto
-      ao seu dispositivo, comparado com outros plexes do volume raiz.
-      Entretanto, seria provavelmente uma boa ideia criar os volumes do
-      vinum desse jeito para que os dispositivos espelhados sejam
-      simetricos evitando assim confusão</para>
+      processo de bootstrap irá, entretanto, usar somente uma delas para
+      achar o bootstrap e todos os arquivos, até que o próprio
+      <literal>kernel</literal> monte os sistemas de arquivos.  Cada
+      subdisco dentro desse plex irá então precisar da sua própria
+      partição imaginária <literal>"a"</literal>, para que o dispositivo
+      correspondente se torne bootável.  Não é estritamente necessário
+      que cada uma dessas falsas partições <literal>"a"</literal> se
+      encontrem no mesmo ponto junto ao seu dispositivo, comparado com
+      outros plexes do volume raiz.  Entretanto, provavelmente seria uma
+      boa idéia criar os volumes do Vinum desse jeito para que os
+      dispositivos espelhados sejam simétricos, evitando, assim,
+      confusão.</para>
       
-	
-      <para>Para setar essas partições <literal>"a"</literal>, para cada
+      <para>Para definir essas partições <literal>"a"</literal>, para cada
       dispositivo contendo parte do volume raiz, as etapas segintes
       precisam ser realizadas:</para>
       
       <procedure>
 	<step>
-	  <para>A localização (offset do início do dispositivo) e tamanho
-	  dos subdiscos dos dispositivos que fazem parte do volume raiz
-	  precisam ser avaliados usando o comando</para>
+	  <para>A localização (<foreignphrase>offset</foreignphrase> do
+	  início do dispositivo) e tamanho dos subdiscos dos
+	  dispositivos que fazem parte do volume raiz precisam ser
+	  examinados usando o comando</para>
 	  
 	  <para><command>vinum l -rv root</command></para>
 
-	  <para>Note que em Vinum, os offsets e tamanhos são medidos em
-	  bytes.  Eles precisam ser divididos por 512 para obter o
+	  <para>Note que no Vinum, os
+	  <foreignphrase>offsets</foreignphrase> e tamanhos são medidos
+	  em bytes.  Eles precisam ser divididos por 512 para obter o
 	  número de blocos que irão, por sua vez, ser usados no comando
-	  <command>disklabel</command>.</para> 
+	  <command>disklabel</command>.</para>
 	</step>
 
 	<step>
@@ -1186,42 +1182,40 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 	  <devicename>ad0s1</devicename>).</para>
 	 
 	  <para>Se já existir uma partição <literal>"a"</literal> no
-	  dispositivo (presumidamente, contendo um sistema de arquivos 
-	  raiz pré-vinum), essa deve ser renomeada, permanecendo
+	  dispositivo (provavelmente, contendo um sistema de arquivos 
+	  raiz pré-Vinum), essa deve ser renomeada, permanecendo
 	  acessível (por segurança), mas não será mais usado para
 	  bootstrap como padrão.  Note que partições ativas (como um
 	  sistema de arquivo raiz atualmente montado) não podem ser
 	  renomeadas, então isso deve ser feito quando a máquina é
-	  inicializada por um modo de <quote>Reparo</quote>, ou em um
+	  inicializada através de uma mídia <quote>Fixit</quote>, ou em um
 	  processo de duas etapas, onde (em uma situação de
 	  espelhamento) o disco que não foi usado no boot será
 	  manipulado primeiro.</para>
 	 
-
-	  <para>Então, o offset da partição de Vinum nesse dispositivo
-	  (se existente) deve ser adicionado ao offset do subdisco de
-	  volume raiz respectivo desse mesmo dispositivo.  O valor
-	  resultante passara a ser o valor <literal>"offset"</literal> 
+	  <para>Então, o <foreignphrase>offset</foreignphrase> da
+	  partição Vinum nesse dispositivo (se existente) deve ser
+	  adicionado ao <foreignphrase>offset</foreignphrase> do
+	  subdisco de volume raiz respectivo desse mesmo dispositivo.  O
+	  valor resultante passará a ser o valor <literal>"offset"</literal> 
 	  para a nova partição <literal>"a"</literal>.  O valor do 
-	  <literal>"tamanho"</literal> dessa partição pode ser tirado
+	  <literal>"size"</literal> dessa partição pode ser tirado
 	  literalmente do cálculo acima.  O <literal>"fstype"</literal>
 	  deve ser <literal>4.2BSD</literal>.  Os valores de
 	  <literal>"fsize"</literal>, <literal>"bsize"</literal>, e
 	  <literal>"cpg"</literal> devem ser escolhidos para melhor
-	  se adaptar ao atual sistema, apesar de que, eles não são muito
+	  se adaptar aos atuais do sistema, apesar de que, eles não são muito
 	  importantes dentro desse contexto.</para>
 	 
-
 	  <para>Dessa forma, uma nova partição <literal>"a"</literal>
-	  será formada e irá envolver as partições do vinum nesse
-	  dipositivo.  Note que o <command>disklabel</command> só vai
-	  permitir isso se as partições do vinum tiverem sido
-	  propriamente marcadas usando o <literal>"vinum"</literal>
-	  fstype.</para>
+	  será formada e sobrepõe as partições Vinum nesse dipositivo.
+	  Note que o <command>disklabel</command> só vai permitir isso
+	  se as partições do vinum tiverem sido propriamente marcadas
+	  usando o <literal>"vinum"</literal> fstype.</para>
 	</step>
 
 	<step>
-	  <para>Isso é tudo!  Uma falsa partção <literal>"a"</literal>
+	  <para>Isso é tudo!  Uma falsa partição <literal>"a"</literal>
 	  agora existe em cada dispositivo que tenha uma réplica do
 	  volume raiz.  É altamente recomendável verificar o resuldado
 	  novamente, usando um comando como</para>
@@ -1231,29 +1225,32 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 	</step>
       </procedure>
 
-      <para>deve ser lembrado que todos os arquivos que contém
-      informações de controle, devem ser relacionadas com o sistema de
-      arquivos raiz no volume do vinum onde, quando setando um novo
-      volume raiz do vinum, talves não seja igual ao que esta em uso.
-      Então, em particular, os arquivos <filename>/etc/fstab</filename>
-      e <filename>/boot/loader.conf</filename> irão precisar de
-      cuidados.<para>
+      <para>Deve ser lembrado que todos os arquivos que contém
+      informações de controle, precisam ser relativos ao sistema de
+      arquivos raiz no volume Vinum onde, quando definido um novo
+      volume raiz Vinum, não deve conincidir com o sistema raiz
+      atualmente ativo.  Então, em particular, os arquivos
+      <filename>/etc/fstab</filename> e
+      <filename>/boot/loader.conf</filename> irão precisar de
+      cuidados específicos.<para>
       
-      <para>Na próxima reinicialização, o bootstrap deve descobrir a
-      informação de controle apropriada a partir do novo aruivo de
-      sistemas raiz do vinum, e agir de acordo.  No final do processo de
-      inicialização do kernel, depois que todos os dispositivos forem
-      anunciados, a notícia importante que mostra o sucesso dessa
-      configuração é uma mensagem como:</para>
+      <para>Na próxima reinicialização, o <literal>bootstrap</literal>
+      deve descobrir a informação de controle apropriada a partir do
+      novo sistema de arquivos raiz Vinum, e agir adequadamente.  No
+      final do processo de inicialização do <literal>kernel</literal>,
+      depois que todos os dispositivos forem anunciados, a notícia
+      importante que mostra o sucesso dessa configuração é uma mensagem
+      como:</para>
       
       <para><screen>Mounting root from ufs:/dev/vinum/root</screen></para>
     </sect2>
 
     <sect2>
-      <title>Example of a Vinum-based Root setup</title>
+      <title>Exemplo Configuração Vinum Para o Sistemas de Arquivos
+      Raiz</title>
 
-      <para>Depois que o volume raiz do Vinum estiver ativado, a saida
-      de <command>vinum l -rv root</command> poderia parecer com:</para>
+      <para>Após o volume raiz do Vinum ser ativado, a saída de
+      <command>vinum l -rv root</command> deve parecer com:</para>
 
       <para>
 	<screen>
@@ -1273,16 +1270,16 @@ Subdisk root.p1.s0:
       </para>
 
       <para>Os valores a serem notados são <literal>135680</literal>
-      para o offset (relativo à partição
-      <devicename>/dev/da0h</devicename>).  Isso traduz a 265 blocos de
-      disco de 512-byte em termos de <command>disklabel</command>.  Da
-      mesma forma, o tamanho desse volume raiz é de 245760 blocos de
-      512-byte.  <devicename>/dev/da1h</devicename>, contendo a segunda
-      réplica desse volume raiz, tem uma configuração simérica.</para>
-      
+      para o <foreignphrase>offset</foreignphrase> (relativo à partição
+      <devicename>/dev/da0h</devicename>).  Isso quer sizer, em termos
+      de <command>disklabel</command>, 265 blocos de disco com 512 bytes
+      cada.  Da mesma forma, o tamanho desse volume raiz é de 245760
+      blocos de 512 bytes.  <devicename>/dev/da1h</devicename>, contendo
+      a segunda réplica desse volume raiz, tem uma configuração
+      simérica.</para>
 
-      <para>O disklabel para esses dispositivos devem se parecer
-      com:</para>
+      <para>O <foreignphrase>disklabel</foreignphrase> para esses
+      dispositivos devem se parecer com:</para>
       
       <para>
 	<screen>
@@ -1298,71 +1295,75 @@ Subdisk root.p1.s0:
       <para>Pode ser observado que o parâmetro <literal>"size"</literal>
       para a partição <literal>"a"</literal> falsa bate com o valor
       esboçado acima, enquanto o parâmetro <literal>"offset"</literal> é
-      a soma do offset dentro da partição do vinum
-      <literal>"h"</literal>, e o offset dessa partição dentro do
+      a soma do <foreignphrase>offset</foreignphrase> dentro da partição
+      Vinum <literal>"h"</literal>, e o
+      <foreignphrase>offset</foreignphrase> dessa partição dentro do
       dispositivo (ou fatia).  Essa é a configuração típica necessária
-      para evitar os problemas descitos em <xref
+      para evitar os problemas descritos em <xref
       linkend="vinum-root-panic">.  Pode também ser visto que toda
-      partição <literal>"a"</literal> etsá completamente dentro da
-      partição <literal>"h"</literal> contendo todos os dados do vinum
-      para esse dispositivo.</para> 
-     
+      partição <literal>"a"</literal> está completamente dentro da
+      partição <literal>"h"</literal> contendo todos os dados do Vinum
+      para esse dispositivo.</para>
     
-      <para>Note que no exemplo acima, o dispositivo inteiro esta
-      dedicado ao vinum, e não há nenhum resto de partição raiz
-      pre-vinum, partindo de que esse foi um disco com configurações
-      novas e foi apenas pretendido a ser parte de uma configuração de
-      vinum, sempre.</para>
+      <para>Note que no exemplo acima, o dispositivo inteiro está
+      dedicado ao Vinum, e não há nenhum resto de partição raiz
+      pré-Vinum, partindo de que esse foi um disco com configurações
+      novas e foi dedicado exclusivamente a ser parte de uma
+      configuração Vinum.</para>
     </sect2>
 
     <sect2>
-      <title>Troubleshooting</title>
+      <title>Resolução de Problemas</title>
 
-      <para>If something goes wrong, a way is needed to recover from
-	the situation.	The following list contains few known pitfalls
-	and solutions.</para>
+      <para>Caso algo saia errado, é preciso ter uma saída para
+      recuperar a situação. A seguinte lista contém algumas armadilhas e
+      suas soluções.</para>
 
       <sect3>
-	<title>System Bootstrap Loads, but System Does Not Boot</title>
+	<title>O <literal>Bootstrap</literal> do sistema entra, mas o sistena na inicializa</title>
 
-	<para>If for any reason the system does not continue to boot,
-	  the bootstrap can be interrupted with by pressing the
-	  <keycap>space</keycap> key at the 10-seconds warning.	 The
-	  loader variables (like <literal>vinum.autostart</literal>)
-	  can be examined using the <command>show</command>, and
-	  manipulated using <command>set</command> or
-	  <command>unset</command> commands.</para>
+	<para>Caso, por alguma razão, o sistema não continue
+	inicializando, o <literal>bootstrap</literal> pode ser
+	interrompido pressionando-se a tecla <keycap>espaço</keycap> 
+	no alerta de 10 segundos.  As variáveis do <literal>loader</loteral>
+	(como <literal>vinum.autostart</literal>) podem ser examindas
+	usando o <command>show</command>, e manipuladas com os comandos
+	<command>set</command> ou <command>unset</command>.</para>
 
-	<para>If the only problem was that the Vinum kernel module was
-	  not yet in the list of modules to load automatically, a
-	  simple <command>load vinum</command> will help.</para>
+	<para>Caso o único problema seja que o módulo Vinum do
+	<literal>kernel</literal>
+	não esteja na lista de módulos para serem carregados
+	automaticamente, um simples <command>load vinum</command> irá
+	ajudar.</para>
 
-	<para>When ready, the boot process can be continued with a
-	  <command>boot -as</command>.	The options
-	  <option>-as</option> will request the kernel to ask for the
-	  root filesystem to mount (<option>-a</option>), and make the
-	  boot process stop in single-user mode (<option>-s</option>),
-	  where the root filesystem is mounted read-only.  That way,
-	  even if only one plex of a multi-plex volume has been
-	  mounted, no data inconsistency between plexes is being
-	  risked.</para>
+	<para>Quando pronto, o processo de <literal>boot</literal> pode
+	ser retomado com o comando <command>boot -as</command>.  As
+	opções <option>-as</option> irão requere ao
+	<literal>kernel</literal> que consulte qual sistema de arquivos
+	raiz deve montar (<option>-a</option>), e faça o processo em
+	modo <literal>single-user</literal> (<option>-s</option>), onde
+	o sistema raiz é montado apenas para leitura.  Desta forma,
+	mesmo que apenas um plex de um volume multi-plex tenha sido
+	montado, nenhum dado entre os plexes corre risco de
+	inconsistência.</para>
 
-	<para>At the prompt asking for a root filesystem to mount, any
-	  device that contains a valid root filesystem can be entered.
-	  If <filename>/etc/fstab</filename> had been set up
-	  correctly, the default should be something like
-	  <literal>ufs:/dev/vinum/root</literal>.  A typical alternate
-	  choice would be something like
-	  <userinput>ufs:da0d</userinput> which could be a
-	  hypothetical partition that contains the pre-Vinum root
-	  filesystem.  Care should be taken if one of the alias
-	  <literal>"a"</literal> partitions are entered here that are
-	  actually reference to the subdisks of the Vinum root device,
-	  because in a mirrored setup, this would only mount one piece
-	  of a mirrored root device.  If this filesystem is to be
-	  mounted read-write later on, it is necessary to remove the
-	  other plex(es) of the Vinum root volume since these plexes
-	  would otherwise carry inconsistent data.</para>
+	<para>Quando for solicitado o sistema de arquivos raíz a ser
+	montado, qualquer dispositivo que contenha um sistema de
+	arquivos raíz válido pode ser informado.  Caso
+	<filename>/etc/fstab</filename> tenha sido definido
+	corretamente, o esperado é algo como
+	<literal>ufs:/dev/vinum/root</literal>. Uma escolha alternativa
+	típica pode ser algo como <userinput>ufs:da0d</userinput> que
+	pode ser uma hipotética partição contendo o sistema de arquivos
+	pré-Vinum.  Deve-se tomar cuidado caso uma das partições apelido
+	<literal>"a"</literal> forem informadas onde há na verdade uma
+	referência aos subdiscos Vinum para o sistema de arquivos raíz,
+	porque em uma configuração de espelhamento, deve-se apenas
+	montar uma peça de um dispositivo raíz. Caso o sistema de
+	arquivos for montado para leitura e escrita posteriormente, será
+	necessário remover o(s) outro(s) plex(es) do volume Vinum raíz,
+	uma vez que estes plexes provavelmente trarão dados
+	inconsistentes.</para>
       </sect3>
 
       <sect3>
@@ -1434,7 +1435,6 @@ Subdisk root.p1.s0:
       adicionar cada fatia ou cada partição explicitamente, porque o
       vinum irá procurar  por cabeçalhos válidos para ele em todos as
       partições dos discos citados.</para>
-      
 
       <para>a partir do momento em que as rotinas usadas para passar o
       nome do arquivo de sistema raiz e para produzir o device ID
@@ -1444,16 +1444,18 @@ Subdisk root.p1.s0:
       sentido em um nome de volume raiz do tipo
       <devicename>/dev/vinum/root</devicename>.  Por esta razão, o
       próprio vinum precisa setar antecipadamente o parâmero interno de
-      kernel que armazena o número de identidade do dispositivo raiz
-      durante a sua inicialização.  Isso é feito setando a variável
-      <literal>vinum.root</literal> com o valor do nome do volume
-      raiz.  A entrada em <filename>/boot/loader.conf</filename> para
-      efetuar essa tarefa se parece com:</para>
+      <literal>kernel</literal> que armazena o número de identidade do
+      dispositivo raiz durante a sua inicialização.  Isso é feito
+      setando a variável <literal>vinum.root</literal> com o valor do
+      nome do volume raiz.  A entrada em
+      <filename>/boot/loader.conf</filename> para efetuar essa tarefa se
+      parece com:</para>
       
       <para><literal>vinum.root="root"</literal></para>
 
-      <para>Agora, quando a inicialização do kernel tenta descobrir o
-      dispositivo raiz a ser montado, vê se algum modulo de kernel 
+      <para>Agora, quando a inicialização do <literal>kernel</literal>
+      tenta descobrir o dispositivo raiz a ser montado, vê se algum
+      modulo de <literal>kernel</literal>
       
       Now, when the kernel initialization tries to find out the
 	root device to mount, it sees whether some kernel module has
