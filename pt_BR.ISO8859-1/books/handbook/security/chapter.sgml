@@ -662,34 +662,38 @@
 	farejar (<foreignphrase>sniffing</foreignphrase>), em um
 	<literal>kernel</literal> funcionando.  Para evitar estes
 	problemas você tem que executar o kernel em um nível
-	de segurança mais elevado, pelo menos securelevel 1.
-	O securelevel pode ser ajustado com <command>sysctl</command> na
+	de segurança elevado, pelo menos 
+	<literal>securelevel</literal> 1.
+	O <literal>securelevel</literal> pode ser ajustado com 
+	<command>sysctl</command> na
 	variável <varname>kern.securelevel</varname>.  Uma vez
-	que você ajustou o securelevel para 1, acesso de escrita
-	a raw devices estarão negados e sinalizações especiais 
-	<command>chflags</command>, tais como <literal>schg</literal>,
-	serão reforçadas.  You must also ensure that the
-	<literal>schg</literal> flag is set on critical startup binaries,
-	directories, and script files &ndash; everything that gets run up
-	to the point where the securelevel is set.  This might be overdoing
-	it, and upgrading the system is much more difficult when you
-	operate at a higher secure level.  You may compromise and run the
-	system at a higher secure level but not set the
-	<literal>schg</literal> flag for every system file and directory
-	under the sun.  Another possibility is to simply mount
-	<filename>/</filename> and <filename>/usr</filename> read-only.
-	It should be noted that being too Draconian in what you attempt to
-	protect may prevent the all-important detection of an
-	intrusion.</para>
+	que você ajustou o <literal>securelevel</literal> para 1, 
+	acesso de escrita a raw devices estarão negados e 
+	sinalizações especiais <command>chflags</command>, tais 
+	como <literal>schg</literal>,
+	serão reforçadas.  Você deve também assegurar que a
+	sinalização <literal>schg</literal> eseja ajustada em binários
+	criticos de inicialização, diretórios, e arquivos 
+	<literal>script</literal> &ndash; tudo que começa a executar
+	até o ponto onde o <literal>securelevel</literal> é ajustado.  
+	Isto pode ser um exagero, e atualizar o sistema é muito mais
+	difícil quando você opera em um nível de segurança elevado.  
+	Você pode acertar e executar o sistema em um nível de
+	segurança elevado mas não ajustar a sinalização
+	<literal>schg</literal> para cada arquivo e diretório do sistema
+	under the sun.  Outra possibilidade é  simplesmente
+	montar o <filename>/</filename> e <filename>/usr</filename> apenas
+	leitura.
+	Deve ser notado que ser Draconiano demais no que você tenta
+	proteger pode prevenir toda importante detecção de uma invasão.</para>
     </sect2>
 
     <sect2 id="security-integrity">
-      <title>Checking File Integrity: Binaries, Configuration Files,
-	Etc.</title>
+      <title>Verificando Integridade de Arquivo: Binários, Arquivos de Configuração, Etc.</title>
 
-      <para>When it comes right down to it, you can only protect your core
-	system configuration and control files so much before the
-	convenience factor rears its ugly head.  For example, using
+      <para>Quando comes right down to it, você pode somente proteger
+ 	sua configuração central do sistema e arquivos de controle
+	muito antes do fator conveniência rears its ugly head.  For example, using
 	<command>chflags</command> to set the <literal>schg</literal> bit
 	on most of the files in <filename>/</filename> and
 	<filename>/usr</filename> is probably counterproductive, because
