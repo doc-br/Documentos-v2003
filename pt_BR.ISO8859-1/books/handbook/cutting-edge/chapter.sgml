@@ -831,7 +831,7 @@ Script done, &hellip;</screen>
 	  neste caso v&aacute; para este diret&oacute;rio).</para>
 	<indexterm><primary><command>make</command></primary></indexterm>
 
-	<para>Para reconstruir todo o seu sistema use o comando &make.1.  Este 
+	<para>Para reconstruir todo o seu sistema use o comando &man.make.1;  Este 
 	  comando l&ecirc; as instru&ccedil;&otilde;es do arquivo <filename>Makefile</filename>, 
 	  que descreve como os programas que comp&otilde;em o &os; devem ser 
 	  recompilados, a ordem em que isto deve acontecer, e assim por 
@@ -902,177 +902,189 @@ Script done, &hellip;</screen>
 	  execute o <maketarget>installworld</maketarget> em modo mono 
 	  usu&aacute;rio.</para>
 
-	<para>Secondly, it allows you to use NFS mounts to upgrade 
-	  multiple machines on your network.  If you have three machines,
-	  <hostid>A</hostid>, <hostid>B</hostid> and <hostid>C</hostid> that you want to upgrade, run <command>make
-	  buildworld</command> and <command>make installworld</command> on
-	  <hostid>A</hostid>.  <hostid>B</hostid> and <hostid>C</hostid> should then NFS mount <filename>/usr/src</filename>
-	  and <filename>/usr/obj</filename> from <hostid>A</hostid>, and you can then run
-	  <command>make installworld</command> to install the results of 
-	  the build on <hostid>B</hostid> and <hostid>C</hostid>.</para>
+	<para>Segundo, permite que voc&ecirc; use NFS para atulizar multiplas 
+	  m&aacute;quinas na sua rede.  Se voc&ecirc; possui tr&ecirc;s m&aacute;quinas, 
+	  <hostid>A</hostid>, <hostid>B</hostid> e <hostid>C</hostid> que voc&ecirc; quer 
+	  atualizar, execute o <command>make buildworld</command> e <command>
+	  make installworld</command> no <hostid>A</hostid>.  <hostid>B</hostid> e 
+	  <hostid>B</hostid> e <hostid>C</hostid> devem montar atrav&eacute;s de NFS o 
+	  <filename>/usr/src</filename> e <filename>/usr/obj</filename> do 
+	  <hostid>A</hostid>, e ent&atilde;o voc&ecirc; pode executar o <command>make installworld
+	  </command> para instalar o resultado da compila&ccedil;&atilde;o nas maquinas 
+	  <hostid>B</hostid> e <hostid>C</hostid>.</para>
 
-	<para>Although the <maketarget>world</maketarget> target still exists,
-	  you are strongly encouraged not to use it.</para>
+	<para>Embora o <literal>target</literal> <maketarget>world</maketarget> 
+	  ainda exista, voc&ecirc; &eacute; fortemente encorajado a n&atilde;o us&aacute;-lo.</para>
 
-	<para>Run</para>
+	<para>Execute</para>
 
 	<screen>&prompt.root; <userinput>make buildworld</userinput></screen>
  
-        <para>It is now possible to specify a <option>-j</option> option to
-          <command>make</command> which will cause it to spawn several
-          simultaneous processes.  This is most useful on multi-CPU machines.
-          However, since much of the compiling process is IO bound rather
-          than CPU bound it is also useful on single CPU machines.</para>
+        <para>Agora &eacute; poss&iacute;vel especificar a op&ccedil;&atilde;o <option>-j</option> para o 
+          <command>make</command>, que far&aacute; com que ele gere v&aacute;rios processos 
+	  simult&acirc;neos.  Isto &eacute; mais &uacute;til em m&aacute;quinas com multiplas CPUs.  Entretanto, 
+	  uma vez que muito do processo de compila&ccedil;&atilde;o utiliza mais IO do que CPU, 
+	  isto tamb&eacute;m &eacute; &uacute;til em m&aacute;quinas com apenas um processador.</para>
 
-	<para>On a typical single-CPU machine you would run:</para>
+	<para>Em uma m&aacute;quina t&iacute;pica de uma CPU voc&ecirc; deve executar:</para>
 	  
 	  <screen>&prompt.root; <userinput>make -j4 buildworld</userinput></screen>
 
-	<para>&man.make.1; will then have up to 4 processes running at any one
-	  time.  Empirical evidence posted to the mailing lists shows this
-	  generally gives the best performance benefit.</para>
+	<para>&man.make.1; ter&aacute; 4 processos rodando ao mesmo tempo.  Evid&ecirc;ncias 
+	  emp&iacute;ricas postadas nas listas de discuss&atilde;o mostram que isto resulta 
+	  em benef&iacute;cios de melhora de performance.</para>
 
-	<para>If you have a multi-CPU machine and you are using an SMP
-	  configured kernel try values between 6 and 10 and see how they speed
-	  things up.</para>
+	<para>Se voc&ecirc; tem uma m&aacute;quina com v&aacute;rios procesadores e est&aacute; usando um 
+	  um <foreignphrase>kernel</foreignphrase> configurado para SMP, tente 
+	  valores entre 6 e 10 e veja como eles aumentam a velocidade.</para>
 
-	<para>Be aware that this is still somewhat experimental, and commits
-	  to the source tree may occasionally break this feature.  If the
-	  world fails to compile using this parameter try again without it
-	  before you report any problems.</para>
+	<para>Saiba que isto &eacute; um tanto quando experimental, e envio de novos 
+	  c&oacute;digos para a &aacute;rvore de fontes pode causar um n&atilde;o funcionamento desta 
+	  caracter&iacute;stica.  Se a compila&ccedil;&atilde;o do sistema falhar ao usar este 
+	  par&acirc;metro tente novamente sem ele antes de reportar problemas.</para>
       </sect3>
       
       <sect3>
-	<title>Timings</title>
+	<title>Tempos</title>
 	<indexterm>
 	  <primary><command>make world</command></primary>
 	  <secondary>timings</secondary>
 	</indexterm>
 
-        <para>Many factors influence the build time, but currently a 500&nbsp;MHz
-          &pentium;&nbsp;III with 128&nbsp;MB of RAM takes about 2&nbsp;hours to build
-          the &os.stable; tree, with no tricks or shortcuts used during the
-          process.  A &os.current; tree will take somewhat longer.</para>
+	<para>Muitos fatores influenciam no tempo de compila&ccedil;&atilde;o, mas
+          atualmente um &pentium;&nbsp;III com 128&nbsp;MB de RAM leva
+          aproximadamente duas horas para compilar a &aacute;rvore &os.stable;,
+          sem o uso de atalhos ou truques durante o processo.  Uma &aacute;rvore
+          do &os.current; levar&aacute; um pouco mais de tempo.</para>
       </sect3>
     </sect2>
     
     <sect2>
-      <title>Compile and Install a New Kernel</title>
+      <title>Compile e Instale um Novo Kernel</title>
       <indexterm>
         <primary>kernel</primary>
-	<secondary>compiling</secondary>
+        <secondary>compiling</secondary>
       </indexterm>
 
-      <para>To take full advantage of your new system you should recompile the
-	kernel.  This is practically a necessity, as certain memory structures
-	may have changed, and programs like &man.ps.1; and &man.top.1; will
-	fail to work until the kernel and source code versions are the
-	same.</para>
+      <para>Para aproveitar ao m&aacute;ximo seu novo sistema voc&ecirc; deve recompilar
+        o <foreignphrase>kernel</foreignphrase>.  Isto &eacute; praticamente uma
+        necessidade, uma vez que certas estruturas de mem&oacute;rias mudaram, e
+        programas como o &man.ps.1; e &man.top.1; n&atilde;o funcionar&atilde;o at&eacute; que
+        as vers&otilde;es do <foreignphrase>kernel</foreignphrase> e dos fontes
+        sejam as mesmas.</para>
 
-      <para>The simplest, safest way to do this is to build and install a
-	kernel based on <filename>GENERIC</filename>.  While
-	<filename>GENERIC</filename> may not have all the necessary devices
-	for your system, it should contain everything necessary to boot your
-	system back to single user mode.  This is a good test that the new
-	system works properly.  After booting from
-	<filename>GENERIC</filename> and verifying that your system works you
-	can then build a new kernel based on your normal kernel	configuration
-	file.</para>
+      <para>A maneira mais simples e segura de fazer isto &eacute; recompilar e
+        instalar o <foreignphrase>kernel</foreignphrase> baseado no
+        arquivo <filename>GENERIC</filename>. Enquanto o <filename>GENERIC
+        </filename> n&atilde;o cont&eacute;m todos os dispositivos necess&aacute;rios para o
+        seu sistema, ele deve conter tudo que for necess&aacute;rio para
+        inicializar de volta seu sistema em modo mono usu&aacute;rio.  Isto &eacute;
+        um bom teste para ver se o sistema funciona corretamente.  Ap&oacute;s
+        inicializar a partir do <filename>GENERIC</filename> e verificar
+        que seu sistema funciona ent&atilde;o voc&ecirc; pode recompilar um novo
+        <foreignphrase>kernel</foreignphrase> baseado no seu arquivo de
+        configura&ccedil;&atilde;o.</para>
 
-      <para>If you are upgrading to &os; 4.0 or above then the old
-	kernel build procedure (as described in <xref linkend="kernelconfig">)
-	is deprecated.  Instead, you should run these commands
-	<emphasis>after</emphasis> you have <link
-        linkend="make-buildworld">built the world with
-        <maketarget>buildworld</maketarget></link>.</para>
+      <para>Se voc&ecirc; est&aacute; atualizando para o &os; 4.0 ou superior ent&atilde;o o
+        procedimento antigo de compila&ccedil;&atilde;o do kernel (como descrito em
+        <xref linkend="kernelconfig">) est&aacute; defasado.  Ao inv&eacute;s desse
+        voc&ecirc; deve executar estes comandos <emphasis>depois</emphasis>
+        de ter <link linkend="make-buildworld"> compilado o sistema
+        com o <maketarget>buildworld</maketarget>.</link>.</para>
 
-      <note><para>If you want to build a custom kernel, and already have a configuration
-	file, just use <literal>KERNCONF=<replaceable>MYKERNEL</replaceable></literal>
-	like this:</para>
+      <note><para>Se voc&ecirc; quer compilar um <foreignphrase>kernel
+        </foreignphrase> customizado e j&aacute; possuir um arquivo de
+        configura&ccedil;&atilde;o, apenas use <literal>KERNCONF=<replaceable>
+        MYKERNEL</replaceable></literal> desta forma:</para>
 
       <screen>&prompt.root; <userinput>cd /usr/src</userinput>
 &prompt.root; <userinput>make buildkernel KERNCONF=<replaceable>MYKERNEL</replaceable></userinput>
 &prompt.root; <userinput>make installkernel KERNCONF=<replaceable>MYKERNEL</replaceable></userinput></screen>
 
-	<para>In FreeBSD&nbsp;4.2 and older you must replace
-	  <literal>KERNCONF=</literal> with <literal>KERNEL=</literal>.
-	  4.2-STABLE that was fetched before Feb 2nd, 2001 does not
-	  recognize <literal>KERNCONF=</literal>.</para>
+<para>No FreeBSD&nbsp;4.2 e anteriores voc&ecirc; deve substituir
+          <literal>KERNCONF=</literal> por <literal>KERNEL=</literal>.
+          4.2-STABLE anterior a 2 de Fevereiro de 2001 n&atilde;o reconhece
+          <literal>KERNCONF=</literal>.</para>
       </note>
 
-      <para>Note that if you have raised <literal>kern.securelevel</literal>
-	above 1 <emphasis>and</emphasis> you have set either the
-	<literal>noschg</literal> or similar flags to your kernel binary, you
-	might find it necessary to drop into single user mode to use
-	<maketarget>installkernel</maketarget>.  Otherwise you should be able
-	to run both these commands from multi user mode without
-	problems.  See &man.init.8; for details about
-	<literal>kern.securelevel</literal> and &man.chflags.1; for details
-	about the various file flags.</para>
-      <para>If you are upgrading to a version of &os; below 4.0 you should
-	use the old kernel build procedure.  However, it is recommended
-	that you use the new version of &man.config.8;, using a command line
-	like this.</para>
-      
+      <para>Note que, se voc&ecirc; subiu o <literal>kern.securelevel</literal>
+        acima de 1 <emphasis>e</emphasis> configurou o atributo
+        <literal>noschg</literal> ou similar no seu arquivo bin&aacute;rio de
+        <foreignphrase>kernel</foreignphrase>, ser&aacute; necess&aacute;rio ir para
+        o modo mono usu&aacute;rio para usar o <maketarget>installkernel
+        </maketarget>.  Caso contr&aacute;rio, voc&ecirc; dever&aacute; ser capaz de executar
+        ambos comandos no modo multi usu&aacute;rio sem problemas.  Veja
+        &man.init.8; para detalhes a respeito do <literal>kern.securelevel
+        </literal> e &man.chflags.1; para detalhes sobre as v&aacute;rias op&ccedil;&otilde;es
+        de par&acirc;metros de arquivos.</para>
+      <para>Se voc&ecirc; est&aacute; atualizando para uma vers&atilde;o do &os; inferior &agrave;
+        4.0 voc&ecirc; deve usar o procedimento antigo de compila&ccedil;&atilde;o do
+        <foreignphrase>kernel</foreignphrase>.  Entretanto, &eacute; recomendado
+        que voc&ecirc; use a nova vers&atilde;o do &man.config.8;, usando uma linha de
+        comando como esta.</para>
+
       <screen>&prompt.root; <userinput>/usr/obj/usr/src/usr.sbin/config/config <replaceable>KERNELNAME</replaceable></userinput></screen>
     </sect2>
 
     <sect2>
-      <title>Reboot into Single User Mode</title>
+      <title>Reinicialize no Modo Mono Usu&aacute;rio</title>
       <indexterm><primary>single-user mode</primary></indexterm>
 
-      <para>You should reboot into single user mode to test the new kernel
-	works.  Do this by following the instructions in
-	<xref linkend="makeworld-singleuser">.</para>
+      <para>Voc&ecirc; deve inicializar no modo monousu&aacute;rio para testar
+        o funcionamento do novo kernel. Fa&ccedil;a isto seguindo as
+        instru&ccedil;&otilde;es desritas em <xref linkend="makeworld-singleuser">.
+        </para>
     </sect2>
 
     <sect2>
-      <title>Install the New System Binaries</title>
+      <title>Instale os Novos Bin&aacute;rios do Sistema</title>
 
-      <para>If you were building a version of &os; recent enough to have
-	used <command>make buildworld</command> then you should now use
-	<maketarget>installworld</maketarget> to install the new system
-	binaries.</para>
+      <para>Se voc&ecirc; estiver compilando uma vers&atilde;o do &os; recente o
+        bastante para ter usado o <command>make buildworld</command>,
+        ent&atilde;o voc&ecirc; deve us&aacute;-lo o <maketarget>installworld
+        </maketarget> para instalar os novos bin&aacute;rios do sistema.<para>
 
-      <para>Run</para>
+      <para>Execute</para>
 
       <screen>&prompt.root; <userinput>cd /usr/src</userinput>
 &prompt.root; <userinput>make installworld</userinput></screen>
 
       <note>
-	<para>If you specified variables on the <command>make
-	    buildworld</command> command line, you must specify the same
-	  variables in the <command>make installworld</command> command
-	  line.  This does not necessarily hold true for other options;
-	  for example, <option>-j</option> must never be used with
-	  <maketarget>installworld</maketarget>.</para>
-	
-	<para>For example, if you ran:</para>
+        <para>Se voc&ecirc; especificou vari&aacute;veis na linha do comando
+          <command>make buildworld</command>, voc&ecirc; deve especificar
+          as mesmas vari&aacute;veis na linha do comando <command>make
+          installworld</command>.  Isto n&atilde;o &eacute; necess&aacute;riamente
+          verdadeiro para algumas op&ccedil;&otilde;es; por exemplo, a op&ccedil;&atilde;o
+          <option>-j</option> nunca deve ser usada com o
+          <maketarget>installworld</maketarget>.</para>
+
+	<para>Por exemplo, se voc&ecirc; executou:</para>
 
 	<screen>&prompt.root; <userinput>make -DNOPROFILE buildworld</userinput></screen>
 
-	<para>you must install the results with:</para>
+	<para>voc&ecirc; deve instalar o resultado com:</para>
 
 	<screen>&prompt.root; <userinput>make -DNOPROFILE installworld</userinput></screen>
 
-	<para>otherwise it would try to install profiled libraries that
-	  had not been built during the <command>make buildworld</command>
-	  phase.</para>
+	<para>sen&atilde;o o sistema tentar&aacute; instalar bibliotecas que
+          n&atilde;o foram compiladas durante o comando <command>make buildworld
+          </command>.</para>
       </note>
     </sect2>
 
     <sect2>
-      <title>Update Files Not Updated by <command>make world</command></title>
+      <title>Atualize os Arquivos n&atilde;o Atualizados pelo <command>make world</command></title>
       
-      <para>Remaking the world will not update certain directories (in
-	particular, <filename>/etc</filename>, <filename>/var</filename> and
-	<filename>/usr</filename>) with new or changed configuration files.</para>
+      <para>Recompilar todo o sistema n&atilde;o atualizar&aacute; certos diret&oacute;rios
+        (em particular, <filename>/etc</filename>, <filename>/var</filename>
+        e <filename>/usr</filename>) com arquivos de configura&ccedil;&atilde;o novos
+        ou modificados.</para>
 
-      <para>The simplest way to update these files is to use
-        &man.mergemaster.8;, though it is possible to do it manually
-        if you would prefer to do that.  Regardless of which way you
-	choose, be sure to make a backup of <filename>/etc</filename> in
-	case anything goes wrong.</para>
+      <para>A maneira mais simples de atualizar estes arquivos e usar
+        o &man.mergemaster.8;, embora seja poss&iacute;vel fazer isto
+        manualmente se voc&ecirc; preferir.  Independente da maneira que voc&ecirc;
+        escolha, esteja certo de ter uma c&oacute;pia de seguran&ccedil;a do
+        diret&oacute;rio <filename>/etc</filename> caso algo saia errado.</para>
 
     <sect3 id="mergemaster">
       <sect3info>
@@ -1080,48 +1092,51 @@ Script done, &hellip;</screen>
 	  <author>
 	    <firstname>Tom</firstname>
 	    <surname>Rhodes</surname>
-	    <contrib>Contributed by </contrib>
+	    <contrib>Contribui&ccedil;&atilde;o de </contrib>
 	  </author>
 	</authorgroup>
       </sect3info>
       <title><command>mergemaster</command></title>
         <indexterm><primary><command>mergemaster</command></primary></indexterm>
 
-      <para>The &man.mergemaster.8; utility is a Bourne script that will
-        aid you in determining the differences between your configuration files
-        in <filename>/etc</filename>, and the configuration files in
-        the source tree <filename>/usr/src/etc</filename>. This is
-        the recommended solution for keeping the system configuration files up to date
-        with those located in the source tree.</para>
+      <para>O utilit&aacute;rio &man.mergemaster.8; &eacute; um <literal>script</literal>
+        Bourne que ajudar&aacute; voc&ecirc; a determinar as diferen&ccedil;as entre seus
+        arquivos de configura&ccedil;&atilde;o em <filename>/etc</filename>, e os arquivos
+        de configura&ccedil;&atilde;o na &aacute;rvore dos fontes em <filename>/usr/src/etc
+        </filename>.  Esta &eacute; a solu&ccedil;&atilde;o recomendada para manter os arquivos
+        de configura&ccedil;&atilde;o do sistema atualizados com os que est&atilde;o na &aacute;rvore
+        dos fontes.</para>
 
-      <para><command>mergemaster</command> was integrated into the FreeBSD base
-        system between 3.3-RELEASE and 3.4-RELEASE, which means it is
-        present in all -STABLE and -CURRENT systems since 3.3.</para>
+      <para>O <command>mergemaster</command> foi integrado ao sistema base
+        do FreeBSD entre o 3.3-RELEASE e 3.4-RELEASE, o que significa que
+        estava presente em todos os -STABLE e -CURRENT deste o 3.3.</para>
 
-      <para>To begin simply type <command>mergemaster</command> at your prompt, and
-        watch it start going.  <command>mergemaster</command> will then build a
-        temporary root environment, from <filename>/</filename> down, and populate
-        it with various system configuration files.  Those files are then compared
-        to the ones currently installed in your system.  At this point, files that
-        differ will be shown in &man.diff.1; format, with the <option>+</option> sign
-        representing added or modified lines, and <option>-</option> representing
-        lines that will be either removed completely, or replaced with a new line.
-        See the &man.diff.1; manual page for more information about the &man.diff.1;
-        syntax and how file differences are shown.</para>
+      <para>Para come&ccedil;ar simplesmente digite <command>mergemaster</command>
+        na sua linha de comando e obserse.  <command>mergemaster</command>
+        compilar&aacute; um ambiente tempor&aacute;rio de root, a partir de <filename>/<filename>,
+        e colocar&aacute; l&aacute; v&aacute;rios arquivos de configura&ccedil;&atilde;o de sistema.  Neste ponto,
+        os arquivos diferentes ser&atilde;o mostrados pelo formato do &man.diff.1;, com
+        o sinal de <option>+</option> representado linhas adicionadas ou
+        modificadas, e o sinal <option>-</option> representado linhas que foram
+        removidas completamente, ou substitu&iacute;das por uma nova linha.  Veja a
+        p&aacute;gina de manual de &man.diff.1 para mais informa&ccedil;&otilde;es sobre a sintaxe do
+        &man.diff.1; e como as diferen&ccedil;as entre os arquivos s&atilde;o mostradas.</para>
 
-      <para>&man.mergemaster.8; will then show you each file that displays variances,
-        and at this point you will have the option of either deleting the new file (referred
-        to as the temporary file), installing the temporary file in its unmodified state,
-        merging the temporary file with the currently installed file, or viewing the
-        &man.diff.1; results again.</para>
+      <para>&man.mergemaster.8; mostrar&aacute; a voc&ecirc; cada arquivo que possuem
+        diferen&ccedil;as, e neste ponto voc&ecirc; ter&aacute; a op&ccedil;&atilde;o de apagar o arquivo novo
+        (referenciado como um arquivo tempor&aacute;rio), instalar o arquivo
+        tempor&aacute;rio em seu estado n&atilde;o modificado, unir o arquivo tempor&aacute;rio
+        com o arquivo atualmente instalado, ou visualizar as diferen&ccedil;as
+        geradas pelo &man.diff.8; novamente.</para>
 
-      <para>Choosing to delete the temporary file will tell &man.mergemaster.8; that we
-        wish to keep our current file unchanged, and to delete the new version.
-        This option is not recommended, unless you see no
-        reason to change the current file.  You can get help at any time by
-        typing <keycap>?</keycap> at the &man.mergemaster.8; prompt.  If the user
-        chooses to skip a file, it will be presented again after all other files
-        have been dealt with.</para>
+      <para>Escolher pela remo&ccedil;&atilde;o do arquivo tempor&aacute;rio instruir&aacute; o
+        &man.mergemaster.8; a manter nosso arquivo atual intacto, e apagar
+        a nova vers&atilde;o.  Esta op&ccedil;&atilde;o n&atilde;o &eacute; recomendada, a menos que voc&ecirc;
+        n&atilde;o veja raz&otilde;es para modificar o arquivo atual.  Voc&ecirc; pode obter
+        ajuda a qualquer momento digitando <keycap>?</keycap> no prompt
+        do &man.mergemaster.8;.  Se o usu&aacute;rio quiser pular o arquivo, o
+        mesmo ser&aacute; mostrado novamente depois que todos os arquivos tenham
+        sido tratados.</para>
 
       <para>Choosing to install the unmodified temporary file will replace the
         current file with the new one.  For most unmodified files, this is the best
