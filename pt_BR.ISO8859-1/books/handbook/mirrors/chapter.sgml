@@ -872,22 +872,22 @@
 	&eacute; usando o pacote <filename role="package">net/cvsup</filename> pr&eacute; 
 	compilado do FreeBSD que faz parte da <link linkend="ports">packages collection</link>.  
 	Se voc&ecirc; preferir compilar o <application>CVSup</application> a partir de seus
-	fontes, voc&ecirc; tamb&eacute;m pode usar o <filename role="package">net/cvsup</filename> encontrado no <quote>ports</quote> mas lembre-se que o
+	fontes, voc&ecirc; tamb&eacute;m pode usar o <filename role="package">net/cvsup</filename> encontrado no <quote>ports</quote>, mas lembre-se que o
 	<application>CVSup</application> depende do sistema Modula-3 e levar&aacute;
-	muito tempo e gastar&aacute; um bocado de espa&ccedil;o em disco baix&aacute;-lo e compila-lo.</para>
+	muito tempo e gastar&aacute; um bocado de espa&ccedil;o em disco baix&aacute;-lo e compil&aacute;-lo.</para>
 
 	<note>
 	  <para>Se voc&ecirc; est&aacute; pretendendo usar o 
 	  <application>CVSup</application> numa m&aacute;quina que n&atilde;o tem o
 	  <application>&xfree86;</application> instalado, como um servidor, por exemplo,
-	 voc&ecirc;  deve lembrar-se de usar o <quote>ports</quote> que n&atilde;o use a
+	  certifique-se de usar o <quote>port</quote> que n&atilde;o inclua a
 	  <application>CVSup</application> <acronym>GUI</acronym>,
 	  <filename role="package">net/cvsup-without-gui</filename>.</para>
 	</note>
       
       <para>Se voc&ecirc; ainda n&atilde;o conhece o <application>CVSup</application>
 	 e tudo o que voc&ecirc; deseja &eacute; um pacote simples para instal&aacute;-lo,
-	prepare o arquivo de configura&ccedil;&atilde;o e inicie a transfer&ecirc;cia 
+	prepare o arquivo de configura&ccedil;&atilde;o e inicie a transfer&ecirc;ncia 
 	atrav&eacute;s de um tipo de interface <quote>apontar e clicar</quote>, pegue 
 	ent&atilde;o o pacote <filename role="package">net/cvsupit</filename>.  
 	Ent&atilde;o o &man.pkg.add.1; guiar&aacute; voc&ecirc; pelo processo
@@ -903,17 +903,17 @@
 	Existem alguns exemplos de <filename>supfiles</filename> no diret&oacute;rio 
 	<ulink type="html" url="file://localhost/usr/share/examples/cvsup/"><filename>/usr/share/examples/cvsup/</filename></ulink>.</para>
       
-      <para>A informa&ccedil;&atilde;o contida no <filename>supfile</filename> responde ao
-	<application>CVSup</application> as seguintes quest&otilde;es:</para>
+      <para>A informa&ccedil;&atilde;o contida no <filename>supfile</filename> responde
+	as seguintes quest&otilde;es</para> a respeito do<application>CVSup</application>: 
       
       <itemizedlist>
 	<listitem>
-	  <para><link linkend="cvsup-config-files">Que arquivos voc&ecirc; quer
+	  <para><link linkend="cvsup-config-files">Quais arquivos voc&ecirc; quer
 	      receber ?</link></para>
 	</listitem>
 	
 	<listitem>
-	  <para><link linkend="cvsup-config-vers">Que vers&otilde;es desses 
+	  <para><link linkend="cvsup-config-vers">Quais vers&otilde;es desses 
 	      arquivos voc&ecirc; quer ?</link></para>
 	</listitem>
 	
@@ -940,38 +940,38 @@
 
       <para>Um <filename>supfile</filename> &eacute; um arquivo texto.  Coment&aacute;rios
 	come&ccedil;am com <literal>#</literal> e v&atilde;o at&eacute; o fim da linha.  
-	Linha em branco e linhas somente com coment&aacute;rios s&atilde;o ignoradas
+	Linhas em branco e linhas somente com coment&aacute;rios s&atilde;o ignoradas
 	.</para>
       
       <para>Cada linha descreve um conjunto de arquivos que o usu&aacute;rio quer
 	receber.  Uma linha come&ccedil;a com um nome de
 	<quote>collection</quote>, um grupo l&oacute;gico de arquivos definidos pelo
 	servidor.  O nome do <foreignphrase>collection</foreignphrase> diz ao servidor que
-	arquivos voc&ecirc; quer.  Depois do nome do <foreignphrase>collection</foreignphrase>  
+	arquivos voc&ecirc; deseja.  Depois do nome do <foreignphrase>collection</foreignphrase>  
 	v&ecirc;m zero ou mais campos separados por espa&ccedil;o.  Estes campos respondem
 	 as quest&otilde;es listadas acima.  Existem dois tipos de campos: indicadores e valores.  
 	   Um indicador consiste de uma palavra-chave isolada, como, <literal>delete</literal> ou
-	<literal>compress</literal>.  Um valor tamb&eacute; consiste de uma palavra-chave, 
+	<literal>compress</literal>.  Um valor tamb&eacute;m consiste de uma palavra-chave, 
 	 mas seguida pelo literal <literal>=</literal> e uma segunda palavra.  Por exemplo,
 	<literal>release=cvs</literal>, &eacute; um campo valor.</para>
       
-      <para>Um <filename>supfile</filename> tipicamente especifica mais de uma 
+      <para>Um <filename>supfile</filename> tipicamente especifica mais de um 
 	<foreignphrase>collection</foreignphrase> para ser recebida.  
 	  Uma maneira de estruturar um <filename>supfile</filename> &eacute;
-	especificar todos os campos relevantes expl&iacute;citamente para cada 
+	especificar de uma forma expl&iacute;cita todos os campos relevantes para cada 
 	<foreignphrase>collection</foreignphrase>.  Entretanto, isso tende a fazer
 	 com que as linhas do <filename>supfile</filename> fiquem muito longas e 
 	&eacute; inconveniente porque muitos campos s&atilde;o os mesmos para 
-	todas as <foreignphrase>collections</foreignphrase> no <filename>supfile</filename>.  
-	<application>CVSup</application> prev&circ; um mecanismo de
-	 <foreignphrase>default</foreignphrase> para evitar &ecirc;sse problema.  
+	todos os <foreignphrase>collections</foreignphrase> no <filename>supfile</filename>.  
+	<application>CVSup</application> possui um mecanismo
+	 <foreignphrase>default</foreignphrase> para evitar esse problema.  
 	  Linhas come&ccedil;ando com o nome de <foreignphrase>collection</foreignphrase>
 	 especial <literal>*default</literal> podem ser usadas para atribuir indicadores e valores
-	 que ser&atilde;o usados como <foreignphrase>default</foreignphrase> para todas as
+	 que ser&atilde;o usados como <foreignphrase>default</foreignphrase> para todos os
 	 <foreignphrase>collections</foreignphrase> subsequentes no arquivo
 	 <filename>supfile</filename>.  Um valor <foreignphrase>default</foreignphrase> pode
-	ser sobreposto numa determinada <foreignphrase>collection</foreignphrase>
-	 especificando-se um valor diferente na linha desta 
+	ser sobreposto num determinado <foreignphrase>collection</foreignphrase>
+	 especificando-se um valor diferente na linha deste 
 	  <foreignphrase>collection</foreignphrase>.  Os <foreignphrase>defaults</foreignphrase>
 	podem ser mudados ou expandidos no meio do arquivo <filename>supfile</filename>
 	 colocando-se linhas <literal>*default</literal> adicionais.</para>
@@ -982,17 +982,17 @@
 
       <itemizedlist>
 	<listitem>
-	  <para><anchor id="cvsup-config-files">Que arquivos voc&ecirc; quer receber ?</para>
+	  <para><anchor id="cvsup-config-files">Quais arquivos voc&ecirc; quer receber ?</para>
 	  
-	  <para>Os arquivos dispon&Iacute;veis atrav&eacute;s do 
+	  <para>Os arquivos dispon&iacute;veis atrav&eacute;s do 
 	  <application>CVSup</application>
 	    s&atilde;o organizados em grupos chamados 
 	    <quote>collections</quote>.  Os <foreignphrase>collections</foreignphrase>
-	  dispon&iacute;veis s&atilde;o descritos na <link
+	  dispon&iacute;veis est&atilde;o descritos na <link
 	      linkend="cvsup-collec">seç&atilde;o seguinte</link>.  
 	  No nosso exemplo desejamos receber toda a &aacute;rvore de diret&oacute;rios com os 
-	  fontes do FreeBSD  Existe um grande <foreignphrase>collection</foreignphrase> 
-	  chamado <literal>src-all</literal> que nos dar&aacute; isso.
+	  fontes do FreeBSD.  Existe um grande <foreignphrase>collection</foreignphrase> 
+	  chamado <literal>src-all</literal> que nos dar&aacute; tudo isto.
 	    Como primeiro passo na prepara&ccedil;&atilde;o de nosso 
 	    <filename>supfile</filename>, vamos simplesmente listar os 
 	  <foreignphrase>collections</foreignphrase>, um por linha ( nesse caso, somente uma 
@@ -1002,7 +1002,7 @@
 	</listitem>
 
 	<listitem>
-	  <para><anchor id="cvsup-config-vers">Que vers&atilde;o dele voc&ecirc; quer ?</para>
+	  <para><anchor id="cvsup-config-vers">Quais vers&otilde;es dele voc&ecirc; quer ?</para>
 
 	  <para>Com o <application>CVSup</application>, voc&ecirc; pode receber
 	  praticamente qualquer vers&atilde;o dos fontes que j&aacute; tenha existido.
