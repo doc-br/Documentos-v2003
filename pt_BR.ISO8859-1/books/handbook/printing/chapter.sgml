@@ -3531,13 +3531,15 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 			</para>
             
 			<para>
-				It is <emphasis>still not enough</emphasis> to have each of the
-          filters generate their own header pages (thereby being able to
-          charge for them).  If users wanted the option of suppressing the
-          header pages with <command>lpr -h</command>, they will still get
-          them and be charged for them since <application>LPD</application>
-	  does not pas any knowledge
-          of the <option>-h</option> option to any of the filters.</para>
+				Isso <emphasis>n&atilde;o &eacute; o sufuciente</emphasis> 
+		para cada filtro gerar sua pr&oacute;priap&aacute;gina de
+		cabe&ccedil;alho ( entretanto estar&aacute; apto a contabiliza-las).
+		  Se os usu&aacute;rios quizerem a op&ccedil;&atilde;o de 
+		supress&atilde;o de p&aacute;ginas de cabe&ccedil;alho com o 
+		comando <command>lpr -h</command>, eles ainda teram e ser&atilde;o 
+		contabilizado uma vez que o <application>LPD</application> n&atilde;o 
+		tem conhecimento da <option>-h</option> para nenhum filtro.
+			</para>
 
 			<para>
 				Ent&atilde;o, qual &eacute; a sua op&ccedil;&atilde;o?
@@ -4500,7 +4502,7 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 	da m&aacute;quina remota, um por linha.  Note que o arquivo 
 	<filename>/etc/hosts.equiv</filename> &eacute; tamb&eacute;m utilizado
 	pelo protocolo &man.ruserok.3;, e afeta programas como
-	&man.rsh.1; and &man.rcp.1;, ent&atilde;o, seja cuidadoso.
+	&man.rsh.1; e &man.rcp.1;, ent&atilde;o, seja cuidadoso.
 					</para>
               
 					<para>
@@ -4670,27 +4672,36 @@ madrigal.fishbaum.de</programlisting>
         </listitem>
               
         <listitem>
-          <para><emphasis>Timely accounting</emphasis> is les common,
-            probably because it is more difficult.  This method has the
-            filters charge users for printouts as soon as they use the
-            printers.  Like disk quotas, the accounting is immediate. You can
-            prevent users from printing when their account goes in the red,
-            and might provide a way for users to check and adjust their
-            <quote>print quotas.</quote> But this method requires some database
-            code to track users and their quotas.</para>
+          <para>
+				<emphasis>Contabilidade temporizada</emphasis> &eacute; menos
+	comum, provavelmente porque &eacute; mais dif&iacute;cil.  Esse 
+	m&eacute;todo tem filtros que contabilizam as impress&otilde;es
+	t&atilde;o logo que se use as impressoras.  Como a limita&ccedil;&atilde;o
+	de disco, a contabilidade &eacute; imetiada.  Voc&ecirc; pode
+	impedir que os usu&aacute;rios imprimam quando suas cotas cheguem ao
+	vermelho, e devam providenciar outro meio para os usu&aacute;rios 
+	verificarem e ajustar suas <quote>cotas de impress&atilde;o</quota>.  
+	Mas esse m&eacute;todo requer algum c&oacute;digo de banco de 
+	dados para rastrear os usu&aacute;rios e suas cotas.
+			</para>
         </listitem>
       </itemizedlist>
       
-      <para>The <application>LPD</application> spooling system supports both 
-	methods easily: since you
-        have to provide the filters (well, most of the time), you also have to
-        provide the accounting code.  But there is a bright side: you have
-        enormous flexibility in your accounting methods.  For example, you
-        choose whether to use periodic or timely accounting. You choose what
-        information to log: user names, host names, job types, pages printed,
-        square footage of paper used, how long the job took to print, and so
-        forth.  And you do so by modifying the filters to save this
-        information.</para>
+      <para>
+			O sistema de spool <application>LPD</application> suporta ambos os
+	m&eacute;todos facilmente: deste que voc&ecirc; providencie os filtros (
+	na maioria das vezes ), voc&ecirc; tamb&eacute;m deve providenciar o
+	c&oacute;digo para a contabilidade.  Mas existe o lado bom: voc&ecirc;
+	ter&aacute; uma enorme flexibilidade em seus m&eacute;todos de 
+	contabilidade.  Por exemplo, voc&ecirc; escolhe como ir&aacute; fazer a
+	contabilidade, periodicamente ou em determinado tempo.  Voc&ecirc; 
+	escolhe qual a informa&ccedil;&atilde;o que ir&aacute; armazenar:
+	nome do usu&aacute;rio, nome da m&aacute;quina, tipo do trabalho de 
+	impress&atilde;o, p&aacute;ginas impressas, metragem quadrada do papel
+	utilizado, quanto tempo a impressora foi utilizada para a impress&atilde;o
+	em muito mais.  E voc&ecirc; s&oacute; ter&aacute; que modificar o filtro
+	para armazenar essas informa&ccedil;&otilde;es.
+		</para>
           
       <sect3>
 			<title>
@@ -5122,7 +5133,7 @@ active kelly    9    /etc/host.conf, /etc/hosts.equiv   88 bytes
       <para>
 			A primeira linha da sa&iacute;da do comando &man.lpq.1; &eacute;
 	igualmente importante: ela informa o que a impressora est&aacute;
-	fazendo ( ou o que o <application>LPD</application pensa que ela 
+	fazendo ( ou o que o <application>LPD</application> pensa que ela 
 	fazendo em &uacute;ltima inst&acirc;ncia ).
 		</para>
 
@@ -5767,96 +5778,121 @@ cfA013rose dequeued
 
 	<varlistentry>
 	  <term><command>enable
-	      <replaceable>printer-name</replaceable></command></term>
+	      <replaceable>nome da impressora</replaceable></command></term>
 		
 	  <listitem>
-	    <para>Enable the queue for a printer.  Users can submit <foreignphrase>jobs</foreignphrase> but
-	      the printer will not print anything until it is started.</para>
+			<para>
+				Abilita a fila para a impressora.  Os usu&aacute;rios 
+	poder&atilde;o enviar trabalhos de impress&atilde;o, mas a 
+	impressora n&atilde;o ir&aacute; imprimir nada at&eacute; que ela seja
+	inicializada.
+			</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
 	  <term><command>help
-	      <replaceable>command-name</replaceable></command></term>
+	      <replaceable>nome do comando</replaceable></command></term>
 		
 	  <listitem>
-	    <para>Print help on the command
-	      <replaceable>command-name</replaceable>.  With no
-	      <replaceable>command-name</replaceable>, print a summary of the
-	      commands available.</para>
+		<para>
+			MOstra um texto de ajuda sobre o comando 
+	      <replaceable>nome do comando</replaceable>.  Sem o 
+	      <replaceable>nome do comando</replaceable>, mostra um resumo
+	dos comandos dispon&iacute;veis.
+		</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
 	  <term><command>restart
-	      <replaceable>printer-name</replaceable></command></term>
+	      <replaceable>nome da impressora</replaceable></command></term>
 	  
 	  <listitem>
-	    <para>Start the printer.  Ordinary users can use this command if
-	      some extraordinary circumstance hangs 
-	      <application>LPD</application>, but they cannot start
-	      a printer stopped with either the <command>stop</command> or
-	      <command>down</command> commands.  The
-	      <command>restart</command> command is equivalent to
-	      <command>abort</command> followed by
-	      <command>start</command>.</para>
+		<para>
+			Inicializa a impressora.  Usu&aacute;rios comuns podem usar este 
+	comando se alguma circunst&acirc;ncia extraordin&aacute;ria trave o
+	<application>LPD</application>, mas ele n&atilde;o pode iniciar a 
+	impressora parada pelos comandos <command>stop</command> ou
+	<command>down</command>.  O comando 
+	<command>restart</command> &eacute; equivalente aos comandos
+	<command>abort</command> seguido por 
+	<command>start</command>.
+		</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
 	  <term><command>start
-	      <replaceable>printer-name</replaceable></command></term>
+	      <replaceable>nome da impressora</replaceable></command></term>
 		
 	  <listitem>
-	    <para>Start the printer.  The printer will print <foreignphrase>jobs</foreignphrase> in its
-	      queue.</para>
+		<para>
+			Inicializa a impressora.  A impressora ir&aacute; imprimir os
+	trabalhos de impress&atilde;ona que estiverem na fila.
+		</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
 	  <term><command>stop
-	      <replaceable>printer-name</replaceable></command></term>
+	      <replaceable>nome da impressora</replaceable></command></term>
 	  
 	  <listitem>
-	    <para>Stop the printer.  The printer will finish the current job
-	      and will not print anything else in its queue.  Even though the
-	      printer is stopped, users can still submit <foreignphrase>jobs</foreignphrase> to an enabled
-	      queue.</para>
+		<para>
+			Para a impressora.  A impressora ir&aacute; terminar a 
+	impress&atilde;o do trabalho de impress&atilde;o atual e n&atilde;o 
+	ir&aacute; imprimir mais nada que estiver na fila.   Mesmo que ela 
+	esteja parada, os usu&aacute;rios podem enviar seus trabalhos de 
+	impress&atilde;o.
+		</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term><command>topq <replaceable>printer-name</replaceable>
-	      <replaceable>job-or-username</replaceable></command></term>
+	  <term><command>topq <replaceable>nome da impressora</replaceable>
+	      <replaceable>
+				trabalho de impress&atilde;o ou nome do usu&aacute;rio
+			</replaceable></command></term>
 		
 	  <listitem>
-	    <para>Rearrange the queue for
-	      <replaceable>printer-name</replaceable> by placing the <foreignphrase>jobs</foreignphrase> with
-	      the listed <replaceable>job</replaceable> numbers or the <foreignphrase>jobs</foreignphrase>
-	      belonging to <replaceable>username</replaceable> at the top of
-	      the queue. For this command, you cannot use
-	      <literal>all</literal> as the
-	      <replaceable>printer-name</replaceable>.</para>
+			<para>
+				Reoeganiza a fila para 
+	<replaceable>nome da impressora</replaceable> por colocar o
+	trabalho de impress&atilde;o com o n&uacute;mero de 
+	<replaceable>trabalho de impress&atilde;o</replaceable> ou o
+	trabalho de impress&atilde;o do 
+	<replaceable>nome do usu&aacute;rio</replaceable> no topo da fila.
+	  Para esse comando voc&ecirc; n&atilde;o pode utilizar 
+	<literal>all</literal> como o 
+	<replaceable>nome da impressora</replaceable>.
+			</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
 	  <term><command>up
-	      <replaceable>printer-name</replaceable></command></term>
+	      <replaceable>nome da impressora</replaceable></command></term>
 		
 	  <listitem>
-	    <para>Bring a printer up; the opposite of the
-	      <command>down</command> command.  Equivalent to
-	      <command>start</command> followed by
-	      <command>enable</command>.</para>
+			<para>
+				Coloca a impressora no ar; oposto ao comando 
+		<command>down</command>.  Equivale aos comandos 
+		<command>start</command> seguido por
+		<command>enable</command>.
+			</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
       
-      <para>&man.lpc.8; accepts the above commands on the command line.  If
-	you do not enter any commands, &man.lpc.8; enters an interactive mode,
-	where you can enter commands until you type <command>exit</command>,
-	<command>quit</command>, or end-of-file.</para>
+		<para>
+			o comando &man.lpc.8; aceita os comandos acima na linha de comando.
+	Se voc&ecirc; n&atilde;o colocar comandos como argumentos, o 
+	&man.lpc.8; entrar&aacute; no modo interativo, onde voc&ecirc; 
+	poder&aacute; entrar com os comandos at&eacute; voc&ecirc; digitar 
+	<command>exit</command>, <command>quit</command>, ou fim de arquivo 
+	( EOF ).
+		</para>
     </sect2>
   </sect1>
   
