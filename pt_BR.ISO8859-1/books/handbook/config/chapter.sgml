@@ -1456,7 +1456,7 @@ compat.linux.osrelease=4.3-STABLE</programlisting>
   </sect1>
 
   <sect1 id="configtuning-sysctl">
-    <title>Tuning with sysctl</title>
+    <title>Sintonizando com o sysctl</title>
 
     <indexterm><primary>sysctl</primary></indexterm>
     <indexterm>
@@ -1464,36 +1464,35 @@ compat.linux.osrelease=4.3-STABLE</programlisting>
       <secondary>with sysctl</secondary>
     </indexterm>
 
-    <para>&man.sysctl.8; is an interface that allows you to make changes
-      to a running &os; system.  This includes many advanced
-      options of the TCP/IP stack and virtual memory system that can
-      dramatically improve performance for an experienced system
-      administrator.  Over five hundred system variables can be read
-      and set using &man.sysctl.8;.</para>
+    <para>&man.sysctl.8; &eacute; uma interface que permite que voc&ecirc; fa&ccedil;a mudan&ccedil;as 
+      em um sistema &os; em tempo real.  Isto inclui muitas op&ccedil;&otilde;es 
+      avan&ccedil;adas da pilha TCP/IP e sistema de mem&oacute;ria virtual que 
+      podem ser configurados atrav&eacute;s do &man.sysctl.8;.</para>
 
-    <para>At its core, &man.sysctl.8; serves two functions: to read and
-      to modify system settings.</para>
+    <para>Na sua ess&ecirc;ncia, o &man.sysctl.8; tem duas fun&ccedil;&otilde;es: 
+      ler e modificar configura&ccedil;&otilde;es de sistema.</para>
 
-    <para>To view all readable variables:</para>
+    <para>Para ver todas as vari&aacute;veis que podem ser lidas:</para>
 
     <screen>&prompt.user; <userinput>sysctl -a</userinput></screen>
 
-    <para>To read a particular variable, for example,
+    <para>Para ler uma vari&aacute;vel em particular, por exemplo,
       <varname>kern.maxproc</varname>:</para>
 
     <screen>&prompt.user; <userinput>sysctl kern.maxproc</userinput>
 kern.maxproc: 1044</screen>
 
-    <para>To set a particular variable, use the intuitive
-      <replaceable>variable</replaceable>=<replaceable>value</replaceable>
-      syntax:</para>
+    <para>Para configurar um valor em particular, use a sintaxe intuitiva 
+      <replaceable>vari&aacute;vel</replaceable>=<replaceable>valor</replaceable>
+      </para>
 
     <screen>&prompt.root; <userinput>sysctl kern.maxfiles=5000</userinput>
 kern.maxfiles: 2088 -> 5000</screen>
 
-    <para>Settings of sysctl variables are usually either strings,
-      numbers, or booleans (a  boolean being <literal>1</literal> for yes
-      or a <literal>0</literal> for no).</para>
+    <para>Configura&ccedil;&otilde;es de vari&aacute;veis do sysctl geralmente s&atilde;o 
+      <literal>strings</literal>, n&uacute;meros ou boleanos (sendo um boleano 
+      <literal>1</literal> para sim ou <literal>0</literal> 
+      para n&atilde;o).</para>
 
   <sect2 id="sysctl-readonly">
     <sect2info>
@@ -1501,32 +1500,37 @@ kern.maxfiles: 2088 -> 5000</screen>
         <author>
 	 <firstname>Tom</firstname>
 	 <surname>Rhodes</surname>
-	 <contrib>Contributed by </contrib>
+	 <contrib>Contribui&ccedil;&atilde;o de </contrib>
 	 <!-- 31 January 2003 -->
         </author>
       </authorgroup>
     </sect2info>
-    <title>&man.sysctl.8; Read-only</title>
+    <title>&man.sysctl.8; Apenas para Leitura</title>
 
-    <para>In some cases it may be desirable to modify read-only &man.sysctl.8;
-      values.  While this is not recommended, it is also sometimes unavoidable.</para>
+    <para>Em alguns casos pode ser desej&aacute;vel modificar valores &man.sysclt.8; 
+      que possam apenas ser lidos.  Enquanto isto n&atilde;o seja recomend&aacute;vel, 
+      algumas vezes tamb&eacute;m pode ser inevit&aacute;vel.</para>
 
-    <para>For instance on some laptop models the &man.cardbus.4; device will
-      not probe memory ranges, and fail with errors which look similar to:</para>
+    <para>Por exemplo, em alguns modelos de computadores port&aacute;teis o 
+      dispositivo &man.cardbus.4; n&atilde;o provar&aacute; algumas faixas de mem&oacute;ria, 
+      e causar&aacute; falhas com erros parecidos com este:</para>
 
     <screen>cbb0: Could not map register memory</screen>
     <screen>device_probe_and_attach: cbb0 attach returned 12</screen>
 
-    <para>Cases like the one above usually require the modification of some
-      default &man.sysctl.8; settings which are set read only.  To overcome
-      these situations a user can put &man.sysctl.8; <quote>OIDs</quote>
-      in their local <filename>/boot/loader.conf.local</filename>.  Default
-      settings are located in the <filename>/boot/defaults/loader.conf</filename>
-      file.</para>
+    <para>Casos como este acima geralmente requerem a modifica&ccedil;&atilde;o de 
+      algumas configura&ccedil;&otilde;es padr&atilde;o do &man.sysctl.8; que s&atilde;o apenas 
+      para leitura.  Para mudar esta situa&ccedil;&atilde;o o usu&aacute;rio pode colocar 
+      <quote>OIDs</quote> de &man.sysctl.8; em seu arquivo 
+      <filename>/boot/loader.conf.local</filename>.  Configura&ccedil;&otilde;es 
+      padr&atilde;o est&atilde;o localizadas no arquivo <filename>/boot/defaults/loader.conf</filename>.
+      </para>
 
-    <para>Fixing the problem mentioned above would require a user to set
-      <option>hw.pci.allow_unsupported_io_range=1</option> in the aforementioned
-      file.  Now &man.cardbus.4; will work properly.</para>
+    <para>Consertar o problema mencionado acima pode requerer que o 
+      usu&aacute;rio configure a op&ccedil;&atilde;o
+      <option>hw.pci.allow_unsupported_io_range=1</option> no arquivo 
+      mencionado anteriormente.  Agora o
+      &man.cardbus.4; funcionar&aacute; adequadamente.</para>
 
     </sect2>
   </sect1>
