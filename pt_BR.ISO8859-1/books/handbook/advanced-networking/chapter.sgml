@@ -6577,63 +6577,66 @@ natd_flags=""</programlisting>
     <sect2 id="network-inetd-overview">
       <title>Vis&atilde;o Geral</title>
 
-      <para>&man.inetd.8; is referred to as the <quote>Internet
-	  Super-Server</quote> because it manages connections for several
-	daemons.  Programs that provide network service are commonly
-	known as daemons.  <application>inetd</application> serves as a
-	managing server for other daemons.  When a connection is
-	received by <application>inetd</application>, it determines
-	which daemon the connection is destined for, spawns the
-	particular daemon and delegates the socket to it.  Running one
-	instance of <application>inetd</application> reduces the overall
-	system load as compared to running each daemon individually in
-	stand-alone mode.</para>
+      <para>O &man.inetd.8; &eacute; chamado de <quote>Super-Servidor
+      Internet</quote> porque ele gerencia conex&otilde;es para diversos
+      daemons.  O <application>inetd</application> atua como um
+      servidor gerenciador para outros daemons.  Quando uma conex&atilde;o &eacute;
+      recebida pelo <application>inetd</application>, ele determina
+      para qual daemon a conex&atilde;o &eacute; destinada e executa o daemon
+      correspondente e a ele delega o socket.  Executar uma inst&acirc;ncia
+      do <application>inetd</application> reduz a carga no sistema de
+      forma geral, comparado a se executar cada daemon
+      individualmente.</para>
 
-      <para>Primarily, <application>inetd</application> is used to
-	spawn other daemons, but several trivial protocols are handled
-	directly, such as <application>chargen</application>,
-	<application>auth</application>, and
-	<application>daytime</application>.</para>
 
-      <para>This section will cover the basics in configuring
-	<application>inetd</application> through its command-line
-	options and its configuration file,
-	<filename>/etc/inetd.conf</filename>.</para>
+      <para>Primariamente, o <application>inetd</application> &eacute; usado
+      para executar outros daemons, mas diversos protocolos simples
+      s&atilde;o tratados diretamente, como 
+      <application>chargen</application>, 
+      <application>auth</application> e 
+      <application>daytime</application>.</para>
+
+      <para>Esta se&ccedil;&atilde;o vai abordar as configura&ccedil;&otilde;es b&aacute;sicas do
+      <application>inetd</application> atrav&eacute;s de seus par&acirc;metros de
+      linha de comando e seu arquivo de configura&ccedil;&atilde;o
+      <filename>/etc/inetd.conf</filename>.</para>
     </sect2>
 
     <sect2 id="network-inetd-settings">
-      <title>Settings</title>
+      <title>Configura&ccedil;&otilde;es</title>
 
-      <para><application>inetd</application> is initialized through
-	the <filename>/etc/rc.conf</filename> system.  The
-	<literal>inetd_enable</literal> option is set to
-	<quote>NO</quote> by default, but is often times turned on by
-	<application>sysinstall</application> with the medium security
-	profile.  Placing:
+      <para>O <application>inetd</application> &eacute; inicializado atrav&eacute;s
+      do sistema <filename>/etc/rc.conf</filename>.  A op&ccedil;&atilde;o 
+      <literal>inetd_enable</literal> &eacute; ajustada para 
+      <quote>NO</quote>, por padr&atilde;o, mas &eacute; muitas vezes ativada pelo 
+      <application>sysinstall</application> com o perfil de 
+      seguran&ccedil;a m&eacute;dio.  Colocando:</para>
 	<programlisting>inetd_enable="YES"</programlisting> or
-	<programlisting>inetd_enable="NO"</programlisting> into
-	<filename>/etc/rc.conf</filename> can enable or disable
-	<application>inetd</application> starting at boot time.</para>
+	<programlisting>inetd_enable="NO"</programlisting> no
+	<filename>/etc/rc.conf</filename> pode ativar ou desativar a 
+	execu&ccedil;&atilde;o do <application>inetd</application> na inicializa&ccedil;&atilde;o
+	do sistema.</para>
 
-      <para>Additionally, different command-line options can be passed
-	to <application>inetd</application> via the
-	<literal>inetd_flags</literal> option.</para>
+      <para>Adicionalmente, par&acirc;metros de linha de comando
+      podem ser passados para o <application>inetd</application> 
+      atrav&eacute;s da op&ccedil;&atilde;o <literal>inetd_flags</literal>.</para>
     </sect2>
 
     <sect2 id="network-inetd-cmdline">
-      <title>Command-Line Options</title>
+      <title>Op&ccedil;&otilde;es de Linha de Comando</title>
 
-      <para><application>inetd</application> synopsis:</para>
+      <para>Sinopse do <application>inetd</application>:</para>
 
-      <para><option>     inetd [-d] [-l] [-w] [-W] [-c maximum] [-C rate] [-a address | hostname]
-	   [-p filename] [-R rate] [configuration file]</option></para>
+      <para><option>     inetd [-d] [-l] [-w] [-W] [-c m&aacute;ximo] 
+      [-C taxa] [-a endere&ccedil;o | nome-do-sistema] [-p nome do arquivo] 
+      [-R taxa] [arquivo de configura&ccedil;&atilde;o]</option></para>
 
       <variablelist>
 	<varlistentry>
 	  <term>-d</term>
 
 	  <listitem>
-	    <para>Turn on debugging.</para>
+	    <para>Ativa a depura&ccedil;&atilde;o.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -6641,7 +6644,7 @@ natd_flags=""</programlisting>
 	  <term>-l</term>
 
 	  <listitem>
-	    <para>Turn on logging of successful connections.</para>
+	    <para>Ativa o registro das conex&otilde;es bem sucedidas.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -6649,8 +6652,8 @@ natd_flags=""</programlisting>
 	  <term>-w</term>
 
 	  <listitem>
-	    <para>Turn on TCP Wrapping for external services (on by
-	      default).</para>
+	    <para>Ativa o encapsulamento TCP para servi&ccedil;os externos 
+	    (ativado por padr&atilde;o).</para>
 	  </listitem>
 	</varlistentry>
 
@@ -6658,43 +6661,42 @@ natd_flags=""</programlisting>
 	  <term>-W</term>
 
 	  <listitem>
-	    <para>Turn on TCP Wrapping for internal services which are
-	      built into <application>inetd</application> (on by
-	      default).</para>
+	    <para>Ativa o encapsulamento do TCP para serv&ccedil;os internos
+	    que s&atilde;o embutidos no <application>inetd</application> 
+	    (ativado por padr&atilde;o).</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term>-c maximum</term>
+	  <term>-c m&aacute;ximo</term>
 
 	  <listitem>
-	    <para>Specify the default maximum number of simultaneous
-	      invocations of each service; the default is unlimited.
-	      May be overridden on a per-service basis with the
-	      <option>max-child</option> parameter.</para>
+	    <para>Especifica o n&uacute;mero m&aacute;ximo padr&atilde;o de invoca&ccedil;&otilde;es
+	    simult&acirc;neas de cada servi&ccedil;o; o padr&atilde;o &eacute; ilimitado.  Pode
+	    ser anulado em cada servi&ccedil;o com o par&acirc;metro 
+	    <option>max-child</option>.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term>-C rate</term>
+	  <term>-C taxa</term>
 
 	  <listitem>
-	    <para>Specify the default maximum number of times a
-	      service can be invoked from a single IP address in one
-	      minute; the default is unlimited.  May be overridden on a
-	      per-service basis with the
-	      <option>max-connections-per-ip-per-minute</option>
-	      parameter.</para>
+	    <para>Especifica o n&uacute;mero m&aacute;ximo padr&atilde;o de vezes que um
+	    servi&ccedil;o pode ser invocado a partir de um &uacute;nico endere&ccedil;o IP
+	    em um minuto; o padr&atilde;o &eacute; ilimitado.  Pode ser cancelado,
+	    por servi&ccedil;o, com o par&acirc;metro 
+	    <option>max-conex&otilde;es-por-ip-por-minuto</option>.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term>-R rate</term>
+	  <term>-R taxa</term>
 
 	  <listitem>
-	    <para>Specify the maximum number of times a service can be
-	      invoked in one minute; the default is 256.  A rate of 0
-	      allows an unlimited number of invocations.</para>
+	    <para>Especifica o n&uacute;mero m&aacute;ximo de vezes que um servi&ccedil;o
+	    pode ser invocado em um minuto; o padr&atilde;o &eacute; 256.  Uma taxa
+	    de 0 permite um n&uacute;mero ilimitado de invoca&ccedil;&otilde;es.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -6702,21 +6704,23 @@ natd_flags=""</programlisting>
 	  <term>-a</term>
 
 	  <listitem>
-	    <para>Specify one specific IP address to bind to.
-	      Alternatively, a hostname can be specified, in which case
-	      the IPv4 or IPv6 address which corresponds to that
-	      hostname is used.  Usually a hostname is specified when
-	      <application>inetd</application> is run inside a
-	      &man.jail.8;, in which case the hostname corresponds to
-	      the &man.jail.8; environment.</para>
+	    <para>Especifica um &uacute;nico endere&ccedil;o IP para ser unido.
+	    Alternativamente, um nome de sistema pode ser
+	    especificado, e neste caso, o endere&ccedil;o IPv4 ou IPV6 que
+	    corresponder &agrave;quele nome &eacute; usado. Habitualmente um nome de
+	    sistema &eacute; especificado quando o
+	    <application>inetd</application> &eacute; executado dentro de um
+	    &man.jail.8;, e neste caso, o nome do sistema corresponde
+	    ao ambiente do &man.jail.8;.</para>
 
-	    <para>When hostname specification is used and both IPv4
-	      and IPv6 bindings are desired, one entry with the
-	      appropriate protocol type for each binding is required for
-	      each service in <filename>/etc/inetd.conf</filename>.  For
-	      example, a TCP-based service would need two entries, one
-	      using <quote>tcp4</quote> for the protocol and the other using
-	      <quote>tcp6</quote>.</para>
+	    <para>Quando o &eacute; usado o nome do sistema e uni&atilde;o com ambos
+	    endere&ccedil;os IPv4 e IPv6 &eacute; desejada, uma entrada com o
+	    tipo apropriado de protocolo para cada uni&atilde;o &eacute; exigida
+	    para cada servi&ccedil;o, no 
+	    <filename>/etc/inetd.conf</filename>.  Por exemplo, um
+	    servi&ccedil;o baseado em TCP precisaria de duas entradas, uma
+	    usando <quote>tcp4</quote> para o protocolo e outra usando
+	    <quote>tcp6</quote>.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -6724,29 +6728,29 @@ natd_flags=""</programlisting>
 	  <term>-p</term>
 
 	  <listitem>
-	    <para>Specify an alternate file in which to store the
-	      process ID.</para>
+	    <para>Especifica um arquivo alternativo para armazenar o
+	    ID do processo.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
 
-      <para>These options can be passed to
-	<application>inetd</application> using the
-	<literal>inetd_flags</literal> option in
-	<filename>/etc/rc.conf</filename>.  By default,
-	<literal>inetd_flags</literal> is set to <quote>-wW</quote>,
-	which turns on TCP wrapping for
-	<application>inetd</application>'s internal and external
-	services.  For novice users, these parameters usually do not need
-	to be modified or even entered in
-	<filename>/etc/rc.conf</filename>.</para>
+      <para>Estas op&ccedil;&otilde;es podem ser passadas ao
+      <application>inetd</application> usando a op&ccedil;&atilde;o
+      <literal>inetd_flags</literal> no 
+      <filename>/etc/rc.conf</filename>. Por padr&atilde;o, o 
+      <literal>inetd_flags</literal> &eacute; ajustado para <quote>-wW</quote>, 
+      que ativa o encapsulamento TCP para os servi&ccedil;os 
+      <application>inetd</application> internos e externos.  Para
+      usu&aacute;rios novatos, estes par&acirc;metros geralmente n&atilde;o precisam ser
+      modificados ou mesmo inclu&iacute;dos no 
+      <filename>/etc/rc.conf</filename>.</para>
 
       <note>
-	<para>An external service is a daemon outside of
-	  <application>inetd</application>, which is invoked when a
-	  connection is received for it.  On the other hand, an internal
-	  service is one that <application>inetd</application> has the
-	  facility of offering within itself.</para>
+	<para>Um servi&ccedil;o externo &eacute; um daemon fora do 
+	<application>inetd</application>, que &eacute; invocado quando uma
+	conex&atilde;o &eacute; recebida para ele.  Por outro lado, um servi&ccedil;o
+	interno &eacute; um que o <application>inetd</application> possui os
+	meios de fornecer por si pr&oacute;prio.</para>
       </note>
 
     </sect2>
@@ -6754,80 +6758,79 @@ natd_flags=""</programlisting>
     <sect2 id="network-inetd-conf">
       <title><filename>inetd.conf</filename></title>
 
-      <para>Configuration of <application>inetd</application> is
-	controlled through the <filename>/etc/inetd.conf</filename>
-	file.</para>
+      <para>A configura&ccedil;&atilde;o do <application>inetd</application> &eacute;
+      controlada atrav&eacute;s do arquivo 
+      <filename>/etc/inetd.conf</filename>.</para>
 
-      <para>When a modification is made to
-	<filename>/etc/inetd.conf</filename>,
-	<application>inetd</application> can be forced to re-read its
-	configuration file by sending a HangUP signal to the
-	<application>inetd</application> process as shown:</para>
+      <para>Quando uma modifica&ccedil;&atilde;o &eacute; feita no 
+      <filename>/etc/inetd.conf</filename>, o 
+      <application>inetd</application> pode ser for&ccedil;ado a reler seu
+      arquivo de configura&ccedil;&atilde;o enviando um sinal HangUP ao processo
+      <application>inetd</application>, como mostrado:</para>
 
       <example id="network-inetd-hangup">
-	<title>Sending <application>inetd</application> a HangUP Signal</title>
+	<title>Enviando um Sinal HangUP ao <application>inetd</application></title>
 
 	<screen>&prompt.root; <userinput>kill -HUP `cat /var/run/inetd.pid`</userinput></screen>
       </example>
 
-      <para>Each line of the configuration file specifies an
-	individual daemon.  Comments in the file are preceded by a
-	<quote>#</quote>.  The format of
-	<filename>/etc/inetd.conf</filename> is as follows:</para>
+      <para>Cada linha do arquivo de configura&ccedil;&atilde;o especifica um daemon
+      individual.  Coment&aacute;rios no arquivo s&atilde;o precedidos por um 
+      <quote>#</quote>.  O formato do 
+      <filename>/etc/inetd.conf</filename> &eacute; o seguinte:</para>
 
-      <programlisting>service-name
-socket-type
-protocol
-{wait|nowait}[/max-child[/max-connections-per-ip-per-minute]]
-user[:group][/login-class]
-server-program
-server-program-arguments</programlisting>
+      <programlisting>nome-do-servi&ccedil;o
+tipo-de-socket
+protocolo
+{wait|nowait}[/max-de-filhos[/max-de-conex&otilde;es-por-ip-por-minuto]]
+usu&aacute;rio[:grupo][/classe-de-login]
+programa-servidor
+argumentos-do-programa-servidor</programlisting>
 
-      <para>An example entry for the <application>ftpd</application> daemon
-	using IPv4:</para>
+      <para>Uma entrada de exemplo para o daemon
+      <application>ftpd</application> usando IPv4:</para>
 
       <programlisting>ftp     stream tcp     nowait root    /usr/libexec/ftpd       ftpd -l</programlisting>
 
       <variablelist>
 	<varlistentry>
-	  <term>service-name</term>
+	  <term>nome-do-servi&ccedil;o</term>
 
 	  <listitem>
-	    <para>This is the service name of the particular daemon.
-	      It must correspond to a service listed in
-	      <filename>/etc/services</filename>.  This determines which
-	      port <application>inetd</application> must listen to.  If
-	      a new service is being created, it must be placed in
-	      <filename>/etc/services</filename>
-	      first.</para>
+	    <para>Este &eacute; o nome do servi&ccedil;o do daemon em quest&atilde;o.  Ele
+	    precisa corresponder ao servi&ccedil;o listado no 
+	    <filename>/etc/services</filename>.  Isto determina qual
+	    porta o <application>inetd</application> precisa escutar.
+	    Se um novo servi&ccedil;o est&aacute; sendo criado, ele precisa ser
+	    colocado primeiro no <filename>/etc/services</filename>.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term>socket-type</term>
+	  <term>tipo-de-socket</term>
 
 	  <listitem>
-	    <para>Either <literal>stream</literal>,
-	      <literal>dgram</literal>, <literal>raw</literal>, or
+	    <para>Pode ser <literal>stream</literal>,
+	      <literal>dgram</literal>, <literal>raw</literal>, ou
 	      <literal>seqpacket</literal>.  <literal>stream</literal>
-	      must be used for connection-based, TCP daemons, while
-	      <literal>dgram</literal> is used for daemons utilizing the
-	      UDP transport protocol.</para>
+	      precisa ser usado para daemons TCP baseados em conex&atilde;o,
+	      enquanto <literal>dgram</literal> &eacute; usado para daemons
+	      usando o protocolo de transporte UDP.
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term>protocol</term>
+	  <term>protocolo</term>
 
 	  <listitem>
-	    <para>One of the following:</para>
+	    <para>Um dos seguintes:</para>
 
 	    <informaltable>
 	      <tgroup cols="2">
 		<thead>
 		  <row>
-		    <entry>Protocol</entry>
-		    <entry>Explanation</entry>
+		    <entry>Protocolo</entry>
+		    <entry>Descri&ccedil;&atilde;o</entry>
 		  </row>
 		</thead>
 		<tbody>
@@ -6849,11 +6852,11 @@ server-program-arguments</programlisting>
 		  </row>
 		  <row>
 		    <entry>tcp46</entry>
-		    <entry>Both TCP IPv4 and v6</entry>
+		    <entry>Ambos TCP IPv4 e v6</entry>
 		  </row>
 		  <row>
 		    <entry>udp46</entry>
-		    <entry>Both UDP IPv4 and v6</entry>
+		    <entry>Ambos UDP IPv4 e v6</entry>
 		  </row>
 		</tbody>
 	      </tgroup>
@@ -6862,148 +6865,156 @@ server-program-arguments</programlisting>
 	</varlistentry>
 
 	<varlistentry>
-	  <term>{wait|nowait}[/max-child[/max-connections-per-ip-per-minute]]</term>
+	  <term>{wait|nowait}[/max-de-filhos[/max-de-conex&otilde;es-por-ip-por-minuto]]</term>
 
 	  <listitem>
-	    <para><option>wait|nowait</option> indicates whether the
-	      daemon invoked from <application>inetd</application> is
-	      able to handle its own socket or not.
-	      <option>dgram</option> socket types must use the wait
-	      option, while stream socket daemons, which are usually
-	      multi-threaded, should use <option>nowait</option>.
-	      <option>wait</option> usually hands off multiple sockets
-	      to a single daemon, while <option>nowait</option> spawns a
-	      child daemon for each new socket.</para>
+	    <para><option>wait|nowait</option> indica se o daemon
+	    invocado pelo <application>inetd</application> &eacute; capaz de
+	    lidar com seu pr&oacute;prio socket ou n&atilde;o.  
+	    Sockets do tipo <option>dgram</option> precisam usar a
+	    op&ccedil;&atilde;o wait, enquanto daemons de sockets tipo stream, os
+	    quais geralmente s&atilde;o multi-threaded, devem usar a op&ccedil;&atilde;o
+	    <option>nowait</option>.  <option>wait</option> geralmente
+	    repassa m&uacute;ltiplos sockets para um &uacute;nico daemon, enquanto
+	    <option>nowait</option> dispara um daemon filho para cada
+	    novo socket.</para>
 
-	    <para>The maximum number of child daemons
-	      <application>inetd</application> may spawn can be set using
-	      the <option>max-child</option> option.  If a limit of ten
-	      instances of a particular daemon is needed, a
-	      <literal>/10</literal> would be placed after
-	      <option>nowait</option>.</para>
+	    <para>O n&uacute;mero m&aacute;ximo de daemons filho que o 
+	    <application>inetd</application> pode disparar pode ser
+	    ajustado usando a op&ccedil;&atilde;o <option>max-de-filhos</option>.
+	    Se um limite de dez inst&acirc;ncias de um daemon em particular
+	    &eacute; necess&aacute;ria, um <literal>/10</literal> deve ser colocado
+	    ap&oacute;s a op&ccedil;&atilde;o <option>nowait</option>.</para>
 
-	    <para>In addition to <option>max-child</option>, another
-	      option limiting the maximum connections from a single
-	      place to a particular daemon can be enabled.
-	      <option>max-connections-per-ip-per-minute</option> does
-	      just this.  A value of ten here would limit any particular
-	      IP address connecting to a particular service to ten
-	      attempts per minute.  This is useful to prevent
-	      intentional or unintentional resource consumption and
-	      Denial of Service (DoS) attacks to a machine.</para>
+	    <para>Al&eacute;m de <option>max-de-filhos</option>, outra op&ccedil;&atilde;o
+	    pode ser ativada para limitar o n&uacute;mero m&aacute;ximo de conex&otilde;es
+	    a partir de um &uacute;nico lugar para um daemon em particular.
+	    O <option>max-conex&otilde;es-por-ip-por-minuto</option> faz 
+	    justamente isto.  Um valor de dez nesta op&ccedil;&atilde;o limitaria
+	    qualquer endere&ccedil;o IP a se conectar a determinado servi&ccedil;o a
+	    dez tentativas por minuto.  Isto &eacute; &uacute;til para evitar
+	    consumo de recursos intencional ou n&atilde;o e ataques de
+	    Nega&ccedil;&atilde;o de Servi&ccedil;o (Denial of service - DoS) para 
+	    a m&aacute;quina.</para>
 
-	    <para>In this field, <option>wait</option> or
-	      <option>nowait</option> is mandatory.
-	      <option>max-child</option> and
-	      <option>max-connections-per-ip-per-minute</option> are
-	      optional.</para>
+	    <para>Neste campo, <option>wait</option> ou 
+	    <option>max-de-filhos</option> e 
+	    <option>max-conex&otilde;es-por-ip-por-minuto</option> s&atilde;o
+	    opcionais.</para>
 
-	    <para>A stream-type multi-threaded daemon without any
-	      <option>max-child</option> or
-	      <option>max-connections-per-ip-per-minute</option> limits
-	      would simply be: <literal>nowait</literal></para>
 
-	    <para>The same daemon with a maximum limit of ten daemons
-	      would read: <literal>nowait/10</literal></para>
+	    <para>Um daemon multi-threaded do tipo stream sem qualquer
+	    limites <option>max-de-filhos</option> ou 
+	    <option>max-conex&otilde;es-por-ip-por-minuto</option> seria
+	    simplesmente: <literal>nowait</literal>.</para>
+	    
+	    <para>O mesmo daemon com um limite m&aacute;ximo de dez daemons
+	    seria: <literal>nowait/10</literal></para>
 
-	    <para>Additionally, the same setup with a limit of twenty
-	      connections per IP address per minute and a maximum
-	      total limit of ten child daemons would read:
-	      <literal>nowait/10/20</literal></para>
+	    <para>Adicionalmente, a mesma configura&ccedil;&atilde;o com um limite
+	    de vinte conex&otilde;es por endere&ccedil;o IP por minuto e um limite
+	    total m&aacute;ximo de dez daemons filhos seria: 
+	    <literal>nowait/10/20</literal>.</para>
 
-	    <para>These options are all utilized by the default
-	      settings of the <application>fingerd</application> daemon,
-	      as seen here:</para>
+	    <para>Estas op&ccedil;&otilde;es s&atilde;o todas utilizadas pela configura&ccedil;&atilde;o
+	    padr&atilde;o do daemon <application>fingerd</application>, como
+	    visto aqui:</para>
 
 	    <programlisting>finger stream tcp     nowait/3/10 nobody /usr/libexec/fingerd fingerd -s</programlisting>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term>user</term>
+	  <term>usu&aacute;rio</term>
 
 	  <listitem>
-	    <para>The user is the username that the particular daemon
-	      should run as.  Most commonly, daemons run as the
-	      <username>root</username> user.  For security purposes, it is
-	      common to find some servers running as the
-	      <username>daemon</username> user, or the least privileged
-	      <username>nobody</username> user.</para>
+	    <para>O usu&aacute;rio &eacute; o nome do usu&aacute;rio atrav&eacute;s do qual o daemon
+	    espec&iacute;fico deve ser executado.  Mais freq&uuml;entemente,
+	    daemons rodam com o usu&aacute;rio <username>root</username>.  Por 
+	    prop&oacute;sito de seguran&ccedil;a, &eacute; comum encontrar alguns
+	    servidores rodando como o usu&aacute;rio 
+	    <username>daemon</username>, ou o usu&aacute;rio com menos
+	    privil&eacute;gios, <username>nobody</username>.</para>
+
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term>server-program</term>
+	  <term>programa-server</term>
 
 	  <listitem>
-	    <para>The full path of the daemon to be executed when a
-	      connection is received.  If the daemon is a service
-	      provided by <application>inetd</application> internally,
-	      then <option>internal</option> should be
-	      used.</para>
+	    <para>O caminho completo do daemon a ser executado quando
+	    uma conex&atilde;o &eacute; recebida.  Se o daemon &eacute; um servi&ccedil;o a ser
+	    fornecido internamente pelo 
+	    <application>inetd</application>, ent&atilde;o 
+	    <option>internal</option> deve ser utilizado.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term>server-program-arguments</term>
+	  <term>argumentos-do-programa-servidor</term>
 
 	  <listitem>
-	    <para>This works in conjunction with
-	      <option>server-program</option> by specifying the
-	      arguments, starting with argv[0], passed to the daemon on
-	      invocation.  If <application>mydaemon -d</application> is
-	      the command line, <literal>mydaemon -d</literal> would be
-	      the value of <option>server program arguments</option>.
-	      Again, if the daemon is an internal service, use
-	      <option>internal</option> here.</para>
+	    <para>Este funciona em conjunto com 
+	    <option>server-program</option> especificando os
+	    argumentos, iniciando com o argv[0], passado ao daemon no
+	    momento da invoca&ccedil;&atilde;o.  Se 
+	    <application>meudaemon -d</application> &eacute; a linha de
+	    comando, <literal>meudaemon -d</literal> seria o valor de
+	    <option>argumentos do programa servidor</option>.
+	    Novamente, se o daemon &eacute; um servi&ccedil;o interno, use 
+	    <option>internal</option> aqui.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
     </sect2>
 
     <sect2 id="network-inetd-security">
-      <title>Security</title>
+      <title>Seguran&ccedil;a</title>
 
-      <para>Depending on the security profile chosen at install, many
-	of <application>inetd</application>'s daemons may be enabled by
-	default.  If there is no apparent need for a particular daemon,
-	disable it!  Place a <quote>#</quote> in front of the daemon in
-	question, and send a <link linkend="network-inetd-hangup">hangup signal
-	  to inetd</link>.
-	Some daemons, such as <application>fingerd</application>, may
-	not be desired at all because they provide an attacker with too
-	much information.</para>
+      <para>Dependendo do perfil de seguranca escolhido durante a
+      instala&ccedil;&atilde;o, muitos daemons do <application>inetd</application> 
+      podem ser ativados por padr&atilde;o.  Se n&atilde;o h&aacute; necessidade aparente
+      para um daemon em particular, desative-o!  Coloque um 
+      <quote>#</quote> na frente do daemon em quest&atilde;o e envie um 
+      <link linkend="network-inetd-hangup">sinal de hangup para o 
+      inetd</link>.  Alguns daemons como o 
+      <application>fingerd</application>, podem ser totalmente
+      indesej&aacute;veis, porque eles fornecem muita informa&ccedil;&atilde;o para um
+      atacante.</para>
 
-      <para>Some daemons are not security-conscious and have long, or
-	non-existent timeouts for connection attempts.  This allows an
-	attacker to slowly send connections to a particular daemon, thus
-	saturating available resources.  It may be a good idea to place
-	<option>ip-per-minute</option> and <option>max-child</option>
-	limitations on certain daemons.</para>
+      <para>Alguns daemons n&atilde;o s&atilde;o conscientes com a seguran&ccedil;a e
+      possuem longos ou inexistentes timeouts para tentativas de
+      conex&atilde;o.  Isto permite um atacante enviar conex&otilde;es lentamente
+      para para um daemon em particular, saturando, assim, os recursos
+      dispon&iacute;veis.  Pode ser uma boa id&eacute;ia colocar limita&ccedil;&otilde;es 
+      <option>ip-por-minuto</option> e <option>max-filhos</option> em 
+      certos daemons.</para>
 
-      <para>By default, TCP wrapping is turned on.  Consult the
-	&man.hosts.access.5; manual page for more information on placing
-	TCP restrictions on various <application>inetd</application>
-	invoked daemons.</para>
+      <para>Por padr&atilde;o, o encapsulamento TCP &eacute; ativado.  Consulte a
+      p&aacute;gina de manual &man.hosts.access.5; para mais informa&ccedil;&otilde;es
+      sobre como colocar restri&ccedil;&otilde;es TCP em v&aacute;rios daemons 
+      invocados pelo <application>inetd</application>.</para>
+
     </sect2>
 
     <sect2 id="network-inetd-misc">
-      <title>Miscellaneous</title>
+      <title>Miscel&acirc;nea</title>
 
       <para><application>daytime</application>,
 	<application>time</application>,
 	<application>echo</application>,
 	<application>discard</application>,
-	<application>chargen</application>, and
-	<application>auth</application> are all internally provided
-	services of <application>inetd</application>.</para>
+	<application>chargen</application>, e
+	<application>auth</application> s&atilde;o todos servi&ccedil;os fornecidos
+	internamente pelo <application>inetd</application>.</para>
 
-      <para>The <application>auth</application> service provides identity
-	(ident, identd) network services, and is configurable to a certain
-	degree.</para>
+      <para>O servi&ccedil;o <application>auth</application> fornece servi&ccedil;os
+      de identidade (ident, identd) de rede, e &eacute; configur&aacute;vel at&eacute; 
+      certo ponto.</para>
 
-      <para>Consult the &man.inetd.8; manual page for more in-depth
-	information.</para>
+      <para>Consulte a p&aacute;gina de manual &man.inetd.8; para informa&ccedil;&otilde;es
+      mais aprofundadas.</para>
     </sect2>
   </sect1>
 
