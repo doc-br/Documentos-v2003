@@ -1417,113 +1417,122 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
   <sect1 id="sgml-primer-marked-sections">
     <title>Sess&otilde;es marcadas</title>
     
-    <para>SGML provides a mechanism to indicate that particular pieces of the
-      document should be processed in a special way.  These are termed
-      <quote>marked sections</quote>.</para>
-
+    <para>O SGML fornece um mecanismo para indicar que uma parte
+      particular do documento deve ser processada de uma forma especial.  Estas 
+      partes s&atilde;o denominadas <quote>sess&otilde;es marcadas</quote>.</para>
+    
     <example>
-      <title>Structure of a marked section</title>
+      <title>Estrutura de uma sess&atilde;o marcada</title>
 
-      <programlisting>&lt;![ <replaceable>KEYWORD</replaceable> [
-  Contents of marked section
+      <programlisting>&lt;![ <replaceable>Palavra-chave</replaceable> [
+  Conte&uacute;do da sess&atilde;o marcada
 ]]&gt;</programlisting>
     </example>
 
-    <para>As you would expect, being an SGML construct, a marked section
-      starts with <literal>&lt!</literal>.</para>
+    <para>Como voc&ecirc; esperaria, sendo uma constru&ccedil;&atilde;o SGML, uma sess&atilde;o
+      marcada inicia com um <literal>&lt!</literal>.</para>
 
-    <para>The first square bracket begins to delimit the marked
-      section.</para>
-
-    <para><replaceable>KEYWORD</replaceable> describes how this marked
-      section should be processed by the parser.</para>
-
-    <para>The second square bracket indicates that the content of the marked
-      section starts here.</para>
+    <para>O primeiro colchete come&ccedil;a a limitar a sess&atilde;o
+      marcada.</para>
     
-    <para>The marked section is finished by closing the two square brackets,
-      and then returning to the document context from the SGML context with
-      <literal>&gt;</literal></para>
+    <para>A <replaceable>Palavra-chave</replaceable> descreve como esta	
+      sess&atilde;o marcada deve ser processada pelo interpretador.</para>
+
+    <para>O segundo colchete indica que o conte&uacute;do da sess&atilde;o marcada 
+      inicia aqui.</para>
+    
+    <para>A sess&atilde;o marcada &eacute; finalizada pelo fechamento dos dois
+      colchetes e ent&atilde;o retornando ao contexto do documento a partir do
+      contexto SGML com o <literal>&gt;</literal></para>
     
     <sect2>
-      <title>Palavras de sess&atilde;o marcada</title>
+      <title>Palavras-Chave de sess&otilde;es marcadas</title>
       
       <sect3>
 	<title><literal>CDATA</literal>, <literal>RCDATA</literal></title>
 	
-	<para>These keywords denote the marked sections <emphasis>content
-	    model</emphasis>, and allow you to change it from the
-	  default.</para>
+	<para>Estas palavras chave denotam o <emphasis>modelo do conte&uacute;do</emphasis> 
+	  das sess&otilde;es marcadas, e permitem que voc&ecirc; o altere a partir
+	  do padr&atilde;o.</para>
 	
-	<para>When an SGML parser is processing a document it keeps track
-	  of what is called the <quote>content model</quote>.</para>
+	<para>Quando um interpretador SGML esta processando um
+	  documento ele tenta seguir o que chamamos de <quote>modelo de
+	  conte&uacute;do</quote>
 	
-	<para>Briefly, the content model describes what sort of content the
-	  parser is expecting to see, and what it will do with it when it
-	  finds it.</para>
+	<para>Resumidamente, o modelo de conte&uacute;do descreve que tipo de
+	  conte&uacute;do o interpretador esta esperando encontrar, e o que
+	  far&aacute; com ele quando o encontrar.</para>
+	
+	<para>Os dois modelos de conte&uacute;do que voc&ecirc; provavelmente ira
+	  achar mais &uacute;teis s&atilde;o o <literal>CDATA</literal> e o 
+	  <literal>RCDATA</literal>.</para>
+	
+	<para>O <literal>CDATA</literal> &eacute; para <quote>Dados de Caracter</quote>.
+	  Se o interpretador est&aacute; neste modelo de conte&uacute;do ent&atilde;o ele
+	  est&aacute; esperando encontrar caracteres, e apenas caracteres.
+	  Neste modelo os simbolos &lt; e o &amp; perdem o seu status
+	  especial, e ser&atilde;o tratados como caracteres
+	  ordin&aacute;rios.</para>
+	  
+	<para>O <literal>RCDATA</literal> &eacute; para <quote>Refer&ecirc;ncias de entidade e 
+	  dados de caracter</qoute>.  Se o interpretador est&aacute; neste
+	  modelo de conte&uacute;do ele est&aacute; esperando encontrar caracteres
+	  <emphasis>e</emphasis> entidades. O s&iacute;mbolo &lt; perde o seu
+	  status especial, mas o &amp; continuar&aacute; sendo tratado como o
+	  inicio de uma entidade geral.</para>
 
-	<para>The two content models you will probably find most useful are
-	  <literal>CDATA</literal> and <literal>RCDATA</literal>.</para>
+	<para>Isto &eacute; particularmente &uacute;til se voc&ecirc; est&aacute; incluindo algum
+	  texto literal o qual cont&eacute;m muitos caracteres &lt; e &amp;.
+	  Ao inv&eacute;s de atravessar o texto tendo tendo que verificar se 
+	  todos os  &lt; est&atilde;o convertidos para um &amp;lt; e todos os
+	  &amp; est&atilde;o convertidos para um &amp;amp; pode ser mais
+	  simples marcar a sess&atilde;o como contendo apenas CDATA.  Quando
+	  o interpretador SGML encontra-los ele ir&aacute; ignorar os
+	  simbolos &lt; e &amp; embutidos no conte&uacute;do.</para>
 	
-	<para><literal>CDATA</literal> is for <quote>Character Data</quote>.
-	  If the parser is in this content model then it is expecting to see
-	  characters, and characters only.  In this model the &lt; and &amp;
-	  symbols lose their special status, and will be treated as ordinary
-	  characters.</para>
-	
-	<para><literal>RCDATA</literal> is for <quote>Entity references and
-	  character data</quote> If the parser is in this content model then it
-	  is expecting to see characters <emphasis>and</emphasis> entities.
-	  &lt; loses its special status, but &amp; will still be treated as
-	  starting the beginning of a general entity.</para>
-	
-	<para>This is particularly useful if you are including some verbatim
-	  text that contains lots of &lt; and &amp; characters.  While you
-	  could go through the text ensuring that every &lt; is converted to a
-	  &amp;lt; and every &amp; is converted to a &amp;amp;, it can be
-	  easier to mark the section as only containing CDATA.  When the SGML
-	  parser encounters this it will ignore the &lt; and &amp; symbols
-	  embedded in the content.</para>
-
         <note>
-          <para>When you use <literal>CDATA</literal> or
-            <literal>RCDATA</literal> in examples of text marked up in SGML,
-            keep in mind that the content of <literal>CDATA</literal> is not
-            validated.  You have to check the included SGML text using other
-            means.  You could, for example, write the example in another
-            document, validate the example code, and then paste it to your
-            <literal>CDATA</literal> content.</para>
+          <para>Quando voc&ecirc; utiliza <literal>CDATA</literal> ou
+	    <literal>RCDATA</literal> nos exemplos de texto marcado em
+	    SGML, tenha em mente que o conteudo do
+	    <literal>CDATA</literal> n&atilde;o &eacute; validado.  Voc&ecirc; tem que
+	    verificar o SGML incluso no texto utilizando algum outro
+	    meio.  Voc&ecirc; pode, por exemplo, escrever o exemplo em um
+	    outro documento, validar o c&oacute;digo de exemplo, e ent&atilde;o
+	    col&aacute;-lo para o seu conte&uacute;do
+	    <literal>CDATA</literal>.</para>
         </note>
-	<!-- The nesting of CDATA within the next example is disgusting -->
-	  
-	<example>
-	  <title>Using a CDATA marked section</title>
-	  
-	  <programlisting>&lt;para>Here is an example of how you would include some text
-  that contained many &amp;lt; and &amp;amp; symbols.  The sample
-  text is a fragment of HTML.  The surrounding text (&lt;para> and
-  &lt;programlisting>) are from DocBook.&lt;/para>
 
+	<!-- O assentamento de CDATA dentro do exemplo seguinte &eacute; repugnante -->
+	
+	<example>
+	  <title>Utilizando uma sess&atilde;o marcada como CDATA</title>
+	  
+	  <programlisting>&lt;para>Aqui est&aacute; um exempli de como voc&ecirc;
+	    incluiria algum texto que contenha muitos s&iacute;mbolos &amp;lt; 
+	    e &amp;amp;.  O texto de exemplo &eacute; um fragmento de HTML.  
+	    O texto circunvizinho (&lt;para> e &lt;programlisting>) &eacute; do
+	    DocBook.&lt;/para>
+	  
 &lt;programlisting>
   &lt;![ CDATA [  <![ CDATA [
-    <p>This is a sample that shows you some of the elements within
-      HTML.  Since the angle brackets are used so many times, it is
-      simpler to say the whole example is a CDATA marked section
-      than to use the entity names for the left and right angle
-      brackets throughout.</p>
+    <p>Esta &eacute; uma amostra que apresenta alguns elementos de HTML.
+       Uma vez que os simbolos de < e > s&atilde;o utilizados muitas vezes, &eacute;
+       mais f&aacute;cil dizer que o exemplo todo &eacute; uma sess&atilde;o marcada do
+       tipo CDATA, do que utilizar nomes de entidades para representar
+       estes simbolos ao longo de todo o texto.</p>
 
     <ul>
-      <li>This is a listitem</li>
-      <li>This is a second listitem</li>
-      <li>This is a third listitem</li>
+      <li>Este &eacute; um item de lista</li>
+      <li>Este &eacute; um segundo item de lista</li>
+      <li>Este &eacute; um terceiro item de lista</li>
     </ul>
 
-    <p>This is the end of the example.</p>]]>
+    <p>Este &eacute; o final do exemplo.</p>]]>
   ]]&gt;
 &lt/programlisting></programlisting>
 
-	  <para>If you look at the source for this document you will see this
-	    technique used throughout.</para>
+	  <para>Se voc&ecirc; examinar o fonte deste documento voc&ecirc; ir&aacute; ver
+	  que esta t&eacute;cnica foi utilizada por toda parte.</para>
 	</example>
       </sect3>
       
@@ -1659,10 +1668,11 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
   <sect1 id="sgml-primer-conclusion">
     <title>Conclus&atilde;o</title>
     
-    <para>That is the conclusion of this SGML primer.  For reasons of space
-      and complexity several things have not been covered in depth (or at
-      all).  However, the previous sections cover enough SGML for you to be
-      able to follow the organisation of the FDP documentation.</para>
+    <para>Esta &eacute; a conclus&atilde;o deste SGML <literal>primer</literal>.
+      Devido a restri&ccedil;&otilde;es de espa&ccedil;o e complexidade, diversos assuntos
+      n&atilde;o foram abordados em profundidade (ou em tudo).  Entretanto,
+      as sess&otilde;es pr&eacute;vias cobriram o suficiente do SGML para que voc&ecirc; possa
+      seguir a organiza&ccedil;&atilde;o da documenta&ccedil;&atilde;o do FDP.</para>
   </sect1>
 </chapter>
 
