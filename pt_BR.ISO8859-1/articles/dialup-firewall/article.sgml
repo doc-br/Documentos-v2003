@@ -100,12 +100,11 @@
 	    IPFIREWALL_VERBOSE_LIMIT=<replaceable>100</replaceable></literal></term>
 
 	<listitem>
-	  <para>
-	  Limits the number of times a matching entry is logged.  This
-            prevents your log file from filling up with lots of repetitive
-	    entries.
-	    <replaceable>100</replaceable> is a reasonable number to use, but
-	    you can adjust it based on your requirements.</para>
+	  <para>Limita o numero de vezes que uma regra &eacute; logada.  Isto
+	    previne que o seu arquivo de log se encha com muitas
+	    entradas repetidas.  <replaceable>100</replaceable> &eacute; um
+	    valor razo&aacute;vel de se usar, mas voc&ecirc; pode ajust&aacute;-lo baseado
+	    nas suas necessidades.</para>
 	</listitem>
       </varlistentry>
 
@@ -113,57 +112,59 @@
 	<term><literal>options IPDIVERT</literal></term>
 
 	<listitem>
-	  <para>Enables <emphasis>divert</emphasis> sockets, which will be
-	    shown later.</para>
+	  <para>Habilita o <emphasis>divert</emphasis> sockets, o qual ser&aacute; abordado 
+	    mais tarde.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
 
-    <para>There are some other <emphasis>optional</emphasis> items that you
-      can compile into the kernel for some added security.  These are not
-      required in order to get firewalling to work, but some more paranoid
-      users may want to use them.</para>
-
+    <para>Existem alguns outros itens <emphasis>opcionais</emphasis>
+      os quais voc&ecirc; pode compilar no seu Kernel para algum acr&eacute;scimo de
+      seguran&ccedil;a.  Eles n&atilde;o s&atilde;o requeridos para colocar o firewall para
+      funcionar, mas alguns usu&aacute;rios mais paran&oacute;icos podem desejar
+      utiliza-los.</para>
+    
     <variablelist>
       <varlistentry>
 	<term><literal>options TCP_DROP_SYNFIN</literal></term>
 
 	<listitem>
-	  <para>This option ignores TCP packets with SYN and FIN.  This
-	   prevents tools like <filename role="package">security/nmap</filename> from identifying the TCP/IP
- 	   stack of the machine, but breaks support for RFC1644
-           extensions.  This is <emphasis>not</emphasis> recommended if the
-           machine will be running a web server.</para>
+	  <para>Esta op&ccedil;&atilde;o ignora os pacotes TCP com SYN e FIN.  Isto
+	    impede que ferramentas como <filename
+	    role="package">security/nmap</filename> de identificar a
+	    pilha TCP/IP de uma maquina, mas quebra o suporte as
+	    extens&otilde;es previstas na RFC1644.  Isto n&atilde;o &eacute; recomendado se
+	    a m&aacute;quina for executar um servidor web.</para>
 	</listitem>
       </varlistentry>
      </variablelist>
 
-    <para>Do not reboot once you have recompiled the kernel. Hopefully,
-      we will only need to reboot once to complete the installation of the
-      firewall.</para>
+    <para>N&atilde;o reboot ap&oacute;s voc&ecirc; ter recompilado o kernel. N&oacute;s
+    precisaremos rebootar apenas uma vez, ao completar a instala&ccedil;&atilde;o do
+    firewall.</para>
   </sect1>
 
   <sect1 id="rcconf">
-    <title>Changing <filename>/etc/rc.conf</filename> to load the
-      firewall</title>
+    <title>Alterando o <filename>/etc/rc.conf</filename> para carregar
+      o firewall.</title>
 
-    <para>We now need to make some changes to
-      <filename>/etc/rc.conf</filename> in order to tell it about the
-      firewall.  Simply add the following lines:</para>
-
+    <para>Agora n&oacute;s precisamos realizar algumas altera&ccedil;&otilde;es no
+      <filename>/etc/rc.conf</filename> para instrui-lo sobre o
+      firewall.  Simplesmente adicione as seguintes linhas:</para>
+    
     <programlisting>firewall_enable="YES"
 firewall_script="/etc/firewall/fwrules"
 natd_enable="YES"
 natd_interface="tun0"
 natd_flags="-dynamic"</programlisting>
 
-    <para>For more information on the functions of these statements take
-     a look at <filename>/etc/defaults/rc.conf</filename> and read
+    <para>iMara maiores informa&ccedil;&otilde;es sobre a fun&ccedil;&atilde;o destas instru&ccedil;&otilde;es,
+      consulte o <filename>/etc/defaults/rc.conf</filename> e leia o
       &man.rc.conf.5;</para>
   </sect1>
 
   <sect1>
-    <title>Disable PPP's network address translation</title>
+    <title>Desabilite a tradu&ccedil;&atilde;o de endere&ccedil;o de rede do PPP</title>
 
     <para>You may already be using PPP's built in network address
       translation (NAT).  If that is the case then you will have to disable
