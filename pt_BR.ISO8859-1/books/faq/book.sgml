@@ -2832,10 +2832,10 @@ disk            wd2     at wdc1 drive 1 # change from wd3 to wd2</programlisting
 	    arquiteturas Intel x86 e DEC (agora Compaq) Alpha.
 	    Desde o FreeBSD 5.0, a arquitetura SPARC-64 tamb&eacute;m
 	    &eacute; suportada.
-	    As plataformas IA-64 e Power-PC foram recentemente
+	    As plataformas IA-64, MIPS e Power-PC foram recentemente
 	    adicionadas &agrave; lista de arquiteturas que
-	    ser&atilde;o futuramente suportadas;  entre na lista do
-	    &a.ia64; e/ou &a.ppc; para mais informa&ccedil;&otilde;es
+	    ser&atilde;o futuramente suportadas;  entre na lista
+	    &a.ia64;, &a.mips;  e/ou &a.ppc; para mais informa&ccedil;&otilde;es
 	    sobre tais arquiteturas.  Para discuss&otilde;es gerais
 	    sobre outras arquiteturas, entre na lista de
 	    discuss&atilde;o &a.platforms;.</para>
@@ -3136,6 +3136,14 @@ options         KBD_INSTALL_CDEV</programlisting>
 &prompt.root; <userinput>./MAKEDEV kbd0 kbd1</userinput></screen>
 	    </step>
 
+	    <note>
+	     <para>Esse passo pode ser pulado se voc&ecirc; estiver usando
+		FreeBSD 5.0-RELEASE ou uma vers&aatilde; mais recente, com
+		&man.devfs.5; habilitado, visto que o dispositivo de controle
+		apropriado ser&aacute; criado automaticamente sob
+		<filename>/dev</filename>.</para>
+	     </note>
+
 	    <step>
 	      <para>Edite o <filename>/etc/rc.conf</filename> e
 		adicione as seguintes linhas:</para>
@@ -3145,7 +3153,7 @@ usbd_flags=""</programlisting>
 	    </step>
 	  </procedure>
 
-	  <para>Depois de reiniciado(rebooting) o sistema, o teclado
+	  <para>Depois de reiniciado (rebooting) o sistema, o teclado
 	    AT aparece como <devicename>/dev/kbd0i</devicename> e o
 	    teclado USB aparece como
 	    <devicename>/dev/kbd1</devicename> , se ambos estiverem
@@ -3288,6 +3296,15 @@ usbd_flags=""</programlisting>
 
 	  <para>logado como usu&aacute;rio
 	    <username>root</username>.</para>
+
+	    <note>
+	     <para>Esse passo pode ser pulado se voc&ecirc; estiver usando
+		FreeBSD 5.0-RELEASE ou uma vers&aatilde; mais recente, com
+		&man.devfs.5; habilitado, visto que o dispositivo de controle
+		apropriado ser&aacute; criado automaticamente sob
+		<filename>/dev</filename>.</para>
+	    </note>
+
 	</answer>
       </qandaentry>
 
@@ -3432,6 +3449,14 @@ device            ums0</programlisting>
 
 	      <screen>&prompt.root; <userinput>cd /dev</userinput>
 &prompt.root; <userinput>./MAKEDEV ums0</userinput></screen>
+
+	    <note>
+	     <para>Esse passo pode ser pulado se voc&ecirc; estiver usando
+		FreeBSD 5.0-RELEASE ou uma vers&aatilde; mais recente, com
+		&man.devfs.5; habilitado, visto que o dispositivo de controle
+		apropriado ser&aacute; criado automaticamente sob
+		<filename>/dev</filename>.</para>
+	     </note>
 	    </step>
 
 	    <step>
@@ -4987,6 +5012,14 @@ quit</programlisting>
 
 	  <screen>&prompt.root; <userinput>cd /dev</userinput>
 &prompt.root; <userinput>./MAKEDEV snd1</userinput></screen>
+
+	    <note>
+	     <para>Esse passo pode ser pulado se voc&ecirc; estiver usando
+		FreeBSD 5.0-RELEASE ou uma vers&aatilde; mais recente, com
+		&man.devfs.5; habilitado, visto que o dispositivo de controle
+		apropriado ser&aacute; criado automaticamente sob
+		<filename>/dev</filename>.</para>
+	    </note>
 
 	  <para>Esse comportamento n&atilde;o ocorre na s&eacute;rie
 	    4.X do FreeBSD, muito trabalho foi feito para tornar o
@@ -7171,12 +7204,19 @@ use "disklabel -r" to install initial label</screen>
 	    <quote>E</quote> como a segunda parti&ccedil;&atilde;o
 	    DOS no segundo disco SCSI, ser&aacute; necess&aacute;rio
 	    criar um arquivo especial para essa <quote>quinta
-	      parti&ccedil;&atilde;o</quote> (slice 5) no /dev, depois
-	    montar /dev/da1s5:</para>
+	    parti&ccedil;&atilde;o</quote> (slice 5)
+	    no <filename>/dev</filename>, depois montar
+	    devicename>/dev/da1s5</devicename>:</para>
 
 	  <screen>&prompt.root; <userinput>cd /dev</userinput>
 &prompt.root; <userinput>sh MAKEDEV da1s5</userinput>
 &prompt.root; <userinput>mount -t msdos /dev/da1s5 /dos/e</userinput></screen>
+	    <note>
+	     <para>Esse passo pode ser pulado se voc&ecirc; estiver usando
+		FreeBSD 5.0-RELEASE ou uma vers&aatilde; mais recente, com
+		&man.devfs.5; habilitado.</para>
+             </note>
+
 	</answer>
       </qandaentry>
 
@@ -8698,7 +8738,7 @@ define(`confDELIVERY_MODE',`deferred')dnl</programlisting>
 &prompt.root; <userinput>./install.sh</userinput></screen>
 
 	  <para>Ou ent&atilde;o, apague todas as op&ccedil;&otilde;es
-	    <quote>MAKE_KERBEROS</quote> do
+	    <makevar>MAKE_KERBEROS</makevar> do
 	    <filename>/etc/make.conf</filename> e recompile todo o
 	    sistema com um build world.</para>
 	</answer>
@@ -8776,6 +8816,13 @@ define(`confDELIVERY_MODE',`deferred')dnl</programlisting>
 
 	 <screen>&prompt.root; <userinput>cd /dev</userinput>
 &prompt.root; <userinput>sh MAKEDEV snd0</userinput></screen>
+
+	    <note>
+	     <para>Esse passo pode ser pulado se voc&ecirc; estiver usando
+		FreeBSD 5.0-RELEASE ou uma vers&aatilde; mais recente, com
+		&man.devfs.5; habilitado.</para>
+	     </note>
+
 	</answer>
       </qandaentry>
 
