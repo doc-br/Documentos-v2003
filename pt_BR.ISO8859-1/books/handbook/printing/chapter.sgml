@@ -429,7 +429,7 @@
 		pergunta a impressora sobre a contagem de p&aacute;ginas
 		(quantas p&aacute;gians ela j&aacute; imprimiu durante
 		seu uso, vida &uacute;til), ent&atilde;o envia o 
-		<foreignphrase>job<foreignphrase> do usu&aacute;rio
+		<foreignphrase>job</foreignphrase> do usu&aacute;rio
 		faz novamente a pergunta &agrave; impressora sobre
 		o total de p&aacute;gians impressas e ent&atilde;o faz
 		a subtra&ccedil;ao dos valores para saber o valor exato
@@ -517,11 +517,11 @@
 	taxa de transfer&ecirc;ncia entre o computador e a impressora,
 	ambos devem ter a mesma taxa de transfer&egrave;ncia.
 	Selecione entre 7 e 8 bits; paridade, par, &iacute;mpar, nenhuma;
-	ou 1 ou 2 <foreignphrase>stop bits<foreignphrase>.  Tamb&eacute;m
+	ou 1 ou 2 <foreignphrase>stop bits</foreignphrase>.  Tamb&eacute;m
 	o protocolo de controle de fluxo; nenhum ou XON/XOFF ( tamb&eacute;m
 	conhecido como controle de fluxo por <quote>hardware</quote> 
-	(<quote><foreignphrase>in-band<foreignphrase></quote>) ou por 
-	<quote>software</quote>).
+	(<quote><foreignphrase>in-band</foreignphrase></quote>) ou por 
+	<quote>software</quote>.
 		Lembre-se dessa configura&ccedil;&otilde;ess para poder
 	aplica-las na configura&ccedil;&atilde;o dos programas, como vamos
 	verificar a seguir.
@@ -534,7 +534,7 @@
 
 	<para>Essa se&ccedil;&atilde;o descreve as configura&ccedil;&otilde;es
 	necess&aacute;rias para imprimir com o sistema de 
-	<foreignphrase>spooling<foreignphrase> no FreeBSD.
+	<foreignphrase>spooling</foreignphrase> no FreeBSD.
 	</para>
 
 	<para>
@@ -547,7 +547,7 @@
 		Configure o seu kernel, se necess&aacute;rio, para
 	utilizar a porta que voc&ecirc; deseja conectar a sua impressora.
 	      A se&ccedil;&atilde;o <link
-	      linkend="printing-kernel">Kernel Configuration</link> informa
+	      linkend="printing-kernel">Configura&ccedil;&atilde;o do Kernel</link> informa
 		&agrave; voc&ecirc; o que &eacute; necess&aacute;rio fazer.
 	      </para>
 	  </step>
@@ -568,7 +568,7 @@
 		Teste se o sistema operacional pode enviar dados para a 
 	impressora.  A se&ccedil;&atilde;o 
 	<link linkend="printing-testing">
-		Verificando a Comuni&ccedil;&atilde;oca com a Impressora
+		Verificando a Comunica&ccedil;&atilde;o com a Impressora
 	</link> d&aacute; algumas sugest&otilde;es de como fazer iso.
 	      </para>
 	  </step>
@@ -726,66 +726,89 @@
 	</procedure>
 
 	<sect4 id="printing-parallel-port-mode">
-	  <title>Setting the Communication Mode for the Parallel
-	    Port</title>
+	  <title>
+		Comfigurando o Modo de Comunica&ccedil;&atilde;o para
+	a Porta Paralela
+	 </title>
 
-	  <para>When you are using the parallel interface, you can choose
-	    whether FreeBSD should use interrupt-driven or polled
-	    communication with the printer.  The generic printer
-	    device driver (&man.lpt.4;) on FreeBSD&nbsp;4.X and 5.X
-	    uses the &man.ppbus.4; system, which controls the port
-	    chipset with the &man.ppc.4; driver.</para>
+	  <para>
+		Quando voc&ecirc; for usar a interface paralela, voc&ecirc;
+	deve escolher entre o modo utilizando interrup&ccedil;&atilde;o
+	ou por <foreignphrase>polling</foreignphrase>.  Driver para o
+	dispositivo gen&eacute;rico de impressora (&man.lpt.4;) para
+	 FreeBSD&nvsp;4.X e 5.X usa o sistema &man.ppbus.4;, o qual 
+	controla a porta do chipset com o driver &man.ppc.4; driver.
+	</para>
 
 	  <itemizedlist>
 	    <listitem>
-	      <para>The <emphasis>interrupt-driven</emphasis> method is
-		the default with the GENERIC kernel.  With this method,
-		the operating system uses an IRQ line to determine when
-		the printer is ready for data.</para>
+	      <para>
+		O m&eacute;todo de 
+		<emphasis>interrup&ccedil;&atilde;o</emphasis> &eacute; o
+	padr&atilde;o com o kernel GENERIC.  Com esse m&eacute;todo
+	o sistema operacional sua uma linha de interrup&ccedil;&atilde;o
+	IRQ para determinar se a impressora est&aacute; pronta para
+	receber os dados.
+		</para>
 	    </listitem>
 
 	    <listitem>
-	      <para>The <emphasis>polled</emphasis> method directs the
-		operating system to repeatedly ask the printer if it is
-		ready for more data.  When it responds ready, the kernel
-		sends more data.</para>
+	      <para>O m&eacute;todo de <emphasis>polled</emphasis> 
+	direciona o sistema operacional para perguntar repetidamente se
+	a impressora est&aacute; pronta para receber dados.  Quando
+	a resposta &eacute; afirmativa, o sistema envia os dados.
+		</para>
 	    </listitem>
 	  </itemizedlist>
 
-	  <para>The interrupt-driven method is usually somewhat faster
-	    but uses up a precious IRQ line.  Some newer HP printers
-	    are claimed not to work correctly in interrupt mode,
-	    apparently due to some (not yet exactly understood) timing
-	    problem.  These printers need polled mode.  You should use
-	    whichever one works.  Some printers will work in both
-	    modes, but are painfully slow in interrupt mode.</para>
+	  <para>
+	O m&eacute;todo de interrup&ccedil;&atilde;o &eacute; normalmente
+	mais r&aacute;pido mas usa uma linha de IRQ preciosa.  Algumas
+	das novas impressoras HP n&atilde;o funcionam corretamente neste
+	modo, aparentemente &eacute; um problema de temporiza&ccedil;&atilde;o
+	( ainda n&atilde;o completamente compreedido ).  Essas impressoras
+	necessitam do modo de <foreignphrase>polling</foreignphrase>.
+	Voc&ecirc; deve utilizar um dos dois m&eacute;todos para
+	trabalhar.  Algumas impressoras ir&atilde;o trabalhar em ambos os
+	modos, mas ficaram sensivelmente mais lentas no mode de 
+	interrup&ccedil;&atilde;o
+	</para>
+	  <para>
+		Voc&ecirc; pode configurar o modo de comuni&ccedil;&atilde;oca
+	de duas maneiras: pela concifgura&ccedil;&atilde;o do kernel ou 
+	usando o programa &man.lptcontrol.8;
+	    </para>
 
-	  <para>You can set the communications mode in two ways: by
-	    configuring the kernel or by using the &man.lptcontrol.8;
-	    program.</para>
-
-	  <para><emphasis>To set the communications mode by configuring
-	    the kernel:</emphasis></para>
+	  <para><emphasis>
+		Para configurar o mode de comunica&ccedil;&atilde;o pelo
+	kernel:
+	    </emphasis></para>
 
 	  <procedure>
 	    <step>
-	      <para>Edit your kernel configuration file.  Look for
-		an <literal>ppc0</literal> entry.  If you are setting up
-		the second parallel port, use <literal>ppc1</literal>
-		instead.  Use <literal>ppc2</literal> for the third port,
-		and so on.</para>
+	      <para>
+		Voc&ecirc; deve editar o arquivo de configura&ccedil;&atilde;o
+	do kernel.  Procure pela entrada <literal>ppc0</literal>.  Se 
+	voc&ecirc; for configurar a segunda porta paralela, use 
+	<literal>ppc1</literal>.  Use <literal>ppc2</literal> para a terceira
+	porta, e assim consecutivamente.
+		</para>
 
 	      <itemizedlist>
 		<listitem>
-		  <para>If you want interrupt-driven mode, for FreeBSD&nbsp;4.X add the
-		    <literal>irq</literal> specifier:</para>
+		  <para>
+		Se voc&ecirc; preferir o modo de interrrup&ccedil;&atilde;o,
+	para FreeBSD&nbsp;4.X inclua a especifica&ccedil;&atilde;o da
+		    <literal>irq</literal>:</para>
 
 		  <programlisting>device ppc0 at isa? irq <replaceable>N</replaceable></programlisting>
 
-		  <para>Where <replaceable>N</replaceable> is the IRQ
-		    number for your computer's parallel port.</para>
+		<para>
+			Onde <replaceable>N</replaceable> &eacute; a
+	IRQ para a porta paralela do seu computador.
+		</para>
 
-		  <para>For FreeBSD&nbsp;5.X, edit the following line:</para>
+		<para> Para o FreeBSD&nbsp;5.X, edite a seguinte linha: </para>
 
 		  <programlisting>hint.ppc.0.irq="<replaceable>N</replaceable>"</programlisting>
 
