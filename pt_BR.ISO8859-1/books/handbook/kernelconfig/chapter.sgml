@@ -615,58 +615,57 @@ pseudo-device   loop          # Network loopback</programlisting>
 
     <programlisting>#makeoptions     DEBUG=-g          #Build kernel with gdb(1) debug symbols</programlisting>
 
-    <para>The normal build process of the &os; does not include
-      debugging information when building the kernel and strips most
-      symbols after the resulting kernel is linked, to save some space
-      at the install location.  If you are going to do tests of kernels
-      in the -CURRENT branch or develop changes of your own for the &os;
-      kernel, you might want to uncomment this line.  It will enable the
-      use of the <option>-g</option> option which enables debugging
-      information when passed to &man.gcc.1;.  The same can be
-      accomplished by the &man.config.8; <option>-g</option> option, if
-      you are using the <quote>traditional</quote> way for building your kernels (See the <xref linkend="kernelconfig-building">
-      for more informations.).</para>
+    <para>O processo normal de compilação do &os; não inclui informações sobre
+      problemas com a compilação do kernel e tira a maioria
+      dos símbolos depois que o resultado do kernel é ligado, para salvar algum espaço
+      no local da instalação. Se você estiver fazendo testes com os kernels
+      na -CURRENT ou alterando a seção de desenvolvimento do seu próprio kernel do &os;,
+      Você pode querer descomentar esta linha. Isto irá habilitar o
+      uso da opção <option>-g</option> que habilita informações de problemas   
+      quando passados para &man.gcc.1;. O mesmo podem ser
+      realizados pelo &man.config.8; opção <option>-g</option>, se
+      você estiver usando a maneira <quote>tradicional</quote> para compilar seu kernel (veja o <xref linkend="kernelconfig-building">
+      para mais informações.).</para>
 
     <programlisting>options          MATH_EMULATE      #Support for x87 emulation</programlisting>
 
-    <para>This line allows the kernel to simulate a math co-processor if
-      your computer does not have one (386 or 486SX).  If you have a
-      486DX, or a 386 or 486SX (with a separate 387 or 487 chip), or
-      higher (&pentium;, &pentium;&nbsp;II, etc.), you can comment this line
-      out.</para>
+    <para>Esta linha permite que o kernel simule um co-processador matemático se
+      seu computador não tiver um (386 ou 486SX). Se você tiver um
+      486DX, ou um 386 ou 486SX (com um chip 387 ou 487 separado), ou
+      superior (&pentium;, &pentium;&nbsp;II, etc.), você poderá comentar esta linha.</para>
 
     <note>
-      <para>The normal math co-processor emulation routines that come with
-	&os; are <emphasis>not</emphasis> very accurate.  If you do not
-	have a math co-processor, and you need the best accuracy, it is
-	recommended that you change this option to
-	<literal>GPL_MATH_EMULATE</literal> to use the GNU math support,
-	which is not included by default for licensing reasons.</para>
+      <para>As rotinas normais matemáticas do co-processador para emulação vem com o
+	&os; <emphasis>não</emphasis> são muito precisas. Se você quer fazer e não tem
+	um co-processador matemático, e você precisa de melhor precisão, é
+	recomendado que você mude esta opção para
+	<literal>GPL_MATH_EMULATE</literal> para usar o GNU suporte matemático,
+	qual não e incluso por padrão por razões licenciais.</para>
 
-      <para>In &os; 5.X, math emulation is disabled by default,
-      as older CPUs that do not have native floating point math support
-      are far less common, and in many cases not supported by the
-      <filename>GENERIC</filename> kernel without other additional options.</para></note>
+      <para>No &os; 5.X, a emulação mateática é disabilitada por padrão,
+      em outras CPUs que não tem suporte a ponto flotuante matemático native
+      são mais ou menos comuns, e em muitos casos não suportados pelo kernel
+      <filename>GENERIC</filename> sem outras opções adicionais.</para></note>
 
     <programlisting>options          INET          #InterNETworking</programlisting>
 
-    <para>Networking support.  Leave this in, even if you do not plan to
-      be connected to a network.  Most programs require at least loopback
-      networking (i.e., making network connections within your PC), so
-      this is essentially mandatory.</para>
+    <para>Suporte a Rede. Deixe isto dentro, mesmo se você não planeja ser
+      ser conectado a uma rede. Muitos programas requerem ao menos loopback
+      rede (isto é, fazendo conexões de rede dentro do seu PC), assim
+      este é essencialmente imposto.</para>
 
     <programlisting>options          INET6          #IPv6 communications protocols</programlisting>
 
-    <para>This enables the IPv6 communication protocols.</para>
+    <para>Isto os protocolos de comunicação IPv6.</para>
 
     <programlisting>options          FFS          #Berkeley Fast Filesystem
 options          FFS_ROOT     #FFS usable as root device [keep this!]</programlisting>
 
-    <para>This is the basic hard drive Filesystem.  Leave it in if you
-      boot from the hard disk.</para>
+    <para>Isto é o sistema de arquivos básico do HD. Deixe isto dentro se você quiser carregar o HD.
+      </para>
 
-    <note><para>In &os; 5.X, <literal>FFS_ROOT</literal> is no longer
-      required.</para></note>
+    <note><para>Em &os; 5.X, <literal>FFS_ROOT</literal> não é mais    
+    requerido.</para></note>
 
     <programlisting>options          UFS_ACL      #Support for access control lists</programlisting>
 
