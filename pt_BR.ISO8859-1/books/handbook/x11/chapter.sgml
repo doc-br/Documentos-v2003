@@ -11,10 +11,10 @@
     <title>Sinopse</title>
 
     <para>O FreeBSD usa <application>&xfree86;</application> para prover aos usuários
-      uma poderosa interface gráfica. <application>&xfree86;</application>
-      é uma implementação de código aberto do Sistema de Janela X. Este capítulo
+      uma poderosa interface gráfica.  <application>&xfree86;</application>
+      é uma implementação de código aberto do Sistema de Janela X.  Este capítulo
       cobrirá a instalação e configuração do
-      <application>&xfree86;</application> num sistema FreeBSD. Para mais
+      <application>&xfree86;</application> num sistema FreeBSD.  Para mais
       informações sobore o <application>&xfree86;</application> e hardware de vídeo
       suportado, verifique o sítio <ulink
         url="http://www.XFree86.org/">&xfree86;</ulink>.</para>
@@ -42,7 +42,7 @@
       </listitem>
 
       <listitem>
-        <para>Como preparar seu sistema para o uso de <foreignphrase>login</foreignphrase> gráfico
+        <para>Como preparar seu sistema para o uso de <literal>login</literal> gráfico
           (<application>XDM</application>).</para>
       </listitem>
     </itemizedlist>
@@ -70,8 +70,8 @@
       <title>Por que o X?</title>
 
       <para>O X nao é o primeiro sistema de interface gráfica escrito para o &unix;, mas é o
-        mais popular. O grupo de desenvolvimento original do X já haviam trabalhado em outro
-        sistema de interface gráfica antes de escrever o X. O nome desse sistema era
+        mais popular.  O grupo de desenvolvimento original do X já haviam trabalhado em outro
+        sistema de interface gráfica antes de escrever o X.  O nome desse sistema era
         <quote>W</quote> (de <quote>Window</quote>).  X é apenas a próxima
         letra no alfabeto Romano.</para>
 
@@ -89,10 +89,10 @@
       <para>O X foi concebido desde o início com foco na rede, e
         adota um modelo <quote>cliente-servidor</quote>.  No modelo do X, o
         <quote>servidor X</quote> executa em um computador que possui teclado,
-        monitor, e mouse conectados. O servidor é responsável por gerenciar
+        monitor, e mouse conectados.  O servidor é responsável por gerenciar
         o vídeo, tratar as entradas pelo teclado e mouse, e assim por diante.
         Cada aplicativo do X (como o <application>XTerm</application>, ou
-        <application>&netscape;</application>) é um <quote>cliente</quote>. Um
+        <application>&netscape;</application>) é um <quote>cliente</quote>.  Um
         cliente envia mensagens para o servidor como <quote>Por favor, desenhe uma
         janela nestas coordenadas</quote>, e o servidor responde a
         mensagens como <quote>O usuário acabou de clicar o bot&atilde;o OK
@@ -100,14 +100,14 @@
 
       <para>Se há apenas um computador envolvido, como em casa ou em um ambiente
         de escritório pequeno, o servidor X e os clientes X estarao executando
-        no mesmo computador. Entretanto, é perfeitamente possível executar o servidor X
+        no mesmo computador.  Entretanto, é perfeitamente possível executar o servidor X
         em um computador de mesa menos poderoso, e executar os aplicativos do X
         (os clientes), por assim dizer, naquela máquina poderosa e caríssima que serve
-        a todo o escritório. Neste cenário a comunicaç&atilde;o entre o cliente X
+        a todo o escritório.  Neste cenário a comunicaç&atilde;o entre o cliente X
         e o servidor se dá na rede.</para>
 
       <para>Isto causa confus&atilde;o a algumas pessoas, pois a terminologia do X é
-        exatamente contrária à que eles esperam. O que se espera é que o <quote>servidor X
+        exatamente contrária à que eles esperam.  O que se espera é que o <quote>servidor X
         </quote> seja a máquina grande e poderosa do por&atilde;o e
         o <quote>cliente X</quote> a máquina sobre suas messas.</para>
 
@@ -117,14 +117,14 @@
 
       <para>N&atilde; há nada no protocolo que force máquinas clientes e
         servidoras a estar executando o mesmo sistema operacional ou ainda
-        no mesmo tipo de computador. É certamente possível
+        no mesmo tipo de computador.  É certamente possível
         executar um servidor X no &microsoft.windows; ou no &macos; da Apple, e há
         várias aplicaç&otilde; gratuitas e comerciais disponíveis que fazem exatamente
         isso.</para>
 
       <para>O seridor X que é distribuído com o FreeBSD é chamado
         <application>&xfree86;</application>, e está disponível gratuitamente, sob uma
-        licença muito similar à licença do FreeBSD. Há também servidores X comerciais
+        licença muito similar à licença do FreeBSD.  Há também servidores X comerciais
         disponíveis para o FreeBSD.</para>
     </sect2>
 
@@ -133,7 +133,7 @@
 
       <para>A filosofia de concepç&atilde;o do X é muito semelhante a filosofia de concepç&atilde; do &unix;,
         <quote>ferramentas, n&atilde;o políticas</quote>.  Isso significa que o X n&atilde;o tenta
-        dizer como a tarefa deve ser realizada. Ao invés disso, as ferramentas s&atilde;o fornecidas
+        dizer como a tarefa deve ser realizada.  Ao invés disso, as ferramentas s&atilde;o fornecidas
         ao usuário, e é sua responsabilidade decidir como vai usar
         essas ferramentas.</para>
 
@@ -160,7 +160,7 @@
         suportam <quote>áreas de trabalho virtuais</quote>; alguns permitem personalizar
         atalhos de teclado para gerenciar a área de trabalho; outros tem um bot&atilde;o <quote>Iniciar</quote>
         ou dispositivo semelhante; outros s&atilde;o <quote>tematizáveis</quote>, permitindo
-        uma modificaç&atilde; completa no visual e sensaç&otilde;es pela aplicaç&atilde;o de um novo tema. Estes
+        uma modificaç&atilde; completa no visual e sensaç&otilde;es pela aplicaç&atilde;o de um novo tema.  Estes
         gerenciadores de janela, e muitos outros, est&atilde;o disponíveis na
         categoria <filename>x11-wm</filename> da Coleç&atilde;o de <literal>Ports</literal>.</para>
 
@@ -178,7 +178,7 @@
         <title>Política do Foco</title>
 
         <para>Outro recurso de responsabilidade do gerenciador de janela é
-          a <quote>política de foco</quote> do mouse. Todo sistema de enjanelamento
+          a <quote>política de foco</quote> do mouse.  Todo sistema de enjanelamento
           precisa de parâmetros para escolher uma janela que responda ao acionamento do
           teclado, e deve indicar visivelmente qual janela está ativa
           também.</para>
@@ -187,9 +187,9 @@
           Este é o modelo utilizado pelo &microsoft.windows;, no qual uma janela
           se torna ativa após receber um clique do mouse.</para>
 
-        <para>O X n&atilde;o suporta nenhuma política de foco em particular. Ao invés disso, o
+        <para>O X n&atilde;o suporta nenhuma política de foco em particular.  Ao invés disso, o
           gerenciador de janela controla qual tem o foco a qualquer tempo.
-          Os diferentes gerenciadores de janela v&atilde;o suportar métodos de foco distintos. Todos
+          Os diferentes gerenciadores de janela v&atilde;o suportar métodos de foco distintos.  Todos
           suportam clique para focar, e a maioria deles suporta
           vários outros.</para>
 
@@ -200,7 +200,7 @@
             <term>o foco segue o mouse</term>
             <listitem>
               <para>A janela abaixo do ponteiro do mouse é a
-                janela que possui o foco. Esta n&atilde;o é necessariamente
+                janela que possui o foco.  Esta n&atilde;o é necessariamente
                 a janela que está sobre todas as demais.
                 O foco é modificado ao apontar outra janela, n&atilde;o há
                 necessidade de clicar nela.</para>
@@ -214,7 +214,7 @@
               <para>Esta política é uma pequena extens&atilde;o de <quote>o foco segue o mouse</quote>.
                 Com o foco seguindo o mouse, se o mouse é movido para
                 a janela raiz (ou a area de trabalho) ent&atilde;o nenhuma janela tem o foco,
-                e o acionamento do teclado é simplesmente perdido. Com o foco desleixado, o foco é
+                e o acionamento do teclado é simplesmente perdido.  Com o foco desleixado, o foco é
                 modificado apenas quando o cursor entra em uma nova janela, e n&atilde;o
                 quando se sai da janela atual.</para>
             </listitem>
@@ -224,9 +224,9 @@
             <term>clique para focar</term>
 
             <listitem>
-              <para>A janela ativa é selecionada pelo clique do mouse. A
+              <para>A janela ativa é selecionada pelo clique do mouse.  A
                 janela pode ent&atilde;o ser <quote>elevada</quote>, e aparecer na
-                frente de todas as demais janelas. Todo acionamento do teclado ser&atilde;o agora
+                frente de todas as demais janelas.  Todo acionamento do teclado ser&atilde;o agora
                 direcionados para essa janela, mesmo se o cursor for movido para
                 outra janela.</para>
             </listitem>
@@ -234,7 +234,7 @@
         </variablelist>
 
         <para>Muitos gerenciadores de janela supportam outras políticas, bem como
-          variações nestas. Certifique-se de consultar a documentação própria do
+          variações nestas.  Certifique-se de consultar a documentação própria do
           gerenciador de janela.</para>
       </note>
     </sect2>
@@ -257,7 +257,7 @@
         de <foreignphrase>widgets</foreignphrase> a aderir.</para>
 
       <para>Como resultado, não espere que as aplicações do X tenham o mesmo
-        visual e sensações. Há vários conjuntos de <foreignphrase>widgets</foreignphrase> populares e
+        visual e sensações.  Há vários conjuntos de <foreignphrase>widgets</foreignphrase> populares e
         variações, incluindo o conjunto original de <foreignphrase>widgets</foreignphrase> Athena do MIT,
         <application>&motif;</application> (no qual o conjunto de <foreignphrase>widgets</foreignphrase> do
         &microsoft.windows; foi modelado, todas as bordas chanfradas em três tons de
@@ -279,23 +279,23 @@
     <para>Antes de instalar o <application>&xfree86;</application>, decida que
       versão executar.  <application>&xfree86; 3.X</application> é um ramo de manutenção do desenvolvimento do
       <application>&xfree86;</application>.  É muito
-      estável, e suporta um número bem grande de placas  vídeo. Entretanto, nenhum recurso novo
-      está sendo desenvolvido para o software. O <application>&xfree86;
+      estável, e suporta um número bem grande de placas vídeo.  Entretanto, nenhum recurso novo
+      está sendo desenvolvido para o software.  O <application>&xfree86;
       4.X</application> é uma reconcepção do sistema com diversos novos
-      recursos como melhor suporte para fontes e <foreignphrase>anti-aliasing</foreignphrase>.
+      recursos como melhor suporte para fontes e <literal>anti-aliasing</literal>.
       Infelizmente esta nova arquitetura requer que os drivers de vídeo sejam
       reescritos, e algumas placas mais velhas que eram suportadas na 3.X não são
-      ainda suportadas na 4.X. Como todo desenvolvimento novo e suporte para as
+      ainda suportadas na 4.X.  Como todo desenvolvimento novo e suporte para as
       placas de vídeo são feitos nesse ramo, o <application>&xfree86;
       4.X</application> é agora a versão padrão do sistema de janela X no
       FreeBSD.</para>
 
     <para>O programa de instalaç&atilde;o do FreeBSD oferece aos usuários a oportunidade de instalar
       e configurar o <application>&xfree86; 4.X</application> durante a instalaç&atilde;o
-      (detalhes em <xref linkend="x-server">). Para instalar e executar o
+      (detalhes em <xref linkend="x-server">).  Para instalar e executar o
       <application>&xfree86; 3.X</application>, aguarde até que o
       FreeBSD mínimo seja instalado, e ent&atilde;o instale o
-      <application>&xfree86;</application>. Por exemplo, para construir e instalar o
+      <application>&xfree86;</application>.  Por exemplo, para construir e instalar o
       <application>&xfree86; 3.X</application> da cole&ccedil;&atilde;o de <literal>ports</literal>:</para>
 
     <screen>&prompt.root; <userinput>cd /usr/ports/x11/XFree86</userinput>
@@ -303,12 +303,12 @@
 
     <para>Como alternativa, quaisquer vers&otilde;es do <application>&xfree86;</application>
       pode ser instalada diretamente dos binários do FreeBSD fornecidos no
-      <ulink url="http://www.XFree86.org/">sítio &xfree86;</ulink>. Um
+      <ulink url="http://www.XFree86.org/">sítio &xfree86;</ulink>.  Um
       pacote binário a ser usado com a ferramenta &man.pkg.add.1; também está disponível para o
-      <application>&xfree86; 4.X</application>. Quando o recurso de baixar da fonte remota
+      <application>&xfree86; 4.X</application>.  Quando o recurso de baixar da fonte remota
       do &man.pkg.add.1; é utilizado, o número da vers&atilde;o do
-      pacote deve ser removido. O &man.pkg.add.1; vai baixar automaticamente
-      a vers&atilde;o mais recente do aplicativo. Logo bara baixar e instalar o
+      pacote deve ser removido.  O &man.pkg.add.1; vai baixar automaticamente
+      a vers&atilde;o mais recente do aplicativo.  Logo bara baixar e instalar o
       pacote do <application>&xfree86; 4.X</application>, é só digitar:</para>
 
     <screen>&prompt.root; <userinput>pkg_add -r XFree86</userinput></screen>
@@ -322,7 +322,7 @@
 
     <note><para>Os exemplos acima v&atilde;o instalar a distribuiç&atilde;o completa do
       <application>&xfree86;</application> incluindo os
-      servidores, clientes, fontes etc. Pacotes individuais e <literal>ports</literal> para
+      servidores, clientes, fontes etc.  Pacotes individuais e <literal>ports</literal> para
       diferentes partes do <application>&xfree86; 4.X</application> também est&atilde;o
       disponíveis.</para></note>
 
@@ -368,9 +368,9 @@
 
       <para>As especificaç&otilde;es do monitor s&atilde;o s&atilde;o usadas pelo
         <application>&xfree86;</application> para determinar a resoluç&atilde;o e
-        taxa de atualizaç&atilde;o em que deve operar. Estas especificaç&otilde;es podem geralmente ser
+        taxa de atualizaç&atilde;o em que deve operar.  Estas especificaç&otilde;es podem geralmente ser
         obtidas da documentaç&atilde;o que vem com o monitor ou a partir do
-        sítio do fabricante. S&atilde;o necessários dois intervalos numéricos,
+        sítio do fabricante.  S&atilde;o necessários dois intervalos numéricos,
         a taxa de varredura horizontal e a taxa de sincronizaç&atilde;o 
         vertical.</para>
 
@@ -381,7 +381,7 @@
         automática n&atilde;o funcione corretamente.</para>
 
       <para>A memória da placa de vídeo determina que
-        resoluç&atilde;o e a profundidade das cores nas quais o sistema vai executar. É 
+        resoluç&atilde;o e a profundidade das cores nas quais o sistema vai executar.  É 
         importante que o usuário conheça isso para saber das limitaç&otilde;es do
         sistema.</para>
 
@@ -391,7 +391,7 @@
       <title>Configurando o &xfree86; 4.X</title>
 
       <para>A configuraç&atilde;o do <application>&xfree86; 4.X</application> é
-        um processo de vários passos. O primeiro passo é construir um arquivo
+        um processo de vários passos.  O primeiro passo é construir um arquivo
         de configuraç&atilde;o inicial com a opç&atilde;o <option>-configure</option> do
         <application>&xfree86;</application>.  Como o super usuário, simplesmente
         execute:</para>
@@ -402,7 +402,7 @@
         <filename>/root</filename> chamado
         <filename>XF86Config.new</filename> (na verdade a pasta utilizada é a
         registrada na variável de ambiente <envar>$HOME</envar>,
-        e ela vai depender de como você conseguiu os direitos de super usuário). O programa do
+        e ela vai depender de como você conseguiu os direitos de super usuário).  O programa do
         <application>&xfree86;</application> vai tentar investigar o
         o hardware da placa de vídeo no sistema e vai escrever um
         arquivo de configuraçao que carregue os drivers adequados ao
@@ -411,13 +411,13 @@
       <para>O próximo passo é a testar a configuraç&atilde;o existente
         para verificar se o <application>&xfree86;</application>
         pode trabalhar com o
-        hardware do sistema alvo. Para fazer esta tarefa, o usuário
+        hardware do sistema alvo.  Para fazer esta tarefa, o usuário
         precisa executar:</para>
 
       <screen>&prompt.root; <userinput>XFree86 -xf86config XF86Config.new</userinput></screen>
 
       <para>Se a grade preto e cinza e um ponteiro de mouse do X aparecem,
-        a configuraç&atilde;o foi bem sucedida. Para sair do teste, basta pressionar simultaneamente
+        a configuraç&atilde;o foi bem sucedida.  Para sair do teste, basta pressionar simultaneamente
         <keycombo action="simul">
           <keycap>Ctrl</keycap>
           <keycap>Alt</keycap>
@@ -425,18 +425,18 @@
         </keycombo>.</para>
 
     <note><para>Se o mouse n&atilde;o funcionar, certifique-se que o dispositivo
-      foi configurado. Veja em <xref linkend="mouse">
+      foi configurado.  Veja em <xref linkend="mouse">
       no capítulo de instalaç&atilde;o do &os;.</para></note>
 
       <indexterm><primary>Fazendo ajustes finos no XFree86 4</primary></indexterm>
 
       <para>Em seguinda, ajuste o arquivo de configuraç&otilde;es <filename>XF86Config.new</filename>
-        ao seu gosto. Abra o arquivo em um editor de textos como o
-        &man.emacs.1; ou &man.ee.1;. Primeiro, adicione as freqüências do
-        monitor do seu sistema. Elas geralmente s&atilde;o expressadas
-        como taxas de sincronizaç&atilde;o horizontal e vertical. Estes
+        ao seu gosto.  Abra o arquivo em um editor de textos como o
+        &man.emacs.1; ou &man.ee.1;.  Primeiro, adicione as freqüências do
+        monitor do seu sistema.  Elas geralmente s&atilde;o expressadas
+        como taxas de sincronizaç&atilde;o horizontal e vertical.  Estes
         valores s&atilde;o adicionados ao arquivo <filename>XF86Config.new</filename>
-        sob a seç&atilde;o <literal>"Monitor"</literal>:</para>
+        sob a seç&atilde;o "Monitor":</para>
 
       <programlisting>Section "Monitor"
         Identifier   "Monitor0"
@@ -448,7 +448,7 @@ EndSection</programlisting>
 
       <para>As express&otilde;es <varname>HorizSync</varname> e
         <varname>VertRefresh</varname> podem n&atilde;o existir no
-        arquivo de configuraç&otilde;es. Se for o caso, elas precisam ser adicionadas, com
+        arquivo de configuraç&otilde;es.  Se for o caso, elas precisam ser adicionadas, com
         a taxa de sincronizaç&atilde;o horizontal posicionada depois da express&atilde;o
         <varname>Horizsync</varname> e a taxa de sincronizaç&atilde;o
         vertical após a express&atilde;o <varname>VertRefresh</varname>.
@@ -456,10 +456,10 @@ EndSection</programlisting>
         preenchidas.</para>
 
       <para>O X permite que recursos DPMS (<literal>Energy Star</literal>) sejam utilizados em monitores
-        com suporte. O programa &man.xset.1; controla os intervalos entre atividades e pode forçar
-        os modos de espera, suspenso e desligado. Se você deseja habilitar os recursos de DPMS
+        com suporte.  O programa &man.xset.1; controla os intervalos entre atividades e pode forçar
+        os modos de espera, suspenso e desligado.  Se você deseja habilitar os recursos de DPMS
         para o seu monitor, você deve acrescentar a linha a seguir na seç&atilde;o
-        <literal>Monitor</literal>:</para>
+        Monitor:</para>
 
       <programlisting>
         Option       "DPMS"</programlisting>
@@ -470,8 +470,8 @@ EndSection</programlisting>
 
       <para>Enquanto o arquivo de configuraç&otilde;es <filename>XF86Config.new</filename>
         ainda estiver aberto no editor, selecione
-        a resoluç&atilde;o padr&atilde;o do monitor e a profundidade das cores desejada. Isso está
-        definido na seç&atilde;o <literal>"Screen"</literal>:</para>
+        a resoluç&atilde;o padr&atilde;o do monitor e a profundidade das cores desejada.  Isso está
+        definido na seç&atilde;o "Screen":</para>
 
       <programlisting>Section "Screen"
         Identifier "Screen0"
@@ -485,7 +485,7 @@ EndSection</programlisting>
 EndSection</programlisting>
 
       <para>A express&atilde;o <varname>DefaultDepth</varname> descreve 
-        a profundidade de cores empregada por padr&atilde;o. Isso pode ser sobreposto
+        a profundidade de cores empregada por padr&atilde;o.  Isso pode ser sobreposto
         com a opç&atilde;o da linha de comando <command>-bpp</command> existente para o
         &man.XFree86.1;.
         A express&atilde;o <varname>Modes</varname>
@@ -493,12 +493,12 @@ EndSection</programlisting>
         Observe que apenas os modos do padr&atilde;o VESA s&atilde;o suportados pela definiç&atilde;o do
         hardware gráfico do sistema alvo.
         No exemplo acima, a profundidade de cores padr&atilde;o é de vinte e quatro
-	bits por ponto. Nesta profundidade de cores, a resoluç&atilde;o aceita é de 
+	bits por ponto.  Nesta profundidade de cores, a resoluç&atilde;o aceita é de 
         mil e vinte e quatro pontos por setecentos e sessenta e oito
         pontos.</para>
 
       <para>Por fim, salve o arquivo de configuraç&otilde;es e teste-o utilizando
-        o modo de teste dado acima. Se tudo estiver bem, o arquivo de configuraç&atilde;o
+        o modo de teste dado acima.  Se tudo estiver bem, o arquivo de configuraç&atilde;o
         precisa ser instalado em um local conhecido pelo
         &man.XFree86.1;
         a fim de encontrá-lo.
@@ -508,7 +508,7 @@ EndSection</programlisting>
       <screen>&prompt.root; <userinput>cp XF86Config.new /etc/X11/XF86Config</userinput></screen>
 
       <para>Uma vez que o arquivo de configuraç&atilde;o tenha sido colocado em um lugar
-        conhecido, a configuraç&atilde;o está completa. Para iniciar o
+        conhecido, a configuraç&atilde;o está completa.  Para iniciar o
         <application>&xfree86; 4.X</application> com &man.startx.1;,
         instale o <literal>port</literal> <filename role="package">x11/wrapper</filename>.
         O <application>&xfree86; 4.X</application> também pode ser executado via
@@ -517,8 +517,8 @@ EndSection</programlisting>
     <note><para>Também existe uma ferramenta gráfica capaz de fazer a configuraç&atilde;o,
       o &man.xf86cfg.1;, que vem na distribuiç&atilde;o do <application>&xfree86; 4.X</application>
       Ela permite definir interativamente sua configuraç&atilde;o pela escolha
-      dos <literal>drivers</literal> e parâmetros apropriados. Este programa pode ser utilizado 
-      no console também, basta utilizar o comando <command>xf86cfg - textmode</command>. Para mais detalhes, 
+      dos <literal>drivers</literal> e parâmetros apropriados.  Este programa pode ser utilizado 
+      no console também, basta utilizar o comando <command>xf86cfg - textmode</command>.  Para mais detalhes, 
       verifique a página do manual &man.xf86cfg.1;.</para></note>
 
     </sect2>
@@ -534,15 +534,15 @@ EndSection</programlisting>
         <para>A configuraç&atilde;o dos <foreignphrase>chipsets</foreignphrase> integrados da &intel; i810
           requerem que a interface de programaç&atilde;o para o AGP, <devicename>agpgart</devicename>,
           do <application>&xfree86;</application> seja instalada para
-          controlar a placa. O <literal>driver</literal> &man.agp.4; está no <literal>kernel</literal>
+          controlar a placa.  O <literal>driver</literal> &man.agp.4; está no <literal>kernel</literal>
           <filename>GENERIC</filename> desde as <literal>releases</literal>
-          4.8-RELEASE e 5.0-RELEASE. Nas <literal>releases</literal> anteriores, você deve
+          4.8-RELEASE e 5.0-RELEASE.  Nas <literal>releases</literal> anteriores, você deve
           adicionar as linhas a seguir:</para>
 
     <programlisting>device agp</programlisting>
 
     <para>no arquivo de configuraç&atilde;o do se <literal>kernel</literal> e reconstruir um novo
-      <literal>kernel</literal>. Ao invés disso, você pode querer carregar
+      <literal>kernel</literal>.  Ao invés disso, você pode querer carregar
           o módulo <filename>agp.ko</filename> do <literal>kernel</literal>
           automaticamente com o &man.loader.8; durante o processo de inicializa&ccedil;&atilde;o.
           Para isso, basta adicionar esta linha ao
@@ -552,7 +552,7 @@ EndSection</programlisting>
 
         <para>A seguir, se estiver utilizando o FreeBSD&nbsp;4.X ou posterior, um novo nó
           para o dispositivo (<foreignphrase>device node</foreignphrase>) precisa ser criado para
-          a interface de programaç&atilde;o. Para criar o nó para o dispositivo AGP, execute
+          a interface de programaç&atilde;o.  Para criar o nó para o dispositivo AGP, execute
           o &man.MAKEDEV.8; no diretório
           <filename>/dev</filename>:</para>
 
@@ -566,16 +566,16 @@ EndSection</programlisting>
     </note>
 
         <para>Isso vai permitir a configuraç&atilde;o do dispositivo como se faz com qualquer outra
-          placa de vídeo. Observe que em sistemas sem o <literal>driver</literal> &man.agp.4;
+          placa de vídeo.  Observe que em sistemas sem o <literal>driver</literal> &man.agp.4;
           compilado no <literal>kernel</literal>, tentar carregar o módulo com
-          o &man.kldload.8; n&atilde;o vai funcionar. Este <literal>driver</literal> precisa estar
+          o &man.kldload.8; n&atilde;o vai funcionar.  Este <literal>driver</literal> precisa estar
           no <literal>kernel</literal> durante o processo de inicializa&ccedil;&atilde;o seja sendo compilado ou
           pelo uso do <filename>/boot/loader.conf</filename>.</para>
 
         <para>Se estiver utilizando o <application>&xfree86; 4.1.0</application> (ou
           posterior) e mensagens sobre símbolos n&atilde;o resolvidos como
-          <literal>fbPictureInit</literal> aparecerem, tente adicionar a linha a seguir
-          após <literal>Driver "i810"</literal> no arquivo de configuraç&atilde;o
+          <quote>fbPictureInit</quote> aparecerem, tente adicionar a linha a seguir
+          após <literal>Driver<literal> "i810" no arquivo de configuraç&atilde;o
           do <application>&xfree86;</application>:</para>
         <programlisting>Option "NoDDC"</programlisting>
       </sect3>
@@ -598,7 +598,7 @@ EndSection</programlisting>
       <title>Fontes <literal>Type1</literal></title>
       <para>As fontes padr&atilde;o que s&atilde;o distribuídas com
         o <application>&xfree86;</application> est&atilde;o aquém do ideal para aplicaç&otilde;es
-        comuns de editoraç&atilde;o eletrônica. Fontes grandes em apresentaç&otilde;es aparecem
+        comuns de editoraç&atilde;o eletrônica.  Fontes grandes em apresentaç&otilde;es aparecem
         recortadas e com aparência nada profissional, e fontes pequenas no
         <application>&netscape;</application> s&atilde;o quase ininteligíveis.
         Entretanto, há várias fontes <literal>Type1</literal> (&postscript;) gratuitas e de alta qualidade 
@@ -607,11 +607,11 @@ EndSection</programlisting>
         a vers&atilde;o 4.X.  Por exemplo, a coleç&atilde;o de fontes URW
         (<filename role="package">x11-fonts/urwfonts</filename>) inclui
         vers&otilde;es de alta qualidade de fontes <literal>type1</literal> padr&atilde;o (<trademark class="registered">Times Roman</trademark>,
-        <trademark class="registered">Helvetica</trademark>, <trademark class="registered">Palatino</trademark> e outras). A coleç&atilde;o <literal>Freefonts</literal>
+        <trademark class="registered">Helvetica</trademark>, <trademark class="registered">Palatino</trademark> e outras).  A coleç&atilde;o <literal>Freefonts</literal>
         (<filename role="package">x11-fonts/freefonts</filename>) inclui
         muitas outras fontes, mas a maioria delas s&atilde;o destinadas ao uso em
         softwares de manipulaç&atilde;o de gráficos como o <application>Gimp</application>, n&atilde;o sendo
-        suficientemente compleats para o uso como fontes de tela. Para completar,
+        suficientemente compleats para o uso como fontes de tela.  Para completar,
         o <application>&xfree86;</application> pode ser configurado para usar 
         fontes &truetype; com um mínimo de esforço: veja 
         <link linkend="truetype">seç&atilde;o sobre fontes &truetype;</link> adiante.</para>
@@ -622,7 +622,7 @@ EndSection</programlisting>
       <screen>&prompt.root; <userinput>cd /usr/ports/x11-fonts/urwfonts</userinput>
 &prompt.root; <userinput>make install clean</userinput></screen>
 
-      <para>E da mesma forma para o <literal>freefont</literal> e outras coleç&otilde;es. Para dizer ao servidor X
+      <para>E da mesma forma para o <literal>freefont</literal> e outras coleç&otilde;es.  Para dizer ao servidor X
         que estas fontes existem, adicione a linha apropriada ao
         arquivo <filename>XF86Config</filename> (em <filename>/etc/</filename> para 
         <application>&xfree86;</application> vers&atilde;o 3, ou em
@@ -657,10 +657,10 @@ EndSection</programlisting>
 
     <para>O <application>&xfree86; 4.X</application> tem suporte incorporado
       para a exibiç&atilde;o produzida de fontes &truetype;.  Há dois módulos diferentes
-      que podem permitir essa funcionalidade. O módulo <literal>freetype</literal> é utilizado
+      que podem permitir essa funcionalidade.  O módulo <literal>freetype</literal> é utilizado
       neste exemplo por ser mais coerente com outros suportes para produç&atilde;o de
-      fontes. Para habilitar o módulo <literal>freetype</literal> basta acrescentar
-      a linha a seguir à seç&atilde;o <literal>"Module"</literal> do
+      fontes.  Para habilitar o módulo <literal>freetype</literal> basta acrescentar
+      a linha a seguir à seç&atilde;o <quote>Module</quote> do
       arquivo <filename>/etc/X11/XF86Config</filename>.</para>
 
     <programlisting>Load  "freetype"</programlisting>
@@ -668,16 +668,16 @@ EndSection</programlisting>
     <para>Para o <application>&xfree86; 3.3.X</application>, um servidor
       de fontes &truetype; separado se faz necessário.
       O <application>Xfstt</application> é de uso comum para
-      esta finalidade. Para instalar o <application>Xfstt</application>,
+      esta finalidade.  Para instalar o <application>Xfstt</application>,
       basta instalar o <literal>port</literal>
       <filename role="package">x11-servers/Xfstt</filename>.</para>
 
     <para>Crie uma pasta para as fontes &truetype; (por exemplo,
       <filename>/usr/X11R6/lib/X11/fonts/TrueType</filename>)
-      e copie todas as fontes &truetype; nesta pasta. Tenha em mente
+      e copie todas as fontes &truetype; nesta pasta.  Tenha em mente
       que as fontes &truetype; n&atilde;o podem ser importadas diretamente de um
       &macintosh;; elas precisam esta no formato &unix;/DOS/&windows; para que possa ser usada pelo
-      <application>&xfree86;</application>. Uma vez que os arquivos tenham sido
+      <application>&xfree86;</application>.  Uma vez que os arquivos tenham sido
       copiados para esta pasta, use o 
       <application>ttmkfdir</application> para criar um arquivo
       <filename>fonts.dir</filename>, de modo que o produtor de fontes do X
@@ -690,7 +690,7 @@ EndSection</programlisting>
 &prompt.root; <userinput>ttmkfdir > fonts.dir</userinput></screen>
 
     <para>Agora adicione a pasta &truetype; no caminho para as fontes (o <foreignphrase>font
-      path</foreignphrase>). Esta é a mesma descriç&atilde;o utilizada anteriormente para as fontes <link
+      path</foreignphrase>).  Esta é a mesma descriç&atilde;o utilizada anteriormente para as fontes <link
       linkend="type1">Type1</link>, isto é, utilize</para>
 
     <screen>&prompt.user; <userinput>xset fp+ /usr/X11R6/lib/X11/fonts/TrueType</userinput>
@@ -699,7 +699,7 @@ EndSection</programlisting>
     <para>ou adicione uma linha <option>FontPath</option> ao arquivo
        <filename>XF86Config</filename>.</para>
 
-      <para>Isso é tudo. Agora o <application>&netscape;</application>,
+      <para>Isso é tudo.  Agora o <application>&netscape;</application>,
         o <application>Gimp</application>,
         o <application>&staroffice;</application>, e todos os outros aplicativos
         do X devem estar reconhecendo as fontes &truetype; instaladas.
@@ -726,36 +726,36 @@ EndSection</programlisting>
     <indexterm><primary>fontes</primary>
       <secondary>anti-alias</secondary></indexterm>
 
-    <para>O <foreignphrase>Anti-aliasing</foreignphrase> está disponível no
+    <para>O <literal>Anti-aliasing</literal> está disponível no
       <application>&xfree86;</application> desde a vers&atilde;o 4.0.2. Mesmo assim, 
       configurar tais fontes era incômodo antes da introduç&atilde;o do
-      <application>&xfree86;</application> 4.3.0. Da vers&atilde; 4.3.0 em diante,
+      <application>&xfree86;</application> 4.3.0.  Da vers&atilde; 4.3.0 em diante,
       todas as fontes em <filename>/usr/X11R6/lib/X11/fonts/</filename> e 
       em <filename>~/.fonts/</filename> s&atilde;o automaticamente
-      disponibilizadas com <foreignphrase>anti-aliasing</foreignphrase> para os aplicativos prontos para o 
-      Xft. Nem todas as aplicaç&otilde;es s&atilde;o preparadas para usar o Xft ainda, mas muitas 
-      já contam com o suporte Xft. Exemplos de aplicaç&otilde;es que reconhecem o Xft incluem o Qt 2.3 
+      disponibilizadas com <literal>anti-aliasing</literal> para os aplicativos prontos para o 
+      Xft.  Nem todas as aplicaç&otilde;es s&atilde;o preparadas para usar o Xft ainda, mas muitas 
+      já contam com o suporte Xft.  Exemplos de aplicaç&otilde;es que reconhecem o Xft incluem o Qt 2.3 
       e posteriores (conjunto de ferramentas feito para a área de trabalho do <application>KDE</application>),
       Gtk+ 2.0 e posteriores (conjunto de ferramentas para a área de trabalho do
       <application>GNOME</application>), e o 
       <application>Mozilla</application> 1.2 e posteriores.
     </para>
 
-    <para>Para distinguir que fontes s&atilde;o <foreignphrase>anti-aliased</foreignphrase>, ou
-      configurar as propriedades do <foreignphrase>anti-aliasing</foreignphrase>, crie (ou edite, se
+    <para>Para distinguir que fontes s&atilde;o <literal>anti-aliased</literal>, ou
+      configurar as propriedades do <literal>anti-aliasing</literal>, crie (ou edite, se
       já existir) o arquivo
-      <filename>/usr/X11R6/etc/fonts/local.conf</filename>. Vários
+      <filename>/usr/X11R6/etc/fonts/local.conf</filename>.  Vários
       recursos avançados do sistema de fontes Xft podem ser ajustadas através
       deste arquivo; esta seç&atilde;o descreve apenas algumas possibilidades
-      simples. Para mais detalhes, por favor verifique em
+      simples.  Para mais detalhes, por favor verifique em
       &man.fonts-conf.5;.</para>
 
     <indexterm><primary>XML</primary></indexterm>
 
-    <para>Este arquivo deve ser em formato XML. Preste bastante atenç&atilde;o a
+    <para>Este arquivo deve ser em formato XML.  Preste bastante atenç&atilde;o a
       caixa dos caracteres, e assegure-se de ter fechado todos os rótulos (<foreignphrase>tags</foreignphrase>).
       O arquivo começa com o cabeçalho usual do XML seguido de uma definiç&atilde;o DOCTYPE,
-      e ent&atilde;o pelo rótulo <literal>&lt;fontconfig&gt;</literal>:</para>
+      e ent&atilde;o pelo rótulo &lt;fontconfig&gt;:</para>
 
     <programlisting>
       &lt;?xml version="1.0"?&gt;
@@ -766,7 +766,7 @@ EndSection</programlisting>
     <para>Como citado anteriormente, toda fonte em
       <filename>/usr/X11R6/lib/X11/fonts/</filename> bem como em
       <filename>~/.fonts/</filename> s&atilde;o automaticamente disponibilizadas para
-      aplicaç&otilde;es prontas para o Xft. Se você deseja acrescentar outra pasta
+      aplicaç&otilde;es prontas para o Xft.  Se você deseja acrescentar outra pasta
       que esteja fora dessas duas hierarquias, acrescente uma linha similar a apresentada abaixo
       ao arquivo 
       <filename>/usr/X11R6/etc/fonts/local.conf</filename>:</para>
@@ -779,10 +779,10 @@ EndSection</programlisting>
 
     <screen>&prompt.root; <userinput>fc-cache -f</userinput></screen>
 
-    <para>O <foreignphrase>anti-aliasing</foreignphrase> torna as bordas pouco nítidas, o que proporciona 
+    <para>O <literal>anti-aliasing</literal> torna as bordas pouco nítidas, o que proporciona 
       a textos pequenos maior legibilidade e remove <quote>escadinhas</quote> de  
-      textos grandes, mas pode causar fatiga visual se aplicado ao texto normal. Para
-      excluir fontes com tamanho em pontos menor 14 do <foreignphrase>anti-aliasing</foreignphrase>, inclua
+      textos grandes, mas pode causar fatiga visual se aplicado ao texto normal.  Para
+      excluir fontes com tamanho em pontos menor 14 do <literal>anti-aliasing</literal>, inclua
       estas linhas:</para>
 
       <programlisting>        &lt;match target="font"&gt;
@@ -798,9 +798,9 @@ EndSection</programlisting>
       <secondary>espaçamento</secondary></indexterm>
 
     <para>O espaçamento para fontes monoespaçadas também pode ser inapropriado
-      com o <foreignphrase>anti-aliasing</foreignphrase>. Isso parece ser uma quest&atilde;o presente
-      no <application>KDE</application>, em particular. Uma correç&atilde;o possível para
-      isso é forçar o espaçamento destas fontes para 100. Acrescente
+      com o <literal>anti-aliasing</literal>.  Isso parece ser uma quest&atilde;o presente
+      no <application>KDE</application>, em particular.  Uma correç&atilde;o possível para
+      isso é forçar o espaçamento destas fontes para 100.  Acrescente
       as seguintes linhas:</para>
 
     <programlisting>       &lt;match target="pattern" name="family"&gt;
@@ -821,7 +821,7 @@ EndSection</programlisting>
         &lt;/match&gt;</programlisting>
 
       <para>(isso apelidará todo nome comum para fontes fixas como 
-        <literal>"mono"</literal>), e ent&atilde;o acrescente:</para>
+        "mono"), e ent&atilde;o acrescente:</para>
 
       <programlisting>         &lt;match target="pattern" name="family"&gt;
              &lt;test qual="any" name="family"&gt;
@@ -833,8 +833,8 @@ EndSection</programlisting>
          &lt;/match&gt;      </programlisting>
 
       <para>Certas fontes, como a Helvetica, podem apresentar problemas quando
-        usadas com <foreignphrase>anti-alias</foreignphrase>. Geralmente isso se apreseta como
-        uma fonte que parece cortada ao meio verticalmente. No pior caso, isso pode causar a
+        usadas com <literal>anti-alias</literal>.  Geralmente isso se apreseta como
+        uma fonte que parece cortada ao meio verticalmente.  No pior caso, isso pode causar a
         parada na execuç&atilde;o de aplicativos como o <application>Mozilla</application>.
         Para evitar isso, considere acrescentar o seguinte ao arquivo
         <filename>local.conf</filename>:</para>
@@ -850,27 +850,27 @@ EndSection</programlisting>
 
       <para>Uma vez terminada a ediç&atilde;o do
         <filename>local.conf</filename> assegure-se de colocar no final do arquivo
-        o rótulo <literal>&lt;/fontconfig&gt;</literal>. N&atilde;o fazê-lo fará que suas
+        o rótulo <literal>&lt;/fontconfig&gt;</literal>.  N&atilde;o fazê-lo fará que suas
         modificaç&otilde;es sejam desprezadas.</para>
 
       <para>O conjunto padr&atilde;o de fontes que vem com
         o <application>&xfree86;</application> n&atilde;o é muito
-        conveniente quando se trata de <literal>anti-alias</literal>. Um conjunto bem melhor
+        conveniente quando se trata de <literal>anti-alias</literal>.  Um conjunto bem melhor
         de fontes padr&atilde;o pode ser encontrado no <literal>port</literal>
         <filename role="package">x11-fonts/bitstream-vera</filename>.
         Esse <literal>port</literal> irá instalar um arquivo
         <filename>/usr/X11R6/etc/fonts/local.conf</filename>
-        se ele n&atilde;o existir. Se o arquivo existir, o <literal>port</literal>
+        se ele n&atilde;o existir.  Se o arquivo existir, o <literal>port</literal>
         var criar o arquivo <filename>/usr/X11R6/etc/fonts/local.conf-vera
-        </filename>. Faça a fus&atilde;o do conteúdo deste arquivo com o
+        </filename>.  Faça a fus&atilde;o do conteúdo deste arquivo com o
         <filename>/usr/X11R6/etc/fonts/local.conf</filename>, e as fontes
-        <literal>Bitstream</literal> automaticamente substituir&atilde;o as fontes
+        Bitstream automaticamente substituir&atilde;o as fontes
         Serif, Sans Serif e Monospaced padr&atilde;o do <application>&xfree86;</application>. 
         </para>
 
       <para>Por fim, os usuários podem acresentar suas próprias configuraç&otilde;es em seus
-        arquivos <filename>.fonts.conf</filename> pessoais. Para fazer isso, cada usuário deve
-        apenas criar o arquivo <filename>~/.fonts.conf</filename>. Este arquivo precisa também
+        arquivos <filename>.fonts.conf</filename> pessoais.  Para fazer isso, cada usuário deve
+        apenas criar o arquivo <filename>~/.fonts.conf</filename>.  Este arquivo precisa também
         estar no formato XML.</para>
 
       <indexterm><primary>Telas LCD</primary></indexterm>
@@ -878,9 +878,9 @@ EndSection</programlisting>
         <secondary>Telas LCD</secondary></indexterm>
 
       <para>Um último ponto: com telas de LCD, amostragem de subpontos pode
-        ser desejável. Isso basicamente trata os componentes (horizontalmente separados)
+        ser desejável.  Isso basicamente trata os componentes (horizontalmente separados)
         vermelho, verde e azul separadamente a fim de melhorar a resoluç&atilde;o horizontal;
-        os resultados podem ser espetaculares. Para permitir isso, acrescente a
+        os resultados podem ser espetaculares.  Para permitir isso, acrescente a
         linha em algum lugar do arquivo <filename>local.conf</filename>:</para>
 
       <programlisting>
@@ -904,18 +904,18 @@ EndSection</programlisting>
         <secondary>Mozilla</secondary>
         <see>Mozilla</see></indexterm>
 
-      <para>O <foreignphrase>anti-aliasing</foreignphrase> deve estar habilitado na próxima vez que
-        o servidor X for iniciado. Entretanto, os programas precisam saber como tirar vantage
-        disso. No presente, o conjunto de ferramentas Qt o faz, logo
+      <para>O <literal>anti-aliasing</literal> deve estar habilitado na próxima vez que
+        o servidor X for iniciado.  Entretanto, os programas precisam saber como tirar vantage
+        disso.  No presente, o conjunto de ferramentas Qt o faz, logo
         todo o ambiente do KDE pode <application>KDE</application> pode utilizar fontes
-        com <foreignphrase>anti-alias</foreignphrase> (veja <xref
+        com <literal>anti-alias</literal> (veja <xref
         linkend="x11-wm-kde-antialias"> sobre o
-        <application>KDE</application> para detalhes). O Gtk+ e o
+        <application>KDE</application> para detalhes).  O Gtk+ e o
         <application>GNOME</application> também podem ser adaptados ao 
-        <foreignphrase>anti-alias</foreignphrase> através do <literal>capplet</literal> <quote>Font</quote> (veja <xref
-        linkend="x11-wm-gnome-antialias"> para mais detalhes). Por padr&atilde;o,
+        <literal>anti-alias</literal> através do <literal>capplet</literal> <quote>Font</quote> (veja <xref
+        linkend="x11-wm-gnome-antialias"> para mais detalhes).  Por padr&atilde;o,
         o <application>Mozilla</application> 1.2 e posteriores v&atilde;o
-        usar o <foreignphrase>anti-alias</foreignphrase> automaticamente. Para desativar isso, reconstrua
+        usar o <literal>anti-alias</literal> automaticamente.  Para desativar isso, reconstrua
         o <application>Mozilla</application> com o parâmetro
         <makevar>-DWITHOUT_XFT</makevar>.</para>
     </sect2>
@@ -937,14 +937,14 @@ EndSection</programlisting>
 
       <indexterm><primary>O Gerenciador de Exibiç&atilde;o do X (XDM)</primary></indexterm>
       <para>O Gerenciador de Exibiç&atilde;o do X (<application>XDM</application>; n.t. de 
-        <literal>X Display Manager</literal>) é uma parte opcional do Sistema de Janela X que é usado para gerenciar
-        o <literal>login</literal> nas sess&otilde;es. Isso é útil em vários tipos de
+        <foreignphrase>X Display Manager</foreignphrase>) é uma parte opcional do Sistema de Janela X que é usado para gerenciar
+        o <literal>login</literal> nas sess&otilde;es.  Isso é útil em vários tipos de
         situaç&otilde;es, incluindo áreas de trabalho como <quote>Terminais X</quote> mínimos
         e grandes servidores de exibiç&atilde;o para rede.
         Como o Sistema de Janela X é independente de rede e protocolos,
         há uma grande variedade de configuraç&otilde;es possíveis
         para a execuç&atilde;o de clientes e servidores X em máquinas diferentes
-        e conectadas a rede. O <application>XDM</application> fornece
+        e conectadas a rede.  O <application>XDM</application> fornece
         uma interface gráfica que possibilita escolher o servidor de exibiç&atilde;o no qual se quer conectar
         e a entrada de informaç&otilde;es de autorizaç&atilde;o como o
         a combinaç&atilde;o de <literal>login</literal> e senha.</para>
@@ -952,12 +952,12 @@ EndSection</programlisting>
       <para>Pense no <application>XDM</application> como  
         o provedor da mesma funcionalidade para o usuário proporcionada pelo
         utilitário &man.getty.8; (veja <xref linkend="term-config"> para 
-        detalhes). Isto é, ele faz o <literal>login</literal> no sistema da tela a que se
+        detalhes).  Isto é, ele faz o <literal>login</literal> no sistema da tela a que se
         está conectado e ent&atilde;o executa um gerente de sess&atilde;o a favor 
         do usuário (geralmente um gerente de janela X).
         O <application>XDM</application> ent&atilde;o aguarda o término
         do programa, sinalizando que o usuário terminou e que deve ser
-        feito seu <literal>log out</literal> da tela. Neste ponto,
+        feito seu <literal>log out</literal> da tela.  Neste ponto,
         o <application>XDM</application> pode exibir a tela de <literal>login</literal> e exibir
         telas com opç&otilde;es para que o próximo usuário faça seu <literal>login</literal>.</para>
     </sect2>
@@ -965,207 +965,207 @@ EndSection</programlisting>
     <sect2>
       <title>Usando o XDM</title>
 
-      <para>O <application>XDM</application> daemon program is
-        located in <filename>/usr/X11R6/bin/xdm</filename>.  This program
-        can be run at any time as <username>root</username> and it will
-        start managing the X display on the local machine.  If
-        <application>XDM</application> is to be run every
-        time the machine boots up, a convenient way to do this is by
-        adding an entry to <filename>/etc/ttys</filename>.  For more
-        information about the format and usage of this file, see <xref
-        linkend="term-etcttys">.  There is a line in the default
-        <filename>/etc/ttys</filename> file for running the
-        <application>XDM</application> daemon on a virtual terminal:</para>
+      <para>O programa <literal>daemon</literal> do <application>XDM</application> está
+        localizado na pasta <filename>/usr/X11R6/bin/xdm</filename>.  Este programa
+        pode ser executado em qualquer momento como <username>root</username> e vai
+        iniciar o gerenciamento a tela do X na máquina local.  Se
+        for executar o <application>XDM</application> a cada vez que
+        o computador inicializar (<foreignphrase>boot</foreignphrase>), um modo conveniente de
+        fazê-lo é adicionar uma entrada no arquivo <filename>/etc/ttys</filename>.  Para mais
+        informaç&otilde;es sobre o uso e o formato deste arquivo, consulte <xref
+        linkend="term-etcttys">.  Há uma lina no arquivo
+        <filename>/etc/ttys</filename> padr&atilde;o para executar o <literal>daemon</literal>
+        do <application>XDM</application> em um terminal virtual:</para>
 
       <screen>ttyv8   "/usr/X11R6/bin/xdm -nodaemon"  xterm   off secure</screen>
 
-      <para>By default this entry is disabled; in order to enable it
-        change field 5 from <literal>off</literal> to
-        <literal>on</literal> and restart &man.init.8; using the
-        directions in <xref linkend="term-hup">.  The first field, the
-        name of the terminal this program will manage, is
-        <literal>ttyv8</literal>.  This means that
-        <application>XDM</application> will start running on the 9th
-        virtual terminal.</para>
+      <para>Por padr&atilde;o esta entrada está desativada; para ativá-la modifique
+        o campo 5 de <literal>off</literal> para
+        <literal>on</literal> e reinicie o &man.init.8; usando as intruç&otilde;es
+        em <xref linkend="term-hup">.  O primeiro campo, o nome
+        do terminal a ser gerenciado por este programa, é
+        <literal>ttyv8</literal>.  Isso significa que
+        o <application>XDM</application> vai iniciar sua execuç&atilde;o no 9&ordm;
+        terminal virtual.</para>
     </sect2>
 
     <sect2>
-      <title>Configuring XDM</title>
+      <title>Configurando o XDM</title>
 
-      <para>The <application>XDM</application> configuration directory
-        is located in <filename>/usr/X11R6/lib/X11/xdm</filename>.  In
-        this directory there are several files used to change the
-        behavior and appearance of
-        <application>XDM</application>.  Typically these files will
-        be found:</para>
+      <para>A pasta com a configuraç&atilde;o do <application>XDM</application> 
+        está localizada em <filename>/usr/X11R6/lib/X11/xdm</filename>.  Nesta
+        pasta há vários arquivos usados para modificar
+        o comportamento e a aparência do
+        <application>XDM</application>.  Tipicamente esses arquivos
+        ser&atilde;o encontrados:</para>
 
         <informaltable frame="none">
           <tgroup cols="2">
             <thead>
               <row>
-                <entry>File</entry>
-                <entry>Description</entry>
+                <entry>Arquivo</entry>
+                <entry>Descriç&atilde;o</entry>
               </row>
             </thead>
 
             <tbody>
               <row>
                 <entry><filename>Xaccess</filename></entry>
-                <entry>Client authorization ruleset.</entry>
+                <entry>Regulamento para autorizaç&atilde;o de clientes.</entry>
               </row>
 
               <row>
                 <entry><filename>Xresources</filename></entry>
-                <entry>Default X resource values.</entry>
+                <entry>Valores padr&atilde;o para recursos do X.</entry>
               </row>
 
               <row>
                 <entry><filename>Xservers</filename></entry>
-                <entry>List of remote and local displays to manage.</entry>
+                <entry>Lista de telas locais e remotas para gerenciar.</entry>
               </row>
 
               <row>
                 <entry><filename>Xsession</filename></entry>
-                <entry>Default session script for logins.</entry>
+                <entry><literal>Script</literal> de sess&atilde;o padr&atilde;o para <literal>logins</literal>.</entry>
               </row>
 
               <row>
                 <entry><filename>Xsetup_</filename>*</entry>
-                <entry>Script to launch applications before the login
-                  interface.</entry>
+                <entry><literal>Script</literal> que executa aplicaç&otilde;es antes da interface de 
+                <literal>login</literal>.</entry>
               </row>
 
               <row>
                 <entry><filename>xdm-config</filename></entry>
-                <entry>Global configuration for all displays running on
-                  this machine.</entry>
+                <entry>Configuraç&otilde;es global para todas as telas em execuç&atilde;o
+                  nesta máquina.</entry>
               </row>
 
               <row>
                 <entry><filename>xdm-errors</filename></entry>
-                <entry>Errors generated by the server program.</entry>
+                <entry>Erros gerados pelo programa servidor.</entry>
               </row>
 
               <row>
                 <entry><filename>xdm-pid</filename></entry>
-                <entry>The process ID of the currently running XDM.</entry>
+                <entry>O ID do processo do XDM que está em execuç&atilde;o.</entry>
               </row>
             </tbody>
           </tgroup>
         </informaltable>
 
-      <para>Also in this directory are a few scripts and programs used
-        to set up the desktop when <application>XDM</application> is
-        running.  The purpose of each of these files will be briefly
-        described.  The exact syntax and usage of all of these files is
-        described in &man.xdm.1;.</para>
+      <para>Nesta pasta também existem alguns <literal>scripts</literal> e programas utilizados
+        para organizar a área de trabalho quando o <application>XDM</application> está em
+        execuç&atilde;o.  O propósito de cada um desses arquivos ser&atilde;o brevemente 
+        descritos.  A sintaxe exata e o uso de todos estes arquivos está
+        descrito em &man.xdm.1;.</para>
 
-      <para>The default configuration is a simple rectangular login
-        window with the hostname of the machine displayed at the top in
-        a large font and <quote>Login:</quote> and
-        <quote>Password:</quote> prompts below.  This is a good starting
-        point for changing the look and feel of
-        <application>XDM</application> screens.</para>
+      <para>A configuraç&atilde;o padr&atilde;o é uma janela retangular simples para <literal>login</literal>
+        com o nome do host (<literal>hostname</literal>) exibido no topo com
+        uma fonte grande e os campos <quote>Login:</quote> e 
+        <quote>Password:</quote> em prontid&atilde;o logo abaixo.  Esse é um bom ponto de
+        partida para trocar o visual e as senç&otilde;es das
+        telas do <application>XDM</application>.</para>
 
       <sect3>
         <title>Xaccess</title>
 
-        <para>The protocol for connecting to
-          <application>XDM</application> controlled displays is called
-          the X Display Manager Connection Protocol (XDMCP).  This file
-          is a ruleset for controlling XDMCP connections from remote
-          machines.  By default, it allows any client to connect, but
-          that does not matter unless the <filename>xdm-config</filename>
-          is changed to listen for remote connections.</para>
+        <para>O protocolo para a conex&atilde;o com as telas do
+          <application>XDM</application> é chamado Protocolo de Conex&atilde;o com o Gerente de Telas X
+          (X Display Manager Connection Protocol, ou apenas XDMCP).  Este arquivo contem 
+          o regulamento que controla as conex&otilde;es via XDMCP vindas de
+          máquinas remotas.  Por padr&atilde;o, ela permite que qualquer cliente se conecte, mas
+          isso é irrelevante a menos que o <filename>xdm-config</filename>
+          seja modificado para esperar por conex&otilde;es remotas.</para>
       </sect3>
 
       <sect3>
         <title>Xresources</title>
-        <para>This is an application-defaults file for the display
-          chooser and the login screens.  This is where the appearance
-          of the login program can be modified.  The format is identical
-          to the app-defaults file described in the
-          <application>&xfree86;</application> documentation.</para>
+        <para>Este é um arquivo de valores padr&atilde;o para aplicaç&otilde;es, para o selecionador de
+          telas e para a tela de <literal>login</literal>.  Este é o lugar onde a aparência
+          do programa de <literal>login</literal> pode ser modificada.  O formato é idêntico
+          ao do arquivo de padr&otilde;es para aplicaç&otilde;es descrito na
+          documentaç&atilde;o do <application>&xfree86;</application>.</para>
       </sect3>
 
       <sect3>
         <title>Xservers</title>
-        <para>This is a list of the remote displays the chooser should
-          provide as choices.</para>
+        <para>Esta é a lista de telas remotas selecionáveis das quais o selecionador de telas
+          deve prover como escolhas possíveis.</para>
       </sect3>
 
       <sect3>
         <title>Xsession</title>
-        <para>This is the default session script for
-          <application>XDM</application> to run after a user has logged
-          in.  Normally each user will have a customized session script
-          in <filename>~/.xsession</filename> that overrides this
-          script.</para>
+        <para>Este é o <literal>script</literal> padr&atilde;o das sess&otilde;es
+          que o <application>XDM</application> executa após o <literal>login</literal> de um usuário.
+          Normalmente cada usuário terá um <literal>script</literal> para a sess&atilde;o personalizado 
+          no <filename>~/.xsession</filename> que predomina sobre esse 
+          <literal>script</literal>.</para>
       </sect3>
 
       <sect3>
         <title>Xsetup_*</title>
-        <para>These will be run automatically before displaying the
-          chooser or login interfaces.  There is a script for each
-          display being used, named <filename>Xsetup_</filename> followed
-          by the local display number (for instance
-          <filename>Xsetup_0</filename>).  Typically these scripts will
-          run one or two programs in the background such as
+        <para>Estes executar&atilde;o automaticamente antes que o selecionador
+          ou a interface de <literal>login</literal> sejam exibidas.  Há um <literal>script</literal>
+          para cada tela em uso, cujo nome é <filename>Xsetup_</filename> seguido do
+          número da tela local (por exemplo
+          <filename>Xsetup_0</filename>).  Tipicamente estes <literal>scripts</literal> executar&atilde;o
+          um ou mais programas no plano de fundo como o
           <command>xconsole</command>.</para>
       </sect3>
 
       <sect3>
         <title>xdm-config</title>
-        <para>This contains settings in the form of app-defaults
-          that are applicable to every display that this installation
-          manages.</para>
+        <para>Este contém atributos na forma de padr&otilde;es de aplicaç&atilde;es
+          que s&atilde;o aplicados para toda tela gerenciada por esta
+          instalaç&atilde;o.</para>
       </sect3>
 
       <sect3>
         <title>xdm-errors</title>
-        <para>This contains the output of the X servers that
-          <application>XDM</application> is trying to run.  If a display
-          that <application>XDM</application> is trying to start hangs
-          for some reason, this is a good place to look for error
-          messages.  These messages are also written to the user's
-          <filename>~/.xsession-errors</filename> file on a per-session
-          basis.</para>
+        <para>Este contém as saídas geradas pelos servidores X os quais o
+          <application>XDM</application> está tentando executar.  Se uma tela
+          a qual o <application>XDM</application> está tentando iniciar congela
+          por alguma raz&atilde;o, este é um bom lugar para procurar por mensagens
+          de erro.  Estas mensagens s&atilde;o também escritas no arquivo do usuário
+          chamado <filename>~/.xsession-errors</filename> sempre a cada sess&atilde;o.
+          </para>
       </sect3>
     </sect2>
 
     <sect2>
-      <title>Running a Network Display Server</title>
+      <title>Executando um Servidor de Telas em Rede</title>
 
-      <para>In order for other clients to connect to the display
-        server, edit the access control rules, and enable the connection
-        listener.  By default these are set to conservative values.
-        To make <application>XDM</application> listen for connections,
-        first comment out a line in the <filename>xdm-config</filename>
-        file:</para>
+      <para>Para que outros clientes possam conectar-se ao servidor de
+        telas, modifique as regras de controle de acesso e ative a espera por
+        conex&otilde;es (um <foreignphrase>listener</foreignphrase>).  Por padr&atilde;o estes
+	s&atilde;o atribuídos a valores conservadores.  Para que o <application>XDM</application>
+        aguarde conex&otilde;es deve-se primeiro comentar uma linha no arquivo
+	<filename>xdm-config</filename>:</para>
 
       <screen>! SECURITY: do not listen for XDMCP or Chooser requests
 ! Comment out this line if you want to manage X terminals with xdm
 DisplayManager.requestPort:     0</screen>
 
-      <para>and then restart <application>XDM</application>.  Remember that
-        comments in app-defaults files begin with a <quote>!</quote>
-        character, not the usual <quote>#</quote>.  More strict
-        access controls may be desired.  Look at the example
-        entries in <filename>Xaccess</filename>, and refer to the
-        &man.xdm.1; manual page.</para>
+      <para>que quer dizer: <quote>AVISO: n&atilde;o se deve esperar por conex&otilde;es XDMCP ou requisiç&otilde;es
+        de um selecionador.  Comente esta linha se você quiser que os terminais X sejam gerenciados pelo xdm</quote>.
+        Após comentar a linha que segue o aviso, reinicie o <application>XDM</application>.  Lembre-se que 
+        comentários em arquivos de padr&otilde;es para aplicaç&otilde;es começam com um caracter <quote>!</quote>,
+        e n&atilde;o o <quote>#</quote> ao qual estamos acostumados.  Controles mais rígidos para o acesso podem ser
+        convenientes.  Observe as entradas de exemplo no arquivo <filename>Xaccess</filename>, e consulte a página do 
+        manual &man.xdm.1;.</para>
     </sect2>
 
      <sect2>
-        <title>Replacements for XDM</title>
+        <title>Substitutos para o XDM</title>
 
-        <para>Several replacements for the default
-          <application>XDM</application> program exist.  One of them,
-          <application>KDM</application> (bundled with
-          <application>KDE</application>) is described later in this
-          chapter.  <application>KDM</application> offers many visual
-          improvements and cosmetic frills, as well as the
-          functionality to allow users to choose their window manager
-          of choice at login time.</para>
+        <para>Existem vários programas que substituem o programa <application>XDM</application>
+          padr&atilde;.  Um deles, o <application>KDM</application> (fornecido junto com o
+          <application>KDE</application>) é descrito adiante neste capítulo.
+          O <application>KDM</application> oferece vários avanços visuais e
+          floreios cosméticos, bem com as funç&otilde;es que
+          permitem aos usuários escolher seu gerenciador de janela
+          preferidos no momento do <literal>login</literal>.</para>
      </sect2>
   </sect1>
 
@@ -1175,9 +1175,9 @@ DisplayManager.requestPort:     0</screen>
         <author>
           <firstname>Valentino</firstname>
           <surname>Vaschetto</surname>
-          <contrib>Contributed by </contrib>
+          <contrib>Contribuiç&atilde;o de </contrib>
         </author>
-        <!-- June 2001 -->
+        <!-- Junho 2001 -->
       </authorgroup>
     </sect1info>
 
