@@ -171,7 +171,7 @@
       url="http://www.bartleby.com/141/">Elementos de Estilo</ulink>,
     por William Strunk.</para>
 
-  <sect1>
+  <sect1 id="writing-style-guide">
     <title>Guia de Estilo</title>
 
     <para>Para manter a fonte do manual consistente quando muitas
@@ -203,11 +203,11 @@
 	do n&iacute;vel de identa&ccedil;&atilde;o que este p&ocirc;de
 	conter.</para> 
 
-      <para>Cada Tag de abertura aumenta o n&iacute;vel de
-	identa&ccedil;&atilde;o em 2 espa&ccedil;os, e cada Tag de
-	fechamento diminui o n&iacute;vel de identa&ccedil;&atilde;o
-	em 2 espa&ccedil;os.  Substitua os espa&ccedil;os principais
-	por Tabs quando apropriado.  N&atilde;o use espa&ccedil;os na
+      <para>As tags de abertura aumentam o n&iacute;vel de
+	identa&ccedil;&atilde;o em 2 espa&ccedil;os, as tags de
+	fechamento diminuem o n&iacute;vel de identa&ccedil;&atilde;o
+	em 2 espa&ccedil;os.  Blocos de 8 espa&ccedil;os no come&ccedil;o de uma 
+	linham devem ser subistituidos por um Tab.  N&atilde;o use espa&ccedil;os na
 	frente dos Tabs, e n&atilde;o adicione espa&ccedil;os em
 	branco no final de uma linha.  O &iacute;ndice dentro dos
 	elementos deve ser identado por dois espa&ccedil;os se o seu
@@ -247,6 +247,18 @@ V
 	automaticamente, e as vari&aacute;veis locais do Emacs ao
 	final de cada arquivo devem refor&ccedil;ar estes
 	estilos.</para>
+
+     <para>Os usu&aacute;rios do <application>Vim</application> se desejarem 
+       podem configurar o seu editor da seguinte forma:</para> 
+    
+     <programlisting>augroup sgmledit 
+     autocmd FileType sgml set formatoptions=cq2l " Special formatting options 
+     autocmd FileType sgml set textwidth=70       " Wrap lines at 70 spaces 
+     autocmd FileType sgml set shiftwidth=2       " Automatically indent 
+     autocmd FileType sgml set softtabstop=2      " Tab key indents 2 spaces 
+     autocmd FileType sgml set tabstop=8          " Replace 8 spaces with a tab 
+     autocmd FileType sgml set autoindent         " Automatic indentation 
+     augroup END</programlisting> 	
     </sect2>
 
     <sect2>
@@ -325,7 +337,7 @@ V
     </sect2>
 
     <sect2>
-      <title>Mudan&ccedil;as nos espaços em branco.</title>
+      <title>Mudan&ccedil;as nos espa&ccedil;os em branco.</title>
 
       <para>Ao enviar mudan&ccedil;as, n&atilde;o envie
 	mudan&ccedil;as de conte&uacute;do ao mesmo tempo que
@@ -347,9 +359,48 @@ V
 	de formata&ccedil;&atilde;o, e que a equipe da
 	tradu&ccedil;&atilde;o pode ignor&aacute;-la.</para>
     </sect2>
+
+    <sect2> 
+      <title>Nonbreaking space</title> 
+    
+        <para>Avoid line breaks in places where they look ugly 
+          or make it difficult to follow a sentence.  Line breaks depend 
+          on the width of the chosen output medium.  In particular, viewing 
+          the HTML documentation with a text browser can lead to badly 
+          formatted paragraphs like the next one:</para> 
+    
+         <literallayout class="monospaced">Data capacity ranges from 40 MB to 15 
+         GB.  Hardware compression &hellip;</literallayout> 
+    
+         <para>The general entity <literal>&amp;nbsp;</literal> prohibits 
+           line breaks between parts belonging together.  Use nonbreaking 
+           spaces in the following places:</para> 
+    
+         <itemizedlist> 
+           <listitem> 
+             <para>between numbers and units:</para> 
+             <programlisting><![ CDATA [57600&nbsp;bps]]></programlisting> 
+           </listitem> 
+    
+           <listitem> 
+             <para>between program names and version numbers:</para> 
+             <programlisting><![ CDATA [FreeBSD&nbsp;4.7]]></programlisting> 
+           </listitem> 
+    
+           <listitem> 
+             <para>between multiword names (use with caution when applying this 
+               to more than 3-4 word names like <quote>The FreeBSD Brazilian 
+                 Portuguese Documentation Project</quote>):</para> 
+             <programlisting><![ CDATA [Sun&nbsp;Microsystems]]></programlisting> 
+           </listitem> 
+         </itemizedlist> 
+       </sect2> 
+
+
+
   </sect1>
 
-  <sect1>
+  <sect1 id="writing-style-word-list">
     <title>Lista de Palavras</title>
 
     <para>O que se segue &eacute; uma pequena lista das palavras com a
@@ -382,6 +433,10 @@ V
       </listitem>
 
       <listitem>
+           <para>IPsec</para>
+           </listitem>
+
+      <listitem>
 	<para>Internet</para>
       </listitem>
 
@@ -390,7 +445,15 @@ V
       </listitem>
 
       <listitem>
+	<para>Soft Updates</para>
+      </listitem>
+
+      <listitem>
 	<para>Unix</para>
+      </listitem>
+
+      <listitem>
+	<para>disk label</para>
       </listitem>
 
       <listitem>
