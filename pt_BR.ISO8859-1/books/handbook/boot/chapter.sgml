@@ -12,7 +12,7 @@
     <indexterm><primary>booting</primary></indexterm>
     <indexterm><primary>bootstrap</primary></indexterm>
 
-    <para>O processo de inicializa&ccedil;&atilde;o e carregamento de um computador com sistema operacional
+    <para>O processo de inicializa&ccedil;&atilde;o e carregamento de um sistema operacional
       refere-se a um <quote>processo de inicializar</quote>, ou simplesmente
       <quote>carregar</quote>. O processo de inicializa&ccedil;&atilde;o do FreeBSD fornece uma grande flexibilidade 
       que acontece quando voc&ecirc; inicia o sistema,
@@ -22,21 +22,21 @@
 
     <para>Este cap&iacute;tulo detalha as op&ccedil;&otilde;es de configura&ccedil;&atilde;o que voc&ecirc; pode ajustar e
       personalizar o processo de inicializa&ccedil;&atilde;o do FreeBSD. Isto inclui tudo o que 
-      acontece desde a hora do kernel do FreeBSD carregar, testar os dispositivos, e
-      inicializar &man.init.8;. Se voc&ecirc; n&atilde;o souber quando isso acontece, isto
+      acontece desde que o kernel do FreeBSD foi inicializado, teste de dispositivos, e
+      inicializa&ccedil;&atilde;o do &man.init.8;. Se voc&ecirc; n&atilde;o souber quando isso acontece, isto
       acontece quando a cor do texto muda de branco brilhante para cinza.</para>
 
     <para>Depois de ler este cap&iacute;tulo, voc&ecirc; saber&aacute;:</para>
 
     <itemizedlist>
       <listitem>
-	<para>O que os componentes do FreeBSD tiram e colocam no sistema, e como
+	<para>O que os componentes do sistema de inicializa&ccedil;&atilde;o do FreeBSD s&atilde;o, e como
 	  eles interagem.</para>
       </listitem>
 
       <listitem>
-	<para>As op&ccedil;&otilde;es que voc&ecirc; pode dar a componentes no FreeBSD
-	  colocando ou tirando para controlar o processo de inicializa&ccedil;&atilde;o.</para>
+	<para>As op&ccedil;&otilde;es que voc&ecirc; pode dar a componentes de inicializa&ccedil;&atilde;o do FreeBSD
+	  para controlar o processo de inicializa&ccedil;&atilde;o.</para>
       </listitem>
       
       <listitem>
@@ -47,7 +47,7 @@
     <note>
       <title>Somente x86</title>
 
-      <para>Este cap&iacute;tulo somente descreve o processo de inicializa&ccedil;&atilde;o para FreeBSD rodando
+      <para>Este cap&iacute;tulo descreve somente o processo de inicializa&ccedil;&atilde;o para FreeBSD rodando
 	em sistemas Intel x86.</para>
     </note>
   </sect1>
@@ -66,13 +66,13 @@
       Baron Munchausen</citetitle>. Um caracter teve afastado parte way down a
       manhole, and pulled himself out by grabbing his bootstraps, and
       lifting.  Nos dias de computa&ccedil;&atilde;o o termo
-      <firstterm>colocar e tirar</firstterm> foi aplicado no mecanismo usado para
+      <foreignphrase>bootstrap</foreignphrase> foi aplicado no mecanismo usado para
       carregar o sistema operacional, que se tornou compacto para
-      <quote>carregar</quote>.</para>
+      <foreignphrase>booting</foreignphrase>.</para>
 
     <para>No hardware x86 o Sistema B&aacute;sico de Entrada/Saida (BIOS) &eacute; respons&aacute;vel
       por carregar o sistema operacional. Para fazer isto, na BIOS aparece o
-      hard disk para o Master Boot Record (MBR), que deve ser alocado sobre um
+      disco r&iacute;gido para o Master Boot Record (MBR), que deve ser alocado sobre um
       local espec&iacute;fico do disco. A BIOS tem bastante mudan&ccedil;as que podem ser feitas para carregar e
       rodar a MBR, e assume que a MBR pode ent&atilde;o carregar a sa&iacute;da do resto das
       tarefas envolvidas na inicializa&ccedil;&atilde;o do sistema operacional.</para>
@@ -83,7 +83,7 @@
     </indexterm>
 
     <para>Se voc&ecirc; tiver somente um sistema operacional instalado no seu disco ent&atilde;o a
-      MBR padr&atilde;o ser&aacute; suficiente. Esta MBR procurar&aacute; pela primeira parti&ccedil;&atilde;o inicializ&aacute;vel
+      MBR padr&atilde;o ser&aacute; suficiente. Esta MBR ir&aacute; procurar pela primeira parti&ccedil;&atilde;o inicializ&aacute;vel
       no disco, e entao roda o c&oacute;digo nesta parti&ccedil;&atilde;o para carregar o
       restante do sistema operacional.</para>
 
@@ -93,14 +93,14 @@
       FreeBSD vem com um MBR que pode ser instalado, e outros
       sistemas operacionais vendidos fornecem MBRs alternativos.</para>
 
-    <para>O restante do sistema bootstrap do FreeBSD &eacute; divido em tr&ecirc;s
+    <para>O restante do sistema <foreignphrase>bootstrap</foreignphrase> do FreeBSD &eacute; divido em tr&ecirc;s
       est&aacute;gios. O primeiro est&aacute;gio &eacute; executado pela MBR, que sabe apenas iniciar
       o computador em um estado espec&iacute;fico e rodar o segundo est&aacute;gio. O
       segundo est&aacute;gio pode fazer mais um peda&ccedil;o em pouco tempo, depois roda o terceiro est&aacute;gio.
       O terceiro est&aacute;gio terminar&aacute; a tarefa de carregar o sistema operacional. O
       trabalho &eacute; dividido dentro destes tr&ecirc;s est&aacute;gios porque o padr&atilde;o do PC imp&otilde;e
-      limites sobre o tamanho dos programas que podem ser rodados nos est&aacute;gios 1 e
-      2. Encadear as tarefas permite que o FreeBSD forne&ccedil;a um carregador mais
+      limites sobre o tamanho dos programas que podem ser rodados nos est&aacute;gios um e
+      dois. Acorrentar as tarefas permite que o FreeBSD forne&ccedil;a um carregador mais
       flex&iacute;vel.</para>
 
     <indexterm><primary>kernel</primary></indexterm>
@@ -109,7 +109,7 @@
     <para>O kernel ent&atilde;o &eacute; inicializado e come&ccedil;a a testar os dispositivos,
       e ent&atilde;o inicializa estes para o uso. Uma vez que o processo de inicializa&ccedil;&atilde;o do kernel
       &eacute; terminado, o kernel passa o controle do processo para
-      &man.init.8;, qual se certifica que os discos est&atilde;o em um estado aproveitavel.
+      &man.init.8;, o qual se certifica que os discos est&atilde;o em um estado aproveitavel.
       &man.init.8; come&ccedil;a ent&atilde;o a configura&ccedil;&atilde;o a n&iacute;vel-de-usu&aacute;rio que
       monta o sistema de arquivos, seta e levanta drivers de rede para comunica&ccedil;&atilde;o com
       a mesma, e normalmente inicia todos os processos que
@@ -145,8 +145,8 @@ F5 Drive 1
 Default: F2</screen>
       </example>
 
-      <para>Outros sistemas operacionais, em particular &windows;&nbsp;95, tem conhecimento que
-	sobscrevem informa&ccedil;&otilde;es j&aacute; existentes na MBR com suas pr&oacute;prias. Se isto acontecer a voc&ecirc;,
+      <para>Outros sistemas operacionais, em particular &windows;&nbsp;95, tem conhecimento para
+	sobrescrever suas pr&oacute;prias informa&ccedil;&otilde;es em uma MBR j&aacute; existente. Se isto acontecer a voc&ecirc;,
 	ou voc&ecirc; queira substituir sua MBR existente com o FreeBSD MBR ent&atilde;o use
 	o seguinte comando:</para>
 
@@ -158,7 +158,7 @@ Default: F2</screen>
 	controladora IDE, <devicename>da0</devicename> para o primeiro disco SCSI,
 	e assim por diante.</para>
 
-      <para>Se voc&ecirc; for um usu&aacute;rio Linux, entretanto, e preferir que o
+      <para>Se voc&ecirc; for um usu&aacute;rio Linux, contudo, e preferir que o
 	<application>LILO</application> controle o processo de inicializa&ccedil;&atilde;o, voc&ecirc; pode
 	editar o arquivo <filename>/etc/lilo.conf</filename> para FreeBSD, ou
 	selecionar <option>Leave The Master Boot Record Untouched</option>
@@ -197,15 +197,15 @@ label=FreeBSD</programlisting>
       <para>Eles s&atilde;o encontrados no setor de inicializa&ccedil;&atilde;o, 
 	que &eacute; onde <link
 	  linkend="boot-boot0">boot0</link>, ou alguns outros programas na
-	<abbrev>MBR</abbrev> espera encontrar um programa para rodar
-	continuar o processo de carga. O arquivo no diret&oacute;rio
+	<abbrev>MBR</abbrev> espera encontrar um programa para rodar e
+	continuar o processo de inicializa&ccedil;&atilde;o. O arquivo no diret&oacute;rio
 	<filename>/boot</filename> s&atilde;o c&oacute;pias dos arquivos reais,
 	que s&atilde;o armazenados fora do sistema de arquivos do FreeBSD.</para>
 
       <para><filename>boot1</filename> &eacute; muito simples, este tamb&eacute;m pode
 	somente ter o tamanho m&aacute;ximo de 512 bytes,
-	e sabemos que justamente para o
-	<firstterm>disklabel</firstterm> do FreeBSD, com informa&ccedil;&otilde;es armazenadas
+	e sabemos bastante sobre o
+	<firstterm>disklabel</firstterm> do FreeBSD, que armazena informa&ccedil;&otilde;es
 	no <foreignphrase>slice</foreignphrase>, para procurar e executar o <filename>boot2</filename>.</para>
       
       <para><filename>boot2</filename> &eacute; ligeiramente mais sofisticado, e compreende
@@ -213,11 +213,10 @@ label=FreeBSD</programlisting>
 	fornecer uma rela&ccedil;&atilde;o simples para escolher o kernel ou o carregador para
 	executar.</para>
 
-      <para>Desde o <link linkend="boot-loader">carregador</link>
-	mais sofisticado, &eacute; forncecido uma boa ajuda na
-	configura&ccedil;&atilde;o de inicializa&ccedil;&atilde;o, <filename>boot2</filename> usualmente executa
-	isto, mas previamente isto
-	era tarefa para executar diretamente no kernel.</para>
+      <para>Desde que o <link linkend="boot-loader">carregador</link>
+	&eacute; muito mais sofisticado, e fornece uma configura&ccedil;&atilde;o f&aacute;cil-de-usar agrad&aacute;vel
+	de inicializa&ccedil;&atilde;o, <filename>boot2</filename> usualmente executa-a,
+	mas previamente isto era tarefa para executar diretamente no kernel.</para>
 
       <example id="boot-boot2-example">
 	<title><filename>boot2</filename> Screenshot</title>
@@ -254,11 +253,11 @@ boot:</screen>
 
     <indexterm><primary>boot-loader</primary></indexterm>
     <para>A inicializa&ccedil;&atilde;o e o est&aacute;gio final dos tr&ecirc;s-est&aacute;gios
-      de bootstrap, &eacute; localizado no sistema de arquivos, usualmente como
+      de <foreignphrase>bootstrap</foreignphrase>, &eacute; localizado no sistema de arquivos, usualmente como
       <filename>/boot/loader</filename>.</para>
       
     <para>A inicializa&ccedil;&atilde;o &eacute; usada como um m&eacute;todo amig&aacute;vel para
-      configura&ccedil;&atilde;o, usando um jogo de comandos internos f&aacute;cil-para-usar,
+      configura&ccedil;&atilde;o, usando um jogo de comandos internos f&aacute;cil-de-usar,
       voltado por um interpretador mais poderoso, com um jogo de comandos mais complexo.</para> 
 
     <sect3 id="boot-loader-flow">
@@ -275,7 +274,7 @@ boot:</screen>
       <para>Ent&atilde;o o carregador ir&aacute; ler o
 	<filename>/boot/loader.rc</filename>, que por padr&atilde;o l&ecirc;
 	dentro de  <filename>/boot/defaults/loader.conf</filename> que
-	seta padr&otilde;es para vari&aacute;veis e leem o 
+	seta padr&otilde;es para vari&aacute;veis e l&ecirc; o 
 	<filename>/boot/loader.conf</filename> para as mudan&ccedil;a destas vari&aacute;veis locais.
 	<filename>loader.rc</filename> age ent&atilde;o
 	sobre estas vari&aacute;veis, carregando qualquer m&oacute;dulo e kernel que s&atilde;o
@@ -283,8 +282,8 @@ boot:</screen>
 
       <para>Finalmente, por padr&atilde;o, o carregador emite uma espera de 10 segundos
 	para pressionar alguma tecla, e carregar o kernel se este n&atilde;o for interrompido.
-	Se interrompido, ao usu&aacute;rio &eacute; apresentado um alerta no prompt que &eacute; para
-	entender o help do comando setado, onde o usu&aacute;rio pode
+	Se interrompido, ao usu&aacute;rio &eacute; apresentado um alerta no prompt que &eacute; f&aacute;cil-de-usar
+ 	para entender o comando setado, onde o usu&aacute;rio pode
 	ajustar vari&aacute;veis, descarregar todos os m&oacute;dulos, carregar m&oacute;dulos, e eles
 	finalmente carregar ou reiniciar.</para>
 
@@ -351,7 +350,7 @@ boot:</screen>
 
 	  <listitem>
 	    <para>Processa o arquivo com o nome dado ao mesmo. O
-	      arquivos &eacute; lido, e interpretado linha por linha. Um
+	      arquivo &eacute; lido, e interpretado linha por linha. Um
 	      erro imediatamente para o comando de inclus&atilde;o.</para>
 	  </listitem>
 	</varlistentry>
@@ -493,7 +492,7 @@ boot:</screen>
     <para>Uma vez que o kernel &eacute; carregado pelo carregador <link
 	linkend="boot-loader">loader</link> (como usado) ou <link
 	linkend="boot-boot1">boot2</link> (passando o carregador), isto
-      examina suas op&ccedil;&atilde;o de boot, se existir, e ajusta seu comportamento como
+      examina suas op&ccedil;&atilde;o de inicializa&ccedil;&atilde;o, se existir, e ajusta seu comportamento como
       necess&aacute;rio.</para>
 
     <sect2 id="boot-kernel-bootflags">
@@ -501,7 +500,7 @@ boot:</screen>
         <primary>kernel</primary>
         <secondary>bootflags</secondary>
       </indexterm>
-      <title>Kernel Boot Flags</title>
+      <title>Op&ccedil;&otilde;es de inicializa&ccedil;&atilde;o no Kernel</title>
 
       <para>Est&atilde;o aqui as op&ccedil;&atilde;o de boot mais comuns:</para>
 
@@ -543,7 +542,7 @@ boot:</screen>
 	  <term><option>-v</option></term>
 
 	  <listitem>
-	    <para>seja mais detalhado durante a inicializa&ccedil;&atilde;o do kernel</para>
+	    <para>ser mais detalhado durante a inicializa&ccedil;&atilde;o do kernel</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
@@ -579,8 +578,8 @@ boot:</screen>
     <note><para>Esta &eacute; uma caracter&iacute;stica do FreeBSD&nbsp;5.0 e posteriores que n&atilde;o 
       existe em vers&otilde;es anteriores.</para></note>
 
-    <para>Durante a inicializa&ccedil;&atilde;o do sistema, o boot &man.loader.8; ir&aacute; ler o arquivo
-      &man.device.hints.5;. Este arquivo armazena informa&ccedil;&otilde;es do boot do kernel 
+    <para>Durante a inicializa&ccedil;&atilde;o do sistema, o <foreignphrase>boot</foreignphrase> &man.loader.8; ir&aacute; ler o arquivo
+      &man.device.hints.5;. Este arquivo armazena informa&ccedil;&otilde;es de inicializa&ccedil;&atilde;o do kernel 
       conhecidas como vari&aacute;veis, sobretudo referenciando as vezes <quote>device hints</quote>.
       Estas <quote>device hints</quote> s&atilde;o usadas pelos drivers do dispositivo para configurara&ccedil;&atilde;o
       do dispositivo.</para>
@@ -589,8 +588,8 @@ boot:</screen>
       est&aacute;gio 3 no prompt de inicializa&ccedil;&aacute;o</link>. Vari&aacute;veis podem ser adicionadas usando
       comando <command>set</command>, removidas com o comando <command>unset</command>, e visualizadas
       com o comando <command>show</command>. Vari&aacute;veis setadas dentro do arquivo
-      <filename>/boot/device.hints</filename> podem ser canceladas aqui tamb&eacute;m. Device hints incorporadas no
-      boot n&atilde;o s&atilde;o permanentes e ser&atilde;o perdidas na pr&oacute;xima 
+      <filename>/boot/device.hints</filename> podem ser canceladas aqui tamb&eacute;m. Device hints incorporadas na
+      inicializa&ccedil;&atilde;o n&atilde;o s&atilde;o permanentes e ser&atilde;o perdidas na pr&oacute;xima 
       inicializa&ccedil;&atilde;o.</para>
 
     <para>Uma vez que o sistema &eacute; carregado, o comando &man.kenv.1; pode ser usado para
@@ -602,7 +601,7 @@ boot:</screen>
 
     <screen><userinput>hint.driver.unit.keyword="<replaceable>value</replaceable>"</userinput></screen>
 
-    <para>A sintaxe para o est&aacute;gio 3 do boot loader &eacute;:</para>
+    <para>A sintaxe para o est&aacute;gio 3 do <foreignphrase>boot loader</foreignphrase> &eacute;:</para>
     <screen><userinput>set hint.driver.unit.keyword=<replaceable>value</replaceable></userinput></screen>
 
     <para><literal>driver</literal> &eacute; o nome do dispositivo, <literal>unit</literal>
@@ -641,8 +640,8 @@ boot:</screen>
       </listitem>
     </itemizedlist>
 
-    <para>Os drivers do dispositivo podem ou n&atilde;o aceitar (se requerido) mais hints n&atilde;o listadas aqui, veja
-      a p&aacute;gina do manual deles &eacute; recomendado. Para maiores informa&ccedil;&otilde;es, consulte as p&aacute;ginas
+    <para>Os drivers do dispositivo podem ou n&atilde;o aceitar (se requerido) mais hints n&atilde;o listadas aqui, &eacute;
+      recomendado que veja a p&aacute;gina do manual deles. Para maiores informa&ccedil;&otilde;es, consulte as p&aacute;ginas
       de manuais &man.device.hints.5;, &man.kenv.1;, &man.loader.conf.5;, e &man.loader.8;.</para>
   </sect1>
 
@@ -652,7 +651,7 @@ boot:</screen>
     </indexterm>
     <title>Init: Inicializa&ccedil;&atilde;o do controle de processos</title>
 	
-    <para>Uma vez que o kernel termina o boot, isto passa para controle
+    <para>Uma vez que o kernel termina a inicializa&ccedil;&atilde;o, isto passa para controle
       dos processos do usu&aacute;rio &man.init.8;, que &eacute; localizado no
       <filename>/sbin/init</filename>, ou o caminho do programa especificado
       em <envar>init_path</envar> vari&aacute;vel dentro da
@@ -718,7 +717,7 @@ console none                            unknown off insecure</programlisting>
       <title>Modo Multi-Usu&aacute;rio</title>
       <indexterm><primary>multi-user mode</primary></indexterm>
       
-      <para>Se &man.init.8; encontra seus arquivos de sistema para ser
+      <para>Se &man.init.8; encontra seus arquivos de sistema 
 	em ordem, ou uma vez que o usu&aacute;rio terminou em <link
 	  linkend="boot-singleuser">modo mono-usu&aacute;rio</link>, o
 	sistema entra em modo  multi-usu&aacute;rio, onde come&ccedil;a a
@@ -731,11 +730,11 @@ console none                            unknown off insecure</programlisting>
 	<para>O sistema de configura&ccedil;&atilde;o de recurso l&ecirc; as
 	  configura&ccedil;&otilde;es padr&otilde;es do
 	  <filename>/etc/defaults/rc.conf</filename>, e o
-	  sistema-especifica detalhes do
+	  sistema especifica detalhes do
 	  <filename>/etc/rc.conf</filename>, e ent&atilde;o procede a
 	  montagem do sistema de arquivos mencionados em
 	  <filename>/etc/fstab</filename>, iniciando os servi&ccedil;os de rede,
-	  inicializando v&aacute;rios daemons do sistema, e
+	  inicializando v&aacute;rios <foreignphrase>daemons</foreignphrase> do sistema, e
 	  finalmente executando os scripts de inicializa&ccedil;&atilde;o de pacotes instalados
 	  localmente.</para>
 
