@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.28 2003/12/12 13:23:10 surf Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.29 2003/12/12 16:46:09 surf Exp $
 -->
 
 <chapter id="kernelconfig">
@@ -1513,52 +1513,52 @@ pseudo-device   bpf           # Berkeley packet filter</programlisting>
 	<term>Falha na instalação do kernel:</term>
 	
 	<listitem>
-	  <para>Se o kernel compiled fine, but failed to install
-	    (the <command>make install</command> or
-	    <command>make installkernel</command> command failed),
-	    the first thing to check is if your system is running at
-	    securelevel 1 or higher (see &man.init.8;).  The kernel
-	    installation tries to remove the immutable flag from
-	    your kernel and set the immutable flag on the new one.
-	    Since securelevel 1 or higher prevents unsetting the immutable
-	    flag for any files on the system, the kernel installation needs
-	    to be performed at securelevel 0 or lower.</para>
+	  <para>Se o kernel perfeitamente estiver compilado, mas não instalou
+	    (o comando <command>make install</command> ou
+	    <command>make installkernel</command> falhar,
+	    a primeira coisa a se fazer  é checar se seu sistema está rodando em
+	    securelevel 1 ou mais elevado (veja &man.init.8;). A instalação do kernel
+	    tenta remover a área de memória que contem informação do
+	    seu kernel e coloca a área de memória num novo um.
+	    Desde que o securelevel 1 ou mais elevado impede a desconfiguração da área de memória
+	    para alguns arquivos no sistema, a instalação do kernel necessita
+	    se executado no securelevel 0 ou seja baixo.</para>
 	</listitem>
       </varlistentry>
 
       <varlistentry>
-	<term>The kernel does not boot:<anchor
+	<term>O kernel não carrega:<anchor
 	  id="kernelconfig-noboot"></term>
 
 	<listitem>
-	  <para>If your new kernel does not boot, or fails to
-	    recognize your devices, do not panic!  Fortunately, &os; has
-	    an excellent mechanism for recovering from incompatible
-	    kernels.  Simply choose the kernel you want to boot from at
-	    the &os; boot loader. You can access this when the system
-	    counts down from 10.  Hit any key except for the
-            <keycap>Enter</keycap> key, type <command>unload</command>
+	  <para>Se seu kernel novo não carregar, ou falhar para
+	    reconhecer seus dispositivos, não se apavore! Felizmente, &os; tem
+	    um excelente mecanismo para recuperar kernels incompatíveis.
+	    Escolha o kernel que você deseja carregar no
+	    &os; e carregue ele. Você pode acessar este quando o sistema
+	    de contas estiver abaixo de 10. Hit e tecle exceto a
+            tecla <keycap>Enter</keycap>, type <command>unload</command>
             and then type
 	    <command>boot <replaceable>kernel.old</replaceable></command>,
             or the filename of any other kernel that will boot properly.
-            When reconfiguring a kernel, it is always a good idea to keep
-            a kernel that is known to work on hand.</para>
+            Ao reconfigurar um kernel, é sempre uma boa idéia manter
+            um kernel confiável na mão para trabalhar.</para>
 
-	  <para>After booting with a good kernel you can check over your
-	    configuration file and try to build it again.  One helpful
-	    resource is the <filename>/var/log/messages</filename> file
-	    which records, among other things, all of the kernel messages
-	    from every successful boot.  Also, the &man.dmesg.8; command
-	    will print the kernel messages from the current boot.</para>
+	  <para>Depois de carregar um kernel confiável você pode verificar o arquivo de configuração do seu kernel e tentar recompilá-lo novamente.
+	    Um recurso de ajudo útil é o arquivo
+	    <filename>/var/log/messages</filename> 
+	    que grava, entre outras coisas, todas as mensagens do kernel
+	    que são com sucesso carregados. Também, o comando &man.dmesg.8;
+	    imprimirá as mesnagens do kernel que estiver carregado atualmente.</para>
 
 	  <note>
-	    <para>If you are having trouble building a kernel, make sure
-	      to keep a <filename>GENERIC</filename>, or some other kernel
-	      that is known to work on hand as a different name that will
-	      not get erased on the next build.  You cannot rely on
-	      <filename>kernel.old</filename> because when installing a
-	      new kernel, <filename>kernel.old</filename> is overwritten
-	      with the last installed kernel which may be non-functional.
+	    <para>Se você estiver tendo problemas para compilar um kernel, certifique
+	      e guarde um <filename>GENERIC</filename>, ou algum outro kernel
+	      que seja conhecido na mão para trabalhar com um nome diferente que 
+	      não apagará na próxima compilação. Você não pode confiar em
+	      <filename>kernel.old</filename> porque ao instalar um
+	      novo kernel, o <filename>kernel.old</filename> é sobscrevido
+	      com o último kernel instalado que pode não se funcional.
 	      Also, as soon as possible, move the working kernel to the
 	      proper <filename>kernel</filename> location or commands such
 	      as &man.ps.1; will not work properly.  The proper command to
