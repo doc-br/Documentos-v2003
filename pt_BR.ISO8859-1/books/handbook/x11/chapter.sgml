@@ -428,15 +428,15 @@
       foi configurado. Veja em <xref linkend="mouse">
       no capítulo de instalaç&atilde;o do &os;.</para></note>
 
-      <indexterm><primary>XFree86 4 Tuning</primary></indexterm>
+      <indexterm><primary>Fazendo ajustes finos no XFree86 4</primary></indexterm>
 
-      <para>Next, tune the <filename>XF86Config.new</filename>
-        configuration file to taste.  Open the file in a text editor such
-        as &man.emacs.1; or &man.ee.1;.  First, add the
-        frequencies for the target system's monitor.  These are usually
-        expressed as a horizontal and vertical synchronization rate.  These
-        values are added to the <filename>XF86Config.new</filename> file
-        under the <literal>"Monitor"</literal> section:</para>
+      <para>Em seguinda, ajuste o arquivo de configuraç&otilde;es <filename>XF86Config.new</filename>
+        ao seu gosto. Abra o arquivo em um editor de textos como o
+        &man.emacs.1; ou &man.ee.1;. Primeiro, adicione as freqüências do
+        monitor do seu sistema. Elas geralmente s&atilde;o expressadas
+        como taxas de sincronizaç&atilde;o horizontal e vertical. Estes
+        valores s&atilde;o adicionados ao arquivo <filename>XF86Config.new</filename>
+        sob a seç&atilde;o <literal>"Monitor"</literal>:</para>
 
       <programlisting>Section "Monitor"
         Identifier   "Monitor0"
@@ -446,20 +446,20 @@
         VertRefresh  48-120
 EndSection</programlisting>
 
-      <para>The <varname>HorizSync</varname> and
-        <varname>VertRefresh</varname> keywords may not exist in the
-        configuration file.  If they do not, they need to be added, with
-        the correct horizontal synchronization rate placed after the
-        <varname>Horizsync</varname> keyword and the vertical
-        synchronization rate after the <varname>VertRefresh</varname>
-        keyword.  In the example above the target monitor's rates were
-        entered.</para>
+      <para>As express&otilde;es <varname>HorizSync</varname> e
+        <varname>VertRefresh</varname> podem n&atilde;o existir no
+        arquivo de configuraç&otilde;es. Se for o caso, elas precisam ser adicionadas, com
+        a taxa de sincronizaç&atilde;o horizontal posicionada depois da express&atilde;o
+        <varname>Horizsync</varname> e a taxa de sincronizaç&atilde;o
+        vertical após a express&atilde;o <varname>VertRefresh</varname>.
+        Confira no exemplo acima as taxas de um monitor já 
+        preenchidas.</para>
 
-      <para>X allows DPMS (Energy Star) features to be used with capable
-        monitors. The &man.xset.1; program controls the time-outs and can force
-        standby, suspend, or off modes.  If you wish to enable DPMS features
-        for your monitor, you must add the following line to the monitor
-        section:</para>
+      <para>O X permite que recursos DPMS (<literal>Energy Star</literal>) sejam utilizados em monitores
+        com suporte. O programa &man.xset.1; controla os intervalos entre atividades e pode forçar
+        os modos de espera, suspenso e desligado. Se você deseja habilitar os recursos de DPMS
+        para o seu monitor, você deve acrescentar a linha a seguir na seç&atilde;o
+        <literal>Monitor</literal>:</para>
 
       <programlisting>
         Option       "DPMS"</programlisting>
@@ -468,10 +468,10 @@ EndSection</programlisting>
         <primary><command>XF86Config</command></primary>
       </indexterm>
 
-      <para>While the <filename>XF86Config.new</filename>
-        configuration file is still open in an editor, select
-        the default resolution and color depth desired.  This is
-        defined in the <literal>"Screen"</literal> section:</para>
+      <para>Enquanto o arquivo de configuraç&otilde;es <filename>XF86Config.new</filename>
+        ainda estiver aberto no editor, selecione
+        a resoluç&atilde;o padr&atilde;o do monitor e a profundidade das cores desejada. Isso está
+        definido na seç&atilde;o <literal>"Screen"</literal>:</para>
 
       <programlisting>Section "Screen"
         Identifier "Screen0"
@@ -484,99 +484,99 @@ EndSection</programlisting>
         EndSubSection
 EndSection</programlisting>
 
-      <para>The <varname>DefaultDepth</varname> keyword describes
-        the color depth to run at by default.  This can be overridden
-        with the <command>-bpp</command> command line switch to
+      <para>A express&atilde;o <varname>DefaultDepth</varname> descreve 
+        a profundidade de cores empregada por padr&atilde;o. Isso pode ser sobreposto
+        com a opç&atilde;o da linha de comando <command>-bpp</command> existente para o
         &man.XFree86.1;.
-        The <varname>Modes</varname> keyword
-        describes the resolution to run at for the given color depth.
-        Note that only VESA standard modes are supported as defined by
-        the target system's graphics hardware.
-        In the example above, the default color depth is twenty-four
-        bits per pixel.  At this color depth, the accepted resolution is
-        one thousand twenty-four pixels by seven hundred and sixty-eight
-        pixels.</para>
+        A express&atilde;o <varname>Modes</varname>
+        descreve a resoluç&atilde;o utilizada para a profundidade de cores dada.
+        Observe que apenas os modos do padr&atilde;o VESA s&atilde;o suportados pela definiç&atilde;o do
+        hardware gráfico do sistema alvo.
+        No exemplo acima, a profundidade de cores padr&atilde;o é de vinte e quatro
+	bits por ponto. Nesta profundidade de cores, a resoluç&atilde;o aceita é de 
+        mil e vinte e quatro pontos por setecentos e sessenta e oito
+        pontos.</para>
 
-      <para>Finally, write the configuration file and test it using
-        the test mode given above.  If all is well, the configuration
-        file needs to be installed in a common location where
+      <para>Por fim, salve o arquivo de configuraç&otilde;es e teste-o utilizando
+        o modo de teste dado acima. Se tudo estiver bem, o arquivo de configuraç&atilde;o
+        precisa ser instalado em um local conhecido pelo
         &man.XFree86.1;
-        can find it.
-        This is typically <filename>/etc/X11/XF86Config</filename> or
+        a fim de encontrá-lo.
+        Este local é tipicamente a pasta <filename>/etc/X11/XF86Config</filename> ou 
         <filename>/usr/X11R6/etc/X11/XF86Config</filename>.</para>
 
       <screen>&prompt.root; <userinput>cp XF86Config.new /etc/X11/XF86Config</userinput></screen>
 
-      <para>Once the configuration file has been placed in a common
-        location, configuration is complete.  In order to start
-        <application>&xfree86; 4.X</application> with &man.startx.1;,
-        install the <filename role="package">x11/wrapper</filename> port.
-        <application>&xfree86; 4.X</application> can also be started with
+      <para>Uma vez que o arquivo de configuraç&atilde;o tenha sido colocado em um lugar
+        conhecido, a configuraç&atilde;o está completa. Para iniciar o
+        <application>&xfree86; 4.X</application> com &man.startx.1;,
+        instale o <literal>port</literal> <filename role="package">x11/wrapper</filename>.
+        O <application>&xfree86; 4.X</application> também pode ser executado via
         &man.xdm.1;.</para>
 
-      <note><para>There is also a graphical tool for configuration,
-    &man.xf86cfg.1;, that comes with the
-    <application>&xfree86; 4.X</application> distribution.  It
-    allows to interactively define your configuration by choosing
-    the appropiate drivers and settings.  This program can be used under console as well, just use the command <command>xf86cfg -textmode</command>.  For more details,
-    refer to the &man.xf86cfg.1; manual page.</para></note>
+    <note><para>Também existe uma ferramenta gráfica capaz de fazer a configuraç&atilde;o,
+      o &man.xf86cfg.1;, que vem na distribuiç&atilde;o do <application>&xfree86; 4.X</application>
+      Ela permite definir interativamente sua configuraç&atilde;o pela escolha
+      dos <literal>drivers</literal> e parâmetros apropriados. Este programa pode ser utilizado 
+      no console também, basta utilizar o comando <command>xf86cfg - textmode</command>. Para mais detalhes, 
+      verifique a página do manual &man.xf86cfg.1;.</para></note>
 
     </sect2>
 
     <sect2>
-      <title>Advanced Configuration Topics</title>
+      <title>Tópicos de configuraç&atilde;o avançados</title>
 
       <sect3>
-        <title>Configuration with &intel; i810 Graphics Chipsets</title>
+        <title>Configuraç&atilde;o dos <foreignphrase>Chipsets</foreignphrase> Gráficos &intel; i810</title>
 
-        <indexterm><primary>Intel i810 graphic chipset</primary></indexterm>
+        <indexterm><primary>O <foreignphrase>chipset</foreignphrase> gráfico da Intel i810</primary></indexterm>
 
-        <para>Configuration with &intel; i810 integrated chipsets
-          requires the <devicename>agpgart</devicename>
-          AGP programming interface for <application>&xfree86;</application>
-          to drive the card.  The &man.agp.4; driver is in the
-      <filename>GENERIC</filename> kernel since releases
-      4.8-RELEASE and 5.0-RELEASE.  On prior releases, you will
-      have to add the following line:</para>
+        <para>A configuraç&atilde;o dos <foreignphrase>chipsets</foreignphrase> integrados da &intel; i810
+          requerem que a interface de programaç&atilde;o para o AGP, <devicename>agpgart</devicename>,
+          do <application>&xfree86;</application> seja instalada para
+          controlar a placa. O <literal>driver</literal> &man.agp.4; está no <literal>kernel</literal>
+          <filename>GENERIC</filename> desde as <literal>releases</literal>
+          4.8-RELEASE e 5.0-RELEASE. Nas <literal>releases</literal> anteriores, você deve
+          adicionar as linhas a seguir:</para>
 
     <programlisting>device agp</programlisting>
 
-    <para>in your kernel configuration file and rebuild a new
-      kernel.  Instead, you may want to load
-      the <filename>agp.ko</filename> kernel module
-          automatically with the &man.loader.8; at boot time.
-          For that, simply add this line to
+    <para>no arquivo de configuraç&atilde;o do se <literal>kernel</kernel> e reconstruir um novo
+      <literal>kernel</literal>. Ao invés disso, você pode querer carregar
+          o módulo <filename>agp.ko</filename> do <literal>kernel</literal>
+          automaticamente com o &man.loader.8; durante o processo de inicializa&ccedil;&atilde;o.
+          Para isso, basta adicionar esta linha ao
           <filename>/boot/loader.conf</filename>:</para>
 
         <programlisting>agp_load="YES"</programlisting>
 
-        <para>Next, if you are running FreeBSD&nbsp;4.X or earlier, a
-          device node needs to be created for the
-          programming interface.  To create the AGP device node, run
-          &man.MAKEDEV.8; in the <filename>/dev</filename>
-          directory:</para>
+        <para>A seguir, se estiver utilizando o FreeBSD&nbsp;4.X ou posterior, um novo nó
+          para o dispositivo (<foreignphrase>device node</foreignphrase>) precisa ser criado para
+          a interface de programaç&atilde;o. Para criar o nó para o dispositivo AGP, execute
+          o &man.MAKEDEV.8; no diretório
+          <filename>/dev</filename>:</para>
 
         <screen>&prompt.root; <userinput>cd /dev</userinput>
 &prompt.root; <userinput>sh MAKEDEV agpgart</userinput></screen>
 
     <note>
-      <para>FreeBSD&nbsp;5.X or later will use &man.devfs.5; to allocate
-        device nodes transparently, therefore the
-        &man.MAKEDEV.8; step is not required.</para>
+      <para>O FreeBSD&nbsp;5.X ou posterior vai utilizar o &man.devfs.5; para alocar
+        os nós dos dispositivos de modo transparente, logo, o passo do
+        &man.MAKEDEV.8; n&atilde;o é necessário.</para>
     </note>
 
-        <para>This will allow configuration of the hardware as any other
-          graphics board.  Note on systems without the &man.agp.4;
-      driver compiled in the kernel, trying to load the module
-      with &man.kldload.8; will not work.  This driver has to be
-      in the kernel at boot time through being compiled in or
-      using <filename>/boot/loader.conf</filename>.</para>
+        <para>Isso vai permitir a configuraç&atilde;o do dispositivo como se faz com qualquer outra
+          placa de vídeo. Observe que em sistemas sem o <literal>driver</literal> &man.agp.4;
+          compilado no <literal>kernel</literal>, tentar carregar o módulo com
+          o &man.kldload.8; n&atilde;o vai funcionar. Este <literal>driver</literal> precisa estar
+          no <literal>kernel</literal> durante o processo de inicializa&ccedil;&atilde;o seja sendo compilado ou
+          pelo uso do <filename>/boot/loader.conf</filename>.</para>
 
-    <para>If you are using <application>&xfree86; 4.1.0</application> (or
-      later) and messages about unresolved symbols like
-          <literal>fbPictureInit</literal> appear, try adding the
-          following line after <literal>Driver "i810"</literal> in the
-          <application>&xfree86;</application> configuration file:</para>
+        <para>Se estiver utilizando o <application>&xfree86; 4.1.0</application> (ou
+          posterior) e mensagens sobre símbolos n&atilde;o resolvidos como
+          <literal>fbPictureInit</literal> aparecerem, tente adicionar a linha a seguir
+          após <literal>Driver "i810"</literal> no arquivo de configuraç&atilde;o
+          do <application>&xfree86;</application>:</para>
         <programlisting>Option "NoDDC"</programlisting>
       </sect3>
     </sect2>
