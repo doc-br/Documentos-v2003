@@ -162,7 +162,7 @@
       unidades de mem&oacute;ria flash como sistema de disco estar&atilde;o
       interessados em discos de mem&oacute;ria e sistemas de arquivos em
       mem&oacute;ria.  Devido o limitado numero de opera&ccedil;&otilde;es de escrita que
-      pode ser realizados em uma unidade de memoria flash, o disco e o
+      pode ser realizados em uma unidade de mem&oacute;ria flash, o disco e o
       sistema de arquivo provavelmente ser&atilde;o montados em modo
       de apenas leitura.  Neste ambiente, os sistemas de arquivo tais
       como <filename>/tmp</filename> e <filename>/var</filename> ser&atilde;o
@@ -303,7 +303,7 @@ pseudo-device   md              # memory disk</programlisting>
     <para>Entretanto, ao instalar o FreeBSD pelos procedimentos
       normais (mesmo para uma pequena instala&ccedil;&atilde;o), pode produzir um
       sistema com um tamanho superior a 200 megabytes.  Como a maioria
-      das pessoas costumam utilizar dispositivos de memoria flash com
+      das pessoas costumam utilizar dispositivos de mem&oacute;ria flash com
       uma capacidade menor que esta (128 Mb &eacute; considerado muitas vezes
       um exagero, sendo que unidades entre 16 e 32 s&atilde;o consideradas
       normais) uma instala&ccedil;&atilde;o usando os mecanismos normais n&atilde;o &eacute;
@@ -336,42 +336,42 @@ pseudo-device   md              # memory disk</programlisting>
 
 	<para>Apos dar o boot com os disquetes do kernel e do mfsroot,
 	  escolha a op&ccedil;&atilde;o <literal>custom</literal> no menu de
-	  instalacao.  No menu de instala&ccedil;&atilde;o customizada, escolha a
-	  op&ccedil;&atilde;o <literal>partition</literal>.  No menu de particoes,
-	  voce deve deletar todas as parti&ccedil;&otilde;es existentes utilizando a
+	  instala&ccedil;&atilde;o.  No menu de instala&ccedil;&atilde;o customizada, escolha a
+	  op&ccedil;&atilde;o <literal>partition</literal>.  No menu de parti&ccedil;&otilde;es,
+	  voc&ecirc; deve deletar todas as parti&ccedil;&otilde;es existentes utilizando a
 	  tecla <keycap>d</keycap>.  Depois de deletar todas as
-	  particoes, crie uma parti&ccedil;&atilde;o utilizando a tecla
+	  parti&ccedil;&otilde;es, crie uma parti&ccedil;&atilde;o utilizando a tecla
 	  <keycap>c</keycap> e aceite o valor padr&atilde;o para o tamanho da
-	  particao.  Quando lhe for indagado qual o tipo da particao,
-	  certifique-se que o valor esta definido como
+	  parti&ccedil;&atilde;o.  Quando lhe for indagado qual o tipo da parti&ccedil;&atilde;o,
+	  certifique-se que o valor est&aacute; definido como
 	  <literal>165</literal>.  Agora grave a tabela de
 	  particionamento para o disco pressionando a tecla
-	  <keycap>w</keycap> (esta e' uma op&ccedil;&atilde;o oculta nesta tela).
-	  Quando for apresentado o menu para que voce escolha o
+	  <keycap>w</keycap> (esta &eacute; uma op&ccedil;&atilde;o oculta nesta tela).
+	  Quando for apresentado o menu para que voc&ecirc; escolha o
 	  gerenciador de boot, tenha o cuidado de selecionar
-	  <literal>None</literal> se voce estiver utilizando um
-	  dispositivo &diskonchip; da M-Systems.  Se voce estiver
-	  utilizando um cartao de memoria flash compativel com o
-	  padr&atilde;o ATA, voce deve escolher a op&ccedil;&atilde;o "FreeBSD Boot
+	  <literal>None</literal> se voc&ecirc; estiver utilizando um
+	  dispositivo &diskonchip; da M-Systems.  Se voc&ecirc; estiver
+	  utilizando um cart&atilde;o de mem&oacute;ria flash compativel com o
+	  padr&atilde;o ATA, voc&ecirc; deve escolher a op&ccedil;&atilde;o "FreeBSD Boot
 	  Manager".  Agora pressione a tecla <keycap>q</keycap> para
-	  sair do menu de particoes.  O menu de escolha do boot
-	  manager sera exibido novamente - repita a escolha que voce
+	  sair do menu de parti&ccedil;&otilde;es.  O menu de escolha do boot
+	  manager ser&aacute; exibido novamente - repita a escolha que voc&ecirc;
 	  fez anteriormente.</para>
       </step>
 
       <step>
-	<title>Criando o sistema de arquivo no seu dispositivo de memoria flash.</title>
+	<title>Criando o sistema de arquivo no seu dispositivo de mem&oacute;ria flash.</title>
 
 	<para>Saia do menu de instala&ccedil;&atilde;o customizada, e no menu
-	  principal da instalacao, escolha a opcao
+	  principal da instala&ccedil;&atilde;o, escolha a op&ccedil;&atilde;o
 	  <literal>fixit</literal>.  Depois de entrar no ambiente de
-	  recuperacao, execute os seguintes comandos:</para>
+	  recupera&ccedil;&atilde;o, execute os seguintes comandos:</para>
 	
 	<informaltable frame="none">
 	  <tgroup cols="2">
 	    <thead>
 	      <row>
-		<entry align="center">Compativeis com ATA</entry>
+		<entry align="center">Compat&iacute;veis com ATA</entry>
 
 		<entry align="center">&diskonchip;</entry>
 	      </row>
@@ -390,31 +390,31 @@ pseudo-device   md              # memory disk</programlisting>
 	  </tgroup>
 	</informaltable>
 
-	<para>Neste ponto voce tera entrado no editor vi o qual esta
-	  sob controle do comando disklabel.  Se voce esta utilizando
-	  um &diskonchip;, o primeiro passo sera alterar o valor do
-	  tipo proximo do inicio do arquivo de <literal>EDSI</literal>
+	<para>Neste ponto voc&ecirc; ter&aacute; entrado no editor vi o qual est&aacute;
+	  sob controle do comando disklabel.  Se voc&ecirc; esta utilizando
+	  um &diskonchip;, o primeiro passo ser&aacute; alterar o valor do
+	  tipo pr&oacute;ximo do inicio do arquivo de <literal>EDSI</literal>
 	  para <literal>DOC2K</literal>.  Em seguida,
-	  independentemente se voce esta utilizando um &diskonchip; ou
-	  um dispositivo de memoria flash compativel com o padr&atilde;o ATA,
-	  voce precisara adicionar uma linha <literal>a:</literal> 
+	  independentemente se voc&ecirc; est&aacute; utilizando um &diskonchip; ou
+	  um dispositivo de mem&oacute;ria flash compativel com o padr&atilde;o ATA,
+	  voc&ecirc; precisara adicionar uma linha <literal>a:</literal> 
 	  no final do arquivo.  Esta linha <literal>a:</literal> deve
 	  se paracer com a linha abaixo:</para>
 	  
 	<programlisting>a:      <replaceable>123456</replaceable>  0       4.2BSD  0       0</programlisting>
 
-	<para>Onde <replaceable>123456</replaceable> e um numero que 
-	  e exatamente o mesmo que existe na linha <literal>c:</literal> 
-	  referente ao tamanho.  Basicamente voce esta duplicando a
+	<para>Onde <replaceable>123456</replaceable> &eacute; um n&uacute;mero que 
+	  &eacute; exatamente o mesmo que existe na linha <literal>c:</literal> 
+	  referente ao tamanho.  Basicamente voc&ecirc; esta duplicando a
 	  linha <literal>c:</literal> existente para a linha
-	  <literal>a:</literal>, certifique-se de que o fstaype e
+	  <literal>a:</literal>, certifique-se de que o fstype &eacute;
 	  <literal>4.2BSD</literal>.  Salve o arquivo e saia.</para> 
 	  
 	<informaltable frame="none">
 	  <tgroup cols="2">
 	    <thead>
 	      <row>
-		<entry align="center">Compativeis com ATA</entry>
+		<entry align="center">Compat&iacute;veis com ATA</entry>
 
 		<entry align="center">&diskonchip;</entry>
 	      </row>
@@ -434,16 +434,16 @@ pseudo-device   md              # memory disk</programlisting>
 
       <step>
 	<title>Colocando o seu sistema de arquivos no seu dispositivo
-	de memopria flash.</title>
+	de mem&oacute;ria flash.</title>
 
-	<para>Monte a sua unidade de memoria flash recem
+	<para>Monte a sua unidade de mem&oacute;ria flash rec&eacute;m
 	preparada:</para>
 
 	<informaltable frame="none">
 	  <tgroup cols="2">
 	    <thead>
 	      <row>
-		<entry align="center">Compativeis com ATA</entry>
+		<entry align="center">Compat&iacute;veis com ATA</entry>
 
 		<entry align="center">&diskonchip;</entry>
 	      </row>
@@ -458,48 +458,48 @@ pseudo-device   md              # memory disk</programlisting>
 	  </tgroup>
 	</informaltable>
 	
-	<para>Coloque a maquina acessivel na rede de forma que possamos
+	<para>Coloque a m&aacute;quina acess&iacute;vel na rede de forma que possamos
 	  transferir o nosso arquivo tar para ela e para 
-	  que possamos descompacta-lo no sistema de arquivos da 
-	  unidade de memoria flash.  Um exemplo de como fazer 
-	  isso e:</para>
+	  que possamos descompact&aacute;-lo no sistema de arquivos da 
+	  unidade de mem&oacute;ria flash.  Um exemplo de como fazer 
+	  isso &eacute;:</para>
 	
 	<screen>&prompt.root; <userinput>ifconfig xl0 192.168.0.10 netmask 255.255.255.0</userinput>
 &prompt.root; <userinput>route add default 192.168.0.1</userinput></screen>
 
-	<para>Agora que a maquina j&aacute; esta acessivel na rede, transfira
-	  o seu arquivo tar para ela.  Neste momento voce pode se ver
-	  diante de um pequeno dilema - Se a sua unidade de memoria
-	  flash possui 128 Mb, por exemplo, e o seu arquito tar eh
-	  maior que 64 Mb, voce nao pode ter o arquivo na sua unidade
-	  flash ao mesmo tempo em que esta descompactando-o - voce ira
-	  ficar sem espaco.  Uma solu&ccedil;&atilde;o para este problema, se voce
+	<para>Agora que a m&aacute;quina j&aacute; esta acess&iacute;vel na rede, transfira
+	  o seu arquivo tar para ela.  Neste momento voc&ecirc; pode se ver
+	  diante de um pequeno dilema - Se a sua unidade de mem&oacute;ria
+	  flash possui 128 Mb, por exemplo, e o seu arquivo tar &eacute;
+	  maior que 64 Mb, voc&ecirc; n&atilde;o pode ter o arquivo na sua unidade
+	  flash ao mesmo tempo em que esta descompactando-o - voc&ecirc; ir&aacute;
+	  ficar sem espa&ccedil;o.  Uma solu&ccedil;&atilde;o para este problema, se voc&ecirc;
 	  estiver utilizando FTP, &eacute; descompactar o arquivo enquanto
-	  ele &eacute; transferido por FTP.  Se voce realizar a sua
-	  transferencia desta forma, voce nunca ira ter o arquivo tar
-	  e o conteudo do arquivo tar no seu disco ao mesmo
+	  ele &eacute; transferido por FTP.  Se voc&ecirc; realizar a sua
+	  transfer&ecirc;ncia desta forma, voc&ecirc; nunca ir&aacute; ter o arquivo tar
+	  e o conte&uacute;do do arquivo tar no seu disco ao mesmo
 	  tempo:</para>
 	
 	<screen><prompt>ftp></prompt> <userinput>get tarfile.tar "| tar xvf -"</userinput></screen>
 
-	<para>Se o seu arquivo tar estiver gzipado, voce podera fazer
+	<para>Se o seu arquivo tar estiver gzipado, voc&ecirc; poder&aacute; fazer
 	  o mesmo procedimento, bastando um pequeno ajuste:</para>
 
 	<screen><prompt>ftp></prompt> <userinput>get tarfile.tar "| zcat | tar xvf -"</userinput></screen>
 
-	<para>Depois que o conteudo do seu sistema de 
+	<para>Depois que o conte&uacute;do do seu sistema de 
 	  arquivos targeado tiver sido descompactado sobre o 
-	  sistema de arquivos da sua unidade de memoria flash, 
-	  voce pode desmontar a unidade e rebootar:</para>
+	  sistema de arquivos da sua unidade de mem&oacute;ria flash, 
+	  voc&ecirc; pode desmontar a unidade e rebootar:</para>
 
 	<screen>&prompt.root; <userinput>cd /</userinput>
 &prompt.root; <userinput>umount /flash</userinput>
 &prompt.root; <userinput>exit</userinput></screen>
 
-	<para>Assumindo que voce configurou corretamente o seu sistema
+	<para>Assumindo que voc&ecirc; configurou corretamente o sistema
 	  de arquivos no seu HD normal (com os sistemas de arquivos
-	  sendo montados em modo de apenas leitura, e com as opcoes
-	  necessarias compiladas no Kernel) voce deve estar bootando
+	  sendo montados em modo de apenas leitura, e com as op&ccedil;&otilde;es
+	  necess&aacute;rias compiladas no Kernel) voc&ecirc; deve estar bootando
 	  com sucesso o seu sistema FreeBSD embedded.</para>
       </step>
     </procedure>
@@ -510,24 +510,24 @@ pseudo-device   md              # memory disk</programlisting>
       </filename>) com o driver fla habilitado</title>
 
     <note>
-      <para>Esta sessao do artigo &eacute; relevante apenas para quem
+      <para>Esta sess&atilde;o do artigo &eacute; relevante apenas para quem
 	estiver utilizando uma unidade &diskonchip; da M-Systems.</para>
     </note>
 
-    <para>Eh possivel que o seu disco de boot
-      <filename>kern.flp</filename> nao utilize um kernel com suporte ao
-      driver <devicename>fla</devicename> habilitado, o que eh
-      necessario para que op sistema reconheca um dispositivo
-      &diskonchip;.  Se voce deu boot no sistema com os disquetes de
-      instala&ccedil;&atilde;o padroes e foi informado pelo sistema de que nao
-      existe nenhum disco presente, entao &eacute; muito provavel que o
-      driver <devicename>fla</devicename> nao exista no seu
+    <para>&Eacute; poss&iacute;vel que o seu disco de boot
+      <filename>kern.flp</filename> n&atilde;o utilize um kernel com suporte ao
+      driver <devicename>fla</devicename> habilitado, o que &eacute;
+      necess&aacute;rio para que o sistema reconhe&ccedil;a um dispositivo
+      &diskonchip;.  Se voc&ecirc; deu boot no sistema com os disquetes de
+      instala&ccedil;&atilde;o padr&otilde;es e foi informado pelo sistema de que n&atilde;o
+      existe nenhum disco presente, ent&atilde;o &eacute; muito prov&aacute;vel que o
+      driver <devicename>fla</devicename> n&atilde;o exista no seu
       kernel.</para>
       
-    <para>Depois que voce tiver compilado um kernel com suporte ao driver
-      <devicename>fla</devicename>, que seja menor que 1.4 Mb, voce pode
+    <para>Depois que voc&ecirc; tiver compilado um kernel com suporte ao driver
+      <devicename>fla</devicename>, que seja menor que 1.4 Mb, voc&ecirc; pode
       criar uma imagem customizada do kern.flp com ele, seguindo as
-      seguintes instrucoes:</para>
+      seguintes instru&ccedil;&otilde;es:</para>
     
     <procedure>
       <step>
@@ -543,7 +543,7 @@ pseudo-device   md              # memory disk</programlisting>
       </step>
       
       <step>
-	<para>Coloque o seu kernel no diretorio <filename>/mnt</filename>
+	<para>Coloque o seu kernel no diret&oacute;rio <filename>/mnt</filename>
 	, substituindo o que j&aacute; existe.</para>
       </step>
 
@@ -556,50 +556,50 @@ pseudo-device   md              # memory disk</programlisting>
   </sect1>
 
   <sect1 id="strategies">
-    <title>Estrategias para configura&ccedil;&atilde;o de sistemas reduzidos e com 
+    <title>Estrat&eacute;gias para configura&ccedil;&atilde;o de sistemas reduzidos e com 
       sistemas de arquivos em modo de apenas leitura</title>
 
-    <para>Na sessao <xref linkend="ro-fs">, foi mencionado que o
+    <para>Na sess&atilde;o <xref linkend="ro-fs">, foi mencionado que o
       sistema de arquivos <filename>/var</filename> criado pelo
-      <filename>/etc/rc.diskless2</filename> e a presenca de uma
+      <filename>/etc/rc.diskless2</filename> e a presen&ccedil;a de uma
       parti&ccedil;&atilde;o raiz em modo de apenas leitura causariam problemas com
       muitos softwares utilizados normalmente com o FreeBSD.  Nesta
-      sessao vamos dar algumas sugestoes para rodar com sucesso o
-      cron, o syslogd, o web server apache, e a instala&ccedil;&atilde;o de 
+      sess&atilde;o vamos dar algumas sugest&otilde;es para rodar com sucesso o
+      cron, o syslogd, o web server apache, instala&ccedil;&atilde;o de 
       aplicativos via ports.</para>
     
     <sect2>
       <title>cron</title>
 
       <para>No <filename>/etc/rc.diskless2</filename> existe uma
-	vari&aacute;vel chamada <literal>var_dirs</literal>.  Esta variavel
-	consiste em uma lista de diretorios (separados por espaco em
+	vari&aacute;vel chamada <literal>var_dirs</literal>.  Esta vari&aacute;vel
+	consiste em uma lista de diret&oacute;rios (separados por espa&ccedil;o em
 	branco) os quais ser&atilde;o criados dentro do
 	<filename>/var</filename> depois que ele for montado como um
-	sistema de arquivo em memoria.  O diretorio <filename>cron</filename>
-	e o <filename>cron/tabs</filename> nao estao nesta lista, e
-	sem estes diretorios, o cron nao ira executar.  Inserindo o 
+	sistema de arquivo em mem&oacute;ria.  O diret&oacute;rio <filename>cron</filename>
+	e o <filename>cron/tabs</filename> n&atilde;o est&atilde;o nesta lista, e
+	sem estes diret&oacute;rios, o cron n&atilde;o ir&aacute; executar.  Inserindo o 
 	<literal>cron</literal>, <literal>cron/tabs</literal>, e se
-	possivel tambem o <literal>at</literal>, e o 
-	<literal>at/jobs</literal> como elementos desta vari&aacute;vel, voce
-	ira possibilitar a execu&ccedil;&atilde;o dos daemons &man.cron.8; and 
+	poss&iacute;vel tambem o <literal>at</literal>, e o 
+	<literal>at/jobs</literal> como elementos desta vari&aacute;vel, voc&ecirc;
+	ir&aacute; possibilitar a execu&ccedil;&atilde;o dos daemons &man.cron.8; e 
 	&man.at.1;.</para>
 
-      <para>Entretanto, isto nao resolve o problema de manuten&ccedil;&atilde;o das
+      <para>Entretanto, isto n&atilde;o resolve o problema de manuten&ccedil;&atilde;o das
 	tabs do cron entre um boot e outro.  Quando o sistema reseta,
 	o sistema de arquivos <filename>/var</filename> que esta em
-	memoria ira desaparecer, e qualquer tab do cron que voce tenha
+	mem&oacute;ria ira desaparecer, e qualquer tab do cron que voc&ecirc; tenha
 	nele ira desaparecer tambem.  Desta forma, uma solu&ccedil;&atilde;o pode
 	ser criar as tabs do cron para os usuarios que precisam
 	delas, monte o seu <filename>/</filename> em modo de leitura e
 	esscrita e copie as tabs do cron para algum lugar seguro, como
-	por exemplo para <filename>/etc/tabs</filename>, e entao
+	por exemplo para <filename>/etc/tabs</filename>, e ent&atilde;o
 	adicione uma linha no final do <filename>/etc/rc.diskless2
-	</filename> que copie estas crontabs para o diretorio 
-	<filename>/var/cron/tabs</filename> depois que o diretorio
+	</filename> que copie estas crontabs para o diret&oacute;rio 
+	<filename>/var/cron/tabs</filename> depois que o diret&oacute;rio
 	tiver sido criado durante a inicializa&ccedil;&atilde;o do sistema.  Voce
-	pode precisar adicionaruma linha que altere as permissoes dos
-	diretorios que voce criou e dos arquivos que voce copiou com o 
+	pode precisar adicionaruma linha que altere as permiss&otilde;es dos
+	diret&oacute;rios que voc&ecirc; criou e dos arquivos que voc&ecirc; copiou com o 
 	<filename>/etc/rc.diskless2</filename>.</para>
     </sect2>
 
@@ -608,54 +608,54 @@ pseudo-device   md              # memory disk</programlisting>
 
       <para>O <filename>syslog.conf</filename> specifiepecifica a 
 	localiza&ccedil;&atilde;o de certos arquivos de log que precisam existir no
-	diretorio <filename>/var/log</filename>.  Estes arquivos nao
-	sao criados pelo <filename>/etc/rc.diskless2</filename>
+	diret&oacute;rio <filename>/var/log</filename>.  Estes arquivos n&atilde;o
+	s&atilde;o criados pelo <filename>/etc/rc.diskless2</filename>
 	durante a inicializa&ccedil;&atilde;o do sistema.  Desta forma, em algum
 	lugar no <filename>/etc/rc.diskless2</filename>, depois da
-	sessao que cria os diretorios no <filename>/var</filename>, 
-	voce vai precisar criar algo como:</para>
+	sess&atilde;o que cria os diret&oacute;rios no <filename>/var</filename>, 
+	voc&ecirc; vai precisar criar algo como:</para>
 
       <screen>&prompt.root; <userinput>touch /var/log/security /var/log/maillog /var/log/cron /var/log/messages</userinput>
 &prompt.root; <userinput>chmod 0644 /var/log/*</userinput></screen>
 
-      <para>Voce tambem tera que adicionar o diretorio <literal>log
-	</literal> a lista de diretorios que o 
+      <para>Voce tambem tera que adicionar o diret&oacute;rio <literal>log
+	</literal> a lista de diret&oacute;rios que o 
 	<filename>/etc/rc.diskless2</filename> cria.</para>
     </sect2>
 
     <sect2>
       <title>Instala&ccedil;&atilde;o de aplicativos via ports</title>
 
-      <para>Antes de iniciar a discussao sobre as alteracoes
+      <para>Antes de iniciar a discuss&atilde;o sobre as altera&ccedil;&otilde;es
 	necessarias para usar com sucesso a &aacute;rvore do ports, eh
-	necessario um lembrete a respeito da natureza de apenas
-	leitura do seu sistema de arquivos na sua unidade de memoria
+	necess&aacute;rio um lembrete a respeito da natureza de apenas
+	leitura do seu sistema de arquivos na sua unidade de mem&oacute;ria
 	flash.  Uma vez que ele e montado em modo de apenas leitura,
-	voce ira precisar monta-lo temporariamente em modo de leitura
-	e escrita usando a sintaxe de comando mostrada na sessao 
+	voc&ecirc; ira precisar monta-lo temporariamente em modo de leitura
+	e escrita usando a sintaxe de comando mostrada na sess&atilde;o 
 	<xref linkend="ro-fs">.  Voce deve sempre remontar esses
 	sistemas de arquivos em modo de apenas leitura sempre que
 	finalizar qualquer tipo de manuten&ccedil;&atilde;o - opera&ccedil;&otilde;es de escrita
-	desnecessarias a sua uinidade de memoria flash pode encurtar
+	desnecessarias a sua uinidade de mem&oacute;ria flash pode encurtar
 	conmsideravelmente a vida util da mesma.</para>
 	
-      <para>Para que seja possivel entrar no diretorio de um port e
+      <para>Para que seja possivel entrar no diret&oacute;rio de um port e
 	executar com sucesso o comando <command>make install</command>, 
-	e necessario que o arquivo <filename>/var/db/port.mkversion
+	e necess&aacute;rio que o arquivo <filename>/var/db/port.mkversion
 	</filename> exista, e que contenha a data correta.  Alem
-	disso, nos precisamos criar um diretorio para os pacotes em um
-	sistema de arquivo que nao seja montado em memoria RAM, o qual
+	disso, nos precisamos criar um diret&oacute;rio para os pacotes em um
+	sistema de arquivo que n&atilde;o seja montado em mem&oacute;ria RAM, o qual
 	ira manter o registro dos nossos pacotes entre um boot e
-	outro.  Por causa disso &eacute; necessario montar o seu sistema de
+	outro.  Por causa disso &eacute; necess&aacute;rio montar o seu sistema de
 	arquivos em modo leitura e escrita sempre que que for
-	necessario instalar algum aplicativo, de forma que &eacute; correto
+	necess&aacute;rio instalar algum aplicativo, de forma que &eacute; correto
 	assumir que teremos que reservar uma area em nossa unidade
-	flash na qual as informa&ccedil;&otilde;es dos pacotes serao
+	flash na qual as informa&ccedil;&otilde;es dos pacotes ser&atilde;o
 	gravadas.</para>
 	
-      <para>Primeiro, crie um diretorio para conter o banco de dados
+      <para>Primeiro, crie um diret&oacute;rio para conter o banco de dados
 	dos pacotes.  Ele normalmente fica localizado no <filename>
-	/var/db/pkg</filename>, mas nos nao podemos coloca-lo ali, pois
+	/var/db/pkg</filename>, mas nos n&atilde;o podemos coloca-lo ali, pois
 	do contrario ele ira desaparecer sempre que o sistema for
 	resetado. Desta forma precisamos coloca-lo em um local seguro,
 	por exemplo:</para>
@@ -664,7 +664,7 @@ pseudo-device   md              # memory disk</programlisting>
 
       <para>Agora, adicione uma linha ao <filename>/etc/rc.diskless2
 	</filename> a qual cria um link simbolico do
-	<filename>/var/db/pkg</filename> para o diretorio 
+	<filename>/var/db/pkg</filename> para o diret&oacute;rio 
 	<filename>/etc/pkg </filename>.  Algo como:</para>
 
       <screen>&prompt.root; <userinput>ln -s /etc/pkg /var/db/pkg</userinput></screen>
@@ -678,13 +678,13 @@ pseudo-device   md              # memory disk</programlisting>
 &prompt.root; <userinput>echo <replaceable>20010412</replaceable> >> /var/db/port.mkversion</userinput></screen>
 
       <para>onde <replaceable>20010412</replaceable> deve ser a data
-	apropriada para a sua versao especifica do FreeBSD.</para>
+	apropriada para a sua vers&atilde;o especifica do FreeBSD.</para>
 
-      <para>Agora, sempre que voce montar o seu sistema de arquivo em
+      <para>Agora, sempre que voc&ecirc; montar o seu sistema de arquivo em
       	modo de leitura e escrita e instalar um pacote, o comando 
 	<command>make install</command> ira funcionar corretamente,
 	pois ele ira encontrar um <filename>/var/db/port.mkversion
-	</filename> adequado, e as informa&ccedil;&otilde;es do pacote serao
+	</filename> adequado, e as informa&ccedil;&otilde;es do pacote ser&atilde;o
 	gravadas com sucesso no <filename>/etc/pkg</filename> (porque
 	o sistema de arquivo estara, neste momento, montado em modo de
 	leitura e escrita) o qual estara sempre disponivel para o
@@ -696,28 +696,28 @@ pseudo-device   md              # memory disk</programlisting>
 
       <para>O apache mantem seus arquivos de processo (pids) e logs no
 	<filename><replaceable>apache_install</replaceable>/logs</filename>.
-	Uma vez que este diretorio fica localizado no sistema de
-	arquivo montado em modo de apenas leitura, ele nao ira
-	funcionar.  E necessario adicionar um novo diretorio a lista
-	de diretorios que o <filename>/etc/rc.diskless2</filename>
+	Uma vez que este diret&oacute;rio fica localizado no sistema de
+	arquivo montado em modo de apenas leitura, ele n&atilde;o ira
+	funcionar.  E necess&aacute;rio adicionar um novo diret&oacute;rio a lista
+	de diret&oacute;rios que o <filename>/etc/rc.diskless2</filename>
 	cria no <filename>/var</filename>, para linkar o  
 	<filename><replaceable>apache_install</replaceable>/logs</filename>
-	para o <filename>/var/log/apache</filename>.  Tambem sera 
-	necessario configurar as permissoes e o proprietario deste
-	novo diretorio.</para>
+	para o <filename>/var/log/apache</filename>.  Tamb&eacute;m ser&aacute; 
+	necess&aacute;rio configurar as permiss&otilde;es e o proprietario deste
+	novo diret&oacute;rio.</para>
 
-      <para>Primeiro, adicione o diretorio <literal>log/apache</literal> 
-	a lista de diretorios a serem criados pelo 
+      <para>Primeiro, adicione o diret&oacute;rio <literal>log/apache</literal> 
+	a lista de diret&oacute;rios a serem criados pelo 
 	<filename>/etc/rc.diskless2</filename>.</para>
       
       <para>Segundo, adicione os comandos abaixo ao 
-	<filename>/etc/rc.diskless2</filename> logo depois da sessao 
-	de cria&ccedil;&atilde;o dos diretorios:</para>
+	<filename>/etc/rc.diskless2</filename> logo depois da sess&atilde;o 
+	de cria&ccedil;&atilde;o dos diret&oacute;rios:</para>
 
       <screen>&prompt.root; <userinput>chmod 0774 /var/log/apache</userinput>
 &prompt.root; <userinput>chown nobody:nobody /var/log/apache</userinput></screen>
 
-      <para>Finalmente, remova o diretorio <filename><replaceable>apache_install
+      <para>Finalmente, remova o diret&oacute;rio <filename><replaceable>apache_install
 	</replaceable>/logs</filename>, e o substitua por um link
 	simbolico:</para>
 
