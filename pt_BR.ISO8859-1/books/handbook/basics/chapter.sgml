@@ -2009,95 +2009,95 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
     <indexterm><primary>shells</primary></indexterm>
     <indexterm><primary>linha de comando</primary></indexterm>
 
-    <para>No FreeBSD, uma grande parte do trabalho do dia a dia é feito
+    <para>No FreeBSD, uma grande parte do trabalho do dia a dia &eacute; feito
 	por interface de linha de comando, chamada de interpretador
 	de comandos, ou <foreignphrase>shell</foreignphrase>.  A
-	principal função de uma <foreignphrase>shell</foreignphrase> é
-	receber comandos por um canal de entrada e executá-los.  Uma
-	série de <foreignphrase>shells</foreignphrase> ainda possuem
-	funções embutidas, o que ajuda a facilitar a realização de
+	principal fun&ccedil;&atilde;o de uma <foreignphrase>shell</foreignphrase> &eacute;
+	receber comandos por um canal de entrada e execut&aacute;-los.  Uma
+	s&eacute;rie de <foreignphrase>shells</foreignphrase> ainda possuem
+	fun&ccedil;&otilde;es embutidas, o que ajuda a facilitar a realiza&ccedil;&atilde;o de
 	tarefas do dia-a-dia, como gerenciamente de arquivos,
-	edição de linha de comando, macros de comandos e variáveis
-	de ambiente.  O FreeBSD vem com uma série de interpretadores
+	edi&ccedil;&atilde;o de linha de comando, macros de comandos e vari&aacute;veis
+	de ambiente.  O FreeBSD vem com uma s&eacute;rie de interpretadores
 	de comandos, como o <command>sh</command>, chamado de
 	<foreignphrase>Bourne Shell</foreignphrase>, e <command>tcsh</command>,
 	A <quote>C-shell</quote> melhorada.  Muitos outros interpretadores
-	de comandos estão disponíveis na Coleção de Ports do FreeBSD,
+	de comandos est&atilde;o dispon&iacute;veis na Cole&ccedil;&atilde;o de Ports do FreeBSD,
 	como o <command>zsh</command> e o <command>bash</command>.</para>
 
     <para>Que <foreignphrase>shell</foreignphrase> utilizar?  Trata-se meramente
-	de uma questão de gosto.  Se você é um programador C, se sentirá mais
-	confortável com um interpretador de comandos similar à linguagem C,
-	como o <command>tcsh</command>.  Se você teve suas origens
-	no Linux, ou é novo ao &unix;, tenta experimentar o
-	<command>bash</command>.  O ponto é que cada interpretador
-	de comandos possui propriedades únicas, que pode ou não
+	de uma quest&atilde;o de gosto.  Se voc&ecirc; &eacute; um programador C, se sentir&aacute; mais
+	confort&aacute;vel com um interpretador de comandos similar &agrave; linguagem C,
+	como o <command>tcsh</command>.  Se voc&ecirc; teve suas origens
+	no Linux, ou &eacute; novo ao &unix;, tenta experimentar o
+	<command>bash</command>.  O ponto &eacute; que cada interpretador
+	de comandos possui propriedades &uacute;nicas, que pode ou n&atilde;o
 	funcionar corretamente em seu ambiente de trabalho, e
-	também, outro ponto importante é sua liberdade de escolha
+	tamb&eacute;m, outro ponto importante &eacute; sua liberdade de escolha
 	para decidir qual e quando interpretador utilizar.</para>
 
-    <para>Uma das características mais comuns em interpretadores de
-	comandos é completar nome de arquivos.  Ao digitar as primeiras
-	letras de um comando ou de um arquivo, você normalmente pode
+    <para>Uma das caracter&iacute;sticas mais comuns em interpretadores de
+	comandos &eacute; completar nome de arquivos.  Ao digitar as primeiras
+	letras de um comando ou de um arquivo, voc&ecirc; normalmente pode
 	fazer com que a <foreignphrase>shell</foreignphrase> automaticamente
 	complete o restante do comando ou arquivo, pressionando a tecla
-	<keycap>Tab</keycap> no teclado.  Aqui está um exemplo.  Suponha que
-	você tenha dois arquivos chamados <filename>foobar</filename> e
-	<filename>foo.bar</filename>.  Você quer apagar o <filename>foo.bar</filename>.
-	Então o que você faria no teclado
-	é: <command>rm fo[<keycap>Tab</keycap>].[<keycap>Tab</keycap>]</command>.</para>
+	<keycap>Tab</keycap> no teclado.  Aqui est&aacute; um exemplo.  Suponha que
+	voc&ecirc; tenha dois arquivos chamados <filename>foobar</filename> e
+	<filename>foo.bar</filename>.  Voc&ecirc; quer apagar o <filename>foo.bar</filename>.
+	Ent&atilde;o o que voc&ecirc; faria no teclado
+	&eacute;: <command>rm fo[<keycap>Tab</keycap>].[<keycap>Tab</keycap>]</command>.</para>
 
-    <para>O interpretador de comandos apresentaria como resultado algo similar à <command>rm
+    <para>O interpretador de comandos apresentaria como resultado algo similar &agrave; <command>rm
       foo[BEEP].bar</command>.</para>
 
-    <para>O [BEEP] é o sino do console, que indica que o interpretador de
-	comandos não foi capaz de completar totalmente o nome do arquivo
-	porque existe mais do que uma opções que coincide.  Ambos,
-	<filename>foobar</filename> e <filename>foo.bar</filename> começam com <literal>fo</literal>,
+    <para>O [BEEP] &eacute; o sino do console, que indica que o interpretador de
+	comandos n&atilde;o foi capaz de completar totalmente o nome do arquivo
+	porque existe mais do que uma op&ccedil;&otilde;es que coincide.  Ambos,
+	<filename>foobar</filename> e <filename>foo.bar</filename> come&ccedil;am com <literal>fo</literal>,
 	mas a <foreignphrase>shell</foreignphrase> pode completar o nome
-	do arquivo até <literal>foo</literal>.  Se neste momento você digitar
+	do arquivo at&eacute; <literal>foo</literal>.  Se neste momento voc&ecirc; digitar
 	<literal>.</literal>, e pressionar <keycap>Tab</keycap> mais uma vez, a
 	<foreignphrase>shell</foreignphrase> deve ser capaz de
-	completar o restante do nome do arquivo para você.</para>
+	completar o restante do nome do arquivo para voc&ecirc;.</para>
 
-    <indexterm><primary>variáveis de ambiente</primary></indexterm>
+    <indexterm><primary>vari&aacute;veis de ambiente</primary></indexterm>
 
     <para>Outra funcionalidade de um interpretador de comandos
-	é o uso de variáveis de ambiente.  Variáveis de ambiente são duplas
-	variáveis de valores armazenados no espaço de ambiente da
-	<foreignphrase>shell</foreignphrase>.  Esse espaço de ambiente
+	&eacute; o uso de vari&aacute;veis de ambiente.  Vari&aacute;veis de ambiente s&atilde;o duplas
+	vari&aacute;veis de valores armazenados no espa&ccedil;o de ambiente da
+	<foreignphrase>shell</foreignphrase>.  Esse espa&ccedil;o de ambiente
 	pode ser lido por qualquer programa chamado pelo intepretador,
-	de forma que contenha uma série de configurações interpretadas
-	pelo mesmo.  Segue aqui uma lista de variáveis de ambiente
+	de forma que contenha uma s&eacute;rie de configura&ccedil;&otilde;es interpretadas
+	pelo mesmo.  Segue aqui uma lista de vari&aacute;veis de ambiente
 	comuns, e seus respectivos significados:</para>
-    <indexterm><primary>variáveis de ambiente</primary></indexterm>
+    <indexterm><primary>vari&aacute;veis de ambiente</primary></indexterm>
 
     <informaltable frame="none">
       <tgroup cols="2">
 	<thead>
 	  <row>
-	    <entry>Variável</entry>
-	    <entry>Descrição</entry>
+	    <entry>Vari&aacute;vel</entry>
+	    <entry>Descri&ccedil;&atilde;o</entry>
 	  </row>
 	</thead>
 
 	<tbody>
 	  <row>
 	    <entry><envar>USER</envar></entry>
-	    <entry>Nome do usuário logado no momento.</entry>
+	    <entry>Nome do usu&aacute;rio logado no momento.</entry>
 	  </row>
 
 	  <row>
 	    <entry><envar>PATH</envar></entry>
-	    <entry>Lista de diretórios, divididos por vírgula,
+	    <entry>Lista de diret&oacute;rios, divididos por v&iacute;rgula,
 		indincando onde deve-se procurar por
-		binários.</entry>
+		bin&aacute;rios.</entry>
 	  </row>
 
 	  <row>
 	    <entry><envar>DISPLAY</envar></entry>
-	    <entry>Nome de rede do terminal gráfico do X11 onde
-		o mesmo deve se conectar, caso esteja disponível.</entry>
+	    <entry>Nome de rede do terminal gr&aacute;fico do X11 onde
+		o mesmo deve se conectar, caso esteja dispon&iacute;vel.</entry>
 	  </row>
 
 	  <row>
@@ -2107,61 +2107,61 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
 
 	  <row>
 	    <entry><envar>TERM</envar></entry>
-	    <entry>Nome do terminal do usuário.  É usado para
-		determinar as características do termina.</entry>
+	    <entry>Nome do terminal do usu&aacute;rio.  &Eacute; usado para
+		determinar as caracter&iacute;sticas do termina.</entry>
 	  </row>
 
 	  <row>
 	    <entry><envar>TERMCAP</envar></entry>
-	    <entry>Entrada com a base de dados de códigos de terminal, que
-		realizam várias funções do console.</entry>
+	    <entry>Entrada com a base de dados de c&oacute;digos de terminal, que
+		realizam v&aacute;rias fun&ccedil;&otilde;es do console.</entry>
 	  </row>
 
 	  <row>
 	    <entry><envar>OSTYPE</envar></entry>
-	    <entry>A espécie do sistema operacional em questão, por exemplo, FreeBSD.</entry>
+	    <entry>A esp&eacute;cie do sistema operacional em quest&atilde;o, por exemplo, FreeBSD.</entry>
 	  </row>
 
 	  <row>
 	    <entry><envar>MACHTYPE</envar></entry>
-	    <entry>A arquitetura de CPU onde o sistema está
+	    <entry>A arquitetura de CPU onde o sistema est&aacute;
 		sendo executado.</entry>
 	  </row>
 
 	  <row>
 	    <entry><envar>EDITOR</envar></entry>
-	    <entry>Editor de texto padrão para o usuário.</entry>
+	    <entry>Editor de texto padr&atilde;o para o usu&aacute;rio.</entry>
 	  </row>
 
 	  <row>
 	    <entry><envar>PAGER</envar></entry>
-	    <entry>O paginador de texto padrão para o usuário.</entry>
+	    <entry>O paginador de texto padr&atilde;o para o usu&aacute;rio.</entry>
 	  </row>
 
 	  <row>
 	    <entry><envar>MANPATH</envar></entry>
-	    <entry>Lista de diretórios separadaos por vírgulas que indicam
-		onde as páginas de manuais devem ser buscadas.</entry>
+	    <entry>Lista de diret&oacute;rios separadaos por v&iacute;rgulas que indicam
+		onde as p&aacute;ginas de manuais devem ser buscadas.</entry>
 	  </row>
 	</tbody>
       </tgroup>
     </informaltable>
 
     <indexterm><primary>Bourne shells</primary></indexterm>
-    <para>Ajustar as variáveis de ambiente é tarefa que se
-	difere de algumas formas entre as várias <foreignphrase>shells</foreignphrase>
-	disponíveis.  Por exemplo, nas <foreignphrase>shells</foreignphrase>
+    <para>Ajustar as vari&aacute;veis de ambiente &eacute; tarefa que se
+	difere de algumas formas entre as v&aacute;rias <foreignphrase>shells</foreignphrase>
+	dispon&iacute;veis.  Por exemplo, nas <foreignphrase>shells</foreignphrase>
 	baseadas nalinguagem C, como o <command>tcsh</command> e
-	o <command>csh</command>, você usaria o <command>setenv</command>
-	para justar as variáveis de ambiente.  Sobre um interpretador
+	o <command>csh</command>, voc&ecirc; usaria o <command>setenv</command>
+	para justar as vari&aacute;veis de ambiente.  Sobre um interpretador
 	estilo <foreignphrase>Bourne shell</foreignphrase> como o
-	próprio <command>sh</command> e o conhecido <command>bash</command>,
-	você usaria o <command>export</command> para definir a variável
+	pr&oacute;prio <command>sh</command> e o conhecido <command>bash</command>,
+	voc&ecirc; usaria o <command>export</command> para definir a vari&aacute;vel
 	de ambiente.  Por exemplo, para definir ou modificar o valor da
-	variável de ambiente <envar>EDITOR</envar>, sob <command>csh</command> ou 
-	<command>tcsh</command>, para definir a variável
+	vari&aacute;vel de ambiente <envar>EDITOR</envar>, sob <command>csh</command> ou 
+	<command>tcsh</command>, para definir a vari&aacute;vel
 	<envar>EDITOR</envar> com o valor
-	<filename>/usr/local/bin/emacs</filename>, você faria
+	<filename>/usr/local/bin/emacs</filename>, voc&ecirc; faria
 	algo como:</para>
 
     <screen>&prompt.user; <userinput>setenv EDITOR /usr/local/bin/emacs</userinput></screen>
@@ -2170,20 +2170,20 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
 
     <screen>&prompt.user; <userinput>export EDITOR="/usr/local/bin/emacs"</userinput></screen>
 
-    <para>Ainda é possível fazer a maioria dos interpretadores expandirem
-	a variável, simplesmente adicionado o carácter
-	<literal>$</literal> na frente da própria variável.  Por exemplo,
-	<command>echo $TERM</command> imprimiria todo o conteúdo da variável
-	<envar>$TERM</envar>, por quê o interpretador interpreta a variável
+    <para>Ainda &eacute; poss&iacute;vel fazer a maioria dos interpretadores expandirem
+	a vari&aacute;vel, simplesmente adicionado o car&aacute;cter
+	<literal>$</literal> na frente da pr&oacute;pria vari&aacute;vel.  Por exemplo,
+	<command>echo $TERM</command> imprimiria todo o conte&uacute;do da vari&aacute;vel
+	<envar>$TERM</envar>, por qu&ecirc; o interpretador interpreta a vari&aacute;vel
 	<envar>$TERM</envar> como seu valor, e o passa para o <command>echo</command>.</para>
 
-    <para>Os interpretadores de comandos cuidam ainda de uma série
+    <para>Os interpretadores de comandos cuidam ainda de uma s&eacute;rie
 	de caracteres especiais, chamados de meta-caracteres,
-	como representações especiais de dados.  O caracter mais comum
-	é o <literal>*</literal>, que representa qualquer conjunto de caracteres
-	em um nome de arquivo.  Os meta-caractéres especiais podem
-	ser usados como substituição de arquivos.  Por exemplo,
-	o comando <command>echo *</command> tem resultado similar à saída
+	como representa&ccedil;&otilde;es especiais de dados.  O caracter mais comum
+	&eacute; o <literal>*</literal>, que representa qualquer conjunto de caracteres
+	em um nome de arquivo.  Os meta-caract&eacute;res especiais podem
+	ser usados como substitui&ccedil;&atilde;o de arquivos.  Por exemplo,
+	o comando <command>echo *</command> tem resultado similar &agrave; sa&iacute;da
 	de um <command>ls</command> pois o interpretador de comandos pega
 	todos os arquivos que batem com <literal>*</literal> e os coloca na
 	linha de comando de forma que o <command>echo</command> possa
@@ -2191,45 +2191,45 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
 
     <para>Para evitar que a <foreignphrase>shell</foreignphrase> 
 	interprete estes caracteres especiais, pode-se utiliza-los
-	como exclusão, inserindo uma barra invertinda (<literal>\</literal>)
+	como exclus&atilde;o, inserindo uma barra invertinda (<literal>\</literal>)
 	na frente deles. <command>echo $TERM</command> imprime em que 
-	terminal você está, enquanto <command>echo \$TERM</command>
+	terminal voc&ecirc; est&aacute;, enquanto <command>echo \$TERM</command>
 	imprime <envar>$TERM</envar> exatamente.</para>
 
     <sect2 id="changing-shells">
       <title>Modificando sua <foreignphrase>Shell</foreignphrase></title>
 
-      <para>A forma mais fácil de modificar seu interpretador de
-	comandos é usar o comando <command>chsh</command>.  Executar o
-	<command>chsh</command> te colocará no editor definido
-	na variável de ambiente <envar>EDITOR</envar>; se esta variável
-	não estiver definida, você será colocado no <command>vi</command>.
+      <para>A forma mais f&aacute;cil de modificar seu interpretador de
+	comandos &eacute; usar o comando <command>chsh</command>.  Executar o
+	<command>chsh</command> te colocar&aacute; no editor definido
+	na vari&aacute;vel de ambiente <envar>EDITOR</envar>; se esta vari&aacute;vel
+	n&atilde;o estiver definida, voc&ecirc; ser&aacute; colocado no <command>vi</command>.
 	Modifique a linha <quote>Shell:</quote> de acordo
 	com suas necessidades.</para>
 
-      <para>Você pode ainda usar o <command>chsh</command> com
-	a opção <option>-s</option>; assim você pode ajustar sua
+      <para>Voc&ecirc; pode ainda usar o <command>chsh</command> com
+	a op&ccedil;&atilde;o <option>-s</option>; assim voc&ecirc; pode ajustar sua
 	<foreignphrase>shell</foreignphrase> sem entrar no editor.
-	Por exemplo, se a intenção era modificar
+	Por exemplo, se a inten&ccedil;&atilde;o era modificar
 	seu interpretador para usar o <command>bash</command>,
 	o truqye pode ser feito da seguinte forma:</para>
 	
       <screen>&prompt.user; <userinput>chsh -s /usr/local/bin/bash</userinput></screen>
 
-      <para>Utilizar o <command>chsh</command> sem parâmetros e editar a
-	<foreignphrase>shell</foreignphrase> também funcionaria.</para>
+      <para>Utilizar o <command>chsh</command> sem par&acirc;metros e editar a
+	<foreignphrase>shell</foreignphrase> tamb&eacute;m funcionaria.</para>
 
       <note>
-	<para>O interpretador de comandos que você deseja
+	<para>O interpretador de comandos que voc&ecirc; deseja
 	utilizar <emphasis>deve</emphasis> estar listado no
-	arquivo <filename>/etc/shells</filename>.  Se você
-	instalou o interpretador à partir da
-	<link linkend="ports">Coleção de Ports</link>, isso já foi
-	feito.  Se você instalou na mão, você mesmo deve faze-lo.</para>
+	arquivo <filename>/etc/shells</filename>.  Se voc&ecirc;
+	instalou o interpretador &agrave; partir da
+	<link linkend="ports">Cole&ccedil;&atilde;o de Ports</link>, isso j&aacute; foi
+	feito.  Se voc&ecirc; instalou na m&atilde;o, voc&ecirc; mesmo deve faze-lo.</para>
      
-      <para>Por exemplo, se você instalou o <command>bash</command>
+      <para>Por exemplo, se voc&ecirc; instalou o <command>bash</command>
 	manualmente e o colocou no <filename>/usr/local/bin</filename>,
-	você vai querer fazer o seguinte:</para>
+	voc&ecirc; vai querer fazer o seguinte:</para>
 
       <screen>&prompt.root; <userinput>echo &quot;/usr/local/bin/bash&quot; &gt;&gt; /etc/shells</userinput></screen>
 
@@ -2243,31 +2243,31 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
     <indexterm><primary>editores de texto</primary></indexterm>
     <indexterm><primary>editores</primary></indexterm>
 
-    <para>Uma série de configurações no FreeBSD são feitas à partir
-	da edição de arquivos de texto.  Por tal motivo, seria uma boa
-	idéia se tornar familiar com algum editor de texto.  FreeBSD
+    <para>Uma s&eacute;rie de configura&ccedil;&otilde;es no FreeBSD s&atilde;o feitas &agrave; partir
+	da edi&ccedil;&atilde;o de arquivos de texto.  Por tal motivo, seria uma boa
+	id&eacute;ia se tornar familiar com algum editor de texto.  FreeBSD
 	vem com alguns editores, como parte de seu sistema base, e muitos	
-	outros editores estão disponíveis na coleção de
+	outros editores est&atilde;o dispon&iacute;veis na cole&ccedil;&atilde;o de
 	<literal>ports</literal>.</para>
 
     <indexterm>
       <primary><command>ee</command></primary>
     </indexterm>
-    <para>O editor mais simples e mais fácil para de aprender, é um editor chamado
+    <para>O editor mais simples e mais f&aacute;cil para de aprender, &eacute; um editor chamado
 	<application>ee</application>, que significa <foreignphrase>easy
-	editor</foreignphrase> (<quote>editor fácil</quote>).  Para iniciar o
+	editor</foreignphrase> (<quote>editor f&aacute;cil</quote>).  Para iniciar o
 	<application>ee</application>, basta digitar na minha de comando
 	<command>ee <replaceable>nomedoarquivo</replaceable></command> onde
-	<replaceable>nomedoarquivo</replaceable> é o nome do arquivo que deve
+	<replaceable>nomedoarquivo</replaceable> &eacute; o nome do arquivo que deve
 	ser editado.  Por exemplo, para editar o <filename>/etc/rc.conf</filename>,
 	digite <command>ee /etc/rc.conf</command>.  Uma vez dentro do
-	<command>ee</command>, todos os comandos para manipular as funções do
-	editor estão listadas no topo da tela.  O caracter <literal>^</literal> representa
+	<command>ee</command>, todos os comandos para manipular as fun&ccedil;&otilde;es do
+	editor est&atilde;o listadas no topo da tela.  O caracter <literal>^</literal> representa
 	a tecla <keycap>Ctrl</keycap> do teclado, de forma que <literal>^e</literal>
-	implica na combinação de teclas <keycombo action="simul"><keycap>Ctrl</keycap><keycap>e</keycap></keycombo>.
+	implica na combina&ccedil;&atilde;o de teclas <keycombo action="simul"><keycap>Ctrl</keycap><keycap>e</keycap></keycombo>.
 	Para sair do <application>ee</application>, aperte a tecla <keycap>Esc</keycap>, depois
 	escolha <foreignphrase>leave editor</foreignphrase> (sair do editor).  O editor 
-	irá perguntar se você deseja salvar as modificações no arquivo, caso ele tenha sido
+	ir&aacute; perguntar se voc&ecirc; deseja salvar as modifica&ccedil;&otilde;es no arquivo, caso ele tenha sido
 	alterado.</para>
 
     <indexterm>
@@ -2284,55 +2284,55 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
       <primary>editors</primary>
       <secondary><command>emacs</command></secondary>
     </indexterm>
-    <para>FreeBSD também oferece editores de texto mais poderosos, como o
+    <para>FreeBSD tamb&eacute;m oferece editores de texto mais poderosos, como o
 	<command>vi</command>, como parte da base do sistema, enquanto
 	outros editores como <command>emacs</command> e <command>vim</command>,
-	estão disponívels na Coleção de <literal>Ports</literal> do FreeBSD.
-	Estes editores oferecem muitas funcionalidades e são extramente
-	poderosos, ao custo de serem um pouco mais difíceis de aprender.  Contudo
-	se você planeja editar muitos textos, aprender algum editor de texto
+	est&atilde;o dispon&iacute;vels na Cole&ccedil;&atilde;o de <literal>Ports</literal> do FreeBSD.
+	Estes editores oferecem muitas funcionalidades e s&atilde;o extramente
+	poderosos, ao custo de serem um pouco mais dif&iacute;ceis de aprender.  Contudo
+	se voc&ecirc; planeja editar muitos textos, aprender algum editor de texto
 	mais poderoso como <command>vim</command> ou <command>emacs</command>
-	economizará a você mais tempo, à longo prazo.</para>
+	economizar&aacute; a voc&ecirc; mais tempo, &agrave; longo prazo.</para>
   </sect1>
 
   <sect1 id="basics-devices">
-    <title>Dispositivos e Nós de Dispositivos</title>
+    <title>Dispositivos e N&oacute;s de Dispositivos</title>
 
-    <para>Um dispositivo é um termo usado em sua maioria para
-	fazer menção à atividades relacionadas à equipamentos
-	físicos no sistema, incluindo discos, impressoras,
-	placas de vídeo e teclados.  Quando o FreeBSD é iniciado,
-	a maioria dos dados que o sistema apresenta são referentes
-	à detecção de dispositivos.  É possível reavaliar as
-	mensagens de inicialização, analisando o arquivo
+    <para>Um dispositivo &eacute; um termo usado em sua maioria para
+	fazer men&ccedil;&atilde;o &agrave; atividades relacionadas &agrave; equipamentos
+	f&iacute;sicos no sistema, incluindo discos, impressoras,
+	placas de v&iacute;deo e teclados.  Quando o FreeBSD &eacute; iniciado,
+	a maioria dos dados que o sistema apresenta s&atilde;o referentes
+	&agrave; detec&ccedil;&atilde;o de dispositivos.  &Eacute; poss&iacute;vel reavaliar as
+	mensagens de inicializa&ccedil;&atilde;o, analisando o arquivo
 	<filename>/var/run/dmesg.boot</filename>.</para>
 
-    <para>Por exemplo, o dispositivo <devicename>acd0</devicename> é o
-	primeiro CDROM IDE disponível, enquanto <devicename>kbd0</devicename>
+    <para>Por exemplo, o dispositivo <devicename>acd0</devicename> &eacute; o
+	primeiro CDROM IDE dispon&iacute;vel, enquanto <devicename>kbd0</devicename>
 	representa o teclado.</para>
 
     <para>A maioria destes dispositivos em um sistema operacional
-	&unix; devem ser acessados por intermédio de arquivos especiais, 
-	chamados nós de dispositivos, ou <foreignphrase>device nodes</foreignphrase>,
-	que estão dispostos sob o diretório <filename>/dev</filename>.</para>
+	&unix; devem ser acessados por interm&eacute;dio de arquivos especiais, 
+	chamados n&oacute;s de dispositivos, ou <foreignphrase>device nodes</foreignphrase>,
+	que est&atilde;o dispostos sob o diret&oacute;rio <filename>/dev</filename>.</para>
 
     <sect2>
-      <title>Criando Nós de Dispositivos</title>
+      <title>Criando N&oacute;s de Dispositivos</title>
       <para>Ao adicionar um novo dispositivo em seu sistema, ou compilar 
-	suporte à dispositivos adicionais, pode ser necessário criar um ou mais
-	nós de dispositivos para controlar os recém adicionados.</para>
+	suporte &agrave; dispositivos adicionais, pode ser necess&aacute;rio criar um ou mais
+	n&oacute;s de dispositivos para controlar os rec&eacute;m adicionados.</para>
 
       <sect3>
 	<title>MAKEDEV Script</title>
-	<para>Em sistemas sem <literal>DEVFS</literal> (isso diz respeito à todas versões do
-	FreeBSD antes da 5.0), nós de dispositivos são criados utilizando a rotina
-	&man.MAKEDEV.8; como apresentado à seguir:</para>
+	<para>Em sistemas sem <literal>DEVFS</literal> (isso diz respeito &agrave; todas vers&otilde;es do
+	FreeBSD antes da 5.0), n&oacute;s de dispositivos s&atilde;o criados utilizando a rotina
+	&man.MAKEDEV.8; como apresentado &agrave; seguir:</para>
 
 	<screen>&prompt.root; <userinput>cd /dev</userinput>
 &prompt.root; <userinput>sh MAKEDEV ad1</userinput>
 	</screen>
 
-	<para>Este exemplo cria os nós de dispositivos apropriados para
+	<para>Este exemplo cria os n&oacute;s de dispositivos apropriados para
 	o segundo dispositivo IDE, quando o mesmo for instalado.</para>
       </sect3>
 
@@ -2340,215 +2340,215 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
 	<title><literal>DEVFS</literal> (DEVice File System)</title>
 
 	<para>O sistema de arquivo de dispositivos, ou simplesmente
-	  <literal>DEVFS</literal>, oferece acesso ao espaço em kernel
+	  <literal>DEVFS</literal>, oferece acesso ao espa&ccedil;o em kernel
 	  para os dados referentes aos nomes de dispositivos, no
-	  sistema de arquivos global.  Ao invés de ter que criar e modificar
-	  os nós de dispositivos, <literal>DEVFS</literal> mantém este
+	  sistema de arquivos global.  Ao inv&eacute;s de ter que criar e modificar
+	  os n&oacute;s de dispositivos, <literal>DEVFS</literal> mant&eacute;m este
 	  sistema de arquivos particular.</para>
 
-	<para>Veja a página de manual do &man.devfs.5; para
-	  obter mais informações.</para>
+	<para>Veja a p&aacute;gina de manual do &man.devfs.5; para
+	  obter mais informa&ccedil;&otilde;es.</para>
 
-	<para><literal>DEVFS</literal> é utilizado por padrão no FreeBSD&nbsp;5.0 e posteriores.</para>
+	<para><literal>DEVFS</literal> &eacute; utilizado por padr&atilde;o no FreeBSD&nbsp;5.0 e posteriores.</para>
       </sect3>
     </sect2>
   </sect1>
 
   <sect1 id="binary-formats">
-    <title>Formatos de binários</title>
+    <title>Formatos de bin&aacute;rios</title>
 
     <para>Para entender o motivo pelo qual o FreeBSD usa o formato <acronym>ELF</acronym>
-	você deve saber primeiro um pouco mais sobre os três formados
-	atualmente <quote>dominantes</quote> de arquivos executáveis &unix;:</para>
+	voc&ecirc; deve saber primeiro um pouco mais sobre os tr&ecirc;s formados
+	atualmente <quote>dominantes</quote> de arquivos execut&aacute;veis &unix;:</para>
 
     <itemizedlist>
       <listitem>
         <para>&man.a.out.5;</para>
 
-        <para>O mais antigo e <quote>clássico</quote> formato de
-	  objetos &unix;.  Utiliza um cabeçalho curto e compacto
-	  com um número mágico (<foreignphrase>magic number</foreignphrase>)
-	  no início do mesmo, que geralmente é usado para caracterizar
-	  seu formato (veja &man.a.out.5; para mais detalhes).  Contém
-	  três segmentos carregados: .text, .data e .bss, acrecidos de
-	  uma tabela de símbolos e uma tabela de conjunto caracteres.</para>
+        <para>O mais antigo e <quote>cl&aacute;ssico</quote> formato de
+	  objetos &unix;.  Utiliza um cabe&ccedil;alho curto e compacto
+	  com um n&uacute;mero m&aacute;gico (<foreignphrase>magic number</foreignphrase>)
+	  no in&iacute;cio do mesmo, que geralmente &eacute; usado para caracterizar
+	  seu formato (veja &man.a.out.5; para mais detalhes).  Cont&eacute;m
+	  tr&ecirc;s segmentos carregados: .text, .data e .bss, acrecidos de
+	  uma tabela de s&iacute;mbolos e uma tabela de conjunto caracteres.</para>
       </listitem>
 
       <listitem>
         <para><acronym>COFF</acronym></para>
 
-        <para>O formato de objetivos SVR3.  Seu cabeçalho compreende
-	  uma tabela de seções, de forma que é possível ter mais
-	  seções do que apenas .text, .data e .bss.</para>
+        <para>O formato de objetivos SVR3.  Seu cabe&ccedil;alho compreende
+	  uma tabela de se&ccedil;&otilde;es, de forma que &eacute; poss&iacute;vel ter mais
+	  se&ccedil;&otilde;es do que apenas .text, .data e .bss.</para>
       </listitem>
 
       <listitem>
         <para><acronym>ELF</acronym></para>
 
         <para>O sucessor direto do <acronym>COFF</acronym>, oferecendo
-	  múltiplas seções e valores possíveis de 32-bit ou 64-bit.
+	  m&uacute;ltiplas se&ccedil;&otilde;es e valores poss&iacute;veis de 32-bit ou 64-bit.
 	  Uma grande desvantagem: <acronym>ELF</acronym> foi
 	  projetado assumindo-se que haveria possilvemente apenas
-	  uma ABI por arquitetura de sistema.  Essa consideração
-	  contudo é levemanete incorreta hoje em dia, e nem mesmo no
-	  mundo comercial do SYSV (onde existem ao penos três
-	  ABIs: SVR4, Solaris e SCO) ela é real.</para>
+	  uma ABI por arquitetura de sistema.  Essa considera&ccedil;&atilde;o
+	  contudo &eacute; levemanete incorreta hoje em dia, e nem mesmo no
+	  mundo comercial do SYSV (onde existem ao penos tr&ecirc;s
+	  ABIs: SVR4, Solaris e SCO) ela &eacute; real.</para>
 
         <para>FreeBSD tenta amenizar este problema por meio de um
-	  utilitário que reconhece um executável <acronym>ELF</acronym>
-	  e obtém informações sobre a ABI compilada neste. O utilitário
-	  em questão é o <command>brandelf</command>.  Veja a página de
-	  manual do &man.brandelf.1; para obter mais informações.</para>
+	  utilit&aacute;rio que reconhece um execut&aacute;vel <acronym>ELF</acronym>
+	  e obt&eacute;m informa&ccedil;&otilde;es sobre a ABI compilada neste. O utilit&aacute;rio
+	  em quest&atilde;o &eacute; o <command>brandelf</command>.  Veja a p&aacute;gina de
+	  manual do &man.brandelf.1; para obter mais informa&ccedil;&otilde;es.</para>
       </listitem>
     </itemizedlist>
 
-    <para>FreeBSD vem do campo <quote>clássico</quote> e durate muito
+    <para>FreeBSD vem do campo <quote>cl&aacute;ssico</quote> e durate muito
 	tempo usou o formato &man.a.out.5;, uma tecnologia utilizada
-	e aprovada por muitos gerações de versões de sistemas BSD,
-	até o ramo 3.X do FreeBSD.  Apesar de ser possível gerar
-	binários (e mesmo o kernel) no formato <acronym>ELF</acronym>
+	e aprovada por muitos gera&ccedil;&otilde;es de vers&otilde;es de sistemas BSD,
+	at&eacute; o ramo 3.X do FreeBSD.  Apesar de ser poss&iacute;vel gerar
+	bin&aacute;rios (e mesmo o kernel) no formato <acronym>ELF</acronym>
 	bem antes do FreeBSD 3.X, o sistema inicialmente resistiu
-	à <quote>pressão</quote> de mudar para o formato
-	<acronym>ELF</acronym> como formato padrão.  Por quê?  Bem,
-	quando o pessoal do campo Linux fez sua dolorosa transição
-	para <acronym>ELF</acronym>, os executáveis <filename>a.out</filename>
-	não podiam ser utilizados pois sua tabela de salto era consideradavelmente
-	inflexível, e a construção de bibliotecas compartilhadas parecia
+	&agrave; <quote>press&atilde;o</quote> de mudar para o formato
+	<acronym>ELF</acronym> como formato padr&atilde;o.  Por qu&ecirc;?  Bem,
+	quando o pessoal do campo Linux fez sua dolorosa transi&ccedil;&atilde;o
+	para <acronym>ELF</acronym>, os execut&aacute;veis <filename>a.out</filename>
+	n&atilde;o podiam ser utilizados pois sua tabela de salto era consideradavelmente
+	inflex&iacute;vel, e a constru&ccedil;&atilde;o de bibliotecas compartilhadas parecia
 	ser complexa demais no novo formato, para os fabricantes e
 	desenvolvedores em geral.  Depois que algumas ferramentas
-	<acronym>ELF</acronym> ofereceram soluções ao problema de
+	<acronym>ELF</acronym> ofereceram solu&ccedil;&otilde;es ao problema de
 	bibliotecas compartilhadas, o formato passou a ser visto
 	como <quote>o caminho a ser seguido</quote>, os custos de
-	migração para este formato já eram então aceitáveis, e a
-	transição foi feita.  O mecanismo de bibliotecas
-	compartilhadas do FreeBSD é baseado com maior proximidade
+	migra&ccedil;&atilde;o para este formato j&aacute; eram ent&atilde;o aceit&aacute;veis, e a
+	transi&ccedil;&atilde;o foi feita.  O mecanismo de bibliotecas
+	compartilhadas do FreeBSD &eacute; baseado com maior proximidade
 	ao estilo de bibliotecas compartilhadas do &sunos; da Sun,
-	e como tal, é muito fácil de ser utilizado.</para>
+	e como tal, &eacute; muito f&aacute;cil de ser utilizado.</para>
 
-    <para>Então, por que existem tantos formatos distintos?</para>
+    <para>Ent&atilde;o, por que existem tantos formatos distintos?</para>
 
-    <para>De voltao ao sombrio, gélido e distante passado, existiam
-	apenas equipamentos simples de computação.  Estes equipamentos
+    <para>De voltao ao sombrio, g&eacute;lido e distante passado, existiam
+	apenas equipamentos simples de computa&ccedil;&atilde;o.  Estes equipamentos
 	simples, suportavam sistemas simples e pequenos. 
 	O formato <filename>a.out</filename> era completamente adequado
-	às tarefas apresentadas pelos binários nestes sistemas simplistas
+	&agrave;s tarefas apresentadas pelos bin&aacute;rios nestes sistemas simplistas
 	(como PDP-11).  Conforme o &unix; passou a ser convertido
 	com base nestes sistemas simples, mantiveram o formado <filename>a.out</filename>
-	pois era suficiente para as primeiras conversões do &unix;, para
+	pois era suficiente para as primeiras convers&otilde;es do &unix;, para
 	arquiteturas como Motorola 68k, VAXen, etc.</para>
 
     <para>Depois algum engenheiro de <literal>hardware</literal> iluminado
-	decidiu que ele poderia forçar os programas a realizarem algumas
+	decidiu que ele poderia for&ccedil;ar os programas a realizarem algumas
 	tarefas mais simples, de forma que ele poderia retirar alguns
-	ítens de seu projeto de equipamento e permitir que o núcleo
-	de sua CPU processasse de forma mais rápida. Mesmo tendo sido
+	&iacute;tens de seu projeto de equipamento e permitir que o n&uacute;cleo
+	de sua CPU processasse de forma mais r&aacute;pida. Mesmo tendo sido
 	projetado para funcionar com este novo tipo de hardware
 	(conhecido hoje em dia como <acronym>RISC</acronym>),
-	o formato <filename>a.out</filename> não se encaixava
-	funcionalmente para o novo equipamento, então vários formatos foram
+	o formato <filename>a.out</filename> n&atilde;o se encaixava
+	funcionalmente para o novo equipamento, ent&atilde;o v&aacute;rios formatos foram
 	desenvolvedores para tentar garantir melhor performance deste
 	novo equipamento, quando comparado ao que o limitado formato
 	<filename>a.out</filename> poderia oferecer.  Algumas coisas como
 	<acronym>COFF</acronym>, <acronym>ECOFF</acronym>, e alguns
-	outros formatos obscuros foram inventados e suas limitaçòes
+	outros formatos obscuros foram inventados e suas limita&ccedil;&ograve;es
 	exploradas antes que as coisas pudessem se estabilizar
 	no formato <acronym>ELF</acronym>.</para>
 
-    <para>Em adição, o tamanho dos programas estavam se tornando
-	grandes, e os discos (bem como memória física) continuavam
-	relativamente pequenos, então o conceito de bibliotecas
-	compartilhadas nasceu.  O sistema de memória virtual também se
-	tornou mais sofisticado.  Enquanto cada um desses avanços
+    <para>Em adi&ccedil;&atilde;o, o tamanho dos programas estavam se tornando
+	grandes, e os discos (bem como mem&oacute;ria f&iacute;sica) continuavam
+	relativamente pequenos, ent&atilde;o o conceito de bibliotecas
+	compartilhadas nasceu.  O sistema de mem&oacute;ria virtual tamb&eacute;m se
+	tornou mais sofisticado.  Enquanto cada um desses avan&ccedil;os
 	foram feitos utilizando o formato <filename>a.out</filename>,
 	sua usabilidade foi se tornando cada vez mais duvidosa, na
-	proporção que novas características eram adicionadas.  Em
-	adição, as pessoas queriam poder carregar as coisas de forma
-	dinâmica, no momento de execussão do sistema, ou então
-	dispensar trechos de seus programas depois que o código
-	inicial tivesse sido executado, para economizar memória
-	e espaço de troca (<foreignphrase>swap</foreignphrase>)
+	propor&ccedil;&atilde;o que novas caracter&iacute;sticas eram adicionadas.  Em
+	adi&ccedil;&atilde;o, as pessoas queriam poder carregar as coisas de forma
+	din&acirc;mica, no momento de execuss&atilde;o do sistema, ou ent&atilde;o
+	dispensar trechos de seus programas depois que o c&oacute;digo
+	inicial tivesse sido executado, para economizar mem&oacute;ria
+	e espa&ccedil;o de troca (<foreignphrase>swap</foreignphrase>)
 	As linguagens se tornaram mais sofisticadas, e as pessoas queriam
-	que códigos fossem carregados antes do programa principal de
-	forma automática.  Uma série de modificações foram feitas
+	que c&oacute;digos fossem carregados antes do programa principal de
+	forma autom&aacute;tica.  Uma s&eacute;rie de modifica&ccedil;&otilde;es foram feitas
 	no formato <filename>a.out</filename> para permitir que esse
 	tipo de coisa pudesse acontecer, e basicamente tudo funcionou
 	bem por um tempo.  Em determinado momento, o <filename>a.out</filename>
-	não podia mais contornar estes problemas sem sobrecarregar seu
-	código e aumentar sua complexidade.  O formato <acronym>ELF</acronym>
+	n&atilde;o podia mais contornar estes problemas sem sobrecarregar seu
+	c&oacute;digo e aumentar sua complexidade.  O formato <acronym>ELF</acronym>
 	resolvia a maioria desses problemas, mas seria doloroso migrar
-	de um sistema que, basicamente, funcionava.  Então o formato
-	<acronym>ELF</acronym> teve que esperar até que fosse mais
+	de um sistema que, basicamente, funcionava.  Ent&atilde;o o formato
+	<acronym>ELF</acronym> teve que esperar at&eacute; que fosse mais
 	penoso continuar com o <filename>a.out</filename>, do que migrar
 	para o <acronym>ELF</acronym>.</para>
 
-    <para>Contudo, com o passar do tempo, as ferramentas de construção
-	de onde o FreeBSD derivou suas próprias ferramentas de construção
+    <para>Contudo, com o passar do tempo, as ferramentas de constru&ccedil;&atilde;o
+	de onde o FreeBSD derivou suas pr&oacute;prias ferramentas de constru&ccedil;&atilde;o
 	(o montador <foreignphrase>assembly</foreignphrase> e o
-	carregador, especialmente) se envolveram em duas árvores
-	paralelas.  A árvore FreeBSD adicionou bibliotecas compartilhadas
+	carregador, especialmente) se envolveram em duas &aacute;rvores
+	paralelas.  A &aacute;rvore FreeBSD adicionou bibliotecas compartilhadas
 	e corrigiu algumas falhas.  O pessoal GNU que originalmente
 	escreviam esses programas, rescreveram os mesmos de adicionaram
-	suporte simples à compilação cruzada, podendo adicionar formatos
-	diferentes à bel prazer, e assim por diante.  Partindo do princípio
+	suporte simples &agrave; compila&ccedil;&atilde;o cruzada, podendo adicionar formatos
+	diferentes &agrave; bel prazer, e assim por diante.  Partindo do princ&iacute;pio
 	que muitas pessoas desejavam criar compiladores cruzados para
 	o FreeBSD, tiveram problemas pois os fontes antigos do FreeBSD
 	faziam chamadas ao <application>as</application> e <application>ld</application>
-	o que não possibilitava tal tarefa.  A nova corrente de ferramentas GNU
-	(<application>binutils</application>) suporta compilação cruzada,
-	<acronym>ELF</acronym>, bibliotecas compartilhadas, extensões C++, etc.
-	Além disso, muitos fabricantes passaram a lançar binários
-	<acronym>ELF</acronym>, e era bom que o FreeBSD pudesse rodá-los.</para>
+	o que n&atilde;o possibilitava tal tarefa.  A nova corrente de ferramentas GNU
+	(<application>binutils</application>) suporta compila&ccedil;&atilde;o cruzada,
+	<acronym>ELF</acronym>, bibliotecas compartilhadas, extens&otilde;es C++, etc.
+	Al&eacute;m disso, muitos fabricantes passaram a lan&ccedil;ar bin&aacute;rios
+	<acronym>ELF</acronym>, e era bom que o FreeBSD pudesse rod&aacute;-los.</para>
 
-    <para><acronym>ELF</acronym> é mais expressivo que <filename>a.out</filename> e
+    <para><acronym>ELF</acronym> &eacute; mais expressivo que <filename>a.out</filename> e
 	oferece mais extensibilidade no sistema base.  As ferramentas
-	<acronym>ELF</acronym> são melhor mantidas, e oferecem suporte
-	à compilação cruzada, que é importante para muita gente.
+	<acronym>ELF</acronym> s&atilde;o melhor mantidas, e oferecem suporte
+	&agrave; compila&ccedil;&atilde;o cruzada, que &eacute; importante para muita gente.
 	O formato <acronym>ELF</acronym> pode ser um pouco mais lento do que
-	<filename>a.out</filename>, mas tentar medir esta diferença é
-	bem difícil.  Existem ainda vários detalhes distintos entre ambos, em
-	relação à como eles mapeiam páginas, tratam código de inicialização,
-	carregamento das instruções, etc.  Nenhum destes fatores são
-	muito relevantes, mas são diferentes.  Futuramente, o suporte
-	à <filename>a.out</filename> será retirado do kernel <filename>GENERIC</filename>,
+	<filename>a.out</filename>, mas tentar medir esta diferen&ccedil;a &eacute;
+	bem dif&iacute;cil.  Existem ainda v&aacute;rios detalhes distintos entre ambos, em
+	rela&ccedil;&atilde;o &agrave; como eles mapeiam p&aacute;ginas, tratam c&oacute;digo de inicializa&ccedil;&atilde;o,
+	carregamento das instru&ccedil;&otilde;es, etc.  Nenhum destes fatores s&atilde;o
+	muito relevantes, mas s&atilde;o diferentes.  Futuramente, o suporte
+	&agrave; <filename>a.out</filename> ser&aacute; retirado do kernel <filename>GENERIC</filename>,
 	e eventualmente removido do sistema quando a necessidade de executar
 	programas <filename>a.out</filename> for passado.</para>
   </sect1>
 
   <sect1 id="basics-more-information">
-    <title>Para mais informações</title>
+    <title>Para mais informa&ccedil;&otilde;es</title>
 
     <sect2 id="basics-man">
-      <title>Páginas de Manuais</title>
-      <indexterm><primary>páginas de manual</primary></indexterm>
+      <title>P&aacute;ginas de Manuais</title>
+      <indexterm><primary>p&aacute;ginas de manual</primary></indexterm>
 
-      <para>A documentação mais compreensiva do FreeBSD é em forma de
-	páginas de manuais. Quase todo programa no sistema é acompanhado
-	com um breve manual de referência que explica a operação básica
-	e os vários argumentos do programa.  Estes manuais podem ser visualizados
-	com o comando <command>man</command>.  A utlização do comando
-	<command>man</command> é simples:</para>
+      <para>A documenta&ccedil;&atilde;o mais compreensiva do FreeBSD &eacute; em forma de
+	p&aacute;ginas de manuais. Quase todo programa no sistema &eacute; acompanhado
+	com um breve manual de refer&ecirc;ncia que explica a opera&ccedil;&atilde;o b&aacute;sica
+	e os v&aacute;rios argumentos do programa.  Estes manuais podem ser visualizados
+	com o comando <command>man</command>.  A utliza&ccedil;&atilde;o do comando
+	<command>man</command> &eacute; simples:</para>
 
       <screen>&prompt.user; <userinput>man <replaceable>comando</replaceable></userinput></screen>
 
-      <para><literal>comando</literal> é o nome do comando sobre o qual
-	você deseja aprender.  Por exemplo, para aprender sobre o
+      <para><literal>comando</literal> &eacute; o nome do comando sobre o qual
+	voc&ecirc; deseja aprender.  Por exemplo, para aprender sobre o
 	comando <command>ls</command>, digite:</para>
 
       <screen>&prompt.user; <userinput>man ls</userinput></screen>
 
-      <para>O manual <quote>online</qote> é dividido em seções numeradas:</para>
+      <para>O manual <quote>online</qote> &eacute; dividido em se&ccedil;&otilde;es numeradas:</para>
 
       <orderedlist>
 	<listitem>
-	  <para>Comandos de usuário.</para>
+	  <para>Comandos de usu&aacute;rio.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Chamadas de sistema e número de erros.</para>
+	  <para>Chamadas de sistema e n&uacute;mero de erros.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Funções de bibliotecas C.</para>
+	  <para>Fun&ccedil;&otilde;es de bibliotecas C.</para>
 	</listitem>
 
 	<listitem>
@@ -2560,15 +2560,15 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
 	</listitem>
 
 	<listitem>
-	  <para>Jogos e outras diversões.</para>
+	  <para>Jogos e outras divers&otilde;es.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Informações gerais.</para>
+	  <para>Informa&ccedil;&otilde;es gerais.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Comandos de manutenção e operação do sistema.</para>
+	  <para>Comandos de manuten&ccedil;&atilde;o e opera&ccedil;&atilde;o do sistema.</para>
 	</listitem>
 
 	<listitem>
@@ -2576,40 +2576,40 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
 	</listitem>
       </orderedlist>
 
-      <para>Em alguns casos, o mesmo tópico pode aparecer em mais de uma
-	seção do manual online.  Por exemplo, se houver um comando
-	<command>chmod</command> para o usuário, e se houver uma chamada
-	de sistema denominada <function>chmod()</function>, você pode
-	informar ao comando <command>man</command> qual delas você quer,
-	especificando a seção:</para>
+      <para>Em alguns casos, o mesmo t&oacute;pico pode aparecer em mais de uma
+	se&ccedil;&atilde;o do manual online.  Por exemplo, se houver um comando
+	<command>chmod</command> para o usu&aacute;rio, e se houver uma chamada
+	de sistema denominada <function>chmod()</function>, voc&ecirc; pode
+	informar ao comando <command>man</command> qual delas voc&ecirc; quer,
+	especificando a se&ccedil;&atilde;o:</para>
 
       <screen>&prompt.user; <userinput>man 1 chmod</userinput></screen>
 
-      <para>Esse comando apresentará a página de manual para o comando
-	do usuário, <command>chmod</command>.  Referencias para uma seção
-	particular do manual online normalmente são apresentadas entre
-	parênteses, nos documentos escritos, de forma que 
-	&man.chmod.1; se refere ao comando de usuário para
-	<command>chmod</command>, e &man.chmod.2; se refere à
+      <para>Esse comando apresentar&aacute; a p&aacute;gina de manual para o comando
+	do usu&aacute;rio, <command>chmod</command>.  Referencias para uma se&ccedil;&atilde;o
+	particular do manual online normalmente s&atilde;o apresentadas entre
+	par&ecirc;nteses, nos documentos escritos, de forma que 
+	&man.chmod.1; se refere ao comando de usu&aacute;rio para
+	<command>chmod</command>, e &man.chmod.2; se refere &agrave;
 	chamada de sistema.</para>
 
-      <para>É bem facil utilizar essa ferramenta, quando você sabe o nome
-	do comando sobre o qual quer obter mais informações, mas e se
-	você não puder lembrar o nome do comando?  Pode usar o
+      <para>&Eacute; bem facil utilizar essa ferramenta, quando voc&ecirc; sabe o nome
+	do comando sobre o qual quer obter mais informa&ccedil;&otilde;es, mas e se
+	voc&ecirc; n&atilde;o puder lembrar o nome do comando?  Pode usar o
 	<command>man</command> para procurar por palavras
-	chaves nas descrições do comando, usando
-	opção <option>-k</option>:</para>
+	chaves nas descri&ccedil;&otilde;es do comando, usando
+	op&ccedil;&atilde;o <option>-k</option>:</para>
 
       <screen>&prompt.user; <userinput>man -k mail</userinput></screen>
 
-      <para>Com esse comando, uma lista de programas será apresentada, contendo
-	em sua descrição a expressão <quote>mail</quote>.  Na verdade
+      <para>Com esse comando, uma lista de programas ser&aacute; apresentada, contendo
+	em sua descri&ccedil;&atilde;o a express&atilde;o <quote>mail</quote>.  Na verdade
 	esse comando tem a mesma funcionalidade de se utilizar o comando
 	<command>apropos</command>.</para>
 
-      <para>Então, você está dando uma olhada em todos esses simpáticos
-	programas que você encontrou sob <filename>/usr/bin</filename>
-	mas não tem a menor idéia do que quer que cada um deles faça?
+      <para>Ent&atilde;o, voc&ecirc; est&aacute; dando uma olhada em todos esses simp&aacute;ticos
+	programas que voc&ecirc; encontrou sob <filename>/usr/bin</filename>
+	mas n&atilde;o tem a menor id&eacute;ia do que quer que cada um deles fa&ccedil;a?
 	Simplesmente digite:</para>
 
 	<screen>&prompt.user; <userinput>cd /usr/bin</userinput>
@@ -2624,23 +2624,23 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
     </sect2>
 
     <sect2 id="basics-info">
-      <title>Arquivos de Informações GNU</title>
-      <indexterm><primary>Fundação do Software Livre</primary></indexterm>
+      <title>Arquivos de Informa&ccedil;&otilde;es GNU</title>
+      <indexterm><primary>Funda&ccedil;&atilde;o do Software Livre</primary></indexterm>
 
-      <para>O FreeBSD inclui várias aplicações e utilitários
-	mantidos pela Fundação do Software Livre (<acronym>FSF</acronym>).
-	Em complemento às páginas de manual, estes programas vem ainda com
+      <para>O FreeBSD inclui v&aacute;rias aplica&ccedil;&otilde;es e utilit&aacute;rios
+	mantidos pela Funda&ccedil;&atilde;o do Software Livre (<acronym>FSF</acronym>).
+	Em complemento &agrave;s p&aacute;ginas de manual, estes programas vem ainda com
 	um documento hipertexto extenso, chamado arquivo <literal>info</literal>
 	que pode ser visualizado com o comando <command>info</command> ou, se
-	você dispõe do <application>emacs</application> instalado, o modo
-	<quote>info</quote> do <application>emacs</application> tem essa função.</para>
+	voc&ecirc; disp&otilde;e do <application>emacs</application> instalado, o modo
+	<quote>info</quote> do <application>emacs</application> tem essa fun&ccedil;&atilde;o.</para>
 
       <para>Para usar o comando &man.info.1;, simplesmente digite:</para>
 
       <screen>&prompt.user; <userinput>info</userinput></screen>
 
-      <para>Para uma breve introdução, digite <literal>h</literal>.  Para uma
-	rápida referência aos comandos, digite <literal>?</literal>.</para>
+      <para>Para uma breve introdu&ccedil;&atilde;o, digite <literal>h</literal>.  Para uma
+	r&aacute;pida refer&ecirc;ncia aos comandos, digite <literal>?</literal>.</para>
     </sect2>
   </sect1>
 </chapter>
