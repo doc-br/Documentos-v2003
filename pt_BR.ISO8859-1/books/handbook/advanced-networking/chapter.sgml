@@ -1305,9 +1305,9 @@ c2e8bc80      0    250 00:02:72:00:d4:1a 00:07:e0:00:0b:ca 3    6    OPEN</scree
       dizer que a uni&atilde;o foi aceita, e solicitar o c&oacute;digo PIN.  Entre o
       mesmo c&oacute;digo PIN que voc&ecirc; tem em 
       <filename>hcsecd.conf</filename>.  Agora seu PC e o dispositivo
-      remoto est&atilde;o unidos.  Alternativamente, voc&ecirc; pode iniciar uni&atilde;o
-      no dispositivo remoto.  Abaixo, a amostra da sa&iacute;da do comando
-      <command>hcsecd</command>.</para>
+      remoto est&atilde;o unidos.  Alternativamente, voc&ecirc; pode iniciar a 
+      uni&atilde;o no dispositivo remoto.  Abaixo, a amostra da sa&iacute;da do 
+      comando <command>hcsecd</command>.</para>
 
 <programlisting>hcsecd[16484]: Got Link_Key_Request event from 'ubt0hci', remote bdaddr 0:80:37:29:19:a4
 hcsecd[16484]: Found matching entry, remote bdaddr 0:80:37:29:19:a4, name 'Pav's T39', link key doesn't exist
@@ -1320,37 +1320,44 @@ hcsecd[16484]: Sending PIN_Code_Reply to 'ubt0hci' for remote bdaddr 0:80:37:29:
 
     <indexterm><primary>SDP</primary></indexterm>
     <sect2>
-      <title>Service Discovery Protocol (SDP)</title>
-      <para>The Service Discovery Protocol (SDP) provides the means for client
-	applications to discover the existence of services provided by server
-	applications as well as the attributes of those services.  The attributes
-	of a service include the type or class of service offered and the
-	mechanism or protocol information needed to utilize the service.</para>
+      <title>Protocolo de Descoberta de Servi&ccedil;o (SDP)</title>
 
-      <para>SDP involves communication between a SDP server and a SDP client.
-	The server maintains a list of service records that describe the
-	characteristics of services associated with the server.  Each service
-	record contains information about a single service.  A client may
-	retrieve information from a service record maintained by the SDP server
-	by issuing a SDP request.  If the client, or an application associated
-	with the client, decides to use a service, it must open a separate
-	connection to the service provider in order to utilize the service.
-	SDP provides a mechanism for discovering services and their attributes,
-	but it does not provide a mechanism for utilizing those services.</para>
 
-      <para>Normally, a SDP client searches for services based on some desired
-	characteristics of the services.  However, there are times when it is
-	desirable to discover which types of services are described by an SDP
-	server's service records without any a priori information about the
-	services.  This process of looking for any offered services is called
-	<emphasis>browsing</emphasis>.</para>
+      <para>O Protocolo de Descoberta de Servi&ccedil;o - Service Discovery
+      Protocol (SDP) - fornece os meios para as aplica&ccedil;&otilde;es clientes
+      descobrirem a exist&ecirc;ncia de servi&ccedil;os fornecidos por aplica&ccedil;&otilde;es
+      servidoras, bem como os atributos destes servi&ccedil;os.  Os atributos
+      de um servi&ccedil;o incluem o tipo de classe de servi&ccedil;o oferecido e a
+      informa&ccedil;&atilde;o do protocolo ou mecanismo necess&aacute;rios para utilizar o
+      servi&ccedil;o.</para>
 
-      <para>Currently Bluetooth SDP server and client are implemented in a
-	third-party package <application>sdp-1.5</application> that can be
-	downloaded from
-	<ulink url="http://www.geocities.com/m_evmenkin/">here</ulink>.  The
-	<application>sdptool</application> is a command line SDP client.
-	The following example shows how to perform a SDP browse query.</para>
+      <para>O SDP envolve comunica&ccedil;&atilde;o entre um servidor SDP e um
+      cliente SDP.  O servidor mant&eacute;m uma lista de registros de
+      servi&ccedil;os que descrevem as caracter&iacute;sticas dos servi&ccedil;os
+      associados com o servidor.  Cada registro de servi&ccedil;o cont&eacute;m
+      informa&ccedil;&atilde;o sobre um &uacute;nico servi&ccedil;o.  Um cliente pode recuperar
+      informa&ccedil;&atilde;o de um servi&ccedil;o mantido pelo servidor SDP emitindo uma
+      solicita&ccedil;&atilde;o SDP.  Se um cliente ou uma aplica&ccedil;&atilde;o associada com o
+      cliente decide usar um servi&ccedil;o, ele precisa abrir uma conex&atilde;o
+      separada ao provedor para utiliz&aacute;-lo.  O SDP fornece um
+      mecanismo para descoberta de servi&ccedil;os e seus atributos, mas n&atilde;o
+      fornece um mecanismo para utiliza&ccedil;&atilde;o destes servi&ccedil;os.</para>
+      
+      <para>Normalmente, um cliente SDP busca por servi&ccedil;os baseados em
+      algumas caracter&iacute;sticas desejadas dos servi&ccedil;os.  Entretanto,
+      h&aacute; momentos nos quais &eacute; desej&aacute;vel descobrir quais tipos de 
+      servi&ccedil;os est&atilde;o descritos por registros de servi&ccedil;o de um servidor
+      SDP sem qualquer informa&ccedil;&atilde;o a priori sobre os mesmos.  ESte
+      processo de procurar por quaisquer servi&ccedil;os oferecidos &eacute; chamado
+      de <emphasis>navega&ccedil;&atilde;o (browsing)</emphasis>.</para>
+
+      <para>Atualmente, o client e o servidor SDP s&atilde;o implementados em
+      uma pacote externo, <application>sdp-1.5</application>, que pode
+      ser copiado 
+      <ulink url="http://www.geocities.com/m_evmenkin/">daqui</ulink>.
+      O <application>sdptool</application> &eacute; um cliente SDP de linha
+      de comando.  O seguinte exemplo mostra como executar uma
+      solicita&ccedil;&atilde;o de navega&ccedil;&atilde;o SDP.</para>
 
       <screen>&prompt.root; <userinput>sdptool browse 00:80:37:29:19:a4</userinput>
 Browsing 00:80:37:29:19:A4 ...
@@ -1376,91 +1383,100 @@ Protocol Descriptor List:
    Channel: 3
 </screen>
 
-      <para>...  and so on.  Note that each service has a list of attributes
-	(RFCOMM channel for example).  Depending on the service you might need to
-	make a note of some of the attributes.  Some Bluetooth implementations do
-	not support service browsing and may return an empty list.  In this case
-	it is possible to search for the specific service.  The example below
-	shows how to search for the OBEX Object Push (OPUSH) service.</para>
+      <para>...e assim por diante.  Note que cada servi&ccedil;o tem uma lista
+      de atributos (canal RFCOMM, por exemplo).  Dependendo do servi&ccedil;o
+      voc&ecirc; pode precisar anotar alguns dos atributos.  Algumas 
+      implementa&ccedil;&otilde;es Bluetooth n&atilde;o suportam navega&ccedil;&atilde;o nos servi&ccedil;os, 
+      e podem retornar uma lista vazia.  Neste caso, &eacute; poss&iacute;vel buscar
+      pelo servi&ccedil;o espec&iacute;fico.  O exemplo abaixo mostra como buscar
+      pelo servi&ccedil;o OBEX Object Push (OPUSH).</para>
 
       <screen>&prompt.root; <userinput>sdptool search --bdaddr 00:07:e0:00:0b:ca OPUSH</userinput></screen>
 
-      <para>Offering services on &os; to Bluetooth clients is done with the
-	<application>sdpd</application> server.</para>
+      <para>Oferecendo servi&ccedil;os em &os; a clientes Bluetooth &eacute; feito
+      com o servidor <application>sdpd</application>.</para>
+
       <screen>&prompt.root; <userinput>sdpd</userinput></screen>
 
-      <para>The <application>sdptool</application> is also used to register
-	a service with the local SDP server.  The example below shows how to
-	register the Network Access with PPP (LAN) service.  Note that some
-	services require attributes (RFCOMM channel for example).</para>
+      <para>O <application>sdptool</application> tamb&eacute;m &eacute; usado para
+      registrar um servi&ccedil;o no servidor SDP local.  O exemplo abaixo
+      mostra como registrar o servi&ccedil;o de Acesso &agrave; Rede com PPP (LAN).
+      Repare que alguns servi&ccedil;os exigem atributos (canal RFCOMM, por
+      exemplo).</para>
 
       <screen>&prompt.root; <userinput>sdptool add --channel=7 LAN</userinput></screen>
 
-      <para>The list of services registered with local SDP server can be
-	obtained by issuing SDP browse query to a <quote>special</quote>
-	BD_ADDR.</para>
+      <para>A lista de servi&ccedil;os registrados com o servidor SDP local
+      pode ser obtida emitindo uma requisi&ccedil;&atilde;o de navega&ccedil;&atilde;o SDP a um
+      BD_ADDR <quote>especial</quote>.</para>
 
       <screen>&prompt.root; <userinput>sdptool browse ff:ff:ff:00:00:00</userinput></screen>
 
     </sect2>
 
     <sect2>
-      <title>Dial-Up Networking (DUN) and Network Access with PPP (LAN)
-	Profiles</title>
+      <title>Perfis de Acesso discado (DUN) e Acesso &agrave; Rede com PPP 
+      (LAN)</title>
 
-      <para>The Dial-Up Networking (DUN) profile is mostly used with modems
-	and cellular phones.  The scenarios covered by this profile are the
-	following:</para>
-
-      <itemizedlist>
-	<listitem><para>use of a cellular phone or modem by a computer as
-	  a wireless modem for connecting to a dial-up internet access server,
-	  or using other dial-up services;</para></listitem>
-
-	<listitem><para>use of a cellular phone or modem by a computer to
-	  receive data calls.</para></listitem>
-      </itemizedlist>
-
-      <para>Network Access with PPP (LAN) profile can be used in the following
-	situations:</para>
+      <para>O perfil de acesso discado - Dial-Up Networking (DUN) - &eacute;
+      mais usado com modems e telefones celulares.  Os cen&aacute;rios
+      cobertos por este perfil s&atilde;o os seguintes:</para>
 
       <itemizedlist>
-	<listitem><para>LAN access for a single Bluetooth device;
-</para></listitem>
+	<listitem><para>uso de um telefone celular ou modem por um
+	computador como modem sem-fio (wireless) para conectar &agrave;
+	Internet atrav&eacute;s de um servidor de acesso discado, ou usar 
+	outros servi&ccedil;os de acesso discado;</para></listitem>
 
-	<listitem><para>LAN access for multiple Bluetooth devices;
-</para></listitem>
+	<listitem><para>uso de um telefone celular ou modem por um
+	computador para receber chamadas de dados.</para></listitem>
 
-	<listitem><para>PC to PC (using PPP networking over serial cable
-	  emulation).</para></listitem>
       </itemizedlist>
 
-      <para>In &os; both profiles are implemented with &man.ppp.8; and
-	&man.rfcomm.pppd.8; - a wrapper that converts RFCOMM Bluetooth
-	connection into something PPP can operate with.  Before any profile
-	can be used, a new PPP label in <filename>/etc/ppp/ppp.conf</filename>
-	must be created.  Consult &man.rfcomm.pppd.8; manual page for examples.
-</para>
+      <para>O perfil de Acesso &agrave; Rede com PPP (LAN) pode ser usado nas
+      seguintes situa&ccedil;&otilde;es:</para>
 
-      <para>In the following example &man.rfcomm.pppd.8; will be used to open
-	RFCOMM connection to remote device with BD_ADDR 00:80:37:29:19:a4 on
-	DUN RFCOMM channel.  The actual RFCOMM channel number will be obtained
-	from the remote device via SDP.  It is possible to specify RFCOMM channel
-	by hand, and in this case &man.rfcomm.pppd.8; will not perform SDP
-	query.  Use <application>sdptool</application> to find out RFCOMM
-	channel on the remote device.</para>
+      <itemizedlist>
+	<listitem><para>Acesso na Rede Local (LAN) para um &uacute;nico
+	dispositivo Bluetooth;</para></listitem>
+
+	<listitem><para>Acesso &agrave; Rede Local para m&uacute;ltiplos
+	dispositivos Bluetooth;</para></listitem>
+
+	<listitem><para>PC a PC (usando rede PPP sobre emula&ccedil;&atilde;o de 
+	cabo serial).</para></listitem>
+      </itemizedlist>
+
+      <para>No &os; ambos os perfis s&atilde;o implementados com &man.ppp.8;
+      e &man.rfcomm.pppd.8; - uma cobertura (wrapper) que converte a
+      conex&atilde;o Bluetooth RFCOMM em algo com o qual o PPP pode operar.
+      Antes que qualquer perfil possa ser usado, um novo r&oacute;tulo PPP
+      deve ser criado em <filename>/etc/ppp/ppp.conf</filename>.  
+      Consulte a p&aacute;gina de manual &man.rfcomm.pppd.8; para ver 
+      exemplos.</para>
+
+      <para>No seguinte exemplo, &man.rfcomm.pppd.8; ser&aacute; usado para
+      abrir uma conex&atilde;o RFCOMM ao dispositivo remoto com o BD_ADDR
+      00:80:37:29:19:a4 no canal RFCOMM DUN.  O n&uacute;mero do canal RFCOMM
+      atual ser&aacute; obtido do dispositivo remoto via SDP.  &Eacute; poss&iacute;vel
+      especificar o canal RFCOMM manualmente, e, neste caso,
+      &man.rfcomm.pppd.8; n&atilde;o ir&aacute; executar uma requisi&ccedil;&atilde;o SDP.  Use
+      <application>sdptool</application> para descobrir o canal RFCOMM
+      no dispositivo remoto.</para>
 
       <screen>&prompt.root; <userinput>rfcomm_pppd -a 00:80:37:29:19:a4 -c -C dun -l rfcomm-dialup</userinput></screen>
 
-      <para>In order to provide Network Access with PPP (LAN) service
-	<application>sdpd</application> server must be running.  It is also
-	required to register LAN service with the local SDP server.  Note that
-	LAN service requires RFCOMM channel attribute.  A new entry for LAN
-	clients must be created in <filename>/etc/ppp/ppp.conf</filename> file.
-	Consult &man.rfcomm.pppd.8; manual page for examples.  Finally, RFCOMM
-	PPP server must be running and listening on the same RFCOMM channel
-	as registered with the local SDP server.  The example below shows how
-	to start RFCOMM PPP server.</para>
+      <para>Para fornecer o servi&ccedil;o de Acesso &agrave; Rede com PPP (LAN), o
+      servidor <application>sdpd</application> deve estar sendo
+      executado.  Tamb&eacute;m &eacute; necess&aacute;rio registrar o servi&ccedil;o de Rede
+      Local com o servidor SDP local.  Note que o servi&ccedil;o de rede 
+      exige o atributo do canal RFCOMM.  Uma nova entrada para
+      clientes da Rede Local precisa ser criada no arquivo
+      <filename>/etc/ppp/ppp.conf</filename>.  Consulte a p&aacute;gina de
+      manual &man.rfcomm.pppd.8; para ver exemplos.  Finalmente, o 
+      servidor PPP RFCOMM precisa estar rodando e ouvindo no mesmo
+      canal RFCOMM como foi registrado com o servidor SDP local.  O
+      exemplo abaixo mostra como iniciar o servidor PPP RFCOMM.</para>
 
       <screen>&prompt.root; <userinput>rfcomm_pppd -s -C 7 -l rfcomm-server</userinput></screen>
 
@@ -1468,30 +1484,37 @@ Protocol Descriptor List:
 
     <indexterm><primary>OBEX</primary></indexterm>
     <sect2>
-      <title>OBEX Push (OPUSH) Profile</title>
-      <para>OBEX is a widely used protocol for simple file transfers between
-	mobile devices.  Its main use is in infrared communication, where it is
-	used for generic file transfers between notebooks or Palm handhelds,
-	and for sending business cards or calendar entries between cellular
-	phones and other devices with PIM applications.</para>
+      <title>Perfil OBEX Push (OPUSH)</title>
 
-      <para>The OBEX server and client are implemented as a third-party package
-	<application>obexapp-1.0</application> that can be downloaded from
-	<ulink url="http://www.geocities.com/m_evmenkin/">here</ulink>.
-	The package requires the <application>openobex</application> library
-	(included) and the <filename role="package">devel/glib12</filename>
-	port.  Note that <application>obexapp</application> does not require
-	root privileges to operate.</para>
+      <para>O OBEX &eacute; um protocolo amplamente usado para transfer&ecirc;ncias
+      de arquivos simples entre dispositivos m&oacute;veis.  Seu principal
+      uso &eacute; nas comunica&ccedil;&atilde;o em infravermelho, onde &eacute; usado para
+      transfer&ecirc;ncias de arquivos gen&eacute;ricos entre notebooks ou
+      dispositivos Palm, e para enviar cart&otilde;es de visita ou entradas
+      em calend&aacute;rios entre telefones celulares e outros dispositivos
+      com aplica&ccedil;&otilde;es de Gerenciamento de Informa&ccedil;&otilde;es Pessoal (PIM).</para>
 
-      <para>OBEX client is used to push and/or pull objects from the OBEX server.
-	An object can, for example, be a business card or an appointment.
-	The OBEX client can obtain RFCOMM channel number from the remote device
-	via SDP.  This can be done by specifying service name instead of RFCOMM
-	channel number.  Supported service names are: IrMC, FTRN and OPUSH.
-	It is possible to specify RFCOMM channel as a number.  Below is an
-	example of an OBEX session, where device information object is pulled
-	from the cellular phone, and a new object (business card) is pushed
-	into the phone's directory.</para>
+      <para>O cliente e o servidor OBEX s&atilde;o implementados como pacotes
+      de terceiros <application>obexapp-1.0</application> que pode ser
+      copiada 
+      <ulink url="http://www.geocities.com/m_evmenkin/">daqui</ulink>.
+        O pacote requer a biblioteca <application>openobex</application>
+	(j&aacute; inclu&iacute;da) e o port 
+	<filename role="package">devel/glib12</filename>.  Note que
+	<application>obexapp</application> n&atilde;o requer privil&eacute;gios de
+	superusu&aacute;rio (root) para operar.</para>
+
+      <para>O cliente OBEX &eacute; usado para remeter e/ou copiar objetos do
+      servidor OBEX.  Um objeto pode, por exemplo, ser um cart&atilde;o de
+      visitas ou um agendamento.  O cliente OBEX pode obter um n&uacute;mero
+      de canal RFCOMM do dispositivo remoto via SDP.  Isto pode ser
+      feito especificando-se o nome do servi&ccedil;o ao inv&eacute;s do n&uacute;mero do
+      canal RFCOMM.  Nomes de dispositivos suportados s&atilde;o: IrMC, FTRN
+      e OPUSH.  &Eacute; poss&iacute;vel especificar o canal RFCOMM como um n&uacute;mero.
+      Abaixo est&aacute; um exemplo de sess&atilde;o OBEX, onde o objeto de 
+      informa&ccedil;&atilde;o do dispositivo &eacute; copiado do telefone celular e, um
+      novo objeto (cart&atilde;o de visita) &eacute; remetido &agrave; agenda do
+      telefone.</para>
 
       <screen>&prompt.user; <userinput>obexapp -a 00:80:37:29:19:a4 -C IrMC</userinput>
 obex&gt; get
@@ -1505,48 +1528,62 @@ Success, response: OK, Success (0x20)
 obex&gt; di
 Success, response: OK, Success (0x20)</screen>
 
-      <para>In order to provide OBEX Push service,
-	<application>sdpd</application> server must be running.  It is also
-	required to register OPUSH service with the local SDP server.  Note that
-	OPUSH service requires RFCOMM channel attribute.  A root folder, where
-	all incoming objects will be stored, must be created.  The default path
-	to the root folder is <filename>/var/spool/obex</filename>.  Finally,
-	OBEX server must be running and listening on the same RFCOMM channel
-	as registered with the local SDP server.  The example below shows how
-	to start OBEX server.</para>
+      <para>Para fornecer o servi&ccedil;o de envio OBEX, o servidor
+      <application>sdpd</application> precisa estar sendo executado.
+      Tamb&eacute;m &eacute; necess&aacute;rio registrar o servi&ccedil;o OPUSH no servidor SDP
+      local.  Note que o servi&ccedil;o OPUSH requer o atributo do canal
+      RFCOMM.  Uma pasta raiz, onde todos os objetos recebidos ser&atilde;o
+      armazenados, precisa ser criado.  O caminho padr&atilde;o para a pasta
+      raiz &eacute; <filename>/var/spool/obex</filename>.  Finalmente, o
+      servidor OBEX precisa estar rodando e ouvindo no mesmo canal
+      RFCOMM como registrado com o servidor SDP local.  O exemplo
+      abaixo mostra como iniciar o servidor OBEX.</para>
 
       <screen>&prompt.root; <userinput>obexapp -s -C 10</userinput></screen>
     </sect2>
 
     <sect2>
-      <title>Serial Port (SP) Profile</title>
-      <para>The Serial Port (SP) profile allows Bluetooth device to perform
-	RS232 (or similar) serial cable emulation.  The scenario covered by this
-	profile deals with legacy applications using Bluetooth as a cable
-	replacement, through a virtual serial port abstraction.</para>
+      <title>Perfil da Porta Serial (SP)</title>
 
-      <para>The &man.rfcomm.sppd.1; utility implements the Serial Port profile.
-	Pseudo tty is used as a virtual serial port abstraction.  The example
-	below shows how to connect to a remote device Serial Port service.
-	Note that you do not have to specify RFCOMM channel -
-	&man.rfcomm.sppd.1; can obtain it from the remote device via SDP.
-	If you would like to override this, specify RFCOMM channel in the
-	command line.</para>
+      <para>A porta serial - Serial Port (SP) - permite a um
+      dispositivo Bluetooth executar uma emula&ccedil;&atilde;o de cabo serial RS232
+      (ou similar).  O cen&aacute;rio abordado neste perfil trata de
+      aplica&ccedil;&otilde;es legadas usando o Bluetooth como substituto do cabo,
+      atrav&eacute;s de uma abstra&ccedil;&atilde;o de porta serial virtual.</para>
+
+      <para>O utilit&aacute;rio &man.rfcomm.sppd.1; implementa o perfil de
+      Porta Serial.  Um pseudo tty &eacute; usado como uma abstra&ccedil;&atilde;o de porta
+      serial virtual.  O exemplo abaixo mostra que voc&ecirc; n&atilde;o tem que
+      especificar o canal RFCOMM - &man.rfcomm.sppd.1; pode obt&ecirc;-lo do
+      dispositivo remoto via SDP.  Se voc&ecirc; quiser ativar manualmente
+      isto, especifique o canal RFCOMM na linha de comando.</para>
 
       <screen>&prompt.root; <userinput>rfcomm_sppd -a 00:07:E0:00:0B:CA -t /dev/ttyp6</userinput>
 rfcomm_sppd[94692]: Starting on /dev/ttyp6...</screen>
 
-      <para>Once connected pseudo tty can be used as serial port.</para>
+      <para>Uma vez conectado, o pseudo tty pode ser usado como porta
+      serial.</para>
 
       <screen>&prompt.root; <userinput>cu -l ttyp6</userinput></screen>
 
     </sect2>
 
     <sect2>
-      <title>Troubleshooting</title>
+      <title>Localiza&ccedil;&atilde;o de Defeitos</title>
 
       <sect3>
-	<title>A remote device cannot connect</title>
+	<title>Um dispositivo remoto n&atilde;o consegue conectar-se</title>
+
+	<para>Alguns dispositivos Bluetooth mais antigos n&atilde;o suportam
+	troca de fun&ccedil;&atilde;o.  Por padr&atilde;o, quando o &os; est&aacute; aceitando uma
+	nova conex&atilde;o, ele tenta efetuar uma troca de fun&ccedil;&atilde;o e
+	tornar-se um mestre. Os dispositivos que n&atilde;o suportarem esta
+	caracter&iacute;stica, n&atilde;o ser&atilde;o capazes de se conectar.  Note que a
+	troca de fun&ccedil;&atilde;o &eacute; executada quando uma nova conex&atilde;o est&aacute;
+	sendo estabelecida, de forma que n&atilde;o seja poss&iacute;vel perguntar
+	ao dispositivo remoto se ele suporta troca de fun&ccedil;&atilde;o.  H&aacute; uma
+	op&ccedil;&atilde;o HCI para desabilitar a troca de fun&ccedil;&atilde;o na ponta local.</para>
+
 	<para>Some older Bluetooth devices do not support role switching.
 	  By default, when &os; is accepting a new connection, it tries to
 	  perform role switch and become a master.  Devices, which do not
@@ -1561,14 +1598,17 @@ rfcomm_sppd[94692]: Starting on /dev/ttyp6...</screen>
       </sect3>
 
       <sect3>
-	<title>Something is going wrong, can I see what exactly is happening?</title>
-	<para>Yes, you can.  Use the <application>hcidump-1.5</application>
-	  third-party package that can be downloaded from
-	  from <ulink url="http://www.geocities.com/m_evmenkin/">here</ulink>.
-	  The <application>hcidump</application> utility is similar to
-	  &man.tcpdump.1;.  It can used to display the content of the Bluetooth
-	  packets on the terminal and to dump the Bluetooth packets to a
-	  file.</para>
+	<title>Algo est&aacute; errado, posso ver o que exatamente est&aacute;
+	acontecendo?</title>
+
+	<para>Sim, voc&ecirc; pode. Use o pacote de terceiros 
+	<application>hcidump-1.5</application>, que pode ser copiado
+	<ulink url="http://www.geocities.com/m_evmenkin/">daqui</ulink>.
+	  O utilit&aacute;rio <application>hcidump</application> &eacute; similar ao
+	  &man.tcpdump.1;.  Ele pode ser usado para mostrar o conte&uacute;do
+	  dos pacotes Bluetooth no terminal, e jogar pacotes em um
+	  arquivo.</para>
+
       </sect3>
 
     </sect2>
