@@ -100,57 +100,58 @@
     No momento, mais de &os.numports; aplicativos j&aacute; foram
     disponibilizados desta forma.</para>
     
-    <para>Para qualquer aplicativo
+    <para>Independente de qual seja o aplicativo, o pacote FreeBSD do mesmo 
+    consiste-se em um unico arquivo para download.  O pacote cont&eacute;m
+    c&oacute;pias pr&eacute;-compiladas de todos os comandos do aplicativo, bem como
+    c&oacute;pias dos arquivos de configura&ccedil;&atilde;o e/ou da documenta&ccedil;&atilde;o.  O
+    gerenciamento de um pacote FreeBSD &eacute; realizado por uma s&eacute;rie de
+    comandos especificos, tais como &man.pkg.add.1;,
+    &man.pkg.delete.1;, &man.pkg.info.1; entre outros.  A instala&ccedil;&atilde;o
+    de um novo aplicativo pode ser realizada atrav&eacute;s da execu&ccedil;&atilde;o de um
+    unico comando.</para>
 
-    For any given application, the FreeBSD package for that
-      application is a single file which you must download.  The
-      package contains pre-compiled copies of all the commands for the
-      application, as well as any configuration files or
-      documentation.  A downloaded package file can be manipulated
-      with FreeBSD package management commands, such as
-      &man.pkg.add.1;, &man.pkg.delete.1;, &man.pkg.info.1;, and so
-      on.  Installing a new application can be carried out with a single
-      command.</para>
-
-    <para>A FreeBSD port for an application is a collection of files
-      designed to automate the process of compiling an application
-      from source code.</para>
-
-    <para>Remember that there are a number of steps you would normally
-      carry out if you compiled a program yourself (downloading,
-      unpacking, patching, compiling, installing).  The files that
-      make up a port contain all the necessary information to allow
-      the system to do this for you.  You run a handful of simple
-      commands and the source code for the application is
-      automatically downloaded, extracted, patched, compiled, and
-      installed for you.</para>
-
-    <para>In fact, the ports system can also be used to generate packages
-      which can later be manipulated with <command>pkg_add</command>
-      and the other package management commands that will be introduced
-      shortly.</para>
-
-    <para>Both packages and ports understand
-      <emphasis>dependencies</emphasis>.  Suppose you want to install
-      an application that depends on a specific library being
-      installed.  Both the application and the library have been made
-      available as FreeBSD ports and packages.  If you use the
-      <command>pkg_add</command> command or the ports system to add
-      the application, both will notice that the library has not been
-      installed, and automatically install the library first.</para>
-
-    <para>Given that the two technologies are quite similar, you might
-      be wondering why FreeBSD bothers with both.  Packages and ports
-      both have their own strengths, and which one you use will depend
-      on your own preference.</para>
-
+    <para>Um port FreeBSD para um aplicativo consiste-se em uma
+    cole&ccedil;&atilde;o de arquivos destinados a automatizar o processo de
+    compila&ccedil;&atilde;o da aplica&ccedil;&atilde;o apartir do seu c&oacute;digo fonte.</para> 
+    
+    <para>Lembre-se que existem diversos passos que voc&ecirc; teria que
+    executar para compilar o programa manualmente (download,
+    descompactar, aplicar patch, compilar e instalar). Os arquivos de
+    um port cont&eacute;m todas as informa&ccedil;&otilde;es necess&aacute;rias para possibilitar 
+    que o sistema automatize o processo para voc&ecirc;. Voc&ecirc; executa um
+    conjunto de comandos simples e o c&oacute;digo fonte do aplicativo &eacute;
+    automaticamente baixado, descompactado, patcheado, compilado e
+    instalado para voc&ecirc;.</para> 
+    
+    <para>De fato, o systema de ports pode ser utilizado para pacotes
+    bin&aacute;rios do aplicativo, o qual pode ser manipulado mais tarde
+    atrav&eacute;s do comando <command>pkg_add</command>, ou por qualquer
+    outro comando de gerenciamento de pacotes, os quais iremos
+    introduzir em instantes.</para>
+    
+    <para>Ambos os sistemas de instala&ccedil;&atilde;o cuidam da instala&ccedil;&atilde;o das
+    <emphasis>depend&ecirc;ncias</emphasis> do aplicativo. Suponha que voc&ecirc;
+    deseja instalar uma aplica&ccedil;&atilde;o que depende de uma biblioteca
+    especifica para funcionar. Tanto o aplicativo quanto a biblioteca
+    s&atilde;o disponibilizadas no FreeBSD como pacote e como ports. Se voce
+    utilizar o comando <command>pkg_add</command> ou o sistema de
+    ports para adicionar o aplicativo, ambos ir&atilde;o informar que a
+    biblioteca necess&aacute;ria para o funcionamento do aplicativo n&atilde;o
+    est&aacute; instalada corretamente e ir&atilde;o instalar automaticamente a 
+    biblioteca antes de instalar o aplicativo.</para>
+    
+    <para>dado que ambas as tecnologias s&atilde;o muito similares, voc&ecirc; deve
+    querer saber o porque o FreeBSD se preocupa com as duas. Os
+    sistemas de pacotes e ports possuem suas pr&oacute;prias virtudes, e qual
+    voc&ecirc; ir&aacute; utilizar depender&aacute; da sua preferencia pessoal.</para>
+    
     <itemizedlist>
-      <title>Package Benefits</title>
+      <title>Beneficios do sistema de Pacotes</title>
       
       <listitem>
-	<para>A compressed package tarball is typically smaller than
-	  the compressed tarball containing the source code for the
-	  application.</para>
+	<para>Um pacote tarball comprimido dos bin&aacute;rios do aplicativo 
+	&eacute; normalmente menor que um tarball compactado contendo o c&oacute;digo
+	fonte do mesmo aplicativo</para>
       </listitem>
 
       <listitem>
