@@ -945,14 +945,14 @@ device          atapicd                 # ATAPI CDROM drives</programlisting>
 
     <programlisting>options         ATA_STATIC_ID           #Static device numbering</programlisting>
 
-    <para>Isto faz o controle est&aacute;tico de n&uacute;mero, no padrão antigo, ou
+    <para>Esta opção faz o controle est&aacute;tico de n&uacute;mero identificador ATA, no padrão antigo, ou
       os n&uacute;meros de dispositivos que s&atilde;o alocados dinâmicamente.</para>
 
     <programlisting># ATA and ATAPI devices
 device          ata0        at isa? port IO_WD1 irq 14
 device          ata1        at isa? port IO_WD2 irq 15</programlisting>
 
-    <para>Usa-se sobre sistemas mais velhos, sistemas non-PCI.</para>
+    <para>É usado em sistemas mais antigos, que não suportam padrão PCI.</para>
 
     <programlisting># SCSI Controllers
 device          ahb        # EISA AHA1742 family
@@ -969,9 +969,9 @@ device          bt0        at isa?
 device          aha0       at isa?
 device          aic0       at isa?</programlisting>
 
-    <para>Controladoras SCSI. Comente alguma linha se voc&ecirc; n&atilde;o tiver em seu
-      sistema. Se voc&ecirc; tiver somente sistema IDE, voc&ecirc; pode remover todos estes
-      completamente.</para>
+    <para>Controladoras SCSI. Caso alguma destas controladoras não estejam disponíveis em seu sistema,
+	comente a linha em questão.  Caso você tenha apenas discos IDE, todas opções aqui podem ser
+	completamente removidas.</para>
 
     <programlisting># SCSI peripherals
 device          scbus      # SCSI bus (required)
@@ -981,31 +981,34 @@ device          cd         # CD
 device          pass       # Passthrough device (direct SCSI
 access)</programlisting>
 
-    <para>Perif&eacute;ricos SCSI. Novamente, comente alguma linha se voc&ecirc; n&atilde;o tiver, ou se
-      voc&ecirc; tiver apenas hardware IDE, voc&ecirc; pode remover estas linhas completamente.</para>
+    <para>Perif&eacute;ricos SCSI. Mais uma vez, se algum destes periféricos não estiverem disponíveis
+	em seu sistema,  comente a linha em questão.  Caso você tenha apenas discos IDE, todas opções aqui podem ser
+	completamente removidas.</para>
 
     <programlisting># RAID controllers
 device          ida        # Compaq Smart RAID
 device          amr        # AMI MegaRAID
 device          mlx        # Mylex DAC960 family</programlisting>
 
-    <para>Suporte a controladoras RAID. Se voc&ecirc; n&atilde;o tiver algumas destas,
-      voc&ecirc; pode comentar esta ou remover todas estas.</para>
+    <para>Suporte à controladoras RAID.  Você pode manter apenas suporte aos equipamentos
+	que você tem disponível, removendo o suporte às controladoras RAID não
+	disponíveis.</para>
 
     <programlisting># atkbdc0 controls both the keyboard and the PS/2 mouse
 device          atkbdc0    at isa? port IO_KBD</programlisting>
 
-    <para>O controlador de teclado (<literal>atkbdc</literal>) fornece servi&ccedil;os de I/O
-      para o teclado AT e estilo PS/2 que aponta dispositivos. Este
-      controlador &eacute; requerido pelo driver do teclado
-      (<literal>atkbd</literal>) e o PS/2 que aponta dispositivo driver
+    <para>O controlador de teclado (<literal>atkbdc</literal>) fornece recursos de controle
+	à operações de E/S para o teclado AT e teclados e dispositivos de apontamento PS/2
+	(como <foreignphrase>mouse</foreignphrase> e canetas).  Este dispositivo é
+	necessário ao suporte de teclado
+      (<literal>atkbd</literal>) bem como ao dispositivo de controle PS/2
       (<literal>psm</literal>).</para>
 
     <programlisting>device          atkbd0     at atkbdc? irq 1</programlisting>
 
-    <para>O driver <literal>atkbd</literal>, em comjunto com o controlador
-      <literal>atkbdc</literal>, prov&eacute;m accesso para o teclado AT 84
-      ou o teclado AT real&ccedil;ado que &eacute; conectado ao controlador de teclado AT.</para>
+    <para>O dispositivo de controle <literal>atkbd</literal>, em comjunto com o
+      <literal>atkbdc</literal>, prov&eacute;m accesso ao teclado AT 84
+      ou à teclados AT, modelos aprimorados e convencionais.</para>
 
     <programlisting>device          psm0       at atkbdc? irq 12</programlisting>
 
