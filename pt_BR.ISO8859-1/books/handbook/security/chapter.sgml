@@ -727,7 +727,7 @@
 	através de um <literal>switch</literal>, o método NFS é
 	frequentemente a melhor escolha.  Se seu servidor com acesso
 	limitado esta conectado as máquinas clientes através de um
-	<literal>hub<literal>, ou atrevés de diversas camadas de roteamento, 
+	<literal>hub</literal>, ou atrevés de diversas camadas de roteamento, 
 	o método NFS pode ser inseguro demais (network-wise) e usar
 	ssh pode ser a melhor escolha mesmo com	audit-trail tracks 
 	que o ssh coloca.</para>
@@ -750,32 +750,36 @@
 	tais como <filename>/</filename> e
 	<filename>/usr</filename>.</para>
 
-      <para>Quanto usar ssh em vez de NFS,
+      <para>Quanto usar ssh em vez do NFS,
 	escrever o script de segurança é muito mais difícil.  Você
-	essencialmente tem que <command>scp</command> the scripts to the client 
-	box in order to
-	run them, making them visible, and for safety you also need to
-	<command>scp</command> the binaries (such as find) that those
-	scripts use.  The <application>ssh</application> client on the
-	client box may already be compromised.  All in all, using
-	ssh may be necessary when running over
-	insecure links, but it is also a lot harder to deal with.</para>
+	essencialmente tem que copiar com <command>scp</command> os
+	scripts para a máquina clientea fim de executar eles, fazendo-os
+	visíveis, e por segurança você necessita também de copiar com
+	<command>scp</command> os binários (tais como find) que aqueles
+	scripts usam.  O cliente <application>ssh</application> 
+	na máquina cliente pode já estar comprometido.  De modo geral, 
+	usar o ssh pode ser necessario quando estiver usando links inseguros,
+	mas ele é também muito difícil de se lidar.</para>
 
-      <para>A good security script will also check for changes to user and
-	staff members access configuration files:
-	<filename>.rhosts</filename>, <filename>.shosts</filename>,
-	<filename>.ssh/authorized_keys</filename> and so forth&hellip;
-	files that might fall outside the purview of the
-	<literal>MD5</literal> check.</para>
+      <para>Um bom script de segurança verificará também por mudanças
+	aos arquivos de configuração de acesso dos usuários e membros
+	do sistema: <filename>.rhosts</filename>, 
+	<filename>.shosts</filename>,
+	<filename>.ssh/authorized_keys</filename> e assim por diante&hellip;
+	arquivos que puderam ficar fora do alcançe da verificação 
+	<literal>MD5</literal>.</para>
 
-      <para>If you have a huge amount of user disk space, it may take too
-	long to run through every file on those partitions.  In this case,
-	setting mount flags to disallow suid binaries and devices on those
-	partitions is a good idea.  The <literal>nodev</literal> and
-	<literal>nosuid</literal> options (see &man.mount.8;) are what you
-	want to look into.  You should probably scan them anyway, at least
-	once a week, since the object of this layer is to detect a break-in
-	whether or not the break-in is effective.</para>
+      <para>Se você tiver uma grande quantidade de espaço em disco, 
+	isto pode demorar muito para executar através em cada
+	arquivo naquela partição.  Neste caso, ajustando as
+	sinalizações do montagem para desabilitar binários
+	suid e dispositivos naquelas partições são uma boa idéia.  
+	As opções <literal>nodev</literal> e
+	<literal>nosuid</literal> (veja &man.mount.8;) são as que
+	você precisa procurar.  Você deve provavelmente fazer a 
+	varredura de qualquer maneira, ao menos uma vez por semana, 
+	desde que o objeto desta camada detecte uma invasão
+	se a invasão for eficaz ou não.</para>
 
       <para>Process accounting (see &man.accton.8;) is a relatively
 	low-overhead feature of the operating system which might help
