@@ -1861,7 +1861,7 @@ $%&amp;'()*+,-./01234567
 	</para>
 
     <sect2 id="printing-advanced-filter-intro">
-      <title>Filters</title>
+      <title>Filtros</title>
       <indexterm>
 	<primary>printing</primary>
 	<secondary>filters</secondary>
@@ -2048,62 +2048,72 @@ $%&amp;'()*+,-./01234567
 
         <itemizedlist>
           <listitem>
-            <para>
+            	<para>
 		O <emphasis>filtro de texto</emphasis>, erradamente chamado de 
-        <emphasis>filtro de entrada</emphasis> na documenta&ccedil;&atilde;o do 
-	<application>LPD</application>, ele manipula a impress&atilde;o de 
-	texto puro. pense nele como um fiultro padr&atilde;o para o
-	<application>LPD</application>
+   <emphasis>filtro de entrada</emphasis> na documenta&ccedil;&atilde;o 
+	do <application>LPD</application>, ele manipula a impress&atilde;o de 
+	texto puro. pense nele como um filtro padr&atilde;o para o
+	<application>LPD</application>, ele espera que todas as impressoras, por 
+	padr&atilde;o, estejam habilitadas a imprimir texto puro, e ela
+	<foreignphrase>tabs</foreignphrase>, 
+	em um ambiente aonde tem estat&iacute;sticas do uso da impressora,
+	o filtro de texto tamb&eacute;m deve gerar a estat&iacute;stica sobre
+	o que foi impresso, geralmente isto &eacute; feito contando o 
+	n&uacute;mero de linhas impressas e comparando-as com o 
+	n&uacute;mero de linhas que a impressora suporta.  O filtro de 
+	texto &eacute; inicializado com a seguinte lista de argumentos:
+		</para>
 
------
-              expects every printer to be able to print plain text by default,
-              and it is the text filter's job to make sure backspaces, tabs,
-              or other special characters do not confuse the printer.  If you
-              are in an environment where you have to account for printer
-              usage, the text filter must also account for pages printed,
-              usually by counting the number of lines printed and comparing
-              that to the number of lines per page the printer supports.  The
-              text filter is started with the following argument list:
+      <cmdsynopsis>
+        	<command>nome-do-filtro</command>
+				<arg>-c</arg>
+				<arg choice="plain">-w<replaceable>largura</replaceable></arg>
+				<arg choice="plain">-l<replaceable>comprimento</replaceable></arg>
+				<arg choice="plain">-i<replaceable>indent</replaceable></arg>
+				<arg choice="plain">-n <replaceable>login</replaceable></arg>
+				<arg choice="plain">-h <replaceable>host</replaceable></arg>
+				<arg choice="plain"><replaceable>arquivo-estatistica</replaceable>
+				</arg>
+		</cmdsynopsis>
 
-              <cmdsynopsis>
-                <command>filter-name</command>
-                <arg>-c</arg>
-                <arg choice="plain">-w<replaceable>width</replaceable></arg>
-                <arg choice="plain">-l<replaceable>length</replaceable></arg>
-                <arg choice="plain">-i<replaceable>indent</replaceable></arg>
-                <arg choice="plain">-n <replaceable>login</replaceable></arg>
-                <arg choice="plain">-h <replaceable>host</replaceable></arg>
-                <arg choice="plain"><replaceable>acct-file</replaceable></arg>
-              </cmdsynopsis>
-
-              where
+              onde
               
               <variablelist>
                 <varlistentry>
                   <term><option>-c</option></term>
 
                   <listitem>
-                    <para>appears if the job is submitted with <command>lpr
-                        -l</command></para>
+							<para>
+								&Eacute; usado quando o 
+								<foreignphrase>job</foreignphrase> &eacute; enviado
+								com o comando
+								<command>lpr -l</command>
+							</para>
                   </listitem>
                 </varlistentry>
                 
                 <varlistentry>
-                  <term><replaceable>width</replaceable></term>
+                  <term><replaceable>largura</replaceable></term>
                   
                   <listitem>
-                    <para>is the value from the <literal>pw</literal> (page
-                      width) capability specified in
-                      <filename>/etc/printcap</filename>, default 132</para>
+                    <para>
+							&Eacute; o valor da op&ccedil;&atilde;o
+							<literal>pw</literal> (largura da p&aacute;gina)
+							especificado no arquivo
+                     <filename>/etc/printcap</filename>, O padr&atilde;o
+							&eacute;  132</para>
                   </listitem>
                 </varlistentry>
                 
                 <varlistentry>
-                  <term><replaceable>length</replaceable></term>
+                  <term><replaceable>comprimento</replaceable></term>
                   
                   <listitem>
-                    <para>is the value from the <literal>pl</literal> (page
-                      length) capability, default 66</para>
+                    <para>
+								&Eacute; o valor da op&ccedil;&atilde;o
+							<literal>pl</literal> ( comprimento da p&aacute;gina),
+							o padr&atilde;o &eacute; 66
+							</para>
                   </listitem>
                 </varlistentry>
                 
@@ -2111,8 +2121,12 @@ $%&amp;'()*+,-./01234567
                   <term><replaceable>indent</replaceable></term>
                   
                   <listitem>
-                    <para>is the amount of the indentation from <command>lpr
-                        -i</command>, default 0</para>
+                    <para>
+								&Eacute; a quantidade de 
+							<foreignphrase>identa&ccedil;&atilde;o</foreignphrase>
+							fornecido pelo comando <command>lpr -i</command>, 
+							o padr&atilde;o &eacute; 0
+							</para>
                   </listitem>
                 </varlistentry>
                 
@@ -2120,8 +2134,10 @@ $%&amp;'()*+,-./01234567
                   <term><replaceable>login</replaceable></term>
                   
                   <listitem>
-                    <para>is the account name of the user printing the
-                      file</para>
+                    <para>
+								&Eacute; o nome da conta de usu&aacute;rio para 
+							pode imprimir o arquivo
+							</para>
                   </listitem>
                 </varlistentry>
                 
@@ -2129,17 +2145,22 @@ $%&amp;'()*+,-./01234567
                   <term><replaceable>host</replaceable></term>
                   
                   <listitem>
-                    <para>is the host name from which the job was
-                      submitted</para>
+                    <para>
+								&Eacute; o nome do computador para onde a 
+							impress&atilde;o ser&aacute; envida.
+							</para>
                   </listitem>
                 </varlistentry>
                 
                 <varlistentry>
-                  <term><replaceable>acct-file</replaceable></term>
+                  <term><replaceable>arquivo-estatistica</replaceable></term>
                   
                   <listitem>
-                    <para>is the name of the accounting file from the
-                      <literal>af</literal> capability.</para>
+								&Eacute; o nome do arquivo onde ser&aacute; armazenada
+							a estat&iacute;stica da impress&atilde;o, este valor 
+							&eacute; atribuido &agrave; op&ccedil;&atilde;o
+                    <literal>af</literal>.
+							</para>
                   </listitem>
                 </varlistentry>
               </variablelist>
@@ -2151,60 +2172,92 @@ $%&amp;'()*+,-./01234567
       <secondary>filters</secondary>
     </indexterm>          
           <listitem>
-            <para>A <emphasis>conversion filter</emphasis> converts a specific
-              file format into one the printer can render onto paper.  For
-              example, ditroff typesetting data cannot be directly printed,
-              but you can install a conversion filter for ditroff files to
-              convert the ditroff data into a form the printer can digest and
-              print.  Section <link
-                linkend="printing-advanced-convfilters">Conversion
-                Filters</link> tells all about them. Conversion filters also
-              need to do accounting, if you need printer accounting.
-              Conversion filters are started with the following arguments:
+            <para>
+					Um <emphasis>filtro de convers&atilde;o</emphasis> 
+				converte um fromato especifico do arquivo em outro que a impressora
+				pode compreender e tranformar em p&aacute;ginas impresas.  Por
+				exemplo, o formato ditroff typesetting n&atilde;o pode ser 
+				impresso diretamento, mas voc&ecirc; pode instalar um filtro
+				conversor para o formato que a impressora possa imprimir
+				corretamente.  A se&ccedil;&atilde;o <link
+				linkend="printing-advanced-convfilters">Filtros Conversores
+				</link> mostra como faze-los.  Filtros de convers&atilde;o que 
+				tamb&eacute;m necessite de estat&iacute;sticas, voc&ecirc; 
+				precisa habilitar a estat&iacute;stica na impressora.
+				Filtros de convers&atilde;o s&atilde;o inicializados
+				com os seguintes argumentos:
 
-              <cmdsynopsis>
-                <command>filter-name</command>
-                <arg
-                  choice="plain">-x<replaceable>pixel-width</replaceable></arg>
-                <arg choice="plain">-y<replaceable>pixel-height</replaceable></arg>
-                <arg choice="plain">-n <replaceable>login</replaceable></arg>
-                <arg choice="plain">-h <replaceable>host</replaceable></arg>
-                <arg choice="plain"><replaceable>acct-file</replaceable></arg>
-              </cmdsynopsis>
+				<cmdsynopsis>
+					<command>nome-do-filtro</command>
+						<arg
+							choice="plain">-x
+								<replaceable>largura do pixel</replaceable>
+						</arg>
+						<arg 
+							choice="plain">-y
+								<replaceable>altura do pixel</replaceable>
+						</arg>
+						<arg 
+							choice="plain">-n <replaceable>login</replaceable>
+						</arg>
+						<arg 
+							choice="plain">-h <replaceable>host</replaceable>
+						</arg>
+						<arg 
+							choice="plain"><replaceable>arquivo-estatistca</replaceable>
+						</arg>
+				</cmdsynopsis>
 
-              where <replaceable>pixel-width</replaceable> is the value
-              from the <literal>px</literal> capability (default 0) and
-              <replaceable>pixel-height</replaceable> is the value from the
-              <literal>py</literal> capability (default 0).</para>
+            Onde <replaceable>largura do pixel</replaceable> &eacute; o 
+				valor da op&ccedil;&atilde;o 
+				<literal>px</literal> (valor padr&atilde;o &eacute; 0) e 
+				<replaceable>altura do pixel</replaceable> &eacute; o valor 
+				da op&ccedil;&atilde;o
+				<literal>py</literal> ( o valor padr&atilde;o &eacute; 0).
+			</para>
           </listitem>
           
           <listitem>
-            <para>The <emphasis>output filter</emphasis> is used only if there
-              is no text filter, or if header pages are enabled. In my
-              experience, output filters are rarely used.  Section <link
-                linkend="printing-advanced-of">Output Filters</link> describe
-              them.  There are only two arguments to an output filter:
+            <para>
+					O <emphasis>filtro de sa&iacute;da</emphasis> &eacute; usado
+				somente se n&atilde;o existir um filtro de texto, ou se o 
+				cabe&ccedil;alho das p&aacute;ginas estiver habilitador.  Em
+				minha experi&ecirc;ncia, o filtro de sa&iacute;da s&atilde;o
+				raramente utilizado.  Na se&ccedil;&atilde;o
+              <link
+                linkend="printing-advanced-of">Filtros de Sa&iacute;da</link> 
+				mostra mais detalhes.  Existem somente dois argumentos para
+				os filtros de sa&iacute;da,. s&atilde;o eles:
 
               <cmdsynopsis>
-                <command>filter-name</command>
-                <arg choice="plain">-w<replaceable>width</replaceable></arg>
-                <arg choice="plain">-l<replaceable>length</replaceable></arg>
+                <command>nome do filtro</command>
+					<arg 
+						choice="plain">-w<replaceable>largura</replaceable>
+					</arg>
+					<arg 
+						choice="plain">-l<replaceable>comprimento</replaceable>
+					</arg>
               </cmdsynopsis>
 
-              which are identical to the text filters <option>-w</option> and
-              <option>-l</option> arguments.</para>
+              os quais s&atilde;o identicos aos argumetos dos filtros
+					de texto <option>-w</option> e <option>-l</option>.
+				</para>
           </listitem>
         </itemizedlist>
 
-        <para>Filters should also <emphasis>exit</emphasis> with the
-          following exit status:</para>
+			<para>
+				Os filtros devem tamb&eacute;m <emphasis>sair</emphasis> com
+			os seguintes status:
+			</para>
             
         <variablelist>
           <varlistentry>
             <term>exit 0</term>
 
             <listitem>
-              <para>If the filter printed the file successfully.</para>
+              <para>
+						Se o filtro obteve sucesso ao imprimir o arquivo.
+					</para>
             </listitem>
           </varlistentry>
           
@@ -2212,10 +2265,13 @@ $%&amp;'()*+,-./01234567
             <term>exit 1</term>
             
             <listitem>
-              <para>If the filter failed to print the file but wants 
-		<application>LPD</application> to
-                try to print the file again.  <application>LPD</application>
-		will restart a filter if it exits with this status.</para>
+					<para>
+						Se o filtro falhou ao imprimir o arquivo, mas aguarda o
+				<application>LPD</application> para tentar imprimir outra
+				vez.
+            <application>LPD</application> ir&aacute; reiniciar o filtro
+				se ele sair com esse status.
+					</para>
             </listitem>
           </varlistentry>
           
@@ -2223,86 +2279,126 @@ $%&amp;'()*+,-./01234567
             <term>exit 2</term>
             
             <listitem>
-              <para>If the filter failed to print the file and does not want
-                <application>LPD</application> to try again.  
-		<application>LPD</application> will throw out the file.</para>
+              <para>
+						Se o filtro falhar na impress&atilde;o do arquivo e 
+					n&atilde;o ir&aacute; aguardar o
+					<application>LPD</application> para tentar denovo.  
+					O <application>LPD</application> ir&aacute; jogar fora
+					o arquivo.
+					</para>
             </listitem>
           </varlistentry>
         </variablelist>
 
-        <para>The text filter that comes with the FreeBSD release,
-          <filename>/usr/libexec/lpr/lpf</filename>, takes advantage of the
-          page width and length arguments to determine when to send a form
-          feed and how to account for printer usage.  It uses the login, host,
-          and accounting file arguments to make the accounting entries.</para>
+        <para>
+				O filtro de texto que vem com a vers&atilde;o do FreeBSD,
+          <filename>/usr/libexec/lpr/lpf</filename>, tira vantagens dos
+			argumentos de largura e comprimento para determinar quando enviar
+			um caracter de alimenta&ccedil;&atilde;o de folha (
+			<foreignphrase>form feed</foreignphrase>)
+			e como gerar estat&iacute;sticas do uso da impressora.  Ele usa o
+			<foreignphrase>login</foreignphrase>, 
+			<foreignphrase>host</foreignphrase>, e o arquivo para armazenar as 
+			estat&iacute;sticas para fazer as estat&iacute;sticas.
+			</para>
 
-        <para>If you are shopping for filters, see if they are LPD-compatible.
-          If they are, they must support the argument lists described above.
-          If you plan on writing filters for general use, then have them
-          support the same argument lists and exit codes.</para>
+        <para>
+				Se voc&ecirc; deseja comprar filtros, veja se s&atilde;o 
+			compat&iacute;veis co o LPD.  Se eles forem, eles devem suportar
+			a lista de argumentos descrita acima.  Se voc&ecirc; planeja 
+			escrever seu pr&oacute;prio filtro para uso geral, eles 
+			tamb&eacute;m devem suportar a lista de argumentose deve utilizar
+			os c&oacute;digos descritos acima.
+			</para>
       </sect3>
       
       <sect3 id="printing-advanced-if-conversion">
-        <title>Accommodating Plain Text Jobs on &postscript; Printers</title>
-        <indexterm><primary>print <foreignphrase>jobs</foreignphrase></primary></indexterm>
+        <title>Acomodando Texto Puro em Impressoras &postscript;</title>
+        <indexterm>
+				<primary>print <foreignphrase>jobs</foreignphrase>
+				</primary>
+			</indexterm>
 
-        <para>If you are the only user of your computer and &postscript; (or
-          other language-based) printer, and you promise to never send plain
-          text to your printer and to never use features of various programs
-          that will want to send plain text to your printer, then you do not
-          need to worry about this section at all.</para>
+        <para>
+				Se s&oacute; voc&ecirc; &eacute; o usu&aacute;rio do seu computador
+			sua impressora suporta &postscript; ( ou outra linguagem ), e 
+			voc&ecirc; prometeu nunca enviar texto puro para a sua impressora e
+			nunca usar&aacute; as vantagens que v&aacute;rios programas que
+			gostariam de enviar testo puro para a sua impressora, ent&atilde;o 
+			voc&ecirc; n&atilde;o precisa se preocupar com esta 
+			se&ccedil;&atilde;o
+			</para>
             
-        <para>But, if you would like to send both &postscript; and plain text
-          <foreignphrase>jobs</foreignphrase> to the printer, then you are urged to augment your printer
-          setup.  To do so, we have the text filter detect if the arriving job
-          is plain text or &postscript;.  All &postscript; <foreignphrase>jobs</foreignphrase> must start with
-          <literal>%!</literal> (for other printer languages, see your printer
-          documentation).  If those are the first two characters in the job,
-          we have &postscript;, and can pass the rest of the job directly.  If
-          those are not the first two characters in the file, then the filter
-          will convert the text into &postscript; and print the result.</para>
+			<para>
+				Mas, se voc&ecirc; gostaria de enviar tanto &postscript; e 
+			texto puro para a sua impresssora, ent&atilde;o voc&ecirc; 
+          you are urged to augment configura&ccedil;&atilde;o da impressora.
+			Para fazer isso, nos temos que ter um filtro para detectar se o texto
+			&eacute; texto puro ou &postscript;.  Todas as impress&otilde;es em
+			&postscript; devem iniciar com <literal>%!</literal> ( para outra
+			linguagem de impressora, veja a documenta&ccedil;&atilde;o da 
+			sua impressora ).  Se estes dois primeiros caracteres aparecerem
+			no arquivo de impress&atilde;om nos temos &postscript;, e podemos
+			passar o resto da impress&atilde;o diretamente para a impressora.
+			Se nos n&atilde;o temos os dois primeiros caracteres no arquivo de
+			impress&atilde;o, ent&atilde;o o filtro deve converte-lo em
+			&postscript; e imprimir o resultado.
+			</para>
             
-        <para>How do we do this?</para>
+        	<para>Como nos faremos isso:
+			</para>
 
         <indexterm>
           <primary>printers</primary>
           <secondary>serial</secondary>
         </indexterm>
-        <para>If you have got a serial printer, a great way to do it is to
-          install <command>lprps</command>.  <command>lprps</command> is a
-          &postscript; printer filter which performs two-way communication with
-          the printer.  It updates the printer's status file with verbose
-          information from the printer, so users and administrators can see
-          exactly what the state of the printer is (such as <errorname>toner
-            low</errorname> or <errorname>paper jam</errorname>).  But more
-          importantly, it includes a program called <command>psif</command>
-          which detects whether the incoming job is plain text and calls
-          <command>textps</command> (another program that comes with
-          <command>lprps</command>) to convert it to &postscript;.  It then uses
-          <command>lprps</command> to send the job to the printer.</para>
+        <para>
+				Se nos temos uma impressora serial, o melhor caminha &eacute; 
+			instalando o <command>lprps</command>.  O <command>lprps</command> &eacute;
+			um filtro de impressora &postscript;, o qual habilita a 
+			comunica&ccedil;&atilde;o bi-direcional com a impressora.  Ele 
+			atualiza o arquivo de status da impressora com informa&ccedil;&atilde;o 
+			recebida da impressora, ent&atilde;o os usu&aacute;rios e administradores
+			podem ver exatamente o estado da impressora ( tais como
+         <errorname>toner baixo</errorname> ou <errorname>paper jam</errorname>).
+			mas o mais importante, &eacute; incluir um programa chamado de
+         <command>psif</command>, o qual detecta quando um 
+			<foreignphrase>job</foreignphrase> &eacute; em texto puro e ent&atilde;o
+			executa o comando <command>textps</command> ( outro pragama que vem
+			com o <command>lprps</command>) para converte-lo em &postscript;.  
+			Ele pode usar <command>lprps</command>  para enviar um 
+			<foreignphrase>job</foreignphrase> para a impressora.
+			</para>
             
-        <para><command>lprps</command> is part of the FreeBSD Ports Collection
-          (see <link linkend="ports">The Ports Collection</link>).  You can
-          fetch, build and install it yourself, of course.  After installing
-          <command>lprps</command>, just specify the pathname to the
-          <command>psif</command> program that is part of
-          <command>lprps</command>.  If you installed <command>lprps</command>
-          from the ports collection, use the following in the serial
-          &postscript; printer's entry in
-          <filename>/etc/printcap</filename>:</para>
+			<para>
+				O <command>lprps</command> &eacute; parte da cole&ccedil;&atilde;o de 
+	programas do FreeBSD (see 
+	<link linkend="ports">A Cole&ccedil;&atilde;o de Programas</link>).  voc&ecirc;
+	pode procurar, construir e instalar, por voc&ecirc; mesmo.  Depois da
+	instala&ccedil;&atilde;o do <command>lprps</command>, Especifique o 
+	diret&oacute;rio para o programa <command>psif</command> que faz parte do
+   <command>lprps</command>.  Se voc&ecirc; instalou o <command>lprps</command>
+	atrav&eacute;s dos <foreignphrase>ports</foreignphrase>, use a seguinte em
+	uma impressora serial e &postscript; configurada no arquivo
+   <filename>/etc/printcap</filename>:
+			</para>
               
         <programlisting>:if=/usr/local/libexec/psif:</programlisting>
 
-        <para>You should also specify the <literal>rw</literal> capability;
-          that tells <application>LPD</application> to open the printer in 
-	  read-write mode.</para>
+		<para>
+			Voc&ecirc; tamb&eacute;m deve especificar a opo&ccedil;&atilde;o
+		<literal>rw</literal>; que informa ao <application>LPD</application> 
+		para abrir a cminica&ccedil;&atilde;o com a impressora como apenas
+		leitura.
+		</para>
             
-        <para>If you have a parallel &postscript; printer (and therefore cannot
-          use two-way communication with the printer, which
-          <command>lprps</command> needs), you can use the following shell
-          script as the text filter:</para>
+		<para>
+			Se voc&ecirc; tem uma impressora &postscript; ( e n&atilde;o 
+		utiliza o modo bi-direcional, como necessita o <command>lprps</command>),
+		voc&ecirc; pode utilizar o seguinte script como um filtro texto:
+		</para>
 
-        <programlisting>#!/bin/sh
+		<programlisting>#!/bin/sh
 #
 #  psif - Print PostScript or plain text on a PostScript printer
 #  Script version; NOT the version that comes with lprps
@@ -2326,49 +2422,70 @@ else
     exit 2
 fi</programlisting>
             
-        <para>In the above script, <command>textps</command> is a program we
-          installed separately to convert plain text to &postscript;.  You can
-          use any text-to-&postscript; program you wish.  The FreeBSD Ports
-          Collection (see <link linkend="ports">The Ports Collection</link>)
-          includes a full featured text-to-&postscript; program called
-          <literal>a2ps</literal> that you might want to investigate.</para>
+		<para>
+			No script acima, <command>textps</command> &eacute; um programa
+		que nos instalamos separadamente para converter texto puro em 
+		&postscript;.  Voc&ecirc; pode usar qualquer conversor de texto para
+		&postscript; que voc&ecirc; desejar.  A cole&ccedil;&atilde;o de 
+		programas do FreeBSD ( <foreignphrase>prots</foreignphrase>, veja em
+      <link linkend="ports">Cole&ccedil;&atilde;o de Programas</link> )
+		inclui um programa conversor de texto para &postscript; com facilidades
+		chamado <literal>a2ps</literal> que voc&ecirc; deveria considerar.
+		</para>
       </sect3>
           
       <sect3 id="printing-advanced-ps">
-        <title>Simulating &postscript; on Non &postscript; Printers</title>
+			<title>
+					Simulando &postscript; em Impressoras N&atilde;o 
+					&postscript; 
+			</title>
         <indexterm>
           <primary>PostScript</primary>
           <secondary>emulating</secondary>
         </indexterm>
         <indexterm>
           <primary>Ghostscript</primary></indexterm>
-        <para>&postscript; is the <emphasis>de facto</emphasis> standard for
-          high quality typesetting and printing.  &postscript; is, however, an
-          <emphasis>expensive</emphasis> standard. Thankfully, Aladdin
-          Enterprises has a free &postscript; work-alike called
-          <application>Ghostscript</application> that runs with FreeBSD.
-          Ghostscript can read most &postscript; files and can render their
-          pages onto a variety of devices, including many brands of
-          non-PostScript printers.  By installing Ghostscript and using a
-          special text filter for your printer, you can make your
-          non &postscript; printer act like a real &postscript; printer.</para>
+			<para>
+				&postscript; &eacute; <emphasis>de facto</emphasis> padr&atilde;o
+			para impress&atilde;o de alta qualidade.  &postscript; &eacute;
+			entretanto, um padr&atilde;o <emphasis>caro</emphasis>.  Ficamos
+			gratos &agrave; Aladdin Enterprises que possui um programa chamado
+			<application>Ghostscript</application> que pode trabalhar com a 
+			maioria dos arquivos &postscript; e pode mostrar suas p&aacute;gianas
+			em uma variedade de dispositivos, incluindo um grande n&uacute;mero 
+			de impressoras n&atilde;o &postscript;.  Com a 
+			instala&ccedil;&atilde;o do Ghostscript e usando filtros especiais
+			de texto para a sua impressora, voc&ecirc; pode fazer uma impressora
+			n&atilde;o &postscript; funcionar como uma impressora &postscript;
+			real.
+			</para>
             
-        <para>Ghostscript is in the FreeBSD Ports Collection, if you
-          would like to install it from there.  You can fetch, build, and
-          install it quite easily yourself, as well.</para>
+			<para>
+				Ghostscript eest&aacute; nos 
+			<foreignphrase>ports</foreignphrase> do FreeBSD, se voc&ecirc; 
+			poder&aacute; instala-lo de l&aacute;.  Voc&ecirc; deve buscar,
+			compilar e instala-lo muito facilmente.
+			</para>
             
-        <para>To simulate &postscript;, we have the text filter detect if it is
-          printing a &postscript; file.  If it is not, then the filter will pass
-          the file directly to the printer; otherwise, it will use Ghostscript
-          to first convert the file into a format the printer will
-          understand.</para>
+			<para>
+				Para simular &postscript;, nos devemos que ter no filtro um 
+			detector para verificar se estamos imprimindo em &postscript; ou 
+			texto puro.  Se for o caso de texto puro, ent&atilde;o o filtro 
+			dever&aacute; repassar as informa&ccedil;&otilde;es diretamente
+			para a impressora, caso contr&aacute;rio, ele dever&aacute;
+			utilizar o Ghostscript antes para converter &postscript; para o
+			formato reconhecido pela a impressora.
+			</para>
             
-        <para>Here is an example: the following script is a text filter
-          for Hewlett Packard DeskJet 500 printers.  For other printers,
-          substitute the <option>-sDEVICE</option> argument to the
-          <command>gs</command> (Ghostscript) command.  (Type <command>gs
-            -h</command> to get a list of devices the current installation of
-          Ghostscript supports.)</para>
+			<para>
+				Aqui tem um exemplo: o exemplo a seguir &eacute; um filtro texto 
+			para uma impressora da Hewlett Packard, a Deskjet 500.  Para outras
+			impressoras, voc&ecirc; deve substituir o argumento da 
+			op&ccedil;&atilde;o <option>-sDEVICE</option> do comando
+         <command>gs</command> (Ghostscript).  Digitando <command>gs
+            -h</command> voc&ecirc; ter&aacute; a lista dos dispositivos
+			suportados pela vers&atilde;o instalada do Ghostscript.
+			</para>
 
         <programlisting>#!/bin/sh
 #
@@ -2412,86 +2529,120 @@ fi
 
 exit 2</programlisting>
 
-        <para>Finally, you need to notify <application>LPD</application> of 
-	  the filter via the <literal>if</literal> capability:</para>
+			<para>
+				Finalmente, voc&ecirc; deve notificar o 
+			<application>LPD</application> do filtro atrav&eacute;s da 
+			op&ccedil;&atilde;o <literal>if</literal>
+			</para>
             
         <programlisting>:if=/usr/local/libexec/ifhp:</programlisting>
 
-        <para>That is it.  You can type <command>lpr plain.text</command> and
-          <filename>lpr whatever.ps</filename> and both should print
-          successfully.</para>
+			<para>
+				Feito isso, voc&ecirc; poder&aacute; digitar 
+			<command>lpr texto.puro</command> e
+          <filename>lpr qualquer-coisa.ps</filename> e ambos dever&atilde;o
+			ser impressos corretamente na impressora.
+			</para>
       </sect3>
       
       <sect3 id="printing-advanced-convfilters">
-        <title>Conversion Filters</title>
+        <title>Filtros Conversores</title>
 
-        <para>After completing the simple setup described in <link
-            linkend="printing-simple">Simple Printer Setup</link>, the first
-          thing you will probably want to do is install conversion filters for
-          your favorite file formats (besides plain ASCII text).</para>
+			<para>
+				Apos ter completamente configurado como descreve a 
+			se&ccedil;&atilde;o 
+			<link linkend="printing-simple">
+				Configura&ccedil;&atilde;o Simples da Impressora
+			</link>, a primeira coisa que voc&ecirc; provavelmente pensa &eacute; 
+			instalar filtros conversores para seus formatos favoritos de
+			arquivo.
+			</para>
             
         <sect4>
-          <title>Why Install Conversion Filters?</title>
+          <title>
+					Porque Instalar Filtros Conversores?
+			</title>
           <indexterm>
             <primary>&tex;</primary>
             <secondary>printing dvi files</secondary>
           </indexterm>
           
-          <para>Conversion filters make printing various kinds of files easy.
-            As an example, suppose we do a lot of work with the &tex;
-            typesetting system, and we have a &postscript; printer.  Every time
-            we generate a DVI file from &tex;, we cannot print it directly until
-            we convert the DVI file into &postscript;.  The command sequence
-            goes like this:</para>
+			<para>
+				Filtros conversores podem imprimir uma variedade de tipos de
+			arquivo facilmente.  Como por exemplo, suponha que tenhamos que 
+			fazer um grande trabalho com o sistema &tex;, e nos temos uma 
+			impressora &postscript;.  Cada vez que nos geramos um arquivo DVI
+			atrav&eacute;s do &tex;, nos n&atilde;o podemos imprimi-lo 
+			diretamente, pos precisamos converte-lo em &postscript;.  A 
+			seq&utrema;&ecirc;ncia de comandos sera algo semelhante a:
+			</para>
                 
           <screen>&prompt.user; <userinput>dvips seaweed-analysis.dvi</userinput>
 &prompt.user; <userinput>lpr seaweed-analysis.ps</userinput></screen>
                 
-          <para>By installing a conversion filter for DVI files, we can skip
-            the hand conversion step each time by having 
-	    <application>LPD</application> do it for us.
-            Now, each time we get a DVI file, we are just one step away from
-            printing it:</para>
+			<para>
+				Instalando um filtro para converter os aquivos DVI em &postscript;,
+			poder&iacute;amos pular um passo a cada vez que tivessemos que 
+			imprimir.  O <application>LPD</application> poder&aacute; realizar
+			esse passo para nos.
+			</para>
               
           <screen>&prompt.user; <userinput>lpr -d seaweed-analysis.dvi</userinput></screen>
                 
-          <para>We got <application>LPD</application> to do the DVI file 
-	    conversion for us by specifying
-            the <option>-d</option> option.  Section <link
-              linkend="printing-lpr-options-format">Formatting and Conversion
-              Options</link> lists the conversion options.</para>
+			<para>
+				Nos informamos o <application>LPD</application> para converter 
+			o arquivo DVI atraves da op&ccedil;&atilde;o <option>-d</option>. 
+				Veja a se&ccedil;&atilde;o <link
+			linkend="printing-lpr-options-format">
+			Op&ccedil;&atilde;oes de Formata&ccedil;&atilde;o e Convers&atilde;o
+			</link> mostra uma listar de op&ccedil;&otilde;es de convers&atilde;o
+			</para>
               
-          <para>For each of the conversion options you want a printer to
-            support, install a <emphasis>conversion filter</emphasis> and
-            specify its pathname in <filename>/etc/printcap</filename>.  A
-            conversion filter is like the text filter for the simple printer
-            setup (see section <link linkend="printing-textfilter">Installing
-              the Text Filter</link>) except that instead of printing plain
-            text, the filter converts the file into a format the printer can
-            understand.</para>
+			<para>
+				Para Cada op&ccedil;&atilde;o de convers&atilde;o que voc&ecirc;
+			deseja que sua impressora suporte, deve instalar um 
+			<emphasis>Filtro Conversor</emphasis> e especificar o diret&oacute;rio
+			no arquivo <filename>/etc/printcap</filename>.  Um filtro conversor
+			&eacute; um filtro texto como foi definido na se&ccedil;&atilde;o 
+			Configura&ccedil;&atilde;o Simples de Impressora ( veja a 
+			se&ccedil;&atilde;o
+			<link linkend="printing-textfilter">Instalando um Filtro de Texto
+			</link>) Exceto pelo fato imprimir arquivos de texto puro, os filtros 
+			convertem os arquivos em um formato que a impressora pode entender.
+			</para>
         </sect4>
 
         <sect4>
-          <title>Which Conversions Filters Should I Install?</title>
+          <title>
+				Qual o Filtro Conversor Devo Instalar?
+			</title>
           
-          <para>You should install the conversion filters you expect to use.
-            If you print a lot of DVI data, then a DVI conversion filter is in
-            order.  If you have got plenty of troff to print out, then you
-            probably want a troff filter.</para>
+			<para>
+				Voc&ecirc; deve instalar o filtro conversor que voc&ecirc; espera
+			utilizar.  Se voc&ecirc; imprime uma grande quantidade de dados
+			no formato DVI, ent&atilde;o voc&ecirc; deve term um filtro para 
+			converte-lo.  Se voc&ecirc; deseja imprimir saidas atrav&eacute;s de 
+			troff, ent&atilde;o provavelmente voc&ecirc; ter&aacute; um filtro
+			troff.
+			</para>
               
-          <para>The following table summarizes the filters that 
-	    <application>LPD</application> works
-            with, their capability entries for the
-            <filename>/etc/printcap</filename> file, and how to invoke them
-            with the <command>lpr</command> command:</para>
+			<para>
+				A seguinte tabela sumariza os filtros que o 
+			<application>LPD</application> pode trabalhar, e suas 
+			op&ccedil;&atilde;o est&atilde;o no arquivo 
+			<filename>/etc/printcap</filename>, e como devem ser chamados com
+			o comando <command>lpr</command>:</para>
 
           <informaltable frame="none">
             <tgroup cols="3">
               <thead>
                 <row>
-                  <entry>File type</entry>
-                  <entry><filename>/etc/printcap</filename> capability</entry>
-                  <entry><command>lpr</command> option</entry>
+                  <entry>Tipo de Arquivo type</entry>
+                  <entry>Op&ccedil;&atilde;o no 
+							<filename>/etc/printcap</filename>
+						</entry>
+                  <entry>Op&ccedil;&otilde;es do <command>lpr</command>
+						</entry>
                 </row>
               </thead>
               
@@ -2521,7 +2672,7 @@ exit 2</programlisting>
                 </row>
                 
                 <row>
-                  <entry>FORTRAN text</entry>
+                  <entry>texto em FORTRAN</entry>
                   <entry><literal>rf</literal></entry>
                   <entry><option>-f</option></entry>
                 </row>
@@ -2539,7 +2690,7 @@ exit 2</programlisting>
                 </row>
                 
                 <row>
-                  <entry>plain text</entry>
+                  <entry>Texto Puro</entry>
                   <entry><literal>if</literal></entry>
                   <entry>none, <option>-p</option>, or
                     <option>-l</option></entry>
@@ -2548,43 +2699,61 @@ exit 2</programlisting>
             </tgroup>
           </informaltable>
           
-          <para>In our example, using <command>lpr -d</command> means the
-            printer needs a <literal>df</literal> capability in its entry in
-            <filename>/etc/printcap</filename>.</para>
+			<para>
+				No nosso exemplo, usamos o comando <command>lpr -d</command> 
+			que significa dizer que precisamos da op&ccedil;&atilde;o
+         <literal>df</literal> dentro do arquivo 
+			<filename>/etc/printcap</filename>.
+			</para>
               
           <indexterm><primary>FORTRAN</primary></indexterm>
-          <para>Despite what others might contend, formats like FORTRAN text
-            and plot are probably obsolete.  At your site, you can give new
-            meanings to these or any of the formatting options just by
-            installing custom filters.  For example, suppose you would like to
-            directly print Printerleaf files (files from the Interleaf desktop
-            publishing program), but will never print plot files.  You could
-            install a Printerleaf conversion filter under the
-            <literal>gf</literal> capability and then educate your users that
-            <command>lpr -g</command> mean <quote>print Printerleaf
-            files.</quote></para>
+			<para>
+				Apesar de algumas pessoas possam pensar, formatos como o 
+			FORTRAN e plot s&atilde;o provavelmente obsoleto.  No seu 
+			s&iacute;tio, voc&ecirc; pode dar novas op&ccedil;&otilde;es de 
+			formata&ccedil;&atilde;o para esses ou qualquer outra 
+			formata&ccedil;&atilde;o apenas instalando novos filtros ajustados
+			para o seu uso.  Por exemplo, suponhamos que seja necess&aacute;rio
+			imprimir diretamente arquivos Printerleaf ( arquivos vindos do
+			do programa de pubica&ccedil;&atilde;o Interleaf ), mas voc&ecirc; 
+			nunca ir&aacute; imprimir arquivos de plot.  Voc&ecirc; poder&aacute;
+			instalar um filtro para converter esse formato utilizando a 
+			op&ccedil;&atilde;o <literal>gf</literal> e educar os seus 
+			usu&aacute;rios a utilizarem o comando <command>lpr -g</command> 
+			quando forem imprimir arquivos do tipo <quote>Printerleaf</quote>.
+			</para>
         </sect4>
 
         <sect4>
-          <title>Installing Conversion Filters</title>
+			<title>
+				Instalando Filtros Conversores
+			</title>
           
-          <para>Since conversion filters are programs you install outside of
-            the base FreeBSD installation, they should probably go under
-            <filename>/usr/local</filename>.  The directory
-            <filename>/usr/local/libexec</filename> is a popular location,
-            since they are specialized programs that only 
-	    <application>LPD</application> will run;
-            regular users should not ever need to run them.</para>
+			<para>
+				Deste que os filtros de convers&atilde;o s&atilde;o programas
+			instalados por fora da instala&ccedil;&atilde;o padr&atilde;o do
+			FreeBSD, eles devem, provavelmente, ficar no diret&oacute;rio
+			<filename>/usr/local</filename>.  O diret&oacute;rio
+			<filename>/usr/local/libexec</filename> &eacute; a 
+			localiza&ccedil;&atilde;o mais indicado, uma vez que s&atilde;o 
+			programas especializados que somente o <application>LPD</application>
+			ir&aacute; usar; usu&aacute;rios regulares do sistema,
+			n&atilde;o dever&atilde;o ter necessidade de execut&aacute;-los.
+			</para>
               
-          <para>To enable a conversion filter, specify its pathname under the
-            appropriate capability for the destination printer in
-            <filename>/etc/printcap</filename>.</para>
+			<para>
+				Para habilitar dum filtro conversor, especifique o diret&oacute;rio
+			no qual ele se encontra, na op&ccedil;&atilde;o espec&iacute;fica
+			do arquivo <filename>/etc/printcap</filename>.
+			</para>
               
-          <para>In our example, we will add the DVI conversion filter to the
-            entry for the printer named <literal>bamboo</literal>.  Here is
-            the example <filename>/etc/printcap</filename> file again, with
-            the new <literal>df</literal> capability for the printer
-            <literal>bamboo</literal>.</para>
+			<para>
+				Um outro exemplo, nos iremos adicionar um filtro conversor DVI
+			na impressora chamada <literal>bamboo</literal>.  Aqui um exemplo
+			de um arquivo <filename>/etc/printcap</filename>, com a nova
+			op&ccedil;&atilde;o <literal>df</literal> para a impressora
+			<literal>bamboo</literal>.
+			</para>
 
           <programlisting>#
 #  /etc/printcap for host rose - added df filter for bamboo
@@ -2600,9 +2769,11 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
         :if=/usr/local/libexec/psif:\
         :df=/usr/local/libexec/psdf:</programlisting>
 
-          <para>The DVI filter is a shell script named
-            <filename>/usr/local/libexec/psdf</filename>.  Here is that
-            script:</para>
+			<para>
+				O filtro DVI &eacute; um script para o shell chamado de
+			<filename>/usr/local/libexec/psdf</filename>.  aqui est&aacute; o
+			script
+			</para>
 
           <programlisting>#!/bin/sh
 #
@@ -2613,28 +2784,39 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 #
 exec /usr/local/bin/dvips -f | /usr/local/libexec/lprps "$@"</programlisting>
 
-          <para>This script runs <command>dvips</command> in filter mode (the
-            <option>-f</option> argument) on standard input, which is the job
-            to print.  It then starts the &postscript; printer filter
-            <command>lprps</command> (see section <link
-              linkend="printing-advanced-if-conversion">Accommodating Plain
-              Text Jobs on &postscript; Printers</link>) with the arguments 
-	    <application>LPD</application>
-            passed to this script. <command>lprps</command> will use those
-            arguments to account for the pages printed.</para>
+			<para>
+				Esse script executa <command>dvips</command> no modo de filtro
+			( o argumento <option>-f</option> ) na entrada padr&atilde;o, na qual
+			o job ser&aacute; impresso.  Ele inicia o filtro &postscript; da
+			impressora <command>lprps</command> ( veja a se&ccedil;&atilde;o
+			<link linkend="printing-advanced-if-conversion">
+			Acomodando Trabalhgos de Impress&atilde;o em Texto Puro em 
+			Impressoras &postscript;
+			</link> ) com os argumentos do <application>LPD</application> passado 
+			pelo script.  O comando <command>lprps</command> ir&aacute; ser usado
+			como argumento para a contabilidade de p&aacute;ginas impressas.
+			</para>
+
         </sect4>
             
         <sect4>
-          <title>More Conversion Filter Examples</title>
+          <title>
+				Mais Exemplos de Filtros Conversores
+			</title>
               
-          <para>Since there is no fixed set of steps to install conversion
-            filters, let me instead provide more examples.  Use these as
-            guidance to making your own filters.  Use them directly, if
-            appropriate.</para>
+			<para>
+				Deste que n&atilde;o existe um conjunto de passos para a 
+			instala&ccedil;&atilde;o de filtros conversores, Nos iremos 
+			providenciar mais exempemplos.  Use-os como guia para fazer os
+			seus pr&oacute;prios filtros.  Use-os diretamente se forem 
+			apropriados.
+			</para>
               
-          <para>This example script is a raster (well, GIF file, actually)
-            conversion filter for a Hewlett Packard LaserJet III-Si
-            printer:</para>
+			<para>
+				Esse exemplo de script &eacute; um filtro conversor
+			<foreignphrase>raster</foreignphrase> ( com arquivos GIF atualmente )
+			para as impressoras Hewlett Packard LaserJet III-Si:
+			</para>
 
           <programlisting>#!/bin/sh
 #
@@ -2646,13 +2828,18 @@ giftopnm | ppmtopgm | pgmtopbm | pbmtolj -resolution 300 \
     &amp;&amp; exit 0 \
     || exit 2</programlisting>
 
-          <para>It works by converting the GIF file into a portable anymap,
-            converting that into a portable graymap, converting that into a
-            portable bitmap, and converting that into LaserJet/PCL-compatible
-            data.</para>
+			<para>
+				Ele converte um arquivo GIF em um formato
+			<foreignphrase>anymap</foreignphrase> port&aacute;vel, convertendo
+			em um mapa de cinza port&aacute;vel, convertento em um formato
+			bitmap port&aacute;vel, e eet&atilde;o convertendo em dados
+			compat&iacute;vel PCL.
+			</para>
               
-          <para>Here is the <filename>/etc/printcap</filename> file with an
-            entry for a printer using the above filter:</para>
+			<para>
+				Um exemplo de arquivo <filename>/etc/printcap</filename> com
+			uma entrada para uma impressora usando o filtro acima.
+			</para>
 
           <programlisting>#
 #  /etc/printcap for host orchid
@@ -2662,9 +2849,11 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
         :if=/usr/local/libexec/hpif:\
         :vf=/usr/local/libexec/hpvf:</programlisting>
               
-          <para>The following script is a conversion filter for troff data
-            from the groff typesetting system for the &postscript; printer named
-            <literal>bamboo</literal>:</para>
+			<para>
+				O pr&oacute;ximo script converte dados troff vindos de um 
+			sistema groff para uma impressora &postscript; chamada 
+         <literal>bamboo</literal>:
+			</para>
 
           <programlisting>#!/bin/sh
 #
@@ -2673,9 +2862,12 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 #
 exec grops | /usr/local/libexec/lprps "$@"</programlisting>
               
-          <para>The above script makes use of <command>lprps</command> again
-            to handle the communication with the printer.  If the printer were
-            on a parallel port, we would use this script instead:</para>
+			<para>
+				O script acima, faz uso novamente do comando 
+			<command>lprps</command> para manipular a comunica&ccedil;&atilde;o
+			com a impressora.  Se a impressora estiver na porta paralela,
+			nos devemos usar este script:
+			</para>
 
           <programlisting>#!/bin/sh
 #
@@ -2684,15 +2876,18 @@ exec grops | /usr/local/libexec/lprps "$@"</programlisting>
 #
 exec grops</programlisting>
           
-          <para>That is it.  Here is the entry we need to add to
-            <filename>/etc/printcap</filename> to enable the filter:</para>
+			<para>
+				Aqui est&aacute; a entrada que precisamos adicionar no arquivo
+			<filename>/etc/printcap</filename> para habilitar o filtro:
+			</para>
                 
           <programlisting>:tf=/usr/local/libexec/pstf:</programlisting>
               
-          <para>Here is an example that might make old hands at FORTRAN blush.
-            It is a FORTRAN-text filter for any printer that can directly
-            print plain text.  We will install it for the printer
-            <literal>teak</literal>:</para>
+			<para>
+				Aqui est&aacute; um filtro para texto em FORRAN para qualquer
+			impressora diretamente em texto puro.  Nos iremos instalar isso
+			para a impressora chamada <literal>teak</literal>:
+			</para>
 
           <programlisting>#!/bin/sh
 #
@@ -2704,39 +2899,53 @@ printf "\033&amp;k2G" &amp;&amp; fpr &amp;&amp; printf "\033&amp;l0H" &amp;&amp;
  exit 0
 exit 2</programlisting>
               
-          <para>And we will add this line to the
-            <filename>/etc/printcap</filename> for the printer
-            <literal>teak</literal> to enable this filter:</para>
+			<para>
+				E nos adicionamos esta linha no arquivo
+			<filename>/etc/printcap</filename> para a impressora
+			<literal>teak</literal> para habilitar esse filtro:
+			</para>
               
           <programlisting>:rf=/usr/local/libexec/hprf:</programlisting>
               
-          <para>Here is one final, somewhat complex example.  We will add a
-            DVI filter to the LaserJet printer <literal>teak</literal>
-            introduced earlier.  First, the easy part: updating
-            <filename>/etc/printcap</filename> with the location of the DVI
-            filter:</para>
+			<para>
+				Aqui &eacute; o fim desse exemplo complexo.  Nos iremos adicionar
+			o filtro DVI para a impressora LaserJet <literal>teak</literal>
+			indrotuzido recentemente.  Primeiro, a parte mais f&aacute;cil; 
+			atualize o arquivo <filename>/etc/printcap</filename> com a 
+			localiza&ccedil;&atilde;o do filtro DVI:
+			</para>
               
           <programlisting>:df=/usr/local/libexec/hpdf:</programlisting>
               
-          <para>Now, for the hard part: making the filter.  For that, we need
-            a DVI-to-LaserJet/PCL conversion program.  The FreeBSD Ports
-            Collection (see <link linkend="ports">The Ports Collection</link>)
-            has one: <command>dvi2xx</command> is the name of the package.
-            Installing this package gives us the program we need,
-            <command>dvilj2p</command>, which converts DVI into LaserJet IIp,
-            LaserJet III, and LaserJet 2000 compatible codes.</para>
+				<para>
+					Agora, a parte mais dif&iacute;cil: fazendo o filtro.
+			Para tanto, nos iremos necessitar de um programa conversor de DVI
+			para LaserJet/PCL.  Na cole&ccedil;&atilde;o de programas do
+			FreeBSD ( veja em 
+			<link linkend="ports">A Cole&ccedil;&atilde;o de Programas</link>)
+			possui um: <command>dvi2xx</command> &eacute; o nome do pacote.
+			Instalando esse pacote, nos teremos o programa necess&aacute;rio,
+			<command>dvilj2p</command>, o qual converte DVI em arquivos 
+			LaserJet IIp, LaserJet III, e LaserJet 2000 compat&iacute;veis.
+				</para>
               
-          <para><command>dvilj2p</command> makes the filter
-            <command>hpdf</command> quite complex since
-            <command>dvilj2p</command> cannot read from standard input.  It
-            wants to work with a filename. What is worse, the filename has to
-            end in <filename>.dvi</filename> so using
-            <filename>/dev/fd/0</filename> for standard input is problematic.
-            We can get around that problem by linking (symbolically) a
-            temporary file name (one that ends in <filename>.dvi</filename>)
-            to <filename>/dev/fd/0</filename>, thereby forcing
-            <command>dvilj2p</command> to read from standard input.</para>
+				<para>
+					O comando <command>dvilj2p</command> deixa o filtro 
+			<command>hpdf</command> pouco complexo uma vez que o comando
+			<command>dvilj2p</command> n&atilde;o pode ler da entrada 
+			padr&atilde;o.  Ele necessita trabalhar com o nome do arquivo.
+			Isso &eacute; rium, o nome do arquivo deve ter no final
+			<filename>.dvi</filename> ent&atilde;o usando o
+			<filename>/dev/fd/0</filename> para a entrada padr&atilde;o 
+			seria problem&aacute;tico.  Nos podemos contornar o problema 
+			linkando ( simbolicamente ) um nome tempor&aacute;rio de arquivo 
+			( um que terminaria em <filename>.dvi</filename> ) para o
+			<filename>/dev/fd/0</filename>, for&ccedil;ando assim o
+			<command>dvilj2p</command> ler da entrada padr&atilde;o.
+				</para>
               
+---
+
           <para>The only other fly in the ointment is the fact that we cannot
             use <filename>/tmp</filename> for the temporary link. Symbolic
             links are owned by user and group <username>bin</username>.  The
@@ -2818,8 +3027,10 @@ exit 0</programlisting>
         </sect4>
 
         <sect4 id="printing-advanced-autoconv">
-          <title>Automated Conversion: an Alternative to Conversion
-            Filters</title>
+          <title>
+				Convers&atilde;o Autom&aacute;tica: Uma Alternatica aos Filtros 
+				de Convers&atilde;o
+            </title>
               
           <para>All these conversion filters accomplish a lot for your
             printing environment, but at the cost forcing the user to specify
@@ -2853,7 +3064,7 @@ exit 0</programlisting>
       </sect3>
       
       <sect3 id="printing-advanced-of">
-        <title>Output Filters</title>
+        <title>Filtros de Sa&iacute;da</title>
 
         <para>The <application>LPD</application> spooling system supports one 
 	  other type of filter that
@@ -2947,7 +3158,7 @@ exit 0</programlisting>
       </sect3>
       
       <sect3 id="printing-advanced-lpf">
-        <title><command>lpf</command>: a Text Filter</title>
+        <title><command>lpf</command>: Um Filtro de Texto</title>
 
         <para>The program <filename>/usr/libexec/lpr/lpf</filename> that comes
           with FreeBSD binary distribution is a text filter (input filter)
@@ -2980,7 +3191,7 @@ exit 0</programlisting>
     </sect2>
     
     <sect2 id="printing-advanced-header-pages">
-      <title>Header Pages</title>
+      <title>P&aacute;ginas de Cabe&ccedil;alhos</title>
       
       <para>If you have <emphasis>lots</emphasis> of users, all of them using
         various printers, then you probably want to consider <emphasis>header
@@ -3012,7 +3223,9 @@ exit 0</programlisting>
           &postscript; Printers</link>.</para>
       
           <sect3 id="printing-advanced-header-pages-enabling">
-        <title>Enabling Header Pages</title>
+			<title>
+				Habilitanto P&aacute;ginas de Cabe&ccedil;alho
+			</title>
 
         <para>In the <link linkend="printing-simple">Simple Printer
             Setup</link> section, we turned off header pages by specifying
@@ -3070,7 +3283,7 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
       </sect3>
       
       <sect3 id="printing-advanced-header-pages-controlling">
-        <title>Controlling Header Pages</title>
+        <title>Controlando P&aacute;ginas de Cabe&ccedil;alho</title>
 
         <para>By enabling header pages, <application>LPD</application> will
 	  produce a <emphasis>long
@@ -3224,7 +3437,9 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
       </sect3>
       
       <sect3 id="printing-advanced-header-pages-ps">
-        <title>Header Pages on &postscript; Printers</title>
+			<title>
+				P&aacute;ginas de Cabe&ccedil;alho em Impressoras &postscript;
+			</title>
 
         <para>As described above, <application>LPD</application> can generate
 	  a plain text header page
@@ -3395,7 +3610,9 @@ done
     </sect2>
     
     <sect2 id="printing-advanced-network-printers">
-      <title>Networked Printing</title>
+			<title>
+				Impress&atilde;o em Rede
+			</title>
       
       <indexterm>
         <primary>printers</primary>
@@ -3449,7 +3666,9 @@ done
       </itemizedlist>
           
       <sect3 id="printing-advanced-network-rm">
-        <title>Printers Installed on Remote Hosts</title>
+			<title>
+				Impressoras Intaladas em um Computador Remoto
+			</title>
 
         <para>The <application>LPD</application> spooling system has built-in
 	  support for sending <foreignphrase>jobs</foreignphrase> to
@@ -3595,7 +3814,10 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
       </sect3>
       
       <sect3 id="printing-advanced-network-net-if">
-        <title>Printers with Networked Data Stream Interfaces</title>
+			<title>
+				Impressoras com Interfaces de Rede 
+				<foreignphrase>Data Stream</foreignphrase>
+			</title>
 
         <para>Often, when you buy a network interface card for a printer, you
           can get two versions: one which emulates a <foreignphrase>spooler</foreignphrase> (the more
@@ -3665,7 +3887,9 @@ exec /usr/libexec/lpr/lpf "$@" | /usr/local/libexec/netprint scrivener 5100</pro
     </sect2>
     
     <sect2 id="printing-advanced-restricting">
-      <title>Restricting Printer Usage</title>
+			<title>
+				Restingindo o Uso da Impressora
+			</title>
       
       <indexterm>
         <primary>printers</primary>
@@ -3678,7 +3902,9 @@ exec /usr/libexec/lpr/lpf "$@" | /usr/local/libexec/netprint scrivener 5100</pro
         can be, and how large the printer queues can get.</para>
       
       <sect3 id="printing-advanced-restricting-copies">
-        <title>Restricting Multiple Copies</title>
+			<title>
+				Restringindo Multiplas C&oacute;pias
+			</title>
 
         <para>The <application>LPD</application> system makes it easy for
 	  users to print multiple copies
@@ -3759,7 +3985,9 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
       </sect3>
       
       <sect3 id="printing-advanced-restricting-access">
-        <title>Restricting Access to Printers</title>
+			<title>
+				Restringindo o Acesso as Impressoras
+			</title>
 
         <para>You can control who can print to what printers by using the &unix;
           group mechanism and the <literal>rg</literal> capability in
@@ -3815,7 +4043,9 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
       </sect3>
       
       <sect3 id="printing-advanced-restricting-sizes">
-        <title>Controlling Sizes of Jobs Submitted</title>
+			<title>
+				Controlando o Tamanho do Arquivos Enviados
+			</title>
 
         <indexterm><primary>print <foreignphrase>jobs</foreignphrase></primary></indexterm>
         <para>If you have many users accessing the printers, you probably need
@@ -3892,7 +4122,9 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
       </sect3>
       
       <sect3 id="printing-advanced-restricting-remote">
-        <title>Restricting Jobs from Remote Printers</title>
+			<title>
+				Restringindo a Impress&atilde;o Remota
+			</title>
 
         <para>The <application>LPD</application> spooling system provides 
 	  several ways to restrict print
@@ -4003,7 +4235,9 @@ madrigal.fishbaum.de</programlisting>
     </sect2>
     
     <sect2 id="printing-advanced-acct">
-      <title>Accounting for Printer Usage</title>
+			<title>
+				Contabilizando o Uso da Impressora
+			</title>
           
       <indexterm>
         <primary>accounting</primary>
@@ -4068,7 +4302,10 @@ madrigal.fishbaum.de</programlisting>
         information.</para>
           
       <sect3>
-        <title>Quick and Dirty Printer Accounting</title>
+			<title>
+				Uma Comtabilidade R&aacute;pida e 
+				<foreignphrase>Dirty</foreignphrase>
+			</title>
 
         <para>FreeBSD comes with two programs that can get you set up with
           simple periodic accounting right away.  They are the text filter
@@ -4243,7 +4480,9 @@ total                     337.00  154   $  6.74</screen>
       </sect3>
       
       <sect3>
-        <title>How Can You Count Pages Printed?</title>
+			<title>
+				Como Contar P&aacute;gians Impressas?
+			</title>
 
         <para>In order to perform even remotely accurate accounting, you need
           to be able to determine how much paper a job uses.  This is the
@@ -4351,9 +4590,13 @@ total                     337.00  154   $  6.74</screen>
       <envar>PRINTER</envar> environment variable.</para>
     
     <sect2 id="printing-lpr">
-      <title>Printing Jobs</title>
+			<title>
+				Tabalhos de Impress&atilde;o
+			</title>
       
-      <para>To print files, type:</para>
+			<para>
+				Para imprimir arquivos, digite:
+			</para>
       
       <screen>&prompt.user; <userinput>lpr <replaceable>filename</replaceable> <replaceable>...</replaceable></userinput></screen>
 	    
@@ -4386,7 +4629,7 @@ total                     337.00  154   $  6.74</screen>
     </sect2>
     
     <sect2 id="printing-lpq">
-      <title>Checking Jobs</title>
+		<title>Verificando a Impress&atilde;o</title>
       
       <indexterm><primary>print <foreignphrase>jobs</foreignphrase></primary></indexterm>
       <para>When you print with &man.lpr.1;, the data you wish to print is put
@@ -4451,7 +4694,10 @@ mary: 3rd                                [job 011rose]
     </sect2>
 
     <sect2 id="printing-lprm">
-      <title>Removing Jobs</title>
+		<title>
+			Removendo a Impress&atilde;o 
+			( <foreignphrase>Jobs</foreignphrase>
+		</title>
       
       <para>If you change your mind about printing a job, you can remove the
 	job from the queue with the &man.lprm.1; command.  Often, you can
@@ -4535,7 +4781,7 @@ cfA013rose dequeued
     </sect2>
     
     <sect2 id="printing-lpr-options">
-      <title>Beyond Plain Text: Printing Options</title>
+		<title>Beyond Plain Text: Printing Options</title>
       
       <para>The &man.lpr.1; command supports a number of options that control
 	formatting text, converting graphic and other file formats, producing
@@ -4543,7 +4789,9 @@ cfA013rose dequeued
 	describes the options.</para>
 	  
       <sect3 id="printing-lpr-options-format">
-	<title>Formatting and Conversion Options</title>
+	<title>
+		Op&ccedil;&otilde;ess de Formata&ccedil;&atilde;o e Convers&atilde;o
+	</title>
 
 	<para>The following &man.lpr.1; options control formatting of the
 	  files in the job.  Use these options if the job does not contain
@@ -4647,10 +4895,10 @@ cfA013rose dequeued
 	  </varlistentry>
 	  
 	  <varlistentry>
-	    <term><option>-T <replaceable>title</replaceable></option></term>
+	    <term><option>-T <replaceable>t&iacute;tulo</replaceable></option></term>
 	    
 	    <listitem>
-	      <para>Use <replaceable>title</replaceable> on the
+	      <para>Use <replaceable>t&iacute;tulo</replaceable> on the
 		  &man.pr.1; header instead of the file name.  This option has
 		effect only when used with the <option>-p</option>
 		option.</para>
@@ -4691,7 +4939,9 @@ cfA013rose dequeued
       </sect3>
       
       <sect3 id="printing-lpr-options-job-handling">
-	<title>Job Handling Options</title>
+	<title>
+		Op&ccedil;&otilde;ess de Manipula&ccedil;&atilde;o de Impress&atilde;o
+	</title>
 
 	<para>The following options to &man.lpr.1; tell 
 	  <application>LPD</application> to handle the job
@@ -4776,7 +5026,9 @@ cfA013rose dequeued
       </sect3>
 	  
       <sect3 id="printing-lpr-options-misc">
-	<title>Header Page Options</title>
+	<title>
+		Op&ccedil;&otilde;ess de P&aacute;ginas de Cabe&ccedil;alho
+	</title>
 
 	<para>These options to &man.lpr.1; adjust the text that normally
 	  appears on a job's header page. If header pages are suppressed for
@@ -4826,7 +5078,9 @@ cfA013rose dequeued
     </sect2>
     
     <sect2 id="printing-lpc">
-      <title>Administering Printers</title>
+		<title>
+			Administrando Impressoras
+		</title>
       
       <para>As an administrator for your printers, you have had to install,
 	set up, and test them.  Using the &man.lpc.8; command, you
@@ -5195,30 +5449,36 @@ exit 2</programlisting>
 	    </listitem>
 
 	    <listitem>
-	      <para>Have FreeBSD's serial line driver automatically
-		convert LF to CR+LF.  Of course, this works with printers
-		on serial ports <emphasis>only</emphasis>.  To enable this
-		feature, use the <literal>ms#</literal> capability and
-		set the <literal>onlcr</literal> mode
-		in the <filename>/etc/printcap</filename> file
-		for the printer.</para>
+			<para>
+				Ter um driver serial para FreeBSD converter o caracter LF em
+		CRLF.  Claro, ele trabalha <emphasis>somente</emphasis> com impressoras 
+		na porta serial.  Para habilitar essa fun&ccedil;&atilde;o, use a 
+		op&ccedil;&atilde;o <literal>ms#</literal> e coloque o modo 
+		<literal>onlcr</literal> no arquivo <filename>/etc/printcap</filename>. 
+			</para>
 	    </listitem>
 
 	    <listitem>
-	      <para>Send an <emphasis>escape code</emphasis> to the
-	        printer to have it temporarily treat LF characters
-		differently.  Consult your printer's manual for escape
-		codes that your printer might support.  When you find the
-		proper escape code, modify the text filter to send the
-		code first, then send the print job.</para>
+			<para>
+				Enviar um <emphasis>c&oacute;digo escape</emphasis> para a 
+		impressora para term um tratamento tempor&aacute;rio diferente do
+		caracter LF.  Condulte o manual de sua impressora para conhecer as
+		seg&utrema;&ecirc;ncias escape que sua impressora pode suportar.  
+		Quando voc&ecirc; encontrar o c&oacute;digo correto, modifique o
+		filtro texto para enviar este c&oacute;digo inicialmente, para apos
+		enviar o arquivo a ser impresso.
+			</para>
 
 	      <indexterm><primary>PCL</primary></indexterm>
-	      <para>Here is an example text filter for printers that
-		understand the Hewlett-Packard PCL escape codes.  This
-		filter makes the printer treat LF characters as a LF and
-		CR; then it sends the job; then it sends a form feed to
-		eject the last page of the job.  It should work with
-		nearly all Hewlett Packard printers.</para>
+		<para>
+			Aqui tem um exemplo de filktro texto para as impressoras que 
+		reconhecem os c&oacute;digos da linguagem PCL da Hewlett Packard.  Esse
+		filtro faz a impressora tratar os caracteres LF como sendo uma 
+		seg&utrema;&ecirc;ncia de LF + CR; entao ele envia o arquivo; 
+		ent&atilde;o ele envia um caracter FF ( alimenta&ccedil;&atilde;o de
+		formul&aacute;rio ) para ejetar a &uacute;ltima p&aacute;gina do 
+		arquivo.  Ele deve funcionar com todas as impressoras da Hewlett Packard.
+		</para>
 
 	      <programlisting>#!/bin/sh
 #
@@ -5231,11 +5491,13 @@ exit 2</programlisting>
 printf "\033&amp;k2G" &amp;&amp; cat &amp;&amp; printf "\033&amp;l0H" &amp;&amp; exit 0
 exit 2</programlisting>
 
-	      <para>Here is an example <filename>/etc/printcap</filename>
-		from a host called <hostid>orchid</hostid>.  It has a single printer
-		attached to its first parallel port, a Hewlett Packard
-		LaserJet 3Si named <literal>teak</literal>.  It is using the
-		above script as its text filter:</para>
+		<para>
+			Aqui um exemplo do <filename>/etc/printcap</filename> de um
+		computador chamado <hostid>orchid</hostid>.  Ele tem uma &uacute;nica
+		impressora ligada a ele na primeira porta paralela, uma Hewlett Packard
+		LaserJet 3Si, chamada de <literal>teak</literal>.  Ele esta usando o
+		script acima como um filtro de texto:
+		</para>
 
 	      <programlisting>#
 #  /etc/printcap for host orchid
@@ -5249,29 +5511,36 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
       </varlistentry>
 
       <varlistentry>
-	<term>It overprinted each line.</term>
+	<term>A Impressora Sobreescreve as linhas.</term>
 
 	<listitem>
-	  <para>The printer never advanced a line.  All of the lines of
-	    text were printed on top of each other on one line.</para>
+		<para>
+			A impressora nunca avan&ccedil;a para linha abaixo.  Todas as linhas
+	do texto s&atilde;o impressas no topo da p&aacute;gina e uma sobre as
+	outras.
+		</para>
 
-	  <para>This problem is the <quote>opposite</quote> of the
-	    staircase effect, described above, and is much rarer.
-	    Somewhere, the LF characters that FreeBSD uses to end a line
-	    are being treated as CR characters to return the print
-	    location to the left edge of the paper, but not also down a
-	    line.</para>
+		<para>
+			Esse problema &eacute; o <quote>oposto</quote> do efeito escada,
+		descrito acima, e muito mais raro.  Em algum lugar, o caracter LF
+		que &eacute; usado pelo FreeBSD como final de linha, &eacute; tratado 
+		como o caracter CR, que retorna a cabe&ccedil;a de impress&atilde;o
+		para o inicio da linha, mas n&atilde;o move uma linha para baixo,
+		como deveria ser.
+		</para>
 
-	  <para>Use the printer's configuration switches or control panel
-	    to enforce the following interpretation of LF and CR
-	    characters:</para>
+	  <para>
+			Use as chaves de configura&ccedil;&atilde;o da impressora ou o painel 
+	de controle para for&ccedil;ar a seguinte interpreta&ccedil;&atilde;o dos 
+	carateres LF e CR.
+		</para>
 
 	  <informaltable frame="none">
 	    <tgroup cols="2">
 	      <thead>
 		<row>
-		  <entry>Printer receives</entry>
-		  <entry>Printer prints</entry>
+		  <entry>Impressora Recebe</entry>
+		  <entry>Impressora Imprime</entry>
 		</row>
 	      </thead>
 
@@ -5292,12 +5561,14 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
       </varlistentry>
 
       <varlistentry>
-	<term>The printer lost characters.</term>
+	<term>A Impressora Perde Caracteres.</term>
 
 	<listitem>
-	  <para>While printing, the printer did not print a few characters
-	    in each line.  The problem might have gotten worse as the
-	    printer ran, losing more and more characters.</para>
+	  <para>
+		Enquanto est&aacute; imprimindo, a impressora n&atilde;o imprime alguns
+	caracteres po linha.  O problema pode estar na configura&ccedil;&atilde;o 
+	<foreignphrase>raw</foreignphrase>, perdendo mais e mais caracteres.
+		</para>
 
 	  <para>
 		O problema &eacute; que a impressora n&atilde;o pode manter
@@ -5317,7 +5588,7 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 
 	    <listitem>
 		<para>
-		Se a impressora suporta 
+		Se a impressora suportar 
 	<foreignphrase> carrier flow control</foreignphrase>,
 	especifique o modo <literal>crtscts</literal> na op&ccedil;&atilde;o
 	 <literal>ms#</literal>.
@@ -5331,7 +5602,7 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
       </varlistentry>
 
       <varlistentry>
-	<term>It printed garbage.</term>
+	<term>A Impressora Imprime Lixo.</term>
 
 	<listitem>
 	<para>
@@ -5351,7 +5622,7 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
       </varlistentry>
 
       <varlistentry>
-	<term>Nothing happened.</term>
+	<term>Nada Acontece.</term>
 
 	<listitem>
 	<para>
