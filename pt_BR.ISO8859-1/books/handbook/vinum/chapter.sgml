@@ -1325,8 +1325,8 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
       anunciados, a not&iacute;cia importante que mostra o sucesso dessa
       configura&ccedil;&atilde;o &eacute; uma mensagem como:</para>
       
-      <para><screen>Mounting root from
-      ufs:/dev/vinum/root</screen></para> </sect2>
+      <para><screen>Mounting root from ufs:/dev/vinum/root</screen></para>
+    </sect2>
 
     <sect2>
       <title>Exemplo Configura&ccedil;&atilde;o Vinum Para o Sistemas de Arquivos
@@ -1337,11 +1337,19 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
       com:</para>
 
       <para>
-        <screen> ...  Subdisk root.p0.s0: Size:        125829120
-        bytes (120 MB) State: up Plex root.p0 at offset 0 (0  B) Drive
-        disk0 (/dev/da0h) at offset 135680 (132 kB) Subdisk root.p1.s0:
-        Size:        125829120 bytes (120 MB) State: up Plex root.p1 at
-        offset 0 (0  B) Drive disk1 (/dev/da1h) at offset 135680 (132 kB)
+        <screen> 
+...
+Subdisk root.p0.s0:
+		Size:        125829120 bytes (120 MB)
+		State: up
+		Plex root.p0 at offset 0 (0  B)
+		Drive disk0 (/dev/da0h) at offset 135680 (132 kB)
+
+Subdisk root.p1.s0:
+		Size:        125829120 bytes (120 MB)
+		State: up
+		Plex root.p1 at offset 0 (0  B)
+		Drive disk1 (/dev/da1h) at offset 135680 (132 kB)
         </screen>
        </para>
 
@@ -1359,12 +1367,16 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
       <para>O <foreignphrase>disklabel</foreignphrase> para esses
       dispositivos devem se parecer com:</para>
       
-      <para> <screen> ...  8 partitions: #        size   offset
-      fstype   [fsize bsize bps/cpg] a:   245760      281    4.2BSD
-      2048 16384     0   # (Cyl.    0*- 15*) c: 71771688        0
-      unused        0     0         # (Cyl.    0 - 4467*) h: 71771672
-      16     vinum                        # (Cyl.    0*- 4467*)
-      </screen> </para>
+      <para> 
+        <screen>
+...
+8 partitions:
+#        size   offset    fstype   [fsize bsize bps/cpg]
+  a:   245760      281    4.2BSD     2048 16384     0   # (Cyl.    0*- 15*)
+  c: 71771688        0    unused        0     0         # (Cyl.    0 - 4467*)
+  h: 71771672       16     vinum                        # (Cyl.    0*- 4467*)
+        </screen>
+      </para>
 
       <para>Pode ser observado que o par&acirc;metro
       <literal>"size"</literal> para a parti&ccedil;&atilde;o
