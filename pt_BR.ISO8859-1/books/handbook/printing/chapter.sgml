@@ -310,30 +310,42 @@
 	Apesar desta se&ccedil;&atilde;o ser chamada de
 	<quote>Configura&ccedil;&atilde;o Simples de Impressora
 	</quote>, ela &eacute; um pouco complexa.
-	Getting the printer
-	to work with your computer and the <application>LPD</application>
-	<foreignphrase>spooler</foreignphrase> is the hardest
-	part.  The advanced options like header pages and accounting are
-	fairly easy once you get the printer working.</para>
+	Fazer com que a impressora funcione com seu computador e o
+	 <application>LPD</application> <foreignphrase>spooler</foreignphrase>
+	&eacute; uma parte dificil da configura&ccedil;&atilde;o.
+	As op&ccedil;&otilde;s avan&ccedil;adas como cabe&ccedil;alhos de 
+	p&aacute;ginas e gerenciamento s&atilde;o facilmente  configu&aacute;
+	veis para funcionar na impressora.
+	</para> 
 
       <sect3 id="printing-hardware">
-	<title>Hardware Setup</title>
+	<title>Configura&ccedil;&atilde;o de Hardware</title>
 
-	<para>This section tells about the various ways you can connect a
-	  printer to your PC.  It talks about the kinds of ports and
-	  cables, and also the kernel configuration you may need to enable
-	  FreeBSD to speak to the printer.</para>
+	<para>
+	Esta se&ccedil;&atilde;o mostra v&aacute;rios meios para voc&ecirc;
+	conectar a impressora no seu PC.  Fala sobre portas de 
+	comuni&ccedil;&atilde;o e cabos, e tamb&eacute;m sobre 
+	configura&ccedil;&atilde;o do kernel que ser&aacute; necess&aacute;ria
+	habilitar para que o FreeBSD possa comunicar-se com a impressora.
+	</para>
 
-	<para>If you have already connected your printer and have
-	  successfully printed with it under another operating system, you
-	  can probably skip to section <link
-	  linkend="printing-software">Software Setup</link>.</para>
+	<para>
+	Se voc&ecirc; j&aacute; tem uma impressora conectada e obteve 
+	sucesso em imprimir em outro sistema operacional, voc&ecirc;
+	provavelmente poder&aacute; pular para a se&ccedil;&atilde;o 
+		<link linkend="printing-software">
+			Configura&ccedil;&atilde;o do Programa
+		</link>.
+	</para>
 
 	<sect4 id="printing-ports">
-	  <title>Ports and Cables</title>
+	  <title>Portas e Cabos</title>
 
-	  <para>Nearly all printers you can get for a PC today support one
-	    or both of the following interfaces:</para>
+	<para>
+	A grande maioria de impressoras que voc&egrave; pode ter
+	para usar em um PC possui suporte a pelo menos uma das interfaces
+	abaixo:
+	</para>
 
 	  <itemizedlist>
 	    <indexterm>
@@ -341,13 +353,17 @@
         <secondary>serial</secondary>
       </indexterm>
 	    <listitem>
-	      <para><emphasis>Serial</emphasis> interfaces use a serial
-		port on your computer to send data to the printer.  Serial
-		interfaces are common in the computer industry and cables
-		are readily available and also easy to construct.  Serial
-		interfaces sometimes need special cables and might require
-		you to configure somewhat complex communications
-		options.</para>
+	      <para>
+		Interface <emphasis>serial</emphasis> usa a porta serial
+		do seu computador para enviar dados para a impressora.  
+		A interface serial s&atilde;o encontradas comumente em 
+		computadores industriais e os cabos estao dispon&iacute;veis e 
+		tamb&eacute;m s&atilde;o de f&aacute;cil 
+		constru&ccedil;&atilde;o.  Interfaces serial algumas vezes 
+		necessitam de cabos especiais e normalmente requer que 
+		voc&ecirc; configure algumas op&ccedil;&otilde;es complexas 
+		da comunica&ccedil;&atilde;o.
+		</para>
 	    </listitem>
 
 	    <indexterm>
@@ -355,218 +371,302 @@
         <secondary>parallel</secondary>
       </indexterm>
 	    <listitem>
-	      <para><emphasis>Parallel</emphasis> interfaces use a
-		parallel port on your computer to send data to the
-		printer.  Parallel interfaces are common in the PC market.
-		Cables are readily available but more difficult to
-		construct by hand.  There are usually no communications
-		options with parallel interfaces, making their
-		configuration exceedingly simple.</para>
-
+	      <para>
+		Interface <emphasis>paralela</emphasis> usa a porta paralela
+		do seu computador para enviar dados para a impressora.
+		Interface paralela &eacute; mais comum em PC.  Os cabos 
+		s&atilde;o disponibilizados mais facilmente, mas s&atilde;o 
+		mais dif&iacute;ceis de serem montados manualmente.  
+		Normalmente n&atilde;o existem op&ccedil;&otilde;es para
+		serem configuradas nas interfaces paralela, tornado a 
+		configura&ccedil;&atilde;o extremamente mais simples.
+	      </para>
 	      <indexterm>
 	        <primary>centronics</primary>
 		<see>parallel printers</see>
 	      </indexterm>
-	      <para>Parallel interfaces are sometimes known as
-		<quote>Centronics</quote> interfaces, named after the
-		connector type on the printer.</para>
+	      <para>
+		Interfaces paralela s&atilde;o normalmente conhecidas como
+	interface <quote>Centronics</quote>, nome este dado por causa do
+	tipo de conector utilizado na impressora.
+	</para>
 	    </listitem>
 	  </itemizedlist>
 
-	  <para>In general, serial interfaces are slower than parallel
-	    interfaces.  Parallel interfaces usually offer just
-	    one-way communication (computer to printer) while serial
-	    gives you two-way.  Newer parallel ports (EPP and ECP) and printers
-	    can communicate in both directions under FreeBSD when a
-	    IEEE1284 compliant cable is used.</para>
+	  <para>
+		Em geral, as interfaces serial s&atilde;o mais lentas
+	que as paralelas.  Interfaces paralelas normalmente s&atilde;o 
+	disponibilizadas em uma &uacute;nica dire&ccedil;&atilde;o para
+	comunica&ccedil;&atilde;o ( do computador para a impresora)
+	enquanto que a serial proporciona uma cominica&ccedil;&atilde;o
+	bi-direcional.  As novas portas paralelas (EPP e ECP) e as
+	impressoras podendo comunicar em ambas as dire&ccedil;&otilde;es sob
+	o FreeBSD quando um cabo padr&atilde;o IEEE1284 estiver sendo usado.
+	</para>
 
 	  <indexterm><primary>PostScript</primary></indexterm>
-	  <para>Usually, the only time you need two-way communication with
-	    the printer is if the printer speaks &postscript;.  &postscript;
-	    printers can be very verbose.  In fact, &postscript; <foreignphrase>jobs</foreignphrase> are
-	    actually programs sent to the printer; they need not produce
-	    paper at all and may return results directly to the computer.
-	    &postscript; also uses two-way communication to tell the
-	    computer about problems, such as errors in the &postscript;
-	    program or paper jams.  Your users may be appreciative of such
-	    information.  Furthermore, the best way to do effective
-	    accounting with a &postscript; printer requires two-way
-	    communication: you ask the printer for its page count (how
-	    many pages it has printed in its lifetime), then send the
-	    user's job, then ask again for its page count.  Subtract the
-	    two values and you know how much paper to charge the
-	    user.</para>
+	  <para>
+		Usualmente, ivoc&ecirc; somente precisar&aacute; da 
+		comunica&ccedil;&atilde;o bi-direcional se sua impressora 
+		<foreignphrase>reconhe&ccedil;a</foreignphrase> 	
+		&postscript;.  Impressora &postscript; pode ser muito 
+		<foreignphrase>verbose</foreignphrase>.  De fato 
+		<foreignphrase>jobs</foreignphrase> &postscript; 
+		s&atilde;o as sa&iacute;das atuais que os programas enviam 
+		para as impressoras; 
+		<foreignphrase>Eles n&atilde;o precis&atilde;o 
+		produzir papel como um todo actually programs sent to 
+		the printer; they need not produce paper at all </foreignphrase>
+		e pode retornar resultados diretamente para o computador.
+	    	&postscript; Tamb&eacute;m usa comunica&ccedil;&atilde;o
+		bi-direcional para informar ao computador sobre problemas 
+		ocorridos, tais como erros em progrmas &postscript; ou
+		papel embaralhado (paper jam).  Seus usu&aacute;rios podem
+		ficar agradecidos com essas inform&ccedil;&otilde;ess.
+		Entretanto, o melhor meio para fazer o accounting efetivo 
+		com uma impressora &postscript; requer que a 
+		cominuca&ccedil;&atilde;o seja bi-direcional: voc&ecirc; 
+		pergunta a impressora sobre a contagem de p&aacute;ginas
+		(quantas p&aacute;gians ela j&aacute; imprimiu durante
+		seu uso, vida &uacute;til), ent&atilde;o envia o 
+		<foreignphrase>job<foreignphrase> do usu&aacute;rio
+		faz novamente a pergunta &agrave; impressora sobre
+		o total de p&aacute;gians impressas e ent&atilde;o faz
+		a subtra&ccedil;ao dos valores para saber o valor exato
+		de p&aacute;ginas impressa pelo usu&aacute;rio.
+	    </para>
 	</sect4>
 	  
 	<sect4 id="printing-parallel">
-	  <title>Parallel Ports</title>
+	  <title>Porta Paralela</title>
 
-	  <para>To hook up a printer using a parallel interface, connect
-	    the Centronics cable between the printer and the computer.
-	    The instructions that came with the printer, the computer, or
-	    both should give you complete guidance.</para>
+	  <para>
+		Para conectar a impressora usando a interface paralela, 
+		utilize o cabo Centronics entre a impressora e o computador.
+		As instru&ccedil;&otilde;ess que vem no manual da impressora
+		e/ou do computador, devem dar a voc&ecirc; um passo-a-passo
+		completo.
+	    </para>
 
-	  <para>Remember which parallel port you used on the computer.
-	    The first parallel port is <filename>/dev/ppc0</filename> to
-	    FreeBSD; the second is <filename>/dev/ppc1</filename>, and so
-	    on.  The printer device name uses the same scheme:
-	    <filename>/dev/lpt0</filename> for the printer on the first
-	    parallel ports etc.</para>
+	  <para>
+		Lembre-se qual porta paralela voc&ecirc; est&aacute;
+	usando no computador.  A primeira porta paralela &eacute; 
+	<filename>/dev/ppc0</filename> Para o FreeBSD; a segunda &eacute;
+	<filename>/dev/ppc1</filename>, e assim por diante.  Os dispositivos
+	de impressora usam o seguinte esquema de nomes:
+	
+	    <filename>/dev/lpt0</filename> Para a impressora conectada
+	na primeira porta paralela etc.
+	    </para>
 	</sect4>
 
 	<sect4 id="printing-serial">
-	  <title>Serial Ports</title>
+	  <title>Porta Serial</title>
 
-	  <para>To hook up a printer using a serial interface, connect the
-	    proper serial cable between the printer and the computer.  The
-	    instructions that came with the printer, the computer, or both
-	    should give you complete guidance.</para>
+	  <para>
+		Para conectar a impressora em uma porta serial, voc&ecirc;
+	dever&aacute; possuir o cabo serial apropriado para interligar o
+	computador com a impressora.  As instru&ccedil;&otilde;ess que vem
+	com a impressora e/ou com o computador, dever&aacute; dar &agrave;
+	voc&ecirc; um completo passo-a-passo.
+	</para>
 
-	  <para>If you are unsure what the <quote>proper serial
-	    cable</quote> is, you may wish to try one of the following
-	    alternatives:</para>
-
+	  <para>
+		Se voc&ecirc; n&atilde;o est&aacute; seguro sobre qual o tipo
+	de <quote>cabo serial</quote> que est&aacute; usando, voc&ecirc; pode 
+	tentar uma dessas alternativas:
+	</para>
 	  <itemizedlist>
 	    <listitem>
-	      <para>A <emphasis>modem</emphasis> cable connects each pin
-		of the connector on one end of the cable straight through
-		to its corresponding pin of the connector on the other
-		end.  This type of cable is also known as a
-		<quote>DTE-to-DCE</quote> cable.</para>
+	      <para>O cabo tipo <emphasis>modem</emphasis> conecta cada pino
+	do conector de um lado ao correspondente do outro conector.  Esse tipo
+	de cabo tamb&eacute;m &eacute; conhecido como cabo
+		<quote>DTE-to-DCE</quote>.</para>
 	    </listitem>
 
 	    <indexterm><primary>null-modem cable</primary></indexterm>
 	    <listitem>
-	      <para>A <emphasis>null-modem</emphasis> cable connects some
-		pins straight through, swaps others (send data to receive
-		data, for example), and shorts some internally in each
-		connector hood.  This type of cable is also known as a
-		<quote>DTE-to-DTE</quote> cable.</para>
+	      <para>
+			O cabo tipo  <emphasis>null-modem</emphasis> conecta 
+		alguns dos pinos diretamente e troca outros ( como por
+		exemplo os pinos respons&aacute;veis por enviar e receber
+		dados ), curta-circuita outros (liga-os entre si) internamente
+		em cada conector. Esse tipo de cabo &eacute; tamb&eacute;m 
+		conechido como cabo <quote>DTE-to-DTE</quote>
+	     </para>
 	    </listitem>
 
 	    <listitem>
-	      <para>A <emphasis>serial printer</emphasis> cable, required
-		for some unusual printers, is like the null-modem cable,
-		but sends some signals to their counterparts instead of
-		being internally shorted.</para>
+	      <para>O cabo de <emphasis>impressora serial</emphasis>, &eacute;
+	necess&aacute;rio para algumas impressoras n&atilde;o comuns,
+	&eacute; semelhante ao cabo null-modem, mas envia alguns sinais
+	que est&aacute;o curto-circuitados internamente.
+		</para>
 	    </listitem>
 	  </itemizedlist>
 
 	  <indexterm><primary>baud rate</primary></indexterm>
 	  <indexterm><primary>parity</primary></indexterm>
 	  <indexterm><primary>flow control protocol</primary></indexterm>
-	  <para>You should also set up the communications parameters for
-	    the printer, usually through front-panel controls or DIP
-	    switches on the printer.  Choose the highest
-	    <literal>bps</literal> (bits per second, sometimes
-	    <emphasis>baud rate</emphasis>) rate that both your computer
-	    and the printer can support.  Choose 7 or 8 data bits; none,
-	    even, or odd parity; and 1 or 2 stop bits.  Also choose a flow
-	    control protocol:  either none, or XON/XOFF (also known as
-	    <quote>in-band</quote> or <quote>software</quote>) flow control.
-	    Remember these settings for the software configuration that
-	    follows.</para>
+	  <para>
+		Voc&ecirc; dever&aacute; configurar alguns parametros
+	da comunica&ccedil;&atilde;o da impressora, que usualmente s&atilde;o 
+	feitos no painel frontal ou nas mini chaves (DIP switchs).  Altere
+	o valor de <literal>bps</literal> (bits por segundos, chamado
+	frequentemente de <emphasis>baud rate</emphasis>) que &eacute; a 
+	taxa de transfer&ecirc;ncia entre o computador e a impressora,
+	ambos devem ter a mesma taxa de transfer&egrave;ncia.
+	Selecione entre 7 e 8 bits; paridade, par, &iacute;mpar, nenhuma;
+	ou 1 ou 2 <foreignphrase>stop bits<foreignphrase>.  Tamb&eacute;m
+	o protocolo de controle de fluxo; nenhum ou XON/XOFF ( tamb&eacute;m
+	conhecido como controle de fluxo por <quote>hardware</quote> 
+	(<quote><foreignphrase>in-band<foreignphrase></quote>) ou por 
+	<quote>software</quote>).
+		Lembre-se dessa configura&ccedil;&otilde;ess para poder
+	aplica-las na configura&ccedil;&atilde;o dos programas, como vamos
+	verificar a seguir.
+	    </para>
 	</sect4>
       </sect3>
 
       <sect3 id="printing-software">
 	<title>Software Setup</title>
 
-	<para>This section describes the software setup necessary to print
-	  with the <application>LPD</application> spooling system in FreeBSD.
+	<para>Essa se&ccedil;&atilde;o descreve as configura&ccedil;&otilde;es
+	necess&aacute;rias para imprimir com o sistema de 
+	<foreignphrase>spooling<foreignphrase> no FreeBSD.
 	</para>
 
-	<para>Here is an outline of the steps involved:</para>
+	<para>
+		Um resumo do que ser&aacute; visto neste passo:
+	</para>
 
 	<procedure>
 	  <step>
-	    <para>Configure your kernel, if necessary, for the port you
-	      are using for the printer; section <link
-	      linkend="printing-kernel">Kernel Configuration</link> tells
-	      you what you need to do.</para>
+	    <para>
+		Configure o seu kernel, se necess&aacute;rio, para
+	utilizar a porta que voc&ecirc; deseja conectar a sua impressora.
+	      A se&ccedil;&atilde;o <link
+	      linkend="printing-kernel">Kernel Configuration</link> informa
+		&agrave; voc&ecirc; o que &eacute; necess&aacute;rio fazer.
+	      </para>
 	  </step>
 
 	  <step>
-	    <para>Set the communications mode for the parallel port, if
-	      you are using a parallel port; section <link
-	      linkend="printing-parallel-port-mode">Setting the
-	      Communication Mode for the Parallel Port</link> gives
-	      details.</para>
+	    <para>
+		Configure o modo de comunica&ccedil;&atilde;o da porta
+	paralela, se voc&ecirc; est&aacute; usando a porta paralela
+	se&ccedil;&atilde;o
+	      <link linkend="printing-parallel-port-mode">
+		Configure o Modo de Comunica&ccedil;&atilde;o para a 
+		Porta Paralela
+	      </link> para ter mais detalhes.</para>
 	  </step>
 
 	  <step>
-	    <para>Test if the operating system can send data to the printer.
-	      Section <link linkend="printing-testing">Checking Printer
-	      Communications</link> gives some suggestions on how to do
-	      this.</para>
+	    <para>
+		Teste se o sistema operacional pode enviar dados para a 
+	impressora.  A se&ccedil;&atilde;o 
+	<link linkend="printing-testing">
+		Verificando a Comuni&ccedil;&atilde;oca com a Impressora
+	</link> d&aacute; algumas sugest&otilde;es de como fazer iso.
+	      </para>
 	  </step>
 
 	  <step>
-	    <para>Set up <application>LPD</application> for the printer by 
-	      modifying the file
-	      <filename>/etc/printcap</filename>.  You will find out how
-	      to do this later in this chapter.</para>
+	    <para>
+		Configure o <application>LPD</application> para a
+	utiliza&ccedil;&atilde;o da impressora, modificando o arquivo
+	<filename>/etc/printcap</filename>.  Voc&ecirc; ir&aacute; 
+	o que fazer mais tarde neste cap&iacute;tulo.
+	</para>
 	  </step>
 	</procedure>
 
 	<sect4 id="printing-kernel">
-	  <title>Kernel Configuration</title>
+	  <title>Configura&ccedil;&atilde;o do Kernel</title>
 
-	  <para>The operating system kernel is compiled to work with a
-	    specific set of devices.  The serial or parallel interface for
-	    your printer is a part of that set.  Therefore, it might be
-	    necessary to add support for an additional serial or parallel
-	    port if your kernel is not already configured for one.</para>
+	  <para>
+		O kernel do sistema operacional &eacute; compilado para
+	trabalhar com um determinado conjunto de dispositivos.  As interfaces
+	serial e paralela para a utiliza&ccedil;&atilde;o da impressora 
+	fazem parte deste conjunto.  Entrtanto, pode ser necess&aacute;rio
+	adcionar o suporte para uma porta serial ou paralela caso o seu
+	kernel n&atilde;o esteja configurado.
+	    </para>
 
-	  <para>To find out if the kernel you are currently using supports
-	    a serial interface, type:</para>
+	  <para>
+		Para saber se seu kernel j&aacute; possui o suporte
+	para interface serial, digite:
+	    </para>
 
 	  <screen>&prompt.root; <userinput>grep sio<replaceable>N</replaceable> /var/run/dmesg.boot</userinput></screen>
 
-	  <para>Where <replaceable>N</replaceable> is the number of the
-	    serial port, starting from zero.  If you see output similar to
-	    the following:</para>
+	  <para>
+		Onde <replaceable>N</replaceable> &eacute; o n&uacute;mero
+	da porta serial, iniciando do zero.  Se voc&ecirc; ver algo 
+	semelhante &agrave;:
+	    </para>
 
-	  <screen>sio2 at port 0x3e8-0x3ef irq 5 on isa
-sio2: type 16550A</screen>
+	  <screen>
+		sio2 at port 0x3e8-0x3ef irq 5 on isa
+		sio2: type 16550A
+	</screen>
 
-	  <para>then the kernel supports the port.</para>
+	  <para>
+		Ent&atilde;o o kernel suporta a porta.
+		</para>
 
-	  <para>To find out if the kernel supports a parallel interface,
-	    type:</para>
+	  <para>
+		Para saber se seu kernel j&aacute; possui o suporte
+	para interface paralela, digite:
+	    </para>
 
 	  <screen>&prompt.root; <userinput>grep ppc<replaceable>N</replaceable> /var/run/dmesg.boot</userinput></screen>
 
-	  <para>Where <replaceable>N</replaceable> is the number of the
-	    parallel port, starting from zero.  If you see output similar
-	    to the following:</para>
+	  <para>
+		Onde <replaceable>N</replaceable> &eacute; o n&uacute;mero
+	da porta paralela, iniciando do zero.  Se voc&ecirc; ver algo 
+	semelhante &agrave;:
+	    </para>
 	    
-	    <screen>ppc0: &lt;Parallel port&gt; at port 0x378-0x37f irq 7 on isa0
-ppc0: SMC-like chipset (ECP/EPP/PS2/NIBBLE) in COMPATIBLE mode
-ppc0: FIFO with 16/16/8 bytes threshold</screen>
+	    <screen>
+		ppc0: &lt;Parallel port&gt; at port 0x378-0x37f irq 7 on isa0
+		ppc0: SMC-like chipset (ECP/EPP/PS2/NIBBLE) in COMPATIBLE mode
+		ppc0: FIFO with 16/16/8 bytes threshold</screen>
 	    
-	    <para>then the kernel supports the port.</para>
+	  <para>
+		Ent&atilde;o o kernel suporta a porta.
+		</para>
 
-	  <para>You might have to reconfigure your kernel in order for the
-	    operating system to recognize and use the parallel or serial
-	    port you are using for the printer.</para>
+	  <para>
+		Voc&ecirc; pode ter que reconfigurar o seu kernel para
+	que o sistema operacional possa reconhecer e usar as portas
+	paralela e/ou serial, para que voc&ecirc; possa utilizar a
+	impressora.
+	    </para>
 
-	  <para>To add support for a serial port, see the section on
-	    kernel configuration.  To add support for a parallel port, see
-	    that section <emphasis>and</emphasis> the section that
-	    follows.</para>
+	  <para>
+		Para adcionar suporte a porta serial, consulte a 
+	se&ccedil;&atilde;o de configura&ccedil;&atilde;o do kernel.  Para
+	adcionar suporte a porta paralela consulte esta se&ccedil;&atilde;o
+	<emphasis>e</enphasis> a se&ccedil;&atilde;o a seguir.
+	    </para>
 	</sect4>
       </sect3>
 
       <sect3 id="printing-dev-ports">
-	<title>Adding <filename>/dev</filename> Entries for the
-	  Ports</title>
+	<title>
+		Adcionando Entradas para as Portas no <filename>/dev</filename> 
+	  </title>
 
-	<note><para>FreeBSD&nbsp;5.0 includes the <literal>devfs</literal>
-	  filesystem which automatically creates device nodes as
-	  needed.  If you are running a version of FreeBSD with
-	  <literal>devfs</literal> enabled then you can safely skip
-	  this section.</para></note>
+	<note><para>FreeBSD&nbsp;5.0 inclui o sistema de arquivos
+	 <literal>devfs</literal>, o qual automaticamente cria
+	os nos dos dispositivos necess&aacute;rios.  Se voc&ecirc; est&aacute;
+	executando a vers&atilde;o do FreeBSD com <literal>devfs</literal>
+	habilitado, voc&ecirc; pode pular com seguran&ccedil;a esta
+	se&ccedil;&atilde;o.
+	  </para></note>
 
 	<para>Even though the kernel may support communication along a
 	  serial or parallel port, you will still need a software
@@ -4945,9 +5045,10 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 	    error messages that might appear.  Based on the messages you
 	    see, try to correct the problem.</para>
 
-	  <para>If you do not specify a <literal>lf</literal> capability,
-	    <application>LPD</application> uses 
-	    <filename>/dev/console</filename> as a default.</para>
+	  <para>
+		Se voc&ecirc; n&atilde;o especificar a capacidade
+	<literal>lf</literal> o <application>LPD</application> usar&aacute; 
+	    <filename>/dev/console</filename> como padr&atilde;o.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
