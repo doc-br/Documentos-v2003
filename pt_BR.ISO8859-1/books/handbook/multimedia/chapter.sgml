@@ -380,65 +380,65 @@ pcm0: &lt;SB16 DSP 4.11&gt; on sbc0</screen>
 	<tbody>
 	  <row>
 	    <entry><devicename>/dev/audio</devicename></entry>
-	    <entry>&sparc; compatible audio device</entry>
+	    <entry>Dispositivo de audio compativel com padr&atilde;o &sparc;</entry>
 	  </row>
 
 	  <row>
 	    <entry><devicename>/dev/dsp</devicename></entry>
-	    <entry>Digitized voice device</entry>
+	    <entry>Dispositivo de voz digitalizada</entry>
 	  </row>
 
 	  <row>
 	    <entry><devicename>/dev/dspW</devicename></entry>
-	    <entry>Like <devicename>/dev/dsp</devicename>, but 16 bits
-	      per sample</entry>
+	    <entry>Semelhante ao <devicename>/dev/dsp</devicename>, mas com uma 
+	    amostragem de 16 bits</entry>
 	  </row>
 
 	  <row>
 	    <entry><devicename>/dev/midi</devicename></entry>
-	    <entry>Raw midi access device</entry>
+	    <entry>Acesso direto ao dispositivo midi</entry>
 	  </row>
 
 	  <row>
 	    <entry><devicename>/dev/mixer</devicename></entry>
-	    <entry>Control port mixer device</entry>
+	    <entry>Porta de controle do dispositivo de mixagem</entry>
 	  </row>
 
 	  <row>
 	    <entry><devicename>/dev/music</devicename></entry>
-	    <entry>Level 2 sequencer interface</entry>
+	    <entry>Interface n&iacute;vel 2 do sequenciador</entry>
 	  </row>
 
 	  <row>
 	    <entry><devicename>/dev/sequencer</devicename></entry>
-	    <entry>Sequencer device</entry>
+	    <entry>Dispositivo sequenciador</entry>
 	  </row>
 
 	  <row>
 	    <entry><devicename>/dev/pss</devicename></entry>
-	    <entry>Programmable device interface</entry>
+	    <entry>Interface de dispositivo program&aacute;vel</entry>
 	  </row>
 	</tbody>
       </tgroup>
     </informaltable>
 
-    <para>If all goes well, you should now have a functioning sound
-      card.  If your CD-ROM or DVD-ROM drive is properly coupled to
-      your sound card, you can put a CD in the drive and play it
-      with &man.cdcontrol.1;:</para>
-
+    <para>Se tudo correu bem, agora voc&ecirc; deve ter uma placa de som que
+      funciona.  Se o seu drive de CD-ROM ou de DVD-ROM estiver
+      devidamente conectado a sua placa de som, voc&ecirc; pode colocar um
+      CD no drive e reproduzi-lo com o uso do &man.cdcontrol.1;:</para>
+    
       <screen>&prompt.user; <userinput>cdcontrol -f /dev/acd0c play 1</userinput></screen>
 
-    <para>Various applications, such as <filename
-      role="package">audio/workman</filename> offer a better
-      interface.  You may want to install an application such as
-      <filename role="package">audio/mpg123</filename> to listen to
-      MP3 audio files.</para>
-
+    <para>Varias aplica&ccedil;&otilde;es, tal como o <filename role="package">
+      audio/workman</filename> oferece yma interface melhor.  Voc&ecirc;
+      pode desejar instalar uma aplica&ccedil;&atilde;o tal como o <filename
+      role="package">audio/mpg123</filename> para ouvir seus arquivos
+      de audio no formato MP3.</para>
+    
     <sect3 id="troubleshooting">
       <title>Problemas Comuns</title>
 
-      <indexterm><primary>device nodes</primary></indexterm>
+      <indexterm><primary>n&oacute;s de dispositivo</primary></indexterm>
       <indexterm><primary>I/O port</primary></indexterm>
       <indexterm><primary>IRQ</primary></indexterm>
       <indexterm><primary>DSP</primary></indexterm>
@@ -447,41 +447,43 @@ pcm0: &lt;SB16 DSP 4.11&gt; on sbc0</screen>
         <tgroup cols="2">
   	  <thead>
 	    <row>
-	     <entry>Error</entry>
-	      <entry>Solution</entry>
+	     <entry>Erro</entry>
+	      <entry>Solu&ccedil;&atilde;o</entry>
 	    </row>
           </thead>
 
 	  <tbody>
 	    <row>
 	      <entry><errorname>unsupported subdevice XX</errorname></entry>
-	      <entry><para>One or more of the device nodes was not created
-	        correctly.  Repeat the steps above.</para></entry>
+	      <entry><para>Um ou mais dos n&oacute;s de dispositivo n&atilde;o foram
+		criados corretamente. Repita os passos acima.</para></entry>
             </row>
 
             <row>
               <entry><errorname>sb_dspwr(XX) timed out</errorname></entry>
-              <entry><para>The I/O port is not set correctly.</para></entry>
+              <entry><para>A porta de I/O n&atilde;o esta ajustada corretamente.</para></entry>
             </row>
 
             <row>
               <entry><errorname>bad irq XX</errorname></entry>
-	      <entry><para>The IRQ is set incorrectly.  Make sure that
-  	        the set IRQ and the sound IRQ are the same.</para></entry>
+	      <entry><para>O IRQ est&aacute; ajustado de forma incorreta.
+		Certifique-se de que o IRQ setado &eacute; o mesmo IRQ
+		utilizado pela sua placa.</para></entry>
             </row>
 
             <row>
               <entry><errorname>xxx: gus pcm not attached, out of memory</errorname></entry>
-              <entry><para>There is not enough available memory to use
-                the device.</para></entry>
+              <entry><para>N&atilde;o existe mem&oacute;ria suficiente para utilizar
+		o dispositivo.</para></entry>
             </row>
 
             <row>
               <entry><errorname>xxx: can't open /dev/dsp!</errorname></entry>
-              <entry><para>Check with <command>fstat | grep dsp</command>
-                if another application is holding the device open.
-                Noteworthy troublemakers are <application>esound</application> and <application>KDE</application>'s sound
-                support.</para></entry>
+              <entry><para>Verifique com o comando <command>fstat | grep dsp</command>
+                se alguma outra aplica&ccedil;&atilde;o esta mantendo o dispositivo
+		aberto.  Criadores de problema dignos de aten&ccedil;&atilde;o s&atilde;o o
+		<application>esound</application> e o suporte a som do
+		<application>KDE</application>.</para></entry>
             </row>
           </tbody>
         </tgroup>
@@ -495,7 +497,7 @@ pcm0: &lt;SB16 DSP 4.11&gt; on sbc0</screen>
       <author>
        <firstname>Munish</firstname>
        <surname>Chopra</surname>
-       <contrib>Contributed by </contrib>
+       <contrib>Contribuido por </contrib>
       </author>
      </authorgroup>
     </sect2info>
@@ -544,7 +546,7 @@ pcm0: &lt;SB16 DSP 4.11&gt; on sbc0</screen>
 	<author>
 	  <firstname>Chern</firstname>
 	  <surname>Lee</surname>
-	  <contrib>Contributed by </contrib>
+	  <contrib>Contribuido por </contrib>
 	</author>
       </authorgroup>
       <!-- 11 Sept 2001 -->
@@ -776,7 +778,7 @@ MPEG 1.0 layer III, 128 kbit/s, 44100 Hz joint-stereo
       <author>
         <firstname>Ross</firstname>
 	<surname>Lippert</surname>
-	<contrib>Contributed by </contrib>
+	<contrib>Contribuido por </contrib>
       </author>
     </authorgroup>
     <!-- 5 June 2002 -->
