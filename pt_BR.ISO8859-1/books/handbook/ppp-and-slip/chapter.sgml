@@ -10,7 +10,7 @@
       <author>
 	<firstname>Jim</firstname>
 	<surname>Mock</surname>
-	<contrib>Restructured, reorganized, and updated by </contrib>
+	<contrib>Restruturado, reorganizado e atualizado por</contrib>
 	<!-- 1 Mar 2000 -->
       </author>
     </authorgroup>
@@ -19,7 +19,7 @@
   <title>PPP and SLIP</title>
 
   <sect1 id="ppp-and-slip-synopsis">
-    <title>Synopsis</title>
+    <title>Synópse</title>
     <indexterm id="ppp-ppp">
       <primary>PPP</primary>
     </indexterm>
@@ -27,75 +27,75 @@
       <primary>SLIP</primary>
     </indexterm>
 
-    <para>FreeBSD has a number of ways to link one computer to
-      another.  To establish a network or Internet connection through a
-      dial-up modem, or to allow others to do so through you, requires
-      the use of PPP or SLIP.  This chapter describes setting up
-      these modem-based communication services in detail.</para>
+    <para>O FreeBSD possui várias formas de ligar um computador a outro.
+      Para estabelecer uma rede ou conexão com a Internet através de um
+      modem discado, ou para permitir que outros façam isso através de você,
+      é necessário o uso de PPP ou SLIP.  Esse capítulo descreve como configurar
+      esses serviços de comunicação em detalhes.</para>
 
-    <para>After reading this chapter, you will know:</para>
+    <para>Após ler este capítulo, você saberá:</para>
 
     <itemizedlist>
       <listitem>
-	<para>How to set up user PPP.</para>
+	<para>Como ajustar PPP em modo usuário.</para>
       </listitem>
       <listitem>
-	<para>How to set up kernel PPP.</para>
+	<para>Como ajustar PPP em modo kernel.</para>
       </listitem>
       <listitem>
-	<para>How to set up <acronym>PPPoE</acronym> (PPP over
+	<para>Como ajustar <acronym>PPPoE</acronym> (PPP over
 	  Ethernet).</para>
       </listitem>
       <listitem>
-	<para>How to set up <acronym>PPPoA</acronym> (PPP over
+	<para>Como ajustar <acronym>PPPoA</acronym> (PPP over
 	  ATM).</para>
 	</listitem>
       <listitem>
-	<para>How to configure and set up a SLIP client and
-	  server.</para>
+        <para>Como configurar e ajustar um cliente SLIP e um servidor.</para>
       </listitem>
     </itemizedlist>
 
     <indexterm id="ppp-ppp-user">
       <primary>PPP</primary>
-      <secondary>user PPP</secondary>
+      <secondary>PPP em modo usuário</secondary>
     </indexterm>      
     <indexterm id="ppp-ppp-kernel">
       <primary>PPP</primary>
-      <secondary>kernel PPP</secondary>
+      <secondary>PPP em modo kernel</secondary>
     </indexterm>      
     <indexterm id="ppp-ppp-ethernet">
       <primary>PPP</primary>
       <secondary>over Ethernet</secondary>
     </indexterm>
 
-    <para>Before reading this chapter, you should:</para>
+    <para>Antes de ler este capítulo você deve:</para>
 
     <itemizedlist>
       <listitem>
-	<para>Be familiar with basic network terminology.</para>
+	<para>Estar familiarizado com a terminologia básica utilizada em redes.</para>
       </listitem>
       <listitem>
-	<para>Understand the basics and purpose of a dialup connection
-	  and PPP and/or SLIP.</para>
+        <para>Ter noções básicas e entender o propósito de uma conexão discada,
+          do protocolo PPP e/ou SLIP.
       </listitem>
     </itemizedlist>
 
-    <para>You may be wondering what the main difference is between user
-      PPP and kernel PPP.  The answer is simple: user PPP processes the
-      inbound and outbound data in userland rather than in the kernel.
-      This is expensive in terms of copying the data between the kernel
-      and userland, but allows a far more feature-rich PPP implementation.
-      User PPP uses the <devicename>tun</devicename> device to communicate
-      with the outside world whereas kernel PPP uses the
-      <devicename>ppp</devicename> device.</para>
+    <para>Você deve estar curioso para saber qual a diferença entre PPP em modo
+      usuário e em modo kernel.  A resposta é simples: em modo usuário o PPP processa
+      o tráfego entrante e sainte em um processo normal em vez de fazer isso 
+      internamente no kernel. Isso é caro em termos de cópias de dados geradas
+      entre o kernel e o processo, mas permite uma implementação PPP muito mais
+      rica em funcionalidades.  PPP em modo usuário usa o dispositivo
+      <devicename>tun</devicename> para se comunicar com o mundo externo onde
+      o PPP em modo kernel utiliza o dispositivo <devicename>ppp</devicename>.</para>
 
     <note>
-      <para>Throughout in this chapter, user PPP will simply be
-	referred to as <application>ppp</application> unless a distinction needs to be made between it
-	and any other PPP software such as <application>pppd</application>.
-	Unless otherwise stated, all of the commands explained in this
-	chapter should be executed as <username>root</username>.</para>
+      <para>Durante todo este capítulo, PPP em modo usuário será simplesmente
+        citado como <application>ppp</application> a não ser que uma distinção
+        seja necessária entre este e qualquer outro software PPP como o 
+        <application>pppd</application>.  A menos que indicado de outra maneira,
+        todos os comandos explicados neste capítulo devem ser executados como
+        <username>root</username>.</para>
     </note>
   </sect1>
 
@@ -105,21 +105,21 @@
         <author>
           <firstname>Tom</firstname>
           <surname>Rhodes</surname>
-          <contrib>Updated and enhanced by </contrib>
+          <contrib>Atualizado e melhorado por </contrib>
         </author>
       </authorgroup>
       <authorgroup>
         <author>
           <firstname>Brian</firstname>
           <surname>Somers</surname>
-	  <contrib>Originally contributed by </contrib>
+	  <contrib>Originalmente contribuido por </contrib>
         </author>
       </authorgroup>
       <authorgroup>
 	<author>
 	  <firstname>Nik</firstname>
 	  <surname>Clayton</surname>
-	  <contrib>With input from </contrib>
+	  <contrib>Com adições de </contrib>
         </author>
         <author>
 	  <firstname>Dirk</firstname>
@@ -132,15 +132,15 @@
       </authorgroup>
     </sect1info>
 
-    <title>Using User PPP</title>
+    <title>Utilizando PPP em modo usuário</title>
 
     <sect2>
-      <title>User PPP</title>
+      <title>PPP em modo usuário</title>
 
       <sect3>
-	<title>Assumptions</title>
+	<title>Suposições</title>
 
-	<para>This document assumes you have the following:</para>
+	<para>Este documento assume que você tem o seguinte:</para>
 
 	<itemizedlist>
 	  <indexterm id="ppp-isp">
@@ -150,18 +150,17 @@
 	    <primary>PPP</primary>
 	  </indexterm>
 	  <listitem>
-	    <para>An account with an Internet Service Provider (ISP) which
-	      you connect to using PPP.</para>
+	    <para>Uma conta com um provedor de acesso a Internet (ISP) através do qual você se conecta
+              utilizando PPP.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>You have a modem or
-	      other device connected to your system and configured
-	      correctly which allows you to connect to your ISP.</para>
+            <para> Um modem ou outro dispositivo conectado ao seu sistema e configura corretamente
+              que permite a você se conectar ao seu provedor.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>The dial-up number(s) of your ISP.</para>
+	    <para>O número de discagem do seu provedor.</para>
 	  </listitem>
 
 	  <indexterm id="ppp-pap">
@@ -180,101 +179,99 @@
 	    <primary>password</primary>
 	  </indexterm>
 	  <listitem>
-	    <para>Your login name and password. (Either a
-	      regular &unix; style login and password pair, or a PAP or CHAP
-	      login and password pair.)</para>
+	    <para>Seu usuário e senha.  (um par &unix; de usuário e senha ou um par PAP ou CHAP).</para>
 	  </listitem>
 
 	  <indexterm id="ppp-nameserver">
 	    <primary>nameserver</primary>
 	  </indexterm>
 	  <listitem>
-	    <para>The IP address of one or more name servers.
-	      Normally, you will be given two IP addresses by your ISP to
-	      use for this.  If they have not given you at least one, then
-	      you can use the <command>enable dns</command> command in
-	      <filename>ppp.conf</filename> and
-	      <application>ppp</application> will set the name servers for
-	      you.  This feature depends on your ISPs PPP implementation
-              supporting DNS negotiation.</para>
+            <para>O endereço IP de um ou mais servidores de nomes. Normalmente você
+              receberá dois endereços IP do seu provedor para esta finalidade. Se
+              você não recebeu ao menos um endereço pode utilizar o comando
+              <command>enable dns</command> no arquivo <filename>ppp.conf</filename> e
+              o <application>ppp</application> irá ajustar os servidores de nome
+              para você.  Essa funcionalidade depende do suporte a negociação de DNS
+              que a implementação PPP do seu provedor oferece.</para>
 	  </listitem>
 	</itemizedlist>
 
-	<para>The following information may be supplied by your ISP, but
-	  is not completely necessary:</para>
+        <para>As seguintes informações podem ser providas por seu provedor mas
+          não são totalmente necessárias:</para>
 
 	<itemizedlist>
 	  <listitem>
-	    <para>The IP address of your ISP's gateway.  The gateway is
-	      the machine to which you will connect and will be set up as
-	      your <emphasis>default route</emphasis>.  If you do not have
-	      this information, we can make one up and your ISP's PPP
-	      server will tell us the correct value when we connect.</para>
+            <para>
+            <para>O endereço IP do <foreignphrase>gateway</foreignphrase> do seu 
+              provedor.  O <foreignphrase>gateway</foreignphrase> é uma máquina a 
+              qual você irá se conectar e que irá ser ajustada como sua 
+              <emphasis>rota padrão</emphasis>.  Se você não tem essa informação
+              nos podemos criar um endereço qualquer e o servidor PPP do seu
+              provedor irá nos informar qual é o valor correto quando nós nos
+              conectarmos.
 
-	    <para>This IP number is referred to as
-	      <literal>HISADDR</literal> by
+	    <para>Este endereço IP é referido como
+	      <literal>HISADDR</literal> pelo
 	      <application>ppp</application>.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>The netmask you should use.  If your ISP has not
-	      provided you with one, you can safely use <hostid
-	      role="netmask">255.255.255.255</hostid>.</para>
+	    <para>A máscara de rede que você deve usar.  Se seu provedor não lhe
+              informou um você pode seguramente usar <hostid role="netmask">
+	      255.255.255.255</hostid>.</para>
 	  </listitem>
 
 	  <indexterm id="ppp-static-ip">
-	    <primary>static IP address</primary>
+	    <primary>Endereço IP estático</primary>
 	  </indexterm>
-	  <listitem>
-	    <para>If your ISP provides you with a static IP address and
-	      hostname, you can enter it.  Otherwise, we simply let the
-	      peer assign whatever IP address it sees fit.</para>
+	  <listitem>Se seu provedor lhe oferece um endereço IP estático e
+              um <foreignphrase>hostname</foreignphrase>, você pode digitá-los.
+              Caso contrário, nós simplesmente deixamos que o servidor remoto
+              defina qualquer endereço IP que ele achar conveniente.</para>
 	  </listitem>
 	</itemizedlist>
  
-	<para>If you do not have any of the required information, contact
-	  your ISP.</para>
+	<para>Se você não tem nenhuma dessas informações, entre em contato com seu 
+          provedor de acesso.</para>
 
 	<note>
-	  <para>Throughout this section, many of the examples showing
-	    the contents of configuration files are numbered by line.
-	    These numbers serve to aid in the presentation and
-	    discussion only and are not meant to be placed in the actual
-	    file.  Proper indentation with tab and space characters is
-	    also important.</para>
+          <para>Durante toda essa seção muitos dos exemplos que se utilizam do
+            conteúdo de arquivos de configuraçõa são números por linha. Esses
+            números servem para ajudar na apresentação e discussão apenas e não
+            devem ser usados em seus arquivos de configuração. Endentação adequada
+            com tab ou espaços também é importante.</para>
 	</note>
 
       </sect3>
 
       <sect3>
-	<title>Creating PPP Device Nodes</title>
-	<indexterm><primary>PPP</primary><secondary>creating device nodes</secondary></indexterm>
+	<title>Criando nós para dispositivos PPP</title>
+	<indexterm><secondary>Criando nós para dispositivos </secondary><primary>PPP</primary></indexterm>
 
-	<para>Under normal circumstances, most users will only need
-	  one <devicename>tun</devicename> device
-	  (<devicename>/dev/tun0</devicename>).  References to
-	  <devicename>tun0</devicename> below may be changed to
-	  <devicename>tun<replaceable>N</replaceable></devicename>
-	  where <replaceable>N</replaceable> is any unit number
-	  corresponding to your system.</para>
+        <para>Em circunstâncias normais a maioria dos usuário irão apenas 
+          precisar de um dispositivo <devicename>tun<devicename>
+          (<devicename>/dev/tun0</devicename>).  Referências ao 
+          <devicename>tun0</devicename> acima podem ser trocadas por
+          <devicename>tun<replaceable>N</replaceable></devicename> onde
+          <replaceable>N</replaceable> é qualquer número correspondente
+          em seu sistema.</para>
 
-        <para>For FreeBSD installations that do not have &man.devfs.5; enabled
-	  (FreeBSD&nbsp;4.X and earlier), the existence of the
-	  <devicename>tun0</devicename> device should  be verified (this is not
-	  necessary if &man.devfs.5; is enabled as device nodes will be created
-	  on demand).</para>
+        <para>Para instalações do FreeBSD que não tenham &man.devfs.5; ativado
+          (FreeBSD&nbsp;4.X e anteriores), a existência do dispositivo 
+          <devicename>tun0</devicename> deve ser verificada (isto não é necessário
+          se &man.devfs.5; está ativado pois os nós de dispositivos serão criados
+          sempre que necessário.</para>
 
-	<para>The easiest way to make sure that the
-	  <devicename>tun0</devicename> device is configured correctly
-	  is to remake the device.  To remake the device, do the
-          following:</para>
+        <para>A maneira mais fácil de ter certeza que o dispositivo <devicename>tun0</devicename>
+          está configurado corretamente é refazer o dispositivo.  Para refazer o
+          dispositivo faça o seguinte:</para>
 
 	<screen>&prompt.root; <userinput>cd /dev</userinput>
 	  &prompt.root; <userinput>sh MAKEDEV tun0</userinput></screen>
 
-	<para>If you need 16 tunnel devices in your kernel, you will need
-	  to create them.  This can be done by executing the following
-	  commands:</para>
+        <para>Se você tem 16 dispositivos de túnel no seu kernel, você irá
+          precisar criá-los. Isso pode ser feito executando-se os seguintes
+          comandos:</para>
 
 	<screen>&prompt.root; <userinput>cd /dev</userinput>
 	  &prompt.root; <userinput>sh MAKEDEV tun15</userinput></screen>
