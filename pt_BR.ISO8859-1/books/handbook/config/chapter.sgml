@@ -42,7 +42,7 @@
       atualiza&ccedil;&otilde;es futuras.
       Este cap&iacute;tulo explicar&aacute; muito do processo de configura&ccedil;&atilde;o do &os;,
       incluindo alguns par&acirc;metros que podem ser configurados
-      para sintonizar um sistema &os;.
+      para ajustar um sistema &os;.
       </para>
 
     <para>Ap&oacute;s ler este cap&iacute;tulo, voc&ecirc; saber&aacute;:</para>
@@ -68,11 +68,11 @@
 	  <filename>/etc</filename>.</para>
       </listitem>
       <listitem>
-        <para>Como sintonizar o &os; usando as vari&aacute;veis do <command>sysctl</command>.
+        <para>Como ajustar o &os; usando as vari&aacute;veis do <command>sysctl</command>.
           </para>
       </listitem>
       <listitem>
-	<para>Como sintonizar a performance de disco e modificar 
+	<para>Como ajustar a performance de disco e modificar 
 	  limita&ccedil;&otilde;es do kernel.</para>
       </listitem>
     </itemizedlist>
@@ -81,7 +81,7 @@
 
     <itemizedlist>
       <listitem>
-	<para>Compreender o b&aacute;sico de &unix; e &os;  (<xref
+	<para>Compreender o b&aacute;sico de &unix; e do &os;  (<xref
 	    linkend="basics">).</para>
       </listitem>
       <listitem>
@@ -115,20 +115,20 @@
 
 	<para>Ao configurar sistemas de arquivo com &man.disklabel.8;
 	  ou &man.sysinstall.8;, lembre-se que discos r&iacute;gidos
-	  transferem dados mais rapidamente das trilas mais externas
+	  transferem dados mais rapidamente das trilhas mais externas
 	  para as internas.
 	  Desta forma, sistemas de arquivos menores e 
 	  mais acessados devem estar mais pr&oacute;ximos da parte de fora
 	  do disco, enquanto parti&ccedil;&otilde;es maiores como <filename>/usr</filename>
           devem estar mais pr&oacute;ximas &agrave; parte de dentro.
-	  &Eacute; uma boa id&eacute;ia criar parti&ccedil;&otilde;es nesta ordem: root. swap,  
+	  &Eacute; uma boa id&eacute;ia criar parti&ccedil;&otilde;es nesta ordem: ra&iacute;z. swap,  
 	  <filename>/var</filename>, <filename>/usr</filename>.</para>
 
 	<para>O tamanho de <filename>/var</filename>
 	  reflete na inten&ccedil;&atilde;o de uso da m&aacute;quina.  
 	  <filename>/var</filename> &eacute; usado para abrigar caixas de correio,
 	  arquivos de log e filas de impress&atilde;o. Caixas postais e 
-	  arquvos de log pode crescer em tamanhos n&atilde;o esperados 
+	  arquivos de log podem crescer em tamanhos n&atilde;o esperados 
 	  dependendo da quantidade de usu&aacute;rios e por quanto tempo 
 	  os arquivos de log s&atilde;o mantidos.  Muitos usu&aacute;rios 
 	  nunca precisar&atilde;o de um gigabyte, 
@@ -184,7 +184,7 @@
 	  maior parti&ccedil;&atilde;o.  Manter as parti&ccedil;&otilde;es de swap com aproximadamente 
 	  o mesmo tamanho permitir&aacute; ao <foreignphrase>kernel</foreignphrase> 
 	  otimizar a distribui&ccedil;&atilde;o do espa&ccedil;o de swap pelas parti&ccedil;&otilde;es.  
-	  N&atilde;o h&aacute; problemas em ter grades parti&ccedil;&otilde;es de swap, mesmo que 
+	  N&atilde;o h&aacute; problemas em ter grandes parti&ccedil;&otilde;es de swap, mesmo que 
 	  o swap n&atilde;o seja muito usado.  Isto pode facilitar a recupera&ccedil;&atilde;o 
 	  de dados de um programa antes de ser for&ccedil;ado a reinicializar a m&aacute;quina.
 	  </para>
@@ -193,7 +193,7 @@
       <sect3>
 	<title>Porque Particionar?</title>
 
-	<para>Muitos usu&aacute;rios pensam que uma parti&ccedil;&atilde;o grade e &uacute;nica
+	<para>Muitos usu&aacute;rios pensam que uma parti&ccedil;&atilde;o grande e &uacute;nica
 	  &eacute; suficiente mas, por v&aacute;rias raz&otilde;es, isto seria uma m&aacute; id&eacute;ia.
 	  Primeiro, cada parti&ccedil;&atilde;o possui caracter&iacute;sticas operacionais 
 	  diferentes e separ&aacute;-las permite ao sistema de arquivos uma
@@ -205,16 +205,16 @@
 
 	<para>Atrav&eacute;s de um particionamento adequado, a fragmenta&ccedil;&atilde;o 
 	  introduzida em parti&ccedil;&otilde;es pequenas com muitos acessos de escrita 
-	  n&atilde;o prejudicar&aacute; pas parti&ccedil;&otilde;es com mais acessos de leitura.  Manter 
+	  n&atilde;o prejudicar&aacute; as parti&ccedil;&otilde;es com mais acessos de leitura.  Manter 
 	  as parti&ccedil;&otilde;es com mais acesso de escrito mais pr&oacute;ximas &agrave; borda do 
 	  disco proporcionar&aacute; melhora na performance de I/O nas 
 	  parti&ccedil;&otilde;es onde isto ocorre com mais freq&uuml;&ecirc;ncia.  Enquanto 
 	  a performance de I/O pode ser necess&aacute;ria em parti&ccedil;&otilde;es maiores, 
 	  coloc&aacute;-las mais na parte externa do disco n&atilde;o promover&aacute; uma 
-	  melhora de performance em rela&ccedil;&atilde;o &agrave; mover  
-	  <filename>/var</filename> para a borda do disco
+	  melhora de performance em rela&ccedil;&atilde;o &agrave; mover o  
+	  <filename>/var</filename> para a borda do disco.
 	  Finalmente, existem preocupa&ccedil;&otilde;es com a seguran&ccedil;a.  Uma parti&ccedil;&atilde;o 
-	  root menor, mais pura, que tem mais acesos de leitura, tem 
+	  ra&iacute;z menor, mais pura, que tem mais acessos de leitura, tem 
 	  uma chance maior de sobreviver &agrave; um <foreignphrase>crash</foreignphrase>.
 	  </para>
       </sect3>
@@ -232,7 +232,7 @@
 
     <para>O local principal para informa&ccedil;&otilde;es de configura&ccedil;&atilde;o de sistema 
       est&aacute; dentro de <filename>/etc/rc.conf</filename>.  Este arquivo
-      cont&eacute;m uma grande quantidade de infora&ccedil;&otilde;es de configura&ccedil;&atilde;o, 
+      cont&eacute;m uma grande quantidade de informa&ccedil;&otilde;es de configura&ccedil;&atilde;o, 
       essencialmente usadas na inicializa&ccedil;&atilde;o do sistema.  Seu nome 
       implica diretamente nisto;  &eacute; a informa&ccedil;&atilde;o de configura&ccedil;&atilde;o para 
       os arquivos <filename>rc*</filename>.</para>
