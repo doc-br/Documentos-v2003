@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/mail/chapter.sgml,v 1.5 2003/12/10 22:07:16 jmelo Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/mail/chapter.sgml,v 1.6 2003/12/11 15:25:26 jmelo Exp $
 -->
 
 <chapter id="mail">
@@ -423,53 +423,51 @@ mail.example.com</programlisting>
   <sect2>
     <title><filename>/etc/mail/sendmail.cf</filename></title>
 
-    <para><application>sendmail</application>'s master configuration
-      file, <filename>sendmail.cf</filename> controls the overall
-      behavior of <application>sendmail</application>, including everything
-      from rewriting e-mail addresses to printing rejection messages to
-      remote mail servers.  Naturally, with such a diverse role, this
-      configuration file is quite complex and its details are a bit
-      out of the scope of this section.  Fortunately, this file rarely
-      needs to be changed for standard mail servers.</para>
+    <para>O <application>sendmail</application> tem como arquivo de configura&ccedil;&atilde;o
+      principal, o <filename>sendmail.cf</filename> que controla o comportamento total
+      do <application>sendmail</application>, incluindo tudo de 
+      reescrita de endere&ccedil;os de mensagens &agrave; impress&atilde;o de mensagens rejei&ccedil;&atilde;o 
+      aos servidores remotos de correio.  Naturalmente, com um papel t&atilde;o diverso, este
+      arquivo de configura&ccedil;&atilde;o &eacute; completamente complexo e os detalhes fogem do escopo desta se&ccedil;&atilde;o.  
+      Felizmente, este arquivo de configura&ccedil;&atilde;o raramente precisa ser modificado por servidores
+      de correio padr&atilde;o.  </para>
 
-    <para>The master <application>sendmail</application> configuration
-      file can be built from &man.m4.1; macros that define the features
-      and behavior of <application>sendmail</application>.  Please see
-      <filename>/usr/src/contrib/sendmail/cf/README</filename> for
-      some of the details.</para>
+    <para>O arquivo de configura&ccedil;&atilde;o principal do <application>sendmail</application> 
+      pode ser construido a partir dos macros &man.m4.1; que define as caracter&iacute;sticas
+      e comportamento do <application>sendmail</application>.  Por favor veja o 
+      <filename>/usr/src/contrib/sendmail/cf/README</filename> para maiores
+      detalhes.  </para>
 
-    <para>When changes to this file are made,
-      <application>sendmail</application> needs to be restarted for
-      the changes to take effect.</para>
+    <para>Quando mudan&ccedil;as neste arquivo s&atilde;o feitas, o
+      <application>sendmail</application> precisa ser reiniciado para
+      que as mudan&ccedil;as tenham efeito.  </para>
 
   </sect2>
   <sect2>
     <title><filename>/etc/mail/virtusertable</filename></title>
 
-    <para>The <filename>virtusertable</filename> maps mail addresses for
-      virtual domains and
-      mailboxes to real mailboxes.  These mailboxes can be local,
-      remote, aliases defined in
-      <filename>/etc/mail/aliases</filename> or files.</para>
+    <para>O <filename>virtusertable</filename> mapeia os endere&ccedil;os de correio para
+      dom&iacute;nios virtuais e caixas de mensagens para caixas de mensagens
+      reais.  Estas caixas de mensagens podem ser locais, remotas, apelidos definidos no
+      <filename>/etc/mail/aliases</filename> ou arquivos.</para>
 
     <example>
-	<title>Example Virtual Domain Mail Map</title>
+	<title>Exemplo de mapeamento de dom&iacute;nio virtual de mensagens</title>
 
-    <programlisting>root@example.com                root
-postmaster@example.com          postmaster@noc.example.net
-@example.com                    joe</programlisting>
+    <programlisting>root@exemplo.com                root
+postmaster@exemplo.com          postmaster@noc.exemplo.net
+@exemplo.com                    joe</programlisting>
       </example>
 
-    <para>In the above example, we have a mapping for a domain
-      <hostid role="domainname">example.com</hostid>.  This file is processed in a
-      first match order down the file.  The first item maps
-      <literal>root@example.com</literal> to the local mailbox <username>root</username>.  The next entry maps
-      <literal>postmaster@example.com</literal> to the mailbox <username>postmaster</username> on the host
-      <hostid role="fqdn">noc.example.net</hostid>.  Finally, if nothing from <hostid role="domainname">example.com</hostid> has
-      matched so far, it will match the last mapping, which matches
-      every other mail message addressed to someone at
-      <hostid role="domainname">example.com</hostid>.
-      This will be mapped to the local mailbox <username>joe</username>.</para>
+    <para>No exemplo acima, n&oacute;s temos um mapeamento para o dom&iacute;nio
+      <hostid role="domainname">exemplo.com</hostid>.  O arquivos &eacute; processado 
+      de cima pra baixo, ordenado na busca da primeira constata&ccedil;&atilde;o da entrada.  O primeiro &iacute;tem mapeia
+      <literal>root@exemplo.com</literal> para a caixa de mensagens local do usu&aacute;rio <username>root</username>.  A pr&oacute;xima entrada mapeia
+      <literal>postmaster@exemplo.com</literal> para a caixa de mensagens do usu&aacute;rio <username>postmaster</username> do host
+      <hostid role="fqdn">noc.exemplo.net</hostid>.  Finalmente, se nada de <hostid role="domainname">exemplo.com</hostid> for
+      encontrado, ele ir&aacute; usar o ultimo mapeamento, que ao ser enviada uma mensagem para qualquer pessoa para o dom&iacute;nio
+      <hostid role="domainname">exemplo.com</hostid> el&aacute; ser&aacute; entregue a um determinado usu&aacute;rio.
+      Neste caso ele ir&aacute; fazer o mapeamento para a caixa de mensagens local do usu&aacute;rio <username>joe</username>.</para>
 
   </sect2>
   </sect1>
@@ -480,37 +478,37 @@ postmaster@example.com          postmaster@noc.example.net
         <author>
           <firstname>Andrew</firstname>
           <surname>Boothman</surname>
-          <contrib>Written by </contrib>
+          <contrib>Escrito por </contrib>
         </author>
       </authorgroup>
       <authorgroup>
         <author>
           <firstname>Gregory</firstname>
           <surname>Neil Shapiro</surname>
-          <contrib>Information taken from e-mails written by </contrib>
+          <contrib>Informa&ccedil;&otilde;es obtidas a partir do email escrito por </contrib>
         </author>
       </authorgroup>
     </sect1info>
-    <title>Changing Your Mail Transfer Agent</title>
+    <title>Trocando seu agente de transfer&ecirc;ncia de mensagens</title>
     <indexterm>
       <primary>email</primary>
-      <secondary>change mta</secondary>
+      <secondary>trocando o mta</secondary>
     </indexterm>
 
-    <para>As already mentioned, FreeBSD comes with
-      <application>sendmail</application> already installed as your
-      MTA (Mail Transfer Agent).  Therefore by default it is
-      in charge of your outgoing and incoming mail.</para>
+    <para>Como mencionado, o FreeBSD vem com o 
+      <application>sendmail</application> j&aacute; instalado como seu
+      MTA (Agente de transfer&ecirc;ncia de mensagens).  Consequentemente por padr&atilde;o sua
+      carga est&aacute; na sa&iacute;da e entrada de mensagens.</para>
 
-    <para>However, for a variety of reasons, some system
-      administrators want to change their system's MTA.  These
-      reasons range from simply wanting to try out another MTA to
-      needing a specific feature or package which relies on another
-      mailer.  Fortunately, whatever the reason, FreeBSD makes it
-      easy to make the change.</para>
+    <para>Entretanto, por uma s&eacute;rie de raz&otilde;es, alguns administradores
+      de sistema querem trocar o seu sistema de MTA.  Estas raz&otilde;es
+      variam simplesmente em querer testar outro MTA at&eacute; a necessidade
+      de fun&ccedil;&otilde;es espec&iacute;ficas ou confia em outro pacote respons&aacute;vel pelo envio de
+      mensagens.  Felizmente, por qualquer raz&atilde;o, o FreeBSD faz com que
+      essa mudan&ccedil;a seja simples de ser realizada.  </para>
 
     <sect2>
-      <title>Install a New MTA</title>
+      <title>Instalando um novo MTA</title>
 
       <para>You have a wide choice of MTAs available.  A good
 	starting point is the
