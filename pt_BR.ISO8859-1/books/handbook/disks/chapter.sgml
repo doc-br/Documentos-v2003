@@ -18,7 +18,8 @@
     <para>Ap&oacute;s ler este cap&iacute;tulo voc&ecirc; saber&aacute;:</para>
     <itemizedlist>
       <listitem><para>A terminologia utilizada pelo FreeBSD para descrever
-	  a organiza&ccedil;&atilde;o dos dados num disco r&iacute;gido (parti&ccedil;&otilde;es, e slices ou
+	  a organiza&ccedil;&atilde;o dos dados num disco r&iacute;gido
+	  (parti&ccedil;&otilde;es, e slices ou
 	  fatias).</para>
       </listitem>
       <listitem><para>Como adicionar um disco r&iacute;gido ao seu sistema.</para>
@@ -27,7 +28,8 @@
 	  de arquivos virtual, como
 	  os alocados em mem&oacute;ria.</para></listitem>
       <listitem>
-	<para>Como fazer utiliza&ccedil;&atilde;o de cotas para limitar o uso do espa&ccedil;o de
+	<para>Como fazer utiliza&ccedil;&atilde;o de cotas para
+	  limitar o uso do espa&ccedil;o de
       armazenamento em disco.</para>
       </listitem>
       <listitem>
@@ -38,7 +40,8 @@
 	<para>Como criar e gravar CDs e DVDs no FreeBSD.</para>
       </listitem>
       <listitem>
-        <para>As v&aacute;rias op&ccedil;&otilde;es de m&iacute;dias para c&oacute;pias
+        <para>As v&aacute;rias op&ccedil;&otilde;es de
+		m&iacute;dias para c&oacute;pias
 		de seguran&ccedil;a(Backup).</para>
       </listitem>
       <listitem>
@@ -1090,31 +1093,32 @@ scsibus1:
 	<title>Controladores ATAPI</title>
 
 	<step>
-	  <para>The ATAPI CD driver makes each track available as
+	  <para>A controladora de CD ATAPI torna cada trilha disponível como
 	    <filename>/dev/acd<replaceable>d</replaceable>t<replaceable>nn</replaceable></filename>,
-	    where <replaceable>d</replaceable> is the drive number, and
-	    <replaceable>nn</replaceable> is the track number written with two
-	    decimal digits, prefixed with zero as needed.
-	    So the first track on the first disk is
-	    <filename>/dev/acd0t01</filename>, the second is
-	    <filename>/dev/acd0t02</filename>, the third is
-	    <filename>/dev/acd0t03</filename>, and so on.</para>
+	    onde <replaceable>d</replaceable> é o número da controladora, e
+	    <replaceable>nn</replaceable> é o número da trilha escrita em
+		dois dígitos decimais, precedidos com zero quando preciso.
+	    Então a primeira trilha no disco é a
+	    <filename>/dev/acd0t01</filename>, a segunda é a
+	    <filename>/dev/acd0t02</filename>, a terceira é a
+	    <filename>/dev/acd0t03</filename>, e assim segue.</para>
 
-	  <para>Make sure the appropriate files exist in
+	  <para>Certifique-se de que os arquivos apropriados existam em
 	    <filename>/dev</filename>.</para>
 
 	  <screen>&prompt.root; <userinput>cd /dev</userinput>
 &prompt.root; <userinput>sh MAKEDEV acd0t99</userinput></screen>
 
-	  <note><para>In FreeBSD 5.0, &man.devfs.5; will automatically
-	    create and manage entries in <filename>/dev</filename>
-	    for you, so it is not necessary to use
+	  <note><para>No FreeBSD 5.0, &man.devfs.5; criará automaticamente
+	    e gerenciará as entradas em <filename>/dev</filename>
+	    para você, portanto, não é necessário utilizar o
 	    <command>MAKEDEV</command>.</para></note>
 	</step>
 
 	<step>
-	  <para>Extract each track using &man.dd.1;.  You must also use a
-	    specific block size when extracting the files.</para>
+	  <para>Extraia cada trilha utilizando o &man.dd.1;.  Você deve
+	    especificar também um tamanho específico de bloco quando
+		estiver extraindo os arquivos.</para>
 
 	  <screen>&prompt.root; <userinput>dd if=/dev/acd0t01 of=track1.cdr bs=2352</userinput>
 &prompt.root; <userinput>dd if=/dev/acd0t02 of=track2.cdr bs=2352</userinput>
@@ -1123,10 +1127,10 @@ scsibus1:
 	</step>
 
 	<step>
-	  <para>Burn the extracted files to disk using
-	    <command>burncd</command>.  You must specify that these are audio
-	    files, and that <command>burncd</command> should fixate the disk
-	    when finished.</para>
+	  <para>Grave os arquivos extraídos para o disco utilizando o
+	    <command>burncd</command>.  Você deve especificar que são arquivos
+		de áudio, e que o <command>burncd</command> deve executar o
+		<option>fixate</option> no disco quando terminar a gravação.</para>
 
 	  <screen>&prompt.root; <userinput>burncd -f <replaceable>/dev/acd0c</replaceable> audio track1.cdr track2.cdr <replaceable>...</replaceable> fixate</userinput></screen>
 	</step>
@@ -1134,65 +1138,69 @@ scsibus1:
     </sect2>
 
     <sect2 id="imaging-cd">
-      <title>Duplicating Data CDs</title>
+      <title>Duplicando CDs de Dados</title>
 
-      <para>You can copy a data CD to a image file that is
-	functionally equivalent to the image file created with
-	<filename role="package">sysutils/mkisofs</filename>, and you can use it to duplicate
-	any data CD.  The example given here assumes that your CDROM
-	device is <devicename>acd0</devicename>.  Substitute your
-	correct CDROM device.  A <literal>c</literal> must be appended
-	to the end of the device name to indicate the entire partition
-	or, in the case of CDROMs, the entire disc.</para>
+      <para>Você pode copiar um CD de dados em um arquivo de imagem
+	  que funcionalmente é equivalente a uma imagem criada com o
+	  <filename role="package">sysutils/mkisofs</filename>, e você
+	  usar este recurso para duplicar qualquer CD de dados.  O
+	  exemplo a seguir assume que o seu dispositivo de CDROM
+	  é o <devicename>acd0</devicename>.  Substitua pelo dispositivo
+	  de CDROM correto no seu sistema.  Um <literal>c</literal> deve
+	  ser adicionado ao final do nome do dispositivo para indicar
+	  a partição toda, ou, no caso de CDROMs, o disco inteiro.</para>
 
       <screen>&prompt.root; <userinput>dd if=/dev/acd0c of=file.iso bs=2048</userinput></screen>
 
-      <para>Now that you have an image, you can burn it to CD as
-	described above.</para>
+      <para>Agora que você possui a imagem, você pode gravá-la num CD como
+	  descrito anteriormente.</para>
     </sect2>
 
     <sect2 id="mounting-cd">
-      <title>Using Data CDs</title>
+      <title>Utilizando CDs de Dados</title>
 
-      <para>Now that you have created a standard data CDROM, you
-	probably want to mount it and read the data on it.  By
-	default, &man.mount.8; assumes that a file system is of type
-	<literal>ufs</literal>.  If you try something like:</para>
+      <para>Agora que você criou um CD de dados padrão, você
+	  provavelmente irá querer montar a unidade e ler dados dele.
+	  Por padrão, o &man.mount.8; irá assumir que o tipo de sistema
+	  de arquivos é o <literal>ufs</literal>.
+	  Se você tentar algo como:</para>
 
       <screen>&prompt.root; <userinput>mount /dev/cd0c /mnt</userinput></screen>
 
-      <para>you will get a complaint about <errorname>Incorrect super
-	  block</errorname>, and no mount. The CDROM is not a
-	  <literal>UFS</literal> file system, so attempts to mount it
-	  as such will fail.  You just need to tell &man.mount.8; that
-	  the file system is of type <literal>ISO9660</literal>, and
-	  everything will work.  You do this by specifying the
-	  <option>-t cd9660</option> option &man.mount.8;. For
-	  example, if you want to mount the CDROM device,
-	  <devicename>/dev/cd0c</devicename>, under
-	  <filename>/mnt</filename>, you would execute:</para>
+      <para>Você conseguirá a seguinte mensagem<errorname>Incorrect super
+	  block</errorname>, e o disco não será montado. O CDROM não é um
+	  sistema de arquivos <literal>UFS</literal>, portanto, tentar
+	  montá-lo com esta configuração ocasionará em falha.  Você só
+	  precisa indicar ao &man.mount.8; que o sistema de arquivos é do
+	  tipo <literal>ISO9660</literal>, e tudo funcionará.  Você faz isso
+	  especificando a opção <option>-t cd9660</option> ao &man.mount.8;. Por
+	  exemplo, se você quer montar o dispositivo de CDROM
+	  <devicename>/dev/cd0c</devicename>, sob o <filename>/mnt</filename>,
+	  você deve executar:</para>
 
           <screen>&prompt.root; <userinput>mount -t cd9660 /dev/cd0c /mnt</userinput></screen>
 
-      <para>Note that your device name
-	(<devicename>/dev/cd0c</devicename> in this example) could be
-	different, depending on the interface your CDROM uses. Also,
-	the <option>-t cd9660</option> option just executes
-	&man.mount.cd9660.8;. The above example could be shortened
-	to:</para>
+      <para>Note que seu nome de dispositivo
+	  (<devicename>/dev/cd0c</devicename> neste exemplo) poderá
+	  ser diferente, dependendo da interface que seu CDROM utilizar.
+	  Também, a opção <option>-t cd9660</option> apenas executa
+	  o &man.mount.cd9660.8;. O exemplo acima pode ser reduzido para:</para>
 
 <screen>&prompt.root; <userinput>mount_cd9660 /dev/cd0c /mnt</userinput></screen>
 
-      <para>You can generally use data CDROMs from any vendor in this
-	way.  Disks with certain ISO 9660 extensions might behave
-	oddly, however.  For example, Joliet disks store all filenames
-	in two-byte Unicode characters.  The FreeBSD kernel does not
-	speak Unicode (yet!), so non-English characters show up as
-	question marks.  (If you are running FreeBSD 4.3 or later, the
-	CD9660 driver includes hooks to load an appropriate Unicode
-	conversion table on the fly.  Modules for some of the common
-	encodings are available via the
-	<filename role="package">sysutils/cd9660_unicode</filename> port.)</para>
+      <para>Você geralmente pode utilizar CDROMs de dados de qualquer
+	  fabricante com este método.  Entretanto, discos com
+	  algumas extensões do ISO 9660 podem ter um comportamente ímpar.
+	  Por exemplo, disco com extensão Joliet armazenam todos os
+	  nomes de arquivos em caracteres Unicode de dois bytes.
+	  O kernel do FreeBSD não entende Unicode (ainda!), então
+	  os caracteres que não pertencerem ao idioma Inglês serão
+	  mostrados como sinais de interrogação.  (Se você estiver
+	  rodando o FreeBSD 4.3 ou superior, o driver CD9660
+	  inclui ganchos para carregar uma tabela de conversão
+	  Unicode dinamicamente.  Módulos para algumas das codificações
+	  comuns estão disponíveis no port
+	  <filename role="package">sysutils/cd9660_unicode</filename>.)</para>
 
       <para>Occasionally, you might get <errorname>Device not
 	configured</errorname> when trying to mount a CDROM.  This
