@@ -133,21 +133,20 @@ Routing tables
 
 Destination      Gateway	    Flags     Refs     Use     Netif Expire
 
-default	  outside-gw	 UGSc       37      418      ppp0
-localhost	localhost	  UH	  0      181       lo0
-test0	    0:e0:b5:36:cf:4f   UHLW	5    63288       ed0     77
-10.20.30.255     link#1	     UHLW	1     2421
-example.com      link#1	     UC	  0	0
-host1	    0:e0:a8:37:8:1e    UHLW	3     4601       lo0
-host2	    0:e0:a8:37:8:1e    UHLW	0	5       lo0
-=>
-host2.example.com link#1	     UC	  0	0
-224	      link#1	     UC	  0	0</screen>
+default		 outside-gw	    UGSc       37      418      ppp0
+localhost	 localhost	    UH		0      181       lo0
+test0		 0:e0:b5:36:cf:4f   UHLW	5    63288       ed0     77
+10.20.30.255     link#1		    UHLW	1     2421
+example.com      link#1		    UC		0	 0
+host1		 0:e0:a8:37:8:1e    UHLW	3     4601       lo0
+host2		 0:e0:a8:37:8:1e    UHLW	0	 5	 lo0 =>
+host2.example.com link#1	    UC		0	 0
+224		 link#1		    UC		0	 0</screen>
 
       <indexterm><primary>default route</primary></indexterm>
       <para>As duas primeiras linhas especificam a rota padr&atilde;o (a qual
       ser&aacute; abordada na <link linkend="network-routing-default">pr&oacute;xima
-      se&ccedil;&atilde;o</link>) e a rota para (<hostid>localhost</hostid> (a
+      se&ccedil;&atilde;o</link>) e a rota para <hostid>localhost</hostid> (a
       pr&oacute;pria m&aacute;quina).</para>
 
       <indexterm><primary>loopback device</primary></indexterm>
@@ -349,11 +348,11 @@ host2.example.com link#1	     UC	  0	0
       passo intermedi&aacute;rio de enviar tr&aacute;fego para o servidor do PSI.</para>
 
       <para>Como observa&ccedil;&atilde;o final, &eacute; comum usar o endere&ccedil;o
-      <hostid role="ipaddr">X.X.X.1</hostid> como o endere&ccedil;o do gateway
+      <hostid role="IPADDR">X.X.X.1</hostid> como o endere&ccedil;o do gateway
       para sua rede local.  Ent&atilde;o (usando o mesmo exemplo), se o seu
       espa&ccedil;o de endere&ccedil;amento classe-C era
-      <hostid role="ipaddr">10.20.30</hostid> e seu PSI estava usando
-      <hostid role=&iuml;paddr">10.9.9</hostid> ent&atilde;o as rotas padr&atilde;o
+      <hostid role="IPADDR">10.20.30</hostid> e seu PSI estava usando
+      <hostid role=IPADDR">10.9.9</hostid> ent&atilde;o as rotas padr&atilde;o
       seriam:</para>
 
       <informaltable frame="none">
@@ -421,7 +420,6 @@ host2.example.com link#1	     UC	  0	0
       isto por padr&atilde;o no FreeBSD.  Voc&ecirc; pode permitir esta
       caracter&iacute;stica alterando a seguinte vari&aacute;vel para
       <literal>YES</literal> no &man.rc.conf.5;:</para>
-	&man.rc.conf.5;:</para>
 
       <programlisting>gateway_enable=YES	  # Set to YES if this host will be a gateway</programlisting>
 
@@ -524,11 +522,11 @@ host2.example.com link#1	     UC	  0	0
 
       <programlisting>options MROUTING</programlisting>
 
-      <para>Al&eacute;m disso, o daemon de roteamento multicast,
+      <para>Al&eacute;m disso, o daemon de roteamento multicast 
       &man.mrouted.8; precisa ser configurado para ativar t&uacute;neis e
       DVMRP atrav&eacute;s do <filename>/etc/mrouted.conf</filename>.  Mais
       detalhes sobre a configura&ccedil;&atilde;o multicast podem ser encontradas
-      nas p&aacute;ginas de manuais do mrouted.</filename></para>
+      nas p&aacute;gina de manual do mrouted.</para>
     </sect2>
   </sect1>
 
@@ -551,102 +549,103 @@ host2.example.com link#1	     UC	  0	0
    </indexterm>
 
    <sect2>
-      <title>Introduction</title>
-      <para>It can be very useful to be able to use a computer without the
-      annoyance of having a network cable attached at all times.  FreeBSD can
-      be used as a wireless client, and even as a wireless <quote>access
-      point</quote>.</para>
+      <title>Introdu&ccedil;&atilde;o</title>
+      <para>Pode ser muito &uacute;til a possibilidade de usar um computador 
+      sem o inc&ocirc;modo de ter um cabo de rede conectado o tempo todo.  O
+      FreeBSD pode ser usado como um cliente sem fio e at&eacute; mesmo como
+      um <quote>ponto de acesso</quote> sem fio.</para>
    </sect2>
 
    <sect2>
-     <title>Wireless Modes of Operation</title>
-     <para>There are two different ways to configure 802.11 wireless devices:
-      BSS and IBSS.</para>
+     <title>Modos de Opera&ccedil;&atilde;o Sem Fio</title>
+     <para>H&aacute; duas formas diferentes de configurar dispositivos sem
+     fio 802.11: BSS e IBSS.</para>
 
      <sect3>
-       <title>BSS Mode</title>
-       <para>BSS mode is the mode that typically is used.  BSS mode is
-	also called infrastructure mode.  In this mode, a number of
-	wireless access points are connected to a wired network.  Each
-	wireless network has its own name.  This name is called the
-	SSID of the network.</para>
-
-       <para>Wireless clients connect to these wireless access
-	points.  The IEEE 802.11 standard defines the protocol that
-	wireless networks use to connect.  A wireless client can be
-	tied to a specific network, when a SSID is set.  A wireless
-	client can also attach to any network by not explicitly
-	setting a SSID.</para>
+       <title>Modo BSS</title>
+       <para>BSS &eacute; o modo tipicamente utilizado.  O modo BSS &eacute;
+	tamb&eacute;m chamado de modo infra-estrutura.  Neste modo, uma
+	quantidade de pontos de acesso sem fio est&atilde;o conectados a uma
+	rede cabeada.  Cada rede sem fio t&ecirc;m seu pr&oacute;prio nome.  Este
+	nome &eacute; chamado SSID da rede.</para>
+	
+       <para>Clientes sem fio conectam-se a estes pontos de acesso.  
+       O padr&atilde;o IEEE 802.11 define o protocolo que redes sem fio usam
+       para conex&otilde;es.  Um cliente sem fio pode ser ligado a uma rede
+       espec&iacute;fica, quando um SSID &eacute; configurado.  Um cliente sem fio
+       tamb&eacute;m pode conectar-se a qualquer rede desde que n&atilde;o configure
+       explicitamente um SSID.</para>
      </sect3>
 
      <sect3>
-       <title>IBSS Mode</title>
-       <para>IBSS mode, also called ad-hoc mode, is designed for point
-	 to point connections.  There are actually two types of ad-hoc
-	 mode.  One is IBSS mode, also called ad-hoc or IEEE ad-hoc
-	 mode.  This mode is defined by the IEEE 802.11 standards.
-	 The second is called demo ad-hoc mode or Lucent ad-hoc mode
-	 (and sometimes, confusingly, ad-hoc mode).  This is the old,
-	 pre-802.11 ad-hoc mode and should only be used for legacy
-	 installations.  We will not cover either of the ad-hoc modes
-	 further.</para>
+       <title>Modo IBSS</title>
+       <para>O modo IBSS, tamb&eacute;m chamado modo ad-hoc, &eacute; projetado para
+       conex&otilde;es ponto-a-ponto.  Existem, de fato, dois tipos de modo
+       ad-hoc.  Um &eacute; o modo IBSS, tamb&eacute;m chamado de ad-hoc ou
+       modo ad-hoc do IEEE.  Este modo &eacute; definido pelos padr&otilde;es IEEE
+       802.11.  O segundo modo &eacute; chamado modo ad-hoc demo ou modo
+       ad-hoc da Lucent (e, &agrave;s vezes, confusamente, modo ad-hoc).
+       Este &eacute; o antigo modo ad-hoc, pr&eacute;-802.11 e somente deve ser
+       usado em instala&ccedil;&otilde;es legadas.  N&atilde;o iremos abordar nenhum dos
+       modos ad-hoc mais adiante.</para>
      </sect3>
    </sect2>
 
    <sect2>
-     <title>Infrastructure Mode</title>
+     <title>Modo Infra-estrutura</title>
      <sect3>
-       <title>Access Points</title>
+       <title>Pontos de Acesso</title>
 
-       <para>Access points are wireless networking devices that allow
-	one or more wireless clients to use the device as a central
-	hub.  When using an access point, all clients communicate
-	through the access point.  Multiple access points are often
-	used to cover a complete area such as a house, business, or
-	park with a wireless network.</para>
+       <para>Pontos de acesso s&atilde;o dispositivos de rede sem fio que
+       permitem um ou mais clientes sem fio utilizar o dispositivo
+       como um concentrador central.  Ao usar um ponto de acesso, todos
+       os clientes comunicam-se atrav&eacute;s do ponto de acesso.  M&uacute;ltiplos
+       pontos de acesso s&atilde;o freq&uuml;entemente usados para cobrir uma &aacute;rea
+       completa como uma casa, neg&oacute;cio ou parque, com uma rede sem
+       fio.</para>
 
-       <para>Access points typically have multiple network
-       connections: the wireless card, and one or more wired Ethernet
-       adapters for connection to the rest of the network.
-</para>
+       <para>Pontos de acesso tipicamente possuem m&uacute;ltiplas conex&otilde;es
+       de rede: o cart&atilde;o sem fio e um ou mais adaptadores Ethernet
+       para conex&atilde;o ao resto da rede.</para>
 
-       <para>Access points can either be purchased prebuilt, or you
-	can build your own with FreeBSD and a supported wireless card.
-	Several vendors make wireless access points and wireless cards
-	with various features.</para>
+       <para>Pontos de acesso podem ser comprados montados ou voc&ecirc;
+       pode construir o seu pr&oacute;prio com FreeBSD e um cart&atilde;o sem fio
+       suportado. Diversos fornecedores fazem pontos de acesso sem fio
+       e cart&otilde;es sem fio com caracter&iacute;sticas variadas.</para>
      </sect3>
 
      <sect3>
-       <title>Building a FreeBSD Access Point</title>
+       <title>Construindo um Ponto de Acesso FreeBSD</title>
        <indexterm><primary>wireless networking</primary>
 	 <secondary>access point</secondary>
        </indexterm>
 
-       <sect4><title>Requirements</title>
+       <sect4><title>Requisitos</title>
 
-	 <para>In order to set up a wireless access point with
-	  FreeBSD, you need to have a compatible wireless card.
-	  Currently, only cards with the Prism chipset are
-	  supported.  You will also need a wired network card that is
-	  supported by FreeBSD (this should not be difficult to find,
-	  FreeBSD supports a lot of different devices).  For this
-	  guide, we will assume you want to &man.bridge.4; all traffic
-	  between the wireless device and the network attached to the
-	  wired network card.</para>
+	 <para>Para ativar um ponto de acesso com FreeBSD, voc&ecirc;
+	 precisa ter uma placa sem fio compat&iacute;vel.  Atualmente,
+	 somente s&atilde;o suportadas as placas com o chipset Prism.  Voc&ecirc;
+	 tamb&eacute;m vai precisar de uma placa de rede com fio suportada
+	 pelo FreeBSD (n&atilde;o deve ser dif&iacute;cil encontrar, o FreeBSD
+	 suporta diversos dispositivos diferentes).  Neste guia, vamos
+	 assumir que voc&ecirc; deseja fazer uma ponte (&man.bridge.4;) 
+	 de todo o tr&aacute;fego entre o dispositivo sem fio e a rede 
+	 conectada na placa de rede com fio.</para>
 
-	 <para>The hostap functionality that FreeBSD uses to implement
-	   the access point works best with certain versions of
-	   firmware.  Prism 2 cards should use firmware version 1.3.4
-	   or newer.  Prism 2.5 and Prism 3 cards should use firmware
-	   1.4.9.  Older versions of the firmware way or may not
-	   function correctly.  At this time, the only way to update
-	   cards is with &windows; firmware update utilities available
-	   from your card's manufacturer.</para>
+	 <para>A funcionalidade hostap que o FreeBSD usa para
+	 implementar o ponto de acesso funciona melhor com certas
+	 vers&otilde;es de firmware.  Placas Prism 2 devem usar o firmware
+	 vers&atilde;o 1.3.4 ou mais recente.  Placas Prism 2.5 e Prism 3
+	 devem usar o firmware 1.4.9. Vers&otilde;es anteriores de firmware
+	 podem ou n&atilde;o funcionar corretamente.  Neste momento, a &uacute;nica
+	 forma de atualizar placas &eacute; com ferramentas de atualiza&ccedil;&atilde;o
+	 para &windows; disponibilizadas pelo fabricante de sua placa.</para>
        </sect4>
 
        <sect4>
-	 <title>Setting It Up</title>
-	 <para>First, make sure your system can see the wireless card:</para>
+	 <title>Ativando o Ponto de Acesso</title>
+	 <para>Primeiro, certifique-se de que seu sistema reconhece a
+	 placa sem fio:</para>
 	 <screen>&prompt.root; <userinput>ifconfig -a</userinput>
 wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
 	inet6 fe80::202:2dff:fe2d:c938%wi0 prefixlen 64 scopeid 0x7
@@ -659,119 +658,121 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
 	channel 10 authmode OPEN powersavemode OFF powersavesleep 100
 	wepmode OFF weptxkey 1</screen>
 
-	 <para>Do not worry about the details now, just make sure it shows you
-	  something to indicate you have a wireless card installed.
-	  If you have trouble seeing the wireless interface, and you
-	  are using a PC Card, you may want to check out
-	  &man.pccardc.8; and &man.pccardd.8; manual pages for more
-	  information.</para>
+	 <para>N&atilde;o se preocupe com os detalhes agora, apenas
+	 certifique-se de que algo &eacute; mostrado, indicando que voc&ecirc; tem
+	 uma placa sem fio instalada.  Se voc&ecirc; tiver problemas em
+	 encontrar a interface sem fio e estiver usando um PC card,
+	 voc&ecirc; pode querer verificar as p&aacute;ginas de manual
+	 &man.pccardc.8; e &man.pccardd.8; para maiores informa&ccedil;&otilde;es.</para>
 
-	 <para>Next, you will need to load a module in order to get
-	  the bridging part of FreeBSD ready for the access point.  In
-	  order to load the &man.bridge.4; module, simply run the
-	  following command:</para>
+	 <para>A seguir, voc&ecirc; vai precisar carregar um m&oacute;dulo para
+	 ter o FreeBSD funcionando como ponte e pronto para o ponto de
+	 acesso. Para carregar o m&oacute;dulo &man.bridge.4;, simplesmente
+	 execute o comando:</para>
 
 	 <screen>&prompt.root; <userinput>kldload bridge</userinput></screen>
 
-	 <para>It should not have produced any errors when loading the
-	  module.  If it did, you may need to compile the
-	  &man.bridge.4; code into your kernel.  The <link
-	  linkend="network-bridging">Bridging</link> section of the handbook
-	  should be able to help you accomplish that task.</para>
+	 <para>N&atilde;o deve ser mostrado nenhum erro ao se carregar o 
+	 m&oacute;dulo.  Se houve algum, talvez voc&ecirc; precise compilar o
+	 c&oacute;digo &man.bridge.4; no kernel do seu sistema.  A se&ccedil;&atilde;o
+	 <link linkend="network-bridging">Liga&ccedil;&atilde;o</link> do
+	 handbook deve ajud&aacute;-lo a executar esta tarefa.</para>
 
-	 <para>Now that you have the bridging stuff done, we need to
-	  tell the FreeBSD kernel which interfaces to bridge together.
-	  We do that by using &man.sysctl.8;:</para>
+	 <para>Agora que voc&ecirc; tem a parte de liga&ccedil;&atilde;o pronta,
+	 precisamos dizer ao kernel do FreeBSD quais interfaces deve
+	 ligar.  Fazemos isto usando &man.sysctl.8;:</para>
 
 	 <screen>&prompt.root; <userinput>sysctl net.link.ether.bridge=1</userinput>
 &prompt.root; <userinput>sysctl net.link.ether.bridge_cfg="wi0 xl0"</userinput>
 &prompt.root; <userinput>sysctl net.inet.ip.forwarding=1</userinput></screen>
 
-	 <para>Now it is time for the wireless card setup.</para>
-	 <para>The following command will set the card into an access point:</para>
+	 <para>Agora &eacute; a hora de configurar a placa sem fio.</para>
+	 <para>O seguinte comando vai ativar a placa como um ponto de
+	 acesso:</para>
 
 	 <screen>
 &prompt.root; <userinput>ifconfig wi0 ssid my_net channel 11 media DS/11Mbps mediaopt hostap up stationname "FreeBSD AP"</userinput>
 	 </screen>
 
-	 <para>The &man.ifconfig.8; line brings the
-	  <devicename>wi0</devicename> interface up, sets its SSID to
-	  <literal>my_net</literal>, and sets the station name to
-	  <literal>FreeBSD AP</literal>.  The <option>media
-	  DS/11Mbps</option> sets the card into 11Mbps mode and is
-	  needed for any <option>mediaopt</option> to take effect.
-	  The <option>mediaopt hostap</option> option places the
-	  interface into access point mode.  The <option>channel
-	  11</option> option sets the 802.11b channel to use.  The
-	  &man.wicontrol.8; man page has valid channel options for
-	  your regulatory domain.
-</para>
+	 <para>A linha &man.ifconfig.8; ativa a interface 
+	  <devicename>wi0</devicename>, configura seu SSID para
+	  <literal>my_net</literal>, e ajusta o nome  da esta&ccedil;&atilde;o para
+	  <literal>FreeBSD AP</literal>.  A op&ccedil;&atilde;o <option>media
+	  DS/11Mbps</option> configura a placa em modo 11Mbps e &eacute;
+	  necess&aacute;ria para qualquer par&acirc;metro <option>mediaopt</option> 
+	  ter efeito.  A op&ccedil;&atilde;o <option>mediaopt hostap</option> coloca
+	  a interface em modo ponto de acesso.  A p&aacute;gina de manual
+	  &man.wicontrol.8; tem as op&ccedil;&otilde;es v&aacute;lidas para canais de seu
+	  controlador de dom&iacute;nio.</para> 
 
-	 <para>Now you should have a complete functioning access point
-	  up and running.  You are encouraged to read
-	  &man.wicontrol.8;, &man.ifconfig.8;, and &man.wi.4; for
-	  further information.
-</para>
+	 <para>Agora voc&ecirc; deve ter um ponto de acesso completamente
+	 funcional ativado e funcionando.  Recomendamos a leitura de 
+	 &man.wicontrol.8;, &man.ifconfig.8;, e &man.wi.4; para maiores 
+	 informa&ccedil;&otilde;es.</para>
 
-	 <para>It is also suggested that you read the section on encryption that follows.</para>
+	 <para>Tamb&eacute;m &eacute; sugerido que voc&ecirc; leia a se&ccedil;&atilde;o sobre
+	 criptografia a seguir.</para>
        </sect4>
 
        <sect4>
-	 <title>Status Information</title>
-	 <para>Once the access point is configured and operational,
-	   operators will want to see the clients that are associated
-	   with the access point.  At any time, the operator may type:</para>
+	 <title>Inform&ccedil;&otilde;es de Estado</title>
+	 <para>Uma vez que o ponto de acesso est&aacute; configurado e
+	 operacional, os operadores v&atilde;o querer ver os clientes
+	 associados ao ponto de acesso.  Em qualquer momento, o
+	 operador pode digitar:</para>
 
 	 <screen>&prompt.root; <userinput>wicontrol -l</userinput>
 1 station:
 00:09:b7:7b:9d:16 asid=04c0, flags=3&lt;ASSOC,AUTH&gt;, caps=1&lt;ESS&gt;, rates=f&lt;1M,2M,5.5M,11M&gt;, sig=38/15
 </screen>
 
-	 <para>This shows that there's one station associated, along
-	   with its parameters.  The signal indicated should be used
-	   as a relative indication of strength only.  Its
-	   translation to dBm or other units varies between different
-	   firmware revisions.</para>
+	 <para>Isto mostra que h&aacute; uma esta&ccedil;&atilde;o associada, junto com
+	 seus par&acirc;metros.  O sinal indicado deve ser usado somente 
+	 como uma indica&ccedil;&atilde;o relativa de pot&ecirc;ncia.  Sua tradu&ccedil;&atilde;o para
+	 dBm ou outras unidades variam entre diferentes revis&otilde;es de
+	 firmware.</para>
        </sect4>
      </sect3>
 
      <sect3>
-       <title>Clients</title>
+       <title>Clientes</title>
 
-       <para>A wireless client is a system that accesses an access
-       point or another client directly.</para>
+       <para>Um cliente sem fio &eacute; um sistema que acessa um ponto de
+       acesso ou outro cliente diretamente.</para>
 
-       <para>Typically, wireless clients only have one network device,
-       the wireless networking card.</para>
+       <para>Tipicamente, os clientes sem fio possuem somente um
+       dispositivo de rede, a placa de rede sem fio.</para>
 
-       <para>There are a few different ways to configure a wireless
-	client.  These are based on the different wireless modes,
-	generally BSS (infrastructure mode, which requires an access
-	point), and IBSS (ad-hoc, or peer-to-peer mode).  In our
-	example, we will use the most popular of the two, BSS mode, to
-	talk to an access point.</para>
+       <para>Existem algumas poucas formas diferentes de configurar 
+       um cliente sem fio.  Estas configura&ccedil;&otilde;es s&atilde;o baseadas nos
+       diferentes modos sem fio, geralmente BSS (modo infra-estrutura,
+       que requer um ponto de acesso), e IBSS (ad-hoc, ou modo 
+       ponto-a-ponto).  Em nosso exemplo, vamos usar o mais popular 
+       dos dois, modo BSS, para comunica&ccedil;&atilde;o com um ponto de acesso.</para>
 
        <sect4>
-       <title>Requirements</title>
-       <para>There is only one real requirement for setting up FreeBSD as a wireless client.
-	You will need a wireless card that is supported by FreeBSD.</para>
+       <title>Requisitos</title>
+       <para>H&aacute; somente um &uacute;nico requisito real para ativar o FreeBSD
+       como um cliente sem fio.  Voc&ecirc; precisa de uma placa sem fio
+       suportada pelo FreeBSD.</para>
        </sect4>
 
        <sect4>
-       <title>Setting Up a Wireless FreeBSD Client</title>
+       <title>Ativando um Cliente Sem Fio FreeBSD</title>
 
-       <para>You will need to know a few things about the wireless
-	network you are joining before you start.  In this example, we
-	are joining a network that has a name of
-	<literal>my_net</literal>, and encryption turned off.</para>
+       <para>Antes de come&ccedil;ar, precisa saber algumas coisas 
+       sobre a rede sem fio &agrave; qual estar&aacute; se conectando.  Neste
+       exemplo, estamos nos conectando a uma rede que tem o nome de 
+       <literal>my_net</literal>, e criptografia desligada.</para>
 
-       <para>Note: In this example, we are not using encryption, which
-	is a dangerous situation.  In the next section, you will learn
-	how to turn on encryption, and why it is important to do so,
-	and why some encryption technologies still do not completely
-	protect you.</para>
+       <para>Neste exemplo, n&atilde;o estamos usando criptografia o que &eacute;
+       uma situa&ccedil;&atilde;o de perigo.  Na pr&oacute;xima se&ccedil;&atilde;o, voc&ecirc; aprender&aacute; 
+       como ativar criptografia, porque &eacute; importante faz&ecirc;-lo e porque
+       algumas tecnologias de criptografia ainda n&atilde;o o protegem
+       completamente.</para>
 
-       <para>Make sure your card is recognized by FreeBSD:</para>
+       <para>Certifique-se de que sua placa &eacute; reconhecida pelo
+       FreeBSD:</para>
 
        <screen>&prompt.root; <userinput>ifconfig -a</userinput>
 wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
@@ -785,170 +786,177 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
 	channel 10 authmode OPEN powersavemode OFF powersavesleep 100
 	wepmode OFF weptxkey 1</screen>
 
-       <para>Now, we will set the card to the correct settings for our
-       network:</para>
+       <para>Agora vamos configurar a placa com os par&acirc;metros corretos
+       para nossa rede:</para>
 
        <screen>&prompt.root; <userinput>ifconfig wi0 inet 192.168.0.20 netmask 255.255.255.0 ssid my_net</userinput></screen>
 
-       <para>Replace <hostid role="IPAddr">192.168.0.20</hostid> and
-	<hostid role="Netmask">255.255.255.0</hostid> with a valid IP
-	address and netmask on your wired network.  Remember, our
-	access point is bridging the data between the wireless
-	network, and the wired network, so it will appear to the other
-	devices on your network that you are on the wired network just
-	as they are.</para>
+       <para>Substitua <hostid role="IPADDR">192.168.0.20</hostid> e
+       <hostid role="Netmask">255.255.255.0</hostid> com um endere&ccedil;o
+       IP e m&aacute;scara de subrede v&aacute;lidos em sua rede com fio.  Lembre-se
+       que nosso ponto de acesso est&aacute; fazendo a liga&ccedil;&atilde;o (ponte)
+       de dados entre a rede sem fio e a rede com fio, de forma
+       que vai parecer aos outros dispositivos na rede que voc&ecirc; est&aacute;
+       na rede com fio, assim como eles.</para> 
 
-       <para>Once you have done that, you should be able to ping hosts
-	on the wired network just as if you were connected using a
-	standard wired connection.</para>
+       <para>Feito isto, voc&ecirc; deve ser capaz de usar ping nos sistemas
+       na rede com fio assim como se estivesse conectado usando uma
+       conex&atilde;o padr&atilde;o, com fio.</para>
 
-       <para>If you are experiencing problems with your wireless
-	connection, check to make sure that your are associated
-	(connected) to the access point:</para>
+       <para>Se estiver com problemas em sua conex&atilde;o sem fio,
+       certifique-se que est&aacute; associado (conectado) ao ponto de
+       acesso:</para>
 
        <screen>&prompt.root; <userinput>ifconfig wi0</userinput></screen>
 
-       <para>should return some information, and you should see:</para>
+       <para>deve retornar alguma informa&ccedil;&atilde;o, e voc&Ecirc; deve ver:</para>
        <screen>status: associated</screen>
 
-       <para>If it does not show associated, then you may be out of
-       range of the access point, do not have encryption on, or
-       possibly have a configuration problem.</para>
+       <para>Se n&atilde;o mostrar que est&aacute; associado, ent&atilde;o voc&ecirc; deve estar
+       fora de alcance do ponto de acesso, estar sem criptografia
+       ativada, ou possivelmente tem um problema de configura&ccedil;&atilde;o.</para>
 
        </sect4>
      </sect3>
 
      <sect3>
-      <title>Encryption</title>
+      <title>Criptografia</title>
       <indexterm>
 	<primary>wireless networking</primary>
 	<secondary>encryption</secondary>
       </indexterm>
 
-      <para>Encryption on a wireless network is important because you
-       no longer have the ability to keep the network contained in a
-       well protected area.  Your wireless data will be broadcast
-       across your entire neighborhood, so anyone who cares to read it
-       can.  This is where encryption comes in.  By encrypting the
-       data that is sent over the airwaves, you make it much more
-       difficult for any interested party to grab your data right out
-       of the air.</para>
+      <para>Criptografia em uma rede sem fio &eacute; importante porque voc&ecirc;
+      n&atilde;o mais ter&aacute; a capacidade de manter a rede contida em uma &aacute;rea
+      bem protegida.  Seus dados sem fio ser&atilde;o transmitidos atrav&eacute;s de
+      toda a sua vizinhan&ccedil;a, ent&atilde;o quem quiser poder&aacute; ler seus
+      dados.  Aqui entra a criptografia.  Criptografando os dados
+      transmitidos por ondas a&eacute;reas, voc&ecirc; torna muito mais dif&iacute;cil a 
+      qualquer um capturar seus dados do ar.</para>
 
-     <para>The two most common ways to encrypt the data between your
-      client and the access point, are WEP, and &man.ipsec.4;.</para>
+     <para>As duas formas mais comuns de criptografar os dados entre
+     seu cliente e o ponto de acesso s&atilde;o WEP, e &man.ipsec.4;.</para>
 
      <sect4>
      <title>WEP</title>
       <indexterm><primary>WEP</primary></indexterm>
 
-      <para>WEP is an abbreviation for Wired Equivalency Protocol.
-       WEP is an attempt to make wireless networks as safe and secure
-       as a wired network.  Unfortunately, it has been cracked, and is
-       fairly trivial to break.  This also means it is not something
-       to rely on when it comes to encrypting sensitive data.</para>
+      <para>WEP &eacute; uma abrevia&ccedil;&atilde;o para Protocolo para Equival&ecirc;ncia em
+      Fio (Wired Equivalency Protocol). WEP &eacute; uma tentativa de tornar
+      as redes sem fio t&atilde;o seguras quanto uma rede com fio.
+      Infelizmente, foi quebrado e &eacute; bem trivial quebr&aacute;-lo.  Isto
+      tamb&eacute;m significa que n&atilde;o &eacute; uma coisa para se contar quando se
+      trata de criptografar dados sens&iacute;veis.</para>
 
-      <para>It is better than nothing, so use the following to turn on
-       WEP on your new FreeBSD access point:</para>
+      <para>&Eacute; melhor que nada, ent&atilde;o fa&ccedil;a o seguinte para ativar WEP
+      em seu novo ponto de acesso FreeBSD:</para>
 
       <screen>&prompt.root; <userinput>ifconfig wi0 inet up ssid my_net wepmode on wepkey 0x1234567890 media DS/11Mbps mediaopt hostap</userinput></screen>
 
-      <para>And you can turn on WEP on a client with this command:</para>
+      <para>E voc&ecirc; pode ativar WEP em um cliente com este comando:</para>
 
       <screen>&prompt.root; <userinput>ifconfig wi0 inet 192.168.0.20 netmask 255.255.255.0 ssid my_net wepmode on wepkey 0x1234567890</userinput></screen>
 
-      <para>Note that you should replace the <literal>0x1234567890</literal> with a more unique key.</para>
+      <para>Note que voc&ecirc; deve substituir o
+      <literal>0x1234567890</literal> por uma chave mais
+      exclusiva.</para>
 
      </sect4>
 
      <sect4>
      <title>IPsec</title>
 
-     <para>&man.ipsec.4; is a much more robust and powerful tool for
-       encrypting data across a network.  This is definitely the
-       preferred way to encrypt wireless data over a network.  You can
-       read more about &man.ipsec.4; security and how to implement it
-       in the <link linkend="ipsec">IPsec</link> section of the
-       handbook.</para>
+     <para>&man.ipsec.4; &eacute; uma ferramenta muito mais robusta e poderosa 
+     para criptografar dados atrav&eacute;s de uma rede.  Esta &eacute;
+     definitivamente a forma preferida de criptografar dados em uma 
+     rede sem fio.  Voc&ecirc; pode ler mais sobre seguran&ccedil;a &man.ipsec.4; e
+     como implement&aacute;-la na se&ccedil;&atilde;o <link linkend="ipsec">IPsec</link> do 
+     handbook.</para>
      </sect4>
     </sect3>
 
     <sect3>
-    <title>Tools</title>
+    <title>Ferramentas</title>
 
-    <para>There are a small number of tools available for use in
-      debugging and setting up your wireless network, and here we will
-      attempt to describe some of them and what they do.</para>
+    <para>H&aacute; um pequeno n&uacute;mero de ferramentas dispon&iacute;vel para uso na
+    determina&ccedil;&atilde;o de problemas e ativa&ccedil;&atilde;o de sua rede sem fio, e aqui
+    vamos tentar descrever algumas delas e o que fazem.</para>
 
     <sect4>
-    <title>The <application>bsd-airtools</application> Package</title>
+    <title>O Pacote <application>bsd-airtools</application></title>
 
-    <para>The <application>bsd-airtools</application> package is a
-      complete toolset that includes wireless auditing tools for WEP
-      key cracking, access point detection, etc.</para>
+    <para>O pacote <application>bsd-airtools</application> &eacute; um
+    conjunto de ferramentas completo que inclui ferramentas de
+    auditoria sem fio para quebrar chaves WEP, detectar pontos de
+    acesso etc.</para>
 
-    <para>The <application>bsd-airtools</application> utilities can be
-      installed from the <filename
-      role="package">net/bsd-airtools</filename> port.  Information on
-      installing ports can be found in <xref linkend="ports"> of the
-      handbook.</para>
+    <para>Os utilit&aacute;rios <application>bsd-airtools</application> podem 
+    ser instalados a partir do port <filename
+    role="package">net/bsd-airtools</filename>.  Informa&ccedil;&otilde;es sobre
+    como instalar ports podem ser encontradas em <xref
+    linkend="ports"> do handbook.</xref></para>
 
-    <para>The program <command>dstumbler</command> is the packaged
-      tool that allows for access point discovery and signal to noise
-      ratio graphing.  If you are having a hard time getting your
-      access point up and running, <command>dstumbler</command> may
-      help you get started.</para>
+    <para>O programa <command>dstumbler</command> &eacute; a ferramenta
+    no pacote que permite a descoberta de pontos de acesso e
+    representa&ccedil;&atilde;o gr&aacute;fica da raz&atilde;o entre sinal e ru&iacute;do. Se voc&ecirc;
+    estiver com dificuldades para ativar seu ponto de acesso,
+    <command>dstumbler</command> pode ajud&aacute;-lo a familiarizar-se.</para>
 
-    <para>To test your wireless network security, you may choose to
-      use <quote>dweputils</quote> (<command>dwepcrack</command>,
-      <command>dwepdump</command> and <command>dwepkeygen</command>)
-      to help you determine if WEP is the right solution to your
-      wireless security needs.</para>
+    <para>Para testar a seguran&ccedil;a de sua rede sem fio, voc&ecirc; pode
+    escolher usar <quote>dweputils</quote> 
+    (<command>dwepcrack</command>, <command>dwepdump</command> e 
+    <command>dwepkeygen</command>) para ajud&aacute;-lo a determinar se WEP &eacute;
+    a a solu&ccedil;&atilde;o adequada para suas necessidades de seguran&ccedil;a sem
+    fio.</para>
 
     </sect4>
 
     <sect4>
-    <title>The <application>wicontrol</application>, <application>ancontrol</application> and <application>raycontrol</application> Utilities</title>
+    <title>Os Utilit&aacute;rios<application>wicontrol</application>, 
+    <application>ancontrol</application> e 
+    <application>raycontrol</application></title>
 
-    <para>These are the tools you use to control how your wireless
-      card behaves on the wireless network.  In the examples above, we
-      have chosen to use &man.wicontrol.8;, since our wireless card is
-      a <devicename>wi0</devicename> interface.  If you had a Cisco
-      wireless device, it would come up as
-      <devicename>an0</devicename>, and therefore you would use
-      &man.ancontrol.8;.</para>
+    <para>Estas s&atilde;o as ferramentas que voc&ecirc; deve usar para controlar
+    como sua placa sem fio se comporta na rede sem fio.  Nos exemplos
+    acima, escolhemos usar &man.wicontrol.8;, uma vez que nossa placa
+    sem fio &eacute; uma interface <devicename>wi0</devicename>.  Se voc&ecirc;
+    tivesse um dispositivo sem fio Cisco, ele apareceria como
+    <devicename>an0</devicename>, e assim voc&ecirc; deveria usar
+    &man.ancontrol.8;.</para>
 
     </sect4>
 
     <sect4>
-    <title>The <application>ifconfig</application> Command</title>
+    <title>O Comando <application>ifconfig</application></title>
     <indexterm><primary>ifconfig</primary></indexterm>
 
-    <para>&man.ifconfig.8; can be used to do many of the same options
-      as &man.wicontrol.8;, however it does lack a few options.  Check
-      &man.ifconfig.8; for command line parameters and options.</para>
+    <para>O &man.ifconfig.8; pode ser usado para fazer muitas das 
+    mesmas configura&ccedil;&otilde;es que &man.wicontrol.8;, entretanto &eacute;
+    desprovido de algumas poucas op&ccedil;&otilde;es.  Verifique &man.ifconfig.8;
+    para op&ccedil;&otilde;es e par&acirc;metros de linha de comando.</para>
 
     </sect4>
 
     </sect3>
 
     <sect3>
-    <title>Supported Cards</title>
+    <title>Placas Suportadas</title>
     <sect4>
-    <title>Access Points</title>
+    <title>Pontos de Acesso</title>
 
-    <para>The only cards that are currently supported for BSS (as an
-      access point) mode are devices based on the Prism 2, 2.5, or 3
-      chipsets.  For a complete list, look at &man.wi.4;.</para>
+    <para>As &uacute;nicas placas que s&atilde;o suportadas atualmente para modo BSS
+    (como um ponto de acesso) s&atilde;o dispositivos baseados nos chipsets
+    Prism 2, 2.5 ou 3.  Para uma lista completa, veja &man.wi.4;.</para>
 
     </sect4>
 
     <sect4>
-    <title>Clients</title>
+    <title>Clientes</title>
 
-    <para>Almost all 802.11b wireless cards are currently supported
-      under FreeBSD.  Most cards based on Prism, Spectrum24, Hermes,
-      Aironet, and Raylink will work as a wireless network card in
-      IBSS (ad-hoc, peer-to-peer, and BSS) mode.</para>
+    <para>Quase todas as placas sem fio 802.11b s&atilde;o suportadas
+    atualmente pelo FreeBSD.  A maioria das placas baseadas em Prism,
+    Spectrum24, Hermes, Aironet e Raylink v&atilde;o funcionar como uma placa
+    de rede em modo IBSS (ad-hoc, ponto-a-ponto e BSS).</para>
 
     </sect4>
     </sect3>
