@@ -1210,7 +1210,7 @@ You can enable XAnim DLL support by defining WITH_XANIM.
 	  ent&atilde;o voc&ecirc; tamb&eacute;m poder&aacute; habilitar a interface gr&aacute;fica.  Se
 	  n&atilde;o, n&atilde;o vale o esfor&ccedil;o.  Se voc&ecirc; planeja reproduzir
 	  (possivelmente encodados com CSS) DVD´s com o
-	  application>MPlayer</application> voc&ecirc; precisa habilitar a
+	  <application>MPlayer</application> voc&ecirc; precisa habilitar a
 	  op&ccedil;&atilde;o de suporte a DVD <footnote><para>Reprodu&ccedil;&atilde;o n&atilde;o
 	  autorizada de DVD´s &eacute; um serio ato criminal em alguns
 	  paises.  Verifique as leis locais antes de habilitar esta
@@ -1222,7 +1222,7 @@ You can enable XAnim DLL support by defining WITH_XANIM.
 	  port do <application>MPlayer</application> ir&aacute; construir a
 	  documenta&ccedil;&atilde;o HTML dele  e um execut&aacute;vel, <command>mplayer</command>.  Ele 
 	  tamb&eacute;m pode ser compilado de forma a gerar um encoder,
-	  command>mencoder</command>, o qual &eacute; uma ferramenta para
+	  <command>mencoder</command>, o qual &eacute; uma ferramenta para
 	  re-encodar video.  Uma modifica&ccedil;&atilde;o no <filename>Makefile</filename>
 	  pode habilitar a sua gera&ccedil;&atilde;o.  Ele pode ser habilitado por
 	  padr&atilde;o nas vers&otilde;es futuras do port.</para>
@@ -1411,34 +1411,39 @@ zoom=yes</programlisting>
     </sect3>
 
     <sect3 id="video-ports-transcode">
-    <title>Utilit&aacute;rios de transcodifica&ccedil;&atilde;o</title>
+    <title>Utilit&aacute;rio transcode</title>
 
-    <para>The software <application>transcode</application> is not a player, but a suite of tools for
-      re-encoding <filename>.avi</filename> and <filename>.mpg</filename> files.  With <application>transcode</application>, one has the
-      ability to merge video files, repair broken files, using command
-      line tools with <filename>stdin/stdout</filename> stream
-      interfaces.</para>
-
-    <para>Like <application>MPlayer</application>, <application>transcode</application> is very experimental software which
-      must be build from the port <filename
-      role="package">multimedia/transcode</filename>.  Using a great
-      many options to the <command>make</command> command.  I
-      recommend:</para>
-
+    <para>O software <application>transcode</application> n&atilde;o &eacute; um
+      reprodutor, mas um conjunto de ferramentas para re-encodar
+      arquivos <filename>.avi</filename> e <filename>.mpg</filename>.  
+      Com o <application>transcode</application>, um tem a habilidade
+      de juntar arquivos de video, consertar arquivos quebrados,
+      utilizando ferramentas de linha de comando com interface de
+      fluxo de dados para <filename>stdin/stdout</filename>.</para>
+    
+    <para>Assim como o <application>MPlayer</application>, o
+      <application>transcode</application> &eacute; um software muito
+      experimental, o qual deve ser compilado a partir do 
+      <filename role="package">multimedia/transcode</filename>.
+      Existe uma grande variedade de op&ccedil;&otilde;es que podem ser utilizadas
+      com o comando <command>make</command>. As recomendadas
+      s&atilde;o:</para>
+    
       <screen>&prompt.root; <userinput>make WITH_LIBMPEG2=yes</userinput></screen>
 
-    <para>If you plan to install <filename
-      role="package">multimedia/avifile</filename>, then add the
-      <literal>WITH_AVIFILE</literal> option to your
-      <command>make</command> command line, as shown here:</para>
-
+    <para>Se voc&ecirc; planeja instalar o <filename
+      role="package">multimedia/avifile</filename>, ent&atilde;o adicione a
+      op&ccedil;&atilde;o <literal>WITH_AVIFILE</literal> a sua linha de comando
+      <command>make</command>, como mostrado aqui:</para>
+    
       <screen>&prompt.root; <userinput>make WITH_AVIFILE=yes WITH_LIBMPEG2=yes</userinput></screen>
 
-    <para>Here are two examples of using <command>transcode</command>
-      for video conversion which produce rescaled output.  The first
-      encodes the output to an openDIVX AVI file, while the second
-      encodes to the much more portable MPEG format.</para>
-
+    <para>Aqui est&atilde;o 2 exemplos de uso do <command>transcode</command>
+      para para converter um video alterando o tamanho do mesmo na
+      saida.  O primeiro encoda a saida para um arquivo AVI openDIVX,
+      enquanto o segundo encoda para o formato MPEGi, o qual &eacute; muito mais 
+      port&aacute;vel.</para> 
+    
       <screen>&prompt.user; <userinput>transcode -i input.vob -x vob -V -Z 320x240 \
 -y opendivx -N 0x55 -o output.avi</userinput></screen>
 
@@ -1446,20 +1451,23 @@ zoom=yes</programlisting>
 -y mpeg -N 0x55 -o output.tmp</userinput>
 &prompt.user; <userinput>tcmplex -o output.mpg -i output.tmp.m1v -p output.tmp.mpa -m 1</userinput></screen>
 
-    <para>There is a manual page for <command>transcode</command>, but
-      there is little documentation for the various <command>tc*</command> utilities (such as
-      <command>tcmplex</command>) which are also installed.
-      However, the <option>-h</option> command line option can
-      always be given to get curt usage instructions for a
-      command.</para>
-
-    <para>In comparison, <command>transcode</command> runs
-      significantly slower than <command>mencoder</command>, but it
-      has a better chance of producing a more widely playable file.
-      MPEGs created by <command>transcode</command> have been known to
-      play on older copies of
-      <application>&windows.media; Player</application> and Apple's <application>&quicktime;</application>, for example.</para>
-
+    <para>Existe uma p&aacute;gina de manual para o <command>transcode</command>, mas
+      existe muito pouca documenta&ccedil;&atilde;o para os v&aacute;rios
+      utilit&aacute;rios <command>tc*</command> (como por exemplo o
+      <command>tcmplex</command>) os quais tamb&eacute;m est&atilde;o instalados.
+      Entretando, a op&ccedil;&atilde;o de linha de comando <option>-h</option>
+      sempre pode ser utilizada para obter uma curta instru&ccedil;&atilde;o de uso
+      para um comando.</para>
+    
+    <para>Em compara&ccedil;&atilde;o, o <command>transcode</command> roda
+      significativamente mais devagar do que o
+      <command>mencoder</command>, mas ele possui uma chance melhor de
+      produzir um arquivo mais amplamente reprodut&iacute;vel.  MPEGs criados
+      pelo <command>transcode</command> sabidamente podem ser
+      reproduzidos nas vers&otilde;es antigas do <application>&windows.media;
+      Player</application> e do <application>&quicktime;</application>
+      da Apple, por exemplo.</para>
+    
     </sect3>
 
   </sect2>
@@ -1467,45 +1475,46 @@ zoom=yes</programlisting>
   <sect2 id="video-further-reading">
     <title>Refer&ecirc;ncias para leitura adicional</title>
 
-    <para>The various video software packages for FreeBSD are
-      developing rapidly.  It is quite possible that in the near
-      future many of the problems discussed here will have been
-      resolved.  In the mean time, those who
-     want to get the very most out of FreeBSD's A/V capabilities will
-     have to cobble together knowledge from several FAQs and tutorials
-     and use a few different applications.  This section exists to
-      give the reader pointers to such additional information.</para>
-
-    <para>The 
-      <ulink url="http://www.mplayerhq.hu/DOCS/">MPlayer documentation</ulink>
-      is very technically informative.
-      These documents should probably be consulted by anyone wishing
-      to obtain a high level of expertise with &unix; video.  The
-      <application>MPlayer</application> mailing list is hostile to anyone who has not bothered
-      to read the documentation, so if you plan on making bug reports
-      to them, RTFM.</para>
-
-    <para>The
-      <ulink url="http://dvd.sourceforge.net/xine-howto/en_GB/html/howto.html">      xine HOWTO</ulink>
-      contains a chapter on performance improvement
-      which is general to all players.</para>
-
-    <para>Finally, there are some other promising applications which
-    the reader may try:</para>
-
+    <para>Os varios pacotes de software de video para FreeBSD s&atilde;o
+      desenvolvidos rapidamente.  E &eacute; bem prov&aacute;vel que em um futuro
+      pr&oacute;ximo muitos dos problemas discutidos aqui ter&atilde;o sido
+      resolvidos.  Neste meio tempo, aqueles que desejarem tirar o
+      m&aacute;ximo das funcionalidades de A/V do FreeBSD ter&atilde;o que
+      complementar seu conhecimento apartir de diversos FAQs e
+      tutoriais e utilizar alguns aplicativos diferentes.  Esta sess&atilde;o
+      existe para dar ao leitor indica&ccedil;&otilde;es de onde obter estas
+      informa&ccedil;&otilde;es adicionais.</para>
+    
+    <para>A <ulink url="http://www.mplayerhq.hu/DOCS/">documenta&ccedil;&atilde;o do
+      MPlayer</ulink> &eacute; muito informativa tecnicamente.  Esta
+      documenta&ccedil;&atilde;o deveria ser consultada por qualquer pessoa que
+      deseja obter um alto nivel de especializa&ccedil;&atilde;o em video no
+      ambiente &unix;.  A lista de discuss&atilde;o do
+      <application>MPlayer</application> &eacute; hostil para qualquer pessoa
+      que n&atilde;o tenha lido a documenta&ccedil;&atilde;o, assim se voc&ecirc; planeja enviar
+      relatorios de problemas para ela, leia o manual (RTFM).</para>
+    
+    <para>O <ulink
+      url="http://dvd.sourceforge.net/xine-howto/en_GB/html/howto.html"> 
+      tutorial sobre xine</ulink> cont&eacute;m um capitulo sobre melhoria de
+      performance a qual se aplica a todos os reprodutores.</para>
+    
+    <para>Finalmente, existem algumas outras aplica&ccedil;&otilde;es promissoras as
+      quais o leitor pode testar:</para>
+    
     <itemizedlist>
 
        <listitem>
-         <para><ulink
-	   url="http://avifile.sourceforge.net/">Avifile</ulink> which
-	   is also a port <filename
+         <para>O <ulink
+	   url="http://avifile.sourceforge.net/">Avifile</ulink> 
+	   tamb&eacute;m esta dispon&iacute;vel no port <filename
 	   role='package'>multimedia/avifile</filename>.</para>
        </listitem>
 
        <listitem>
-         <para><ulink
+         <para>O <ulink
 	   url="http://www.dtek.chalmers.se/groups/dvd/">Ogle</ulink>
-	   which is also a port <filename
+	   tamb&eacute;m esta dispon&iacute;vel no port <filename
 	   role='package'>multimedia/ogle</filename>.</para>
        </listitem>
 
@@ -1515,8 +1524,9 @@ zoom=yes</programlisting>
 
 	<listitem>
          <para><filename
-           role="package">multimedia/dvdauthor</filename>, an open
-           source package for authoring DVD content.</para>
+           role="package">multimedia/dvdauthor</filename>, 
+	   um pacote de c&oacute;digo aberto para autoria de conteudo 
+	   de DVDs
         </listitem>
 
     </itemizedlist>
