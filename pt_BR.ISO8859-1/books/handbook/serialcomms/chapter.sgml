@@ -1,8 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/serialcomms/chapter.sgml,v 
-     1.9 2003/12/10 19:10:48 ebrandi Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/serialcomms/chapter.sgml,v 1.9 2003/12/10 19:10:48 ebrandi Exp $
 -->
 
 <chapter id="serialcomms">
@@ -580,12 +579,15 @@ device		sio3	at isa? port IO_COM4 irq 9</programlisting>
 	arquivos especiais de dispositivo.  Para utilizar o
 	<command>MAKEDEV</command> para criar 
         os arquivos especiais de 
-	dispositivos de dial-up para a porta <devicename>COM1</devicename> 
+	dispositivos de dial-up para 
+        a porta <devicename>COM1</devicename> 
 	(porta 0), v&aacute; para o diret&oacute;rio 
         <filename>/dev</filename> e
-	execute o comando <command>MAKEDEV ttyd0</command>.  Da mesma
+	execute o comando <command>MAKEDEV 
+        ttyd0</command>.  Da mesma
 	forma, para criar os arquivos especiais de dispositivos
-	dial-up para a porta <devicename>COM2</devicename> (porta 1),
+	dial-up para a 
+        porta <devicename>COM2</devicename> (porta 1),
 	utilize o comando <command>MAKEDEV ttyd1</command>.</para>
 	
 	<para>O <command>MAKEDEV</command> n&atilde;o 
@@ -644,7 +646,8 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
 
     <para>O dispositivo
     <devicename>ttyd<replaceable>N</replaceable></devicename> (ou
-    <devicename>cuaa<replaceable>N</replaceable></devicename>) &eacute; o
+    <devicename>cuaa<replaceable>N</replaceable></devicename>) 
+     &eacute; o
     dispositivo que normalmente voc&ecirc; 
     ir&aacute; desejar abrir para as suas
     aplica&ccedil;&otilde;es.  Quando um processo abre um 
@@ -652,18 +655,27 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
     um conjunto padr&atilde;o de configura&ccedil;&otilde;es 
     de I/O para o terminal.</para>
 
-    <screen>&prompt.root; <userinput>stty -a -f /dev/ttyd1</userinput></screen>
+    <screen>&prompt.root; <userinput>
+    stty -a -f /dev/ttyd1</userinput>
+    </screen>
 
     <para>Quando voc&ecirc; altera as configura&ccedil;&otilde;es
       para este dispositivo,
-      os ajustes permanecem v&aacute;lidos at&eacute; que o dispositivo seja
-      fechado.  Quando ele &eacute; reaberto, ele voltar&aacute; a utilizar as
+      os ajustes permanecem v&aacute;lidos 
+      at&eacute; que o dispositivo seja
+      fechado.  Quando ele &eacute; reaberto, ele 
+      voltar&aacute; a utilizar as
       configura&ccedil;&otilde;es padr&otilde;es.  Para
       fazer altera&ccedil;&otilde;es na configura&ccedil;&atilde;o
-      padr&atilde;o, voc&ecirc; deve abrir e ajustar as configura&ccedil;&otilde;es de
-      <quote>estado inicial</quote> do dispositivo.  Por exemplo, para
-      habilitar o modo <option>CLOCAL</option>, comunica&ccedil;&atilde;o de 8 bits
-      e o controle de fluxo <option>XON/XOFF</option> como padr&atilde;o para
+      padr&atilde;o, voc&ecirc; deve abrir e 
+      ajustar as configura&ccedil;&otilde;es de
+      <quote>estado inicial</quote> do dispositivo.  Por 
+      exemplo, para
+      habilitar o modo <option>CLOCAL
+      </option>, comunica&ccedil;&atilde;o 
+      de 8 bits
+      e o controle de fluxo <option>XON/XOFF</option> como 
+      padr&atilde;o para
       o dispositivo <devicename>ttyd5</devicename>, execute:</para>
 
     <screen>&prompt.root; <userinput>stty -f /dev/ttyid5 clocal cs8 ixon ixoff</userinput></screen>
@@ -674,26 +686,33 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
     </indexterm>
 
     <!-- XXX; /etc/rc.serial is gone in 5.1.
-      How do you set default parameters for these devices in 5.X ? -->
+      How do you set default parameters for these 
+      devices in 5.X ? -->
 
-    <para>Todo o processo de iniciali&ccedil;&atilde;o dos dispositivos 
+    <para>Todo o processo de iniciali&ccedil;&atilde;o 
+         dos dispositivos 
          seriais &eacute; controlado
-         pelo arquivo <filename>/etc/rc.serial</filename>. Este arquivo
+         pelo arquivo <filename>/etc/rc.serial</filename>. Este 
+         arquivo
          afeta as configura&ccedil;&otilde;es padr&otilde;es dos 
          dispositivos seriais.</para>
 
     <para>Para impedir que configura&ccedil;&otilde;es sejam
            modificadas por aplica&ccedil;&otilde;es, configure
-           os dispositivos em <quote>lock state</quote>. Por exemplo, para
+           os dispositivos em <quote>lock state</quote>. Por 
+           exemplo, para
            travar a velocidade
-           do <devicename>ttyd5</devicename> em 57600&nbsp;bps, digite:</para>
+           do <devicename>ttyd5</devicename> em 
+           57600&nbsp;bps, digite:</para>
 
 
     <screen>&prompt.root; <userinput>stty -f /dev/ttyld5 57600</userinput></screen>
 
-    <para>Deste momento em diante, as aplica&ccedil;&otilde;es que abrirem
+    <para>Deste momento em diante, as aplica&ccedil;&otilde;es 
+          que abrirem
           o dispositivo <devicename>ttyd5</devicename>
-          e tentarem modificar a velocidade da porta ter&atilde;o sua
+          e tentarem modificar a velocidade da 
+          porta ter&atilde;o sua
           tentativa ignorada e far&atilde;o uso
           do dispositivo na velocidade 57600&nbsp;bps.</para>
 
@@ -702,7 +721,8 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
     </indexterm>
 
 
-    <para>Naturalmente, voc&ecirc; deve definir que os dispositivos que estiverem
+    <para>Naturalmente, voc&ecirc; deve definir que os 
+          dispositivos que estiverem
           em estado de inicializa&ccedil;&atilde;o ou travados
           tenham permiss&atilde;o de escrita somente
           para a conta <username>root</username>.</para>
@@ -747,32 +767,44 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
         sistema remoto, para
         trabalhos em modo texto puro.</para> 
 
-      <para>Atualmente, os PCs possuem consoles com alta defini&ccedil;&atilde;o
+      <para>Atualmente, os PCs possuem consoles 
+        com alta defini&ccedil;&atilde;o
         gr&aacute;fica, mas
-        as habilidades de estabelecer uma sess&atilde;o de login atrav&eacute;s de
+        as habilidades de estabelecer uma sess&atilde;o de 
+        login atrav&eacute;s de
         uma porta
-        serial foi mantida nos sistemas operacionais &unix; atuais; O FreeBSD
+        serial foi mantida nos sistemas operacionais 
+        &unix; atuais; O FreeBSD
         n&atilde;o &eacute; uma exce&ccedil;&atilde;o. Utilizando
         um terminal conectado a
         uma porta serial
-        voc&ecirc; pode logar-se e rodar programas em modo texto normalmente como 
-        seria feito em um console ou numa janela de <command>xterm</command>
+        voc&ecirc; pode logar-se e rodar programas 
+        em modo texto normalmente como 
+        seria feito em um console ou numa janela 
+        de <command>xterm</command>
         do sistema X Window.</para> 
         
-      <para>Os usu&aacute;rios coorporativos tem a op&ccedil;&atilde;o de
+      <para>Os usu&aacute;rios coorporativos 
+        tem a op&ccedil;&atilde;o de
         conectar diversos terminais
-        num sistema FreeBSD e coloc&aacute;-los nas mesas de trabalho de
+        num sistema FreeBSD e coloc&aacute;-los 
+        nas mesas de trabalho de
         seus funcion&aacute;rios.
-        Os usu&aacute;rios dom&eacute;sticos podem utilizar de computadores
+        Os usu&aacute;rios dom&eacute;sticos podem 
+        utilizar de computadores
         antigos como IBM PCs
-        ou &macintosh; como terminais de um computador de performance superior 
-        rodando FreeBSD. Permitindo que um computador poderoso, que
+        ou &macintosh; como terminais de um computador 
+        de performance superior 
+        rodando FreeBSD. Permitindo que um computador 
+        poderoso, que
         na maioria das vezes 
-        seria utilizado por apenas um usu&aacute;rio, torne-se um sistema para
+        seria utilizado por apenas um usu&aacute;rio, torne-se 
+        um sistema para
         m&uacute;ltiplos
         usu&aacute;rios.</para>  
   
-      <para>No FreeBSD tem-se basicamente tr&ecirc;s tipos de terminais:</para>
+      <para>No FreeBSD tem-se basicamente 
+         tr&ecirc;s tipos de terminais:</para>
 
       <itemizedlist>
 	<listitem>
@@ -782,7 +814,8 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
 	</listitem>
 
 	<listitem>
-	  <para><link linkend="term-pcs">PCs atuando como terminais</link></para>
+	  <para><link linkend="term-pcs">PCs atuando 
+          como terminais</link></para>
 	</listitem>
 
 	<listitem>
@@ -790,19 +823,24 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
 	</listitem>
       </itemizedlist>
 	  
-      <para>S&atilde;o descritos em sequ&ecirc;ncia cada um dos tipos.</para>
+      <para>S&atilde;o descritos em 
+         sequ&ecirc;ncia cada um dos tipos.</para>
 	  
       <sect3 id="term-dumb">
-	<title>Terminais <foreignphrase>Dumb</foreignphrase> ou burros</title>
+	<title>Terminais <foreignphrase>Dumb</foreignphrase> ou 
+          burros</title>
 
-        <para>Terminais <foreignphrase>Dumb</foreignphrase> s&atilde;o um
+        <para>Terminais 
+          <foreignphrase>Dumb</foreignphrase> s&atilde;o um
           tipo caracter&iacute;stico de
           equipamento para conex&atilde;o em computadores
           atrav&eacute;s de portas seriais. S&atilde;o chamados
           <quote>dumb</quote> ou <quote>burros</quote> devido
           a serem terminais que possuem
-          habilidade &uacute;nica de envio e apresenta&ccedil;&atilde;o
-          de informa&ccedil;&otilde;es em modo texto. N&atilde;o &eacute; 
+          habilidade &uacute;nica de envio 
+          e apresenta&ccedil;&atilde;o
+          de informa&ccedil;&otilde;es em modo 
+          texto. N&atilde;o &eacute; 
           poss&iacute;vel executar nenhum programa
           neles. A execu&ccedil;&atilde;o dos programas como 
           editores de texto, compiladores, correio
@@ -833,18 +871,22 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
       <sect3 id="term-pcs">
 	<title>PCs atuando como terminais</title>
 
-        <para>Se um <link linkend="term-dumb">terminal burro</link> possui
+        <para>Se um <link linkend="term-dumb">terminal 
+          burro</link> possui
           habilidades suficientes para exibir,
           enviar e receber texto, certamente, qualquer
           computador poder&aacute; ser
-          utilizado como um terminal burro. Tudo que ser&aacute; preciso
+          utilizado como um terminal burro. Tudo que 
+          ser&aacute; preciso
           &eacute; um cabo
-          apropriado e a <emphasis>emula&ccedil;&atilde;o de terminal</emphasis> 
+          apropriado e a <emphasis>emula&ccedil;&atilde;o de 
+          terminal</emphasis> 
           realizada por um programa executado no computador.</para>
           
         <para>Tal configura&ccedil;&atilde;o &eacute; comum para uso
           dom&eacute;stico. Por exemplo, se
-          tem uma pessoa ocupada trabalahndo no seu console do FreeBSD
+          tem uma pessoa ocupada trabalahndo 
+          no seu console do FreeBSD
           voc&ecirc; pode realizar trabalhos em texto ao
           mesmo tempo de um computador
           conectado como um terminal ao FreeBSD.</para>
@@ -866,7 +908,8 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
 
         <para>Os terminais X s&atilde;o apresentados aqui
               somente para abordagem geral do tema.
-              Entretanto, este cap&iacute;tulo <emphasis>n&atilde;o</emphasis>
+              Entretanto, este cap&iacute;tulo 
+              <emphasis>n&atilde;o</emphasis>
               abrange a configura&ccedil;&atilde;o
               ou o uso de terminais X.</para>
 	    
@@ -876,41 +919,55 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
     <sect2 id="term-config">
       <title>Configura&ccedil;&atilde;o</title>
 
-      <para>Esta sess&atilde;o descreve o que &eacute; necess&aacute;rio
+      <para>Esta sess&atilde;o descreve o 
+        que &eacute; necess&aacute;rio
         configurar no seu sistema FreeBSD
         para habilitar o <foreignphrase>login</foreignphrase> e
         utiliza&ccedil;&atilde;o atrav&eacute;s de um terminal.
         &Eacute; assumido aqui que voc&ecirc; tenha
-        previamente habilitado o suporte para portas seriais no seu kernel
+        previamente habilitado o suporte 
+        para portas seriais no seu kernel
         e que voc&ecirc; tenha feito a conex&atilde;o
         f&iacute;sica do terminal na porta serial.</para> 
       
 
-      <para>Relembrando o <xref linkend="boot"> que descreve que o processo
+      <para>Relembrando o <xref linkend="boot"> que 
+        descreve que o processo
         <command>init</command> &eacute; respons&aacute;vel pelo 
         controle e in&iacute;cializa&ccedil;&atilde;o 
-        de todos os processos ao iniciar o sistema.  Uma das atividades executadas
-        pelo <command>init</command> &eacute; ler o arquivo <filename>/etc/ttys</filename>
-        e iniciar o processo <command>getty</command> nos terminais disponibilizados.
-	O processo <command>getty</command> &eacute; respons&aacute;vel 
+        de todos os processos ao iniciar 
+        o sistema.  Uma das atividades executadas
+        pelo <command>init</command> &eacute; ler o 
+        arquivo <filename>/etc/ttys</filename>
+        e iniciar o processo <command>getty</command> nos 
+        terminais disponibilizados.
+	O processo <command>getty</command> &eacute; 
+        respons&aacute;vel 
         pela leitura do nome de <foreignphrase>login</foreignphrase>
-	e pela inicializa&ccedil;&atilde;o do programa <command>login</command>.</para>
+	e pela inicializa&ccedil;&atilde;o 
+        do programa <command>login</command>.</para>
 	  
-      <para>Assim, para configurar os terminais para o seu sistema FreeBSD 
-	os seguintes passos devem ser realizados como <username>root</username>:</para>
+      <para>Assim, para configurar os 
+        terminais para o seu sistema FreeBSD 
+	os seguintes passos devem ser 
+        realizados como <username>root</username>:</para>
 
       <procedure>
 	<step>
-	  <para>Adicione uma linha no arquivo <filename>/etc/ttys</filename> 
+	  <para>Adicione uma linha no 
+            arquivo <filename>/etc/ttys</filename> 
             para a entrada
-	    do diret&oacute;rio <filename>/dev</filename> indicando a 
+	    do diret&oacute;rio <filename>/dev</filename>
+            indicando a 
             porta serial caso esta n&atilde;o esteja 
             descrita no arquivo.</para>
 	</step>
 
 	<step>
-	  <para>Especifique que o <command>/usr/libexec/getty</command> deve ser executado
-            na porta, e indique um tipo apropriado de <replaceable>getty</replaceable> no 
+	  <para>Especifique que o 
+            <command>/usr/libexec/getty</command> deve ser executado
+            na porta, e indique um tipo apropriado 
+            de <replaceable>getty</replaceable> no 
             arquivo <filename>/etc/gettytab</filename>.</para>
 	</step>
 
@@ -919,15 +976,18 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
 	</step>
 
 	<step>
-	  <para>Configure a porta como <quote><foreignphrase>on</foreignphrase>.</quote></para>
+	  <para>Configure a porta como <quote>
+             <foreignphrase>on</foreignphrase>.</quote></para>
 	</step>
 	      
 	<step>
-	  <para>Especifique se a porta deve ser <quote>segura.</quote></para>
+	  <para>Especifique se a porta deve 
+             ser <quote>segura.</quote></para>
 	</step>
 
 	<step>
-	  <para>Force o <command>init</command> a reler o arquivo<filename>/etc/ttys</filename>.</para>
+	  <para>Force o <command>init</command> a reler o 
+             arquivo<filename>/etc/ttys</filename>.</para>
 	</step>
       </procedure>
       
@@ -935,25 +995,33 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
         criar um tipo de <replaceable>getty</replaceable> 
         personalizado para utilizar no passo 2 fazendo 
         uma entrada no arquivo <filename>/etc/gettytab</filename>.
-        Este cap&iacute;tulo n&atilde;o explica como fazer isso; &eacute; 
-        recomend&aacute;vel que voc&ecirc; leia as p&aacute;ginas de 
+        Este cap&iacute;tulo n&atilde;o 
+        explica como fazer isso; &eacute; 
+        recomend&aacute;vel que voc&ecirc; leia as p&aacute;ginas de
         manual &man.gettytab.5;
-        e a &man.getty.8; para informa&ccedil;&otilde;es detalhadas 
+        e a &man.getty.8; para informa&ccedil;&otilde;es detalhadas
         deste processo.</para>
       
       <sect3 id="term-etcttys">
-	<title>Adicionando uma entrada no arquivo <filename>/etc/ttys</filename></title>
+	<title>Adicionando uma entrada no 
+           arquivo <filename>/etc/ttys</filename></title>
 
-	<para>O arquivo <filename>/etc/ttys</filename> lista todas as portas do 
+	<para>O arquivo <filename>/etc/ttys</filename> lista
+          todas as portas do 
           seu sistema FreeBSD em que voc&ecirc;
-          deseja permitir <foreignphrase>logins</foreignphrase>. Por exemplo,
-	  o primeiro console virtual que &eacute; definido em uma entrada deste 
+          deseja permitir <foreignphrase>logins</foreignphrase>. Por 
+          exemplo,
+	  o primeiro console virtual que &eacute; definido 
+          em uma entrada deste 
           arquivo &eacute; o <filename>ttyv0</filename>.  Voc&ecirc;
-          pode realizar <foreignphrase>login</foreignphrase> devido esta entrada.  Este 
+          pode realizar <foreignphrase>login</foreignphrase> devido
+          esta entrada.  Este 
           arquivo tamb&eacute;m cont&eacute;m
-          entradas para outros consoles virtuais, portas seriais, e pseudo-ttys.  Para 
+          entradas para outros consoles virtuais, portas 
+          seriais, e pseudo-ttys.  Para 
           um terminal f&iacute;sico,
-          apenas liste a porta serial que est&aacute; em <filename>/dev</filename> numa 
+          apenas liste a porta serial que est&aacute; em 
+          <filename>/dev</filename> numa 
           entrada sem a parte do 
           <filename>/dev</filename> (por exemplo, 
 	  <devicename>/dev/ttyv0</devicename> deve ser listado como 
@@ -962,21 +1030,30 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
 	<para>A instala&ccedil;&atilde;o padr&atilde;o do 
           FreeBSD inclui no arquivo <filename>/etc/ttys</filename>
           o suporte para as quatro primeiras portas 
-          seriais: <filename>ttyd0</filename> &agrave; <filename>ttyd3</filename>.  Se 
+          seriais: <filename>ttyd0</filename> 
+          &agrave; <filename>ttyd3</filename>.  Se 
           voc&ecirc; conectar fisicamente um terminal em 
-          uma destas portas n&atilde;o ser&aacute; necess&aacute;rio editar o <filename>/etc/ttys</filename>
+          uma destas portas n&atilde;o ser&aacute; necess&aacute;rio 
+          editar o <filename>/etc/ttys</filename>
           pois as entradas referentes a estes terminais 
           j&aacute; constar&atilde;o no arquivo.</para>
 
 	<example id="ex-etc-ttys">
-	  <title>Adicionando entradas de terminais em <filename>/etc/ttys</filename></title> 
+	  <title>Adicionando entradas de terminais 
+            em <filename>/etc/ttys</filename></title> 
 
 	  <para>Vamos supor que gostar&iacute;amos de conectar dois 
-            terminais ao sistema: um Wyse-50 e um velho IBM PC 286 executando
-            o programa de terminal <application>Procomm</application>, que emula um terminal VT-100.
-            N&oacute;s conectamos o Wyse na segunda porta serial e 
-            o 286 na sexta porta serial (uma porta de uma placa multi-serial).
-	    As entradas correspondentes a esta configura&ccedil;&atilde;o no 
+            terminais ao sistema: um Wyse-50 e um velho 
+            IBM PC 286 executando
+            o programa de terminal 
+            <application>Procomm</application>, que emula 
+            um terminal VT-100.
+            N&oacute;s conectamos o Wyse na 
+            segunda porta serial e 
+            o 286 na sexta porta serial (uma porta de uma 
+            placa multi-serial).
+	    As entradas correspondentes a esta 
+            configura&ccedil;&atilde;o no 
             arquivo <filename>/etc/ttys</filename>
             deveriam ser algo como abaixo:</para>
 
@@ -992,7 +1069,8 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
 	  <calloutlist>
 	    <callout arearefs="co-ttys-line1col1">
 	      <para>O primeiro campo normalmente especifica o 
-               nome de arquivo do terminal e ele &eacute; localizado em
+               nome de arquivo do terminal 
+               e ele &eacute; localizado em
 	      <filename>/dev</filename>.</para>
 	    </callout>
 	    <callout arearefs="co-ttys-line1col2">
@@ -3068,12 +3146,17 @@ ttyd3 "/usr/libexec/getty std.9600" unknown off secure</programlisting>
     </sect2>
   
     <sect2 id="serialconsole-loader">
-      <title>Alterando a console atrav&eacute;s do carregador de boot</title>
+      <title>Alterando a console atrav&eacute;s do 
+        carregador de boot</title>
 
-      <para>Se&ccedil;&otilde;es anteriores descreveram como configurar 
-        uma console no bloco de boot. Esta se&ccedil;&atilde;o demonstra que voc&ecirc;
-        pode especificar a console entrando com alguns comandos e configurando 
-        algumas vari&aacute;veis de ambiente no carregador de boot.  Como
+      <para>Se&ccedil;&otilde;es anteriores 
+        descreveram como configurar 
+        uma console no bloco de boot. Esta se&ccedil;&atilde;o 
+        demonstra que voc&ecirc;
+        pode especificar a console entrando 
+        com alguns comandos e configurando 
+        algumas vari&aacute;veis de ambiente 
+        no carregador de boot.  Como
         o carregador de boot &eacute; executado como o terceiro 
         est&aacute;gio do processo de boot, depois do 
         bloco de boot, as configura&ccedil;&otilde;es
@@ -3090,7 +3173,8 @@ ttyd3 "/usr/libexec/getty std.9600" unknown off secure</programlisting>
 
 	<programlisting>set console=comconsole</programlisting>
 
-	<para>Isto ter&aacute; efeito apesar das configura&ccedil;&otilde;es 
+	<para>Isto ter&aacute; efeito apesar 
+           das configura&ccedil;&otilde;es 
           feitas no bloco de boot, como discutido 
           em se&ccedil;&otilde;es anteriores.</para>
 
