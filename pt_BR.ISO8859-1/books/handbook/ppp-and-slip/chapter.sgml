@@ -2293,7 +2293,7 @@ ng0: flags=88d1&lt;UP,POINTOPOINT,RUNNING,NOARP,SIMPLEX,MULTICAST&gt; mtu 1500
     </sect2>
 
     <sect2>
-      <title>Usando o ptpclient</title>
+      <title>Usando o pptpclient</title>
 	
 	<para>É também possível usar o FreeBSD para se conectar a
 	  outros serviços de ADSL usando o
@@ -2385,14 +2385,14 @@ tun0: flags=8051&lt;UP,POINTOPOINT,RUNNING,MULTICAST&gt; mtu 1500
 	<author>
 	  <firstname>Satoshi</firstname>
 	  <surname>Asami</surname>
-	  <contrib>Originally contributed by </contrib>
+	  <contrib>Originalmente contribuído por </contrib>
 	</author>
       </authorgroup>
       <authorgroup>
 	<author>
 	  <firstname>Guy</firstname>
 	  <surname>Helmer</surname>
-	  <contrib>With input from </contrib>
+	  <contrib>Com adições de </contrib>
 	</author>
 	<author>
 	  <firstname>Piero</firstname>
@@ -2401,48 +2401,49 @@ tun0: flags=8051&lt;UP,POINTOPOINT,RUNNING,MULTICAST&gt; mtu 1500
       </authorgroup>
     </sect1info>
 
-    <title>Using SLIP</title>
+    <title>Usando SLIP</title>
     <indexterm><primary>SLIP</primary></indexterm>
 
     <sect2 id="slipc">
-      <title>Setting Up a SLIP Client</title>
+      <title>Ajustando um cliente SLIP</title>
       <indexterm><primary>SLIP</primary><secondary>client</secondary></indexterm>
-      <para>The following is one way to set up a FreeBSD machine for SLIP
-	on a static host network.  For dynamic hostname assignments (your
-	address changes each time you dial up), you probably need to
-	have a more complex setup.</para>
+      <para>Mostraremos uma maneira de ajustar uma máquina FreeBSD para
+        SLIP numa rede de endereços estáticos. Para ajuste dinâmico de
+	endereços (seu endereço IP muda cada vez que se conecta) uma
+	configuração mais complexa deve ser feita.</para>
 
-      <para>First, determine which serial port your modem is connected to.
-	Many people set up a symbolic link, such as
-	<devicename>/dev/modem</devicename>, to point to the real device name,
-	<devicename>/dev/cuaaN</devicename>.  This allows you to
-	abstract the actual device name should you ever need to move
-	the modem to a different port.  It can become quite cumbersome when you
-	need to fix a bunch of files in <filename>/etc</filename> and
-	<filename>.kermrc</filename> files all over the system!</para>
+	<para>Primeiro determine em qual porta serial seu modem está
+	  conectado. Muitas pessoas ajustam um link simbólico,
+	  <devicename>/dev/modem</devicename>, que aponta para o
+	  nome real do dispositivo, <devicename>/dev/cuaaN</devicename>.
+	  Isso permite que você abstraia o nome do dispositivo caso
+	  você precise mover o modem para otra porta. Isso pode ser
+	  bastante útil quando você precisa arrumar um monte
+	  de arquivos no <filename>/etc</filename> e arquivos
+	  <filename>.kermrc</filename> por todo o sistema!</para>
 
       <note>
-	<para><filename>/dev/cuaa0</filename> is
-	  <devicename>COM1</devicename>, <filename>cuaa1</filename> is
+	<para><filename>/dev/cuaa0</filename> é
+	  <devicename>COM1</devicename>, <filename>cuaa1</filename> é
 	  <devicename>COM2</devicename>, etc.</para>
       </note>
 
-      <para>Make sure you have the following in your kernel configuration
-	file:</para>
+	<para>Tenha certeza de ter o seguinte na configuração do
+	  seu kernel:</para>
 
       <programlisting>pseudo-device   sl      1</programlisting>
 
-      <para>It is included in the <filename>GENERIC</filename> kernel, so
-	this should not be a problem unless you have deleted it.</para>
+	<para>Isso é incluído no kernel <filename>GENERIC</filename>, 
+	  portanto não deve ser um problema a menos que você removeu-o.</para>
 
       <sect3>
-	<title>Things You Have to Do Only Once</title>
+	<title>Coisas Que Você Tem De Fazer Apenas Uma Vez</title>
 
 	<procedure>
 	  <step>
-	    <para>Add your home machine, the gateway and nameservers to
-	      your <filename>/etc/hosts</filename> file.  Mine looks like
-	      this:</para>
+	  <para>Adicione sua máquina, gateway e servidores de nomes
+	    ao arquivo <filename>/etc/hosts</filename>. O meu se
+	    parece com isso:</para>
 
 	    <programlisting>127.0.0.1	       localhost loghost
 136.152.64.181	  water.CS.Example.EDU water.CS water
@@ -2452,35 +2453,34 @@ tun0: flags=8051&lt;UP,POINTOPOINT,RUNNING,MULTICAST&gt; mtu 1500
 	  </step>
 
 	  <step>
-	    <para>Make sure you have <option>hosts</option> before
-	      <option>bind</option> in your
-	      <filename>/etc/host.conf</filename> on FreeBSD versions
-	      prior to 5.0.  Since FreeBSD&nbsp;5.0, the system uses
-	      the file <filename>/etc/nsswitch.conf</filename> instead,
-	      make sure you have <option>files</option> before
-	      <option>dns</option> in the <option>hosts</option> line
-	      of this file.  Without these parameters funny
-	      things may happen.</para>
+	  <para>Tenha certeza de que você tem <option>hosts</option>
+	    antes de <option>bind</option> no seu 
+	    <filename>/etc/host.conf</filename> em versões do FreeBSD
+	    anteriores a 5.0.  Desde o FreeBSD&nbsp;5.0, o sistema
+	    usa o arquivo <filename>/etc/nsswitch.conf</filename>
+	    portanto tenha certeza de ter <option>files</option>
+	    antes de <option>dns</option> na linha <option>hosts</option> 
+	    deste arquivo.  Sem estes parâmetros coisas estranhas
+	    podem acontecer.</para>
 	  </step>
 
 	  <step>
-	    <para>Edit the <filename>/etc/rc.conf</filename> file.</para>
+	  <para>Edite o arquivo <filename>/etc/rc.conf</filename>.</para>
 
 	    <orderedlist>
 	      <listitem>
-		<para>Set your hostname by editing the line that
-		  says:</para>
+		<para>Define seu <literal>hostname</literal> editando a
+		  linha que diz:</para>
 	
-		<programlisting>hostname="myname.my.domain"</programlisting>
+		<programlisting>hostname="meunome.my.dominio"</programlisting>
 
-		<para>Your machine's full Internet hostname should be
-		  placed here.</para>
+		<para>O hostname completo da sua máquina deve ser posto
+		  lá.</para>
 	      </listitem>
 
 	      <listitem>
-		<para>Add <devicename>sl0</devicename> to the list of
-		  network interfaces by changing the line that
-		  says:</para>
+	      	<para>Adicione <devicename>sl0</devicename> a listagem
+		  de interfaces de rede editando a linha que diz:</para>
 
 		<programlisting>network_interfaces="lo0"</programlisting>
 
@@ -2490,16 +2490,15 @@ tun0: flags=8051&lt;UP,POINTOPOINT,RUNNING,MULTICAST&gt; mtu 1500
 	      </listitem>
 
 	      <listitem>
-		<para>Set the startup flags of <devicename>sl0</devicename> by adding a
-		  line:</para>
+	      	<para>Define algumas opções de inicialização da
+		  <devicename>sl0</devicename> editando a linha:</para>
 
 		<programlisting>ifconfig_sl0="inet ${hostname} slip-gateway netmask 0xffffff00 up"</programlisting>
 	      </listitem>
 
 	      <indexterm><primary>default route</primary></indexterm>
 	      <listitem>
-		<para>Designate the default router by changing the
-		  line:</para>
+		<para>Define o roteador padrão editando a linha:</para>
 
 		<programlisting>defaultrouter="NO"</programlisting>
 
@@ -2511,29 +2510,29 @@ tun0: flags=8051&lt;UP,POINTOPOINT,RUNNING,MULTICAST&gt; mtu 1500
 	  </step>
 
 	  <step>
-	    <para>Make a file <filename>/etc/resolv.conf</filename> which
-	      contains:</para>
+	    <para>Crie um arquivo <filename>/etc/resolv.conf</filename> que
+	      contenha:</para>
 
-	    <programlisting>domain CS.Example.EDU
+	    <programlisting>domain CS.Exemplo.BR
 nameserver 128.32.136.9
 nameserver 128.32.136.12</programlisting>
 
 	    <indexterm><primary>nameserver</primary></indexterm>
 	    <indexterm><primary>domain name</primary></indexterm>
-	    <para>As you can see, these set up the nameserver hosts.  Of
-	      course, the actual domain names and addresses depend on your
-	      environment.</para>
+	    <para>Como você pode ver, estas opções definem os servidores
+	      de nomes. É claro que o nome do domínio e o endereços dos
+	      servidores dependem do seu ambiente.</para>
 	  </step>
 
 	  <step>
-	    <para>Set the password for <username>root</username> and
-	      <username>toor</username> (and any other
-	      accounts that do not have a password).</para>
+	  <para>Ajuste uma senha para <username>root</username> e
+	    <username>toor</username> (e qualquer outra conta que
+	    não tenha uma senha).</para>
 	  </step>
 
 	  <step>
-	    <para>Reboot your machine and make sure it comes up with the
-	      correct hostname.</para>
+	  <para>Reinicie sua máquina e tenha certeza de que ela
+	    iniciou com o <literal>hostname</hostname> correto.</para>
 	  </step>
 	</procedure>
       </sect3>
