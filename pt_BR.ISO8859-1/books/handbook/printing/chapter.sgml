@@ -872,52 +872,69 @@
 	    </step>
 	  </procedure>
 
-	  <para><emphasis>To set the communications mode with</emphasis>
-	    &man.lptcontrol.8;:</para>
+	  <para><emphasis>Para configurar o modo de comunica&ccedil;&atilde;o
+	com </emphasis> &man.lptcontrol.8;:</para>
 
 	  <procedure>
 	    <step>
-	      <para>Type:</para>
+	      <para>Digite:</para>
 
 	      <screen>&prompt.root; <userinput>lptcontrol -i -d /dev/lpt<replaceable>N</replaceable></userinput></screen>
 
-	      <para>to set interrupt-driven mode for
-		<literal>lpt<replaceable>N</replaceable></literal>.</para>
+	      <para>
+		para configurar o modo de interrup&ccedil;&atilde;o
+	para a <literal>lpt<replaceable>N</replaceable></literal>.
+		</para>
 	    </step>
 
 	    <step>
-	      <para>Type:</para>
+	      <para>Digite:</para>
 
 	      <screen>&prompt.root; <userinput>lptcontrol -p -d /dev/lpt<replaceable>N</replaceable></userinput></screen>
 
-	      <para>to set polled-mode for
+	      <para>
+		Para configurar o modo de 
+			<foreignphrase>polling</foreignphrase> para
 		<literal>lpt<replaceable>N</replaceable></literal>.</para>
 	    </step>
 	  </procedure>
 
-	  <para>You could put these commands in your
-	    <filename>/etc/rc.local</filename> file to set the mode each
-	    time your system boots.  See &man.lptcontrol.8; for more
-	    information.</para>
+	  <para>
+		Voc&ecirc; pode colocar esses comandos no arquivo 
+	<filename>/etc/rc.local</filename> para configurar automaticamente
+	na hora da inicializa&ccedil;&atilde;o do seu sistema.  Veja 
+	&man.lptcontrol.8; para maiores detalhes.</para>
 	</sect4>
 
 	<sect4 id="printing-testing">
-	  <title>Checking Printer Communications</title>
+	  <title>
+		Testanto a Comuni&ccedil;&atilde;oca com a Impressora
+	</title>
 
-	  <para>Before proceeding to configure the <foreignphrase>spooling</foreignphrase> system, you
-	    should make sure the operating system can successfully send
-	    data to your printer.  It is a lot easier to debug printer
-	    communication and the spooling system separately.</para>
+	  <para>
+		Antes de procequir com a configura&ccedil;&atilde;o do 
+	sistema	<foreignphrase>spooling</foreignphrase>, voc&egrave;
+	deve ter certeza que o seu sistema operaional teve sucesso
+	em enviar dados para a impressora.  &Eacute; muito mais f&aacute;cil
+	depurar a conex&atilde;o com a impressora e o systema de 
+	<foreignphrase>spooling</foreignphrase> separadamente.
+	</para>
 
-	  <para>To test the printer, we will send some text to it.  For
-	    printers that can immediately print characters sent to them,
-	    the program  &man.lptest.1; is perfect: it generates all 96
-	    printable ASCII characters in 96 lines.</para>
+	  <para>
+		Para fazer o teste da impressora, nos precisamos enviar
+	algum testo para a impressora.  Para impressoras que podem imprimir
+	caracteres diretamente, o programa &man.lptest.1; 
+	&eacute; perfeito: ele gera todos os 96 imprim&iacute;veis da
+	tabela ASCII em 96 linhas.
+	    </para>
 
 	  <indexterm><primary>PostScript</primary></indexterm>
-	  <para>For a &postscript; (or other language-based) printer, we
-	    will need a more sophisticated test.  A small &postscript;
-	    program, such as the following, will suffice:</para>
+	  <para>
+		Para a impressora &postscript; (ou outra linguagem )
+	nos iremos precisar de algo mais sofisticado para testar.  Um 
+	pequeno programa &postscript; como o que segue, &eacute; o 
+	sufuciente
+	</para>
 
 	  <programlisting>%!PS
 100 100 moveto 300 300 lineto stroke
@@ -925,17 +942,26 @@
 (Is this thing working?) show
 showpage</programlisting>
 
-	  <para>The above &postscript; code can be placed into a file and
-	    used as shown in the examples appearing in the following
-	    sections.</para>
+	  <para>
+		O c&oacute;digo &postscript; acima pode ser colocado
+	em um arquivo e usado como mostra os exemplos nas sec&ccedil;&otilde;es
+	a seguir.
+	    </para>
 
 	  <indexterm><primary>PCL</primary></indexterm>
 	  <note>
-	    <para>When this document refers to a printer language, it is
-	      assuming a language like &postscript;, and not Hewlett
-	      Packard's PCL.  Although PCL has great functionality, you
-	      can intermingle plain text with its escape sequences.
-	      &postscript; cannot directly print plain text, and that is the
+	    <para>
+		Quando esse documento refere-se a linguagem da
+	impressora,  &eacute; assumido que a linguagem &eacute; 
+	semelhante ao &postscript;,  e n&atilde;o o PCL da Hewlett 
+	PackardL.  Ainda que a linguagem PCL tenha grande funcionalidade,
+	voc&ecirc; pode mesclar texto puro com seguencias de controle
+	com caracteres ESC.  &postscript; n&atilde;o pode ser impresso
+	diretamente em impressoras de texto puro, e para impressoras que
+	necessitem de outra linguagem para 
+
+----
+	cannot directly print plain text, and that is the
 	      kind of printer language for which we must make special
 	      accommodations.</para>
 	  </note>
