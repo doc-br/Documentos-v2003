@@ -983,56 +983,60 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
     <indexterm><primary>Bluetooth</primary></indexterm>
     <sect2>
       <title>Introdu&ccedil;&atilde;o</title>
-      <para>Bluetooth &eacute; uma teconologia sem fio para criar redes
-      pessoais operando na banda n&atilde;o licenciada de 2.4GHz , com um
-      alcance de 10 metros.  Redes normalmente s&atilde;o formadas sob
-      demanda por dispositivos port&aacute;teis, como telefones celulares,
-      handhelds e laptops.  Diferente de outras populares tecnologias 
-      sem fio, Wi-Fi, o Bluetooth oferece perfis de servi&ccedil;o de alto
-      n&iacute;vel, p.ex.  servidores de arquivos tipo FTP, distribui&ccedil;&atilde;o de 
-      arquivos, transporte de voz, emula&ccedil;&atilde;o de linha serial e mais.</para>
 
-      <para>The Bluetooth stack in &os; is implemented using the Netgraph
-	framework (see &man.netgraph.4;).  A broad variety of Bluetooth USB
-	dongles is supported by the &man.ng.ubt.4; driver.  The Broadcom BCM2033
-	chip based Bluetooth devices are supported via the &man.ubtbcmfw.4; and
-	&man.ng.ubt.4; drivers.  The 3Com Bluetooth PC Card 3CRWB60-A is
-	supported by the &man.ng.bt3c.4; driver.  Serial and UART based
-	Bluetooth devices are supported via &man.sio.4;, &man.ng.h4.4;
-	and &man.hcseriald.8;.  This chapter describes the use of the USB
-	Bluetooth dongle.  Bluetooth support is available in &os; 5.0 and newer
-	systems.</para>
+      <para>Bluetooth &eacute; uma teconologia sem fio para criar redes
+      pessoais operando na banda n&atilde;o licenciada de 2.4GHz, com 
+      alcance de 10 metros.  As redes geralmente s&atilde;o criadas sob medida 
+      para este prop&oacute;sito, a partir de dispositivos port&aacute;teis como 
+      telefones celulares, handhelds e laptops.  Diferente de outras 
+      tecnologias sem fio populares, como Wi-Fi, o Bluetooth 
+      oferece perfis de servi&ccedil;o de alto n&iacute;vel, por exemplo: servidores 
+      de arquivos simlares ao FTP, distribui&ccedil;&atilde;o de arquivos, 
+      transporte de voz, emula&ccedil;&atilde;o de linha serial e outras.</para>
+
+      <para>A pilha Bluetooth em &os; &eacute; implementada usando o
+      framework Netgraph (veja &man.netgraph.4;).  Uma ampla variedade
+      de plugues USB Bluetooth &eacute; suportada pelo gerenciador &man.ng.ubt.4;.
+      Os dispositivos baseado no chip Bluetooth Broadcom BCM2033 s&atilde;o 
+      suportados atrav&eacute;s dos gerenciadores &man.ubtbcmfw.4; e
+      &man.ng.ubt.4;.  O cart&atilde;o PC Bluetooth 3Com 3CRWB60-A &eacute;
+      suportado pelo gerenciador &man.ng.bt3c.4;. Dispositivos Bluetooth
+      baseados em serial e UART s&atilde;o suportados via &man.sio.4;,
+      &man.ng.h4.4; e &man.hcseriald.8;.  Este cap&iacute;tulo descrve o uso
+      do plugue Bluetooth USB.  O suporte ao Bluetooth est&aacute; dispon&iacute;vel
+      em sistemas com &os; 5.0 e mais recentes.</para>
     </sect2>
 
     <sect2>
-      <title>Plugging in the Device</title>
-      <para>By default Bluetooth device drivers are available as kernel modules.
-	Before attaching a device, you will need to load the driver into the
-	kernel.</para>
+      <title>Conectando o Dispositivo</title>
+
+      <para>Por padr&atilde;o, os gerenciadores de dispositivos Bluetooth est&atilde;o 
+      dispon&iacute;veis na forma de m&oacute;dulos de kernel.  Antes de ligar um
+      dispositivo, voc&ecirc; vai precisar carregar o gerenciador no kernel.</para>
 
       <screen>&prompt.root; <userinput>kldload ng_ubt</userinput></screen>
 
-      <para>If the Bluetooth device is present in the system during system
-	startup, load the module from
-	<filename>/boot/loader.conf</filename>.</para>
+      <para>Se o dispositivo Bluetooth est&aacute; presente no sistema
+      durante a inicializa&ccedil;&atilde;o, carregue o m&oacute;dulo de
+      <filename>/boot/loader.conf</filename>.</para>
 
       <programlisting>ng_ubt_load="YES"</programlisting>
 
-      <para>Plug in your USB dongle.  The output similar to the following will
-	appear on the console (or in syslog).</para>
+      <para>Conecte seu plugue USB.  Uma sa&iacute;da similar &agrave; seguinte ser&aacute;
+      exibida na console (ou no syslog).</para>
 
       <screen>ubt0: vendor 0x0a12 product 0x0001, rev 1.10/5.25, addr 2
 ubt0: Interface 0 endpoints: interrupt=0x81, bulk-in=0x82, bulk-out=0x2
 ubt0: Interface 1 (alt.config 5) endpoints: isoc-in=0x83, isoc-out=0x3,
       wMaxPacketSize=49, nframes=6, buffer size=294</screen>
 
-      <para>Copy
-	<filename>/usr/share/examples/netgraph/bluetooth/rc.bluetooth</filename>
-	into some convenient place, like <filename>/etc/rc.bluetooth</filename>.
-	This script is used to start and stop the Bluetooth stack.  It is a good
-	idea to stop the stack before unplugging the device, but it is not
-	(usually) fatal.  When starting the stack, you will receive output similar
-	to the following:</para>
+      <para>Copie
+      <filename>/usr/share/examples/netgraph/bluetooth/rc.bluetooth</filename>
+      para algum lugar conveniente como <filename>/etc/rc.bluetooth</filename>.
+      Este script &eacute; usado para iniciar e parar a pilha Bluetooth.  &Eacute;
+      uma boa id&eacute;ia parar a pilha antes de desplugar o dispositivo,
+      mas, se acontecer, isto (geralmente) n&atilde;o &eacute; fatal.  Quando
+      iniciar a pilha, voc&ecirc; poder&aacute; ver uma sa&iacute;da similar &agrave; seguinte:</para>
 
       <screen>&prompt.root; <userinput>/etc/rc.bluetooth start ubt0</userinput>
 BD_ADDR: 00:02:72:00:d4:1a
@@ -1051,33 +1055,40 @@ Number of SCO packets: 8</screen>
 
     <indexterm><primary>HCI</primary></indexterm>
     <sect2>
-      <title>Host Controller Interface (HCI)</title>
+      <title>Interface Controladora de Sistema (HCI)</title>
 
-      <para>Host Controller Interface (HCI) provides a command interface to the
-	baseband controller and link manager, and access to hardware status and
-	control registers.  This interface provides a uniform method of accessing
-	the Bluetooth baseband capabilities.  HCI layer on the Host exchanges
-	data and commands with the HCI firmware on the Bluetooth hardware.
-	The Host Controller Transport Layer (i.e.  physical bus) driver provides
-	both HCI layers with the ability to exchange information with each
-	other.</para>
+      <para>A Interface Controladora de Sistema, ou, Host Controller 
+      Interface (HCI) fornece uma interface de comando para o
+      controlador de banda base e o gerenciador de liga&ccedil;&atilde;o, e acesso
+      ao estado do hardware e registradores de controle.  Esta
+      interface fornece um m&eacute;todo uniforme de acesso &agrave;s capacidades de
+      banda base do Bluetooth.  A camada HCI no Sistema troca dados e
+      comandos com o firmware HCI no hardware Bluetooth.  O
+      gerenciador da Camada de Transporte Controladora do Sistema 
+      - Host Controller Transport Layer - (barramento f&iacute;sico) fornece 
+      a ambas as camadas HCI a capacidade de trocar informa&ccedil;&otilde;es com 
+      a outra.</para>
 
-      <para>A single Netgraph node of type <emphasis>hci</emphasis> is
-	created for a single Bluetooth device.  The HCI node is normally
-	connected to the Bluetooth device driver node (downstream) and
-	the L2CAP node (upstream).  All HCI operations must be performed
-	on the HCI node and not on the device driver node.  Default name
-	for the HCI node is <quote>devicehci</quote>.
-	For more details refer to the &man.ng.hci.4; man page.</para>
+      <para>Um &uacute;nico n&oacute; Netgraph do tipo <emphasis>hci</emphasis> &eacute; 
+      criado para um &uacute;nico dispositivo Bluetooth.  O n&oacute; HCI
+      normalmente &eacute; conectado ao n&oacute; do gerenciador de dispositivo
+      Bluetooth (downstream) e ao n&oacute; L2CAP (upstream).  Todas as
+      opera&ccedil;&otilde;es HCI devem ser desempenhadas no n&oacute; HCI e n&atilde;o no n&oacute; do
+      gerenciador de dispositivo.  O nome padr&atilde;o para o n&oacute; HCI &eacute; 
+      <quote>devicehci</quote>.  Para maiores detalhes consulte a
+      p&aacute;gina de manual &man.ng.hci.4;.</para>
 
-      <para>One of the most common tasks is discovery of Bluetooth devices in
-	RF proximity.  This operation is called <emphasis>inquiry</emphasis>.
-	Inquiry and other HCI realated operations are done with the
-	&man.hccontrol.8; utility.  The example below shows how to find out
-	which Bluetooth devices are in range.  You should receive the list of
-	devices in a few seconds.  Note that a remote device will only answer
-	the inquiry if it put into <emphasis>discoverable</emphasis>
-	mode.</para>
+
+      <para>Uma das tarefas mais comuns &eacute; o descobrimento de
+      dispositivos Bluetooth nas proximidades de r&aacute;diofreq&uuml;&ecirc;ncia, RF.
+      Esta opera&ccedil;&atilde;o chama-se <emphasis>investiga&ccedil;&atilde;o</emphasis>
+      (inquiry).  A investiga&ccedil;&atilde;o e outras opera&ccedil;&otilde;es relativas a HCI 
+      s&atilde;o feitas com o utilit&aacute;rio &man.hccontrol.8;.  O exemplo abaixo 
+      exibe como encontrar quais dispositivos Bluetooth est&atilde;o dentro 
+      de alcance.  Voc&ecirc; deve receber a lista de dispositivos em 
+      poucos segundos.  Note que um dispositivo remoto somente vai 
+      responder &agrave; investiga&ccedil;&atilde;o se estiver em modo 
+      <emphasis>"encontr&aacute;vel"</emphasis> (discoverable).</para>
 
       <screen>&prompt.user; <userinput>hccontrol -n ubt0hci inquiry</userinput>
 Inquiry result, num_responses=1
@@ -1090,78 +1101,87 @@ Inquiry result #0
        Clock offset: 0x78ef
 Inquiry complete.  Status: No error [00]</screen>
 
-      <para><literal>BD_ADDR</literal> is unique address of a Bluetooth
-	device, similar to MAC addresses of a network card.  This address
-	is needed for further communication with a device.  It is possible
-	to assign human readable name to a BD_ADDR.
-	The <filename>/etc/bluetooth/hosts</filename> file contains information
-	regarding the known Bluetooth hosts.  The following example shows how
-	to obtain human readable name that was assigned to the remote
-	device.</para>
+      <para>O <literal>BD_ADDR</literal> &eacute; o endere&ccedil;o &uacute;nico de um
+      dispositivo Bluetooth, similar ao endere&ccedil;o MAC de uma placa de
+      rede.  Este endere&ccedil;o &eacute; necess&aacute;rio para promover comunica&ccedil;&otilde;es com
+      um dispositivo.  &Eacute; poss&iacute;vel designar um nome leg&iacute;vel por humanos 
+      a um BD_ADDR.  O arquivo <filename>/etc/bluetooth/hosts</filename>
+      cont&eacute;m informa&ccedil;&atilde;o relativas aos sistemas Bluetooth conhecidos.
+      O seguinte exemplo mostra como obter um nome leg&iacute;vel por humanos 
+      que foi designado a um dispositivo remoto.</para>
 
       <screen>&prompt.user; <userinput>hccontrol -n ubt0hci remote_name_request 00:80:37:29:19:a4</userinput>
 BD_ADDR: 00:80:37:29:19:a4
 Name: Pav's T39</screen>
 
-      <para>If you perform an inquiry on a remote Bluetooth device, it will
-	find your computer as <quote>your.host.name (ubt0)</quote>.  The name
-	assigned to the local device can be changed at any time.</para>
+      <para>Se voc&ecirc; executar uma investiga&ccedil;&atilde;o em um dispositivo
+      Bluetooth remoto, ele ir&aacute; encontrar seu computador como 
+      <quote>nome.do.seu.sistema (ubt0)</quote>.  O nome designado
+      para o dispositivo local pode ser trocado a qualquer hora.</para>
 
-      <para>The Bluetooth system provides a point-to-point connection (only two
-	Bluetooth units involved), or a point-to-multipoint connection.  In the
-	point-to-multipoint connection the connection is shared among several
-	Bluetooth devices.  The following example shows how to obtain the list
-	of active baseband connections for the local device.</para>
+      <para>O sistema Bluetooth fornece conex&atilde;o porto-a-ponto (somente
+      duas unidades envolvidas), ou uma conex&atilde;o ponto-a-multiponto.
+      Na conex&atilde;o ponto-a-multiponto, a mesma &eacute; compartilhada entre
+      diversos dispositivos Bluetooth.  O exemplo a seguir mostra como
+      obter a lista de conex&otilde;es de banda base para o dispositivo
+      local.</para>
 
       <screen>&prompt.user; <userinput>hccontrol -n ubt0hci read_connection_list</userinput>
 Remote BD_ADDR    Handle Type Mode Role Encrypt Pending Queue State
 00:80:37:29:19:a4     41 ACL    0 MAST    NONE       0     0 OPEN</screen>
 
-      <para>A <emphasis>connection handle</emphasis> is useful when termination
-	of the baseband connection is required.  Note, that it is normally not
-	required to do it by hand.  The stack will automatically terminate
-	inactive baseband connections.</para>
+      <para>Um <emphasis>identificador de conex&atilde;o (handle)</emphasis>
+      &eacute; &uacute;til quando &eacute; necess&aacute;rio o encerramento de uma conex&atilde;o de
+      banda base.  Note que geralmente n&atilde;o &eacute; necess&aacute;rio se fazer isto
+      manualmente.  A pilha automaticamente ir&aacute; encerrar conex&otilde;es de
+      banda base inativas.</para>
 
       <screen>&prompt.root; <userinput>hccontrol -n ubt0hci disconnect 41</userinput>
 Connection handle: 41
 Reason: Connection terminated by local host [0x16]</screen>
 
-      <para>Refer to <command>hccontrol help</command> for a complete listing
-	of available HCI commands.  Most of the HCI commands do not require
-	superuser privileges.</para>
+      <para>Consulte <command>hccontrol help</command> para uma
+      listagem completa dos comandos HCI dispon&iacute;veis.  A maioria dos
+      comandos HCI n&atilde;o requerem privil&eacute;gios de superusu&aacute;rio.</para>
 
     </sect2>
 
     <indexterm><primary>L2CAP</primary></indexterm>
     <sect2>
-      <title>Logical Link Control and Adaptation Protocol (L2CAP)</title>
+      <title>Protocolo de Controle L&oacute;gico da Liga&ccedil;&atilde;o e de Adapta&ccedil;&atilde;o
+      (L2CAP)</title>
 
-      <para>Logical Link Control and Adaptation Protocol (L2CAP) provides
-	connection-oriented and connectionless data services to upper layer
-	protocols with protocol multiplexing capability and segmentation and
-	reassembly operation.  L2CAP permits higher level protocols and
-	applications to transmit and receive L2CAP data packets up to 64
-	kilobytes in length.</para>
+      <para>O Protocolo de Controle L&oacute;gico da Liga&ccedil;&atilde;o e de Adapta&ccedil;&atilde;o
+      - Logical Link Control and Adaptation Protocol - (L2CAP), 
+      fornece servi&ccedil;os de dados orientados &agrave; conex&atilde;o e desconectados
+      (connectionless) aos protocolos dos n&iacute;veis superiores com
+      capacidade de multiplexa&ccedil;&atilde;o e opera&ccedil;&atilde;o de segmenta&ccedil;&atilde;o e
+      remontagem.  O L2CAP permite aos protocolos dos n&iacute;veis
+      superiores e aplica&ccedil;&otilde;es transmitirem e receberem pacotes de
+      dados L2CAP de at&eacute; 64 kilobytes de comprimento.</para>
 
-      <para>L2CAP is based around the concept of <emphasis>channels</emphasis>.
-	Channel is a logical connection on top of baseband connection.  Each
-	channel is bound to a single protocol in a many-to-one fashion.  Multiple
-	channels can be bound to the same protocol, but a channel cannot be
-	bound to multiple protocols.  Each L2CAP packet received on a channel is
-	directed to the appropriate higher level protocol.  Multiple channels
-	can share the same baseband connection.</para>
+      <para>O L2CAP &eacute; baseado em torno do conceito de 
+      <emphasis>channels</emphasis>.  Um canal &eacute; uma conex&atilde;o l&oacute;gica
+      sobre uma conex&atilde;o de banda base.  Cada canal est&aacute; ligado a um
+      &uacute;nico protocolo de modo muitos-para-um.  M&uacute;ltiplos canais podem
+      ser ligados ao mesmo protocolo, mas um canal n&atilde;o pode ser ligado
+      a m&uacute;ltiplos protocolos.  Cada pacote L2CAP recebido em um canal
+      &eacute; direcionado ao protocolo de n&iacute;vel superior apropriado.
+      M&uacute;ltiplos canais podem compartilhar a mesma conex&atilde;o banda base.</para>
 
-      <para>A single Netgraph node of type <emphasis>l2cap</emphasis> is
-	created for a single Bluetooth device.  The L2CAP node is normally
-	connected to the Bluetooth HCI node (downstream) and Bluetooth sockets
-	nodes (upstream).  Default name for the L2CAP node is
-	<quote>devicel2cap</quote>.  For more details refer to the
-	&man.ng.l2cap.4; man page.</para>
+      <para>Um &uacute;nico n&oacute; Netgraph do tipo <emphasis>l2cap</emphasis> &eacute;
+      criado para um &uacute;nico dispositivo Bluetooth.  O n&oacute; L2CAP
+      geralmente &eacute; conectado a um n&oacute; Bluetooth HCI (downstream) e 
+      n&oacute;s de dispositivos de envio/recep&ccedil;&atilde;o (sockets) Bluetooth 
+      (upstream).  O nome padr&atilde;o para o n&oacute; L2CAP &eacute; 
+      <quote>devicel2cap</quote>.  Para maiores detalhes consulte a
+      p&aacute;gina de manual &man.ng.l2cap.4;.</para>
 
-      <para>A useful command is &man.l2ping.8;, which can be used to ping
-	other devices.  Some Bluetooth implementations might not return all of
-	the data sent to them, so <emphasis>0 bytes</emphasis> in the following
-	example is normal.</para>
+      <para>Um comando &uacute;til &eacute; o &man.l2ping.8;, que pode ser usado
+      para testar (ping) outros dispositivos.  Algumas implementa&ccedil;&otilde;es
+      Bluetooth podem n&atilde;o responder a todos os dados a elas enviado,
+      ent&atilde;o o resultado <emphasis>0 bytes</emphasis> no exemplo abaixo
+      &eacute; considerado normal.</para>
 
       <screen>&prompt.root; <userinput>l2ping -a 00:80:37:29:19:a4</userinput>
 0 bytes from 0:80:37:29:19:a4 seq_no=0 time=48.633 ms result=0
@@ -1169,10 +1189,10 @@ Reason: Connection terminated by local host [0x16]</screen>
 0 bytes from 0:80:37:29:19:a4 seq_no=2 time=28.324 ms result=0
 0 bytes from 0:80:37:29:19:a4 seq_no=3 time=46.150 ms result=0</screen>
 
-      <para>The &man.l2control.8; utility is used to perform various operations
-	on L2CAP nodes.  This example shows how to obtain the list of logical
-	connections (channels) and the list of baseband connections for the
-	local device.</para>
+      <para>O utilit&aacute;rio &man.l2control.8; &eacute; usado para executar
+      diversas opera&ccedil;&otilde;es em n&oacute;s L2CAP.  Este exemplo mostra como obter
+      a lista de conex&otilde;es l&oacute;gicas (canais) e a lista de conex&otilde;es banda
+      base para o dispositivo local.</para>
 
       <screen>&prompt.user; <userinput>l2control -a 00:02:72:00:d4:1a read_channel_list</userinput>
 L2CAP channels:
@@ -1183,10 +1203,12 @@ L2CAP connections:
 Remote BD_ADDR    Handle Flags Pending State
 00:07:e0:00:0b:ca     41 O	   0 OPEN</screen>
 
-      <para>Another diagnostic tool is &man.btsockstat.1;.  It does a job
-	similar to as &man.netstat.1; does, but for Bluetooth network-related
-	data structures.  The example below shows the same logical connection as
-	&man.l2control.8; above.</para>
+      <para>Outra ferramenta de diagn&oacute;stico &eacute; &man.btsockstat.1;.
+      Esta ferramenta faz um trabalho similar ao de &man.netstat.1;,
+      mas para estruturas de dados Bluetooth relacionadas &agrave; rede.  O
+      exemplo abaixo mostra a mesma conex&atilde;o l&oacute;gica que
+      &man.l2control.8;, acima.</para>
+      
 
       <screen>&prompt.user; <userinput>btsockstat</userinput>
 Active L2CAP sockets
@@ -1203,55 +1225,67 @@ c2e8bc80      0    250 00:02:72:00:d4:1a 00:07:e0:00:0b:ca 3    6    OPEN</scree
 
     <indexterm><primary>RFCOMM</primary></indexterm>
     <sect2>
-      <title>RFCOMM Protocol</title>
+      <title>Protocolo RFCOMM</title>
 
-      <para>The RFCOMM protocol provides emulation of serial ports over the
-	L2CAP protocol.  The protocol is based on the ETSI standard TS 07.10.
-	RFCOMM is a simple transport protocol, with additional provisions for
-	emulating the 9 circuits of RS-232 (EIATIA-232-E) serial ports.  The
-	RFCOMM protocol supports up to 60 simultaneous connections (RFCOMM
-	channels) between two Bluetooth devices.</para>
+      <para>O protocolo RFCOMM fornece emula&ccedil;&atilde;o de portas seriais
+      sobre o protocolo L2CAP.  O protocolo &eacute; baseado no padr&atilde;o ETSI
+      TS 07.10.  O RFCOMM &eacute; um protocolo de transporte simples, com
+      provis&otilde;es adicionais para emular os nove circuitos das portas
+      seriais RS-232 (EIATIA-232-E).  O protocolo RFCOMM suporta at&eacute;
+      60 conex&otilde;es simult&acirc;neas (canais RFCOMM) entre dois dispositivos
+      Bluetooth.</para>
 
-      <para>For the purposes of RFCOMM, a complete communication path involves
-	two applications running on different devices (the communication
-	endpoints) with a communication segment between them.  RFCOMM is intended
-	to cover applications that make use of the serial ports of the devices
-	in which they reside.  The communication segment is a Bluetooth link from
-	one device to another (direct connect).</para>
+      <para>Para os prop&oacute;sitos do RFCOMM, um caminho completo de
+      comunica&ccedil;&atilde;o envolve duas aplica&ccedil;&otilde;es rodando em dispositivos
+      diferentes (as pontas da comunica&ccedil;&atilde;o) com um segmento de
+      comunica&ccedil;&atilde;o entre eles.  O RFCOMM &eacute; planejado para cobrir
+      aplica&ccedil;&otilde;es que utilizem as portas seriais dos dispositivos em
+      que residem.  O segmento de comunica&ccedil;&atilde;o &eacute; uma liga&ccedil;&atilde;o Bluetooth
+      de um dispositivo para outro (conex&atilde;o direta).</para>
 
-      <para>RFCOMM is only concerned with the connection between the devices in
-	the direct connect case, or between the device and a modem in the
-	network case.  RFCOMM can support other configurations, such as modules
-	that communicate via Bluetooth wireless technology on one side and
-	provide a wired interface on the other side.</para>
+      <para>O RFCOMM preocupa-se somente com o caso da conex&atilde;o direta
+      entre os dispositivos, ou com o caso de rede entre um 
+      dispositivo e um modem.  O RFCOMM pode suportar outras
+      configura&ccedil;&otilde;es, como m&oacute;dulos que comunicam-se via tecnologia sem
+      fio Bluetooth em um lado, e fornecem uma interface cabeada na
+      outra ponta.</para>  
 
-      <para>In &os; the RFCOMM protocol is implemented at the Bluetooth sockets
-	layer.</para>
+      <para>No &os; o protocolo RFCOMM &eacute; implementado na camada de
+      sockets Bluetooth.</para>
     </sect2>
 
     <indexterm><primary>pairing</primary></indexterm>
     <sect2>
-      <title>Pairing of Devices</title>
+      <title>Uni&atilde;o de Dispositivos (Pairing)</title>
 
-      <para>By default, Bluetooth communication is not authenticated, and any
-	device can talk to any other device.  A Bluetooth device (for example,
-	cellular phone) may choose to require authentication to provide a
-	particular service (for example, Dial-Up service).  Bluetooth
-	authentication is normally done with <emphasis>PIN codes</emphasis>.
-	A PIN code is an ASCII string up to 16 characters in length.  User is
-	required to enter the same PIN code on both devices.  Once user has
-	entered the PIN code, both devices will generate a
-	<emphasis>link key</emphasis>.  After that the link key can be stored
-	either in the devices themselves or in a persistent storage.  Next time
-	both devices will use previously generated link key.  The described
-	above procedure is called <emphasis>pairing</emphasis>.  Note that if
-	the link key is lost by any device then pairing must be repeated.</para>
+      <para>Por padr&atilde;o, a comunica&ccedil;&atilde;o Bluetooth n&atilde;o &eacute; autenticada e
+      qualquer dispositivo pode falar para qualquer outro 
+      dispositivo.  Um dispositivo Bluetooth (por exemplo, um telefone
+      celular) pode escolher exigir autentica&ccedil;&atilde;o para fornecer um
+      servi&ccedil;o particular (por exemplo, acesso discado).  A
+      autentica&ccedil;&atilde;o no Bluetooth &eacute; feita normalmente com 
+      <emphasis>c&oacute;digo PIN</emphasis>.  Um c&oacute;digo PIN &eacute; uma
+      seq&uuml;&ecirc;ncia de caracteres ASCII de at&eacute; 16 caracteres de
+      comprimento.  &Eacute; preciso que o usu&aacute;rio entre com o mesmo c&oacute;digo
+      PIN em ambos os dispositivos.  Uma vez que o usu&aacute;rio entrou com
+      o c&oacute;digo PIN, ambos os dispositivos v&atilde;o gerar uma 
+      <emphasis>chave de liga&ccedil;&atilde;o (link key)</emphasis>.  Depois, a 
+      chave de liga&ccedil;&atilde;o pode ser armazenada nos pr&oacute;prios dispositivos
+      ou em um armazenamento persistente.  Da pr&oacute;xima vez, ambos os
+      dispositivos v&atilde;o usar a chave de liga&ccedil;&atilde;o previamente 
+      armazenada.  O procedimento acima descrito &eacute; chamada de 
+      <emphasis>uni&atilde;o (pairing)</emphasis>.  Note que se a chave de 
+      liga&ccedil;&atilde;o for perdida por qualquer dispositivo, ent&atilde;o a uni&atilde;o 
+      precisar&aacute; ser repetida.</para>
 
-      <para>The &man.hcsecd.8; daemon is responsible for handling of all
-	Bluetooth authentication requests.  The default configuration file is
-	<filename>/etc/bluetooth/hcsecd.conf</filename>.  An example section for
-	a cellular phone with the PIN code arbitrarily set to
-	<quote>1234</quote> is shown below.</para>
+      <para>O daemon &man.hcsecd.8; &eacute; respons&aacute;vel por tratar todas as
+      solicita&ccedil;&otilde;es de autentica&ccedil;&atilde;o Bluetooth.  O arquivo de
+      configura&ccedil;&atilde;o padr&atilde;o &eacute; 
+      <filename>/etc/bluetooth/hcsecd.conf</filename>.  Abaixo &eacute;
+      mostrada uma se&ccedil;&atilde;o de exemplo para um telefone celular com o 
+      c&oacute;digo PIN configurado arbitrariamente para 
+      <quote>1234</quotea>.</para>
+
 
       <programlisting>device {
 	bdaddr 00:80:37:29:19:a4;
@@ -1260,16 +1294,20 @@ c2e8bc80      0    250 00:02:72:00:d4:1a 00:07:e0:00:0b:ca 3    6    OPEN</scree
 	pin     "1234";
       }</programlisting>
 
-      <para>There is no limitation on PIN codes (except length).  Some devices
-	(for example Bluetooth headsets) may have a fixed PIN code built in.
-	The <option>-d</option> switch forces the &man.hcsecd.8; daemon to stay
-	in the foreground, so it is easy to see what is happening.  Set the
-	remote device to receive pairing and initiate the Bluetooth connection
-	to the remote device.  The remote device should say that pairing was
-	accepted, and request the PIN code.  Enter the same PIN code as you
-	have in <filename>hcsecd.conf</filename>.  Now your PC and the remote
-	device are paired.  Alternatively, you can initiate pairing on the remote
-	device.  Below in the sample <command>hcsecd</command> output.</para>
+
+      <para>N&atilde;o h&aacute; limites em c&oacute;digos de PIN (exceto tamanho).  Alguns
+      dispositivos (por exemplo, fones Bluetooth) podem ter um c&oacute;digo
+      PIN fixo embutido.  O par&acirc;metro <option>-d</option> for&ccedil;a o
+      daemon &man.hcsecd.8; a se manter rodando em primeiro plano, 
+      de forma que seja f&aacute;cil observar o que est&aacute; acontecendo.  Ajuste
+      o dispositivo remoto para receber uni&atilde;o e iniciar a conex&atilde;o
+      Bluetooth ao dispositivo remoto.  O dispositivo remoto deveria
+      dizer que a uni&atilde;o foi aceita, e solicitar o c&oacute;digo PIN.  Entre o
+      mesmo c&oacute;digo PIN que voc&ecirc; tem em 
+      <filename>hcsecd.conf</filename>.  Agora seu PC e o dispositivo
+      remoto est&atilde;o unidos.  Alternativamente, voc&ecirc; pode iniciar uni&atilde;o
+      no dispositivo remoto.  Abaixo, a amostra da sa&iacute;da do comando
+      <command>hcsecd</command>.</para>
 
 <programlisting>hcsecd[16484]: Got Link_Key_Request event from 'ubt0hci', remote bdaddr 0:80:37:29:19:a4
 hcsecd[16484]: Found matching entry, remote bdaddr 0:80:37:29:19:a4, name 'Pav's T39', link key doesn't exist
