@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!--
-	$FreeBSD: doc/pt_PT.ISO8859-1/share/sgml/transtable-local.xsl,v 1.1 2004/05/15 12:07:41 brueffer Exp $
+	$FreeBSD$
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!--
-	$FreeBSD: doc/pt_PT.ISO8859-1/share/sgml/mirrors-local.xsl,v 1.1 2003/12/23 01:21:01 pan Exp $
+	$FreeBSD$
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
