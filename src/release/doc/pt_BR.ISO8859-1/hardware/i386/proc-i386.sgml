@@ -14,8 +14,8 @@
     processadores Intel começando com o 80386 são suportados, incluíndo o
     80386, 80486, Pentium, Pentium Pro, Pentium II, Pentium III,
     Pentium 4, e variantes disso, como os processadores Xeon e Celeron.  
-    (Contudo, &os; 5.2-RELEASE e mais recentes no longer support
-    the 80386SX processor.)  Todos processadores AMD i386-compatíveis
+    (Contudo, &os; 5.2-RELEASE e mais recentes não suportam mais o 
+    processador 80386SX.)  Todos processadores AMD i386-compatíveis
     são suportados incluíndo o Am486, Am5x86, K5, K6 (e variantes),
     Athlon (incluíndo Athlon-MP, Athlon-XP, Athlon-4,
     e Athlon Thunderbird), e processadores Duron.  O processador incorporado AMD
@@ -27,29 +27,28 @@
     Há algum limite para o suporte ao barramento de expansão MCA (<quote>MicroChannel</quote>)
     usado na linha de PCs IBM PS/2.</para>
 
-  <para>Sistemas de multi-processadores simétricos, Symmetric Multi-Processor
+  <para>Sistemas de multi-processadores simétricos, <foreignphrse>Symmetric Multi-Processor</foreignphrase>
     (SMP), são geralmente suportados pelo FreeBSD, embora em alguns casos,
-    bus na BIOS ou placa mãe, podem gerar alguns problemas. Perusal of the archives 
-    of the &a.smp; may yield some clues.</para>
+    bugs na BIOS ou placa mãe, podem gerar alguns problemas. Vasculhar os arquivos da 
+    &a.smp; pode resultar em algumas dicas.</para>
 
   <para>&os; irá aproveitar-se do suporte ao Hyper Threading (HTT) em CPUs Intel
-    que suportam esta característica. A kernel with the
-    <literal>options&nbsp;SMP</literal> feature enabled will
-    automatically detect the additional logical processors.  The
-    default &os; scheduler treats the logical processors the same as
-    additional physical processors; in other words, no attempt is made
-    to optimize scheduling decisions given the shared resources
-    between logical processors within the same CPU.  Because this
-    naive scheduling can result in suboptimal performance, under
-    certain circumstances it may be useful to disable the logical
-    processors with the
-    the <varname>machdep.hlt_logical_cpus</varname> sysctl variable.
+    que suportam esta característica. Um kernel com a característica
+    <literal>options&nbsp;SMP</literal> permitida detectará 
+    automaticamente os processadores lógicos adicionais. O sistema de
+    agendamento padrão do &os; trata os processadores lógicos da mesma maneira
+    que trata processadores físicos adicionais; em outras palavras, nenhuma tentativa é
+    feita para otimizar decisões de agendamento dados os recursos compartilhados entre
+    processadores lógicos dentro da mesma CPU. Pelo fato deste agendamento primário poder
+    resultar em performance não otimizada, sob determinadas circunstâncias pode ser
+    útil desabilitar os processadores lógicos com a variável
+    <varname>machdep.hlt_logical_cpus</varname> no sysctl.
     Também é possível desligar qualquer CPU ocioso com a variável
     <varname>machdep.hlt_cpus</varname> no sysctl. A página do manual 
     &man.smp.4; tem mais detalhes.</para>
 
-  <para>&os; ira tirar proveito do suporte ao Physical Address Extensions (PAE)
-    em CPUs que suportam esta característica. Um kernel com a opção <literal>PAE</literal>
+  <para>&os; ira tirar proveito do suporte ao <foreignphrase>Physical Address Extensions</foreignphrase>
+   (PAE) em CPUs que suportam esta característica. Um kernel com a opção <literal>PAE</literal>
     habilitada irá detectar memória acima de 4 gigabytes e permiti-o a ser usada pelo sistema.
     This feature places constraints on the device drivers and other features of
     &os; which may be used; consulte a página do manual &man.pae.4; para mais detalhes.</para>
@@ -57,10 +56,10 @@
   <para>&os; will generally run on i386-based laptops, albeit with
     varying levels of support for certain hardware features such as
     sound, graphics, power management, and PCCARD expansion slots.
-    These features tend to vary in idiosyncratic ways between
-    machines, and frequently require special-case support in &os; to
-    work around hardware bugs or other oddities.  When in doubt, a
-    search of the archives of the &a.mobile; may be useful.</para>
+    Estas características tendem a variar de maneira exclusiva entre
+    máquinas, e frequentemente requer suporte em casos-especiais no &os; 
+    para corrigir bugs e outros contra-tempos.  Na dúvida, uma
+    uma procura dos arquivos do &a.mobile; pode ser útil.</para>
 
   <para>Muitos laptops modernos (bem como muitos desktops) usam o Advanced 
     Configuration e o Power Management (ACPI) por padrão. &os; suporta ACPI
