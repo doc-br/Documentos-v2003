@@ -11,7 +11,7 @@
   <articleinfo>
     <title>Escrevendo relat&oacute;rios de problema no FreeBSD</title>
 
-    <pubdate>$FreeBSD: articles/problem-reports/article.sgml,v 1.9 2003/12/11 15:54:29 ebrandi Exp $</pubdate>
+    <pubdate>$FreeBSD: articles/problem-reports/article.sgml,v 1.10 2003/12/11 21:56:53 ebrandi Exp $</pubdate>
 
     <legalnotice id="trademarks" role="trademarks">
       &tm-attrib.freebsd;
@@ -345,44 +345,50 @@
 
         <listitem>
           <para><emphasis>Evite pedidos vagos de novas funcionalidades.</emphasis>
-            PRs of the form <quote>someone should really implement something
-            that does so-and-so</quote> are less likely to get results than
-            very specific requests.  Remember, the source is available
-            to everyone, so if you want a feature, the best way to
-            ensure it being included is to get to work!  Also consider
-            the fact that many things like this would make a better
-            topic for discussion on <literal>freebsd-questions</literal>
-            than an entry in the PR database, as discussed above.</para>
+	    Os PRs no formato <quote>algu&eacute;m deve realmente implementar
+	    algo que fa&ccedil;a isso ou aquilo</quote>s&atilde;o menos prov&aacute;veis de
+	    obeterem uma resposta que os que s&atilde;o mais especificos.
+	    Lembre-se, o c&oacute;digo est&aacute; disponivel para todos, de forma
+	    que se voce deseja uma nova funcionalidade, a melhor
+	    maneira de ter certeza de que ela ser&aacute; incluida &eacute; come&ccedil;ar
+	    a trabalhar!  Tamb&eacute;m considere o fato de que muitas coisas
+	    estariam melhores como um t&oacute;pico melhor de discuss&atilde;o na
+	    <literal>freebsd-questions</literal> do que como uma
+	    entrada no banco de dados de PRs, como discutido
+	    acima.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>Make sure no one else has already submitted
-            a similar PR.</emphasis> Although this has already been
-            mentioned above, it bears repeating here.  It only take a
-            minute or two to use the web-based search engine at
-            <ulink URL="http://www.FreeBSD.org/cgi/query-pr-summary.cgi?query"></ulink>.
-            (Of course, everyone is guilty of forgetting to do this
-            now and then.)</para> </listitem>
-
+          <para><emphasis>Tenha certeza que que ningu&eacute;m j&aacute; tenha
+	  enviando um PR semelhante.</emphasis>  Embora isso j&aacute; tenha
+	  sido mencionado anteriormente, cabe repetir aqui.  Isto ir&aacute;
+	  tomar apenas 1 ou 2 minutos no uso do <ulink
+	  URL="http://www.FreeBSD.org/cgi/query-pr-summary.cgi?query">
+	  mecanismo de busca</ulink> da interface web do banco de
+	  dados de PRs. (&eacute; claro, todos s&atilde;o culpados de esquecerem de
+	  fazerem isso de vez em quando.)</para>
+	 </listitem> 
+	  
         <listitem>
-          <para><emphasis>Avoid controversial requests.</emphasis>
-            If your PR addresses an area that has been controversial
-            in the past, you should probably be prepared to not only
-            offer patches, but also justification for why the patches
-            are <quote>The Right Thing To Do</quote>.  As noted above,
-            a careful search of the mailing lists using the archives
-            at <ulink URL="http://www.FreeBSD.org/search/search.html#mailinglists"></ulink>
-            is always good preparation.</para>
+          <para><emphasis>Evite solicita&ccedil;&otilde;es controversas.</emphasis>
+	    Se o seu PR se relaciona a uma area que foi controversa no
+	    passado, voc&ecirc; deve estar preparado para oferecer n&atilde;o s&oacute;
+	    apenas os patches, mas tamb&eacute;m a justificativa de porque os
+	    patches s&atilde;o <quote>a coisa certa a se fazer</quote>.  Como
+	    mencionado acima, uma busca cuidadosa nos <ulink
+	    URL="http://www.FreeBSD.org/search/search.html#mailinglists">
+	    arquivos das listas de discuss&atilde;o</ulink> &eacute; sempre um bom
+	    preparativo.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>Be polite.</emphasis>
-            Almost anyone who would potentially work on your PR is a
-            volunteer.  No one likes to be told that they have to do
-            something when they are already doing it for some
-            motivation other than monetary gain.  This is a good thing
-            to keep in mind at all times on Open Source
-            projects.</para>
+          <para><emphasis>Seja educado.</emphasis>
+	    Quase todas as pessoas que potencialmente podem trabalhar
+	    no seu PR s&atilde;o volunt&aacute;rios.  Ningu&eacute;m gosta que seja dito
+	    que eles devem fazer algo que eles j&aacute; est&atilde;o fazendo por
+	    alguma outra motiva&ccedil;&atilde;o a qual n&atilde;o &eacute; a de ganho financeiro.
+	    Esta &eacute; uma boa coisa para ter sempre em mente num projeto
+	    de c&oacute;digo aberto.</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -390,36 +396,46 @@
     <section>
       <title>Antes de voc&ecirc; iniciar</title>
 
-      <para>Before running the &man.send-pr.1; program, make sure your
-        <envar>VISUAL</envar> (or <envar>EDITOR</envar> if
-        <envar>VISUAL</envar> is not set) environment variable is set
-        to something sensible.</para>
-
-      <para>You should also make sure that mail delivery works fine.
-        &man.send-pr.1; uses mail messages for the submission and
-        tracking of problem reports.  If you cannot post mail messages
-        from the machine you're running &man.send-pr.1; on, your
-        problem report will not reach the GNATS database.  For details
-        on the setup of mail on FreeBSD, see the <quote>Electronic
-        Mail</quote> chapter of the FreeBSD Handbook at
-        <ulink URL="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/mail.html"></ulink>.</para>
+      <para>
+	Antes de executar o programa &man.send-pr.1;, tenha certeza
+	que a sua vari&aacute;vel de ambiente <envar>VISUAL</envar> (ou a
+	<envar>EDITOR</envar> se a envar>VISUAL</envar> n&atilde;o estiver
+	definida) est&aacute; setada para alguma coisa sensivel.</para>
+      
+      <para>
+	Voc&ecirc; tamb&eacute;m deve se certificar de que o sistema de entrega de
+	emails esteja funcionando corretamente.  O &man.send-pr.1;
+	utiliza mensagens de email para enviar e rastrear um relat&oacute;rio
+	de problemas.  Se voc&ecirc; n&atilde;o pode enviar mensagens de email
+	apartir da m&aacute;quina onde esta executando o &man.send-pr.1;, os
+	seus relat&oacute;rios de problemas n&atilde;o ir&atilde;o chegar at&eacute; a base de
+	dados GNATS.  Para maiores detalhes de como configurar o
+	sistema de email no FreeBSD, consulte o cap&iacute;tulo
+	<quote>Correio Eletr&ocirc;nico</quote> no Handbook do FreeBSD em
+	<ulink
+	URL="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/mail.html">
+	</ulink>.</para>
     </section>
 
     <section>
       <title>Anexando pachs ou arquivos</title>
 
-      <para>The &man.send-pr.1; program has provisions for attaching
-        files to a problem report.  You can attach as many files as
-        you want provided that each has a unique base name (i.e. the
-        name of the file proper, without the path).  Just use the
-        <option>-a</option> command-line option to specify the names
-        of the files you wish to attach:</para>
-
+      <para>
+	O programa &man.send-pr.1; tem a capacidade de anexar arquivos
+	a um relat&oacute;rio de problema.  Voce pode anexar tantos arquivos
+	quantos voc&ecirc; desejar, desde que cada um possua um nome &uacute;nico.
+	(por ex. por exemplo o nome pr&oacute;prio do arquivo, sem o caminho
+	de diret&oacute;rio).  Basta utilizar a op&ccedil;&atilde;o de linha de comando
+	<option>-a</option> para especificar os nomes dos arquivos que
+	voc&ecirc; deseja anexar:</para>
+      
 <screen>&prompt.user; <userinput>send-pr -a /var/run/dmesg -a /tmp/errors</userinput></screen>
 
-      <para>Do not worry about binary files, they will be automatically
-        encoded so as not to upset your mail agent.</para>
-
+      <para>
+	N&atilde;o se preocupe com os arquivos bin&aacute;rios, eles ser&atilde;o
+	automaticamente codificados de forma a n&atilde;o interferir com o
+	seu agente de correio.</para>
+      
       <para>If you attach a patch, make sure you use the
         <option>-c</option> or <option>-u</option> option to
         &man.diff.1; to create a context or unified diff (unified is
