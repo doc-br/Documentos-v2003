@@ -484,11 +484,11 @@
       fontes do projeto &os;, ou todas as &aacute;reas, dependendo do seu 
       interesse.  Os servi&ccedil;os prim&aacute;rios que oferecemos s&atilde;o 
       <link linkend="anoncvs">CVS An&ocirc;nimo
-      CVS</link>, <link linkend="cvsup">CVSup</link>, e <link
+      </link>, <link linkend="cvsup">CVSup</link>, e <link
       linkend="ctm">CTM</link>.</para>
 
     <warning>
-      <para>Enquanto &eacute; poss&iacute;vel atualizar apenas partes da sua &aacute;rvore 
+      <para> Enquanto &eacute; poss&iacute;vel atualizar apenas partes da sua &aacute;rvore 
 	dos fontes, o &uacute;nico procedimento de atualiza&ccedil;&atilde;o com suporte &eacute; 
 	o de atualizar toda a &aacute;rvore e recompilar os fontes de n&iacute;vel de 
 	usu&aacute;rio (i.e., todos os programas que s&atilde;o executados no espa&ccedil;o 
@@ -502,122 +502,121 @@
     </warning>
 
     <indexterm><primary>anonymous CVS</primary></indexterm>
-    <para><application>Anonymous CVS</application> and
-      <application>CVSup</application> use the <emphasis>pull</emphasis>
-      model of updating sources.  In the case of
-      <application>CVSup</application> the user (or a 
-      <command>cron</command> script) invokes
-      the <command>cvsup</command> program, and it interacts with a
-      <command>cvsupd</command> server somewhere to bring your files
-      up-to-date.  The updates you receive are up-to-the-minute and you
-      get them when, and only when, you want them.  You can easily
-      restrict your updates to the specific files or directories that are
-      of interest to you.  Updates are generated on the fly by the server,
-      according to what you have and what you want to have.
-      <application>Anonymous CVS</application> is quite a bit more
-      simplistic than <application>CVSup</application> in that it is just an extension to
-      <application>CVS</application> which allows it to pull changes
-      directly from a remote CVS repository.
-      <application>CVSup</application> can do this far more efficiently,
-      but <application>Anonymous CVS</application> is easier to
-      use.</para>
+    <para><application>CVS An&ocirc;nimo</application> e
+      <application>CVSup</application> usam o modelo <emphasis>pull</emphasis>
+      de atualiza&ccedil;&atilde;o dos fontes.  No caso do <application>CVSup</application> o 
+      usu&aacute;rio (ou um <literal>script</literal> <command>cron</command>) invocar 
+      o programa <command>cvsup</command>, e ele interagir com um servidor 
+      <command>cvsupd</command> em algum lugar para fazer com que seus arquivos fiquem 
+      atualizados.  As atualiza&ccedil;&otilde;es que voc&ecirc; recebe s&atilde;o as mais recentes e voc&ecirc; 
+      as obt&eacute;m, e somente quando, voc&ecirc; as quer.  Voc&ecirc; pode facilmente 
+      restringir suas atualiza&ccedil;&otilde;es &agrave; arquivos ou diret&oacute;rios espec&iacute;ficos que s&atilde;o 
+      do seu interesse.  As atualiza&ccedil;&otilde;es s&atilde;o geradas rapidamente pelo servidor, 
+      de acordo com o que voc&ecirc; tem o com o que voc&ecirc; quer ter.  
+      <application>CVS An&ocirc;nimo</application> &eacute; um pouco mais simples do que o 
+      <application>CVSup</application>, sendo apenas uma extens&atilde;o do 
+      <application>CVS</application> que permite puxar as mudan&ccedil;as diretamente 
+      de um reposit&oacute;rio CVS.  <application>CVSup</application> pode fazer 
+      isto de maneira bem mais eficiente, mas o <application>CVS An&ocirc;nimo
+      </application> &eacute; mais f&aacute;cil de usar.</para>
 
     <indexterm>
       <primary><application>CTM</application></primary>
     </indexterm>
-    <para><application>CTM</application>, on the other hand, does not
-      interactively compare the sources you have with those on the master
-      archive or otherwise pull them across.  Instead, a script which
-      identifies changes in files since its previous run is executed
-      several times a day on the master CTM machine, any detected changes
-      being compressed, stamped with a sequence-number and encoded for
-      transmission over email (in printable ASCII only).  Once received,
-      these <quote>CTM deltas</quote> can then be handed to the
-      &man.ctm.rmail.1; utility which will automatically decode, verify
-      and apply the changes to the user's copy of the sources.  This
-      process is far more efficient than <application>CVSup</application>,
-      and places less strain on our server resources since it is a
-      <emphasis>push</emphasis> rather than a <emphasis>pull</emphasis>
-      model.</para>
+    <para>O <application>CTM</application>, por outro lado, n&atilde;o compara 
+      interativamente os fontes que voc&ecirc; tem com os que est&atilde;o no arquivo 
+      principal ou com os que foram puxados.  Ao inv&eacute;s disso, um <literal>
+      script</literal> que identifica as mudan&ccedil;as nos arquivos desde a 
+      &uacute;ltima vez que o <application>CTM</application> foi usado &eacute; executado 
+      v&aacute;rias vezes por dia na m&aacute;quina CTM principal, as mudan&ccedil;as s&atilde;o 
+      comprimidas, estampadas com um n&uacute;mero sequencial e codificadas para 
+      transmiss&atilde;o por correio eletr&ocirc;nico (apenas em caracteres ASCII 
+      imprim&iacute;veis).  Uma vez recebidos, estes <quotes>deltas CTM</quote> 
+      podem ser manipulados pelo utilit&aacute;rio &man.ctm.rmail.1; que 
+      decodificar&aacute; automaticamente, verificar&aacute; e aplicar&aacute; as mudan&ccedil;as nos 
+      fontes do usu&aacute;rio.  Este processo &eacute; bem mais eficiente do que o 
+      <application>CVSup</application>, e n&atilde;o sobrecarrega o nosso 
+      servidor uma vez que o modelo <emphasis>push</emphasis> ao inv&eacute;s do 
+      <emphasis>pull</emphasis> &eacute; utilizado.</para>
 
-    <para>There are other trade-offs, of course.  If you inadvertently
-      wipe out portions of your archive, <application>CVSup</application>
-      will detect and rebuild the damaged portions for you.
-      <application>CTM</application> will not do this, and if you wipe some
-      portion of your source tree out (and do not have it backed up) then
-      you will have to start from scratch (from the most recent CVS
-      <quote>base delta</quote>) and rebuild it all with <application>CTM</application> or, with
-      <application>Anonymous CVS</application>, simply delete the bad bits and resync.</para>
+    <para>Existem alguns contratempos, &eacute; claro.  Se voc&ecirc; inadivertidamente 
+      apagar parte dos seus fontes, o <application>CVSup</application> 
+      detectar&aacute; e reconstruir&aacute; as partes denificadas para voc&ecirc;.  O 
+      <application>CTM</application> n&atilde;o far&aacute; isto, se voc&ecirc; apagar alguma 
+      parte da sua &aacute;rvore de fontes (e n&atilde;o possuir c&oacute;pia de seguran&ccedil;a) 
+      ent&atilde;o voc&ecirc; vai ter que come&ccedil;ar do zero (da mais recente <quote>
+      base delta</quote> do CVS) e reconstruir tudo com o <application>
+      CTM</application> ou, com o <application>CVS An&ocirc;nimo</application>, 
+      simplesmente apagar os bits problem&aacute;ticos e resincronizar.</para>
   </sect1>
 
   <sect1 id="makeworld">
-    <title>Using <command>make world</command></title>
+    <title>Usando o <command>make world</command></title>
 
     <indexterm>
       <primary><command>make world</command></primary>
     </indexterm>
-    <para>Once you have synchronized your local source tree against a
-      particular version of &os; (&os.stable;, &os.current;, and so on)
-      you can then use the source
-      tree to rebuild the system.</para>
+    <para>Uma vez sincronizados os fontes locais com uma vers&atilde;o particular 
+      do &os; (&os.stable;, &os.current;, e assim por diante) voc&ecirc; pode 
+      usar a &aacute;rvore dos fontes para reconstruir o sistema.</para>
 
     <warning>
-      <title>Take a Backup</title>
+      <title>Tire uma C&oacute;pia de Seguran&ccedil;a</title>
 
-      <para>It cannot be stressed enough how important it is to take a
-	backup of your system <emphasis>before</emphasis> you do this.
-	While rebuilding the world is (as long as you follow these
-	instructions) an easy task to do, there will inevitably be times
-	when you make mistakes, or when mistakes made by others in the
-	source tree render your system unbootable.</para>
+      <para>Nunca &eacute; demais falar como &eacute; importante tirar uma c&oacute;pia de 
+	seguran&ccedil;a do seu sistema <emphasis>antes</emphasis> de fazer 
+	isso.  Enquanto que reconstruir tudo &eacute; (se voc&ecirc; seguir estas 
+	instru&ccedil;&otilde;es) uma tarefa f&aacute;cil, inevitavelmente existir&atilde;o 
+	ocasi&otilde;es em que voc&ecirc; cometer&aacute; erros, ou quando erros cometidos 
+	por outros na &aacute;rvore dos fontes fazendo com que seu sistema 
+	n&atilde;o inicialize.</para>
 
-      <para>Make sure you have taken a backup.  And have a fixit floppy to
-	hand.  You will probably never have to use it, but it is better to be
-	safe than sorry!</para>
+      <para>Tenha certeza de que voc&ecirc; tirou uma c&oacute;pia de seguran&ccedil;a.  E 
+	tenha um disquete de boot em m&atilde;os.  Voc&ecirc; provavelmente nunca vai 
+	precisar utliz&aacute;-lo, mas &eacute; melhor previnir do que remediar!</para>
     </warning>
 
     <warning>
-      <title>Subscribe to the Right Mailing List</title>
+      <title>Inscreva-se na Lista de Discuss&atilde;o Certa</title>
 
       <indexterm><primary>mailing list</primary></indexterm>
-      <para>The &os.stable; and &os.current; branches are, by their
-	nature, <emphasis>in development</emphasis>.  People that
-	contribute to &os; are human, and mistakes occasionally
-	happen.</para>
+      <para>O &os.stable; e &os.current; est&atilde;o, por sua natureza, 
+	<emphasis>em desenvolvimento</emphasis>.  Pessoas que 
+	contribuem com o &os; s&atilde;o humanas, e erros acontecem 
+	de vez em quando.</para>
 
-      <para>Sometimes these mistakes can be quite harmless, just causing
-	your system to print a new diagnostic warning.  Or the change may
-	be catastrophic, and render your system unbootable or destroy your
-	file systems (or worse).</para>
+      <para>Algumas vezes estes erros podem ser um pouquinho nocivos, 
+	apenas fazendo com que seu sistema imprima uma mensagem de 
+	diagn&oacute;stico de alerta.  Ou as mudan&ccedil;as podem ser catastr&oacute;ficas, 
+	fazendo com que seu sistema n&atilde;o inicialize mais ou destrua seus 
+	sistemas de arquivos (ou pior).</para>
 
-      <para>If problems like these occur, a <quote>heads up</quote> is
-        posted to the appropriate mailing list, explaining the nature of
-	the problem and which systems it affects.  And an <quote>all
-	clear</quote> announcement is posted when the problem has been
-	solved.</para>
+      <para>Se acontecerem problemas como estes, uma <quote>nota</quote> 
+	&eacute; postada na lista apropriada, explicando a natureza do problema e 
+	quais sistemas s&atilde;o afetados por ele.  E um an&uacute;ncio <quote>tudo 
+	limpo</quote> &eacute; postado quando o problema foi solucionado.</para>
 
-      <para>If you try to track &os.stable; or &os.current; and do
-	not read the &a.stable; or the
-	&a.current; respectively, then you are
-	asking for trouble.</para>
+      <para>Se voc&ecirc; tentar acompanhar o &os.stable; ou o &os.current; e n&atilde;o 
+	ler a &a.stable; ou a &a.current; respectivamente, ent&atilde;o voc&ecirc; 
+	est&aacute; ca&ccedil;ando problemas.</para>
     </warning>
 
     <sect2>
-      <title>Read <filename>/usr/src/UPDATING</filename></title>
+      <title>Leia o Arquivo <filename>/usr/src/UPDATING</filename></title>
 
-      <para>Before you do anything else, read
-	<filename>/usr/src/UPDATING</filename> (or the equivalent file
-	wherever you have a copy of the source code).  This file should
-	contain important information about problems you might encounter, or
-	specify the order in which you might have to run certain commands.
-	If <filename>UPDATING</filename> contradicts something you read here,
-	<filename>UPDATING</filename> takes precedence.</para>
+      <para>Antes de fazer qualquer coisa, leia o arquivo 
+	<filename>/usr/src/UPDATING</filename> (ou o arquivo equivalente 
+	sempre que voc&ecirc; possuir uma c&oacute;pia dos c&oacute;digos fonte).  Este arquivo 
+	pode conter informa&ccedil;&otilde;es importantes a respeito de problemas que 
+	voc&ecirc; pode encontrar, ou especifica a ordem na qual voc&ecirc; deve 
+	executar certos comandos.  Se o arquivo <filename>UPDATING</filename> 
+	contradizer algo que voc&ecirc; ler aqui, ele tem precedencia.</para>
 
       <important>
-	<para>Reading <filename>UPDATING</filename> is not an acceptable
-	  substitute for subscribing to the correct mailing list, as described 
-	  previously.  The two requirements are complementary, not
-	  exclusive.</para>
+	<para>Ler o <filename>UPDATING</filename> n&atilde;o substitu&iacute; 
+	  a inscri&ccedil;&atilde;o e acompanhamento da lista de discuss&atilde;o correta, 
+	  como mencionado anteriormente.  Os dois requisitos s&atilde;o complementares, 
+	  n&atilde;o exclusivos.</para>
       </important>
     </sect2>
 
