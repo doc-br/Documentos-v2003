@@ -4597,64 +4597,73 @@ TWO       (,hotel,dominio-teste)
       <programlisting>nis_client_enable="YES"	# run client stuff as well
 nis_client_flags="-S <replaceable>NIS domain</replaceable>,<replaceable>server</replaceable>"</programlisting>
 
-      <para>See &man.ypbind.8; for further information.</para>
+      <para>Veja &man.ypbind.8; para maiores informa&ccedil;&otilde;es.</para>
     </sect2>
 
     <sect2>
-      <title>Password Formats</title>
+      <title>Formatos de Senhas</title>
       <indexterm>
 	<primary>NIS</primary>
 	<secondary>password formats</secondary>
       </indexterm>
-      <para>One of the most common issues that people run into when trying
-	to implement NIS is password format compatibility.  If your NIS
-	server is using DES encrypted passwords, it will only support
-	clients that are also using DES.  For example, if you have
-	&solaris; NIS clients in your network, then you will almost certainly
-	need to use DES encrypted passwords.</para>
+      <para>Uma das quest&otilde;es mais comuns que as pessoas enfrentam 
+      quando tentam implementar o NIS, &eacute; a compatibilidade de
+      formatos de senhas.  Se o seu servidore NIS est&aacute; usando senhas
+      criptografadas com DES, ele somente suportar&aacute; clientes que
+      tamb&eacute;m estejam usando DES.  Por exemplo, se voc&ecirc; tem clientes
+      NIS &solaris; em sua rede, ent&atilde;o voc&ecirc; quase certamente precisa
+      usar senhas criptografadas com DES.</para>
 
-      <para>To check which format your servers
-	and clients are using, look at <filename>/etc/login.conf</filename>.
-	If the host is configured to use DES encrypted passwords, then the
-	<literal>default</literal> class will contain an entry like this:</para>
+      <para>Para verificar qual o formato seus servidores e
+      clientes est&atilde;o usando, olhe no <filename>/etc/login.conf</filename>.  
+      Se o sistema (host) est&aacute; configurado para usar senhas
+      criptografadas com DES, ent&atilde;o a classe <literal>padr&atilde;o 
+      (default)</literal> vai conter uma entrada como esta:</para>
 
       <programlisting>default:\
 	:passwd_format=des:\
 	:copyright=/etc/COPYRIGHT:\
-	[Further entries elided]</programlisting>
+	[Entradas adicionais omitidas]</programlisting>
 
-      <para>Other possible values for the <literal>passwd_format</literal>
-	capability include <literal>blf</literal> and <literal>md5</literal>
-	(for Blowfish and MD5 encrypted passwords, respectively).</para>
+      <para>Outros poss&iacute;veis valores para a capacidade
+      <literal>passwd_format</literal>, incluem 
+      <literal>blf</literal> e <literal>md5</literal> (para senhas
+      criptografadas com Blowfish e MD5, respectivamente).</para>
 
-      <para>If you have made changes to <filename>/etc/login.conf</filename>,
-	you will also need to rebuild the login capability database, which is
-	achieved by running the following command as <username>root</username>:</para>
+      <para>Se voc&ecirc; fez mudan&ccedil;as no 
+      <filename>/etc/login.conf</filename>, voc&ecirc; tamb&eacute;m vai precisar
+      reconstruir a base dedados de capacidade de login, a qual &eacute;
+      feita executando o seguinte comando como 
+      <username>root</username>:</para>
 
       <screen>&prompt.root; <userinput>cap_mkdb /etc/login.conf</userinput></screen>
 
-      <note><para>The format of passwords already in
-	<filename>/etc/master.passwd</filename> will not be updated until
-	a user changes their password for the first time <emphasis>after</emphasis>
-	the login capability database is rebuilt.</para></note>
+      <note><para>O formato de senhas j&aacute; presentes no 
+      <filename>/etc/master.passwd</filename> n&atilde;o ser&aacute; atualizado at&eacute;
+      que um usu&aacute;rio modifique sua senha pela primeira vez 
+      <emphasis>depois</emphasis> da reconstru&ccedil;&atilde;o da base de dados de
+      capacidade.</para></note>
 
-      <para>Next, in order to ensure that passwords are encrypted with the
-	format that you have chosen, you should also check that the
-	<literal>crypt_default</literal> in <filename>/etc/auth.conf</filename>
-	gives precedence to your chosen password format.  To do this, place
-	the format that you have chosen first in the list.  For example, when
-	using DES encrypted passwords, the entry would be:</para>
+      <para>Em seguida, para garantir que senhas est&atilde;o criptografadas
+      com o formato que voc&ecirc; escolheu, voc&ecirc; tamb&eacute;m deve verificar que
+      o <literal>crypt_default</literal> no 
+      <filename>/etc/auth.conf</filename> d&aacute; preced&ecirc;ncia para o
+      formato de senha da sua escolha.  Para fazer isto, coloque o
+      formato que voc&ecirc; escolheu em primeiro na lista.  Por exemplo,
+      quando usar senhas criptografadas com DES, a entrada deve 
+      ser:</para>
 
       <programlisting>crypt_default	=	des blf md5</programlisting>
 
-      <para>Having followed the above steps on each of the &os; based NIS
-	servers and clients, you can be sure that they all agree on which
-	password format is used within your network.
-	If you have trouble authenticating on an NIS client, this
-	is a pretty good place to start looking for possible problems.
-	Remember: if you want to deploy an NIS server for a heterogenous
-	network, you will probably have to use DES on all systems
-	because it is the lowest common standard.</para>
+      <para>Tendo seguido os passos acima em cada um dos servidores e
+      clientes NIS baseados em &os;, voc&ecirc; pode estar certo de que
+      todos eles concordam em qual formato de senha &eacute; usado na sua
+      rede.  Se voc&ecirc; tem problemas com autentica&ccedil;&atilde;o em um cliente NIS,
+      este &eacute; um bom lugar para come&ccedil;ar a procurar por poss&iacute;veis
+      problemas.  Lembre-se: se voc&ecirc; quer implementar um servidor NIS
+      em uma rede heterog&ecirc;nea, voc&ecirc; provavelmente ter&aacute; que usar DES em
+      todos os seus sistemas, porque &eacute; o padr&atilde;o de menor denominador
+      comum.</para>
     </sect2>
   </sect1>
 
