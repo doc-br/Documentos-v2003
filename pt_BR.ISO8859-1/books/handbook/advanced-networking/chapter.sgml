@@ -10,7 +10,7 @@
   <sect1 id="advanced-networking-synopsis">
     <title>&Iacute;ndice</title>
 
-    <para>Este cap&iacute;tulo aborda alguns dos servi&ccedil;os de redes 
+    <para>Este cap&iacute;tulo aborda alguns dos servi&ccedil;os de redes
     usados com mais frequ&ecirc;ncia em sistemas &unix;.  Vamos
     abordar como definir, configurar, testar e manter todos
     os servi&ccedil;os de rede que o FreeBSD usa.  Adicionalmente,
@@ -80,7 +80,7 @@
 
     <itemizedlist>
       <listitem>
-	<para>Compreender os princ&iacute;pios dos scripts 
+	<para>Compreender os princ&iacute;pios dos scripts
 	<filename>/etc/rc</filename> .</para>
       </listitem>
 
@@ -523,7 +523,7 @@ host2.example.com link#1	    UC		0	 0
 
       <programlisting>options MROUTING</programlisting>
 
-      <para>Al&eacute;m disso, o daemon de roteamento multicast 
+      <para>Al&eacute;m disso, o daemon de roteamento multicast
       &man.mrouted.8; precisa ser configurado para ativar t&uacute;neis e
       DVMRP atrav&eacute;s do <filename>/etc/mrouted.conf</filename>.  Mais
       detalhes sobre a configura&ccedil;&atilde;o multicast podem ser encontradas
@@ -551,7 +551,7 @@ host2.example.com link#1	    UC		0	 0
 
    <sect2>
       <title>Introdu&ccedil;&atilde;o</title>
-      <para>Pode ser muito &uacute;til a possibilidade de usar um computador 
+      <para>Pode ser muito &uacute;til a possibilidade de usar um computador
       sem o inc&ocirc;modo de ter um cabo de rede conectado o tempo todo.  O
       FreeBSD pode ser usado como um cliente sem fio e at&eacute; mesmo como
       um <quote>ponto de acesso</quote> sem fio.</para>
@@ -569,8 +569,8 @@ host2.example.com link#1	    UC		0	 0
 	quantidade de pontos de acesso sem fio est&atilde;o conectados a uma
 	rede cabeada.  Cada rede sem fio t&ecirc;m seu pr&oacute;prio nome.  Este
 	nome &eacute; chamado SSID da rede.</para>
-	
-       <para>Clientes sem fio conectam-se a estes pontos de acesso.  
+
+       <para>Clientes sem fio conectam-se a estes pontos de acesso.
        O padr&atilde;o IEEE 802.11 define o protocolo que redes sem fio usam
        para conex&otilde;es.  Um cliente sem fio pode ser ligado a uma rede
        espec&iacute;fica, quando um SSID &eacute; configurado.  Um cliente sem fio
@@ -629,8 +629,8 @@ host2.example.com link#1	    UC		0	 0
 	 tamb&eacute;m vai precisar de uma placa de rede com fio suportada
 	 pelo FreeBSD (n&atilde;o deve ser dif&iacute;cil encontrar, o FreeBSD
 	 suporta diversos dispositivos diferentes).  Neste guia, vamos
-	 assumir que voc&ecirc; deseja fazer uma ponte (&man.bridge.4;) 
-	 de todo o tr&aacute;fego entre o dispositivo sem fio e a rede 
+	 assumir que voc&ecirc; deseja fazer uma ponte (&man.bridge.4;)
+	 de todo o tr&aacute;fego entre o dispositivo sem fio e a rede
 	 conectada na placa de rede com fio.</para>
 
 	 <para>A funcionalidade hostap que o FreeBSD usa para
@@ -673,7 +673,7 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
 
 	 <screen>&prompt.root; <userinput>kldload bridge</userinput></screen>
 
-	 <para>N&atilde;o deve ser mostrado nenhum erro ao se carregar o 
+	 <para>N&atilde;o deve ser mostrado nenhum erro ao se carregar o
 	 m&oacute;dulo.  Se houve algum, talvez voc&ecirc; precise compilar o
 	 c&oacute;digo &man.bridge.4; no kernel do seu sistema.  A se&ccedil;&atilde;o
 	 <link linkend="network-bridging">Liga&ccedil;&atilde;o</link> do
@@ -695,20 +695,20 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
 &prompt.root; <userinput>ifconfig wi0 ssid my_net channel 11 media DS/11Mbps mediaopt hostap up stationname "FreeBSD AP"</userinput>
 	 </screen>
 
-	 <para>A linha &man.ifconfig.8; ativa a interface 
+	 <para>A linha &man.ifconfig.8; ativa a interface
 	  <devicename>wi0</devicename>, configura seu SSID para
 	  <literal>my_net</literal>, e ajusta o nome  da esta&ccedil;&atilde;o para
 	  <literal>FreeBSD AP</literal>.  A op&ccedil;&atilde;o <option>media
 	  DS/11Mbps</option> configura a placa em modo 11Mbps e &eacute;
-	  necess&aacute;ria para qualquer par&acirc;metro <option>mediaopt</option> 
+	  necess&aacute;ria para qualquer par&acirc;metro <option>mediaopt</option>
 	  ter efeito.  A op&ccedil;&atilde;o <option>mediaopt hostap</option> coloca
 	  a interface em modo ponto de acesso.  A p&aacute;gina de manual
 	  &man.wicontrol.8; tem as op&ccedil;&otilde;es v&aacute;lidas para canais de seu
-	  controlador de dom&iacute;nio.</para> 
+	  controlador de dom&iacute;nio.</para>
 
 	 <para>Agora voc&ecirc; deve ter um ponto de acesso completamente
-	 funcional ativado e funcionando.  Recomendamos a leitura de 
-	 &man.wicontrol.8;, &man.ifconfig.8;, e &man.wi.4; para maiores 
+	 funcional ativado e funcionando.  Recomendamos a leitura de
+	 &man.wicontrol.8;, &man.ifconfig.8;, e &man.wi.4; para maiores
 	 informa&ccedil;&otilde;es.</para>
 
 	 <para>Tamb&eacute;m &eacute; sugerido que voc&ecirc; leia a se&ccedil;&atilde;o sobre
@@ -728,7 +728,7 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
 </screen>
 
 	 <para>Isto mostra que h&aacute; uma esta&ccedil;&atilde;o associada, junto com
-	 seus par&acirc;metros.  O sinal indicado deve ser usado somente 
+	 seus par&acirc;metros.  O sinal indicado deve ser usado somente
 	 como uma indica&ccedil;&atilde;o relativa de pot&ecirc;ncia.  Sua tradu&ccedil;&atilde;o para
 	 dBm ou outras unidades variam entre diferentes revis&otilde;es de
 	 firmware.</para>
@@ -744,11 +744,11 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
        <para>Tipicamente, os clientes sem fio possuem somente um
        dispositivo de rede, a placa de rede sem fio.</para>
 
-       <para>Existem algumas poucas formas diferentes de configurar 
+       <para>Existem algumas poucas formas diferentes de configurar
        um cliente sem fio.  Estas configura&ccedil;&otilde;es s&atilde;o baseadas nos
        diferentes modos sem fio, geralmente BSS (modo infra-estrutura,
-       que requer um ponto de acesso), e IBSS (ad-hoc, ou modo 
-       ponto-a-ponto).  Em nosso exemplo, vamos usar o mais popular 
+       que requer um ponto de acesso), e IBSS (ad-hoc, ou modo
+       ponto-a-ponto).  Em nosso exemplo, vamos usar o mais popular
        dos dois, modo BSS, para comunica&ccedil;&atilde;o com um ponto de acesso.</para>
 
        <sect4>
@@ -761,13 +761,13 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
        <sect4>
        <title>Ativando um Cliente FreeBSD Sem Fio</title>
 
-       <para>Antes de come&ccedil;ar, precisa saber algumas coisas 
+       <para>Antes de come&ccedil;ar, precisa saber algumas coisas
        sobre a rede sem fio &agrave; qual estar&aacute; se conectando.  Neste
-       exemplo, estamos nos conectando a uma rede que tem o nome de 
+       exemplo, estamos nos conectando a uma rede que tem o nome de
        <literal>my_net</literal>, e criptografia desligada.</para>
 
        <para>Neste exemplo, n&atilde;o estamos usando criptografia o que &eacute;
-       uma situa&ccedil;&atilde;o de perigo.  Na pr&oacute;xima se&ccedil;&atilde;o, voc&ecirc; aprender&aacute; 
+       uma situa&ccedil;&atilde;o de perigo.  Na pr&oacute;xima se&ccedil;&atilde;o, voc&ecirc; aprender&aacute;
        como ativar criptografia, porque &eacute; importante faz&ecirc;-lo e porque
        algumas tecnologias de criptografia ainda n&atilde;o o protegem
        completamente.</para>
@@ -798,7 +798,7 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
        que nosso ponto de acesso est&aacute; fazendo a liga&ccedil;&atilde;o (ponte)
        de dados entre a rede sem fio e a rede com fio, de forma
        que vai parecer aos outros dispositivos na rede que voc&ecirc; est&aacute;
-       na rede com fio, assim como eles.</para> 
+       na rede com fio, assim como eles.</para>
 
        <para>Feito isto, voc&ecirc; deve ser capaz de usar ping nos sistemas
        na rede com fio assim como se estivesse conectado usando uma
@@ -832,7 +832,7 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
       bem protegida.  Seus dados sem fio ser&atilde;o transmitidos atrav&eacute;s de
       toda a sua vizinhan&ccedil;a, ent&atilde;o quem quiser poder&aacute; ler seus
       dados.  Aqui entra a criptografia.  Criptografando os dados
-      transmitidos por ondas a&eacute;reas, voc&ecirc; torna muito mais dif&iacute;cil a 
+      transmitidos por ondas a&eacute;reas, voc&ecirc; torna muito mais dif&iacute;cil a
       qualquer um capturar seus dados do ar.</para>
 
      <para>As duas formas mais comuns de criptografar os dados entre
@@ -867,11 +867,11 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
      <sect4>
      <title>IPsec</title>
 
-     <para>&man.ipsec.4; &eacute; uma ferramenta muito mais robusta e poderosa 
+     <para>&man.ipsec.4; &eacute; uma ferramenta muito mais robusta e poderosa
      para criptografar dados atrav&eacute;s de uma rede.  Esta &eacute;
-     definitivamente a forma preferida de criptografar dados em uma 
+     definitivamente a forma preferida de criptografar dados em uma
      rede sem fio.  Voc&ecirc; pode ler mais sobre seguran&ccedil;a &man.ipsec.4; e
-     como implement&aacute;-la na se&ccedil;&atilde;o <link linkend="ipsec">IPsec</link> do 
+     como implement&aacute;-la na se&ccedil;&atilde;o <link linkend="ipsec">IPsec</link> do
      handbook.</para>
      </sect4>
     </sect3>
@@ -891,7 +891,7 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
     auditoria sem fio para quebrar chaves WEP, detectar pontos de
     acesso etc.</para>
 
-    <para>Os utilit&aacute;rios <application>bsd-airtools</application> podem 
+    <para>Os utilit&aacute;rios <application>bsd-airtools</application> podem
     ser instalados a partir do port <filename
     role="package">net/bsd-airtools</filename>.  Informa&ccedil;&otilde;es sobre
     como instalar ports podem ser encontradas em <xref
@@ -904,8 +904,8 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
     <command>dstumbler</command> pode ajud&aacute;-lo a familiarizar-se.</para>
 
     <para>Para testar a seguran&ccedil;a de sua rede sem fio, voc&ecirc; pode
-    escolher usar <quote>dweputils</quote> 
-    (<command>dwepcrack</command>, <command>dwepdump</command> e 
+    escolher usar <quote>dweputils</quote>
+    (<command>dwepcrack</command>, <command>dwepdump</command> e
     <command>dwepkeygen</command>) para ajud&aacute;-lo a determinar se WEP &eacute;
     a a solu&ccedil;&atilde;o adequada para suas necessidades de seguran&ccedil;a sem
     fio.</para>
@@ -913,8 +913,8 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
     </sect4>
 
     <sect4>
-    <title>Os Utilit&aacute;rios<application> wicontrol</application>, 
-    <application>ancontrol</application> e 
+    <title>Os Utilit&aacute;rios<application> wicontrol</application>,
+    <application>ancontrol</application> e
     <application>raycontrol</application></title>
 
     <para>Estas s&atilde;o as ferramentas que voc&ecirc; deve usar para controlar
@@ -931,7 +931,7 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
     <title>O Comando <application>ifconfig</application></title>
     <indexterm><primary>ifconfig</primary></indexterm>
 
-    <para>O &man.ifconfig.8; pode ser usado para fazer muitas das 
+    <para>O &man.ifconfig.8; pode ser usado para fazer muitas das
     mesmas configura&ccedil;&otilde;es que &man.wicontrol.8;, entretanto &eacute;
     desprovido de algumas poucas op&ccedil;&otilde;es.  Verifique &man.ifconfig.8;
     para op&ccedil;&otilde;es e par&acirc;metros de linha de comando.</para>
@@ -985,19 +985,19 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
       <title>Introdu&ccedil;&atilde;o</title>
 
       <para>Bluetooth &eacute; uma teconologia sem fio para criar redes
-      pessoais operando na banda n&atilde;o licenciada de 2.4GHz, com 
-      alcance de 10 metros.  As redes geralmente s&atilde;o criadas sob medida 
-      para este prop&oacute;sito, a partir de dispositivos port&aacute;teis como 
-      telefones celulares, handhelds e laptops.  Diferente de outras 
-      tecnologias sem fio populares, como Wi-Fi, o Bluetooth 
-      oferece perfis de servi&ccedil;o de alto n&iacute;vel, por exemplo: servidores 
-      de arquivos simlares ao FTP, distribui&ccedil;&atilde;o de arquivos, 
+      pessoais operando na banda n&atilde;o licenciada de 2.4GHz, com
+      alcance de 10 metros.  As redes geralmente s&atilde;o criadas sob medida
+      para este prop&oacute;sito, a partir de dispositivos port&aacute;teis como
+      telefones celulares, handhelds e laptops.  Diferente de outras
+      tecnologias sem fio populares, como Wi-Fi, o Bluetooth
+      oferece perfis de servi&ccedil;o de alto n&iacute;vel, por exemplo: servidores
+      de arquivos simlares ao FTP, distribui&ccedil;&atilde;o de arquivos,
       transporte de voz, emula&ccedil;&atilde;o de linha serial e outras.</para>
 
       <para>A pilha Bluetooth em &os; &eacute; implementada usando o
       framework Netgraph (veja &man.netgraph.4;).  Uma ampla variedade
       de plugues USB Bluetooth &eacute; suportada pelo gerenciador &man.ng.ubt.4;.
-      Os dispositivos baseado no chip Bluetooth Broadcom BCM2033 s&atilde;o 
+      Os dispositivos baseado no chip Bluetooth Broadcom BCM2033 s&atilde;o
       suportados atrav&eacute;s dos gerenciadores &man.ubtbcmfw.4; e
       &man.ng.ubt.4;.  O cart&atilde;o PC Bluetooth 3Com 3CRWB60-A &eacute;
       suportado pelo gerenciador &man.ng.bt3c.4;. Dispositivos Bluetooth
@@ -1010,7 +1010,7 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
     <sect2>
       <title>Conectando o Dispositivo</title>
 
-      <para>Por padr&atilde;o, os gerenciadores de dispositivos Bluetooth est&atilde;o 
+      <para>Por padr&atilde;o, os gerenciadores de dispositivos Bluetooth est&atilde;o
       dispon&iacute;veis na forma de m&oacute;dulos de kernel.  Antes de ligar um
       dispositivo, voc&ecirc; vai precisar carregar o gerenciador no kernel.</para>
 
@@ -1057,24 +1057,24 @@ Number of SCO packets: 8</screen>
     <sect2>
       <title>Interface Controladora de Sistema (HCI)</title>
 
-      <para>A Interface Controladora de Sistema, ou, Host Controller 
+      <para>A Interface Controladora de Sistema, ou, Host Controller
       Interface (HCI) fornece uma interface de comando para o
       controlador de banda base e o gerenciador de liga&ccedil;&atilde;o, e acesso
       ao estado do hardware e registradores de controle.  Esta
       interface fornece um m&eacute;todo uniforme de acesso &agrave;s capacidades de
       banda base do Bluetooth.  A camada HCI no Sistema troca dados e
       comandos com o firmware HCI no hardware Bluetooth.  O
-      gerenciador da Camada de Transporte Controladora do Sistema 
-      - Host Controller Transport Layer - (barramento f&iacute;sico) fornece 
-      a ambas as camadas HCI a capacidade de trocar informa&ccedil;&otilde;es com 
+      gerenciador da Camada de Transporte Controladora do Sistema
+      - Host Controller Transport Layer - (barramento f&iacute;sico) fornece
+      a ambas as camadas HCI a capacidade de trocar informa&ccedil;&otilde;es com
       a outra.</para>
 
-      <para>Um &uacute;nico n&oacute; Netgraph do tipo <emphasis>hci</emphasis> &eacute; 
+      <para>Um &uacute;nico n&oacute; Netgraph do tipo <emphasis>hci</emphasis> &eacute;
       criado para um &uacute;nico dispositivo Bluetooth.  O n&oacute; HCI
       normalmente &eacute; conectado ao n&oacute; do gerenciador de dispositivo
       Bluetooth (downstream) e ao n&oacute; L2CAP (upstream).  Todas as
       opera&ccedil;&otilde;es HCI devem ser desempenhadas no n&oacute; HCI e n&atilde;o no n&oacute; do
-      gerenciador de dispositivo.  O nome padr&atilde;o para o n&oacute; HCI &eacute; 
+      gerenciador de dispositivo.  O nome padr&atilde;o para o n&oacute; HCI &eacute;
       <quote>devicehci</quote>.  Para maiores detalhes consulte a
       p&aacute;gina de manual &man.ng.hci.4;.</para>
 
@@ -1082,12 +1082,12 @@ Number of SCO packets: 8</screen>
       <para>Uma das tarefas mais comuns &eacute; o descobrimento de
       dispositivos Bluetooth nas proximidades de r&aacute;diofreq&uuml;&ecirc;ncia, RF.
       Esta opera&ccedil;&atilde;o chama-se <emphasis>investiga&ccedil;&atilde;o</emphasis>
-      (inquiry).  A investiga&ccedil;&atilde;o e outras opera&ccedil;&otilde;es relativas a HCI 
-      s&atilde;o feitas com o utilit&aacute;rio &man.hccontrol.8;.  O exemplo abaixo 
-      exibe como encontrar quais dispositivos Bluetooth est&atilde;o dentro 
-      de alcance.  Voc&ecirc; deve receber a lista de dispositivos em 
-      poucos segundos.  Note que um dispositivo remoto somente vai 
-      responder &agrave; investiga&ccedil;&atilde;o se estiver em modo 
+      (inquiry).  A investiga&ccedil;&atilde;o e outras opera&ccedil;&otilde;es relativas a HCI
+      s&atilde;o feitas com o utilit&aacute;rio &man.hccontrol.8;.  O exemplo abaixo
+      exibe como encontrar quais dispositivos Bluetooth est&atilde;o dentro
+      de alcance.  Voc&ecirc; deve receber a lista de dispositivos em
+      poucos segundos.  Note que um dispositivo remoto somente vai
+      responder &agrave; investiga&ccedil;&atilde;o se estiver em modo
       <emphasis>"encontr&aacute;vel"</emphasis> (discoverable).</para>
 
       <screen>&prompt.user; <userinput>hccontrol -n ubt0hci inquiry</userinput>
@@ -1104,10 +1104,10 @@ Inquiry complete.  Status: No error [00]</screen>
       <para>O <literal>BD_ADDR</literal> &eacute; o endere&ccedil;o &uacute;nico de um
       dispositivo Bluetooth, similar ao endere&ccedil;o MAC de uma placa de
       rede.  Este endere&ccedil;o &eacute; necess&aacute;rio para promover comunica&ccedil;&otilde;es com
-      um dispositivo.  &Eacute; poss&iacute;vel designar um nome leg&iacute;vel por humanos 
+      um dispositivo.  &Eacute; poss&iacute;vel designar um nome leg&iacute;vel por humanos
       a um BD_ADDR.  O arquivo <filename>/etc/bluetooth/hosts</filename>
       cont&eacute;m informa&ccedil;&atilde;o relativas aos sistemas Bluetooth conhecidos.
-      O seguinte exemplo mostra como obter um nome leg&iacute;vel por humanos 
+      O seguinte exemplo mostra como obter um nome leg&iacute;vel por humanos
       que foi designado a um dispositivo remoto.</para>
 
       <screen>&prompt.user; <userinput>hccontrol -n ubt0hci remote_name_request 00:80:37:29:19:a4</userinput>
@@ -1115,7 +1115,7 @@ BD_ADDR: 00:80:37:29:19:a4
 Name: Pav's T39</screen>
 
       <para>Se voc&ecirc; executar uma investiga&ccedil;&atilde;o em um dispositivo
-      Bluetooth remoto, ele ir&aacute; encontrar seu computador como 
+      Bluetooth remoto, ele ir&aacute; encontrar seu computador como
       <quote>nome.do.seu.sistema (ubt0)</quote>.  O nome designado
       para o dispositivo local pode ser trocado a qualquer hora.</para>
 
@@ -1152,7 +1152,7 @@ Reason: Connection terminated by local host [0x16]</screen>
       (L2CAP)</title>
 
       <para>O Protocolo de Controle L&oacute;gico da Liga&ccedil;&atilde;o e de Adapta&ccedil;&atilde;o
-      - Logical Link Control and Adaptation Protocol - (L2CAP), 
+      - Logical Link Control and Adaptation Protocol - (L2CAP),
       fornece servi&ccedil;os de dados orientados &agrave; conex&atilde;o e desconectados
       (connectionless) aos protocolos dos n&iacute;veis superiores com
       capacidade de multiplexa&ccedil;&atilde;o e opera&ccedil;&atilde;o de segmenta&ccedil;&atilde;o e
@@ -1160,7 +1160,7 @@ Reason: Connection terminated by local host [0x16]</screen>
       superiores e aplica&ccedil;&otilde;es transmitirem e receberem pacotes de
       dados L2CAP de at&eacute; 64 kilobytes de comprimento.</para>
 
-      <para>O L2CAP &eacute; baseado em torno do conceito de 
+      <para>O L2CAP &eacute; baseado em torno do conceito de
       <emphasis>channels</emphasis>.  Um canal &eacute; uma conex&atilde;o l&oacute;gica
       sobre uma conex&atilde;o de banda base.  Cada canal est&aacute; ligado a um
       &uacute;nico protocolo de modo muitos-para-um.  M&uacute;ltiplos canais podem
@@ -1171,9 +1171,9 @@ Reason: Connection terminated by local host [0x16]</screen>
 
       <para>Um &uacute;nico n&oacute; Netgraph do tipo <emphasis>l2cap</emphasis> &eacute;
       criado para um &uacute;nico dispositivo Bluetooth.  O n&oacute; L2CAP
-      geralmente &eacute; conectado a um n&oacute; Bluetooth HCI (downstream) e 
-      n&oacute;s de dispositivos de envio/recep&ccedil;&atilde;o (sockets) Bluetooth 
-      (upstream).  O nome padr&atilde;o para o n&oacute; L2CAP &eacute; 
+      geralmente &eacute; conectado a um n&oacute; Bluetooth HCI (downstream) e
+      n&oacute;s de dispositivos de envio/recep&ccedil;&atilde;o (sockets) Bluetooth
+      (upstream).  O nome padr&atilde;o para o n&oacute; L2CAP &eacute;
       <quote>devicel2cap</quote>.  Para maiores detalhes consulte a
       p&aacute;gina de manual &man.ng.l2cap.4;.</para>
 
@@ -1208,7 +1208,7 @@ Remote BD_ADDR    Handle Flags Pending State
       mas para estruturas de dados Bluetooth relacionadas &agrave; rede.  O
       exemplo abaixo mostra a mesma conex&atilde;o l&oacute;gica que
       &man.l2control.8;, acima.</para>
-      
+
 
       <screen>&prompt.user; <userinput>btsockstat</userinput>
 Active L2CAP sockets
@@ -1244,11 +1244,11 @@ c2e8bc80      0    250 00:02:72:00:d4:1a 00:07:e0:00:0b:ca 3    6    OPEN</scree
       de um dispositivo para outro (conex&atilde;o direta).</para>
 
       <para>O RFCOMM preocupa-se somente com o caso da conex&atilde;o direta
-      entre os dispositivos, ou com o caso de rede entre um 
+      entre os dispositivos, ou com o caso de rede entre um
       dispositivo e um modem.  O RFCOMM pode suportar outras
       configura&ccedil;&otilde;es, como m&oacute;dulos que comunicam-se via tecnologia sem
       fio Bluetooth em um lado, e fornecem uma interface cabeada na
-      outra ponta.</para>  
+      outra ponta.</para>
 
       <para>No &os; o protocolo RFCOMM &eacute; implementado na camada de
       sockets Bluetooth.</para>
@@ -1259,31 +1259,31 @@ c2e8bc80      0    250 00:02:72:00:d4:1a 00:07:e0:00:0b:ca 3    6    OPEN</scree
       <title>Uni&atilde;o de Dispositivos (Pairing)</title>
 
       <para>Por padr&atilde;o, a comunica&ccedil;&atilde;o Bluetooth n&atilde;o &eacute; autenticada e
-      qualquer dispositivo pode falar para qualquer outro 
+      qualquer dispositivo pode falar para qualquer outro
       dispositivo.  Um dispositivo Bluetooth (por exemplo, um telefone
       celular) pode escolher exigir autentica&ccedil;&atilde;o para fornecer um
       servi&ccedil;o particular (por exemplo, acesso discado).  A
-      autentica&ccedil;&atilde;o no Bluetooth &eacute; feita normalmente com 
+      autentica&ccedil;&atilde;o no Bluetooth &eacute; feita normalmente com
       <emphasis>c&oacute;digo PIN</emphasis>.  Um c&oacute;digo PIN &eacute; uma
       seq&uuml;&ecirc;ncia de caracteres ASCII de at&eacute; 16 caracteres de
       comprimento.  &Eacute; preciso que o usu&aacute;rio entre com o mesmo c&oacute;digo
       PIN em ambos os dispositivos.  Uma vez que o usu&aacute;rio entrou com
-      o c&oacute;digo PIN, ambos os dispositivos v&atilde;o gerar uma 
-      <emphasis>chave de liga&ccedil;&atilde;o (link key)</emphasis>.  Depois, a 
+      o c&oacute;digo PIN, ambos os dispositivos v&atilde;o gerar uma
+      <emphasis>chave de liga&ccedil;&atilde;o (link key)</emphasis>.  Depois, a
       chave de liga&ccedil;&atilde;o pode ser armazenada nos pr&oacute;prios dispositivos
       ou em um armazenamento persistente.  Da pr&oacute;xima vez, ambos os
-      dispositivos v&atilde;o usar a chave de liga&ccedil;&atilde;o previamente 
-      armazenada.  O procedimento acima descrito &eacute; chamada de 
-      <emphasis>uni&atilde;o (pairing)</emphasis>.  Note que se a chave de 
-      liga&ccedil;&atilde;o for perdida por qualquer dispositivo, ent&atilde;o a uni&atilde;o 
+      dispositivos v&atilde;o usar a chave de liga&ccedil;&atilde;o previamente
+      armazenada.  O procedimento acima descrito &eacute; chamada de
+      <emphasis>uni&atilde;o (pairing)</emphasis>.  Note que se a chave de
+      liga&ccedil;&atilde;o for perdida por qualquer dispositivo, ent&atilde;o a uni&atilde;o
       precisar&aacute; ser repetida.</para>
 
       <para>O daemon &man.hcsecd.8; &eacute; respons&aacute;vel por tratar todas as
       solicita&ccedil;&otilde;es de autentica&ccedil;&atilde;o Bluetooth.  O arquivo de
-      configura&ccedil;&atilde;o padr&atilde;o &eacute; 
+      configura&ccedil;&atilde;o padr&atilde;o &eacute;
       <filename>/etc/bluetooth/hcsecd.conf</filename>.  Abaixo &eacute;
-      mostrada uma se&ccedil;&atilde;o de exemplo para um telefone celular com o 
-      c&oacute;digo PIN configurado arbitrariamente para 
+      mostrada uma se&ccedil;&atilde;o de exemplo para um telefone celular com o
+      c&oacute;digo PIN configurado arbitrariamente para
       <quote>1234</quote>.</para>
 
 
@@ -1298,15 +1298,15 @@ c2e8bc80      0    250 00:02:72:00:d4:1a 00:07:e0:00:0b:ca 3    6    OPEN</scree
       <para>N&atilde;o h&aacute; limites em c&oacute;digos de PIN (exceto tamanho).  Alguns
       dispositivos (por exemplo, fones Bluetooth) podem ter um c&oacute;digo
       PIN fixo embutido.  O par&acirc;metro <option>-d</option> for&ccedil;a o
-      daemon &man.hcsecd.8; a se manter rodando em primeiro plano, 
+      daemon &man.hcsecd.8; a se manter rodando em primeiro plano,
       de forma que seja f&aacute;cil observar o que est&aacute; acontecendo.  Ajuste
       o dispositivo remoto para receber uni&atilde;o e iniciar a conex&atilde;o
       Bluetooth ao dispositivo remoto.  O dispositivo remoto deveria
       dizer que a uni&atilde;o foi aceita, e solicitar o c&oacute;digo PIN.  Entre o
-      mesmo c&oacute;digo PIN que voc&ecirc; tem em 
+      mesmo c&oacute;digo PIN que voc&ecirc; tem em
       <filename>hcsecd.conf</filename>.  Agora seu PC e o dispositivo
-      remoto est&atilde;o unidos.  Alternativamente, voc&ecirc; pode iniciar a 
-      uni&atilde;o no dispositivo remoto.  Abaixo, a amostra da sa&iacute;da do 
+      remoto est&atilde;o unidos.  Alternativamente, voc&ecirc; pode iniciar a
+      uni&atilde;o no dispositivo remoto.  Abaixo, a amostra da sa&iacute;da do
       comando <command>hcsecd</command>.</para>
 
 <programlisting>hcsecd[16484]: Got Link_Key_Request event from 'ubt0hci', remote bdaddr 0:80:37:29:19:a4
@@ -1342,10 +1342,10 @@ hcsecd[16484]: Sending PIN_Code_Reply to 'ubt0hci' for remote bdaddr 0:80:37:29:
       separada ao provedor para utiliz&aacute;-lo.  O SDP fornece um
       mecanismo para descoberta de servi&ccedil;os e seus atributos, mas n&atilde;o
       fornece um mecanismo para utiliza&ccedil;&atilde;o destes servi&ccedil;os.</para>
-      
+
       <para>Normalmente, um cliente SDP busca por servi&ccedil;os baseados em
       algumas caracter&iacute;sticas desejadas dos servi&ccedil;os.  Entretanto,
-      h&aacute; momentos nos quais &eacute; desej&aacute;vel descobrir quais tipos de 
+      h&aacute; momentos nos quais &eacute; desej&aacute;vel descobrir quais tipos de
       servi&ccedil;os est&atilde;o descritos por registros de servi&ccedil;o de um servidor
       SDP sem qualquer informa&ccedil;&atilde;o a priori sobre os mesmos.  ESte
       processo de procurar por quaisquer servi&ccedil;os oferecidos &eacute; chamado
@@ -1353,7 +1353,7 @@ hcsecd[16484]: Sending PIN_Code_Reply to 'ubt0hci' for remote bdaddr 0:80:37:29:
 
       <para>Atualmente, o client e o servidor SDP s&atilde;o implementados em
       uma pacote externo, <application>sdp-1.5</application>, que pode
-      ser copiado 
+      ser copiado
       <ulink url="http://www.geocities.com/m_evmenkin/">daqui</ulink>.
       O <application>sdptool</application> &eacute; um cliente SDP de linha
       de comando.  O seguinte exemplo mostra como executar uma
@@ -1385,8 +1385,8 @@ Protocol Descriptor List:
 
       <para>...e assim por diante.  Note que cada servi&ccedil;o tem uma lista
       de atributos (canal RFCOMM, por exemplo).  Dependendo do servi&ccedil;o
-      voc&ecirc; pode precisar anotar alguns dos atributos.  Algumas 
-      implementa&ccedil;&otilde;es Bluetooth n&atilde;o suportam navega&ccedil;&atilde;o nos servi&ccedil;os, 
+      voc&ecirc; pode precisar anotar alguns dos atributos.  Algumas
+      implementa&ccedil;&otilde;es Bluetooth n&atilde;o suportam navega&ccedil;&atilde;o nos servi&ccedil;os,
       e podem retornar uma lista vazia.  Neste caso, &eacute; poss&iacute;vel buscar
       pelo servi&ccedil;o espec&iacute;fico.  O exemplo abaixo mostra como buscar
       pelo servi&ccedil;o OBEX Object Push (OPUSH).</para>
@@ -1415,7 +1415,7 @@ Protocol Descriptor List:
     </sect2>
 
     <sect2>
-      <title>Perfis de Acesso discado (DUN) e Acesso &agrave; Rede com PPP 
+      <title>Perfis de Acesso discado (DUN) e Acesso &agrave; Rede com PPP
       (LAN)</title>
 
       <para>O perfil de acesso discado - Dial-Up Networking (DUN) - &eacute;
@@ -1425,7 +1425,7 @@ Protocol Descriptor List:
       <itemizedlist>
 	<listitem><para>uso de um telefone celular ou modem por um
 	computador como modem sem-fio (wireless) para conectar &agrave;
-	Internet atrav&eacute;s de um servidor de acesso discado, ou usar 
+	Internet atrav&eacute;s de um servidor de acesso discado, ou usar
 	outros servi&ccedil;os de acesso discado;</para></listitem>
 
 	<listitem><para>uso de um telefone celular ou modem por um
@@ -1443,7 +1443,7 @@ Protocol Descriptor List:
 	<listitem><para>Acesso &agrave; Rede Local para m&uacute;ltiplos
 	dispositivos Bluetooth;</para></listitem>
 
-	<listitem><para>PC a PC (usando rede PPP sobre emula&ccedil;&atilde;o de 
+	<listitem><para>PC a PC (usando rede PPP sobre emula&ccedil;&atilde;o de
 	cabo serial).</para></listitem>
       </itemizedlist>
 
@@ -1451,8 +1451,8 @@ Protocol Descriptor List:
       e &man.rfcomm.pppd.8; - uma cobertura (wrapper) que converte a
       conex&atilde;o Bluetooth RFCOMM em algo com o qual o PPP pode operar.
       Antes que qualquer perfil possa ser usado, um novo r&oacute;tulo PPP
-      deve ser criado em <filename>/etc/ppp/ppp.conf</filename>.  
-      Consulte a p&aacute;gina de manual &man.rfcomm.pppd.8; para ver 
+      deve ser criado em <filename>/etc/ppp/ppp.conf</filename>.
+      Consulte a p&aacute;gina de manual &man.rfcomm.pppd.8; para ver
       exemplos.</para>
 
       <para>No seguinte exemplo, &man.rfcomm.pppd.8; ser&aacute; usado para
@@ -1469,11 +1469,11 @@ Protocol Descriptor List:
       <para>Para fornecer o servi&ccedil;o de Acesso &agrave; Rede com PPP (LAN), o
       servidor <application>sdpd</application> deve estar sendo
       executado.  Tamb&eacute;m &eacute; necess&aacute;rio registrar o servi&ccedil;o de Rede
-      Local com o servidor SDP local.  Note que o servi&ccedil;o de rede 
+      Local com o servidor SDP local.  Note que o servi&ccedil;o de rede
       exige o atributo do canal RFCOMM.  Uma nova entrada para
       clientes da Rede Local precisa ser criada no arquivo
       <filename>/etc/ppp/ppp.conf</filename>.  Consulte a p&aacute;gina de
-      manual &man.rfcomm.pppd.8; para ver exemplos.  Finalmente, o 
+      manual &man.rfcomm.pppd.8; para ver exemplos.  Finalmente, o
       servidor PPP RFCOMM precisa estar rodando e ouvindo no mesmo
       canal RFCOMM como foi registrado com o servidor SDP local.  O
       exemplo abaixo mostra como iniciar o servidor PPP RFCOMM.</para>
@@ -1496,10 +1496,10 @@ Protocol Descriptor List:
 
       <para>O cliente e o servidor OBEX s&atilde;o implementados como pacotes
       de terceiros <application>obexapp-1.0</application> que pode ser
-      copiada 
+      copiada
       <ulink url="http://www.geocities.com/m_evmenkin/">daqui</ulink>.
         O pacote requer a biblioteca <application>openobex</application>
-	(j&aacute; inclu&iacute;da) e o port 
+	(j&aacute; inclu&iacute;da) e o port
 	<filename role="package">devel/glib12</filename>.  Note que
 	<application>obexapp</application> n&atilde;o requer privil&eacute;gios de
 	superusu&aacute;rio (root) para operar.</para>
@@ -1511,7 +1511,7 @@ Protocol Descriptor List:
       feito especificando-se o nome do servi&ccedil;o ao inv&eacute;s do n&uacute;mero do
       canal RFCOMM.  Nomes de dispositivos suportados s&atilde;o: IrMC, FTRN
       e OPUSH.  &Eacute; poss&iacute;vel especificar o canal RFCOMM como um n&uacute;mero.
-      Abaixo est&aacute; um exemplo de sess&atilde;o OBEX, onde o objeto de 
+      Abaixo est&aacute; um exemplo de sess&atilde;o OBEX, onde o objeto de
       informa&ccedil;&atilde;o do dispositivo &eacute; copiado do telefone celular e, um
       novo objeto (cart&atilde;o de visita) &eacute; remetido &agrave; agenda do
       telefone.</para>
@@ -1601,7 +1601,7 @@ rfcomm_sppd[94692]: Starting on /dev/ttyp6...</screen>
 	<title>Algo est&aacute; errado, posso ver o que exatamente est&aacute;
 	acontecendo?</title>
 
-	<para>Sim, voc&ecirc; pode. Use o pacote de terceiros 
+	<para>Sim, voc&ecirc; pode. Use o pacote de terceiros
 	<application>hcidump-1.5</application>, que pode ser copiado
 	<ulink url="http://www.geocities.com/m_evmenkin/">daqui</ulink>.
 	  O utilit&aacute;rio <application>hcidump</application> &eacute; similar ao
@@ -1670,11 +1670,11 @@ rfcomm_sppd[94692]: Starting on /dev/ttyp6...</screen>
 
 	<para>Se o os usu&aacute;rios do Editorial pudessem ser segregados em
 	um segmento de rede e os usu&aacute;rios da Produ&ccedil;&atilde;o em outra, ambos
-	segmentos de rede podem ser conectador com uma liga&ccedil;&atilde;o.  Somente 
-	o tr&aacute;fego destinado a interfaces no <quote>outro</quote> 
+	segmentos de rede podem ser conectador com uma liga&ccedil;&atilde;o.  Somente
+	o tr&aacute;fego destinado a interfaces no <quote>outro</quote>
 	lado da liga&ccedil;&atilde;o poderia ser enviado para a outra rede,
 	reduzindo a congest&atilde;o em cada segmento de rede.</para>
-	
+
       </sect3>
 
       <sect3>
@@ -1687,9 +1687,9 @@ rfcomm_sppd[94692]: Starting on /dev/ttyp6...</screen>
 	(NAT).</para>
 
 	<para>Um exemplo &eacute; uma pequena companhia conectada via DSL ou
-	ISDN ao seu PSI.  Eles possuem 13 endere&ccedil;os IP de seu PSI 
-	globalmente acess&iacute;veis e 10 PCs em sua rede.  Nesta situa&ccedil;&atilde;o, 
-	&eacute; dif&iacute;cil usar um firewall baseado em roteador por quest&otilde;es 
+	ISDN ao seu PSI.  Eles possuem 13 endere&ccedil;os IP de seu PSI
+	globalmente acess&iacute;veis e 10 PCs em sua rede.  Nesta situa&ccedil;&atilde;o,
+	&eacute; dif&iacute;cil usar um firewall baseado em roteador por quest&otilde;es
 	de divis&otilde;es de subrede.</para>
 
 	<indexterm><primary>router</primary></indexterm>
@@ -1735,14 +1735,14 @@ rfcomm_sppd[94692]: Starting on /dev/ttyp6...</screen>
 	<title>Suporte a Firewall</title>
 	<indexterm><primary>firewall</primary></indexterm>
 	<para>Se voc&ecirc; estiver planejando usar a ponte como firewall,
-	voc&ecirc; tamb&eacute;m vai precisar adicionar a op&ccedil;&atilde;o 
+	voc&ecirc; tamb&eacute;m vai precisar adicionar a op&ccedil;&atilde;o
 	<varname>IPFIREWALL</varname>.  Leia <xref
 	linkend="firewalls"> para informa&ccedil;&otilde;es gerais sobre
 	configura&ccedil;&atilde;o de ponte como firewall.</para>
 
 	<para>Se precisar permitir pacotes n&atilde;o-IP (como ARP)
 	trafegarem atrav&eacute;s da ponte, h&aacute; uma op&ccedil;&atilde;o n&atilde;o documentada de
-	firewall que precisa ser ativada.  Esta op&ccedil;&atilde;o &eacute; 
+	firewall que precisa ser ativada.  Esta op&ccedil;&atilde;o &eacute;
 	<literal>IPFIREWALL_DEFAULT_TO_ACCEPT</literal>.  Note que
 	isto altera a regra padr&atilde;o para que o firewall aceite qualquer
 	pacote.  Certifique-se de que compreende como isto muda o
@@ -1753,7 +1753,7 @@ rfcomm_sppd[94692]: Starting on /dev/ttyp6...</screen>
 	<title>Suporte a Formata&ccedil;&atilde;o de Tr&aacute;fego (Traffic Shaping)</title>
 
 	<para>Se voc&ecirc; desejar usar a ponte como formatador de tr&aacute;fego,
-	voc&ecirc; vai precisar adicionar a op&ccedil;&atilde;o <literal>DUMMYNET</literal> 
+	voc&ecirc; vai precisar adicionar a op&ccedil;&atilde;o <literal>DUMMYNET</literal>
 	&agrave; sua configura&ccedil;&atilde;o de kernel.  Leia &man.dummynet.4; para
 	maiores informa&ccedil;&otilde;es.</para>
       </sect3>
@@ -2941,26 +2941,26 @@ Exports list on foobar:
       tanto usando um kernel contendo PPP com isppp - um driver
       modificado a partir do sppp - ou usando o comando de usu&aacute;rio
       &man.ppp.8;.  Usando o comando &man.ppp.8;, &eacute; poss&iacute;vel agregar
-      dois ou mais canais B ISDN.  Uma aplica&ccedil;&atilde;o de secret&aacute;ria 
+      dois ou mais canais B ISDN.  Uma aplica&ccedil;&atilde;o de secret&aacute;ria
       eletr&ocirc;nica telef&ocirc;nica tamb&eacute;m est&aacute; dispon&iacute;vel, bem como muitos
       utilit&aacute;rios, como um modem de 300 Baud em software.</para>
 
-      <para>Um crescente n&uacute;mero de placas ISDN para PC s&atilde;o suportadas 
-      pelo FreeBSD e os relatos mostram que ele &eacute; usado com sucesso por 
+      <para>Um crescente n&uacute;mero de placas ISDN para PC s&atilde;o suportadas
+      pelo FreeBSD e os relatos mostram que ele &eacute; usado com sucesso por
       toda a Europa e em muitas outras partes do mundo.</para>
 
       <para>As placas ISDN passivas suportadas s&atilde;o na maioria as que
-      possuem os chipsets Infineon (anteriormente Siemens) ISAC/HSCX/IPAC, 
+      possuem os chipsets Infineon (anteriormente Siemens) ISAC/HSCX/IPAC,
       mas tamb&eacute;m placas ISDN com chips da Cologne Chip (somente
       barramento ISA), placas PCI com chips Winbond W6692, algumas
       placas com combina&ccedil;&otilde;es do chipset Tiger300/320/ISAC e algumas
-      placas com chipsets de fabricantes espec&iacute;ficos como as placas 
+      placas com chipsets de fabricantes espec&iacute;ficos como as placas
       AVM Fritz!Card PCI V.1.0 e a AVM Fritz!Card PnP.</para>
 
-      <para>Atualmente as placas ISDN ativas suportadas s&atilde;o as 
+      <para>Atualmente as placas ISDN ativas suportadas s&atilde;o as
       AVM B1 (ISA e PCI) e as AVM T1 PCI PRI.</para>
 
-      <para>Para documenta&ccedil;&atilde;o sobre 
+      <para>Para documenta&ccedil;&atilde;o sobre
       <application>isdn4bsd</application>, veja o diret&oacute;rio
       <filename>/usr/share/examples/isdn/</filename> em seu sistema
       FreeBSD ou em <ulink url="http://www.freebsd-support.de/i4b/">
@@ -2976,7 +2976,7 @@ Exports list on foobar:
       com &a.hm;.</para>
 
       <para>Para quest&otilde;es referentes &agrave; instala&ccedil;&atilde;o, configura&ccedil;&atilde;o e
-      resolu&ccedil;&atilde;o de problemas com <application>isdn4bsd</application>, 
+      resolu&ccedil;&atilde;o de problemas com <application>isdn4bsd</application>,
       est&aacute; dispon&iacute;vel uma lista de discuss&atilde;o &a.isdn.name;.</para>
     </sect2>
 
@@ -2992,7 +2992,7 @@ Exports list on foobar:
       <para>Um AT vai operar basicamente da mesma forma que um modem
       exceto pelas velocidades de conex&atilde;o e vaz&atilde;o ser&atilde;o muito mais
       r&aacute;pidas que seu antigo modem.  Voc&ecirc; vai precisar configurar o
-      <link linkend="ppp">PPP</link> extamente da mesma forma que 
+      <link linkend="ppp">PPP</link> extamente da mesma forma que
       configura um modem.  Certifique-se de configurar a velocidade
       serial para a maior poss&iacute;vel.</para>
       <indexterm><primary>PPP</primary></indexterm>
@@ -3011,7 +3011,7 @@ Exports list on foobar:
       experimentou com o programa PPP ir&atilde;o persistir.</para>
 
       <para>Se voc&ecirc; quer estabilidade m&aacute;xima, use a opc&atilde;o de kernel
-      <link linkend="ppp">PPP</link>, n&atilde;o o 
+      <link linkend="ppp">PPP</link>, n&atilde;o o
       <link linkend="userppp">iijPPP</link> de contexto de usu&aacute;rio.
       </para>
 
@@ -3175,8 +3175,8 @@ ISDN BRI line</literallayout>
       </example>
 
       <para>Uma grande vantagem da maioria dos roteadores/pontes &eacute; que
-      eles lhe permitem ter 2 conex&otilde;es PPP <emphasis>separadas e 
-      independentes</emphasis> a 2 s&iacute;tios separados ao 
+      eles lhe permitem ter 2 conex&otilde;es PPP <emphasis>separadas e
+      independentes</emphasis> a 2 s&iacute;tios separados ao
       <emphasis>mesmo</emphasis> tempo.  Isto n&atilde;o &eacute; suportado na
       maioria dos ATs, exceto em modelos espec&iacute;ficos (geralmente
       caros) que possuem duas portas seriais.  N&atilde;o confundir isto com
@@ -3186,7 +3186,7 @@ ISDN BRI line</literallayout>
       exemplo, voc&ecirc; possuir uma conex&atilde;o ISDN dedicada em seu
       escrit&oacute;rio e desejar se conectar atrav&eacute;s dela, mas n&atilde;o quer ter
       mais uma linha ISDN no trabalho.  Um roteador no local do
-      escrit&oacute;rio pode gerenciar uma conex&atilde;o dedicada de canal B 
+      escrit&oacute;rio pode gerenciar uma conex&atilde;o dedicada de canal B
       (64&nbsp;Kbps) para a Internet e usar o outro canal B para uma
       conex&atilde;o de dados separada.  O segundo canal B pode ser usado
       para receber ou realizar acesso discado ou agrega&ccedil;&atilde;o din&acirc;mica
@@ -4576,8 +4576,8 @@ nis_client_flags="-S <replaceable>NIS domain</replaceable>,<replaceable>server</
 	<primary>Internet Software Consortium (ISC)</primary>
       </indexterm>
 
-      <para>DHCP, o Protocolo de Configura&ccedil;&atilde;o Din&acirc;mica de Servidor (Dynamic 
-      Host Configuration Protocol, Descreve os meios pelo qual um sistema 
+      <para>DHCP, o Protocolo de Configura&ccedil;&atilde;o Din&acirc;mica de Servidor (Dynamic
+      Host Configuration Protocol, Descreve os meios pelo qual um sistema
       pode se conectar a uma rede e obter a informa&ccedil;&atilde;o necess&aacute;ria para
       comunica&ccedil;&atilde;o naquela rede.  O FreeBSD usa a implementa&ccedil;&atilde;o de DHCP
       da ISC (Internet Systems Consortium), ent&atilde;o toda informa&ccedil;&atilde;o
@@ -4588,9 +4588,9 @@ nis_client_flags="-S <replaceable>NIS domain</replaceable>,<replaceable>server</
     <sect2>
       <title>O Que Esta Se&ccedil;&atilde;o Cobre</title>
 
-      <para>Esta se&ccedil;&atilde;o descreve os componentes cliente e servidor do sistema 
-      DHCP da ISC.  O programa cliente, <command>dhclient</command>, j&aacute; vem 
-      integrado no FreeBSD e a parte servidor est&aacute; dispon&iacute;vel do port 
+      <para>Esta se&ccedil;&atilde;o descreve os componentes cliente e servidor do sistema
+      DHCP da ISC.  O programa cliente, <command>dhclient</command>, j&aacute; vem
+      integrado no FreeBSD e a parte servidor est&aacute; dispon&iacute;vel do port
       <filename role="package">net/isc-dhcp3</filename>.  As p&aacute;ginas
       de manual &man.dhclient.8;, &man.dhcp-options.5;, e
       &man.dhclient.conf.5;, adicionalmente &agrave;s refer&ecirc;ncias dispon&iacute;veis
@@ -4601,8 +4601,8 @@ nis_client_flags="-S <replaceable>NIS domain</replaceable>,<replaceable>server</
       <title>Como Funciona</title>
       <indexterm><primary>UDP</primary></indexterm>
       <para>Quando o <command>dhclient</command>, o cliente DHCP, &eacute;
-	executado na m&aacute;quina cliente, ele come&ccedil;a a transmiss&atilde;o por 
-	difus&atilde;o de requisi&ccedil;&otilde;es de informa&ccedil;&otilde;es de configura&ccedil;&atilde;o.  Por 
+	executado na m&aacute;quina cliente, ele come&ccedil;a a transmiss&atilde;o por
+	difus&atilde;o de requisi&ccedil;&otilde;es de informa&ccedil;&otilde;es de configura&ccedil;&atilde;o.  Por
 	padr&atilde;o, estas solicita&ccedil;&otilde;es est&atilde;o s&atilde;o na porta UDP 68.  O
 	servidor responde na UDP 67, dando ao cliente um endere&ccedil;o IP e
 	outras informa&ccedil;&otilde;es de rede, como a m&aacute;scara de rede, roteador e
@@ -4622,7 +4622,7 @@ nis_client_flags="-S <replaceable>NIS domain</replaceable>,<replaceable>server</
       <title>Integra&ccedil;&atilde;o com o FreeBSD</title>
 
       <para>O FreeBSD integra totalmente o cliente DHCP da ISC, o
-      <command>dhclient</command>.  O suporte ao cliente DHCP &eacute; 
+      <command>dhclient</command>.  O suporte ao cliente DHCP &eacute;
       fornecido tanto no instalador quanto no sistema base,
       evitando a necessidade de conhecimento detalhado das
       configura&ccedil;&otilde;es em qualquer rede que tenha um servidor
@@ -4632,14 +4632,14 @@ nis_client_flags="-S <replaceable>NIS domain</replaceable>,<replaceable>server</
 	  <primary><application>sysinstall</application></primary>
 	</indexterm>
 
-	<para>O DHCP &eacute; suportado pelo 
+	<para>O DHCP &eacute; suportado pelo
 	<application>sysinstall</application>.  Quando configurar
 	uma interface de rede atrav&eacute;s do sysinstall, a primeira
 	pergunta feita &eacute;, <quote>Do you want to try DHCP configuration
 	of this interface? ("Voc&ecirc; deseja tentar configura&ccedil;&atilde;o DHCP
 	nesta interface?")</quote> Respondendo afirmativamente, ser&aacute;
 	executado o <command>dhclient</command>, e se funcionar, as
-	informa&ccedil;&otilde;es da configura&ccedil;&atilde;o de rede ser&atilde;o preenchidas 
+	informa&ccedil;&otilde;es da configura&ccedil;&atilde;o de rede ser&atilde;o preenchidas
 	automaticamente.</para>
 
 	<para>Existem duas coisas que voc&ecirc; precisa fazer para ter seu
@@ -4650,7 +4650,7 @@ nis_client_flags="-S <replaceable>NIS domain</replaceable>,<replaceable>server</
 	</indexterm>
 	<itemizedlist>
 	  <listitem>
-	    <para>Certifique-se de que o dispositivo 
+	    <para>Certifique-se de que o dispositivo
 	    <devicename>bpf</devicename> est&aacute; compilado no seu kernel.
 	    Para fazer isso, adicione o <literal>pseudo-device bpf</literal>
 	    no seu arquivo de configura&ccedil;&atilde;o do kernel e reconstrua o
@@ -4663,7 +4663,7 @@ nis_client_flags="-S <replaceable>NIS domain</replaceable>,<replaceable>server</
 	    voc&ecirc; n&atilde;o precisa criar um para ter o DHCP funcionando.</para>
 	    <note>
 	      <para>Para os que s&atilde;o particularmente preocupados com
-	      seguran&ccedil;a, voc&ecirc; deve estar ciente de que o 
+	      seguran&ccedil;a, voc&ecirc; deve estar ciente de que o
 	      <devicename>bpf</devicename> tamb&eacute;m &eacute; o dispositivo que
 	      permite o funcionamento correto de analizadores de pacotes
 	      (embora ainda precisem ser executados pelo usu&aacute;rio
@@ -4683,7 +4683,7 @@ nis_client_flags="-S <replaceable>NIS domain</replaceable>,<replaceable>server</
 	    <programlisting>ifconfig_fxp0="DHCP"</programlisting>
 
 	    <note>
-	      <para>Certifique-se de substituir 
+	      <para>Certifique-se de substituir
 	      <literal>fxp0</literal> pela designa&ccedil;&atilde;o da interface que
 	      voc&ecirc; deseja configurar automaticamente, como desccrito
 	      em <xref linkend="config-network-setup">.</para>
@@ -4704,7 +4704,7 @@ dhcp_flags=""</programlisting>
 	  <secondary>server</secondary>
 	</indexterm>
 	<para>O servidor DHCP, <command>dhcpd</command>, &eacute; inclu&iacute;do
-	como parte do port 
+	como parte do port
 	<filename role="package">net/isc-dhcp3</filename> na cole&ccedil;&atilde;o
 	de ports.  Este port contem a distribui&ccedil;&atilde;o completa do DHCP da
 	ISC, contendo o cliente, servidor, agente de relay e
@@ -4728,7 +4728,7 @@ dhcp_flags=""</programlisting>
 
 	<listitem><para><filename>/sbin/dhclient</filename></para>
 	  <para>O <command>dhclient</command> &eacute; compilado estaticamente e
-	    reside em <filename>/sbin</filename>.  A p&aacute;gina de manual 
+	    reside em <filename>/sbin</filename>.  A p&aacute;gina de manual
 	    &man.dhclient.8; fornece mais informa&ccedil;&otilde;es sobre o
 	    <command>dhclient</command>.</para>
 	</listitem>
@@ -4738,7 +4738,7 @@ dhcp_flags=""</programlisting>
 	  configura&ccedil;&atilde;o do cliente DHCP espec&iacute;fico do FreeBSD.  &Eacute;
 	  descrito em &man.dhclient-script.8;, mas voc&ecirc; n&atilde;o deve
 	  precisar de qualquer modifica&ccedil;&atilde;o de usu&aacute;rio para seu
-	  funcionamento. 
+	  funcionamento.
 	</listitem>
 
 	<listitem><para><filename>/var/db/dhclient.leases</filename></para>
@@ -4753,9 +4753,9 @@ dhcp_flags=""</programlisting>
     <sect2>
       <title>Leitura Complementar</title>
 
-      <para>O protocolo DHCP &eacute; descrito totalmente na 
+      <para>O protocolo DHCP &eacute; descrito totalmente na
       <ulink url="http://www.freesoft.org/CIE/RFC/2131/">RFC 2131</ulink>.
-      Um recurso de informa&ccedil;&otilde;es tamb&eacute;m foi montado em 
+      Um recurso de informa&ccedil;&otilde;es tamb&eacute;m foi montado em
       <ulink url="http://www.dhcp.org/">dhcp.org</ulink>.</para>
     </sect2>
 
@@ -4770,7 +4770,7 @@ dhcp_flags=""</programlisting>
 	  implementa&ccedil;&atilde;o da ISC da su&iacute;te DHCP.</para>
 
 	  <para>A parte servidora da su&iacute;te n&atilde;o &eacute; fornecida no
-	  FreeBSD, ent&atilde;o voc&ecirc; vai precisar instalar o port 
+	  FreeBSD, ent&atilde;o voc&ecirc; vai precisar instalar o port
 	  <filename role="package">net/isc-dhcp3</filename> para
 	  ativar este servi&ccedil;o.  Veja <xref linkend="ports"> para mais
 	  informa&ccedil;&otilde;es sobre uso da cole&ccedil;&atilde;o de ports.</para>
@@ -4787,7 +4787,7 @@ dhcp_flags=""</programlisting>
 	  dispositivo &man.bpf.4; esst&aacute; compilado no seu kernel.  Para
 	  isto, adicione o <literal>pseudo-device bpf</literal> ao seu
 	  arquivo de configura&ccedil;&atilde;o do kernel e reconstrua o kernel.
-	  Para mais informa&ccedil;&otilde;es sobre constru&ccedil;&atilde;o de kernels, veja 
+	  Para mais informa&ccedil;&otilde;es sobre constru&ccedil;&atilde;o de kernels, veja
 	  <xref linkend="kernelconfig">.</para>
 
 	  <para>O dispositivo <devicename>bpf</devicename> j&aacute; &eacute; parte
@@ -4797,14 +4797,14 @@ dhcp_flags=""</programlisting>
 
 	    <note>
 	      <para>Aqueles particularmente preocupados com
-	      seguran&ccedil;a, devem observar que o 
+	      seguran&ccedil;a, devem observar que o
 	      <devicename>bpf</devicename> tamb&eacute;m &eacute; o dispositivo que
 	      permite aos analizadores de pacotes executarem seu
 	      trabalho (apesar de tais programas precisarem de acesso
-	      privilegiado).  O <devicename>bpf</devicename> 
+	      privilegiado).  O <devicename>bpf</devicename>
 	      <emphasis>&eacute;</emphasis> exigido para uso do DHCP, mas se
 	      voc&ecirc; &eacute; muito preocupado com quest&otilde;es de seguran&ccedil;a, voc&ecirc;
-	      provavelmente n&atilde;o deve incluir o 
+	      provavelmente n&atilde;o deve incluir o
 	      <devicename>bpf</devicename>em seu kernel simplesmente
 	      por supor que vai usar DHCP em algum momento no futuro.</para>
 	    </note>
@@ -4876,14 +4876,14 @@ host mailhost {
 	      <para>Este &eacute; o maior per&iacute;odo de tempo permitido que o
 	      servidor dever&aacute; permitir um arrendamento.  Se um cliente
 	      solicitar um per&iacute;odo maior, um arrendamento ser&aacute;
-	      efetuado, entretanto, ser&aacute; v&aacute;lido somente por 
+	      efetuado, entretanto, ser&aacute; v&aacute;lido somente por
 	      <literal>max-lease-time</literal> segundos.</para>
 	    </callout>
 
 	    <callout arearefs="ddns-update-style">
 	      <para>Esta op&ccedil;&atilde;o especifica se o servidor DHCP dever&aacute;
 	      tentar atualizar o DNS quando um arrendamento &eacute; aceito
-	      ou devolvido.   Na implementa&ccedil;&atilde;o da ISC, esta op&ccedil;&atilde;o &eacute; 
+	      ou devolvido.   Na implementa&ccedil;&atilde;o da ISC, esta op&ccedil;&atilde;o &eacute;
 	      <emphasis>obrigat&oacute;ria</emphasis>.</para>
 	    </callout>
 
@@ -4901,7 +4901,7 @@ host mailhost {
 
 	    <callout arearefs="hardware">
 	      <para>O endere&ccedil;o MAC de um sistema (de forma que o
-	      servidor DHCP possa reconhec&ecirc;-lo quando dele receber 
+	      servidor DHCP possa reconhec&ecirc;-lo quando dele receber
 	      uma solicita&ccedil;&atilde;o).</para>
 	    </callout>
 
@@ -4909,21 +4909,21 @@ host mailhost {
 	      <para>Especifica que o sistema sempre deve receber o
 	      mesmo endere&ccedil;o IP.  Note que um hostname funciona aqui,
 	      desde que o servidor DHCP seja capaz de resolver o
-	      nome via DNS antes de responder &agrave; solicita&ccedil;&atilde;o com as 
+	      nome via DNS antes de responder &agrave; solicita&ccedil;&atilde;o com as
 	      informa&ccedil;&otilde;es do arrendamento.</para>
 	    </callout>
 	  </calloutlist>
 
-	  <para>Quando voc&ecirc; terminar de escrever o seu 
+	  <para>Quando voc&ecirc; terminar de escrever o seu
 	  <filename>dhcpd.conf</filename> voc&ecirc; pode dar
-	  prosseguimento, iniciando o servidor com o seguinte 
+	  prosseguimento, iniciando o servidor com o seguinte
 	  comando:</para>
 
 	  <screen>&prompt.root; <userinput>/usr/local/etc/rc.d/isc-dhcpd.sh start</userinput></screen>
 
 	  <para>Se futuramente voc&ecirc; precisar realizar altera&ccedil;&otilde;es na
 	  configura&ccedil;&atilde;o de seu servidor, &eacute; importante notar que enviar
-	  um sinal<literal>SIGHUP</literal> para o 
+	  um sinal<literal>SIGHUP</literal> para o
 	  <application>dhcpd</application> <emphasis>not</emphasis>
 	  vai recarregar as configura&ccedil;&otilde;es, como na maioria dos
 	  daemons.  Voc&ecirc; precisa enviar um sinal
@@ -4939,8 +4939,8 @@ host mailhost {
 	  </indexterm>
 	  <itemizedlist>
 	    <listitem><para><filename>/usr/local/sbin/dhcpd</filename></para>
-	      <para>O <application>dhcpd</application> &eacute; 
-	      compilado estaticamente e reside em 
+	      <para>O <application>dhcpd</application> &eacute;
+	      compilado estaticamente e reside em
 	      <filename>/usr/local/sbin</filename>.  A p&aacute;gina de
 	      manual &man.dhcpd.8; instalada com o port fornece mais
 	      informa&ccedil;&otilde;es sobre o
@@ -4987,113 +4987,110 @@ host mailhost {
 	<author>
 	  <firstname>Chern</firstname>
 	  <surname>Lee</surname>
-	  <contrib>Contributed by </contrib>
+	  <contrib>Contribu&iacute;do por</contrib>
 	</author>
       </authorgroup>
     </sect1info>
     <title>DNS</title>
 
     <sect2>
-      <title>Overview</title>
+      <title>Vis&atilde;o Geral</title>
       <indexterm><primary>BIND</primary></indexterm>
 
-      <para>FreeBSD utilizes, by default, a version of BIND (Berkeley
-	Internet Name Domain), which is the most common implementation of the
-	DNS protocol.  DNS is the protocol through which names are mapped to
-	IP addresses, and vice versa.  For example, a query for
-	<hostid>www.FreeBSD.org</hostid>
-	will receive a reply with the IP address of The FreeBSD Project's
-	web server, whereas, a query for <hostid>ftp.FreeBSD.org</hostid>
-	will return the IP
-	address of the corresponding FTP machine.  Likewise, the opposite can
-	happen.  A query for an IP address can resolve its hostname.  It is
-	not necessary to run a name server to perform DNS lookups on a system.
-</para>
+      <para>O FreeBSD usa, por padr&atilde;o, uma vers&atilde;o do BIND (Berkeley
+      Internet Name Domain), que &eacute; a implementa&ccedil;&atilde;o mais comum do
+      protocolo DNS.  O DNS &eacute; o protocolo pelo qual nomes s&atilde;o mapeados
+      para endere&ccedil;os IP e vice-versa.  Por exemplo, uma pergunta por
+      <hostid>www.FreeBSD.org</hostid> receber&aacute; uma resposta com o
+      endere&ccedil;o IP do servidor web do Projeto FreeBSD, ao passo que,
+      uma pergunta por <hostid>ftp.FreeBSD.org</hostid> retornar&aacute; o
+      endere&ccedil;o IP da maaquina FTP correspondente.  Da mesma forma, o
+      oposto pode ocorrer.  Uma pergunta pelo endere&ccedil;o IP pode
+      resolver seu nome de sistema.  N&atilde;o &eacute; necess&aacute;rio rodar um
+      servidor de nomes para efetuar pesquisas DNS em um sistema.</para>
 
       <indexterm><primary>DNS</primary></indexterm>
-      <para>DNS is coordinated across the Internet through a somewhat
-	complex system of authoritative root name servers, and other
-	smaller-scale name servers who host and cache individual domain
-	information.
-</para>
 
-      <para>
-	This document refers to BIND 8.x, as it is the stable version
-	used in FreeBSD.  BIND 9.x in FreeBSD can be installed through
-	the <filename role="package">net/bind9</filename> port.
-</para>
+      <para>O DNS &eacute; coordenado atrav&eacute;s da Internet atrav&eacute;s de um
+      sistema um tanto complexo de servidores de nome raiz
+      autoritativos, e outros servidores de nome de menor escala que
+      abrigam e fazem cache de informa&ccedil;&otilde;es de dom&iacute;nios individuais.</para>
 
-      <para>
-	RFC1034 and RFC1035 dictate the DNS protocol.
-</para>
+      <para>Este documento refere-se ao BIND 8.x, como ele &eacute; a vers&atilde;o
+      est&aacute;vel usada no FreeBSD.  O BIND 9.x no FreeBSD pode ser
+      instalado atrav&eacute;s do port
+      <filename role="package">net/bind9</filename>.</para>
 
-      <para>
-	Currently, BIND is maintained by the <ulink
-	url="http://www.isc.org/">
-	Internet Software Consortium (www.isc.org)</ulink>.
-</para>
+      <para>As RFC1034 e RFC1035 ditam o protocolo DNS.</para>
+
+      <para>Atualmente, o BIND &eacute; mantido pelo
+      <ulink url="http://www.isc.org/">Internet Software Consortium
+      (www.isc.org)</ulink>.</para>
     </sect2>
 
     <sect2>
-      <title>Terminology</title>
+      <title>Terminologia</title>
 
-      <para>To understand this document, some terms related to DNS must be
-	understood.</para>
+      <para>Para compreender este documento, alguns termos relativos
+      ao DNS precisam ser entendidos.</para>
 
       <informaltable frame="none">
 	<tgroup cols="2">
 	  <thead>
 	    <row>
-	      <entry>Term</entry>
-	      <entry>Definition</entry>
+	      <entry>Termo</entry>
+	      <entry>Defini&ccedil;&atilde;o</entry>
 	    </row>
 	  </thead>
 
 	  <tbody>
 	    <row>
-	      <entry>Forward DNS</entry>
-	      <entry>Mapping of hostnames to IP addresses</entry>
+	      <entry>DNS Direto</entry>
+	      <entry>Mapeamento de nomes para endere&ccedil;os IP</entry>
 	    </row>
 
 	    <row>
-	      <entry>Origin</entry>
-	      <entry>Refers to the domain covered in a particular zone
-		file</entry>
+	      <entry>Origem</entry>
+	      <entry>Refere-se ao dom&iacute;nio abrangido em um determinado
+	      arquivo de zona</entry>
 	    </row>
 
 	    <row>
-	      <entry><application>named</application>, BIND, name server</entry>
-	      <entry>Common names for the BIND name server package within
-		FreeBSD</entry>
+	      <entry><application>named</application>, BIND, servidor
+	      de nome</entry>
+	      <entry>Nomes comuns para o pacote do servidor de nomes
+	      BIND, incluso no FreeBSD</entry>
 	    </row>
 
 	    <indexterm><primary>resolver</primary></indexterm>
 	    <row>
 	      <entry>Resolver</entry>
-	      <entry>A system process through which a
-		machine queries a name server for zone information</entry>
+	      <entry>Um processo do sistema atrav&eacute;s do qual uma
+	      m&aacute;quina pesquisa num servidor de nomes por informa&ccedil;&otilde;es
+	      sobre zonas</entry>
 	    </row>
 
 	    <indexterm><primary>reverse DNS</primary></indexterm>
 	    <row>
-	      <entry>Reverse DNS</entry>
-	      <entry>The opposite of forward DNS; mapping of IP addresses to
-		hostnames</entry>
+	      <entry>DNS reverso</entry>
+	      <entry>O oposto do DNS direto; mapeamento de endere&ccedil;os
+	      IP para nomes</entry>
 	    </row>
 
 	    <indexterm><primary>root zone</primary></indexterm>
 	    <row>
-	      <entry>Root zone</entry>
+	      <entry>Zona Raiz (Root zone)</entry>
 
-	      <entry>The beginning of the Internet zone hierarchy.
-		All zones fall under the root zone, similar to how
-		all files in a file system fall under the root directory.</entry>
+	      <entry>O in&iacute;cio da hierarquia de zona da Internet. Todas
+	      as zonas reacem sob a zona raiz, similar a como todos os
+	      arquivos em um sistema de arquivos localizam-se abaixo do
+	      diret&oacute;rio raiz.</entry>
 	    </row>
 
 	    <row>
-	      <entry>Zone</entry>
-	      <entry>An individual domain, subdomain, or portion of the DNS administered by
-		the same authority</entry>
+	      <entry>Zona</entry>
+	      <entry>Um dom&iacute;nio individual, subdom&iacute;nio, ou parte de um
+	      DNS administrado por uma mesma autoridade</entry>
 	    </row>
 	  </tbody>
 	</tgroup>
@@ -5104,172 +5101,179 @@ host mailhost {
 	<secondary>examples</secondary>
       </indexterm>
 
-      <para>Examples of zones:
+      <para>Exemplos de zonas:
 </para>
       <itemizedlist>
 	<listitem>
-	  <para><hostid>.</hostid> is the root zone</para>
+	  <para><hostid>.</hostid> &eacute; a zona raiz</para>
 	</listitem>
 	<listitem>
-	  <para><hostid>org.</hostid> is a zone under the root zone</para>
+	  <para><hostid>org.</hostid> &eacute; a zona sob a zona raiz</para>
 	</listitem>
 	<listitem>
-	  <para><hostid>example.org</hostid> is a zone under the
-	  <hostid>org.</hostid> zone</para>
+	  <para><hostid>exemplo.org</hostid> &eacute; a zona sob a zona
+	  <hostid>org.</hostid></para>
 	</listitem>
 	<listitem>
-	  <para><hostid>foo.example.org.</hostid> is a subdomain, a
-	    zone under the <hostid>example.org.</hostid> zone</para>
+	  <para><hostid>foo.exemplo.org.</hostid> &eacute; um subdom&iacute;nio, uma
+	    zona sob a zona <hostid>exemplo.org.</hostid></para>
 	</listitem>
 	<listitem>
 	  <para>
-	    <hostid>1.2.3.in-addr.arpa</hostid> is a zone referencing
-	    all IP addresses which fall under the 3.2.1.* IP space.
-</para>
+	    <hostid>1.2.3.in-addr.arpa</hostid> &eacute; a zona referenciando
+	    todos os endere&ccedil;os IP que recaem sob o espa&ccedil;o IP 3.2.1.*
+	  </para>
 	</listitem>
       </itemizedlist>
 
-      <para>As one can see, the more specific part of a hostname appears to
-	its left.  For example, <hostid>example.org.</hostid> is more
-	specific than <hostid>org.</hostid>, as <hostid>org.</hostid> is
-	more specific than the root zone.  The layout of each part of
-	a hostname is much like a filesystem: the <filename>/dev</filename>
-	directory falls within the root, and so on.</para>
-
+      <para>Como se pode ver, a parte mais espec&iacute;fica de um nome de
+      sistema aparece &agrave; sua esquerda.  Por exemplo,
+      <hostid>exemplo.org</hostid> &eacute; mais espec&iacute;fico que
+      <hostid>org.</hostid>, como <hostid>org.</hostid> &eacute; mais
+      espec&iacute;fico que a zona raiz.  O esbo&ccedil;o de cada parte de um nome
+      de sistema &eacute; muito parecido com um sistema de arquivos: o
+      diret&oacute;rio <filename>/dev</filename> fica sob o raiz, e assim por
+      diante.</para>
 
     </sect2>
 
     <sect2>
-      <title>Reasons to Run a Name Server</title>
+      <title>Raz&otilde;es para Rodar um Servidor de Nome</title>
 
-      <para>Name servers usually come in two forms: an authoritative
-	name server, and a caching name server.</para>
+      <para>Servidores de nome normalmente aparecem em duas formas:
+      como servidor de nome autoritativo e, como um servidor de nome
+      para fazer cache.</para>
 
-      <para>An authoritative name server is needed when:</para>
+      <para>Um servidor de nome autoritativo &eacute; necess&aacute;rio quando:</para>
 
       <itemizedlist>
 	<listitem>
-	  <para>one wants to serve DNS information to the
-	    world, replying authoritatively to queries.</para>
+	  <para>algu&eacute;m quer servir informa&ccedil;&atilde;o DNS para o mundo,
+	  respondendo de forma autoritativa a pesquisas.</para>
 	</listitem>
 	<listitem>
-	  <para>a domain, such as <hostid>example.org</hostid>, is
-	    registered and IP addresses need to be assigned to hostnames
-	    under it.</para>
+	  <para>um dom&iacute;nio, como <hostid>exemplo.org</hostid>, &eacute;
+	  registrado e endere&ccedil;os IP precisam ser designados a nomes de
+	  sistemas sob ele.</para>
 	</listitem>
 	<listitem>
-	  <para>an IP address block requires reverse DNS entries (IP to
-	    hostname).</para>
+	  <para>um bloco de endere&ccedil;os IP requerem entradas DNS
+	  reversas (IP para nomes de sistema).</para>
 	</listitem>
 	<listitem>
-	  <para>a backup name server, called a slave, must reply to queries
-	    when the primary is down or inaccessible.</para>
+	  <para>um servidor de nome de seguran&ccedil;a, chamado de escravo,
+	  precisa responder a pesquisas quando o prim&aacute;rio est&aacute; fora do
+	  ar ou inacess&iacute;vel.</para>
 	  </listitem>
       </itemizedlist>
 
-      <para>A caching name server is needed when:</para>
+      <para>Um servidor de nome para fazer cache &eacute; necess&aacute;rio quando:</para>
 
       <itemizedlist>
 	<listitem>
-	  <para>a local DNS server may cache and respond more quickly
-	    than querying an outside name server.</para>
+	  <para>um servidor DNS local pode fazer cache e responder
+	  mais rapidamente do que pesquisar em um servidor de nome
+	  externo.</para>
 	</listitem>
 	<listitem>
-	  <para>a reduction in overall network traffic is desired (DNS
-	    traffic has been measured to account for 5% or more of total
-	    Internet traffic).</para>
+	  <para>uma redu&ccedil;&atilde;o no tr&aacute;fego de rede de uma forma geral &eacute;
+	  desejada (o tr&aacute;fego DNS foi contabilizado como 5% ou mais do
+	  tr&aacute;fego total da Internet).</para>
 	</listitem>
       </itemizedlist>
 
-      <para>When one queries for <hostid>www.FreeBSD.org</hostid>, the
-	resolver usually queries the uplink ISP's name server, and retrieves
-	the reply.  With a local, caching DNS server, the query only has to
-	be made once to the outside world by the caching DNS server.  Every
-	additional query will not have to look to the outside of the local
-	network, since the information is cached locally.</para>
-
+      <para>Quando algu&eacute;m pesquisa por
+      <hostid>www.FreeBSD.org</hostid>, o resolver normalmente
+      pesquisa o servidor de nomes do provedor de n&iacute;vel superior e
+      recupera a resposta.  Com um servidor DNS local fazendo cache, a
+      pesquisa precisa ser feita uma vez para o mundo exterior.  Cada
+      pesquisa adicional n&atilde;o vai precisar buscar fora da rede local,
+      uma vez que h&aacute; uma c&oacute;pia local da informa&ccedil;&atilde;o no cache.</para>
     </sect2>
 
     <sect2>
-      <title>How It Works</title>
-      <para>In FreeBSD, the BIND daemon is called
-	<application>named</application> for obvious reasons.</para>
+      <title>Como Funciona</title>
+
+      <para>No FreeBSD, o daemon BIND &eacute; chamado
+      <application>named</application> por raz&otilde;es &oacute;bvias.</para>
 
       <informaltable frame="none">
 	<tgroup cols="2">
 	  <thead>
 	    <row>
-	      <entry>File</entry>
-	      <entry>Description</entry>
+	      <entry>Arquivo</entry>
+	      <entry>Descri&ccedil;&atilde;o</entry>
 	    </row>
 	  </thead>
 
 	  <tbody>
 	    <row>
 	      <entry><application>named</application></entry>
-	      <entry>the BIND daemon</entry>
+	      <entry>o daemon do BIND</entry>
 	    </row>
 
 	    <row>
 	      <entry><command>ndc</command></entry>
-	      <entry>name daemon control program</entry>
+	      <entry>programa de controle do daemon de nome (name
+	      daemon control)</entry>
 	    </row>
 
 	    <row>
 	      <entry><filename>/etc/namedb</filename></entry>
-	      <entry>directory where BIND zone information resides</entry>
+	      <entry>diret&oacute;rio onde reside a informa&ccedil;&atilde;o de zona
+	      do BIND</entry>
 	    </row>
 
 	    <row>
 	      <entry><filename>/etc/namedb/named.conf</filename></entry>
-	      <entry>daemon configuration file</entry>
+	      <entry>arquivo de configura&ccedil;&atilde;o do daemon</entry>
 	    </row>
 	  </tbody>
 	</tgroup>
       </informaltable>
 
       <para>
-	Zone files are usually contained within the
-	<filename>/etc/namedb</filename>
-	directory, and contain the DNS zone information
-	served by the name server.
+        Arquivos de zona normalmente pertencem ao diret&oacute;rio
+	<filename>/etc/namedb</filename>, e cont&eacute;m a informa&ccedil;&atilde;o de
+	zona DNS fornecida pelo servidor de nomes.
 </para>
     </sect2>
 
     <sect2>
-      <title>Starting BIND</title>
+      <title>Iniciando o BIND</title>
       <indexterm>
 	<primary>BIND</primary>
 	<secondary>starting</secondary>
       </indexterm>
-      <para>
-	Since BIND is installed by default, configuring it all is
-	relatively simple.
-</para>
-      <para>
-	To ensure the named daemon is started at boot, put the following
-	 modifications in <filename>/etc/rc.conf</filename>:
-</para>
+      <para>Uma vez que o BIND &eacute; instalado por padr&atilde;o, configur&aacute;-lo &eacute;
+	relativamente simples.</para>
+
+      <para>Para assegurar que o daemon named &eacute; executado durante a
+	inicializa&ccedil;&atilde;o, coloque as seguintes modifica&ccedil;&otilde;es no
+	<filename>/etc/rc.conf</filename>:</para>
+
       <programlisting>named_enable="YES"</programlisting>
-      <para>To start the daemon manually (after configuring it)</para>
+
+      <para>Para iniciar o daemon manualmente (ap&oacute;s configur&aacute;-lo)</para>
+
       <screen>&prompt.root; <userinput>ndc start</userinput></screen>
     </sect2>
 
     <sect2>
-      <title>Configuration Files</title>
+      <title>Arquivos de Configura&ccedil;&atilde;o</title>
       <indexterm>
 	<primary>BIND</primary>
 	<secondary>configuration files</secondary>
       </indexterm>
       <sect3>
-	<title>Using <command>make-localhost</command></title>
-	<para>Be sure to:
-</para>
+	<title>Usando <command>make-localhost</command></title>
+	<para>Certifique-se de fazer:</para>
+
 	<screen>&prompt.root; <userinput>cd /etc/namedb</userinput>
 &prompt.root; <userinput>sh make-localhost</userinput></screen>
-	<para>to properly create the local reverse DNS zone file in
-	  <filename>/etc/namedb/localhost.rev</filename>.
-</para>
+
+	<para>para criar adequadamente o arquivo de zona DNS reverso local
+	no <filename>/etc/namedb/localhost.rev</filename>.</para>
       </sect3>
 
       <sect3>
@@ -5277,64 +5281,71 @@ host mailhost {
 
 	<programlisting>// &dollar;FreeBSD$
 //
-// Refer to the named(8) manual page for details.  If you are ever going
-// to setup a primary server, make sure you've understood the hairy
-// details of how DNS is working.  Even with simple mistakes, you can
-// break connectivity for affected parties, or cause huge amount of
-// useless Internet traffic.
+// Consulte a p&aacute;gina de manual do named(8) para detalhes.  Se voc&ecirc;
+// alguma vez for configurar um servidor prim&aacute;rio, certifique-se de
+// que compreendeu os detalhes cabeludos de como o DNS est&aacute;
+// funcionando.  Mesmo com simples enganos, voc&ecirc; pode quebrar a
+// conectividade de grupos atingidos, ou causar enormes quantidades de
+// tr&aacute;fego in&uacute;til na Internet.
 
 options {
 	directory "/etc/namedb";
 
-// In addition to the "forwarders" clause, you can force your name
-// server to never initiate queries of its own, but always ask its
-// forwarders only, by enabling the following line:
+// Adicionalmente &agrave; cl&aacute;usula "forwarders", voc&ecirc; pode for&ccedil;ar seu
+// servidor de nomes a nunca iniciar pesquisas por conta pr&oacute;pria, mas
+// sempre consultar somente seus despachantes, ativando a linha
+// abaixo:
 //
 //      forward only;
 
-// If you've got a DNS server around at your upstream provider, enter
-// its IP address here, and enable the line below.  This will make you
-// benefit from its cache, thus reduce overall DNS traffic in the
-Internet.
+// Se voc&ecirc; tem um servidor DNS por perto em seu provedor de acesso,
+// entre seu endere&ccedil;o IP aqui, e ative a linha abaixo.  Isto far&aacute; com
+// que voc&ecirc; se beneficie de seu cache, reduzindo o tr&aacute;fego DNS na
+// Internet em geral.
+
 /*
 	forwarders {
 		127.0.0.1;
 	};
 */</programlisting>
 
-	<para>
-	  Just as the comment says, to benefit from an uplink's cache,
-	  <literal>forwarders</literal> can be enabled here.  Under normal
-	  circumstances, a name server will recursively query the Internet
-	  looking at certain name servers until it finds the answer it is
-	  looking for.  Having this enabled will have it query the uplink's
-	  name server (or name server provided) first, taking advantage of
-	  its cache.  If the uplink name server in question is a heavily
-	  trafficked, fast name server, enabling this may be worthwhile.
-</para>
+	<para>Como diz o coment&aacute;rio, para se beneficiar de um cache de
+	acesso, <literal>despachantes (forwarders)</literal> podem ser
+	ativados aqui.  Em circunst&acirc;ncias normais, um servidor de nome
+	ir&aacute; pesquisar a Internet de forma recursiva em determinados
+	servidores de nomes at&eacute; que encontre a resposta que procura.
+	Com este recurso ativado, ele ter&aacute; que consultar o servidor de
+	nome do provedor de acesso (ou o servidor de nome configurado)
+	primeiro, tirando vantagem de seu cache.  Se o servidor de
+	nome em quest&atilde;o estiver com acessos de alta velocidade,
+	um servidor de nomes r&aacute;pido, ativar este recurso pode valer a
+	pena.</para>
 
 	<warning><para><hostid role="ipaddr">127.0.0.1</hostid>
-	    will <emphasis>not</emphasis> work here.
-	    Change this IP address to a name server at your uplink.</para>
+	    <emphasis>n&atilde;o</emphasis> vai funcionar aqui.  Mude este
+	    endere&ccedil;o IP para um servidor de nome localizado em seu
+	    provedor de acesso.</para>
 	</warning>
 
 	<programlisting>	/*
-	 * If there is a firewall between you and name servers you want
-	 * to talk to, you might need to uncomment the query-source
-	 * directive below.  Previous versions of BIND always asked
-	 * questions using port 53, but BIND 8.1 uses an unprivileged
-	 * port by default.
+	 * Se existe um firewall entre voc&ecirc; e os servidores de nome
+	 * com os quais deseja falar, voc&ecirc; pode precisar remover os
+	 * coment&aacute;rios da diretiva query-source abaixo.  Vers&otilde;es
+	 * anteriores do BIND sempre fizeram pesquisas usando a porta
+	 * 53, mas o BIND 8.1 usa uma porta n&atilde;o priviliegada por
+	 * padr&atilde;o.
 	 */
 	// query-source address * port 53;
 
 	/*
-	 * If running in a sandbox, you may have to specify a different
-	 * location for the dumpfile.
+	 * se estiver executando em um ambiente restrito (sandbox),
+	 * voc&ecirc; pode ter que especificar uma localiza&ccedil;&atilde;o diferente
+	 * para o arquivo de depejo de mem&oacute;ria (dumpfile).
 	 */
 	// dump-file "s/named_dump.db";
 };
 
-// Note: the following will be supported in a future release.
+// Nota: os comandos a seguir ser&atilde;o suportados em uma vers&atilde;o futura.
 /*
 host { any; } {
 	topology {
@@ -5343,12 +5354,13 @@ host { any; } {
 };
 */
 
-// Setting up secondaries is way easier and the rough picture for this
-// is explained below.
+// Configurar secund&aacute;rios &eacute; muito mais f&aacute;cil e um esbo&ccedil;o da
+// configura&ccedil;&atilde;o &eacute; explicado a seguir.
 //
-// If you enable a local name server, don't forget to enter 127.0.0.1
-// into your /etc/resolv.conf so this server will be queried first.
-// Also, make sure to enable it in /etc/rc.conf.
+// Se voc&ecirc; ativar um servidor de nome local, n&atilde;o esque&ccedil;a de colocar o
+// 127.0.0.1 no seu /etc/resolv.conf para que este servidor seja
+// consultado primeiro.
+// Tamb&eacute;m certifique-se de ativ&aacute;-lo no /etc/rc.conf.
 
 zone "." {
 	type hint;
@@ -5366,36 +5378,38 @@ zone
 	file "localhost.rev";
 };
 
-// NB: Do not use the IP addresses below, they are faked, and only
-// serve demonstration/documentation purposes!
+// Nota: N&atilde;o use os endere&ccedil;os IP abaixo, eles s&atilde;o apenas exemplos e
+// servem somente para prop&oacute;sitos de demonstra&ccedil;&atilde;o e documenta&ccedil;&atilde;o!
 //
-// Example secondary config entries.  It can be convenient to become
-// a secondary at least for the zone where your own domain is in.  Ask
-// your network administrator for the IP address of the responsible
-// primary.
+// Exemplo de entradas de configura&ccedil;&atilde;o de servidor secund&aacute;rio.  Pode ser
+// interessante se tornar o secund&aacute;rio pelo menos da zona de seu
+// pr&oacute;prio dom&iacute;nio.  Solicite a seu administrador de rede o
+// endere&ccedil;o IP do servidor prim&aacute;rio respons&aacute;vel.
 //
-// Never forget to include the reverse lookup (IN-ADDR.ARPA) zone!
-// (This is the first bytes of the respective IP address, in reverse
-// order, with ".IN-ADDR.ARPA" appended.)
+// Nunca esque&ccedil;a de incluir a zona de busca reversa (IN-ADDR.ARPA)!
+// (Estes s&atilde;o os primeiros bytes do respectivo endere&ccedil;o IP, em ordem
+// invertida, com ".IN-ADDR.ARPA" anexado.)
 //
-// Before starting to setup a primary zone, better make sure you fully
-// understand how DNS and BIND works, however.  There are sometimes
-// unobvious pitfalls.  Setting up a secondary is comparably simpler.
+// Entretanto, antes de iniciar a configurar a zona prim&aacute;ria, &eacute; bom ter
+// compreendido completamente como o DNS e o BIND trabalham.  Algumas
+// vezes, existem ciladas ocultas.  Em compara&ccedil;&atilde;o, &eacute; mais f&aacute;cil
+// configurar um secund&aacute;rio.
 //
-// NB: Don't blindly enable the examples below. :-)  Use actual names
-// and addresses instead.
+// NB: N&atilde;o ative cegamente os exemplos abaixo. :-)  Ao inv&eacute;s, use
+// nomes e endere&ccedil;os reais.
 //
-// NOTE!!!  FreeBSD runs bind in a sandbox (see named_flags in rc.conf).
-// The directory containing the secondary zones must be write accessible
-// to bind.  The following sequence is suggested:
+// NOTA!!! O FreeBSD roda bind em uma sandbox (veja named_flags no
+// rc.conf).  O diret&oacute;rio contendo as zonas secund&aacute;rias devem possuir
+// acesso de grava&ccedil;&atilde;o permitido para o bind.  &Eacute; sugerida a seguinte
+// seq&uuml;&ecirc;ncia:
 //
 //      mkdir /etc/namedb/s
 //      chown bind:bind /etc/namedb/s
 //      chmod 750 /etc/namedb/s</programlisting>
 
-	<para>For more information on running BIND in a sandbox, see
-	  <link linkend="network-named-sandbox">Running named in a sandbox</link>.
-	</para>
+	<para>Para mais informa&ccedil;&otilde;es sobre como rodar o BIND numa
+	sandbox, veja <link linkend="network-named-sandbox">Rodando
+	o named em uma sandbox</link>.</para>
 
 	<programlisting>/*
 zone "example.com" {
@@ -5414,271 +5428,261 @@ zone "0.168.192.in-addr.arpa" {
 	};
 };
 */</programlisting>
-	<para>In <filename>named.conf</filename>, these are examples of slave
-	  entries for a forward and reverse zone.</para>
+	<para>No <filename>named.conf</filename> existem exemplos de
+	entradas secund&aacute;rias para as zonas direta e reversa.</para>
 
-	<para>For each new zone served, a new zone entry must be added to
-	  <filename>named.conf</filename></para>
+	<para>Para cada nova zona servida, uma nova entrada de zona
+	precisa ser adicionada ao <filename>named.conf</filename></para>
 
-	<para>For example, the simplest zone entry for
-	  <hostid role="domainname">example.org</hostid> can look like:</para>
+	<para>Por exemplo, a entrada mais simples para a zona
+	<hostid role="domainname">exemplo.org</hostid> pode ficar
+	assim:</para>
 
-	<programlisting>zone "example.org" {
+	<programlisting>zone "exemplo.org" {
 	type master;
-	file "example.org";
+	file "exemplo.org";
 };</programlisting>
 
-	<para>The zone is a master, as indicated by the <option>type</option>
-	  statement, holding its zone information in
-	  <filename>/etc/namedb/example.org</filename> indicated by
-	  the <option>file</option> statement.</para>
+	<para>A zona &eacute; prim&aacute;ria, como indicado pela declara&ccedil;&atilde;o
+	<option>type</option>, mantendo a informa&ccedil;&atilde;o da zona no
+	<filename>/etc/namedb/exemplo.org</filename>  indicado pela
+	declara&ccedil;&atilde;o <option>file</option>.</para>
 
-	<programlisting>zone "example.org" {
+	<programlisting>zone "exemplo.org" {
 	type slave;
-	file "example.org";
+	file "exemplo.org";
 };</programlisting>
 
-	<para>In the slave case, the zone information is transferred from
-	  the master name server for the particular zone, and saved in the
-	  file specified.  If and when the master server dies or is
-	  unreachable, the slave name server will have the transferred
-	  zone information and will be able to serve it.</para>
+	<para>No caso do secund&aacute;rio, a informa&ccedil;&atilde;o da zona &eacute;
+	transferida do servidor de nomes prim&aacute;rio de uma zona em
+	particular, e salvo no arquivo especificado.  Se e quando o
+	servidor prim&aacute;rio morrer, ou estiver fora de alcance, o
+	servidor de nomes secund&aacute;rio ter&aacute; a informa&ccedil;&atilde;o da zona
+	transferida e ser&aacute; capaz de servi-la.</para>
       </sect3>
 
       <sect3>
-	<title>Zone Files</title>
-	<para>
-	  An example master zone file for <hostid>example.org</hostid>
-	  (existing within <filename>/etc/namedb/example.org</filename>)
-	  is as follows:
-</para>
+	<title>Arquivos de Zona</title>
+
+	<para>Um exemplo de arquivo de zona prim&aacute;rio para
+	<hostid>exemplo.org</hostid> (existente no
+	<filename>/etc/namedb/example.org</filename>) segue abaixo: </para>
 
 	<programlisting>$TTL 3600
 
-example.org.  IN SOA ns1.example.org.  admin.example.org. (
-			5	       ; Serial
-			10800	   ; Refresh
-			3600	    ; Retry
-			604800	  ; Expire
+exemplo.org.  IN SOA ns1.exemplo.org.  admin.exemplo.org. (
+			5	 ; Serial
+			10800	 ; Refresh
+			3600	 ; Retry
+			604800	 ; Expire
 			86400 )	 ; Minimum TTL
 
-; DNS Servers
-@       IN NS	   ns1.example.org.
-@       IN NS	   ns2.example.org.
+; Servidores DNS
+@            IN NS      ns1.exemplo.org.
+@            IN NS      ns2.exemplo.org.
 
-; Machine Names
-localhost       IN A    127.0.0.1
-ns1	     IN A    3.2.1.2
-ns2	     IN A    3.2.1.3
-mail	    IN A    3.2.1.10
-@	       IN A    3.2.1.30
+; Nomes de M&aacute;quinas
+localhost    IN A       127.0.0.1
+ns1	     IN A       3.2.1.2
+ns2	     IN A       3.2.1.3
+mail	     IN A       3.2.1.10
+@	     IN A       3.2.1.30
 
-; Aliases
+; Apelidos (aliases)
 www	     IN CNAME	@
 
-; MX Record
-@	       IN MX   10      mail.example.org.</programlisting>
+; Registro MX (MX Record)
+@	     IN MX  10  mail.exemplo.org.</programlisting>
 
-	<para>
-	  Note that every hostname ending in a <quote>.</quote> is an
-	  exact hostname, whereas everything without a trailing
-	  <quote>.</quote> is referenced to the origin.  For example,
-	  <literal>www</literal> is translated into <literal>www +
-	    origin</literal>.  In our fictitious zone file, our origin
-	  is <hostid>example.org.</hostid>, so
-	  <literal>www</literal> would translate to
-	  <hostid>www.example.org.</hostid>
-</para>
+	<para>Note que cada nome de sistema que termina com um
+	<quote>.</quote> &eacute; um nome exato, ao passo que tudo sem um
+	<quote>.</quote> no final &eacute; referenciado &agrave; origem.
+	Por exemplo, <literal>www</literal> &eacute; traduzido para
+	<literal>www + origem</literal>.  Em nosso arquivo de zona
+	fict&iacute;cio, nossa origem &eacute; <hostid>exemplo.org.</hostid>, ent&atilde;o
+	<literal>www</literal> ser&aacute; traduzido para
+	<hostid>www.exemplo.org.</hostid>.</para>
 
-	<para>
-	  The format of a zone file follows:
-</para>
-	<programlisting>recordname      IN recordtype   value</programlisting>
+	<para>O formato de um arquivo de zona &eacute; como segue:</para>
+
+	<programlisting>nomedoregistro      IN tipodoregistro  valor</programlisting>
 
 	<indexterm>
 	  <primary>DNS</primary>
 	  <secondary>records</secondary>
 	</indexterm>
-	<para>
-	  The most commonly used DNS records:
-</para>
+	<para>Os registros DNS mais freq&uuml;entemente usados:</para>
 
 	<variablelist>
 	  <varlistentry>
 	    <term>SOA</term>
 
-	    <listitem><para>start of zone authority</para></listitem>
+	    <listitem><para>in&iacute;cio da zona de autoridade</para></listitem>
 	  </varlistentry>
 
 	  <varlistentry>
 	    <term>NS</term>
 
-	    <listitem><para>an authoritative name server</para></listitem>
+	    <listitem><para>um servidor de nome
+	    autoritativo</para></listitem>
 	  </varlistentry>
 
 	  <varlistentry>
 	    <term>A</term>
 
-	    <listitem><para>A host address</para></listitem>
+	    <listitem><para>Um endere&ccedil;o de sistema (host address)</para></listitem>
 	  </varlistentry>
 
 	  <varlistentry>
 	    <term>CNAME</term>
 
-	    <listitem><para>the canonical name for an alias</para></listitem>
+	    <listitem><para>o nome can&ocirc;nico para um apelido
+	    (alias)</para></listitem>
 	  </varlistentry>
 
 	  <varlistentry>
 	    <term>MX</term>
 
-	    <listitem><para>mail exchanger</para></listitem>
+	    <listitem><para>servidor de correio (mail exchanger)</para></listitem>
 	  </varlistentry>
 
 	  <varlistentry>
 	    <term>PTR</term>
 
-	    <listitem><para>a domain name pointer (used in reverse DNS)
-	</para></listitem>
+	    <listitem><para>um ponteiro de nome de dom&iacute;nio (usado em
+	    DNS reverso)</para></listitem>
 	  </varlistentry>
 	</variablelist>
 
 	<programlisting>
-example.org.  IN SOA ns1.example.org.  admin.example.org. (
-			5	       ; Serial
-			10800	   ; Refresh after 3 hours
-			3600	    ; Retry after 1 hour
-			604800	  ; Expire after 1 week
-			86400 )	 ; Minimum TTL of 1 day</programlisting>
+exemplo.org.  IN SOA ns1.exemplo.org.  admin.exemplo.org. (
+			5	 ; Serial
+			10800	 ; Atualizar ap&oacute;s 3 horas
+			3600	 ; Tentar novamente ap&oacute;s 1 hora
+			604800	 ; Expirar ap&oacute;s 1 semana
+			86400 )	 ; TTL m&iacute;nimo de 1 dia</programlisting>
 
 
 
 	<variablelist>
 	  <varlistentry>
-	    <term><hostid>example.org.</hostid></term>
+	    <term><hostid>exemplo.org.</hostid></term>
 
-	    <listitem><para>the domain name, also the origin for this
-		zone file.</para></listitem>
+	    <listitem><para>o nome de dom&iacute;nio, que tamb&eacute;m &eacute; a origem
+	    para este arquivo de zona</para></listitem>
 	  </varlistentry>
 
 	  <varlistentry>
-	    <term><hostid>ns1.example.org.</hostid></term>
+	    <term><hostid>ns1.exemplo.org.</hostid></term>
 
-	    <listitem><para>the primary/authoritative name server for this
-		zone</para></listitem>
+	    <listitem><para>o servidor de nome prim&aacute;rio/autoritativo
+	    para esta zona</para></listitem>
 	  </varlistentry>
 
 	  <varlistentry>
-	    <term><literal>admin.example.org.</literal></term>
+	    <term><literal>admin.exemplo.org.</literal></term>
 
-	    <listitem><para>the responsible person for this zone,
-		email address with @
-	  replaced.  (<email>admin@example.org</email> becomes
-		<literal>admin.example.org</literal>)</para>
+	    <listitem><para>o endere&ccedil;o de correio eletr&ocirc;nico da pessoa
+	    respons&aacute;vel por esta zona, com a @ trocada.  (
+	    <email>admin@exemplo.org</email> &eacute; substitu&iacute;do por
+	    <literal>admin.exemplo.org</literal>)</para></listitem>
 	    </listitem>
 	  </varlistentry>
 
 	  <varlistentry>
 	    <term><literal>5</literal></term>
 
-	      <listitem><para>the serial number of the file.  this
-		  must be incremented each time the zone file is modified.
-		  Nowadays, many admins prefer a
-		  <literal>yyyymmddrr</literal> format for the serial
-		  number.  2001041002 would mean last modified 04/10/2001,
-		  the latter 02 being the second time the zone file has
-		  been modified this day.  The serial number is important
-		  as it alerts slave name servers for a zone when it is
-		  updated.</para>
-	      </listitem>
+	      <listitem><para>o n&uacute;mero de s&eacute;rie do arquivo.  Deve ser
+	      incrementado toda vez que o arquivo de zona &eacute; alterado.
+	      Hoje em dia, muitos administradores preferem o formato
+	      <literal>aaaammddii</literal> para o n&uacute;mero de s&eacute;rie.
+	      2001041002 quer dizer que a &uacute;ltima modifica&ccedil;&atilde;o foi feita
+	      em 10/04/2001, e os d&iacute;gitos 02 ao final, significam que
+	      foi a segunda vez que o arquivo de zona foi alterado
+	      nesse dia.</para></listitem>
 	  </varlistentry>
 	</variablelist>
 
 	<programlisting>
-@       IN NS	   ns1.example.org.</programlisting>
+@       IN NS	   ns1.exemplo.org.</programlisting>
 
-	<para>
-	  This is an <varname>NS</varname> entry.  Every name server that is going to reply
-	  authoritatively for the zone must have one of these entries.
-	  The <literal>@</literal> as seen here could have been
-	  <hostid role="domainname">example.org.</hostid>
-	  The <literal>@</literal> translates to the origin.
-</para>
+	<para>Esta &eacute; uma entrada <varname>NS</varname>.  Cada servidor
+	de nome que responder&aacute; autoritativamente pela zona deve ter
+	uma destas entradas.  A <literal>@</literal> como aqui
+	mostrada poderia ter sido 
+	<hostid role="domainname">exemplo.org.</hostid>  A 
+	<literal>@</literal> &eacute; traduzida pela origem.</para>
 
 	<programlisting>
-localhost       IN A    127.0.0.1
+localhost    IN A    127.0.0.1
 ns1	     IN A    3.2.1.2
 ns2	     IN A    3.2.1.3
-mail	    IN A    3.2.1.10
-@	       IN A    3.2.1.30</programlisting>
+mail	     IN A    3.2.1.10
+@	     IN A    3.2.1.30</programlisting>
 
-	<para>
-	  The A record indicates machine names.  As seen above,
-	  <hostid>ns1.example.org</hostid> would resolve to
-	  <hostid role="ipaddr">3.2.1.2</hostid>.  Again,
-	  the origin symbol, <literal>@</literal>, is
-	  used here, thus meaning <hostid>example.org</hostid>
-	  would resolve to <hostid role="ipaddr">3.2.1.30</hostid>.
-</para>
+	<para>O registro A indica nomes de m&aacute;quinas.  Como mostrado
+	acima, <hostid>ns1.exemplo.org</hostid> resolveria para 
+	<hostid role="ipaddr">3.2.1.2</hostid>.  De novo, o s&iacute;mbolo da
+	origem, <literal>@</literal>, &eacute; usado aqui, significando que o 
+	<hostid>exemplo.org</hostid> resolveria para 
+	<hostid role="ipaddr">3.2.1.30</hostid>.</para>
 
 	<programlisting>
 www	     IN CNAME	@</programlisting>
 
-	<para>
-	  The canonical name record is usually used for giving aliases
-	  to a machine.  In the example, <hostid>www</hostid> is
-	  aliased to the machine addressed to the origin, or
-	  <hostid>example.org</hostid>
-	  (<hostid role="ipaddr">3.2.1.30</hostid>).
-	  <varname>CNAME</varname>s can be used to provide alias
-	  hostnames, or round robin one hostname among multiple
-	  machines.
-</para>
+	<para>O registro de nome can&ocirc;nico &eacute; geralmente usado para dar
+	apelidos (aliases) para uma m&aacute;quina.  No exemplo, 
+	<hostid>www</hostid> &eacute; apelidado como a m&aacute;quina endere&ccedil;ada
+	para a origem, ou <hostid>exemplo.org</hostid> 
+	(<hostid role="ipaddr">3.2.1.30</hostid>).
+	<varname>CNAME</varname>s podem ser usados para fornecer
+	apelidos a nomes de sistemas, ou efetuar rotatividade
+	(round-robin) de um nome de sistema entre v&aacute;rias 
+	m&aacute;quinas.</para>
 
 	<programlisting>
-@	       IN MX   10      mail.example.org.</programlisting>
+@	       IN MX   10      mail.exemplo.org.</programlisting>
 
-	<para>
-	  The <varname>MX</varname> record indicates which mail
-	  servers are responsible for handling incoming mail for the
-	  zone.  <hostid role="fqdn">mail.example.org</hostid> is the
-	  hostname of the mail server, and 10 being the priority of
-	  that mail server.
-</para>
+	<para>O registro <varname>MX</varname> indica quais servidores
+	de correio s&atilde;o respons&aacute;veis por tratar correspond&ecirc;ncia 
+	de entrada para a zona.  
+	<hostid role="fqdn">mail.exemplo.org</hostid> &eacute; o nome do
+	servidor de correio, e 10 a prioridade daquele servidor de
+	correio.</para>
 
-	<para>
-	  One can have several mail servers, with priorities of 3, 2,
-	  1.  A mail server attempting to deliver to <hostid
-	  role="domainname">example.org</hostid> would first try the
-	  highest priority MX, then the second highest, etc, until the
-	  mail can be properly delivered.
-</para>
+	<<para>Algu&eacute;m pode ter v&aacute;rios servidores de correio, com
+	prioridades de 3, 2 e 1.  Um servidor de correio tentando
+	fazer uma entrega para 
+	<hostid role="domainname">exemplo.org</hostid> tentaria
+	primeiro o MX de maior prioridade, depois o de segunda maior e
+	assim por diante, at&eacute; que o correio seja entregue
+	corretamente.</para>
 
-	<para>
-	  For in-addr.arpa zone files (reverse DNS), the same format is
-	  used, except with <varname>PTR</varname> entries instead of
-	  <varname>A</varname> or <varname>CNAME</varname>.
-</para>
+	<para>Para arquivos de zona in-addr.arpa (DNS reverso), o
+	mesmo formato &eacute; usado, exceto pelo fato de conter entradas 
+	<varname>PTR</varname> ao inv&eacute;s de <varname>A</varname> ou
+	<varname>CNAME</varname>.</para>
 
 	<programlisting>$TTL 3600
 
-1.2.3.in-addr.arpa.  IN SOA ns1.example.org.  admin.example.org. (
-			5	       ; Serial
-			10800	   ; Refresh
-			3600	    ; Retry
+1.2.3.in-addr.arpa.  IN SOA ns1.exemplo.org.  admin.exemplo.org. (
+			5	  ; Serial
+			10800	  ; Refresh
+			3600	  ; Retry
 			604800	  ; Expire
 			3600 )	  ; Minimum
 
-@       IN NS   ns1.example.org.
-@       IN NS   ns2.example.org.
+@       IN NS   ns1.exemplo.org.
+@       IN NS   ns2.exemplo.org.
 
-2       IN PTR ns1.example.org.
-3       IN PTR ns2.example.org.
-10      IN PTR mail.example.org.
-30      IN PTR example.org.</programlisting>
-	<para>
-	 This file gives the proper IP address to hostname mappings of our above
-	 fictitious domain.
-</para>
+2       IN PTR  ns1.exemplo.org.
+3       IN PTR  ns2.exemplo.org.
+10      IN PTR  mail.exemplo.org.
+30      IN PTR  exemplo.org.</programlisting>
+
+	<para>Este arquivo fornece o endere&ccedil;o IP adequado aos
+	mapeamentos de nomes de sistemas de nosso dom&iacute;nio fict&iacute;cio
+	acima.</para>
       </sect3>
     </sect2>
 
@@ -6050,11 +6054,11 @@ zone "10.168.192.in-addr.arpa" in {
     <sect2>
       <title>Vis&atilde;o Geral</title>
 
-      <para>Ao longo do tempo, o rel&oacute;gio de um computador tende 
+      <para>Ao longo do tempo, o rel&oacute;gio de um computador tende
       a variar.  Enquanto o tempo passa, o rel&oacute;gio do computador se
       torna menos preciso.  O NTP (Network Time Protocol) &eacute; uma forma
       de assegurar que o seu rel&oacute;gio est&aacute; correto.</para>
-      
+
       <para>Muitos servi&ccedil;os Internet dependem, ou muito se beneficiam,
       da precis&atilde;o do rel&oacute;gio do computador estar correto.  Por
       exemplo, um servidor Web pode receber solicita&ccedil;&otilde;es para enviar
@@ -6085,9 +6089,9 @@ zone "10.168.192.in-addr.arpa" in {
       um ou mais servidores NTP para usar.  Seu administrador de rede
       ou Provedor de Servi&ccedil;os Internet podem ter configurado um
       servidor NTP para este prop&oacute;sito&mdash;verifique sua
-      documenta&ccedil;&atilde;o para confirmar se este &eacute; o caso.  Existe uma 
-      <ulink 
-      url="http://www.eecis.udel.edu/~mills/ntp/servers.html">lista 
+      documenta&ccedil;&atilde;o para confirmar se este &eacute; o caso.  Existe uma
+      <ulink
+      url="http://www.eecis.udel.edu/~mills/ntp/servers.html">lista
       de servidores NTP publicamente acess&iacute;veis</ulink> os quais
       podem ser usados para encontrar um servidor NTP pr&oacute;ximo a voc&ecirc;.
       Certifique-se de estar ciente da pol&iacute;tica de qualquer
@@ -6095,8 +6099,8 @@ zone "10.168.192.in-addr.arpa" in {
       uso.</para>
 
       <para>Escolher alguns servidores NTP n&atilde;o conectados &eacute; uma boa
-      id&eacute;ia no caso de algum dos servidores que voc&ecirc; estiver usando 
-      se tornar inalcan&ccedil;avel ou seu rel&oacute;gio n&atilde;o for confi&aacute;vel.  
+      id&eacute;ia no caso de algum dos servidores que voc&ecirc; estiver usando
+      se tornar inalcan&ccedil;avel ou seu rel&oacute;gio n&atilde;o for confi&aacute;vel.
       &man.ntpd.8; usa as respostas recebidas de outros servidores de
       forma inteligente&mdash;ele vai favorecer os servidores mais
       confi&aacute;veis em detrimento dos menos confi&aacute;veis.</para>
@@ -6128,7 +6132,7 @@ zone "10.168.192.in-addr.arpa" in {
 	diferen&ccedil;a entre a hora atual do rel&oacute;gio e a hora correta.</para>
 
 	<para>Para ativar o &man.ntpdate.8; durante a inicializa&ccedil;&atilde;o,
-	adicione <literal>ntpdate_enable="YES"</literal> ao 
+	adicione <literal>ntpdate_enable="YES"</literal> ao
 	<filename>/etc/rc.conf</filename>.  Voc&ecirc; tamb&eacute;m vai precisar
 	especificar todos os servidores com os quais deseja
 	sincronizar e quaisquer par&acirc;metros a serem passados ao
@@ -6143,7 +6147,7 @@ zone "10.168.192.in-addr.arpa" in {
 
 	<title>Configura&ccedil;&atilde;o Geral</title>
 
-	<para>O NTP &eacute; configurado pelo arquivo 
+	<para>O NTP &eacute; configurado pelo arquivo
 	<filename>/etc/ntp.conf</filename> no formato descrito em
 	&man.ntp.conf.5;.  Aqui est&aacute; um exemplo simples:</para>
 
@@ -6155,13 +6159,13 @@ driftfile /var/db/ntp.drift</programlisting>
 
 	<para>A op&ccedil;&atilde;o <literal>server</literal> especifica quais
 	servidores devem ser usados, com um servidor por linha.  Se um
-	servidor &eacute; especificado com o argumento 
+	servidor &eacute; especificado com o argumento
 	<literal>prefer</literal>, como em <hostid
 	role="fqdn">ntplocal.example.com</hostid>, este servidor &eacute;
 	preferido sobre os demais servidores.  Uma resposta de um servidor
 	preferido ser&aacute; descartada se ela diferir muito das respostas
 	dos demais servidores, caso contr&aacute;rio ser&aacute; usada
-	desconsiderando as outras respostas.  O argumento 
+	desconsiderando as outras respostas.  O argumento
 	<literal>prefer</literal> normalmente &eacute; usado para servidores
 	NTP que s&atilde;o reconhecidamente de alta precis&atilde;o, como os que
 	possuem hardware especial para monitoramento da hora.</para>
@@ -6169,8 +6173,8 @@ driftfile /var/db/ntp.drift</programlisting>
 	<para>A op&ccedil;&atilde;o <literal>driftfile</literal> especifica qual
 	arquivo &eacute; usado para armazenar a compensa&ccedil;&atilde;o de freq&uuml;&ecirc;ncia do
 	rel&oacute;gio do sistema.  O programa &man.ntpd.8; usa isto para
-	compensar automaticamente as varia&ccedil;&otilde;es naturais do 
-	rel&oacute;gio, permitindo que seja mantida uma configura&ccedil;&atilde;o correta 
+	compensar automaticamente as varia&ccedil;&otilde;es naturais do
+	rel&oacute;gio, permitindo que seja mantida uma configura&ccedil;&atilde;o correta
 	mesmo que seja cortada a conex&atilde;o de todas as fontes externas
 	de hora durante um per&iacute;odo de tempo.</para>
 
@@ -6186,8 +6190,8 @@ driftfile /var/db/ntp.drift</programlisting>
 	<title>Controlando acesso ao Seu Servidor</title>
 
 	<para>Por padr&atilde;o, seu servidor NTP ser&aacute; acess&iacute;vel a todos os
-	sistemas na Internet.  A op&ccedil;&atilde;o <literal>restrict</literal> em 
-	<filename>/etc/ntp.conf</filename> permite que voc&ecirc; controle 
+	sistemas na Internet.  A op&ccedil;&atilde;o <literal>restrict</literal> em
+	<filename>/etc/ntp.conf</filename> permite que voc&ecirc; controle
 	quais m&aacute;quinas podem acessar seu servidor.</para>
 
 	<para>Se voc&ecirc; quer negar acesso a todas as m&aacute;quinas ao seu
@@ -6196,14 +6200,14 @@ driftfile /var/db/ntp.drift</programlisting>
 
 	<programlisting>restrict default ignore</programlisting>
 
-	<para>Se voc&ecirc; quer permitir que somente m&aacute;quinas em sua 
+	<para>Se voc&ecirc; quer permitir que somente m&aacute;quinas em sua
 	rede sincronizem seus rel&oacute;gios com seu servidor, mas
 	assegurar que n&atilde;o lhes seja permitido configurar o servidor ou
 	usada como pares (peers) de sincronismo, adicione</para>
 
 	<programlisting>restrict 192.168.1.0 mask 255.255.255.0 notrust nomodify notrap</programlisting>
 
-	<para>onde <hostid role="ipaddr">192.168.1.0</hostid> 
+	<para>onde <hostid role="ipaddr">192.168.1.0</hostid>
 	&eacute; um endere&ccedil;o IP em sua rede e <hostid
 	role="netmask">255.255.255.0</hostid> &eacute; a m&aacute;scara de subrede
 	de sua rede.</para>
@@ -6220,17 +6224,17 @@ driftfile /var/db/ntp.drift</programlisting>
       <title>Executando o Servidor NTP</title>
 
       <para>Para assegurar que o servidor NTP &eacute; iniciado durante a
-      inicializa&ccedil;&atilde;o, adicione a linha 
+      inicializa&ccedil;&atilde;o, adicione a linha
       <literal>xntpd_enable="YES"</literal>.  Se voc&ecirc; deseja passar
       par&acirc;metros adicionais ao &man.ntpd.8;, edite o par&acirc;metro
-      <varname>xntpd_flags</varname> no 
+      <varname>xntpd_flags</varname> no
       <filename>/etc/rc.conf</filename>.</para>
 
       <para>Para iniciar o servidor sem reinicializar a m&aacute;quina, rode
       <command>ntpd</command> certificando de especificar quaisquer
-      par&acirc;metros adicionais de <varname>xntpd_flags</varname> em 
+      par&acirc;metros adicionais de <varname>xntpd_flags</varname> em
       <filename>/etc/rc.conf</filename>.  Por exemplo:</para>
-      <screen>&prompt.root; 
+      <screen>&prompt.root;
       <userinput>ntpd -p /var/run/ntpd.pid</userinput></screen>
 
       <note>
@@ -6244,7 +6248,7 @@ driftfile /var/db/ntp.drift</programlisting>
       <title>Usando o ntpd com uma Conex&atilde;o Internet Tempor&aacute;ria</title>
 
       <para>O programa &man.ntpd.8; n&atilde;o precisa de uma conex&atilde;o
-      permanente &agrave; Internet para funcionar corretamente.  
+      permanente &agrave; Internet para funcionar corretamente.
       Entretanto, se voc&ecirc; tem uma conex&atilde;o tempor&aacute;ria que est&aacute;
       configurada para discar por demanda, &eacute; uma boa id&eacute;ia evitar que
       o tr&aacute;fego NTP de disparar uma conex&atilde;o discada ou de manter a
@@ -6303,7 +6307,7 @@ driftfile /var/db/ntp.drift</programlisting>
       m&aacute;quina local e re-injeta estes pacotes de volta ao fluxo de
       pacotes IP saintes.  &man.natd.8; faz isso mudando o endere&ccedil;o IP
       de origem e a porta, de forma que, quando o dado &eacute; recebido de
-      volta, &eacute; capaz de determinar sua localiza&ccedil;&atilde;o original e 
+      volta, &eacute; capaz de determinar sua localiza&ccedil;&atilde;o original e
       repass&aacute;-lo ao seu solicitante original.</para>
 
       <indexterm><primary>Internet connection sharing</primary></indexterm>
@@ -6359,7 +6363,7 @@ driftfile /var/db/ntp.drift</programlisting>
       <para>Uma configura&ccedil;&atilde;o como esta &eacute; geralmente usada para
       compartilhar uma conex&atilde;o Internet.  Uma das m&aacute;quinas da
       <acronym>LAN</acronym> est&aacute; conectada &agrave; Internet.  As demais
-      m&aacute;quinas acessam a Internet atrav&eacute;s daquela m&aacute;quina 
+      m&aacute;quinas acessam a Internet atrav&eacute;s daquela m&aacute;quina
       <quote>gateway</quote>.</para>
     </sect2>
 
@@ -6369,7 +6373,7 @@ driftfile /var/db/ntp.drift</programlisting>
 	<secondary>configuration</secondary>
       </indexterm>
       <title>Configura&ccedil;&atilde;o</title>
-      <para>As seguintes op&ccedil;&otilde;es precisam estar no arquivo de 
+      <para>As seguintes op&ccedil;&otilde;es precisam estar no arquivo de
       configura&ccedil;&atilde;o do kernel:</para>
       <programlisting>options IPFIREWALL
 options IPDIVERT</programlisting>
@@ -6379,7 +6383,7 @@ options IPDIVERT</programlisting>
       <programlisting>options IPFIREWALL_DEFAULT_TO_ACCEPT
 options IPFIREWALL_VERBOSE</programlisting>
 
-      <para>O seguinte precisaa estar no 
+      <para>O seguinte precisaa estar no
       <filename>/etc/rc.conf</filename>:</para>
 
       <programlisting>gateway_enable="YES"
@@ -6395,8 +6399,8 @@ natd_flags=""</programlisting>
 	    <row>
 	      <entry>gateway_enable="YES"</entry>
 	      <entry>Configura a m&aacute;quina parar atuar como um gateway.
-	      Executando 
-	      <command>sysctl net.inet.ip.forwarding=1</command> 
+	      Executando
+	      <command>sysctl net.inet.ip.forwarding=1</command>
 	      causaria o mesmo efeito.</entry>
 	    </row>
 	    <row><entry>firewall_enable="YES"</entry>
@@ -6407,7 +6411,7 @@ natd_flags=""</programlisting>
 	    <row><entry>firewall_type="OPEN"</entry>
 	      <entry>Isto especifica um conjunto predefinido de
 	      regras do firewall, permitindo a entrada de qualquer
-	      coisa.  Veja <filename>/etc/rc.firewall</filename> 
+	      coisa.  Veja <filename>/etc/rc.firewall</filename>
 	      para tipos adicinais.</entry>
 	    </row>
 	    <row>
@@ -6425,23 +6429,23 @@ natd_flags=""</programlisting>
       </informaltable>
 
       <para>Tendo as op&ccedil;&otilde;es anteriores definidas em
-      <filename>/etc/rc.conf</filename> seria executado 
+      <filename>/etc/rc.conf</filename> seria executado
       <command>natd -interface fxp0</command> durante a inicializa&ccedil;&atilde;o.
       Ele tamb&eacute;m pode ser executado manualmente.</para>
 
       <para>Cada m&aacute;quina e interface na rede local deveria ter
       n&uacute;meros de endere&ccedil;os IP atribu&iacute;dos no espa&ccedil;o de rede privado
       como definido por <ulink
-      url="ftp://ftp.isi.edu/in-notes/rfc1918.txt">RFC 1918</ulink> 
-      e ter como o gateway padr&atilde;o, o endere&ccedil;o IP interno da 
+      url="ftp://ftp.isi.edu/in-notes/rfc1918.txt">RFC 1918</ulink>
+      e ter como o gateway padr&atilde;o, o endere&ccedil;o IP interno da
       m&aacute;quina <application>natd</application>.</para>
 
-      <para>Por exemplo, o cliente <hostid>A</hostid> e 
+      <para>Por exemplo, o cliente <hostid>A</hostid> e
       <hostid>B</hostid> na rede local possuem endere&ccedil;os IP
-      <hostid role="ipaddr">192.168.0.2</hostid> e 
-      <hostid role="ipaddr">192.168.0.3</hostid>, enquanto a 
+      <hostid role="ipaddr">192.168.0.2</hostid> e
+      <hostid role="ipaddr">192.168.0.3</hostid>, enquanto a
       interface de rede local da m&aacute;quina executando o natd possui o
-      endere&ccedil;o IP <hostid role="ipaddr">192.168.0.1</hostid>.  O 
+      endere&ccedil;o IP <hostid role="ipaddr">192.168.0.1</hostid>.  O
       gateway padr&atilde;o dos clientes <hostid>A</hostid> e
       <hostid>B</hostid> precisa ser o da m&aacute;quina com natd, <hostid
       role="ipaddr">192.168.0.1</hostid>.  A interface externa, ou
@@ -6462,8 +6466,8 @@ natd_flags=""</programlisting>
       m&aacute;quina com <application>natd</application> para um cliente da
       rede local.</para>
 
-      <para>Por exemplo, um servidor IRC roda em um cliente 
-      <hostid>A</hostid>, e um servidor web em um cliente 
+      <para>Por exemplo, um servidor IRC roda em um cliente
+      <hostid>A</hostid>, e um servidor web em um cliente
       <hostid>B</hostid>.  Para que isto funcione corretamente, as conex&otilde;es
       recebidas nas portas 6667 (IRC) e 80 (web) precisam ser
       redirecionadas para as respectivas m&aacute;quinas.</para>
@@ -6479,19 +6483,19 @@ natd_flags=""</programlisting>
 	<programlisting>    -redirect_port tcp 192.168.0.2:6667 6667
     -redirect_port tcp 192.168.0.3:80 80</programlisting>
 
-      <para>Isto ir&aacute; direcionar as portas <emphasis>tcp</emphasis> 
+      <para>Isto ir&aacute; direcionar as portas <emphasis>tcp</emphasis>
       corretas para as m&aacute;quinas clientes da rede local.</para>
 
       <para>Um argumento <option>-redirect_port</option> pode ser
       usado para indicar faixas de portas al&eacute;m de portas individuais.
-      Por exemplo, <replaceable>tcp 192.168.0.2:2000-3000 
+      Por exemplo, <replaceable>tcp 192.168.0.2:2000-3000
       2000-3000</replaceable> redirecionaria todas as conex&otilde;es
       recebidas nas portas 2000 a 3000 para portas 2000 a 3000 no
       cliente <hostid>A</hostid>.</para>
 
-      <para>Estas op&ccedil;&otilde;es podem ser usadas executando diretamente o 
-      &man.natd.8;, ou inseridas na op&ccedil;&atilde;o 
-      <literal>natd_flags=""</literal> em 
+      <para>Estas op&ccedil;&otilde;es podem ser usadas executando diretamente o
+      &man.natd.8;, ou inseridas na op&ccedil;&atilde;o
+      <literal>natd_flags=""</literal> em
       <filename>/etc/rc.conf</filename>.</para>
 
       <para>Para mais op&ccedil;&otilde;es de configura&ccedil;&atilde;o, consulte &man.natd.8;.</para>
@@ -6508,16 +6512,16 @@ natd_flags=""</programlisting>
       endere&ccedil;o IP externo apropriado e redireciona todo o tr&aacute;fego de
       entrada para aquele endere&ccedil;o IP de volta ao cliente da rede
       local espec&iacute;fico.  Isto tamb&eacute;m &eacute; conhecido como NAT est&aacute;tico.
-      Por exemplo, os endere&ccedil;os IP 
+      Por exemplo, os endere&ccedil;os IP
       <hostid role="ipaddr">128.1.1.1</hostid>,
       <hostid role="ipaddr">128.1.1.2</hostid> e
       <hostid role="ipaddr">128.1.1.3</hostid> pertencem &agrave; maquina
       gateway com <application>natd</application>.  O <hostid
       role="ipaddr">128.1.1.1</hostid> pode ser usado como o o
-      endere&ccedil;o IP externo da m&aacute;quina gateway, enquanto 
-      <hostid role="ipaddr">128.1.1.2</hostid> e 
+      endere&ccedil;o IP externo da m&aacute;quina gateway, enquanto
+      <hostid role="ipaddr">128.1.1.2</hostid> e
       <hostid role="ipaddr">128.1.1.3</hostid> s&atilde;o repassados de volta
-      aos clientes <hostid>A</hostid> e <hostid>B</hostid> da rede 
+      aos clientes <hostid>A</hostid> e <hostid>B</hostid> da rede
       local.</para>
 
       <para>A sintaxe de <option>-redirect_address</option> &eacute; a
@@ -6535,7 +6539,7 @@ natd_flags=""</programlisting>
 	    </row>
 	    <row>
 	      <entry>IPp&uacute;blico</entry>
-	      <entry>O endere&ccedil;o IP externo correspondente ao cliente 
+	      <entry>O endere&ccedil;o IP externo correspondente ao cliente
 	      da rede local.</entry>
 	    </row>
 	  </tbody>
@@ -6554,7 +6558,7 @@ natd_flags=""</programlisting>
       vez que todos os dados recebidos em um endere&ccedil;o IP em particular
       s&atilde;o redirecionados.</para>
 
-      <para>Os endere&ccedil;os IP externos na m&aacute;quina com 
+      <para>Os endere&ccedil;os IP externos na m&aacute;quina com
       <application>natd</application> precisam ser ativos como
       secund&aacute;rios na interface externa.  Veja como fazer em
       &man.rc.conf.5;.</para>
@@ -6591,9 +6595,9 @@ natd_flags=""</programlisting>
 
       <para>Primariamente, o <application>inetd</application> &eacute; usado
       para executar outros daemons, mas diversos protocolos simples
-      s&atilde;o tratados diretamente, como 
-      <application>chargen</application>, 
-      <application>auth</application> e 
+      s&atilde;o tratados diretamente, como
+      <application>chargen</application>,
+      <application>auth</application> e
       <application>daytime</application>.</para>
 
       <para>Esta se&ccedil;&atilde;o vai abordar as configura&ccedil;&otilde;es b&aacute;sicas do
@@ -6606,19 +6610,19 @@ natd_flags=""</programlisting>
       <title>Configura&ccedil;&otilde;es</title>
 
       <para>O <application>inetd</application> &eacute; inicializado atrav&eacute;s
-      do sistema <filename>/etc/rc.conf</filename>.  A op&ccedil;&atilde;o 
-      <literal>inetd_enable</literal> &eacute; ajustada para 
-      <quote>NO</quote>, por padr&atilde;o, mas &eacute; muitas vezes ativada pelo 
-      <application>sysinstall</application> com o perfil de 
+      do sistema <filename>/etc/rc.conf</filename>.  A op&ccedil;&atilde;o
+      <literal>inetd_enable</literal> &eacute; ajustada para
+      <quote>NO</quote>, por padr&atilde;o, mas &eacute; muitas vezes ativada pelo
+      <application>sysinstall</application> com o perfil de
       seguran&ccedil;a m&eacute;dio.  Colocando:
 	<programlisting>inetd_enable="YES"</programlisting> or
 	<programlisting>inetd_enable="NO"</programlisting> no
-	<filename>/etc/rc.conf</filename> pode ativar ou desativar a 
+	<filename>/etc/rc.conf</filename> pode ativar ou desativar a
 	execu&ccedil;&atilde;o do <application>inetd</application> na inicializa&ccedil;&atilde;o
 	do sistema.</para>
 
       <para>Adicionalmente, par&acirc;metros de linha de comando
-      podem ser passados para o <application>inetd</application> 
+      podem ser passados para o <application>inetd</application>
       atrav&eacute;s da op&ccedil;&atilde;o <literal>inetd_flags</literal>.</para>
     </sect2>
 
@@ -6627,8 +6631,8 @@ natd_flags=""</programlisting>
 
       <para>Sinopse do <application>inetd</application>:</para>
 
-      <para><option>     inetd [-d] [-l] [-w] [-W] [-c m&aacute;ximo] 
-      [-C taxa] [-a endere&ccedil;o | nome-do-sistema] [-p nome do arquivo] 
+      <para><option>     inetd [-d] [-l] [-w] [-W] [-c m&aacute;ximo]
+      [-C taxa] [-a endere&ccedil;o | nome-do-sistema] [-p nome do arquivo]
       [-R taxa] [arquivo de configura&ccedil;&atilde;o]</option></para>
 
       <variablelist>
@@ -6652,7 +6656,7 @@ natd_flags=""</programlisting>
 	  <term>-w</term>
 
 	  <listitem>
-	    <para>Ativa o encapsulamento TCP para servi&ccedil;os externos 
+	    <para>Ativa o encapsulamento TCP para servi&ccedil;os externos
 	    (ativado por padr&atilde;o).</para>
 	  </listitem>
 	</varlistentry>
@@ -6662,7 +6666,7 @@ natd_flags=""</programlisting>
 
 	  <listitem>
 	    <para>Ativa o encapsulamento do TCP para serv&ccedil;os internos
-	    que s&atilde;o embutidos no <application>inetd</application> 
+	    que s&atilde;o embutidos no <application>inetd</application>
 	    (ativado por padr&atilde;o).</para>
 	  </listitem>
 	</varlistentry>
@@ -6673,7 +6677,7 @@ natd_flags=""</programlisting>
 	  <listitem>
 	    <para>Especifica o n&uacute;mero m&aacute;ximo padr&atilde;o de invoca&ccedil;&otilde;es
 	    simult&acirc;neas de cada servi&ccedil;o; o padr&atilde;o &eacute; ilimitado.  Pode
-	    ser anulado em cada servi&ccedil;o com o par&acirc;metro 
+	    ser anulado em cada servi&ccedil;o com o par&acirc;metro
 	    <option>max-child</option>.</para>
 	  </listitem>
 	</varlistentry>
@@ -6685,7 +6689,7 @@ natd_flags=""</programlisting>
 	    <para>Especifica o n&uacute;mero m&aacute;ximo padr&atilde;o de vezes que um
 	    servi&ccedil;o pode ser invocado a partir de um &uacute;nico endere&ccedil;o IP
 	    em um minuto; o padr&atilde;o &eacute; ilimitado.  Pode ser cancelado,
-	    por servi&ccedil;o, com o par&acirc;metro 
+	    por servi&ccedil;o, com o par&acirc;metro
 	    <option>max-conex&otilde;es-por-ip-por-minuto</option>.</para>
 	  </listitem>
 	</varlistentry>
@@ -6716,7 +6720,7 @@ natd_flags=""</programlisting>
 	    <para>Quando o &eacute; usado o nome do sistema e uni&atilde;o com ambos
 	    endere&ccedil;os IPv4 e IPv6 &eacute; desejada, uma entrada com o
 	    tipo apropriado de protocolo para cada uni&atilde;o &eacute; exigida
-	    para cada servi&ccedil;o, no 
+	    para cada servi&ccedil;o, no
 	    <filename>/etc/inetd.conf</filename>.  Por exemplo, um
 	    servi&ccedil;o baseado em TCP precisaria de duas entradas, uma
 	    usando <quote>tcp4</quote> para o protocolo e outra usando
@@ -6736,17 +6740,17 @@ natd_flags=""</programlisting>
 
       <para>Estas op&ccedil;&otilde;es podem ser passadas ao
       <application>inetd</application> usando a op&ccedil;&atilde;o
-      <literal>inetd_flags</literal> no 
-      <filename>/etc/rc.conf</filename>. Por padr&atilde;o, o 
-      <literal>inetd_flags</literal> &eacute; ajustado para <quote>-wW</quote>, 
-      que ativa o encapsulamento TCP para os servi&ccedil;os 
+      <literal>inetd_flags</literal> no
+      <filename>/etc/rc.conf</filename>. Por padr&atilde;o, o
+      <literal>inetd_flags</literal> &eacute; ajustado para <quote>-wW</quote>,
+      que ativa o encapsulamento TCP para os servi&ccedil;os
       <application>inetd</application> internos e externos.  Para
       usu&aacute;rios novatos, estes par&acirc;metros geralmente n&atilde;o precisam ser
-      modificados ou mesmo inclu&iacute;dos no 
+      modificados ou mesmo inclu&iacute;dos no
       <filename>/etc/rc.conf</filename>.</para>
 
       <note>
-	<para>Um servi&ccedil;o externo &eacute; um daemon fora do 
+	<para>Um servi&ccedil;o externo &eacute; um daemon fora do
 	<application>inetd</application>, que &eacute; invocado quando uma
 	conex&atilde;o &eacute; recebida para ele.  Por outro lado, um servi&ccedil;o
 	interno &eacute; um que o <application>inetd</application> possui os
@@ -6759,11 +6763,11 @@ natd_flags=""</programlisting>
       <title><filename>inetd.conf</filename></title>
 
       <para>A configura&ccedil;&atilde;o do <application>inetd</application> &eacute;
-      controlada atrav&eacute;s do arquivo 
+      controlada atrav&eacute;s do arquivo
       <filename>/etc/inetd.conf</filename>.</para>
 
-      <para>Quando uma modifica&ccedil;&atilde;o &eacute; feita no 
-      <filename>/etc/inetd.conf</filename>, o 
+      <para>Quando uma modifica&ccedil;&atilde;o &eacute; feita no
+      <filename>/etc/inetd.conf</filename>, o
       <application>inetd</application> pode ser for&ccedil;ado a reler seu
       arquivo de configura&ccedil;&atilde;o enviando um sinal HangUP ao processo
       <application>inetd</application>, como mostrado:</para>
@@ -6775,8 +6779,8 @@ natd_flags=""</programlisting>
       </example>
 
       <para>Cada linha do arquivo de configura&ccedil;&atilde;o especifica um daemon
-      individual.  Coment&aacute;rios no arquivo s&atilde;o precedidos por um 
-      <quote>#</quote>.  O formato do 
+      individual.  Coment&aacute;rios no arquivo s&atilde;o precedidos por um
+      <quote>#</quote>.  O formato do
       <filename>/etc/inetd.conf</filename> &eacute; o seguinte:</para>
 
       <programlisting>nome-do-servi&ccedil;o
@@ -6798,7 +6802,7 @@ argumentos-do-programa-servidor</programlisting>
 
 	  <listitem>
 	    <para>Este &eacute; o nome do servi&ccedil;o do daemon em quest&atilde;o.  Ele
-	    precisa corresponder ao servi&ccedil;o listado no 
+	    precisa corresponder ao servi&ccedil;o listado no
 	    <filename>/etc/services</filename>.  Isto determina qual
 	    porta o <application>inetd</application> precisa escutar.
 	    Se um novo servi&ccedil;o est&aacute; sendo criado, ele precisa ser
@@ -6870,7 +6874,7 @@ argumentos-do-programa-servidor</programlisting>
 	  <listitem>
 	    <para><option>wait|nowait</option> indica se o daemon
 	    invocado pelo <application>inetd</application> &eacute; capaz de
-	    lidar com seu pr&oacute;prio socket ou n&atilde;o.  
+	    lidar com seu pr&oacute;prio socket ou n&atilde;o.
 	    Sockets do tipo <option>dgram</option> precisam usar a
 	    op&ccedil;&atilde;o wait, enquanto daemons de sockets tipo stream, os
 	    quais geralmente s&atilde;o multi-threaded, devem usar a op&ccedil;&atilde;o
@@ -6879,7 +6883,7 @@ argumentos-do-programa-servidor</programlisting>
 	    <option>nowait</option> dispara um daemon filho para cada
 	    novo socket.</para>
 
-	    <para>O n&uacute;mero m&aacute;ximo de daemons filho que o 
+	    <para>O n&uacute;mero m&aacute;ximo de daemons filho que o
 	    <application>inetd</application> pode disparar pode ser
 	    ajustado usando a op&ccedil;&atilde;o <option>max-de-filhos</option>.
 	    Se um limite de dez inst&acirc;ncias de um daemon em particular
@@ -6889,31 +6893,31 @@ argumentos-do-programa-servidor</programlisting>
 	    <para>Al&eacute;m de <option>max-de-filhos</option>, outra op&ccedil;&atilde;o
 	    pode ser ativada para limitar o n&uacute;mero m&aacute;ximo de conex&otilde;es
 	    a partir de um &uacute;nico lugar para um daemon em particular.
-	    O <option>max-conex&otilde;es-por-ip-por-minuto</option> faz 
+	    O <option>max-conex&otilde;es-por-ip-por-minuto</option> faz
 	    justamente isto.  Um valor de dez nesta op&ccedil;&atilde;o limitaria
 	    qualquer endere&ccedil;o IP a se conectar a determinado servi&ccedil;o a
 	    dez tentativas por minuto.  Isto &eacute; &uacute;til para evitar
 	    consumo de recursos intencional ou n&atilde;o e ataques de
-	    Nega&ccedil;&atilde;o de Servi&ccedil;o (Denial of service - DoS) para 
+	    Nega&ccedil;&atilde;o de Servi&ccedil;o (Denial of service - DoS) para
 	    a m&aacute;quina.</para>
 
-	    <para>Neste campo, <option>wait</option> ou 
-	    <option>max-de-filhos</option> e 
+	    <para>Neste campo, <option>wait</option> ou
+	    <option>max-de-filhos</option> e
 	    <option>max-conex&otilde;es-por-ip-por-minuto</option> s&atilde;o
 	    opcionais.</para>
 
 
 	    <para>Um daemon multi-threaded do tipo stream sem qualquer
-	    limites <option>max-de-filhos</option> ou 
+	    limites <option>max-de-filhos</option> ou
 	    <option>max-conex&otilde;es-por-ip-por-minuto</option> seria
 	    simplesmente: <literal>nowait</literal>.</para>
-	    
+
 	    <para>O mesmo daemon com um limite m&aacute;ximo de dez daemons
 	    seria: <literal>nowait/10</literal></para>
 
 	    <para>Adicionalmente, a mesma configura&ccedil;&atilde;o com um limite
 	    de vinte conex&otilde;es por endere&ccedil;o IP por minuto e um limite
-	    total m&aacute;ximo de dez daemons filhos seria: 
+	    total m&aacute;ximo de dez daemons filhos seria:
 	    <literal>nowait/10/20</literal>.</para>
 
 	    <para>Estas op&ccedil;&otilde;es s&atilde;o todas utilizadas pela configura&ccedil;&atilde;o
@@ -6930,9 +6934,9 @@ argumentos-do-programa-servidor</programlisting>
 	  <listitem>
 	    <para>O usu&aacute;rio &eacute; o nome do usu&aacute;rio atrav&eacute;s do qual o daemon
 	    espec&iacute;fico deve ser executado.  Mais freq&uuml;entemente,
-	    daemons rodam com o usu&aacute;rio <username>root</username>.  Por 
+	    daemons rodam com o usu&aacute;rio <username>root</username>.  Por
 	    prop&oacute;sito de seguran&ccedil;a, &eacute; comum encontrar alguns
-	    servidores rodando como o usu&aacute;rio 
+	    servidores rodando como o usu&aacute;rio
 	    <username>daemon</username>, ou o usu&aacute;rio com menos
 	    privil&eacute;gios, <username>nobody</username>.</para>
 
@@ -6945,8 +6949,8 @@ argumentos-do-programa-servidor</programlisting>
 	  <listitem>
 	    <para>O caminho completo do daemon a ser executado quando
 	    uma conex&atilde;o &eacute; recebida.  Se o daemon &eacute; um servi&ccedil;o a ser
-	    fornecido internamente pelo 
-	    <application>inetd</application>, ent&atilde;o 
+	    fornecido internamente pelo
+	    <application>inetd</application>, ent&atilde;o
 	    <option>internal</option> deve ser utilizado.</para>
 	  </listitem>
 	</varlistentry>
@@ -6955,14 +6959,14 @@ argumentos-do-programa-servidor</programlisting>
 	  <term>argumentos-do-programa-servidor</term>
 
 	  <listitem>
-	    <para>Este funciona em conjunto com 
+	    <para>Este funciona em conjunto com
 	    <option>server-program</option> especificando os
 	    argumentos, iniciando com o argv[0], passado ao daemon no
-	    momento da invoca&ccedil;&atilde;o.  Se 
+	    momento da invoca&ccedil;&atilde;o.  Se
 	    <application>meudaemon -d</application> &eacute; a linha de
 	    comando, <literal>meudaemon -d</literal> seria o valor de
 	    <option>argumentos do programa servidor</option>.
-	    Novamente, se o daemon &eacute; um servi&ccedil;o interno, use 
+	    Novamente, se o daemon &eacute; um servi&ccedil;o interno, use
 	    <option>internal</option> aqui.</para>
 	  </listitem>
 	</varlistentry>
@@ -6973,12 +6977,12 @@ argumentos-do-programa-servidor</programlisting>
       <title>Seguran&ccedil;a</title>
 
       <para>Dependendo do perfil de seguranca escolhido durante a
-      instala&ccedil;&atilde;o, muitos daemons do <application>inetd</application> 
+      instala&ccedil;&atilde;o, muitos daemons do <application>inetd</application>
       podem ser ativados por padr&atilde;o.  Se n&atilde;o h&aacute; necessidade aparente
-      para um daemon em particular, desative-o!  Coloque um 
-      <quote>#</quote> na frente do daemon em quest&atilde;o e envie um 
-      <link linkend="network-inetd-hangup">sinal de hangup para o 
-      inetd</link>.  Alguns daemons como o 
+      para um daemon em particular, desative-o!  Coloque um
+      <quote>#</quote> na frente do daemon em quest&atilde;o e envie um
+      <link linkend="network-inetd-hangup">sinal de hangup para o
+      inetd</link>.  Alguns daemons como o
       <application>fingerd</application>, podem ser totalmente
       indesej&aacute;veis, porque eles fornecem muita informa&ccedil;&atilde;o para um
       atacante.</para>
@@ -6987,13 +6991,13 @@ argumentos-do-programa-servidor</programlisting>
       possuem longos ou inexistentes timeouts para tentativas de
       conex&atilde;o.  Isto permite um atacante enviar conex&otilde;es lentamente
       para para um daemon em particular, saturando, assim, os recursos
-      dispon&iacute;veis.  Pode ser uma boa id&eacute;ia colocar limita&ccedil;&otilde;es 
-      <option>ip-por-minuto</option> e <option>max-filhos</option> em 
+      dispon&iacute;veis.  Pode ser uma boa id&eacute;ia colocar limita&ccedil;&otilde;es
+      <option>ip-por-minuto</option> e <option>max-filhos</option> em
       certos daemons.</para>
 
       <para>Por padr&atilde;o, o encapsulamento TCP &eacute; ativado.  Consulte a
       p&aacute;gina de manual &man.hosts.access.5; para mais informa&ccedil;&otilde;es
-      sobre como colocar restri&ccedil;&otilde;es TCP em v&aacute;rios daemons 
+      sobre como colocar restri&ccedil;&otilde;es TCP em v&aacute;rios daemons
       invocados pelo <application>inetd</application>.</para>
 
     </sect2>
@@ -7010,7 +7014,7 @@ argumentos-do-programa-servidor</programlisting>
 	internamente pelo <application>inetd</application>.</para>
 
       <para>O servi&ccedil;o <application>auth</application> fornece servi&ccedil;os
-      de identidade (ident, identd) de rede, e &eacute; configur&aacute;vel at&eacute; 
+      de identidade (ident, identd) de rede, e &eacute; configur&aacute;vel at&eacute;
       certo ponto.</para>
 
       <para>Consulte a p&aacute;gina de manual &man.inetd.8; para informa&ccedil;&otilde;es
@@ -7183,7 +7187,7 @@ lpt0: Interrupt-driven port</screen>
       <filename>/boot/device.hints</filename> deve conter as seguintes
       linhas:</para>
 
-      <programlisting>hint.ppc.0.at="isa" 
+      <programlisting>hint.ppc.0.at="isa"
       hint.ppc.0.irq="7"</programlisting>
 
       <para>Ent&atilde;o verifique se o arquivo de configura&ccedil;&atilde;o do kernel tem
@@ -7202,9 +7206,9 @@ lp0: flags=8810&lt;POINTOPOINT,SIMPLEX,MULTICAST&gt; mtu 1500</screen>
 plip0: flags=8810&lt;POINTOPOINT,SIMPLEX,MULTICAST&gt; mtu 1500</screen>
 
       <note><para>O nome do dispositivo usado para a interface
-      paralela &eacute; diferente entre o &os;&nbsp;4.X 
-      (<devicename>lp<replaceable>X</replaceable></devicename>) 
-      e o &os;&nbsp;5.X 
+      paralela &eacute; diferente entre o &os;&nbsp;4.X
+      (<devicename>lp<replaceable>X</replaceable></devicename>)
+      e o &os;&nbsp;5.X
       (<devicename>plip<replaceable>X</replaceable></devicename>).</para></note>
 
       <para>Conecte o cabo laplink na interface paralela em ambos os
@@ -7231,7 +7235,7 @@ IP Address    10.0.0.1      10.0.0.2</programlisting>
       leia as p&aacute;ginas de manual &man.lp.4; e &man.lpt.4; para mais
       detalhes.</para>
 
-      <para>Voc&ecirc; deve tamb&eacute;m adicionar ambas os sistemas ao 
+      <para>Voc&ecirc; deve tamb&eacute;m adicionar ambas os sistemas ao
       <filename>/etc/hosts</filename>:</para>
 
       <programlisting>127.0.0.1	       localhost.my.domain localhost
@@ -7239,7 +7243,7 @@ IP Address    10.0.0.1      10.0.0.2</programlisting>
 10.0.0.2		host2.my.domain</programlisting>
 
       <para>Para confirmar que a conex&atilde;o funciona, v&aacute; a cada sistema e
-      fa&ccedil;a um ping para o outro.  Por exemplo, em 
+      fa&ccedil;a um ping para o outro.  Por exemplo, em
       <hostid>host1</hostid>:</para>
 
 	  <screen>&prompt.root; <userinput>ifconfig lp0</userinput>
@@ -7284,12 +7288,12 @@ round-trip min/avg/max/stddev = 2.530/2.643/2.774/0.103 ms</screen>
     </sect1info>
 
     <title>IPv6</title>
-    <para>IPv6 (tamb&eacute;m conhecido como IPng <quote>IP next 
-    generation</quote>) &eacute; a nova vers&atilde;o do bem conhecido protocolo 
-    IP (tamb&eacute;m conhecido como <acronym>IPv4</acronym>).  Como outros 
-    sistemas *BSD atuais, o FreeBSD inclui a implementa&ccedil;&atilde;o de 
+    <para>IPv6 (tamb&eacute;m conhecido como IPng <quote>IP next
+    generation</quote>) &eacute; a nova vers&atilde;o do bem conhecido protocolo
+    IP (tamb&eacute;m conhecido como <acronym>IPv4</acronym>).  Como outros
+    sistemas *BSD atuais, o FreeBSD inclui a implementa&ccedil;&atilde;o de
     refer&ecirc;ncia <acronym>KAME</acronym>.  Ent&atilde;o o seu sistema FreeBSD
-    vem com tudo o que voc&ecirc; via precisar para experi&ecirc;ncias com IPv6.  
+    vem com tudo o que voc&ecirc; via precisar para experi&ecirc;ncias com IPv6.
     Esta se&ccedil;&atilde;o enfoca na configura&ccedil;&atilde;o e ativa&ccedil;&atilde;o do IPv6.</para>
 
     <para>No in&iacute;cio dos anos 90, as pessoas tomaram conhecimento do
@@ -7302,7 +7306,7 @@ round-trip min/avg/max/stddev = 2.530/2.643/2.774/0.103 ms</screen>
 	preocupa&ccedil;&atilde;o t&atilde;o grande, uma vez que espa&ccedil;os de endere&ccedil;os
 	privados (<hostid role="ipaddr">10.0.0.0/8</hostid>,
 	  <hostid role="ipaddr">192.168.0.0/24</hostid>,
-	  etc.) e a Tradu&ccedil;&atilde;o de Endere&ccedil;os de Rede (Network Address 
+	  etc.) e a Tradu&ccedil;&atilde;o de Endere&ccedil;os de Rede (Network Address
 	  Translation - <acronym>NAT</acronym>) est&atilde;o sendo empregados.</para>
       </listitem>
 
@@ -7317,7 +7321,7 @@ round-trip min/avg/max/stddev = 2.530/2.643/2.774/0.103 ms</screen>
     <itemizedlist>
       <listitem>
 	<para>Espa&ccedil;o de endere&ccedil;amento de 128 bits.  Em outras
-	palavras, existem te&oacute;ricos 
+	palavras, existem te&oacute;ricos
 	  340,282,366,920,938,463,463,374,607,431,768,211,456
 	  endere&ccedil;os dispon&iacute;veis.  Isto significa que s&atilde;o
 	  aproximadamente 6.67 * 10^27 endere&ccedil;os IPv6 por metro
@@ -7405,7 +7409,7 @@ round-trip min/avg/max/stddev = 2.530/2.643/2.774/0.103 ms</screen>
       as interfaces pertencentes ao grupo multicast.</para>
 
 	<note><para>O endere&ccedil;o de difus&atilde;o (broadcast) IPv4
-	(normalmente <hostid role="ipaddr">xxx.xxx.xxx.255</hostid>) 
+	(normalmente <hostid role="ipaddr">xxx.xxx.xxx.255</hostid>)
 	&eacute; expresso por endere&ccedil;os multicast em IPv6.</para></note>
 
       <para>Endere&ccedil;os IPv6 Reservados:</para>
@@ -7415,7 +7419,7 @@ round-trip min/avg/max/stddev = 2.530/2.643/2.774/0.103 ms</screen>
 	::			128 Bits			n&atilde;o especificado cf.  0.0.0.0 em endere&ccedil;o IPv4
 	::1			128 Bits			endere&ccedil;o loopback cf.  127.0.0.1 em IPv4
 	::00:xx:xx:xx:xx	96 Bits				IPv4 embutido	Os 32 bits mais baixos s&atilde;o os
-								endere&ccedil;os	IPv4.  Tamb&eacute;m chamado 
+								endere&ccedil;os	IPv4.  Tamb&eacute;m chamado
 								<quote>Endere&ccedil;o IPv4 compat&iacute;vel com IPv6
 								</quote>
 	::ff:xx:xx:xx:xx	96 Bits		IPv4 mapeado    Os 32 bits mais baixos s&atilde;o os
@@ -7435,25 +7439,25 @@ round-trip min/avg/max/stddev = 2.530/2.643/2.774/0.103 ms</screen>
     <sect2>
       <title>Lendo Endere&ccedil;os IPv6</title>
       <para>A forma can&ocirc;nica &eacute; representada como: <hostid
-      role="ip6addr">x:x:x:x:x:x:x:x</hostid>, cada 
-      <quote>x</quote> sendo um valor hexadecimal de 16 
+      role="ip6addr">x:x:x:x:x:x:x:x</hostid>, cada
+      <quote>x</quote> sendo um valor hexadecimal de 16
       Bits.  Por exemplo <hostid
       role="ip6addr">FEBC:A574:382B:23C1:AA49:4592:4EFE:9982</hostid></para>
 
-      <para>Freq&uuml;entemente um endere&ccedil;o ter&aacute; longas subs&eacute;ries 
+      <para>Freq&uuml;entemente um endere&ccedil;o ter&aacute; longas subs&eacute;ries
       compostas por zerosr, ent&atilde;o cada subs&eacute;rie pode ser abreviada por
-      <quote>::</quote>. Por exemplo <hostid 
-      role="ip6addr">fe80::1</hostid> corresponde &agrave; forma can&ocirc;nica 
-      <hostid 
+      <quote>::</quote>. Por exemplo <hostid
+      role="ip6addr">fe80::1</hostid> corresponde &agrave; forma can&ocirc;nica
+      <hostid
       role="ip6addr">fe80:0000:0000:0000:0000:0000:0000:0001</hostid></para>
 
       <para>Uma terceira forma &eacute; escrever a &uacute;ltima parte de 32 Bits na
-      forma conhecida (decimal), estilo IPv4, com pontos 
-      <quote>.</quote> como separadores.  Por exemplo, 
+      forma conhecida (decimal), estilo IPv4, com pontos
+      <quote>.</quote> como separadores.  Por exemplo,
       <hostid role="ip6addr">2002::10.0.0.1</hostid> corresponde &agrave;
       representa&ccedil;&atilde;o can&ocirc;nica (hexadecimal)
       <hostid role="ip6addr">2002:0000:0000:0000:0000:0000:0a00:0001</hostid>
-       que por sua vez equivale a escrever 
+       que por sua vez equivale a escrever
        <hostid role="ip6addr">2002::a00:1</hostid></para>
 
 
@@ -7532,10 +7536,10 @@ gif0: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1280
 
 	<note><para>Em caso de voc&ecirc; estar intrigado pelo endere&ccedil;o
 	<hostid role="ip6addr">ff02:1%gif0</hostid>, isto &eacute; um
-	endere&ccedil;o multicast.  <literal>%gif0</literal> indica que o 
-	endere&ccedil;o multicast na interface de rede 
-	<devicename>gif0</devicename> deve ser usado.  Uma vez que 
-	n&oacute;s usamos <command>ping</command> para um endere&ccedil;o multicast, 
+	endere&ccedil;o multicast.  <literal>%gif0</literal> indica que o
+	endere&ccedil;o multicast na interface de rede
+	<devicename>gif0</devicename> deve ser usado.  Uma vez que
+	n&oacute;s usamos <command>ping</command> para um endere&ccedil;o multicast,
 	o outro ponto final do t&uacute;nel deve responder tamb&eacute;m).</para></note>
 
       <para>Agora, configurar a rota para sua conex&atilde;o ao 6bone deve
