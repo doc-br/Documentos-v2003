@@ -1,3 +1,12 @@
+<!--
+     The FreeBSD Documentation Project
+     The FreeBSD Brazilian Portuguese Documentation Project
+
+     Original revision: 1.15
+
+     $FreeBSD$
+-->
+
 <!DOCTYPE article PUBLIC "-//FreeBSD//DTD DocBook V4.1-Based Extension//EN" [
 <!ENTITY % man PUBLIC "-//FreeBSD//ENTITIES DocBook Manual Page Entities//EN">
 %man;
@@ -14,545 +23,435 @@
 <!ENTITY % mailing-lists PUBLIC "-//FreeBSD//ENTITIES DocBook Mailing List Entities//EN">
 %mailing-lists;
 
-<!ENTITY % trademarks PUBLIC "-//FreeBSD//ENTITIES DocBook Trademark Entities//EN">
-%trademarks;
-
 <!ENTITY % release PUBLIC "-//FreeBSD//ENTITIES Release Specification//EN">
 %release;
-
-<!ENTITY release.4x "4.<replaceable>X</replaceable>">
-<!ENTITY release.5x "5.<replaceable>X</replaceable>">
-<!ENTITY release.4last "4.9-RELEASE">
-<!ENTITY release.5branchpoint "5.3-RELEASE">
-
 ]>
 
 <article>
   <articleinfo>
-    <title>Early Adopter's Guide to &os; &release.current;</title>
+    <title>Guia dos Novos Adeptos ao FreeBSD 5.0-RELEASE</title>
 
     <authorgroup>
-      <corpauthor>The &os; Release Engineering Team</corpauthor>
+      <corpauthor>Time de Engenharia de Vers&otilde;es FreeBSD</corpauthor>
     </authorgroup>
 
-    <pubdate>$FreeBSD: src/release/doc/en_US.ISO8859-1/early-adopter/article.sgml,v 1.17 2003/12/02 05:54:35 bmah Exp $</pubdate>
+    <pubdate>$FreeBSD: freebsdbrasil/early-adopters.sgml,v 1.2 2003/12/11 19:51:46 eksffa Exp $</pubdate>
 
     <copyright>
       <year>2002</year>
       <year>2003</year>
-      <holder role="mailto:re@FreeBSD.org">The &os; Release
-        Engineering Team</holder>
+      <holder role="mailto:re@FreeBSD.org">Time de Engenharia de 
+        Vers&otilde;es FreeBSD</holder>
     </copyright>
-
-    <legalnotice id="trademarks" role="trademarks">
-      &tm-attrib.freebsd;
-      &tm-attrib.intel;
-      &tm-attrib.microsoft;
-      &tm-attrib.sparc;
-      &tm-attrib.general;
-    </legalnotice>
-
-    <abstract>
-      <para>This article describes the status of &os;
-	&release.current;, from the standpoint of users who may be new
-	to the &release.5x; series of releases or to &os; in general.
-	It presents some background information on release
-	engineering, some highlights of new features, and some
-	possible drawbacks that might be faced by early adopters.  It
-	also contains some of the future release engineering plans for
-	the 4-STABLE development branch and some tips on upgrading
-	existing systems.</para>
-    </abstract>
   </articleinfo>
 
   <sect1 id="intro">
-    <title>Introduction</title>
+    <title>Introdu&ccedil;&atilde;o</title>
 
-    <para>&os; &release.5x; marks the first new major version of &os; in
-      over two years.  Besides a number of new features, it also
-      contains a number of major developments in the underlying system
-      architecture.
-      Along with these advances, however, comes a system that
-      incorporates a tremendous amount of new and not-widely-tested
-      code.  Compared to the existing line of
-      &release.4x; releases, the first few &release.5x; releases
-      may have regressions
-      in areas of stability, performance, and occasionally
-      functionality.</para>
+    <para>FreeBSD 5.0 representa a primeira das novas vers&otilde;es principais do
+FreeBSD em cerca de dois anos. Al&eacute;m de v&aacute;rias novas funcionalidades,
+ainda cont&eacute;m uma s&eacute;rie de grandes modifica&ccedil;&otilde;es
+desenvolvidas na arquitetura subjacente do sistema. Junto com tais avan&ccedil;os,
+contudo, est&aacute; um sistema que incopora uma quantidade not&aacute;vel
+de c&oacute;digo novo e n&atilde;o-completamente-testado. Comparado &agrave;
+linha existente dos <foreignphrase>releases</foreignphrase> 4.<replaceable>X</replaceable>
+o 5.0 pode apresentar regress&otilde; quanto &agrave; estabilidade, performance,
+e ocasionalmente funcionalidade.</para>
 
-    <para>For these reasons, the &a.re; specifically
-      discourages users from updating from older &os; releases to
-      &release.current; unless they are aware of (and prepared to deal
-      with) possible regressions in the newer releases.
-      Specifically, for more conservative users, we recommend
-      running &release.4x; releases (such as
-      &release.4last;) for the near-term
-      future.  We feel that such users are probably best served by
-      upgrading to &release.5x; only after a
-      5-STABLE development branch has been created; this may be around
-      the time of &release.5branchpoint;.</para>
+    <para>Por essas ras&otilde;es, o Time de Engenharia de Vers&otilde;es
+	(<foreignphrase>The Release Engineering Team</foreignphrase>)
+	<emphasis>n&atilde;o</emphasis> aconselha a atualiza&cced
+	precipitada (&agrave;s cegas) de vers&otilde;es anteriores do FreeBSD para
+	o 5.0. Especificamente, aos usu&aacute;rios mais conservadores, recomendamos
+	a utiliza&ccedil;&atilde;o dos <foreignphrase>releases</foreignphrase> 4.
+	<replaceable>X</replaceable>(como o 4.7-RELEASE ou o 4.8-RELEASE que est&aacute;
+	por vir) &agrave; m&eacute;dio prazo futuro. Sentimos que tais usu&aacute;rios
+	provavelmente ser&atilde;o melhor atentidos com a atualiza&ccedil;&atilde;o para 
+	a s&eacute;rie 5.<replaceable>X</replaceable> apenas depois que um ramo de 
+	desenvolvimento 5-STABLE tiver sido criado; isso deve ser por volta do 5.1-RELEASE
+	ou do 5.2-RELEASE.
+    </para>
 
-    <para>(&os; &release.5x; suffers from what has been described as a
-      <quote>chicken and egg</quote> problem.  The entire project has
-      a goal of producing releases that are as stable and reliable
-      as possible.  This stability and reliability requires widespread
-      testing, particularly of the system's newer features.  However,
-      getting a large number of users to test the system, in a
-      practical sense, means building and distributing a
-      release first!)</para>
+    <para>(FreeBSD 5.0 sofre do que &eacute; chamado a quest&atilde;o da <quote>galinha
+	e o ovo</quote>. O projeto como um todo tem o objetivo de produzir um 5.0-RELEASE
+	que seja t&atilde;o est&aacute;vel e confi&aacute;vel quanto o poss&iacute;vel.
+	Tal estabilidade e confiabilida requer &nbsp;testes amplos, particularmente
+	as novas caracter&iacute;sticas do sistema. Contudo, conseguir um n&uacute;mero
+	consider&aacute;vel de usu&aacute;rios para testar o sistema, de um ponto
+	de vista pr&aacute;tico, implica na necessidade de criar e distribuir uma
+	vers&atilde;o de lan&ccedil;amento antes!)</para>
 
-    <para>This article describes some of the issues involved in
-      installing and running &os; &release.current;.  We begin with a
-      brief overview of the &os; release process.  We then present
-      some of the more noteworthy new features in &os; &release.current;, along
-      with some areas that may prove troublesome for unwary users.
-      For those users choosing to remain with 4-STABLE-based releases,
-      we give some of the short- to medium-term plans for this
-      development branch.  Finally, we present some notes on upgrading
-      existing &release.4x; systems to &release.current;.</para>
-
+    <para>Esse artigo descreve algumas das quest&otilde;es envolvidas na instala&ccedil;&ati
+	e uso do FreeBSD 5.0-RELEASE.Iniciamos com uma breve
+	vis&atilde;o geral do processo de lan&ccedil;amento do FreeBSD. Em seguida
+	apresentamos algumas das mais not&aacute;veis novas caracter&iacute;sticas
+	do FreeBSD 5.0, em conjunto com alguns pontos que podem implicar em alguns
+	desconfortos para os usu&aacute;rios inadvertidos. Para aqueles que preferirem
+	se manter nas vers&otilde;es baseadas no 4-STABLE, daremos previs&otilde;es
+	dos planos de curto &agrave; m&eacute;dio prazo para esse ramo de desenvolvimento.
+	Finalmente apresentamos algumas notas quanto &agrave; atualiza&ccedil;&atilde;o
+	dos sistemas 4.<replaceable>X</replaceable> existentes para o 5.0.</para>
   </sect1>
 
   <sect1 id="release-overview">
-    <title>An Overview of the &os; Release Process</title>
+    <title>Uma Vis&atilde;o Geral do Processo de Lan&ccedil;amento do &os</title>
 
-    <para>&os; employs a model of development that relies on multiple
-      development branches within the source code repository.  The main branch is called
-      <quote>CURRENT</quote>, and is referred to in the CVS repository
-      with the <literal>HEAD</literal> tag.  New features are
-      committed first to this branch; although this means that CURRENT
-      is the first to see new functionality, it also means that it
-      occasionally suffers from breakages as new features are
-      added and debugged.</para>
+    <para>&os emprega um modelo de desenvolvimento que utiliza m&uacute;ltiplos
+	ramos de desenvolvimento junto ao reposit&oacute;rio do c&oacute;digo fonte.
+	O ramo principal &eacute; chamado de <quote>CURRENT</quote>, e &eacute; referenciado
+	no reposit&oacute;rio CVS com a indica&ccedil;&atilde;o (<foreignphrase>>tag</foreignphrase>)
+	<literal>HEAD</literal>. Novas caracter&iacute;sitcas s&atilde;o adicionadas
+	primeiro nesse ramo; apesar disso dizer que o CURRENT &eacute; o primeiro
+	ramo &agrave; presenciar novas funcionalidades, tamb&eacute;m significa que
+	ocasionalmente ele sofre por falhas, &agrave; medida que novas caracter&iacute;sticas
+	s&atilde;o adicionadas e depuradas.</para>
 
-    <para>Most &os; releases are made from one of several
-      <quote>STABLE</quote> branches.  Features are only added to
-      these branches after some amount of testing in CURRENT.  At the
-      moment, only one STABLE branch is under active development; this
-      branch is referred to as <quote>4-STABLE</quote>, and all of the
-      &os; &release.4x; releases were based on
-      it.  This branch has the tag <literal>RELENG_4</literal> in the
-      CVS repository.</para>
+    <para>A maioria dos &os; <quote>releases</quote> s&atilde;o feitos &agrave; 
+      partir de um dos muitos ramos <quote>STABLE</quote>. 
+      Caracter&iacute;sticas s&atilde;o adicionadas nestes ramos apenas depois
+      de uma certa quantidade de testes no CURRENT. No momento, apenas um ramo
+      STABLE est&aacute; sob desenvolvimento ativo; esse ramo ramo &eacute; 
+      referido como <quote>4-STABLE</quote>, e todos os &os; 
+      4.<replaceable>X</replaceable>s&atilde;o baseados neste. Este ramo tem a
+      tag <literal>RELENG_4</literal> no reposit&oacute;rio CVS.</para>	   
 
-    <para>&os; 5.0, 5.1, and 5.2 are based on the CURRENT branch.  The
-      first of these releases was made after over two years of development
-      (prior to these, the
-      last release from HEAD was &os; 4.0, in March 2000).</para>
+    <para>&os; 5.0 &eacute; baseado no ramo CURRENT. Este &eacute; o primeiro
+      release deste ramo em mais de 2 anos (o &uacute;timo foi o &os; 4.0 
+      Mar&ccedil;o de 2000).</para>
 
-    <para>At some point after the release of &os; 5.0, a
-      <quote>5-STABLE</quote> branch will be created in the &os;
-      CVS repository with the branch tag <literal>RELENG_5</literal>.
-      The past two stable branches (3-STABLE and 4-STABLE) were
-      created immediately after their respective <quote>dot-oh</quote>
-      releases (3.0 and 4.0, respectively).  In hindsight, this
-      practice did not give sufficient time for either CURRENT
-      to stabilize before the new branches were
-      created.  This in turn resulted in wasted effort porting bug
-      fixes between branches, as well as some architectural changes
-      that could not be ported between branches at all.</para>
+    <para>Em um dado momento, ap&oacute;s o lan&ccedil;amento do &os; 5.0,
+      um ramo <quote>5-STABLE</quote> ser&aacute; criado no reposit&oacute;rio
+      CVS FreeBSD com a tag do ramo indicado <literal>RELENG_5</literal>.
+      Os Os &uacute;ltimos dois ramos est&aacute;veis (3-STABLE and 4-STABLE)
+      foram criados imediatamente ap&oacute;s seus respectivos lan&ccedil;amentos
+      <quote>ponto-zero</quote> (3.0 and 4.0,respectivamente). Em retrospecto, tal pr&aacute;tica
+      n&atilde;o deu tempo suficiente para o ramo CURRENT ou para o STABLE se estabilizarem
+      efetivamente, depois que os novos ramos foram criados.</para>
 
-    <para>Therefore, the release engineering team will only create the
-      5-STABLE branch in the CVS repository after we have found a
-      relatively stable state to use as its basis.  It is likely that
-      there will be 
-      multiple releases in the &release.5x; series
-      before this happens; we estimate
-      that the 5-STABLE branch will be created around the time of
-      &release.5branchpoint;.</para>
+    <para>Consequ&ecirc;ntemente, o time de engenharia de vers&otilde;es criar&aacute;
+      o ramo 5-STABLE no reposit&oacute;rio CVS apenas depois que concluirem que o
+      ramo est&aacute; em um estado relativamente est&aacute;vel, para ser usado
+      como base para esse ramo. &Eacute; prov&aacute;vel que existam alguns
+      <quote>releases</quote>na s&eacute;rie 5.<replaceable>X</replaceable>antes que
+      isso aconte&ccedil;a; nossas estimativa s&atilde;o que o ramo 5-STABLE seja
+      criado um pouco ap&oacute;s o 5.1-RELEASE ou o 5.2-RELEASE.</para>
 
-    <para>More information on &os; release engineering processes can be found
-      on the <ulink
-      url="http://www.FreeBSD.org/releng/index.html">Release
-      Engineering Web pages</ulink> and in the <ulink
-      url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/articles/releng/index.html"><quote>&os; Release
-      Engineering</quote></ulink> article.  Specific issues for the upcoming
-      5-STABLE development branch can be found in <ulink
-      url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/articles/5-roadmap/index.html"><quote>The
-      Roadmap for 5-STABLE</quote></ulink>.</para>
+    <para>Mais informa&ccedil;&otilde;es sobre os processos de engenharia de vers&otilde;es
+      do &os; podem ser encontradas nas <ulink
+      url="http://www.FreeBSD.org/releng/index.html">p&aacute;ginas
+      Web sobre Engenharia de Vers&otilde;es</a> e no artigo sobre a <ulink
+      url="http://www.freebsd.org/doc/en_US.ISO8859-1/articles/releng/index.html">Engenharia
+      de Vers&otilde;es do &os;.</para>
 
   </sect1>
 
   <sect1 id="new">
-    <title>New Features</title>
+    <title>Novidades</title>
 
-    <para>A large attraction of &os; &release.5x; is a number of new
-      features.  These new features and functionality generally involve
-      large architectural changes that were not feasible to port back to
-      the &os; 4-STABLE development branch.  (By contrast, many
-      self-contained enhancements, such as new device drivers or
-      userland utilities, have already been ported.)  A brief, but not
-      exhaustive list includes:</para>
+    <para>Uma das grandes atra&ccedil;&otilde;es do &os; 5.0 &eacute; o n&uacute;mero
+      de novidades. Tais novidades e funcionalidades geralmente envolvem grandes
+      mudan&ccedil;as arquiteturais que n&atilde;o s&atilde;o vi&aacute;veis de
+      serem convertidas ("portadas") devolta para o ramo de desenvolvimento do &os;
+      4-STABLE. (Em contrastando, muitas melhorias aut&ocirc;nomas, como dispositivos
+      de controle ou utilit&aacute;rios do n&iacute;vel de usu&aacute;rio, foram
+      convertidas.) Uma lista breve, mas n&atilde;o exaustiva, incl&uacute;:</para>
 
     <itemizedlist>
       <listitem>
-        <para>SMPng: The <quote>next generation</quote> support for
- 	  SMP machines (work in progress).
- 	  Ongoing work aims to perform fine-grained locking of various
- 	  kernel subsystems to increase the number of threads of
- 	  execution that can be running in the kernel.  More
- 	  information can be found on the 
-	  <ulink url="http://www.FreeBSD.org/smp/">FreeBSD SMP
- 	  Project</ulink> page.</para>
+        <para>SMPng: O suporte da <quote>proxima geracao</quote> m&aacute;quinas SMP
+          (em andamento). No momento o suporte &agrave; m&uacute;ltiplos processadores
+          sendo utilizados ao mesmo tempo, no kernel, &eacute; parcial.</para>
       </listitem>
 
       <listitem>
-	<para>KSE:  Kernel Scheduled Entities allow a single process
-	  to have multiple kernel-level threads, similar to Scheduler
-	  Activations.  The <filename>libkse</filename>
-	  and <filename>libthr</filename> threading libraries make this
-	  feature available to multi-threaded userland programs,
-	  using the &man.pthread.3; API.</para>
+        <para>KSE: Kernel Scheduled Entities ou Entidades Agendadas pelo Kernel
+          permitem que um &uacute;nico processo tenha m&uacute;ltiplas <foreignphrase>threads</foreignphrase>, 
+          no n&iacute;vel de kernel, similar ao Agendamento de Ativa&ccedil;&otildees
+          (<foreignphrase>Scheduler Activations</foreignphrase>).</para>
+      </listitem>
+ 
+      <listitem>
+        <para>Novas arquiteturas: Suporte &agrave;s arquiteturas sparc64 e ia64,
+          em adi&ccedil;&atilde;o &agrave;s (anteriormente dispon&iacute;veis) i386,
+          pc98 e Alpha.</para>
       </listitem>
 
       <listitem>
-	<para>New architectures:  Support for the sparc64, ia64, and amd64
-	  architectures, in addition to the i386, pc98, and
-	  alpha.</para>
+        <para>GCC: A cadeia de ferramentas de compila&ccedil;&atilde;o &eacute;
+          baseada agora no GCC 3.2.1, ao inv&eacute;s do GCC 2.95.<replaceable>X</replaceable>.</para>
+        </para>
+      </listitem> 
+ 
+      <listitem>
+        <para>MAC: Suporte &agrave; pol&iacute;ticas Mandat&oacute;rias de Controle
+          de Acesso, extens&iacute;veis e carreg&aacute;veis.</para>
       </listitem>
 
       <listitem>
-	<para>GCC:  The compiler toolchain is now based on GCC
-	  3.3.<replaceable>X</replaceable>, rather than GCC
-	  2.95.<replaceable>X</replaceable>.</para>
+        <para>GEOM: Um <foreignphrase>framework</foreignphrase>flex&iacute;vel para transforma&ccedil;&ograve;es
+          de requisi&ccedil;&otilde;es de E/S. Uma aplica&ccedil;&atilde;o experimental
+          de encripta&ccedil;&atilde;o de disco foi desenvolvida, baseada no GEOM.</para>
       </listitem>
 
       <listitem>
-	<para>MAC:  Support for extensible, loadable Mandatory Access
-	  Control policies.</para>
+        <para>FFS: O sistema de arquivo FFS (<foreignphrase>Fast Filesystem</foreignphrase>)
+          suporta agora opera&ccedil;&otilde;es &man.fsck.8; em segundo plano e <foreignphrase>snapshots</foreignphrase>
+          de sistemas de arquivos.
       </listitem>
 
       <listitem>
-        <para>GEOM:  A flexible framework for transformations of disk
-	  I/O requests.  The GBDE experimental disk encryption facility has
-	  been developed based on GEOM.</para>
+        <para>UFS2: Um novo formato UFS2 em-disco foi adicionado, que suporta atributos
+          extendidos por-arquivo bem como arquivos de maior tamanho.</para>
       </listitem>
 
       <listitem>
-	<para>FFS: The FFS filesystem now supports background
-          &man.fsck.8; operations (for faster crash recovery) and
-          filesystem snapshots.</para>
-      </listitem>
-
-      <listitem>
-	<para>UFS2:  A new UFS2 on-disk format has been added, which
-	  supports extended per-file attributes and larger file
-	  sizes.  UFS2 is now the default format for &man.newfs.8;.
-	  On all platforms except for pc98, filesystems created from
-	  within &man.sysinstall.8; will use UFS2 by default.</para>
-      </listitem>
-
-      <listitem>
-        <para>Cardbus:  Support for Cardbus devices.</para>
-      </listitem>
-
-      <listitem>
-	<para>Bluetooth:  Support for Bluetooth devices.</para>
+        <para>Cardbus: Suporte &agrave; dispositivos Cardbus.</para>
       </listitem>
 
     </itemizedlist>
 
-    <para>A more comprehensive list of new features can be found in
-      the release notes for the various &os; &release.5x; releases.</para>
+    <para>Uma lista mais compreensiva das novidades pode ser encontrada nas notas
+      de lan&ccedil;amento do &os; 5.0.</para>
 
   </sect1>
 
   <sect1 id="drawbacks">
-    <title>Drawbacks to Early Adoption</title>
+    <title>Consequ&ecirc;ncias da Ado&ccedil;&atilde;o Antecipada</title>
 
-    <para>Along with the new features of &os; &release.5x; come some areas
-      that can cause problems, or at least can lead to unexpected
-      behavior.  Generally, these come from the fact that a number of
-      features are works-in-progress.  A partial list of these
-      areas of difficulty includes:</para>
+    <para>Junto com as novas caracter&iacute;sticas do &os; 5.0 est&atilde;o algumas
+      &aacute;reas que podem causar problemas, ou ao menos propiciar comportamentos
+      inesperados. Geralmente, isso se deve ao fato que uma s&eacute;rie das novas
+      caracter&iacute;sticas s&atilde;o desenvolvimento em progresso. Uma lista 
+      parcial destas &aacute;reas de dificuldade inclui:</para>
 
     <itemizedlist>
 
       <listitem>
-        <para>A number of features are not yet finished.  Examples
-	  from the feature list above include SMPng and KSE.  While
-	  suitable for testing and experimentation, these features may
-	  not be ready for production use.</para>
+        <para>Uma s&eacute;rie de caracter&iacute;sticas ainda n&atilde;o est&atilde;o
+          terminadas. Exemplos da lista anunciada acima incluem SMPng e KSE.</para>
       </listitem>
 
       <listitem>
-        <para>Because of changes in kernel data structures and
-          ABIs/APIs, third-party binary device drivers will require
-          modifications to work correctly under &os; 5.0.  There is
-          a possibility of more minor ABI/API changes before the
-          5-STABLE branch is created, particularly on newer machine
-          architectures.  In some (hopefully rare) cases,
-          user-visible structures may change, requiring recompiling of
-          applications or reinstallation of ports/packages.</para>
+        <para>Devido &agrave; modifica&ccedil;&otilde;es em estrutudas e ABIs/APIs
+          de dados do kernel, dispositivos de controle de terceiros ir&atilde;o precisar
+          de modifica&ccedil;&otilde;es para funcionar corretamente sob &os; 5.0. Existe
+          ainda a possibilidade de outras mudan&ccedil;as menores na ABI/API
+          antes da cria&ccedil;&atilde;o do ramo 5-STABLE.</para>
       </listitem>
 
       <listitem>
-        <para>Several parts of &os;'s base system functionality
-          have been moved to the Ports Collection.  Notable examples
-          include <application>Perl</application>,
-          <application>UUCP</application>, and most (but not all)
-          games.  While these programs are still supported, their
-          removal from the base system may cause some confusion.</para>
+        <para>In&uacute;meras partes das funcionalidades do &os; que antes faziam
+          parte do sistema base foram movidas para a Cole&ccedil;&atilde;o de Ports.
+          Exemplos not&aacute;veis incluem <application>Perl</application>,
+          <application>UUCP</application>, e a maioria (mas n&atilde;o todos) dos jogos.
+          Apesar destes programas continuarem plenamente suportados, sua remo&ccedil;&atilde;o
+          do sistema base pode gerar alguma confus&atilde;o.</para>
+      </listitem>
+        
+      <listitem>
+        <para>Alguns pacotes ou Ports n&atilde;o podem ser compilados, ou n&atilde;o
+          funcionam corretamente no &os; 5.0, ainda que o fa&ccedil;am sob &os;
+          4-STABLE. Geralmente esses problemas s&atilde;o causados pelas modifica&ccedil;&otilde;es
+          na cadeia de ferramentas de desenvolvimento do sistema, ou pela limpeza feita
+          nos arquivos de cabe&ccedil;alho (<foreignphrase>header files cleanup</foreignphrase>).</para>
+      </listitem> 
+ 
+     <listitem> 
+       <para>Pelo fato do &os; 5.0 ser o primeiro lan&ccedil;amento do ramo CURRENT
+         em quase dois anos, muitas de suas caracter&iacute;sticas est&atilde;o sendo
+         expostas pela primeira vez. Muitas destas novidades (como o SMPng) tem impacto
+         global no kernel.</para>
+     </listitem>
+
+      <listitem>
+        <para>Uma certa quantia de c&oacute;digo para depura&ccedil;&atilde;o e diagn&oacute;stico
+          continua existindo de forma &agrave; ajudar na identifica&ccedil;&atilde;o
+          de problemas nas novas tecnologias do FreeBSD 5.0. Isto pode causar uma performance
+          um pouco inferior no &os; 5.0 em rela&ccedil;&atilde;o ao 4-STABLE.</para>
       </listitem>
 
       <listitem>
-	<para>Some parts of the &os; base system have fallen into a
-	  state of disrepair due to a lack of users and maintainers.
-	  These have been removed.  Specific examples include the
-	  generation of a.out-style executables, XNS networking
-	  support, and the X-10 controller driver.</para>
+        <para>Novidades s&atilde;o adicionadas no ramo de desenvolvimento 4-STABLE
+          apenas depois de j&aacute; estarem <quote>acalmadas</quote> no -CURRENT. O &os; 5.0
+          n&atilde;o tem a influ&ecirc;ncia estabilizadora proporcionada pelo ramo -STABLE
+          (&eacute; prov&aacute;vel que o ramo de desenvolvimento 5-STABLE seja criado
+          em algum momento posterior ao 5.1-RELEASE ou 5.2-RELEASE.)</para>
       </listitem>
 
       <listitem>
-        <para>A number of ports and packages do not build or do not
-          run correctly under &os; &release.5x;, whereas they did under &os;
-          4-STABLE.  Generally these problems are caused by compiler
-          toolchain changes or cleanups of header files.  In some
-          cases they are caused by changes in kernel or device
-          support.</para>
-      </listitem>
-
-      <listitem>
-        <para>Many &os; &release.5x; features are
-          seeing wide exposure for the first time.  Many of these
-          features (such as SMPng) have broad impacts on the
-          kernel, and it may be difficult to gauge their effects on
-          stability and performance.</para>
-      </listitem>
-
-      <listitem>
-        <para>A certain amount of debugging and diagnostic code is
-          still in place to help track down problems in &os; &release.5x;'s new
-          features.  This may cause &os; &release.5x; to perform more slowly
-          than 4-STABLE.</para>
-      </listitem>
-
-      <listitem>
-        <para>Features are only added to the 4-STABLE development
-          branch after a <quote>settling time</quote> in -CURRENT.
-          &os; &release.5x; does not have the stabilizing influence of a
-          -STABLE branch.  (It is likely that the 5-STABLE development
-          branch will be created sometime after 
-          &release.5branchpoint;.)</para>
-      </listitem>
-
-      <listitem>
-	<para>Documentation (such as the &os; <ulink
+	<para>Documenta&ccedil;&atilde;o (como &os; <ulink
           url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/index.html">Handbook</ulink>
-          and <ulink
+          e <ulink
           url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/faq/index.html">FAQ</ulink>)
-          may not reflect changes recently made to &os; &release.5x;.</para>
+          pode n&atilde;o refletir as mudan&ccedil;as recentemente feitas no &os; 5.0.</para>
       </listitem>
 
     </itemizedlist>
 
-    <para>Because a number of these drawbacks affect system stability, the
-      release engineering team recommends that more conservative sites
-      and users stick to releases based on the 4-STABLE branch until
-      the &release.5x; series is more polished.  While we believe that
-      many initial problems with stability have been fixed, some
-      issues with performance are still being addressed by
-      works-in-progress.  We also note that best common practices in
-      system administration call for trying operating system upgrades
-      in a test environment before upgrading one's production, or
-      <quote>mission-critical</quote> systems.</para>
+    <para> Por v&aacute;rios destes contratempos afetarem a estabilidade do sistema,
+      o time de engenharia de vers&otilde;es recomenda que os s&iacute;tios e usu&aacute;rios
+      mais conservadores mantenham-se &agrave;s vers&ograve;es baseadas no ramo
+      4-STABLE at&eacute; que a s&eacute;rie 5.<replaceable>X</replaceable>esteja mais polida.</para>
 
   </sect1>
 
   <sect1 id="plans-stable">
-    <title>Plans for the 4-STABLE Branch</title>
+    <title>Planos para o ramo 4-STABLE</title>
 
-    <para>It is important to note that even though releases are being
-      made in the &release.5x; series, support for &release.4x;
-      releases will continue for some time.
-      Indeed, &os; 4.8 was released two months after
-      5.0, in April 2003, followed by 4.9, in October 2003.
-      Future releases from the 4-STABLE branch (if any) will
-      depend on several factors.  The most important of these
-      is the existence and stability of the 5-STABLE branch.  If
-      CURRENT is not sufficiently stable to allow the creation of a
-      5-STABLE branch, this may require and permit more releases from
-      the 4-STABLE branch.  Until the last declared release
-      on the 4-STABLE branch, new features may be merged from <literal>HEAD</literal> at
-      the discretion of developers, subject to existing release
-      engineering policies.</para>
+    <para>O lan&ccedil;amento do &os; 5.0 n&atilde;o significa o fim do ramo 4-STABLE.
+      Existir&aacute; no m&iacute;nimo mais uma vers&atilde;o nesse ramo, chamada
+      4.8-RELEASE, atualmente agendado para 1 de Mar&ccedil;o de 2003.</para>
+      
+    <para>No momento da prepara&ccedil;&atilde;o deste documento, o time de engenharia
+      de vers&otilde;es n&atilde;o tem planos definidos para vers&otilde;es futuras
+      (p&oacute;s 4.8) no ramo 4-STABLE. Contudo, o 4.9-RELEASE ou at&eacute; mesmo
+      4.10-RELEASE s&atilde;o possibilidades. Qualquer lan&ccedil;amento futuro
+      deste ramo ir&atilde;o depender de in&uacute;meros fatores. O mais importante
+      deles &eacute; a exist&ecirc;ncia e estabilidade do ramo 5-STABLE. Enquanto
+      CURRENT n&atilde;o for suficientemente est&aacute;vel para permitir a cria&ccedil;&atilde;o
+      do ramo 5-STABLE, poder&aacute; ser necess&aacute;rio e permitido o lan&ccedil;amento
+      de mais vers&otilde;es do ramo 4-STABLE. At&eacute; a &uacute;ltima vers&atilde;o
+      declarada do ramo 4-STABLE, novas funcionalidades poder&atilde;o ser incorporadas
+      do ramo mais alto, conforme &nbsp;decis&atilde;o dos desenvolvedores, de 
+      acordo com as pol&iacute;ticas existentes de engenharia de vers&otilde;es.</para>
 
-    <para>To some extent, the release engineering team (as well as the
-      developer community as a whole) will take into
-      account user demand for future 4-STABLE releases.  This demand,
-      however, will need to be balanced with release engineering
-      resources (particularly developers' time, computing resources, and mirror
-      archive space).  We note that in general, the &os; community 
-      (both users and developers) has shown a preference for
-      moving forward with new features in 
-      the &release.5x; branch and beyond, due to the difficulty
-      involved in backporting (and maintaining) new functionality in
-      &release.4x;.</para>
+    <para>Em extens&atilde;o, o time de engenharia de vers&otilde;es levar&aacute;
+      em conta a demanda dos usu&aacute;rios para futuros <foreignphrase>releases</foreignphrase>
+      4-STABLE. Tal demando, contudo, necessitar&aacute; ser balanceada com os recursos de
+      engenharia de vers&otilde;es (em termos de pessoal, recursos computacionais
+      e espa&ccedil;o para armazenamento espelhado).</para>
 
-    <para>The &a.security-officer; will continue to support releases
-      made from the 4-STABLE branch in accordance with their published
-      policies, which can be found on the <ulink
-      url="http://www.FreeBSD.org/security/index.html">Security
-      page</ulink> on the &os; web site.  Generally, the two most
-      recent releases from any branch will be supported with respect
-      to security advisories and security fixes.  At its discretion,
-      the team may support other releases for specific issues.</para>
-
-    <para>At this point, the release engineering team has no specific
-      plans for future releases from the 4-STABLE development branch.
-      It seems likely that any future releases (if
-      any) from this branch will be lightweight,
-      <quote>point</quote> releases.  These will probably carry
-      4.9.<replaceable>X</replaceable> version numbers, to indicate
-      that they are not intended to provide large amount of new
-      functionality compared to &release.4last;.  In general, these
-      releases will emphasize security fixes, bug fixes, and device
-      driver updates (particularly to accommodate new hardware easily
-      supported by existing drivers).  Major new features (especially those
-      requiring infrastructure support added in &release.5x;) will
-      probably not be added in these releases.</para>
-
-  </sect1>
+    <para>O Time de Seguran&ccedil;a (<foreignphrase>The Security Officer Team</foreignphrase>) 
+      &a.security-officer; continuar&aacute; suportando vers&otilde;es originadas &agrave; partir
+      do ramo 4-STABLE de acordo com suas pol&iacute;ticas publicadas, que podem
+      ser encontradas na <ulink
+      url="http://www.FreeBSD.org/security/index.html">P&aacute;gina de Seguran&ccedil;a</ulink>
+      do s&iacute;tio WWW do &os;. Geralmente, as duas vers&otilde;es mais recentes de qualquer
+      ramo ser&atilde;o mantidas com suporte, em respeito &agrave; <foreignphrase>advisories</foreignphrase>
+      e corre&ccedil;&otilde;es de seguran&ccedil;a. Aos seus crit&eacute;rios,
+      a equipe poder&aacute; suportar outras vers&otilde;es.</para>
+      
+   </sect1>
 
   <sect1 id="upgrade">
-    <title>Notes on Upgrading from &os; &release.4x;</title>
+    <title>6 Notas de Atualiza&ccedil;&atilde;o</title>
 
-    <para>For those users with existing &os; systems, this section
-      offers a few notes on upgrading a &os;
-      &release.4x; system to
-      &release.5x;.  As with any &os; upgrade, it
-      is crucial to read the release notes and the errata for the
-      version in question, as well as
-      <filename>src/UPDATING</filename> in the case of source upgrades.</para>
+    <para>Aos usu&aacute;rios que j&aacute; tem um sistema &os; essa se&ccedil;&atilde;o
+      oferece algumas notas quanto &agrave; atualiza&ccedil;&atilde;o de um sistema
+      FreeBSD 4.<replaceable>X</replaceable> para um 5.<replaceable>X</replaceable>. Como qualquer
+      atualiza&ccedil;&atilde;o do &os; &eacute; crucial que as notas de lan&ccedil;amento e a errata
+      da vers&atilde;o em quest&atilde;o sejam lidas, bem como o <filename>src/UPDATING</filename>
+      para atualiza&ccedil;&otilde;es &agrave; partir do c&oacute;digo fonte.</para>
 
     <sect2>
-      <title>Binary Upgrades</title>
+      <title>6.1 Atualiza&ccedil;&otilde;es Bin&aacute;rias</title>
 
-      <para>Probably the most straightforward approach is that of
-        <quote>backup everything, reformat, reinstall, and restore
-        everything</quote>.  This eliminates problems of incompatible
-        or obsolete executables or configuration files polluting the
-        new system.  It allows new filesystems to be created to take
-        advantage of new functionality (most notably, the UFS2
-        defaults).</para>
+      <para>Provavelmente a abordagem mais direta seja <quote>fa&ccedil;a c&oacute;pias
+        de seguran&ccedil;a de todos os dados relevantes, reformate, reinstale e 
+        restaure todos os dados copiados</quote>. Isto elimina problemas quanto &agrave;
+        execut&aacute;veis obsoletos ou incomat&iacute;veis, ou arquivos de configura&ccedil;&atilde;o
+        inadequados ao novo sistema.</para>
 
-      <para>As of this time, the binary upgrade option in
-        &man.sysinstall.8; has not been well-tested for
-        cross-major-version upgrades.  Using this feature is not
-        recommended.  In particular, a binary upgrade will leave
-        behind a number of files that are present in &os;
-        &release.4x; but not in &release.5x;.  These obsolete
-        files may create some problems.  Examples of these files
-        include old C++ headers, programs moved to the Ports
-        Collection, or shared libraries that have moved to support
-        dynamically-linked root filesystem executables.</para>
+      <para>At&eacute; esse momento, a op&ccedil;&atilde;o de atualiza&ccedil;&atilde;o
+        bin&aacute;ria no &man.sysinstall.8; n&atilde;o foi muito testada quanto &agrave; atualiza&ccedil;&otilde;es
+        entre vers&otilde;es principais (<foreignphrase>cross-major-version upgrades</foreignphrase>).
+        Utilizar essa funcionalidade n&atilde;o &eacute; recomend&aacute;vel. Em
+        particular, porque uma atualiza&ccedil;&atilde;o bin&aacute;ria ir&aacute;
+        manter uma s&eacute;rie de arquivos presentes no FreeBSD 4.<replaceable>X</replaceable>mas
+        desnecess&aacute;rios no 5.0. Tais arquivos obsoletos podem criar alguns problemas.</para>
+ 
+      <para>Em plataformas i386 e pc98, existe uma aplica&ccedil;&atilde;o, UserConfig,
+        no 4-STABLE que permite configura&ccedil;&atilde;o de dispositivos ISA no
+        momento da inicializa&ccedil;&atilde;o pela m&iacute;dia de instala&ccedil;&atilde;o.
+        No &os; 5.0, tal funcionalidade foi substitu&iacute;da em parte pelo mecanismo
+        &man.device.hints.5; (ele permite que os mesms par&acirc;metros sejam especificados, mas com uma
+        interface bastante diferente).</para>
+           
+       <para>Instala&ccedil;&otilde;es bin&aacute;rias baseadas em disquete podem precisar
+        que um terceiro (novo) disco seja baixado, que oferece dispositivos de controle
+        adicionais, em m&oacute;dulos do kernel. Essa imagem de disquete <filename>drivers.flp</filename>
+        geralmente ser&aacute; encontrado no mesmo lugar das imagens <filename>kern.flp</filename> e
+        <filename>mfsroot.flp</filename>.</para>
 
-      <para>On the &i386; and pc98 platforms, a UserConfig utility
-        exists on 4-STABLE to allow boot-time configuration of ISA
-        devices when booting from installation media.  Under &os;
-        &release.5x;, this functionality has been replaced in part by the
-        &man.device.hints.5; mechanism (it allows specifying the same
-        parameters, but with a very different interface).</para>
-
-      <para>Floppy-based binary installations may require downloading
-        a third, new floppy image holding additional device drivers
-        in kernel modules.  This <filename>drivers.flp</filename>
-        floppy image will generally be found in the same location as
-        the usual <filename>kern.flp</filename> and
-        <filename>mfsroot.flp</filename> floppy images.</para>
-
-      <para>CDROM-based installations on the &i386; architecture now use
-        a <quote>no-emulation</quote> boot loader.  This allows, among
-        other things, the use of a <literal>GENERIC</literal> kernel,
-        rather than the stripped-down kernel on the floppy images.  In
-        theory, any system capable of booting the &microsoft; &windowsnt;
-        4 installation CDROMs should be able to cope with the &os;
-        &release.5x; CDROMs.</para>
+      <para>Instala&ccedil;&otilde;es baseadas no CDROM em arquitetura i386 agora
+        faz uso de um <quote>sem-emula&ccedil;&atilde;o</quote> <foreignphrase>boot loader</foreignphrase>.
+        Isto permite, entre outras coisas, o uso de um kernel&nbsp; <literal>GENERIC</literal>
+        ao inv&eacute;s de um kernel diminu&iacute;do nas imagens de disquete. Em
+        teoria, qualquer sistema capaz de carregar os CDROMs de instala&ccedil;&atilde;o
+        do Microsoft Windows NT 4 deve conseguir lidar com os CDROMs do FreeBSD 5.0.</part>
 
     </sect2>
 
     <sect2>
-      <title>Source Upgrades</title>
+      <title>6.2 Atualiza&ccedil;&otilde;es &agrave; partir do Fonte</title>
 
-      <para>Reading <filename>src/UPDATING</filename> is absolutely
-        essential.  The section entitled <quote>To upgrade from
-        4.x-stable to current</quote> contains a step-by-step update
-        procedure.  This procedure must be followed exactly, without
-        making use of the <quote>shortcuts</quote> that some users
-        occasionally employ.</para>
+      <para>A leitura do <filename>src/UPDATING</filename> &eacute; absolutamente
+        essencial. A se&ccedil;&atilde;o chamada <quote>Atualizando de 4.x-stable para
+        current</quote> cont&eacute;m os procedimentos de atualiza&ccedil;&atilde;o passo-a-passo.
+        Tais procedimentos devem ser seguidos com exatid&atilde;o, sem os <quote>atalhos</quote>
+        que alguns usu&aacute;rios ocasionalmente aplicam.</para>
 
     </sect2>
 
     <sect2>
-      <title>Common Notes</title>
+      <title>6.3 Notas Gerais</title>
 
-      <para><application>Perl</application> has been removed from the
-        base system, and should be installed either
-        from a pre-built package or from the Ports Collection.
-        Building Perl as a part of the base system created a number of
-        difficulties which made updates problematic.  
-        The base system utilities that used Perl have either
-        been rewritten (if still applicable) or discarded (if
-        obsolete).  &man.sysinstall.8; will now install the
-        Perl package as a part of most distribution sets, so most
-        users will not notice this change.</para>
+      <para><application>Perl</application> foi removida do sistema base, e deve ser
+        instalado &agrave; partir de um pacote pr&eacute;-compilado ou pela Cole&ccedil;&atilde;o
+        de Ports. A cria&ccedil;&atilde;o do Perl como parte do sistema base gerava
+        uma s&eacute;rie de dificuldades que tornava a atualiza&ccedil;&atilde;o
+        problem&aacute;tica. Os utilit&aacute;rios do sistema base que usavam Perl
+        ou foram rescritos (quando ainda aplic&aacute;veis) ou descartados (se obsoletos).
+        &man.sysinstall.8; instalar&aacute; agora o pacote Perl como parte da maioria dos 
+        conjuntos de distribui&ccedil;&atilde;o, de forma que a maioria dos usu&aacute;rios
+        n&atilde;o notem esta mudan&ccedil;a.</para>
 
-      <para>It is generally possible to run old
-        &release.4x; executables under
-        &release.5x;, but this requires the
-        <filename>compat4x</filename> distribution to be installed.
-        Using old ports may be possible in some cases, although there
-        are a number of known cases of backward incompatibility.  As an
-        example, the
-	<filename role="package">devel/gnomevfs2</filename>,
-	<filename role="package">mail/postfix</filename>, and
-	<filename role="package">security/cfs</filename> ports need to
-        be recompiled due to changes in the <literal>statfs</literal>
-        structure.</para>
+        <para>Geralmente &eacute; poss&iacute;vel rodar execut&aacute;veis 4.<replaceable>X</replaceable>
+        antigos sob 5.<replaceable>X</replaceable>, mas isto requer que a distribui&ccedil;&atilde;o
+        <filename>compat4x</filename> seja instalada. Portanto, usar ports antigos
+        <emphasis>pode</emphasis> ser poss&iacute;vel.</para>
 
-      <para>When installing or upgrading over the top of an existing
-        4-STABLE-based system, it is extremely important to clear out
-        old header files in <filename>/usr/include</filename>.
-        Renaming or moving this directory before a binary installation
-        or an <literal>installworld</literal> is generally
-        sufficient.  If this step is not taken, confusion may result
-        (especially with C++ programs) as the compiler may wind up
-        using a mixture of obsolete and current header files.</para>
+      <para>Ao instalar ou atualizar sobre um sistema base 4-STABLE recente, &eacute;
+        extremamente importante limpar os arquivos de cabe&ccedil;alho (<foreignphrase>header</foreignphrase>)
+        antigos em <filename>/usr/include</filename>. Renomear ou remover este 
+        diret&oacute;rio antes da instala&ccedil;&atilde;o bin&aacute;ria ou de um&nbsp;
+        <literal>installworld</literal>&eacute; geralmente o suficiente. Se
+        este passo n&atilde;o for seguido, pode acontecer confus&atilde;o (especialmente
+        com programas C++) j&aacute; que o compilador pode passar a usar uma mistura
+        de cabe&ccedil;alhos obsoletos com atuais.</para>
 
-      <para><filename>MAKEDEV</filename> is no longer available, nor
-         is it required.
-         FreeBSD &release.5x; uses a device filesystem, which automatically
-         creates device nodes on demand.  For more information,
-         please see &man.devfs.5;.</para>
+      <para><filename>MAKEDEV</filename> n&atilde;o &eacute; mais dispon&iacute;vel ou requerido.
+        FreeBSD &release.5x; usa um dispositivo de filesystem, que cria automaticamente nos
+        de dispositivo sob demanda. Para mais informac&ccedil;&otilde;es, veja &man.devfs.5;.</para>
 
-      <para>UFS2 is the default on-disk format for file systems
-	created using &man.newfs.8;.  For all platforms except pc98,
-	it is also the default for file systems created using the disk
-	labeling screen within &man.sysinstall.8;.  Because &os;
-	&release.4x; only understands UFS1 (not UFS2), disk partitions
-	that need to be accessed by both &release.5x; and &release.4x;
-	must be created with UFS1.  This can be specified using the
-	<option>-O1</option> option to &man.newfs.8;, or on the disk
-	labeling screen in &man.sysinstall.8;.  This situation most
-	often arises with a a single machine that dual-boots &os;
-	&release.4x; and &os; &release.5x;.  Note that there is no way
-	to convert file systems between the two on-disk formats (other
-	than backing up, re-creating the file system, and
-	restoring).</para>
+      <para>UFS2 &eacute; o formato em-disco padr&atilde;o para sistemas de arquivos criados
+        usando &man.newfs.8;. Para todas as plataformas exceto pc98, &eacute; tamb&eacute;m por padr&atilde;o
+        para sistemas de arquivos criados usando a tela de nomea&ccedil;&atilde;o; (<foreignphrase>labeling</foreignphrase>)
+        de discos no &man.sysinstall.8;. Devido &os; &release.4x; compreender somente UFS1 (n&atilde;o UFS2),
+        as parti&ccedil&otilde;es de disco que precisam ser acessados pelo por ambos os &release.5x; e &release.4x;
+        devem ser criadas com UFS1. Isto pode ser especificado usando a op&ccedil;&atilde;o 
+        <option>-O1</option> no &man.newfs.8;, ou sob a tela de nomea&ccedil;&atilde;o; (<foreignphrase>labeling</foreignphrase>)
+        &man.sysinstall.8;. Esta situa&ccedil;&atilde;o deve surgir muitas vezes com uma &uacute;nica m&aacute;quina
+        com <foreignphrase>dual-boot</foreignphrase> &os; &release.4x; e &os; &release.5x;. Note que n&atilde;o h&aacute;
+        nenhuma maneira de converter sistema de arquivos entre os dois formatos em-disco (ao inv&&eacute;s de fazer backup
+        re-criando o sistema de arquivo, e restaurando).</para>        
 
     </sect2>
+
   </sect1>
 
   <sect1 id="summary">
 
-    <title>Summary</title>
+    <title>7 Sum&aacute;rio</title>
 
-    <para>While &os; &release.current; contains a number of new and exciting
-      features, it may not be suitable for all users at this time.  In
-      this document, we presented some background on release
-      engineering, some of the more notable new features of the &release.5x;
-      series, and some drawbacks to early adoption.  We also presented
-      some future plans for the 4-STABLE development branch and some
-      tips on upgrading for early adopters.</para>
+    <para>Enquanto &os; 5.0 cont&eacute;m uma s&eacute;rie de novas e excitantes
+      caracter&iacute;sticas, ele pode n&atilde;o ser apropriado para todos os
+      usu&aacute;rios no momento. Neste documento, apresentamos algumas informa&ccedil;&otilde;es
+      de base sobre a engenharia de vers&otilde;es, algumas das mais novas caracter&iacute;sticas
+      mais not&aacute;veis das s&eacute;ries 5.<replaceable>X</replaceable>, e algumas consequ&ecirc;ncias
+      da ado&ccedil;&atilde;o antecipada. Tamb&eacute;m apresentamos alguns planos
+      futuros quanto ao desenvolvimento do ramo 4-STABLE e algumas dicas de atualiza&ccedil;&atilde;o
+      aos novos adeptos.</para>
 
   </sect1>
 </article>
