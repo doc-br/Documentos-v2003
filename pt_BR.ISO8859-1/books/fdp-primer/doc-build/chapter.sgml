@@ -27,112 +27,111 @@
      ANY WAY OUT OF THE USE OF THIS DOCUMENTATION, EVEN IF ADVISED OF THE
      POSSIBILITY OF SUCH DAMAGE.
 
-     $FreeBSD: doc/en_US.ISO8859-1/books/fdp-primer/doc-build/chapter.sgml,v 1.13 2003/07/20 20:55:17 blackend Exp $
+     $FreeBSD: doc/en_US.ISO8859-1/books/fdp-primer/doc-build/chapter.sgml,v 1.10 2002/07/16 23:12:56 blackend Exp $
 -->
 
 <chapter id="doc-build">
-  <title>The Documentation Build Process</title>
+  <title>O processo de construção da documentação</title>
 
-  <para>This chapter's main purpose is to clearly explain <emphasis>how
-    the documentation build process is organized</emphasis>, and
-    <emphasis>how to affect modifications to this process</emphasis>.
+  <para>A principal finalidade desse capitulo é explicar claramente <emphasis>como
+    o processo de criação da documentação é organizado</emphasis>, e
+    <emphasis>e como fazer modificações a este processo</emphasis>.
     </para>
 
-  <para>After you have finished reading this chapter you should:</para>
+  <para>Depois de finalizar a leitura deste capítulo você deverá:</para>
 
   <itemizedlist>
     <listitem>
-      <para>Know what you need to build the FDP documentation, in
-	addition to those mentioned in the <link
-	linkend="tools">SGML tools chapter</link>.</para>
+      <para>Saber o que você precisa para construir a documentação FDP, em
+	adição ao que foi mencionado no <link
+	linkend="tools">capítulo Ferramentas SGML</link>.</para>
     </listitem>
 
     <listitem>
-      <para>Be able to read and understand the
-	<application>make</application> instructions that are present in
-	each document's <filename>Makefile</filename>s, as well as an
-	overview of the <filename>doc.project.mk</filename> includes.</para>
+      <para>Poder ler e entender as instruções do 
+	<application>make</application> que estão presentes em cada 
+	documento <filename>Makefile</filename>, assim como uma visão 
+	geral do <filename>doc.project.mk</filename> .</para>
     </listitem>
  
     <listitem>
-      <para>Be able to customize the build process by using
-	<application>make</application> variables and
-	<application>make</application> targets.</para>
+      <para>Poder customizar o processo de construção usando
+	<application>make</application> variáveis e
+	<application>make</application> alvos.</para>
     </listitem>
   </itemizedlist>
 
-  <sect1 id="doc-build-toolset">
-    <title>The FreeBSD Documentation Build Toolset</title>
+  <sect1>
+    <title>Ferramentas para construção da documentação do FreeBSD</title>
 
-    <para>Here are your tools.  Use them every way you can.</para>
+    <para>Aqui estão suas ferramentas.  Use-as da maneira que você puder.</para>
 
     <itemizedlist>
       <listitem>
-	<para>The primary build tool you will need is
-	  <application>make</application>, but specifically
+	<para>A primeira ferramenta que você precisará é o
+	  <application>make</application>, mais especificamente o
 	  <application>Berkeley Make</application>.</para>
       </listitem>
 
       <listitem>
-	<para>Package building is handled by FreeBSD's
-	  <application>pkg_create</application>.  If you are not using
-	  FreeBSD, you will either have to live without packages, or
-	  compile the source yourself.</para>
+	<para>A construção de pacotes do FreeBSD é segurado pelo
+	  <application>pkg_create</application>.  Se você não estã usando
+	  FreeBSD, você terá que viver sem pacotes,ou
+	  compile o source você mesmo.</para>
       </listitem>
 
       <listitem>
-	<para><application>gzip</application> is needed to create
-	  compressed versions of the document.
-	  <application>bzip2</application> compression and
-	  <application>zip</application> archives are also supported.
-	  <application>tar</application> is supported, but package
-	  building demands it.</para>
+	<para>O <application>gzip</application> é necessário para criar versões 
+	  compactadas do documento.
+	  O compressor <application>bzip2</application> e
+	  os arquivos <application>zip</application> também são suportados.
+	  O <application>tar</application> é suportado, mas a construção de 
+	  pacotes necessita dele.</para>
       </listitem>
 
       <listitem>
-	<para><application>install</application> is the default method
-	  to install the documentation.  There are alternatives,
-	  however.</para>
+	<para>O <application>install</application> é o método padrão 
+	  para instalar a documentação.  Entretanto, há alternativas.</para>
       </listitem>
     </itemizedlist>
 
     <note>
-      <para>It is unlikely you will not be able to find these last two, they
-	are mentioned for completeness.</para>
+      <para>É improvável você nao encontrar esses ultimos dois,
+	ele são mencionados para integridade.</para>
     </note>
   </sect1>
 
-  <sect1 id="doc-build-makefiles">
-    <title>Understanding Makefiles in the Documentation tree</title>
+  <sect1>
+    <title>Entendendo Makefiles na árvore da documentção</title>
 
-    <para>There are three main types of <filename>Makefile</filename>s 
-      in the FreeBSD Documentation Project tree.</para>
+    <para>Há três tipos principais de <filename>Makefile</filename>s 
+      na árvore do  projeto de documentção do FreeBSD.</para>
 
     <itemizedlist>
       <listitem>
-	<para><link linkend="sub-make">Subdirectory
-	  <filename>Makefile</filename>s</link> simply pass
-	  commands to those directories below them.</para>
+	<para><link linkend="sub-make">Subdiretório
+	  <filename>Makefile</filename>s</link> simplesmente passa
+	  comandos para aqueles directório abaixo dele.</para>
       </listitem>
 
       <listitem>
-	<para><link linkend="doc-make">Documentation
-	  <filename>Makefile</filename>s</link> describe the
-	  document(s) that should be produced from this directory.</para>
+	<para><link linkend="doc-make">Documentação
+	  <filename>Makefile</filename>s</link> descreve o(s)
+	  documento(s) que deve ser produzida a partir desde diretório.</para>
       </listitem>
 
       <listitem>
 	<para><link linkend="make-includes"><application>Make</application>
-	  includes</link> are the glue that perform the document production,
-	  and are usually of the form
+	  includes</link> é que executa a produção do documento,
+	  e geralmente a do formulário.
 	  <filename>doc.<replaceable>xxx</replaceable>.mk</filename>.</para>
       </listitem>
     </itemizedlist>
 
     <sect2 id="sub-make">
-      <title>Subdirectory Makefiles</title>
+      <title>Subdiretório Makefiles</title>
 
-      <para>These <filename>Makefile</filename>s usually take the form of:</para>
+      <para>Estes <filename>Makefile</filename>s geralmente tem a forma:</para>
 
       <programlisting>SUBDIR =articles
 SUBDIR+=books
@@ -142,30 +141,29 @@ COMPAT_SYMLINK = en
 DOC_PREFIX?= ${.CURDIR}/..
 .include "${DOC_PREFIX}/share/mk/doc.project.mk"</programlisting>
 
-      <para>In quick summary, the first four non-empty lines define the
-	<application>make</application> variables,
+      <para>Em um sumário rápido, as primeiras quatro linhas definem as variáveis do
+	<application>make</application>,
 	<makevar>SUBDIR</makevar>, <makevar>COMPAT_SYMLINK</makevar>,
-	and <makevar>DOC_PREFIX</makevar>.</para>
+	e <makevar>DOC_PREFIX</makevar>.</para>
 
-      <para>The first <makevar>SUBDIR</makevar> statement, as well as
-	the <makevar>COMPAT_SYMLINK</makevar> statement, shows how to
-	assign a value to a variable, overriding any previous
-	value.</para>
+      <para>A primeira indicação ao <makevar>SUBDIR</makevar> statement, tanto quanto 
+	a indicação<makevar>COMPAT_SYMLINK</makevar>, mostra como atribuir um valor a uma variável,
+	cancelando algum valor precendente.</para>
 
-      <para>The second <makevar>SUBDIR</makevar> statement shows how a
-	value is appended to the current value of a variable.  The
-	<makevar>SUBDIR</makevar> variable is now <literal>articles
+      <para>A segunda indicação <makevar>SUBDIR</makevar> mostra como um valor
+	é adicionado ao valor atual de uma variável.  A variável
+	<makevar>SUBDIR</makevar> é agora <literal>articles
 	books</literal>.</para>
 
-      <para>The <makevar>DOC_PREFIX</makevar> assignment shows how a
-	value is assigned to the variable, but only if it is not already
-	defined.  This is useful if <makevar>DOC_PREFIX</makevar> is not
-	where this <filename>Makefile</filename> thinks it is - the user
-	can override this and provide the correct value.</para>
+      <para>A indicação <makevar>DOC_PREFIX</makevar> mostra como um valor
+	é atribuído para variável, mas somente se já não estiver definida.
+	Isto é útil se o <makevar>DOC_PREFIX</makevar> não for
+	onde este <filename>Makefile</filename> pensa que é - o usuário
+	pode cancelar este e fornecer o valor correto.</para>
 
-      <para>Now what does it all mean?  <makevar>SUBDIR</makevar>
-	mentions which subdirectories below this one the build process
-	should pass any work on to.</para>
+      <para>Agora o que tudo isso significa? <makevar>SUBDIR</makevar>
+	menciona que todos subdiretórios abaixo deste, devem passar qualquer 
+        trabalho de processo de construção nele.</para>
 
       <para><makevar>COMPAT_SYMLINK</makevar> is specific to
 	compatibility symlinks (amazingly enough) for languages to their
