@@ -570,14 +570,17 @@ cvspserver stream tcp nowait root /usr/bin/cvs cvs -f -l -R -T /anoncvstmp --all
       <sect3 id="mirror-ftp-cvsup">
         <title>Espelhando com o CVSup</title>
 
-        <para>
-          A few sites, including the one-and-only <hostid role="fqdn">ftp-master.FreeBSD.org</hostid>
-          even offer <application>CVSup</application> to mirror the contents of 
-          the FTP space. You need to install a <application>cvsup</application>
-          client, preferably from the port <filename role="package">net/cvsup</filename>.
-          (Also reread <xref linkend="mirror-serv-cvsup">.)
-          A sample <filename>supfile</filename> suitable for <hostid role="fqdn">ftp-master.FreeBSD.org</hostid>
-          looks like this:
+        <para>Poucos sites, incluindo o <hostid role="fqdn">
+	  ftp-master.FreeBSD.org</hostid>, oferecem acesso via CVSup
+	  para espelhamento da &aacute;rea de FTP.  Voc&ecirc; deve instalar um
+	  cliente de <application>cvsup</application>,
+	  preferencialmente a partir do port <filename role="package">
+	  net/cvsup</filename> (tamb&eacute;m visto na 
+	  <xref linkend="mirror-serv-cvsup">). Um exemplo de arquivo 
+	  <filename>supfile</filename> para fazer o espelhamento a partir
+	  do <hostid role="fqdn">ftp-master.FreeBSD.org</hostid>
+          se pareceria com isto:</para>
+
           <programlisting>
           #
           # FreeBSD archive supfile from master server
