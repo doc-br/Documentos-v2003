@@ -84,7 +84,8 @@
       </listitem>
 
       <listitem>
-	<para>Estar familiarizado com a terminologia b&aacute;sica de rede.</para>
+	<para>Estar familiarizado com a terminologia b&aacute;sica de
+	redes.</para>
       </listitem>
     </itemizedlist>
   </sect1>
@@ -138,7 +139,8 @@ test0	    0:e0:b5:36:cf:4f   UHLW	5    63288       ed0     77
 10.20.30.255     link#1	     UHLW	1     2421
 example.com      link#1	     UC	  0	0
 host1	    0:e0:a8:37:8:1e    UHLW	3     4601       lo0
-host2	    0:e0:a8:37:8:1e    UHLW	0	5       lo0 =>
+host2	    0:e0:a8:37:8:1e    UHLW	0	5       lo0
+=>
 host2.example.com link#1	     UC	  0	0
 224	      link#1	     UC	  0	0</screen>
 
@@ -183,7 +185,7 @@ host2.example.com link#1	     UC	  0	0
       de difus&atilde;o (broadcast) para a subrede
       <hostid role="ipaddr">10.20.30</hostid>, e
       <hostid role="domainname">example.com</hostid> &eacute; o nome de dom&iacute;nio
-      associado com aquela subrede).  A designa&ccedil;&atilde;o <literal>link#1</literal>
+      associado &agrave;quela subrede).  A designa&ccedil;&atilde;o <literal>link#1</literal>
       refere-se &agrave; primeira placa Ethernet na m&aacute;quina.  Voc&ecirc; ir&aacute; notar que
       nenhuma interface adicional &eacute; especificada para aquelas.</para>
 
@@ -271,47 +273,49 @@ host2.example.com link#1	     UC	  0	0
       <title>Default Routes</title>
 
       <indexterm><primary>default route</primary></indexterm>
-      <para>When the local system needs to make a connection to a remote host,
-	it checks the routing table to determine if a known path exists.  If
-	the remote host falls into a subnet that we know how to reach (Cloned
-	routes), then the system checks to see if it can connect along that
-	interface.</para>
+      <para>Quando um sistema local precisa fazer uma conex&atilde;o a um
+      sistema remoto, ele verifica a tabela de roteamento para
+      determinar se existe um caminho conhecido.  Se o sistema remoto
+      estiver em uma das subredes que j&aacute; sabemos como alcan&ccedil;ar (rotas
+      Clonadas), ent&atilde;o o sistema verifica se pode se conectar por
+      aquela interface.</para>
 
-      <para>If all known paths fail, the system has one last option: the
-	<quote>default</quote> route.  This route is a special type of gateway
-	route (usually the only one present in the system), and is always
-	marked with a <literal>c</literal> in the flags field.  For hosts on a
-	local area network, this gateway is set to whatever machine has a
-	direct connection to the outside world (whether via PPP link,
-	DSL, cable modem, T1, or another network interface).</para>
+      <para>Se falharem todos os caminhos conhecidos, o sistema
+      tem uma &uacute;ltima op&ccedil;&atilde;o: a rota <quote>padr&atilde;o</quote>.  Esta rota &eacute;
+      um tipo especial rota de sa&iacute;da,  ou gateway (normalmente a
+      &uacute;nica presente no sistema), e &eacute; sempre indicada por um
+      <literal>c</literal> no campo flags.  Para sistemas em uma rede
+      local, este gateway &eacute; configurado para qualquer m&aacute;quina que
+      tenha uma conex&atilde;o direta para o mundo exterior (seja via enlace
+      PPP, DSL, modem a cabo, T1 ou outra interface de rede).</para>
 
-      <para>If you are configuring the default route for a machine which
-	itself is functioning as the gateway to the outside world, then the
-	default route will be the gateway machine at your Internet Service
-	Provider's (ISP) site.</para>
+      <para>Se voc&ecirc; estiver configurando a rota padr&atilde;o em uma m&aacute;quina
+      que esteja funcionando como o gateway para o mundo exterior,
+      ent&atilde;o a rota padr&atilde;o ser&aacute; a m&aacute;quina gateway localizada no seu
+      Provedor de Servi&ccedil;os Internet (PSI).</para>
 
-      <para>Let us look at an example of default routes.  This is a common
-	configuration:</para>
+      <para>Vamos dar uma olhada em um exemplo de rotas padr&atilde;o.  Esta &eacute;
+      uma configura&ccedil;&atilde;o usual:</para>
 
       <literallayout>
 [Local2]  &lt;--ether--&gt;  [Local1]  &lt;--PPP--&gt; [ISP-Serv]  &lt;--ether--&gt;  [T1-GW]
       </literallayout>
 
-      <para>The hosts <hostid>Local1</hostid> and
-	<hostid>Local2</hostid> are at your site.
-	<hostid>Local1</hostid> is connected to an ISP via a dial up
-	PPP connection.  This PPP server computer is connected through
-	a local area network to another gateway computer through an
-	external interface to the ISPs Internet feed.</para>
+      <para>Os sistemas <hostid>Local1</hostid> and
+	<hostid>Local2</hostid> est&atilde;o em seu s&iacute;tio local.
+	<hostid>Local1</hostid> est&aacute; conectado a um PSI por uma conex&atilde;o
+	PPP discada.  Este servidor PPP est&aacute; conectado por uma rede
+	local a outro computador gateway atrav&eacute;s de uma interface
+	externa ao canal Internet do PSI.</para>
 
-      <para>The default routes for each of your machines will be:</para>
+      <para>As rotas padr&atilde;o para cada uma das suas m&aacute;quinas ser&atilde;o:</para>
 
       <informaltable frame="none">
 	<tgroup cols="3">
 	  <thead>
 	    <row>
-	      <entry>Host</entry>
-	      <entry>Default Gateway</entry>
+	      <entry>Sistema</entry>
+	      <entry>Gateway Padr&atilde;o</entry>
 	      <entry>Interface</entry>
 	    </row>
 	  </thead>
@@ -332,31 +336,32 @@ host2.example.com link#1	     UC	  0	0
 	</tgroup>
       </informaltable>
 
-      <para>A common question is <quote>Why (or how) would we set
-	the <hostid>T1-GW</hostid> to be the default gateway for
-	<hostid>Local1</hostid>, rather than the ISP server it is
-	connected to?</quote>.</para>
+      <para>Uma pergunta comum &eacute; <quote>Por que (ou como)
+      n&oacute;s configuramos o <hostid>T1-GW</hostid> para ser o gateway
+      padr&atilde;o para <hostid>Local1</hostid>, ao inv&eacute;s do servidor do PSI
+      ao qual est&aacute; conectado?</quote>.</para>
 
-      <para>Remember, since the PPP interface is using an address on the ISP's
-	local network for your side of the connection, routes for any other
-	machines on the ISP's local network will be automatically generated.
-	Hence, you will already know how to reach the <hostid>T1-GW</hostid>
-	machine, so there is no need for the intermediate step
-	of sending traffic to the ISP server.</para>
+      <para>Lembre-se, uma vez que a interface PPP est&aacute; usando um
+      endere&ccedil;o da rede local do PSI para o seu lado da conex&atilde;o, rotas
+      para qualquer outra m&aacute;quina na rede local do PSI ser&atilde;o criadas
+      automaticamente.  Assim, uma vez que voc&ecirc; j&aacute; sabe como alcan&ccedil;ar
+      a m&aacute;quina <hostid>T1-GW</hostid>, ent&atilde;o n&atilde;o h&aacute; necessidade do
+      passo intermedi&aacute;rio de enviar tr&aacute;fego para o servidor do PSI.</para>
 
-      <para>As a final note, it is common to use the address <hostid
-	  role="ipaddr">X.X.X.1</hostid> as the gateway address for your local
-	network.  So (using the same example), if your local class-C address
-	space was <hostid role="ipaddr">10.20.30</hostid> and your ISP was
-	using <hostid role="ipaddr">10.9.9</hostid> then the default routes
-	would be:</para>
+      <para>Como observa&ccedil;&atilde;o final, &eacute; comum usar o endere&ccedil;o
+      <hostid role="ipaddr">X.X.X.1</hostid> como o endere&ccedil;o do gateway
+      para sua rede local.  Ent&atilde;o (usando o mesmo exemplo), se o seu
+      espa&ccedil;o de endere&ccedil;amento classe-C era
+      <hostid role="ipaddr">10.20.30</hostid> e seu PSI estava usando
+      <hostid role=&iuml;paddr">10.9.9</hostid> ent&atilde;o as rotas padr&atilde;o
+      seriam:</para>
 
       <informaltable frame="none">
 	<tgroup cols="2">
 	  <thead>
 	    <row>
-	      <entry>Host</entry>
-	      <entry>Default Route</entry>
+	      <entry>Sistema</entry>
+	      <entry>Rota Padr&atilde;o</entry>
 	    </row>
 	  </thead>
 	  <tbody>
@@ -374,33 +379,35 @@ host2.example.com link#1	     UC	  0	0
     </sect2>
 
     <sect2>
-      <title>Dual Homed Hosts</title>
+      <title>Sistemas Duplamente Conectados</title>
       <indexterm><primary>dual homed hosts</primary></indexterm>
-      <para>There is one other type of configuration that we should cover, and
-	that is a host that sits on two different networks.  Technically, any
-	machine functioning as a gateway (in the example above, using a PPP
-	connection) counts as a dual-homed host.  But the term is really only
-	used to refer to a machine that sits on two local-area
-	networks.</para>
+      <para>Existe um outro tipo de configura&ccedil;&atilde;o que devemos abordar,
+       que se trata de um sistema pertencente a duas redes diferentes.
+       Tecnicamente, qualquer m&aacute;quina funcionando como um gateway
+       (no exemplo acima, usando uma conex&atilde;o PPP) conta como um
+       sistema duplamente conectado.  Mas, na verdade, o termo somente
+       &eacute; usado para se referir a uma m&aacute;quina conectada a duas redes locais
+       diferentes.</para>
 
-      <para>In one case, the machine has two Ethernet cards, each
-	having an address on the separate subnets.  Alternately, the
-	machine may only have one Ethernet card, and be using
-	&man.ifconfig.8; aliasing.  The former is used if two
-	physically separate Ethernet networks are in use, the latter
-	if there is one physical network segment, but two logically
-	separate subnets.</para>
+      <para>Em um caso, a m&aacute;quina tem duas placas Ethernet, cada uma
+      possuindo um endere&ccedil;o em subredes separadas.  Alternativamente,
+      a m&aacute;quina pode ter somente uma placa Ethernet e estar usando um
+      apelido &man.ifconfig.8;.  O primeiro caso &eacute; usado se duas redes
+      Ethernet fisicamente separadas est&atilde;o em uso, e o segundo se h&aacute;
+      somente um segmento f&iacute;sico Ethernet, mas duas subredes separadas
+      logicamente.</para>
 
-      <para>Either way, routing tables are set up so that each subnet knows
-	that this machine is the defined gateway (inbound route) to the other
-	subnet.  This configuration, with the machine acting as a router
-	between the two subnets, is often used when we need to implement
-	packet filtering or firewall security in either or both
-	directions.</para>
+      <para>De um jeito ou de outro, as tabelas de roteamento s&atilde;o
+      configuradas de forma que cada subrede saiba que esta m&aacute;quina &eacute;
+      o gateway definido (rota de entrada) para a outra subrede.  Esta
+      configura&ccedil;&atilde;o, com a m&aacute;quina atuando como um roteador entre duas
+      subredes, &eacute; muitas vezes usado quando precisamos implementar
+      filtragem de pacotes ou um firewall de seguran&ccedil;a em cada uma ou
+      em ambas as dire&ccedil;&otilde;es.</para>
 
-      <para>If you want this machine to actually forward packets
-	between the two interfaces, you need to tell FreeBSD to enable
-	this ability.</para>
+      <para>Se voc&ecirc; deseja que esta m&aacute;quina na pr&aacute;tica passe adiante
+      pacotes entre as duas interfaces, voc&ecirc; precisa dizer ao FreeBSD
+      para permitir esta capacidade.</para>
     </sect2>
 
     <sect2 id="network-dedicated-router">
