@@ -151,142 +151,149 @@
   </sect1>                                                                     
   
   <sect1 id="overview-before">
-    <title>Before you start</title>                                            
+    <title>Antes de voce iniciar</title>                                            
     
-    <para>This document assumes that you already know:</para>                  
+    <para>Este documento assume que voc&ecirc; j&aacute; sabe:</para>                  
     
     <itemizedlist>                                                             
       <listitem>                                                               
-	<para>How to maintain an up-to-date local copy of the FreeBSD
-	  documentation by maintaining a local copy of the
-	  FreeBSD CVS repository (using <application>CVS</application>
-	  and either <application>CVSup</application> or
-	  <application>CTM</application>) or by using
-	  <application>CVSup</application> to download just a
-	  <emphasis>checked-out</emphasis> copy.</para>
+	<para>Como manter uma c&oacute;pia local atualizada da documenta&ccedil;&atilde;o,
+	  atrav&eacute;s da manuten&ccedil;&atilde;o de uma c&oacute;pia local do reposit&oacute;rio CVS do
+	  FreeBSD (utilizando <application>CVS</application>,
+	  <application>CVSup</application> ou <application>CTM
+	  </application>) ou atrav&eacute;s do uso do <application>CVSup
+	  </application> copiando apenas uma <emphasis>vers&atilde;o de
+	  trabalho</emphasis> dos arquivos.</para>
       </listitem>
       
       <listitem>                                                               
-	<para>How to download and install new software using either the
-	  FreeBSD Ports system or &man.pkg.add.1;.</para>
+	<para>Como obter e instalar um novo software utilizando o
+	sistema de ports ou de &man.pkg.add.1; do FreeBSD.</para>
       </listitem>                                                              
     </itemizedlist>                                                            
   </sect1>
 
   <sect1 id="overview-quick-start">
-    <title>Quick Start</title>
+    <title>In&iacute;cio R&aacute;pido</title>
 
-    <para>If you just want to get going, and feel confident you can pick
-      things up as you go along, follow these instructions.</para>
-
+    <para>Se voc&ecirc; deseja ir come&ccedil;ando, e se sente seguro de que voc&ecirc;
+    pode ir pegando as coisas a medida que avan&ccedil;a, siga estas
+    instru&ccedil;&otilde;es.</para>
+    
     <procedure>
       <step>
-	<para>Install the <filename role="package">textproc/docproj</filename>
-	  meta-port.</para>
+	<para>Instale o meta-port <filename role="package">textproc/docproj</filename>.</para>
 
 	<screen>&prompt.root; <userinput>cd /usr/ports/textproc/docproj</userinput>
 &prompt.root; <userinput>make JADETEX=no install</userinput></screen>
       </step>
 
       <step>
-	<para>Get a local copy of the FreeBSD <filename>doc</filename> tree.
-	  Either use CVSup in <literal>checkout</literal> mode to do this, or
-	  get a full copy of the CVS repository locally.</para>
-
-	<para>If you have the CVS repository locally then as a minimum you
-	  will need to checkout the <filename>doc/share</filename>, and
-	  <filename>doc/en_US.ISO8859-1/share</filename>
-	  directories.</para>
+	<para>Obtenha uma c&oacute;pia local da &aacute;rvore de documenta&ccedil;&atilde;o do
+	  FreeBSD (<filename>doc</filename>).  Utilize o CVSup em modo
+	  <literal>checkou</literal> para fazer isso, ou ent&atilde;o obtenha
+	  uma c&oacute;pia completa do reposit&oacute;rio CVS localmente.</para>
+	
+	<para>Se voc&ecirc; possui uma c&oacute;pia local do reposit&oacute;rio CVS,
+	  ent&atilde;o o minimo que voc&ecirc; vai precisar ser&aacute; retirar uma c&oacute;pia
+	  de trabalho dos diret&oacute;rios <filename>doc/share</filename>, e
+	  <filename>doc/en_US.ISO8859-1/share</filename>.</para>
 
 	<screen>&prompt.user; <userinput>cvs checkout doc/share</userinput>
 &prompt.user; <userinput>cvs checkout doc/en_US.ISO8859-1/share</userinput></screen>
 
-	<para>If you have plenty of disk space then you could check out
-	  everything.</para>
+	<para>Se voc&ecirc; tiver abund&acirc;ncia de espa&ccedil;o em disco, voc&ecirc; pode 
+	retirar uma c&oacute;pia de trabalho completa (de todos os
+	subdiret&oacute;rios da arvore doc).</para>
 
 	<screen>&prompt.user; <userinput>cvs checkout doc</userinput></screen>
       </step>
 
       <step>
-	<para>If you are preparing a change to an existing book or article,
-	  check it out of the repository as necessary.  If you are planning on
-	  contributing a new book or article then use an existing one as a
-	  guide.</para>
-
-	<para>For example, if you want to contribute a new article about
-	  setting up a VPN between FreeBSD and Windows 2000 you might do the
-	  following.</para>
-
+	<para>Se voc&ecirc; est&aacute; preparando uma altera&ccedil;&atilde;o a um artigo ou
+	  livro existente, retire uma vers&atilde;o de trabalho do arquivo do
+	  reposit&oacute;rio.  Se voc&ecirc; est&aacute; planejando contribuir com um novo
+	  livro ou artigo, ent&atilde;o utlize um dos existentes como
+	  guia.</para>
+	
+	<para>Por exemplo, se voce deseja contribuir com um novo
+	artigo sobre como configurar uma VPN entre o FreeBSD e o
+	windows 2000, voc&ecirc; pode fazer o seguinte:</para>
+	
 	<procedure>
 	  <step>
-	    <para>Check out the <filename>articles</filename>
-	      directory.</para>
+	    <para>Retire uma c&oacute;pia de trabalho do diret&oacute;rio 
+	      <filename>articles</filename>.</para>
 
 	    <screen>&prompt.user; <userinput>cvs checkout doc/en_US.ISO8859-1/articles</userinput></screen>
 	  </step>
 
 	  <step>
-	    <para>Copy an existing article to use as a template.  In this
-	      case, you have decided that your new article belongs in a
-	      directory called <filename>vpn-w2k</filename>.</para>
+	    <para>Copie um artigo existente para utilizar como
+	      template.  Neste caso, voc&ecirc; decidiu que o seu novo artivo
+	      iria para um diret&oacute;rio chamado <filename>vpn-w2k
+	      </filename>.</para>
 
 	    <screen>&prompt.user; <userinput>cd doc/en_US.ISO8859-1/articles</userinput>
 &prompt.user; <userinput>cp -r committers-guide vpn-w2k</userinput></screen>
 	  </step>
 	</procedure>
 
-	<para>If you wanted to edit an existing document, such as the FAQ,
-	  which is in <filename>doc/en_US.ISO8859-1/books/faq</filename> you
-	  would check it out of the repository like this.</para>
+	<para>Se voc&ecirc; deseja editar um documento existente, como por
+	  exemplo o FAQ, o qual est&aacute; em <filename>
+	  doc/en_US.ISO8859-1/books/faq</filename> voc&ecirc; deve retirar a
+	  c&oacute;pia de trabalho do reposit&oacute;rio da seguinte forma:</para>
 
 	<screen>&prompt.user; <userinput>cvs checkout doc/en_US.ISO8859-1/books/faq</userinput></screen>
       </step>
 
       <step>
-	<para>Edit the <filename>.sgml</filename> files using your editor of
-	  choice.</para>
+	<para>Edite os arquivos <filename>.sgml</filename> o editor da
+	sua prefer&ecirc;ncia.</para>
       </step>
 
       <step>
-	<para>Test the markup using the <maketarget>lint</maketarget>
-	  target.  This will quickly find any errors in the document
-	  without actually performing the time-consuming
-	  transformation.</para>
+	<para>Teste a marca&ccedil;&atilde;o utilizando o alvo <maketarget>
+	  lint</maketarget>.  Isto ir&aacute; encontrar rapidamente qualquer
+	  erro existente no documento sem realizar realmente qualquer
+	  tipo de transforma&ccedil;&atilde;o que consuma tempo.</para>
 
 	<screen>&prompt.user; <userinput>make lint</userinput></screen>
 
-	<para>When you are ready to actually build the document, you
-  	  may specify a single format or a list of formats in the
-  	  <varname>FORMATS</varname> variable.  Currently,
+	<para>Quando voc&ecirc; estiver pronto para efetivamente compilar o
+	  documento, voc&ecirc; pode especificar um &uacute;nico formato ou uma
+	  lista de formatos de destino, na vari&aacute;vel <varname>FORMATS
+	  </varname> variable.  Atualmente os formatos suportados s&atilde;o, 
   	  <literal>html</literal>, <literal>html-split</literal>,
   	  <literal>txt</literal>, <literal>ps</literal>,
-  	  <literal>pdf</literal>, and <literal>rtf</literal> are
-  	  supported.  The most up to date list of supported formats is
-  	  listed at the top of the
-  	  <filename>doc/share/mk/doc.docbook.mk</filename> file.  Make
-  	  sure to use quotes around the list of formats when you build
-  	  more than one format with a single command.</para>
-
-        <para>For example, to convert the document to
-          <literal>html</literal> only, you would use:</para>
+  	  <literal>pdf</literal>, e <literal>rtf</literal>.  
+	  A lista mais atualizada dos formatos suportados est&aacute; listada
+	  no inicio do arquivo <filename>doc/share/mk/doc.docbook.mk
+	  </filename> file.  Certifique-se de utilizar aspas
+	  (<literal>"</literal>) em volta da lista de formatos quando
+	  voc&ecirc; estiver compilando mais de um formato em um un&iacute;co
+	  comando.</para>
+	  
+        <para>Por exemplo, para converter o documento apenas para 
+	  <literal>html</literal>, voc&ecirc; deve utilizar:</para>
 
 	<screen>&prompt.user; <userinput>make FORMATS=html</userinput></screen>
 
-        <para>But when you want to convert the document to both
-          <literal>html</literal> and <literal>txt</literal> format,
-          you could use either two separate &man.make.1; runs,
-          with:</para>
+        <para>Mas quando voc&ecirc; deseja converter o documento tanto para
+	  o formato <literal>html</literal> quanto para o formato 
+	  <literal>txt</literal>, voc&ecirc; pode utilizar duas execu&ccedil;&otilde;es
+	  separadas do &man.make.1;, como a seguir:</para>
 
 	<screen>&prompt.user; <userinput>make FORMATS=html</userinput>
 &prompt.user; <userinput>make FORMATS=txt</userinput></screen>
 
-        <para>or, you can do it in one command:</para>
+        <para>ou, voc&ecirc; pode fazer isso em um &uacute;nico comando:</para>
 
 	<screen>&prompt.user; <userinput>make FORMATS="html txt"</userinput></screen>
       </step>
 
       <step>
-	<para>Submit your changes using &man.send-pr.1;.</para>
+	<para>Envie suas altera&ccedil;&otilde;es utilizando o &man.send-pr.1;.</para>
       </step>
     </procedure>
   </sect1>
