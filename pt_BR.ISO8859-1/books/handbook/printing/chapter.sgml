@@ -3813,7 +3813,7 @@ done
 				Acessando a impressora conectada a uma m&aacute;quina remota.  
 		Voc&ecirc; instala a impressora normalmente como se fosse uma 
 		impressora serial ou paralela na m&aacute;quina.  Ent&atilde;o, 
-		voc&ecirc; configura o <application>LPD</application para habilitar
+		voc&ecirc; configura o <application>LPD</application> para habilitar
 		o acesso a impressora de outras m&aacute;quinas na rede.  Veja a 
 		se&ccedil;&atilde;o <link
 		linkend="printing-advanced-network-rm">Impressoras Instaladas
@@ -4254,18 +4254,21 @@ rattan|line|diablo|lp|Diablo 630 Line Printer:\
 bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
         :lp=:rm=rose:rp=bamboo:sd=/var/spool/lpd/bamboo:sc:</programlisting>
             
----
 
-        <para>By using the <literal>sc</literal> capability, we prevent the
-          use of <command>lpr -#</command>, but that still does not prevent
-          users from running &man.lpr.1;
-          multiple times, or from submitting the same file multiple times in
-          one job like this:</para>
+			<para>
+				Usando a op&ccedil;&atilde;o <literal>sc</literal>, nos 
+		podemos prever o uso do comando <command>lpr -#</command>, mas isso
+		n&atilde;o prev&ecirc; usu&aacute;rios utilizando &man.lpr.1; 
+		v&aacute;rias vezes, ou de enviar o mesmo arquivo v&aacute;rias vezes
+		em um &uacute;nico trabalho de impress&atilde;o, como segue:
+			</para>
               
         <screen>&prompt.user; <userinput>lpr forsale.sign forsale.sign forsale.sign forsale.sign forsale.sign</userinput></screen>
               
-        <para>There are many ways to prevent this abuse (including ignoring
-          it) which you are free to explore.</para>
+			<para>
+				Existem v&aacute;rias maneiras de se prever esse abuso ( 
+		incluisive ignorando ele) que voc&ecirc; pode explorar livremente.
+			</para>
       </sect3>
       
       <sect3 id="printing-advanced-restricting-access">
@@ -4273,19 +4276,25 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 				Restringindo o Acesso as Impressoras
 			</title>
 
-        <para>You can control who can print to what printers by using the &unix;
-          group mechanism and the <literal>rg</literal> capability in
-          <filename>/etc/printcap</filename>.  Just place the users you want
-          to have access to a printer in a certain group, and then name that
-          group in the <literal>rg</literal> capability.</para>
+        <para>
+				Voc&ecirc; pode controlar quem pode imprimir em qual impressora
+		utilizando o mecanismo de grupos do &unix; e a op&ccedil;&atilde;o
+		<literal>rg</literal> no <filename>/etc/printcap</filename>.  Apenas
+		colocando os usu&aacute;rios que voc&ecirc; quer que tenham acesso
+		a impressora diferentes grupos, e ent&atilde;o definindo na 
+		op&ccedil;&atilde;o <literal>rg</literal> o grupo desejado.
+			</para>
             
-        <para>Users outside the group (including <username>root</username>)
-	  will be greeted with
+			<para>
+				Os usu&aacute;rios fora do grupo ( inmcluindo o 
+		<username>root</username>) ir&atilde;o receber a seguinte mensagem:
           
           <errorname>lpr: Not a member of the restricted group</errorname>
           
-          if they try to print to the controlled printer.</para>
+          Se eles tentarem imprimir em uma impressora controlada.
+			</para>
 
+---
         <para>As with the <literal>sc</literal> (suppress multiple copies)
           capability, you need to specify <literal>rg</literal> on remote
           hosts that also have access to your printers, if you feel it is
