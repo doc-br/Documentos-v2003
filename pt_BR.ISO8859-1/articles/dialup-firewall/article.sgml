@@ -12,7 +12,7 @@
 
 <article>
   <articleinfo>
-    <title>Dialup firewalling with FreeBSD</title>
+    <title>Dialup firewalling com FreeBSD</title>
 
     <authorgroup>
       <author>
@@ -33,41 +33,46 @@
     </legalnotice>
 
     <abstract>
-      <para>This article documents how to set up a firewall using a PPP
-	dialup with FreeBSD and IPFW, and specifically with firewalling over
-	a dialup with a dynamically assigned IP address.  This document does
-	not cover setting up your PPP connection in the first place.</para>
+      <para>Este artigo documenta como configurar um firewall
+	utilizando uma conex&atilde;o discada com o FreeBSD e o IPFW, e
+	especificamente como implementar implementar um firewall de
+	filtragem de pacotes em cima de um endere&ccedil;o IP atribuido
+	dinamicamente.  Este documento n&atilde;o aborda a configura&ccedil;&atilde;o da sua
+	conex&atilde;o PPP propriamente dita.</para>
     </abstract>
   </articleinfo>
 
   <sect1 id="preface">
-    <title>Preface</title>
+    <title>Pref&aacute;cio</title>
 
     <para>Dialup Firewalling with FreeBSD</para>
 
-     <para>This document covers the process that is required to set up
-       firewalling with FreeBSD when an IP address is assigned dynamically
-       by your ISP.  While every effort has been made to make this document
-       as informative and correct as possible, you are welcome to mail your
-       comments/suggestions to the <email>marcs@draenor.org</email>.</para>
+     <para>Este documento aborda o processo o qual &eacute; necess&aacute;rio para
+       configurar um firewall de filtragem de pacotes com o freebsd
+       quando o seu IP &eacute; atribuido dinamicamente pelo seu provedor.
+       Realizei todo o esfor&ccedil;o possivel para fazer este documento t&atilde;o
+       informativo e correto quanto possivel, seus emails com
+       coment&aacute;rios e sugest&otilde;es s&atilde;o bem vindos e devem ser enviados
+       para <email>marcs@draenor.org</email>.</para>
    </sect1>
 
   <sect1 id="kernel">
-    <title>Kernel Options</title>
+    <title>Op&ccedil;&otilde;es do Kernel</title>
 
-    <para>The first thing you will need to do is recompile your kernel.
-      If you need more information on how to recompile the kernel,
-      then the best place to start is the <ulink
-	URL="../../books/handbook/kernelconfig.html">kernel
-	configuration section in the Handbook</ulink>. You need to add the
-      following options into your kernel configuration file:</para>
+    <para>A primeira coisa que voc&ecirc; necessitar&aacute; fazer &eacute; recompilar o
+      seu kernel.  Se voc&ecirc; precisa de maiores informa&ccedil;&otilde;es sovre como
+      recompilar o kernel, ent&atilde;o o melhor lugar para iniciar &eacute; a
+      <ulink URL="../../books/handbook/kernelconfig.html">sess&atilde;o sobre
+      configura&ccedil;&atilde;o do kernel no Handbook<u/link>.  Voc&ecirc; precisa
+      adicionar as seguintes op&ccedil;&otilde;es no seu arquivo de configura&ccedil;&atilde;o do
+      kernel:</para>
 
     <variablelist>
       <varlistentry>
 	<term><literal>options IPFIREWALL</literal></term>
 
 	<listitem>
-	  <para>Enables the kernel's firewall code.</para>
+	  <para>Habilita o c&oacute;digo de firewall no kernel.</para>
 	</listitem>
       </varlistentry>
 
@@ -75,9 +80,9 @@
 	<term><literal>options IPFW2</literal></term>
 
 	<listitem>
-	  <para>Enables the new version of IPFW.</para>
-	  <important><para>Only do this if you're running FreeBSD 4.X,
-	  this is the default in newer versions of
+	  <para>Habilita a nova vers&atilde;o do IPFW.</para>
+	  <important><para>S&oacute; fa&ccedil;a isso se voc&ecirc; estiver executando o
+	  FreeBSD 4.X, este &eacute; o padr&atilde;o  nas vers&otilde;es mais recentes do
 	  FreeBSD.</para></important>
 	</listitem>
       </varlistentry>
@@ -86,7 +91,7 @@
 	<term><literal>options IPFIREWALL_VERBOSE</literal></term>
 
 	<listitem>
-	  <para>Sends logged packets to the system logger.</para>
+	  <para>Envia os pacotes logados para o sistema de log.</para>
 	</listitem>
       </varlistentry>
 
@@ -95,7 +100,8 @@
 	    IPFIREWALL_VERBOSE_LIMIT=<replaceable>100</replaceable></literal></term>
 
 	<listitem>
-	  <para>Limits the number of times a matching entry is logged.  This
+	  <para>
+	  Limits the number of times a matching entry is logged.  This
             prevents your log file from filling up with lots of repetitive
 	    entries.
 	    <replaceable>100</replaceable> is a reasonable number to use, but
