@@ -1940,13 +1940,13 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  ter seu valor aumentado ou diminuido baseado nos 
 	  requisitos do sistema.  Esta vari&aacute;vel indica o 
 	  n&uacute;mero m&aacute;ximo de descritores de arquivos no seu 
-	  sistema.  Quanto a tabela de descritores de arquivos 
+	  sistema.  Quando a tabela de descritores de arquivos 
 	  est&aacute; cheia, a mensagem <errorname>file: table is 
 	  full</errorname> aparecer&aacute; v&aacute;rias vezes no buffer de 
 	  mensagens do sistema, que pode ser visualizado atrav&eacute;s 
 	  do comando <command>dmesg</command>.</para>
 
-	<para>Cara arquivo aberto, socket, ou fifo usa um 
+	<para>Cada arquivo aberto, socket, ou fifo usa um 
 	  descritor de arquivo.  Um servidor de produ&ccedil;&atilde;o de 
 	  larga escala pode facilmente requerer muitos milhares 
 	  de descritores de arquivos, dependendo do tipo e do 
@@ -1988,7 +1988,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  conex&otilde;es em um ambiente de servidor web com alta carga.  Para 
 	  tais ambientes o aumento deste valor para <literal>
 	  1024</literal> ou mais &eacute; recomendado.  O servi&ccedil;o de daemon pode 
-	  por si s&oacute; limitar o tamanho d fila (por exemplo, 
+	  por si s&oacute; limitar o tamanho da fila (por exemplo, 
 	  &man.sendmail.8;, ou <application>Apache</application>) mas 
 	  na maioria das vezes existir&aacute; uma diretiva em seus arquivos 
 	  de configura&ccedil;&atilde;o para ajustar o tamanho da fila.  Filas de 
@@ -2013,22 +2013,22 @@ kern.maxfiles: 2088 -> 5000</screen>
 	consome 16&nbsp;K de buffer de envio e 16&nbsp;K de recep&ccedil;&atilde;o, 
 	voc&ecirc; precisa de aproximadamente 32&nbsp;MB de buffers de rede 
 	para cobrir seu servidor web.  Uma boa regra geral &eacute; 
-	multiplicar por 2, ent&atilde;o 2x&nbsp;MB&nbsp;/&nbsp;2&nbsp;KB&nbsp;=
+	multiplicar por 2, ent&atilde;o 2x32&nbsp;MB&nbsp;/&nbsp;2&nbsp;KB&nbsp;=
 	64&nbsp;MB&nbsp;/&nbsp;2&nbsp;kB&nbsp;= 32768.  Recomendamos 
 	valores entre 4096 e 32768 para m&aacute;quinas com grandes 
 	quantidades de mem&oacute;ria. Sob nenhuma circunst&acirc;ncia voc&ecirc; deve 
 	especificar valores arbitrariamente altos para este 
-	par&acirc;metro, pois pode causar para durante a inicializa&ccedil;&atilde;o.  A 
+	par&acirc;metro, pois pode causar travamentos durante a inicializa&ccedil;&atilde;o.  A 
 	op&ccedil;&atilde;o <option>-m</option> do &man.netstat.1; pode ser 
 	usada para observar o uso do cluster de rede.</para>
 
       <para><varname>kern.ipc.nmbclusters</varname> pode ser usado para 
-	sintonizar isto no momento da inicializa&ccedil;&atilde;o.  Somente vers&otilde;es 
-	antigas do &os; requerer&atilde;o o uso da op&ccedil;&atilde;o &man.config.8; 
+	ajustar isto no momento da inicializa&ccedil;&atilde;o.  Somente vers&otilde;es 
+	antigas do &os; irão requerer o uso da op&ccedil;&atilde;o &man.config.8; 
         de kernel <option>NMBCLUSTERS</option>. 
         </para>
 
-      <para>Para servidores mais ocupados que fazem uso extensivo da 
+      <para>Para servidores mais ocupados, que fazem uso extensivo da 
 	chamada de sistema &man.sendfile.2;, pode ser necess&aacute;rio 
 	aumentar o n&uacute;mero de buffers &man.sendfile.2; atrav&eacute;s da 
 	op&ccedil;&atilde;o de configura&ccedil;&atilde;o de <foreignphrase>kernel
@@ -2036,11 +2036,11 @@ kern.maxfiles: 2088 -> 5000</screen>
 	valor no arquivo <filename>/boot/loader.conf</filename> 
 	(veja &man.loader.8; para mais detalhes).  Um indicador 
 	comum que indica que este par&acirc;metro precisa ser ajustado 
-	&eacute; quando processos s&atilde;o vistos no estado <errorname>sfbufa
-	</errorname>.  A vari&aacute;vel sysctl <varname>kern.ipc.nsfbufs
+	&eacute; quando processos s&atilde;o vistos no estado <errorname>sfbufa</errorname>.  
+        A vari&aacute;vel sysctl <varname>kern.ipc.nsfbufs
 	</varname> oferece uma vis&atilde;o apenas de leitura de como esta 
 	vari&aacute;vel est&aacute; configurada no <foreignphrase>kernel
-	</foreignphrase>.  Este par&acirc;metro aumenta nominalmente com 
+	</foreignphrase>.  Este par&acirc;metro aumenta nominalmente com o 
 	<varname>kern.maxusers</varname>, entretanto pode ser 
 	necess&aacute;rio ajustar de acordo com a necessidade.</para>
 
@@ -2067,7 +2067,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <varname>net.inet.ip.portrange.first</varname> e
 	  <varname>net.inet.ip.portrange.last</varname>, que possuem 
 	  valores padr&atilde;o 1024 e 5000, respectivamente. Faixas de porta 
-	  padr&atilde;o s&atilde;o usdas para conex&otilde;es que saem, e &eacute; poss&iacute;vel ficar 
+	  padr&atilde;o s&atilde;o usadas para conex&otilde;es que saem, e &eacute; poss&iacute;vel ficar 
 	  sem portas sob certas circunst&acirc;ncias.  Isto ocorre de forma 
 	  mais comum quando voc&ecirc; roda um servidor proxy que tem muita 
 	  carga.  A faixa de portas n&atilde;o &eacute; um problema quando se executa 
@@ -2083,7 +2083,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  portas pode causar em um firewall.  Alguns firewalls podem 
 	  bloquear grandes faixas de portas (geralmente portas de n&uacute;meros 
 	  baixos) e esperar que os sistemas utilizem faixas de portas 
-	  altas para conex&otilde;es que saem &mdash, por esta raz&atilde;o 
+	  altas para conex&otilde;es que saem &mdash por esta raz&atilde;o 
 	  recomenda-se que a vari&aacute;vel <varname>net.inet.ip.portrange.first
 	  </varname> tenha seu valor diminuido.</para>
       </sect3>
@@ -2123,7 +2123,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  constru&iacute;dos na roda intermedi&aacute;ria e trocar as filas de pacotes 
 	  assim como reduzir a quantidade de dados constru&iacute;dos na interface 
 	  de enfileiramento da m&aacute;quina local.  Com poucos pacotes enfileirados, 
-	  conex&otilde;es ineterativas, especialmente sob modems lentos, tamb&eacute;m 
+	  conex&otilde;es interativas, especialmente sob modems lentos, tamb&eacute;m 
 	  ser&atilde;o capazes de operar com tempos reduzidos de <foreignphrase>
 	  <emphasis>Round Trip</emphasis></foreignphrase>.  Entretanto, 
 	  note que esta caracter&iacute;stica tem efeito apenas na transmiss&atilde;o 
@@ -2143,7 +2143,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  ou 5; e talvez tenha que reduzir a vari&aacute;vel 
 	  <varname>net.inet.tcp.inflight_min</varname> (por exemplo, para 
 	  3500) para obter o efeito desejado.  Reduzir estes par&acirc;metros 
-	  deve ser um recurso de &uacute;ltima tentativa.</para>
+	  deve ser feito como um último recurso somente.</para>
       </sect3>
     </sect2>
   </sect1>
@@ -2152,7 +2152,7 @@ kern.maxfiles: 2088 -> 5000</screen>
     <title>Adicionando Espa&ccedil;o de Swap</title>
 
     <para>N&atilde;o importa o que voc&ecirc; planeje, algumas vezes o sistema 
-      n&atilde;o se roda como voc&ecirc; espera.  Se voc&ecirc; acha que precisa de 
+      n&atilde;o roda como voc&ecirc; espera.  Se voc&ecirc; acha que precisa de 
       mais espa&ccedil;o de swap, &eacute; simples adicionar.  Voc&ecirc; tem tr&ecirc;s 
       maneiras de fazer isso: adicionar um novo disco, habilitar 
       swap atrav&eacute;s de NFS, e criar um arquivo de swap em uma 
@@ -2187,7 +2187,7 @@ kern.maxfiles: 2088 -> 5000</screen>
     <sect2 id="create-swapfile">
       <title>Arquivos de Swap</title>
 
-      <para>Voc&ecirc; pode criar um arquifo de tamanho espec&iacute;fico 
+      <para>Voc&ecirc; pode criar um arquivo de tamanho espec&iacute;fico 
 	para utilizar como arquivo de swap.  Em nosso exemplo 
 	usaremos um arquivo de 64MB chamado <filename>/usr/swap0
 	</filename>.  Voc&ecirc; pode usar qualquer nome que desejar, 
@@ -2228,7 +2228,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	<listitem>
 	  <para>habilite o arquivo de swap em <filename>/etc/rc.conf</filename>:</para>
 
-	  <programlisting>swapfile="/usr/swap0"   # Set to name of swapfile if aux swapfile desired.</programlisting>
+	  <programlisting>swapfile="/usr/swap0"   # Ajuste o nome do arquivo de swap desejado.</programlisting>
 	</listitem>
 
 	<listitem>
@@ -2269,7 +2269,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	<listitem>
 	  <para>habilite o arquivo de swap no <filename>/etc/rc.conf</filename>:</para>
 
-	  <programlisting>swapfile="/usr/swap0"   # Set to name of swapfile if aux swapfile desired.</programlisting>
+	  <programlisting>swapfile="/usr/swap0"   # Ajuste o nome do arquivo de swap desejado.</programlisting>
 	</listitem>
 
 	<listitem>
@@ -2323,7 +2323,7 @@ kern.maxfiles: 2088 -> 5000</screen>
       um m&oacute;dulo padr&atilde;o de <foreignphrase>kernel</foreignphrase>.  Para 
       o &os;&nbsp;4.9, <acronym>ACPI</acronym> pode ser habilitado 
       adicionando-se a linha <literal>device acpi</literal> ao arquivo 
-      de comfigura&ccedil;&atilde;o do <foreignphrase>kernel</foreignphrase> e 
+      de configura&ccedil;&atilde;o do <foreignphrase>kernel</foreignphrase> e 
       recompilando-se o sistema.</para>
 
     <sect2 id="acpi-intro">
@@ -2335,7 +2335,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	interface para recursos de hardware e gerenciamento 
 	de energia.  &Eacute; um elemento chave na <emphasis>Configura&ccedil;&atilde;o 
 	direcionada ao Sistema e Gerenciamento de Energia</emphasis>, 
-	i.e.: oferece mais controle e flexibilidade para o sistema 
+	ex.: oferece mais controle e flexibilidade para o sistema 
 	operacional (<acronym>SO</acronym>).  Sistemas modernos, 
 	<quote>arrebentaram</quote> os limites das interfaces 
 	<literal>Plug and Play</literal> atuais (tais como APM, que 
@@ -2350,7 +2350,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 
       <para>O <emphasis>Gerenciamento Avan&ccedil;ado de Energia (APM)</emphasis>
       facilita o controle do uso de energia de um sistema baseado em sua 
-      atividade.  A BIOS APM &eacute; oferecida pelo fornecedor (do sistem) e &eacute; 
+      atividade.  A BIOS APM &eacute; oferecida pelo fornecedor (do sistema) e &eacute; 
       espec&iacute;fica &agrave; plataforma de hardware.  Um driver APM no SO media o 
       acesso ao <emphasis>Programa de Interface APM</emphasis>, que 
       permite o gerenciamento de n&iacute;veis de energia.</para>
@@ -2375,12 +2375,12 @@ kern.maxfiles: 2088 -> 5000</screen>
       possa se adaptar bem ao prop&oacute;sito da m&aacute;quina.</para>
       
       <para><emphasis>BIOS Plug and Play (PNPBIOS)</emphasis> era
-      incofi&aacute;vel em muitas situa&ccedil;&otilde;es.  PNPBIOS &eacute; uma tecnologia 
+      inconfi&aacute;vel em muitas situa&ccedil;&otilde;es.  PNPBIOS &eacute; uma tecnologia 
       de 16 bits, assim o SO tem que emular 16 bits para 
       fazer <quote>interface</quote> com os m&eacute;todos PNPBIOS.</para>
 
       <para>O driver <acronym>APM</acronym> do &os; est&aacute; 
-      documentado na p&aacute;gina de manual &man.apm.4;.</para>
+      documentado na p&aacute;gina de manual do &man.apm.4;.</para>
     </sect2>
 
     <sect2 id="acpi-config">
@@ -2390,7 +2390,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 	na inicializa&ccedil;&atilde;o pelo &man.loader.8; e <emphasis>n&atilde;o</emphasis> deve 
 	ser compilado no <foreignphrase>kernel</foreignphrase>.  A raz&atilde;o 
 	por tr&aacute;s disso &eacute; que os m&oacute;dulos s&atilde;o mais f&aacute;ceis de se trabalhar, 
-	digamos trocar para outro <filename>acpi.ko</filename> sem que seja 
+	digamos se trocar para outro <filename>acpi.ko</filename> sem que seja 
 	preciso recompilar o <foreignphrase>kernel</foreignphrase>.  Isto 
 	tem a vantagem de facilitar os testes.  Uma outra raz&atilde;o &eacute; que 
 	inicializar o <acronym>ACPI</acronym> depois do sistema estar no ar 
@@ -2400,16 +2400,16 @@ kern.maxfiles: 2088 -> 5000</screen>
 	v&aacute;rias intera&ccedil;&otilde;es de hardware.  O <acronym>ACPI</acronym> pode ser 
 	desabilitado com o utilit&aacute;rio &man.acpiconf.8;.  Na verdade, a maior 
 	parte das intera&ccedil;&otilde;es com o <acronym>ACPI</acronym> pode ser feita 
-	atravpes do &man.acpiconf.8;.  Basicamente isto significa que se 
+	através do &man.acpiconf.8;.  Basicamente isto significa que se 
 	qualquer coisa a respeito do <acronym>ACPI</acronym> estiver na sa&iacute;da 
-	do &man.dmesg.8;, ent&atilde;o priovavelmente j&aacute; estar&aacute; rodando.</para>
+	do &man.dmesg.8;, ent&atilde;o provavelmente j&aacute; estar&aacute; rodando.</para>
 
       <note><para><acronym>ACPI</acronym> e <acronym>APM</acronym> n&atilde;o podem 
 	coexistir e devem ser usados separadamente.  O &uacute;ltimo a ser carregado 
 	ser&aacute; finalizado se o driver tiver not&iacute;cias que o outro est&aacute; sendo 
 	executado.</para></note>
 
-      <para>Nma forma mais simples, o <acronym>ACPI</acronym> pode ser usado 
+      <para>Numa forma mais simples, o <acronym>ACPI</acronym> pode ser usado 
 	para colocar o sistema em modo de espera com a op&ccedil;&atilde;o <option>-s
 	</option> e <literal>1-5</literal> do &man.acpiconf.8;.</para>
 
@@ -2422,14 +2422,14 @@ kern.maxfiles: 2088 -> 5000</screen>
     <sect2 id="acpi-debug">
       <title>Depurando e Desabilitando o <acronym>ACPI</acronym></title>
 
-      <para>Quase tudo no <acronym>ACPI</acronym> &eacute; tranparente, 
+      <para>Quase tudo no <acronym>ACPI</acronym> &eacute; transparente, 
 	at&eacute; que n&atilde;o funcione.  Voc&ecirc; como usu&aacute;rio saber&aacute; quando 
 	alguma coisa n&atilde;o funcionar de acordo.  O driver &man.acpi.4; 
-	suporte v&aacute;rias op&ccedil;&otilde;es de depura&ccedil;&atilde;o, &eacute; at&eacute; poss&iacute;vel 
-	seletivamente desabilitar algumas partes algumas partes do 
+	suporta v&aacute;rias op&ccedil;&otilde;es de depura&ccedil;&atilde;o, &eacute; at&eacute; poss&iacute;vel 
+	seletivamente desabilitar algumas partes do 
 	sistema <acronym>ACPI</acronym>.  Para mais informa&ccedil;&otilde;es a 
 	respeito de facildades de depura&ccedil;&atilde;o leia a p&aacute;gina de manual 
-	&man.acpi.4;.</para>
+	do &man.acpi.4;.</para>
 
       <para>Algumas vezes, por v&aacute;rias raz&otilde;es, o m&oacute;dulo <filename>
 	acpi.ko</filename> deve ser descarregado.  Isto s&oacute; pode ser 
@@ -2442,7 +2442,7 @@ kern.maxfiles: 2088 -> 5000</screen>
 
       <programlisting>exec="unset acpi_load"</programlisting>
 
-      <para>&os;&nbsp;5.1-RELEASE e superiores vem com um menu 
+      <para>O &os;&nbsp;5.1-RELEASE e superiores vem com um menu 
 	em tempo de inicializa&ccedil;&atilde;o que controla como o &os; &eacute; 
 	inicializado.  Uma das op&ccedil;&otilde;es propostas &eacute; a de desligar 
 	o <acronym>ACPI</acronym>.  Para desabilit&aacute;-lo selecione 
