@@ -1386,93 +1386,92 @@ pseudo-device   pty           # Pseudo-ttys (telnet etc)</programlisting>
       <primary><command>MAKEDEV</command></primary>
     </indexterm>
 
-    <note><para>Se voc&ecirc; estiver rodando &os;&nbsp;5.0 ou posteriores
-      voc&ecirc; poder&aacute; com seguran&ccedil;a pular est&aacute; se&ccedil;&atilde;o. Estas vers&otilde;es usam
-      &man.devfs.5; para alocar liga&ccedil;&atilde;o entre dispositivos transparentes para o usu&aacute;rio.</para></note>
+    <note><para>Se voc&ecirc; estiver usando o &os;&nbsp; versão 5.0 ou posterior,
+      pode seguramente pular esta seção.  Estas versões usam o &man.devfs.5; para criar os dispositivos de controle
+	de forma completamente transparente para o usuário.</para></note>
 
-    <para>Quase todos dispositivo no kernel tem uma  
-      <quote>liga&ccedil;&atilde;o</quote> correspondente no diret&oacute;rio <filename>/dev</filename>.
-      Voc&ecirc; visualiza esta liga&ccedil;&atilde;o como arquivos regulares, mas s&atilde;o realmente entradas especiais
-      no kernel que os programas usam para acessar os dispositivos.
-      O shell script <filename>/dev/MAKEDEV</filename>, que &eacute;
-      executado quando voc&ecirc; instala primeiramente o sistema operacional, cria
-      quase todas os dispositivos de liga&ccedil;&atilde;o suportados. Entretanto, isto n&atilde;o
-      cria <emphasis>todos</emphasis>, assim quando voc&ecirc; adiciona suporte para
-      um novo dispositivo, isto faz apropriadamente a entrada
-      neste diret&oacute;rio e adiciona este. Est&aacute; aqui um exemplo simples:</para>
+    <para>Quase todos dispositivo no kernel usam um
+      <quote>dispositivo de controle</quote> que fica no diret&oacute;rio <filename>/dev</filename>.
+      O usuário normal visualiza estes dispositivos como arquivos regulares, mas na realidade são entradas especiais
+	no kernel do sistema, que os programas usam para acessar os recursos do sistema. Existe uma rotina <foreignphrase>shell</foreignphrase>,
+	o <filename>/dev/MAKEDEV</filename>, que &eacute;
+      executado quando voc&ecirc; instala o sistema operacional pela primeira vez; esta rotina cria
+      quase todos os dispositivos de controle suportados no sistema. Entretanto, não
+      cria <emphasis>todos</emphasis>, de forma que ao adicionar suporte para
+      novos dispositivos, esta rotina deve ser usada para criar a entrada apropriada neste diretório
+	e acima dele. Veja um exemplo simples:</para>
 
-    <para>Supondo que voc&ecirc; adicione suporte de um IDE CD-ROM ao kernel. A linha
-      a adicionar &eacute;:</para>
+    <para>Vamos supor que você adicionou um CD-ROM IDE e requer que ele seja suportado pelo kernel. A linha
+      no kernel deve ser a seguinte:</para>
 
     <programlisting>device acd0</programlisting>
 
-    <para>Isto significa que voc&ecirc; deve procurar alguma entrada que comece com
-      <filename>acd0</filename> no diret&oacute;rio <filename>/dev</filename>,
-      possivelmente seguidas por uma letra, tal como
+    <para>Ou seja, a entrada <filename>acd0</filename> deve estar disponível no
+	<filename>/dev</filename>, possivelmente seguida por uma letra, tal como
       <literal>c</literal>, ou precedido por uma letra
-      <literal>r</literal>, que significa um dispositivo <quote>raw</quote>. Estes
-      turns daqueles arquivos que n&atilde;o est&atilde;o l&aacute;, assim voc&ecirc; deve mudar para o diret&oacute;rio e o tipo para
+      <literal>r</literal>, que significa tratar-se de um dispositivo crú (<quote>raw</quote>).
+	Existe contudo uma grande possibilidade destes arquivos não estarem
+	presentes sob este diretório, neste caso você pode entrar no diretório
       <filename>/dev</filename>:</para>
 
     <indexterm>
       <primary><command>MAKEDEV</command></primary></indexterm>
     <screen>&prompt.root; <userinput>sh MAKEDEV acd0</userinput></screen>
 
-    <para>Quando este script terminar, voc&ecirc; encontrar&aacute; agora uma entrada
+    <para>Quando a rotina terminar de ser executada, deverão existir as entradas
       <filename>acd0c</filename> e <filename>racd0c</filename>
-      em <filename>/dev</filename> assim que voc&ecirc; executar
-      corretamente.</para>
+      sob <filename>/dev</filename>.</para>
 
-    <para>Para Placas de Som, o seguinte comando cria as entradas apropriadas:</para>
+    <para>Para placas de som, o seguinte comando cria as entradas apropriadas:</para>
 
     <screen>&prompt.root; <userinput>sh MAKEDEV snd0</userinput></screen>
 
     <note>
-      <para>Ao criar liga&ccedil;&atilde;o para dispositivos tais como Placas de Som, se
-	outra pessoa tiver acesso a sua m&aacute;quina, pode ser necess&aacute;rio 
+      <para>Ao criar dispositivos de controle tais como Placas de Som, se
+	outras pessoas tiverem acesso à sua m&aacute;quina, pode ser necess&aacute;rio 
 	proteger os dispositivos contra acesso externo adicionando os arquivos no
-	<filename>/etc/fbtab</filename>. Veja &man.fbtab.5; para maiores
+	<filename>/etc/fbtab</filename>. Veja o manual do &man.fbtab.5; para obter maiores
 	informa&ccedil;&otilde;es.</para>
     </note>
 
-    <para>Siga este simples procedimentos para outros dispositivos
+    <para>Siga este simples procedimento quando quizer adicionar dispositivos de
+	controle à outros equipamentos
       n&atilde;o <filename>GEN&Eacute;RICOS</filename> que n&atilde;o tiverem
-      entradas.</para>
+      entradas apropriadas.</para>
 
     <note>
-      <para>Todas as controladoras SCSI usam a mesma entrada no
-	<filename>/dev</filename>, assim voc&ecirc; n&atilde;o necessita criar
-	este. Tamb&eacute;m, as placas de rede e SLIP/PPP pseudo-devices n&atilde;o
-	tem entradas em <filename>/dev</filename> em tudo, assim voc&ecirc; n&atilde;o
-	tem que preocupar-se sobre estes tamb&eacute;m.</para>
+      <para>Todas as controladoras SCSI usam a mesma entrada sob o
+	<filename>/dev</filename>, de forma que estes não requerem
+	que os dispositivos sejam manualmente criados.  As placas de rede e SLIP/PPP não
+	tem dispositivos de controle sob o <filename>/dev</filename>, de forma que você
+	não deve se preocupar também com estes equipamentos.</para>
     </note>
   </sect1>
 
   <sect1 id="kernelconfig-trouble">
     <title>Se algo der errado</title>
 
-    <para>H&aacute; 5 categorias de problema que podem ocorrer ao construir um kernel personalizado.
-      S&atilde;o:</para>
+    <para>H&aacute; 5 categorias de problemas que podem ocorrer ao compilar um kernel personalizado.
+      Elas são:</para>
 
     <variablelist>
       <varlistentry>
 	<term>Falhas na <command>configura&ccedil;&atilde;o</command>:</term>
 
 	<listitem>
-	  <para>Se o comando &man.config.8; falhar, e
-	    der esta descri&ccedil;&atilde;o do seu kernel, voc&ecirc; provavelmente fez algum
-	    erro simples em algum lugar. Felizmente,
-	    &man.config.8; imprimir&aacute; o n&uacute;mero da linha que est&aacute; com
-	    problema, assim voc&ecirc; pode tranquilamente pular para isto com o
-	    <application>vi</application>. Por exemplo, se voc&ecirc; ver:</para>
+	  <para>Se a rotina &man.config.8; falhar, é provável que você tenha cometido
+		um erro bastante simples.  Felizmente, o &man.config.8; indicará o número da
+		linha que está com problema, de forma que você pode tranquilamente ir
+		diretamente à esta linha, com um editor de texto como o
+		<application>vi</application>. Por exemplo, se você encontrar o seguinte erro:</para>
 
 	  <screen>config: line 17: syntax error</screen>
 
-	  <para>Voc&ecirc; pode chegar ao problema pelo <application>vi</application> 
-	    procurando <command>17G</command> no mode de comando. Certifique-se que o
-	    teclado est&aacute; corretamente configurado, comparando o kernel
-	    <filename>GEN&Eacute;RICO</filename> com uma outra
-	    refer&ecirc;ncia.</para>
+	  <para>Você vai identificar o problema, usando o <application>vi</application>,
+	    com o comando <command>17G</command> no modo de comandos do editor. Certifique-se que o
+	    a opção em questão est&aacute; corretamente configurada, comparando o kernel
+	    <filename>GEN&Eacute;RICO</filename> com sua outra
+	    refer&ecirc;ncia de arquivo de kernel.</para>
 	</listitem>
       </varlistentry>
 
@@ -1480,12 +1479,12 @@ pseudo-device   pty           # Pseudo-ttys (telnet etc)</programlisting>
 	<term>Falha no <command>make</command>:</term>
 
 	<listitem>
-	  <para>Se o comando <command>make</command> falhar, isso normalmente
-	    significa que tem erros em suas descri&ccedil;&otilde;es do kernel, mas n&atilde;o bastante
-	    grave para &man.config.8; trav&aacute;-lo. Novamente, olhe
-	    sobre sua configura&ccedil;&atilde;o, e se voc&ecirc; ainda n&atilde;o pode resolver o problema,
-	    envie um e-mail para &a.questions; com sua configura&ccedil;&atilde;o do kernel,
-	    e isto deve ser diagnosticado mais rapidamente.</para>
+	  <para>Se o comando <command>make</command> falhar, é indicação de que
+	    existem erros no seu arquivo de configuração do kernel, mas estes erros não são
+	    suficientemente claros para o &man.config.8; indeitifca-lo.  Mas uma vez, dê uma olhada em
+	    seu arquivo de configuração do kernel, e se não conseguir solucionar a questão, envie uma
+	    mensagem de correio eletrônico para &a.questions; com a configuração do seu kernel, de forma
+	    que o problema seja diagnosticado de forma rápida.</para>
 	</listitem>
       </varlistentry>
 
