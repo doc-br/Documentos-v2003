@@ -1244,69 +1244,75 @@ You can enable XAnim DLL support by defining WITH_XANIM.
         <indexterm><primary>MPlayer</primary>
 	           <secondary>use</secondary></indexterm>
 
-        <para>Any user of <application>MPlayer</application> must set up a
-          <filename>.mplayer</filename> subdirectory of her
-          home directory.  To create this necessary subdirectory,
-	  you can type the following:</para>
-
+        <para>Qualquer usu&aacute;rio do <application>MPlayer</application>
+	  deve estabelecer um subdiret&oacute;rio
+	  <filename>.mplayer</filename> no seu diret&oacute;rio home.  Para
+	  criar este subdiret&oacute;rio necess&aacute;rio ao funcionamento do
+	  aplicativo, voc&ecirc; pode executar o seguinte:</para>
+	
 <screen>&prompt.user; <userinput>cd /usr/ports/multimedia/mplayer</userinput>
 &prompt.user; <userinput>make install-user</userinput></screen>
 
-	<para>The command options for <command>mplayer</command> are
-	  listed in the manual page.  For even more detail there is HTML
-	  documentation.  In this section, we will describe only a few
-	  common uses.</para>
-
-	<para>To play a file, such as
+	<para>As op&ccedil;&otilde;es de comando para o <command>mplayer</command>
+	  est&atilde;o listadas na sua p&aacute;gina de manual.  Para maiores
+	  detalhes consulte a documenta&ccedil;&atilde;o HTML.  Nesta sess&atilde;o, n&oacute;s
+	  descreveremos apenas alguns usos comuns.</para>
+	
+	<para>Para reproduzir um arquivo, como por exemplo
 	  <filename><replaceable>testfile.avi</replaceable></filename>,
-	  through one of the various video interfaces set the
-	  <option>-vo</option> option:</para>
-
+	  atrav&eacute;s de uma das varias interfaces de video, especifique a
+	  op&ccedil;&atilde;o <option>-vo</option>:</para>
+	
 	  <screen>&prompt.user; <userinput>mplayer -vo xv testfile.avi</userinput></screen>
 	  <screen>&prompt.user; <userinput>mplayer -vo sdl testfile.avi</userinput></screen>
 	  <screen>&prompt.user; <userinput>mplayer -vo x11 testfile.avi</userinput></screen>
 	  <screen>&prompt.root; <userinput>mplayer -vo dga testfile.avi</userinput></screen>
 	  <screen>&prompt.root; <userinput>mplayer -vo 'sdl:dga' testfile.avi</userinput></screen>
 
-	<para>It is worth trying all of these options, as their relative
-	  performance depends on many factors and will vary significantly
-	  with hardware.</para>
-
-	<para>To play from a DVD, replace the
-	 <filename>testfile.avi</filename> with <option>-dvd &lt;N&gt;
-	 <replaceable>DEVICE</replaceable></option> where &lt;N&gt; is
-	 the title number to play and
-	 <filename><replaceable>DEVICE</replaceable></filename> is the
-	 device node for the DVD-ROM.  For example, to play title 3
-	 from <filename>/dev/dvd</filename>:</para>
-
+	<para>Vale a pena tentar todas estas op&ccedil;&otilde;es, porque seu
+	  desempenho relativo depende de muitos fatores e variar&aacute;
+	  significativamente com o hardware.</para>
+	
+	<para>Para reproduzir um DVD, supstitua o <filename>
+	  testfile.avi</filename> com <option>-dvd &lt;N&gt; 
+	  <replaceable>DEVICE</replaceable></option> onde &lt;N&gt; &eacute;
+	  o numero do titulo a ser reproduzido e
+	  <filename><replaceable>DEVICE</replaceable></filename> &eacute; o
+	  n&oacute; de dispositivo para o DVD-ROM.  Por exemplo, para
+	  reproduzir o titulo 3 a partir do
+	  <filename>/dev/dvd</filename>:</para>
+	
 	  <screen>&prompt.root; <userinput>mplayer -vo dga -dvd 2 /dev/dvd</userinput></screen>
 
-	<para>To stop, pause, advance and so on, consult the
-	  keybindings, which are output by running <command>mplayer
-	  -h</command> or read the manual page.</para>
-
-        <para>Additional important options for playback are:
-          <option>-fs -zoom</option> which engages the fullscreen mode
-          and <option>-framedrop</option> which helps performance.</para>
-
-	<para>In order for the mplayer command line to not become too
-	  large, the user can create a file
-	  <filename>.mplayer/config</filename> and set default options
-	  there:</para>
+	<para>Para para, pausar, avan&ccedil;ar e assim por diante, consulte
+	  o mapeamento de teclas, o qual &eacute; exibido pela execu&ccedil;&atilde;o do
+	  comando <command>mplayer -h</command> ou ent&atilde;o leia a pagina
+	  de manual.</para>
+	
+        <para>Uma importante op&ccedil;&atilde;o de reprodu&ccedil;&atilde;o &eacute;: <option>-fs
+	  -zoom</option> a qual emprega o modo de tela cheia e
+	  <option>-framedrop</option> a qual ajuda na
+	  performance.</para>
+	
+	<para>Para que a linha de comando do mplayer n&atilde;o se torne
+	  demasiadamente grande, o usu&aacute;rio pode criar um arquivo
+	  <filename>.mplayer/config</filename> e especificar ali as
+	  op&ccedil;&otilde;es padr&otilde;es:</para>
+	
 <programlisting>vo=xv
 fs=yes
 zoom=yes</programlisting>
 
-	<para>Finally, <command>mplayer</command> can be used to rip a
-	  DVD title into a <filename>.vob</filename> file.  To dump
-	  out the second title from a DVD, type this:</para>
-
+	<para>E por ultimo, o <command>mplayer</command> pode ser
+	  utilizado para ripar um titulo DVD para um arquivo
+	  <filename>.vob</filename>.  Para ripar o segundo titulo de um
+	  DVD, execute isto:</para>
+	
 	  <screen>&prompt.root; <userinput>mplayer -dumpstream -dumpfile out.vob -dvd 2 /dev/dvd</userinput></screen>
 
-        <para>The output file, <filename>out.vob</filename>, will be
-	  MPEG and can be manipulated by the other packages described
-	  in this section.</para>
+        <para>O arquivo de sa&iacute;da, <filename>out.vob</filename>, ser&aacute;
+	   um arquivo mpeg e pode ser manipulado pelos outros pacotes
+	  descritos nesta sess&atilde;o.</para>
 
       </sect4>
       <sect4 id="video-mencoder">
