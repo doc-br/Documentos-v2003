@@ -694,30 +694,37 @@ cvspserver stream tcp nowait root /usr/bin/cvs cvs -f -l -R -T /anoncvstmp --all
     <sect2 id="mirror-www">
       <title>Espelhando as p&aacute;ginas WWW</title>
 
-      <para>
-        The best way is to check out the <emphasis>www</emphasis>
-        distribution from CVS. If you have a local mirror of the
-        CVS repository, it is probably as easy as:
-        <screen>&prompt.user; <userinput>cvs -d /home/ncvs co www</userinput></screen>
-        and a <emphasis>cronjob</emphasis>, that calls <command>cvs up -d -P</command>
-        on a regular basis, maybe just after your repository was updated.
-        Of course, the files need to remain in a directory available
-        for public WWW access. The installation and configuration of a 
-        webserver is not discussed here.
-      </para>
-      
-      <note><para>For the website to be visible, users must execute the &man.make.1;
-        command in the main <filename>www</filename> directory.  This command
-        will create the standard <filename>*.html</filename> files for web
-        viewing.  For this to work however, the
-        <filename role="package">textproc/docproj</filename> port must be
-        installed.</para></note>
-      <para>
-        If you don't have a local repository, you can use 
-        <application>CVSup</application> to maintain an <quote>up to date copy</quote>
-        of the www pages. A sample supfile can be found in
-        <filename>/usr/share/examples/cvsup/www-supfile</filename> and
-        could look like this:
+      <para>A melhor forma &eacute; realizar um "check out" da distribui&ccedil;&atilde;o
+	<emphasis>www</emphasis> do servidor de CVS.  Se voc&ecirc; tem um
+	mirror local do reposit&oacute;rio CVS, provavelmente ser&aacute; t&atilde;o
+	simples quanto executar:</para>
+
+      <screen>&prompt.user; <userinput>cvs -d /home/ncvs co www</userinput></screen>
+      <para>e um <emphasis>cronjob</emphasis>, o qual executa um 
+        <command>cvs update -d -P</command> periodicamente, talvez
+	imediatamente depois de cada atualiza&ccedil;&atilde;o do seu reposit&oacute;rio.
+	Naturalmente, os arquivos necessitam ficar em um diret&oacute;rio
+	dispon&iacute;vel para acesso p&uacute;blico via WWW.  A instala&ccedil;&atilde;o e
+	configura&ccedil;&atilde;o de um servidor web n&atilde;o ser&aacute; abordada neste
+	artigo.</para>
+
+      <note>
+	<para>Para que o site web fique dispon&iacute;vel, voc&ecirc; precisa
+	  executaro comando &man.make.1; dentro do diret&oacute;rio principal
+	  do <filename>www</filename>.  Este comando ir&aacute; criar os
+	  arquivos <filename>*.html</filename> para serem visualizados
+	  via web.  Para que o comando possa ser executado com
+	  sucesso, o port <filename role="package">textproc/docproj
+	  </filename> precisa estar instalado.</para>
+      </note>
+
+      <para>Se voc&ecirc; n&atilde;o possui um reposit&oacute;rio local, voc&ecirc; pode
+	utilizar o <application>CVSup</application> para manter uma c&oacute;pia
+        <quote>atualizada</quote> das p&aacute;ginas www.  Um exemplo de
+	supfile para esta tarefa pode ser encontrado em
+        <filename>/usr/share/examples/cvsup/www-supfile</filename> o
+	qual ir&aacute; se parecer com isto:</para>
+
         <programlisting>
         #
         # WWW module supfile for FreeBSD
@@ -734,24 +741,24 @@ cvspserver stream tcp nowait root /usr/bin/cvs cvs -f -l -R -T /anoncvstmp --all
         # This collection retrieves the www/ tree of the FreeBSD repository
         www
         </programlisting>
-     </para>
-     <para>
-       Using <filename role="package">ftp/wget</filename> or other web-mirror tools is
-       probably not recommended.
-     </para>
+
+     <para>N&atilde;o recomendamos o uso do <filename role="package">ftp/wget
+      </filename> ou de outras ferramentas de espelhamento web.</para>
+      
      <sect3 id="mirror-www-doc">
-       <title>Mirroring the FreeBSD documentation</title>
-       <para>
-         Since the documentation is referenced a lot from the 
-         webpages, it is recommended that you mirror the 
-         FreeBSD documentation as well. However, this is not
-         as trivial as the www-pages alone.
-       </para>
-       <para>
-         First of all, you should get the doc sources,
-         again preferably via <application>CVSup</application>.
-         Here is a corresponding sample supfile:
-         <programlisting>
+       <title>Espelhando a documenta&ccedil;&atilde;o do FreeBSD</title>
+       
+       <para>Uma vez que a documenta&ccedil;&atilde;o &eacute; fortemente refer&ecirc;nciada
+	 a partir das p&aacute;ginas web, recomenda-se que voc&ecirc; tamb&eacute;m
+	 espelhe a documenta&ccedil;&atilde;o do FreeBSD.  Entretanto, isto n&atilde;o &eacute; t&atilde;o
+	 trivial quando espelhar as p&aacute;ginas www isoladamente.</para>
+
+       <para>Antes de mais nada, voc&ecirc; deve obter os fontes da
+	 documenta&ccedil;&atilde;o, e de novo o m&eacute;todo preferencial &eacute; via <application>
+	 CVSup</application>.  Aqui est&aacute; um exemplo do supfile
+	 correspondente:</para>
+         
+	 <programlisting>
          #
          # FreeBSD documentation supfile
          #
@@ -768,95 +775,92 @@ cvspserver stream tcp nowait root /usr/bin/cvs cvs -f -l -R -T /anoncvstmp --all
          # This includes the handbook, FAQ, and translations thereof.
          doc-all
          </programlisting>
-       </para>
-       <para>
-         Then you need to install a couple of ports.
-         You are lucky, there is a meta-port:
-         <filename role="package">textproc/docproj</filename> to do the work
-         for you. You need to set up some 
-         environment variables, like
-         <literal>SGML_CATALOG_FILES</literal>.
-         Also have a look at your <filename>/etc/make.conf</filename>
-         (copy <filename>/etc/defaults/make.conf</filename> if
-         you do not have one), and look at the
-         <literal>DOC_LANG</literal> variable.
-         Now you are probably ready to run <command>make</command>
-         in you doc directory (<filename>/usr/share/doc</filename>
-         by default) and build the documentation.
-         Again you need to make it accessible for your webserver
-         and make sure the links point to the right location.
+       
+       <para>Ent&atilde;o voc&ecirc; ter&aacute; que instalar diversos ports.  Mas voc&ecirc;
+	 est&aacute; com sorte, pois existe um meta port: <filename 
+	 role="package">textproc/docproj</filename> que faz o trabalho
+	 para voc&ecirc;.  Voce precisa configurar algumas vari&aacute;veis de
+	 ambiente, como por exemplo <literal>SGML_CATALOG_FILES</literal>.  
+	 Tamb&eacute;m de uma olhada no seu <filename>/etc/make.conf</filename> 
+	 (fa&ccedil;a uma c&oacute;pia do <filename>/etc/defaults/make.conf</filename> 
+	 se voc&ecirc; n&atilde;o possuir um), e verifique a vari&aacute;vel <literal>DOC_LANG
+	 </literal>.  Agora voc&ecirc; j&aacute; est&aacute; provavelmente pronto para
+	 executar o comando <command>make</command> no seu diret&oacute;rio
+	 dos fontes da documenta&ccedil;&atilde;o (por padr&atilde;o <filename>
+	 /usr/share/doc</filename>) para construir a documenta&ccedil;&atilde;o.  De
+	 novo, voc&ecirc; precisa torn&aacute;-lo acess&iacute;vel atrav&eacute;s do seu servidor
+	 web e certifique-se de que os links apontam para o local
+	 correto.</para>
+         
          <important>
-           <para>
-             The building of the documentation, as well as lots
-             of side issues, is documented itself in:
-             <ulink url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/fdp-primer/">fdp-primer</ulink>.
-             Please read this piece of documentation, especially if you
-             have problems building the documentation.
-           </para>
+           <para>A constru&ccedil;&atilde;o da documenta&ccedil;&atilde;o, assim como as diversas tarefas
+	     associadas ao processo, est&atilde;o documentadas no 
+             <ulink 
+	     url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/fdp-primer/">
+	     fdp-primer</ulink>.  Por favor leia este documento, especialmente 
+	     se voc&ecirc; esta tendo problemas para contruir a documenta&ccedil;&atilde;o.</para>
          </important>
-         <note>
-           <para>
-           XXX MAYBE THIS CAN BE LINKED FROM WITHIN - NOT USING AN ABSOLUTE URL XXX
-           </para>
-         </note>
-       </para>
+
      </sect3>
    </sect2>
+
    <sect2 id="mirror-how-often">
-     <title>How often should I mirror?</title>
-     <para>
-       Every mirror should be updated on a regular
-       basis. You will certainly need some script
-       framework for it that will be called by 
-       &man.cron.8;. Since nearly every admin
-       does this his own way, we cannot give
-       specific instructions. It could work
-       like this:
-     </para>
+     <title>Com que frequ&ecirc;ncia atualizar o site espelho?</title>
+
+     <para>Cada site espelho deve ser atualizado regularmente.  Voc&ecirc;
+       certamente ir&aacute; precisar de alguns scripts de trabalho, os quais
+       ser&atilde;o executados pelo &man.cron.8;, automatizando o processo de
+       atualiza&ccedil;&atilde;o.  Uma vez que cada administrador implementa estes 
+       scripts da sua pr&oacute;pria maneira, n&oacute;s n&atilde;o podemos dar instru&ccedil;&otilde;es 
+       espec&iacute;ficas sobre como proceder.  Mas de uma forma geral 
+       o processo de implementa&ccedil;&atilde;o poderia ser resumido como:</para>
+
      <procedure>
        <step>
-         <para>
-           Put the command to run your mirroring application
-           in a script. Use of a plain <command>/bin/sh</command>
-           script is recommended.
+         <para>Coloque os comandos para executar a sua aplica&ccedil;&atilde;o de
+	   espelhamento em um script.  Recomenda-se utilizar um script
+	   simples em <command>/bin/sh</command>.</para>
          </para>
        </step>
+       
        <step>
-         <para>
-           Add some output redirections so diagnostic
-           messages are logged to a file.
-         </para>
+         <para>Adicione alguns redirecionamentos para arquivo das 
+	   mensagens dos programas, de forma que possa usar o arquivo com 
+	   a finalidade de diagn&oacute;stico de problemas.</para>
+       </step>
+       
+       <step>
+         <para>Teste se o seu script funciona, verifique o arquivo de
+	   log.</para>
        </step>
        <step>
-         <para>
-           Test if your script works. Check the logs.
-         </para>
-       </step>
-       <step>
-         <para>
-	   Use &man.crontab.1; to add the script to the
-	   appropriate user's &man.crontab.5;.  This should be a
-	   different user than what your FTP daemon runs as so that
-	   if file permissions inside your FTP area are not
-	   world-readable those files can not be accessed by anonymous
-	   FTP.  This is used to <quote>stage</quote> releases &mdash;
-	   making sure all of the official mirror sites have all of the
-	   necessary release files on release day.
-         </para>
+         <para>Utilize o &man.crontab.1; para adicionar o script ao
+	   &man.crontab.5; do usu&aacute;rio apropriado.  O qual deve ser um
+	   usu&aacute;rio diferente do usu&aacute;rio sob o qual o servidor de FTP &eacute;
+	   executado, desta forma n&atilde;o ser&aacute; permitido o acesso via FTP
+	   an&ocirc;nimo a arquivos presentes na &aacute;rea de FTP, os quais n&atilde;o
+	   possuam permiss&otilde;es que possibilitem a leitura por todos os
+	   demais usu&aacute;rios.  Isto &eacute; utilizando para a fase de
+	   <quote>est&aacute;gio</quote> das distribui&ccedil;&otilde;es &mdash; garantindo
+	   que todos os site espelhos oficiais possuam todos os arquivos
+	   necess&aacute;rios de uma distribui&ccedil;&atilde;o, no dia em que a mesma &eacute;
+	   liberada.</para>
        </step>
      </procedure>
-     <para>
-       Here are some recommended schedules:
+
+     <para>Aqui est&atilde;o alguns dos agendamentos recomendados para a
+       atualiza&ccedil;&atilde;o dos site espelho:</para>
+     
        <itemizedlist>
-         <listitem><para>FTP fileset: daily</para></listitem>
-         <listitem><para>CVS repository: daily to hourly</para></listitem>
-         <listitem><para>WWW pages: daily</para></listitem>
+         <listitem><para>Servidor FTP: di&aacute;rio</para></listitem>
+         <listitem><para>Reposit&oacute;rio CVS: di&aacute;rio a hor&aacute;rio</para></listitem>
+         <listitem><para>P&aacute;ginas WWW: di&aacute;rio</para></listitem>
        </itemizedlist>
      </para>
    </sect2>
   </sect1>
   <sect1 id="mirror-where">
-    <title>Where to mirror from</title>
+    <title>De onde espelhar</title>
     <para>
       This is an important issue. So this section will
       spend some effort to explain the backgrounds.  We will say this
