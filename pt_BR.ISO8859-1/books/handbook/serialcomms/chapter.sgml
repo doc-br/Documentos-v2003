@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/serialcomms/chapter.sgml,v 1.6 2003/12/09 14:51:43 ebrandi Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/serialcomms/chapter.sgml,v 1.7 2003/12/09 20:36:29 ebrandi Exp $
 -->
 
 <chapter id="serialcomms">
@@ -337,20 +337,26 @@
 	Digiboard e Stallion.  No entando, o kernel default suporta
 	apenas as portas COM normais.</para>
 	
-      <para>To see if your kernel recognizes any of your serial ports, watch
-	for messages while the kernel is booting, or use the
-	<command>/sbin/dmesg</command> command to replay the kernel's boot
-	messages.  In particular, look for messages that start with the
-	characters <literal>sio</literal>.</para>
-
-      <tip><para>To view just the messages that have the word
-	<literal>sio</literal>, use the command:</para>
-	  
+      <para>
+	Para verificar se o seu kernel reconhece alguma das suas
+	portas seriais, olhe as mensagens exibidas no console enquanto
+	o kernel esta sendo carregado, ou ent&atilde;o utilize o comando
+	<command>/sbin/dmesg</command> para visualizar novamente as
+	mensagens exibidas durante o processo de boot do kernel.  Em
+	particular, procure por mensagens que iniciem com os
+	caracteres <literal>sio</literal>.</para>
+	
+      <tip><para>
+	Para visualizar apenas as mensagens que contenham a palavra
+	<literal>sio</literal>, use o comando:</para>
+      
       <screen>&prompt.root; <userinput>/sbin/dmesg | grep 'sio'</userinput></screen>
       </tip>
 	    
-      <para>For example, on a system with four serial ports, these are the
-	serial-port specific kernel boot messages:</para>
+      <para>
+	Por exemplo, em um sistema com 4 portas seriais, as mensagens
+	especificas do kernel para as portas seriais durante o
+	processo de boot seriam parecidas com essas:</para>
       
       <screen>sio0 at 0x3f8-0x3ff irq 4 on isa
 sio0: type 16550A
@@ -361,22 +367,25 @@ sio2: type 16550A
 sio3 at 0x2e8-0x2ef irq 9 on isa
 sio3: type 16550A</screen>
 	  
-      <para>If your kernel does not recognize all of your serial
-	ports, you will probably need to configure a custom FreeBSD
-	kernel for your system.  For detailed information on
-	configuring your kernel, please see <xref
+      <para>
+	Se o seu kernel n&atilde;o reconheceu todas as suas portas seriais,
+	voc&ecirc; provavelmente precisa de um kernel customizado para o seu
+	sistema FreeBSD.  Para informa&ccedil;&otilde;es detalhadas de como
+	configurar o seu kernel, por favor consultexref 
 	linkend="kernelconfig">.</para>
 
-      <para>The relevant device lines for your kernel configuration
-	file would look like this, for FreeBSD&nbsp;4.X:</para>
-	  
+      <para>
+	As linhas de device relevantes em seu arquivo de configura&ccedil;&atilde;o
+	do kernel, ir&atilde;o se paracer com estas, para o
+	FreeBSD&nbsp;4.X:</para>
+      
       <programlisting>device		sio0	at isa? port IO_COM1 irq 4
 device		sio1	at isa? port IO_COM2 irq 3
 device		sio2	at isa? port IO_COM3 irq 5
 device		sio3	at isa? port IO_COM4 irq 9</programlisting>
 	  
 
-      <para>and like this, for FreeBSD&nbsp;5.X:</para>
+      <para>e parecida com esta, para o FreeBSD&nbsp;5.X:</para>
 
       <programlisting>device		sio</programlisting>
 
