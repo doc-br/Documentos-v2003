@@ -260,67 +260,59 @@
       vantagem de requer significativamente menos espaço de
       armazenameto.  O acesso à leitura é parecida com a utilizada nas
       organizações striped, mas o acesso à escrita é bem reduzida, chega
-      a ate 25% da performance de leitura aproximadamente.  se um disco
-      falha, 
-      
-      Compared to mirroring, <acronym>RAID-5</acronym> has the
-	advantage of requiring significantly less storage space.  Read
-	access is similar to that of striped organizations, but write
-	access is significantly slower, approximately 25% of the read
-	performance.  If one drive fails, the array can continue to
-	operate in degraded mode: a read from one of the remaining
-	accessible drives continues normally, but a read from the
-	failed drive is recalculated from the corresponding block from
-	all the remaining drives.
-      </para>
+      a até 25% da performance de leitura aproximadamente.  Se uma
+      partição falha, o array pode continuar a operar em um modo de 
+      despreza: a leitura das partições acessiveis restantes continua
+      normalmente, mas a leitura da partição danificada é recalculada
+      pelo bloco correspondente de todos as partições restantes.</para>
   </sect1>
 
   <sect1 id="vinum-objects">
-    <title>Vinum Objects</title>
-      <para>In order to address these problems, Vinum implements a four-level
-	hierarchy of objects:</para>
+    <title>Objetos do Vinum</title>
+      <para>Para que o Vinum possa solucionar esse problema, ele
+      implementa um quarto nível em hierarquia de objetos:</para>
+      
 
       <itemizedlist>
 	<listitem>
-	  <para>The most visible object is the virtual disk, called a
-	    <emphasis>volume</emphasis>.  Volumes have essentially the same
-	    properties as a &unix; disk drive, though there are some minor
-	    differences.  They have no size limitations.</para>
+	  <para>O objeto mais visivel é o disco vitual, chamado de
+	  <emphasis>volume</emphasis>.  Volumes tem essencialmente as
+	  mesmas propriedades de uma partição &unix;, mas tem umas
+	  pequenas diferenças.  Eles não tem nenhuma limitação de
+	  tamanho.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Volumes are composed of <emphasis>plexes</emphasis>,
-	    each of which represent the total address space of a
-	    volume.  This level in the hierarchy thus provides
-	    redundancy.  Think of plexes as individual disks in a
-	    mirrored array, each containing the same data.</para>
+	  <para>Volumes são compostos de <emphasis>plexes</emphasis>, no
+	  qual representa o espaço total de adressamento de um volume.
+	  Dessa forma, esse nível na hierarquia fornece redundância.
+	  Pense em plexes como uma partição individual em um array
+	  clonado, cada um ontendo os mesmos dados.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Since Vinum exists within the &unix; disk storage
-	    framework, it would be possible to use &unix;
-	    partitions as the building block for multi-disk plexes,
-	    but in fact this turns out to be too inflexible:
-	    &unix; disks can have only a limited number of
-	    partitions.  Instead, Vinum subdivides a single
-	    &unix; partition (the <emphasis>drive</emphasis>)
-	    into contiguous areas called
-	    <emphasis>subdisks</emphasis>, which it uses as building
-	    blocks for plexes.</para>
+	  <para>Desde que o Vinum existe no sistema de armazenamento de
+	  discos &unix;, seria possível usar partições &unix; como um
+	  bloco de construção para plexes de multiplos discos, mas no
+	  final isso acaba sendo muito inflexível: o número de partições
+	  de um disco &unix; é limitado.  Ao contrário, Vinum subdivide
+	  uma única partição &unix; (os <emphasis>discos de
+	  vinum</emphasis>) em contínuas areas chamadas
+	  <emphasis>subdiscos</emphasis>, no qual é usado como blocas de
+	  construção para plexes.</para>
 	</listitem>
       
 	<listitem>
-	  <para>Subdisks reside on Vinum <emphasis>drives</emphasis>,
-	    currently &unix; partitions.  Vinum drives can
-	    contain any number of subdisks.  With the exception of a
-	    small area at the beginning of the drive, which is used
-	    for storing configuration and state information, the
-	    entire drive is available for data storage.</para>
+	  <para>Subdiscos residem em discos de Vinum.  atualmente
+	  partições &unix;.  com a exceção de uma pequea área no começo
+	  do disco, no qual é usado para armazenamento de configurações
+	  e informações sobre o estado, o disco todo fica disponível
+	  para armazenamento de dados.</para>
 	</listitem>
       </itemizedlist>
 
-      <para>The following sections describe the way these objects provide the
-	functionality required of Vinum.</para>
+      <para>As sessões seguintes descrevem o jeito com que esses objetos
+      fornecem a funcionalidade requerida pelo Vinum.</para>
 
     <sect2>
       <title>Conciderações de um tamanho de volume</title>
@@ -347,74 +339,73 @@
     </sect2>
     
     <sect2>
-      <title>'
+      <title>Assuntos de performance</title>
       
-      Performance Issues</title>
-
-      <para>Vinum implements both concatenation and striping at the
-	plex level:</para>
-
+      <para>Vinum implementa no nível de plexes tanto concatenação
+      quanto striping:</para>
+      
       <itemizedlist>
 	<listitem>
-	  <para>A <emphasis>concatenated plex</emphasis> uses the
-	    address space of each subdisk in turn.</para>
+	  <para>Um <emphasis>plex concatenado</emphasis> usa um espaço de
+	  adressamento de cada subdisco por vez.</para>
 	</listitem>
 
 	<listitem>
-	  <para>A <emphasis>striped plex</emphasis> stripes the data
-	    across each subdisk.  The subdisks must all have the same
-	    size, and there must be at least two subdisks in order to
-	    distinguish it from a concatenated plex.</para>
+	  <para>Um <emphasis>plex striped</emphasis> stripes os dados
+	  entre cada subdisco.  Todos os subdiscos tem que ter o mesmo
+	  tamanho, e é preciso que existam pelo menos dois subdiscos
+	  para que eles possam ser distinguidos a partir de um plex
+	  concatenado.</para>
 	</listitem>
       </itemizedlist>
     </sect2>
 
     <sect2>
-      <title>Which Plex Organization?</title>
-      <para>The version of Vinum supplied with FreeBSD &rel.current; implements
-	two kinds of plex:</para>
-    
+      <title>Qual organização plex?</para>
+     
+     <para>A versão do Vinum suprida com o FreeBSD &rel.current;
+     implementa dois tipos de plexes:</para> 
+     
       <itemizedlist>
 	<listitem>
-	  <para>Concatenated plexes are the most flexible: they can
-	    contain any number of subdisks, and the subdisks may be of
-	    different length.  The plex may be extended by adding
-	    additional subdisks.  They require less
-	    <acronym>CPU</acronym> time than striped plexes, though
-	    the difference in <acronym>CPU</acronym> overhead is not
-	    measurable.  On the other hand, they are most susceptible
-	    to hot spots, where one disk is very active and others are
-	    idle.</para>
+	  <para>Plexes concatenados são os mais flexiveis: eles podem
+	  conter infinitos números de subdiscos e os subdiscos podem ser
+	  de tamanhos diferentes.  Os plexes podem ser extendendidos
+	  adicionando subdiscos.  Eles requerem menos tempo de 
+	  <acronym>CPU</acronym> do que striped plexes, mas a diferença
+	  em <acronym>CPU</acronym> overhead não da para ser medida.
+	  On the other hand, they are most susceptible to hot spots, 
+	  where one disk is very active and others are idle.</para>
         </listitem>
 
 	<listitem>
-	  <para>The greatest advantage of striped
-	    (<acronym>RAID-0</acronym>) plexes is that they reduce hot
-	    spots: by choosing an optimum sized stripe (about
-	    256&nbsp;kB), you can even out the load on the component
-	    drives.  The disadvantages of this approach are
-	    (fractionally) more complex code and restrictions on
-	    subdisks: they must be all the same size, and extending a
-	    plex by adding new subdisks is so complicated that Vinum
-	    currently does not implement it.  Vinum imposes an
-	    additional, trivial restriction: a striped plex must have
-	    at least two subdisks, since otherwise it is
-	    indistinguishable from a concatenated plex.</para>
-	</listitem>
+	  <para>A grande vantágme de plexes striped
+	  (<acronym>RAID-0</acronym>) é que eles reduzem os pontos
+	  quentes: escolhendo o melhor tamanho de stripe (mais ou menos
+	  256&nbsp;kB), você pode igualar a carga nos discos
+	  componentes.  As disventagens dessa escolha são cóigos
+	  (fracionalmente) mais complexos e restrições em subdiscos:
+	  eles tem que ser todos do mesmo tamanho, e extender um plex
+	  através da adição de um novo subdisco é tão complicado que
+	  vinum atualmente nem o implementa.  Vinum impõe uma restrição
+	  adicional, trivial: Um plex striped precisa ter pelo menos
+	  dois subdiscos, pois caso contrário seria indistinguivel de um
+	  plex concatenado.</para>
+	 </listitem>
       </itemizedlist>
     
-      <para><xref linkend="vinum-comparison"> summarizes the advantages
-	and disadvantages of each plex organization.</para>
+      <para><xref linkend="vinum-comparison">sumariza as vantágens e
+      desvantágens de cada organização plex.</para>
     
       <table id="vinum-comparison">
-	<title>Vinum Plex Organizations</title>
+	<title>Organizações Plex do Vinum</title>
 	<tgroup cols="5">
 	  <thead>
 	    <row>
-	      <entry>Plex type</entry>
+	      <entry>Tipo de Plex</entry>
 	  	<entry>Minimum subdisks</entry>
-	  	<entry>Can add subdisks</entry>
-	  	<entry>Must be equal size</entry>
+	  	<entry>Pode adicionar subdiscos</entry>
+	  	<entry>Deve ser de igual tamanho</entry>
 	  	<entry>Application</entry>
 	    </row>
 	  </thead>
@@ -423,19 +414,19 @@
 	    <row>
 	      <entry>concatenated</entry>
 	      <entry>1</entry>
-	      <entry>yes</entry>
-	      <entry>no</entry>
-	      <entry>Large data storage with maximum placement flexibility
-	        and moderate performance</entry>
+	      <entry>sim</entry>
+	      <entry>não</entry>
+	      <entry>Grande armazenamento de dados com máxima
+	      flexibilidade de placement e performance moderada</entry>
 	    </row>
 	    
 	    <row>
 	      <entry>striped</entry>
 	      <entry>2</entry>
-	      <entry>no</entry>
-	      <entry>yes</entry>
-	      <entry>High performance in combination with highly concurrent
-		access</entry>
+	      <entry>não</entry>
+	      <entry>sim</entry>
+	      <entry>Alta performance em combinação com um acesso
+	      altamente concorrido</entry>
 	    </row>
 	  </tbody>
 	</tgroup>
@@ -1148,119 +1139,117 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 	</listitem>
       </itemizedlist>
 
-      <para>
+      <para>Note que é desejado e possivel que existam multiplos plexes,
+      cada um contendo uma réplica do sistema de arquivos raiz.  O
+      processo de bootstrap ira, entretanto, usar somente uma delas para
+      achar o bootstrap e todos os arquivos, até que o próprio kernel
+      monte os sistemas de arquivos.  cada subdisco dentro desse plex
+      ira então precisar da sua própria partição imaginária
+      <literal>"a"</literal>, para que o dispositivo correspondente se
+      torne bootável.  Não é strictly necessário que cada uma dessa falsa
+      partição <literal>"a"</literal> se encontre no mesmo offset junto
+      ao seu dispositivo, comparado com outros plexes do volume raiz.
+      Entretanto, seria provavelmente uma boa ideia criar os volumes do
+      vinum desse jeito para que os dispositivos espelhados sejam
+      simetricos evitando assim confusão</para>
       
-      Note that it is desirable and possible that there are
-	multiple plexes, each containing one replica of the root
-	filesystem.  The bootstrap process will, however, only use one
-	of these replica for finding the bootstrap and all the files,
-	until the kernel will eventually mount the root filesystem
-	itself.	 Each single subdisk within these plexes will then
-	need its own <literal>"a"</literal> partition illusion, for
-	the respective device to become bootable.  It is not strictly
-	needed that each of these faked <literal>"a"</literal>
-	partitions is located at the same offset within its device,
-	compared with other devices containing plexes of the root
-	volume.	 However, it is probably a good idea to create the
-	Vinum volumes that way so the resulting mirrored devices are
-	symmetric, to avoid confusion.</para>
-
-      <para>In order to set up these <literal>"a"</literal> partitions,
-	for each device containing part of the root volume, the
-	following needs to be done:</para>
-
+	
+      <para>Para setar essas partições <literal>"a"</literal>, para cada
+      dispositivo contendo parte do volume raiz, as etapas segintes
+      precisam ser realizadas:</para>
+      
       <procedure>
 	<step>
-	  <para>The location (offset from the beginning of the device)
-	    and size of this device's subdisk that is part of the root
-	    volume need to be examined, using the command</para>
-
+	  <para>A localização (offset do início do dispositivo) e tamanho
+	  dos subdiscos dos dispositivos que fazem parte do volume raiz
+	  precisam ser avaliados usando o comando</para>
+	  
 	  <para><command>vinum l -rv root</command></para>
 
-	  <para>Note that Vinum offsets and sizes are measured in
-	    bytes.  They must be divided by 512 in order to obtain the
-	    block numbers that are to be used in the
-	    <command>disklabel</command> command.</para>
+	  <para>note que em Vinum, os offsets e tamanhos são medidos em
+	  bytes.  Eles precisam ser divididos por 512 para obter o
+	  número de blocos que irão, por sua vez, ser usados no comando
+	  <command>disklabel</command>.</para> 
 	</step>
 
 	<step>
-	  <para>Run the command</para>
+	  <para>Execute o comando</para>
 
 	  <para><command>disklabel -e
 	    </command><replaceable>devname</replaceable></para>
 
-	  <para>for each device that participates in the root volume.
-	    <replaceable>devname</replaceable> must be either the name
-	    of the disk (like <devicename>da0</devicename>) for disks
-	    without a slice (aka. fdisk) table, or the name of the
-	    slice (like <devicename>ad0s1</devicename>).</para>
+	  <para>Para cada dispositivo que participa no volume raiz.
+	  <replaceable>devname</replaceable> deve ser ou o nome do disco
+	  (exemplo <devicename>da0</devicename>) para discos sem tabela
+	  de partições (ex. fdisk), ou o nome da partição (exemplo
+	  <devicename>ad0s1</devicename>).</para>
+	 
+	  <para>Se já existir uma partição <literal>"a"</literal> no
+	  dispositivo (presumidamente, contendo um sistema de arquivos 
+	  raiz pré-vinum), essa deve ser renomeada, permanecendo
+	  acessível (por segurança), mas não será mais usado para
+	  bootstrap como padrão.  Note que partições ativas (como um
+	  sistema de arquivo raiz atualmente montado) não podem ser
+	  renomeadas, então isso deve ser feito quando a máquina é
+	  inicializada por um modo de <quote>Reparo</quote>, ou em um
+	  processo de duas etapas, onde (em uma situação de
+	  espelhamento) o disco que não foi usado no boot será
+	  manipulado primeiro.</para>
+	 
 
-	  <para>If there is already an <literal>"a"</literal>
-	    partition on the device (presumably, containing a
-	    pre-Vinum root filesystem), it should be renamed to
-	    something else, so it remains accessible (just in case),
-	    but will no longer be used by default to bootstrap the
-	    system.  Note that active partitions (like a root
-	    filesystem currently mounted) cannot be renamed, so this
-	    must be executed either when being booted from a
-	    <quote>Fixit</quote> medium, or in a two-step process,
-	    where (in a mirrored situation) the disk that has not been
-	    currently booted is being manipulated first.</para>
+	  <para>Então, o offset da partição de Vinum nesse dispositivo
+	  (se existente) deve ser adicionado ao offset do subdisco de
+	  volume raiz respectivo desse mesmo dispositivo.  O valor
+	  resultante passara a ser o valor <literal>"offset"</literal> 
+	  para a nova partição <literal>"a"</literal>.  O valor do 
+	  <literal>"tamanho"</literal> dessa partição pode ser tirado
+	  literalmente do cálculo acima.  O <literal>"fstype"</literal>
+	  deve ser <literal>4.2BSD</literal>.  Os valores de
+	  <literal>"fsize"</literal>, <literal>"bsize"</literal>, e
+	  <literal>"cpg"</literal> devem ser escolhidos para melhor
+	  se adaptar ao atual sistema, apesar de que, eles não são muito
+	  importantes dentro desse contexto.</para>
+	 
 
-	  <para>Then, the offset the Vinum partition on this
-	    device (if any) must be added to the offset of the
-	    respective root volume subdisk on this device.  The
-	    resulting value will become the
-	    <literal>"offset"</literal> value for the new
-	    <literal>"a"</literal> partition.  The
-	    <literal>"size"</literal> value for this partition can be
-	    taken verbatim from the calculation above.	The
-	    <literal>"fstype"</literal> should be
-	    <literal>4.2BSD</literal>.	The
-	    <literal>"fsize"</literal>, <literal>"bsize"</literal>,
-	    and <literal>"cpg"</literal> values should best be chosen
-	    to match the actual filesystem, though they are fairly
-	    unimportant within this context.</para>
-
-	  <para>That way, a new <literal>"a"</literal> partition will
-	    be established that overlaps the Vinum partition on this
-	    device.  Note that the <command>disklabel</command> will
-	    only allow for this overlap if the Vinum partition has
-	    properly been marked using the <literal>"vinum"</literal>
-	    fstype.</para>
+	  <para>Dessa forma, uma nova partição <literal>"a"</literal>
+	  será formada e irá envolver as partições de vinum nesse
+	  dipositivo.  Note que o <command>disklabel</command> só vai
+	  permitir isso se as partições de vinum tiverem sido
+	  propriamente marcadas usando o <literal>"vinum"</literal>
+	  fstype.</para>
 	</step>
 
 	<step>
-	  <para>That's all!  A faked <literal>"a"</literal> partition
-	    does exist now on each device that has one replica of the
-	    root volume.  It is highly recommendable to verify the
-	    result again, using a command like</para>
-
+	  <para>Isso é tudo!  Uma falsa partção <literal>"a"</literal>
+	  agora existe em cada dispositivo que tenha uma réplica do
+	  volume raiz.  É altamente recomendável verificar o resuldado
+	  novamente, usando um comando como</para>
+	  
 	  <para><command>fsck -n
 	    </command><devicename>/dev/<replaceable>devname</replaceable>a</devicename></para>
 	</step>
       </procedure>
 
-      <para>It should be remembered that all files containing control
-	information must be relative to the root filesystem in the
-	Vinum volume which, when setting up a new Vinum root volume,
-	might not match the root filesystem that is currently active.
-	So in particular, the files <filename>/etc/fstab</filename>
-	and <filename>/boot/loader.conf</filename> need to be taken
-	care of.</para>
-
-      <para>At next reboot, the bootstrap should figure out the
-	appropriate control information from the new Vinum-based root
-	filesystem, and act accordingly.  At the end of the kernel
-	initialization process, after all devices have been announced,
-	the prominent notice that shows the success of this setup is a
-	message like:</para>
-
+      <para>deve ser lembrado que todos os arquivos que contém
+      informações de controle, devem ser relacionadas com o sistema de
+      arquivos raiz no volume de vinum onde, quando setando um novo
+      volume raiz do vinum, talves não seja igual ao que esta em uso.
+      Então, em particular, os arquivos <filename>/etc/fstab</filename>
+      e <filename>/boot/loader.conf</filename> irão precisar de
+      cuidados.<para>
+      
+      <para>Na próxima reinicialização, o bootstrap deve descobrir a
+      informação de controle apropriada a partir do novo aruivo de
+      sistemas raiz do vinum, e agir de acordo.  No final do processo de
+      inicialização do kernel, depois que todos os dispositivos forem
+      anunciados, a notícia importante que mostra o sucesso dessa
+      configuração é uma mensagem como:</para>
+      
       <para><screen>Mounting root from ufs:/dev/vinum/root</screen></para>
     </sect2>
 
     <sect2>
-      <title>Example of a Vinum-based Root Setup</title>
+      <title>Example of a Vinum-based Root setup</title>
 
       <para>After the Vinum root volume has been set up, the output of
 	<command>vinum l -rv root</command> could look like:</para>
