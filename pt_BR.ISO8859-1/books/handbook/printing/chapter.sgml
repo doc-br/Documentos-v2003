@@ -3492,26 +3492,29 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
         <para>Por que?</para>
 
 			<para>
-				Por que o filtro de sa&iacute;da &eacute; um programa externo
-			que ter&aacute; controle quando a p&aacute;gina de cabe&ccedil;alho
-			&eacute; impressa 
-
----
-
-			Because the output filter is the only external program that will
-          have control when the header page is printed that could do
-          accounting, and it is not provided with any <emphasis>user or
-            host</emphasis> information or an accounting file, so it has no
-          idea whom to charge for printer use.  It is also not enough to just
-          <quote>add one page</quote> to the text filter or any of the
-          conversion filters (which do have user and host information) since
-          users can suppress header pages with <command>lpr -h</command>.
-          They could still be charged for header pages they did not print.
-          Basically, <command>lpr -h</command> will be the preferred option of
-          environmentally-minded users, but you cannot offer any incentive to
-          use it.</para>
+				Por que o filtro de sa&iacute;da &eacute; somente um programa 
+		externo que ter&aacute; controle quando a p&aacute;gina de 
+		cabe&ccedil;alho for impressa e n&atilde;o pode diferenciar isto
+		do total para que possa fazer a estat&iacute;stica corretamente,
+		e isso n&atilde;o &eacute; fornecido por qualquer 
+		emphasis>usu&aacute;rio ou m&aacute;quina</emphasis> ou qualquer 
+		arquivo de estat&iacute;stica, ent&atilde;o ele n&atilde;o tem 
+		ideia para quem contabilizar o uso da impressora.  E tamb&eacute;m
+		n&atilde;o &eacute; justo <quote>adcionar uma p&aacute;gina</quote>
+		para o filtro texto ou qualquer outro filtro de convers&atilde;o 
+		( os quais t&ecirc;m informa&ccedil;&otilde;es sobre os 
+		usu&aacute;rios e m&aacute;quinas) uma vez que os usu&aacute;rios 
+		podem suprimir as p&aacute;ginas de cabe&ccedil;alho com o comando
+		<command>lpr -h</command>.  &Agrave; eles ent&atilde;o seriam atribuidos
+		os custros ( estat&iacute;sticas ) de p&aacute;ginas de 
+		cabe&ccedil;alho que efetivamente n&atilde;o imprimiram.  Basicamente,
+      o <command>lpr -h</command> ir&aacute; ser uma op&ccedil;&atilde;o
+		preferiad no ambito dos usu&aacute;rios, mas voc&ecirc; n&atilde;o
+		dever&aacute; incentivar o seu uso.
+			</para>
             
-        <para>It is <emphasis>still not enough</emphasis> to have each of the
+			<para>
+				It is <emphasis>still not enough</emphasis> to have each of the
           filters generate their own header pages (thereby being able to
           charge for them).  If users wanted the option of suppressing the
           header pages with <command>lpr -h</command>, they will still get
@@ -3519,9 +3522,13 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 	  does not pass any knowledge
           of the <option>-h</option> option to any of the filters.</para>
 
-        <para>So, what are your options?</para>
+			<para>
+				Ent&atilde;o, qual &eacute; a sua op&ccedil;&atilde;o?
+			</para>
 
-        <para>You can:</para>
+			<para>
+				Voc&ecirc; pode:
+			</para>
 
         <itemizedlist>
           <listitem>
@@ -3544,27 +3551,35 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
           </listitem>
           
           <listitem>
-            <para>Write a <emphasis>smart</emphasis> output filter. Normally,
-              an output filter is not meant to do anything more than
-              initialize a printer or do some simple character conversion.  It
-              is suited for header pages and plain text <foreignphrase>jobs</foreignphrase> (when there is no
-              text (input) filter).  But, if there is a text filter for the
-              plain text <foreignphrase>jobs</foreignphrase>, then <application>LPD</application> will start
-	      the output filter only for
-              the header pages.  And the output filter can parse the header
-              page text that <application>LPD</application> generates to
-	      determine what user and host to
-              charge for the header page.  The only other problem with this
-              method is that the output filter still does not know what
-              accounting file to use (it is not passed the name of the file
-              from the <literal>af</literal> capability), but if you have a
-              well-known accounting file, you can hard-code that into the
-              output filter.  To facilitate the parsing step, use the
-              <literal>sh</literal> (short header) capability in
-              <filename>/etc/printcap</filename>.  Then again, all that might
-              be too much trouble, and users will certainly appreciate the
-              more generous system administrator who makes header pages
-              free.</para>
+				<para>
+					Escrevendo um filtro de sa&iacute;da 
+			<emphasis>inteligente</emphasis>.  Normalmente um filtro de
+			sa&iacute;da n&atilde;o precisa de muita coisa a al&eacute;m de 
+			inicializar a impressora ou fazer algumas convers&otilde;ess de 
+			caracteres.  Ele der&aacute; que se adaptar para p&aacute;gians de 
+			cabe&ccedil;alho ou para trabalhos de impress&atilde;o em texto 
+			puro ( quando ele n&atilde;o for um filtro de texto (entrada)).  Mas, 
+			se existir um filtro de texto para trabalhos de impress&atilde;o
+			em texto puro, ent&atilde;o <application>LPD</application> 
+			ir&aacute; iniciar o filtro de sa&iacute;da somente para a 
+			p&aacute;gina de cabe&ccedil;alho.  E o filtro de sa&iacute;da 
+			poder&aacute; alanisar a p&aacute;gina de cabe&ccedil;alho que o
+			<application>LPD</application> gerou para determinar qual 
+			usu&aacute;rio e m&aacute;quina para poder contabiliza-la.  O 
+			&uacute;nico problema com esse m&eacute;todo &eacute; que o filtro 
+			de sa&iacute;da continua sem ter conhecimento do arquivo de 
+			estat&iacute;stica ( isso n&atilde;o &eacute; passado pela 
+			op&ccedil;&atilde;o <literal>af</literal>), mas se voc&ecirc;
+			tem o conhecimento do arquivo de estat&iacute;stica, voce 
+			poder&aacute; coloca-lo direto no c&oacute;digo do filtro de
+			sa&iacute;da.  Para facilitar o passo de an&aacute;lise, use a
+			op&ccedil;&atilde;o <literal>sh</literal> (p&aacute;gina curta)
+			do arquivo <filename>/etc/printcap</filename.  Ent&atilde;o 
+			depois de tudo feito, os usu&aacute;rios ir&atilde;o apreciar
+			o qu&atilde;o generoso o administrador do sistema &eacute;, 
+			liberando das estat&iacute;sticas de utiliza&ccedil;&atilde;o a
+			paina de cabe&ccedil;alho.
+			</para>
           </listitem>
         </itemizedlist>
       </sect3>
@@ -3583,16 +3598,26 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 		p&aacute;ginas de cabe&ccedil;alho torna-se imprest&aacute;vel&mdash;.
 		</para>
             
-        <para>One obvious way to get header pages is to have every conversion
-          filter and the text filter generate the header page. The filters
-          should use the user and host arguments to generate a suitable
-          header page.  The drawback of this method is that users will always
-          get a header page, even if they submit <foreignphrase>jobs</foreignphrase> with <command>lpr
-            -h</command>.</para>
+      <para>
+			Uma maneira obvia de ter p&aacute;ginas de cabe&ccedil;alho &eacute; 
+		gerar atrav&eacute;s de cada filtro de convers&atilde;o e de filtros de 
+		texto, as p&aacute;ginas de cabe&ccedil;alho.  Os filtros devem usar 
+		os argumentos de nome de usu&aacute;rio e da m&aacute;quina, para 
+		gerar uma p&aacute;gina de cabe&ccedil;alhjo otimizada. a desvantagem
+		deste m&eacute;todo &eacute; que o usu&aacute;rio sempre tera a
+		p&aacute;gina de cabe&ccedil;alho mesmo que ele utilize o 
+		comando <command>lpr -h</command> para imprimir seus trabalhos de
+		impress&otilde;es.
+		</para>
             
-        <para>Let us explore this method.  The following script takes three
-          arguments (user login name, host name, and job name) and makes a
-          simple &postscript; header page:</para>
+		<para>
+			Iremos explorar este m&eacute;todo.  O 
+		<foreignphrase>script</foreignphrase> abaixo manipula tr&ecirc;s
+		argumentos ( nome do usu&aacute;rio (login), nome da m&aacute;quina,
+		e o nome do trabalho de impress&atilde;o) e faz uma p&aacute;gina
+		simples de cabe&ccedil;alho em &postscript;:
+		</para>
+
 
         <programlisting>#!/bin/sh
 #
@@ -3674,6 +3699,8 @@ restore
 showpage
 EOF</programlisting>
 
+
+---
         <para>Now, each of the conversion filters and the text filter can call
           this script to first generate the header page, and then print the
           user's job.  Here is the DVI conversion filter from earlier in this
@@ -5644,7 +5671,7 @@ exit 2</programlisting>
 				Enviar um <emphasis>c&oacute;digo escape</emphasis> para a 
 		impressora para term um tratamento tempor&aacute;rio diferente do
 		caracter LF.  Condulte o manual de sua impressora para conhecer as
-		seg&utrema;&ecirc;ncias escape que sua impressora pode suportar.  
+		sequ&ecirc;ncias escape que sua impressora pode suportar.  
 		Quando voc&ecirc; encontrar o c&oacute;digo correto, modifique o
 		filtro texto para enviar este c&oacute;digo inicialmente, para apos
 		enviar o arquivo a ser impresso.
@@ -5655,7 +5682,7 @@ exit 2</programlisting>
 			Aqui tem um exemplo de filtro texto para as impressoras que 
 		reconhecem os c&oacute;digos da linguagem PCL da Hewlett Packard.  Esse
 		filtro faz a impressora tratar os caracteres LF como sendo uma 
-		seg&utrema;&ecirc;ncia de LF + CR; entao ele envia o arquivo; 
+		sequ&ecirc;ncia de LF + CR; entao ele envia o arquivo; 
 		ent&atilde;o ele envia um caracter FF ( alimenta&ccedil;&atilde;o de
 		formul&aacute;rio ) para ejetar a &uacute;ltima p&aacute;gina do 
 		arquivo.  Ele deve funcionar com todas as impressoras da Hewlett Packard.
