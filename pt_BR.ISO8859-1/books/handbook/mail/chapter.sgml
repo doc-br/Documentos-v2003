@@ -162,14 +162,14 @@
       <para>O sistema de nome de dom&iacute;nios (DNS) e seu daemon
         <command>named</command> tem um grande papel na entrega de
 	email.  Em orderm para entregar a mensagem do seu site para outro, o
-	servidor daemon irá consultar no DNS para determinar o host que irá receber o destino da mensagem.  </para>
+	servidor daemon ir&aacute; consultar no DNS para determinar o host que ir&aacute; receber o destino da mensagem.  </para>
 
-      <para>Isso funciona da mesma forma quando é enviado uma mensagem para você.  O DNS
-        contém o banco de dados com mapeamento de nomes para o endereço IP, e o nome do host 
-	para o servidor de email.  O endereço IP é especificado no registro A. 
-	O registro MX (Mail eXchanger) especifica o servidor de email que irá
-	receber a mensagem para você.  Se você não tiver um registro MX para seu hostname,
-	sua mensagem será entregue diretamente para seu host.  </para>
+      <para>Isso funciona da mesma forma quando &eacute; enviado uma mensagem para voc&ecirc;.  O DNS
+        cont&eacute;m o banco de dados com mapeamento de nomes para o endere&ccedil;o IP, e o nome do host 
+	para o servidor de email.  O endere&ccedil;o IP &eacute; especificado no registro A. 
+	O registro MX (Mail eXchanger) especifica o servidor de email que ir&aacute;
+	receber a mensagem para voc&ecirc;.  Se voc&ecirc; n&atilde;o tiver um registro MX para seu hostname,
+	sua mensagem ser&aacute; entregue diretamente para seu host.  </para>
     </sect2>
 
     <sect2 id="mail-receive">
@@ -179,39 +179,37 @@
         <secondary>recebendo</secondary>
       </indexterm>
 
-      <para>Receiving mail for your domain is done by the mail host.  It
-        will collect mail sent to you and store it for reading or pickup.
-	In order to pick the stored mail up, you will need to connect to
-	the mail host.  This is done by either using POP or IMAP.  If you
-	want to read mail directly on the mail host, then a POP or IMAP
-	server is not needed.</para>
+      <para>O recebimento de mensagens para o seu dom&iacute;nio &eacute; feito pelo servidor de correio.  Ele
+        ir&aacute; coletar a mensagem enviada para voc&ecirc; e armazen&aacute;-la para leitura ou pega-la.  
+	Para puxar a mensagem armazenada no servidor, voc&ecirc; ir&aacute; precisar conectar no servidor de email.  
+	Isto &eacute; feito usando POP ou IMAP.  Se voc&ecirc; quer ler mensagens diretamente no servidor de email,
+	ent&atilde;o o POP ou IMAP n&atilde;o &eacute; necess&aacute;rio.  </para>
 
       <indexterm><primary>POP</primary></indexterm>
       <indexterm><primary>IMAP</primary></indexterm>
-      <para>If you want to run a POP or IMAP server, there are two things
-        you need to do:</para>
+      <para>Se voc&ecirc; quer rodar um servidor POP ou IMAP, h&aacute; duas coisas que
+        voc&ecirc; deve fazer:  </para>
 
       <procedure>
         <step>
-	  <para>Get a POP or IMAP daemon from the <ulink
-	    url="../../../../ports/mail.html">ports collection</ulink> and install
-	    it on your system.</para>
+	  <para>Pegue o daemon do POP ou IMAP da <ulink
+	    url="../../../../ports/mail.html">cole&ccedil;&atilde;o de ports</ulink> e instale
+	    em seu sistema.  </para>
 	</step>
 
 	<step>
-	  <para>Modify <filename>/etc/inetd.conf</filename> to load the
-	    POP or IMAP server.</para>
+	  <para>Modifique o <filename>/etc/inetd.conf</filename> para carregar o 
+	    servidor POP ou IMAP.  </para>
 	</step>
       </procedure>
     </sect2>
 
     <sect2 id="mail-host">
-      <title>The Mail Host</title>
+      <title>O servidor de correio</title>
       <indexterm><primary>mail host</primary></indexterm>
 
-      <para>The mail host is the name given to a server that is
-        responsible for delivering and receiving mail for your host, and
-	possibly your network.</para>
+      <para>O servidor de correio &eacute; o nome dado ao servidor que &eacute; respons&aacute;vel pela
+        entrega e recebimento de mensagens do seu host, e possivelmente de sua rede.  </para>
     </sect2>
   </sect1>
 
@@ -221,26 +219,26 @@
         <author>
           <firstname>Christopher</firstname>
           <surname>Shumway</surname>
-          <contrib>Contributed by </contrib>
+          <contrib>Contribu&iacute;do por </contrib>
         </author>
       </authorgroup>
     </sect1info>
-    <title><application>sendmail</application> Configuration</title>
+    <title>Configura&ccedil;&atilde;o do <application>sendmail</application></title>
 
     <indexterm>
       <primary><application>sendmail</application></primary>
     </indexterm>
 
-    <para>&man.sendmail.8; is the default Mail Transfer Agent (MTA) in
-      FreeBSD.  <application>sendmail</application>'s job is to accept
-      mail from Mail User Agents (MUA) and deliver it to the
-      appropriate mailer as defined by its configuration file.
-      <application>sendmail</application> can also accept network
-      connections and deliver mail to local mailboxes or deliver it to
-      another program.</para>
+    <para>&man.sendmail.8; &eacute; o agente de transfer&ecirc;ncia de mensagens (MTA) padr&atilde;o no
+      FreeBSD. A fun&ccedil;&atilde;o do <application>sendmail</application> &eacute; aceitar mensagens
+      a partir de um agente de usu&aacute;rio de mensagens (MUA) e entreg&aacute;-la ao mailer
+      apropriado como definido pelo arquivo de configura&ccedil;&atilde;o. 
+      <application>sendmail</application> pode tamb&eacute;m aceitar conex&otilde;es de rede e entregar 
+      as mensagens em caixas de mensagens locais ou entreg&aacute;-las para outro programa.  </para>
+      
 
-    <para><application>sendmail</application> uses the following
-      configuration files:</para>
+    <para>O <application>sendmail</application> usa os seguintes
+      arquivos de configura&ccedil;&atilde;o:  </para>
 
     <indexterm>
       <primary><filename>/etc/mail/access</filename></primary>
@@ -267,8 +265,8 @@
       <tgroup cols="2">
 	<thead>
 	  <row>
-	    <entry>Filename</entry>
-	    <entry>Function</entry>
+	    <entry>Nome do arquivo</entry>
+	    <entry>Fun&ccedil;&atilde;o</entry>
 	  </row>
 	</thead>
 	<tbody>
@@ -276,46 +274,46 @@
 	    <entry>
 	      <filename>/etc/mail/access</filename>
 	    </entry>
-	    <entry><application>sendmail</application> access database
- 	      file</entry>
+	    <entry><application>sendmail</application> acessa o arquivo da base de 
+ 	      dados</entry>
 	  </row>
 	  <row>
 	    <entry>
 	      <filename>/etc/mail/aliases</filename>
 	    </entry>
-	    <entry>Mailbox aliases</entry>
+	    <entry>Apelidos de caixa de mensagem</entry>
 	  </row>
 	  <row>
 	    <entry>
 	      <filename>/etc/mail/local-host-names</filename>
 	    </entry>
-	    <entry>Lists of hosts <application>sendmail</application>
-	    accepts mail for</entry>
+	    <entry>Lista dos hosts que o <application>sendmail</application>
+	    aceita mensagens</entry>
     </row>
 	  <row>
 	    <entry>
 	      <filename>/etc/mail/mailer.conf</filename>
 	    </entry>
-	    <entry>Mailer program configuration</entry>
+	    <entry>Arquivo de configura&ccedil;&atilde;o do Mailer</entry>
 	  </row>
 	  <row>
 	    <entry>
 	      <filename>/etc/mail/mailertable</filename>
 	    </entry>
-	    <entry>Mailer delivery table</entry>
+	    <entry>Tabela de entrega do mailer</entry>
 	  </row>
 	  <row>
 	    <entry>
 	      <filename>/etc/mail/sendmail.cf</filename>
 	    </entry>
-	    <entry><application>sendmail</application> master
-	    configuration file</entry>
+	    <entry>O arquivo de configura&ccedil;&atilde;o principal do <application>sendmail</application>
+	   </entry>
 	  </row>
 	  <row>
 	    <entry>
 	      <filename>/etc/mail/virtusertable</filename>
 	    </entry>
-	    <entry>Virtual users and domain tables</entry>
+	    <entry>Us&aacute;rios virtuais e tabelas de dom&iacute;nios</entry>
 	  </row>
 	</tbody>
       </tgroup>
@@ -324,22 +322,21 @@
   <sect2>
     <title><filename>/etc/mail/access</filename></title>
 
-    <para>The access database defines what host(s) or IP addresses
-      have access to the local mail server and what kind of access
-      they have.  Hosts can be listed as <option>OK</option>,
-      <option>REJECT</option>, <option>RELAY</option> or simply passed
-      to <application>sendmail</application>'s error handling routine with a given mailer error.
-      Hosts that are listed as <option>OK</option>, which is the
-      default, are allowed to send mail to this host as long as the
-      mail's final destination is the local machine.  Hosts that are
-      listed as <option>REJECT</option> are rejected for all mail
-      connections.  Hosts that have the <option>RELAY</option> option
-      for their hostname are allowed to send mail for any destination
-      through this mail server.</para>
+    <para>A banco de dados de acesso que define quais host(s) ou endere&ccedil;o IP
+      tem acesso local ao servidor de email e qual tipo de acesso eles tem.
+      Os hosts podem ser listados com <option>OK</option>,
+      <option>REJECT</option>, <option>RELAY</option> ou simplesmente passar 
+      para o <application>sendmail</application> segurar erros de rotina dado pelo encarregado 
+      do envio de mensagens.  Os hosts que s&atilde;o listados como <option>OK</option>, s&atilde;o por padr&atilde;o 
+      permitidos enviar mensagens para este host assim como enviar mensagens atrav&eacute;s da maquina local para
+      destinat&aacute;rios finais.  Os hosts que s&atilde;o listados com <option>REJECT</option> s&atilde;o rejeitados 
+      por qualquer conex&atilde;o de email no servidorar. Os hosts que tem a op&ccedil;&atilde;o <option>RELAY</option> 
+      para seu hostname, s&atilde;o permitidos para enviar mensagens para qualquer destino atrav&eacute;s desse 
+      servidor de correio.  </para>
 
       <example>
-	<title>Configuring the <application>sendmail</application>
-  	  Access Database</title>
+	<title>Configurando o banco de dados de acesso do <application>sendmail</application>
+  	 </title>
 
     <programlisting>cyberspammer.com                550 We don't accept mail from spammers
 FREE.STEALTH.MAILER@            550 We don't accept mail from spammers
