@@ -1181,82 +1181,82 @@ DisplayManager.requestPort:     0</screen>
       </authorgroup>
     </sect1info>
 
-    <title>Desktop Environments</title>
+    <title>Ambientes para a área de trabalho</title>
 
-    <para>This section describes the different desktop environments
-      available for X on FreeBSD.  A <quote>desktop environment</quote>
-      can mean anything ranging from a simple window manager to a
-      complete suite of desktop applications, such as
-      <application>KDE</application> or <application>GNOME</application>.
+    <para>Esta seç&atilde;o descreve os diferentes ambientes para a área de trabalho
+      disponíveis para o X no FreeBSD.  Um <quote>ambiente para a área de trabalho</quote>
+      pode significar qualquer coisa desde um simples gerenciador de janelas a uma
+      coleç&atilde;o completa de aplicativos, como o
+      <application>KDE</application> ou o <application>GNOME</application>.
     </para>
 
     <sect2 id="x11-wm-gnome">
       <title>GNOME</title>
 
       <sect3 id="x11-wm-gnome-about">
-        <title>About GNOME</title>
+        <title>Sobre o GNOME</title>
 
         <indexterm><primary>GNOME</primary></indexterm>
-        <para><application>GNOME</application> is a user-friendly
-          desktop environment that enables users to easily use and
-          configure their computers.  <application>GNOME</application>
-          includes a panel (for starting applications and displaying
-          status), a desktop (where data and applications can be
-          placed), a set of standard desktop tools and applications, and
-          a set of conventions that make it easy for applications to
-          cooperate and be consistent with each other.  Users of other
-          operating systems or environments should feel right at home
-          using the powerful graphics-driven environment that
-          <application>GNOME</application> provides.  More
-      information regarding <application>GNOME</application> on
-      FreeBSD can be found on the <ulink
-      url="http://www.FreeBSD.org/gnome">FreeBSD GNOME
-      Project</ulink>'s web site.</para>
+        <para>O <application>GNOME</application> é um ambiente para a área de trabalho
+          amigável que permite aos usuários usar e configurar facilmente
+          seus computadores.  O <application>GNOME</application>
+          inclui um painel (para iniciar os aplicativos e para a exibiç&atilde;o do
+          estado), uma área de trabalho (onde os dados e os aplicativos podem ser
+          colocados), um conjunto de ferramentas e aplicativos padr&atilde;o, e
+          um conjunto de convenç&otilde;es que facilitam a cooperaç&atilde;o
+          e a consistência entre as aplicaç&otilde;es.  Usuários de outros
+          sistemas operacionais ou ambientes se sentir&atilde;o em casa
+          usando um poderoso ambiente dirigido por gráficos provido pelo
+          <application>GNOME</application>.  Mais
+          informaç&otilde;es sobre o <application>GNOME</application> no
+          FreeBSD podem ser encontrados no sítio da web <ulink
+          url="http://www.FreeBSD.org/gnome">FreeBSD GNOME
+          Project</ulink>.</para>
       </sect3>
 
       <sect3 id="x11-wm-gnome-install">
-        <title>Installing GNOME</title>
+        <title>Instalando o GNOME</title>
 
-        <para>The easiest way to install
-          <application>GNOME</application> is through the
-          <quote>Desktop Configuration</quote> menu during the FreeBSD
-      installation process as described in <xref
-      linkend="default-desktop"> of Chapter&nbsp;2.  It can also
-          be easily installed from a package or the ports
-          collection:</para>
+        <para>A forma mais fácil de instalar
+          o <application>GNOME</application> é através do menu
+          <quote>Desktop Configuration</quote>, que significa <quote>configuraç&atilde;o da área de trabalho</quote>,
+          durante o processo de instalaç&atilde;o do FreeBSD como descrito em <xref
+          linkend="default-desktop"> do Capítlo&nbsp;2.  Ele também pode ser
+          facilmente instalado de um pacote ou da cole&ccedil;&atilde;o de
+          <literal>ports</literal>:</para>
 
-        <para>To install the <application>GNOME</application> package
-          from the network, simply type:</para>
+        <para>Para instalar o pacote do <application>GNOME</application>
+          a partir da rede, basta entrar:</para>
 
         <screen>&prompt.root; <userinput>pkg_add -r gnome2</userinput></screen>
 
-        <para>To build <application>GNOME</application> from source, use
-          the ports tree:</para>
+        <para>Para construir o <application>GNOME</application> a partir dos fontes, utilize
+          a árvore de <literal>ports</literal>:</para>
 
         <screen>&prompt.root; <userinput>cd /usr/ports/x11/gnome2</userinput>
 &prompt.root; <userinput>make install clean</userinput></screen>
 
-        <para>Once <application>GNOME</application> is installed,
-          the X server must be told to start
-          <application>GNOME</application> instead of a default window
-          manager.  If a custom <filename>.xinitrc</filename> is already in
-          place, simply replace the line that starts the current window
-          manager with one that starts
-          <application>/usr/X11R6/bin/gnome-session</application> instead.
-          If nothing special has been done to configuration file,
-          then it is enough to simply type:</para>
+        <para>Uma vez que o <application>GNOME</application> esteja instalado,
+          o servidor X deve ser instruído para iniciar o
+          <application>GNOME</application> ao invés do gerenciador de janela
+          padr&atilde;o.  Se um <filename>.xinitrc</filename> personalizado estiver em
+          uso, basta substituir a linha que inicia o gerenciador de
+          janela atual para que, ao invés dele, inicie o
+          <application>/usr/X11R6/bin/gnome-session</application>.
+          Se nada de especial foi feito no arquivo de configuraç&otilde;es,
+          ent&atilde;o é suficiente apenas entrar:</para>
 
         <screen>&prompt.user; <userinput>echo "/usr/X11R6/bin/gnome-session" &gt; ~/.xinitrc</userinput></screen>
 
-        <para>Next, type <command>startx</command>, and the
-          <application>GNOME</application> desktop environment will be
-          started.</para>
+        <para>A seguir, entre com <command>startx</command>, e o
+          ambiente da área de trabalho <application>GNOME</application> vai ser
+          iniciado.</para>
 
-        <note><para>If a display manager, like
-          <application>XDM</application>, is being used, this will not work.
-          Instead, create an executable <filename>.xsession</filename>
-          file with the same command in it.  To do this, edit the file
-          and replace the existing window manager command with
+        <note><para>Se um gerenciador de exibiç&atilde;o, como o
+          <application>XDM</application>, estiver sendo usado, isso n&atilde;o vai funcionar.
+          Ao invés disso, crie um arquivo executável <filename>.xsession</filename>
+          contendo o mesmo comando.  Para fazer isso, edite o arquivo
+          e substitua o comando do gerenciador de janela existente por
           <application>/usr/X11R6/bin/gnome-session</application>:
           </para></note>
 
@@ -1264,37 +1264,37 @@ DisplayManager.requestPort:     0</screen>
 &prompt.user; <userinput>echo "/usr/X11R6/bin/gnome-session" >> ~/.xsession</userinput>
 &prompt.user; <userinput>chmod +x ~/.xsession</userinput></screen>
 
-        <para>Another option is to configure the display manager to
-          allow choosing the window manager at login time; the section on
-          <link linkend="x11-wm-kde-details">KDE details</link>
-          explains how to do this for <application>kdm</application>, the
-          display manager of <application>KDE</application>.</para>
+        <para>Outra opç&atilde;o é configurar o gerenciador de exibiç&atilde;o para que
+          permita escolher o gerenciador de janela no momento do <literal>login</literal>; a seç&atilde;o
+          <link linkend="x11-wm-kde-details">Detalhes do KDE</link>
+          explica como fazer isso para o <application>kdm</application>, o
+          gerenciador de exibiç&atilde;o do <application>KDE</application>.</para>
       </sect3>
 
       <sect3 id="x11-wm-gnome-antialias">
-        <title>Anti-aliased Fonts with GNOME</title>
+        <title>Fontes com <literal>anti-alias</literal> no GNOME</title>
 
         <indexterm><primary>GNOME</primary>
-          <secondary>anti-aliased fonts</secondary></indexterm>
-    <para>Starting with version 4.0.2, <application>&xfree86;</application>
-      supports anti-aliasing via its <quote>RENDER</quote> extension.
-      Gtk+ 2.0 and greater (the toolkit used by
-      <application>GNOME</application>) can make use of this
-      functionality.  Configuring anti-aliasing is described in
-      <xref linkend="antialias">.  So, with up-to-date software,
-      anti-aliasing is possible within the
-      <application>GNOME</application> desktop.  Just go to
-      <menuchoice>
-        <guimenu>Applications</guimenu>
-        <guisubmenu>Desktop Preferences</guisubmenu>
-        <guimenuitem>Font</guimenuitem></menuchoice>, and select either
-      <guibutton>Best shapes</guibutton>,
-      <guibutton>Best contrast</guibutton>, or
-      <guibutton>Subpixel smoothing (LCDs)</guibutton>.  For a
-      Gtk+ application that is not part of the
-      <application>GNOME</application> desktop, set the
-      environment variable <varname>GDK_USE_XFT</varname> to
-      <literal>1</literal> before launching the program.</para>
+          <secondary>fontes com <literal>anti-alias</literal></secondary></indexterm>
+        <para>A partir da vers&atilde;o 4.0.2, o <application>&xfree86;</application>
+          suporta <literal>anti-alias</literal> através de sua extens&atilde;o <quote>RENDER</quote>.
+          O Gtk+ 2.0 e posteriores (a caixa de ferramentas usada pelo
+          <application>GNOME</application>) pode utilizar essa
+          funcionalidade.  A configuraç&atilde;o do <literal>anti-alias</literal> está descrita em
+          <xref linkend="antialias">.  Ent&atilde;o, com software atual,
+          <literal>anti-alias</literal> é possível dentro da área de trabalho
+          <application>GNOME</application>.  Apenas vá para
+          <menuchoice>
+            <guimenu>Applications (aplicaç&otilde;es)</guimenu>
+            <guisubmenu>Desktop Preferences (preferências da área de trabalho)</guisubmenu>
+            <guimenuitem>Font (fonte)</guimenuitem></menuchoice>, e escolha entre
+          <guibutton>Best shapes (melhores formas)</guibutton>,
+          <guibutton>Best contrast (melhor contraste)</guibutton>, ou  
+          <guibutton>Subpixel smoothing (LCDs) (suavizaç&atilde;o de subpixel)</guibutton>.  Para uma
+          aplicaç&atilde;o Gtk+ que n&atilde;o é parte da
+          área de trabalho <application>GNOME</application>, ajuste a
+          variável de ambiente <varname>GDK_USE_XFT</varname> para
+          <literal>1</literal> antes de executar o programa.</para>
       </sect3>
     </sect2>
 
@@ -1303,31 +1303,31 @@ DisplayManager.requestPort:     0</screen>
 
       <indexterm><primary>KDE</primary></indexterm>
       <sect3 id="x11-wm-kde-about">
-        <title>About KDE</title>
+        <title>Sobre o KDE</title>
 
-        <para><application>KDE</application> is an easy to use
-          contemporary desktop environment.  Some of the things that
-          <application>KDE</application> brings to the user are:</para>
+        <para>O <application>KDE</application> é um ambiente da área de trabalho
+          contemporânea fácil de usar.  Algumas das coisas que o
+          <application>KDE</application> oferece ao usuário s&atilde;o:</para>
 
         <itemizedlist>
           <listitem>
-        <para>A beautiful contemporary desktop</para>
+        <para>Uma área de trabalho contemporânea bonita</para>
       </listitem>
 
           <listitem>
-        <para>A desktop exhibiting complete network transparency</para>
+        <para>Uma área de trabalho que exibe transparência de rede completa</para>
       </listitem>
 
           <listitem>
-        <para>An integrated help system allowing for convenient,
-          consistent access to help on the use of the
-          <application>KDE</application> desktop and its
-          applications</para>
+        <para>Um sistema de ajuda integrado que permite acesso conveniente
+          e consistente para esclarecer o uso da
+          área de trabalho <application>KDE</application> e seus
+          aplicativos</para>
       </listitem>
 
           <listitem>
-        <para>Consistent look and feel of all
-              <application>KDE</application> applications</para>
+        <para>Visual e sensaç&otilde;es consistente de todos os
+          aplicativos do <application>KDE</application></para>
       </listitem>
 
           <listitem>
