@@ -152,7 +152,7 @@
       <para>Esteja ciente de que algumas vers&otilde;es antigas do
         <application>sendmail</application> tem s&eacute;rios problemas de
 	seguran&ccedil;a, entretanto se voc&ecirc; manter rodando uma vers&atilde;o sempre atual,
-	voc&ecirc; n&atilde;o dever&aacute; ter problemas.  &Eacute; uma boa ideia sempre manter atualizado
+	voc&ecirc; n&atilde;o dever&aacute; ter problemas.  &Eacute; uma boa id&eacute;ia sempre manter atualizado
 	qualquer aplicativo que voc&ecirc; rode.</para>
     </sect2>
 
@@ -330,7 +330,7 @@
       do envio de mensagens.  Os hosts que s&atilde;o listados como <option>OK</option>, s&atilde;o por padr&atilde;o 
       permitidos enviar mensagens para este host assim como enviar mensagens atrav&eacute;s da maquina local para
       destinat&aacute;rios finais.  Os hosts que s&atilde;o listados com <option>REJECT</option> s&atilde;o rejeitados 
-      por qualquer conex&atilde;o de email no servidorar. Os hosts que tem a op&ccedil;&atilde;o <option>RELAY</option> 
+      por qualquer conex&atilde;o de email no servidor. Os hosts que tem a op&ccedil;&atilde;o <option>RELAY</option> 
       para seu hostname, s&atilde;o permitidos para enviar mensagens para qualquer destino atrav&eacute;s desse 
       servidor de correio.</para>
 
@@ -355,12 +355,12 @@ okay.cyberspammer.com           OK
      conex&otilde;es de mensagens vindo do host <hostid role="fqdn">okay.cyberspammer.com</hostid>, que &eacute;
      mais exata do que a linha acima <hostid role="domainname">cyberspammer.com</hostid>.  Defini&ccedil;&otilde;es mais
      espec&iacute;ficas sobreescrevem defini&ccedil;&otilde;es menos exatas.  A &uacute;ltima entrada permite
-     relaying de correio eletr&ocirc;nico vindo dos hosts com endere&ccedil;&otilde; IP que
+     <literal>relaying</literal> de correio eletr&ocirc;nico vindo dos hosts com endere&ccedil;o IP que
      come&ccedil;am com <hostid>128.32</hostid>.  Estes hosts est&atilde;o aptos a
      enviar mensagens atrav&eacute;s desse servidor de correio que s&atilde;o destinados para outros
      servidores de correio.  </para>
 
-   <para>Quando este arquivo &eacute; atualizado, voce precisa executar o comando
+   <para>Quando este arquivo &eacute; atualizado, voc&ecirc; precisa executar o comando
      <command>make</command> no diret&oacute;rio <filename>/etc/mail/</filename> para
      atualizar a base de dados.  </para>
 
@@ -381,8 +381,8 @@ bit.bucket:  /dev/null
 procmail: "|/usr/local/bin/procmail"</programlisting>
       </example>
 
-      <para>O formato do arquivo &eacute; simples; O nome da caixa de mensagens(email)&eacute; indicado do lado esquerdo
-	dos dois pontos e depois do lado direito eh o destino da mensagens para onde ser&atilde;o direcionadas.
+      <para>O formato do arquivo &eacute; simples; O nome da caixa de mensagens(e-mail) &eacute; indicado do lado esquerdo
+	dos dois pontos e depois do lado direito &eacute; o destino da mensagens para onde ser&atilde;o direcionadas.
 	O primeiro exemplo simplesmente direciona a caixa de correio de mensagens que chegam para o usu&aacute;rio
 	<username>root</username> para a caixa de correio do usu&aacute;rio <username>localuser</username>, 
         que &eacute; olhada novamente na base de dados de apelidos.  Se nada for encontrado, ent&atilde;o a mensagem &eacute; entregue,
@@ -415,7 +415,7 @@ procmail: "|/usr/local/bin/procmail"</programlisting>
     <programlisting>example.com
 mail.example.com</programlisting>
 
-    <para>Quando este arquivo &eacute; atualizado, O &man.sendmail.8; precisar ser
+    <para>Quando este arquivo &eacute; atualizado, O &man.sendmail.8; precisa ser
     reiniciado para ativar as mudan&ccedil;as.  </para>
 
   </sect2>
@@ -465,8 +465,8 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
       <literal>root@exemplo.com</literal> para a caixa de mensagens local do usu&aacute;rio <username>root</username>.  A pr&oacute;xima entrada mapeia
       <literal>postmaster@exemplo.com</literal> para a caixa de mensagens do usu&aacute;rio <username>postmaster</username> do host
       <hostid role="fqdn">noc.exemplo.net</hostid>.  Finalmente, se nada de <hostid role="domainname">exemplo.com</hostid> for
-      encontrado, ele ir&aacute; usar o ultimo mapeamento, que ao ser enviada uma mensagem para qualquer pessoa para o dom&iacute;nio
-      <hostid role="domainname">exemplo.com</hostid> el&aacute; ser&aacute; entregue a um determinado usu&aacute;rio.
+      encontrado, ele ir&aacute; usar o &uacute;ltimo mapeamento, que ao ser enviada uma mensagem para qualquer pessoa para o dom&iacute;nio
+      <hostid role="domainname">exemplo.com</hostid> ela ser&aacute; entregue a um determinado usu&aacute;rio.
       Neste caso ele ir&aacute; fazer o mapeamento para a caixa de mensagens local do usu&aacute;rio <username>joe</username>.</para>
 
   </sect2>
@@ -521,7 +521,7 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
 	ele lhe dar&aacute; a oportuniade de decidir se ele cumprir&aacute; suas necessidades, 
 	e tamb&eacute;m lhe d&aacute; a oportunidade de configurar seu novo aplicativo antes 
 	de desabilitar o <application>sendmail</application>.  Ao se fazer isso, voc&ecirc;
-	deve certifica-rse que a instala&ccedil;&atilde;o do novo aplicativo n&atilde;o tentar&aacute;
+	deve certificar-se que a instala&ccedil;&atilde;o do novo aplicativo n&atilde;o tentar&aacute;
 	sobreescrever os bin&aacute;rios do sistema como
 	<filename>/usr/bin/sendmail</filename>.  Se n&atilde;o, seu novo
 	aplicativo de mensagens ser&aacute; posto fazendo o servi&ccedil;o antes que
@@ -570,14 +570,14 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
 	  <para>Se voc&ecirc; desabilitar o <application>sendmail</application>
 	    como servi&ccedil;o de sa&iacute;da de mensagens, &eacute; importante que voc&ecirc; o
 	    substitua com um sistema totalmente alternativo no servi&ccedil;o de entrega
-	    de mensagens.  Se voc&ecirc; escolher n&atilde;o fazero, fun&ccedil;&otilde;es do sistema como
-	    &man.periodic.8; ser&atilde;o incapazer de entregar seus resultados por
+	    de mensagens.  Se voc&ecirc; escolher n&atilde;o faze-lo, fun&ccedil;&otilde;es do sistema como
+	    &man.periodic.8; ser&atilde;o incapaz de entregar seus resultados por
 	    e-mail que eles esperariam normalmente.  V&aacute;rias partes do seu 
 	    sistema pode esperar que tenham sistema
 	    <application>sendmail</application>-compat&iacute;vel funcional.  Se
 	    as aplica&ccedil;&otilde;es continuarem a usar os bin&aacute;rios do
 	    <application>sendmail</application> para tentar enviar mensagens 
-	    ap&oacute;s desabilitad, a mensagem ficar&aacute; inativa na fila
+	    ap&oacute;s desabilitar, a mensagem ficar&aacute; inativa na fila
 	    do <application>sendmail</application>, e nunca ser&aacute; entregue.</para>
 	</warning>
 
@@ -613,7 +613,7 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
 	<programlisting>/usr/local/etc/rc.d/supermailer.sh start</programlisting>
 
 	<para>Que voc&ecirc; tamb&eacute;m pode manualmente inicializar o servidor.  Na hora
-	  sde desligar, os scripts do sistema ir&atilde;o usar a op&ccedil;&atilde;o
+	  de desligar, os scripts do sistema ir&atilde;o usar a op&ccedil;&atilde;o
 	  <literal>stop</literal>, executando o comando</para>
 
 	<programlisting>/usr/local/etc/rc.d/supermailer.sh stop</programlisting>
@@ -634,7 +634,7 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
 
 	<para>no <filename>/etc/rc.conf</filename>, onde
 	  <replaceable>nodoarquivo</replaceable> &eacute; o nome de
-	  algum script que voc&egrave; queira executar na inicializa&ccedil;&atilde;o do sistema
+	  algum script que voc&ecirc; queira executar na inicializa&ccedil;&atilde;o do sistema
 	  para inicializar set MTA.</para>
       </sect3>
 
