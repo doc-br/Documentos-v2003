@@ -720,42 +720,42 @@ EndSection</programlisting>
         </author>
       </authorgroup>
     </sect2info>
-    <title>Anti-Aliased Fonts</title>
+    <title>Fontes com Anti-Alias</title>
 
-    <indexterm><primary>anti-aliased fonts</primary></indexterm>
-    <indexterm><primary>fonts</primary>
-      <secondary>anti-aliased</secondary></indexterm>
+    <indexterm><primary>fontes com anti-alias</primary></indexterm>
+    <indexterm><primary>fontes</primary>
+      <secondary>anti-alias</secondary></indexterm>
 
-    <para>Anti-aliasing has been available in
-      <application>&xfree86;</application> since 4.0.2.  However, font
-      configuration was cumbersome before the introduction of
-      <application>&xfree86;</application> 4.3.0.  Starting in version 4.3.0,
-      all fonts in <filename>/usr/X11R6/lib/X11/fonts/</filename> and
-      <filename>~/.fonts/</filename> are automatically
-      made available for anti-aliasing to Xft-aware applications.  Not
-      all applications are Xft-aware yet, but many have received Xft support.
-      Examples of Xft-aware applications include Qt 2.3 and higher (the
-      toolkit for the <application>KDE</application> desktop),
-      Gtk+ 2.0 and higher (the toolkit for the
-      <application>GNOME</application> desktop), and
-      <application>Mozilla</application> 1.2 and higher.
+    <para>O <foreignphrase>Anti-aliasing</foreignphrase> está disponível no
+      <application>&xfree86;</application> desde a vers&atilde;o 4.0.2. Mesmo assim, 
+      configurar tais fontes era incômodo antes da introduç&atilde;o do
+      <application>&xfree86;</application> 4.3.0. Da vers&atilde; 4.3.0 em diante,
+      todas as fontes em <filename>/usr/X11R6/lib/X11/fonts/</filename> e 
+      em <filename>~/.fonts/</filename> s&atilde;o automaticamente
+      disponibilizadas com <foreignphrase>anti-aliasing</foreignphrase> para os aplicativos prontos para o 
+      Xft. Nem todas as aplicaç&otilde;es s&atilde;o preparadas para usar o Xft ainda, mas muitas 
+      já contam com o suporte Xft. Exemplos de aplicaç&otilde;es que reconhecem o Xft incluem o Qt 2.3 
+      e posteriores (conjunto de ferramentas feito para a área de trabalho do <application>KDE</application>),
+      Gtk+ 2.0 e posteriores (conjunto de ferramentas para a área de trabalho do
+      <application>GNOME</application>), e o 
+      <application>Mozilla</application> 1.2 e posteriores.
     </para>
 
-    <para>In order to control which fonts are anti-aliased, or to
-      configure anti-aliasing properties, create (or edit, if it
-      already exists) the file
-      <filename>/usr/X11R6/etc/fonts/local.conf</filename>.  Several
-      advanced features of the Xft font system can be tuned using
-      this file; this section describes only some simple
-      possibilities.  For more details, please see
+    <para>Para distinguir que fontes s&atilde;o <foreignphrase>anti-aliased</foreignphrase>, ou
+      configurar as propriedades do <foreignphrase>anti-aliasing</foreignphrase>, crie (ou edite, se
+      já existir) o arquivo
+      <filename>/usr/X11R6/etc/fonts/local.conf</filename>. Vários
+      recursos avançados do sistema de fontes Xft podem ser ajustadas através
+      deste arquivo; esta seç&atilde;o descreve apenas algumas possibilidades
+      simples. Para mais detalhes, por favor verifique em
       &man.fonts-conf.5;.</para>
 
     <indexterm><primary>XML</primary></indexterm>
 
-    <para>This file must be in XML format.  Pay careful attention to
-      case, and make sure all tags are properly closed.  The file
-      begins with the usual XML header followed by a DOCTYPE
-      definition, and then the <literal>&lt;fontconfig&gt;</literal> tag:</para>
+    <para>Este arquivo deve ser em formato XML. Preste bastante atenç&atilde;o a
+      caixa dos caracteres, e assegure-se de ter fechado todos os rótulos (<foreignphrase>tags</foreignphrase>).
+      O arquivo começa com o cabeçalho usual do XML seguido de uma definiç&atilde;o DOCTYPE,
+      e ent&atilde;o pelo rótulo <literal>&lt;fontconfig&gt;</literal>:</para>
 
     <programlisting>
       &lt;?xml version="1.0"?&gt;
@@ -763,27 +763,27 @@ EndSection</programlisting>
       &lt;fontconfig&gt;
     </programlisting>
 
-    <para>As previously stated, all fonts in
-      <filename>/usr/X11R6/lib/X11/fonts/</filename> as well as
-      <filename>~/.fonts/</filename> are already made available to
-      Xft-aware applications.  If you wish to add another directory
-      outside of these two directory trees, add a line similar to the
-      following to
+    <para>Como citado anteriormente, toda fonte em
+      <filename>/usr/X11R6/lib/X11/fonts/</filename> bem como em
+      <filename>~/.fonts/</filename> s&atilde;o automaticamente disponibilizadas para
+      aplicaç&otilde;es prontas para o Xft. Se você deseja acrescentar outra pasta
+      que esteja fora dessas duas hierarquias, acrescente uma linha similar a apresentada abaixo
+      ao arquivo 
       <filename>/usr/X11R6/etc/fonts/local.conf</filename>:</para>
 
     <programlisting>&lt;dir&gt;/path/to/my/fonts&lt;/dir&gt;</programlisting>
 
-    <para>After adding new fonts, and especially new font directories,
-      you should run the following command to rebuild the font
-      caches:</para>
+    <para>Após acrescentar novas fontes, e especialmente novas pastas com fontes,
+      você deve executar o comando a seguir para reconstruir os <foreignphrase>caches</foreignphrase>
+      de fonte:</para>
 
     <screen>&prompt.root; <userinput>fc-cache -f</userinput></screen>
 
-    <para>Anti-aliasing makes borders slightly fuzzy, which makes very
-      small text more readable and removes <quote>staircases</quote> from
-      large text, but can cause eyestrain if applied to normal text.  To
-      exclude point sizes smaller than 14 point from anti-aliasing, include
-      these lines:</para>
+    <para>O <foreignphrase>anti-aliasing</foreignphrase> torna as bordas pouco nítidas, o que proporciona 
+      a textos pequenos maior legibilidade e remove <quote>escadinhas</quote> de  
+      textos grandes, mas pode causar fatiga visual se aplicado ao texto normal. Para
+      excluir fontes com tamanho em pontos menor 14 do <foreignphrase>anti-aliasing</foreignphrase>, inclua
+      estas linhas:</para>
 
       <programlisting>        &lt;match target="font"&gt;
             &lt;test name="size" compare="less"&gt;
@@ -794,16 +794,16 @@ EndSection</programlisting>
             &lt;/edit&gt;
         &lt;/match&gt;</programlisting>
 
-    <indexterm><primary>fonts</primary>
-      <secondary>spacing</secondary></indexterm>
+    <indexterm><primary>fontes</primary>
+      <secondary>espaçamento</secondary></indexterm>
 
-    <para>Spacing for some monospaced fonts may also be inappropriate
-      with anti-aliasing.  This seems to be an issue with
-      <application>KDE</application>, in particular.  One possible fix for
-      this is to force the spacing for such fonts to be 100.  Add the
-      following lines:</para>
+    <para>O espaçamento para fontes monoespaçadas também pode ser inapropriado
+      com o <foreignphrase>anti-aliasing</foreignphrase>. Isso parece ser uma quest&atilde;o presente
+      no <application>KDE</application>, em particular. Uma correç&atilde;o possível para
+      isso é forçar o espaçamento destas fontes para 100. Acrescente
+      as seguintes linhas:</para>
 
-     <programlisting>       &lt;match target="pattern" name="family"&gt;
+    <programlisting>       &lt;match target="pattern" name="family"&gt;
            &lt;test qual="any" name="family"&gt;
                &lt;string&gt;fixed&lt;/string&gt;
            &lt;/test&gt;
@@ -820,8 +820,8 @@ EndSection</programlisting>
             &lt;/edit&gt;
         &lt;/match&gt;</programlisting>
 
-      <para>(this aliases the other common names for fixed fonts as
-        <literal>"mono"</literal>), and then add:</para>
+      <para>(isso apelidará todo nome comum para fontes fixas como 
+        <literal>"mono"</literal>), e ent&atilde;o acrescente:</para>
 
       <programlisting>         &lt;match target="pattern" name="family"&gt;
              &lt;test qual="any" name="family"&gt;
@@ -832,12 +832,12 @@ EndSection</programlisting>
              &lt;/edit&gt;
          &lt;/match&gt;      </programlisting>
 
-      <para>Certain fonts, such as Helvetica, may have a problem when
-    anti-aliased.  Usually this manifests itself as a font that
-    seems cut in half vertically.  At worst, it may cause
-    applications such as <application>Mozilla</application> to
-    crash.  To avoid this, consider adding the following to
-    <filename>local.conf</filename>:</para>
+      <para>Certas fontes, como a Helvetica, podem apresentar problemas quando
+        usadas com <foreignphrase>anti-alias</foreignphrase>. Geralmente isso se apreseta como
+        uma fonte que parece cortada ao meio verticalmente. No pior caso, isso pode causar a
+        parada na execuç&atilde;o de aplicativos como o <application>Mozilla</application>.
+        Para evitar isso, considere acrescentar o seguinte ao arquivo
+        <filename>local.conf</filename>:</para>
 
       <programlisting>         &lt;match target="pattern" name="family"&gt;
              &lt;test qual="any" name="family"&gt;
@@ -848,76 +848,76 @@ EndSection</programlisting>
              &lt;/edit&gt;
          &lt;/match&gt;        </programlisting>
 
-      <para>Once you have finished editing
-        <filename>local.conf</filename> make sure you end the file
-        with the <literal>&lt;/fontconfig&gt;</literal> tag.  Not doing this will cause
-        your changes to be ignored.</para>
+      <para>Uma vez terminada a ediç&atilde;o do
+        <filename>local.conf</filename> assegure-se de colocar no final do arquivo
+        o rótulo <literal>&lt;/fontconfig&gt;</literal>. N&atilde;o fazê-lo fará que suas
+        modificaç&otilde;es sejam desprezadas.</para>
 
-       <para>The default font set that comes with
-         <application>&xfree86;</application> is not very
-         desirable when it comes to anti-aliasing.  A much better
-     set of default fonts can be found in the
-     <filename role="package">x11-fonts/bitstream-vera</filename>
-     port.  This port will install a
-     <filename>/usr/X11R6/etc/fonts/local.conf</filename> file
-     if one does not exist already.  If the file does exist,
-     the port will create a <filename>/usr/X11R6/etc/fonts/local.conf-vera
-     </filename> file.  Merge the contents of this file into
-     <filename>/usr/X11R6/etc/fonts/local.conf</filename>, and the
-     Bitstream fonts will automatically replace the default
-     <application>&xfree86;</application> Serif, Sans Serif, and Monospaced
-     fonts.</para>
+      <para>O conjunto padr&atilde;o de fontes que vem com
+        o <application>&xfree86;</application> n&atilde;o é muito
+        conveniente quando se trata de <literal>anti-alias</literal>. Um conjunto bem melhor
+        de fontes padr&atilde;o pode ser encontrado no <literal>port</literal>
+        <filename role="package">x11-fonts/bitstream-vera</filename>.
+        Esse <literal>port</literal> irá instalar um arquivo
+        <filename>/usr/X11R6/etc/fonts/local.conf</filename>
+        se ele n&atilde;o existir. Se o arquivo existir, o <literal>port</literal>
+        var criar o arquivo <filename>/usr/X11R6/etc/fonts/local.conf-vera
+        </filename>. Faça a fus&atilde;o do conteúdo deste arquivo com o
+        <filename>/usr/X11R6/etc/fonts/local.conf</filename>, e as fontes
+        <literal>Bitstream</literal> automaticamente substituir&atilde;o as fontes
+        Serif, Sans Serif e Monospaced padr&atilde;o do <application>&xfree86;</application>. 
+        </para>
 
-       <para>Finally, users can add their own settings via their personal
-        <filename>.fonts.conf</filename> files.  To do this, each user should
-    simply create a <filename>~/.fonts.conf</filename>.  This file must
-    also be in XML format.</para>
+      <para>Por fim, os usuários podem acresentar suas próprias configuraç&otilde;es em seus
+        arquivos <filename>.fonts.conf</filename> pessoais. Para fazer isso, cada usuário deve
+        apenas criar o arquivo <filename>~/.fonts.conf</filename>. Este arquivo precisa também
+        estar no formato XML.</para>
 
-       <indexterm><primary>LCD screen</primary></indexterm>
-       <indexterm><primary>Fonts</primary>
-         <secondary>LCD screen</secondary></indexterm>
+      <indexterm><primary>Telas LCD</primary></indexterm>
+      <indexterm><primary>Fontes</primary>
+        <secondary>Telas LCD</secondary></indexterm>
 
-       <para>One last point: with an LCD screen, sub-pixel sampling may be
-        desired.  This basically treats the (horizontally separated)
-        red, green and blue components separately to improve the horizontal
-        resolution; the results can be dramatic.  To enable this, add the
-        line somewhere in the <filename>local.conf</filename> file:</para>
+      <para>Um último ponto: com telas de LCD, amostragem de subpontos pode
+        ser desejável. Isso basicamente trata os componentes (horizontalmente separados)
+        vermelho, verde e azul separadamente a fim de melhorar a resoluç&atilde;o horizontal;
+        os resultados podem ser espetaculares. Para permitir isso, acrescente a
+        linha em algum lugar do arquivo <filename>local.conf</filename>:</para>
 
-       <programlisting>
-         &lt;match target="font"&gt;
-             &lt;test qual="all" name="rgba"&gt;
-                 &lt;const&gt;unknown&lt;/const&gt;
-             &lt;/test&gt;
-             &lt;edit name="rgba" mode="assign"&gt;
-                 &lt;const&gt;rgb&lt;/const&gt;
-             &lt;/edit&gt;
-         &lt;/match&gt;
-       </programlisting>
+      <programlisting>
+        &lt;match target="font"&gt;
+            &lt;test qual="all" name="rgba"&gt;
+                &lt;const&gt;unknown&lt;/const&gt;
+            &lt;/test&gt;
+            &lt;edit name="rgba" mode="assign"&gt;
+                &lt;const&gt;rgb&lt;/const&gt;
+            &lt;/edit&gt;
+        &lt;/match&gt;
+      </programlisting>
 
-       <note><para>Depending on the sort of display,
-     <literal>rgb</literal> may need to be changed to <literal>bgr</literal>,
-     <literal>vrgb</literal> or <literal>vbgr</literal>: experiment and
-     see which works best.</para></note>
+      <note><para>Conforme o tipo de tela, o
+        <literal>rgb</literal> pode precisar ser substituído por <literal>bgr</literal>,
+        <literal>vrgb</literal> ou <literal>vbgr</literal>: experimente e
+        veja qual funciona melhor.</para></note>
 
-       <indexterm><primary>Mozilla</primary></indexterm>
-       <indexterm><primary>web browsers</primary>
-         <secondary>Mozilla</secondary>
-         <see>Mozilla</see></indexterm>
+      <indexterm><primary>Mozilla</primary></indexterm>
+      <indexterm><primary>navegadores da www</primary>
+        <secondary>Mozilla</secondary>
+        <see>Mozilla</see></indexterm>
 
-       <para>Anti-aliasing should be enabled the next time the X
-         server is started.  However, programs must know how to take
-         advantage of it.  At present, the Qt toolkit does,
-         so the entire <application>KDE</application> environment can
-         use anti-aliased fonts (see <xref
-         linkend="x11-wm-kde-antialias"> on
-         <application>KDE</application> for details).  Gtk+ and
-         <application>GNOME</application> can also be made to use
-         anti-aliasing via the <quote>Font</quote> capplet (see <xref
-         linkend="x11-wm-gnome-antialias"> for details).  By default,
-         <application>Mozilla</application> 1.2 and greater will
-         automatically use anti-aliasing. To disable this, rebuild
-         <application>Mozilla</application> with the
-         <makevar>-DWITHOUT_XFT</makevar> flag.</para>
+      <para>O <foreignphrase>anti-aliasing</foreignphrase> deve estar habilitado na próxima vez que
+        o servidor X for iniciado. Entretanto, os programas precisam saber como tirar vantage
+        disso. No presente, o conjunto de ferramentas Qt o faz, logo
+        todo o ambiente do KDE pode <application>KDE</application> pode utilizar fontes
+        com <foreignphrase>anti-alias</foreignphrase> (veja <xref
+        linkend="x11-wm-kde-antialias"> sobre o
+        <application>KDE</application> para detalhes). O Gtk+ e o
+        <application>GNOME</application> também podem ser adaptados ao 
+        <foreignphrase>anti-alias</foreignphrase> através do <literal>capplet</literal> <quote>Font</quote> (veja <xref
+        linkend="x11-wm-gnome-antialias"> para mais detalhes). Por padr&atilde;o,
+        o <application>Mozilla</application> 1.2 e posteriores v&atilde;o
+        usar o <foreignphrase>anti-alias</foreignphrase> automaticamente. Para desativar isso, reconstrua
+        o <application>Mozilla</application> com o parâmetro
+        <makevar>-DWITHOUT_XFT</makevar>.</para>
     </sect2>
   </sect1>
 
@@ -927,7 +927,7 @@ EndSection</programlisting>
         <author>
           <firstname>Seth</firstname>
           <surname>Kingsley</surname>
-          <contrib>Contributed by </contrib>
+          <contrib>Contribuiç&otilde;es de </contrib>
         </author>
       </authorgroup>
     </sect1info>
