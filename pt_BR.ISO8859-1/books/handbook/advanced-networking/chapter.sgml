@@ -295,7 +295,7 @@ host2.example.com link#1	     UC	  0	0
       Provedor de Servi&ccedil;os Internet (PSI).</para>
 
       <para>Vamos dar uma olhada em um exemplo de rotas padr&atilde;o.  Esta &eacute;
-      uma configura&ccedil;&atilde;o usual:</para>
+      uma configura&ccedil;&atilde;o comum:</para>
 
       <literallayout>
 [Local2]  &lt;--ether--&gt;  [Local1]  &lt;--PPP--&gt; [ISP-Serv]  &lt;--ether--&gt;  [T1-GW]
@@ -411,115 +411,124 @@ host2.example.com link#1	     UC	  0	0
     </sect2>
 
     <sect2 id="network-dedicated-router">
-      <title>Building a Router</title>
+      <title>Construindo um Roteador</title>
 
       <indexterm><primary>router</primary></indexterm>
 
-      <para>A network router is simply a system that forwards packets
-	from one interface to another.  Internet standards and good
-	engineering practice prevent the FreeBSD Project from enabling
-	this by default in FreeBSD.  You can enable this feature by
-	changing the following variable to <literal>YES</literal> in
+      <para>Um roteador de rede &eacute; simplesmente um sistema que repassa
+      pacotes de uma interface para outra.  Padr&otilde;es da Internet e boas
+      pr&aacute;ticas de engenharia impedem o Projeto FreeBSD de permitir
+      isto por padr&atilde;o no FreeBSD.  Voc&ecirc; pode permitir esta
+      caracter&iacute;stica alterando a seguinte vari&aacute;vel para
+      <literal>YES</literal> no &man.rc.conf.5;:</para>
 	&man.rc.conf.5;:</para>
 
       <programlisting>gateway_enable=YES	  # Set to YES if this host will be a gateway</programlisting>
 
-      <para>This option will set the &man.sysctl.8; variable
-	<varname>net.inet.ip.forwarding</varname> to
-	<literal>1</literal>.  If you should need to stop routing
-	temporarily, you can reset this to <literal>0</literal> temporarily.</para>
+      <para>Esta op&ccedil;&atilde;o ir&aacute; ajustar a vari&aacute;vel do &man.sysctl.8;
+      chamada <varname>net.inet.ip.forwarding</varname> para
+	<literal>1</literal>.  Se voc&ecirc; precisar parar o roteamento
+	temporariamente, voc&ecirc; voc&ecirc; pode reajust&aacute;-la para
+	<literal>0</literal>.</para>
 
-      <para>Your new router will need routes to know where to send the
-	traffic.  If your network is simple enough you can use static
-	routes.  FreeBSD also comes with the standard BSD routing
-	daemon &man.routed.8;, which speaks RIP (both version 1 and
-	version 2) and IRDP.  Support for BGP v4, OSPF v2, and other
-	sophisticated routing protocols is available with the
-	<filename role="package">net/zebra</filename> package.
-	Commercial products such as gated are also available for more
-	complex network routing solutions.</para>
+      <para>Seu novo roteador precisar&aacute; de rotas para saber aonde
+      enviar o tr&aacute;fego.  Se sua rede for simples o suficiente voc&ecirc;
+      pode usar rotas est&aacute;ticas.  O FreeBSD tamb&eacute;m vem com o daemon
+      de roteamento padr&atilde;o do BSD &man.routed.8;, o qual fala RIP
+      (ambas as vers&otilde;es 1 e 2) e IRDP.  O suporte para BGP v4, OSPF v2
+      e outros protocolos de roteamento sofisticados est&atilde;o dispon&iacute;veis
+      com o pacote <filename role="package">net/zebra</filename>.
+      Produtos comerciais como o gated tamb&eacute;m est&atilde;o dispon&iacute;veis para
+      solu&ccedil;&otilde;es mais complexas de roteamento.</para>
 
 <indexterm><primary>BGP</primary></indexterm>
 <indexterm><primary>RIP</primary></indexterm>
 <indexterm><primary>OSPF</primary></indexterm>
 
-      <para>Even when FreeBSD is configured in this way, it does not
-	completely comply with the Internet standard requirements for
-	routers.  It comes close enough for ordinary use,
-	however.</para>
+      <para>Mesmo quando o FreeBSD &eacute; configurado desta forma, ele
+      ainda n&atilde;o cumpre completamente com os requisitos padr&otilde;es da
+      Internet para roteadores.  Mas chega bem perto para uso
+      normal, entretanto.</para>
     </sect2>
 
     <sect2>
-      <title>Routing Propagation</title>
+      <title>Propaga&ccedil;&atilde;o do Roteamento</title>
       <indexterm><primary>routing propagation</primary></indexterm>
-      <para>We have already talked about how we define our routes to the
-	outside world, but not about how the outside world finds us.</para>
+      <para>N&oacute;s j&aacute; falamos sobre como definimos nossas rotas para o
+      mundo exterior, mas n&atilde;o sobre como o mundo exterior nos
+      encontra.</para>
 
-      <para>We already know that routing tables can be set up so that all
-	traffic for a particular address space (in our examples, a class-C
-	subnet) can be sent to a particular host on that network, which will
-	forward the packets inbound.</para>
+      <para>J&aacute; sabemos como as tabelas de roteamento podem ser
+      configuradas de forma que todo o tr&aacute;fego para um espa&ccedil;o de
+      endere&ccedil;amento em particular (nos nossos exemplos, uma subrede
+      classe-C) pode ser enviado a um determinado sistema naquela
+      rede, o qual ir&aacute; repassar os pacotes para dentro.</para>
 
-      <para>When you get an address space assigned to your site, your service
-	provider will set up their routing tables so that all traffic for your
-	subnet will be sent down your PPP link to your site.  But how do sites
-	across the country know to send to your ISP?</para>
+      <para>Quando voc&ecirc; obtiver a designa&ccedil;&atilde;o de um espa&ccedil;o de
+      endere&ccedil;amento para seu s&iacute;tio, seu provedor de servi&ccedil;os ir&aacute;
+      configurar suas tabelas de roteamento de forma que todo o
+      tr&aacute;fego para sua subrede ser&aacute; enviado atrav&eacute;s do seu enlace PPP
+      ao seu s&iacute;tio.  Mas como os s&iacute;tios atrav&eacute;s do pa&iacute;s saber&atilde;o enviar
+      ao seu PSI?</para>
 
-      <para>There is a system (much like the distributed DNS information) that
-	keeps track of all assigned address-spaces, and defines their point of
-	connection to the Internet Backbone.  The <quote>Backbone</quote> are
-	the main trunk lines that carry Internet traffic across the country,
-	and around the world.  Each backbone machine has a copy of a master
-	set of tables, which direct traffic for a particular network to a
-	specific backbone carrier, and from there down the chain of service
-	providers until it reaches your network.</para>
+      <para>H&aacute; um sistema (muito parecido com a informa&ccedil;&atilde;o DNS
+      disttribu&iacute;da) que mant&eacute;m resgistros de todos os espa&ccedil;os de
+      endere&ccedil;amento designados, e que define seu ponto de conex&atilde;o &agrave;
+      Espinha Dorsal Internet.  A <quote>Espinha Dorsal</quote> s&atilde;o
+      os principais canais que carregam o tr&aacute;fego da Internet atrav&eacute;s
+      do pa&iacute;s e ao redor do mundo.  Cada m&aacute;quina de espinha dorsal t&ecirc;m
+      uma c&oacute;pia de um conjunto mestre de tabelas, as quais direcionam
+      tr&aacute;fego a uma determinada rede e a um provedor de espinha dorsal
+      espec&iacute;fico e, de l&aacute;, abaixo na cadeia de provedores de servi&ccedil;os
+      at&eacute; atingir a sua rede.</para>
 
-      <para>It is the task of your service provider to advertise to the
-	backbone sites that they are the point of connection (and thus the
-	path inward) for your site.  This is known as route
-	propagation.</para>
+      <para>&Eacute; a tarefa do seu provedor de servi&ccedil;os anunciar para os
+      s&iacute;tios da espinha dorsal que eles s&atilde;o o ponto de conex&atilde;o (e,
+      assim, o caminho de entrada) para seu s&iacute;tio.  Isto &eacute; conhecido
+      como propaga&ccedil;&atilde;o de rotas.</para>
     </sect2>
 
     <sect2>
-      <title>Troubleshooting</title>
+      <title>Resolu&ccedil;&atilde;o de Problemas</title>
       <indexterm>
 	<primary><command>traceroute</command></primary>
       </indexterm>
-      <para>Sometimes, there is a problem with routing propagation, and some
-	sites are unable to connect to you.  Perhaps the most useful command
-	for trying to figure out where routing is breaking down is the
-	  &man.traceroute.8; command.  It is equally useful if you cannot seem
-	to make a connection to a remote machine (i.e. &man.ping.8;
-	fails).</para>
+      <para>&Agrave;s vezes, h&aacute; um problema com propaga&ccedil;&atilde;o de rotas, e alguns
+      s&iacute;tios ficam incapazes de se conectar a voc&ecirc;.  Talvez o comando
+      mais &uacute;til para tentar descobrir onde o roteamento est&aacute; em pane &eacute;
+      o &man.traceroute.8;.  Ele &eacute; igualmente &uacute;til se voc&ecirc; n&atilde;o parece
+      conseguir realizar uma conex&atilde;o a uma m&aacute;quina remota (p.ex.  o
+      &man.ping.8; falhou).</para>
 
-      <para>The &man.traceroute.8; command is run with the name of the remote
-	host you are trying to connect to.  It will show the gateway hosts
-	along the path of the attempt, eventually either reaching the target
-	host, or terminating because of a lack of connection.</para>
+      <para>O comando &man.traceroute.8; &eacute; executado com o nome do
+      sistema remoto que voc&ecirc; est&aacute; tentando se conectar.  Ele vai
+      mostrar os sistemas gateway ao longo do caminho da tentativa,
+      eventualmente alcan&ccedil;ando o sistema-alvo, ou terminando por falta
+      de conectividade.</para>
 
-      <para>For more information, see the manual page for
-	  &man.traceroute.8;.</para>
+      <para>Para maiores informa&ccedil;&otilde;es, veja a p&aacute;gina do manual do
+      &man.traceroute.8;.</para>
     </sect2>
 
     <sect2>
-      <title>Multicast Routing</title>
+      <title>Roteamento Multicast</title>
       <indexterm>
 	<primary>multicast</primary>
 	<secondary>options MROUTING</secondary>
       </indexterm>
-      <para>FreeBSD supports both multicast applications and multicast
-	routing natively.  Multicast applications do not require any
-	special configuration of FreeBSD; applications will generally
-	run out of the box.  Multicast routing
-	requires that support be compiled into the kernel:</para>
+      <para>O FreeBSD suporta aplica&ccedil;&otilde;es multicast e roteamento multicast
+	de forma nativa.  Aplica&ccedil;&otilde;es multicast n&atilde;o requerem qualquer
+	configura&ccedil;&atilde;o especial no FreeBSD; aplica&ccedil;&otilde;es geralmente ir&atilde;o
+	funcionar sem necessidade de ajustes.  O roteamento multicast
+	requer que o suporte seja compilado no n&uacute;cleo, ou kernel:</para>
 
       <programlisting>options MROUTING</programlisting>
 
-      <para>In addition, the multicast routing daemon, &man.mrouted.8;
-	must be configured to set up tunnels and DVMRP via
-	<filename>/etc/mrouted.conf</filename>.  More details on
-	multicast configuration may be found in the man pages for
-	mrouted.</para>
+      <para>Al&eacute;m disso, o daemon de roteamento multicast,
+      &man.mrouted.8; precisa ser configurado para ativar t&uacute;neis e
+      DVMRP atrav&eacute;s do <filename>/etc/mrouted.conf</filename>.  Mais
+      detalhes sobre a configura&ccedil;&atilde;o multicast podem ser encontradas
+      nas p&aacute;ginas de manuais do mrouted.</filename></para>
     </sect2>
   </sect1>
 
@@ -529,11 +538,11 @@ host2.example.com link#1	     UC	  0	0
 	<author>
 	  <firstname>Eric</firstname>
 	  <surname>Anderson</surname>
-	  <contrib>Written by </contrib>
+	  <contrib>Escrito por </contrib>
 	</author>
       </authorgroup>
     </sect1info>
-    <title>Wireless Networking</title>
+    <title>Rede Sem Fio (Wireless)</title>
 
    <indexterm><primary>wireless networking</primary></indexterm>
    <indexterm>
