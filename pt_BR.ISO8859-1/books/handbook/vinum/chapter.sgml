@@ -1,4 +1,4 @@
-<!--
+!--
 	The Vinum Volume Manager
 	By Greg Lehey (grog at lemis dot com)
 
@@ -13,10 +13,10 @@
   <title>O Gerenciador de Volumes Vinum</title>
   
   <sect1 id="vinum-synopsis">
-    <title>Sinópse</title>
+    <title>Sin&oacute;pse</title>
 
-    <para>Não importa quais discos você tem, eles sempre terão
-     limitações
+    <para>N&atilde;o importa quais discos voc&ecirc; tem, eles sempre
+    ter&atilde;o limita&ccedil;&otilde;es:</para>
     
       <itemizedlist>
 	<listitem>
@@ -44,105 +44,114 @@
       </authorgroup>
     </sect1info>
 
-    <title>Discos são muito pequenos</title>
+    <title>Discos s&atilde;o muito pequenos</title>
 
     <indexterm><primary>Vinum</primary></indexterm>
     <indexterm><primary>RAID</primary>
     <secondary>Software</secondary></indexterm>
    
     <para><emphasis>Vinum</emphasis> o chamado <emphasis>Gerenciador de
-    Volumes</emphasis> é o disco virtual que trata destes três
-    problemas, vamos analiza-los com mais detalhes.  Soluções para estes
-    problemas tem sido propostas e implementadas:</para>
+    Volumes</emphasis> &eacute; o disco virtual que trata destes
+    tr&ecirc;s problemas, vamos analiza-los com mais detalhes.
+    Solu&ccedil;&otilde;es para estes problemas tem sido propostas e
+    implementadas:</para>
 
-    <para>os discos estão ficando maiores, mas os requisitos para
-    armazenamento de dados também.  Frequentemente você vai querer um
-    sistema de arquivos maior do que o disco que você tem disponível.
-    Reconhecidamente, este problema já não é tão agudo com era a dez
-    anos atrás, mas ele ainda existe.  Alguns sistemas resolveram isso
+    <para>os discos est&atilde;o ficando maiores, mas os requisitos para
+    armazenamento de dados tamb&eacute;m.  Frequentemente voc&ecirc; vai
+    querer um sistema de arquivos maior do que o disco que voc&ecirc;
+    tem dispon&iacute;vel.  Reconhecidamente, este problema j&aacute;
+    n&atilde;o &eacute; t&atilde;o agudo com era a dez anos
+    atr&aacute;s, mas ele ainda existe.  Alguns sistemas resolveram isso
     criando um dispositivo abstrato onde armazenam seus dados em um
-    número de discos.</para>
+    n&uacute;mero de discos.</para>
   </sect1>
 
   <sect1 id="vinum-access-bottlenecks">
     <title>Gargalo de acesso</title>
 
     <para>Sistemas modernos frequentemente precisam acessar dados de uma
-    maneira incrívelmente rápida.  Por exemplo, grandes servidores de
-    FTP e HTTP podem manter milhares de sessões ao mesmo tempo e podem
-    ter multiplas conexões de 100&nbsp;Mbit/s com o mundo externo, bem
-    além das taxas de transmisão da maioria dos discos.</para>
+    maneira incr&iacute;velmente r&aacute;pida.  Por exemplo, grandes
+    servidores de FTP e HTTP podem manter milhares de sess&otilde;es ao
+    mesmo tempo e podem ter multiplas conex&otilde;es de 100&nbsp;Mbit/s
+    com o mundo externo, bem al&eacute;m das taxas de transmis&atilde;o
+    da maioria dos discos.</para>
     
-    <para>Os discos atuais podem transferir dados sequencialmente em até
-    70&nbsp;MB/s, mas este valor é de pouca importância em um ambiente
-    onde muitos processos independentes acessam  um disco, onde eles
-    talvez atinjam apenas uma fração desse valor.  Nesses casos é mais
+    <para>Os discos atuais podem transferir dados sequencialmente em
+    at&eacute; 70&nbsp;MB/s, mas este valor &eacute; de pouca
+    import&acirc;ncia em um ambiente onde muitos processos independentes
+    acessam  um disco, onde eles talvez atinjam apenas uma
+    fra&ccedil;&atilde;o desse valor.  Nesses casos &eacute; mais
     importante observar o problema do ponto de vista do subsystem: o
-    parametro importante é a carga que uma transferência coloca no
-    subsystem, em outras palavras, o tempo em que a transferência ocupa
-    os discos envolvidos.</para>
+    parametro importante &eacute; a carga que uma transfer&ecirc;ncia
+    coloca no subsystem, em outras palavras, o tempo em que a
+    transfer&ecirc;ncia ocupa os discos envolvidos.</para>
        
-    <para>Em qualquer operação de transferência, o disco
-    deve primeiramente posicionar as cabeças de leitura e esperar até
-    que o primeiro setor passe em baixo delas e depois sim executar a
-    transferência.  Esses atos podem ser considerados com se fossem
-    atômicos: não faz o menor sentido interromper eles.</para>
+    <para>Em qualquer opera&ccedil;&atilde;o de transfer&ecirc;ncia, o
+    disco deve primeiramente posicionar as cabe&ccedil;as de leitura e
+    esperar at&eacute; que o primeiro setor passe em baixo delas e
+    depois sim executar a transfer&ecirc;ncia.  Esses atos podem ser
+    considerados com se fossem at&ocirc;micos: n&atilde;o faz o menor
+    sentido interromper eles.</para>
     
-    <para><anchor id="vinum-latency">Considere uma transferência
-    típica de aproximadamente 10&nbsp;kB: a geração atual de discos de
-    alta performance podem posicionar as cabeças em uma média de
-    3.5&nbsp;ms.  Os discos mais rápidos giram em 15.000&nbsp;rpm,
-    então, a rotação latente média (metade de uma revolução) é de
-    2&nbsp;ms.  Em 70&nbsp;MB/s, a transferência propriamente dita, leva
-    em torno de 150&nbsp;&mu;s, o que é quase nada comprado com o
-    tempo de posicionamento.  Em tal caso, a taxa efetiva de
-    transferência fica um pouco maior que 1&nbsp;MB/s e é altamente
-    dependente no tamanho do que vai ser transferido, é claro.</para>
+    <para><anchor id="vinum-latency">Considere uma transfer&ecirc;ncia
+    t&iacute;pica de aproximadamente 10&nbsp;kB: a gera&ccedil;&atilde;o
+    atual de discos de alta performance podem posicionar as
+    cabe&ccedil;as em uma m&eacute;dia de 3.5&nbsp;ms.  Os discos mais
+    r&aacute;pidos giram em 15.000&nbsp;rpm, ent&atilde;o, a
+    rota&ccedil;&atilde;o latente m&eacute;dia (metade de uma
+    revolu&ccedil;&atilde;o) &eacute; de 2&nbsp;ms.  Em 70&nbsp;MB/s, a
+    transfer&ecirc;ncia propriamente dita, leva em torno de
+    150&nbsp;&mu;s, o que &eacute; quase nada comprado com o tempo de
+    posicionamento.  Em tal caso, a taxa efetiva de transfer&ecirc;ncia
+    fica um pouco maior que 1&nbsp;MB/s e &eacute; altamente dependente
+    no tamanho do que vai ser transferido, &eacute; claro.</para>
 
-    <para>A solução óbvia e tradicional para esse gargalo é <quote>more
-    spindles</quote>: ele usa vários discos pequenos  com a mesma
-    capacidade de armazenamento em vez de usar um outro disco grande.
-    Cada disco é capaz de se posicionar e transferir dados de maneira
-    independente, então o ritmo de transferência efetivo, cresce a uma
-    taxa próxima ao número de discos usados.</para>
+    <para>A solu&ccedil;&atilde;o &oacute;bvia e tradicional para esse
+    gargalo &eacute; <quote>more spindles</quote>: ele usa v&aacute;rios
+    discos pequenos  com a mesma capacidade de armazenamento em vez de
+    usar um outro disco grande.  Cada disco &eacute; capaz de se
+    posicionar e transferir dados de maneira independente, ent&atilde;o
+    o ritmo de transfer&ecirc;ncia efetivo, cresce a uma taxa
+    pr&oacute;xima ao n&uacute;mero de discos usados.</para>
 
-    <para>O ritmo de transferência exato é, claramente, menor que o
-    número de discos envolvidos: apesar de cada disco ser capaz de relizar
-    transferencias em paralelo, não existe nenhuma forma de se assegurar
-    que as solicitações estão distribuidas de maneira uniforme entre os
-    discos.  Inevitavelmente a carga no disco será maior do que no
+    <para>O ritmo de transfer&ecirc;ncia exato &eacute;, claramente,
+    menor que o n&uacute;mero de discos envolvidos: apesar de cada disco
+    ser capaz de relizar transferencias em paralelo, n&atilde;o existe
+    nenhuma forma de se assegurar que as solicita&ccedil;&otilde;es
+    est&atilde;o distribuidas de maneira uniforme entre os discos.
+    Inevitavelmente a carga no disco ser&aacute; maior do que no
     outro.</para> 
     
     <indexterm>
-      <primary>concatenação de dicos</primary>
+      <primary>concatena&ccedil;&atilde;o de dicos</primary>
     </indexterm>
     <indexterm>
       <primary>Vinum</primary>
-      <secondary>concatenação</secondary>
+      <secondary>concatena&ccedil;&atilde;o</secondary>
     </indexterm>
 
-    <para>A distribuição equilibrada da carga nos discos é fortemente
-    dependente do modo em que os dados são compartilhados entre eles.
-    No próximo debate, seria conveniente visualizar um disco como se
-    fosse um grande número de setores de dados mapeados por números,
-    como as páginas de um livro.  O método mais simples seria dividir o
-    disco virtual em pequenos grupos de setores consecutivos do tamanho
-    do disco físico individual e depois armzená-los desse jeito,
-    semelhante a pegar um livro grande e dividí-lo em pequenas sessões.
-    Esse étodo é chamado de <emphasis>concatenação</emphasis> e tem a
-    vantagem que os discos não precisam ter nenhum tipo de
-    relacionamento quanto a tamanho.  Funciona bem quando o acesso ao
-    disco virtual é dividido de maneira igual entre os seus espaços
-    mapeados.  Quando o acesso é concentrado uma área menor, o
-    aumento no desempenho é menos acentuado.  A <xref linkend="vinum-concat"> 
-    ilustra a seqüência na qual as unidades de armazenamento são
-    alocadas em uma organização concatenada.
-    </para> 
-    <para>
-      <figure id="vinum-concat">
-	<title>Organização Concatenada</title>
-	<graphic fileref="vinum/vinum-concat">
-      </figure>
+    <para>A distribui&ccedil;&atilde;o equilibrada da carga nos discos
+    &eacute; fortemente dependente do modo em que os dados s&atilde;o
+    compartilhados entre eles.  No pr&oacute;ximo debate, seria
+    conveniente visualizar um disco como se fosse um grande
+    n&uacute;mero de setores de dados mapeados por n&uacute;meros, como
+    as p&aacute;ginas de um livro.  O m&eacute;todo mais simples seria
+    dividir o disco virtual em pequenos grupos de setores consecutivos
+    do tamanho do disco f&iacute;sico individual e depois
+    armzen&aacute;-los desse jeito, semelhante a pegar um livro grande e
+    divid&iacute;-lo em pequenas sess&otilde;es.  Esse &eacute;todo
+    &eacute; chamado de <emphasis>concatena&ccedil;&atilde;o</emphasis>
+    e tem a vantagem que os discos n&atilde;o precisam ter nenhum tipo
+    de relacionamento quanto a tamanho.  Funciona bem quando o acesso ao
+    disco virtual &eacute; dividido de maneira igual entre os seus
+    espa&ccedil;os mapeados.  Quando o acesso &eacute; concentrado uma
+    &aacute;rea menor, o aumento no desempenho &eacute; menos acentuado.
+    A <xref linkend="vinum-concat"> ilustra a seq&uuml;&ecirc;ncia na
+    qual as unidades de armazenamento s&atilde;o alocadas em uma
+    organiza&ccedil;&atilde;o concatenada.</para> 
+
+    <para> <figure id="vinum-concat"> <title>Organiza&ccedil;&atilde;o
+    Concatenada</title> <graphic fileref="vinum/vinum-concat"> </figure>
     </para>
 
     <indexterm>
@@ -153,34 +162,37 @@
       <secondary>striping</secondary>
     </indexterm>
 
-    <para>Um mapeamento alternativo é dividir o espaço de endereçamento em
-    componentes menores, de tamanhos iguais e armazená-los
-    seqüencialmente em discos diferentes.  Por exemplo, os primeiros 256
-    setores poderiam ser armazenados no primeiro disco, os 256 setores
-    seguintes no próximo disco e assim por diante.  Depois de preencher
-    o último disco o processo se repete até que os discos estejam cheios.
-    Esse mapemento é chamado de <emphasis>striping</emphasis> ou
-    <acronym>RAID-0</acronym>.
+    <para>Um mapeamento alternativo &eacute; dividir o espa&ccedil;o de
+    endere&ccedil;amento em componentes menores, de tamanhos iguais e
+    armazen&aacute;-los seq&uuml;encialmente em discos diferentes.  Por
+    exemplo, os primeiros 256 setores poderiam ser armazenados no
+    primeiro disco, os 256 setores seguintes no pr&oacute;ximo disco e
+    assim por diante.  Depois de preencher o &uacute;ltimo disco o
+    processo se repete at&eacute; que os discos estejam cheios.  Esse
+    mapemento &eacute; chamado de <emphasis>striping</emphasis> ou
+    <acronym>RAID-0</acronym>.  
     
     <footnote>
       <indexterm><primary>RAID</primary></indexterm>
-    
-      <para><acronym>RAID</acronym> (Redundant Array of Inexpensive
-      Disks) significa <emphasis>Vetor redundante de discos
-      baratos</emphasis> e oferece várias formas de tolerância de erros,
-      apesar de que um termo um pouco equivocado, pois não fornece
-      redundância.</para> </footnote>.
 
-    O <foreignphrase>striping</foreignphrase> exige um esforço grande
-    para localizar os dados e isso causa carga adicional de I/O onde a
-    tranferência é distribuida para diversos discos, mas pode também
-    fornecer uma carga constante entre os discos.  <xref linkend="vinum-striped"> 
-    ilustra uma seqüência em que as unidades de armazenamento são
-    alocadas em uma organização <foreignphrase>striped</foreignphrase>.</para>
+      <para><acronym>RAID</acronym> (Redundant Array of Inexpensive Disks)
+      significa <emphasis>Vetor redundante de discos baratos</emphasis> e
+      oferece v&aacute;rias formas de toler&acirc;ncia de erros, apesar de
+      que um termo um pouco equivocado, pois n&atilde;o fornece
+      redund&acirc;ncia.</para> </footnote>.
+
+    O <foreignphrase>striping</foreignphrase> exige um esfor&ccedil;o
+    grande para localizar os dados e isso causa carga adicional de I/O
+    onde a tranfer&ecirc;ncia &eacute; distribuida para diversos discos,
+    mas pode tamb&eacute;m fornecer uma carga constante entre os discos.
+    <xref linkend="vinum-striped"> ilustra uma seq&uuml;&ecirc;ncia em
+    que as unidades de armazenamento s&atilde;o alocadas em uma
+    organiza&ccedil;&atilde;o
+    <foreignphrase>striped</foreignphrase>.</para>
     
-    <para>
+    <para> 
       <figure id="vinum-striped">
-        <title>Organização Striped</title>
+        <title>Organiza&ccedil;&atilde;o Striped</title>
 	<graphic fileref="vinum/vinum-striped">
       </figure>
     </para>
@@ -189,12 +201,13 @@
   <sect1 id="vinum-data-integrity">
     <title>Integridade de dados</title>
 
-      <para>O outro problema com os discos atuais é que eles não são
-      confiáveis.  Apesar do crescimento significativo na credibilidade
-      dos discos nos últimos anos, esses ainda são um dos componentes
-      do núcleo de servidor com a maior possibilidade de falhar.  E
-      quando eles falham, os resultados podem ser catastróficos:
-      substituir um disco e recuperar seus dados pode levar dias.</para>
+      <para>O outro problema com os discos atuais &eacute; que eles
+      n&atilde;o s&atilde;o confi&aacute;veis.  Apesar do crescimento
+      significativo na credibilidade dos discos nos &uacute;ltimos anos,
+      esses ainda s&atilde;o um dos componentes do n&uacute;cleo de
+      servidor com a maior possibilidade de falhar.  E quando eles
+      falham, os resultados podem ser catastr&oacute;ficos: substituir
+      um disco e recuperar seus dados pode levar dias.</para>
       
       <indexterm>
 	<primary>espelhamento de disco</primary>
@@ -207,209 +220,233 @@
 	<primary>RAID-1</primary>
       </indexterm>
       
-      <para>O método tradicional de abordar esse problema tem sido o
-      <emphasis>espelhamento</emphasis>, mantendo duas cópias dos dados
-      em dois lugares físicos distintos.  Desde da aparição dos níveis
-      de <acronym>RAID</acronym>, essa técnica de espelhamento também é
-      chamada de <acronym>RAID nível 1</acronym> ou
-      <acronym>RAID-1</acronym>.  Qualquer escrita feita no volume
-      é realizada nas duas localidades, a leitura pode ser feita a partir
-      de uma delas, então se o disco falhar, os dados ainda estarão
-      disponíveis no outro.</para>
+      <para>O m&eacute;todo tradicional de abordar esse problema tem
+      sido o <emphasis>espelhamento</emphasis>, mantendo duas
+      c&oacute;pias dos dados em dois lugares f&iacute;sicos distintos.
+      Desde da apari&ccedil;&atilde;o dos n&iacute;veis de
+      <acronym>RAID</acronym>, essa t&eacute;cnica de espelhamento
+      tamb&eacute;m &eacute; chamada de <acronym>RAID n&iacute;vel
+      1</acronym> ou <acronym>RAID-1</acronym>.  Qualquer escrita feita
+      no volume &eacute; realizada nas duas localidades, a leitura pode
+      ser feita a partir de uma delas, ent&atilde;o se o disco falhar,
+      os dados ainda estar&atilde;o dispon&iacute;veis no outro.</para>
       
-      <para>O espelhamento tem dois problemas:</para>
-    
+      <para>O espelhamento tem dois problemas:</para> 
 	<itemizedlist>
 	  <listitem>
-	    <para>O preço.  Exige duas vezes mais armazenamento de disco
-	    do que uma solução sem redundância.</para>
+	    <para>O pre&ccedil;o.  Exige duas vezes mais armazenamento
+	    de disco do que uma solu&ccedil;&atilde;o sem
+	    redund&acirc;ncia.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>O impacto de performance.  A escrita deve ser feita para
-	    os dois discos, devido a isso eles usam duas vezes mais
-	    largura de banda do que um volume não espelhado.  Na leitura
-	    não há queda de performance: chega até a parecer que está
-	    mais rápido.</para>
+	    <para>O impacto de performance.  A escrita deve ser feita
+	    para os dois discos, devido a isso eles usam duas vezes mais
+	    largura de banda do que um volume n&atilde;o espelhado.  Na
+	    leitura n&atilde;o h&aacute; queda de performance: chega
+	    at&eacute; a parecer que est&aacute; mais
+	    r&aacute;pido.</para>
 	  </listitem>
 	</itemizedlist>
 
-      <para><indexterm><primary>RAID-5</primary></indexterm>Uma solução
-      alternativa é a <emphasis>paridade</emphasis>, implementada nos níveis
-      2, 3, 4 e 5 do <acronym>RAID</acronym>.  Dentre esses,
-      <acronym>RAID-5</acronym> é o mais interessante.  Como
-      implementado no Vinum, é uma variante na organização
-      <foreignphrase>striped</foreignphrase> onde dedica um bloco de
-      cada fatia à paridade dos outros blocos.  Conforme implementado no
-      Vinum, um plex <acronym>RAID-5</acronym> é parecido com um plex
-      <foreignphrase>striped</foreignphrase>, exceto que ele implementa
-      o <acronym>RAID-5</acronym> incluindo um bloco de paridade em
-      cada fatia.  Como exigido pelo <acronym>RAID-5</acronym>, o local
-      do bloco de paridade muda de uma fatia para a outra.  Os números nos
-      blocos de dados indicam o número relativo do bloco.</para>
+      <para><indexterm><primary>RAID-5</primary></indexterm>Uma
+      solu&ccedil;&atilde;o alternativa &eacute; a
+      <emphasis>paridade</emphasis>, implementada nos n&iacute;veis 2,
+      3, 4 e 5 do <acronym>RAID</acronym>.  Dentre esses,
+      <acronym>RAID-5</acronym> &eacute; o mais interessante.  Como
+      implementado no Vinum, &eacute; uma variante na
+      organiza&ccedil;&atilde;o <foreignphrase>striped</foreignphrase>
+      onde dedica um bloco de cada <foreignphrase>slice</foreignphrase>
+      &agrave; paridade dos outros blocos.  Conforme implementado no
+      Vinum, um plex <acronym>RAID-5</acronym> &eacute; parecido com um
+      plex <foreignphrase>striped</foreignphrase>, exceto que ele
+      implementa o <acronym>RAID-5</acronym> incluindo um bloco de
+      paridade em cada <foreignphrase>slice</foreignphrase>.  Como
+      exigido pelo <acronym>RAID-5</acronym>, o local do bloco de
+      paridade muda de um <foreignphrase>slice</foreignphrase> para
+      outro.  Os n&uacute;meros nos blocos de dados indicam o
+      n&uacute;mero relativo do bloco.</para>
 
       <para>
-	<figure id="vinum-raid5-org">
-	  <title>Organização RAID-5</title>
+        <figure id="vinum-raid5-org">
+          <title>Organiza&ccedil;&atilde;o RAID-5</title>
 	  <graphic fileref="vinum/vinum-raid5-org">
 	</figure>
       </para>
 
       <para>Comparado com espelhamento, <acronym>RAID-5</acronym> tem a
-      vantagem de requerer significativamente menos espaço de
-      armazenameto.  O acesso de leitura é parecido com o utilizado nas
-      organizações <foreignphrase>striped</foreignphrase>, mas o acesso
-      à escrita é bem reduzido, chega a até 25% da performance de
-      leitura aproximadamente.  Se uma partição falha, o vetor pode
-      continuar a operar em modo degradado: a leitura das partições
-      acessíveis restantes continua normalmente, mas a leitura da
-      partição danificada é recalculada pelo bloco correspondente de
-      todos os discos restantes.</para>
+      vantagem de requerer significativamente menos espa&ccedil;o de
+      armazenameto.  O acesso de leitura &eacute; parecido com o
+      utilizado nas organiza&ccedil;&otilde;es
+      <foreignphrase>striped</foreignphrase>, mas o acesso &agrave;
+      escrita &eacute; bem reduzido, chega a at&eacute; 25% da
+      performance de leitura aproximadamente.  Se uma
+      parti&ccedil;&atilde;o falha, o vetor pode continuar a operar em
+      modo degradado: a leitura das parti&ccedil;&otilde;es
+      acess&iacute;veis restantes continua normalmente, mas a leitura da
+      parti&ccedil;&atilde;o danificada &eacute; recalculada pelo bloco
+      correspondente de todos os discos restantes.</para>
   </sect1>
 
   <sect1 id="vinum-objects">
     <title>Objetos do Vinum</title>
       <para>Para que o Vinum possa solucionar esse problema, ele
-      implementa uma hierarquia de objetos em quatro níveis:</para>
+      implementa uma hierarquia de objetos em quatro
+      n&iacute;veis:</para>
 
       <itemizedlist>
 	<listitem>
-	  <para>O objeto mais visível é o disco virtual, chamado de
-	  <emphasis>volume</emphasis>.  Volumes tem essencialmente as
-	  mesmas propriedades de uma partição &unix;, contudo tem
-	  algumas pequenas diferenças.  Eles não tem nenhuma limitação
-	  de tamanho.</para>
+	  <para>O objeto mais vis&iacute;vel &eacute; o disco virtual,
+	  chamado de <emphasis>volume</emphasis>.  Volumes tem
+	  essencialmente as mesmas propriedades de uma
+	  parti&ccedil;&atilde;o &unix;, contudo tem algumas pequenas
+	  diferen&ccedil;as.  Eles n&atilde;o tem nenhuma
+	  limita&ccedil;&atilde;o de tamanho.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Volumes são compostos de <emphasis>plexes</emphasis>, no
-	  qual representa o espaço total de adressamento de um volume.
-	  Dessa forma, esse nível na hierarquia fornece redundância.
-	  Pense em plexes como uma partição individual em um vetor
-	  clonado, cada um contendo os mesmos dados.</para>
+	  <para>Volumes s&atilde;o compostos de
+	  <emphasis>plexes</emphasis>, no qual representa o
+	  espa&ccedil;o total de adressamento de um volume.  Dessa
+	  forma, esse n&iacute;vel na hierarquia fornece
+	  redund&acirc;ncia.  Pense em plexes como uma
+	  parti&ccedil;&atilde;o individual em um vetor clonado, cada um
+	  contendo os mesmos dados.</para>
 	</listitem>
 
 	<listitem>
 	  <para>Desde que o Vinum exista no sistema de armazenamento de
-	  discos &unix;, seria possível usar partições &unix; como um
-	  bloco de construção para plexes de múltiplos discos, mas no
-	  final isso acaba sendo muito inflexível: o número de partições
-	  de um disco &unix; é limitado.  Ao contrário, Vinum subdivide
-	  uma única partição &unix; (os <emphasis>discos do
-	  vinum</emphasis>) em área contínuas chamadas
-	  <emphasis>subdiscos</emphasis>, os quais são usados como
-	  blocos de construção para plexes.</para>
+	  discos &unix;, seria poss&iacute;vel usar
+	  parti&ccedil;&otilde;es &unix; como um bloco de
+	  constru&ccedil;&atilde;o para plexes de m&uacute;ltiplos
+	  discos, mas no final isso acaba sendo muito inflex&iacute;vel:
+	  o n&uacute;mero de parti&ccedil;&otilde;es de um disco &unix;
+	  &eacute; limitado.  Ao contr&aacute;rio, Vinum subdivide uma
+	  &uacute;nica parti&ccedil;&atilde;o &unix; (os
+	  <emphasis>discos do vinum</emphasis>) em &aacute;rea
+	  cont&iacute;nuas chamadas <emphasis>subdiscos</emphasis>, os
+	  quais s&atilde;o usados como blocos de
+	  constru&ccedil;&atilde;o para plexes.</para>
 	</listitem>
       
 	<listitem>
 	  <para>Subdiscos residem em discos do Vinum.  Atualmente
-	  partições &unix;.  Com a exceção de uma pequea área no começo
-	  do disco, a qual é usada para armazenamento de informações de
-	  configuração e estado, o disco todo fica disponível para
-	  armazenamento de dados.</para>
+	  parti&ccedil;&otilde;es &unix;.  Com a exce&ccedil;&atilde;o
+	  de uma pequea &aacute;rea no come&ccedil;o do disco, a qual
+	  &eacute; usada para armazenamento de informa&ccedil;&otilde;es
+	  de configura&ccedil;&atilde;o e estado, o disco todo fica
+	  dispon&iacute;vel para armazenamento de dados.</para>
 	</listitem>
       </itemizedlist>
 
-      <para>As sessões seguintes descrevem o modo com que esses objetos
-      fornecem a funcionalidade requerida pelo Vinum.</para>
+      <para>As sess&otilde;es seguintes descrevem o modo com que esses
+      objetos fornecem a funcionalidade requerida pelo Vinum.</para>
 
     <sect2>
-      <title>Considerações de um tamanho de volume</title>
+      <title>Considera&ccedil;&otilde;es de um tamanho de volume</title>
 
-      <para>Plexes podem ter muitos subdiscos espalhados por todas as 
-      partições nas configurações do vinum.  Como resultado, o tamanho
-      de uma prtição original não limta o tamanho nem de um plex e nem
-      de um volume.</para>
+      <para>Plexes podem ter muitos subdiscos espalhados por todas as
+      parti&ccedil;&otilde;es nas configura&ccedil;&otilde;es do vinum.
+      Como resultado, o tamanho de uma prti&ccedil;&atilde;o original
+      n&atilde;o limta o tamanho nem de um plex e nem de um
+      volume.</para>
     </sect2>
     
     <sect2>
       <title>Armazenamento de Dados Redundante</title>
-      <para>Vinum implementa espelhamento anexando múltiplos plexes a um
-      volume.  Cada plex é a representação dos dados de um volume.  Um
-      volume pode conter de um a oito plexes.</para>
+      <para>Vinum implementa espelhamento anexando m&uacute;ltiplos
+      plexes a um volume.  Cada plex &eacute; a
+      representa&ccedil;&atilde;o dos dados de um volume.  Um volume
+      pode conter de um a oito plexes.</para>
       
       <para>Apesar de um plex repesentar os dados completos de um
-      volume, é possivel que partes da representação estejam fisicamente
-      ausentes, seja por planejamento (por não definir um subdisco como
-      parte de um plex), ou por acidente (como resultado de uma falha no
-      disco).  Contanto que, pelo menos um plex possa fornecer dados para a
-      extenção completa de endereço do volume, o sistema é completamente
-      funcional.</para>
+      volume, &eacute; possivel que partes da
+      representa&ccedil;&atilde;o estejam fisicamente ausentes, seja por
+      planejamento (por n&atilde;o definir um subdisco como parte de um
+      plex), ou por acidente (como resultado de uma falha no disco).
+      Contanto que, pelo menos um plex possa fornecer dados para a
+      exten&ccedil;&atilde;o completa de endere&ccedil;o do volume, o
+      sistema &eacute; completamente funcional.</para>
     </sect2>
     
     <sect2>
-      <title>Questões de performance</title>
+      <title>Quest&otilde;es de performance</title>
       
-      <para>Vinum implementa no nível do plex tanto concatenação
-      quanto striping:</para>
+      <para>Vinum implementa no n&iacute;vel do plex tanto
+      concatena&ccedil;&atilde;o quanto striping:</para>
       
       <itemizedlist>
 	<listitem>
-	  <para>Um <emphasis>plex concatenado</emphasis> usa um espaço de
-	  endereçamento de cada subdisco por vez.</para>
+	  <para>Um <emphasis>plex concatenado</emphasis> usa um
+	  espa&ccedil;o de endere&ccedil;amento de cada subdisco por
+	  vez.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Um <emphasis>plex striped</emphasis> distribui os dados
-	  entre cada subdisco.  Todos os subdiscos têm que ter o mesmo
-	  tamanho, e é preciso que existam pelo menos dois subdiscos
-	  para que eles possam ser distinguidos a partir de um plex
-	  concatenado.</para>
+	  <para>Um <emphasis>plex
+	  <foreignphrase>striped</foreignphrase></emphasis> distribui os
+	  dados entre cada subdisco.  Todos os subdiscos t&ecirc;m que
+	  ter o mesmo tamanho, e &eacute; preciso que existam pelo menos
+	  dois subdiscos para que eles possam ser distinguidos a partir
+	  de um plex concatenado.</para>
 	</listitem>
       </itemizedlist>
     </sect2>
 
     <sect2>
-      <title>Qual organização plex?</title>
+      <title>Qual organiza&ccedil;&atilde;o plex?</title>
      
-     <para>A versão do Vinum suprida com o FreeBSD &rel.current;
-     implementa dois tipos de plexes:</para>
+    <para>A vers&atilde;o do Vinum suprida com o FreeBSD &rel.current;
+    implementa dois tipos de plexes:</para>
      
       <itemizedlist>
 	<listitem>
-	  <para>Plexes concatenados são os mais flexíveis: eles podem
-	  conter infinitos números de subdiscos e os subdiscos podem ser
-	  de tamanhos diferentes.  Os plexes podem ser extendendidos
-	  adicionando subdiscos.  Eles requerem menos tempo de 
-	  <acronym>CPU</acronym> do que plexes
-	  <foreignphrase>striped</foreignphrase>, mas a diferença
-	  em sobrecarga de <acronym>CPU</acronym> não da para ser medida.
-	  Por outro lado, eles são mais sucetíveis a <literal>hot
-	  spots</literal>, onde um disco é muito ativo e outros estão
+	  <para>Plexes concatenados s&atilde;o os mais flex&iacute;veis:
+	  eles podem conter infinitos n&uacute;meros de subdiscos e os
+	  subdiscos podem ser de tamanhos diferentes.  Os plexes podem
+	  ser extendendidos adicionando subdiscos.  Eles requerem menos
+	  tempo de <acronym>CPU</acronym> do que plexes
+	  <foreignphrase>striped</foreignphrase>, mas a diferen&ccedil;a
+	  em sobrecarga de <acronym>CPU</acronym> n&atilde;o da para ser
+	  medida.  Por outro lado, eles s&atilde;o mais
+	  sucet&iacute;veis a <literal>hot spots</literal>, onde um
+	  disco &eacute; muito ativo e outros est&atilde;o
 	  ociosos.</para>
         </listitem>
 
 	<listitem>
-	  <para>A grande vantágem de plexes <foreignphrase>striped</foreignphrase>
-	  (<acronym>RAID-0</acronym>) é que eles reduzem os <literal>hot
-	  spots</literal>: escolhendo o melhor tamanho de
+	  <para>A grande vant&aacute;gem de plexes
+	  <foreignphrase>striped</foreignphrase>
+	  (<acronym>RAID-0</acronym>) &eacute; que eles reduzem os
+	  <literal>hot spots</literal>: escolhendo o melhor tamanho de
 	  <foreignphrase>stripe</foreignphrase> (mais ou menos
-	  256&nbsp;kB), você pode igualar a carga nos discos
-	  componentes.  As desvantagens dessa escolha são códigos
-	  (fracionalmente) mais complexos e restrições em subdiscos:
-	  eles tem que ser todos do mesmo tamanho, e extender um plex
-	  através da adição de um novo subdisco é tão complicado que
-	  Vinum atualmente nem o implementa.  Vinum impõe uma restrição
-	  trivial adicional: Um plex
-	  <foreignphrase>striped</foreignphrase> precisa ter pelo menos
-	  dois subdiscos, pois caso contrário seria indistinguivel de um
-	  plex concatenado.</para>
+	  256&nbsp;kB), voc&ecirc; pode igualar a carga nos discos
+	  componentes.  As desvantagens dessa escolha s&atilde;o
+	  c&oacute;digos (fracionalmente) mais complexos e
+	  restri&ccedil;&otilde;es em subdiscos: eles tem que ser todos
+	  do mesmo tamanho, e extender um plex atrav&eacute;s da
+	  adi&ccedil;&atilde;o de um novo subdisco &eacute; t&atilde;o
+	  complicado que Vinum atualmente nem o implementa.  Vinum
+	  imp&otilde;e uma restri&ccedil;&atilde;o trivial adicional: Um
+	  plex <foreignphrase>striped</foreignphrase> precisa ter pelo
+	  menos dois subdiscos, pois caso contr&aacute;rio seria
+	  indistinguivel de um plex concatenado.</para>
 	 </listitem>
       </itemizedlist>
     
       <para><xref linkend="vinum-comparison"> sumariza as vantagens e
-      desvantagens de cada organização plex.</para>
+      desvantagens de cada organiza&ccedil;&atilde;o plex.</para>
     
       <table id="vinum-comparison">
-	<title>Organizações do Plex no Vinum</title>
+	<title>Organiza&ccedil;&otilde;es do Plex no Vinum</title>
 	<tgroup cols="5">
 	  <thead>
 	    <row>
 	      <entry>Tipo de Plex</entry>
-	  	<entry>Mínimo de subdiscos</entry>
+	  	<entry>M&iacute;nimo de subdiscos</entry>
 	  	<entry>Pode adicionar subdiscos</entry>
 	  	<entry>Deve ser de igual tamanho</entry>
-	  	<entry>Aplicação</entry>
+	  	<entry>Aplica&ccedil;&atilde;o</entry>
 	    </row>
 	  </thead>
 
@@ -418,17 +455,17 @@
 	      <entry>concatenado</entry>
 	      <entry>1</entry>
 	      <entry>sim</entry>
-	      <entry>não</entry>
-	      <entry>Grande armazenamento de dados com máxima
+	      <entry>n&atilde;o</entry>
+	      <entry>Grande armazenamento de dados com m&aacute;xima
 	      flexibilidade de posicionamento e performance moderada</entry>
 	    </row>
 	    
 	    <row>
 	      <entry><foreignphrase>striped</foreignphrase></entry>
 	      <entry>2</entry>
-	      <entry>não</entry>
+	      <entry>n&atilde;o</entry>
 	      <entry>sim</entry>
-	      <entry>Alta performance em combinação com um acesso
+	      <entry>Alta performance em combina&ccedil;&atilde;o com um acesso
 	      altamente concorrido</entry>
 	    </row>
 	  </tbody>
@@ -440,70 +477,74 @@
   <sect1 id="vinum-examples">
     <title>Alguns exemplos</title>
     
-
-    <para>Vinum mantém uma <emphasis>base de dados de
-    configuração</emphasis> onde descreve os objetos conhecidos por um
-    sistema individual.  Inicialmente, o usuário cria o banco de dados de
-    configuração a partir de um ou mais arquivos de configuração com a
-    ajuda do utilitário &man.vinum.8;.  Vinum guarda uma cópia das
-    configurações de seu banco de dados em cada fatia de disco (a qual
-    Vinum chama de <emphasis>dispositivo</emphasis>) sobre seu controle.
-    Essa base de dados é atualizada em cada mudança de estado, então,
-    precisamente recupera o estado de cada objeto do Vinum.</para>
+    <para>Vinum mant&eacute;m uma <emphasis>base de dados de
+    configura&ccedil;&atilde;o</emphasis> onde descreve os objetos
+    conhecidos por um sistema individual.  Inicialmente, o
+    usu&aacute;rio cria o banco de dados de configura&ccedil;&atilde;o a
+    partir de um ou mais arquivos de configura&ccedil;&atilde;o com a
+    ajuda do utilit&aacute;rio &man.vinum.8;.  Vinum guarda uma
+    c&oacute;pia das configura&ccedil;&otilde;es de seu banco de dados
+    em cada <foreignphrase>slice</foreignphrase> de disco (a qual Vinum
+    chama de <emphasis>dispositivo</emphasis>) sobre seu controle.  Essa
+    base de dados &eacute; atualizada em cada mudan&ccedil;a de estado,
+    ent&atilde;o, precisamente recupera o estado de cada objeto do
+    Vinum.</para>
     
-  
     <sect2>
-      <title>O Arquivo de Configuração</title>
-      <para>O arquivo de configuração descreve os objetos individuais do
-      Vinum.  A definção de um simples volume poderia ser:</para>
+      <title>O Arquivo de Configura&ccedil;&atilde;o</title>
+      <para>O arquivo de configura&ccedil;&atilde;o descreve os objetos
+      individuais do Vinum.  A defin&ccedil;&atilde;o de um simples
+      volume poderia ser:</para>
       
-
       <programlisting>
-        drive a device /dev/da3h
-        volume myvol
-          plex org concat
-            sd length 512m drive a</programlisting>
+    drive a device /dev/da3h
+    volume myvol
+      plex org concat
+        sd length 512m drive a</programlisting>
 
-      <para>Esse arquivo descreve quatro objetos do Vinum:</para>
-      
+      <para>Esse arquivo descreve quatro objetos do Vinum:</para> 
 
       <itemizedlist>
 	<listitem>
-	  <para>A linha <emphasis>drive</emphasis> descreve uma partição
-	  de disco (<emphasis>drive</emphasis>) e sua localidade
-	  relativa ao <foreignphrase>hardware</foreignphrase>
-	  subjacente.  É dado um nome simbólico <emphasis>a</emphasis>.
-	  Essa separação entre nomes simbólicos e nomes de dispositivos
-	  permite que os discos sejam movidos de um lado a outro sem
-	  confusão.</para>
+	  <para>A linha <emphasis>drive</emphasis> descreve uma
+	  parti&ccedil;&atilde;o de disco (<emphasis>drive</emphasis>) e
+	  sua localidade relativa ao
+	  <foreignphrase>hardware</foreignphrase> subjacente.  &Eacute;
+	  dado um nome simb&oacute;lico <emphasis>a</emphasis>.  Essa
+	  separa&ccedil;&atilde;o entre nomes simb&oacute;licos e nomes
+	  de dispositivos permite que os discos sejam movidos de um lado
+	  a outro sem confus&atilde;o.</para>
 	</listitem>
 
 	<listitem>
 	  <para>A linha <emphasis>volume</emphasis> descreve um volume.
-	  O único atributo requerido é o nome, nesse caso
+	  O &uacute;nico atributo requerido &eacute; o nome, nesse caso
 	  <emphasis>myvol</emphasis>.</para>
 	</listitem>
 
 	<listitem>
 	  <para>A linha <emphasis>plex</emphasis> define um plex.  O
-	  único parâmetro requerido é a organização, nesse caso
-	  <emphasis>concat</emphasis>.  Nenhum nome é necessário: o
-	  sistema irá automaticamente gerar um nome a partir do volume
-	  adicionando o sufixo
+	  &uacute;nico par&acirc;metro requerido &eacute; a
+	  organiza&ccedil;&atilde;o, nesse caso
+	  <emphasis>concat</emphasis>.  Nenhum nome &eacute;
+	  necess&aacute;rio: o sistema ir&aacute; automaticamente gerar
+	  um nome a partir do volume adicionando o sufixo
 	  <emphasis>.p</emphasis><emphasis>x</emphasis>, onde
-	  <emphasis>x</emphasis> é o número de plexes no volume.  Então,
-	  esse plex terá o nome <emphasis>myvol.p0</emphasis>.</para>
+	  <emphasis>x</emphasis> &eacute; o n&uacute;mero de plexes no
+	  volume.  Ent&atilde;o, esse plex ter&aacute; o nome
+	  <emphasis>myvol.p0</emphasis>.</para>
 	</listitem>
 
 	<listitem>
 	  <para>A linha <emphasis>sd</emphasis> descreve um subdisco.
-	  As especificações mínimas são o nome do disco no qual será
-	  armazenado, e o tamanho do subdisco.  Como nos plexes, nenhum
-	  nome é necessário: o sistema delega automaticamente nomes
+	  As especifica&ccedil;&otilde;es m&iacute;nimas s&atilde;o o
+	  nome do disco no qual ser&aacute; armazenado, e o tamanho do
+	  subdisco.  Como nos plexes, nenhum nome &eacute;
+	  necess&aacute;rio: o sistema delega automaticamente nomes
 	  provenientes dos plexes adicionando o sufixo
 	  <emphasis>.s</emphasis><emphasis>x</emphasis>, onde
-	  <emphasis>x</emphasis> é o número de subdiscos do plex.  Então
-	  Vinum delega a esse subdisco o nome de
+	  <emphasis>x</emphasis> &eacute; o n&uacute;mero de subdiscos
+	  do plex.  Ent&atilde;o Vinum delega a esse subdisco o nome de
 	  <emphasis>myvol.p0.s0</emphasis>.</para>
 	</listitem>
       </itemizedlist>
@@ -527,38 +568,39 @@
 	
 	S myvol.p0.s0           State: up       PO:        0  B Size:        512 MB</programlisting>
 
-      <para>Essa saida mostra um pequeno formato de listagem do
-      &man.vinum.8;.  É representado graficamente em <xref
+      <para>Essa sa&icute;da mostra um pequeno formato de listagem do
+      &man.vinum.8;.  &Eacute; representado graficamente em <xref
       linkend="vinum-simple-vol">.</para>
       
-      <para>
-	<figure id="vinum-simple-vol">
-	  <title>Um Volume Simples de Vinum</title>
-	  <graphic fileref="vinum/vinum-simple-vol">
-	</figure>
+      <para> <figure id="vinum-simple-vol"> <title>Um Volume Simples de
+      Vinum</title> <graphic fileref="vinum/vinum-simple-vol"> </figure>
       </para>
 
       <para>Essa figura, e as outras que seguem, representam um volume,
-      que contém plexes, e estes, por sua vez possuem subdiscos.  Nesse
-      exemplo trivial, o volume contém um plex, e o plex contém um
-      subdisco.</para>
+      que cont&eacute;m plexes, e estes, por sua vez possuem subdiscos.
+      Nesse exemplo trivial, o volume cont&eacute;m um plex, e o plex
+      cont&eacute;m um subdisco.</para>
       
-      <para>Esse volume em particular não tem nenhuma vantagem
-      específica sobre uma partição de um disco convencional.  Contém um
-      único plex, então, não é redundante.  O plex contém um único
-      subdisco, então a alocação de dados não se difere de uma partição
-      de disco convencional.  As sessões seguintes exemplificam diversos
-      métodos de configuração mais interessantes.</para>
+      <para>Esse volume em particular n&atilde;o tem nenhuma vantagem
+      espec&iacute;fica sobre uma parti&ccedil;&atilde;o de um disco
+      convencional.  Cont&eacute;m um &uacute;nico plex, ent&atilde;o,
+      n&atilde;o &eacute; redundante.  O plex cont&eacute;m um
+      &uacute;nico subdisco, ent&atilde;o a aloca&ccedil;&atilde;o de
+      dados n&atilde;o se difere de uma parti&ccedil;&atilde;o de disco
+      convencional.  As sess&otilde;es seguintes exemplificam diversos
+      m&eacute;todos de configura&ccedil;&atilde;o mais
+      interessantes.</para>
     </sect2>
 
     <sect2>
-      <title>Crescimento na Confiança: Espelhamento</title>
+      <title>Crescimento na Confian&ccedil;a: Espelhamento</title>
 
-      <para>A confiança em um volume pode ser aumentada com
-      espelhamento.  Quando planejando um espelhamento de volume, é
-      importante se assegurar que o subdisco de cada plex esta em
-      partições diferentes, para que uma falha de disco não derrube os
-      dois plexes.  A seguinte configuração espelha um volume:</para>
+      <para>A confian&ccedil;a em um volume pode ser aumentada com
+      espelhamento.  Quando planejando um espelhamento de volume,
+      &eacute; importante se assegurar que o subdisco de cada plex esta
+      em parti&ccedil;&otilde;es diferentes, para que uma falha de disco
+      n&atilde;o derrube os dois plexes.  A seguinte
+      configura&ccedil;&atilde;o espelha um volume:</para>
 
       <programlisting>
 	drive b device /dev/da4h
@@ -568,13 +610,14 @@
 	  plex org concat
 	    sd length 512m drive b</programlisting>
 
-      <para>Nesse exemplo, não foi necessário especificar uma definição
-      de uma partição <emphasis>a</emphasis> novamente, a partir do
-      momento que o vinum armazena todos os objetos em sua base de
-      dados de configuração.  Depois de processar essa definição, a
-      configuração se parece com:</para>
+      <para>Nesse exemplo, n&atilde;o foi necess&aacute;rio especificar
+      uma defini&ccedil;&atilde;o de uma parti&ccedil;&atilde;o
+      <emphasis>a</emphasis> novamente, a partir do momento que o vinum
+      armazena todos os objetos em sua base de dados de
+      configura&ccedil;&atilde;o.  Depois de processar essa
+      defini&ccedil;&atilde;o, a configura&ccedil;&atilde;o se parece
+      com:</para>
       
-
       <programlisting>
 	Drives:         2 (4 configured)
 	Volumes:        2 (4 configured)
@@ -599,30 +642,31 @@
       graficamente.</para>
 
       <para>
-	<figure id="vinum-mirrored-vol">
+        <figure id="vinum-mirrored-vol">
 	  <title>Um Volume de Vinum Espelhado</title>
 	  <graphic fileref="vinum/vinum-mirrored-vol">
-	</figure>
+        </figure>
       </para>
 
-      <para>Nesse esemplo, cada plex contém os 512&nbsp;MB de espaço de
-      endereço.  E como no exemplo anterior, cada plex contém um único
-      subdisco.</para>
+      <para>Nesse esemplo, cada plex cont&eacute;m os 512&nbsp;MB de
+      espa&ccedil;o de endere&ccedil;o.  E como no exemplo anterior,
+      cada plex cont&eacute;m um &uacute;nico subdisco.</para>
     </sect2>
 
     <sect2>
       <title>Otimizando a Performance</title>
 
-      <para>O espelhamento do volume no exemplo anterior é mais
-      resistente a falhas do que o volume não espelhado, mas sua
-      performance é menor: cada escrita no volume requer a escrita em
-      dois discos, usando assim mais largura de banda de disco.  
-      Quando se quer considerar a peformance é indicado uma abordagem
-      diferente: ao invés de espelhar, os dados são segmentados dentre o
-      maior numero de partições possível.  A configuração seguinte
-      mostra um volume com um plex
+      <para>O espelhamento do volume no exemplo anterior &eacute; mais
+      resistente a falhas do que o volume n&atilde;o espelhado, mas sua
+      performance &eacute; menor: cada escrita no volume requer a
+      escrita em dois discos, usando assim mais largura de banda de
+      disco.  Quando se quer considerar a peformance &eacute; indicado
+      uma abordagem diferente: ao inv&eacute;s de espelhar, os dados
+      s&atilde;o segmentados dentre o maior numero de
+      parti&ccedil;&otilde;es poss&iacute;vel.  A
+      configura&ccedil;&atilde;o seguinte mostra um volume com um plex
       <foreignphrase>striped</foreignphrase> entre quatro
-      partições:</para>
+      parti&ccedil;&otilde;es:</para>
       
 	<programlisting>
 	drive c device /dev/da5h
@@ -634,9 +678,10 @@
 	  sd length 128m drive c
 	  sd length 128m drive d</programlisting>
 
-      <para>Como antes, não é necessário definir as partições que já são
-      conhecidas pelo vinum.  Depois de processar essa definição, a
-      configuração se parece com:</para>
+      <para>Como antes, n&atilde;o &eacute; necess&aacute;rio definir as
+      parti&ccedil;&otilde;es que j&aacute; s&atilde;o conhecidas pelo
+      vinum.  Depois de processar essa defini&ccedil;&atilde;o, a
+      configura&ccedil;&atilde;o se parece com:</para>
       
       <programlisting>
 	Drives:         4 (4 configured)
@@ -667,26 +712,29 @@
     S striped.p0.s3         State: up       PO:     1536 kB Size:        128 MB</programlisting>
 
       <para>
-	<figure id="vinum-striped-vol">
-	  <title>Um volume Vinum <foreignphrase>Striped</foreignphrase></title>
+        <figure id="vinum-striped-vol">
+ 	  <title>Um volume Vinum <foreignphrase>Striped</foreignphrase></title>
 	  <graphic fileref="vinum/vinum-striped-vol">
 	</figure>
       </para>
 
-      <para>Esse volume é representado em
-	<xref linkend="vinum-striped-vol">.  O sombreado dos
-	<foreignphrase>stripes</foreignphrase> indica a porção junto ao
-	espaço endereçado do plex: os stripes mais claros vem primeiro,
-	os mais escuros por último.</para>
+      <para>Esse volume &eacute; representado em <xref
+      linkend="vinum-striped-vol">.  O sombreado dos
+      <foreignphrase>stripes</foreignphrase> indica a
+      por&ccedil;&atilde;o junto ao espa&ccedil;o endere&ccedil;ado do
+      plex: os stripes mais claros vem primeiro, os mais escuros por
+      &uacute;ltimo.</para>
     </sect2>
 
     <sect2>
       <title>Estabilidade e Performance</title>
 
-      <para><anchor id="vinum-resilience">Com o hardware necessário, é
-      possível construir volumes que apresentam tanto acréscimo de
-      performance quanto de estabilidade quando comparados às partições &unix;
-      comuns.  Um arquivo de configuração típico pode ser:</para>
+      <para><anchor id="vinum-resilience">Com o hardware
+      necess&aacute;rio, &eacute; poss&iacute;vel construir volumes que
+      apresentam tanto acr&eacute;scimo de performance quanto de
+      estabilidade quando comparados &agrave;s parti&ccedil;&otilde;es
+      &unix; comuns.  Um arquivo de configura&ccedil;&atilde;o
+      t&iacute;pico pode ser:</para>
       
       <programlisting>
 	volume raid10
@@ -703,59 +751,60 @@
         sd length 102480k drive a
         sd length 102480k drive b</programlisting>
 
-      <para>Os subdiscos do segundo plex estão deslocados por dois
-      discos em relação ao primeiro plex: isso ajuda a garantir que não
-      acontecerá escrita no mesmo subdisco, mesmo que a transferência
-      aconteça sobre dois discos.</para>
+      <para>Os subdiscos do segundo plex est&atilde;o deslocados por
+      dois discos em rela&ccedil;&atilde;o ao primeiro plex: isso ajuda
+      a garantir que n&atilde;o acontecer&aacute; escrita no mesmo
+      subdisco, mesmo que a transfer&ecirc;ncia aconte&ccedil;a sobre
+      dois discos.</para>
       
       <para><xref linkend="vinum-raid10-vol"> representa a estrutura
-	desse volume.</para>
+      desse volume.</para>
 
-      <para>
-	<figure id="vinum-raid10-vol">
-	  <title>Um Volume Vinum Striped e Espelhado</title>
-	  <graphic fileref="vinum/vinum-raid10-vol">
-        </figure>
-      </para>
+      <para> <figure id="vinum-raid10-vol"> <title>Um Volume Vinum
+      Striped e Espelhado</title> <graphic
+      fileref="vinum/vinum-raid10-vol"> </figure> </para>
     </sect2>
   </sect1>
   
   <sect1 id="vinum-object-naming">
     <title>Nomenclatura de objetos</title>
 
-    <para>Como descrito assima, Vinum designa nomes padrões
-    para plexes e subdisks, embora você possa sobrescrevê-los.
-    Sobrescrever os nomes padrões, não é recomenado: experiências com o
-    gerenciador de volumes VERITAS, que permite nomes arbitrários
-    para objetos, têm mostrado que essa flexibilidade não trás 
-    vantagem significativa e pode causar confusão.</para>
+    <para>Como descrito assima, Vinum designa nomes padr&otilde;es para
+    plexes e subdisks, embora voc&ecirc; possa sobrescrev&ecirc;-los.
+    Sobrescrever os nomes padr&otilde;es, n&atilde;o &eacute;
+    recomenado: experi&ecirc;ncias com o gerenciador de volumes VERITAS,
+    que permite nomes arbitr&aacute;rios para objetos, t&ecirc;m
+    mostrado que essa flexibilidade n&atilde;o tr&aacute;s vantagem
+    significativa e pode causar confus&atilde;o.</para>
 
-    <para>Nomes podem conter qualquer caracter não nulo, mas é
-    recomendado que estes sejam restritos a letras, digitos e caracteres
-    de sublinhado.  Os nomes dos volumes, plexes e subdiscos podem ser
-    formados por até 64 caracteres, e o nome dos drives por até
-    32.</para>
+    <para>Nomes podem conter qualquer caracter n&atilde;o nulo, mas
+    &eacute; recomendado que estes sejam restritos a letras, digitos e
+    caracteres de sublinhado.  Os nomes dos volumes, plexes e subdiscos
+    podem ser formados por at&eacute; 64 caracteres, e o nome dos drives
+    por at&eacute; 32.</para>
     
-    <para>Objetos do Vinum são dispositivos designados na
-    hierarquia <filename>/dev/vinum</filename>.  A configuração descrita
-    acima faria o Vinum a criar os seguintes nós de despositivo:</para>
+    <para>Objetos do Vinum s&atilde;o dispositivos designados na
+    hierarquia <filename>/dev/vinum</filename>.  A
+    configura&ccedil;&atilde;o descrita acima faria o Vinum a criar os
+    seguintes n&oacute;s de despositivo:</para>
 
     <itemizedlist>
       <listitem>
 	<para>Os dispositivos de controle
 	<devicename>/dev/vinum/control</devicename> e
-	<devicename>/dev/vinum/controld</devicename>, os quais são usados
-	por &man.vinum.8; e pelo daemon do Vinum respectivamente.</para> 
+	<devicename>/dev/vinum/controld</devicename>, os quais
+	s&atilde;o usados por &man.vinum.8; e pelo daemon do Vinum
+	respectivamente.</para> 
       </listitem> 
 
       <listitem>
 	<para>Entrada de dispositivo de caracter e bloco para cada
-	volume.  Esses são os principais dispositivos usados pelo Vinum.
-	Os nomes dos dispoitivos de bloco são o nome do volume, enquanto os
-	de caracter seguem a tradição BSD de preceder a letra
-	<emphasis>r</emphasis> ao nome.  Por isso a configurção abaixo
-	incluiria os dispositivos de bloco
-	<devicename>/dev/vinum/myvol</devicename>,
+	volume.  Esses s&atilde;o os principais dispositivos usados pelo
+	Vinum.  Os nomes dos dispoitivos de bloco s&atilde;o o nome do
+	volume, enquanto os de caracter seguem a tradi&ccedil;&atilde;o
+	BSD de preceder a letra <emphasis>r</emphasis> ao nome.  Por
+	isso a configur&ccedil;&atilde;o abaixo incluiria os
+	dispositivos de bloco <devicename>/dev/vinum/myvol</devicename>,
 	<devicename>/dev/vinum/mirror</devicename>,
 	<devicename>/dev/vinum/striped</devicename>,
 	<devicename>/dev/vinum/raid5</devicename> e
@@ -764,44 +813,46 @@
 	<devicename>/dev/vinum/rmirror</devicename>,
 	<devicename>/dev/vinum/rstriped</devicename>,
 	<devicename>/dev/vinum/rraid5</devicename> e
-	<devicename>/dev/vinum/rraid10</devicename>.  óbviamente existe
-	um problema aqui: é possível ter dois volumes chamados
-	<emphasis>r</emphasis> e <emphasis>rr</emphasis>, mas ocorreria um
-	conflito criando o nó do dispositivo
-	<devicename>/dev/vinum/rr</devicename>: seria um dispositivo de
-	caracter para o volume <emphasis>r</emphasis> ou um dispositivo
-	bloco para o volume <emphasis>rr</emphasis>?  Atualmente Vinum
-	não trata este conflito: o primeiro volume definido levará o
+	<devicename>/dev/vinum/rraid10</devicename>.  &oacute;bviamente
+	existe um problema aqui: &eacute; poss&iacute;vel ter dois
+	volumes chamados <emphasis>r</emphasis> e
+	<emphasis>rr</emphasis>, mas ocorreria um conflito criando o
+	n&oacute; do dispositivo <devicename>/dev/vinum/rr</devicename>:
+	seria um dispositivo de caracter para o volume
+	<emphasis>r</emphasis> ou um dispositivo bloco para o volume
+	<emphasis>rr</emphasis>?  Atualmente Vinum n&atilde;o trata este
+	conflito: o primeiro volume definido levar&aacute; o
 	nome.</para> 
       </listitem>
 
       <listitem>
-	<para>Um diretório <devicename>/dev/vinum/drive</devicename> com
-	entradas para cada disco.  Essas entradas são na verdade
-	<foreignphrase>links</foreignphrase> simbólicos para os discos
-	nós correspondentes.</para>
+	<para>Um diret&oacute;rio
+	<devicename>/dev/vinum/drive</devicename> com entradas para cada
+	disco.  Essas entradas s&atilde;o na verdade
+	<foreignphrase>links</foreignphrase> simb&oacute;licos para os
+	discos n&oacute;s correspondentes.</para>
       </listitem>
 
       <listitem>
-	<para>Um diretório <filename>/dev/vinum/volume</filename> com
-	entradas para cada volume, que contém um subdiretório para cada
-	plex, que por sua vez contém subdiretórios para seus
-	subdiscos.</para>
+	<para>Um diret&oacute;rio <filename>/dev/vinum/volume</filename>
+	com entradas para cada volume, que cont&eacute;m um
+	subdiret&oacute;rio para cada plex, que por sua vez
+	cont&eacute;m subdiret&oacute;rios para seus subdiscos.</para>
       </listitem>
 
       <listitem>
-	<para>Os diretórios
-	  <devicename>/dev/vinum/plex</devicename>,
-	  <devicename>/dev/vinum/sd</devicename>, e
-	  <devicename>/dev/vinum/rsd</devicename>, onde contém um
-	  nó de dispositivo de bloco para cada plex e um nó de
-	  dispositivo de bloco e caracter para cada subdisco,
-	  respectivamente.</para>
+	<para>Os diret&oacute;rios
+	<devicename>/dev/vinum/plex</devicename>,
+	<devicename>/dev/vinum/sd</devicename>, e
+	<devicename>/dev/vinum/rsd</devicename>, onde cont&eacute;m um
+	n&oacute; de dispositivo de bloco para cada plex e um n&oacute;
+	de dispositivo de bloco e caracter para cada subdisco,
+	respectivamente.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Por exemplo, considere o seguinte arquivo de configuração:</para>
-	<programlisting>
+    <para>Por exemplo, considere o seguinte arquivo de
+    configura&ccedil;&atilde;o:</para> <programlisting>
 	drive drive1 device /dev/sd1h
 	drive drive2 device /dev/sd2h
 	drive drive3 device /dev/sd3h
@@ -876,44 +927,47 @@
     brwxr-xr--  1 root  wheel   25, 0x20200002 Apr 13 16:46 s64.p0.s2
     brwxr-xr--  1 root  wheel   25, 0x20300002 Apr 13 16:46 s64.p0.s3</programlisting>
 
-    <para>Apesar de não ser recomendado alocação de nomes específicos
-    para plexes e subdiscos, os discos Vinum devem ser nomeados.
-    Isso torna possível mover um disco para uma outra localidade e ainda
-    sim reconhacê-lo automaticamente.  Os nomes dos discos podem conter
-    até 32 caracteres.</para>
+    <para>Apesar de n&atilde;o ser recomendado aloca&ccedil;&atilde;o de
+    nomes espec&iacute;ficos para plexes e subdiscos, os discos Vinum
+    devem ser nomeados.  Isso torna poss&iacute;vel mover um disco para
+    uma outra localidade e ainda sim reconhac&ecirc;-lo automaticamente.
+    Os nomes dos discos podem conter at&eacute; 32 caracteres.</para>
     
     <sect2>
       <title>Criando Sistemas de Arquivos</title>
 
-	<para>Volumes e discos parecem idênticos para o sistema, com
-	uma excessão.  Ao contrário de discos &unix;, Vinum não particiona
-	volumes, assim, não possui uma tabela de partições.
-	Isso exigiu uma mudança em alguns utilitários de discos como
-	&man.newfs.8;, que previamente tentava interpretar a última
-	letra de um nome de volume Vinum como um identificador de
-	partições.  Por exemplo, uma partição de disco pode ter um nome
-	como <devicename>/dev/ad0a</devicename> ou
+	<para>Volumes e discos parecem id&ecirc;nticos para o sistema,
+	com uma excess&atilde;o.  Ao contr&aacute;rio de discos &unix;,
+	Vinum n&atilde;o particiona volumes, assim, n&atilde;o possui
+	uma tabela de parti&ccedil;&otilde;es.  Isso exigiu uma
+	mudan&ccedil;a em alguns utilit&aacute;rios de discos como
+	&man.newfs.8;, que previamente tentava interpretar a
+	&uacute;ltima letra de um nome de volume Vinum como um
+	identificador de parti&ccedil;&otilde;es.  Por exemplo, uma
+	parti&ccedil;&atilde;o de disco pode ter um nome como
+	<devicename>/dev/ad0a</devicename> ou
 	<devicename>/dev/da2h</devicename>.  Esses nomes representam a
-	primeira partição (<devicename>a</devicename>) no primeiro (0)
-	disco IDE (<devicename>ad</devicename>) e a oitava partição
-	(<devicename>h</devicename>) no terceiro disco SCSI (2)
-	(<devicename>da</devicename>), respectivamente.  Em contraste,
-	um volume Vinum pode ser chamado de
-	<devicename>/dev/vinum/concat</devicename>, um nome que não tem
-	nenhum relacionamento com o nome da partição.</para>
+	primeira parti&ccedil;&atilde;o (<devicename>a</devicename>) no
+	primeiro (0) disco IDE (<devicename>ad</devicename>) e a oitava
+	parti&ccedil;&atilde;o (<devicename>h</devicename>) no terceiro
+	disco SCSI (2) (<devicename>da</devicename>), respectivamente.
+	Em contraste, um volume Vinum pode ser chamado de
+	<devicename>/dev/vinum/concat</devicename>, um nome que
+	n&atilde;o tem nenhum relacionamento com o nome da
+	parti&ccedil;&atilde;o.</para>
 	
-	  
 	<para>Normalmente, &man.newfs.8; interpreta o nome do disco e
-	reclama se não entendê-lo.  Por exemplo:</para>
+	reclama se n&atilde;o entend&ecirc;-lo.  Por exemplo:</para>
 	
 	<screen>&prompt.root; <userinput>newfs /dev/vinum/concat</userinput>
 newfs: /dev/vinum/concat: can't figure out file system partition</screen>
 
-	<note><para>O que segue só é valido para as versões de FreeBSD
-	anteriores a 5.0:</para></note>
+	<note><para>O que segue s&oacute; &eacute; valido para as
+	vers&otilde;es de FreeBSD anteriores a 5.0:</para></note>
 
 	<para>Para criar um sistema de arquivos nesse volume, use a
-	opção <option>-v</option> para &man.newfs.8;:</para>
+	op&ccedil;&atilde;o <option>-v</option> para
+	&man.newfs.8;:</para>
 
 	<screen>&prompt.root; <userinput>newfs -v /dev/vinum/concat</userinput></screen>
 
@@ -923,24 +977,28 @@ newfs: /dev/vinum/concat: can't figure out file system partition</screen>
   <sect1 id="vinum-config">
     <title>Configurando Vinum</title>
 
-    <para>O <literal>kernel</literal> <filename>GENERIC</filename> não
-    contém Vinum.  É possível construir um <literal>kernel</literal>
-    especial para incluir o Vinum, mas não é recomendado.  A maneira
-    simples de iniciar o Vinum é com o módulo de
-    <literal>kernel</literal> (<acronym>kld</acronym>).  Você nem
-    precisa usar &man.kldload.8; para Vinum: quando você inicia
-    &man.vinum.8;, ele verifica se o modulo foi carregado ou não, e o
-    carrega automaticamente.</para>
+    <para>O <literal>kernel</literal> <filename>GENERIC</filename>
+    n&atilde;o cont&eacute;m Vinum.  &Eacute; poss&iacute;vel construir
+    um <literal>kernel</literal> especial para incluir o Vinum, mas
+    n&atilde;o &eacute; recomendado.  A maneira simples de iniciar o
+    Vinum &eacute; com o m&oacute;dulo de <literal>kernel</literal>
+    (<acronym>kld</acronym>).  Voc&ecirc; nem precisa usar
+    &man.kldload.8; para Vinum: quando voc&ecirc; inicia &man.vinum.8;,
+    ele verifica se o modulo foi carregado ou n&atilde;o, e o carrega
+    automaticamente.</para>
     
     <sect2>
-      <title>Inicialização</title>
+      <title>Inicializa&ccedil;&atilde;o</title>
 
-      <para>Vinum armazena as informações de configuração das partições de
-        disco essencialmente da mesma forma que os arquivos de
-	configuração.  Quando lê do banco de dados de configuração,
-	Vinum reconhece algumas palavras chave que não são permitidas
-	nos arquivos de configuração.  Por exemplo, uma configuração de
-	disco talvez contenha o seguinte texto:</para>
+      <para>Vinum armazena as informa&ccedil;&otilde;es de
+      configura&ccedil;&atilde;o das parti&ccedil;&otilde;es de disco
+      essencialmente da mesma forma que os arquivos de
+      configura&ccedil;&atilde;o.  Quando l&ecirc; do banco de dados de
+      configura&ccedil;&atilde;o, Vinum reconhece algumas palavras chave
+      que n&atilde;o s&atilde;o permitidas nos arquivos de
+      configura&ccedil;&atilde;o.  Por exemplo, uma
+      configura&ccedil;&atilde;o de disco talvez contenha o seguinte
+      texto:</para>
       
 	<programlisting>volume myvol state up
 volume bigraid state down
@@ -962,46 +1020,50 @@ sd name bigraid.p0.s2 drive c plex bigraid.p0 state initializing len 4194304b dr
 sd name bigraid.p0.s3 drive d plex bigraid.p0 state initializing len 4194304b driveoff set 1573129b plexoffset 12582912b
 sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b driveoff set 1573129b plexoffset 16777216b</programlisting>
   
-	<para>A diferença clara aqui é a presença explicita de
-	informações sobre localidade e nomenclatura (Sendo as duas no
-	caso permitidas, mas desencorajadas) e também informações sobre
-	os estados (mas não são disponíveis para o usuário).  Vinum não
-	armazena informações sobre os discos nas informações de
-	configuração: ele acha as informações pesquisando nos discos
-	configurados por partições identificadas como Vinum.  Isso habilita o
-	Vinum a identificar discos corretamente, mesmo que eles tenham
-	sido rotulados com uma identificação de drives &unix;
-	diferente.</para>
+	<para>A diferen&ccedil;a clara aqui &eacute; a presen&ccedil;a
+	explicita de informa&ccedil;&otilde;es sobre localidade e
+	nomenclatura (Sendo as duas no caso permitidas, mas
+	desencorajadas) e tamb&eacute;m informa&ccedil;&otilde;es sobre
+	os estados (mas n&atilde;o s&atilde;o dispon&iacute;veis para o
+	usu&aacute;rio).  Vinum n&atilde;o armazena
+	informa&ccedil;&otilde;es sobre os discos nas
+	informa&ccedil;&otilde;es de configura&ccedil;&atilde;o: ele
+	acha as informa&ccedil;&otilde;es pesquisando nos discos
+	configurados por parti&ccedil;&otilde;es identificadas como
+	Vinum.  Isso habilita o Vinum a identificar discos corretamente,
+	mesmo que eles tenham sido rotulados com uma
+	identifica&ccedil;&atilde;o de drives &unix; diferente.</para>
 	
       <sect3 id="vinum-rc-startup">
-	<title>Inicialização Automática</title>
+	<title>Inicializa&ccedil;&atilde;o Autom&aacute;tica</title>
 
-        <para>Para iniciar o Vinum automaticamente quando você
-	inicializa o sistema, certifique-se de que você tem a seguinte linha
-	no seu <filename>/etc/rc.conf</filename>:</para>
+        <para>Para iniciar o Vinum automaticamente quando voc&ecirc;
+	inicializa o sistema, certifique-se de que voc&ecirc; tem a
+	seguinte linha no seu <filename>/etc/rc.conf</filename>:</para>
 	
-
 	<programlisting>start_vinum="YES"		# set to YES to start vinum</programlisting>
 
-	<para>Se o seu sistema não possuir o arquivo
-	<filename>/etc/rc.conf</filename>, crie um com esse conteúdo.
-	Isso fará com que o sistema carregue o Vinum
-	<acronym>kld</acronym> na inicialização, e inicie qualquer
-	objeto citado na configuração.  Isso é feito antes de montar os
-	sistemas de arquivos, então, é possível fazer automaticamente um 
+	<para>Se o seu sistema n&atilde;o possuir o arquivo
+	<filename>/etc/rc.conf</filename>, crie um com esse
+	conte&uacute;do.  Isso far&aacute; com que o sistema carregue o
+	Vinum <acronym>kld</acronym> na inicializa&ccedil;&atilde;o, e
+	inicie qualquer objeto citado na configura&ccedil;&atilde;o.
+	Isso &eacute; feito antes de montar os sistemas de arquivos,
+	ent&atilde;o, &eacute; poss&iacute;vel fazer automaticamente um
 	&man.fsck.8; e montar os sistemas de arquivo nos volumes
 	Vinum.</para>
 	
-
-	<para>Quando você inicia Vinum com o comando <command>vinum
-	start</command>, Vinum lê a base de dados de configuração de um
-	dos discos Vinum.  Sobre circunstâncias normais, cada um dos
-	discos contém uma cópia idêntica da base de dados de
-	configuração, então não importa que disco é lido.  Embora, após
-	uma pane, Vinum tenha que determinar qual o disco foi atualizado
-	mais recentemente e ler as configurações desse disco.  E então
-	as atualiza, se necessário, progressivamente no	disco mais
-	velho.</para>
+	<para>Quando voc&ecirc; inicia Vinum com o comando
+	<command>vinum start</command>, ele l&ecirc; a base de dados de
+	configura&ccedil;&atilde;o de um dos discos Vinum.  Sobre
+	circunst&acirc;ncias normais, cada um dos discos cont&eacute;m
+	uma c&oacute;pia id&ecirc;ntica da base de dados de
+	configura&ccedil;&atilde;o, ent&atilde;o n&atilde;o importa que
+	disco &eacute; lido.  Embora, ap&oacute;s uma pane, Vinum tenha
+	que determinar qual o disco foi atualizado mais recentemente e
+	ler as configura&ccedil;&otilde;es desse disco.  E ent&atilde;o
+	as atualiza, se necess&aacute;rio, progressivamente no	disco
+	mais velho.</para>
 	
       </sect3>
     </sect2>
@@ -1009,482 +1071,517 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 
   <sect1 id="vinum-root">
     <title>Usando Vinum para o Sistema de Arquivos Raiz</title>
-    
 
-    <para>Para uma máquina que esta espelhada por inteiro usando Vinum,
-    é desejável espelhar também o sistema de arquivos raiz.  Executar
-    tal configuração é menos trivial do que espelhar um disco
-    arbitrário:</para>
+    <para>Para uma m&aacute;quina que esta espelhada por inteiro usando
+    Vinum, &eacute; desej&aacute;vel espelhar tamb&eacute;m o sistema de
+    arquivos raiz.  Executar tal configura&ccedil;&atilde;o &eacute;
+    menos trivial do que espelhar um disco arbitr&aacute;rio:</para>
 
     <itemizedlist>
       <listitem>
-	<para>O sistema de arquivos raiz deve estar disponível bem
-	cedo durante o processo de inicialização, então a infra-estrutura
-	Vinum deveria estar disponível também nessa hora.</para> 
+	<para>O sistema de arquivos raiz deve estar dispon&iacute;vel
+	bem cedo durante o processo de inicializa&ccedil;&atilde;o,
+	ent&atilde;o a infra-estrutura Vinum deveria estar
+	dispon&iacute;vel tamb&eacute;m nessa hora.</para> 
       </listitem>
-      <listitem><para>O volume contendo os arquivos de sistema raiz também
-      contém o bootstap de sistema e o <literal>kernel</literal>, no
-      qual tem que ser lido pela utilidade nativa de sistema (ex. A BIOS
-      no caso dos PC's) onde frequentemente não pode ser ensinada sobre
-      os detalhes do Vinum.</para>
+      <listitem>
+        <para>O volume contendo os arquivos de sistema raiz
+        tamb&eacute;m cont&eacute;m o bootstap de sistema e o
+        <literal>kernel</literal>, no qual tem que ser lido pela utilidade
+        nativa de sistema (ex. A BIOS no caso dos PC's) onde
+        frequentemente n&atilde;o pode ser ensinada sobre os detalhes do
+        Vinum.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Nas sessões que seguem, o termo <quote>root volume</quote> é
-    usado para descrever o volume Vinum que contém os sistemas de
-    arquivo raiz.  É provavelmente uma boa idéia usar o nome
-    <literal>"root"</literal> para esse volume, mas isso não é de
-    maneira nenhuma obrigatório.  Apesar de que todos os exemplos
-    de comandos nas sessões seguintes assumem esse nome.</para>
+    <para>Nas sess&otilde;es que seguem, o termo <quote>root
+    volume</quote> &eacute; usado para descrever o volume Vinum que
+    cont&eacute;m os sistemas de arquivo raiz.  &Eacute; provavelmente
+    uma boa id&eacute;ia usar o nome <literal>"root"</literal> para esse
+    volume, mas isso n&atilde;o &eacute; de maneira nenhuma
+    obrigat&oacute;rio.  Apesar de que todos os exemplos de comandos nas
+    sess&otilde;es seguintes assumem esse nome.</para>
 
     <sect2>
       <title>Iniciando o Vinum a Tempo Para o Sistema de Arquivos Raiz
       </title>
 
-      <para>Existem algumas medidas a se tomar para que isso aconteça:
-      </para>
+      <para>Existem algumas medidas a se tomar para que isso
+      aconte&ccedil;a: </para>
 
       <itemizedlist>
 	<listitem>
-	  <para>Vinum precisa estar disponível no
-	  <literal>kernel</literal> na hora do boot.  Então, o método
-	  para iniciar automaticamente o Vinum descrito em <xref
-	  linkend="vinum-rc-startup"> não é aplicável nesse caso, e o
-	  parâmetro <literal>start_vinum</literal>
-	  <emphasis>não</emphasis> pode estar ativado quando a seguinte
-	  configuração estiver sendo arrumada.  A primeira opção seria
-	  compilar o Vinum staticamente no <literal>kernel</literal>,
-	  então estará disponível o tempo todo, mas isso também não é
-	  sempre desejável.  Existe outra opção no entanto, que seria
-	  fazer com que o <filename>/boot/loader</filename> (<xref
-	  linkend="boot-loader">) carregue o módulo de kenel do vinum
-	  cedo, antes de iniciar o <literal>kernel</literal>.  Isso pode
-	  ser feito adicionando a seguinte linha</para>
+	  <para>Vinum precisa estar dispon&iacute;vel no
+	  <literal>kernel</literal> na hora do boot.  Ent&atilde;o, o
+	  m&eacute;todo para iniciar automaticamente o Vinum descrito em
+	  <xref linkend="vinum-rc-startup"> n&atilde;o &eacute;
+	  aplic&aacute;vel nesse caso, e o par&acirc;metro
+	  <literal>start_vinum</literal> <emphasis>n&atilde;o</emphasis>
+	  pode estar ativado quando a seguinte
+	  configura&ccedil;&atilde;o estiver sendo arrumada.  A primeira
+	  op&ccedil;&atilde;o seria compilar o Vinum staticamente no
+	  <literal>kernel</literal>, ent&atilde;o estar&aacute;
+	  dispon&iacute;vel o tempo todo, mas isso tamb&eacute;m
+	  n&atilde;o &eacute; sempre desej&aacute;vel.  Existe outra
+	  op&ccedil;&atilde;o no entanto, que seria fazer com que o
+	  <filename>/boot/loader</filename> (<xref
+	  linkend="boot-loader">) carregue o m&oacute;dulo de kenel do
+	  vinum cedo, antes de iniciar o <literal>kernel</literal>.
+	  Isso pode ser feito adicionando a seguinte linha</para>
 
 	  <para><literal>vinum_load="YES"</literal></para>
 
 	  <para>no arquivo
-	    <filename>/boot/loader.conf</filename>.</para>
+	  <filename>/boot/loader.conf</filename>.</para>
 	</listitem>
 
 	<listitem>
 	  <para>Vinum deve ser iniciado cedo pois ele precisa suprir o
-	  volume para os arquivos de sistemas raiz.  Por padrão, a parte
-	  do <literal>kernel</literal> do vinum não esta procurando por
-	  discos que possam conter informações de volume Vinum até que o
-	  administrador (ou um dos scripts de inicialização) lance o
-	  comando <command>vinum start</command>.</para>
+	  volume para os arquivos de sistemas raiz.  Por padr&atilde;o,
+	  a parte do <literal>kernel</literal> do vinum n&atilde;o esta
+	  procurando por discos que possam conter
+	  informa&ccedil;&otilde;es de volume Vinum at&eacute; que o
+	  administrador (ou um dos scripts de
+	  inicializa&ccedil;&atilde;o) lance o comando <command>vinum
+	  start</command>.</para>
 
-	  <note><para>Os parágrafos seguintes descrevem os passos
-	  necessários para o FreeBSD 5.x e superiores.  Os passos
-	  obrigatórios para o 4.x, são diferentes e estão descritos a
-	  baixo em <xref linkend="vinum-root-4x">.</para></note>
+	  <note><para>Os par&aacute;grafos seguintes descrevem os passos
+	  necess&aacute;rios para o FreeBSD 5.x e superiores.  Os passos
+	  obrigat&oacute;rios para o 4.x, s&atilde;o diferentes e
+	  est&atilde;o descritos a baixo em <xref
+	  linkend="vinum-root-4x">.</para></note>
 	  
 	  <para>Colocando a linha:</para>
 
 	  <para><literal>vinum.autostart="YES"</literal></para>
 
-	  <para>em <filename>/boot/loader.conf</filename>, Vinum é
-	    instruído para procurar automaticamente em todos os discos
-	    por informações úteis a ele como parte da inicialização do
-	    <literal>kernel</literal>.</para> 
+	  <para>em <filename>/boot/loader.conf</filename>, Vinum
+	  &eacute; instru&iacute;do para procurar automaticamente em
+	  todos os discos por informa&ccedil;&otilde;es &uacute;teis a
+	  ele como parte da inicializa&ccedil;&atilde;o do
+	  <literal>kernel</literal>.</para>
 
-	  <para>Note que não é necesário ensinar ao
+	  <para>Note que n&atilde;o &eacute; neces&aacute;rio ensinar ao
 	  <literal>kernel</literal> aonde procurar pelos arquivos de
 	  sistema raiz.  <filename>/boot/loader</filename> procura o
 	  nome do dispositivo raiz em <filename>/etc/fstab</filename>, e
-	  passa essa informação para o <literal>kernel</literal>.
-	  Quando chega a hora de montar os arquivos de sistema raiz, o
-	  <literal>kernel</literal> descobre a partir do nome do
-	  dispositivo fornecido qual é o disco que se deve pedir para
-	  passar o nome do dispositivo raiz para um ID interno de
-	  dispostivo (número maior/menor).</para>
+	  passa essa informa&ccedil;&atilde;o para o
+	  <literal>kernel</literal>.  Quando chega a hora de montar os
+	  arquivos de sistema raiz, o <literal>kernel</literal> descobre
+	  a partir do nome do dispositivo fornecido qual &eacute; o
+	  disco que se deve pedir para passar o nome do dispositivo raiz
+	  para um ID interno de dispostivo (n&uacute;mero
+	  maior/menor).</para>
 	  
 	</listitem>
       </itemizedlist>
     </sect2>
 
     <sect2>
-      <title>Tornando um Volume Raiz Baseado em Vinum Accessível Para o
+      <title>Tornando um Volume Raiz Baseado em Vinum Access&iacute;vel Para o
       Bootstrap</title>
 
       <para>Visto que o atual <literal>Bootstrap</literal> do FreeBSD
-      contém apenas 7.5 KB de código, e já tem o trabalho de ler
-      arquivos no UFS (como <filename>/boot/loader</filename>), é
-      completamente impossível ensiná-lo também sobre as estruturas
-      internas do Vinum para que ele possa analizar seus dados de
-      configuração, e descobrir sozinho os elementos de um
-      volume de inicialização.  Dessa forma, alguns truques são
-      necessários para fornecer ao código do
-      <literal>bootstrap</literal> a ilusão de que ele é uma partição
-      <literal>"a"</literal> padrão que contém o arquivo de sistema
-      raiz.</para>
+      cont&eacute;m apenas 7.5 KB de c&oacute;digo, e j&aacute; tem o
+      trabalho de ler arquivos no UFS (como
+      <filename>/boot/loader</filename>), &eacute; completamente
+      imposs&iacute;vel ensin&aacute;-lo tamb&eacute;m sobre as
+      estruturas internas do Vinum para que ele possa analizar seus
+      dados de configura&ccedil;&atilde;o, e descobrir sozinho os
+      elementos de um volume de inicializa&ccedil;&atilde;o.  Dessa
+      forma, alguns truques s&atilde;o necess&aacute;rios para fornecer
+      ao c&oacute;digo do <literal>bootstrap</literal> a ilus&atilde;o
+      de que ele &eacute; uma parti&ccedil;&atilde;o
+      <literal>"a"</literal> padr&atilde;o que cont&eacute;m o arquivo
+      de sistema raiz.</para>
      
-      <para>Para que isso se torne possível, os seguintes requisitos
-      para o volume razia devem ser compridos:</para>
+      <para>Para que isso se torne poss&iacute;vel, os seguintes
+      requisitos para o volume razia devem ser compridos:</para>
       
       <itemizedlist>
 	<listitem>
-	  <para>O volume raiz não pode estar partido ou em RAID-5.</para>
-	</listitem>
+	  <para>O volume raiz n&atilde;o pode estar partido ou em
+	  RAID-5.</para> </listitem>
 
 	<listitem>
-	  <para>Um volume raiz não pode conter mais de um subdisco
-	  concatenado por plex.
-	</listitem>
-      </itemizedlist>
-
-      <para>Note que é desejado e possível que existam múltiplos plexes,
-      cada um contendo uma réplica do sistema de arquivos raiz.  O
-      processo de bootstrap irá, entretanto, usar somente uma delas para
-      achar o bootstrap e todos os arquivos, até que o próprio
-      <literal>kernel</literal> monte os sistemas de arquivos.  Cada
-      subdisco dentro desse plex irá então precisar da sua própria
-      partição imaginária <literal>"a"</literal>, para que o dispositivo
-      correspondente se torne bootável.  Não é estritamente necessário
-      que cada uma dessas falsas partições <literal>"a"</literal> se
-      encontrem no mesmo ponto junto ao seu dispositivo, comparado com
-      outros plexes do volume raiz.  Entretanto, provavelmente seria uma
-      boa idéia criar os volumes do Vinum desse jeito para que os
-      dispositivos espelhados sejam simétricos, evitando, assim,
-      confusão.</para>
-      
-      <para>Para definir essas partições <literal>"a"</literal>, para cada
-      dispositivo contendo parte do volume raiz, as etapas segintes
-      precisam ser realizadas:</para>
+	  <para>Um volume raiz n&atilde;o pode conter mais de um
+	  subdisco concatenado por plex.  </listitem> </itemizedlist>
+	  <para>Note que &eacute; desejado e poss&iacute;vel que existam
+	  m&uacute;ltiplos plexes, cada um contendo uma r&eacute;plica
+	  do sistema de arquivos raiz.  O processo de
+	  <literal>bootstrap</literal> ir&aacute;, entretanto, usar
+	  somente uma delas para achar o <literal>bootstrap</literal> e
+	  todos os arquivos, at&eacute; que o pr&oacute;prio
+	  <literal>kernel</literal> monte os sistemas de arquivos.  Cada
+	  subdisco dentro desse plex ir&aacute; ent&atilde;o precisar da
+	  sua pr&oacute;pria parti&ccedil;&atilde;o imagin&aacute;ria
+	  <literal>"a"</literal>, para que o dispositivo correspondente
+	  se torne boot&aacute;vel.  N&atilde;o &eacute; estritamente
+	  necess&aacute;rio que cada uma dessas falsas
+	  parti&ccedil;&otilde;es <literal>"a"</literal> se encontrem no
+	  mesmo ponto junto ao seu dispositivo, comparado com outros
+	  plexes do volume raiz.  Entretanto, provavelmente seria uma
+	  boa id&eacute;ia criar os volumes do Vinum desse jeito para
+	  que os dispositivos espelhados sejam sim&eacute;tricos,
+	  evitando, assim, confus&atilde;o.</para>
+      <para>Para definir essas parti&ccedil;&otilde;es
+      <literal>"a"</literal>, para cada dispositivo contendo parte do
+      volume raiz, as etapas segintes precisam ser realizadas:</para>
       
       <procedure>
 	<step>
-	  <para>A localização (<foreignphrase>offset</foreignphrase> do
-	  início do dispositivo) e tamanho dos subdiscos dos
-	  dispositivos que fazem parte do volume raiz precisam ser
-	  examinados usando o comando</para>
+	  <para>A localiza&ccedil;&atilde;o
+	  (<foreignphrase>offset</foreignphrase> do in&iacute;cio do
+	  dispositivo) e tamanho dos subdiscos dos dispositivos que
+	  fazem parte do volume raiz precisam ser examinados usando o
+	  comando</para>
 	  
-	  <para><command>vinum l -rv root</command></para>
-
+	  <para><command>vinum l -rv root</command></para> 
 	  <para>Note que no Vinum, os
-	  <foreignphrase>offsets</foreignphrase> e tamanhos são medidos
-	  em bytes.  Eles precisam ser divididos por 512 para obter o
-	  número de blocos que irão, por sua vez, ser usados no comando
-	  <command>disklabel</command>.</para>
+	  <foreignphrase>offsets</foreignphrase> e tamanhos s&atilde;o
+	  medidos em bytes.  Eles precisam ser divididos por 512 para
+	  obter o n&uacute;mero de blocos que ir&atilde;o, por sua vez,
+	  ser usados no comando <command>disklabel</command>.</para>
 	</step>
 
 	<step>
-	  <para>Execute o comando</para>
-
+	  <para>Execute o comando</para> 
 	  <para><command>disklabel -e
-	    </command><replaceable>devname</replaceable></para>
+	  </command><replaceable>devname</replaceable></para>
 
 	  <para>Para cada dispositivo que participa no volume raiz.
 	  <replaceable>devname</replaceable> deve ser ou o nome do disco
 	  (exemplo <devicename>da0</devicename>) para discos sem tabela
-	  de partições (ex. fdisk), ou o nome da partição (exemplo
+	  de parti&ccedil;&otilde;es (ex. fdisk), ou o nome da
+	  parti&ccedil;&atilde;o (exemplo
 	  <devicename>ad0s1</devicename>).</para>
 	 
-	  <para>Se já existir uma partição <literal>"a"</literal> no
-	  dispositivo (provavelmente, contendo um sistema de arquivos 
-	  raiz pré-Vinum), essa deve ser renomeada, permanecendo
-	  acessível (por segurança), mas não será mais usado para
-	  bootstrap como padrão.  Note que partições ativas (como um
-	  sistema de arquivo raiz atualmente montado) não podem ser
-	  renomeadas, então isso deve ser feito quando a máquina é
-	  inicializada através de uma mídia <quote>Fixit</quote>, ou em um
-	  processo de duas etapas, onde (em uma situação de
-	  espelhamento) o disco que não foi usado no boot será
-	  manipulado primeiro.</para>
+	  <para>Se j&aacute; existir uma parti&ccedil;&atilde;o
+	  <literal>"a"</literal> no dispositivo (provavelmente, contendo
+	  um sistema de arquivos raiz pr&eacute;-Vinum), essa deve ser
+	  renomeada para um nome qualquer, permanecendo acess&iacute;vel
+	  (por seguran&ccedil;a), mas n&atilde;o ser&aacute; mais usado
+	  para <literal>bootstrap</literal> como padr&atilde;o.  Note
+	  que parti&ccedil;&otilde;es ativas (como um sistema de arquivo
+	  raiz atualmente montado) n&atilde;o podem ser renomeadas,
+	  ent&atilde;o isso deve ser feito quando a m&aacute;quina
+	  &eacute; inicializada atrav&eacute;s de uma m&iacute;dia
+	  <quote>Fixit</quote>, ou em um processo de duas etapas, onde
+	  (em uma situa&ccedil;&atilde;o de espelhamento) o disco que
+	  n&atilde;o foi usado no boot ser&aacute; manipulado
+	  primeiro.</para>
 	 
-	  <para>Então, o <foreignphrase>offset</foreignphrase> da
-	  partição Vinum nesse dispositivo (se existente) deve ser
-	  adicionado ao <foreignphrase>offset</foreignphrase> do
-	  subdisco de volume raiz respectivo desse mesmo dispositivo.  O
-	  valor resultante passará a ser o valor <literal>"offset"</literal> 
-	  para a nova partição <literal>"a"</literal>.  O valor do 
-	  <literal>"size"</literal> dessa partição pode ser tirado
-	  literalmente do cálculo acima.  O <literal>"fstype"</literal>
-	  deve ser <literal>4.2BSD</literal>.  Os valores de
+	  <para>Ent&atilde;o, o <foreignphrase>offset</foreignphrase> da
+	  parti&ccedil;&atilde;o Vinum nesse dispositivo (se existente)
+	  deve ser adicionado ao <foreignphrase>offset</foreignphrase>
+	  do subdisco de volume raiz respectivo desse mesmo dispositivo.
+	  O valor resultante passar&aacute; a ser o valor
+	  <literal>"offset"</literal> para a nova parti&ccedil;&atilde;o
+	  <literal>"a"</literal>.  O valor do <literal>"size"</literal>
+	  dessa parti&ccedil;&atilde;o pode ser tirado literalmente do
+	  c&aacute;lculo acima.  O <literal>"fstype"</literal> deve ser
+	  <literal>4.2BSD</literal>.  Os valores de
 	  <literal>"fsize"</literal>, <literal>"bsize"</literal>, e
-	  <literal>"cpg"</literal> devem ser escolhidos para melhor
-	  se adaptar aos atuais do sistema, apesar de que, eles não são muito
-	  importantes dentro desse contexto.</para>
+	  <literal>"cpg"</literal> devem ser escolhidos para melhor se
+	  adaptar aos atuais do sistema, apesar de que, eles n&atilde;o
+	  s&atilde;o muito importantes dentro desse contexto.</para>
 	 
-	  <para>Dessa forma, uma nova partição <literal>"a"</literal>
-	  será formada e sobrepõe as partições Vinum nesse dipositivo.
-	  Note que o <command>disklabel</command> só vai permitir isso
-	  se as partições do vinum tiverem sido propriamente marcadas
-	  usando o <literal>"vinum"</literal> fstype.</para>
+	  <para>Dessa forma, uma nova parti&ccedil;&atilde;o
+	  <literal>"a"</literal> ser&aacute; formada e sobrep&otilde;e
+	  as parti&ccedil;&otilde;es Vinum nesse dipositivo.  Note que o
+	  <command>disklabel</command> s&oacute; vai permitir isso se as
+	  parti&ccedil;&otilde;es do vinum tiverem sido propriamente
+	  marcadas usando o <literal>"vinum"</literal> fstype.</para>
 	</step>
 
 	<step>
-	  <para>Isso é tudo!  Uma falsa partição <literal>"a"</literal>
-	  agora existe em cada dispositivo que tenha uma réplica do
-	  volume raiz.  É altamente recomendável verificar o resuldado
-	  novamente, usando um comando como</para>
+	  <para>Isso &eacute; tudo!  Uma parti&ccedil;&atilde;o falsa
+	  <literal>"a"</literal> agora existe em cada dispositivo que
+	  tenha uma r&eacute;plica do volume raiz.  &Eacute; altamente
+	  recomend&aacute;vel verificar o resuldado novamente, usando um
+	  comando como</para>
 	  
 	  <para><command>fsck -n
-	    </command><devicename>/dev/<replaceable>devname</replaceable>a</devicename></para>
+	  </command><devicename>/dev/<replaceable>devname</replaceable>a</devicename></para>
 	</step>
       </procedure>
 
-      <para>Deve ser lembrado que todos os arquivos que contém
-      informações de controle, precisam ser relativos ao sistema de
-      arquivos raiz no volume Vinum onde, quando definido um novo
-      volume raiz Vinum, não deve conincidir com o sistema raiz
-      atualmente ativo.  Então, em particular, os arquivos
+      <para>Deve ser lembrado que todos os arquivos que cont&eacute;m
+      informa&ccedil;&otilde;es de controle, precisam ser relativos ao
+      sistema de arquivos raiz no volume Vinum onde, quando definido um
+      novo volume raiz Vinum, n&atilde;o deve conincidir com o sistema
+      raiz atualmente ativo.  Ent&atilde;o, em particular, os arquivos
       <filename>/etc/fstab</filename> e
-      <filename>/boot/loader.conf</filename> irão precisar de
-      cuidados específicos.<para>
+      <filename>/boot/loader.conf</filename> precisar&atilde;o ser
+      observados.</para>
       
-      <para>Na próxima reinicialização, o <literal>bootstrap</literal>
-      deve descobrir a informação de controle apropriada a partir do
-      novo sistema de arquivos raiz Vinum, e agir adequadamente.  No
-      final do processo de inicialização do <literal>kernel</literal>,
-      depois que todos os dispositivos forem anunciados, a notícia
-      importante que mostra o sucesso dessa configuração é uma mensagem
-      como:</para>
+      <para>Na pr&oacute;xima inicializa&ccedil;&atilde;o, o
+      <literal>bootstrap</literal> deve descobrir a
+      informa&ccedil;&atilde;o de controle apropriada a partir do novo
+      sistema de arquivos raiz Vinum, e agir adequadamente.  No final do
+      processo de inicializa&ccedil;&atilde;o do
+      <literal>kernel</literal>, depois que todos os dispositivos forem
+      anunciados, a not&iacute;cia importante que mostra o sucesso dessa
+      configura&ccedil;&atilde;o &eacute; uma mensagem como:</para>
       
-      <para><screen>Mounting root from ufs:/dev/vinum/root</screen></para>
-    </sect2>
+      <para><screen>Mounting root from
+      ufs:/dev/vinum/root</screen></para> </sect2>
 
     <sect2>
-      <title>Exemplo Configuração Vinum Para o Sistemas de Arquivos
+      <title>Exemplo Configura&ccedil;&atilde;o Vinum Para o Sistemas de Arquivos
       Raiz</title>
 
-      <para>Após o volume raiz do Vinum ser ativado, a saída de
-      <command>vinum l -rv root</command> deve parecer com:</para>
+      <para>Ap&oacute;s o volume raiz do Vinum ser ativado, a
+      sa&iacute;da de <command>vinum l -rv root</command> deve parecer
+      com:</para>
 
       <para>
-	<screen>
-...
-Subdisk root.p0.s0:
-		Size:        125829120 bytes (120 MB)
-		State: up
-		Plex root.p0 at offset 0 (0  B)
-		Drive disk0 (/dev/da0h) at offset 135680 (132 kB)
+        <screen> ...  Subdisk root.p0.s0: Size:        125829120
+        bytes (120 MB) State: up Plex root.p0 at offset 0 (0  B) Drive
+        disk0 (/dev/da0h) at offset 135680 (132 kB) Subdisk root.p1.s0:
+        Size:        125829120 bytes (120 MB) State: up Plex root.p1 at
+        offset 0 (0  B) Drive disk1 (/dev/da1h) at offset 135680 (132 kB)
+        </screen>
+       </para>
 
-Subdisk root.p1.s0:
-		Size:        125829120 bytes (120 MB)
-		State: up
-		Plex root.p1 at offset 0 (0  B)
-		Drive disk1 (/dev/da1h) at offset 135680 (132 kB)
-	</screen>
-      </para>
-
-      <para>Os valores a serem notados são <literal>135680</literal>
-      para o <foreignphrase>offset</foreignphrase> (relativo à partição
-      <devicename>/dev/da0h</devicename>).  Isso quer sizer, em termos
-      de <command>disklabel</command>, 265 blocos de disco com 512 bytes
-      cada.  Da mesma forma, o tamanho desse volume raiz é de 245760
-      blocos de 512 bytes.  <devicename>/dev/da1h</devicename>, contendo
-      a segunda réplica desse volume raiz, tem uma configuração
-      simérica.</para>
+      <para>Os valores a serem notados s&atilde;o
+      <literal>135680</literal> para o
+      <foreignphrase>offset</foreignphrase> (relativo &agrave;
+      parti&ccedil;&atilde;o <devicename>/dev/da0h</devicename>).  Isso
+      quer sizer, em termos de <command>disklabel</command>, 265 blocos
+      de disco com 512 bytes cada.  Da mesma forma, o tamanho desse
+      volume raiz &eacute; de 245760 blocos de 512 bytes.
+      <devicename>/dev/da1h</devicename>, contendo a segunda
+      r&eacute;plica desse volume raiz, tem uma
+      configura&ccedil;&atilde;o sim&eacute;rica.</para>
 
       <para>O <foreignphrase>disklabel</foreignphrase> para esses
       dispositivos devem se parecer com:</para>
       
-      <para>
-	<screen>
-...
-8 partitions:
-#        size   offset    fstype   [fsize bsize bps/cpg]
-  a:   245760      281    4.2BSD     2048 16384     0   # (Cyl.    0*- 15*)
-  c: 71771688        0    unused        0     0         # (Cyl.    0 - 4467*)
-  h: 71771672       16     vinum                        # (Cyl.    0*- 4467*)
-	</screen>
-      </para>
+      <para> <screen> ...  8 partitions: #        size   offset
+      fstype   [fsize bsize bps/cpg] a:   245760      281    4.2BSD
+      2048 16384     0   # (Cyl.    0*- 15*) c: 71771688        0
+      unused        0     0         # (Cyl.    0 - 4467*) h: 71771672
+      16     vinum                        # (Cyl.    0*- 4467*)
+      </screen> </para>
 
-      <para>Pode ser observado que o parâmetro <literal>"size"</literal>
-      para a partição <literal>"a"</literal> falsa bate com o valor
-      esboçado acima, enquanto o parâmetro <literal>"offset"</literal> é
-      a soma do <foreignphrase>offset</foreignphrase> dentro da partição
-      Vinum <literal>"h"</literal>, e o
-      <foreignphrase>offset</foreignphrase> dessa partição dentro do
-      dispositivo (ou fatia).  Essa é a configuração típica necessária
-      para evitar os problemas descritos em <xref
-      linkend="vinum-root-panic">.  Pode também ser visto que toda
-      partição <literal>"a"</literal> está completamente dentro da
-      partição <literal>"h"</literal> contendo todos os dados do Vinum
-      para esse dispositivo.</para>
+      <para>Pode ser observado que o par&acirc;metro
+      <literal>"size"</literal> para a parti&ccedil;&atilde;o
+      <literal>"a"</literal> falsa bate com o valor esbo&ccedil;ado
+      acima, enquanto o par&acirc;metro <literal>"offset"</literal>
+      &eacute; a soma do <foreignphrase>offset</foreignphrase> dentro da
+      parti&ccedil;&atilde;o Vinum <literal>"h"</literal>, e o
+      <foreignphrase>offset</foreignphrase> dessa parti&ccedil;&atilde;o
+      dentro do dispositivo (ou <foreignphrase>slice</foreignphrase>).
+      Essa &eacute; a configura&ccedil;&atilde;o t&iacute;pica
+      necess&aacute;ria para evitar os problemas descritos em <xref
+      linkend="vinum-root-panic">.  Pode tamb&eacute;m ser visto que
+      toda parti&ccedil;&atilde;o <literal>"a"</literal> est&aacute;
+      completamente dentro da parti&ccedil;&atilde;o
+      <literal>"h"</literal> contendo todos os dados do Vinum para esse
+      dispositivo.</para>
     
-      <para>Note que no exemplo acima, o dispositivo inteiro está
-      dedicado ao Vinum, e não há nenhum resto de partição raiz
-      pré-Vinum, partindo de que esse foi um disco com configurações
-      novas e foi dedicado exclusivamente a ser parte de uma
-      configuração Vinum.</para>
+      <para>Note que no exemplo acima, o dispositivo inteiro est&aacute;
+      dedicado ao Vinum, e n&atilde;o h&aacute; nenhum resto de
+      parti&ccedil;&atilde;o raiz pr&eacute;-Vinum, partindo de que esse
+      foi um disco com configura&ccedil;&otilde;es novas e foi dedicado
+      exclusivamente a ser parte de uma configura&ccedil;&atilde;o
+      Vinum.</para>
     </sect2>
 
     <sect2>
-      <title>Resolução de Problemas</title>
+      <title>Resolu&ccedil;&atilde;o de Problemas</title>
 
-      <para>Caso algo saia errado, é preciso ter uma saída para
-      recuperar a situação. A seguinte lista contém algumas armadilhas e
-      suas soluções.</para>
+      <para>Caso algo saia errado, &eacute; preciso ter uma sa&iacute;da
+      para recuperar a situa&ccedil;&atilde;o. A seguinte lista
+      cont&eacute;m algumas armadilhas e suas
+      solu&ccedil;&otilde;es.</para>
 
       <sect3>
-	<title>O <literal>Bootstrap</literal> do sistema entra, mas o sistena na inicializa</title>
+	<title>O <literal>Bootstrap</literal> do sistema entra, mas o
+	sistena na inicializa</title>
 
-	<para>Caso, por alguma razão, o sistema não continue
-	inicializando, o <literal>bootstrap</literal> pode ser
-	interrompido pressionando-se a tecla <keycap>espaço</keycap> 
-	no alerta de 10 segundos.  As variáveis do <literal>loader</loteral>
-	(como <literal>vinum.autostart</literal>) podem ser examindas
-	usando o <command>show</command>, e manipuladas com os comandos
+	<para>Caso, por alguma raz&atilde;o, o sistema n&atilde;o
+	continue inicializando, o <literal>bootstrap</literal> pode ser
+	interrompido pressionando-se a tecla
+	<keycap>espa&ccedil;o</keycap> no alerta de 10 segundos.  As
+	vari&aacute;veis do <literal>loader</literal> (como
+	<literal>vinum.autostart</literal>) podem ser examindas usando o
+	<command>show</command>, e manipuladas com os comandos
 	<command>set</command> ou <command>unset</command>.</para>
 
-	<para>Caso o único problema seja que o módulo Vinum do
+	<para>Caso o &uacute;nico problema seja que o m&oacute;dulo Vinum do
 	<literal>kernel</literal>
-	não esteja na lista de módulos para serem carregados
-	automaticamente, um simples <command>load vinum</command> irá
+	n&atilde;o esteja na lista de m&oacute;dulos para serem carregados
+	automaticamente, um simples <command>load vinum</command> ir&aacute;
 	ajudar.</para>
 
 	<para>Quando pronto, o processo de <literal>boot</literal> pode
 	ser retomado com o comando <command>boot -as</command>.  As
-	opções <option>-as</option> irão requere ao
+	op&ccedil;&otilde;es <option>-as</option> ir&atilde;o requere ao
 	<literal>kernel</literal> que consulte qual sistema de arquivos
-	raiz deve montar (<option>-a</option>), e faça o processo em
+	raiz deve montar (<option>-a</option>), e fa&ccedil;a o processo em
 	modo <literal>single-user</literal> (<option>-s</option>), onde
-	o sistema raiz é montado apenas para leitura.  Desta forma,
+	o sistema raiz &eacute; montado apenas para leitura.  Desta forma,
 	mesmo que apenas um plex de um volume multi-plex tenha sido
 	montado, nenhum dado entre os plexes corre risco de
-	inconsistência.</para>
+	inconsist&ecirc;ncia.</para>
 
-	<para>Quando for solicitado o sistema de arquivos raíz a ser
+	<para>Quando for solicitado o sistema de arquivos ra&iacute;z a ser
 	montado, qualquer dispositivo que contenha um sistema de
-	arquivos raíz válido pode ser informado.  Caso
+	arquivos ra&iacute;z v&aacute;lido pode ser informado.  Caso
 	<filename>/etc/fstab</filename> tenha sido definido
-	corretamente, o esperado é algo como
+	corretamente, o esperado &eacute; algo como
 	<literal>ufs:/dev/vinum/root</literal>. Uma escolha alternativa
-	típica pode ser algo como <userinput>ufs:da0d</userinput> que
-	pode ser uma hipotética partição contendo o sistema de arquivos
-	pré-Vinum.  Deve-se tomar cuidado caso uma das partições apelido
-	<literal>"a"</literal> forem informadas onde há na verdade uma
-	referência aos subdiscos Vinum para o sistema de arquivos raíz,
-	porque em uma configuração de espelhamento, deve-se apenas
-	montar uma peça de um dispositivo raíz. Caso o sistema de
-	arquivos for montado para leitura e escrita posteriormente, será
-	necessário remover o(s) outro(s) plex(es) do volume Vinum raíz,
-	uma vez que estes plexes provavelmente trarão dados
+	t&iacute;pica pode ser algo como <userinput>ufs:da0d</userinput> que
+	pode ser uma hipot&eacute;tica parti&ccedil;&atilde;o contendo o sistema de arquivos
+	pr&eacute;-Vinum.  Deve-se tomar cuidado caso uma das parti&ccedil;&otilde;es apelido
+	<literal>"a"</literal> forem informadas onde h&aacute; na verdade uma
+	refer&ecirc;ncia aos subdiscos Vinum para o sistema de arquivos ra&iacute;z,
+	porque em uma configura&ccedil;&atilde;o de espelhamento, deve-se apenas
+	montar uma pe&ccedil;a de um dispositivo ra&iacute;z.  Caso o sistema de
+	arquivos for montado para leitura e escrita posteriormente, ser&aacute;
+	necess&aacute;rio remover o(s) outro(s) plex(es) do volume Vinum ra&iacute;z,
+	uma vez que estes plexes provavelmente trar&atilde;o dados
 	inconsistentes.</para>
       </sect3>
 
       <sect3>
-	<title>Only Primary Bootstrap Loads</title>
+	<title>Apenas o Bootstrap Prim&aacute;rio Inicia</title>
 
-	<para>If <filename>/boot/loader</filename> fails to load, but
-	  the primary bootstrap still loads (visible by a single dash
-	  in the left column of the screen right after the boot
-	  process starts), an attempt can be made to interrupt the
-	  primary bootstrap at this point, using the
-	  <keycap>space</keycap> key.  This will make the bootstrap
-	  stop in stage two, see <xref linkend="boot-boot1">.  An
-	  attempt can be made here to boot off an alternate partition,
-	  like the partition containing the previous root filesystem
-	  that has been moved away from <literal>"a"</literal>
-	  above.</para>
+	<para>Caso o <filename>/boot/loader</filename> n&atilde;o seja
+	carregado, mas o <literal>bootstrap</literal> prim&aacute;rio
+	continue carregando (viivel por uma barra a esquerda da tela
+	imediatamente ap&oacute;s o processo de <literal>boot</literal>
+	iniciar), uma tentativa de interromper o
+	<literal>bootstrap</literal> prim&aacute;rio &eacute;
+	poss&iacute;vel, usando a tecla <keycap>espa&ccedil;o</keycap>.
+	Isto vai o <literal>bootstrap</literal> parar no est&aacute;gio
+	dois, ver <xref linkend="boot-boot1">.  Neste momento &eacute;
+	poss&iacute;vel realizar o <literal>boot</literal> de uma
+	parti&ccedil;&atilde;o alternativa, como a
+	parti&ccedil;&atilde;o contendo o sistema de arquivos
+	ra&iacute;z antigo que foi removido de <literal>"a"</literal>
+	acima.</para>
       </sect3>
 
       <sect3 id="vinum-root-panic">
-	<title>Nothing Boots, the Bootstrap
-	  Panics</title>
+	<title>Nada incializa, o <literal>Bootstrap</literal> Trava</title>
 
-	<para>This situation will happen if the bootstrap had been
-	  destroyed by the Vinum installation.	Unfortunately, Vinum
-	  accidentally currently leaves only 4 KB at the beginning of
-	  its partition free before starting to write its Vinum header
-	  information.	However, the stage one and two bootstraps plus
-	  the disklabel embedded between them currently require 8 KB.
-	  So if a Vinum partition was started at offset 0 within a
-	  slice or disk that was meant to be bootable, the Vinum setup
-	  will trash the bootstrap.</para>
+	<para>Esta situa&ccedil;&atilde;o vai ocorrer quando o
+	<literal>bootstrap</literal> foi destru&iacute;do pela
+	instala&ccedil;&atilde;o do Vinum.  Infelizmente, atualmente o
+	Vinum deixa livres apenas 4 KB no in&iacute;cio de sua
+	parti&ccedil;&atilde;o antes de iniciar a escrita do seu
+	cabe&ccedil;alho de informa&ccedil;&otilde;es.  Contudo, os
+	est&aacute;gios um e dois do <literal>bootstrap</literal> mais o
+	<literal>disklabel</literal> incorporado entre eles atualmente
+	requerem 8 KB.  Assim, se a parti&ccedil;&atilde;o Vinum for
+	iniciada no <literal>offset</literal> 0 em um
+	<literal>slice</literal> ou disco que pretende ser alvo de
+	<literal>boot</literal>, a configura&ccedil;&atilde;o do Vinum
+	vai corromper o <literal>bootstrap</literal>.</para>
 
-	<para>Similarly, if the above situation has been recovered,
-	  for example by booting from a <quote>Fixit</quote> medium,
-	  and the bootstrap has been re-installed using
-	  <command>disklabel -B</command> as described in <xref
-	  linkend="boot-boot1">, the bootstrap will trash the Vinum
-	  header, and Vinum will no longer find its disk(s).  Though
-	  no actual Vinum configuration data or data in Vinum volumes
-	  will be trashed by this, and it would be possible to recover
-	  all the data by entering exact the same Vinum configuration
-	  data again, the situation is hard to fix at all.  It would
-	  be necessary to move the entire Vinum partition by at least
-	  4 KB off, in order to have the Vinum header and the system
-	  bootstrap no longer collide.</para>
+	<para>Similarmente, caso a situa&ccedil;&atilde;o acima tenha
+	sido sanada, por exemplo, reiniciando a partir de uma
+	m&iacute;dia <quote>Fixit</quote>, e o
+	<literal>bootstrap</literal> tenha sido reinstalado usando o
+	comando <command>disklabel -B</command> como descrito em <xref
+	linkend="boot-boot1">, o <literal>bootstrap</literal> ir&aacute;
+	corromper o cabe&ccedil;alho Vinum, e assim, n&atilde;o
+	encontrar&aacute; mais seu(s) disco(s).  Contudo nenhuma
+	informa&ccedil;&atilde;o de configura&ccedil;&atilde;o ou dados
+	reais nos volumes Vinum ser&atilde;o perdidos, e &eacute;
+	poss&iacute;vel recuperar todos os dados informando-se
+	axatamente a mesma configura&ccedil;&atilde;o novamente, a
+	situa&ccedil;&atilde;o &eacute; complexa mesmo.  Pode ser
+	necess&aacute;rio afastar toda a parti&ccedil;&atilde;o Vinum
+	pelo menos 4 KB, de forma a ter o cabe&ccedil;alho Vinum e o
+	<literal>bootstrap</literal> do sistema sem
+	colis&otilde;es.</para>
       </sect3>
     </sect2>
 
     <sect2 id="vinum-root-4x">
-      <title>Diferença para o freeBSD 4.x</title>
+      <title>Diferen&ccedil;as para o FreeBSD 4.x</title>
 
-      <para>Com o freeBSD 4.x, algumas funções internas são obrigatórias
-      para fazer com que o vinum procure por todos os discos, e o código
-      que desobre o número de identidade interno do dispositivo raiz não
-      é inteligênte suficiente para suportar nomes como
-      <devicename>/dev/vinum/root</devicename> automaticamente.  Então,
-      as coisas são um pouco diferentes aqui.</para>
+      <para>Com o FreeBSD 4.x, algumas fun&ccedil;&otilde;es internas
+      s&atilde;o obrigat&oacute;rias para fazer com que o Vinum procure
+      por todos os discos, e o c&oacute;digo que descobre o
+      identificador interno do dispositivo raiz n&atilde;o &eacute;
+      inteligente o suficiente para tratar algo como
+      <devicename>/dev/vinum/root</devicename> automaticamente.
+      Ent&atilde;o, as coisas s&atilde;o um pouco diferentes
+      aqui.</para>
      
-      <para>Vinum precisa ser informado dos discos exatos que ele tem
-      que procurar, use uma linha parecida com a seguinte em
+      <para>Vinum precisa ser explicitamente informado dos discos que
+      ele tem que procurar, use uma linha parecida com a seguinte em
       <filename>/boot/loader.conf</filename>:</para>
       
       <para><literal>vinum.drives="/dev/<replaceable>da0</replaceable>
-	/dev/<replaceable>da1</replaceable>"</literal></para>
+      /dev/<replaceable>da1</replaceable>"</literal></para>
 
-      <para>É importante que todos os discos que contém dados do vinum
-      sejam mencionados.  Não será prejudicial se discos a
-      <emphasis>mais</emphasis> forem listados, e nem é necessário
-      adicionar cada fatia ou cada partição explicitamente, porque o
-      vinum irá procurar  por cabeçalhos válidos para ele em todos as
-      partições dos discos citados.</para>
+      <para>&Eacute; importante que todos os discos que cont&eacute;m
+      dados do Vinum sejam mencionados.  N&atilde;o ser&aacute;
+      prejudicial se discos a <emphasis>mais</emphasis> forem listados,
+      e nem &eacute; necess&aacute;rio adicionar cada
+      <literal>slice</literal> ou cada parti&ccedil;&atilde;o
+      explicitamente, porque o Vinum ir&aacute; procurar por
+      cabe&ccedil;alhos v&aacute;lidos em todas as
+      parti&ccedil;&otilde;es dos discos citados.</para>
 
-      <para>a partir do momento em que as rotinas usadas para passar o
-      nome do arquivo de sistema raiz e para produzir o device ID
-      (major/minor number) estão preparadas apenas para suportar nomes
-      de dispositivos <quote>clássicos</quote> como
-      <devicename>/dev/ad0s1a</devicename>, eles não podem fazer o menor
-      sentido em um nome de volume raiz do tipo
-      <devicename>/dev/vinum/root</devicename>.  Por esta razão, o
-      próprio vinum precisa setar antecipadamente o parâmero interno de
-      <literal>kernel</literal> que armazena o número de identidade do
-      dispositivo raiz durante a sua inicialização.  Isso é feito
-      setando a variável <literal>vinum.root</literal> com o valor do
-      nome do volume raiz.  A entrada em
+      <para>A partir do momento em que as rotinas usadas para passar o
+      nome do sistema de arquivos ra&iacute;z e derivar o ID do
+      dispositivo (n&uacute;mero maior/menor) est&atilde;o preparadas
+      apenas para suportar nomes de dispositivos
+      <quote>cl&aacute;ssicos</quote> como
+      <devicename>/dev/ad0s1a</devicename>, eles n&atilde;o tem a menor
+      id&eacute;ia do que fazer com um nome de volume raiz do tipo
+      <devicename>/dev/vinum/root</devicename>.  Por esta raz&atilde;o,
+      o pr&oacute;prio Vinum precisa definir antecipadamente o
+      par&acirc;mero interno de <literal>kernel</literal> que armazena o
+      n&uacute;mero de identidade do dispositivo raiz durante a sua
+      inicializa&ccedil;&atilde;o.  Isso &eacute; feito definindo a
+      vari&aacute;vel <literal>vinum.root</literal> com o valor do nome
+      do volume raiz.  A entrada em
       <filename>/boot/loader.conf</filename> para efetuar essa tarefa se
       parece com:</para>
       
       <para><literal>vinum.root="root"</literal></para>
 
-      <para>Agora, quando a inicialização do <literal>kernel</literal>
-      tenta descobrir o dispositivo raiz a ser montado, vê se algum
-      modulo de <literal>kernel</literal>
-      
-      Now, when the kernel initialization tries to find out the
-	root device to mount, it sees whether some kernel module has
-	already pre-initialized the kernel parameter for it.  If that
-	is the case, <emphasis>and</emphasis> the device claiming the
-	root device matches the major number of the driver as figured
-	out from the name of the root device string being passed (that
-	is, <literal>"vinum"</literal> in our case), it will use the
-	pre-allocated device ID, instead of trying to figure out one
-	itself.	 That way, during the usual automatic startup, it can
-	continue to mount the Vinum root volume for the root
-	filesystem.</para>
+      <para>Agora, quando a inicializa&ccedil;&atilde;o do
+      <literal>kernel</literal> tenta encontrar o dispositivo
+      ra&iacute;z a ser montado, v&ecirc; se algum m&oacute;dulo do
+      <literal>kernel</literal> j&aacute; pr&eacute;-iniciou o
+      par&acirc;metro para isso. Caso seja esta a
+      situa&ccedil;&atilde;o, <emphasis>e</emphasis> o dispositivo
+      requisitando o sistema ra&iacute;z coincida com o n&uacute;mero
+      maior do driver, como indicado pelo nome do dispositivo
+      ra&iacute;z sendo passado (isto &eacute;,
+      <literal>"vinum"</literal> no nosso caso), ela vai usar o ID do
+      dispositivo pr&eacute;-alocado, ao contr&aacute;rio de tentar
+      eleger um por si mesma. Desta maneira, no decorrer da
+      inicializa&ccedil;&atilde;o autom&aacute;tica, pode continuar a
+      montar o volume Vinum ra&iacute;z como sistema de arquivos
+      ra&iacute;z.</para>
 
-      <para>However, when <command>boot -a</command> has been
-	requesting to ask for entering the name of the root device
-	manually, it must be noted that this routine still cannot
-	actually parse a name entered there that refers to a Vinum
-	volume.  If any device name is entered that does not refer to
-	a Vinum device, the mismatch between the major numbers of the
-	pre-allocated root parameter and the driver as figured out
-	from the given name will make this routine enter its normal
-	parser, so entering a string like
-	<userinput>ufs:da0d</userinput> will work as expected. Note
-	that if this fails, it is however no longer possible to
-	re-enter a string like <userinput>ufs:vinum/root</userinput>
-	again, since it cannot be parsed.  The only way out is to
-	reboot again, and start over then.  (At the
-	<quote>askroot</quote> prompt, the initial
-	<devicename>/dev/</devicename> can always be omitted.)</para>
+      <para>Contudo, quando <command>boot -a</command> requisitar a
+      entrada do nome do dispositivo ra&iacute;z manualmente, deve-se
+      considerar que esta rotina permanece n&atilde;o tratando o valor
+      informado caso refira-se a um volume Vinum.  Caso algum nome de
+      dispositivo n&atilde;o referente aos dispositivos Vinum seja
+      informado, a distin&ccedil;&atilde;o entre os n&uacute;meros
+      maiores do par&acirc;metro ra&iacute;z pr&eacute;-alocado e o
+      driver como descrito no nome informado vai fazer esta rotina
+      entrar em seu interpretador normal, assim entrando uma
+      seq&uuml;&ecirc;ncia como: <userinput>ufs:da0d</userinput>
+      ir&aacute; funcionar como o esperado.  Observe que se isto falhar,
+      n&atilde;o ser&aacute; mais poss&iacute;vel informar um novo valor
+      como <userinput>ufs:vinum/root</userinput>, e iniciar novamente,
+      uma vez que n&atilde;o pode mais ser tratado pela rotina.  Ao
+      informar dados no <quote>askroot</quote>, o
+      <devicename>/dev/</devicename> inicial sempre poder&aacute; ser
+      omitido.)</para>
     </sect2>
   </sect1>
 </chapter>
