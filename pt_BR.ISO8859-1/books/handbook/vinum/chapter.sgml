@@ -121,36 +121,36 @@
       <secondary>concatenação</secondary>
     </indexterm>
 
-    <para>A igualdade da carga nos discos é fortemente dependente do
-    modo em que os dados são compartilhados entre eles.  No
-    próximo debate, seria conveniente visualizar um disco como se fosse
-    um grande número de setores de dados mapeados numericamente, como as
-    páginas de um livro.  O método mais simples seria dividir o disco
-    virtual em pequenos grupos de setores consecutivos do tamanho do
-    disco físico individual e depois armzená-los desse jeito, semelhante
-    a pegar um livro grande e dividí-lo em pequenas sessões.  Esse étodo
-    é chamado de <emphasis>concatenação</emphasis> e tem a vantagem que
-    os discos não precisam ter nenhum tipo de relacionamento quanto a
-    tamanho.  Funciona bem quando o acesso ao disco virtual é dividido
-    de maneira igual entre os seus espaços mapeados.  quando o acesso é
-    concentrado um uma área menor, o aumento no desempenho é menos
-    acentuado. A <xref linkend="vinum-concat"> ilustra a seqüência na qual
-    as unidades de armazenamento são alocadas em uma organização
-    concatenada.</para>
-    
+    <para>A distribuição equilibrada da carga nos discos é fortemente
+    dependente do modo em que os dados são compartilhados entre eles.
+    No próximo debate, seria conveniente visualizar um disco como se
+    fosse um grande número de setores de dados mapeados por números,
+    como as páginas de um livro.  O método mais simples seria dividir o
+    disco virtual em pequenos grupos de setores consecutivos do tamanho
+    do disco físico individual e depois armzená-los desse jeito,
+    semelhante a pegar um livro grande e dividí-lo em pequenas sessões.
+    Esse étodo é chamado de <emphasis>concatenação</emphasis> e tem a
+    vantagem que os discos não precisam ter nenhum tipo de
+    relacionamento quanto a tamanho.  Funciona bem quando o acesso ao
+    disco virtual é dividido de maneira igual entre os seus espaços
+    mapeados.  Quando o acesso é concentrado uma área menor, o
+    aumento no desempenho é menos acentuado.  A <xref linkend="vinum-concat"> 
+    ilustra a seqüência na qual as unidades de armazenamento são
+    alocadas em uma organização concatenada.
+    </para> 
     <para>
       <figure id="vinum-concat">
-	<title>Organização concatenada</title>
+	<title>Organização Concatenada</title>
 	<graphic fileref="vinum/vinum-concat">
       </figure>
     </para>
 
     <indexterm>
-      <primary>particionamento de discos</primary>
+      <primary>striping de discos</primary>
     </indexterm>
     <indexterm>
       <primary>Vinum</primary>
-      <secondary>particionamento</secondary>
+      <secondary>striping</secondary>
     </indexterm>
 
     <para>Um mapeamento alternativo é dividir o espaço de endereçamento em
@@ -158,7 +158,7 @@
     seqüencialmente em discos diferentes.  Por exemplo, os primeiros 256
     setores poderiam ser armazenados no primeiro disco, os 256 setores
     seguintes no próximo disco e assim por diante.  Depois de preencher
-    o último disco processo se repete até que os discos estejam cheios.
+    o último disco o processo se repete até que os discos estejam cheios.
     Esse mapemento é chamado de <emphasis>striping</emphasis> ou
     <acronym>RAID-0</acronym>.
     
@@ -169,16 +169,14 @@
       Disks) significa <emphasis>Vetor redundante de discos
       baratos</emphasis> e oferece várias formas de tolerância de erros,
       apesar de que um termo um pouco equivocado, pois não fornece
-      redundância.</para>
-    </footnote>
+      redundância.</para> </footnote>.
 
     O <foreignphrase>striping</foreignphrase> exige um esforço grande
     para localizar os dados e isso causa carga adicional de I/O onde a
     tranferência é distribuida para diversos discos, mas pode também
-    fornecer uma carga constante entre os discos.  <xref
-    linkend="vinum-striped"> ilustra  seqüência em que as unidades de
-    armazenamento são alocadas em uma organização
-    <foreignphrase>striped</foreignphrase>.</para>
+    fornecer uma carga constante entre os discos.  <xref linkend="vinum-striped"> 
+    ilustra uma seqüência em que as unidades de armazenamento são
+    alocadas em uma organização <foreignphrase>striped</foreignphrase>.</para>
     
     <para>
       <figure id="vinum-striped">
@@ -203,7 +201,7 @@
       </indexterm>
       <indexterm>
 	<primary>Vinum</primary>
-	<secondary>mirroring</secondary>
+	<secondary>espelhamento</secondary>
       </indexterm>
       <indexterm>
 	<primary>RAID-1</primary>
@@ -211,15 +209,15 @@
       
       <para>O método tradicional de abordar esse problema tem sido o
       <emphasis>espelhamento</emphasis>, mantendo duas cópias dos dados
-      em dois lugares fisicos distintos.  Desde da aparição dos níveis
+      em dois lugares físicos distintos.  Desde da aparição dos níveis
       de <acronym>RAID</acronym>, essa técnica de espelhamento também é
       chamada de <acronym>RAID nível 1</acronym> ou
       <acronym>RAID-1</acronym>.  Qualquer escrita feita no volume
-      é realizada nas duas localidades; a leitura pode ser feita a partir
+      é realizada nas duas localidades, a leitura pode ser feita a partir
       de uma delas, então se o disco falhar, os dados ainda estarão
       disponíveis no outro.</para>
       
-      <para>Espelhamento tem dois problemas:</para>
+      <para>O espelhamento tem dois problemas:</para>
     
 	<itemizedlist>
 	  <listitem>
@@ -238,9 +236,9 @@
 
       <para><indexterm><primary>RAID-5</primary></indexterm>Uma solução
       alternativa é a <emphasis>paridade</emphasis>, implementada nos níveis
-      2, 3, 4 e 5 do <acronym>RAID</acronym>.  Entre esses,
+      2, 3, 4 e 5 do <acronym>RAID</acronym>.  Dentre esses,
       <acronym>RAID-5</acronym> é o mais interessante.  Como
-      implementado no vinum, é uma variante na organização
+      implementado no Vinum, é uma variante na organização
       <foreignphrase>striped</foreignphrase> onde dedica um bloco de
       cada fatia à paridade dos outros blocos.  Conforme implementado no
       Vinum, um plex <acronym>RAID-5</acronym> é parecido com um plex
@@ -298,7 +296,7 @@
 	  final isso acaba sendo muito inflexível: o número de partições
 	  de um disco &unix; é limitado.  Ao contrário, Vinum subdivide
 	  uma única partição &unix; (os <emphasis>discos do
-	  vinum</emphasis>) em areas contínuas chamadas
+	  vinum</emphasis>) em área contínuas chamadas
 	  <emphasis>subdiscos</emphasis>, os quais são usados como
 	  blocos de construção para plexes.</para>
 	</listitem>
@@ -312,7 +310,7 @@
 	</listitem>
       </itemizedlist>
 
-      <para>As sessões seguintes descrevem o jeito com que esses objetos
+      <para>As sessões seguintes descrevem o modo com que esses objetos
       fornecem a funcionalidade requerida pelo Vinum.</para>
 
     <sect2>
@@ -325,35 +323,35 @@
     </sect2>
     
     <sect2>
-      <title>Redundância de armazenamento de dados</title>
-      <para>Vinum implementa espelhamento anexando multiplos plexes a um
+      <title>Armazenamento de Dados Redundante</title>
+      <para>Vinum implementa espelhamento anexando múltiplos plexes a um
       volume.  Cada plex é a representação dos dados de um volume.  Um
-      volume pode conter entre um e oito plexes.</para>
+      volume pode conter de um a oito plexes.</para>
       
       <para>Apesar de um plex repesentar os dados completos de um
-      volume, é possivel que partes da representação esteja fisicamente
-      faltando, ou por planejamento (por não definir um subdisco como
+      volume, é possivel que partes da representação estejam fisicamente
+      ausentes, seja por planejamento (por não definir um subdisco como
       parte de um plex), ou por acidente (como resultado de uma falha no
-      disco).  Se que pelo menos um plex possa fornecer dados para a
+      disco).  Contanto que, pelo menos um plex possa fornecer dados para a
       extenção completa de endereço do volume, o sistema é completamente
       funcional.</para>
     </sect2>
     
     <sect2>
-      <title>Assuntos de performance</title>
+      <title>Questões de performance</title>
       
-      <para>Vinum implementa no nível de plexes tanto concatenação
+      <para>Vinum implementa no nível do plex tanto concatenação
       quanto striping:</para>
       
       <itemizedlist>
 	<listitem>
 	  <para>Um <emphasis>plex concatenado</emphasis> usa um espaço de
-	  adressamento de cada subdisco por vez.</para>
+	  endereçamento de cada subdisco por vez.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Um <emphasis>plex striped</emphasis> stripes os dados
-	  entre cada subdisco.  Todos os subdiscos tem que ter o mesmo
+	  <para>Um <emphasis>plex striped</emphasis> distribui os dados
+	  entre cada subdisco.  Todos os subdiscos têm que ter o mesmo
 	  tamanho, e é preciso que existam pelo menos dois subdiscos
 	  para que eles possam ser distinguidos a partir de um plex
 	  concatenado.</para>
@@ -365,64 +363,68 @@
       <title>Qual organização plex?</title>
      
      <para>A versão do Vinum suprida com o FreeBSD &rel.current;
-     implementa dois tipos de plexes:</para> 
+     implementa dois tipos de plexes:</para>
      
       <itemizedlist>
 	<listitem>
-	  <para>Plexes concatenados são os mais flexiveis: eles podem
+	  <para>Plexes concatenados são os mais flexíveis: eles podem
 	  conter infinitos números de subdiscos e os subdiscos podem ser
 	  de tamanhos diferentes.  Os plexes podem ser extendendidos
 	  adicionando subdiscos.  Eles requerem menos tempo de 
-	  <acronym>CPU</acronym> do que striped plexes, mas a diferença
-	  em <acronym>CPU</acronym> overhead não da para ser medida.
-	  On the other hand, they are most susceptible to hot spots, 
-	  where one disk is very active and others are idle.</para>
+	  <acronym>CPU</acronym> do que plexes
+	  <foreignphrase>striped</foreignphrase>, mas a diferença
+	  em sobrecarga de <acronym>CPU</acronym> não da para ser medida.
+	  Por outro lado, eles são mais sucetíveis a <literal>hot
+	  spots</literal>, onde um disco é muito ativo e outros estão
+	  ociosos.</para>
         </listitem>
 
 	<listitem>
-	  <para>A grande vantágme de plexes striped
-	  (<acronym>RAID-0</acronym>) é que eles reduzem os pontos
-	  quentes: escolhendo o melhor tamanho de stripe (mais ou menos
+	  <para>A grande vantágem de plexes <foreignphrase>striped</foreignphrase>
+	  (<acronym>RAID-0</acronym>) é que eles reduzem os <literal>hot
+	  spots</literal>: escolhendo o melhor tamanho de
+	  <foreignphrase>stripe</foreignphrase> (mais ou menos
 	  256&nbsp;kB), você pode igualar a carga nos discos
-	  componentes.  As disventagens dessa escolha são cóigos
+	  componentes.  As desvantagens dessa escolha são códigos
 	  (fracionalmente) mais complexos e restrições em subdiscos:
 	  eles tem que ser todos do mesmo tamanho, e extender um plex
 	  através da adição de um novo subdisco é tão complicado que
-	  vinum atualmente nem o implementa.  Vinum impõe uma restrição
-	  adicional, trivial: Um plex striped precisa ter pelo menos
+	  Vinum atualmente nem o implementa.  Vinum impõe uma restrição
+	  trivial adicional: Um plex
+	  <foreignphrase>striped</foreignphrase> precisa ter pelo menos
 	  dois subdiscos, pois caso contrário seria indistinguivel de um
 	  plex concatenado.</para>
 	 </listitem>
       </itemizedlist>
     
-      <para><xref linkend="vinum-comparison">sumariza as vantágens e
-      desvantágens de cada organização plex.</para>
+      <para><xref linkend="vinum-comparison"> sumariza as vantagens e
+      desvantagens de cada organização plex.</para>
     
       <table id="vinum-comparison">
-	<title>Organizações Plex do Vinum</title>
+	<title>Organizações do Plex no Vinum</title>
 	<tgroup cols="5">
 	  <thead>
 	    <row>
 	      <entry>Tipo de Plex</entry>
-	  	<entry>Minimum subdisks</entry>
+	  	<entry>Mínimo de subdiscos</entry>
 	  	<entry>Pode adicionar subdiscos</entry>
 	  	<entry>Deve ser de igual tamanho</entry>
-	  	<entry>Application</entry>
+	  	<entry>Aplicação</entry>
 	    </row>
 	  </thead>
 
 	  <tbody>
 	    <row>
-	      <entry>concatenated</entry>
+	      <entry>concatenado</entry>
 	      <entry>1</entry>
 	      <entry>sim</entry>
 	      <entry>não</entry>
 	      <entry>Grande armazenamento de dados com máxima
-	      flexibilidade de placement e performance moderada</entry>
+	      flexibilidade de posicionamento e performance moderada</entry>
 	    </row>
 	    
 	    <row>
-	      <entry>striped</entry>
+	      <entry><foreignphrase>striped</foreignphrase></entry>
 	      <entry>2</entry>
 	      <entry>não</entry>
 	      <entry>sim</entry>
@@ -439,19 +441,19 @@
     <title>Alguns exemplos</title>
     
 
-    <para>Vinum mantám uma <emphasis>base de dados de
+    <para>Vinum mantém uma <emphasis>base de dados de
     configuração</emphasis> onde descreve os objetos conhecidos por um
-    sistema individua.  Inicialmente, o usuário cria o banco de dados de
+    sistema individual.  Inicialmente, o usuário cria o banco de dados de
     configuração a partir de um ou mais arquivos de configuração com a
     ajuda do utilitário &man.vinum.8;.  Vinum guarda uma cópia das
-    configurações de seu banco de dados em cada "fatia" de disco (onde o
+    configurações de seu banco de dados em cada fatia de disco (a qual
     Vinum chama de <emphasis>dispositivo</emphasis>) sobre seu controle.
     Essa base de dados é atualizada em cada mudança de estado, então,
-    precisamente recupera o estado de cada objeo do Vinum</para>
+    precisamente recupera o estado de cada objeto do Vinum.</para>
     
   
     <sect2>
-      <title>O arquivo de configuração</title>
+      <title>O Arquivo de Configuração</title>
       <para>O arquivo de configuração descreve os objetos individuais do
       Vinum.  A definção de um simples volume poderia ser:</para>
       
@@ -469,33 +471,33 @@
 	<listitem>
 	  <para>A linha <emphasis>drive</emphasis> descreve uma partição
 	  de disco (<emphasis>drive</emphasis>) e sua localidade
-	  relativa ao fundamento do 
-	  <foreignphrase>hardware</foreignphrase>.  É dado um nome
-	  simbólico <emphasis>a</emphasis>.  Essa separação entre nomes
-	  simbólicos e nomes de dispositivos permite que os discos sejam
-	  movidos de um lado a outro sem confusão.</para>
+	  relativa ao <foreignphrase>hardware</foreignphrase>
+	  subjacente.  É dado um nome simbólico <emphasis>a</emphasis>.
+	  Essa separação entre nomes simbólicos e nomes de dispositivos
+	  permite que os discos sejam movidos de um lado a outro sem
+	  confusão.</para>
 	</listitem>
 
 	<listitem>
 	  <para>A linha <emphasis>volume</emphasis> descreve um volume.
-	  O unico atributo requerido é o nome, nesse caso
-	  <emphasis>myvol</emphasis>.</para 
+	  O único atributo requerido é o nome, nesse caso
+	  <emphasis>myvol</emphasis>.</para>
 	</listitem>
 
 	<listitem>
 	  <para>A linha <emphasis>plex</emphasis> define um plex.  O
 	  único parâmetro requerido é a organização, nesse caso
-	  <emphasis>concat</emphasis>.  nenhum nome é necessário: o
+	  <emphasis>concat</emphasis>.  Nenhum nome é necessário: o
 	  sistema irá automaticamente gerar um nome a partir do volume
-	  adicionando o sufixo  <emphasis>.p</emphasis>
-	  <emphasis>x</emphasis>, onde <emphasis>x</emphasis> é o número
-	  de plexes no volume.  Então, esse plex terá o nome
-	  <emphasis>myvol.p0</emphasis>.</para>
+	  adicionando o sufixo
+	  <emphasis>.p</emphasis><emphasis>x</emphasis>, onde
+	  <emphasis>x</emphasis> é o número de plexes no volume.  Então,
+	  esse plex terá o nome <emphasis>myvol.p0</emphasis>.</para>
 	</listitem>
 
 	<listitem>
 	  <para>A linha <emphasis>sd</emphasis> descreve um subdisco.
-	  As mínimas especificações são os nomes dos discos no qual será
+	  As especificações mínimas são o nome do disco no qual será
 	  armazenado, e o tamanho do subdisco.  Como nos plexes, nenhum
 	  nome é necessário: o sistema delega automaticamente nomes
 	  provenientes dos plexes adicionando o sufixo
@@ -531,17 +533,17 @@
       
       <para>
 	<figure id="vinum-simple-vol">
-	  <title>Um simples volume de Vinum</title>
+	  <title>Um Volume Simples de Vinum</title>
 	  <graphic fileref="vinum/vinum-simple-vol">
 	</figure>
       </para>
 
-      <para>Essa figura, e as outra que seguem, representam um volume,
-      no qual contém plexes, que por sua vez possuem subdiscos.  Nesse
+      <para>Essa figura, e as outras que seguem, representam um volume,
+      que contém plexes, e estes, por sua vez possuem subdiscos.  Nesse
       exemplo trivial, o volume contém um plex, e o plex contém um
       subdisco.</para>
       
-      <para>Esse volume em particular não tem nenhuma vantágem
+      <para>Esse volume em particular não tem nenhuma vantagem
       específica sobre uma partição de um disco convencional.  Contém um
       único plex, então, não é redundante.  O plex contém um único
       subdisco, então a alocação de dados não se difere de uma partição
@@ -550,7 +552,7 @@
     </sect2>
 
     <sect2>
-      <title>Crescimento na confiança: Espelhamento</title>
+      <title>Crescimento na Confiança: Espelhamento</title>
 
       <para>A confiança em um volume pode ser aumentada com
       espelhamento.  Quando planejando um espelhamento de volume, é
@@ -566,7 +568,7 @@
 	  plex org concat
 	    sd length 512m drive b</programlisting>
 
-      <para>Nesse exemplo, Não foi necessário especificar uma definição
+      <para>Nesse exemplo, não foi necessário especificar uma definição
       de uma partição <emphasis>a</emphasis> novamente, a partir do
       momento que o vinum armazena todos os objetos em sua base de
       dados de configuração.  Depois de processar essa definição, a
@@ -598,7 +600,7 @@
 
       <para>
 	<figure id="vinum-mirrored-vol">
-	  <title>Um volume de Vinum espelhado</title>
+	  <title>Um Volume de Vinum Espelhado</title>
 	  <graphic fileref="vinum/vinum-mirrored-vol">
 	</figure>
       </para>
