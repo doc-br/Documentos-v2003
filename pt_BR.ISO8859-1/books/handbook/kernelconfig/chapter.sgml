@@ -520,7 +520,7 @@ cpu          I686_CPU</programlisting>
     </itemizedlist>
 
     <para>A primeira destas op&ccedil;&otilde;es &eacute; provavelmente a mais f&aacute;cil, mas voc&ecirc;
-	necessitar&aacute; de muito espa&ccedil;o em disco numa m&aacute;quina de classe 386, o que pode ser
+	necessitar&aacute; de muito espa&ccedil;o em disco em uma m&aacute;quina de classe 386, o que pode ser
 	difícil de encontrar.</para>
 
     <indexterm>
@@ -560,21 +560,22 @@ cpu          I686_CPU</programlisting>
       ao 4.5, ou voc&ecirc; deve definir está variável manualmente sempre, e o valor
 	de <literal>maxusers</literal> deve ser no m&iacute;nimo 4, especialmente se for
       usando o Sistema de Janelas X, ou compilando programas com frequência. A raz&atilde;o &eacute; que
-      a tabela mais importante ajustada com <literal>maxusers</literal> &eacute; o
-      n&uacute;mero m&aacute;ximo de processos, que &eacute; ajustado para <literal>20 + 16 *
-      maxusers</literal>, assim se voc&ecirc; ajustar <literal>maxusers</literal> para 1,
-      ent&atilde;o voc&ecirc; poder&aacute; somente ter 36 processos simult&acirc;neos, incluindo os 18
+      a tabela mais importante ajustada por meio do <literal>maxusers</literal> &eacute; o
+      n&uacute;mero m&aacute;ximo de processos, que &eacute; definido como <literal>20 + 16 *
+      maxusers</literal>, de forma que, se você ajustar <literal>maxusers</literal> para o valor 1,
+      poderão existir no máximo 36 processos simultâneos, incluindo ai os 18 processos
       que o sistema carrega na hora da inicializa&ccedil;&atilde;o, e os 15 que voc&ecirc; provavelmente
-      ir&aacute; criar quando voc&ecirc; iniciar o X Window System. Mesmo uma
-      tarefa simples uma leitura de uma p&aacute;gina de manual come&ccedil;ar&aacute; levantando nove processos para
-      filtro, decompactando, e vendo isso. Configurando
-      <literal>maxusers</literal> para 64 permitir&aacute; voc&ecirc; ter carregados 1044
-      processos simult&acirc;neos, qual deve ser bastante para quase todo o uso.
-      Se, entretanto, voc&ecirc; ver o erro <errortype>proc completo da tabela
-      </errortype> ao tentar iniciar outro programa, ou &eacute;
-      um servidor rodando com um grande n&uacute;meros de usu&aacute;rios simult&acirc;neos (se preferir
-      <hostid role="fqdn">ftp.FreeBSD.org</hostid>), voc&ecirc; pode aumentar
-      o n&uacute;mero e recompilar.</para>
+      ir&aacute; criar quando iniciar o sistema de interface gráfica. Mesmo tarefas simples como
+      a leitura de uma p&aacute;gina de manual será iniciada levantando nove processos para
+      filtro, decompactação e visualização do manual. Colocando
+      <literal>maxusers</literal> em 64 permitir&aacute; que você tenha 1044
+      processos simult&acirc;neos carregados, o que deve ser o suficiente para a maioria de suas
+      necessidades.
+      Entretanto, se você se deparar com o erro <errortype>proc table is full
+      </errortype> ao tentar iniciar outro programa, ou se o sistema em questão tratar
+	de um servidor com um grande número de usuários simultâneos (digamos, como o
+      <hostid role="fqdn">ftp.FreeBSD.org</hostid> por exemplo), é possível aumentar
+	o valor da variável <literal>maxusers</literal> e recompilar o kernel do sistema.</para>
 
     <note>
       <para><literal>maxusers</literal><emphasis>n&atilde;o</emphasis>
