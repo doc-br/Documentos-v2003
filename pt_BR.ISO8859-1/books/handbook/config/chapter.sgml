@@ -8,21 +8,21 @@
   <chapterinfo>
     <authorgroup>
       <author>
-        <firstname>Chern</firstname>
+	<firstname>Chern</firstname>
 	<surname>Lee</surname>
 	<contrib>Escrito por </contrib>
       </author>
     </authorgroup>
     <authorgroup>
       <author>
-        <firstname>Mike</firstname>
+	<firstname>Mike</firstname>
 	<surname>Smith</surname>
 	<contrib>Baseado em um tutorial escrito por </contrib>
       </author>
     </authorgroup>
     <authorgroup>
       <author>
-        <firstname>Matt</firstname>
+	<firstname>Matt</firstname>
 	<surname>Dillon</surname>
 	<contrib>Tamb&eacute;m baseado em tuning(7) escrito por </contrib>
       </author>
@@ -38,23 +38,23 @@
     <indexterm><primary>system optimization</primary></indexterm>
 
     <para>Um dos aspectos mais importantes do &os; &eacute; a configura&ccedil;&atilde;o do sistema.
-      A configura&ccedil;&atilde;o correta ajudar&aacute; a previnir dores de cabe&ccedil;a durante 
+      A configura&ccedil;&atilde;o correta ajudar&aacute; a previnir dores de cabe&ccedil;a durante
       atualiza&ccedil;&otilde;es futuras.
       Este cap&iacute;tulo explicar&aacute; muito do processo de configura&ccedil;&atilde;o do &os;,
       incluindo alguns par&acirc;metros que podem ser configurados
       para ajustar um sistema &os;.
-      </para>
+</para>
 
     <para>Ap&oacute;s ler este cap&iacute;tulo, voc&ecirc; saber&aacute;:</para>
 
     <itemizedlist>
       <listitem>
-	<para>Como trabalhar eficientemente com 
+	<para>Como trabalhar eficientemente com
 	  sistemas de arquivos e parti&ccedil;&otilde;es de swap.</para>
       </listitem>
       <listitem>
 	<para>No&ccedil;&otilde;es de configura&ccedil;&atilde;o dos sistemas de
-          inicializa&ccedil;&atilde;o <filename>rc.conf</filename> e
+	  inicializa&ccedil;&atilde;o <filename>rc.conf</filename> e
 	  <filename>/usr/local/etc/rc.d</filename>.</para>
       </listitem>
       <listitem>
@@ -64,15 +64,15 @@
 	<para>Como configurar servidores virtuais em seus dispositivos de rede.</para>
       </listitem>
       <listitem>
-	<para>Como usar os diversos arquivos de configura&ccedil;&atilde;o em 
+	<para>Como usar os diversos arquivos de configura&ccedil;&atilde;o em
 	  <filename>/etc</filename>.</para>
       </listitem>
       <listitem>
-        <para>Como ajustar o &os; usando as vari&aacute;veis do <command>sysctl</command>.
-          </para>
+	<para>Como ajustar o &os; usando as vari&aacute;veis do <command>sysctl</command>.
+</para>
       </listitem>
       <listitem>
-	<para>Como ajustar a performance de disco e modificar 
+	<para>Como ajustar a performance de disco e modificar
 	  limita&ccedil;&otilde;es do kernel.</para>
       </listitem>
     </itemizedlist>
@@ -101,13 +101,13 @@
 
       <indexterm><primary>partition layout</primary></indexterm>
       <indexterm>
-        <primary><filename>/etc</filename></primary>
+	<primary><filename>/etc</filename></primary>
       </indexterm>
       <indexterm>
-        <primary><filename>/var</filename></primary>
+	<primary><filename>/var</filename></primary>
       </indexterm>
       <indexterm>
-        <primary><filename>/usr</filename></primary>
+	<primary><filename>/usr</filename></primary>
       </indexterm>
 
       <sect3>
@@ -117,40 +117,40 @@
 	  ou &man.sysinstall.8;, lembre-se que discos r&iacute;gidos
 	  transferem dados mais rapidamente das trilhas mais externas
 	  para as internas.
-	  Desta forma, sistemas de arquivos menores e 
+	  Desta forma, sistemas de arquivos menores e
 	  mais acessados devem estar mais pr&oacute;ximos da parte de fora
 	  do disco, enquanto parti&ccedil;&otilde;es maiores como <filename>/usr</filename>
-          devem estar mais pr&oacute;ximas &agrave; parte de dentro.
-	  &Eacute; uma boa id&eacute;ia criar parti&ccedil;&otilde;es nesta ordem: ra&iacute;z. swap,  
+	  devem estar mais pr&oacute;ximas &agrave; parte de dentro.
+	  &Eacute; uma boa id&eacute;ia criar parti&ccedil;&otilde;es nesta ordem: ra&iacute;z.  swap,
 	  <filename>/var</filename>, <filename>/usr</filename>.</para>
 
 	<para>O tamanho de <filename>/var</filename>
-	  reflete na inten&ccedil;&atilde;o de uso da m&aacute;quina.  
+	  reflete na inten&ccedil;&atilde;o de uso da m&aacute;quina.
 	  <filename>/var</filename> &eacute; usado para abrigar caixas de correio,
-	  arquivos de log e filas de impress&atilde;o. Caixas postais e 
-	  arquivos de log podem crescer em tamanhos n&atilde;o esperados 
-	  dependendo da quantidade de usu&aacute;rios e por quanto tempo 
-	  os arquivos de log s&atilde;o mantidos.  Muitos usu&aacute;rios 
-	  nunca precisar&atilde;o de um gigabyte, 
+	  arquivos de log e filas de impress&atilde;o.  Caixas postais e
+	  arquivos de log podem crescer em tamanhos n&atilde;o esperados
+	  dependendo da quantidade de usu&aacute;rios e por quanto tempo
+	  os arquivos de log s&atilde;o mantidos.  Muitos usu&aacute;rios
+	  nunca precisar&atilde;o de um gigabyte,
 	  mas lembre-se que <filename>/var/tmp</filename>
 	  deve ser grande o bastante para abrigar pacotes.
-	  </para>
+	</para>
 
 	<para>A parti&ccedil;&atilde;o <filename>/usr</filename> abriga a maioria dos
 	  arquivos necess&aacute;rios ao sistema, a cole&ccedil;&atilde;o &man.ports.7;
 	  recomendada) e o c&oacute;digo fonte (opcional).  Ambos
-	  s&atilde;o opcionais no momento da instala&ccedil;&atilde;o. 
+	  s&atilde;o opcionais no momento da instala&ccedil;&atilde;o.
 	  Pelo menos 2 gigabytes s&atilde;o recomendados para esta parti&ccedil;&atilde;o.</para>
 
 	<para>Ao selecionar tamanhos de parti&ccedil;&otilde;es, tenha em mente
-	  os requisitos de tamanho. Ficar sem espa&ccedil;o em uma parti&ccedil;&atilde;o
+	  os requisitos de tamanho.  Ficar sem espa&ccedil;o em uma parti&ccedil;&atilde;o
 	  enquanto outra &eacute; pouco usada pode ser um pouco chato.
-	  </para>
+	</para>
 
-	<note><para>Alguns usu&aacute;rios perceberam que o 
-	    dimensionador padr&atilde;o <literal>Auto-defaults</literal> do &man.sysinstall.8; 
+	<note><para>Alguns usu&aacute;rios perceberam que o
+	    dimensionador padr&atilde;o <literal>Auto-defaults</literal> do &man.sysinstall.8;
 	    algumas vezes selecionam parti&ccedil;&otilde;es <filename>/var</filename>
-	    e <filename>/</filename> em tamanhos menores que o necess&aacute;rio.  Particione 
+	    e <filename>/</filename> em tamanhos menores que o necess&aacute;rio.  Particione
 	    de maneira inteligente e generosa.</para></note>
 
       </sect3>
@@ -163,31 +163,31 @@
 
 	<para>Como regra geral, a parti&ccedil;&atilde;o de swap deve ser
 	  mais ou menos o dobro do tamanho da mem&oacute;ria do sistema (RAM).  Por
-	  exemplo, se uma m&aacute;quina possui 128&nbsp;megabytes de mem&oacute;ria, 
-	  o arquivo de swap deveria ser de 256&nbsp;megabytes.  Sistemas 
+	  exemplo, se uma m&aacute;quina possui 128&nbsp;megabytes de mem&oacute;ria,
+	  o arquivo de swap deveria ser de 256&nbsp;megabytes.  Sistemas
 	  com pouca mem&oacute;ria podem obter melhor performance com mais
-	  swap.  Menos que 256&nbsp;megabytes de mem&oacute;ria n&atilde;o &eacute; recomendado 
-	  e uma expans&atilde;o deve ser considerada.  
-	  Os algoritmos de pagina&ccedil;&atilde;o da mem&oacute;ria virtual (VM) s&atilde;o sintonizados 
-	  para obter melhor desempenho quando a parti&ccedil;&atilde;o de swap 
-	  &eacute; pelo menos duas vezes o tamanho da mem&oacute;ria.  Configurar um 
-	  swap muito pequeno pode levar &agrave; inefici&ecirc;ncia no c&oacute;digo de procura 
-	  de p&aacute;gina da mem&oacute;ria virtual e pode criar problemas 
+	  swap.  Menos que 256&nbsp;megabytes de mem&oacute;ria n&atilde;o &eacute; recomendado
+	  e uma expans&atilde;o deve ser considerada.
+	  Os algoritmos de pagina&ccedil;&atilde;o da mem&oacute;ria virtual (VM) s&atilde;o sintonizados
+	  para obter melhor desempenho quando a parti&ccedil;&atilde;o de swap
+	  &eacute; pelo menos duas vezes o tamanho da mem&oacute;ria.  Configurar um
+	  swap muito pequeno pode levar &agrave; inefici&ecirc;ncia no c&oacute;digo de procura
+	  de p&aacute;gina da mem&oacute;ria virtual e pode criar problemas
 	  se mais mem&oacute;ria for acidionada.</para>
 
-	<para>Em sistemas maiores com multiplos discos SCSI (ou 
-	  multiplos discos IDE operando em controladoras diferentes), 
-	  &eacute; recomendado que o swap seja configurado em cada disco (para 
-	  at&eacute; quatro discos).  As parti&ccedil;&otilde;es de swap devem ser aproximadamente 
-	  do mesmo tamanho.  O kernel pode manipular tamanhos arbitr&aacute;rios mas 
-	  estruturas de dados internas escalam &agrave; at&eacute; 4 vezes para a 
-	  maior parti&ccedil;&atilde;o.  Manter as parti&ccedil;&otilde;es de swap com aproximadamente 
-	  o mesmo tamanho permitir&aacute; ao <foreignphrase>kernel</foreignphrase> 
-	  otimizar a distribui&ccedil;&atilde;o do espa&ccedil;o de swap pelas parti&ccedil;&otilde;es.  
-	  N&atilde;o h&aacute; problemas em ter grandes parti&ccedil;&otilde;es de swap, mesmo que 
-	  o swap n&atilde;o seja muito usado.  Isto pode facilitar a recupera&ccedil;&atilde;o 
+	<para>Em sistemas maiores com multiplos discos SCSI (ou
+	  multiplos discos IDE operando em controladoras diferentes),
+	  &eacute; recomendado que o swap seja configurado em cada disco (para
+	  at&eacute; quatro discos).  As parti&ccedil;&otilde;es de swap devem ser aproximadamente
+	  do mesmo tamanho.  O kernel pode manipular tamanhos arbitr&aacute;rios mas
+	  estruturas de dados internas escalam &agrave; at&eacute; 4 vezes para a
+	  maior parti&ccedil;&atilde;o.  Manter as parti&ccedil;&otilde;es de swap com aproximadamente
+	  o mesmo tamanho permitir&aacute; ao <foreignphrase>kernel</foreignphrase>
+	  otimizar a distribui&ccedil;&atilde;o do espa&ccedil;o de swap pelas parti&ccedil;&otilde;es.
+	  N&atilde;o h&aacute; problemas em ter grandes parti&ccedil;&otilde;es de swap, mesmo que
+	  o swap n&atilde;o seja muito usado.  Isto pode facilitar a recupera&ccedil;&atilde;o
 	  de dados de um programa antes de ser for&ccedil;ado a reinicializar a m&aacute;quina.
-	  </para>
+	</para>
       </sect3>
 
       <sect3>
@@ -195,28 +195,28 @@
 
 	<para>Muitos usu&aacute;rios pensam que uma parti&ccedil;&atilde;o grande e &uacute;nica
 	  &eacute; suficiente mas, por v&aacute;rias raz&otilde;es, isto seria uma m&aacute; id&eacute;ia.
-	  Primeiro, cada parti&ccedil;&atilde;o possui caracter&iacute;sticas operacionais 
+	  Primeiro, cada parti&ccedil;&atilde;o possui caracter&iacute;sticas operacionais
 	  diferentes e separ&aacute;-las permite ao sistema de arquivos uma
-	  sintonia de acordo. Por exemplo, as parti&ccedil;&otilde;es root 
-	  e <filename>/usr</filename> recebem mais acessos de leitura, e 
-	  pouca escrita.  Enquanto que muita leitura e escrita pode 
-	  ocorrer em <filename>/var</filename> e 
+	  sintonia de acordo.  Por exemplo, as parti&ccedil;&otilde;es root
+	  e <filename>/usr</filename> recebem mais acessos de leitura, e
+	  pouca escrita.  Enquanto que muita leitura e escrita pode
+	  ocorrer em <filename>/var</filename> e
 	  <filename>/var/tmp</filename>.</para>
 
-	<para>Atrav&eacute;s de um particionamento adequado, a fragmenta&ccedil;&atilde;o 
-	  introduzida em parti&ccedil;&otilde;es pequenas com muitos acessos de escrita 
-	  n&atilde;o prejudicar&aacute; as parti&ccedil;&otilde;es com mais acessos de leitura.  Manter 
-	  as parti&ccedil;&otilde;es com mais acesso de escrito mais pr&oacute;ximas &agrave; borda do 
-	  disco proporcionar&aacute; melhora na performance de I/O nas 
-	  parti&ccedil;&otilde;es onde isto ocorre com mais freq&uuml;&ecirc;ncia.  Enquanto 
-	  a performance de I/O pode ser necess&aacute;ria em parti&ccedil;&otilde;es maiores, 
-	  coloc&aacute;-las mais na parte externa do disco n&atilde;o promover&aacute; uma 
-	  melhora de performance em rela&ccedil;&atilde;o &agrave; mover o  
+	<para>Atrav&eacute;s de um particionamento adequado, a fragmenta&ccedil;&atilde;o
+	  introduzida em parti&ccedil;&otilde;es pequenas com muitos acessos de escrita
+	  n&atilde;o prejudicar&aacute; as parti&ccedil;&otilde;es com mais acessos de leitura.  Manter
+	  as parti&ccedil;&otilde;es com mais acesso de escrito mais pr&oacute;ximas &agrave; borda do
+	  disco proporcionar&aacute; melhora na performance de I/O nas
+	  parti&ccedil;&otilde;es onde isto ocorre com mais freq&uuml;&ecirc;ncia.  Enquanto
+	  a performance de I/O pode ser necess&aacute;ria em parti&ccedil;&otilde;es maiores,
+	  coloc&aacute;-las mais na parte externa do disco n&atilde;o promover&aacute; uma
+	  melhora de performance em rela&ccedil;&atilde;o &agrave; mover o
 	  <filename>/var</filename> para a borda do disco.
-	  Finalmente, existem preocupa&ccedil;&otilde;es com a seguran&ccedil;a.  Uma parti&ccedil;&atilde;o 
-	  ra&iacute;z menor, mais pura, que tem mais acessos de leitura, tem 
+	  Finalmente, existem preocupa&ccedil;&otilde;es com a seguran&ccedil;a.  Uma parti&ccedil;&atilde;o
+	  ra&iacute;z menor, mais pura, que tem mais acessos de leitura, tem
 	  uma chance maior de sobreviver &agrave; um <foreignphrase>crash</foreignphrase>.
-	  </para>
+	</para>
       </sect3>
     </sect2>
 
@@ -230,38 +230,38 @@
       <secondary><filename>rc.conf</filename></secondary>
     </indexterm>
 
-    <para>O local principal para informa&ccedil;&otilde;es de configura&ccedil;&atilde;o de sistema 
+    <para>O local principal para informa&ccedil;&otilde;es de configura&ccedil;&atilde;o de sistema
       est&aacute; dentro de <filename>/etc/rc.conf</filename>.  Este arquivo
-      cont&eacute;m uma grande quantidade de informa&ccedil;&otilde;es de configura&ccedil;&atilde;o, 
-      essencialmente usadas na inicializa&ccedil;&atilde;o do sistema.  Seu nome 
-      implica diretamente nisto;  &eacute; a informa&ccedil;&atilde;o de configura&ccedil;&atilde;o para 
+      cont&eacute;m uma grande quantidade de informa&ccedil;&otilde;es de configura&ccedil;&atilde;o,
+      essencialmente usadas na inicializa&ccedil;&atilde;o do sistema.  Seu nome
+      implica diretamente nisto;  &eacute; a informa&ccedil;&atilde;o de configura&ccedil;&atilde;o para
       os arquivos <filename>rc*</filename>.</para>
 
-    <para>Um administrador deve inserir entradas no arquivo 
-      <filename>rc.conf</filename> para sobrepor 
-      as configura&ccedil;&otilde;es padr&atilde;o em  
-      <filename>/etc/defaults/rc.conf</filename>.  Os arquivos padr&atilde;o 
-      n&atilde;o devem ser copiados para <filename>/etc</filename> - pois 
-      cont&eacute;m valores padr&otilde;es, n&atilde;o exemplos. Todas mudan&ccedil;as de sistema 
+    <para>Um administrador deve inserir entradas no arquivo
+      <filename>rc.conf</filename> para sobrepor
+      as configura&ccedil;&otilde;es padr&atilde;o em
+      <filename>/etc/defaults/rc.conf</filename>.  Os arquivos padr&atilde;o
+      n&atilde;o devem ser copiados para <filename>/etc</filename> - pois
+      cont&eacute;m valores padr&otilde;es, n&atilde;o exemplos.  Todas mudan&ccedil;as de sistema
       especificas devem ser feitas diretamente no arquivo <filename>rc.conf</filename>
-      </para>
+</para>
 
-    <para>Uma variedade de estrat&eacute;gias podem ser aplicadas em 
-      aplica&ccedil;&otilde;es em <foreignphrase>cluster</foreignphrase> 
-      para separar configura&ccedil;&otilde;es globais de sistema das configura&ccedil;&otilde;es 
-      espec&iacute;ficas com o intuito de diminuir a carga de administra&ccedil;&atilde;o.  O 
-      procedimento adotado &eacute; o de colocar configura&ccedil;&otilde;es globais 
-      em outro arquivo, 
-      como <filename>/etc/rc.conf.site</filename>, e ent&atilde;o incluir este 
-      arquivo em <filename>/etc/rc.conf</filename>, que possuir&aacute; 
+    <para>Uma variedade de estrat&eacute;gias podem ser aplicadas em
+      aplica&ccedil;&otilde;es em <foreignphrase>cluster</foreignphrase>
+      para separar configura&ccedil;&otilde;es globais de sistema das configura&ccedil;&otilde;es
+      espec&iacute;ficas com o intuito de diminuir a carga de administra&ccedil;&atilde;o.  O
+      procedimento adotado &eacute; o de colocar configura&ccedil;&otilde;es globais
+      em outro arquivo,
+      como <filename>/etc/rc.conf.site</filename>, e ent&atilde;o incluir este
+      arquivo em <filename>/etc/rc.conf</filename>, que possuir&aacute;
       apenas informa&ccedil;&otilde;es espec&iacute;ficas de sistema.</para>
 
-    <para>Como o <filename>rc.conf</filename> &eacute; lido pelo &man.sh.1; &eacute; simples 
+    <para>Como o <filename>rc.conf</filename> &eacute; lido pelo &man.sh.1; &eacute; simples
       fazer isto.  Por exemplo:</para>
 
     <itemizedlist>
       <listitem><para>rc.conf:</para>
-<programlisting>	. rc.conf.site
+<programlisting>	.  rc.conf.site
 	hostname="node15.example.com"
 	network_interfaces="fxp0 lo0"
 	ifconfig_fxp0="inet 10.1.1.1"</programlisting></listitem>
@@ -271,14 +271,14 @@
 	blanktime="100"</programlisting></listitem>
     </itemizedlist>
 
-    <para>O arquivo <filename>rc.conf.site</filename> pode ser distribu&iacute;do 
-      para todos os sistemas usando-se <command>rsync</command> ou um 
-      programa similar, enquanto que o arquivo <filename>rc.conf</filename> 
+    <para>O arquivo <filename>rc.conf.site</filename> pode ser distribu&iacute;do
+      para todos os sistemas usando-se <command>rsync</command> ou um
+      programa similar, enquanto que o arquivo <filename>rc.conf</filename>
       permanece &uacute;nico.</para>
 
     <para>Atualizar o sistema usando o &man.sysinstall.8;
-      ou <command>make world</command> n&atilde;o sobrescrever&aacute; o arquivo  
-      <filename>rc.conf</filename>, assim a configura&ccedil;&atilde;o de 
+      ou <command>make world</command> n&atilde;o sobrescrever&aacute; o arquivo
+      <filename>rc.conf</filename>, assim a configura&ccedil;&atilde;o de
       sistema n&atilde;o ser&aacute; perdida.</para>
 
   </sect1>
@@ -286,44 +286,44 @@
   <sect1 id="configtuning-appconfig">
     <title>Configura&ccedil;&atilde;o de Aplica&ccedil;&otilde;es</title>
 
-    <para>Tipicamente, aplica&ccedil;&otilde;es instaladas possuem seus pr&oacute;prios 
+    <para>Tipicamente, aplica&ccedil;&otilde;es instaladas possuem seus pr&oacute;prios
       arquivos de configura&ccedil;&atilde;o, com sua pr&oacute;pria sintaxe, etc.  &Eacute;
-      importante que estes arquivos sejam mantidos separados do 
-      sistema base, para que eles possam ser facilmente localizados e 
+      importante que estes arquivos sejam mantidos separados do
+      sistema base, para que eles possam ser facilmente localizados e
       gerenciados pelas ferramentas de gerenciamento de pacotes.</para>
 
     <indexterm><primary>/usr/local/etc</primary></indexterm>
 
-    <para>Tipicamente, estes arquivos s&atilde;o instalados em 
-      <filename>/usr/local/etc</filename>.  No caso em que uma 
-      aplica&ccedil;&atilde;o possui um grande n&uacute;mero de arquivos de configura&ccedil;&atilde;o, 
+    <para>Tipicamente, estes arquivos s&atilde;o instalados em
+      <filename>/usr/local/etc</filename>.  No caso em que uma
+      aplica&ccedil;&atilde;o possui um grande n&uacute;mero de arquivos de configura&ccedil;&atilde;o,
       um subdiret&oacute;rio ser&aacute; criado para abrig&aacute;-los.</para>
 
-    <para>Normalmente, quando um <literal>port</literal> ou pacote 
-      &eacute; instalado, arquivos de configura&ccedil;&atilde;o de exemplo tamb&eacute;m s&atilde;o 
-      instalados.  Estes arquivos normalmente s&atilde;o identificados como 
-      tendo o sufixo <filename>.default</filename>.  Se n&atilde;o 
-      existirem arquivos de configura&ccedil;&atilde;o para a aplica&ccedil;&atilde;o, eles ser&atilde;o 
-      criados atrav&eacute;s da c&oacute;pia dos arquivos 
+    <para>Normalmente, quando um <literal>port</literal> ou pacote
+      &eacute; instalado, arquivos de configura&ccedil;&atilde;o de exemplo tamb&eacute;m s&atilde;o
+      instalados.  Estes arquivos normalmente s&atilde;o identificados como
+      tendo o sufixo <filename>.default</filename>.  Se n&atilde;o
+      existirem arquivos de configura&ccedil;&atilde;o para a aplica&ccedil;&atilde;o, eles ser&atilde;o
+      criados atrav&eacute;s da c&oacute;pia dos arquivos
       <filename>.default</filename>.</para>
 
-    <para>Por exemplo, considere o conte&uacute;do do diret&oacute;rio 
+    <para>Por exemplo, considere o conte&uacute;do do diret&oacute;rio
     <filename>/usr/local/etc/apache</filename>:</para>
 
-<literallayout class="monospaced">-rw-r--r--  1 root  wheel   2184 May 20  1998 access.conf
--rw-r--r--  1 root  wheel   2184 May 20  1998 access.conf.default
--rw-r--r--  1 root  wheel   9555 May 20  1998 httpd.conf
--rw-r--r--  1 root  wheel   9555 May 20  1998 httpd.conf.default
--rw-r--r--  1 root  wheel  12205 May 20  1998 magic
--rw-r--r--  1 root  wheel  12205 May 20  1998 magic.default
--rw-r--r--  1 root  wheel   2700 May 20  1998 mime.types
--rw-r--r--  1 root  wheel   2700 May 20  1998 mime.types.default
--rw-r--r--  1 root  wheel   7980 May 20  1998 srm.conf
--rw-r--r--  1 root  wheel   7933 May 20  1998 srm.conf.default</literallayout>
+<literallayout class="monospaced">-rw-r--r--  1 root wheel   2184 May 20 1998 access.conf
+-rw-r--r--  1 root wheel   2184 May 20 1998 access.conf.default
+-rw-r--r--  1 root wheel   9555 May 20 1998 httpd.conf
+-rw-r--r--  1 root wheel   9555 May 20 1998 httpd.conf.default
+-rw-r--r--  1 root wheel 12205 May 20 1998 magic
+-rw-r--r--  1 root wheel 12205 May 20 1998 magic.default
+-rw-r--r--  1 root wheel   2700 May 20 1998 mime.types
+-rw-r--r--  1 root wheel   2700 May 20 1998 mime.types.default
+-rw-r--r--  1 root wheel   7980 May 20 1998 srm.conf
+-rw-r--r--  1 root wheel   7933 May 20 1998 srm.conf.default</literallayout>
 
     <para>O tamanho dos arquivos mostram que apenas o arquivo <filename>srm.conf</filename>
-      foi modificado.  Uma atualiza&ccedil;&atilde;o posterior do <literal>port</literal> do 
-      <application>Apache</application> n&atilde;o sobrescrever&aacute; 
+      foi modificado.  Uma atualiza&ccedil;&atilde;o posterior do <literal>port</literal> do
+      <application>Apache</application> n&atilde;o sobrescrever&aacute;
       este arquivo modificado.</para>
 
   </sect1>
@@ -333,25 +333,25 @@
 
     <indexterm><primary>services</primary></indexterm>
 
-    <para>Hospedar v&aacute;rios servi&ccedil;os &eacute; comum para um sistema.  Eles podem 
-      ser inicializados de formas diferentes, cada um com suas 
+    <para>Hospedar v&aacute;rios servi&ccedil;os &eacute; comum para um sistema.  Eles podem
+      ser inicializados de formas diferentes, cada um com suas
       vantagens.</para>
 
     <indexterm><primary>/usr/local/etc/rc.d</primary></indexterm>
 
     <para>Aplicativos instalados atrav&eacute;s do <literal>port</literal>
-      ou da cole&ccedil;&atilde;o de pacotes frequentemente colocar&aacute; um <literal>script</literal> em 
-      <filename>/usr/local/etc/rc.d</filename>, que ser&aacute; invocado na inicializa&ccedil;&atilde;o 
-      do sistema com o argumento <option>start</option>, e no desligamento  
+      ou da cole&ccedil;&atilde;o de pacotes frequentemente colocar&aacute; um <literal>script</literal> em
+      <filename>/usr/local/etc/rc.d</filename>, que ser&aacute; invocado na inicializa&ccedil;&atilde;o
+      do sistema com o argumento <option>start</option>, e no desligamento
       do sistema com o argumento <option>stop</option>.
-      Esta &eacute; a maneira recomendada de incializar servi&ccedil;os globais de sistema 
-      que s&atilde;o executados sob o usu&aacute;rio <username>root</username>, ou que 
+      Esta &eacute; a maneira recomendada de incializar servi&ccedil;os globais de sistema
+      que s&atilde;o executados sob o usu&aacute;rio <username>root</username>, ou que
       esperam ser inicializados como <username>root</username>.
-      Estes <literal>scripts</literal> s&atilde;o registrados como parte da 
-      instala&ccedil;&atilde;o do pacote, e ser&atilde;o removidos quando o pacote 
+      Estes <literal>scripts</literal> s&atilde;o registrados como parte da
+      instala&ccedil;&atilde;o do pacote, e ser&atilde;o removidos quando o pacote
       for removido.</para>
 
-    <para>Um <literal>script</literal> gen&eacute;rico de inicializa&ccedil;&atilde;o em 
+    <para>Um <literal>script</literal> gen&eacute;rico de inicializa&ccedil;&atilde;o em
       <filename>/usr/local/etc/rc.d</filename> seria parecido com:</para>
 
     <programlisting>#!/bin/sh
@@ -359,74 +359,74 @@ echo -n ' FooBar'
 
 case "$1" in
 start)
-        /usr/local/bin/foobar
-        ;;
+	/usr/local/bin/foobar
+	;;
 stop)
-        kill -9 `cat /var/run/foobar.pid`
-        ;;
+	kill -9 `cat /var/run/foobar.pid`
+	;;
 *)
-        echo "Usage: `basename $0` {start|stop}" >&2
-        exit 64
-        ;;
+	echo "Usage: `basename $0` {start|stop}" >&2
+	exit 64
+	;;
 esac
 
 exit 0
     </programlisting>
 
-    <para>O <literal>script</literal> de inicializa&ccedil;&atilde;o do &os; procurar&aacute; em 
-      <filename>/usr/local/etc/rc.d</filename> por <literal>scripts</literal> que possuem 
-      a extens&atilde;o <literal>.sh</literal> e s&atilde;o execut&aacute;veis pelo 
-      <username>root</username>.  Estes <literal>scripts</literal> encontrados s&atilde;o chamados 
+    <para>O <literal>script</literal> de inicializa&ccedil;&atilde;o do &os; procurar&aacute; em
+      <filename>/usr/local/etc/rc.d</filename> por <literal>scripts</literal> que possuem
+      a extens&atilde;o <literal>.sh</literal> e s&atilde;o execut&aacute;veis pelo
+      <username>root</username>.  Estes <literal>scripts</literal> encontrados s&atilde;o chamados
       com o argumento <option>start</option> na inicializa&ccedil;&atilde;o, e <option>stop</option>
-      no desligamento, para permitir que executem suas fun&ccedil;&otilde;es.  Sendo assim, se voc&ecirc; 
-      desejar que o <literal>script</literal> de exemplo acima seja selecionado e 
+      no desligamento, para permitir que executem suas fun&ccedil;&otilde;es.  Sendo assim, se voc&ecirc;
+      desejar que o <literal>script</literal> de exemplo acima seja selecionado e
       executado no momento de incializa&ccedil;&atilde;o do sistema, voc&ecirc; deve grav&aacute;-lo em um arquivo,
-      como por exemplo  
+      como por exemplo
       <filename>FooBar.sh</filename> em
-      <filename>/usr/local/etc/rc.d</filename> e ter certeza de que ele &eacute; execut&aacute;vel.  Voc&ecirc; 
-      pode fazer com que um <literal>script</literal> executador de comandos seja 
+      <filename>/usr/local/etc/rc.d</filename> e ter certeza de que ele &eacute; execut&aacute;vel.  Voc&ecirc;
+      pode fazer com que um <literal>script</literal> executador de comandos seja
       execut&aacute;vel com o &man.chmod.1; como mostrado abaixo:</para>
 
     <screen>&prompt.root; <userinput>chmod 755 <replaceable>FooBar.sh</replaceable></userinput></screen>
 
-    <para>Alguns servi&ccedil;os esperam ser invocados pelo &man.inetd.8; quando uma 
-      conex&atilde;o &eacute; recebida em uma porta dispon&iacute;vel.  &Eacute; comum para servidores 
-      de correio (POP e IMAP, etc).  Estes servi&ccedil;os s&atilde;o habilitados  
+    <para>Alguns servi&ccedil;os esperam ser invocados pelo &man.inetd.8; quando uma
+      conex&atilde;o &eacute; recebida em uma porta dispon&iacute;vel.  &Eacute; comum para servidores
+      de correio (POP e IMAP, etc).  Estes servi&ccedil;os s&atilde;o habilitados
       editando-se o arquivo <filename>/etc/inetd.conf</filename>.
       Veja &man.inetd.8; para detalhes de como editar este arquivo.</para>
 
-    <para>Alguns servi&ccedil;os de sistema adicionais podem n&atilde;o possuir entradas 
-      no arquivo <filename>/etc/rc.conf</filename>.  Estes servi&ccedil;os s&atilde;o tracidionamente 
-      habilitados incluindo-se comandos no arquivo 
-      <filename>/etc/rc.local</filename>.  Como no &os;&nbsp;3.1 n&atilde;o existe 
-      o arquivo <filename>/etc/rc.local</filename>; mas se for criado pelo 
-      administrador ele ser&aacute; executado pelo sistema.  Note que 
-      o arquivo <filename>rc.local</filename> &eacute; geralmente considerado como um 
-      local de &uacute;ltimo recurso; se existir um lugar melhor para inicializar o 
+    <para>Alguns servi&ccedil;os de sistema adicionais podem n&atilde;o possuir entradas
+      no arquivo <filename>/etc/rc.conf</filename>.  Estes servi&ccedil;os s&atilde;o tracidionamente
+      habilitados incluindo-se comandos no arquivo
+      <filename>/etc/rc.local</filename>.  Como no &os;&nbsp;3.1 n&atilde;o existe
+      o arquivo <filename>/etc/rc.local</filename>; mas se for criado pelo
+      administrador ele ser&aacute; executado pelo sistema.  Note que
+      o arquivo <filename>rc.local</filename> &eacute; geralmente considerado como um
+      local de &uacute;ltimo recurso; se existir um lugar melhor para inicializar o
       servi&ccedil;o, coloque o <literal>script</literal> neste lugar melhor.</para>
 
-    <note><para><emphasis>N&atilde;o</emphasis> coloque qualquer comando no 
-      arquivo <filename>/etc/rc.conf</filename>.  Para inicializar <literal>daemons</literal>, 
-      ou executar qualquer comando durante a inicializa&ccedil;&atilde;o, coloque um <literal>script</literal> em 
+    <note><para><emphasis>N&atilde;o</emphasis> coloque qualquer comando no
+      arquivo <filename>/etc/rc.conf</filename>.  Para inicializar <literal>daemons</literal>,
+      ou executar qualquer comando durante a inicializa&ccedil;&atilde;o, coloque um <literal>script</literal> em
       <filename>/usr/local/etc/rc.d</filename>.</para>
     </note>
 
-    <para>Tamb&eacute;m &eacute; poss&iacute;vel usar o <literal>daemon</literal> &man.cron.8; para inicializar  
-      servi&ccedil;os de sistema.  Este m&eacute;todo tem algumas vantagens, n&atilde;o &eacute; para menos, pois o 
-      &man.cron.8; executa estes processos sob o propriet&aacute;rio do 
-      <command>crontab</command>, e os servi&ccedil;os podem ser inicializados e 
+    <para>Tamb&eacute;m &eacute; poss&iacute;vel usar o <literal>daemon</literal> &man.cron.8; para inicializar
+      servi&ccedil;os de sistema.  Este m&eacute;todo tem algumas vantagens, n&atilde;o &eacute; para menos, pois o
+      &man.cron.8; executa estes processos sob o propriet&aacute;rio do
+      <command>crontab</command>, e os servi&ccedil;os podem ser inicializados e
       mantidos por usu&aacute;rios n&atilde;o-<username>root</username>.</para>
 
-    <para>Isto tira vantagem de uma caracter&iacute;stica do &man.cron.8;: a 
+    <para>Isto tira vantagem de uma caracter&iacute;stica do &man.cron.8;: a
       especifica&ccedil;&atilde;o de tempo pode ser trocada por <literal>@reboot</literal>,
-      que far&aacute; com que o trabalho seja executado quando o &man.cron.8; for 
+      que far&aacute; com que o trabalho seja executado quando o &man.cron.8; for
       inicializado logo ap&oacute;s a inicializa&ccedil;&atilde;o do sistema.</para>
   </sect1>
 
   <sect1 id="configtuning-cron">
     <sect1info>
       <authorgroup>
-        <author>
+	<author>
 	<firstname>Tom</firstname>
 	<surname>Rhodes</surname>
 	<contrib>Contribui&ccedil;&atilde;o de </contrib>
@@ -439,9 +439,9 @@ exit 0
     <indexterm><primary>cron</primary>
       <secondary>configuration</secondary></indexterm>
 
-    <para>Uma das ferramentas mais &uacute;teis no &os; &eacute; o &man.cron.8;.  O 
+    <para>Uma das ferramentas mais &uacute;teis no &os; &eacute; o &man.cron.8;.  O
       utilit&aacute;rio <command>cron</command> roda em segundo plano e constantemente
-      verifica o arquivo <filename>/etc/crontab</filename>. Ele tamb&eacute;m verifica
+      verifica o arquivo <filename>/etc/crontab</filename>.  Ele tamb&eacute;m verifica
       o diret&oacute;rio <filename>/var/cron/tabs</filename> na procura novos
       arquivos do tipo <filename>crontab</filename>.  Estes arquivos
       <filename>crontab</filename> armazenam informa&ccedil;&otilde;es espec&iacute;ficas sobre
@@ -471,51 +471,51 @@ HOME=/var/log
     <calloutlist>
       <callout arearefs="co-comments">
 	<para>Como muitos arquivos de configura&ccedil;&atilde;o do &os;, o caracter <literal>#</literal>
-	  representa um coment&aacute;rio. Um coment&aacute;rio pode ser colocado em um
-	  arquivo como um lembrete de como e porque uma a&ccedil;&atilde;o desejada &eacute; executada. 
+	  representa um coment&aacute;rio.  Um coment&aacute;rio pode ser colocado em um
+	  arquivo como um lembrete de como e porque uma a&ccedil;&atilde;o desejada &eacute; executada.
 	  Os coment&aacute;rios n&atilde;o podem estar na mesma linha que o comando sen&atilde;o ser&atilde;o
-          interpretados como parte do comando;  eles devem estar em uma nova linha.
-          Linhas em branco s&atilde;o ignoradas.</para>
+	  interpretados como parte do comando;  eles devem estar em uma nova linha.
+	  Linhas em branco s&atilde;o ignoradas.</para>
       </callout>
 
       <callout arearefs="co-env">
-	<para>Primeiramente, o ambiente deve ser definido. Os caracteres
+	<para>Primeiramente, o ambiente deve ser definido.  Os caracteres
 	  (<literal>=</literal>) s&atilde;o usados para definir qualquer configura&ccedil;&atilde;o de
 	  ambiente, como neste exemplo que s&atilde;o usados para as op&ccedil;&otilde;es <envar>SHELL</envar>,
-	  <envar>PATH</envar>, e <envar>HOME</envar>.  Se a linha do shell for omitida, 
-	  o <command>cron</command> usar&aacute; o padr&atilde;o, que &eacute; o 
+	  <envar>PATH</envar>, e <envar>HOME</envar>.  Se a linha do shell for omitida,
+	  o <command>cron</command> usar&aacute; o padr&atilde;o, que &eacute; o
 	  <command>sh</command>.  Se a vari&aacute;vel <option>PATH</option> for omitida,
-          nenhum padr&atilde;o ser&aacute; usado e o caminho para os arquivos dever&aacute; ser absoluto.   
+	  nenhum padr&atilde;o ser&aacute; usado e o caminho para os arquivos dever&aacute; ser absoluto.
 	  Se o <option>HOME</option> for omitido, o <command>cron</command>
 	  usar&aacute; o diret&oacute;rio base do usu&aacute;rio que o invocou.</para>
       </callout>
 
       <callout arearefs="co-field-descr">
-	<para>Esta linha define um total de sete campos. Aqui s&atilde;o listados os valores 
+	<para>Esta linha define um total de sete campos.  Aqui s&atilde;o listados os valores
 	  <literal>minute</literal>, <literal>hour</literal>,
 	  <literal>mday</literal>, <literal>month</literal>, <literal>wday</literal>,
 	  <literal>who</literal>, e <literal>command</literal>.  Estes s&atilde;o
-          praticamente autoexplicativos. Minute &eacute; o tempo em minutos em que o
-          comando ser&aacute; executado. Hours &eacute; similar &agrave; op&ccedil;&atilde;o Minute, em horas.
-          Month &eacute; similar &agrave; Minute e Hour, designando o m&ecirc;s. As op&ccedil;&otilde;es mday
-          vem de dia da semana. Todos estes campos devem ter valores num&eacute;ricos,
-          e obedecer ao rel&oacute;gio do tipo 24h. O campo <quote>who</quote> &eacute; especial,
+	  praticamente autoexplicativos.  Minute &eacute; o tempo em minutos em que o
+	  comando ser&aacute; executado.  Hours &eacute; similar &agrave; op&ccedil;&atilde;o Minute, em horas.
+	  Month &eacute; similar &agrave; Minute e Hour, designando o m&ecirc;s.  As op&ccedil;&otilde;es mday
+	  vem de dia da semana.  Todos estes campos devem ter valores num&eacute;ricos,
+	  e obedecer ao rel&oacute;gio do tipo 24h.  O campo <quote>who</quote> &eacute; especial,
 	  e existe apenas no arquivo <filename>/etc/crontab</filename>.
-	  Este arquivo especifica sob que usu&aacute;rio o comando deve ser executado.  
+	  Este arquivo especifica sob que usu&aacute;rio o comando deve ser executado.
 	  Quando um usu&aacute;rio instala seu aquivo <filename>crontab</filename>, ele ou ela
-          n&atilde;o ter&aacute; esta op&ccedil;&atilde;o. Finalmente, op&ccedil;&otilde;es do comando s&atilde;o listadas.
-          Este &eacute; o &uacute;ltimo campo, sendo assim, naturalmente deve designar o comando
+	  n&atilde;o ter&aacute; esta op&ccedil;&atilde;o.  Finalmente, op&ccedil;&otilde;es do comando s&atilde;o listadas.
+	  Este &eacute; o &uacute;ltimo campo, sendo assim, naturalmente deve designar o comando
 	  a ser executado.</para>
       </callout>
 
       <callout arearefs="co-main">
 	<para>Esta &uacute;ltima linha definir&aacute; os valores discutidos acima.  Note
 	  aqui que tempos a listagem <literal>*/5</literal>, seguida por v&aacute;rios caracteres
-	  <literal>*</literal>.  Estes caracteres <literal>*</literal> 
+	  <literal>*</literal>.  Estes caracteres <literal>*</literal>
 	  significam <quote>primeiro-&uacute;ltimo</quote>, e podem ser interpretados como
 	  <emphasis>qualquer</emphasis> tempo.  Ent&atilde;o, julgando por esta linha,
 	  fica claro que o comando <command>atrun</command> ser&aacute; invocado pelo
-	  <username>root</username> a cada cinco minutos n&atilde;o importando o dia ou m&ecirc;s.  
+	  <username>root</username> a cada cinco minutos n&atilde;o importando o dia ou m&ecirc;s.
 	  Para mais informa&ccedil;&otilde;es sobre o <command>atrun</command>,
 	  veja a p&aacute;gina de manual &man.atrun.8;.</para>
 
@@ -528,7 +528,7 @@ HOME=/var/log
     <para>Esta &eacute; a configura&ccedil;&atilde;o b&aacute;sica para todo arquivo
       <filename>crontab</filename>, embora exista algo diferente a respeito
       deste.  O campo n&uacute;mero seis, onde &eacute; especificado o nome de usu&aacute;rio,
-      que existe somente no arquivo <filename>/etc/crontab</filename>.  Este arquivo 
+      que existe somente no arquivo <filename>/etc/crontab</filename>.  Este arquivo
       deve ser omitido para arquivos <filename>crontab</filename> individuais de
       usu&aacute;rios.</para>
 
@@ -543,17 +543,17 @@ HOME=/var/log
 
       <screen>&prompt.root; <userinput>crontab arquivo-crontab</userinput></screen>
 
-      <para>Existe tamb&eacute;m uma op&ccedil;&atilde;o para listar os arquivos 
-	<filename>crontab</filename> instalados, basta passar a op&ccedil;&atilde;o 
-	<option>-l</option> para o <command>crontab</command> 
+      <para>Existe tamb&eacute;m uma op&ccedil;&atilde;o para listar os arquivos
+	<filename>crontab</filename> instalados, basta passar a op&ccedil;&atilde;o
+	<option>-l</option> para o <command>crontab</command>
 	e observar a sa&iacute;da do comando.</para>
 
-      <para>Usu&aacute;rios que desejem come&ccedil;ar seu pr&oacute;prio arquivo crontab do zero, 
+      <para>Usu&aacute;rios que desejem come&ccedil;ar seu pr&oacute;prio arquivo crontab do zero,
 	sem usar um exemplo, podem usar <command>crontab -e</command>.  Este
-	comando invocar&aacute; o editor com um arquivo vazio. Quando o arquivo for 
-	gravado ser&aacute; automaticamente instalado pelo comando 
+	comando invocar&aacute; o editor com um arquivo vazio.  Quando o arquivo for
+	gravado ser&aacute; automaticamente instalado pelo comando
 	<command>crontab</command>.
-      </para>
+</para>
 
     </sect2>
   </sect1>
@@ -561,12 +561,12 @@ HOME=/var/log
   <sect1 id="configtuning-rcNG">
     <sect1info>
       <authorgroup>
-        <author>
+	<author>
 	 <firstname>Tom</firstname>
 	 <surname>Rhodes</surname>
 	 <contrib>Contribui&ccedil;&atilde;o de </contrib>
 	 <!-- 16 May 2003 -->
-        </author>
+	</author>
       </authorgroup>
     </sect1info>
 
@@ -574,57 +574,57 @@ HOME=/var/log
 
     <indexterm><primary>rcNG</primary></indexterm>
 
-    <para>O &os; recentemente integrou o sistema de inicializa&ccedil;&atilde;o 
-      <filename>rc.d</filename> do NetBSD. Os usu&aacute;rios podem notar os 
-      arquivos no diret&oacute;rio 
-      <filename>/etc/rc.d</filename>.  Muitos destes arquivos s&atilde;o para 
-      servi&ccedil;os b&aacute;sicos que podem ser controlados com os par&acirc;metros 
+    <para>O &os; recentemente integrou o sistema de inicializa&ccedil;&atilde;o
+      <filename>rc.d</filename> do NetBSD.  Os usu&aacute;rios podem notar os
+      arquivos no diret&oacute;rio
+      <filename>/etc/rc.d</filename>.  Muitos destes arquivos s&atilde;o para
+      servi&ccedil;os b&aacute;sicos que podem ser controlados com os par&acirc;metros
       <option>start</option>, <option>stop</option>,
       e <option>restart</option>.
-      Por exemplo, o &man.sshd.8; pode ser reinicializado com o seguinte 
+      Por exemplo, o &man.sshd.8; pode ser reinicializado com o seguinte
       comando:</para>
 
     <screen>&prompt.root; <userinput>/etc/rc.d/sshd restart</userinput></screen>
 
-    <para>Este procedimento &eacute; similar para outros servi&ccedil;os.  Claro, 
-      servi&ccedil;os que normalmente s&atilde;o inicializados como especificado em 
+    <para>Este procedimento &eacute; similar para outros servi&ccedil;os.  Claro,
+      servi&ccedil;os que normalmente s&atilde;o inicializados como especificado em
       &man.rc.conf.5;.  Por exemplo, habilitar o <literal>daemon Network Address
-      Translation</literal> na inicializa&ccedil;&atilde;o basta adicionar a seguinte 
+      Translation</literal> na inicializa&ccedil;&atilde;o basta adicionar a seguinte
       linha em <filename>/etc/rc.conf</filename>:</para>
 
     <programlisting>natd_enable="YES"</programlisting>
 
-    <para>Se a linha <option>natd_enable="NO"</option> j&aacute; existe, 
-       ent&atilde;o simplesmente mude a op&ccedil;&atilde;o <option>NO</option> para  
-       <option>YES</option>.  Os <literal>scripts</literal> rc automaticamente 
-       carregar&atilde;o outros servi&ccedil;os dependentes durante a pr&oacute;xima inicializa&ccedil;&atilde;o, 
+    <para>Se a linha <option>natd_enable="NO"</option> j&aacute; existe,
+       ent&atilde;o simplesmente mude a op&ccedil;&atilde;o <option>NO</option> para
+       <option>YES</option>.  Os <literal>scripts</literal> rc automaticamente
+       carregar&atilde;o outros servi&ccedil;os dependentes durante a pr&oacute;xima inicializa&ccedil;&atilde;o,
        como descrito abaixo.</para>
 
-    <para>Uma vez que o sistema <filename>rc.d</filename> foi feito primariamente 
-      para iniciar/parar servi&ccedil;os na ocasi&atilde;o de inicializa&ccedil;&atilde;o/desligamento 
-      do sistema;  os par&acirc;metros 
+    <para>Uma vez que o sistema <filename>rc.d</filename> foi feito primariamente
+      para iniciar/parar servi&ccedil;os na ocasi&atilde;o de inicializa&ccedil;&atilde;o/desligamento
+      do sistema;  os par&acirc;metros
       <option>start</option>,
-      <option>stop</option> e <option>restart</option> somente 
-      cumprir&atilde;o suas fun&ccedil;&otilde;es se as vari&aacute;veis apropriadas 
-      estiverem configuradas no <filename>/etc/rc.conf</filename>.  Por 
-      exemplo, o comando <command>sshd restart</command> acima s&oacute; 
-      funcionar&aacute; se <varname>sshd_enable</varname> estiver configurado para 
-      <option>YES</option> no <filename>/etc/rc.conf</filename>.  Para iniciar 
-      <option>(start)</option>, parar <option>(stop)</option> ou reiniciar 
-      <option>(restart)</option> um servi&ccedil;o, independente das configura&ccedil;&otilde;es em 
-      <filename>/etc/rc.conf</filename>, os comandos devem ter o prefixo 
-      <quote>force</quote>.  Por exemplo, para reiniciar o 
-      <command>sshd</command> independente da configura&ccedil;&atilde;o atual no 
-      <filename>/etc/rc.conf</filename>, execute o seguinte comando: 
+      <option>stop</option> e <option>restart</option> somente
+      cumprir&atilde;o suas fun&ccedil;&otilde;es se as vari&aacute;veis apropriadas
+      estiverem configuradas no <filename>/etc/rc.conf</filename>.  Por
+      exemplo, o comando <command>sshd restart</command> acima s&oacute;
+      funcionar&aacute; se <varname>sshd_enable</varname> estiver configurado para
+      <option>YES</option> no <filename>/etc/rc.conf</filename>.  Para iniciar
+      <option>(start)</option>, parar <option>(stop)</option> ou reiniciar
+      <option>(restart)</option> um servi&ccedil;o, independente das configura&ccedil;&otilde;es em
+      <filename>/etc/rc.conf</filename>, os comandos devem ter o prefixo
+      <quote>force</quote>.  Por exemplo, para reiniciar o
+      <command>sshd</command> independente da configura&ccedil;&atilde;o atual no
+      <filename>/etc/rc.conf</filename>, execute o seguinte comando:
       :</para>
 
     <screen>&prompt.root; <userinput>/etc/rc.d/sshd forcerestart</userinput></screen>
 
-    <para>&Eacute; f&aacute;cil verificar se um servi&ccedil;o est&aacute; habilitado no 
-      <filename>/etc/rc.conf</filename>, basta executar o <literal>script</literal> 
-      <filename>rc.d</filename> com o par&acirc;metro  
-      <option>rcvar</option>.  Desta forma, o administrador pode verificar se o 
-      <command>sshd</command> est&aacute; de fato habilitado no 
+    <para>&Eacute; f&aacute;cil verificar se um servi&ccedil;o est&aacute; habilitado no
+      <filename>/etc/rc.conf</filename>, basta executar o <literal>script</literal>
+      <filename>rc.d</filename> com o par&acirc;metro
+      <option>rcvar</option>.  Desta forma, o administrador pode verificar se o
+      <command>sshd</command> est&aacute; de fato habilitado no
       <filename>/etc/rc.conf</filename>:</para>
 
     <screen>&prompt.root; <userinput>/etc/rc.d/sshd rcvar</userinput>
@@ -632,49 +632,49 @@ HOME=/var/log
 $sshd_enable=YES</screen>
 
     <note>
-      <para>A segunda linha (<literal># sshd</literal>) &eacute; a sa&iacute;da do comando 
-        <command>sshd</command>; n&atilde;o um console <username>root</username>.
-        </para>
+      <para>A segunda linha (<literal># sshd</literal>) &eacute; a sa&iacute;da do comando
+	<command>sshd</command>; n&atilde;o um console <username>root</username>.
+</para>
     </note>
 
-    <para>Para determinar se o servi&ccedil;o est&aacute; no ar, use o par&acirc;metro 
-      <option>status</option>.  Por exemplo, para verficar se 
+    <para>Para determinar se o servi&ccedil;o est&aacute; no ar, use o par&acirc;metro
+      <option>status</option>.  Por exemplo, para verficar se
       o <command>sshd</command> est&aacute; no ar:</para>
 
     <screen>&prompt.root; <userinput>/etc/rc.d/sshd status</userinput>
 sshd is running as pid 433.</screen>
 
     <para>Tamb&eacute;m &eacute; poss&iacute;vel recarregar <option>(reload)</option> um servi&ccedil;o.
-      Este par&acirc;metro tentar&aacute; enviar um sinal para um servi&ccedil;o em particular, 
-      for&ccedil;ando uma recarga dos arquivos de configura&ccedil;&atilde;o.  Em muitos casos 
-      isto significa enviar um sinal <literal>SIGHUP</literal> 
+      Este par&acirc;metro tentar&aacute; enviar um sinal para um servi&ccedil;o em particular,
+      for&ccedil;ando uma recarga dos arquivos de configura&ccedil;&atilde;o.  Em muitos casos
+      isto significa enviar um sinal <literal>SIGHUP</literal>
       para o servi&ccedil;o.</para>
 
-    <para>A estrutura do <application>rcNG</application> n&atilde;o &eacute; apenas usada 
-      para servi&ccedil;os de rede, tamb&eacute;m contribui em grande parte 
-      para a inicializa&ccedil;&atilde;o do sistema.  Por exemplo, 
-      considere o arquivo <filename>bgfsck</filename>.  Quando 
-      este script for executado imprimir&aacute; a seginte mensagem: 
-      </para>
+    <para>A estrutura do <application>rcNG</application> n&atilde;o &eacute; apenas usada
+      para servi&ccedil;os de rede, tamb&eacute;m contribui em grande parte
+      para a inicializa&ccedil;&atilde;o do sistema.  Por exemplo,
+      considere o arquivo <filename>bgfsck</filename>.  Quando
+      este script for executado imprimir&aacute; a seginte mensagem:
+</para>
 
     <screen>Starting background file system checks in 60 seconds.</screen>
 
-    <para>Portanto, este arquivo &eacute; usado para checagem do sistema de 
+    <para>Portanto, este arquivo &eacute; usado para checagem do sistema de
       arquivos em segundo plano, que &eacute; feita durante a inicializa&ccedil;&atilde;o.
-      </para>
+</para>
 
-    <para>Muitos servi&ccedil;os de sistema dependem de outros sevi&ccedil;os para 
-      funcionar corretamente.  Por exemplo, NIS e outros servi&ccedil;os 
-      baseados em RPC podem falhar durante a inicializa&ccedil;&atilde;o at&eacute; que 
+    <para>Muitos servi&ccedil;os de sistema dependem de outros sevi&ccedil;os para
+      funcionar corretamente.  Por exemplo, NIS e outros servi&ccedil;os
+      baseados em RPC podem falhar durante a inicializa&ccedil;&atilde;o at&eacute; que
       o servi&ccedil;o <command>rpcbind</command>
-      (portmapper) tenha sido iniciado.  Para resolver esta quest&atilde;o, 
-      informa&ccedil;&otilde;es sobre depend&ecirc;ncia e outros meta-dados est&atilde;o 
-      inclu&iacute;dos no topo de cada <literal>script</literal> de 
-      inicializa&ccedil;&atilde;o.  O programa &man.rcorder.8; &eacute; usado para analisar 
-      estes coment&aacute;rios durante a inicializa&ccedil;&atilde;o do sistema para determinar 
-      a ordem na qual os servi&ccedil;os de sistema devem ser invocados para 
-      satisfazer as depend&ecirc;ncias.  As seguintes palavras podem ser 
-      incluidas no topo de cada arquivo de <literal>script</literal> de  
+      (portmapper) tenha sido iniciado.  Para resolver esta quest&atilde;o,
+      informa&ccedil;&otilde;es sobre depend&ecirc;ncia e outros meta-dados est&atilde;o
+      inclu&iacute;dos no topo de cada <literal>script</literal> de
+      inicializa&ccedil;&atilde;o.  O programa &man.rcorder.8; &eacute; usado para analisar
+      estes coment&aacute;rios durante a inicializa&ccedil;&atilde;o do sistema para determinar
+      a ordem na qual os servi&ccedil;os de sistema devem ser invocados para
+      satisfazer as depend&ecirc;ncias.  As seguintes palavras podem ser
+      incluidas no topo de cada arquivo de <literal>script</literal> de
       inicializa&ccedil;&atilde;o:</para>
 
     <itemizedlist>
@@ -683,7 +683,7 @@ sshd is running as pid 433.</screen>
       </listitem>
 
       <listitem>
-	<para>REQUIRE: Lista os servi&ccedil;os que s&atilde;o necess&aacute;rios para este 
+	<para>REQUIRE: Lista os servi&ccedil;os que s&atilde;o necess&aacute;rios para este
 	  servi&ccedil;o.  Este arquivo ser&aacute; executado <emphasis>depois</emphasis>
 	  dos servi&ccedil;os especificados.</para>
       </listitem>
@@ -696,12 +696,12 @@ sshd is running as pid 433.</screen>
 
       <listitem>
 	<para>KEYWORD: &os; ou NetBSD.  Isto &eacute; usado para caracter&iacute;sticas
-          dependentes de *BSD.</para>
+	  dependentes de *BSD.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Usando este m&eacute;todo, um administrador pode controlar facilmente 
-      os servi&ccedil;os de sistema sem o stress dos <quote>runlevels</quote> 
+    <para>Usando este m&eacute;todo, um administrador pode controlar facilmente
+      os servi&ccedil;os de sistema sem o stress dos <quote>runlevels</quote>
       como em outros sistemas operacionais &unix;.</para>
 
     <para>Informa&ccedil;&otilde;es adicionais sobre sistema <filename>rc</filename> no &os; 5.X
@@ -712,12 +712,12 @@ sshd is running as pid 433.</screen>
   <sect1 id="config-network-setup">
     <sect1info>
       <authorgroup>
-        <author>
+	<author>
 	 <firstname>Marc</firstname>
 	 <surname>Fonvieille</surname>
 	 <contrib>Contribui&ccedil;&atilde;o de </contrib>
 	 <!-- 6 October 2002 -->
-        </author>
+	</author>
       </authorgroup>
     </sect1info>
 
@@ -726,7 +726,7 @@ sshd is running as pid 433.</screen>
     <indexterm><primary>network card configuration</primary></indexterm>
 
     <para>Nos dias de hoje &eacute; dif&iacute;cil pensar em um computador sem
-      conex&atilde;o de rede.  Adicionar e configurar uma placa de rede 
+      conex&atilde;o de rede.  Adicionar e configurar uma placa de rede
       &eacute; uma tarefa comum para qualquer administrador &os;.</para>
 
     <sect2>
@@ -737,25 +737,25 @@ sshd is running as pid 433.</screen>
 	<secondary>locating the driver</secondary>
       </indexterm>
 
-      <para>Antes de come&ccedil;ar, voc&ecirc; deve saber o modelo da placa que 
+      <para>Antes de come&ccedil;ar, voc&ecirc; deve saber o modelo da placa que
 	voc&ecirc; possui, o chip que ela usa, se &eacute; PCI ou ISA.
-	&os; tem suporte &agrave; uma grande variedade de plavas PCI e ISA.  
-	Verifique a Lista de Compatibilidade de Hardware da sua vers&atilde;o 
+	&os; tem suporte &agrave; uma grande variedade de plavas PCI e ISA.
+	Verifique a Lista de Compatibilidade de Hardware da sua vers&atilde;o
 	e veja se a sua placa &eacute; suportada.</para>
 
-      <para>Uma vez que a placa possui suporte, voc&ecirc; precisa determinar 
+      <para>Uma vez que a placa possui suporte, voc&ecirc; precisa determinar
 	o <literal>driver</literal> para ela.  O arquivo
-	<filename>/usr/src/sys/i386/conf/LINT</filename> te dar&aacute; uma lista 
-	de drivers de placa de rede com alguma informa&ccedil;&atilde;o sobre os 
-	<literal>chipsets</literal> suportados.  Se voc&ecirc; estiver com 
-	d&uacute;vidas sobre qual <literal>driver</literal> &eacute; o correto, leia a 
-	p&aacute;gina de manual do <literal>driver</literal>.  O manual te dar&aacute; 
-	informa&ccedil;&otilde;es sobre os dispositivos suportados e at&eacute; sobre 
+	<filename>/usr/src/sys/i386/conf/LINT</filename> te dar&aacute; uma lista
+	de drivers de placa de rede com alguma informa&ccedil;&atilde;o sobre os
+	<literal>chipsets</literal> suportados.  Se voc&ecirc; estiver com
+	d&uacute;vidas sobre qual <literal>driver</literal> &eacute; o correto, leia a
+	p&aacute;gina de manual do <literal>driver</literal>.  O manual te dar&aacute;
+	informa&ccedil;&otilde;es sobre os dispositivos suportados e at&eacute; sobre
 	problemas que podem ocorrer.</para>
 
-      <para>Se voc&ecirc; possui uma placa comum, provavelmente voc&ecirc; n&atilde;o 
-	precisar&aacute; procurar tanto por um <literal>driver</literal>.  
-	<literal>Drivers</literal> para as placas de rede mais comuns 
+      <para>Se voc&ecirc; possui uma placa comum, provavelmente voc&ecirc; n&atilde;o
+	precisar&aacute; procurar tanto por um <literal>driver</literal>.
+	<literal>Drivers</literal> para as placas de rede mais comuns
 	est&atilde;o presentes no arquivo de <foreignphrase>kernel</foreignphrase>
  	<filename>GENERIC</filename>, ent&atilde;o sua placa deve aparecer
 	durante a inicializa&ccedil;&atilde;o, tipo:</para>
@@ -776,20 +776,20 @@ ukphy1:  10baseT, 10baseT-FDX, 100baseTX, 100baseTX-FDX, auto</screen>
       <para>Neste exemplo, note que duas placas usam o driver &man.dc.4;,
 	que j&aacute; est&aacute; presente no sistema.</para>
 
-      <para>Para usar a sua placa de rede voc&ecirc; precisa carregar o driver 
-	apropriado.  Isto pode ser feito de duas maneiras.  A mais f&aacute;cil 
-	&eacute; simplesmente carregar um m&oacute;dulo de <foreignphrase>kernel</foreignphrase> 
-	para a sua placa com o &man.kldload.8;.  Um m&oacute;dulo n&atilde;o &eacute; 
-	dispon&iacute;vel para todos os drivers de placa de rede (placas ISA que usam 
-	&man.ed.4;, por exemplo).  Alternativamente, voc&ecirc; pode compilar estaticamente 
-	o suporte para a sua placa no <foreignphrase>kernel</foreignphrase>.  Verifique 
-	o arquivo <filename>/usr/src/sys/i386/conf/LINT</filename> e a p&aacute;gina de manual 
-	do <literal>driver</literal> para saber o que adicionar ao seu 
-	arquivo de configura&ccedil;&atilde;o do <foreignphrase>kernel</foreignphrase>.  Para 
-	maiores informa&ccedil;&otilde;es de como recompilar seu <foreignphrase>kernel</foreignphrase> 
-	por favor veja o <xref linkend="kernelconfig">.  Se a sua placa foi 
-	detectada pelo seu <foreignphrase>kernel</foreignphrase> 
-	(<filename>GENERIC</filename>) durante a inicializa&ccedil;&atilde;o voc&ecirc; n&atilde;o 
+      <para>Para usar a sua placa de rede voc&ecirc; precisa carregar o driver
+	apropriado.  Isto pode ser feito de duas maneiras.  A mais f&aacute;cil
+	&eacute; simplesmente carregar um m&oacute;dulo de <foreignphrase>kernel</foreignphrase>
+	para a sua placa com o &man.kldload.8;.  Um m&oacute;dulo n&atilde;o &eacute;
+	dispon&iacute;vel para todos os drivers de placa de rede (placas ISA que usam
+	&man.ed.4;, por exemplo).  Alternativamente, voc&ecirc; pode compilar estaticamente
+	o suporte para a sua placa no <foreignphrase>kernel</foreignphrase>.  Verifique
+	o arquivo <filename>/usr/src/sys/i386/conf/LINT</filename> e a p&aacute;gina de manual
+	do <literal>driver</literal> para saber o que adicionar ao seu
+	arquivo de configura&ccedil;&atilde;o do <foreignphrase>kernel</foreignphrase>.  Para
+	maiores informa&ccedil;&otilde;es de como recompilar seu <foreignphrase>kernel</foreignphrase>
+	por favor veja o <xref linkend="kernelconfig">.  Se a sua placa foi
+	detectada pelo seu <foreignphrase>kernel</foreignphrase>
+	(<filename>GENERIC</filename>) durante a inicializa&ccedil;&atilde;o voc&ecirc; n&atilde;o
 	precisa construir um novo kernel.</para>
     </sect2>
 
@@ -801,35 +801,35 @@ ukphy1:  10baseT, 10baseT-FDX, 100baseTX, 100baseTX-FDX, auto</screen>
 	<secondary>configuration</secondary>
       </indexterm>
 
-      <para>Uma vez que o <literal>driver</literal> correto da 
-	placa de rede est&aacute; carregado, a placa precisar ser 
-	configurada.  Como muitas outras coisas, a placa de rede 
+      <para>Uma vez que o <literal>driver</literal> correto da
+	placa de rede est&aacute; carregado, a placa precisar ser
+	configurada.  Como muitas outras coisas, a placa de rede
 	pode ter sido configurada durante a instala&ccedil;&atilde;o pelo
 	<application>sysinstall</application>.</para>
 
-      <para>Para mostrar a configura&ccedil;&atilde;o das placas de rede 
+      <para>Para mostrar a configura&ccedil;&atilde;o das placas de rede
 	do seu sistema, entre com o seguinte comando:</para>
 
 <screen>&prompt.user; <userinput>ifconfig</userinput>
 dc0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
-        inet 192.168.1.3 netmask 0xffffff00 broadcast 192.168.1.255
-        ether 00:a0:cc:da:da:da
-        media: Ethernet autoselect (100baseTX &lt;full-duplex&gt;)
-        status: active
+	inet 192.168.1.3 netmask 0xffffff00 broadcast 192.168.1.255
+	ether 00:a0:cc:da:da:da
+	media: Ethernet autoselect (100baseTX &lt;full-duplex&gt;)
+	status: active
 dc1: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
-        inet 10.0.0.1 netmask 0xffffff00 broadcast 10.0.0.255
-        ether 00:a0:cc:da:da:db
-        media: Ethernet 10baseT/UTP
-        status: no carrier
+	inet 10.0.0.1 netmask 0xffffff00 broadcast 10.0.0.255
+	ether 00:a0:cc:da:da:db
+	media: Ethernet 10baseT/UTP
+	status: no carrier
 lp0: flags=8810&lt;POINTOPOINT,SIMPLEX,MULTICAST&gt; mtu 1500
 lo0: flags=8049&lt;UP,LOOPBACK,RUNNING,MULTICAST&gt; mtu 16384
-        inet 127.0.0.1 netmask 0xff000000
+	inet 127.0.0.1 netmask 0xff000000
 tun0: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1500</screen>
 
       <note>
 	<para>Vers&otilde;es antigas do &os; podem requerer o par&acirc;metro <option>-a</option>
-	  seguido de &man.ifconfig.8;, para mais detalhes sobre a 
-	  sintaxe correta do &man.ifconfig.8; por favor leia a p&aacute;gina 
+	  seguido de &man.ifconfig.8;, para mais detalhes sobre a
+	  sintaxe correta do &man.ifconfig.8; por favor leia a p&aacute;gina
 	  de manual.  Note que tamb&eacute;m existem entradas referentes &agrave; IPv6
 	  (<literal>inet6</literal> etc.) que foram omitidas neste
 	  exemplo.</para>
@@ -855,7 +855,7 @@ tun0: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1500</screen>
 	</listitem>
 
 	<listitem>
-	  <para><devicename>lo0</devicename>: O dispositivo 
+	  <para><devicename>lo0</devicename>: O dispositivo
 	    <literal>loopback</literal></para>
 	</listitem>
 
@@ -865,11 +865,11 @@ tun0: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1500</screen>
 	</listitem>
       </itemizedlist>
 
-      <para>O &os; usa o nome do driver seguido pela ordem na qual 
-	cada placa &eacute; detectada na inicializa&ccedil;&atilde;o do 
-	<foreignphrase>kernel</foreignphrase> para dar nome &agrave; 
-	placa.  Por exemplo, <devicename>sis2</devicename> pode ser 
-	a terceira placa de rede no sistema usando o driver 
+      <para>O &os; usa o nome do driver seguido pela ordem na qual
+	cada placa &eacute; detectada na inicializa&ccedil;&atilde;o do
+	<foreignphrase>kernel</foreignphrase> para dar nome &agrave;
+	placa.  Por exemplo, <devicename>sis2</devicename> pode ser
+	a terceira placa de rede no sistema usando o driver
 	&man.sis.4;.</para>
 
       <para>Neste exemplo, o dispositivo <devicename>dc0</devicename> est&aacute;
@@ -877,7 +877,7 @@ tun0: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1500</screen>
 
       <orderedlist>
 	<listitem>
-	  <para><literal>UP</literal> siginifica que a placa est&aacute; 
+	  <para><literal>UP</literal> siginifica que a placa est&aacute;
 	    configurada e pronta para uso.</para>
 	</listitem>
 
@@ -889,13 +889,13 @@ tun0: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1500</screen>
 
 	<listitem>
 	  <para>Tem uma m&aacute;scara de rede v&aacute;lida (<literal>netmask</literal>;
-	    <hostid role="netmask">0xffffff00</hostid> que &eacute; o mesmo que 
+	    <hostid role="netmask">0xffffff00</hostid> que &eacute; o mesmo que
 	    <hostid role="netmask">255.255.255.0</hostid>).</para>
 	</listitem>
 
 	<listitem>
-	  <para>Possui um endere&ccedil;o de <foreignphrase>broadcast</foreignphrase> 
-	    v&aacute;lido (neste caso, 
+	  <para>Possui um endere&ccedil;o de <foreignphrase>broadcast</foreignphrase>
+	    v&aacute;lido (neste caso,
 	    <hostid role="ipaddr">192.168.1.255</hostid>).</para>
 	</listitem>
 
@@ -905,81 +905,81 @@ tun0: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1500</screen>
 	</listitem>
 
 	<listitem>
-	  <para>A sele&ccedil;&atilde;o f&iacute;sica de m&iacute;dia est&aacute; no modo autom&aacute;tico 
+	  <para>A sele&ccedil;&atilde;o f&iacute;sica de m&iacute;dia est&aacute; no modo autom&aacute;tico
 	    (<literal>media: Ethernet autoselect (100baseTX
 	    &lt;full-duplex&gt;)</literal>).  Podemos ver que o dispositivo
-	    <devicename>dc1</devicename> foi configurado para 
-	    <literal>10baseT/UTP</literal>.  Para mais informa&ccedil;&otilde;es 
-	    a respeito de tipos de m&iacute;dia para um determinado 
-	    <literal>driver</literal>, por favor verifique a 
+	    <devicename>dc1</devicename> foi configurado para
+	    <literal>10baseT/UTP</literal>.  Para mais informa&ccedil;&otilde;es
+	    a respeito de tipos de m&iacute;dia para um determinado
+	    <literal>driver</literal>, por favor verifique a
 	    respectiva p&aacute;gina de manual.</para>
 	</listitem>
 
 	<listitem>
 	  <para>O estado da conex&atilde;o (<literal>status</literal>)
-	    &eacute; <literal>active</literal>, ou seja, a conex&atilde;o foi 
+	    &eacute; <literal>active</literal>, ou seja, a conex&atilde;o foi
 	    detectada.  Para
-	    <devicename>dc1</devicename>, vemos 
-	    <literal>status: no carrier</literal>.  Isto &eacute; normal quando 
+	    <devicename>dc1</devicename>, vemos
+	    <literal>status: no carrier</literal>.  Isto &eacute; normal quando
 	    o cabo n&atilde;o est&aacute; conectado &agrave; placa.</para>
 	</listitem>
       </orderedlist>
 
-      <para>Se a sa&iacute;da do &man.ifconfig.8; mostrou algo parecido com 
+      <para>Se a sa&iacute;da do &man.ifconfig.8; mostrou algo parecido com
 	</para>
 
 <screen>dc0: flags=8843&lt;BROADCAST,SIMPLEX,MULTICAST&gt; mtu 1500
-	        ether 00:a0:cc:da:da:da</screen>
+		ether 00:a0:cc:da:da:da</screen>
 
       <para>pode indicar que a placa n&atilde;o foi configurada.</para>
 
-      <para>Para configurar sua placa, voc&ecirc; precisa de previl&eacute;gios de 
-	<username>root</username>.  A configura&ccedil;&atilde;o da placa de rede pode 
-	ser feita a partir da linha de comando com o &man.ifconfig.8; mas 
-	voc&ecirc; vai precisar refazer a configura&ccedil;&atilde;o ap&oacute;s cada inicializa&ccedil;ao.  O 
-	arquivo <filename>/etc/rc.conf</filename> &eacute; o lugar para adicionar 
+      <para>Para configurar sua placa, voc&ecirc; precisa de previl&eacute;gios de
+	<username>root</username>.  A configura&ccedil;&atilde;o da placa de rede pode
+	ser feita a partir da linha de comando com o &man.ifconfig.8; mas
+	voc&ecirc; vai precisar refazer a configura&ccedil;&atilde;o ap&oacute;s cada inicializa&ccedil;ao.  O
+	arquivo <filename>/etc/rc.conf</filename> &eacute; o lugar para adicionar
 	a configura&ccedil;&atilde;o da placa de rede.</para>
 
-      <para>Abra o arquivo <filename>/etc/rc.conf</filename> no seu 
-	editor preferido.  Voc&ecirc; precisa adicionar uma linha para cada 
-	placa de rede presente no sistema, por exemplo, em nosso caso, 
+      <para>Abra o arquivo <filename>/etc/rc.conf</filename> no seu
+	editor preferido.  Voc&ecirc; precisa adicionar uma linha para cada
+	placa de rede presente no sistema, por exemplo, em nosso caso,
 	adicionamos estas duas linhas:</para>
 
 <programlisting>ifconfig_dc0="inet 192.168.1.3 netmask 255.255.255.0"
 ifconfig_dc1="inet 10.0.0.1 netmask 255.255.255.0 media 10baseT/UTP"</programlisting>
 
       <para>Voc&ecirc; precisa substituir <devicename>dc0</devicename>,
-	<devicename>dc1</devicename>, e assim sucessivamente, com 
-	nomes de dispositivos corretos para suas placas, e os endere&ccedil;os 
-	apropriados.  Voc&ecirc; deve ler as p&aacute;ginas de manual do 
-	<literal>driver</literal> e &man.ifconfig.8; para mais detalhes 
-	a respeito das op&ccedil;&otilde;es permitidas e tamb&eacute;m 
+	<devicename>dc1</devicename>, e assim sucessivamente, com
+	nomes de dispositivos corretos para suas placas, e os endere&ccedil;os
+	apropriados.  Voc&ecirc; deve ler as p&aacute;ginas de manual do
+	<literal>driver</literal> e &man.ifconfig.8; para mais detalhes
+	a respeito das op&ccedil;&otilde;es permitidas e tamb&eacute;m
 	&man.rc.conf.5; para mais informa&ccedil;&otilde;es sobre a sintaxe em
 	<filename>/etc/rc.conf</filename>.</para>
 
-      <para>Se voc&ecirc; configurou a rede durante a instala&ccedil;&atilde;o, 
+      <para>Se voc&ecirc; configurou a rede durante a instala&ccedil;&atilde;o,
 	algumas linhas de placa(s) de rede podem j&aacute; estar
-	presentes.  Fa&ccedil;a uma verifica&ccedil;&atilde;o dupla no arquivo 
-	<filename>/etc/rc.conf</filename> antes de adicionar 
+	presentes.  Fa&ccedil;a uma verifica&ccedil;&atilde;o dupla no arquivo
+	<filename>/etc/rc.conf</filename> antes de adicionar
 	qualquer linha.</para>
 
-      <para>Voc&ecirc; tamb&eacute;m ter&aacute; que editar o arquivo 
-	<filename>/etc/hosts</filename> para adicionar nomes e 
-	endere&ccedil;os IP das m&aacute;quinas da Rede Local, se estes nomes 
-	ainda n&atilde;o estiverem l&aacute;.  Para mais informa&ccedil;&otilde;es veja &man.hosts.5; 
+      <para>Voc&ecirc; tamb&eacute;m ter&aacute; que editar o arquivo
+	<filename>/etc/hosts</filename> para adicionar nomes e
+	endere&ccedil;os IP das m&aacute;quinas da Rede Local, se estes nomes
+	ainda n&atilde;o estiverem l&aacute;.  Para mais informa&ccedil;&otilde;es veja &man.hosts.5;
 	e <filename>/usr/share/examples/etc/hosts</filename>.</para>
     </sect2>
 
     <sect2>
       <title>Testes e Resolu&ccedil;&atilde;o de Problemas</title>
 
-      <para>Uma vez feitas as configura&ccedil;&otilde;es necess&aacute;rias no 
-	<filename>/etc/rc.conf</filename>, voc&ecirc; deve reinicializar seu 
-	sistema.  Isto far&aacute; com que as mudan&ccedil;as em sua(s) placa(s) de rede 
-	sejam aplicadas, e verifique se seu sistema reinicializa 
+      <para>Uma vez feitas as configura&ccedil;&otilde;es necess&aacute;rias no
+	<filename>/etc/rc.conf</filename>, voc&ecirc; deve reinicializar seu
+	sistema.  Isto far&aacute; com que as mudan&ccedil;as em sua(s) placa(s) de rede
+	sejam aplicadas, e verifique se seu sistema reinicializa
 	sem erros de configura&ccedil;&atilde;o.</para>
 
-      <para>Ap&oacute;s reinicializar o sistema, voc&ecirc; deve testar as 
+      <para>Ap&oacute;s reinicializar o sistema, voc&ecirc; deve testar as
 	interfaces de rede.</para>
 
       <sect3>
@@ -990,9 +990,9 @@ ifconfig_dc1="inet 10.0.0.1 netmask 255.255.255.0 media 10baseT/UTP"</programlis
 	  <secondary>testing the card</secondary>
 	</indexterm>
 
-	<para>Para verificar se uma placa Ethernet foi configurada 
-	  corretamente, voc&ecirc; precisa tentar duas coisas.  Primeiro, execute 
-	  o comando ping para a sua pr&oacute;pria interface, e ent&atilde;o fa&ccedil;a o 
+	<para>Para verificar se uma placa Ethernet foi configurada
+	  corretamente, voc&ecirc; precisa tentar duas coisas.  Primeiro, execute
+	  o comando ping para a sua pr&oacute;pria interface, e ent&atilde;o fa&ccedil;a o
 	  mesmo para outra m&aacute;quina na sua Rede Local.</para>
 
 	<para>Primeiro teste para a interface local:</para>
@@ -1009,7 +1009,7 @@ PING 192.168.1.3 (192.168.1.3): 56 data bytes
 5 packets transmitted, 5 packets received, 0% packet loss
 round-trip min/avg/max/stddev = 0.074/0.083/0.108/0.013 ms</screen>
 
-	<para>Agora temos que usar o <command>ping</command> para outra 
+	<para>Agora temos que usar o <command>ping</command> para outra
 	  m&aacute;quina na Rede Local:</para>
 
 <screen>&prompt.user; <userinput>ping -c5 192.168.1.2</userinput>
@@ -1025,7 +1025,7 @@ PING 192.168.1.2 (192.168.1.2): 56 data bytes
 round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
 
 	<para>Voc&ecirc; tamb&eacute;m pode usar o nome da m&aacute;quina ao inv&eacute;s de
-	  <hostid role="ipaddr">192.168.1.2</hostid> se voc&ecirc; configurou o arquivo 
+	  <hostid role="ipaddr">192.168.1.2</hostid> se voc&ecirc; configurou o arquivo
 	  <filename>/etc/hosts</filename>.</para>
       </sect3>
 
@@ -1038,61 +1038,61 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
       </indexterm>
 
       <para>Resolu&ccedil;&atilde;o de problemas de configura&ccedil;&atilde;o de <literal>hardware</literal>
-	e <literal>software</literal> sempre &eacute; doloroso, e uma dor que pode 
-	ser aliviada atrav&eacute;s da checagem de coisas simples antes de 
-	qualquer coisa.  Seu cabo de rede est&aacute; conectado?  Voc&ecirc; configurou 
-	os servi&ccedil;os de rede corretamente?  Voc&ecirc; configurou o 
-	<foreignphrase>firewall</foreignphrase> corretamente?  A placa de 
-	rede que voc&ecirc; est&aacute; usando &eacute; suportada pelo &os;?  Sempre verifique 
-	as notas de hardware antes de enviar um relat&oacute;rio de falha.  Atualize 
-	sua vers&atilde;o do &os; para a &uacute;ltima vers&atilde;o <literal>STABLE</literal>.  
-	Verifique os arquivos das listas de discuss&atilde;o, ou procure na 
+	e <literal>software</literal> sempre &eacute; doloroso, e uma dor que pode
+	ser aliviada atrav&eacute;s da checagem de coisas simples antes de
+	qualquer coisa.  Seu cabo de rede est&aacute; conectado?  Voc&ecirc; configurou
+	os servi&ccedil;os de rede corretamente?  Voc&ecirc; configurou o
+	<foreignphrase>firewall</foreignphrase> corretamente?  A placa de
+	rede que voc&ecirc; est&aacute; usando &eacute; suportada pelo &os;?  Sempre verifique
+	as notas de hardware antes de enviar um relat&oacute;rio de falha.  Atualize
+	sua vers&atilde;o do &os; para a &uacute;ltima vers&atilde;o <literal>STABLE</literal>.
+	Verifique os arquivos das listas de discuss&atilde;o, ou procure na
 	Internet.</para>
 
-      <para>Se a placa funcionar, e a performance estiver ruim, vale 
-	dar uma lida na p&aacute;gina de manual &man.tuning.7;.  Voc&ecirc; tamb&eacute;m 
-	pode verificar configura&ccedil;&otilde;es de rede incorretas, que podem 
+      <para>Se a placa funcionar, e a performance estiver ruim, vale
+	dar uma lida na p&aacute;gina de manual &man.tuning.7;.  Voc&ecirc; tamb&eacute;m
+	pode verificar configura&ccedil;&otilde;es de rede incorretas, que podem
 	provocar lentid&atilde;o nas conex&otilde;es.</para>
 
       <para>Alguns usu&aacute;rios passam por problemas de um ou dois <quote>device
-	timeouts</quote>, que &eacute; normal em algumas placas.  Se eles 
-	continuarem, ou come&ccedil;ar a incomodar, voc&ecirc; pode querer ter certeza 
-	de que o dispositivo n&atilde;o est&aacute; conflitando com outro dispositivo.  
-	Fa&ccedil;a uma verifica&ccedil;&atilde;o dupla das conex&otilde;es de cabeamento.  Talvez 
+	timeouts</quote>, que &eacute; normal em algumas placas.  Se eles
+	continuarem, ou come&ccedil;ar a incomodar, voc&ecirc; pode querer ter certeza
+	de que o dispositivo n&atilde;o est&aacute; conflitando com outro dispositivo.
+	Fa&ccedil;a uma verifica&ccedil;&atilde;o dupla das conex&otilde;es de cabeamento.  Talvez
 	voc&ecirc; apenas precise de outra placa.</para>
 
-      <para>Algumas vezes, os usu&aacute;rios percebem pequenos erros <errorname>watchdog timeout</errorname>.  
-	A primeira coisa a ser feita &eacute; checar o cabo da conex&atilde;o.  Muitas 
-	placas requerem um <literal>slot</literal> PCI que suporte 
-	gerenciamento de barramento.  Em algumas placas-m&atilde;e antigas, apenas um 
-	<literal>slot</literal> permite isso (geralmente o <literal>slot</literal> 0).  
-	Verifique a documenta&ccedil;&atilde;o da placa de rede e da placa-m&atilde;e 
+      <para>Algumas vezes, os usu&aacute;rios percebem pequenos erros <errorname>watchdog timeout</errorname>.
+	A primeira coisa a ser feita &eacute; checar o cabo da conex&atilde;o.  Muitas
+	placas requerem um <literal>slot</literal> PCI que suporte
+	gerenciamento de barramento.  Em algumas placas-m&atilde;e antigas, apenas um
+	<literal>slot</literal> permite isso (geralmente o <literal>slot</literal> 0).
+	Verifique a documenta&ccedil;&atilde;o da placa de rede e da placa-m&atilde;e
 	para saber se isto pode ser um problema.</para>
 
-      <para>A mensagem <errorname>No route to host</errorname> acontece quando  
-	o sistema n&atilde;o &eacute; capaz de rotear um pacote para a m&aacute;quina de destino.  Isto 
-	pode acontecer se nenhuma rota padr&atilde;o for especificada, ou se um cabo 
-	estiver desconectado.  Verifique a sa&iacute;da do comando 
-	<command>netstat -rn</command> e tenha certeza de que exista 
-	uma rota v&aacute;lida para a m&aacute;quina que voc&ecirc; est&aacute; tentando 
-	alcan&ccedil;ar.  Se n&atilde;o existir, leia o 
+      <para>A mensagem <errorname>No route to host</errorname> acontece quando
+	o sistema n&atilde;o &eacute; capaz de rotear um pacote para a m&aacute;quina de destino.  Isto
+	pode acontecer se nenhuma rota padr&atilde;o for especificada, ou se um cabo
+	estiver desconectado.  Verifique a sa&iacute;da do comando
+	<command>netstat -rn</command> e tenha certeza de que exista
+	uma rota v&aacute;lida para a m&aacute;quina que voc&ecirc; est&aacute; tentando
+	alcan&ccedil;ar.  Se n&atilde;o existir, leia o
 	<xref
 	linkend="advanced-networking">.</para>
 
-      <para>As mensagens de erro <errorname>ping: sendto: Permission denied</errorname> 
-	geralmente s&atilde;o provocadas por um <foreignphrase>firewall</foreignphrase> 
-	desconfigurado.  Se o <command>ipfw</command> estiver habilitado no 
-	<foreignphrase>kernel</foreignphrase> mas n&atilde;o existirem regras definidas, 
-	ent&atilde;o a pol&iacute;tica padr&atilde;o &eacute; de negar todo o tr&aacute;fego, at&eacute; mesmo as 
-	requisi&ccedil;&otilde;es de <command>ping</command>!  
+      <para>As mensagens de erro <errorname>ping: sendto: Permission denied</errorname>
+	geralmente s&atilde;o provocadas por um <foreignphrase>firewall</foreignphrase>
+	desconfigurado.  Se o <command>ipfw</command> estiver habilitado no
+	<foreignphrase>kernel</foreignphrase> mas n&atilde;o existirem regras definidas,
+	ent&atilde;o a pol&iacute;tica padr&atilde;o &eacute; de negar todo o tr&aacute;fego, at&eacute; mesmo as
+	requisi&ccedil;&otilde;es de <command>ping</command>!
 	Leia a <xref
 	linkend="firewalls"> para maiores informa&ccedil;&otilde;es.</para>
 
-      <para>Algumas vezes a performance da placa &eacute; ruim, ou abaixo do 
-	normal.  Nestes casos &eacute; melhor configurar o modo de  sele&ccedil;&atilde;o de m&iacute;dia 
-	de <literal>autoselect</literal> para a velocidade correta.  
-	Enquanto isto pode funcionar para grande parte dos equipamentos, talvez 
-	n&atilde;o resolva o problema de todos.  Novamente, verifique toda a 
+      <para>Algumas vezes a performance da placa &eacute; ruim, ou abaixo do
+	normal.  Nestes casos &eacute; melhor configurar o modo de sele&ccedil;&atilde;o de m&iacute;dia
+	de <literal>autoselect</literal> para a velocidade correta.
+	Enquanto isto pode funcionar para grande parte dos equipamentos, talvez
+	n&atilde;o resolva o problema de todos.  Novamente, verifique toda a
 	configura&ccedil;&atilde;o de rede, e leia a p&aacute;gina de manual &man.tuning.7;.</para>
 
       </sect3>
@@ -1105,46 +1105,46 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
     <indexterm><primary>virtual hosts</primary></indexterm>
     <indexterm><primary>IP aliases</primary></indexterm>
 
-    <para>Um uso muito comum do &os; &eacute; a hospedagem virtual de 
+    <para>Um uso muito comum do &os; &eacute; a hospedagem virtual de
       servidores, onde um servidor parece ser muitos para a rede.  Isto
-      &eacute; feito designando-se multiplos endere&ccedil;os de rede para 
+      &eacute; feito designando-se multiplos endere&ccedil;os de rede para
       uma &uacute;nica interface.</para>
 
     <para>Uma interface de rede possui um endere&ccedil;o <quote>real</quote>,
       e pode possuir qualquer n&uacute;mero de endere&ccedil;os de <quote>alias</quote>.
-      Estes <literal>aliases</literal> normalmente s&atilde;o 
-      adicionados atrav&eacute;s de entradas no arquivo 
+      Estes <literal>aliases</literal> normalmente s&atilde;o
+      adicionados atrav&eacute;s de entradas no arquivo
       <filename>/etc/rc.conf</filename>.</para>
 
-    <para>Uma entrada de <literal>alias</literal> para a interface 
+    <para>Uma entrada de <literal>alias</literal> para a interface
       <devicename>fxp0</devicename> &eacute; assim:</para>
 
 <programlisting>ifconfig_fxp0_alias0="inet xxx.xxx.xxx.xxx netmask xxx.xxx.xxx.xxx"</programlisting>
 
-    <para>Note que as entradas de <literal>alias</literal> devem 
-      come&ccedil;ar com alias0 e continuar em ordem crescente, por 
-      (por exemplo, _alias1, _alias2, e assim sucessivamente).  O 
+    <para>Note que as entradas de <literal>alias</literal> devem
+      come&ccedil;ar com alias0 e continuar em ordem crescente, por
+      (por exemplo, _alias1, _alias2, e assim sucessivamente).  O
       processo de configura&ccedil;&atilde;o se encerrar&aacute; assim que faltar um n&uacute;mero.
-    </para>
+</para>
 
-    <para>O c&aacute;lculo das m&aacute;scaras de <literal>alias</literal> &eacute; importante, 
-      mas ainda bem que &eacute; bem simples.  Para uma interface qualquer, deve 
-      existir um endere&ccedil;o que represente corretamente a m&aacute;scara de rede.  
-      Quaisquer outros endere&ccedil;os dentro desta rede devem ter a 
+    <para>O c&aacute;lculo das m&aacute;scaras de <literal>alias</literal> &eacute; importante,
+      mas ainda bem que &eacute; bem simples.  Para uma interface qualquer, deve
+      existir um endere&ccedil;o que represente corretamente a m&aacute;scara de rede.
+      Quaisquer outros endere&ccedil;os dentro desta rede devem ter a
       m&aacute;scara de <literal>1</literal>s.</para>
 
-    <para>Por exemplo, considere o caso onde a interface 
-      <devicename>fxp0</devicename> &eacute; conectada &agrave; duas redes, a 
+    <para>Por exemplo, considere o caso onde a interface
+      <devicename>fxp0</devicename> &eacute; conectada &agrave; duas redes, a
       rede <hostid role="ipaddr">10.1.1.0</hostid>
       com a m&aacute;scara <hostid role="netmask">255.255.255.0</hostid>
-      e &agrave; rede <hostid role="ipaddr">202.0.75.16</hostid> com a 
+      e &agrave; rede <hostid role="ipaddr">202.0.75.16</hostid> com a
       m&aacute;scara <hostid role="netmask">255.255.255.240</hostid>.
       Queremos que o sistema responda de <hostid role="ipaddr">10.1.1.1</hostid>
-      &agrave; <hostid role="ipaddr">10.1.1.5</hostid> e de 
-      <hostid role="ipaddr">202.0.75.17</hostid> &agrave; 
+      &agrave; <hostid role="ipaddr">10.1.1.5</hostid> e de
+      <hostid role="ipaddr">202.0.75.17</hostid> &agrave;
       <hostid role="ipaddr">202.0.75.20</hostid>.</para>
 
-    <para>As seguintes entradas configuram a placa para este 
+    <para>As seguintes entradas configuram a placa para este
       arranjo:</para>
 
 <programlisting> ifconfig_fxp0="inet 10.1.1.1 netmask 255.255.255.0"
@@ -1164,16 +1164,16 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
 
     <sect2>
       <title>Estrutura do <filename>/etc</filename></title>
-      <para>Existem v&aacute;rios diret&oacute;rios onde as informa&ccedil;&otilde;es 
-        de configura&ccedil;&atilde;o s&atilde;o mantidas.  Incluindo:</para>
+      <para>Existem v&aacute;rios diret&oacute;rios onde as informa&ccedil;&otilde;es
+	de configura&ccedil;&atilde;o s&atilde;o mantidas.  Incluindo:</para>
 
       <informaltable frame="none">
 	<tgroup cols="2">
 	  <tbody>
 	    <row>
 	      <entry><filename>/etc</filename></entry>
-	      <entry>Informa&ccedil;&atilde;o gen&eacute;rica de configura&ccedil;&atilde;o;  aqui os dados 
-                s&atilde;o espec&iacute;ficos do sistema.</entry>
+	      <entry>Informa&ccedil;&atilde;o gen&eacute;rica de configura&ccedil;&atilde;o;  aqui os dados
+		s&atilde;o espec&iacute;ficos do sistema.</entry>
 	    </row>
 	    <row>
 	      <entry><filename>/etc/defaults</filename></entry>
@@ -1181,36 +1181,36 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
 	    </row>
 	    <row>
 	      <entry><filename>/etc/mail</filename></entry>
-	      <entry>Configura&ccedil;&atilde;o extra do &man.sendmail.8;, outros 
+	      <entry>Configura&ccedil;&atilde;o extra do &man.sendmail.8;, outros
 		arquivos de configura&ccedil;&atilde;o de Agentes de Transporde de Correio.
 	      </entry>
 	    </row>
 	    <row>
 	      <entry><filename>/etc/ppp</filename></entry>
-	      <entry>Configura&ccedil;&atilde;o para programas ppp de usu&aacute;rio e de 
+	      <entry>Configura&ccedil;&atilde;o para programas ppp de usu&aacute;rio e de
 		<foreignphrase>kernel</foreignphrase>.
 	      </entry>
 	    </row>
 	    <row>
 	      <entry><filename>/etc/namedb</filename></entry>
-	      <entry>Configura&ccedil;&atilde;o padr&atilde;o dos dados do &man.named.8;.  Normalmente 
-		o arquivo <filename>named.conf</filename> e arquivos de zona 
+	      <entry>Configura&ccedil;&atilde;o padr&atilde;o dos dados do &man.named.8;.  Normalmente
+		o arquivo <filename>named.conf</filename> e arquivos de zona
 		s&atilde;o armazenados aqui.</entry>
 	    </row>
 	    <row>
 	      <entry><filename>/usr/local/etc</filename></entry>
-	      <entry>Arquivos de configura&ccedil;&atilde;o para aplica&ccedil;&otilde;es instaladas.  Pode 
+	      <entry>Arquivos de configura&ccedil;&atilde;o para aplica&ccedil;&otilde;es instaladas.  Pode
 		conter subdiret&oacute;rios por aplica&ccedil;&atilde;o.</entry>
 	    </row>
 	    <row>
 	      <entry><filename>/usr/local/etc/rc.d</filename></entry>
-	      <entry><literal>Scripts</literal> de inicializa&ccedil;&atilde;o/parada 
+	      <entry><literal>Scripts</literal> de inicializa&ccedil;&atilde;o/parada
 		para aplica&ccedil;&otilde;es instaladas.</entry>
 	    </row>
 	    <row>
 	      <entry><filename>/var/db</filename></entry>
-	      <entry>Arquivos de banco de dados espec&iacute;ficos de sistema gerados 
-		 automaticamente, como base da dados de pacotes, a base de dados 
+	      <entry>Arquivos de banco de dados espec&iacute;ficos de sistema gerados
+		 automaticamente, como base da dados de pacotes, a base de dados
 		 <literal>locate</literal>, e assim por diante.</entry>
 	    </row>
 	  </tbody>
@@ -1242,13 +1242,13 @@ round-trip min/avg/max/stddev = 0.700/0.729/0.766/0.025 ms</screen>
 	    <tbody>
 	      <row>
 		<entry><literal>nameserver</literal></entry>
-		<entry>O endere&ccedil;o IP do servidor de nomes que o resolvedor 
-		  deve pesquisar.  Os servidores s&atilde;o na ordem em que est&atilde;o listados 
+		<entry>O endere&ccedil;o IP do servidor de nomes que o resolvedor
+		  deve pesquisar.  Os servidores s&atilde;o na ordem em que est&atilde;o listados
 		  num m&aacute;ximo de tr&ecirc;s.</entry>
 	      </row>
 	      <row>
 		<entry><literal>search</literal></entry>
-		<entry>Lista de pesquisa para a procura do nome de servidor.  Normalmente 
+		<entry>Lista de pesquisa para a procura do nome de servidor.  Normalmente
 		  determinado pelo dom&iacute;nio do servidor local.</entry>
 	      </row>
 	      <row>
@@ -1269,7 +1269,7 @@ nameserver 147.11.100.30</programlisting>
 	  <literal>domain</literal> devem ser usadas.</para></note>
 
 	<para>Se voc&ecirc; estiver usando geralmente o &man.dhclient.8;, ele reescreve o
-	  <filename>resolv.conf</filename> com a informa&ccedil;&atilde;o recebida do 
+	  <filename>resolv.conf</filename> com a informa&ccedil;&atilde;o recebida do
 	  servidor DHCP.</para>
       </sect3>
 
@@ -1278,14 +1278,14 @@ nameserver 147.11.100.30</programlisting>
 
 	<indexterm><primary>hosts</primary></indexterm>
 
-	<para>O arquivo <filename>/etc/hosts</filename> &eacute; uma base em texto 
-	  remanescente da velha Internet.  Funciona em conjunto com o servidores 
-	  DNS e NIS oferecendo mapeamento de nome para endere&ccedil;os IP.  Computadores 
-	  locais conectados &agrave; Rede Local podem ser colocados aqui para prop&oacute;sitos 
-	  simples de nomeamento ao inv&eacute;s de configurar um servidor &man.named.8;.  
-	  Adicionalmente, o arquivo 
-	  <filename>/etc/hosts</filename> pode ser usado para oferecer uma 
-	  base local de nomes Internet, reduzindo a necessidade de pesquisa externa 
+	<para>O arquivo <filename>/etc/hosts</filename> &eacute; uma base em texto
+	  remanescente da velha Internet.  Funciona em conjunto com o servidores
+	  DNS e NIS oferecendo mapeamento de nome para endere&ccedil;os IP.  Computadores
+	  locais conectados &agrave; Rede Local podem ser colocados aqui para prop&oacute;sitos
+	  simples de nomeamento ao inv&eacute;s de configurar um servidor &man.named.8;.
+	  Adicionalmente, o arquivo
+	  <filename>/etc/hosts</filename> pode ser usado para oferecer uma
+	  base local de nomes Internet, reduzindo a necessidade de pesquisa externa
 	  para nomes geralmente mais usados.</para>
 
 	<programlisting># &dollar;&os;&dollar;
@@ -1297,18 +1297,18 @@ nameserver 147.11.100.30</programlisting>
 # not be consulted at all; see /etc/nsswitch.conf for the resolution order.
 #
 #
-::1                     localhost localhost.my.domain myname.my.domain
-127.0.0.1               localhost localhost.my.domain myname.my.domain
+::1		     localhost localhost.my.domain myname.my.domain
+127.0.0.1	       localhost localhost.my.domain myname.my.domain
 
 #
 # Imaginary network.
-#10.0.0.2               myname.my.domain myname
-#10.0.0.3               myfriend.my.domain myfriend
+#10.0.0.2	       myname.my.domain myname
+#10.0.0.3	       myfriend.my.domain myfriend
 #
 # According to RFC 1918, you can use the following IP networks for
 # private nets which will never be connected to the Internet:
 #
-#       10.0.0.0        -   10.255.255.255
+#       10.0.0.0	-   10.255.255.255
 #       172.16.0.0      -   172.31.255.255
 #       192.168.0.0     -   192.168.255.255
 #
@@ -1320,7 +1320,7 @@ nameserver 147.11.100.30</programlisting>
 #</programlisting>
 
 	<para>O arquivo <filename>/etc/hosts</filename> possui o seguinte formato:
-	  </para>
+	</para>
 
 	<programlisting>[Endere&ccedil;o Internet] [hostname oficial] [apelido1] [apelido2] ...</programlisting>
 
@@ -1342,44 +1342,44 @@ nameserver 147.11.100.30</programlisting>
 
 	<indexterm><primary>syslog.conf</primary></indexterm>
 
-	<para><filename>syslog.conf</filename> &eacute; um arquivo de configura&ccedil;&atilde;o para 
-	  o programa &man.syslogd.8;.  Indica que tipo de mensagens do 
-	  <command>syslog</command> s&atilde;o armazenadas nos arquivos 
+	<para><filename>syslog.conf</filename> &eacute; um arquivo de configura&ccedil;&atilde;o para
+	  o programa &man.syslogd.8;.  Indica que tipo de mensagens do
+	  <command>syslog</command> s&atilde;o armazenadas nos arquivos
 	  de log.</para>
 
 	<programlisting># &dollar;&os;&dollar;
 #
-#       Spaces ARE valid field separators in this file. However,
+#       Spaces ARE valid field separators in this file.  However,
 #       other *nix-like systems still insist on using tabs as field
-#       separators. If you are sharing this file between systems, you
+#       separators.  If you are sharing this file between systems, you
 #       may want to use only tabs as field separators here.
 #       Consult the syslog.conf(5) manual page.
-*.err;kern.debug;auth.notice;mail.crit          /dev/console
+*.err;kern.debug;auth.notice;mail.crit	  /dev/console
 *.notice;kern.debug;lpr.info;mail.crit;news.err /var/log/messages
-security.*                                      /var/log/security
-mail.info                                       /var/log/maillog
-lpr.info                                        /var/log/lpd-errs
-cron.*                                          /var/log/cron
-*.err                                           root
-*.notice;news.err                               root
-*.alert                                         root
-*.emerg                                         *
+security.*				      /var/log/security
+mail.info				       /var/log/maillog
+lpr.info					/var/log/lpd-errs
+cron.*					  /var/log/cron
+*.err					   root
+*.notice;news.err			       root
+*.alert					 root
+*.emerg					 *
 # uncomment this to log all writes to /dev/console to /var/log/console.log
-#console.info                                   /var/log/console.log
+#console.info				   /var/log/console.log
 # uncomment this to enable logging of all log messages to /var/log/all.log
-#*.*                                            /var/log/all.log
+#*.*					    /var/log/all.log
 # uncomment this to enable logging to a remote log host named loghost
-#*.*                                            @loghost
+#*.*					    @loghost
 # uncomment these if you're running inn
-# news.crit                                     /var/log/news/news.crit
-# news.err                                      /var/log/news/news.err
-# news.notice                                   /var/log/news/news.notice
+# news.crit				     /var/log/news/news.crit
+# news.err				      /var/log/news/news.err
+# news.notice				   /var/log/news/news.notice
 !startslip
-*.*                                             /var/log/slip.log
+*.*					     /var/log/slip.log
 !ppp
-*.*                                             /var/log/ppp.log</programlisting>
+*.*					     /var/log/ppp.log</programlisting>
 
-	<para>Consulte a p&aacute;gina de manual do &man.syslog.conf.5; para mais 
+	<para>Consulte a p&aacute;gina de manual do &man.syslog.conf.5; para mais
 	  informa&ccedil;&atilde;o.</para>
       </sect3>
 
@@ -1388,45 +1388,45 @@ cron.*                                          /var/log/cron
 
 	<indexterm><primary>newsyslog.conf</primary></indexterm>
 
-	<para><filename>newsyslog.conf</filename> &eacute; o arquivo de configura&ccedil;&atilde;o 
-	  para o &man.newsyslog.8;, um programa que normalmente &eacute; agendado para ser executado pelo 
-	  &man.cron.8;.  O &man.newsyslog.8; determina quando os arquivos de 
-	  log necessitam ser arquivados ou reorganizados.  
-	  <filename>arquivolog</filename> &eacute; renomeado para 
+	<para><filename>newsyslog.conf</filename> &eacute; o arquivo de configura&ccedil;&atilde;o
+	  para o &man.newsyslog.8;, um programa que normalmente &eacute; agendado para ser executado pelo
+	  &man.cron.8;.  O &man.newsyslog.8; determina quando os arquivos de
+	  log necessitam ser arquivados ou reorganizados.
+	  <filename>arquivolog</filename> &eacute; renomeado para
 	  <filename>arquivolog.0</filename>, <filename>arquivolog.0</filename>
 	  &eacute; renomeado para <filename>arquivolog.1</filename>, e assim sucessivamente.
-	  Alternativamente, os arquivos de log podem ser arquivados no formato &man.gzip.1;, 
+	  Alternativamente, os arquivos de log podem ser arquivados no formato &man.gzip.1;,
 	  fazendo com que sejam nomeados: <filename>arquivolog.0.gz</filename>,
 	  <filename>arquivolog.1.gz</filename>, e assim sucessivamente.</para>
 
-	<para><filename>newsyslog.conf</filename> indica os arquivos de log 
-	  a serem gerenciados, quantos devem ser mantidos, e quando devem 
-	  ser modificados.  Arquivos de log podem ser rearranjados e/ou 
-	  arquivados ao chegarem &agrave; um determinado tamanho, ou em um 
+	<para><filename>newsyslog.conf</filename> indica os arquivos de log
+	  a serem gerenciados, quantos devem ser mantidos, e quando devem
+	  ser modificados.  Arquivos de log podem ser rearranjados e/ou
+	  arquivados ao chegarem &agrave; um determinado tamanho, ou em um
 	  per&iacute;odo de tempo/data.</para>
 
 	<programlisting># configuration file for newsyslog
 # &dollar;&os;&dollar;
 #
-# filename          [owner:group]    mode count size when [ZB] [/pid_file] [sig_num]
-/var/log/cron                           600  3     100  *     Z
-/var/log/amd.log                        644  7     100  *     Z
-/var/log/kerberos.log                   644  7     100  *     Z
-/var/log/lpd-errs                       644  7     100  *     Z
-/var/log/maillog                        644  7     *    @T00  Z
-/var/log/sendmail.st                    644  10    *    168   B
-/var/log/messages                       644  5     100  *     Z
-/var/log/all.log                        600  7     *    @T00  Z
-/var/log/slip.log                       600  3     100  *     Z
-/var/log/ppp.log                        600  3     100  *     Z
-/var/log/security                       600  10    100  *     Z
-/var/log/wtmp                           644  3     *    @01T05 B
-/var/log/daily.log                      640  7     *    @T00  Z
-/var/log/weekly.log                     640  5     1    $W6D0 Z
-/var/log/monthly.log                    640  12    *    $M1D0 Z
-/var/log/console.log                    640  5     100  *     Z</programlisting>
+# filename	  [owner:group]    mode count size when [ZB] [/pid_file] [sig_num]
+/var/log/cron			   600 3     100  *     Z
+/var/log/amd.log			644 7     100  *     Z
+/var/log/kerberos.log		   644 7     100  *     Z
+/var/log/lpd-errs		       644 7     100  *     Z
+/var/log/maillog			644 7     *    @T00 Z
+/var/log/sendmail.st		    644 10    *    168   B
+/var/log/messages		       644 5     100  *     Z
+/var/log/all.log			600 7     *    @T00 Z
+/var/log/slip.log		       600 3     100  *     Z
+/var/log/ppp.log			600 3     100  *     Z
+/var/log/security		       600 10    100  *     Z
+/var/log/wtmp			   644 3     *    @01T05 B
+/var/log/daily.log		      640 7     *    @T00 Z
+/var/log/weekly.log		     640 5     1    $W6D0 Z
+/var/log/monthly.log		    640 12    *    $M1D0 Z
+/var/log/console.log		    640 5     100  *     Z</programlisting>
 
-	<para>Consulte p&aacute;gina de manual do &man.newsyslog.8; para mais 
+	<para>Consulte p&aacute;gina de manual do &man.newsyslog.8; para mais
 	  informa&ccedil;&atilde;o.</para>
       </sect3>
     </sect2>
@@ -1437,18 +1437,18 @@ cron.*                                          /var/log/cron
       <indexterm><primary>sysctl.conf</primary></indexterm>
       <indexterm><primary>sysctl</primary></indexterm>
 
-      <para><filename>sysctl.conf</filename> se parece muito com o 
-	<filename>rc.conf</filename>.  Os valores s&atilde;o ajustados no formato 
-	<literal>vari&aacute;vel=valor</literal>.  
-	Os valores especificados s&atilde;o configurados antes do sistema 
-	alcan&ccedil;ar o modo multi usu&aacute;rio.  Nem todas as vari&aacute;veis s&atilde;o 
+      <para><filename>sysctl.conf</filename> se parece muito com o
+	<filename>rc.conf</filename>.  Os valores s&atilde;o ajustados no formato
+	<literal>vari&aacute;vel=valor</literal>.
+	Os valores especificados s&atilde;o configurados antes do sistema
+	alcan&ccedil;ar o modo multi usu&aacute;rio.  Nem todas as vari&aacute;veis s&atilde;o
 	ajust&aacute;veis neste modo.</para>
 
-      <para>Um exemplo de <filename>sysctl.conf</filename> desligando a emiss&atilde;o de 
-	log de sinais de sa&iacute;das fatais fazendo com que os programas Linux saibam 
+      <para>Um exemplo de <filename>sysctl.conf</filename> desligando a emiss&atilde;o de
+	log de sinais de sa&iacute;das fatais fazendo com que os programas Linux saibam
 	que est&atilde;o realmente sendo executados sob o &os;.</para>
 
-      <programlisting>kern.logsigexit=0       # Do not log fatal signal exits (e.g. sig 11)
+      <programlisting>kern.logsigexit=0       # Do not log fatal signal exits (e.g.  sig 11)
 compat.linux.osname=&os;
 compat.linux.osrelease=4.3-STABLE</programlisting>
     </sect2>
@@ -1463,12 +1463,12 @@ compat.linux.osrelease=4.3-STABLE</programlisting>
       <secondary>with sysctl</secondary>
     </indexterm>
 
-    <para>O &man.sysctl.8; &eacute; uma interface que permite que voc&ecirc; fa&ccedil;a mudan&ccedil;as 
-      em um sistema &os; em tempo real.  Isto inclui muitas op&ccedil;&otilde;es 
-      avan&ccedil;adas da pilha TCP/IP e sistema de mem&oacute;ria virtual que 
+    <para>O &man.sysctl.8; &eacute; uma interface que permite que voc&ecirc; fa&ccedil;a mudan&ccedil;as
+      em um sistema &os; em tempo real.  Isto inclui muitas op&ccedil;&otilde;es
+      avan&ccedil;adas da pilha TCP/IP e sistema de mem&oacute;ria virtual que
       podem ser configurados atrav&eacute;s do &man.sysctl.8;.</para>
 
-    <para>Na sua ess&ecirc;ncia, o &man.sysctl.8; tem duas fun&ccedil;&otilde;es: 
+    <para>Na sua ess&ecirc;ncia, o &man.sysctl.8; tem duas fun&ccedil;&otilde;es:
       ler e modificar configura&ccedil;&otilde;es do sistema.</para>
 
     <para>Para ver todas as vari&aacute;veis que podem ser lidas:</para>
@@ -1481,53 +1481,53 @@ compat.linux.osrelease=4.3-STABLE</programlisting>
     <screen>&prompt.user; <userinput>sysctl kern.maxproc</userinput>
 kern.maxproc: 1044</screen>
 
-    <para>Para configurar um valor em particular, use a sintaxe intuitiva 
+    <para>Para configurar um valor em particular, use a sintaxe intuitiva
       <replaceable>vari&aacute;vel</replaceable>=<replaceable>valor</replaceable>
-      </para>
+</para>
 
     <screen>&prompt.root; <userinput>sysctl kern.maxfiles=5000</userinput>
 kern.maxfiles: 2088 -> 5000</screen>
 
-    <para>Configura&ccedil;&otilde;es de vari&aacute;veis do sysctl geralmente s&atilde;o 
-      <literal>strings</literal>, n&uacute;meros ou boleanos (sendo um boleano 
-      <literal>1</literal> para sim ou <literal>0</literal> 
+    <para>Configura&ccedil;&otilde;es de vari&aacute;veis do sysctl geralmente s&atilde;o
+      <literal>strings</literal>, n&uacute;meros ou boleanos (sendo um boleano
+      <literal>1</literal> para sim ou <literal>0</literal>
       para n&atilde;o).</para>
 
   <sect2 id="sysctl-readonly">
     <sect2info>
       <authorgroup>
-        <author>
+	<author>
 	 <firstname>Tom</firstname>
 	 <surname>Rhodes</surname>
 	 <contrib>Contribui&ccedil;&atilde;o de </contrib>
 	 <!-- 31 January 2003 -->
-        </author>
+	</author>
       </authorgroup>
     </sect2info>
     <title>&man.sysctl.8; Apenas para Leitura</title>
 
-    <para>Em alguns casos pode ser desej&aacute;vel modificar valores &man.sysctl.8; 
-      que possam apenas ser lidos.  Enquanto isto n&atilde;o seja recomend&aacute;vel, 
+    <para>Em alguns casos pode ser desej&aacute;vel modificar valores &man.sysctl.8;
+      que possam apenas ser lidos.  Enquanto isto n&atilde;o seja recomend&aacute;vel,
       algumas vezes tamb&eacute;m pode ser inevit&aacute;vel.</para>
 
-    <para>Por exemplo, em alguns modelos de computadores port&aacute;teis o 
-      dispositivo &man.cardbus.4; n&atilde;o provar&aacute; algumas faixas de mem&oacute;ria, 
+    <para>Por exemplo, em alguns modelos de computadores port&aacute;teis o
+      dispositivo &man.cardbus.4; n&atilde;o provar&aacute; algumas faixas de mem&oacute;ria,
       e causar&aacute; falhas com erros parecidos com este:</para>
 
     <screen>cbb0: Could not map register memory</screen>
     <screen>device_probe_and_attach: cbb0 attach returned 12</screen>
 
-    <para>Casos como este acima geralmente requerem a modifica&ccedil;&atilde;o de 
-      algumas configura&ccedil;&otilde;es padr&atilde;o do &man.sysctl.8; que s&atilde;o apenas 
-      para leitura.  Para mudar esta situa&ccedil;&atilde;o o usu&aacute;rio pode colocar 
+    <para>Casos como este acima geralmente requerem a modifica&ccedil;&atilde;o de
+      algumas configura&ccedil;&otilde;es padr&atilde;o do &man.sysctl.8; que s&atilde;o apenas
+      para leitura.  Para mudar esta situa&ccedil;&atilde;o o usu&aacute;rio pode colocar
       <quote>OIDs</quote> de &man.sysctl.8; em seu arquivo local
-      <filename>/boot/loader.conf</filename>.  Configura&ccedil;&otilde;es 
+      <filename>/boot/loader.conf</filename>.  Configura&ccedil;&otilde;es
       padr&atilde;o est&atilde;o localizadas no arquivo <filename>/boot/defaults/loader.conf</filename>.
-      </para>
+</para>
 
-    <para>Consertar o problema mencionado acima pode requerer que o 
+    <para>Consertar o problema mencionado acima pode requerer que o
       usu&aacute;rio configure a op&ccedil;&atilde;o
-      <option>hw.pci.allow_unsupported_io_range=1</option> no arquivo 
+      <option>hw.pci.allow_unsupported_io_range=1</option> no arquivo
       mencionado anteriormente.  Agora o
       &man.cardbus.4; funcionar&aacute; adequadamente.</para>
 
@@ -1547,28 +1547,28 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <primary><varname>vfs.vmiodirenable</varname></primary>
 	</indexterm>
 
-	<para>A vari&aacute;vel sysctl <varname>vfs.vmiodirenable</varname> pode 
-	  ser configurada tanto para 0 (desligada) ou 1 (ligada);  onde 
-	  o padr&atilde;o &eacute; 1.  Esta vari&aacute;vel controla como os diret&oacute;rios s&atilde;o 
-	  cacheados pelo sistema.  Muitos diret&oacute;rios s&atilde;o pequenos, utilizando apenas 
-	  um fragmento (tipicamente 1&nbsp;K) no sistema de arquivos 
-	  e menos no cache do <foreignphrase>buffer</foreignphrase> 
-	  (tipicamente 512&nbsp;bytes).  Entretanto, ao operar em modo 
-	  padr&atilde;o o cache do <foreignphrase>buffer</foreignphrase> ir&aacute; cachear 
-	  apenas um n&uacute;mero fixo de diret&oacute;rio ainda que voc&ecirc; tenha uma grande 
-	  quantidade de mem&oacute;ria.  Ligar este sysctl permite que o cache do 
-	  <foreignphrase>buffer</foreignphrase> use o 
-	  <literal>VM Page Cache</literal> para cachear os diret&oacute;rios, 
-	  fazendo com que toda mem&oacute;ria dispon&iacute;vel possa ser usada para 
-	  cachear diret&oacute;rios.  Entretanto, o m&iacute;nimo de mem&oacute;ria usada 
-	  para cachear um diret&oacute;rio &eacute; o tamanho de uma p&aacute;gina f&iacute;sica 
-	  (tipicamente 4&nbsp;K) ao inv&eacute;s de 512&nbsp;bytes.  Recomendamos 
-	  que esta vari&aacute;vel seja ligada se voc&ecirc; estiver usando servi&ccedil;os 
-	  que manipulem um grande n&uacute;mero de arquivos.  Servi&ccedil;os como web 
-	  caches, grandes sistemas de correio eletr&ocirc;nico, e sistemas de 
-	  not&iacute;cias.  Ligar esta vari&aacute;vel geralmente n&atilde;o reduzir&aacute; a 
-	  performance, mesmo com a mem&oacute;ria desperdi&ccedil;ada, mas voc&ecirc; 
-	  deve tentar para descobrir.</para> 
+	<para>A vari&aacute;vel sysctl <varname>vfs.vmiodirenable</varname> pode
+	  ser configurada tanto para 0 (desligada) ou 1 (ligada);  onde
+	  o padr&atilde;o &eacute; 1.  Esta vari&aacute;vel controla como os diret&oacute;rios s&atilde;o
+	  cacheados pelo sistema.  Muitos diret&oacute;rios s&atilde;o pequenos, utilizando apenas
+	  um fragmento (tipicamente 1&nbsp;K) no sistema de arquivos
+	  e menos no cache do <foreignphrase>buffer</foreignphrase>
+	  (tipicamente 512&nbsp;bytes).  Entretanto, ao operar em modo
+	  padr&atilde;o o cache do <foreignphrase>buffer</foreignphrase> ir&aacute; cachear
+	  apenas um n&uacute;mero fixo de diret&oacute;rio ainda que voc&ecirc; tenha uma grande
+	  quantidade de mem&oacute;ria.  Ligar este sysctl permite que o cache do
+	  <foreignphrase>buffer</foreignphrase> use o
+	  <literal>VM Page Cache</literal> para cachear os diret&oacute;rios,
+	  fazendo com que toda mem&oacute;ria dispon&iacute;vel possa ser usada para
+	  cachear diret&oacute;rios.  Entretanto, o m&iacute;nimo de mem&oacute;ria usada
+	  para cachear um diret&oacute;rio &eacute; o tamanho de uma p&aacute;gina f&iacute;sica
+	  (tipicamente 4&nbsp;K) ao inv&eacute;s de 512&nbsp;bytes.  Recomendamos
+	  que esta vari&aacute;vel seja ligada se voc&ecirc; estiver usando servi&ccedil;os
+	  que manipulem um grande n&uacute;mero de arquivos.  Servi&ccedil;os como web
+	  caches, grandes sistemas de correio eletr&ocirc;nico, e sistemas de
+	  not&iacute;cias.  Ligar esta vari&aacute;vel geralmente n&atilde;o reduzir&aacute; a
+	  performance, mesmo com a mem&oacute;ria desperdi&ccedil;ada, mas voc&ecirc;
+	  deve tentar para descobrir.</para>
       </sect3>
 
      <sect3>
@@ -1578,15 +1578,15 @@ kern.maxfiles: 2088 -> 5000</screen>
  	  <primary><varname>vfs.write_behind</varname></primary>
  	</indexterm>
 
- 	<para>A vari&aacute;vel sysctl <varname>vfs.write_behind</varname> possui 
- 	  valor padr&atilde;o <literal>1</literal> (ligada).  Isto diz para que o 
-	  sistema de arquivos fa&ccedil;a uma escrita completa assim que uma 
-	  seq&uuml;&ecirc;ncia de <literal>clusters</literal> seja coletada, 
-	  isto tipicamente ocorre numa escrita de grandes arquivos 
-	  sequenciais.  A id&eacute;ia &eacute; evitar a satura&ccedil;&atilde;o do cache do  
-	  <foreignphrase>buffer</foreignphrase> com <foreignphrase>buffers</foreignphrase> 
-	  sujos quando isto n&atilde;o beneficiar a performance de E/S.  Entretanto, 
-	  isto pode paralizar processos, e sob algumas circunst&acirc;ncias voc&ecirc; 
+ 	<para>A vari&aacute;vel sysctl <varname>vfs.write_behind</varname> possui
+ 	  valor padr&atilde;o <literal>1</literal> (ligada).  Isto diz para que o
+	  sistema de arquivos fa&ccedil;a uma escrita completa assim que uma
+	  seq&uuml;&ecirc;ncia de <literal>clusters</literal> seja coletada,
+	  isto tipicamente ocorre numa escrita de grandes arquivos
+	  sequenciais.  A id&eacute;ia &eacute; evitar a satura&ccedil;&atilde;o do cache do
+	  <foreignphrase>buffer</foreignphrase> com <foreignphrase>buffers</foreignphrase>
+	  sujos quando isto n&atilde;o beneficiar a performance de E/S.  Entretanto,
+	  isto pode paralizar processos, e sob algumas circunst&acirc;ncias voc&ecirc;
 	  pode querer desligar esta vari&aacute;vel.</para>
        </sect3>
 
@@ -1597,22 +1597,22 @@ kern.maxfiles: 2088 -> 5000</screen>
  	  <primary><varname>vfs.hirunningspace</varname></primary>
  	</indexterm>
 
- 	<para>A vari&aacute;vel sysctl <varname>vfs.hirunningspace</varname> 
- 	  determina a quantidade excedente de escrita de I/O que pode ser 
-	  enfileirada nos controladores de disco globais do sistema 
-	  em qualquer ocasi&atilde;o.  O padr&atilde;o normalmente &eacute; suficiente, mas 
-	  em m&aacute;quinas com muitos discos voc&ecirc; pode querer aumentar para 
-	  quatro ou cinco <emphasis>megabytes</emphasis>.  Note que 
-	  configurar um valor alto (excedendo o ponto inicial do buffer de 
-	  escrita do cache) pode levar a uma performance de 
-	  <foreignphrase>clustering</foreignphrase> degradante.  N&atilde;o 
-	  configure esta vari&aacute;vel com um valor arbitrariamente alto!  
-	  Valores altos de escrita podem adicionar lat&ecirc;ncia em 
+ 	<para>A vari&aacute;vel sysctl <varname>vfs.hirunningspace</varname>
+ 	  determina a quantidade excedente de escrita de I/O que pode ser
+	  enfileirada nos controladores de disco globais do sistema
+	  em qualquer ocasi&atilde;o.  O padr&atilde;o normalmente &eacute; suficiente, mas
+	  em m&aacute;quinas com muitos discos voc&ecirc; pode querer aumentar para
+	  quatro ou cinco <emphasis>megabytes</emphasis>.  Note que
+	  configurar um valor alto (excedendo o ponto inicial do buffer de
+	  escrita do cache) pode levar a uma performance de
+	  <foreignphrase>clustering</foreignphrase> degradante.  N&atilde;o
+	  configure esta vari&aacute;vel com um valor arbitrariamente alto!
+	  Valores altos de escrita podem adicionar lat&ecirc;ncia em
 	  leituras ocorridas simultaneamente.</para>
 
- 	<para>Existem outras vari&aacute;veis sysctl de cache de buffer e 
-	  p&aacute;gina VM.  N&atilde;o recomendamos a modifica&ccedil;&atilde;o de seus valores.  
-	  Assim como no &os; 4.3, o sistema VM realiza um excelente 
+ 	<para>Existem outras vari&aacute;veis sysctl de cache de buffer e
+	  p&aacute;gina VM.  N&atilde;o recomendamos a modifica&ccedil;&atilde;o de seus valores.
+	  Assim como no &os; 4.3, o sistema VM realiza um excelente
 	  trabalho ajustando-se automaticamente.</para>
        </sect3>
 
@@ -1623,27 +1623,27 @@ kern.maxfiles: 2088 -> 5000</screen>
  	  <primary><varname>vm.swap_idle_enabled</varname></primary>
  	</indexterm>
 
- 	<para>A vari&aacute;vel sysctl <varname>vm.swap_idle_enabled</varname> 
- 	  &eacute; &uacute;til em grandes sistemas multi-usu&aacute;rio onde voc&ecirc; tem muitos 
-	  usu&aacute;rios entrando e saindo do sistema e muitos processos 
-	  ociosos.  Estes sistemas tendem a gerar uma press&atilde;o 
-	  consider&aacute;vel e cont&iacute;nua nas reservas de mem&oacute;ria livre.  
-	  Sintonizar esta caracter&iacute;stica e ajustar a histeria de 
-	  <literal>swapout</literal> (em segundos fora de uso) atrav&eacute;s de 
+ 	<para>A vari&aacute;vel sysctl <varname>vm.swap_idle_enabled</varname>
+ 	  &eacute; &uacute;til em grandes sistemas multi-usu&aacute;rio onde voc&ecirc; tem muitos
+	  usu&aacute;rios entrando e saindo do sistema e muitos processos
+	  ociosos.  Estes sistemas tendem a gerar uma press&atilde;o
+	  consider&aacute;vel e cont&iacute;nua nas reservas de mem&oacute;ria livre.
+	  Sintonizar esta caracter&iacute;stica e ajustar a histeria de
+	  <literal>swapout</literal> (em segundos fora de uso) atrav&eacute;s de
  	  <varname>vm.swap_idle_threshold1</varname> e
- 	  <varname>vm.swap_idle_threshold2</varname> permite que voc&ecirc; 
-	  diminua mais rapidamente a prioridade das p&aacute;ginas de 
-	  mem&oacute;ria associadas &agrave; processos ociosos do algoritmo 
-	  padr&atilde;o de <literal>pageout</literal>.  Isto d&aacute; uma ajuda ao 
-	  <literal>daemon de pageout</literal>.  N&atilde;o ligue esta op&ccedil;&atilde;o 
-	  a menos que voc&ecirc; precise, pois a troca que voc&ecirc; est&aacute; fazendo 
-	  &eacute; essencialmente mem&oacute;ria de pr&eacute;-p&aacute;gina antes ao inv&eacute;s de 
-	  tardia; consumindo mais <literal>swap</literal> e banda de 
-	  disco.  Em um sistema pequeno esta op&ccedil;&atilde;o ter&aacute; um efeito 
-	  determin&aacute;vel, mas em um sistema maior que j&aacute; est&aacute; fazendo 
-	  uma pagina&ccedil;&atilde;o moderada esta op&ccedil;&atilde;o permite ao sistema VM 
-	  organizar os processos que entram e saem da mem&oacute;ria mais 
-	  facilmente.</para>  
+ 	  <varname>vm.swap_idle_threshold2</varname> permite que voc&ecirc;
+	  diminua mais rapidamente a prioridade das p&aacute;ginas de
+	  mem&oacute;ria associadas &agrave; processos ociosos do algoritmo
+	  padr&atilde;o de <literal>pageout</literal>.  Isto d&aacute; uma ajuda ao
+	  <literal>daemon de pageout</literal>.  N&atilde;o ligue esta op&ccedil;&atilde;o
+	  a menos que voc&ecirc; precise, pois a troca que voc&ecirc; est&aacute; fazendo
+	  &eacute; essencialmente mem&oacute;ria de pr&eacute;-p&aacute;gina antes ao inv&eacute;s de
+	  tardia; consumindo mais <literal>swap</literal> e banda de
+	  disco.  Em um sistema pequeno esta op&ccedil;&atilde;o ter&aacute; um efeito
+	  determin&aacute;vel, mas em um sistema maior que j&aacute; est&aacute; fazendo
+	  uma pagina&ccedil;&atilde;o moderada esta op&ccedil;&atilde;o permite ao sistema VM
+	  organizar os processos que entram e saem da mem&oacute;ria mais
+	  facilmente.</para>
        </sect3>
 
       <sect3>
@@ -1653,25 +1653,25 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <primary><varname>hw.ata.wc</varname></primary>
 	</indexterm>
 
-	<para>O &os;&nbsp;4.3 flertou com o desligamento do cache de escrita IDE.  
-	  Isto reduziu a largura de banda de escrita em discos IDE e 
-	  foi considerado necess&aacute;rio devido a s&eacute;rias quest&otilde;es de consist&ecirc;ncia 
-	  de dados introduzidas pelos fabricantes de discos r&iacute;gidos.  O 
-	  problema &eacute; que discos IDE mentem quando uma escrita &eacute; 
-	  completada.  Com o cache de escrita de IDE ligado, estes discos 
-	  n&atilde;o somente escrevem dados no disco fora de ordem, mas algumas 
-	  vezes atrasar&aacute; a escrita de alguns blocos indefinidamente quando 
-	  estiver sob grande carga.  Um problema ou uma falha de energia 
-	  pode causar corrup&ccedil;&otilde;es s&eacute;rias no sistema de arquivos.  O padr&atilde;o 
-	  do &os; foi modificado para ser seguro.  Infelizmente, o resultado 
-	  foi uma grande perda de performance, e voltamos a ligar o cache 
-	  de escrita por padr&atilde;o.  Voc&ecirc; pode checar o padr&atilde;o do seu sistema 
-	  observando a vari&aacute;vel sysctl <varname>hw.ata.wc</varname>.  Se 
-	  o cache de escrita IDE estiver desligado, voc&ecirc; pode liga-lo de 
+	<para>O &os;&nbsp;4.3 flertou com o desligamento do cache de escrita IDE.
+	  Isto reduziu a largura de banda de escrita em discos IDE e
+	  foi considerado necess&aacute;rio devido a s&eacute;rias quest&otilde;es de consist&ecirc;ncia
+	  de dados introduzidas pelos fabricantes de discos r&iacute;gidos.  O
+	  problema &eacute; que discos IDE mentem quando uma escrita &eacute;
+	  completada.  Com o cache de escrita de IDE ligado, estes discos
+	  n&atilde;o somente escrevem dados no disco fora de ordem, mas algumas
+	  vezes atrasar&aacute; a escrita de alguns blocos indefinidamente quando
+	  estiver sob grande carga.  Um problema ou uma falha de energia
+	  pode causar corrup&ccedil;&otilde;es s&eacute;rias no sistema de arquivos.  O padr&atilde;o
+	  do &os; foi modificado para ser seguro.  Infelizmente, o resultado
+	  foi uma grande perda de performance, e voltamos a ligar o cache
+	  de escrita por padr&atilde;o.  Voc&ecirc; pode checar o padr&atilde;o do seu sistema
+	  observando a vari&aacute;vel sysctl <varname>hw.ata.wc</varname>.  Se
+	  o cache de escrita IDE estiver desligado, voc&ecirc; pode liga-lo de
 	  volta configurando a vari&aacute;vel de <foreignphrase>kernel</foreignphrase>
-	  de volta para 1.  Isto 
-	  deve ser feito pelo carregador de inicializa&ccedil;&atilde;o durante a 
-	  inicializa&ccedil;&atilde;o.  Tentar fazer isso depois da inicializa&ccedil;&atilde;o do 
+	  de volta para 1.  Isto
+	  deve ser feito pelo carregador de inicializa&ccedil;&atilde;o durante a
+	  inicializa&ccedil;&atilde;o.  Tentar fazer isso depois da inicializa&ccedil;&atilde;o do
 	  <foreignphrase>kernel</foreignphrase> n&atilde;o surtir&aacute; efeito.</para>
 
 	<para>Para mais informa&ccedil;&otilde;es veja &man.ata.4;.</para>
@@ -1686,15 +1686,15 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <secondary><varname>kern.cam.scsi_delay</varname></secondary>
 	</indexterm>
 
-	<para>A configura&ccedil;&atilde;o de kernel <option>SCSI_DELAY</option> pode ser 
-	  usada para reduzir o tempo de inicializa&ccedil;&atilde;o.  O padr&atilde;o &eacute; um pouco 
-	  alto e pode ser respons&aacute;vel <literal>15+</literal> segundos de 
-	  espera no processo de inicializa&ccedil;&atilde;o.  Reduzir para 
-	  <literal>5</literal> segundos funciona bem (especialmente para 
-	  drives modernos).  Vers&otilde;es mais novas do &os; (5.0+) podem 
-	  ajustar a vari&aacute;vel <varname>kern.cam.scsi_delay</varname>.  As 
-	  op&ccedil;&otilde;es de configura&ccedil;&atilde;o de kernel e ajuste de vari&aacute;vel aceitam 
-	  valores em <emphasis>milisegundos</emphasis> e 
+	<para>A configura&ccedil;&atilde;o de kernel <option>SCSI_DELAY</option> pode ser
+	  usada para reduzir o tempo de inicializa&ccedil;&atilde;o.  O padr&atilde;o &eacute; um pouco
+	  alto e pode ser respons&aacute;vel <literal>15+</literal> segundos de
+	  espera no processo de inicializa&ccedil;&atilde;o.  Reduzir para
+	  <literal>5</literal> segundos funciona bem (especialmente para
+	  drives modernos).  Vers&otilde;es mais novas do &os; (5.0+) podem
+	  ajustar a vari&aacute;vel <varname>kern.cam.scsi_delay</varname>.  As
+	  op&ccedil;&otilde;es de configura&ccedil;&atilde;o de kernel e ajuste de vari&aacute;vel aceitam
+	  valores em <emphasis>milisegundos</emphasis> e
 	  <emphasis>n&atilde;o</emphasis> em <emphasis>seconds</emphasis>.</para>
       </sect3>
     </sect2>
@@ -1705,42 +1705,42 @@ kern.maxfiles: 2088 -> 5000</screen>
       <indexterm><primary>Soft Updates</primary></indexterm>
       <indexterm><primary>tunefs</primary></indexterm>
 
-      <para>O programa &man.tunefs.8; pode ser usado para fazer um 
-	ajuste fino no sistema de arquivos.  Este programa possui 
-	muitas op&ccedil;&otilde;es, mas por enquanto vamos nos preocupar apenas 
-	em ligar e desligar o <foreignphrase>Soft Upatades</foreignphrase> 
+      <para>O programa &man.tunefs.8; pode ser usado para fazer um
+	ajuste fino no sistema de arquivos.  Este programa possui
+	muitas op&ccedil;&otilde;es, mas por enquanto vamos nos preocupar apenas
+	em ligar e desligar o <foreignphrase>Soft Upatades</foreignphrase>
 	da seguinte maneira:</para>
 
       <screen>&prompt.root; <userinput>tunefs -n enable /sistemadearquivos</userinput>
 &prompt.root; <userinput>tunefs -n disable /sistemadearquivos</userinput></screen>
 
-      <para>Um sistema de arquivos n&atilde;o pode ser modificado com o 
-	&man.tunefs.8; enquanto estiver montado.  Uma boa hora para 
-	habilitar o <foreignphrase>Soft Updates</foreignphrase> &eacute; antes 
+      <para>Um sistema de arquivos n&atilde;o pode ser modificado com o
+	&man.tunefs.8; enquanto estiver montado.  Uma boa hora para
+	habilitar o <foreignphrase>Soft Updates</foreignphrase> &eacute; antes
 	que qualquer parti&ccedil;&atilde;o seja montada, em modo mono-usu&aacute;rio.</para>
 
-      <note><para>Assim como no &os;&nbsp;4.5, &eacute; poss&iacute;vel habilitar o 
-	<foreignphrase>Soft Updates</foreignphrase> no momento da 
-	cria&ccedil;&atilde;o do sistema de arquivos, atrav&eacute;s da op&ccedil;&atilde;o 
+      <note><para>Assim como no &os;&nbsp;4.5, &eacute; poss&iacute;vel habilitar o
+	<foreignphrase>Soft Updates</foreignphrase> no momento da
+	cria&ccedil;&atilde;o do sistema de arquivos, atrav&eacute;s da op&ccedil;&atilde;o
 	<literal>-U</literal> do &man.newfs.8;.</para></note>
 
-      <para>O <foreignphrase>Soft Updates</foreignphrase> melhora 
-	drasticamente a performance do <foreignphrase>meta-dados</foreignphrase>, 
-	principalmente a cria&ccedil;&atilde;o e elimina&ccedil;&atilde;o de arquivos, atrav&eacute;s do 
-	uso de um cache de mem&oacute;ria.  Recomendamos o uso do 
-	<foreignphrase>Soft Updates</foreignphrase> em todos os seus 
-	sistemas de arquivos.  Existem dois pequenos problemas no seu 
-	uso, que voc&ecirc; deve estar ciente: Primeiro, o 
-	<foreignphrase>Soft Updates</foreignphrase> garante a consist&ecirc;ncia 
-	no sistema de arquivos no caso de problemas, mas pode ficar alguns 
-	segundos (at&eacute; mesmo minuto!) atualizando o disco f&iacute;sico em 
-	segundo plano.  Se seu sistema der problema voc&ecirc; pode perder mais 
-	dados do que da outra maneira.  Segundo, o 
-	<foreignphrase>Soft Updates</foreignphrase> atrasa a libera&ccedil;&atilde;o de 
-	blocos do sistema de arquivo.  Se voc&ecirc; possui um sistema de 
-	arquivo (como a ra&iacute;z) que est&aacute; praticamente lotado, fazer uma 
-	atualiza&ccedil;&atilde;o geral tipo <command>make installworld</command>, pode 
-	fazer com que o sistema de arquivos fique sem espa&ccedil;o e falhe a 
+      <para>O <foreignphrase>Soft Updates</foreignphrase> melhora
+	drasticamente a performance do <foreignphrase>meta-dados</foreignphrase>,
+	principalmente a cria&ccedil;&atilde;o e elimina&ccedil;&atilde;o de arquivos, atrav&eacute;s do
+	uso de um cache de mem&oacute;ria.  Recomendamos o uso do
+	<foreignphrase>Soft Updates</foreignphrase> em todos os seus
+	sistemas de arquivos.  Existem dois pequenos problemas no seu
+	uso, que voc&ecirc; deve estar ciente: Primeiro, o
+	<foreignphrase>Soft Updates</foreignphrase> garante a consist&ecirc;ncia
+	no sistema de arquivos no caso de problemas, mas pode ficar alguns
+	segundos (at&eacute; mesmo minuto!) atualizando o disco f&iacute;sico em
+	segundo plano.  Se seu sistema der problema voc&ecirc; pode perder mais
+	dados do que da outra maneira.  Segundo, o
+	<foreignphrase>Soft Updates</foreignphrase> atrasa a libera&ccedil;&atilde;o de
+	blocos do sistema de arquivo.  Se voc&ecirc; possui um sistema de
+	arquivo (como a ra&iacute;z) que est&aacute; praticamente lotado, fazer uma
+	atualiza&ccedil;&atilde;o geral tipo <command>make installworld</command>, pode
+	fazer com que o sistema de arquivos fique sem espa&ccedil;o e falhe a
 	atualiza&ccedil;&atilde;o.</para>
 
       <sect3>
@@ -1751,168 +1751,168 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <secondary>details</secondary>
 	</indexterm>
 
-	<para>Existe duas maneiras tradicionais de escrever meta-dados 
-	  de sistemas de arquivos de volta para o disco.  
-	  (Atualiza&ccedil;&atilde;o de meta-dados s&atilde;o atualiza&ccedil;&otilde;es para dados 
-	  que n&atilde;o sejam de conte&uacute;do, como inodos ou 
+	<para>Existe duas maneiras tradicionais de escrever meta-dados
+	  de sistemas de arquivos de volta para o disco.
+	  (Atualiza&ccedil;&atilde;o de meta-dados s&atilde;o atualiza&ccedil;&otilde;es para dados
+	  que n&atilde;o sejam de conte&uacute;do, como inodos ou
 	  diret&oacute;rios.)</para>
 
-	<para>Historicamente, o comportamento padr&atilde;o era o de 
-	  escrever atualiza&ccedil;&otilde;es de meta-dados sincronamente.  Se 
-	  um diret&oacute;rio foi modificado, o sistema esperou at&eacute; que 
-	  a mudan&ccedil;a fosse realmente feita no disco.  Os buffers de 
-	  dados de arquivo (conte&uacute;do do arquivo) foram passados 
-	  atrav&eacute;s do buffer de cache e guardados mais tarde em disco 
-	  assincronamente.  A vantagem desta implementa&ccedil;&atilde;o &eacute; a 
-	  seguran&ccedil;a na opera&ccedil;&atilde;o.  Se existir uma falha durante 
-	  uma atualiza&ccedil;&atilde;o, os meta-dados sempre estar&atilde;o em um 
-	  estado consistente.  Um arquivo &eacute; criado de forma 
-	  completa ou n&atilde;o de qualquer forma.  Se os blocos de 
-	  dados de um arquivo n&atilde;o encontrar seu caminho do 
-	  cache de buffer no disco na hora do problema, o &man.fsck.8; 
-	  ser&aacute; capaz de reconhecer e reparar o sistema de arquivos 
-	  configurando o tamanho do arquivo para 0.  Al&eacute;m disso, 
-	  a implementa&ccedil;&atilde;o &eacute; clara e simples.  A desvantagem &eacute; que 
-	  as mudan&ccedil;as de meta-dados s&atilde;o lentas.  O comando 
-	  <command>rm -r</command>, por exemplo, toca em todos os 
-	  arquivos em um diret&oacute;rio sequencialmente, mas cada 
-	  mudan&ccedil;a de diret&oacute;rio (exclus&atilde;o de um arquivo) ser&aacute; 
-	  escrita sincronamente no disco.  Isto inclui atualiza&ccedil;&otilde;es 
-	  no pr&oacute;prio diret&oacute;rio, na tabela de inodo, e poss&iacute;velmente 
-	  nos blocos indiretamente alocados pelo arquivo.  
-	  Considera&ccedil;&otilde;es similares s&atilde;o aplic&aacute;veis no 
-	  desenrolar de hierarquias grandes 
+	<para>Historicamente, o comportamento padr&atilde;o era o de
+	  escrever atualiza&ccedil;&otilde;es de meta-dados sincronamente.  Se
+	  um diret&oacute;rio foi modificado, o sistema esperou at&eacute; que
+	  a mudan&ccedil;a fosse realmente feita no disco.  Os buffers de
+	  dados de arquivo (conte&uacute;do do arquivo) foram passados
+	  atrav&eacute;s do buffer de cache e guardados mais tarde em disco
+	  assincronamente.  A vantagem desta implementa&ccedil;&atilde;o &eacute; a
+	  seguran&ccedil;a na opera&ccedil;&atilde;o.  Se existir uma falha durante
+	  uma atualiza&ccedil;&atilde;o, os meta-dados sempre estar&atilde;o em um
+	  estado consistente.  Um arquivo &eacute; criado de forma
+	  completa ou n&atilde;o de qualquer forma.  Se os blocos de
+	  dados de um arquivo n&atilde;o encontrar seu caminho do
+	  cache de buffer no disco na hora do problema, o &man.fsck.8;
+	  ser&aacute; capaz de reconhecer e reparar o sistema de arquivos
+	  configurando o tamanho do arquivo para 0.  Al&eacute;m disso,
+	  a implementa&ccedil;&atilde;o &eacute; clara e simples.  A desvantagem &eacute; que
+	  as mudan&ccedil;as de meta-dados s&atilde;o lentas.  O comando
+	  <command>rm -r</command>, por exemplo, toca em todos os
+	  arquivos em um diret&oacute;rio sequencialmente, mas cada
+	  mudan&ccedil;a de diret&oacute;rio (exclus&atilde;o de um arquivo) ser&aacute;
+	  escrita sincronamente no disco.  Isto inclui atualiza&ccedil;&otilde;es
+	  no pr&oacute;prio diret&oacute;rio, na tabela de inodo, e poss&iacute;velmente
+	  nos blocos indiretamente alocados pelo arquivo.
+	  Considera&ccedil;&otilde;es similares s&atilde;o aplic&aacute;veis no
+	  desenrolar de hierarquias grandes
 	  (<command>tar -x</command>).</para>
 
-	<para>O segundo caso &eacute; o de atualiza&ccedil;&otilde;es ass&iacute;ncronas de 
-	  meta-dados.  Isto &eacute; o padr&atilde;o para Linux/ext2fs e 
-  	  <command>mount -o async</command> para ufs nos *BSD.  Todas 
-	  as atualiza&ccedil;&otilde;es de meta-dados s&atilde;o simplesmente passadas 
-	  pelo cache de buffer tamb&eacute;m, eles ser&atilde;o misturados com as 
-	  atualiza&ccedil;&otilde;es de conte&uacute;do de dados de arquivo.  A vantagem 
-	  desta implementa&ccedil;&atilde;o &eacute; que n&atilde;o existe a necessidade de 
-	  esperar at&eacute; que cada atualiza&ccedil;&atilde;o de meta-dados tenha sido 
-	  escrita em disco, uma vez que todas as opera&ccedil;&otilde;es que causam 
-	  grandes quantidades de atualiza&ccedil;&atilde;o de meta-dados trabalhem 
-	  mais r&aacute;pido que no caso s&iacute;ncrono.  Al&eacute;m disso, a 
-	  implementa&ccedil;&atilde;o &eacute; simples e limpa, possuindo um baixo risco 
-	  de falhas na codifica&ccedil;&atilde;o. A desvantagem &eacute; que n&atilde;o existe 
-	  garantia para um estado consistente do sistema de 
-	  arquivos.  Se ocorrer uma falha durante uma opera&ccedil;&atilde;o que 
-	  atualizou grandes quantidades de meta-dados (como uma 
-	  falta de energia, ou algu&eacute;m pressionar o bot&atilde;o de 
-	  reinicializa&ccedil;&atilde;o), o sistema de arquivos ficar&aacute; em um 
-	  estado imprevis&iacute;vel.  N&atilde;o existe uma oportunidade para 
-	  examinar o estado do sistema de arquivos quando o sistema 
-	  voltar para o ar novamente; os blocos de dados de um 
-	  arquivo j&aacute; podem ter sido escritos no disco enquanto as 
-	  atualiza&ccedil;&otilde;es na tabela de inodo, ou diret&oacute;rio 
-	  associado, ainda n&atilde;o foram.  Na verdade &eacute; imposs&iacute;vel 
-	  implementar um <command>fsck</command> que seja capaz 
-	  de limpar todo o caos resultante (pelo fato de que a 
-	  informa&ccedil;&atilde;o necess&aacute;ria n&atilde;o est&aacute; dispon&iacute;vel no disco).  Se 
-	  o sistema de arquivos foi danificado al&eacute;m das 
-	  possibilidades de repara&ccedil;&atilde;o, a &uacute;nica escolha &eacute; 
+	<para>O segundo caso &eacute; o de atualiza&ccedil;&otilde;es ass&iacute;ncronas de
+	  meta-dados.  Isto &eacute; o padr&atilde;o para Linux/ext2fs e
+  	  <command>mount -o async</command> para ufs nos *BSD.  Todas
+	  as atualiza&ccedil;&otilde;es de meta-dados s&atilde;o simplesmente passadas
+	  pelo cache de buffer tamb&eacute;m, eles ser&atilde;o misturados com as
+	  atualiza&ccedil;&otilde;es de conte&uacute;do de dados de arquivo.  A vantagem
+	  desta implementa&ccedil;&atilde;o &eacute; que n&atilde;o existe a necessidade de
+	  esperar at&eacute; que cada atualiza&ccedil;&atilde;o de meta-dados tenha sido
+	  escrita em disco, uma vez que todas as opera&ccedil;&otilde;es que causam
+	  grandes quantidades de atualiza&ccedil;&atilde;o de meta-dados trabalhem
+	  mais r&aacute;pido que no caso s&iacute;ncrono.  Al&eacute;m disso, a
+	  implementa&ccedil;&atilde;o &eacute; simples e limpa, possuindo um baixo risco
+	  de falhas na codifica&ccedil;&atilde;o.  A desvantagem &eacute; que n&atilde;o existe
+	  garantia para um estado consistente do sistema de
+	  arquivos.  Se ocorrer uma falha durante uma opera&ccedil;&atilde;o que
+	  atualizou grandes quantidades de meta-dados (como uma
+	  falta de energia, ou algu&eacute;m pressionar o bot&atilde;o de
+	  reinicializa&ccedil;&atilde;o), o sistema de arquivos ficar&aacute; em um
+	  estado imprevis&iacute;vel.  N&atilde;o existe uma oportunidade para
+	  examinar o estado do sistema de arquivos quando o sistema
+	  voltar para o ar novamente; os blocos de dados de um
+	  arquivo j&aacute; podem ter sido escritos no disco enquanto as
+	  atualiza&ccedil;&otilde;es na tabela de inodo, ou diret&oacute;rio
+	  associado, ainda n&atilde;o foram.  Na verdade &eacute; imposs&iacute;vel
+	  implementar um <command>fsck</command> que seja capaz
+	  de limpar todo o caos resultante (pelo fato de que a
+	  informa&ccedil;&atilde;o necess&aacute;ria n&atilde;o est&aacute; dispon&iacute;vel no disco).  Se
+	  o sistema de arquivos foi danificado al&eacute;m das
+	  possibilidades de repara&ccedil;&atilde;o, a &uacute;nica escolha &eacute;
 	  utilizar o &man.newfs.8; e restaurar um backup.
-	  </para>
+	</para>
 
-	<para>A solu&ccedil;&atilde;o normal para este problema foi a 
-	  implementa&ccedil;&atilde;o de uma <emphasis>regi&atilde;o suja de 
-	  <foreignphrase>logging</foreignphrase></emphasis>, 
-	  tamb&eacute;m conhecida como <emphasis>journaling</emphasis>, 
-	  embora este termo n&atilde;o seja usado consistentemente e &eacute; 
-	  ocasionalmente aplicado &agrave; outras formas de transa&ccedil;&atilde;o 
-	  de <foreignphrase>logging</foreignphrase>.  Atualiza&ccedil;&otilde;es 
-	  de meta-dados ainda s&atilde;o escritas sincronamente, mas 
-	  apenas em uma pequena regi&atilde;o do disco.  Posteriormente 
-	  ser&atilde;o movidos para a localiza&ccedil;&atilde;o apropriada.  Devido ao 
-	  pequeno tamanho da &aacute;rea de <foreignphrase>logging</foreignphrase>, 
-	  a regi&atilde;o cont&iacute;gua do disco, n&atilde;o existem grandes 
-	  dist&acirc;ncias a serem percorridas pela cabe&ccedil;a do disco, 
-	  mesmo durante opera&ccedil;&otilde;es pesadas, fazendo com que estas 
-	  opera&ccedil;&otilde;es sejam mais r&aacute;pidas do que as atualiza&ccedil;&otilde;es 
-	  s&iacute;ncronas.  Al&eacute;m disso, a complexidade de implementa&ccedil;&atilde;o 
-	  &eacute; um tanto quanto limitada, fazendo com que o risco 
-	  de exist&ecirc;ncia de falhas na codifica&ccedil;&atilde;o sejam menores.  A 
-	  desvantagem &eacute; que todos os meta-dados s&atilde;o escritos 
-	  duas vezes (uma vez na regi&atilde;o de 
-	  <foreignphrase>logging</foreignphrase> e outra 
-	  no local apropriado) causando perda de performance 
-	  em condi&ccedil;&otilde;es normais.  Por outro lado, no caso de 
-	  pane, todas as opera&ccedil;&otilde;es de meta-dados pendentes 
-	  podem ser rapidamente desfeitas ou completadas da 
-	  &aacute;rea de <foreignphrase>logging</foreignphrase> depois 
-	  que o sistema retornar ao ar novamente, resultando 
+	<para>A solu&ccedil;&atilde;o normal para este problema foi a
+	  implementa&ccedil;&atilde;o de uma <emphasis>regi&atilde;o suja de
+	  <foreignphrase>logging</foreignphrase></emphasis>,
+	  tamb&eacute;m conhecida como <emphasis>journaling</emphasis>,
+	  embora este termo n&atilde;o seja usado consistentemente e &eacute;
+	  ocasionalmente aplicado &agrave; outras formas de transa&ccedil;&atilde;o
+	  de <foreignphrase>logging</foreignphrase>.  Atualiza&ccedil;&otilde;es
+	  de meta-dados ainda s&atilde;o escritas sincronamente, mas
+	  apenas em uma pequena regi&atilde;o do disco.  Posteriormente
+	  ser&atilde;o movidos para a localiza&ccedil;&atilde;o apropriada.  Devido ao
+	  pequeno tamanho da &aacute;rea de <foreignphrase>logging</foreignphrase>,
+	  a regi&atilde;o cont&iacute;gua do disco, n&atilde;o existem grandes
+	  dist&acirc;ncias a serem percorridas pela cabe&ccedil;a do disco,
+	  mesmo durante opera&ccedil;&otilde;es pesadas, fazendo com que estas
+	  opera&ccedil;&otilde;es sejam mais r&aacute;pidas do que as atualiza&ccedil;&otilde;es
+	  s&iacute;ncronas.  Al&eacute;m disso, a complexidade de implementa&ccedil;&atilde;o
+	  &eacute; um tanto quanto limitada, fazendo com que o risco
+	  de exist&ecirc;ncia de falhas na codifica&ccedil;&atilde;o sejam menores.  A
+	  desvantagem &eacute; que todos os meta-dados s&atilde;o escritos
+	  duas vezes (uma vez na regi&atilde;o de
+	  <foreignphrase>logging</foreignphrase> e outra
+	  no local apropriado) causando perda de performance
+	  em condi&ccedil;&otilde;es normais.  Por outro lado, no caso de
+	  pane, todas as opera&ccedil;&otilde;es de meta-dados pendentes
+	  podem ser rapidamente desfeitas ou completadas da
+	  &aacute;rea de <foreignphrase>logging</foreignphrase> depois
+	  que o sistema retornar ao ar novamente, resultando
 	  uma inicializa&ccedil;&atilde;o r&aacute;pida de sistema de arquivos.
-	  </para>
+	</para>
 
 	<para>Kirk McKusick, desenvolvedor do Berkeley FFS,
-	   resolveu este problema com o Soft Updates: todas 
-	   as atualiza&ccedil;&otilde;es de meta-dados pendentes s&atilde;o mantidas 
-	   em mem&oacute;ria e escritas no disco numa seq&uuml;&ecirc;ncia ordenada 
-	   (<quote>ordered meta-data updates</quote>).  Isto causa o 
-	   seguinte efeito, no caso de opera&ccedil;&otilde;es pesadas de 
-	   meta-dados, atualiza&ccedil;&otilde;es posteriores em um item 
-	   <quote>pegam</quote> as primeiras que ainda est&atilde;o 
-	   em mem&oacute;ria e n&atilde;o foram escritas no disco.  Ent&atilde;o 
-	   todas as opera&ccedil;&otilde;es em, digamos, um diret&oacute;rio, geralmente 
-	   s&atilde;o feitas em mem&oacute;ria antes que a atualiza&ccedil;&atilde;o seja 
-	   escrita no disco (os blocos de dados s&atilde;o ordenado de 
-	   acordo com seu posicionamento, assim n&atilde;o podem estar 
-	   no disco antes de seus meta-dados).  Se o sistema der 
-	   pane, a conseq&uuml;&ecirc;ncia ser&aacute; um <quote>log rewind</quote>: 
-	   todas as opera&ccedil;&otilde;es que n&atilde;o encontraram seu caminho para 
-	   o disco parecem nunca ter ocorrido.  Um estado consistente 
-	   de sistema de arquivo &eacute; mantido como se fosse de 30 a 
-	   60 segundos antes.  O algoritmo utilizado garante que 
-	   todos os recursos em uso sejam marcados com seus mapas 
-	   de bits apropriados: blocos e inodos.  Depois de uma pane, 
-	   a &uacute;nica aloca&ccedil;&atilde;o de erros de recursos que ocorre s&atilde;o os 
-	   marcados como <quote>used</quote> que na verdade s&atilde;o 
-	   <quote>free</quote>.  O &man.fsck.8; reconhece esta 
-	   situa&ccedil;&atilde;o, e libera os recursos que n&atilde;o estejam em 
-	   uso.  &Eacute; seguro ignorar o estado sujo do sistema de arquivo 
+	   resolveu este problema com o Soft Updates: todas
+	   as atualiza&ccedil;&otilde;es de meta-dados pendentes s&atilde;o mantidas
+	   em mem&oacute;ria e escritas no disco numa seq&uuml;&ecirc;ncia ordenada
+	   (<quote>ordered meta-data updates</quote>).  Isto causa o
+	   seguinte efeito, no caso de opera&ccedil;&otilde;es pesadas de
+	   meta-dados, atualiza&ccedil;&otilde;es posteriores em um item
+	   <quote>pegam</quote> as primeiras que ainda est&atilde;o
+	   em mem&oacute;ria e n&atilde;o foram escritas no disco.  Ent&atilde;o
+	   todas as opera&ccedil;&otilde;es em, digamos, um diret&oacute;rio, geralmente
+	   s&atilde;o feitas em mem&oacute;ria antes que a atualiza&ccedil;&atilde;o seja
+	   escrita no disco (os blocos de dados s&atilde;o ordenado de
+	   acordo com seu posicionamento, assim n&atilde;o podem estar
+	   no disco antes de seus meta-dados).  Se o sistema der
+	   pane, a conseq&uuml;&ecirc;ncia ser&aacute; um <quote>log rewind</quote>:
+	   todas as opera&ccedil;&otilde;es que n&atilde;o encontraram seu caminho para
+	   o disco parecem nunca ter ocorrido.  Um estado consistente
+	   de sistema de arquivo &eacute; mantido como se fosse de 30 a
+	   60 segundos antes.  O algoritmo utilizado garante que
+	   todos os recursos em uso sejam marcados com seus mapas
+	   de bits apropriados: blocos e inodos.  Depois de uma pane,
+	   a &uacute;nica aloca&ccedil;&atilde;o de erros de recursos que ocorre s&atilde;o os
+	   marcados como <quote>used</quote> que na verdade s&atilde;o
+	   <quote>free</quote>.  O &man.fsck.8; reconhece esta
+	   situa&ccedil;&atilde;o, e libera os recursos que n&atilde;o estejam em
+	   uso.  &Eacute; seguro ignorar o estado sujo do sistema de arquivo
 	   ap&oacute;s uma pane for&ccedil;ando mont&aacute;-lo com <command>
-	   mount -f</command>.  Para liberar recursos que podem 
-	   estar ociosos, o &man.fsck.8; necessita ser executado 
+	   mount -f</command>.  Para liberar recursos que podem
+	   estar ociosos, o &man.fsck.8; necessita ser executado
 	   posteriormente.  Esta &eacute; a id&eacute;ia atr&aacute;s do <emphasis>
-	   background fsck</emphasis>: no momento da inicializa&ccedil;&atilde;o 
-	   do sistema, apenas um <foreignphrase>snapshot</foreignphrase> 
-	   do sistema de arquivo &eacute; gravada.  O <command>fsck</command> 
-	   pode ser executado depois.  Todos os sistemas de arquivo 
-	   podem ser montados <quote>sujos</quote>, para que a 
-	   inicializa&ccedil;&atilde;o do sistema prossiga em modo multi-usu&aacute;rio.  
-	   Ent&atilde;o o <command>fsck</command> em segundo plano ser&aacute; 
-	   agendado para ser executado em todos os sistemas de 
-	   arquivo onde for necess&aacute;rio, para liberar recursos que 
-	   podem estar ociosos.  (Sistemas de arquivos que 
-	   n&atilde;o usam Soft Updates ainda necessitam do 
+	   background fsck</emphasis>: no momento da inicializa&ccedil;&atilde;o
+	   do sistema, apenas um <foreignphrase>snapshot</foreignphrase>
+	   do sistema de arquivo &eacute; gravada.  O <command>fsck</command>
+	   pode ser executado depois.  Todos os sistemas de arquivo
+	   podem ser montados <quote>sujos</quote>, para que a
+	   inicializa&ccedil;&atilde;o do sistema prossiga em modo multi-usu&aacute;rio.
+	   Ent&atilde;o o <command>fsck</command> em segundo plano ser&aacute;
+	   agendado para ser executado em todos os sistemas de
+	   arquivo onde for necess&aacute;rio, para liberar recursos que
+	   podem estar ociosos.  (Sistemas de arquivos que
+	   n&atilde;o usam Soft Updates ainda necessitam do
 	   <command>fsck</command> em primeiro plano.)</para>
 
-	 <para>A vantagem &eacute; que as opera&ccedil;&otilde;es de meta-dados 
-	   s&atilde;o quase t&atilde;o r&aacute;pidas quando as atualiza&ccedil;&otilde;es 
+	 <para>A vantagem &eacute; que as opera&ccedil;&otilde;es de meta-dados
+	   s&atilde;o quase t&atilde;o r&aacute;pidas quando as atualiza&ccedil;&otilde;es
 	   ass&iacute;ncronas (mais r&aacute;pidas do que com <emphasis>
-	   logging</emphasis>, que precisa escrever os 
-	   meta-dados duas vezes).  As desvantagem s&atilde;o a 
-	   complexidade do c&oacute;digo (implicando em um alto 
-	   rico de falhas de c&oacute;digo em uma &aacute;rea extremamente 
-	   sens&iacute;vel no que diz respeito a perda de dados do 
-	   usu&aacute;rio), e um alto consumo de mem&oacute;ria.  Al&eacute;m disso 
-	   existem algumas peculiaridades que temos que lidar.  Depois  
-	   de uma pane, o estado do sistema de arquivos parece 
-	   estar algo como <quote>antigo</quote>.  Em situa&ccedil;&otilde;es 
-	   onde a op&ccedil;&atilde;o s&iacute;ncrona pode ter causado alguns 
-	   arquivos de tamanho zero ap&oacute;s o <command>fsck</command>, 
-	   estes arquivos n&atilde;o existem em um sistema de arquivo 
-	   com Soft Update, pois nem os meta-dados e os conte&uacute;dos 
-	   dos arquivos foram escritos no disco.  O espa&ccedil;o em 
-	   disco n&atilde;o &eacute; liberado at&eacute; que as atualiza&ccedil;&otilde;es tenham 
-	   sido escritas no disco, que pode acontecer algum 
-	   tempo depois de executar o comando 
-	   <command>rm</command>.  Isto pode causar problemas 
-	   ao introduzir grandes quantidades de dados em um 
-	   sistema de arquivo que n&atilde;o possui espa&ccedil;o livre 
-	   suficiente para abrigar todos os arquivos duas 
+	   logging</emphasis>, que precisa escrever os
+	   meta-dados duas vezes).  As desvantagem s&atilde;o a
+	   complexidade do c&oacute;digo (implicando em um alto
+	   rico de falhas de c&oacute;digo em uma &aacute;rea extremamente
+	   sens&iacute;vel no que diz respeito a perda de dados do
+	   usu&aacute;rio), e um alto consumo de mem&oacute;ria.  Al&eacute;m disso
+	   existem algumas peculiaridades que temos que lidar.  Depois
+	   de uma pane, o estado do sistema de arquivos parece
+	   estar algo como <quote>antigo</quote>.  Em situa&ccedil;&otilde;es
+	   onde a op&ccedil;&atilde;o s&iacute;ncrona pode ter causado alguns
+	   arquivos de tamanho zero ap&oacute;s o <command>fsck</command>,
+	   estes arquivos n&atilde;o existem em um sistema de arquivo
+	   com Soft Update, pois nem os meta-dados e os conte&uacute;dos
+	   dos arquivos foram escritos no disco.  O espa&ccedil;o em
+	   disco n&atilde;o &eacute; liberado at&eacute; que as atualiza&ccedil;&otilde;es tenham
+	   sido escritas no disco, que pode acontecer algum
+	   tempo depois de executar o comando
+	   <command>rm</command>.  Isto pode causar problemas
+	   ao introduzir grandes quantidades de dados em um
+	   sistema de arquivo que n&atilde;o possui espa&ccedil;o livre
+	   suficiente para abrigar todos os arquivos duas
 	   vezes.</para>
       </sect3>
     </sect2>
@@ -1936,39 +1936,39 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <primary><varname>kern.maxfiles</varname></primary>
 	</indexterm>
 
-	<para>A vari&aacute;vel <varname>kern.maxfiles</varname> pode 
-	  ter seu valor aumentado ou diminuido baseado nos 
-	  requisitos do sistema.  Esta vari&aacute;vel indica o 
-	  n&uacute;mero m&aacute;ximo de descritores de arquivos no seu 
-	  sistema.  Quando a tabela de descritores de arquivos 
-	  est&aacute; cheia, a mensagem <errorname>file: table is 
-	  full</errorname> aparecer&aacute; v&aacute;rias vezes no buffer de 
-	  mensagens do sistema, que pode ser visualizado atrav&eacute;s 
+	<para>A vari&aacute;vel <varname>kern.maxfiles</varname> pode
+	  ter seu valor aumentado ou diminuido baseado nos
+	  requisitos do sistema.  Esta vari&aacute;vel indica o
+	  n&uacute;mero m&aacute;ximo de descritores de arquivos no seu
+	  sistema.  Quando a tabela de descritores de arquivos
+	  est&aacute; cheia, a mensagem <errorname>file: table is
+	  full</errorname> aparecer&aacute; v&aacute;rias vezes no buffer de
+	  mensagens do sistema, que pode ser visualizado atrav&eacute;s
 	  do comando <command>dmesg</command>.</para>
 
-	<para>Cada arquivo aberto, socket, ou fifo usa um 
-	  descritor de arquivo.  Um servidor de produ&ccedil;&atilde;o de 
-	  larga escala pode facilmente requerer muitos milhares 
-	  de descritores de arquivos, dependendo do tipo e do 
+	<para>Cada arquivo aberto, socket, ou fifo usa um
+	  descritor de arquivo.  Um servidor de produ&ccedil;&atilde;o de
+	  larga escala pode facilmente requerer muitos milhares
+	  de descritores de arquivos, dependendo do tipo e do
 	  n&uacute;mero de servi&ccedil;os sendo executados concorrentemente.
-	  </para>
+	</para>
 
-	<para>O valor padr&atilde;o da vari&aacute;vel <varname>kern.maxfile</varname> 
-	  &eacute; definido pela op&ccedil;&atilde;o <option>MAXUSERS</option> no seu 
+	<para>O valor padr&atilde;o da vari&aacute;vel <varname>kern.maxfile</varname>
+	  &eacute; definido pela op&ccedil;&atilde;o <option>MAXUSERS</option> no seu
 	  arquivo de configura&ccedil;&atilde;o de kernel.  <varname>
-	  kern.max.files</varname> cresce proporcionalmente ao valor 
-	  de <option>MAXUSERS</option>.  Ao compilar um kernel 
-	  customizado, &eacute; uma boa id&eacute;ia modificar esta configura&ccedil;&atilde;o 
-	  de acordo com o uso do seu sistema.  A partir deste n&uacute;mero, 
-	  o kernel toma base para  muitos limites pr&eacute;-definidos.  Embora 
-	  uma m&aacute;quina em produ&ccedil;&atilde;o n&atilde;o tenha 256 usu&aacute;rios conectados 
-	  ao mesmo tempo, os recursos requeridos podem ser similares aos 
+	  kern.max.files</varname> cresce proporcionalmente ao valor
+	  de <option>MAXUSERS</option>.  Ao compilar um kernel
+	  customizado, &eacute; uma boa id&eacute;ia modificar esta configura&ccedil;&atilde;o
+	  de acordo com o uso do seu sistema.  A partir deste n&uacute;mero,
+	  o kernel toma base para muitos limites pr&eacute;-definidos.  Embora
+	  uma m&aacute;quina em produ&ccedil;&atilde;o n&atilde;o tenha 256 usu&aacute;rios conectados
+	  ao mesmo tempo, os recursos requeridos podem ser similares aos
 	  de um servidor de ponta.</para>
 
-	<note><para>Assim como no &os;&nbsp;4.5, configurar a 
-	  op&ccedil;&atilde;o <option>MAXUSERS</option> para 
-	  <literal>0</literal> no seu arquivo de configura&ccedil;&atilde;o de kernel 
-	  faz com que um valor padr&atilde;o razo&aacute;vel seja configurado 
+	<note><para>Assim como no &os;&nbsp;4.5, configurar a
+	  op&ccedil;&atilde;o <option>MAXUSERS</option> para
+	  <literal>0</literal> no seu arquivo de configura&ccedil;&atilde;o de kernel
+	  faz com que um valor padr&atilde;o razo&aacute;vel seja configurado
 	  de acordo com a mem&oacute;ria RAM presente no seu sistema.</para>
 	  </note>
 
@@ -1981,18 +1981,18 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <primary><varname>kern.ipc.somaxconn</varname></primary>
 	</indexterm>
 
-	<para>A vari&aacute;vel sysctl <varname>kern.ipc.somaxconn</varname> 
-	  limita o tamanho da fila de escuta para aceita&ccedil;&atilde;o de novas 
-	  conex&otilde;es TCP.  O valor padr&atilde;o de <literal>128</literal> &eacute; 
-	  tipicamente baixo para uma manipula&ccedil;&atilde;o robusta de novas 
-	  conex&otilde;es em um ambiente de servidor web com alta carga.  Para 
+	<para>A vari&aacute;vel sysctl <varname>kern.ipc.somaxconn</varname>
+	  limita o tamanho da fila de escuta para aceita&ccedil;&atilde;o de novas
+	  conex&otilde;es TCP.  O valor padr&atilde;o de <literal>128</literal> &eacute;
+	  tipicamente baixo para uma manipula&ccedil;&atilde;o robusta de novas
+	  conex&otilde;es em um ambiente de servidor web com alta carga.  Para
 	  tais ambientes o aumento deste valor para <literal>
-	  1024</literal> ou mais &eacute; recomendado.  O servi&ccedil;o de daemon pode 
-	  por si s&oacute; limitar o tamanho da fila (por exemplo, 
-	  &man.sendmail.8;, ou <application>Apache</application>) mas 
-	  na maioria das vezes existir&aacute; uma diretiva em seus arquivos 
-	  de configura&ccedil;&atilde;o para ajustar o tamanho da fila.  Filas de 
-	  escuta grandes tamb&eacute;m podem fazer um bom trabalho evitando 
+	  1024</literal> ou mais &eacute; recomendado.  O servi&ccedil;o de daemon pode
+	  por si s&oacute; limitar o tamanho da fila (por exemplo,
+	  &man.sendmail.8;, ou <application>Apache</application>) mas
+	  na maioria das vezes existir&aacute; uma diretiva em seus arquivos
+	  de configura&ccedil;&atilde;o para ajustar o tamanho da fila.  Filas de
+	  escuta grandes tamb&eacute;m podem fazer um bom trabalho evitando
 	  ataques de Nega&ccedil;&atilde;o de Servi&ccedil;o (<abbrev>DoS</abbrev>).</para>
       </sect3>
 
@@ -2000,55 +2000,55 @@ kern.maxfiles: 2088 -> 5000</screen>
     <sect2>
       <title>Limites de Rede</title>
 
-      <para>A op&ccedil;&atilde;o de configura&ccedil;&atilde;o de kernel <option>NMBCLUSTERS</option> 
-	dita a quantidade de <literal>Mbufs</literal> de rede 
-	dispon&iacute;vel para o sistema.  Um servidor com muito tr&aacute;fego e um 
-	n&uacute;mero pequeno de <literal>Mbufs</literal> limitar&atilde;o a habilidade 
-	do &os;.  Cada cluster representa aproximadamente 2&nbsp;K de 
-	mem&oacute;ria, ent&atilde;o um valor de 1024 representa 2 megabytes de 
-	mem&oacute;ria de kernel reservada para buffers de rede.  Um 
-	c&aacute;lculo simples pode ser feito para saber quantos s&atilde;o 
-	necess&aacute;rios.  Se voc&ecirc; possui um servidor web que chega a um 
-	m&aacute;ximo de 1000 conex&otilde;es simult&acirc;neas, e cada conex&atilde;o 
-	consome 16&nbsp;K de buffer de envio e 16&nbsp;K de recep&ccedil;&atilde;o, 
-	voc&ecirc; precisa de aproximadamente 32&nbsp;MB de buffers de rede 
-	para cobrir seu servidor web.  Uma boa regra geral &eacute; 
+      <para>A op&ccedil;&atilde;o de configura&ccedil;&atilde;o de kernel <option>NMBCLUSTERS</option>
+	dita a quantidade de <literal>Mbufs</literal> de rede
+	dispon&iacute;vel para o sistema.  Um servidor com muito tr&aacute;fego e um
+	n&uacute;mero pequeno de <literal>Mbufs</literal> limitar&atilde;o a habilidade
+	do &os;.  Cada cluster representa aproximadamente 2&nbsp;K de
+	mem&oacute;ria, ent&atilde;o um valor de 1024 representa 2 megabytes de
+	mem&oacute;ria de kernel reservada para buffers de rede.  Um
+	c&aacute;lculo simples pode ser feito para saber quantos s&atilde;o
+	necess&aacute;rios.  Se voc&ecirc; possui um servidor web que chega a um
+	m&aacute;ximo de 1000 conex&otilde;es simult&acirc;neas, e cada conex&atilde;o
+	consome 16&nbsp;K de buffer de envio e 16&nbsp;K de recep&ccedil;&atilde;o,
+	voc&ecirc; precisa de aproximadamente 32&nbsp;MB de buffers de rede
+	para cobrir seu servidor web.  Uma boa regra geral &eacute;
 	multiplicar por 2, ent&atilde;o 2x32&nbsp;MB&nbsp;/&nbsp;2&nbsp;KB&nbsp;=
-	64&nbsp;MB&nbsp;/&nbsp;2&nbsp;kB&nbsp;= 32768.  Recomendamos 
-	valores entre 4096 e 32768 para m&aacute;quinas com grandes 
-	quantidades de mem&oacute;ria. Sob nenhuma circunst&acirc;ncia voc&ecirc; deve 
-	especificar valores arbitrariamente altos para este 
-	par&acirc;metro, pois pode causar travamentos durante a inicializa&ccedil;&atilde;o.  A 
-	op&ccedil;&atilde;o <option>-m</option> do &man.netstat.1; pode ser 
+	64&nbsp;MB&nbsp;/&nbsp;2&nbsp;kB&nbsp;= 32768.  Recomendamos
+	valores entre 4096 e 32768 para m&aacute;quinas com grandes
+	quantidades de mem&oacute;ria.  Sob nenhuma circunst&acirc;ncia voc&ecirc; deve
+	especificar valores arbitrariamente altos para este
+	par&acirc;metro, pois pode causar travamentos durante a inicializa&ccedil;&atilde;o.  A
+	op&ccedil;&atilde;o <option>-m</option> do &man.netstat.1; pode ser
 	usada para observar o uso do cluster de rede.</para>
 
-      <para><varname>kern.ipc.nmbclusters</varname> pode ser usado para 
-	ajustar isto no momento da inicializa&ccedil;&atilde;o.  Somente vers&otilde;es 
-	antigas do &os; ir&atilde;o requerer o uso da op&ccedil;&atilde;o &man.config.8; 
-        de kernel <option>NMBCLUSTERS</option>. 
-        </para>
+      <para><varname>kern.ipc.nmbclusters</varname> pode ser usado para
+	ajustar isto no momento da inicializa&ccedil;&atilde;o.  Somente vers&otilde;es
+	antigas do &os; ir&atilde;o requerer o uso da op&ccedil;&atilde;o &man.config.8;
+	de kernel <option>NMBCLUSTERS</option>.
+</para>
 
-      <para>Para servidores mais ocupados, que fazem uso extensivo da 
-	chamada de sistema &man.sendfile.2;, pode ser necess&aacute;rio 
-	aumentar o n&uacute;mero de buffers &man.sendfile.2; atrav&eacute;s da 
+      <para>Para servidores mais ocupados, que fazem uso extensivo da
+	chamada de sistema &man.sendfile.2;, pode ser necess&aacute;rio
+	aumentar o n&uacute;mero de buffers &man.sendfile.2; atrav&eacute;s da
 	op&ccedil;&atilde;o de configura&ccedil;&atilde;o de <foreignphrase>kernel
-	</foreignphrase> <option>NSFBUFS</option> colocando seu 
-	valor no arquivo <filename>/boot/loader.conf</filename> 
-	(veja &man.loader.8; para mais detalhes).  Um indicador 
-	comum que indica que este par&acirc;metro precisa ser ajustado 
-	&eacute; quando processos s&atilde;o vistos no estado <errorname>sfbufa</errorname>.  
-        A vari&aacute;vel sysctl <varname>kern.ipc.nsfbufs
-	</varname> oferece uma vis&atilde;o apenas de leitura de como esta 
+	</foreignphrase> <option>NSFBUFS</option> colocando seu
+	valor no arquivo <filename>/boot/loader.conf</filename>
+	(veja &man.loader.8; para mais detalhes).  Um indicador
+	comum que indica que este par&acirc;metro precisa ser ajustado
+	&eacute; quando processos s&atilde;o vistos no estado <errorname>sfbufa</errorname>.
+	A vari&aacute;vel sysctl <varname>kern.ipc.nsfbufs
+	</varname> oferece uma vis&atilde;o apenas de leitura de como esta
 	vari&aacute;vel est&aacute; configurada no <foreignphrase>kernel
-	</foreignphrase>.  Este par&acirc;metro aumenta nominalmente com o 
-	<varname>kern.maxusers</varname>, entretanto pode ser 
+	</foreignphrase>.  Este par&acirc;metro aumenta nominalmente com o
+	<varname>kern.maxusers</varname>, entretanto pode ser
 	necess&aacute;rio ajustar de acordo com a necessidade.</para>
 
       <important>
-	<para>Mesmo que o <literal>socket</literal> tenha sido marcado como 
+	<para>Mesmo que o <literal>socket</literal> tenha sido marcado como
 	  n&atilde;o bloqueador, invocar o &man.sendfile.2; neste <literal>socket
-	  </literal> pode resultar em bloqueamento de chamadas no 
-	  &man.sendfile.2; at&eacute; que <literal>struct sf_buf</literal>'s 
+	  </literal> pode resultar em bloqueamento de chamadas no
+	  &man.sendfile.2; at&eacute; que <literal>struct sf_buf</literal>'s
 	  tenham sido disponibilizados.</para>
       </important>
 
@@ -2059,31 +2059,31 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <primary>net.inet.ip.portrange.*</primary>
 	</indexterm>
 
-	<para>A vari&aacute;vel sysctl <varname>net.inet.ip.portrange.*</varname> 
-	  controla a faixa de n&uacute;mero de portas automaticamente ligadas a 
-	  <literal>sockets</literal> TCP e UDP.  Existem tr&ecirc;s faixas: a 
-	  baixa, a padr&atilde;o e a faixa alta.  Muitos programas de rede usam 
-	  a faixa padr&atilde;o, que &eacute; controlada pela vari&aacute;vel 
+	<para>A vari&aacute;vel sysctl <varname>net.inet.ip.portrange.*</varname>
+	  controla a faixa de n&uacute;mero de portas automaticamente ligadas a
+	  <literal>sockets</literal> TCP e UDP.  Existem tr&ecirc;s faixas: a
+	  baixa, a padr&atilde;o e a faixa alta.  Muitos programas de rede usam
+	  a faixa padr&atilde;o, que &eacute; controlada pela vari&aacute;vel
 	  <varname>net.inet.ip.portrange.first</varname> e
-	  <varname>net.inet.ip.portrange.last</varname>, que possuem 
-	  valores padr&atilde;o 1024 e 5000, respectivamente. Faixas de porta 
-	  padr&atilde;o s&atilde;o usadas para conex&otilde;es que saem, e &eacute; poss&iacute;vel ficar 
-	  sem portas sob certas circunst&acirc;ncias.  Isto ocorre de forma 
-	  mais comum quando voc&ecirc; roda um servidor proxy que tem muita 
-	  carga.  A faixa de portas n&atilde;o &eacute; um problema quando se executa 
-	  servidores cujo papel principal &eacute; receber conex&otilde;es, como um 
-	  servdor web normal, ou um servidor que possui um n&uacute;mero limitado 
-	  de conex&otilde;es que saem, como um <literal>relay</literal> de 
-	  correio.  Para situa&ccedil;&otilde;es onde voc&ecirc; pode ficar sem portas, &eacute; 
-	  recomendado que se aumente modestamente a vari&aacute;vel 
-	  <varname>net.inet.ip.portrange.last</varname>.  Um valor de 
+	  <varname>net.inet.ip.portrange.last</varname>, que possuem
+	  valores padr&atilde;o 1024 e 5000, respectivamente.  Faixas de porta
+	  padr&atilde;o s&atilde;o usadas para conex&otilde;es que saem, e &eacute; poss&iacute;vel ficar
+	  sem portas sob certas circunst&acirc;ncias.  Isto ocorre de forma
+	  mais comum quando voc&ecirc; roda um servidor proxy que tem muita
+	  carga.  A faixa de portas n&atilde;o &eacute; um problema quando se executa
+	  servidores cujo papel principal &eacute; receber conex&otilde;es, como um
+	  servdor web normal, ou um servidor que possui um n&uacute;mero limitado
+	  de conex&otilde;es que saem, como um <literal>relay</literal> de
+	  correio.  Para situa&ccedil;&otilde;es onde voc&ecirc; pode ficar sem portas, &eacute;
+	  recomendado que se aumente modestamente a vari&aacute;vel
+	  <varname>net.inet.ip.portrange.last</varname>.  Um valor de
 	   <literal>10000</literal>, <literal>20000</literal> ou
-	  <literal>30000</literal> deve ser suficiente.  Voc&ecirc; tamb&eacute;m deve 
-	  considerar os efeitos colaterais que a mudan&ccedil;a de faixa de 
-	  portas pode causar em um firewall.  Alguns firewalls podem 
-	  bloquear grandes faixas de portas (geralmente portas de n&uacute;meros 
-	  baixos) e esperar que os sistemas utilizem faixas de portas 
-	  altas para conex&otilde;es que saem &mdash por esta raz&atilde;o 
+	  <literal>30000</literal> deve ser suficiente.  Voc&ecirc; tamb&eacute;m deve
+	  considerar os efeitos colaterais que a mudan&ccedil;a de faixa de
+	  portas pode causar em um firewall.  Alguns firewalls podem
+	  bloquear grandes faixas de portas (geralmente portas de n&uacute;meros
+	  baixos) e esperar que os sistemas utilizem faixas de portas
+	  altas para conex&otilde;es que saem &mdash por esta raz&atilde;o
 	  recomenda-se que a vari&aacute;vel <varname>net.inet.ip.portrange.first
 	  </varname> tenha seu valor diminuido.</para>
       </sect3>
@@ -2096,53 +2096,53 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <secondary><varname>net.inet.tcp.inflight_enable</varname></secondary>
 	</indexterm>
 
-	<para>A Limita&ccedil;&atilde;o do Produto de Atraso de Banda TCP &eacute; similar ao 
-	  TCP/Vegas no <application>NetBSD</application>.  Pode ser habilitado 
-	  atrav&eacute;s da configura&ccedil;&atilde;o da vari&aacute;vel sysctl 
-	  <varname>net.inet.tcp.inflight_enable</varname> para o valor 
-	  <literal>1</literal>.  O sistema tentar&aacute; calcular o produto do atraso 
-	  de banda para cada conex&atilde;o e limitar a quantidade de dados 
-	  enfileirados para a rede para apenas a quantidade requerida, com 
-	  o objetivo de otimizar a quantidade de dados entrando e 
+	<para>A Limita&ccedil;&atilde;o do Produto de Atraso de Banda TCP &eacute; similar ao
+	  TCP/Vegas no <application>NetBSD</application>.  Pode ser habilitado
+	  atrav&eacute;s da configura&ccedil;&atilde;o da vari&aacute;vel sysctl
+	  <varname>net.inet.tcp.inflight_enable</varname> para o valor
+	  <literal>1</literal>.  O sistema tentar&aacute; calcular o produto do atraso
+	  de banda para cada conex&atilde;o e limitar a quantidade de dados
+	  enfileirados para a rede para apenas a quantidade requerida, com
+	  o objetivo de otimizar a quantidade de dados entrando e
 	  saindo.</para>
 
-	<para>Esta caracter&iacute;stica &eacute; &uacute;til se voc&ecirc; est&aacute; servindo dados 
-	  atrav&eacute;s de modems, Gigabit Ethernet, ou at&eacute; mesmo links WAN de 
-	  alta velocidade (ou qualquer outro link com um alto produto de 
-	  atraso de banda), especialmente se voc&ecirc; tamb&eacute;m est&aacute; usando 
-	  escalamento de janela ou possui uma grande janela de envio 
-	  configurada.  Se voc&ecirc; habilitar esta op&ccedil;&atilde;o, voc&ecirc; deve ter 
-	  certeza de configurar a vari&aacute;vel 
-	  <varname>net.inet.tcp.inflight_debug</varname> para 
-	  <literal>0</literal> (desabilitar depura&ccedil;&atilde;o), e para produ&ccedil;&atilde;o 
-	  configurar <varname>net.inet.tcp.inflight_min</varname> para pelo 
-	  menos <literal>6144</literal> pode ser ben&eacute;fico.  Entretanto, 
-	  note que configurar valores m&iacute;nimos altos pode efetivamente 
-	  desabilitar a limita&ccedil;&atilde;o de banda dependendo do link.  A 
-	  caracter&iacute;stica de limita&ccedil;&atilde;o reduz a quantidade de dados 
-	  constru&iacute;dos na roda intermedi&aacute;ria e trocar as filas de pacotes 
-	  assim como reduzir a quantidade de dados constru&iacute;dos na interface 
-	  de enfileiramento da m&aacute;quina local.  Com poucos pacotes enfileirados, 
-	  conex&otilde;es interativas, especialmente sob modems lentos, tamb&eacute;m 
+	<para>Esta caracter&iacute;stica &eacute; &uacute;til se voc&ecirc; est&aacute; servindo dados
+	  atrav&eacute;s de modems, Gigabit Ethernet, ou at&eacute; mesmo links WAN de
+	  alta velocidade (ou qualquer outro link com um alto produto de
+	  atraso de banda), especialmente se voc&ecirc; tamb&eacute;m est&aacute; usando
+	  escalamento de janela ou possui uma grande janela de envio
+	  configurada.  Se voc&ecirc; habilitar esta op&ccedil;&atilde;o, voc&ecirc; deve ter
+	  certeza de configurar a vari&aacute;vel
+	  <varname>net.inet.tcp.inflight_debug</varname> para
+	  <literal>0</literal> (desabilitar depura&ccedil;&atilde;o), e para produ&ccedil;&atilde;o
+	  configurar <varname>net.inet.tcp.inflight_min</varname> para pelo
+	  menos <literal>6144</literal> pode ser ben&eacute;fico.  Entretanto,
+	  note que configurar valores m&iacute;nimos altos pode efetivamente
+	  desabilitar a limita&ccedil;&atilde;o de banda dependendo do link.  A
+	  caracter&iacute;stica de limita&ccedil;&atilde;o reduz a quantidade de dados
+	  constru&iacute;dos na roda intermedi&aacute;ria e trocar as filas de pacotes
+	  assim como reduzir a quantidade de dados constru&iacute;dos na interface
+	  de enfileiramento da m&aacute;quina local.  Com poucos pacotes enfileirados,
+	  conex&otilde;es interativas, especialmente sob modems lentos, tamb&eacute;m
 	  ser&atilde;o capazes de operar com tempos reduzidos de <foreignphrase>
-	  <emphasis>Round Trip</emphasis></foreignphrase>.  Entretanto, 
-	  note que esta caracter&iacute;stica tem efeito apenas na transmiss&atilde;o 
-	  de dados (envio de dados / lado do servidor).  N&atilde;o tem efeito 
+	  <emphasis>Round Trip</emphasis></foreignphrase>.  Entretanto,
+	  note que esta caracter&iacute;stica tem efeito apenas na transmiss&atilde;o
+	  de dados (envio de dados / lado do servidor).  N&atilde;o tem efeito
 	  na recep&ccedil;&atilde;o de dados <foreignphrase>(download)</foreignphrase>
 	</para>
 
-	<para>Ajustar o valor de <varname>net.inet.tcp.inflight_stab</varname> 
-	  <emphasis>n&atilde;o</emphasis> &eacute; recomendado.  Este par&acirc;metro tem valor 
-	  20 como padr&atilde;o, representando 2 pacotes m&aacute;ximos adicionados ao 
-	  c&aacute;lculo de janela de produto de atraso de banda.  A janela 
-	  adicional &eacute; requerida para estabilizar o algoritmo e melhorar 
-	  a resposta em condi&ccedil;&otilde;es de mudan&ccedil;a, mas tamb&eacute;m pode resultar em 
-	  tempos altos de ping em links lentos (ainda mais lentos do que 
-	  voc&ecirc; teria sem o algoritmo <literal>inflight</literal>).  Nestes 
-	  casos, voc&ecirc; pode querer tentar reduzir este par&acirc;metro para 15, 10 
-	  ou 5; e talvez tenha que reduzir a vari&aacute;vel 
-	  <varname>net.inet.tcp.inflight_min</varname> (por exemplo, para 
-	  3500) para obter o efeito desejado.  Reduzir estes par&acirc;metros 
+	<para>Ajustar o valor de <varname>net.inet.tcp.inflight_stab</varname>
+	  <emphasis>n&atilde;o</emphasis> &eacute; recomendado.  Este par&acirc;metro tem valor
+	  20 como padr&atilde;o, representando 2 pacotes m&aacute;ximos adicionados ao
+	  c&aacute;lculo de janela de produto de atraso de banda.  A janela
+	  adicional &eacute; requerida para estabilizar o algoritmo e melhorar
+	  a resposta em condi&ccedil;&otilde;es de mudan&ccedil;a, mas tamb&eacute;m pode resultar em
+	  tempos altos de ping em links lentos (ainda mais lentos do que
+	  voc&ecirc; teria sem o algoritmo <literal>inflight</literal>).  Nestes
+	  casos, voc&ecirc; pode querer tentar reduzir este par&acirc;metro para 15, 10
+	  ou 5; e talvez tenha que reduzir a vari&aacute;vel
+	  <varname>net.inet.tcp.inflight_min</varname> (por exemplo, para
+	  3500) para obter o efeito desejado.  Reduzir estes par&acirc;metros
 	  deve ser feito como um &uacute;ltimo recurso somente.</para>
       </sect3>
     </sect2>
@@ -2151,61 +2151,61 @@ kern.maxfiles: 2088 -> 5000</screen>
   <sect1 id="adding-swap-space">
     <title>Adicionando Espa&ccedil;o de Swap</title>
 
-    <para>N&atilde;o importa o que voc&ecirc; planeje, algumas vezes o sistema 
-      n&atilde;o roda como voc&ecirc; espera.  Se voc&ecirc; acha que precisa de 
-      mais espa&ccedil;o de swap, &eacute; simples adicionar.  Voc&ecirc; tem tr&ecirc;s 
-      maneiras de fazer isso: adicionar um novo disco, habilitar 
-      swap atrav&eacute;s de NFS, e criar um arquivo de swap em uma 
+    <para>N&atilde;o importa o que voc&ecirc; planeje, algumas vezes o sistema
+      n&atilde;o roda como voc&ecirc; espera.  Se voc&ecirc; acha que precisa de
+      mais espa&ccedil;o de swap, &eacute; simples adicionar.  Voc&ecirc; tem tr&ecirc;s
+      maneiras de fazer isso: adicionar um novo disco, habilitar
+      swap atrav&eacute;s de NFS, e criar um arquivo de swap em uma
       parti&ccedil;&atilde;o existente.</para>
 
     <sect2 id="new-drive-swap">
       <title>Swap em um Novo Disco R&iacute;gido</title>
 
-      <para>A melhor maneira de adicionar swap, claro, &eacute; usar isto 
-	como desculpa para adicionar outro disco r&iacute;gido.  Voc&ecirc; pode 
-	sempre usar outro disco r&iacute;gido afinal de contas.  Se voc&ecirc; puder 
-	fazer isto, releia a discuss&atilde;o <ulink 
-	url="configtuning-initial.html#SWAP-DESIGN"> espa&ccedil;o de swap 
+      <para>A melhor maneira de adicionar swap, claro, &eacute; usar isto
+	como desculpa para adicionar outro disco r&iacute;gido.  Voc&ecirc; pode
+	sempre usar outro disco r&iacute;gido afinal de contas.  Se voc&ecirc; puder
+	fazer isto, releia a discuss&atilde;o <ulink
+	url="configtuning-initial.html#SWAP-DESIGN"> espa&ccedil;o de swap
 	</ulink> da se&ccedil;&atilde;o do Handbook <ulink
 	url="configtuning-initial.html">Configura&ccedil;&atilde;o Inicial</ulink>
-	para sugest&otilde;es de quais os melhores meios para arrumar seu 
+	para sugest&otilde;es de quais os melhores meios para arrumar seu
 	swap.</para>
     </sect2>
 
     <sect2 id="nfs-swap">
       <title>Swap atrav&eacute;s de NFS</title>
 
-      <para>Fazer swap atrav&eacute;s de NFS somente &eacute; recomendado 
-	se voc&ecirc; n&atilde;o possui um disco local para fazer swap. &Eacute; 
-	lento e ineficiente em vers&otilde;es do &os; anteriores a 
-	4.X.  &Eacute; razoavelmente r&aacute;pido na 4.0-RELEASE e superior.  
-	Mesmo com vers&otilde;es mais novas do &os;, swap de NFS ser&aacute; 
-	limitado pela largura de banda da rede colocando uma 
+      <para>Fazer swap atrav&eacute;s de NFS somente &eacute; recomendado
+	se voc&ecirc; n&atilde;o possui um disco local para fazer swap. &Eacute;
+	lento e ineficiente em vers&otilde;es do &os; anteriores a
+	4.X.  &Eacute; razoavelmente r&aacute;pido na 4.0-RELEASE e superior.
+	Mesmo com vers&otilde;es mais novas do &os;, swap de NFS ser&aacute;
+	limitado pela largura de banda da rede colocando uma
 	carga extra no servidor NFS.</para>
     </sect2>
 
     <sect2 id="create-swapfile">
       <title>Arquivos de Swap</title>
 
-      <para>Voc&ecirc; pode criar um arquivo de tamanho espec&iacute;fico 
-	para utilizar como arquivo de swap.  Em nosso exemplo 
+      <para>Voc&ecirc; pode criar um arquivo de tamanho espec&iacute;fico
+	para utilizar como arquivo de swap.  Em nosso exemplo
 	usaremos um arquivo de 64MB chamado <filename>/usr/swap0
-	</filename>.  Voc&ecirc; pode usar qualquer nome que desejar, 
+	</filename>.  Voc&ecirc; pode usar qualquer nome que desejar,
 	&eacute; claro.</para>
 
       <example>
-        <title>Criando um Arquivo de Swap no &os; 4.X</title>
+	<title>Criando um Arquivo de Swap no &os; 4.X</title>
 
       <orderedlist>
-        <listitem>
-          <para>Tenha certeza de que seu arquivo de configura&ccedil;&atilde;o de 
-	    <foreignphrase>kernel</foreignphrase> inclui o driver 
-	    <literal>vnode</literal>.  Ele 
-	    <emphasis>n&atilde;o</emphasis> est&aacute; nas vers&otilde;es recentes do 
+	<listitem>
+	  <para>Tenha certeza de que seu arquivo de configura&ccedil;&atilde;o de
+	    <foreignphrase>kernel</foreignphrase> inclui o driver
+	    <literal>vnode</literal>.  Ele
+	    <emphasis>n&atilde;o</emphasis> est&aacute; nas vers&otilde;es recentes do
 	    arquivo <filename>GENERIC</filename>.</para>
 
-          <programlisting>pseudo-device   vn 1   #Vnode driver (turns a file into a device)</programlisting>
-        </listitem>
+	  <programlisting>pseudo-device   vn 1   #Vnode driver (turns a file into a device)</programlisting>
+	</listitem>
 
 	<listitem>
 	  <para>crie um vn-device:</para>
@@ -2233,11 +2233,11 @@ kern.maxfiles: 2088 -> 5000</screen>
 
 	<listitem>
 
-          <para>Reinicialize a m&aacute;quina ou habilite o arquivo de swap 
+	  <para>Reinicialize a m&aacute;quina ou habilite o arquivo de swap
 	    imediatamente, digite:</para>
 
-          <screen>&prompt.root; <userinput>vnconfig -e /dev/vn0b /usr/swap0 swap</userinput></screen>
-        </listitem>
+	  <screen>&prompt.root; <userinput>vnconfig -e /dev/vn0b /usr/swap0 swap</userinput></screen>
+	</listitem>
       </orderedlist>
 
       </example>
@@ -2246,8 +2246,8 @@ kern.maxfiles: 2088 -> 5000</screen>
 
       <orderedlist>
 	<listitem>
-	  <para>Tenha certeza de que seu arquivo de configura&ccedil;&atilde;o 
-	    de <foreignphrase>kernel</foreignphrase> tenha o 
+	  <para>Tenha certeza de que seu arquivo de configura&ccedil;&atilde;o
+	    de <foreignphrase>kernel</foreignphrase> tenha o
 	    driver de mem&oacute;ria (&man.md.4;).  Est&aacute; no <filename>
 	    GENERIC</filename> por padr&atilde;o.</para>
 
@@ -2274,11 +2274,11 @@ kern.maxfiles: 2088 -> 5000</screen>
 
 	<listitem>
 
-	  <para>Reinicialize a m&aacute;quina ou habilite o arquivo de swap 
+	  <para>Reinicialize a m&aacute;quina ou habilite o arquivo de swap
 	    imediatamente, digite:</para>
 
 	  <screen>&prompt.root; <userinput>mdconfig -a -t vnode -f /usr/swap0 -u 0 && swapon /dev/md0</userinput></screen>
-        </listitem>
+	</listitem>
       </orderedlist>
 
       </example>
@@ -2302,46 +2302,46 @@ kern.maxfiles: 2088 -> 5000</screen>
 
     <title>Gerenciamento de Energia e Recursos</title>
 
-    <para>&Eacute; muito importante utilizar os recursos de hardware de 
-      maneira eficiente.  Antes do <acronym>ACPI</acronym> ser 
-      introduzido, era muito dif&iacute;cil e inflex&iacute;fel para os sistemas 
-      operacionais gerenciar o uso de energia e propriedades 
-      t&eacute;rmicas de um sistema.  O hardware era controlado por algum 
-      tipo de interface <acronym>BIOS</acronym> embarcada, ou 
-      <emphasis>Plug and Play BIOS (PNPBIOS)</emphasis>, ou 
-      <emphasis>Gerenciamento de Energia Avan&ccedil;ado (APM)</emphasis> 
-      e assim por diante.  Gerenciamento de Energia e Recursos &eacute; um 
-      dos componentes chave de um sistema operacional moderno.  Por 
-      exemplo, voc&ecirc; pode querer que o sistema operacional monitore 
-      os limites do sistema (e poss&iacute;velmente alertar voc&ecirc;) caso a 
+    <para>&Eacute; muito importante utilizar os recursos de hardware de
+      maneira eficiente.  Antes do <acronym>ACPI</acronym> ser
+      introduzido, era muito dif&iacute;cil e inflex&iacute;fel para os sistemas
+      operacionais gerenciar o uso de energia e propriedades
+      t&eacute;rmicas de um sistema.  O hardware era controlado por algum
+      tipo de interface <acronym>BIOS</acronym> embarcada, ou
+      <emphasis>Plug and Play BIOS (PNPBIOS)</emphasis>, ou
+      <emphasis>Gerenciamento de Energia Avan&ccedil;ado (APM)</emphasis>
+      e assim por diante.  Gerenciamento de Energia e Recursos &eacute; um
+      dos componentes chave de um sistema operacional moderno.  Por
+      exemplo, voc&ecirc; pode querer que o sistema operacional monitore
+      os limites do sistema (e poss&iacute;velmente alertar voc&ecirc;) caso a
       temperatura do seu sistema aumente inesperadamente.</para>
 
-    <para>Nesta se&ccedil;&atilde;o do Handbook do &os; ofereceremos informa&ccedil;&otilde;es 
-      sobre <acronym>ACPI</acronym>.  Daremos refer&ecirc;ncias de leituras 
+    <para>Nesta se&ccedil;&atilde;o do Handbook do &os; ofereceremos informa&ccedil;&otilde;es
+      sobre <acronym>ACPI</acronym>.  Daremos refer&ecirc;ncias de leituras
       mais completas no final.  Por favor, saiba que o <acronym>ACPI
-      </acronym> est&aacute; dispon&iacute;vel no &os;&nbsp;5.X e superiores como 
-      um m&oacute;dulo padr&atilde;o de <foreignphrase>kernel</foreignphrase>.  Para 
-      o &os;&nbsp;4.9, <acronym>ACPI</acronym> pode ser habilitado 
-      adicionando-se a linha <literal>device acpi</literal> ao arquivo 
-      de configura&ccedil;&atilde;o do <foreignphrase>kernel</foreignphrase> e 
+      </acronym> est&aacute; dispon&iacute;vel no &os;&nbsp;5.X e superiores como
+      um m&oacute;dulo padr&atilde;o de <foreignphrase>kernel</foreignphrase>.  Para
+      o &os;&nbsp;4.9, <acronym>ACPI</acronym> pode ser habilitado
+      adicionando-se a linha <literal>device acpi</literal> ao arquivo
+      de configura&ccedil;&atilde;o do <foreignphrase>kernel</foreignphrase> e
       recompilando-se o sistema.</para>
 
     <sect2 id="acpi-intro">
       <title>O que &eacute; ACPI?</title>
 
-      <para>Configura&ccedil;&atilde;o Avan&ccedil;ada e Interface de Energia 
-	(<acronym>ACPI</acronym>) &eacute; um padr&atilde;o escrito por um 
-	cons&oacute;rcio de fornecedores para oferecer um padr&atilde;o de 
-	interface para recursos de hardware e gerenciamento 
-	de energia.  &Eacute; um elemento chave na <emphasis>Configura&ccedil;&atilde;o 
-	direcionada ao Sistema e Gerenciamento de Energia</emphasis>, 
-	ex.: oferece mais controle e flexibilidade para o sistema 
-	operacional (<acronym>SO</acronym>).  Sistemas modernos, 
-	<quote>arrebentaram</quote> os limites das interfaces 
-	<literal>Plug and Play</literal> atuais (tais como APM, que 
+      <para>Configura&ccedil;&atilde;o Avan&ccedil;ada e Interface de Energia
+	(<acronym>ACPI</acronym>) &eacute; um padr&atilde;o escrito por um
+	cons&oacute;rcio de fornecedores para oferecer um padr&atilde;o de
+	interface para recursos de hardware e gerenciamento
+	de energia.  &Eacute; um elemento chave na <emphasis>Configura&ccedil;&atilde;o
+	direcionada ao Sistema e Gerenciamento de Energia</emphasis>,
+	ex.: oferece mais controle e flexibilidade para o sistema
+	operacional (<acronym>SO</acronym>).  Sistemas modernos,
+	<quote>arrebentaram</quote> os limites das interfaces
+	<literal>Plug and Play</literal> atuais (tais como APM, que
 	&eacute; usada no &os;&nbsp;4.X), antes da introdu&ccedil;&atilde;o do <acronym>
-	ACPI</acronym>.  <acronym>ACPI</acronym> &eacute; o sucessor 
-	direto do <acronym>APM</acronym> (Gerenciamento Avan&ccedil;ado 
+	ACPI</acronym>.  <acronym>ACPI</acronym> &eacute; o sucessor
+	direto do <acronym>APM</acronym> (Gerenciamento Avan&ccedil;ado
 	de Energia).</para>
     </sect2>
 
@@ -2349,104 +2349,104 @@ kern.maxfiles: 2088 -> 5000</screen>
       <title>Contratempos do Gerenciamento Avan&ccedil;ado de Energia (APM)</title>
 
       <para>O <emphasis>Gerenciamento Avan&ccedil;ado de Energia (APM)</emphasis>
-      facilita o controle do uso de energia de um sistema baseado em sua 
-      atividade.  A BIOS APM &eacute; oferecida pelo fornecedor (do sistema) e &eacute; 
-      espec&iacute;fica &agrave; plataforma de hardware.  Um driver APM no SO media o 
-      acesso ao <emphasis>Programa de Interface APM</emphasis>, que 
+      facilita o controle do uso de energia de um sistema baseado em sua
+      atividade.  A BIOS APM &eacute; oferecida pelo fornecedor (do sistema) e &eacute;
+      espec&iacute;fica &agrave; plataforma de hardware.  Um driver APM no SO media o
+      acesso ao <emphasis>Programa de Interface APM</emphasis>, que
       permite o gerenciamento de n&iacute;veis de energia.</para>
 
-      <para>Existem quatro problemas principais no APM. Primeiro, 
-      o gerenciamento de energia &eacute; feito pela BIOS (espec&iacute;fica 
-      do fornecedor), e o SO n&atilde;o tem nenhum conhecimento dela.  Um 
-      exemplo disso &eacute; quando o usu&aacute;rio configura valores de tempo 
-      ocioso para discos r&iacute;gidos na BIOS APM que, quando excedidos, 
-      ela (BIOS) desliga o disco sem o consentimento do SO.  Segundo, 
-      a l&oacute;gica do APM &eacute; embarcada na BIOS, e opera fora do escopo 
-      do SO.  Isto significa que os usu&aacute;rios s&oacute; podem consertar 
-      problemas em suas BIOS APM gravando uma nova ROM; que &eacute; um 
-      procedimento extremamente perigoso, e se falhar, pode levar 
-      o sistema &agrave; um estado irrecuper&aacute;vel.  Terceiro, APM &eacute; uma 
-      tecnologia espec&iacute;fica do fornecedor, o que significa que 
-      existem muitas paridades (duplica&ccedil;&atilde;o de esfor&ccedil;os) e falhas 
-      encontradas nas BIOS destes fornecedores que podem n&atilde;o ser 
-      consertadas nas de outros fornecedores.  &Uacute;ltima mas n&atilde;o menos 
-      importante, a BIOS APM n&atilde;o possui espa&ccedil;o suficiente para 
-      implementar uma pol&iacute;tica sofisticada de energia, ou uma que 
+      <para>Existem quatro problemas principais no APM.  Primeiro,
+      o gerenciamento de energia &eacute; feito pela BIOS (espec&iacute;fica
+      do fornecedor), e o SO n&atilde;o tem nenhum conhecimento dela.  Um
+      exemplo disso &eacute; quando o usu&aacute;rio configura valores de tempo
+      ocioso para discos r&iacute;gidos na BIOS APM que, quando excedidos,
+      ela (BIOS) desliga o disco sem o consentimento do SO.  Segundo,
+      a l&oacute;gica do APM &eacute; embarcada na BIOS, e opera fora do escopo
+      do SO.  Isto significa que os usu&aacute;rios s&oacute; podem consertar
+      problemas em suas BIOS APM gravando uma nova ROM; que &eacute; um
+      procedimento extremamente perigoso, e se falhar, pode levar
+      o sistema &agrave; um estado irrecuper&aacute;vel.  Terceiro, APM &eacute; uma
+      tecnologia espec&iacute;fica do fornecedor, o que significa que
+      existem muitas paridades (duplica&ccedil;&atilde;o de esfor&ccedil;os) e falhas
+      encontradas nas BIOS destes fornecedores que podem n&atilde;o ser
+      consertadas nas de outros fornecedores.  &Uacute;ltima mas n&atilde;o menos
+      importante, a BIOS APM n&atilde;o possui espa&ccedil;o suficiente para
+      implementar uma pol&iacute;tica sofisticada de energia, ou uma que
       possa se adaptar bem ao prop&oacute;sito da m&aacute;quina.</para>
-      
+
       <para><emphasis>BIOS Plug and Play (PNPBIOS)</emphasis> era
-      inconfi&aacute;vel em muitas situa&ccedil;&otilde;es.  PNPBIOS &eacute; uma tecnologia 
-      de 16 bits, assim o SO tem que emular 16 bits para 
+      inconfi&aacute;vel em muitas situa&ccedil;&otilde;es.  PNPBIOS &eacute; uma tecnologia
+      de 16 bits, assim o SO tem que emular 16 bits para
       fazer <quote>interface</quote> com os m&eacute;todos PNPBIOS.</para>
 
-      <para>O driver <acronym>APM</acronym> do &os; est&aacute; 
+      <para>O driver <acronym>APM</acronym> do &os; est&aacute;
       documentado na p&aacute;gina de manual do &man.apm.4;.</para>
     </sect2>
 
     <sect2 id="acpi-config">
       <title>Configurando <acronym>ACPI</acronym></title>
 
-      <para>O driver <filename>acpi.ko</filename> &eacute; carregado por padr&atilde;o 
-	na inicializa&ccedil;&atilde;o pelo &man.loader.8; e <emphasis>n&atilde;o</emphasis> deve 
-	ser compilado no <foreignphrase>kernel</foreignphrase>.  A raz&atilde;o 
-	por tr&aacute;s disso &eacute; que os m&oacute;dulos s&atilde;o mais f&aacute;ceis de se trabalhar, 
-	digamos se trocar para outro <filename>acpi.ko</filename> sem que seja 
-	preciso recompilar o <foreignphrase>kernel</foreignphrase>.  Isto 
-	tem a vantagem de facilitar os testes.  Uma outra raz&atilde;o &eacute; que 
-	inicializar o <acronym>ACPI</acronym> depois do sistema estar no ar 
-	n&atilde;o &eacute; t&atilde;o &uacute;til, e em alguns casos pode ser fatal.  Na d&uacute;vida, 
-	apenas desabilite o <acronym>ACPI</acronym>.  Este driver n&atilde;o deve 
-	e n&atilde;o pode ser desabilitado pois o barramento do sistema o usa para 
-	v&aacute;rias intera&ccedil;&otilde;es de hardware.  O <acronym>ACPI</acronym> pode ser 
-	desabilitado com o utilit&aacute;rio &man.acpiconf.8;.  Na verdade, a maior 
-	parte das intera&ccedil;&otilde;es com o <acronym>ACPI</acronym> pode ser feita 
-	atrav&eacute;s do &man.acpiconf.8;.  Basicamente isto significa que se 
-	qualquer coisa a respeito do <acronym>ACPI</acronym> estiver na sa&iacute;da 
+      <para>O driver <filename>acpi.ko</filename> &eacute; carregado por padr&atilde;o
+	na inicializa&ccedil;&atilde;o pelo &man.loader.8; e <emphasis>n&atilde;o</emphasis> deve
+	ser compilado no <foreignphrase>kernel</foreignphrase>.  A raz&atilde;o
+	por tr&aacute;s disso &eacute; que os m&oacute;dulos s&atilde;o mais f&aacute;ceis de se trabalhar,
+	digamos se trocar para outro <filename>acpi.ko</filename> sem que seja
+	preciso recompilar o <foreignphrase>kernel</foreignphrase>.  Isto
+	tem a vantagem de facilitar os testes.  Uma outra raz&atilde;o &eacute; que
+	inicializar o <acronym>ACPI</acronym> depois do sistema estar no ar
+	n&atilde;o &eacute; t&atilde;o &uacute;til, e em alguns casos pode ser fatal.  Na d&uacute;vida,
+	apenas desabilite o <acronym>ACPI</acronym>.  Este driver n&atilde;o deve
+	e n&atilde;o pode ser desabilitado pois o barramento do sistema o usa para
+	v&aacute;rias intera&ccedil;&otilde;es de hardware.  O <acronym>ACPI</acronym> pode ser
+	desabilitado com o utilit&aacute;rio &man.acpiconf.8;.  Na verdade, a maior
+	parte das intera&ccedil;&otilde;es com o <acronym>ACPI</acronym> pode ser feita
+	atrav&eacute;s do &man.acpiconf.8;.  Basicamente isto significa que se
+	qualquer coisa a respeito do <acronym>ACPI</acronym> estiver na sa&iacute;da
 	do &man.dmesg.8;, ent&atilde;o provavelmente j&aacute; estar&aacute; rodando.</para>
 
-      <note><para><acronym>ACPI</acronym> e <acronym>APM</acronym> n&atilde;o podem 
-	coexistir e devem ser usados separadamente.  O &uacute;ltimo a ser carregado 
-	ser&aacute; finalizado se o driver tiver not&iacute;cias que o outro est&aacute; sendo 
+      <note><para><acronym>ACPI</acronym> e <acronym>APM</acronym> n&atilde;o podem
+	coexistir e devem ser usados separadamente.  O &uacute;ltimo a ser carregado
+	ser&aacute; finalizado se o driver tiver not&iacute;cias que o outro est&aacute; sendo
 	executado.</para></note>
 
-      <para>Numa forma mais simples, o <acronym>ACPI</acronym> pode ser usado 
+      <para>Numa forma mais simples, o <acronym>ACPI</acronym> pode ser usado
 	para colocar o sistema em modo de espera com a op&ccedil;&atilde;o <option>-s
 	</option> e <literal>1-5</literal> do &man.acpiconf.8;.</para>
 
       <screen>&prompt.root; <userinput>halt -p</userinput></screen>
 
-      <para>Outras op&ccedil;&otilde;es est&atilde;o dispon&iacute;veis.  Confira a p&aacute;gina de manual 
+      <para>Outras op&ccedil;&otilde;es est&atilde;o dispon&iacute;veis.  Confira a p&aacute;gina de manual
 	&man.acpiconf.8; para mais informa&ccedil;&otilde;es.</para>
     </sect2>
 
     <sect2 id="acpi-debug">
       <title>Depurando e Desabilitando o <acronym>ACPI</acronym></title>
 
-      <para>Quase tudo no <acronym>ACPI</acronym> &eacute; transparente, 
-	at&eacute; que n&atilde;o funcione.  Voc&ecirc; como usu&aacute;rio saber&aacute; quando 
-	alguma coisa n&atilde;o funcionar de acordo.  O driver &man.acpi.4; 
-	suporta v&aacute;rias op&ccedil;&otilde;es de depura&ccedil;&atilde;o, &eacute; at&eacute; poss&iacute;vel 
-	seletivamente desabilitar algumas partes do 
-	sistema <acronym>ACPI</acronym>.  Para mais informa&ccedil;&otilde;es a 
-	respeito de facildades de depura&ccedil;&atilde;o leia a p&aacute;gina de manual 
+      <para>Quase tudo no <acronym>ACPI</acronym> &eacute; transparente,
+	at&eacute; que n&atilde;o funcione.  Voc&ecirc; como usu&aacute;rio saber&aacute; quando
+	alguma coisa n&atilde;o funcionar de acordo.  O driver &man.acpi.4;
+	suporta v&aacute;rias op&ccedil;&otilde;es de depura&ccedil;&atilde;o, &eacute; at&eacute; poss&iacute;vel
+	seletivamente desabilitar algumas partes do
+	sistema <acronym>ACPI</acronym>.  Para mais informa&ccedil;&otilde;es a
+	respeito de facildades de depura&ccedil;&atilde;o leia a p&aacute;gina de manual
 	do &man.acpi.4;.</para>
 
       <para>Algumas vezes, por v&aacute;rias raz&otilde;es, o m&oacute;dulo <filename>
-	acpi.ko</filename> deve ser descarregado.  Isto s&oacute; pode ser 
-	feito no momento da inicializa&ccedil;&atilde;o pelo &man.loader.8;.  Voc&ecirc; 
+	acpi.ko</filename> deve ser descarregado.  Isto s&oacute; pode ser
+	feito no momento da inicializa&ccedil;&atilde;o pelo &man.loader.8;.  Voc&ecirc;
 	pode digitar no prompt do &man.loader.8; o comando <command>
-	unset acpi_load</command> cada vez que voc&ecirc; inicializar o 
-	sistema, para interromper o carregamento autom&aacute;tico do 
-	driver &man.acpi.4; adicione a seguinte linha no arquivo 
+	unset acpi_load</command> cada vez que voc&ecirc; inicializar o
+	sistema, para interromper o carregamento autom&aacute;tico do
+	driver &man.acpi.4; adicione a seguinte linha no arquivo
 	<filename>/boot/loader.conf</filename>:</para>
 
       <programlisting>exec="unset acpi_load"</programlisting>
 
-      <para>O &os;&nbsp;5.1-RELEASE e superiores vem com um menu 
-	em tempo de inicializa&ccedil;&atilde;o que controla como o &os; &eacute; 
-	inicializado.  Uma das op&ccedil;&otilde;es propostas &eacute; a de desligar 
-	o <acronym>ACPI</acronym>.  Para desabilit&aacute;-lo selecione 
-	<guimenuitem>2. Boot &os; with ACPI disabled</guimenuitem>
+      <para>O &os;&nbsp;5.1-RELEASE e superiores vem com um menu
+	em tempo de inicializa&ccedil;&atilde;o que controla como o &os; &eacute;
+	inicializado.  Uma das op&ccedil;&otilde;es propostas &eacute; a de desligar
+	o <acronym>ACPI</acronym>.  Para desabilit&aacute;-lo selecione
+	<guimenuitem>2.  Boot &os; with ACPI disabled</guimenuitem>
 	no menu.</para>
 
     </sect2>
