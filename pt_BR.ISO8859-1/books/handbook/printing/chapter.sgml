@@ -1047,169 +1047,199 @@ showpage</programlisting>
         <primary>printers</primary>
         <secondary>serial</secondary>
       </indexterm>
-	    <para>This section tells you how to check if FreeBSD can
-	      communicate with a printer on a serial port.</para>
+	    <para>Essa se&ccedil;&atilde;o informa &agrave; voc&ecirc;
+	como verificar se o FreeBSD pode comunicar com a impressora pela
+	porta serial.</para>
 
-	    <para><emphasis>To test a printer on a serial
-	      port:</emphasis></para>
+	    <para><emphasis>Para testa a impressora na porta serial:
+	      </emphasis></para>
 
 	    <procedure>
 	      <step>
-		<para>Become <username>root</username> with &man.su.1;.</para>
+		<para>Torne-se <username>root</username> com &man.su.1;.</para>
 	      </step>
 
 	      <step>
-		<para>Edit the file <filename>/etc/remote</filename>.  Add
-		  the following entry:</para>
+		<para>Edite o arquivo <filename>/etc/remote</filename>.  
+	Adicione a seguinte entrada:</para>
 
-		<programlisting>printer:dv=/dev/<replaceable>port</replaceable>:br#<replaceable>bps-rate</replaceable>:pa=<replaceable>parity</replaceable></programlisting>
+		<programlisting>printer:dv=/dev/<replaceable>porta</replaceable>:br#<replaceable>bps-rate</replaceable>:pa=<replaceable>paridade</replaceable></programlisting>
 
 		<indexterm><primary>bits-per-second</primary></indexterm>
 		<indexterm><primary>serial port</primary></indexterm>
 		<indexterm><primary>parity</primary></indexterm>
-		<para>Where <replaceable>port</replaceable> is the device
-		  entry for the serial port (<literal>ttyd0</literal>,
+		<para>Onde <replaceable>porta</replaceable> &eacute; o
+	dispositivo para a porta serial (<literal>ttyd0</literal>,
 		  <literal>ttyd1</literal>, etc.),
-		  <replaceable>bps-rate</replaceable> is the
-		  bits-per-second rate at which the printer communicates,
-		  and <replaceable>parity</replaceable> is the parity
-		  required by the printer (either <literal>even</literal>,
-		  <literal>odd</literal>, <literal>none</literal>, or
-		  <literal>zero</literal>).</para>
+		  <replaceable>bps-rate</replaceable> &eacute; a taxa em
+		  bits-por-segundo pela qual a impressora ir&aacute;
+	se comunuicar, e <replaceable>paridade</replaceable> &eacute; a 
+	paridade requierida pela impressora ( deve ser uma dessas, a seguir:
+  	<literal>par</literal>, <literal>&iacute;mpar</literal>, 
+	<literal>nenhum</literal>, ou <literal>zero</literal>).</para>
 
-		<para>Here is a sample entry for a printer connected via
-		  a serial line to the third serial port at 19200&nbsp;bps with
-		  no parity:</para>
+		<para>
+		Aqui tem um exemplo de uma impressora conectada via terceira 
+	porta seria a uma taxa de 19200&nbsp;bps sem paridade:
+		  </para>
 
 		<programlisting>printer:dv=/dev/ttyd2:br#19200:pa=none</programlisting>
 	      </step>
 
 	      <step>
-		<para>Connect to the printer with &man.tip.1;.
-		  Type:</para>
+		<para>Conectando a impressora com &man.tip.1;.  Digite:</para>
 
 		<screen>&prompt.root; <userinput>tip printer</userinput></screen>
 
-		<para>If this step does not work, edit the file
-		  <filename>/etc/remote</filename> again and try using
+		<para>
+			Se esse passo n&atilde;o funcionar, edite o arquivo
+	<filename>/etc/remote</filename> e tente usando
 		  <filename>/dev/cuaa<replaceable>N</replaceable></filename>
-		  instead of
+		  ao inv&eacute;s de 
 		  <filename>/dev/ttyd<replaceable>N</replaceable></filename>.</para>
 	      </step>
 
 	      <step>
-		<para>Send data to the printer.</para>
+		<para>Envie dados para a impressora.  </para>
 
 		<itemizedlist>
 		  <listitem>
-		    <para>If the printer can print plain text, then use
-		      &man.lptest.1;.  Type:</para>
+		    <para>Se a Impressora pode imprimir texto puro, use
+		      &man.lptest.1;.  Digite:</para>
 
 		    <screen>&prompt.user; <userinput>$lptest</userinput></screen>
 		  </listitem>
 
 		  <listitem>
-		    <para>If the printer understands &postscript; or other
-		      printer language, then send a small program to the
-		      printer.  Type the program, line by line,
-		      <emphasis>very carefully</emphasis> as backspacing
-		      or other editing keys may be significant to the
-		      printer.  You may also need to type a special
-		      end-of-file key for the printer so it knows it
-		      received the whole program.  For &postscript;
-		      printers, press <literal>CONTROL+D</literal>.</para>
+		    <para>Se a impressora entende &postscript; ou outra
+	liguagem, envie um pequeno programa para a impressora.  Digite o 
+	programa linha-a-linha <emphasis>muito cuidadosamente</emphasis> 
+	porque as teclas de edi&ccedil;&atilde;o podem ter significado 
+	para a impressora.  Voc&ecirc; tamb&eacute;m pode precisar 
+	digitar o caracter especial de fim-de-arquivo para a impressora
+	reconhecer que recebeu todo o programa.  Para a impressora
+	&postscript;, pressione <literal>CONTROL+D</literal>.</para>
 
-		    <para>Alternatively, you can put the program in a file
-		      and type:</para>
+		    <para>
+		Alternativamente, voc&ecirc; pode colocar o programa 
+	em um arquivo e digitar:
+		    </para>
 
-		    <screen>&prompt.user; <userinput>&gt;<replaceable>file</replaceable></userinput></screen>
+		    <screen>&prompt.user; <userinput>&gt;<replaceable>arquivo</replaceable></userinput></screen>
 
-		    <para>Where <replaceable>file</replaceable> is the
-		      name of the file containing the program.  After
-		      &man.tip.1; sends the file, press any required
-		      end-of-file key.</para>
+		    <para>Onde <replaceable>arquivo</replaceable> &eacute;
+	o nome do arquivo que cont&eacute;m o programa.  Apos
+	&man.tip.1; envia o arquivo, pressione a seguencia fim-de-arquivo.
+		      </para>
 		  </listitem>
 		</itemizedlist>
 	      </step>
 	    </procedure>
 
-	    <para>You should see something print.  Do not worry if the
-	      text does not look right; we will fix that later.</para>
+	    <para>
+		Voc&ecirc; deve ver algo impresso.  N&atilde;o se preocupe 
+	se o texto n&atilde;o se parecer correto;  nos iremos consertar 
+	isso mais tarde.
+	      </para>
 	  </sect5>
 	</sect4>
       </sect3>
 
       <sect3 id="printing-printcap">
-	<title>Enabling the Spooler: the <filename>/etc/printcap</filename>
-	  File</title>
+	<title>
+		Habilitando o <foreignphrase>Spooler</foreignphrase>: 
+		O Arquivo <filename>/etc/printcap</filename>
+	  </title>
 
-	<para>At this point, your printer should be hooked up, your kernel
-	  configured to communicate with it (if necessary), and you have
-	  been able to send some simple data to the printer.  Now, we are
-	  ready to configure <application>LPD</application> to control access
-	  to your printer.</para>
+	<para>
+		Nesse ponto, sua impressora deve estar conectada, seu kernel
+	configurado e comunicando com a impressora, e voc&ecirc; teve sucesso
+	ao enviar dados para a impressora.  Agora, nos estamos prontos para 
+	configurar <application>LPD</application> para controlar o acesso
+	a sua impressora.
+	  </para>
 
-	<para>You configure <application>LPD</application> by editing the file
-	  <filename>/etc/printcap</filename>.  The 
-	  <application>LPD</application> spooling system
-	  reads this file each time the <foreignphrase>spooler</foreignphrase> is used, so updates to the
-	  file take immediate effect.</para>
+	<para>
+		Voc&ecirc; configura o <application>LPD</application> pela 
+	edi&ccedil;&atilde;o do arquivo <filename>/etc/printcap</filename>.  
+	  O sistema de <foreignphrase>spooling</foreignphrase> 
+	<application>LPD</application> l&ecirc; este arquivo a cada vez que
+	o <foreignphrase>spooler</foreignphrase> &eacute; necess&aacute;rio
+	ent&atilde;o a atualiza&ccedil;&atilde;o do arquivo se reflete
+	imediatamente na aplica&ccedil;&atilde;o.
+	  </para>
 
 	<indexterm>
     <primary>printers</primary>
     <secondary>capabilities</secondary>
   </indexterm>
-	<para>The format of the &man.printcap.5; file is straightforward.
-	  Use your favorite text editor to make changes to
-	  <filename>/etc/printcap</filename>.  The format is identical to
-	  other capability files like
-	  <filename>/usr/share/misc/termcap</filename> and
-	  <filename>/etc/remote</filename>.  For complete information
-	  about the format, see the &man.cgetent.3;.</para>
+	<para>
+		O formato do arquivo &man.printcap.5; &eacute; direto.
+	  Use o seu editor de texto favorito para realizar as mudan&ccedil;as
+	no arquivo <filename>/etc/printcap</filename>.  O formato &eacute;
+	identico ao outros arquivos de compatibilidades como os 
+	  <filename>/usr/share/misc/termcap</filename> e
+	  <filename>/etc/remote</filename>.  Para completa 
+	informa&ccedil;&atilde;o sobre o formato, veja &man.cgetent.3;.</para>
 
-	<para>The simple <foreignphrase>spooler</foreignphrase> configuration consists of the following
-	  steps:</para>
+	<para>
+		A simples configura&ccedil;&atilde;o do 
+	<foreignphrase>spooler</foreignphrase> consiste com em
+	seguir os seguintes passos:
+	  </para>
 
 	<procedure>
 	  <step>
-	    <para>Pick a name (and a few convenient aliases) for the
-	      printer, and put them in the
-	      <filename>/etc/printcap</filename> file; see the 
+	    <para>
+		Escolha um nome (e algum apelido conveniente) para a sua
+	impressora, e coloque-o no arquivo <filename>/etc/printcap</filename> 
+	Veja a se&ccedil;&atilde;o 
 	      <link linkend="printing-naming">Naming the Printer</link>
-	      section for more information on naming.</para>
+	para maiores informa&ccedil;&otilde;es sobre dar nomes.</para>
 	  </step>
-
 	  <indexterm><primary>header pages</primary></indexterm>
 	  <step>
-	    <para>Turn off header pages (which are on by default) by
-	      inserting the <literal>sh</literal> capability; see the
-	      <link linkend="printing-no-header-pages">Suppressing Header
-	      Pages</link> section for more information.</para>
+	    <para>
+		Para desligar o cabe&ccedil;alho de p&aacute;ginas ( ele
+	&eacute; habilitado por padr&atilde;o ) inserindo a chave
+	<literal>sh</literal>; veja a se&ccedil;&atilde;o
+	      <link linkend="printing-no-header-pages">
+	Suprimindo o Cabe&ccedil;alho de P&aacute;ginas</link> para
+	maiores informa&ccedil;&otilde;es.</para>
 	  </step>
 
 	  <step>
-	    <para>Make a spooling directory, and specify its location with
-	      the <literal>sd</literal> capability; see the <link
-	      linkend="printing-spooldir">Making the Spooling
-	      Directory</link> section for more information.</para>
+	    <para>
+		Criando o diret&oacute;rio de 
+	<foreignphrase>spooling</foreignphrase>, e especificando a sua 
+	posi&ccedil;&atilde;o com a chave <literal>sd</literal>; veja a
+	se&ccedil;&atilde;o <link linkend="printing-spooldir">
+	Criando o Diret&oacute;rio de <foreignphrase>Spooling</foreignphrase>
+	</link> para maiores informa&ccedil;&otilde;es
+	</para>
 	  </step>
 
 	  <step>
-	    <para>Set the <filename>/dev</filename> entry to use for the
-	      printer, and note it in <filename>/etc/printcap</filename>
-	      with the <literal>lp</literal> capability; see the <link
-	      linkend="printing-device">Identifying the Printer
-	      Device</link> for more information.  Also, if the printer is
-	      on a serial port, set up the communication parameters with
-	      the <literal>ms#</literal> capability which is discussed in the <link
-	      linkend="printing-commparam">Configuring Spooler
-	      Communications Parameters</link> section.</para>
+	    <para>Veja a entrada <filename>/dev</filename> para usar
+	a sua impressora, e coloque ela dentro do arquivo 
+	<filename>/etc/printcap</filename> na chave <literal>lp</literal>;
+	veja a se&ccedil;&atilde;o <link linkend="printing-device">
+	Identifica&ccedil;&atilde;o do Dispositivo de Impress&atilde;o
+	</link> para maiores informa&ccedil;&otilde;es.  Se a impressora
+	estiver na porta serial, configure os parametros de 
+	comunica&ccedil;&atilde;o use a chave the <literal>ms#</literal> 
+	o qual &eacute; discutido na se&ccedil;&atilde;o 
+	<link linkend="printing-commparam">
+		Configurando os Parametros Comuni&ccedil;&atilde;o 
+		do <foreignphrase>Spooler</foreignphrase> </link>.</para>
 	  </step>
 
 	  <step>
-	    <para>Install a plain text input filter; see the <link
-	    linkend="printing-textfilter">Installing the Text
-	    Filter</link> section for details.</para>
+	    <para>
+		Instalar um filtro de entrada para texto puro; veja
+	a se&ccedil;&atilde;o <link linkend="printing-textfilter">
+	Instalando o Filtro de Texto </link> para mais detalhes
+		</para>
 	  </step>
 
 	  <step>
