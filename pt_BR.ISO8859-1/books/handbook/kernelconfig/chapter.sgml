@@ -1211,29 +1211,28 @@ device          sn0    at isa? port 0x300 irq 10
 
     <programlisting>pseudo-device   tun           # Packet tunnel.</programlisting>
 
-    <para>Isto &eacute; usado pelo software de PPP. Um
-      <replaceable>n&uacute;mero</replaceable> depois <literal>tun</literal>
-      especificado &eacute; o n&uacute;mero de sess&otilde;es simultaneas PPP suportadas. Veja
-      a se&ccedil;&atilde;o <link linkend="userppp">PPP</link> deste livro para maiores
+    <para>É usada pelo programa que implementa o suporte PPP em nível de usuário. O
+	<replaceable>valor</replaceable> na frente da entrada <literal>tun</literal>
+	indica o número de sessões simultâneas suportadas pelo PPP.  Veja a
+	<link linkend="userppp">PPP</link> deste livro para obter maiores
       informa&ccedil;&otilde;es.</para>
 
     <programlisting><anchor id="kernelconfig-ptys">
 pseudo-device   pty           # Pseudo-ttys (telnet etc)</programlisting>
 
-    <para>Isto &eacute; um <quote>pseudo-terminal</quote> que simula porta de login.
-      Isto &eacute; usado para entrada <command>telnet</command> e se&ccedil;&otilde;es
+    <para>Trata-se de um <quote>pseudo-terminal</quote> que simula a interface
+	de login no sistema.  É usado pelo <command>telnet</command> bem como por se&ccedil;&otilde;es
       <command>rlogin</command>,
       <application>xterm</application>, e algumas outras aplica&ccedil;&otilde;es como
-      <application>Emacs</application>. Um
-      <replaceable>n&uacute;mero</replaceable> depois <literal>pty</literal> indica o n&uacute;mero de
-      <literal>pty</literal>s para ser criado. Se voc&ecirc; necessita mais que o
-      padr&atilde;o de 16 simult&acirc;neas <application>xterm</application> windows
-      ou remote logins, &eacute; certo aumentar este n&uacute;mero,
-      para o m&aacute;ximo de 256.</para>
+      <application>Emacs</application>.  O
+      <replaceable>valor</replaceable> após a entrada <literal>pty</literal> indica o n&uacute;mero de
+	dispositivos <literal>pty</literal> que devem ser criados.  Se você tem a necessidade de mais de
+	16 sessões simultâneas de <application>xterm</application> ou acessos remotos, pode aumentar
+	este valor até o máximo de 256.</para>
 
     <programlisting>pseudo-device   md            # Memory <quote>disks</quote></programlisting>
 
-    <para>Disco de mem&oacute;ria pseudo-devices.</para>
+    <para>É o pseudo-dispositivo para discos de memória.</para>
 
     <programlisting>pseudo-device   gif</programlisting>
 
@@ -1241,21 +1240,18 @@ pseudo-device   pty           # Pseudo-ttys (telnet etc)</programlisting>
 
     <programlisting>pseudo-device   gif     4     # IPv6 and IPv4 tunneling</programlisting>
 
-    <para>Isto implementa IPv6 sobre IPv4 tunneling,
-      IPv4 sobre IPv4 tunneling, e IPv6 sobre IPv6 tunneling. Come&ccedil;ando com
-      &os;&nbsp;4.4 o <literal>gif</literal> dispositivo &eacute;
-      <quote>auto-cloning</quote>, e voc&ecirc; deve usar o primeiro exemplo
-      (sem o n&uacute;mero depois do <literal>gif</literal>). Vers&otilde;es mais avan&ccedil;adas do
-      &os; requerem o n&uacute;mero.</para>
+    <para>Implementa tunelamento do protocolo IPv6 sobre IPv4, bem como tunelamento
+      IPv4 sobre IPv4, e IPv6 sobre.  À partir do
+      &os;&nbsp;4.4 o dispositivo <literal>gif</literal> pode ser criado por demanda,
+	e a primeira entrada (sem o identificador numérico após o <literal>gif</literal>) pode
+	ser usada.  Versões anteriores do &os; requerem esta definição.</para>
 
     <programlisting>pseudo-device   faith   1     # IPv6-to-IPv4 relaying (translation)</programlisting>
 
-    <para>Esta pseudo-device captura os pacotes que s&atilde;o emitidos e
+    <para>Este pseudo-dispositivo captura os pacotes que s&atilde;o emitidos e
       desv&iacute;a-os ao daemon da tradu&ccedil;&atilde;o IPv4/IPv6.</para>
 
-    <programlisting># O `bpf' pseudo-device permite o filtro de pacotes Berkeley.
-# Esteja ciente das consequencias administrativas ao habilitar isto!
-pseudo-device   bpf           # Berkeley packet filter</programlisting>
+    <programlisting>pseudo-device   bpf           # Berkeley packet filter</programlisting>
 
     <para>Este &eacute; o filtro de pacotes Berkeley. Esta pseudo-device permite
       que as interfaces da rede sejam colocadas em modo promiscuous, capturando cada
