@@ -11,7 +11,7 @@
   <articleinfo>
     <title>Escrevendo relat&oacute;rios de problema no FreeBSD</title>
 
-    <pubdate>$FreeBSD: articles/problem-reports/article.sgml,v 1.12 2003/12/12 01:47:16 ebrandi Exp $</pubdate>
+    <pubdate>$FreeBSD: articles/problem-reports/article.sgml,v 1.13 2003/12/12 02:09:35 ebrandi Exp $</pubdate>
 
     <legalnotice id="trademarks" role="trademarks">
       &tm-attrib.freebsd;
@@ -718,39 +718,40 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Environment:</emphasis> This should
-            describe, as accurately as possible, the environment in
-            which the problem has been observed.  This includes the
-            operating system version, the version of the specific
-            program or file that contains the problem, and any other
-            relevant items such as system configuration, other
-            installed software that influences the problem,
-            etc.&mdash;quite simply everything a developer needs to
-            know to reconstruct the environment in which the problem
-            occurs.</para>
+          <para><emphasis>Environment:</emphasis> Este campo deve
+	  descrever, da forma mais precisa possivel, o ambiente no
+	  qual o problema foi observado.  Isto incluia a vers&atilde;o do
+	  sistema operacional, a vers&atilde;o do programa ou do arquivo 
+	  especifico que cont&eacute;m o problema, e qualquer outro item
+	  relevante para a configura&ccedil;&atilde;o do sistema, outros softwares
+	  instalados que tenham influ&ecirc;ncia no problema, etc. &mdash;
+	  ou seja simplesmente tudo o que um desenvolvedor precisar
+	  saber para reconstruir o ambiente no qual o problema
+	  ocorreu.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>Description:</emphasis> A complete and
-            accurate description of the problem you are experiencing.
-            Try to avoid speculating about the causes of the problem
-            unless you are certain that you are on the right track, as
-            it may mislead a developer into making incorrect
-            assumptions about the problem.</para>
+          <para><emphasis>Description:</emphasis> Uma descri&ccedil;&atilde;o
+	  precisa e completa do problema que voc&ecirc; esta experimentando.
+	  Tente evitar especular sobre as causas do problema a menos
+	  que voc&ecirc; tenha certeza de que est&aacute; no caminho certo, do
+	  contr&aacute;rio voc&ecirc; pode induzir o desenvolvedor a seguir na
+	  dire&ccedil;&atilde;o errada.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>How-To-Repeat:</emphasis> A summary of the
-            actions you need to take to reproduce the problem.</para>
+          <para><emphasis>How-To-Repeat:</emphasis> Um sum&aacute;rio com as
+	  a&ccedil;&otilde;es que voc&ecirc; precisa executar para reproduzir o
+	  problema.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>Fix:</emphasis> Preferably a patch, or at
-            least a workaround (which not only helps other people with
-            the same problem work around it, but may also help a
-            developer understand the cause for the problem), but if
-            you do not have any firm ideas for either, it is better to
-            leave this field blank than to speculate.</para>
+          <para><emphasis>Fix:</emphasis> Preferencialmente um patch,
+	  ou no minimo um contorno (o que n&atilde;o s&oacute; ajuda as outras
+	  pessoas que est&atilde;o com o mesmo problema, como tamb&eacute;m auxilia
+	  o desenvolvedor a entender melhor a causa do problema), mas
+	  se voc&ecirc; n&atilde;o tem nenhuma id&eacute;ia s&oacute;lida, &eacute; melhor deixar este
+	  campo em branco do que especular.</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -758,23 +759,27 @@
     <section>
       <title>Enviando o relat&oacute;rio de problemas</title>
 
-      <para>Once you are done filling out the template, have saved it,
-        and exit your editor, &man.send-pr.1; will prompt you with
-        <prompt>s)end, e)dit or a)bort?</prompt>.  You can then hit
-        <userinput>s</userinput> to go ahead and submit the problem report,
-        <userinput>e</userinput> to restart the editor and make
-        further modifications, or <userinput>a</userinput> to abort.
-        If you choose the latter, your problem report will remain on
-        disk (&man.send-pr.1; will tell you the filename before it
-        terminates), so you can edit it at your leisure, or maybe
-        transfer it to a system with better net connectivity, before
-        sending it with the <option>-f</option> to
-        &man.send-pr.1;:</para>
-
+      <para>
+	Uma vez que voc&ecirc; tenha preenchido o template, salve-o, e saia
+	do editor de texto, ao fazer isso o  &man.send-pr.1; ir&aacute;
+	perguntar de voc&ecirc; deseja<prompt>s)end, e)dit or
+	a)bort?</prompt>.  Voc&ecirc; pode pressionar
+	<userinput>s</userinput> para continuar e enviar o relat&oacute;rio
+	de problema, <userinput>e</userinput> para voltar ao editor de
+	forma que possa efetuar alguma altera&ccedil;&atilde;o, ou ent&atilde;o
+	<userinput>a</userinput> para cancelar o envio.  Se voc&ecirc;
+	escolher a op&ccedil;&atilde;o <literal>later</literal> (mais tarde), o seu
+	relat&oacute;rio de problema ir&aacute; permanecer no seu disco (o
+	&man.send-pr.1; ir&aacute; lhe dizer o nome do arquivo antes de
+	terminar), assim voc&ecirc; pode edit&aacute;-lo quando tiver mais tempo,
+	ou pode transferi-lo para um sistema com uma melhor
+	conectividade, antes de envi&aacute;-lo com a op&ccedil;&atilde;o
+	<option>-f</option> do &man.send-pr.1;:</para>
+      
 <screen>&prompt.user; <userinput>send-pr -f ~/my-problem-report</userinput></screen>
 
-      <para>This will read the specified file, validate the contents,
-        strip comments and send it off.</para>
+      <para>Este comando ir&aacute; ler o arquivo especificado, validar o seu
+      conte&uacute;do, remover os coment&aacute;rios e envi&aacute;-lo.</para>
     </section>
 
   </section>
@@ -782,49 +787,59 @@
   <section id="pr-followup">
     <title>Acompanhamento</title>
 
-    <para>Once your problem report has been filed, you will receive a
-      confirmation by email which will include the tracking number
-      that was assigned to your problem report and a URL you can use
-      to check its status.  With a little luck, someone will take an
-      interest in your problem and try to address it, or, as the case
-      may be, explain why it is not a problem.  You will be
-      automatically notified of any change of status, and you will
-      receive copies of any comments or patches someone may attach to
-      your problem report's audit trail.</para>
+    <para>
+      Uma vez que o relat&oacute;rio de problemas foi enviado, voc&ecirc; ir&aacute;
+      receber um email de confirma&ccedil;&atilde;o o qual ir&aacute; incluir um numero de
+      controle, o qual foi atribuido ao seu relat&oacute;rio de problema e
+      uma URL que voc&ecirc; pode consultar para verificar o seu status.
+      Com um pouco de sorte, algu&eacute;m ir&aacute; se interessar pelo seu
+      problema e ir&aacute; tentar resolve-lo, ou se for o caso, explicar o
+      porque ele n&atilde;o &eacute; um problema.  Voc&ecirc; ser&aacute; notificado
+      automaticamente quando ocorrer qualquer tipo de altera&ccedil;&atilde;o no
+      status do seu PR, e voc&ecirc; ir&aacute; receber c&oacute;pias de qualquer
+      coment&aacute;rio ou pacth que enviarem como complemento ao seu
+      relat&oacute;rio de problema.</para>
+    
+    <para>
+      Se alguem solicitar alguma informa&ccedil;&atilde;o adicional a voc&ecirc;, ou se
+      voc&ecirc; lembrar ou descobrir algo que voc&ecirc; n&atilde;o mencinou no
+      relat&oacute;rio inicial, apenas envie as novas informa&ccedil;&otilde;es para
+      <email>bug-followup@FreeBSD.org</email>, tendo certeza de que o
+      numero de controle foi incluido no assunto da mensagem, de forma
+      que o sistema autom&aacute;tico de acompanhamento de bugs, tenha como
+      saber a qual relat&oacute;rio de problema ele deve anexar o
+      email.</para>
 
-    <para>If someone requests additional information from you, or you
-      remember or discover something you did not mention in the
-      initial report, just mail it to
-      <email>bug-followup@FreeBSD.org</email>, making sure that the
-      tracking number is included in the subject so the bug tracking
-      system will know what problem report to attach it to.</para>
-
-    <para>If the problem report remains open after the problem has
-      gone away, just send a follow-up (in the manner prescribed
-      above) saying that the problem report can be closed, and, if
-      possible, explaining how or when the problem was fixed.</para>
+    <para>
+      Se o relat&oacute;rio de problema permanecer aberto depois que o
+      problema j&aacute; tiver sido solucionado, apenas envie um
+      <literal>follow-up</literal> (da forma mencionada acima) dizendo
+      que o relat&oacute;rio d eproblema pode ser fechado, e, se possivel,
+      explicando o porque e quando o problema foi solucionado.</para>
   </section>
 
   <section id="pr-further">
     <title>Leituras futuras</title>
 
-    <para>This is a list of resources relevant to the proper writing
-      and processing of problem reports.  It is by no means complete.</para>
+    <para>
+      Esta &eacute; a lista de recursos relevantes sobre a maneira apropriada
+      de escrever e processar relat&oacute;rios de problema. Esta lista n&atilde;o
+      est&aacute; de forma alguma completa.</para>
 
     <itemizedlist>
       <listitem>
         <para><ulink
             url="http://www.chiark.greenend.org.uk/~sgtatham/bugs.html">
-            How to Report Bugs Effectively</ulink>&mdash;an excellent
-            essay by Simon G. Tatham on composing useful (non-FreeBSD-specific)
-            problem reports.</para>
+            Como reportar bugs de forma efetiva</ulink>&mdash; Um excelente 
+	    ensaio por Simon G. Tatham sobre a elabora&ccedil;&atilde;o de relat&oacute;rios de 
+	    problemas ut&eacute;is (n&atilde;o &eacute; especifico sobre o FreeBSD).</para>
       </listitem>
       <listitem>
         <para><ulink
-          url="../../articles/pr-guidelines/article.html">Problem
-          Report Handling Guidelines</ulink>&mdash;valuable insight
-          into how problem reports are handled by the FreeBSD
-          developers.</para>
+          url="../../articles/pr-guidelines/article.html">Guia de como 
+	  lidar com relat&oacute;rios de problemas</ulink>&mdash; Uma percep&ccedil;&atilde;o 
+	  valiosa sobre como os desenvolvedores do FreeBSD devem lidar com 
+	  os rel&aacute;torios de problemas.</para>
       </listitem>
     </itemizedlist>
   </section>
