@@ -579,59 +579,57 @@ cpu          I686_CPU</programlisting>
 
     <note>
       <para><literal>maxusers</literal><emphasis>n&atilde;o</emphasis>
-	limita o n&uacute;mero de usu&aacute;rios que podem logar em sua m&aacute;quina. Isto
-	simplesmente ajusta tamanho de v&aacute;rias tabelas aos valores razo&aacute;veis considerando
+	limita o n&uacute;mero de usu&aacute;rios que podem logar em sua m&aacute;quina. Ele apenas
+	define o valor de v&aacute;rias tabelas à quantias razoáveis considerando
 	o n&uacute;mero m&aacute;ximo de usu&aacute;rios e processos que voc&ecirc; provavelmente ter&aacute; rodando em seu sistema.
-	A palavra-chave qual <emphasis>faz</emphasis> limita&ccedil;&atilde;o ao n&uacute;mero de logins <emphasis>remotos simult&acirc;neous e X terminal windows</emphasis>
+	A opção que <emphasis>possibilita</emphasis> limitar o n&uacute;mero de logins <emphasis>remotos simult&acirc;neous e de terminais gráficos</emphasis>
 	&eacute; <link linkend="kernelconfig-ptys"><literal>pseudo-device pty 16</literal></link>.</para>
     </note>
     
-    <programlisting># Floating point support - n&atilde;o disabilite.
+    <programlisting># Floating point support - n&atilde;o desabilite.
 device          npx0     at nexus? port IO_NPX irq 13</programlisting>
     
-    <para><literal>npx0</literal> &eacute; a unidade para o ponto flutuante das unidades matem&aacute;ticas no
-      &os;, qual &eacute; tamb&eacute;m o hardware co-processador ou
-      o emulador de software matem&aacute;tico. Isto <emphasis>n&atilde;o</emphasis>
-      &eacute; opicional.</para>
+    <para><literal>npx0</literal> &eacute; a opção que disponibiliza suporte lógico à ponto flutuante em unidades matem&aacute;ticas do
+      &os;, que faz o papel de equipamento co-processador, ou simplesmente emulador matemático lógico. Esta definição
+	<emphasis>n&atilde;o</emphasis> &eacute; opcional.</para>
 
-    <programlisting># Pseudo devices - o n&uacute;mero indica quantas unidades a ser alocadas.
+    <programlisting># Pseudo devices - o n&uacute;mero indica quantas unidades serão alocadas.
 pseudo-device   loop          # Network loopback</programlisting>
 
-    <para>Isto &eacute; o dispositivo generic loopback para TCP/IP. Se for telnet
-      ou FTP para <hostid>localhost</hostid> (exemplo, <hostid
-      role="ipaddr">127.0.0.1</hostid>) isto voltar&aacute; para voc&ecirc; direto atrav&eacute;s da
-      pseudo-device. Isto &eacute; <emphasis>imposto</emphasis>.</para>
+    <para>Trata-se do dispositivo genérico de comunicação TCP/IP interna - via <foreignphrase>loopback</foreignphrase>.
+	Por exemplo, se você fizer uma conexão telnet ou FTP para <hostid>localhost</hostid> (ou seja, <hostid
+      role="ipaddr">127.0.0.1</hostid>) a conexão voltará à você através deste pseudo-dispositivo. Este comportamento é
+	mandatório.</para>
 
-    <para>Tudo que segue &eacute; mais ou menos opcional. Vejam as notas
-      abaixo ou ao lado para cada op&ccedil;&atilde;o para ter mais informa&ccedil;&otilde;es.</para>
+    <para>Todas as outras opções no decorrer do arquivo são consideravelmente optativas. Veja as notas em cada uma das
+	opções abaixo, para obter mais informações.</para>
 
     <programlisting>#To statically compile in device wiring instead of /boot/device.hints
 #hints          "GENERIC.hints"         #Default places to look for devices.</programlisting>
 
-    <para>Em &os; 5.X e vers&otilde;es mais novas o &man.device.hints.5; &eacute;
-      usado para configurar op&ccedil;&otilde;es de dispositivos drivers. O padr&atilde;o
-      da localiza&ccedil;&atilde;o &man.loader.8; que verifica na inicializa&ccedil;&atilde;o &eacute;
+    <para>No &os; 5.X e vers&otilde;es posteriores, o &man.device.hints.5; &eacute;
+      usado para configurar algumas op&ccedil;&otilde;es de dispositivos de controle. Por padr&atilde;o
+      o &man.loader.8; verifica as opções em
       <filename>/boot/device.hints</filename>. Usando a op&ccedil;&atilde;o
-      <literal>hints</literal> voc&ecirc; pode compilar estas hints
-      est&aacute;ticamente dentro do seu kernel. Ent&atilde;o n&atilde;o h&aacute; nenhuma necessidade de criar um arquivo
+      <literal>hints</literal> estas definições podem ser estaticamente compiladas
+	dentro do seu kernel, de forma que a necessidade de cirar o arquivo
       <filename>device.hints</filename> dentro de
-      <filename>/boot</filename>.</para>
+      <filename>/boot</filename> seja suprimida.</para>
 
     <!-- XXX: Add a comment here that explains when compiling hints into the kernel is a good idea and why. -->
 
     <programlisting>#makeoptions     DEBUG=-g          #Build kernel with gdb(1) debug symbols</programlisting>
 
     <para>O processo normal de compila&ccedil;&atilde;o do &os; n&atilde;o inclui informa&ccedil;&otilde;es sobre
-      problemas com a compila&ccedil;&atilde;o do kernel e tira a maioria
-      dos s&iacute;mbolos depois que o kernel instalado, para salvar algum espa&ccedil;o
-      no local da instala&ccedil;&atilde;o. Se voc&ecirc; estiver fazendo testes com os kernels
-      na -CURRENT ou alterando a se&ccedil;&atilde;o de desenvolvimento do seu pr&oacute;prio kernel do &os;,
-      Voc&ecirc; pode querer descomentar esta linha. Isto ir&aacute; habilitar o
-      uso da op&ccedil;&atilde;o <option>-g</option> que habilita informa&ccedil;&otilde;es de problemas   
-      quando passados para &man.gcc.1;. O mesmo podem ser
-      realizados pelo &man.config.8; op&ccedil;&atilde;o <option>-g</option>, se
-      voc&ecirc; estiver usando a maneira <quote>tradicional</quote> para compilar seu kernel (veja o <xref linkend="kernelconfig-building">
-      para mais informa&ccedil;&otilde;es.).</para>
+      problemas com a compila&ccedil;&atilde;o do kernel, e remove a maioria
+      dos s&iacute;mbolos depois que o kernel é instalado, para economizar algum espa&ccedil;o
+      em disco.  Caso você esteja fazendo testes com kernel 
+      na série -CURRENT, ou alterando opções de desenvolvimento de seu pr&oacute;prio kernel &os;,
+      pode ser interessante descomentar esta linha.  Isto irá  habilitar o
+      uso da op&ccedil;&atilde;o <option>-g</option> que habilita a adição de informações de depuração do
+      programa, realizados pelo &man.config.8;, caso você esteja compilando seu kernel da maneira 
+	<quote>tradicional</quote> (veja a <xref linkend="kernelconfig-building">
+      para obter mais informa&ccedil;&otilde;es.).</para>
 
     <programlisting>options          MATH_EMULATE      #Support for x87 emulation</programlisting>
 
