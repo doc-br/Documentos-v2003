@@ -1280,83 +1280,78 @@ pseudo-device   pty           # Pseudo-ttys (telnet etc)</programlisting>
 #device         cue           # CATC USB ethernet
 #device         kue           # Kawasaki LSI USB ethernet</programlisting>
 
-    <para>Suporte para v&aacute;rios dispositivos USB.</para>
+    <para>Estas opções adicionam suporte à v&aacute;rios dispositivos USB.</para>
 
-    <para>Para maiores e adicionais informa&ccedil;&otilde;es sobre dispositivos suportados pelo 
-      &os;, veja
-      <filename>/usr/src/sys/i386/conf/LINT</filename>.</para>
+    <para>Para obter mais informações sobre cada dispositivo USB suportado pelo &os;
+	por gentileza, veja <filename>/usr/src/sys/i386/conf/LINT</filename>.</para>
 
       <sect2>
         <title>Grandes Configura&ccedil;&otilde;es de Mem&oacute;ria (<acronym>PAE</acronym>)</title>
 	<indexterm>
 	  <primary>
-	    Extens&otilde;es F&iacute;sicas do endere&ccedil;o (<acronym>PAE</acronym>)
+	    Extens&otilde;es F&iacute;sicas de Endereçamento (<acronym>PAE</acronym>)
 	  </primary>
 	  <secondary>
 	    Grandes Configura&ccedil;&otilde;es de Mem&oacute;ria
 	  </secondary>
 	</indexterm>
 
-	<para>As m&aacute;quinas com grandes configura&ccedil;&otilde;es de mem&oacute;ria requerem acesso a
-	  mais que o limite de 4 gigabyte no User+Kernel Virtual do espa&ccedil;o de endere&ccedil;o
-	  (<acronym>KVA</acronym>). Devido a esta
-	  limita&ccedil;&atilde;o, a Intel adicionou suporte para 36-bit de acesso a espa&ccedil;o de endere&ccedil;o f&iacute;sico
-	  no &pentium; Na linha Pro e anteriores de CPUs.</para>
+	<para>Máquinas com grandes configura&ccedil;&otilde;es de mem&oacute;ria tem a necessidade
+	 de que sejam acessados endereços de memória que superam o limite de 4 Gigabytes de espaço no
+	 ambiente de usuário e do kernel (<acronym>KVA</acronym>). Devido à esta
+	 limita&ccedil;&atilde;o, a Intel adicionou suporte à espaço de endereçamento físico de 36-bit
+	 nos processadores no &pentium; em sua linha de CPUs Pro e posteriores.</para>
 	
 	<para>A extens&atilde;o de endere&ccedil;o f&iacute;sico (<acronym>PAE</acronym>)
-	  capacita o &intel; &pentium; Pro e CPUs anteriores
-	  permitindo a configura&ccedil;&atilde;o de mem&oacute;ria para levantar at&eacute; 64 gigabytes.
-	  &os; fornecendo suporte para esta capacidade via op&ccedil;&atilde;o 
-	  <option>PAE</option> na configura&ccedil;&atilde;o do kernel, dispon&iacute;vel
-	  no 4.X da s&eacute;rie &os; come&ccedil;ando com 4.9-RELEASE e
-	  no 5.X da s&eacute;rie &os; come&ccedil;ando com 5.1-RELEASE. Devido 
-	  a limita&ccedil;&otilde;es da arquitetura de mem&oacute;ria da Intel, nenhuma distin&ccedil;&atilde;o
-	  e feita para mem&oacute;rias acima ou abaixo de 4 gigabytes. A mem&oacute;ria alocada
-	  acima de 4 gigabytes &eacute; adicionada simplesmente ao pool da mem&oacute;ria
-	  dispon&iacute;vel.</para>
+	  possibilida que as CPUs &intel; &pentium; Pro e posteriores possam ter até
+	  64 gigabytes de memória. O &os; oferece suporte à este recurso por meio da
+	  opção <option>PAE</option> na configura&ccedil;&atilde;o do kernel, dispon&iacute;vel
+	  na série 4.X à partir da versão 4.9-RELEASE e
+	  no 5.X à partir do 5.1-RELEASE.  Devido à limitações da arquitetura de memória Intel, não
+	  é possível distinguir o que é endereçado acima ou abaixo dos 4 gibabytes.  A memória
+	  além dos 4GB é meramente inclusa e mapeada ao <foreignphrase>pool</foreignphrase> de
+	  memória disponível.</para>
 
-	<para>Para habilitar suporte ao <acronym>PAE</acronym>no kernel,
-	  adicione simplesmente a seguinte linha no arquivo de configua&ccedil;&atilde;o do seu kernel:
+	<para>Para habilitar suporte ao <acronym>PAE</acronym>, basta adicionar
+	  ao arquivo de configuração do kernel, a seguinte linha:
 	  </para>
 	
 	<programlisting>options		    PAE</programlisting>
 
 	<note>
-	  <para>O suporte ao <acronym>PAE</acronym> no &os; est&aacute; somente
-	    dispon&iacute;vel para processadores &intel; IA-32. Deve-se tamb&eacute;m 
-	    notar, que o suporte ao <acronym>PAE</acronym> no &os; n&atilde;o
-	    foi totalmente testado, e s&atilde;o considerados de qualidade beta 
-	    se comparedos com outras caracter&iacute;sticas stable do &os;.</para>
+	  <para>O suporte à <acronym>PAE</acronym> no &os; limita-se à
+	   processadores &intel; IA-32.  Deve-se tamb&eacute;m 
+	    notar, que o suporte à <acronym>PAE</acronym> no &os; ainda n&atilde;o
+	    foi totalmente testado, e é considerado de qualidade beta, quando comparado
+	    com outros recursos estáveis do &os;.</para>
 	</note>
 
-	<para>Suporte <acronym>PAE</acronym> no &os; tem algumas limita&ccedil;&otilde;es:</para>
+	<para>O suporte à <acronym>PAE</acronym> no &os; tem algumas limita&ccedil;&otilde;es:</para>
 	
 	<itemizedlist>
 	  <listitem>
-	    <para>Um processo n&atilde;o pode alcan&ccedil;ar mais de 4
-	      gigabytes do espa&ccedil;o da VM.</para>
+	    <para>Um mesmo processo n&atilde;o pode alocar mais do que
+		4 gigabytes do espa&ccedil;o da VM.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>O m&oacute;dulo <acronym>KLD</acronym> n&atilde;o pode ser carregado dentro
-	      de um kernel com o <acronym>PAE</acronym> habilitado, devido a 
-	      diferen&ccedil;as na estrutura da configura&ccedil;&atilde;o do m&oacute;dulo do kernel.
+	    <para>M&oacute;dulos <acronym>KLD</acronym> n&atilde;o podem ser carregados dentro
+	      em um kernel com <acronym>PAE</acronym> habilitado, devido a 
+	      diferen&ccedil;as na estrutura da configura&ccedil;&atilde;o do m&oacute;dulo de kernel.
 	      </para>
 	  </listitem>
 
 	  <listitem>
-	    <para>Drivers do dispositivos que n&atilde;o usam o &man.bus.dma.9;
-	      a interface causar&aacute; corrump&ccedil;&atilde;o de dados em um kernel com
-	      <acronym>PAE</acronym> habilitado e n&atilde;o s&atilde;o
-	      recomendados para uso. Por esta raz&atilde;o, o arquivos de configura&ccedil;&atilde;o do
-	      <filename>PAE</filename> no kernel
-	      &eacute; fornecido no &os; 5.X, que
-	      exclui todos os drivers desconhecidos para trabalhar com o <acronym>PAE</acronym> habilitado no
-	      kernel.</para>
+	    <para>Dispositivos de controle n&atilde;o usam o a interface &man.bus.dma.9;
+	      podem causar corrompimento de dados em um kernel com
+	      <acronym>PAE</acronym>, portanto não são recomendados para uso em conjunto
+	      com <acronym>PAE</acronym>.  Por esta razão um arquivo específico para configuração
+	      de um kernel com <filename>PAE</filename> está disponível separadamente no
+	      &os; 5.X, onde os dispositivos de controle conflitante estão ausentes.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>Alguns sistemas tunables determinam o uso do recurso da mem&oacute;ria
+	    <para>Alguns valores ajustáveis no kernel  sistemas tunables determinam o uso do recurso da mem&oacute;ria
 	      pela quantidade de mem&oacute;ria f&iacute;sica dispon&iacute;vel. Alguns
 	      tunables podem desnecessariamente sobre-alocar devido a
 	      natureza da grande mam&oacute;ria de um sistema <acronym>PAE</acronym>.
