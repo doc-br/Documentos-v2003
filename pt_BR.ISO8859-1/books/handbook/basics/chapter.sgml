@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/basics/chapter.sgml,v 1.1.1.1 2003/11/28 01:13:14 eksffa Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/basics/chapter.sgml,v 1.1.1.1 2004/01/26 19:54:30 eksffa Exp $
 -->
 
 <chapter id="basics">
@@ -2519,124 +2519,128 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
 
     <sect2 id="basics-man">
       <title>Páginas de Manuais</title>
-      <indexterm><primary>manual pages</primary></indexterm>
+      <indexterm><primary>páginas de manual</primary></indexterm>
 
-      <para>The most comprehensive documentation on FreeBSD is in the form
-	of manual pages. Nearly every program on the system comes with a
-	short reference manual explaining the basic operation and various
-	arguments. These manuals can be viewed with the <command>man</command> command.  Use
-	of the <command>man</command> command is simple:</para>
+      <para>A documentação mais compreensiva do FreeBSD é em forma de
+	páginas de manuais. Quase todo programa no sistema é acompanhado
+	com um breve manual de referência que explica a operação básica
+	e os vários argumentos do programa.  Estes manuais podem ser visualizados
+	com o comando <command>man</command>.  A utlização do comando
+	<command>man</command> é simples:</para>
 
-      <screen>&prompt.user; <userinput>man <replaceable>command</replaceable></userinput></screen>
+      <screen>&prompt.user; <userinput>man <replaceable>comando</replaceable></userinput></screen>
 
-      <para><literal>command</literal> is the name of the command you
-        wish to learn about.  For example, to learn more about
-	<command>ls</command> command type:</para>
+      <para><literal>comando</literal> é o nome do comando sobre o qual
+	você deseja aprender.  Por exemplo, para aprender sobre o
+	comando <command>ls</command>, digite:</para>
 
       <screen>&prompt.user; <userinput>man ls</userinput></screen>
 
-      <para>The online manual is divided up into numbered sections:</para>
+      <para>O manual <quote>online</qote> é dividido em seções numeradas:</para>
 
       <orderedlist>
 	<listitem>
-	  <para>User commands.</para>
+	  <para>Comandos de usuário.</para>
 	</listitem>
 
 	<listitem>
-	  <para>System calls and error numbers.</para>
+	  <para>Chamadas de sistema e número de erros.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Functions in the C libraries.</para>
+	  <para>Funções de bibliotecas C.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Device drivers.</para>
+	  <para>Controladores de dispositivos.</para>
 	</listitem>
 
 	<listitem>
-	  <para>File formats.</para>
+	  <para>Formato de arquivos.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Games and other diversions.</para>
+	  <para>Jogos e outras diversões.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Miscellaneous information.</para>
+	  <para>Informações gerais.</para>
 	</listitem>
 
 	<listitem>
-	  <para>System maintenance and operation commands.</para>
+	  <para>Comandos de manutenção e operação do sistema.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Kernel developers.</para>
+	  <para>Desenvolvedores do kernel.</para>
 	</listitem>
       </orderedlist>
 
-      <para>In some cases, the same topic may appear in more than one
-	section of the online manual.  For example, there is a
-	<command>chmod</command> user command and a
-	<function>chmod()</function> system call.  In this case, you can
-	tell the <command>man</command> command which one you want by specifying the
-	section:</para>
+      <para>Em alguns casos, o mesmo tópico pode aparecer em mais de uma
+	seção do manual online.  Por exemplo, se houver um comando
+	<command>chmod</command> para o usuário, e se houver uma chamada
+	de sistema denominada <function>chmod()</function>, você pode
+	informar ao comando <command>man</command> qual delas você quer,
+	especificando a seção:</para>
 
       <screen>&prompt.user; <userinput>man 1 chmod</userinput></screen>
 
-      <para>This will display the manual page for the user command
-        <command>chmod</command>. References to a particular section of
-	the online manual are traditionally placed in parenthesis in
-	written documentation, so &man.chmod.1; refers to the
-	<command>chmod</command> user command and &man.chmod.2; refers to
-	the system call.</para>
+      <para>Esse comando apresentará a página de manual para o comando
+	do usuário, <command>chmod</command>.  Referencias para uma seção
+	particular do manual online normalmente são apresentadas entre
+	parênteses, nos documentos escritos, de forma que 
+	&man.chmod.1; se refere ao comando de usuário para
+	<command>chmod</command>, e &man.chmod.2; se refere à
+	chamada de sistema.</para>
 
-      <para>This is fine if you know the name of the command and simply
-	wish to know how to use it, but what if you cannot recall the
-	command name?  You can use <command>man</command> to search for keywords in the
-	command descriptions by using the <option>-k</option>
-	switch:</para>
+      <para>É bem facil utilizar essa ferramenta, quando você sabe o nome
+	do comando sobre o qual quer obter mais informações, mas e se
+	você não puder lembrar o nome do comando?  Pode usar o
+	<command>man</command> para procurar por palavras
+	chaves nas descrições do comando, usando
+	opção <option>-k</option>:</para>
 
       <screen>&prompt.user; <userinput>man -k mail</userinput></screen>
 
-      <para>With this command you will be presented with a list of
-        commands that have the keyword <quote>mail</quote> in their
-	descriptions.  This is actually functionally equivalent to using
-	the <command>apropos</command> command.</para>
+      <para>Com esse comando, uma lista de programas será apresentada, contendo
+	em sua descrição a expressão <quote>mail</quote>.  Na verdade
+	esse comando tem a mesma funcionalidade de se utilizar o comando
+	<command>apropos</command>.</para>
 
-      <para>So, you are looking at all those fancy commands in
-	<filename>/usr/bin</filename> but do not have the faintest idea
-	what most of them actually do?  Simply do:</para>
+      <para>Então, você está dando uma olhada em todos esses simpáticos
+	programas que você encontrou sob <filename>/usr/bin</filename>
+	mas não tem a menor idéia do que quer que cada um deles faça?
+	Simplesmente digite:</para>
 
 	<screen>&prompt.user; <userinput>cd /usr/bin</userinput>
 &prompt.user; <userinput>man -f *</userinput></screen>
 
-	<para>or</para>
+	<para>ou</para>
 
 	<screen>&prompt.user; <userinput>cd /usr/bin</userinput>
 &prompt.user; <userinput>whatis *</userinput></screen>
 
-	<para>which does the same thing.</para>
+	<para>que fazem a mesma coisa.</para>
     </sect2>
 
     <sect2 id="basics-info">
-      <title>GNU Info Files</title>
-      <indexterm><primary>Free Software Foundation</primary></indexterm>
+      <title>Arquivos de Informações GNU</title>
+      <indexterm><primary>Fundação do Software Livre</primary></indexterm>
 
-      <para>FreeBSD includes many applications and utilities produced by
-	the Free Software Foundation (FSF).  In addition to manual pages,
-	these programs come with more extensive hypertext documents called
-	<literal>info</literal> files which can be viewed with the
-	<command>info</command> command or, if you installed
-	<application>emacs</application>, the info mode of
-	<application>emacs</application>.</para>
+      <para>O FreeBSD inclui várias aplicações e utilitários
+	mantidos pela Fundação do Software Livre (<acronym>FSF</acronym>).
+	Em complemento às páginas de manual, estes programas vem ainda com
+	um documento hipertexto extenso, chamado arquivo <literal>info</literal>
+	que pode ser visualizado com o comando <command>info</command> ou, se
+	você dispõe do <application>emacs</application> instalado, o modo
+	<quote>info</quote> do <application>emacs</application> tem essa função.</para>
 
-      <para>To use the &man.info.1; command, simply type:</para>
+      <para>Para usar o comando &man.info.1;, simplesmente digite:</para>
 
       <screen>&prompt.user; <userinput>info</userinput></screen>
 
-      <para>For a brief introduction, type <literal>h</literal>.  For a
-	quick command reference, type <literal>?</literal>.</para>
+      <para>Para uma breve introdução, digite <literal>h</literal>.  Para uma
+	rápida referência aos comandos, digite <literal>?</literal>.</para>
     </sect2>
   </sect1>
 </chapter>
