@@ -2439,7 +2439,7 @@ echo "O disquete foi desmontado e esta pronto para o uso."]]></programlisting>
 	</author>
       </authorgroup>
     </sect1info>
-    <title>Rede, Mem&oacute;ria, e Sistemas de Arquivos restaurados</title>
+    <title>Rede, Mem&oacute;ria, e Sistemas de Arquivos em Imagems</title>
     <indexterm><primary>virtual disks</primary></indexterm>
     <indexterm>
       <primary>disks</primary>
@@ -2782,50 +2782,61 @@ Filesystem 1K-blocks Used Avail Capacity  Mounted on
 	   adquirido pois outros snapshots possivelmente utilizar&atilde;o
 	   parte dos blocos que seriam liberados.</para>
 
-      <para>During initial creation, the <option>schg</option> flag (see the &man.chflags.1; manual page)
-	is set to ensure that even <username>root</username> cannot write to the snapshot.
-	The &man.unlink.1; command makes an exception for snapshot files
-	since it allows them to be removed
-	with the <option>schg</option> flag set, so it is not necessary to
-	clear the <option>schg</option> flag before removing a snapshot file.</para>
+      <para>Durante a cria&ccedil;&atilde;o inicial, a op&ccedil;&atilde;o <option>schg</option>
+	  	(veja a p&aacute;gina de manual do &man.chflags.1;)
+		&eacute; configurada para assegurar que n&atilde;o ser&aacute; permitido
+		escrever no snapshot, nem mesmo para o <username>root</username>.
+		O comando &man.unlink.1; faz uma exce&ccedil;&atilde;o para arquivos
+		de snapshots desde que eles permitam ser removidos
+		com a op&ccedil;&atilde;o <option>schg</option> sendo utilizada,
+		portanto n&atilde;o &eacute; necess&aacute;rio limpar a op&ccedil;&atilde;o
+	    <option>schg</option> antes de remover um arquivo
+		de snapshot.</para>
 
-      <para>Snapshots are created with the &man.mount.8; command.  To place
-	a snapshot of <filename>/var</filename> in the file
-	<filename>/var/snapshot/snap</filename> use the following
-	command:</para>
+      <para>Os snapshots s&atilde;o criados com o comando &man.mount.8;.
+	     Para colocar um snapshot do <filename>/var</filename>
+		 no arquivo <filename>/var/snapshot/snap</filename>
+		 utilize o seguinte comando:</para>
 
 <screen>&prompt.root; <userinput>mount -u -o snapshot /var/snapshot/snap /var</userinput></screen>
 
-      <para>Once a snapshot has been created, they have several
-	uses:</para>
+      <para>Uma vez que um snapshot foi criado, este possui
+	    diversas utilidades:</para>
 
       <itemizedlist>
 	<listitem>
-	  <para>Some administrators will use a snapshot file for backup purposes,
-	    because the snapshot can be transfered to CDs or tape.</para>
-	</listitem>
-	
-	<listitem>
-	  <para>File integrity, &man.fsck.8; may be ran on the snapshot.
-	    Assuming that the file system was clean when it was mounted, you
-	    should always get a clean (and unchanging) result.
-	    This is essentially what the
-	    background &man.fsck.8; process does.</para>
+	  <para>Alguns administradores utilizar&atilde;o arquivos de snapshot
+	     com o prop&oacute;sito de backup devido a um snapshot poder ser
+		 transferido atrav&eacute;s de CD ou fita.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Run the &man.dump.8; utility on the snapshot.
-	    A dump will be returned that is consistent with the
-	    file system and the timestamp of the snapshot.  &man.dump.8;
-	    can also take a snapshot, create a dump image and then
-	    remove the snapshot in one command using the
-	    <option>-L</option> flag.</para>
+	  <para>A integridade do arquivo, o &man.fsck.8; pode
+	    ser executado para um snapshot.
+	    Assumindo que aquele sistema de arquivos
+		foi limpo ao ser montado, voc&ecirc; sempre deveria
+		ter resultados limpos e n&atilde;o modificados.
+		Isto &eacute; essenciamente o que o processo do
+        &man.fsck.8; faz em <foreignphrase>
+		background</foreignphrase>.</para>
 	</listitem>
 
 	<listitem>
-	  <para>&man.mount.8; the snapshot as a frozen image of the file system.
-	    To &man.mount.8; the snapshot
-	    <filename>/var/snapshot/snap</filename> run:</para>
+	  <para>Execute o utilit&aacute;rio &man.dump.8; no snapshot.
+	    Ser&aacute; gerada uma c&oacute;pia que ser&aacute; consistente
+		ao sistema de arquivos e tendo os arquivos
+		no mesmo hor&aacute;rio dos do snapshot.  O &man.dump.8;
+	    tamb&eacute;m pode pegar um snapshot, criar uma c&oacute;pia em uma
+		imagem e ent&atilde;o remover o snapshot
+		em um comando, utilizando a op&ccedil;&atilde;o
+		<option>-L</option>.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Execute o &man.mount.8; no snapshot como
+	    se fosse uma imagem de um sistema de arquivos.
+	    Para executar o &man.mount.8; no snapshot
+	    <filename>/var/snapshot/snap</filename> fa&ccedil;a:</para>
 
 <screen>&prompt.root; <userinput>mdconfig -a -t vnode -f /var/snapshot/snap -u 4</userinput></screen>
 <screen>&prompt.root; <userinput>mount -r /dev/md4 /mnt</userinput></screen>
@@ -2833,176 +2844,206 @@ Filesystem 1K-blocks Used Avail Capacity  Mounted on
 	</listitem>
       </itemizedlist>
 
-      <para>You can now walk the hierarchy of your frozen <filename>/var</filename>
-	file system mounted at <filename>/mnt</filename>.  Everything will
-	be in the same state it was during the snapshot creation time.
-	The only exception is that any earlier snapshots will appear
-	as zero length files.  When the use of a snapshot has delimited,
-	it can be unmounted with:</para>
+      <para>Voc&ecirc; agora pode caminhar pela hierarquia
+	    de arquivos do seu sistema de arquivos <filename>/var</filename>
+		montado no seu <filename>/mnt</filename>.  Tudo estar&aacute;
+		no mesmo estado de quando o snapshot foi criado.
+		A &uacute;nica exce&ccedil;&atilde;o &eacute; que alguns snapshots aparecer&atilde;o com
+		arquivos com tamanho zero.  Quando o uso de um
+		snapshot foi encerrado, voc pode desmont&aacute;-lo com:</para>
 
 <screen>&prompt.root; <userinput>umount /mnt</userinput></screen>
 <screen>&prompt.root; <userinput>mdconfig -d -u 4</userinput></screen>
 
-      <para>For more information about <option>softupdates</option> and
-	file system snapshots, including technical papers, you can visit
-	Marshall Kirk McKusick's website at
-	<ulink url="http://www.mckusick.com/">http://www.mckusick.com.</ulink></para>
+      <para>Para mais informa&ccedil;&otilde;es sobre a op&ccedil;&atilde;o
+	     <option>softupdates</option> e sistemas de arquivos
+		 em snapshots, incluindo artigos t&eacute;cnicos, voc&ecirc; pode
+		 visitar o website de Marshall Kirk McKusick's em
+		<ulink url="http://www.mckusick.com/">
+		http://www.mckusick.com.</ulink></para>
   </sect1>
-  
+
   <sect1 id="quotas">
-    <title>File System Quotas</title>
+    <title>Cotas de uso para sistemas de arquivos</title>
     <indexterm>
       <primary>accounting</primary>
       <secondary>disk space</secondary>
     </indexterm>
     <indexterm><primary>disk quotas</primary></indexterm>
 
-    <para>Quotas are an optional feature of the operating system that
-      allow you to limit the amount of disk space and/or the number of
-      files a user or members of a group may allocate on a per-file
-      system basis. This is used most often on timesharing systems where
-      it is desirable to limit the amount of resources any one user or
-      group of users may allocate.  This will prevent one user or group
-      of users from consuming all of the available disk space.</para>
+    <para>O uso de cotas &eacute; uma funcionalidade do sistema
+	  operacional que permite limitar a quantidade de espa&ccedil;o
+	  de disco e/ou o n&uacute;mero de arquivos que um usu&aacute;rio ou
+	  membros de um grupo podem alocar em um sistema de arquivos.
+	  Isto &eacute; mais frequente em sistemas de compartilhamento de
+	  tempo onde &eacute; desej&aacute;vel limitar a quantidade de recursos
+	  que qualquer usu&aacute;rio ou um grupo de usu&aacute;rios podem alocar.
+	  Isto previnir&aacute; um usu&aacute;rio ou um grupo de usu&aacute;rios
+	  de consumir todo o espa&ccedil;o em disco dispon&iacute;vel.</para>
 
     <sect2>
-      <title>Configuring Your System to Enable Disk Quotas</title>
+      <title>Configurando seus sistema para utilizar cotas de disco</title>
 
-      <para>Before attempting to use disk quotas, it is necessary to make
-	sure that quotas are configured in your kernel.  This is done by
-	adding the following line to your kernel configuration
-	file:</para>
+      <para>Antes de tentar utilizar cotas de disco, &eacute; necess&aacute;rio ter
+	    certeza que o suporte a cotas esteja configurado em seu kernel.
+		Isto &eacute; feito adicionando as seguintes linhas ao seu arquivo de
+		configura&ccedil;&atilde;o do kernel:</para>
 
       <programlisting>options QUOTA</programlisting>
 
-      <para>The stock <filename>GENERIC</filename> kernel does not have
-	this enabled by default, so you will have to configure, build and
-	install a custom kernel in order to use disk quotas.  Please refer
-	to <xref linkend="kernelconfig"> for more information on kernel
-	configuration.</para>
+      <para>O kernel <filename>GENERIC</filename> n&atilde;o possui isto
+	    ativado, portanto, voc&ecirc; ter&aacute; que configurar, recompilar
+		e instalar um kernel personalizado caso deseje utilizar
+		cotas de disco. Por favor, visite a se&ccedil;&atilde;o
+		<xref linkend="kernelconfig"> para ter mais informa&ccedil;&otilde;es
+		sobre configura&ccedil;&atilde;o de kernel.</para>
 
-      <para>Next you will need to enable disk quotas in
-	<filename>/etc/rc.conf</filename>.  This is done by adding the
-	line:</para>
+      <para>Em seguida, voc&ecirc; precisar&aacute; ativar as cotas
+	   de disco no <filename>/etc/rc.conf</filename>.
+	   Isto &eacute; feito adicionando a linha:</para>
 
       <programlisting>enable_quotas="YES"</programlisting>
       <indexterm>
         <primary>disk quotas</primary>
         <secondary>checking</secondary>
       </indexterm>
-      <para>For finer control over your quota startup, there is an
-	additional configuration variable available. Normally on bootup,
-	the quota integrity of each file system is checked by the
-	&man.quotacheck.8; program.  The
-	&man.quotacheck.8; facility insures that the data in
-	the quota database properly reflects the data on the file system.
-	This is a very time consuming process that will significantly
-	affect the time your system takes to boot. If you would like to
-	skip this step, a variable in <filename>/etc/rc.conf</filename>
-	is made available for the purpose:</para>
+      <para>Para controlar o processo de inicializa&ccedil;&atilde;o de cotas,
+	    h&aacute; uma vari&aacute;vel de configura&ccedil;&atilde;o adicional dispon&iacute;vel.
+		Normalmente, na inicializa&ccedil;&atilde;o &eacute; checada a integridade
+		das cotas de cada um dos sistemas de arquivos pelo
+		programa &man.quotacheck.8;.  O &man.quotacheck.8;
+		facilita a certifica&ccedil;&atilde;o que dos dados
+		das defini&ccedil;&otilde;es de cotas refletem adequadamente
+		os dados no sistema de arquivos.
+		Isto &eacute; um processo que consome tempo que ir&aacute;
+		afetar significamente o tempo que o seu
+		sistema leva para iniciar. Se voc&ecirc; gostaria
+		de passar adiante neste passo h&aacute; uma vari&aacute;vel
+		com este prop&oacute;sito para ser configurada no
+		<filename>/etc/rc.conf</filename>:</para>
 
       <programlisting>check_quotas="NO"</programlisting>
 
-      <para>If you are running FreeBSD prior to 3.2-RELEASE, the
-	configuration is simpler, and consists of only one variable.  Set
-	the following in your <filename>/etc/rc.conf</filename>:</para>
+      <para>Se voc&ecirc; estiver utilizando um sistema FreeBSD anterior
+	    a vers&atilde;o 3.2-RELEASE, a configura&ccedil;&atilde;o &eacute; simples e consiste
+		em apenas uma vari&aacute;vel.  Configure o
+		<filename>/etc/rc.conf</filename> como segue:</para>
 
       <programlisting>check_quotas="YES"</programlisting>
 
-      <para>Finally you will need to edit <filename>/etc/fstab</filename>
-	to enable disk quotas on a per-file system basis.  This is where
-	you can either enable user or group quotas or both for all of your
-	file systems.</para>
+      <para>Finalmente, voc&ecirc; precisar&aacute; editar o arquivos
+	    <filename>/etc/fstab</filename> para ativar as cotas
+		de disco para cada um dos sistemas de arquivos.
+		Aqui &eacute; onde se pode ativar o uso de cotas para usu&aacute;rio
+		ou para grupos de usu&aacute;rios para todos os sistemas de
+		arquivos.</para>
 
-      <para>To enable per-user quotas on a file system, add the
-	<option>userquota</option> option to the options field in the
-	<filename>/etc/fstab</filename> entry for the file system you want
-	to enable quotas on.  For example:</para>
+      <para>Para ativar o uso de cotas por usu&aacute;rio
+	    em um sistema de arquivos, adicione a op&ccedil;&atilde;o
+		<option>userquota</option> no campo de op&ccedil;&otilde;es
+		de uma entrada no <filename>/etc/fstab</filename>
+		para o sistema de arquivos que voc&ecirc; quer ativar
+		as cotas.  Por exemplo:</para>
 
       <programlisting>/dev/da1s2g   /home    ufs rw,userquota 1 2</programlisting>
 
-      <para>Similarly, to enable group quotas, use the
-	<option>groupquota</option> option instead of
-	<option>userquota</option>.  To enable both user and
-	group quotas, change the entry as follows:</para>
+      <para>Similar &eacute; o processo de ativa&ccedil;&atilde;o de cotas para grupos
+	    de usu&aacute;rios. Utilize a op&ccedil;&atilde;o <option>groupquota</option>
+		ao inv&eacute;s de <option>userquota</option>.  Para ativar
+		ambos os tipos de cotas, mude a entrada para:</para>
 
       <programlisting>/dev/da1s2g    /home    ufs rw,userquota,groupquota 1 2</programlisting>
 
-      <para>By default, the quota files are stored in the root directory of
-	the file system with the names <filename>quota.user</filename> and
-	<filename>quota.group</filename> for user and group quotas
-	respectively.  See &man.fstab.5; for more
-	information.  Even though the &man.fstab.5; manual page says that
-	you can specify
-	an alternate location for the quota files, this is not recommended
-	because the various quota utilities do not seem to handle this
-	properly.</para>
+      <para>Por padr&atilde;o, os arquivos de cota s&atilde;o armazenados
+	    no diret&oacute;rio raiz de cada sistema de arquivos com o nome
+		de <filename>quota.user</filename> e
+		<filename>quota.group</filename> para cotas de usu&aacute;rio
+		e de grupos respectivamente.  Veja a p&aacute;gina
+		de manual do &man.fstab.5; para mais informa&ccedil;&otilde;es.
+		Embora a p&aacute;gina de manual do &man.fstab.5; diga que voc&ecirc;
+		pode especificar um local alternativo para os arquivos de cota,
+		isto n&atilde;o &eacute; recomendado devido aos v&aacute;rios utilit&aacute;rios de
+		gerenciamento de cotas n&atilde;o suportam esta possibilidade,
+		o que ocasionaria em erro devido a estes utilit&aacute;rios
+		buscarem pelos arquivos na raiz do sistema de arquivos.</para>
 
-      <para>At this point you should reboot your system with your new
-	kernel.  <filename>/etc/rc</filename> will automatically run the
-	appropriate commands to  create the initial quota files for all of
-	the quotas you enabled in <filename>/etc/fstab</filename>, so
-	there is no need to manually create any zero length quota
-	files.</para>
+      <para>Neste ponto voc&ecirc; deve reiniciar seu sistema
+	   com seu novo kernel.  O <filename>/etc/rc</filename>
+	   automaticamente executar&aacute; os comandos apropriados
+	   para criar os arquivos de cota iniciais para todos
+	   os sistemas de arquivos que tiveram cotas ativadas
+	   no <filename>/etc/fstab</filename>, portanto, n&atilde;o &eacute;
+	   necess&aacute;rio criar qualquer arquivo de cota com tamanho
+	   zero manualmente.</para>
 
-      <para>In the normal course of operations you should not be required
-	to run the &man.quotacheck.8;,
-	&man.quotaon.8;, or &man.quotaoff.8;
-	commands manually.  However, you may want to read their manual pages
-	just to be familiar with their operation.</para>
+      <para>No curso normal das opera&ccedil;&otilde;es voc&ecirc; n&atilde;o deveria
+	    ser solicitado a executar os comandos &man.quotacheck.8;,
+	    &man.quotaon.8;, ou &man.quotaoff.8; manualmente.
+		Entretanto, voc&ecirc; pode querer ler as p&aacute;ginas de manuais
+		somente para estar familiarizado com a opera&ccedil;&atilde;o destes
+		comandos.</para>
     </sect2>
 
     <sect2>
-      <title>Setting Quota Limits</title>
+      <title>Configurando os limites das cotas</title>
       <indexterm>
         <primary>disk quotas</primary>
         <secondary>limits</secondary>
       </indexterm>
 
-      <para>Once you have configured your system to enable quotas, verify
-	that they really are enabled.  An easy way to do this is to
-	run:</para>
+      <para>Uma vez que voc&ecirc; configurou e ativou o sistema
+	    de cotas, verifique se este est&aacute; relamente funcional.
+		Uma maneira f&aacute;cil de fazer isso &eacute; executando:</para>
 
       <screen>&prompt.root; <userinput>quota -v</userinput></screen>
 
-      <para>You should see a one line summary of disk usage and current
-	quota limits for each file system that quotas are enabled
-	on.</para>
+      <para>Voc&ecirc; deve ver uma linha de sum&aacute;rio sobre a utiliza&ccedil;&atilde;o
+	    de disco e sobre os limites de cotas para cada um dos sistemas
+		de arquivos que as cotas est&atilde;o ativas.</para>
 
-      <para>You are now ready to start assigning quota limits with the
-	&man.edquota.8; command.</para>
+      <para>Voc&ecirc; agora est&aacute; pronto para iniciar a defini&ccedil;&atilde;o
+	    dos limites de cotas com o comando &man.edquota.8;.</para>
 
-      <para>You have several options on how to enforce limits on the
-	amount of disk space a user or group may allocate, and how many
-	files they may create.  You may limit allocations based on disk
-	space (block quotas) or number of files (inode quotas) or a
-	combination of both.  Each of these limits are further broken down
-	into two categories: hard and soft limits.</para>
+      <para>Voc&ecirc; tem diversas op&ccedil;&otilde;es para auxiliar em como
+	  voc&ecirc; define os limites de quantidade de espa&ccedil;o em disco que um
+	  usu&aacute;rio ou um grupo de usu&aacute;rios pode alocar, e quantos
+	  arquivos eles podem criar.  Voc&ecirc; deve limitar as aloca&ccedil;&otilde;es
+	  se baseando no espa&ccedil;o em disco (cotas de blocos) ou pelo
+	  n&uacute;mero de arquivos (cotas por <foreignphrase>inode</foreignphrase>)
+      ou uma combina&ccedil;&atilde;o de ambos.  Cada um destes limites
+	  pode ser atingido em duas categorias:
+	  limites f&iacute;sicos e l&oacute;gicos.</para>
 
       <indexterm><primary>hard limit</primary></indexterm>
-      <para>A hard limit may not be exceeded.  Once a user reaches his
-	hard limit he may not make any further allocations on the file
-	system in question.  For example, if the user has a hard limit of
-	500 blocks on a file system and is currently using 490 blocks, the
-	user can only allocate an additional 10 blocks.  Attempting to
-	allocate an additional 11 blocks will fail.</para>
+      <para>Um limite f&iacute;sico n&atilde;o pode ser excedido.
+	    Uma vez que o usu&aacute;rio atinge seu limite f&iacute;sico ele n&atilde;o
+		poder&aacute; fazer aloca&ccedil;&atilde;o alguma no sistema de arquivos
+		em quest&atilde;o.  Por exemplo, se o usu&aacute;rio tem um limite
+		f&iacute;sico de 500 blocos num sistema de arquivos e est&aacute;
+		utilizando atualmente o 490 blocos, o usu&aacute;rio poder&aacute; alocar
+		somente 10 blocos adicionais.  A tentativa de alocar
+		11 blocos adicionais resultar&aacute; em falha.</para>
 
       <indexterm><primary>soft limit</primary></indexterm>
-      <para>Soft limits, on the other hand, can be exceeded for a limited
-	amount of time.  This period of time is known as the grace period,
-	which is one week by default.  If a user stays over his or her
-	soft limit longer than the grace period, the soft limit will
-	turn into a hard limit and no further allocations will be allowed.
-	When the user drops back below the soft limit, the grace period
-	will be reset.</para>
+      <para>Limites l&oacute;gicos, por outro lado, podem ser excedidos
+	  por uma quantidade limitada de tempo.  Este per&iacute;odo &eacute; conhecido
+	  como per&iacute;odo de favor (<foreignphrase>grace time</foreignphrase>),
+	  que &eacute; de uma semana, por padr&atilde;o.
+	  Se um usu&aacute;rio estiver acima do seu limite l&oacute;gico por um tempo
+	  maior que o tempo de favor suas cotas tornar&atilde;o-se cotas de
+	  limite f&iacute;sico e nenhuma outra aloca&ccedil;&atilde;o ser&aacute; permitida.
+	  Quando um usu&aacute;rio apaga seus arquivos liberando espa&ccedil;o suficiente
+	  para estar abaixo dos limites das suas cotas l&oacute;gicas, o tempo
+	  de favor &eacute; reiniciado.</para>
 
-      <para>The following is an example of what you might see when you run
-	the &man.edquota.8; command.  When the
-	&man.edquota.8; command is invoked, you are placed into
-	the editor specified by the <envar>EDITOR</envar> environment
-	variable, or in the <application>vi</application> editor if the
-	<envar>EDITOR</envar> variable is not set, to allow you to edit
-	the quota limits.</para>
+      <para>&Agrave; seguir, temos um exemplo do que voc&ecirc; pode
+	    ver quando executar o comando &man.edquota.8;.
+		Quando o comando &man.edquota.8; &eacute; chamado, voc&ecirc; &eacute; direcionado
+		ao editor especificado pela vari&aacute;vel de ambiente
+		<envar>EDITOR</envar> ou ao editor
+		<application>vi</application> se a configura&ccedil;&atilde;o da var&iacute;avel
+		<envar>EDITOR</envar> n&atilde;o foi alterada, para permitir que
+		voc&ecirc; edite os limites de cotas.</para>
 
       <screen>&prompt.root; <userinput>edquota -u test</userinput></screen>
 
@@ -3012,57 +3053,65 @@ Filesystem 1K-blocks Used Avail Capacity  Mounted on
 /usr/var: blocks in use: 0, limits (soft = 50, hard = 75)
         inodes in use: 0, limits (soft = 50, hard = 60)</programlisting>
 
-      <para>You will normally see two lines for each file system that has
-	quotas enabled.  One line for the block limits, and one line for
-	inode limits.  Simply change the value you want updated to modify
-	the quota limit.  For example, to raise this user's block limit
-	from a soft limit of 50 and a hard limit of 75 to a soft limit of
-	500 and a hard limit of 600, change:</para>
+      <para>Voc&ecirc; normalmente ver&aacute; duas linhas para cada sistema de arquivos
+	     que tenham cotas ativadas.  Uma linha para os limites de blocos
+         e uma para os limites de <foreignphrase>inode</foreignphrase>.
+		 Simplesmente, modifique os valores que voc&ecirc; desejar para modificar
+		 os limites de cotas.  Por exemplo, para aumentar o limite de blocos
+		 deste usu&aacute;rio de 50 e o limite f&iacute;sicp de 75 para, respectivamente,
+		 500 e 600, mude:</para>
 
       <programlisting>/usr: blocks in use: 65, limits (soft = 50, hard = 75)</programlisting>
 
-      <para>to:</para>
+      <para>para:</para>
 
       <programlisting> /usr: blocks in use: 65, limits (soft = 500, hard = 600)</programlisting>
 
-      <para>The new quota limits will be in place when you exit the
-	editor.</para>
+      <para>Os novos limites de cotas ser&aacute; definidos assim que
+	     voc&ecirc; sair do editor.</para>
 
-      <para>Sometimes it is desirable to set quota limits on a range of
-	UIDs.  This can be done by use of the <option>-p</option> option
-	on the &man.edquota.8; command.  First, assign the
-	desired quota limit to a user, and then run
-	<command>edquota -p protouser startuid-enduid</command>.  For
-	example, if user <username>test</username> has the desired quota
-	limits, the following command can be used to duplicate those quota
-	limits for UIDs 10,000 through 19,999:</para>
+      <para>Algumas vezes &eacute; desej&aacute;vel definir limites de cotas
+	    para uma faixa de UIDs.  Isso pode ser feito
+		pelo uso da op&ccedil;&atilde;o <option>-p</option> no comando
+		&man.edquota.8;.  Primeiro, defina o limite de cotas
+		desejado para um usu&aacute;rio, e ent&atilde;o execute
+	    <command>edquota -p protouser startuid-enduid</command>.
+		Por exemplo, se o usu&aacute;rio <username>test</username>
+		tem os limites de cotas desejado, o seguinte comando pode ser
+		utilizado para duplicar estes limites para os usu&aacute;rios
+		com UIDs de 10,000 at&eacute; 19,999, com:</para>
 
       <screen>&prompt.root; <userinput>edquota -p test 10000-19999</userinput></screen>
-	  
-      <para>For more information see &man.edquota.8; manual page.</para>
+
+      <para>Para mais informa&ccedil;&otilde;es veja a p&aacute;gina de manual
+	     do &man.edquota.8;.</para>
     </sect2>
 
     <sect2>
-      <title>Checking Quota Limits and Disk Usage</title>
+      <title>Verificando os limites de cotas e a utiliza&ccedil;&atilde;o de disco</title>
       <indexterm>
         <primary>disk quotas</primary>
         <secondary>checking</secondary>
       </indexterm>
 
-      <para>You can use either the &man.quota.1; or the
-	&man.repquota.8; commands to check quota limits and
-	disk usage.  The &man.quota.1; command can be used to
-	check individual user or group quotas and disk usage.  A user
-	may only examine his own quota, and the quota of a group he
-	is a member of. Only the super-user may view all user and group
-	quotas.  The
-	&man.repquota.8; command can be used to get a summary
-	of all quotas and disk usage for file systems with quotas
-	enabled.</para>
+      <para>Voc&ecirc; pode utilizar tanto o comando &man.quota.1;
+	    quanto o &man.repquota.8; para verificar os limites de
+		cotas e a utiliza&ccedil;&atilde;o do espa&ccedil;o de disco.
+		O comando &man.quota.1; pode ser utilizado para verificar
+		individualmente as cotas e a utiliza&ccedil;&atilde;o de disco de um
+		usu&aacute;rio ou de um grupo de usu&aacute;rios.  Um usu&aacute;rio pode apenas
+		examinar suas cotas pr&oacute;prias, e as cotas para o grupo
+		no qual ele &eacute; membro. S&oacute; o superusu&aacute;rio pode ver
+		as cotas de todos os usu&aacute;rios e de todos os
+		grupos de usu&aacute;rios.
+		O comando &man.repquota.8; pode ser utilizado para
+		conseguir um sum&aacute;rio de todas as cotas e utiliza&ccedil;&atilde;o
+		de disco para os sistemas de arquivos com cotas
+		ativas.</para>
 
-      <para>The following is some sample output from the
-	<command>quota -v</command> command for a user that has quota
-	limits on two file systems.</para>
+      <para>&Agrave; seguir, temos um exemplo de sa&iacute;da do comando
+		<command>quota -v</command> para um usu&aacute;rio que tem
+		limites definidos em dois sistemas de arquivos.</para>
 
       <programlisting>Disk quotas for user test (uid 1002):
      Filesystem  blocks   quota   limit   grace   files   quota   limit   grace
@@ -3070,36 +3119,39 @@ Filesystem 1K-blocks Used Avail Capacity  Mounted on
        /usr/var       0      50      75               0      50      60</programlisting>
 
       <indexterm><primary>grace period</primary></indexterm>
-      <para>On the <filename>/usr</filename> file system in the above
-	example, this user is currently 15 blocks over the soft limit of
-	50 blocks and has 5 days of the grace period left.  Note the
-	asterisk <literal>*</literal> which indicates that the user is
-	currently over his quota limit.</para>
+      <para>No sitema de arquivos <filename>/usr</filename>,
+	    no exemplo dado, o usu&aacute;rio est&aacute; acima do seu limite l&oacute;gico de
+		50 blocos em 15 blocos e tem 5 dias restantes para que o
+		tempo de favor acabe.  Note o aster&iacute;sco
+		<literal>*</literal>, ele indica que o usu&aacute;rio est&aacute;
+		acima dos seus limites de cotas.</para>
 
-      <para>Normally file systems that the user is not using any disk
-	space on will not show up in the output from the
-	&man.quota.1; command, even if he has a quota limit
-	assigned for that file system.  The <option>-v</option> option
-	will display those file systems, such as the
-	<filename>/usr/var</filename> file system in the above
-	example.</para>
+      <para>Normalmente, os sitemas de arquivos que o usu&aacute;rio
+	    n&atilde;o fez utiliza&ccedil;&atilde;o de espa&ccedil;o em disco n&atilde;o ser&atilde;o mostrados
+		na sa&iacute;da do comando &man.quota.1;, mesmo se
+		este tiver limites de cotas definidos neste sistema de arquivos.
+		A op&ccedil;&otilde;es <option>-v</option> ir&aacute; listar estes sistemas de
+		arquivos, como o <filename>/usr/var</filename>
+		no exemplo em discuss&atilde;o.</para>
     </sect2>
 
     <sect2>
-      <title>Quotas over NFS</title>
+      <title>Uso de cotas em sistemas de arquivos NFS</title>
       <indexterm><primary>NFS</primary></indexterm>
 
-      <para>Quotas are enforced by the quota subsystem on the NFS server.
-	The &man.rpc.rquotad.8; daemon makes quota information available
-	to the &man.quota.1; command on NFS clients, allowing users on
-	those machines to see their quota statistics.</para>
+      <para>Cotas podem ser utilizadas pelo subsistema do servidor NFS.
+	     O processo em segundo plano &man.rpc.rquotad.8;
+		 faz com que as informa&ccedil;&otilde;es de cota estejam dispon&iacute;veis
+		 ao comando &man.quota.1; nos clientes NFS, permitindo
+		 aos usu&aacute;rios ver suas estat&iacute;sticas de cotas
+		 em suas m&aacute;quinas.</para>
 
-      <para>Enable <command>rpc.rquotad</command> in
-	<filename>/etc/inetd.conf</filename> like so:</para>
+      <para>Ative o <command>rpc.rquotad</command> no
+	<filename>/etc/inetd.conf</filename> como abaixo:</para>
 
       <programlisting>rquotad/1      dgram rpc/udp wait root /usr/libexec/rpc.rquotad rpc.rquotad</programlisting>
 
-      <para>Now restart <command>inetd</command>:</para>
+      <para>Agora, reinicie o <command>inetd</command>:</para>
 
       <screen>&prompt.root; <userinput>kill -HUP `cat /var/run/inetd.pid`</userinput></screen>
     </sect2>
@@ -3112,7 +3164,7 @@ Filesystem 1K-blocks Used Avail Capacity  Mounted on
 	<author>
 	  <firstname>Lucky</firstname>
 	  <surname>Green</surname>
-	  <contrib>Contributed by </contrib>
+	  <contrib>Contribui&ccedil;&atilde;o de </contrib>
 	  <affiliation>
 	    <address><email>shamrock@cypherpunks.to</email></address>
 	  </affiliation>
@@ -3121,93 +3173,100 @@ Filesystem 1K-blocks Used Avail Capacity  Mounted on
       <!-- 11 MARCH 2003 -->
     </sect1info>
 
-    <title>Encrypting Disk Partitions</title>
+    <title>Encriptando parti&ccedil;&otilde;es de um disco</title>
     <indexterm>
       <primary>disks</primary>
       <secondary>encrypting</secondary></indexterm>
 
-    <para>FreeBSD offers excellent online protections against
-      unauthorized data access.  File permissions and Mandatory
-      Access Control (MAC) (see <xref linkend="mac">) help prevent
-      unauthorized third-parties from accessing data while the operating
-      system is active and the computer is powered up. However,
-      the permissions enforced by the operating system are irrelevant if an
-      attacker has physical access to a computer and can simply move
-      the computer's hard drive to another system to copy and analyze
-      the sensitive data.</para>
+    <para>O FreeBSD oferece excelentes prote&ccedil;&otilde;es em tempo
+	  de uso para controlar acesso n&atilde;o autorizado aos dados.
+	  Permiss&otilde;es de arquivos e Controle de Acesso Mandat&oacute;rio (MAC)
+	  (Mandatory Access Control, veja <xref linkend="mac">) ajudam
+	  a prevenir acessos n&atilde;o autorizados de terceiros
+	  tentando acessar os dados enquanto o sistema operacional
+	  est&aacute; ativo e o computador ligado. Entretanto, as prote&ccedil;&otilde;es
+	  fornecidas pelo sistema operacional s&atilde;o irrelevantes se
+	  um atacante tem acesso f&iacute;sico ao computador, podendo, simplesmente,
+	  mover os dispositivos para um outro sistema para copiar e analisar
+	  os dados significantes.</para>
 
-    <para>Regardless of how an attacker may have come into possession of
-      a hard drive or powered-down computer, <application>GEOM Based Disk
-      Encryption (gbde)</application> can protect the data on the
-      computer's file systems against even highly-motivated attackers
-      with significant resources. Unlike cumbersome encryption methods
-      that encrypt only individual files, <application>gbde</application>
-      transparently encrypts entire file systems. No cleartext ever
-      touches the hard drive's platter.</para>
+    <para>N&atilde;o nos preocupando de como o atacante adquiriu acesso
+	  e apossou-se do disco r&iacute;gido ou de como ele desligou o computador,
+	  a <application>Encripta&ccedil;&atilde;o de Disco Baseada em Geometria</application>
+	  (gbde, GEOM Based Disk Encryption) pode proteger os dados
+	  nos sistemas de arquivos contra o mais motivado dos atacantes
+	  com recursos significantes. Em contrapartida aos desajeitados
+	  m&eacute;todos de encripta&ccedil;&atilde;o utilizado em arquivos individuais, o
+	  <application>gbde</application> encripta, de maneira transparente,
+	  todo o sistema de arquivos. Nenhum texto sem encripta&ccedil;&atilde;o
+	  chega a ser armazenado no disco r&iacute;gido.</para>
 
     <sect2>
-      <title>Enabling gbde in the Kernel</title>
+      <title>Ativando o gbde no kernel</title>
 
       <procedure>
 	<step>
-	  <title>Become <username>root</username></title>
+	  <title>Torne-se o usu&aacute;rio <username>root</username></title>
 
-	  <para>Configuring <application>gbde</application> requires
-	    super-user privileges.</para>
+	  <para>Configurar o <application>gbde</application> requer
+	     privil&eacute;gios de superusu&aacute;rio.</para>
 
 	  <screen>&prompt.user; <userinput>su -</userinput>
 Password:</screen>
 	</step>
-	
-	<step>
-	  <title>Verify the Operating System Version</title>
 
-	  <para>&man.gbde.4; requires FreeBSD 5.0 or higher.</para>
+	<step>
+	  <title>Verifique a vers&atilde;o do sistema operacional</title>
+
+	  <para>O &man.gbde.4; requer a utiliza&ccedil;&atilde;o
+	    do FreeBSD 5.0 ou vers&atilde;o superior.</para>
 
 	  <screen>&prompt.root; <userinput>uname -r</userinput>
 5.0-RELEASE</screen>
 	</step>
 
 	<step>
-	  <title>Add &man.gbde.4; Support to the Kernel Configuration File</title>
+	  <title>Adicione o suporte ao &man.gbde.4; no arquivo de
+	     configura&ccedil;&atilde;o do kernel</title>
 
-	  <para>Using your favorite text editor, add the following
-	    line to your kernel configuration file:</para>
+	  <para>Utilizando seu editor de textos favorito, adicione
+	    a seguinte linha no seu arquivo de configura&ccedil;&atilde;o de kernel:</para>
 
 	  <para><literal>options GEOM_BDE</literal></para>
 
-	  <para>Configure, recompile, and install the FreeBSD kernel.
-	    This process is described in <xref
+	  <para>Ap&oacute;s configurar, recompile e  instale kernel do FreeBSD.
+	    Este processo est&aacute; descrito em <xref
 	    linkend="kernelconfig">.</para>
 
-	  <para>Reboot into the new kernel.</para>
+	  <para>Reinicie utilizando o novo kernel.</para>
 	</step>
       </procedure>
     </sect2>
 
 
     <sect2>
-      <title>Preparing the Encrypted Hard Drive</title>
+      <title>Preparando a encripta&ccedil;&atilde;o do disco r&iacute;gido</title>
 
-      <para>The following example assumes that you are adding a new hard
-	drive to your system that will hold a single encrypted partition.
-	This partition will be mounted as <filename>/private</filename>.
-	<application>gbde</application> can also be used to encrypt
-	<filename>/home</filename> and <filename>/var/mail</filename>, but
-	this requires more complex instructions which exceed the scope of
-	this introduction.</para>
+      <para>O exemplo que segue assume que voc&ecirc; adicionou
+	    um novo disco r&iacute;gido no seu sistema e este ter&aacute; uma
+		parti&ccedil;&atilde;o encriptada. Esta parti&ccedil;&atilde;o ser&aacute; montada como
+		<filename>/private</filename>. O <application>gbde
+		</application> tamb&eacute;m pode ser utilizado para encriptar
+		o <filename>/home</filename> e o <filename>/var/mail</filename>,
+		mas isso requer instru&ccedil;&otilde;es mais complexas que excedem o escopo
+		desta introdu&ccedil;&atilde;o.</para>
 
       <procedure>
 	<step>
-	  <title>Add the New Hard Drive</title>
+	  <title>Adicionando um novo disco r&iacute;gido</title>
 
-	  <para>Install the new drive to the system as explained in <xref
-	    linkend="disks-adding">. For the purposes of this example,
-	    a new hard drive partition has been added as
-	    <devicename>/dev/ad4s1c</devicename>. The
+	  <para>Instale o novo disco no sistema como explicado em
+	    <xref linkend="disks-adding">. Para o prop&oacute;sito deste exemplos,
+		uma nova parti&ccedil;&atilde;o foi adicionada a este disco como
+  	    <devicename>/dev/ad4s1c</devicename>. Os dispositivos
 	    <devicename>/dev/ad0s1<replaceable>*</replaceable></devicename>
-	    devices represent existing standard FreeBSD partitions on
-	    the example system.</para>
+	    representam parti&ccedil;&otilde;es padr&otilde;es do FreeBSD
+		no sistema do exemplo.</para>
 
 	  <screen>&prompt.root; <userinput>ls /dev/ad*</userinput>
 /dev/ad0        /dev/ad0s1b     /dev/ad0s1e     /dev/ad4s1
@@ -3216,32 +3275,32 @@ Password:</screen>
 	</step>
 
 	<step>
-	  <title>Create a Directory to Hold gbde Lock Files</title>
+	  <title>Crie um diret&oacute;rio para o gbde armazenar seus arquivos de trava</title>
 
 	  <screen>&prompt.root; <userinput>mkdir /etc/gbde</userinput></screen>
 
-	  <para>The <application>gbde</application> lock file contains
-	    information that <application>gbde</application> requires to
-	    access encrypted partitions. Without access to the lock file,
-	    <application>gbde</application> will not be able to decrypt
-	    the data contained in the encrypted partition without
-	    significant manual intervention which is not supported by the
-	    software. Each encrypted partition uses a separate lock
-	    file.</para>
+	  <para>Os arquivos de trava do <application>gbde</application>
+	    cont&eacute;m informa&ccedil;&otilde;es que o <application>gbde</application>
+		precisa para acessar parti&ccedil;&otilde;es encriptadas. Sem ter acesso
+		aos arquivos de trava o <application>gbde</application>
+		n&atilde;o ser&aacute; capaz de desencriptar os dados contidos na parti&ccedil;&atilde;o
+		encriptada sem interven&ccedil;&atilde;o manual significanete, o que n&atilde;o &eacute;
+		suportado pelo programa. Cada parti&ccedil;&atilde;o encriptada
+		usa arquivos de travas separados.</para>
 	</step>
 
 	<step>
-	  <title>Initialize the gbde Partition</title>
+	  <title>Inicialize a parti&ccedil;&atilde;o gbde</title>
 
-	  <para>A <application>gbde</application> partition must be
-	    initialized before it can be used. This initialization needs to
-	    be performed only once:</para>
+	  <para>Uma parti&ccedil;&atilde;o <application>gbde</application> deve
+	    ser iniciada antes de poder ser utilizada. Este processo
+		precisa ser realizado pelo menos uma vez:</para>
 
 	  <screen>&prompt.root; <userinput>gbde init /dev/ad4s1c -i -L /etc/gbde/ad4s1c</userinput></screen>
 
-	  <para>&man.gbde.8; will open your editor, permitting you to set
-	    various configuration options in a template. For use with UFS1
-	    or UFS2, set the sector_size to 2048:</para>
+	  <para>O &man.gbde.8; abrir&aacute; seu editor, permitindo que voc&ecirc;
+	    configure diversas op&ccedil;&otilde;es fornecidas num modelo. Para utilizar
+		com UFS1 ou UFS2, configure o <option>sector_size</option> para 2048:</para>
 
 	  <programlisting>$<!-- This is not the space you are looking
 for-->FreeBSD: src/sbin/gbde/template.txt,v 1.1 2002/10/20 11:16:13 phk Exp $
@@ -3255,44 +3314,47 @@ sector_size     =       2048
 [...]
 </programlisting>
 
-	  <para>&man.gbde.8; will ask you twice to type the passphrase that
-	    should be used to secure the data. The passphrase must be the
-	    same both times. <application>gbde</application>'s ability to
-	    protect your data depends entirely on the quality of the
-	    passphrase that you choose.
-	  <footnote>
-          <para>For tips on how to select a secure passphrase that is easy
-	    to remember, see the <ulink
+	  <para>O &man.gbde.8; perguntar&aacute; duas vezes a frase de
+	    encripta&ccedil;&atilde;o utilizada para assegurar os dados. A frase
+		de encripta&ccedil;&atilde;o deve ser a mesma em ambas as vezes.  As
+		habilidades do <application>gbde</application> para
+		proteger seus dados depende inteiramente da qualidade
+		da frase de encripta&ccedil;&atilde;o que voc&ecirc; escolhe.
+		<footnote>
+          <para>Para dicas em como selecionar uma frase de encripta&ccedil;&atilde;o
+		  segura e f&aacute;cil de lembrar, veja o website <ulink
 	    url="http://world.std.com/~reinhold/diceware.html">Diceware
-	    Passphrase</ulink> website.</para></footnote></para>
+	    Passphrase</ulink>.</para></footnote></para>
 
-	  <para>The <command>gbde init</command> command creates a lock
-	    file for your <application>gbde</application> partition that in
-	    this example is stored as
+	  <para>O comando <command>gbde init</command> cria um arquivo
+	    de trava para a sua parti&ccedil;&atilde;o <application>gbde</application>
+		que neste exemplo &eacute; armazenado como
 	    <filename>/etc/gbde/ad4s1c</filename>.</para>
 
 	  <caution>
-	    <para><application>gbde</application> lock files
-	      <emphasis>must</emphasis> be backed up together with the
-	      contents of any encrypted partitions. While deleting a lock
-	      file alone cannot prevent a determined attacker from
-	      decrypting a <application>gbde</application> partition,
-	      without the lock file, the legitimate owner will be unable
-	      to access the data on the encrypted partition without a
-	      significant amount of work that is totally unsupported by
-	      &man.gbde.8; and its designer.</para>
+	    <para>Os arquivos de trava do <application>gbde</application>
+		  <emphasis>devem</emphasis> ser copiados junto ao backup
+		  do conte&uacute;do das parti&ccedil;&otilde;es encriptadas. Apagando um arquivo
+		  de trava sozinho pode n&atilde;o prevenir que um atacante
+		  determinado consiga desencriptar a parti&ccedil;&atilde;o
+		  <application>gbde</application>, sem o arquivo de trava,
+		  mesmo o propriet&aacute;rio dos dados n&atilde;o conseguir&aacute; acessar os
+		  dados na parti&ccedil;&atilde;o encriptada sem uma quantidade
+		  significante de trabalho que &eacute; totalmente isento
+		  suporte, tanto do &man.gbde.8; quanto de
+		  seu desenvolvedor.</para>
 	  </caution>
 	</step>
 
 	<step>
-	  <title>Attach the Encrypted Partition to the Kernel</title>
+	  <title>Anexando a parti&ccedil;&atilde;o encriptada ao kernel</title>
 
 	  <screen>&prompt.root; <userinput>gbde attach /dev/ad4s1c -l /etc/gbde/ad4s1c</userinput></screen>
 
-	  <para> You will be asked to provide the passphrase that you
-	    selected during the initialization of the encrypted partition.
-	    The new encrypted device will show up in
-	    <filename>/dev</filename> as
+	  <para>Voc&ecirc; ser&aacute; solicitado a fornecer a frase de encripta&ccedil;&atilde;o
+	   que voc&ecirc; selecionou durante a incializa&ccedil;&atilde;o da parti&ccedil;&atilde;o
+	   encriptada.  O novo dispositivo encriptado ser&aacute; mostrado
+	   em <filename>/dev</filename> como
 	    <filename>/dev/device_name.bde</filename>:</para>
 
 	  <screen>&prompt.root; <userinput>ls /dev/ad*</userinput>
@@ -3302,46 +3364,48 @@ sector_size     =       2048
 	</step>
 
 	<step>
-	  <title>Create a File System on the Encrypted Device</title>
+	  <title>Criar um sistema de arquvos encriptado no dispositivo</title>
 
-	  <para>Once the encrypted device has been attached to the kernel,
-	    you can create a file system on the device. To create a file
-	    system on the encrypted device, use &man.newfs.8;. Since it is
-	    much faster to initialize a new UFS2 file system than it is to
-	    initialize the old UFS1 file system, using &man.newfs.8; with
-	    the <option>-O2</option> option is recommended.</para>
+	  <para>Uma vez que o dispositivo encriptado foi anexado
+        ao kernel, voc&ecirc; pode criar um sistema de arquivos nele.
+		Para criar um sistema de arquivos no dispositivo encriptado
+		use o &man.newfs.8;. Considerando ainda que &eacute; muito mais
+		r&aacute;pido de iniciar um novo sistema de arquivos UFS2
+		que um velho UFS1, utilizando o &man.newfs.8; com a
+		op&ccedil;&atilde;o <option>-O2</option> &eacute; uma recomenda&ccedil;&atilde;o.</para>
 
-	  <note><para>The <option>-O2</option> option is the default
-	  with &os;&nbsp;5.1-RELEASE and later.</para></note>
+	  <note><para>A op&ccedil;&atilde;o <option>-O2</option> &eacute; o padr&atilde;o
+	     para o &os;&nbsp;5.1-RELEASE e vers&otilde;es mais novas.</para></note>
 
 	  <screen>&prompt.root; <userinput>newfs -U -O2 /dev/ad4s1c.bde</userinput></screen>
 
 	  <note>
-	    <para>The &man.newfs.8; command must be performed on an
-	      attached <application>gbde</application> partition which
-	      is identified by a
-	      <filename><replaceable>*</replaceable>.bde</filename>
-	      extension to the device name.</para>
+	    <para>O comando &man.newfs.8; deve ser executado na parti&ccedil;&atilde;o
+		  <application>gbde</application> anexada que &eacute; identificada
+		  pela extens&atilde;o <filename><replaceable>*</replaceable>.bde</filename>
+	      no nome do dispositivo.</para>
 	  </note>
 	</step>
 
 	<step>
-	  <title>Mount the Encrypted Partition</title>
+	  <title>Montar a parti&ccedil;&atilde;o encriptada</title>
 
-	  <para>Create a mount point for the encrypted file system.</para>
+	  <para>Crie um ponto de montagem para o sistema de
+	    arquivos encriptado.</para>
 
 	  <screen>&prompt.root; <userinput>mkdir /private</userinput></screen>
 
-	  <para>Mount the encrypted file system.</para>
+	  <para>Monte o sistema de arquivos encriptado.</para>
 
 	  <screen>&prompt.root; <userinput>mount /dev/ad4s1c.bde /private</userinput></screen>
 	</step>
 
 	<step>
-	  <title>Verify That the Encrypted File System is Available</title>
+	  <title>Verifique se o sistema de arquivos encriptado est&aacute; utiliz&aacute;vel</title>
 
-	  <para>The encrypted file system should now be visible to
-	    &man.df.1; and be available for use.</para>
+	  <para>O sistema de arquivos encriptado agora deve poder ser
+	    vis&iacute;vel na listagem do comando &man.df.1;
+		e deve estar dispon&iacute;vel para uso.</para>
 
 	  <screen>&prompt.user; <userinput>df -H</userinput>
 Filesystem        Size   Used  Avail Capacity  Mounted on
@@ -3356,80 +3420,92 @@ Filesystem        Size   Used  Avail Capacity  Mounted on
     </sect2>
 
     <sect2>
-      <title>Mounting Existing Encrypted File Systems</title>
+      <title>Montando um sistema de arquivos encriptado existente</title>
 
-      <para>After each boot, any encrypted file systems must be
-	re-attached to the kernel, checked for errors, and mounted, before
-	the file systems can be used. The required commands must be
-	executed as user <username>root</username>.</para>
+      <para>Ap&oacute;s cada in&iacute;cio do sistema, qualquer sistema de arquivos
+	     encriptado deve ser reanexado ao kernel, verificado se possui
+		 erros, e montado, isso tudo antes do sistema de arquivos poder ser
+		 utilizado. Os comandos necess&aacute;rio devem ser executados
+		 pelo usu&aacute;rio <username>root</username>.</para>
 
       <procedure>
 	<step>
-	  <title>Attach the gbde Partition to the Kernel</title>
+	  <title>Anexar uma parti&ccedil;&atilde;o gbde ao kernel</title>
 
 	  <screen>&prompt.root; <userinput>gbde attach /dev/ad4s1c -l /etc/gbde/ad4s1c</userinput></screen>
-	  
-	  <para>You will be asked to provide the passphrase that you
-	    selected during initialization of the encrypted gbde
-	    partition.</para>
+
+	  <para>Voc&ecirc; ser&aacute; solicitado a fornecer a frase de encripta&ccedil;&atilde;o
+	    que voc&ecirc; selecionou durante a inicializa&ccedil;&atilde;o da parti&ccedil;&atilde;o
+		gbde encriptada.</para>
 	</step>
 
 	<step>
-	  <title>Check the File System for Errors</title>
+	  <title>Checar erros no sistema de arquivos</title>
 
-	  <para>Since encrypted file systems cannot yet be listed in
-	    <filename>/etc/fstab</filename> for automatic mounting, the
-	    file systems must be checked for errors by running &man.fsck.8;
-	    manually before mounting.</para>
+	  <para>Considerando que os sistemas de arquivos encriptados
+	    ainda n&atilde;o podem ser listados no
+	    <filename>/etc/fstab</filename> para a montagem autom&aacute;tica, o
+		sistema de arquivos deve ser checado atrav&eacute;s da execu&ccedil;&atilde;o
+		manual do &man.fsck.8; antes de ser montado.</para>
 
 	  <screen>&prompt.root; <userinput>fsck -p -t ffs /dev/ad4s1c.bde</userinput></screen>
 	</step>
 
 	<step>
-	  <title>Mount the Encrypted File System</title>
+	  <title>Montar um sistema de arquivos encriptado</title>
 
 	  <screen>&prompt.root; <userinput>mount /dev/ad4s1c.bde /private</userinput></screen>
-	  
-	  <para>The encrypted file system is now available for use.</para>
+
+	  <para>O sitema de arquivos encriptado agora est&aacute;
+	     dispon&iacute;vel para o uso.</para>
 	</step>
       </procedure>
 
       <sect3>
-	<title>Automatically Mounting Encrypted Partitions</title>
+	<title>Montagem autom&aacute;tica de sistemas de arquivos encriptados</title>
 
-	<para>It is possible to create a script to automatically attach,
-	  check, and mount an encrypted partition, but for security reasons
-	  the script should not contain the &man.gbde.8; password. Instead,
-	  it is recommended that such scripts be run manually while
-	  providing the password via the console or &man.ssh.1;.</para>
+	<para>&Eacute; poss&iacute;vel criar um script que automaticamente, anexe, verifique,
+	  e monte a parti&ccedil;&atilde;o encriptada, mas por motivos de seguran&ccedil;a
+	  o script n&atilde;o deve conter a frase de encripta&ccedil;&atilde;o do &man.gbde.8;.
+	  Ao inv&eacute;s de fazer isso, &eacute; recomendado que este script
+	  seja executado manualmente enquanto se prov&ecirc; a frase de encripta&ccedil;&atilde;o
+	  via console ou &man.ssh.1;.</para>
       </sect3>
     </sect2>
 
       <sect2>
-	<title>Cryptographic Protections Employed by gbde</title>
+	<title>Prote&ccedil;&otilde;es de encripta&ccedil;&atilde;o empregadas pelo gbde</title>
 
-	<para>&man.gbde.8; encrypts the sector payload using 128-bit AES in
-	  CBC mode.  Each sector on the disk is encrypted with a different
-	  AES key. For more information on <application>gbde</application>'s
-	  cryptographic design, including how the sector keys are derived
-	  from the user-supplied passphrase, see &man.gbde.4;.</para>
+	<para>O &man.gbde.8; encripta um setor utilizando AES de 128-bit
+	  em modo CBC.  Cada setor do disco &eacute; encriptado com uma chave
+	  AES diferente. Para mais informa&ccedil;&otilde;es sobre o projeto de
+	  encripta&ccedil;&atilde;o do <application>gbde</application>, incluindo
+	  como as chaves para os setores s&atilde;o derivadas da frase
+	  encripta&ccedil;&atilde;o fornecida pelo usu&aacute;rio, veja a p&aacute;gina de manual
+	  do &man.gbde.4;.</para>
       </sect2>
 
       <sect2>
-	<title>Compatibility Issues</title>
+	<title>Informa&ccedil;&otilde;es de compatibilidade</title>
 
-	<para>&man.sysinstall.8; is incompatible with
-	  <application>gbde</application>-encrypted devices. All
-	  <devicename><replaceable>*</replaceable>.bde</devicename> devices must be detached from the
-	  kernel before starting &man.sysinstall.8; or it will crash during
-	  its initial probing for devices. To detach the encrypted device
-	  used in our example, use the following command:</para>
+	<para>O &man.sysinstall.8; &eacute; incompat&iacute;vel com dispositivos
+	  encriptados do <application>gbde</application>.
+	  Todos os dispositivos
+	  <devicename><replaceable>*</replaceable>.bde</devicename>
+	  devem ser desconectados do kernel antes
+	  da execu&ccedil;&atilde;o do &man.sysinstall.8; ou haver&aacute; uma
+	  parada de execu&ccedil;&atilde;o durante a fase inicial do
+	  programa onde &eacute; feita uma pesquisa sobre
+	  os dispositivos dispon&iacute;veis.
+	  Para desconectar o dispositivo encriptado utilizado
+	  no exemplo dado, use o seguinte comando:</para>
 	<screen>&prompt.root; <userinput>gbde detach /dev/ad4s1c</userinput></screen>
 
-      <para>Also note that, as &man.vinum.4; does not use the
-	&man.geom.4; subsystem, you cannot use
-	<application>gbde</application> with
-	<application>vinum</application> volumes.</para>
+      <para>Note tamb&eacute;m que como o &man.vinum.4;
+	    n&atilde;o utiliza o subsistema &man.geom.4;, ele
+		tamb&eacute;m n&atilde;o possibilita o uso do
+		<application>gbde</application> com volumes
+	    <application>vinum</application>.</para>
       </sect2>
 
   </sect1>
