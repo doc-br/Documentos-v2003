@@ -31,74 +31,68 @@
 -->
 
 <chapter id="the-website">
-  <title>The Website</title>
+  <title>O Website</title>
   
   <sect1>
-    <title>Preparation</title>
+    <title>Prepara&ccedil;&atilde;o</title>
     
-    <para>Get 200MB free disk space. You will need the disk space for the
-      SGML tools, a subset of the CVS tree, temporary build space and the
-      installed web pages. If you already have installed the SGML tools and
-      the CVS tree, you need only ~100MB free disk space.</para>
-    
+    <para>Pegue 200MB livre no disco. Voc&ecirce; ira precisar de espa&ccedil;o em disco para as ferramentas SGML, 
+      um subconjunto da &aacute;rvore do CVS, espa&ccedil;o provis&oacute;rio para compila&ccedil;&atilde; e 
+      web pages instaladas. Se voc&ecirce j&aacute; tem instalado as ferramentas SGML e a &aacute;rvore 
+      do CVS, voc&ecirc precisar&aacute; apenas ~100MB livres no disco.</para>
+ 
     <note>
-      <para>Make sure your documentation ports are up to date!  When in
-	doubt, remove the old ports using &man.pkg.delete.1; command before
-	installing the port.  For example, we currently depend on
-	jade-1.2 and if you have installed jade-1.1, please do</para>
+      <para>Certifique-se que seus ports de documenta&ccedil;&atilde; est&atilde;o atualizados! Quando na
+        d&uacute;vida, remova o outro ports usando o comando &man.pkg.delete.1; antes de instalar o ports.
+        Por exemplo, n&oacute;s atualmente dependemos do jade-1.2, e se voc&ecirce; tem instalado o jade-1.1. por favor fa&ccedil;a:</para>
 
       <screen>&prompt.root; <userinput>pkg_delete jade-1.1</userinput></screen>
     </note>
 
-    <para>Setup a CVS repository. You need the directories www, doc and
-      ports in the CVS tree (plus the CVSROOT of course).  Please read the
-      CVSup introduction <ulink
-	url="../handbook/synching.html#CVSUP">
-	http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/synching.html#CVSUP</ulink> how to
-      mirror a CVS tree or parts of a CVS tree.</para>
+    <para>Configure a reposit&oacute;rio CVS. Voc&ecircle; precisa dos diret&oacute;rios www, doc e ports dentro da 
+     sua &aacute;rvore do CVS (mais o CVSROOT &eacute; claro). Por favor leia o como fazer Introdu&ccedil;&atilde;o ao CVSup <ulink url="../handbook/synching.html#CVSUP">http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/synching.html#CVSUP</ulink> espelho uma &aacute;vore do CVS ou partes de uma &aacute;rvore do CVS.</para>
     
-    <para>The essential cvsup collections are: <literal>www</literal>,
-      <literal>doc-all</literal>, <literal>cvs-base</literal>, and
+    <para>O essencial do cvsup seria: <literal>www</literal>,
+      <literal>doc-all</literal>, <literal>cvs-base</literal>, e
       <literal>ports-base</literal>.</para>
     
-    <para>These collections require ~100MB free disk space.</para>
+    <para>Isso precisar&aacute; de ~100MB de espa&ccedil;o livre em disco.</para>
     
-    <para>A full CVS tree - including <literal>src</literal>,
-      <literal>doc</literal>, <literal>www</literal>, and
-      <literal>ports</literal> - is currently 650MB large.</para>
+    <para>Uma &aacute;rvore completa do CVS, incluindo: <literal>src</literal>,
+      <literal>doc</literal>, <literal>www</literal>, e
+      <literal>ports</literal> - &eacute; atualmente de 650MB.</para>
   </sect1>
   
   <sect1>
-    <title>Build the web pages from scratch</title>
+    <title>Construa as web pages do inicio</title>
     
     <procedure> 
       <step>
-	<para>Go to into a build directory with at least 60MB of free
-	  space.</para>
+	<para>V&aacute; para o diret&oacute;rio de prepara&ccedil;&atilde;o com no m&iacute;nimo 60MB de espa&ccedil;o em disco</para>
 	
 	<screen>&prompt.root; <userinput>mkdir /var/tmp/webbuild</userinput>
 &prompt.root; <userinput>cd /var/tmp/webbuild</userinput></screen>
       </step>
 
       <step>
-	<para>Checkout the SGML files from the CVS tree.</para>
+	<para>Checkout os arquivos SGML do CVS.</para>
 	
 	<screen>&prompt.root; <userinput>cvs -R co www doc</userinput></screen>
       </step>
       
       <step>
-        <para>Change into the <filename>www</filename> directory, and
-	  run the &man.make.1; <maketarget>links</maketarget> target, to
-	  create the necessary symbolic links.</para>
+        <para>Entre no diret&oacute;rio <filename>www</filename>, e
+	  execute o &man.make.1; <maketarget>links</maketarget>, para criar 
+	  os links simb&oacute;licos necess&aacute;rios..</para>
 	
 	<screen>&prompt.root; <userinput>cd www</userinput>
 &prompt.root; <userinput>make links</userinput></screen>
       </step>
 
       <step>
-	<para>Change into the <filename>en</filename> directory, and run
-	  the &man.make.1; <maketarget>all</maketarget> target, to create
-	  the web pages.</para>
+	<para>Entre no diret&oacute;rio <filename>en</filename>, e execute
+	  &man.make.1; <maketarget>all</maketarget> target, para criar as
+	  web pages.</para>
 	
 	<screen>&prompt.root; <userinput>cd en</userinput>
 &prompt.root; <userinput>make all</userinput></screen>
