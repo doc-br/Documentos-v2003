@@ -4020,29 +4020,39 @@ rattan|line|diablo|lp|Diablo 630 Line Printer:\
 bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
         :lp=:rm=rose:rp=bamboo:sd=/var/spool/lpd/bamboo:</programlisting>
 
-        <para>Then, we just need to make spooling directories on
-          <hostid>orchid</hostid>:</para>
+        <para>
+				Ent&atilde;o, nos apenas criamos o diret&oacute;rio de
+		<foreignphrase>spool</foreignphrase> na m&aacute;quina 
+		<hostid>orchid</hostid>:
+			</para>
               
         <screen>&prompt.root; <userinput>mkdir -p /var/spool/lpd/rattan /var/spool/lpd/bamboo</userinput>
 &prompt.root; <userinput>chmod 770 /var/spool/lpd/rattan /var/spool/lpd/bamboo</userinput>
 &prompt.root; <userinput>chown daemon:daemon /var/spool/lpd/rattan /var/spool/lpd/bamboo</userinput></screen>
               
-        <para>Now, users on <hostid>orchid</hostid> can print to
-          <literal>rattan</literal> and <literal>bamboo</literal>.  If, for
-          example, a user on <hostid>orchid</hostid> typed
+			<para>
+				Agora, os usu&aacute;rios na m&aacute;quina <hostid>orchid</hostid>
+		podem imprimir para as impressoras <literal>rattan</literal> e
+		<literal>bamboo</literal>.  Se, por exemplo, o usu&aacute;rio na 
+		m&aacute;quina <hostid>orchid</hostid> digitar:
               
           <screen>&prompt.user; <userinput>lpr -P bamboo -d sushi-review.dvi</userinput></screen>
 
-          the <application>LPD</application> system on <hostid>orchid</hostid>
-	  would copy the job to the spooling
-          directory <filename>/var/spool/lpd/bamboo</filename> and note that it was a
-          DVI job.  As soon as the host <hostid>rose</hostid> has room in its
-          <literal>bamboo</literal> spooling directory, the two 
-	  <application>LPDs</application> would transfer the
-          file to <hostid>rose</hostid>.  The file would wait in <hostid>rose</hostid>'s
-          queue until it was finally printed.  It would be converted from DVI to
-          &postscript; (since <literal>bamboo</literal> is a &postscript; printer) on
-          <hostid>rose</hostid>.</para>
+          O siatema <application>LPD</application> na m&aacute;quina
+		<hostid>orchid</hostid> ir&aacute; copiar o trabalho de impress&atilde;o
+		do diret&oacute;rio de <foreignphrase>spool</foreignphrase>
+		<filename>/var/spool/lpd/bamboo</filename> e ir&aacute; notar que 
+		&eacute; uma impress&atilde;o em DVI.  T&atilde;o logo o 
+		servidor <hostid>rose</hostid> tiver espa&ccedil;o no 
+		diret&oacute;rio de <foreignphrase>spool</foreignphrase> da
+		impressora <literal>bamboo</literal> os dois sistemas 
+	  	<application>LPDs</application> ir&atilde;o transferir o arquivo
+		para o servidor <hostid>rose</hostid>.  O arquivo ficar&aacute;
+		aguardando na fila do servidor <hostid>rose</hostid> at&eacute;
+		ser finalmente impresso.  Ele ent&atilde;o ir&aacute; converter
+		do formato DVI para &postscript; deste que a impressora
+		<literal>bamboo</literal> consiga interpretar &postscript;
+			</para>
       </sect3>
       
       <sect3 id="printing-advanced-network-net-if">
@@ -4051,33 +4061,49 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 				<foreignphrase>Data Stream</foreignphrase>
 			</title>
 
-        <para>Often, when you buy a network interface card for a printer, you
-          can get two versions: one which emulates a <foreignphrase>spooler</foreignphrase> (the more
-          expensive version), or one which just lets you send data to it as if
-          you were using a serial or parallel port (the cheaper version).
-          This section tells how to use the cheaper version. For the more
-          expensive one, see the previous section <link
-            linkend="printing-advanced-network-rm">Printers Installed on
-            Remote Hosts</link>.</para>
+			<para>
+				Geralmente, quando voc&ecirc; compra uma interface de rede para
+		a sua impressora, voc&ecirc; pode ter duas vers&otilde;es: uma que 
+		emula um <foreignphrase>spooler</foreignphrase> ( a vers&atilde;o
+		mais cara), ou uma que permita que voc&ecirc; envie dados para
+		ela como se voc&ecirc; estivesse utilizando uma porta paralela ou
+		serial ( a vers&atilde;o mais barata).  Essa se&ccedil;&atilde;o mostra 
+		como voc&ecirc; ir&aacute; utilizar essa vers&atilde;o mais
+		barata.  Para a vers&atilde;o mais cara, veja a se&ccedil;&atilde;o 
+		anterior <link
+            linkend="printing-advanced-network-rm">
+				Impressoras Instaladas em uma M&aacute;quina Remota
+            </link>.
+			</para>
             
-        <para>The format of the <filename>/etc/printcap</filename> file lets
-          you specify what serial or parallel interface to use, and (if you
-          are using a serial interface), what baud rate, whether to use flow
-          control, delays for tabs, conversion of newlines, and more.  But
-          there is no way to specify a connection to a printer that is
-          listening on a TCP/IP or other network port.</para>
+			<para>
+				O formato do arquivo <filename>/etc/printcap</filename> 
+		permite que voc&ecirc; especifique qual a interface, seria ou
+		paralela, a ser usada e ( se voc&ecirc; estiver usando uma 
+		interface serial), qual a taxa de transferencia (
+		<foreignphrase>baud rate</foreignphrase>), Se est&aacute; usando
+		controle de fluxo, expans&atilde;o de tabula&ccedil;&atilde;o,
+		convers&atilde;o de novas linhas, e mais.  Mas existe um meio de 
+		especificar a conex&atilde;o com a impressora que e ouvir sobre
+		TCP/IP ou outra porta da rede.
+			</para>
             
-        <para>To send data to a networked printer, you need to develop a
-          communications program that can be called by the text and conversion
-          filters.  Here is one such example: the script
-          <command>netprint</command> takes all data on standard input and
-          sends it to a network-attached printer.  We specify the hostname of
-          the printer as the first argument and the port number to which to
-          connect as the second argument to <command>netprint</command>.  Note
-          that this supports one-way communication only (FreeBSD to printer);
-          many network printers support two-way communication, and you might
-          want to take advantage of that (to get printer status, perform
-          accounting, etc.).</para>
+			<para>
+				Para enviar dados para uma impressora na rede, voc&ecirc; 
+		dever&aacute; desenvolver um programa de comunica&ccedil;&atilde;o
+		que possa ser chamado pelo filtro de texto e/ou de convers&atilde;o.
+		  Aqui est&aacute; um exemplo: O script <command>netprint</command> 
+		pega todos os dados da entrada padr&atilde;o e envia para a
+		impressora de rede.  Nos especificamos o nome da m&aacute;quina 
+		onde a impressora est&aacute; conectada como o primeiro argumento
+		e o n&uacute;mero da porta para a conex&atilde;o como o segundo
+		argumento para o <command>netprint</command>.  Note que esse suporte
+		&eacute; de uma &uacute;nica dire&ccedil;&atilde;o ( Impressoras para
+		o FreeBSD ); muitas impressoras de rede suportam 
+		comunica&ccedil;&atilde;o bidirecional, voc&ecirc; pode ter vantagem
+		em utilizar essa comunica&ccedil;&atilde;o para obter status da
+		impressora, fazer contabilidade, etc.
+			</para>
 
         <programlisting>#!/usr/bin/perl
 #
@@ -4103,11 +4129,13 @@ connect(PRINTER, $sockaddr) || die "Can't contact $printer_host: $!";
 while (&lt;STDIN&gt;) { print PRINTER; }
 exit 0;</programlisting>
             
-        <para>We can then use this script in various filters.  Suppose we had
-          a Diablo 750-N line printer connected to the network.  The printer
-          accepts data to print on port number 5100.  The host name of the
-          printer is scrivener.  Here is the text filter for the
-          printer:</para>
+			<para>
+				Nos podemos utilizar este script em v&aacute;rios filtros. 
+		Supondo que temos uma impressora Diablo 750-N conectada &agrave; rede.
+		A impressora aceita dados para impress&atilde;o na porta de 
+		n&uacute;mero 5100.  O nome da m&aacute;quina &eacute; scrivener.
+		Aqui est&aacute; um filtro de texto para a impressora.
+			</para>
 
         <programlisting>#!/bin/sh
 #
@@ -4127,6 +4155,9 @@ exec /usr/libexec/lpr/lpf "$@" | /usr/local/libexec/netprint scrivener 5100</pro
         <primary>printers</primary>
         <secondary>restricting access to</secondary>
       </indexterm>
+
+---
+
       <para>This section gives information on restricting printer usage. The
         <application>LPD</application> system lets you control who can access
 	a printer, both locally or
