@@ -878,64 +878,53 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
           os controles de contraste e brilho. Caso seja um terminal de impress&atilde;o, certifique-se de este possui 
           papel e tinta em quantidade suficiente.</para> 
 
-	<para>Make sure that a <command>getty</command> process is running
-	  and serving the terminal.  For example, to get a list of
-	  running <command>getty</command> processes with
-	  <command>ps</command>, type:</para>
+	<para>Certifique-se de que o processo <command>getty</command> está rodando e servindo 
+          um terminal. Por exemplo, para obter uma lista dos processos <command>getty</command>
+          em execução use o <command>ps</command>, digite:</para>
 
         <screen>&prompt.root; <userinput>ps -axww|grep getty</userinput></screen>
 
-	<para>You should see an entry for the terminal.  For
-	  example, the following display shows that a
-	  <command>getty</command> is running on the second serial
-	  port <literal>ttyd1</literal> and is using the
-	  <literal>std.38400</literal> entry in
-	  <filename>/etc/gettytab</filename>:</para>
+	<para>Você deverá ver uma entrada referente ao terminal. Por
+          exemplo, a listagem seguinte mostra um <command>getty</command>
+          sendo executado na segunda porta serial a <literal>ttyd1</literal>
+          e este está usando o parâmetro <literal>std.38400</literal> referente a entrada no
+          <filename>/etc/gettytab</filename>:</para>
 
 	<screen>22189  d1  Is+    0:00.03 /usr/libexec/getty std.38400 ttyd1</screen>
 
-	<para>If no <command>getty</command> process is running, make sure
-	  you have enabled the port in <filename>/etc/ttys</filename>.
-	  Also remember to run <command>kill -HUP 1</command>
-	  after modifying the <filename>ttys</filename> file.</para>
+	<para>Caso não se tenha um processo <command>getty</command> em execução,
+          verifique se você ativou a porta no <filename>/etc/ttys</filename>.
+	  Lembre-se também de executar <command>kill -HUP 1</command>
+	  após modificar o arquivo <filename>ttys</filename>.</para>
 
-	<para>If the <command>getty</command> process is running
-	  but the terminal still does not display a login prompt,
-	  or if it displays a prompt but will not allow you to
-	  type, your terminal or cable may not support hardware
-	  handshaking. Try changing the entry in
-	  <filename>/etc/ttys</filename> from
-	  <literal>std.38400</literal> to
-	  <literal>3wire.38400</literal> remember to run
-	  <command>kill -HUP 1</command> after modifying
-	  <filename>/etc/ttys</filename>). The
-	  <literal>3wire</literal> entry is similar to
-	  <literal>std</literal>, but ignores hardware
-	  handshaking. You may need to reduce the baud rate or
-	  enable software flow control when using
-	  <literal>3wire</literal> to prevent buffer
-	  overflows.</para>
+	<para>Caso o processo <command>getty</command> esteja rodando e o terminal
+          não apresente o <foreignphrase>prompt de login</foreignphrase>
+          ou apresente sem permitir a digitação, seu terminal ou cabo podem não suportar
+          a verificação de conexão(<foreignphrase>handshaking</foreignphrase>). Tente
+          modificar a entrada no <filename>/etc/ttys</filename> de <literal>std.38400</literal> para
+	  <literal>3wire.38400</literal> lembrando de executar <command>kill -HUP 1</command> após 
+          alterar o <filename>/etc/ttys</filename>. O <literal>3wire</literal> é uma entrada
+          similar ao <literal>std</literal>, porém ignora a verificação de conexão. Você pode reduzir
+          a velocidade ou ativar o controle de fluxo quando utilizar <literal>3wire</literal>, para 
+          prevenir estouro de áreas de troca(<foreignphrase>buffer overflows</foreignphrase>).</para>
 
       </sect3>
 
       <sect3>
-	<title>If Garbage Appears Instead of a Login Prompt</title>
+	<title>Caso apareçam caracteres estranhos ao invés do <foreignphrase>Prompt de Login</foreignphrase></title>
 
-	<para>Make sure the terminal and FreeBSD agree on the bps rate and
-	  parity settings.  Check the <command>getty</command> processes
-	  to make sure the
-	  correct <replaceable>getty</replaceable> type is in use.  If
-	  not, edit <filename>/etc/ttys</filename> and run <command>kill
+	<para>Certifique-se de que o terminal e o FreeBSD tenham a velocidade e a configuração
+          de paridade compatíveis. Verifique no processo <command>getty</command> se tipo de <replaceable>getty</replaceable>
+          correto está em uso.  Se não, edite o <filename>/etc/ttys</filename> e execute <command>kill
 	  -HUP 1</command>.</para>
 
       </sect3>
 
       <sect3>
-	<title>Characters Appear Doubled; the Password Appears When Typed</title>
+	<title>Caracteres aparecem duplicados; a senha aparece quando digitada</title>
 
-	<para>Switch the terminal (or the terminal emulation software)
-	  from <quote>half duplex</quote> or <quote>local echo</quote> to
-	  <quote>full duplex.</quote></para>
+	<para>Altere o terminal (ou o programa de emulação de terminal)
+	  de <quote>half duplex</quote> ou <quote>local echo</quote> para <quote>full duplex.</quote></para>
 
       </sect3>
     </sect2>
@@ -958,99 +947,88 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
 	</author>
       </authorgroup>
     </sect1info>
-    <title>Dial-in Service</title>
+    <title>Serviço de Dial-in</title>
     <indexterm><primary>dial-in service</primary></indexterm>
 
-    <para>Configuring your FreeBSD system for dial-in service is very
-      similar to connecting terminals except that you are dealing with
-      modems instead of terminals.</para>
+    <para>Configurar o seu sistema FreeBSD para o serviço de <foreignphrase>dial-in</foreignphrase> é
+      similar ao processo de configurar terminais exceto que você terá de discar com <quote>modems</quote>.</para>
 
       <sect2>
-	<title>External vs. Internal Modems</title>
+	<title>Modems Externos vs. Internos</title>
 
-	<para>External modems seem to be more convenient for dial-up, because
-	  external modems often can be semi-permanently configured via
-	  parameters stored in non-volatile RAM and they usually provide
-	  lighted indicators that display the state of important RS-232
-	  signals.  Blinking lights impress visitors, but lights are also very
-	  useful to see whether a modem is operating properly.</para>
+	<para>Modems externos são mais convenientes para <foreignphrase>dial-up</foreignphrase>, devido
+          a permitirem ser configurados via parâmetros armazenados em RAM não volátil e eles possuem
+          indicadores luminosos que demonstram o estado de sinais RS-232 importantes. Luzes piscantes
+          impressionam visitantes, e também são úteis na verificação do correto funcionamento do modem.</para>
 	    
-	<para>Internal modems usually lack non-volatile RAM, so their
-	  configuration may be limited only to setting DIP switches.  If your
-	  internal modem has any signal indicator lights, it is probably
-	  difficult to view the lights when the system's cover is in
-	  place.</para>
+	<para>Modems internos usualmente não permitem configurações via RAM não volátil, limitando
+          a serem realizadas somente através de chaves DIP.  Caso seu modem possua algum indicador
+          luminoso será, provavelmente, difícil ver as luzes enquanto seu sistema estiver no
+          local próprio.</para>
       
       <sect3>
-	<title>Modems and Cables</title>
+	<title>Modems e Cabos</title>
 	<indexterm><primary>modem</primary></indexterm>
 
-	<para>If you are using an external modem, then you will of
-	  course need the proper cable.  A standard RS-232C serial
-	  cable should suffice as long as all of the normal signals
-	  are wired:</para>
+	<para>Se você estiver utilizando um modem externo então será necessário utilizar um cabo apropriado. Um
+          cabo serial do padrão RS-232 longo o suficiente com todos os fios necessários aos sinais:</para>
 
 	<itemizedlist>
 	  <listitem>
-	    <para>Transmitted Data (<acronym>SD</acronym>)</para>
+	    <para>Dados transmitidos (<acronym>SD</acronym>)</para>
 	  </listitem>
 	  
 	  <listitem>
-	    <para>Received Data (<acronym>RD</acronym>)</para>
+	    <para>Dados recebidos (<acronym>RD</acronym>)</para>
 	  </listitem>
 	  
 	  <listitem>
-	    <para>Request to Send (<acronym>RTS</acronym>)</para>
+	    <para>Solicitar para enviar (<acronym>RTS</acronym>)</para>
 	  </listitem>
 	  
 	  <listitem>
-	    <para>Clear to Send (<acronym>CTS</acronym>)</para>
+	    <para>Limpar para enviar (<acronym>CTS</acronym>)</para>
 	  </listitem>
 	  
 	  <listitem>
-	    <para>Data Set Ready (<acronym>DSR</acronym>)</para>
+	    <para>Dados prontos (<acronym>DSR</acronym>)</para>
 	  </listitem>
 	  
 	  <listitem>
-	    <para>Data Terminal Ready (<acronym>DTR</acronym>)</para>
+	    <para>Terminal de dados pronto (<acronym>DTR</acronym>)</para>
 	  </listitem>
 	  
 	  <listitem>
-	    <para>Carrier Detect (<acronym>CD</acronym>)</para>
+	    <para>Detecção de portador (<acronym>CD</acronym>)</para>
 	  </listitem>
 	  
 	  <listitem>
-	    <para>Signal Ground (<acronym>SG</acronym>)</para>
+	    <para>Sinal terra (<acronym>SG</acronym>)</para>
 	  </listitem>
 	</itemizedlist>
 
-	<para>FreeBSD needs the <acronym>RTS</acronym> and
-	  <acronym>CTS</acronym> signals for flow-control at speeds above
-	  2400&nbsp;bps, the <acronym>CD</acronym> signal to detect when a call has
-	  been answered or the line has been hung up, and the
-	  <acronym>DTR</acronym> signal to reset the modem after a session is
-	  complete.  Some cables are wired without all of the needed signals,
-	  so if you have problems, such as a login session not going away when
-	  the line hangs up, you may have a problem with your cable.</para>
+	<para>O FreeBSD necessita dos sinais <acronym>RTS</acronym> e <acronym>CTS</acronym> para 
+          controle de fluxo sobre velocidades acima de 2400&nbsp;bps, o sinal <acronym>CD</acronym> deve 
+          para detectar que a chamada foi respondida e a linha estabilizada, e o sinal 
+          <acronym>DTR</acronym> para reiniciar o modem depois de uma seção completa. Alguns
+          cabos não possuem todos os fios necessários aos sinais, então, se você tiver problemas
+          com a fase de login que não prosegue após a linha ter sido estabelecida, você
+          deve ter um problema com o seu cabo.</para>
 	    
-	<para>Like other &unix; like operating systems, FreeBSD uses the
-	  hardware signals to find out when a call has been answered
-	  or a line has been hung up and to hangup and reset the modem
-	  after a call.  FreeBSD avoids sending commands to the modem
-	  or watching for status reports from the modem.  If you are
-	  familiar with connecting modems to PC-based bulletin board
-	  systems, this may seem awkward.</para>
+	<para>Assim como outros sistemas operacionais &unix;, o FreeBSD usa de sinais físicos
+          para localizar quando uma chamada foi respondida ou a linha estabelecida e para
+          reiniciar o modem após uma chamada. O FreeBSD evita enviar comandos para o modem
+          ou observar por estados reportados pelo modem. Se você está acostumado a conectar modems
+          a sistemas PC-BBS, isto deve parecer impróprio.</para>
       </sect3>
       </sect2>
       
       <sect2>
-	<title>Serial Interface Considerations</title>
+	<title>Considerações da Interface Serial</title>
 
-	<para>FreeBSD supports NS8250-, NS16450-, NS16550-, and NS16550A-based
-	  EIA RS-232C (CCITT V.24) communications interfaces.  The 8250 and
-	  16450 devices have single-character buffers.  The 16550 device
-	  provides a 16-character buffer, which allows for better system
-	  performance.  (Bugs in plain 16550's prevent the use of the
+	<para>O FreeBSD tem suporte as interfaces de comunicações NS8250-, NS16450-, NS16550-, e NS16550A- baseadas 
+	  na EIA RS-232C (CCITT V.24).  Os dispositivos 8250 e 16450 que possuem área de troca de caracter único.  O dispositivo 
+          16550 provê áreas de troca de 16 caracteres, o que permite uma melhor perfomance ao sistema.  (Bugs in plain 16550's prevent the use of the
 	  16-character buffer, so use 16550A's if possible).  Because
 	  single-character-buffer devices require more work by the operating
 	  system than the 16-character-buffer devices, 16550A-based serial
