@@ -35,7 +35,7 @@
     </indexterm>
 
     <para>O <literal>kernel</literal> &eacute; o cora&ccedil;&atilde;o do sistema operacional &os;.  
-      Ele &eacute; respons&iacute;vel por gerenciar a mem&oacute;ria, refor&ccedil;ar 
+      Ele &eacute; respons&aacute;vel por gerenciar a mem&oacute;ria, refor&ccedil;ar 
       controles de seguran&ccedil;a,
       rede, accesso a disco, e muito mais.  A medida que mais e mais o &os;
       torna-se din&acirc;micamente configur&aacute;vel &eacute;, ocasionalmente &eacute; necess&aacute;rio
@@ -74,49 +74,50 @@
   </sect1>
 
   <sect1 id="kernelconfig-custom-kernel">
-    <title>Porque compilar um kernel personalisado?</title>
+    <title>Porque compilar um <literal>kernel</literal> personalizado?</title>
 
-    <para>Tradicionalmente, &os; teve o que foi chamado de kernel
-      <quote>monolitico</quote>. Isto significa que o kernel era um
+    <para>Tradicionalmente, o &os; teve o que foi chamado de <literal>kernel</literal>
+      <quote>monol&iacute;tico</quote>. Isto significa que o <literal>kernel</literal> era um
       grande programa, contendo uma lista fixa de dispositivos suportados, e se voc&ecirc; quisesse
-      alterar o comportamento do kernel ent&atilde;o &eacute; voc&ecirc; teria que compilar um novo kernel,
-      ent&atilde;o reiniciar seu computador com o novo kernel.</para>
+      alterar o comportamento do <literal>kernel</literal> ent&atilde;o &eacute; voc&ecirc; teria que compilar um novo <literal>kernel</literal>,
+      e da&iacute; reiniciar seu computador com o novo <literal>kernel</literal>.</para>
 
     <para>Hoje, o &os; est&aacute; movendo-se rapidamente para um modelo onde muitas das funcionalidades do
-      kernel est&aacute; contida em m&oacute;dulos que s&atilde;o carregados e descarregados din&acirc;micamente do kernel conforme necess&aacute;rios.
-      Isto permite que o kernel se adapte ao novo hardware de repente
-      tornando-se dispon&iacute;vel (tais como cart&otilde;es PCMCIA para laptop), ou para
-      novas funcionalidades a serem traduzidas dentro do kernel isso n&atilde;o era
-      necess&aacute;rio quando o kernel era originalmente compilado. Isso
-      &eacute; conhecido como kernel modular. Coloquialmente eles s&atilde;o chamados KLDs.</para>
+      <literal>kernel</literal> est&aacute; contida em m&oacute;dulos que s&atilde;o carregados e descarregados din&acirc;micamente do <literal>kernel</literal> conforme eles s&atilde;o necess&aacute;rios.
+      Isto permite que o <literal>kernel</literal> se adapte a um novo <foreignphrase>hardware</foreignphrase> repentinamente
+      tornando-o dispon&iacute;vel (tais como cart&otilde;es PCMCIA para <foreignphrase>laptop</foreignphrase>), ou a
+      novas funcionalidades a serem inseridas no <literal>kernel</literal> que n&atilde;o eram
+      necess&aacute;rias quando o <literal>kernel</literal> foi originalmente compilado. Isso
+      &eacute; conhecido como <literal>kernel</literal> modular. Coloquialmente eles s&atilde;o chamados KLDs.</para>
 
-    <para>Apesar disto, sabemos que ainda &eacute necess&aacute;rio fazer algumas configura&ccedil;&otilde;es est&aacute;ticas no kernel. Em alguns casos 
-      isto est&aacute; assim porque a funcionalidades que est&atilde;o amarrada ao kernel e n&atilde;o podem ser carregadas din&acirc;micamente. 
-      Em outros casos isto pode simplesmente estar assim porque ningu&eacute;m ainda conseguiu tempo para escrever um m&oacute;dulo do kernel de 
-carregamento din&acirc;mico ainda para essas funcionalidades.</para>
+    <para>Apesar disto, ainda &eacute necess&aacute;rio carregar algumas configura&ccedil;&otilde;es est&aacute;ticas no <literal>kernel</literal>. Em alguns casos 
+      isto est&aacute; assim porque a funcionalidades est&atilde;o t&atilde;o amarradas ao <literal>kernel</literal> que elas n&atilde;o podem ser carregadas din&acirc;micamente. 
+      Em outros casos isto pode simplesmente estar assim porque ningu&eacute;m ainda conseguiu tempo para escrever
+um m&oacute;dulo de 
+carregamento din&acirc;mico do <literal>kernel</literal> para essas funcionalidades.</para>
 
-    <para>Compilar um kernel personalizado e um dos passos mais importante que cada usu&aacute;rio de
-      &unix; deve saber. Este processo, consome um tempo curto e trar&aacute; muitos benef&iacute;cios para o seu sistema &os;.
-      Diferente do kernel <filename>GENERIC</filename>, o qual necessita de suporte de uma
-      abrangente lista de hardware, um kernel personalizado somente cont&eacute;m suporte para o hardware dos
-      <emphasis>seus</emphasis> PC's. Isto tem benef&iacute;cios in&uacute;meros, como:</para>
+    <para>Compilar um <literal>kernel</literal> personalizado &eacute; um dos rituais mais importantes que cada usu&aacute;rio de
+      &unix; deve enfrentar. Este processo, embora consuma tempo, trar&aacute; muitos benef&iacute;cios para o seu sistema &os;.
+      Diferentemente do <literal>kernel</literal> <filename>GENERIC</filename>, o qual necessita de suporte a uma
+      abrangente lista de equipamentos, um <literal>kernel</literal> personalizado somente cont&eacute;r&aacute; suporte para o <foreignphrase>hardware</foreignphrase> do
+      <emphasis>seu</emphasis> PC. Isto tem in&uacute;meros benef&iacute;cios, tais como:</para>
 
     <itemizedlist>
       <listitem>
-	<para>Tempo mais r&aacute;pido para carregar. Posto que o kernel apenas experimentar&aacute; o
+	<para>Tempo mais r&aacute;pido para carregar. Posto que o <literal>kernel</literal> apenas experimentar&aacute; o
 	hardware que voc&ecirc; tiver em seu sistema, o tempo de testes do seu sistema ao carregar a m&aacute;quina diminuir&aacute; drasticamente.</para>
       </listitem>
 
       <listitem>
-	<para>Menos uso da mem&oacute;ria. Um kernel personalizado usa frequentemente menos mem&oacute;ria
-	  que o kernel <filename>GENERIC</filename>, o que &eacute; importante
-	  porque o kernel atual deve sempre estar presente na mem&oacute;ria real.
-	  Por esta raz&atilde;o, um kernel personalizado e &uacute;til especialmente
+	<para>Menos uso da mem&oacute;ria. Um <literal>kernel</literal> personalizado usa frequentemente menos mem&oacute;ria
+	  que o <literal>kernel</literal> <filename>GENERIC</filename>, o que &eacute; importante
+	  porque o <literal>kernel</literal> atual deve sempre estar presente na mem&oacute;ria real.
+	  Por esta raz&atilde;o, um <literal>kernel</literal> personalizado e &uacute;til especialmente
 	  em um sistema com pouca quantidade de RAM.</para>
       </listitem>
 
       <listitem>
-	<para>Adicionar suporte a hardware. Um kernel personalizado permite a voc&ecirc; adicionar suporte a dispositivos tais como Placas de Som, que n&atilde;o est&atilde;o presentes no kernel <filename>GENERIC</filename>.</para>
+	<para>Adicionar suporte a hardware. Um <literal>kernel</literal> personalizado permite a voc&ecirc; adicionar suporte a dispositivos tais como Placas de Som, que n&atilde;o est&atilde;o presentes no <literal>kernel</literal> <filename>GENERIC</filename>.</para>
       </listitem>
     </itemizedlist>
   </sect1>
