@@ -576,29 +576,31 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
   <sect1 id="sgml-primer-doctype-declaration">
     <title>A declara&ccedil;&atilde;o DOCTYPE</title>
 
-    <para>The beginning of each document that you write must specify the name
-      of the DTD that the document conforms to.  This is so that SGML parsers
-      can determine the DTD and ensure that the document does conform to 
-      it.</para>
-
-    <para>This information is generally expressed on one line, in the DOCTYPE
-      declaration.</para>
-
-    <para>A typical declaration for a document written to conform with version
-      4.0 of the HTML DTD looks like this;</para>
-
+    <para>O inicio de cada documento que voc&ecirc; escrever deve
+    especificar o nome do DTD o qual se aplica ao seu documento.  Isto
+    deve ser feito para que os interpretadores SGML possam determinar
+    o DTD e assegurar que o documento esta em conformidade com o
+    mesmo.</para>
+    
+    <para>Esta informa&ccedil;&atilde;o &eacute; geralmente expressada em uma linha, na
+    declara&ccedil;&atilde;o DOCTYPE</para>
+    
+    <para>Uma declara&ccedil;&atilde;o t&iacute;pica para um documento escrito para
+      conformar-se com a vers&atilde;o 4.0 do DTD HTML se parece com
+      esta:</para>
+    
     <programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN">]]></programlisting>
 
-    <para>That line contains a number of different components.</para>
+    <para>Esta linha cont&eacute;m diferentes componentes.</para>
 
     <variablelist>
       <varlistentry>
 	<term><literal>&lt;!</literal></term>
 	
 	<listitem>
-	  <para>Is the <emphasis>indicator</emphasis> that indicates that this
-	    is an SGML declaration.  This line is declaring the document type.
-	  </para>
+	  <para>&Eacute; o <emphasis>indicador</emphasis> que indica que se
+	  trata de uma declara&ccedil;&atilde;o SGML.  Esta linha est&aacute; declarando o tipo do
+	  documento.</para>
 	</listitem>
       </varlistentry>
 
@@ -606,8 +608,8 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	<term><literal>DOCTYPE</literal></term>
 	
 	<listitem>
-	  <para>Shows that this is an SGML declaration for the document
-	    type.</para>
+	  <para>Mostra que esta &eacute; uma declara&ccedil;&atilde;o SGML para o tipo 
+	    de documento.</para>
 	</listitem>
       </varlistentry>
       
@@ -615,8 +617,8 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	<term><literal>html</literal></term>
 	
 	<listitem>
-	  <para>Names the first <link linkend="sgml-primer-elements">element</link> that
-	    will appear in the document.</para>
+	  <para>O nome do primeiro <link linkend="sgml-primer-elements">
+	    elemento</link> o qual ir&aacute; aparecer no documento</para>
 	</listitem>
       </varlistentry>
 
@@ -624,18 +626,18 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	<term><literal>PUBLIC "-//W3C//DTD HTML 4.0//EN"</literal></term>
 
 	<listitem>
-	  <para>Lists the Formal Public Identifier (FPI)<indexterm>
-	      <primary>Formal Public Identifier</primary>
+	  <para>Lista o Identificador P&uacute;blico Formal (FPI)<indexterm>
+	      <primary>Identificar P&uacute;blico Formal</primary>
 	    </indexterm>
-	    for the DTD that this
-	    document conforms to.  Your SGML parser will use this to find the
-	    correct DTD when processing this document.</para>
+	    para o DTD ao qual este documento conforma-se.  O seu
+	    interpretador SGML ir&aacute; utiliza-lo para encontrar o DTD
+	    correto quando estiver processando o documento.</para>
 
-	  <para><literal>PUBLIC</literal> is not a part of the FPI, but
-	    indicates to the SGML processor how to find the DTD referenced in
-	    the FPI.  Other ways of telling the SGML parser how to find the
-	    DTD are shown <link
-	      linkend="sgml-primer-fpi-alternatives">later</link>.</para>
+	  <para>O <literal>PUBLIC</literal> n&atilde;o faz parte do FPI, ele 
+	    indica para o processador SGML como localizar o DTD
+	    referenciado na FPI.  Outras formas de informar ao
+	    interpretador SGML como localizar o DTD s&atilde;o abordadas <link
+	    linkend="sgml-primer-fpi-alternatives">mais tarde</link>.</para>
 	</listitem>
       </varlistentry>
 
@@ -643,41 +645,44 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	<term><literal>&gt;</literal></term>
 	
 	<listitem>
-	  <para>Returns to the document.</para>
+	  <para>Retorno ao documento.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
     
     <sect2>
       <title>Identificadores p&uacute;blicos formais (FPIs)<indexterm significance="preferred">
-	  <primary>Formal Public Identifier</primary>
+	  <primary>Identificadores P&uacute;blicos Formais</primary>
 	</indexterm>
 </title>
 
       <note>
-	<para>You do not need to know this, but it is useful background, and
-	  might help you debug problems when your SGML processor can not locate
-	  the DTD you are using.</para>
+	<para>Voc&ecirc; n&atilde;o precisa conhece-los, mas eles s&atilde;o um background
+	  &uacute;til, e podem ajud&aacute;-lo a debugar problemas quando o seu
+	  processador SGML n&atilde;o puder localizar o DTD que voc&ecirc; esta
+	  utilizando.</para>
       </note>
       
-      <para>FPIs must follow a specific syntax.  This syntax is as
-	follows;</para>
+      <para>Os FPIs devem seguir uma sintaxe espec&iacute;fica.  Esta sintaxe 
+	&eacute; a seguinte :</para>
 
-      <programlisting>"<replaceable>Owner</replaceable>//<replaceable>Keyword</replaceable> <replaceable>Description</replaceable>//<replaceable>Language</replaceable>"</programlisting>
+      <programlisting>"<replaceable>Propriet&aacute;rio</replaceable>//<replaceable>Palavra-Chave</replaceable> <replaceable>Descri&ccedil;&atilde;o</replaceable>//<replaceable>Idioma</replaceable>"</programlisting>
 
       <variablelist>
 	<varlistentry>
-	  <term><replaceable>Owner</replaceable></term>
+	  <term><replaceable>Propriet&aacute;rio</replaceable></term>
 	  
 	  <listitem>
-	    <para>This indicates the owner of the FPI.</para>
+	    <para>Isto indica o propriet&aacute;rio da FPI.</para>
 
-	    <para>If this string starts with <quote>ISO</quote> then this is an
-	      ISO owned FPI.  For example, the FPI <literal>"ISO
-		8879:1986//ENTITIES Greek Symbols//EN"</literal> lists
-	      <literal>ISO 8879:1986</literal> as being the owner for the set
-	      of entities for Greek symbols.  ISO 8879:1986 is the ISO number
-	      for the SGML standard.</para>
+	    <para>Se este conjunto de caracteres come&ccedil;ar com
+	      <quote>ISO</quote> significar&aacute; que o FPI &eacute; de propriedade do
+	      ISO.  POr exemplo, a FPI <literal>"ISO 8879:1986//ENTITIES 
+	      Greek Symbols//EN"</literal> lista o 
+	      <literal>ISO 8879:1986</literal> como sendo o
+	      propriet&aacute;rio do conjunto de entidades dos s&iacute;mbolos
+	      Gregos.  O ISO 8879:1986 &eacute; o numero da ISO para o padr&atilde;o
+	      SGML.</para>
 
 	    <para>Otherwise, this string will either look like
 	      <literal>-//<replaceable>Owner</replaceable></literal> or
