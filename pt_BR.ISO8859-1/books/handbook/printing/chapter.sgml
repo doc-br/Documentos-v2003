@@ -2005,46 +2005,57 @@ $%&amp;'()*+,-./01234567
       
       <sect3 id="printing-advanced-filters">
         <title>Como os Filtros Funcionam</title>
------
 
-        <para>As mentioned before, a filter is an executable program started
-          by <application>LPD</application> to handle the device-dependent part of
-	  communicating with the printer.</para>
+        <para>
+		Como mencionado antes, o filtro &eacute; um programa 
+	execut&aacute;vel inicializado pelo <application>LPD</application> 
+	para manipular a comunica&ccedil;&atilde;o dependente da impressora.
+	</para>
             
-        <para>When <application>LPD</application> wants to print a file in a 
-	  job, it starts a filter
-          program.  It sets the filter's standard input to the file to print,
-          its standard output to the printer, and its standard error to the
-          error logging file (specified in the <literal>lf</literal>
-          capability in <filename>/etc/printcap</filename>, or
-          <filename>/dev/console</filename> by default).</para>
+        <para>
+		Quando o <application>LPD</application> precisa imprimir um
+	arquivo no <foreignphrase>job</foreignphrase>, ele inicializa o filtro.
+	Ele configura a entrada padr&atilde;o do filtro para o arquivo a ser 
+	impresso, e a sa&iacute;da padr&atilde;o do filtro e redireciona as 
+	sa&iacute;das padr&atilde;o e a sa&iacute;da padr&atilde;o de erro para
+	o arquivo de log de erros ( especificado na op&ccedil;&atilde;o
+        <literal>lf</literal> no arquivo <filename>/etc/printcap</filename>, ou
+          <filename>/dev/console</filename> por padr&atilde;o).
+	</para>
             
         <indexterm>
           <primary><command>troff</command></primary>
         </indexterm>
-        <para>Which filter <application>LPD</application> starts and the 
-	  filter's arguments depend on
-          what is listed in the <filename>/etc/printcap</filename> file and
-          what arguments the user specified for the job on the      
-            &man.lpr.1; command line.  For example, if the user typed
-          <command>lpr -t</command>, <application>LPD</application> would
-	  start the troff filter, listed
-          in the <literal>tf</literal> capability for the destination printer.
-          If the user wanted to print plain text, it would start the
-          <literal>if</literal> filter (this is mostly true: see <link
-            linkend="printing-advanced-of">Output Filters</link> for
-          details).</para>
+        <para>
+		A escolha do filtro inicializado pelo <application>LPD</application> 
+	depende do arquimento utilizado no arquivo <filename>/etc/printcap</filename> 
+	e qual foi o argumento que o usu&aacute;rio especificou no comando
+	de linha &man.lpr.1;.  Por exemplo, se o usu&aacute;rio digita o seguinte 
+	comando: <command>lpr -t</command>, o <application>LPD</application> ir&aacute;
+	inicializar o filtro troff, que &eacute; o argumento da op&ccedil;&atilde;o
+        <literal>tf</literal> para a impressora padr&atilde;o.
+	Se o usu&aacute;rio quizer impreimir um texto puro, ele dever&aacute; 
+	inicializar o filtro <literal>if</literal> ( isso &eacute; muito comum,
+	veja em <link
+            linkend="printing-advanced-of">Output Filters</link> para maiores 
+	detalhes).
+	</para>
 
-        <para>There are three kinds of filters you can specify in
-          <filename>/etc/printcap</filename>:</para>
+        <para>
+		Existem tres tipos de filtros que voc&ecirc; pode especificar
+	no arquivo <filename>/etc/printcap</filename>:
+	</para>
 
         <itemizedlist>
           <listitem>
-            <para>The <emphasis>text filter</emphasis>, confusingly called the
-              <emphasis>input filter</emphasis> in 
-	      <application>LPD</application> documentation, handles
-              regular text printing.  Think of it as the default filter.  
-	      <application>LPD</application>
+            <para>
+		O <emphasis>filtro de texto</emphasis>, erradamente chamado de 
+        <emphasis>filtro de entrada</emphasis> na documenta&ccedil;&atilde;o do 
+	<application>LPD</application>, ele manipula a impress&atilde;o de 
+	texto puro. pense nele como um fiultro padr&atilde;o para o
+	<application>LPD</application>
+
+-----
               expects every printer to be able to print plain text by default,
               and it is the text filter's job to make sure backspaces, tabs,
               or other special characters do not confuse the printer.  If you
@@ -5288,25 +5299,31 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 	    in each line.  The problem might have gotten worse as the
 	    printer ran, losing more and more characters.</para>
 
-	  <para>The problem is that the printer cannot keep up with the
-	    speed at which the computer sends data over a serial line
-	    (this problem should not occur with printers on parallel
-	    ports).  There are two ways to overcome the problem:</para>
+	  <para>
+		O problema &eacute; que a impressora n&atilde;o pode manter
+	a velociade a qual o computador est&aacute; usando para enviar
+	os dados pela porta serial ( esse problema n&atilde;o deve ocorrer
+	na porta paralela).  Existem duas maneiras de solucionar o problema:
+	</para>
 
 	  <itemizedlist>
 	    <listitem>
-	      <para>If the printer supports XON/XOFF flow control, have
-		FreeBSD use it by specifying the <literal>ixon</literal> mode
-		in the <literal>ms#</literal> capability.</para>
+	      <para>
+		Se a impressora suportar o controle por XON/XOFF, o FreeeBSD
+	ir&aacute; usa-lo se for especificado o modo <literal>ixon</literal> 
+	na op&ccedil;&atilde;o <literal>ms#</literal>.
+		</para>
 	    </listitem>
 
 	    <listitem>
 		<para>
-			If the printer supports carrier flow control, specify
-		the <literal>crtscts</literal> mode in the 
-		<literal>ms#</literal> capability.
-		Make sure the cable connecting the printer to the computer
-		is correctly wired for carrier flow control.
+		Se a impressora suporta 
+	<foreignphrase> carrier flow control</foreignphrase>,
+	especifique o modo <literal>crtscts</literal> na op&ccedil;&atilde;o
+	 <literal>ms#</literal>.
+		Tenha certeza que o cabo que conecta a impressora ao 
+	computador esteja corretamente feito para 
+	<foreignphrase> carrier flow control</foreignphrase>,
 		</para>
 	    </listitem>
 	  </itemizedlist>
