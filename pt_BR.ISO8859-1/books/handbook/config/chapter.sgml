@@ -97,7 +97,7 @@
     <title>Configura&ccedil;&atilde;o Inicial</title>
 
     <sect2>
-      <title>Estrutura de Particioanmento</title>
+      <title>Estrutura de Particionamento</title>
 
       <indexterm><primary>partition layout</primary></indexterm>
       <indexterm>
@@ -307,7 +307,7 @@
       criados atrav&eacute;s da c&oacute;pia dos arquivos 
       <filename>.default</filename>.</para>
 
-    <para>Por exempli, considere o conte&uacute;do do diret&oacute;rio 
+    <para>Por exemplo, considere o conte&uacute;do do diret&oacute;rio 
     <filename>/usr/local/etc/apache</filename>:</para>
 
 <literallayout class="monospaced">-rw-r--r--  1 root  wheel   2184 May 20  1998 access.conf
@@ -329,31 +329,30 @@
   </sect1>
 
   <sect1 id="configtuning-starting-services">
-    <title>Starting Services</title>
+    <title>Inicializando Servi&ccedil;os</title>
 
     <indexterm><primary>services</primary></indexterm>
 
-    <para>It is common for a system to host a number of services.
-      These may be started in several different fashions, each having
-      different advantages.</para>
+    <para>Hospedar v&aacute;rios servi&ccedil;os &eacute; comum para um sistema.  Eles podem 
+      ser inicializados de formas diferentes, cada um com suas 
+      vantagens.</para>
 
     <indexterm><primary>/usr/local/etc/rc.d</primary></indexterm>
 
-    <para>Software installed from a port or the packages collection
-      will often place a script in
-      <filename>/usr/local/etc/rc.d</filename> which is invoked at
-      system startup with a <option>start</option> argument, and at
-      system shutdown with a <option>stop</option> argument.
-      This is the recommended way for
-      starting system-wide services that are to be run as
-      <username>root</username>, or that
-      expect to be started as <username>root</username>.
-      These scripts are registered as
-      part of the installation of the package, and will be removed
-      when the package is removed.</para>
+    <para>Aplicativos instalados atrav&eacute;s do <literal>port</literal>
+      ou da cole&ccedil;&atilde;o de pacotes frequentemente colocar&aacute; um <literal>script</literal> em 
+      <filename>/usr/local/etc/rc.d</filename>, que ser&aacute; invocado na inicializa&ccedil;&atilde;o 
+      do sistema com o argumento <option>start</option>, e no desligamento  
+      do sistema com o argumento <option>stop</option>.
+      Este &eacute; a maneira recomendada de incializar servi&ccedil;os globais de sistema 
+      que s&atilde;o executados sob o usu&aacute;rio <username>root</username>, ou que 
+      esperam ser inicializados como <username>root</username>.
+      Estes <literal>scripts</literal> s&atilde;o registrados como parte da 
+      instala&ccedil;&atilde;o do pacote, e ser&atilde;o removidos quando o pacote 
+      for removido.</para>
 
-    <para>A generic startup script in
-      <filename>/usr/local/etc/rc.d</filename> looks like:</para>
+    <para>Um <literal>script</literal> gen&eacute;rico de inicializa&ccedil;&atilde;o em 
+      <filename>/usr/local/etc/rc.d</filename> seria parecido com:</para>
 
     <programlisting>#!/bin/sh
 echo -n ' FooBar'
@@ -374,54 +373,54 @@ esac
 exit 0
     </programlisting>
 
-    <para>The startup scripts of &os; will look in
-      <filename>/usr/local/etc/rc.d</filename> for scripts that have an
-      <literal>.sh</literal> extension and are executable by
-      <username>root</username>.  Those scripts that are found are called with
-      an option <option>start</option> at startup, and <option>stop</option>
-      at shutdown to allow them to carry out their purpose.  So if you wanted
-      the above sample script to be picked up and run at the proper time during
-      system startup, you should save it to a file called
-      <filename>FooBar.sh</filename> in
-      <filename>/usr/local/etc/rc.d</filename> and make sure it is
-      executable.  You can make a shell script executable with &man.chmod.1;
-      as shown below:</para>
+    <para>O <literal>script</literal> de inicializa&ccedil;&atilde;o do &os; procurar&aacute; em 
+      <filename>/usr/local/etc/rc.d</filename> por <literal>scripts</literal> que possuem 
+      a extens&atilde;o <literal>.sh</literal> e s&atilde;o execut&aacute;veis pelo 
+      <username>root</username>.  Estes <literal>scripts</literal> encontrados s&atilde;o chamados 
+      com o argumento <option>start</option> na inicializa&ccedil;&atilde;o, e <option>stop</option>
+      no desligamento, para permitir que executem suas fun&ccedil;&otilde;es.  Sendo assim, se voc&ecirc; 
+      desejar que o <literal>script</literal> de exemplo acima seja selecionado e 
+      executado no momento de incializa&ccedil;&atilde;o do sistema, voc&ecirc; deve grav&aacute;-lo em um arquivo,
+      como por exemplo  
+      <filename>FooBar.sh</filename> em
+      <filename>/usr/local/etc/rc.d</filename> e ter certeza de que ele &eacute; execut&aacute;vel.  Voc&ecirc; 
+      pode fazer com que um <literal>script</literal> executador de comandos seja 
+      execut&aacute;vel com &man.chmod.1; como mostrado abaixo:</para>
 
     <screen>&prompt.root; <userinput>chmod 755 <replaceable>FooBar.sh</replaceable></userinput></screen>
 
-    <para>Some services expect to be invoked by &man.inetd.8; when a
-      connection is received on a suitable port.  This is common for
-      mail reader servers (POP and IMAP, etc.).  These services are
-      enabled by editing the file <filename>/etc/inetd.conf</filename>.
-      See &man.inetd.8; for details on editing this file.</para>
+    <para>Alguns servi&ccedil;os esperam ser invocados pelo &man.inetd.8; quando uma 
+      conex&atilde;o &eacute; recebida em uma porta dispon&iacute;vel.  &Eacute; comum para servidores 
+      de correio (POP e IMAP, etc).  Estes servi&ccedil;os s&atilde;o habilitados  
+      editando-se o arquivo <filename>/etc/inetd.conf</filename>.
+      Veja &man.inetd.8; para detalhes de como editar este arquivo.</para>
 
-    <para>Some additional system services may not be covered by the
-      toggles in <filename>/etc/rc.conf</filename>.  These are
-      traditionally enabled by placing the command(s) to invoke them
-      in <filename>/etc/rc.local</filename>.  As of &os;&nbsp;3.1 there
-      is no default <filename>/etc/rc.local</filename>; if it is
-      created by the administrator it will however be honored in the
-      normal fashion.  Note that <filename>rc.local</filename> is
-      generally regarded as the location of last resort; if there is a
-      better place to start a service, do it there.</para>
+    <para>Alguns servi&ccedil;os de sistema adicionais podem n&atilde;o possuir entradas 
+      no arquivo <filename>/etc/rc.conf</filename>.  Estes servi&ccedil;os s&atilde;o tracidionamente 
+      habilitados incluindo-se comandos no arquivo 
+      <filename>/etc/rc.local</filename>.  Como no &os;&nbsp;3.1 n&atilde;o existe 
+      o arquivo <filename>/etc/rc.local</filename>; mas se for criado pelo 
+      administrador ele ser&aacute; honrado pelo sistema.  Note que 
+      o arquivo <filename>rc.local</filename> &eacute; geralmente considerado como um 
+      local derradeiro; se existir um lugar melhor para inicializar o 
+      servi&ccedil;o, coloque o <literal>script</literal> neste lugar.</para>
 
-    <note><para>Do <emphasis>not</emphasis> place any commands in
-      <filename>/etc/rc.conf</filename>.  To start daemons, or
-      run any commands at boot time, place a script in
-      <filename>/usr/local/etc/rc.d</filename> instead.</para>
+    <note><para><emphasis>N&atilde;o</emphasis> coloque qualquer comando no 
+      arquivo <filename>/etc/rc.conf</filename>.  Para inicializar <literal>daemons</literal>, 
+      ou executar qualquer comando durante a inicializa&ccedil;&atilde;o, coloque um <literal>script</literal> em 
+      <filename>/usr/local/etc/rc.d</filename>.</para>
     </note>
 
-    <para>It is also possible to use the &man.cron.8; daemon to start
-      system services.  This approach has a number of advantages, not
-      least being that because &man.cron.8; runs these processes as the
-      owner of the <command>crontab</command>, services may be started
-      and maintained by non-<username>root</username> users.</para>
+    <para>Tamb&eacute;m &eacute; poss&iacute;vel usar o <literal>daemon</literal> &man.cron.8; para inicializar  
+      servi&ccedil;os de sistema.  Este m&eacute;todo tem algumas vantagens, n&atilde;o &eacute; para menos, pois o 
+      &man.cron.8; executa estes processos sob o propriet&aacute;rio do 
+      <command>crontab</command>, e os servi&ccedil;os podem ser inicializados e 
+      mantidos por usu&aacute;rios n&atilde;o-<username>root</username>.</para>
 
-    <para>This takes advantage of a feature of &man.cron.8;: the
-      time specification may be replaced by <literal>@reboot</literal>,
-      which will
-      cause the job to be run when &man.cron.8; is started shortly after
-      system boot.</para>
+    <para>Isto tira vantagem de uma caracter&iacute;stica do &man.cron.8;: a 
+      especifica&ccedil;&atilde;o de tempo pode ser trocada por <literal>@reboot</literal>,
+      que far&aacute; com que o trabalho seja executado quando o &man.cron.8; for 
+      inicializado logo ap&oacute;s a inicializa&ccedil;&atilde;o do sistema.</para>
   </sect1>
 
   <sect1 id="configtuning-cron">
