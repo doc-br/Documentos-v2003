@@ -1807,68 +1807,71 @@ rfcomm_sppd[94692]: Starting on /dev/ttyp6...</screen>
 	<author>
 	  <firstname>Tom</firstname>
 	  <surname>Rhodes</surname>
-	  <contrib>Reorganized and enhanced by </contrib>
+	  <contrib>Reorganizado e aumentado por </contrib>
 	</author>
       </authorgroup>
       <authorgroup>
 	<author>
 	  <firstname>Bill</firstname>
       	  <surname>Swingle</surname>
-	  <contrib>Written by </contrib>
+	  <contrib>Escrito por </contrib>
 	</author>
       </authorgroup>
     </sect1info>
     <title>NFS</title>
 
     <indexterm><primary>NFS</primary></indexterm>
-    <para>Among the many different filesystems that FreeBSD supports is
-      the Network File System, also known as <acronym>NFS</acronym>.
-      <acronym>NFS</acronym> allows a system to share directories and files
-      with others over a network.  By using <acronym>NFS</acronym>, users and
-      programs can access files on remote systems almost as if they were local
-      files.</para>
+    <para>Dentre os diversos sistemas de arquivos suportador pelo
+    FreeBSD est&aacute; o Sistema de Arquivo em Rede (Network File System),
+    tamb&eacute;m conhecido como <acronym>NFS</acronym>.  O
+    <acronym>NFS</acronym> permite que um sistema compartilhe seus
+    diret&oacute;rios e arquivos com outros sistemas atrav&eacute;s de uma rede.
+    Usando <acronym>NFS</acronym>, os usu&aacute;rios e programas podem
+    acessar arquivos em sistemas remotos quase como se fossem arquivos
+    locais.</para>
 
-    <para>Some of the most notable benefits that
-      <acronym>NFS</acronym> can provide are:</para>
+    <para>Alguns dos benef&iacute;cios mais not&aacute;veis que o
+    <acronym>NFS</acronym> pode oferecer s&atilde;o:</para>
 
     <itemizedlist>
       <listitem>
-	<para>Local workstations use less disk space because
-	  commonly used data can be stored on a single machine and still
-	  remain accessible to others over the network.</para>
+	<para>Esta&ccedil;&otilde;es locais usam menos espa&ccedil;o em disco porque dados
+	freq&uuml;entemente usados podem ser arqmazenados em uma
+	&uacute;nica m&aacute;quina e ainda permanecerem acess&iacute;veis a outras pela
+	rede.</para>
       </listitem>
 
       <listitem>
-	<para>There is no need for users to have separate home directories
-	  on every network machine.  Home directories could be set up on the
-	  <acronym>NFS</acronym> server and made available throughout
-	  the network.</para>
+	<para>N&atilde;o h&aacute; necessidade de usu&aacute;rios terem diret&oacute;rios pessoais
+	separados em cada m&aacute;quina da rede.  Diret&oacute;rios pessoais podem
+	ser configurados no servidor <acronym>NFS</acronym> e serem
+	disponibilizados atrav&eacute;s da rede.</para>
       </listitem>
 
       <listitem>
-	<para>Storage devices such as floppy disks, CDROM drives, and
-	  ZIP drives can be used by other machines on the network.
-	  This may reduce the number of removable media drives
-	  throughout the network.</para>
+	<para>Dispositivos de armazenamento como disquetes, leitores
+	de CD-ROM e leitores de ZIP podem ser usados por outras
+	m&aacute;quinas na rede.  Isto pode reduzir o n&uacute;mero de leitores de
+	m&iacute;dia remov&iacute;vel em toda a rede.</para>
       </listitem>
     </itemizedlist>
 
     <sect2>
-      <title>How <acronym>NFS</acronym> Works</title>
+      <title>Como o <acronym>NFS</acronym> Funciona</title>
 
-      <para><acronym>NFS</acronym> consists of at least two main parts:
-	a server and one or more clients.  The client remotely accesses
-	the data that is stored
-	on the server machine.  In order for this to function properly a few
-	processes have to be configured and running:</para>
+      <para>O <acronym>NFS</acronym> consiste de, pelo menos, duas
+      partes principais: um servidor e um ou mais clientes.  O cliente
+      acessa remotamente os dados armazenados na m&aacute;quina servidora.
+      Para que isto funcione direito, alguns poucos processos precisam
+      estar configurados e rodando:</para>
 
-      <note><para>In &os; 5.X, the <application>portmap</application> utility
-	has been replaced with the <command>rpcbind</command> utility.  Thus,
-	in &os; 5.X the user is required to replace every instance of
-	<application>portmap</application> with <command>rpcbind</command>
-	in the forthcoming examples.</para></note>
+      <note><para>No &os; 5.X, o utilit&aacute;rio <application>portmap</application> 
+      foi substitu&iacute;do pelo utilit&aacute;rio <command>rpcbind</command>.  
+      Assim, no &os; 5.X &eacute; preciso que o usu&aacute;rio substitua cada
+      inst&acirc;ncia do <application>portmap</application> pelo 
+      <command>rpcbind</command> nos exemplos a seguir.</para></note>
 
-      <para>The server has to be running the following daemons:</para>
+      <para>O servidor precisa ter rodando os seguintes daemons:</para>
       <indexterm>
 	<primary>NFS</primary>
 	<secondary>server</secondary>
@@ -1888,221 +1891,231 @@ rfcomm_sppd[94692]: Starting on /dev/ttyp6...</screen>
 	  <thead>
 	    <row>
 	      <entry>Daemon</entry>
-	      <entry>Description</entry>
+	      <entry>Descri&ccedil;&atilde;o</entry>
 	    </row>
 	  </thead>
 	  <tbody>
 	    <row>
 	      <entry>nfsd</entry>
-	      <entry>The <acronym>NFS</acronym> daemon which services requests from
-	      the <acronym>NFS</acronym> clients.</entry>
+	      <entry> O deamon <acronym>NFS</acronym>, que atende
+	      requisi&ccedil;&otilde;es dos clientes <acronym>NFS</acronym>.</entry>
 	    </row>
 	    <row>
 	      <entry>mountd</entry>
-	      <entry>The <acronym>NFS</acronym> mount daemon which carries out
-		the requests that &man.nfsd.8; passes on to it.</entry>
+	      <entry> O daemon de montagem <acronym>NFS</acronym>, que executa 
+	      as solicita&ccedil;&otilde;es que o &man.nfsd.8; lhe passa.</entry>
 	    </row>
 	    <row>
 	      <entry>portmap</entry>
-	      <entry> The portmapper daemon
-		allows <acronym>NFS</acronym> clients to discover which port the <acronym>NFS</acronym> server
-		is using.</entry>
+	      <entry> O daemon portmapper permite que clientes
+	      <acronym>NFS</acronym> descubram qual porta o servidor
+	      <acronym>NFS</acronym> est&aacute; utilizando.</entry>
 	    </row>
 	  </tbody>
 	</tgroup>
       </informaltable>
 
-      <para>The client can also run a daemon, known as
-	<application>nfsiod</application>.  The
-	<application>nfsiod</application> daemon services the requests
-	from the <acronym>NFS</acronym> server.  This is optional, and
-	improves performance, but is not required for normal and
-	correct operation.  See the &man.nfsiod.8; manual page for
-	more information.
-</para>
+      <para>O cliente tamb&eacute;m pode rodar um daemon, conhecido como
+      <application>nfsiod</application>.  O daemon 
+      <application>nfsiod</application> atende &agrave;s solicita&ccedil;&otilde;es do
+      servidor <acronym>NFS</acronym>.  Isto &eacute; opcional e aumenta o
+      desempenho, mas n&atilde;o &eacute; requerido para a opera&ccedil;&atilde;o normal e
+      correta.  Veja a p&aacute;gina de manual &man.nfsiod.8; para mais
+      informa&ccedil;&otilde;es.</para>
     </sect2>
 
     <sect2 id="network-configuring-nfs">
-      <title>Configuring <acronym>NFS</acronym></title>
+      <title>Configurando o <acronym>NFS</acronym></title>
       <indexterm>
 	<primary>NFS</primary>
 	<secondary>configuration</secondary>
       </indexterm>
 
-      <para><acronym>NFS</acronym> configuration is a relatively
-	straightforward process.  The processes that need to be
-	running can all start at boot time with a few modifications to
-	your <filename>/etc/rc.conf</filename> file.</para>
+      <para>A configura&ccedil;&atilde;o do <acronym>NFS</acronym> &eacute; um processo
+      relativamente claro e direto.  Os preocessos que precisam estar
+      rodando podem todos ser ativados no momento da inicializa&ccedil;&atilde;o do
+      sistema, com poucas modifica&ccedil;&otilde;es no seu arquivo 
+      <filename>/etc/rc.conf</filename>.</para>
 
-      <para>On the <acronym>NFS</acronym> server, make sure that the
-	following options are configured in the
-	<filename>/etc/rc.conf</filename> file:</para>
+      <para>No servidor <acronym>NFS</acronym>, certifique-se de que
+      as seguintes op&ccedil;&otilde;es est&atilde;o configuradas no arquivo 
+      <filename>/etc/rc.conf</filename>:</para>
 
       <programlisting>portmap_enable="YES"
 nfs_server_enable="YES"
 mountd_flags="-r"</programlisting>
 
-      <para><command>mountd</command> runs automatically whenever the
-	<acronym>NFS</acronym> server is enabled.</para>
+      <para>O <command>mountd</command> &eacute; automaticamente executado
+      quando o servidor <acronym>NFS</acronym> &eacute; ativado.</para>
 
-      <para>On the client, make sure this option is present in
-	<filename>/etc/rc.conf</filename>:</para>
+      <para>No cliente, certifique-se de que esta op&ccedil;&atilde;o est&aacute; presente
+      no <filename>/etc/rc.conf</filename>:</para>
 
       <programlisting>nfs_client_enable="YES"</programlisting>
 
-      <para>The <filename>/etc/exports</filename> file specifies which
-	filesystems <acronym>NFS</acronym> should export (sometimes
-	referred to as <quote>share</quote>).  Each line in
-	<filename>/etc/exports</filename> specifies a filesystem to be
-	exported and which machines have access to that filesystem.
-	Along with what machines have access to that filesystem,
-	access options may also be specified.  There are many such
-	options that can be used in this file but only a few will be
-	mentioned here.  You can easily discover other options by
-	reading over the &man.exports.5; manual page.</para>
+      <para>O arquivo <filename>/etc/exports</filename> especifica
+      quais sistemas de arquivos o <acronym>NFS</acronym> deve
+      exportar (&agrave;s vezes chamados de 
+      <quote>compartilhamentos</quote>).  Cada linha no 
+      <filename>/etc/exports</filename> determina um sistema de
+      arquivo a ser exportado e quais m&aacute;quinas t&ecirc;m acesso &agrave;quele
+      sistema de arquivo.  Junto com quais m&aacute;quinas t&ecirc;m acesso ao
+      sistema de arquivos, op&ccedil;&otilde;es de acesso tamb&eacute;m podem ser
+      especificadas.  Existem muitas op&ccedil;&otilde;es que podem ser usadas neste
+      arquivo, mas somente umas poucas ser&atilde;o mencionadas aqui.  Voc&ecirc;
+      pode facilmente descobrir outras op&ccedil;&otilde;es lendo a p&aacute;gina de manual
+      &man.exports.5;.</para>
 
-      <para>Here are a few example <filename>/etc/exports</filename>
-	entries:</para>
+      <para>Aqui est&atilde;o uns poucos exemplos de entradas no 
+      <filename>/etc/exports</filename>:</para>
 
       <indexterm>
 	<primary>NFS</primary>
 	<secondary>export examples</secondary>
       </indexterm>
 
-      <para>The following examples give an idea of how to export filesystems,
-	although the settings may be different depending on
-	your environment and network configuration.
-	For instance, to export the <filename>/cdrom</filename> directory to
-	three example machines that have the same domain name as the server
-	(hence the lack of a domain name for each) or have entries in your
-	<filename>/etc/hosts</filename> file.  The <option>-ro</option>
-	flag makes the exported filesystem read-only.  With this flag, the
-	remote system will not be able to write any changes to the
-	exported filesystem.</para>
+      <para>Os seguintes exemplos d&atilde;o uma id&eacute;ia de como exportar
+      sistemas de arquivos, ainda que os par&acirc;metros possam ser
+      diferentes, dependendo do seu ambiente e das configura&ccedil;&otilde;es de
+      rede.  Por exemplo, para exportar o diret&oacute;rio
+      <filename>/cdrom</filename> para tr&ecirc;s m&aacute;quinas de exemplo, que
+      possuem o mesmo nome de dom&iacute;nio que o servidor (por conseguinte
+      a aus&ecirc;ncia do nome de dom&iacute;nio em cada uma) ou possuem entradas 
+      no seu arquivo <filename>/etc/hosts</filename>.  O par&acirc;metro 
+      <option>-ro</option> torna o sistema de arquivo exportado
+      somente-para-leitura (read-only).  Com este par&acirc;metro, o sistema
+      remoto n&atilde;o ser&aacute; capaz de gravar quaisquer mudan&ccedil;as no sistema de
+      arquivo exportado.</para>
 
       <programlisting>/cdrom -ro host1 host2 host3</programlisting>
 
-      <para>The following line exports <filename>/home</filename> to
-	three hosts by IP address.  This is a useful setup if you have
-	a private network without a <acronym>DNS</acronym> server
-	configured.  Optionally the <filename>/etc/hosts</filename>
-	file could be configured for internal hostnames; please review
-	&man.hosts.5; for more information.  The
-	<option>-alldirs</option> flag allows the subdirectories to be
-	mount points.  In other words, it will not mount the
-	subdirectories but permit the client to mount only the
-	directories that are required or needed.</para>
+      <para>A linha abaixo exporta o <filename>/home</filename> para
+      tr&ecirc;s sistemas atrav&eacute;s de seus endere&ccedil;os IP.  Esta &eacute; uma
+      configura&ccedil;&atilde;o &uacute;til, se voc&ecirc; tem uma rede privada, sem servidor 
+      <acronym>DNS</acronym> configurado.  Opcionalmente, o arquivo 
+      <filename>/etc/hosts</filename> poderia ser configurado para
+      nomear os sistemas internos; por favor reveja &man.hosts.5; para
+      maiores informa&ccedil;&otilde;es.  O par&acirc;metro <option>-alldirs</option>
+      permite que os subdiret&oacute;rios sejam pontos de montagem.  Em
+      outras palavras, n&atilde;o vai montar os subdiret&oacute;rios, mas vai
+      permitir que o cliente monte somente os diret&oacute;rios que s&atilde;o
+      requeridos os necess&aacute;rios.</para>
 
       <programlisting>/home  -alldirs 10.0.0.2 10.0.0.3 10.0.0.4</programlisting>
 
-      <para>The following line exports <filename>/a</filename> so that
-	two clients from different domains may access the filesystem.
-	The <option>-maproot=root</option> flag allows the
-	<username>root</username> user on the remote system to write
-	data on the exported filesystem as <username>root</username>.
-	If the <literal>-maproot=root</literal> flag is not specified,
-	then even if a user has <username>root</username> access on
-	the remote system, they will not be able to modify files on
-	the exported filesystem.</para>
+      <para>A seguinte linha exporta <filename>/a</filename> de forma
+      que dois clientes de diferentes dom&iacute;nios acessem o sistema de
+      arquivos.  O par&acirc;metro <option>-maproot=root</option> permite
+      que o usu&aacute;rio <username>root</username> do sistema remoto 
+      grave dados no sistema de arquivos exportado como 
+      <username>root</username>.  Se o par&acirc;metro 
+      <literal>-maproot=root</literal> n&atilde;o for especificado, ent&atilde;o,
+      mesmo que um usu&aacute;rio tenha acesso de <username>root</username> 
+      no sistema remoto, ele n&atilde;o ser&aacute; capaz de modificar arquivos no sistema de arquivos exportado.</para>
 
-      <programlisting>/a  -maproot=root host.example.com box.example.org</programlisting>
+      <programlisting>/a  -maproot=root host.exemplo.com box.exemplo.org</programlisting>
 
-      <para>In order for a client to access an exported filesystem,
-	the client must have permission to do so.  Make sure the
-	client is listed in your <filename>/etc/exports</filename>
-	file.</para>
+      <para>Para que um cliente tenha acesso a um sistema de arquivos
+      exportado, o cliente precisa ter permiss&atilde;o para tal.
+      Certifique-se de que o cliente est&aacute; listado no seu arquivo 
+      <filename>/etc/exports</filename>.</para>
 
-      <para>In <filename>/etc/exports</filename>, each line represents
-	the export information for one filesystem to one host.  A
-	remote host can only be specified once per filesystem, and may
-	only have one default entry.  For example, assume that
-	<filename>/usr</filename> is a single filesystem.  The
-	following <filename>/etc/exports</filename> would be
-	invalid:</para>
+      <para>No <filename>/etc/exports</filename>, cada linha
+      representa a informa&ccedil;&atilde;o de exporta&ccedil;&atilde;o para um sistema de arquivo
+      para um sistema.  Um sistema remoto pode ser especificado 
+      somente uma vez por sistema de arquivo, e pode ter somente uma 
+      entrada padr&atilde;o.  Por exemplo, assuma que
+      <filename>/usr</filename> &eacute; um &uacute;nico sistema de arquivo.  O 
+      <filename>/etc/exports</filename> abaixo seria inv&aacute;lido:</para>
 
-      <programlisting>/usr/src   client
-/usr/ports client</programlisting>
+      <programlisting>/usr/src   cliente
+/usr/ports cliente</programlisting>
 
-      <para>One filesystem, <filename>/usr</filename>, has two lines
-	specifying exports to the same host, <hostid>client</hostid>.
-	The correct format for this situation is:</para>
+      <para>Um sistema de arquivo, <filename>/usr</filename>, tem duas
+      linhas especificando exporta&ccedil;&otilde;es para o mesmo sistema, 
+      <hostid>cliente</hostid>.  O formato correto para esta situa&ccedil;&atilde;o
+      &eacute;:</para>
 
-      <programlisting>/usr/src /usr/ports client</programlisting>
+      <programlisting>/usr/src /usr/ports cliente</programlisting>
 
-      <para>The properties of one filesystem exported to a given host
-	must all occur on one line.  Lines without a client specified
-	are treated as a single host.  This limits how you can export
-	filesystems, but for most people this is not an issue.</para>
+      <para>As propriedades de um sistema de arquivo exportado para um
+      dado sistema precisa estar em uma mesma linha.  Linhas sem um
+      cliente especificado s&atilde;o tratadas como um &uacute;nico sistema.  Isto
+      limita como voc&ecirc; pode exportar sistemas de arquivos, mas para a
+      maioria das pessoas isto n&atilde;o &eacute; um problema.</para>
 
-      <para>The following is an example of a valid export list, where
-	<filename>/usr</filename> and <filename>/exports</filename>
-	are local filesystems:</para>
+      <para>Abaixo segue um exemplo de uma lista de exporta&ccedil;&atilde;o v&aacute;lida,
+      onde <filename>/usr</filename> e <filename>/exports</filename> 
+      s&atilde;o sistemas de arquivos locais:</para>
 
       <programlisting># Export src and ports to client01 and client02, but only
-# client01 has root privileges on it
-/usr/src /usr/ports -maproot=root    client01
-/usr/src /usr/ports	       client02
-# The client machines have root and can mount anywhere
-# on /exports.  Anyone in the world can mount /exports/obj read-only
-/exports -alldirs -maproot=root      client01 client02
+# cliente01 tem privil&eacute;gios de root nele
+/usr/src /usr/ports -maproot=root    cliente01
+/usr/src /usr/ports	       cliente02
+# As m&aacute;quinas cliente possuem acesso de root e podem montar em
+# qualquer lugar de /exports.  Qualquer um no mundo pode montar /exports/obj somente-leitura.
+/exports -alldirs -maproot=root      cliente01 cliente02
 /exports/obj -ro</programlisting>
 
-      <para>You must restart
-	<command>mountd</command> whenever you modify
-	<filename>/etc/exports</filename> so the changes can take effect.
-	This can be accomplished by sending the HUP signal
-	to the <command>mountd</command> process:</para>
+      <para>Voc&ecirc; precisa reiniciar o <command>mountd</command> todas
+      as vezes que modificar o <filename>/etc/exports</filename> de 
+      forma que as mudan&ccedil;as tenham efeito.  Isto pode ser executado
+      enviando o sinal HUP ao processo <command>mountd</command>:</para>
 
       <screen>&prompt.root; <userinput>kill -HUP `cat /var/run/mountd.pid`</userinput></screen>
 
-      <para>Alternatively, a reboot will make FreeBSD set everything
-	up properly.  A reboot is not necessary though.
-	Executing the following commands as <username>root</username>
-	should start everything up.</para>
+      <para>Alternativamente, uma reinicializa&ccedil;&atilde;o (reboot) far&aacute; o FreeBSD
+      configurar tudo corretamente.  Entretanto, uma reinicializa&ccedil;&atilde;o 
+      n&atilde;o &eacute; necess&aacute;ria.  Executando o seguinte comando como 
+      <username>root</username> dever&aacute; ativar tudo.</para>
 
-      <para>On the <acronym>NFS</acronym> server:</para>
+      <para>No servidor <acronym>NFS</acronym>:</para>
 
       <screen>&prompt.root; <userinput>portmap</userinput>
 &prompt.root; <userinput>nfsd -u -t -n 4</userinput>
 &prompt.root; <userinput>mountd -r</userinput></screen>
 
-      <para>On the <acronym>NFS</acronym> client:</para>
+      <para>No cliente <acronym>NFS</acronym>:</para>
 
       <screen>&prompt.root; <userinput>nfsiod -n 4</userinput></screen>
 
-      <para>Now everything should be ready to actually mount a remote file
-	system.  In these examples the
-	server's name will be <literal>server</literal> and the client's
-	name will be <literal>client</literal>.  If you only want to
-	temporarily mount a remote filesystem or would rather test the
-	configuration, just execute a command like this as <username>root</username> on the
-	client:</para>
+      <para>Agora tudo deve estar pronto para, na pr&aacute;tica, montar um
+      sistema de arquivo remoto.  Nestes exemplos, o nome do servidor
+      ser&aacute; <literal>server</literal> e o nome do cliente ser&aacute;
+      <literal>client</literal>.  Se voc&ecirc; quer somente montar
+      temporariamente um sistema de arquivo ou prefere testar a
+      configura&ccedil;&atilde;o, apenas execute um comando como este como
+      <username>root</username> no cliente:</para>
+
       <indexterm>
 	<primary>NFS</primary>
 	<secondary>mounting</secondary>
       </indexterm>
       <screen>&prompt.root; <userinput>mount server:/home /mnt</userinput></screen>
 
-      <para>This will mount the <filename>/home</filename> directory
-	on the server at <filename>/mnt</filename> on the client.  If
-	everything is set up correctly you should be able to enter
-	<filename>/mnt</filename> on the client and see all the files
-	that are on the server.</para>
+      <para>Isto ir&aacute; montar o diret&oacute;rio <filename>/home</filename> 
+      do servidor em <filename>/mnt</filename> no cliente.  Se tudo
+      estiver configurado corretamente, voc&ecirc; deve ser capaz de entrar
+      no <filename>/mnt</filename> no cliente e ver todos os arquivos
+      que est&atilde;o no servidor.</para>
 
-      <para>If you want to automatically mount a remote filesystem
-	each time the computer boots, add the filesystem to the
-	<filename>/etc/fstab</filename> file.  Here is an example:</para>
+      <para>Se voc&ecirc; quer montar automaticamente um sistema de arquivo
+      remoto cada vez que o computador iniciar, adicione o sistema de
+      arquivos no arquivo <filename>/etc/fstab</filename>.  Eis um
+      exemplo:</para>
 
       <programlisting>server:/home	/mnt	nfs	rw	0	0</programlisting>
 
-      <para>The &man.fstab.5; manual page lists all the available options.</para>
+      <para>A p&aacute;gina de manual &man.fstab.5; lista todas as op&ccedil;&otilde;es
+      dispon&iacute;veis.</para>
     </sect2>
 
     <sect2>
-      <title>Practical Uses</title>
+      <title>Usos Pr&aacute;ticos</title>
 
-      <para><acronym>NFS</acronym> has many practical uses.  Some of the more common
-	ones are listed below:</para>
+      <para>O <acronym>NFS</acronym> tem muitos usos pr&aacute;ticos.  Alguns
+      dos usos mais comuns est&atilde;o listados abaixo:</para>
+
 
       <indexterm>
 	<primary>NFS</primary>
@@ -2110,26 +2123,26 @@ mountd_flags="-r"</programlisting>
       </indexterm>
       <itemizedlist>
 	<listitem>
-	  <para>Set several machines to share a CDROM or other media
-	    among them.  This is cheaper and often a more convenient
-	    method to install software on multiple machines.</para>
+	  <para>Configurar diversas m&aacute;quinas para compatilhar um CDROM
+	  ou outra m&iacute;dia entre eles.  Isto &eacute; mais barato e
+	  freq&uuml;entemente um m&eacute;todo mais conveniente de instalar
+	  software em m&uacute;ltiplas m&aacute;quinas.</para>
 	</listitem>
 
 	<listitem>
-	  <para>On large networks, it might be more convenient to
-	    configure a central <acronym>NFS</acronym> server in which
-	    to store all the user home directories.  These home
-	    directories can then be exported to the network so that
-	    users would always have the same home directory,
-	    regardless of which workstation they log in to.</para>
-	</listitem>
-
+	  <para>Em grandes redes, pode ser mais conveniente
+	  configurar um servidor central para armazenar todos os
+	  diret&oacute;rios pessoais dos usu&aacute;rios.  Estes diret&oacute;rios pessoais
+	  ent&atilde;o podem ser exportados para a rede, de forma que os
+	  usu&aacute;rios sempre tenham o mesmo diret&oacute;rio pessoal,
+	  sem se preocupar com qual esta&ccedil;&atilde;o de trabalho eles
+	  utilizem.</para>
 	<listitem>
-	  <para>Several machines could have a common
-	    <filename>/usr/ports/distfiles</filename> directory.  That
-	    way, when you need to install a port on several machines,
-	    you can quickly access the source without downloading it
-	    on each machine.</para>
+	  <para>Diversas m&aacute;quinas poderiam ter um diret&oacute;rio
+	  <filename>/usr/ports/distfiles</filename> comum.  Desta
+	  forma, quando voc&ecirc; precisar instalar um port em diversas
+	  m&aacute;quinas, voc&ecirc; pode rapidamente acessar o fonte sem precisar
+	  baix&aacute;-lo em cada m&aacute;quina.</para>
 	</listitem>
       </itemizedlist>
     </sect2>
@@ -2140,54 +2153,56 @@ mountd_flags="-r"</programlisting>
 	  <author>
 	    <firstname>Wylie</firstname>
 	    <surname>Stilwell</surname>
-	    <contrib>Contributed by </contrib>
+	    <contrib>Contribu&iacute;do por </contrib>
 	  </author>
 	</authorgroup>
 	<authorgroup>
 	  <author>
 	    <firstname>Chern</firstname>
 	    <surname>Lee</surname>
-	    <contrib>Rewritten by </contrib>
+	    <contrib>Reescrito por </contrib>
 	  </author>
 	</authorgroup>
       </sect2info>
-      <title>Automatic Mounts with <application>amd</application></title>
+      <title>Montagens Autom&aacute;ticas com <application>amd</application></title>
 
       <indexterm><primary>amd</primary></indexterm>
       <indexterm><primary>automatic mounter daemon</primary></indexterm>
 
-      <para>&man.amd.8; (the automatic mounter daemon)
-	automatically mounts a
-	remote filesystem whenever a file or directory within that
-	filesystem is accessed.  Filesystems that are inactive for a
-	period of time will also be automatically unmounted by
-	<application>amd</application>.  Using
-	<application>amd</application> provides a simple alternative
-	to permanent mounts, as permanent mounts are usually listed in
-	<filename>/etc/fstab</filename>.</para>
+      <para>O daemon de automontagem, &man.amd.8; (the automatic
+      mounter daemon), monta automaticamente um sistema de arquivo 
+      remoto todas as vezes que um arquivo ou diret&oacute;rio naquele
+      sistema de arquivo &eacute; acessado.  Sistemas de arquivos que ficam
+      inativos por um per&iacute;odo de tempo tamb&eacute;m ser&atilde;o automaticamente
+      desmontados pelo <application>amd</application>.  Usar o
+      <application>amd</application> &eacute; uma alternativa para montagens
+      permanentes, uma vez que as montagens permanentes geralmente
+      est&atilde;o listadas no <filename>/etc/fstab</filename>.</para>
 
-      <para><application>amd</application> operates by attaching
-	itself as an NFS server to the <filename>/host</filename> and
-	<filename>/net</filename> directories.  When a file is accessed
-	within one of these directories, <application>amd</application>
-	looks up the corresponding remote mount and automatically mounts
-	it.  <filename>/net</filename> is used to mount an exported
-	filesystem from an IP address, while <filename>/host</filename>
-	is used to mount an export from a remote hostname.</para>
+      <para>O <application>amd</application> opera anexando-se como um
+      servidor NFS aos diret&oacute;rios <filename>/host</filename> e
+      <filename>/net</filename>.  Quando um arquivo &eacute; acessado dentro
+      destes diret&oacute;rios, o <application>amd</application> procura pelo
+      ponto de montagem remoto correspondente e o monta 
+      automaticamente.  O <filename>/net</filename> &eacute; usado para
+      montar um sistema de arquivo exportado de um endere&ccedil;o IP,
+      enquanto o <filename>/host</filename> &eacute; usado para montar uma
+      exporta&ccedil;&atilde;o de um nome de sistema remoto.</para>
 
-      <para>An access to a file within
-	<filename>/host/foobar/usr</filename> would tell
-	<application>amd</application> to attempt to mount the
-	<filename>/usr</filename> export on the host
-	<hostid>foobar</hostid>.</para>
+      <para>Um acesso a um arquivo dentro de 
+      <filename>/host/foobar/usr</filename> diria ao 
+      <application>amd</application> para tentar montar a exporta&ccedil;&atilde;o
+      <filename>/usr</filename> no sistema <hostid>foobar</hostid>.
+      </para>
 
       <example>
-	<title>Mounting an Export with <application>amd</application></title>
+	<title>Montando uma Exporta&ccedil;&atilde;o com 
+	<application>amd</application></title>
 
-	<para>You can view the available mounts of a remote host with
-	  the <command>showmount</command> command.  For example, to
-	  view the mounts of a host named <hostid>foobar</hostid>, you
-	  can use:</para>
+	<para>Voc&ecirc; pode ver as montagens dispon&iacute;veis de um sistema
+	remoto com o comando <command>showmount</command>.  Por
+	exemplo, para ver as montagens de um sistema chamado 
+	<hostid>foobar</hostid>, voc&ecirc; pode usar:</para>
 
 	<screen>&prompt.user; <userinput>showmount -e foobar</userinput>
 Exports list on foobar:
@@ -2196,32 +2211,34 @@ Exports list on foobar:
 &prompt.user; <userinput>cd /host/foobar/usr</userinput></screen>
       </example>
 
-      <para>As seen in the example, the <command>showmount</command> shows
-	<filename>/usr</filename> as an export.  When changing directories to
-	<filename>/host/foobar/usr</filename>, <application>amd</application>
-	attempts to resolve the hostname <hostid>foobar</hostid> and
-	automatically mount the desired export.</para>
+      <para>Como visto no exemplo, o <command>showmount</command> mostra 
+      <filename>/usr</filename> como uma exporta&ccedil;&atilde;o.  Quando trocar de
+      diret&oacute;rios para <filename>/host/foobar/usr</filename>, o
+      <application>amd</application> tenta resolver o nome do sistema
+      <hostid>foobar</hostid> e automaticamente monta a exporta&ccedil;&atilde;o
+      desejada.</para>
 
-      <para><application>amd</application> can be started by the
-	startup scripts by placing the following lines in
-	<filename>/etc/rc.conf</filename>:</para>
+      <para>O <application>amd</application> pode ser iniciado pelos
+      scripts de inicializa&ccedil;&atilde;o colocando as seguintes linhas no
+      <filename>/etc/rc.conf</filename>:</para>
 
       <programlisting>amd_enable="YES"</programlisting>
 
-      <para>Additionally, custom flags can be passed to
-      <application>amd</application> from the
-      <varname>amd_flags</varname> option.  By default,
-      <varname>amd_flags</varname> is set to:</para>
+      <para>Adicionalmente, par&acirc;mtros personalizados podem ser
+      passados ao <application>amd</application> pela op&ccedil;&atilde;o 
+      <varname>amd_flags</varname>.  Por padr&atilde;o, o
+      <varname>amd_flags</varname> &eacute; ajustado para:</para>
 
       <programlisting>amd_flags="-a /.amd_mnt -l syslog /host /etc/amd.map /net /etc/amd.map"</programlisting>
 
-      <para>The <filename>/etc/amd.map</filename> file defines the
-	default options that exports are mounted with.  The
-	<filename>/etc/amd.conf</filename> file defines some of the more
-	advanced features of <application>amd</application>.</para>
+      <para>O arquivo <filename>/etc/amd.map</filename> define as
+      op&ccedil;&otilde;es padr&atilde;o com as quais as exporta&ccedil;&otilde;es ser&atilde;o montadas.  O
+      arquivo <filename>/etc/amd.conf</filename> define algumas das
+      caracter&iacute;sticas mais avan&ccedil;adas do 
+      <application>amd</application>.</para>
 
-      <para>Consult the &man.amd.8; and &man.amd.conf.5; manual pages for more
-	information.</para>
+      <para>Consulte as p&aacute;ginas de manual &man.amd.8; e
+      &man.amd.conf.5; para maiores informa&ccedil;&otilde;es.</para>
     </sect2>
 
     <sect2 id="network-nfs-integration">
@@ -2230,112 +2247,119 @@ Exports list on foobar:
 	  <author>
 	    <firstname>John</firstname>
 	    <surname>Lind</surname>
-	    <contrib>Contributed by </contrib>
+	    <contrib>Contribu&iacute;do por </contrib>
 	  </author>
 	</authorgroup>
       </sect2info>
-      <title>Problems Integrating with Other Systems</title>
+      <title>Problemas na Integra&ccedil;&atilde;o com Outros Sistemas</title>
 
-      <para>Certain Ethernet adapters for ISA PC systems have limitations
-	which can lead to serious network problems, particularly with NFS.
-	This difficulty is not specific to FreeBSD, but FreeBSD systems
-	are affected by it.</para>
+      <para>Certos adaptadores Ethernet para sistemas PC ISA possuem
+      limita&ccedil;&otilde;es que podem causar s&eacute;rios problemas de rede,
+      particularmente com NFS.  Esta dificuldade n&atilde;o &eacute; espec&iacute;fica do
+      FreeBSD, mas sistemas FreeBSD s&atilde;o afetados por ela.</para>
 
-      <para>The problem nearly always occurs when (FreeBSD) PC systems are
-	networked with high-performance workstations, such as those made
-	by Silicon Graphics, Inc., and Sun Microsystems, Inc.  The NFS
-	mount will work fine, and some operations may succeed, but
-	suddenly the server will seem to become unresponsive to the
-	client, even though requests to and from other systems continue to
-	be processed.  This happens to the client system, whether the
-	client is the FreeBSD system or the workstation.  On many systems,
-	there is no way to shut down the client gracefully once this
-	problem has manifested itself.  The only solution is often to
-	reset the client, because the NFS situation cannot be
-	resolved.</para>
+      <para>O problema quase sempre ocorre quando sistemas PC
+      (FreeBSD) s&atilde;o conectados em rede com esta&ccedil;&otilde;es de trabalho de
+      alto desempenho com as feitas pela Silicon Graphics, Inc., e Sun
+      Microsystems, Inc.  As montagens NFS funcionar&atilde;o bem, e algumas
+      opera&ccedil;&otilde;es podem ser bem sucedidas, mas repentinamente, o
+      servidor vai parecer n&atilde;o mais responder ao cliente, mesmo que as
+      solicita&ccedil;&otilde;es de e para outros sistemas continuem a ser
+      processadas.  Isto acontece ao sistema cliente, se o cliente for
+      o sistema FreeBSD ou a esta&ccedil;&atilde;o de trabalho.  Em muitos
+      sistemas, n&atilde;o h&aacute; forma de parar o sistema elegantemente, uma vez
+      que este problema se manifestou.  A &uacute;nica solu&ccedil;&atilde;o &eacute;,
+      freq&uuml;entemente, reinicializar o cliente, porque a situa&ccedil;&atilde;o do
+      NFS n&atilde;o pode ser resolvida.</para>
 
-      <para>Though the <quote>correct</quote> solution is to get a higher
-	performance and capacity Ethernet adapter for the FreeBSD system,
-	there is a simple workaround that will allow satisfactory
-	operation.  If the FreeBSD system is the
-	<emphasis>server</emphasis>, include the option
-	<option>-w=1024</option> on the mount from the client.  If the
-	FreeBSD system is the <emphasis>client</emphasis>, then mount the
-	NFS filesystem with the option <option>-r=1024</option>.  These
-	options may be specified using the fourth field of the
-	<filename>fstab</filename> entry on the client for automatic
-	mounts, or by using the <option>-o</option> parameter of the mount
-	command for manual mounts.</para>
+      <para>Apesar da solu&ccedil;&atilde;o <quote>correta</quote> ser a de obter um
+      adaptador de maior desempenho e capacidade para o sistema
+      FreeBSD, h&aacute; um contorno simples que vai permitir a opera&ccedil;&atilde;o
+      satisfat&oacute;ria.  Se o sistema FreeBSD for o 
+      <emphasis>servidor</emphasis>, inclua a op&ccedil;&atilde;o 
+      <option>-w=1024</option> na montagem a partir do cliente.  Se o
+      sistema FreeBSD &eacute; o <emphasis>cliente</emphasis>, ent&atilde;o monte o
+      sistema de arquivo NFS com a op&ccedil;&atilde;o <option>-r=1024</option>.
+      Estas op&ccedil;&otilde;es podem ser especificadas usando o quarto campo da
+      entrada <filename>fstab</filename> no cliente para montagens
+      autom&aacute;ticas, ou, usando o par&acirc;metro <option>-o</option> do
+      comando mount para montagens manuais.</para>
 
-      <para>It should be noted that there is a different problem,
-	sometimes mistaken for this one, when the NFS servers and clients
-	are on different networks.  If that is the case, make
-	<emphasis>certain</emphasis> that your routers are routing the
-	necessary UDP information, or you will not get anywhere, no matter
-	what else you are doing.</para>
+      <para>Deve ser obseravado que h&aacute; um problema diferente, algumas
+      vezes confundido com este, quando os servidores e clientes NFS
+      est&atilde;o em redes diferentes.  Se for este o caso, esteja
+      <emphasis>certo</emphasis> de que seus roteadores est&atilde;o roteando
+      a informa&ccedil;&atilde;o UDP necess&aacute;ria, ou voc&ecirc; n&atilde;o vai chegar a lugar
+      algum, n&atilde;o importando o que mais voc&ecirc; estiver fazendo.</para>
 
-      <para>In the following examples, <hostid>fastws</hostid> is the host
-	(interface) name of a high-performance workstation, and
-	<hostid>freebox</hostid> is the host (interface) name of a FreeBSD
-	system with a lower-performance Ethernet adapter.  Also,
-	<filename>/sharedfs</filename> will be the exported NFS
-	filesystem (see &man.exports.5;), and
-	<filename>/project</filename> will be the mount point on the
-	client for the exported filesystem.  In all cases, note that
-	additional options, such as <option>hard</option> or
-	<option>soft</option> and <option>bg</option> may be desirable in
-	your application.</para>
+      <para>Nos seguintes exemplos, <hostid>fastws</hostid> &eacute; o
+      nome do sistema (interface) de uma esta&ccedil;&atilde;o de trabalho de alto
+      desempenho, e <hostid>freebox</hostid> &eacute; o nome do sistema
+      (interface) de um sistema FreeBSD com um adaptador Ethernet de
+      baixo desempenho.  Tamb&eacute;m, <filename>/sharedfs</filename> ser&aacute;
+      o sistema de arquivo NFS exportado (veja &man.exports.5;), e
+      <filename>/project</filename> ser&aacute; o ponto de montagem no
+      cliente para o sistema exportado.  Em todos os casos, note que
+      op&ccedil;&otilde;es adicionais, como <option>hard</option> ou
+      <option>soft</option> e <option>bg</option> podem ser desej&aacute;veis
+      em sua aplica&ccedil;&atilde;o.</para>
 
-      <para>Examples for the FreeBSD system (<hostid>freebox</hostid>) as
-	the client in <filename>/etc/fstab</filename> on freebox:</para>
+      <para>Exemplos para o sistema FreeBSD (<hostid>freebox</hostid>)
+      como sendo o cliente no <filename>/etc/fstab</filename> de 
+      freebox:</para>
 
       <programlisting>fastws:/sharedfs /project nfs rw,-r=1024 0 0</programlisting>
 
-      <para>As a manual mount command on <hostid>freebox</hostid>:</para>
+      <para>Como um comando para montagem manual em 
+      <hostid>freebox</hostid>:</para>
 
       <screen>&prompt.root; <userinput>mount -t nfs -o -r=1024 fastws:/sharedfs /project</userinput></screen>
 
-      <para>Examples for the FreeBSD system as the server in
-	<filename>/etc/fstab</filename> on <hostid>fastws</hostid>:</para>
+      <para>Exemplos para o sistema FreeBSD como o servidor no
+      <filename>/etc/fstab</filename> em <hostid>fastws</hostid>:</para>
 
       <programlisting>freebox:/sharedfs /project nfs rw,-w=1024 0 0</programlisting>
 
-      <para>As a manual mount command on <hostid>fastws</hostid>:</para>
+      <para>Como comando para montagem manual em 
+      <hostid>fastws</hostid>:</para>
 
       <screen>&prompt.root; <userinput>mount -t nfs -o -w=1024 freebox:/sharedfs /project</userinput></screen>
 
-      <para>Nearly any 16-bit Ethernet adapter will allow operation
-	without the above restrictions on the read or write size.</para>
+      <para>Quase qualquer adaptador Ethernet permitir&aacute; opera&ccedil;&atilde;o sem
+      as restri&ccedil;&otilde;es acima no tamanho de leitura ou escrita.</para>
 
-      <para>For anyone who cares, here is what happens when the failure
-	occurs, which also explains why it is unrecoverable.  NFS
-	typically works with a <quote>block</quote> size of 8&nbsp;k (though it
-	may do fragments of smaller sizes).  Since the maximum Ethernet
-	packet is around 1500&nbsp;bytes, the NFS <quote>block</quote> gets
-	split into multiple Ethernet packets, even though it is still a
-	single unit to the upper-level code, and must be received,
-	assembled, and <emphasis>acknowledged</emphasis> as a unit.  The
-	high-performance workstations can pump out the packets which
-	comprise the NFS unit one right after the other, just as close
-	together as the standard allows.  On the smaller, lower capacity
-	cards, the later packets overrun the earlier packets of the same
-	unit before they can be transferred to the host and the unit as a
-	whole cannot be reconstructed or acknowledged.  As a result, the
-	workstation will time out and try again, but it will try again
-	with the entire 8&nbsp;K unit, and the process will be repeated, ad
-	infinitum.</para>
+      <para>Para qualquer um que se importe, aqui est&aacute; o que acontece
+      quando a falha ocorre, o que tamb&eacute;m explica porque &eacute;
+      irrecuper&aacute;vel.  O NFS trabalha tipicamente com um tamanho de
+      <quote>bloco</quote> de 8&nbsp;k (apesar de que pode criar
+      fragmentos de tamanhos menores).  Uma vez que o tamanho m&aacute;ximo
+      do quadro Ethernet &eacute; em torno de 1500&nbsp;bytes, o 
+      <quote>bloco</quote> NFS &eacute; dividido em m&uacute;ltiplos quadros
+      Ethernet, mesmo que ainda seja uma &uacute;nica unidade para o c&oacute;digo 
+      de n&iacute;vel superior, e precisa ser recebido, montado e 
+      <emphasis>confirmado (acknowledged)</emphasis> como uma
+      unidade.  As esta&ccedil;&otilde;es de alto desempenho podem bombear os
+      pacotes que comp&otilde;em a unidade NFS para fora, um ap&oacute;s o outro,
+      t&atilde;o pr&oacute;ximos quanto permitido pelo padr&atilde;o.  Nas interfaces
+      menores, de baixa capacidade, os &uacute;ltimos pacotes ultrapassam 
+      os primeiros pacotes da mesma unidade antes que possam ser
+      reconstru&iacute;dos ou confirmados.  Como resultado, a esta&ccedil;&atilde;o de
+      trabalho vai expirar e tentar novamente, mas tentar&aacute; novamente
+      com a unidade de 8&nbsp;K inteira, e o processo se repetir&aacute;, ao
+      infinito.</para>
 
-      <para>By keeping the unit size below the Ethernet packet size
-	limitation, we ensure that any complete Ethernet packet received
-	can be acknowledged individually, avoiding the deadlock
-	situation.</para>
+      <para>Mantendo o tamanho da unidade menor que a limita&ccedil;&atilde;o do 
+      tamanho do quadro Ethernet, garantimos que qualquer quadro
+      Ethernet completo recebido pode ser confirmado individualmente,
+      evitando a situa&ccedil;&atilde;o de congelamento (deadlock).</para>
 
-      <para>Overruns may still occur when a high-performance workstations
-	is slamming data out to a PC system, but with the better cards,
-	such overruns are not guaranteed on NFS <quote>units</quote>.  When
-	an overrun occurs, the units affected will be retransmitted, and
-	there will be a fair chance that they will be received, assembled,
-	and acknowledged.</para>
+      <para>Ultrapassagens ainda poder&atilde;o ocorrer quando uma esta&ccedil;&otilde;es 
+      de alto desempenho estiverem golpeando dados para um sistema 
+      PC, mas com placas melhores, tais ultrapassagens n&atilde;o s&atilde;o
+      garantidas nas <quote>unidades</quote> NFS.  Quando uma
+      ultrapassagem acontecer, as unidades afetadas ser&atilde;o
+      retransmitidas, e haver&aacute; uma boa chance de que ser&atilde;o recebidas,
+      montadas e confirmadas.</para>
     </sect2>
   </sect1>
 
