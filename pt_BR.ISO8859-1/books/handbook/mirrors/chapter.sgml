@@ -289,15 +289,16 @@
           &eacute; muito mais eficiente no uso dos recursos de rede e utiliza
           a tecnologia mais sofisticada dos dois, mas a um pre&ccedil;o.  
 	  Para usar o <application>CVSup</application>, um cliente especial dever&aacute; primeiramente
-          dever&aacute; ser instalado e configurado antes que qualquer bit possa ser transferido, e
-	  ent&atilde;o a transfer&ecirc;ncia se dar&aacute; em grandes peda&ccedil;os identificados pelo
+          dever&aacute; ser instalado e configurado antes que qualquer bit possa ser transferido, depois disto
+	  a transfer&ecirc;ncia se dar&aacute; em grandes peda&ccedil;os identificados pelo
           <application>CVSup</application> como
 	  <emphasis>collections</emphasis>.</para>
 
 	<para>Por outro lado o <application>Anoncvs</application>,
-          pode ser usado para sincronizar um programa ou arquivo 
-          espec&iacute;fico (como <command>ls</command> or <command>grep</command>)
-	  simplesmente referenciado-se a seu nome no CVS.  O
+          pode ser usado para examinar qualquer coisa desde um arquivo 
+          espec&iacute;fico at&eacute; um programa espe&iacute;fico
+	  (como <command>ls</command> or <command>grep</command>)
+          simplesmente referenciado-se o nome do m&oacute;dulo no CVS.  O
 	  <application>anoncvs</application> &eacute; bom exclusivamente para
 	  opera&ccedil;&otilde;es somente de leitura no reposit&oacute;rio CVS.  
 	  Se sua inten&ccedil;&atilde;o &eacute; participar com desenvolvimento local
@@ -309,9 +310,9 @@
       <sect2>
 	<title><anchor id="anoncvs-usage">Usando o CVS An&ocirc;nimo</title>
 
-	<para>Para configurar o &man.cvs.1; para usar um reposit&oacute;rio CVS
-	  &eacute; preciso somente atribuir a vari&aacute;vel do sistema 
-          <envar>CVSROOT</envar> o endere&ccedil;o de um reposit&oacute;rio
+	<para>Para configurar o &man.cvs.1; para usar um reposit&oacute;rio CVS An&ocirc;nimo
+	  &eacute; preciso somente atribuir &agrave; vari&aacute;vel <envar>CVSROOT</envar>
+          do sistema o endere&ccedil;o de um reposit&oacute;rio
 	  <emphasis>anoncvs</emphasis> do FreeBSD.  Atualmente existem
 	  os seguintes reposit&oacute;rios:</para>
 
@@ -348,46 +349,46 @@
 	  </listitem>
 	</itemizedlist>
 
-	<para>Uma vez que o CVS considera para a opera&ccedil;&atilde;o de 
-        <quote>check out</quote>(sincroniza&ccedil;&atilde;o) praticamente
+	<para>Uma vez que o CVS permite realizar a opera&ccedil;&atilde;o de 
+        <quote>check out</quote> para praticamente
         qualquer vers&atilde;o do FreeBSD que exista, 
         voc&ecirc; precisa estar familiarizado com a op&ccedil;&atilde;o de revis&atilde;o
         (<option>-r</option>) para o &man.cvs.1; e quais s&atilde;o os valores
         permitidos para ela no reposit&oacute;rio FreeBSD.</para>
 
-	<para>Existem duas esp&eacute;cies de indicadores, indicador de revis&atilde;o
-          e indicador de estado.  Um indicador de revis&atilde;o refere-se a uma
+	<para>Existem duas esp&eacute;cies de etiquetas, a etiqueta de revis&atilde;o
+          e a etiqueta de ramo.  Uma etiqueta de revis&atilde;o refere-se a uma
           revis&atilde;o espec&iacute;fica.  Isto significa que ela ser&aacute; a
-          mesma hoje e amanh&atilde;.  J&aacute; um indicador de estado refere-se
+          mesma hoje e amanh&atilde;.  J&aacute; uma etiqueta de ramo refere-se
           a &uacute;ltima revis&atilde;o numa dada linha de desenvolvimento.  
-          Como um indicador de estado n&atilde;o se refere a uma revis&atilde;o
-          em especial ela poder&aacute; ser diferente de hoje para amanh&atilde;
+          Como um etiqueta de ramo n&atilde;o se refere a uma revis&atilde;o
+          em especial, ela poder&aacute; ser diferente de hoje para amanh&atilde;
 	  .</para>
 
-	<para>A <xref linkend="cvs-tags"> cont&eacute;m os indicadores de revis&atilde;o
-          v&aacute;lidos.  Eles n&atilde;o s&atilde;o v&aacute;lidos para as
-          <foreignphrase>ports collection</foreignphrase> j&aacute; que elas n&atilde;o tem m&uacute;ltiplas
+	<para>A <xref linkend="cvs-tags"> cont&eacute;m as etiquetas de revis&atilde;o
+          v&aacute;lidos.  Elas n&atilde;o s&atilde;o v&aacute;lidas para os
+          <foreignphrase>ports collection</foreignphrase> j&aacute; que eles n&atilde;o t&ecirc;m m&uacute;ltiplas
 	  revis&otilde;es.</para>
 
-	<para>Quando especifica um indicador de estado voc&ecirc; receber&aacute;
+	<para>Ao especificar uma etiqueta de ramo voc&ecirc; receber&aacute;
           a &uacute;ltima vers&atilde;o dos arquivos naquela linha de 
-	  desenvolvimento.  Se deseja receber alguma vers&atilde;o anterior
-          pode fazer isso especificando uma data com a op&ccedil;&atilde;o
-	  data <option>-D data</option>.  
+	  desenvolvimento.  Se voc&ecirc; desejar receber alguma vers&atilde;o anterior,
+          isto poder&aacute; ser feito especificando-se uma data com a op&ccedil;&atilde;o
+	  <option>-D data</option>.  
 	  Veja &man.cvs.1; para mais detalhes.</para>
       </sect2>
 
       <sect2>
 	<title>Exemplos</title>
 
-	<para>Embora seja realmente recomendado que voc&ecirc; leia o Manual
-	  para &man.cvs.1; voc&ecirc; j&aacute; pode ir fazendo alguma coisa
-          antes.  Abaixo est&atilde;o alguns exemplos simples que mostram
+	<para>Embora seja realmente recomendado que voc&ecirc; leia profundamente o Manual
+	  para &man.cvs.1; antes de fazer qualquer coisa.
+          Abaixo est&atilde;o alguns exemplos simples que mostram
           basicamente como usar o CVS an&ocirc;nimo:</para>
 
 	<example>
-	  <title>Sincronizando alguma coisa de -CURRENT (&man.ls.1;) e
-	    deletando-a depois:</title>
+	  <title>Sincronizando Alguma Coisa de -CURRENT (&man.ls.1;) e
+	    Apagando-a Depois:</title>
 
 	  <screen>&prompt.user; <userinput>setenv CVSROOT :pserver:anoncvs@anoncvs.FreeBSD.org:/home/ncvs</userinput>
 &prompt.user; <userinput>cvs login</userinput>
@@ -399,7 +400,7 @@
 	</example>
 
 	<example>
-	  <title>Sincronizando a vers&atilde;o do &man.ls.1; no estado 3.X-STABLE:</title>
+	  <title>Sincronizando a Vers&atilde;o do &man.ls.1; no Ramo 3.X-STABLE:</title>
 	    
 	  <screen>&prompt.user; <userinput>setenv CVSROOT :pserver:anoncvs@anoncvs.FreeBSD.org:/home/ncvs</userinput>
 &prompt.user; <userinput>cvs login</userinput>
@@ -411,7 +412,7 @@
 	</example>
 
 	<example>
-	  <title>Criando uma lista de altera&ccedil;&otilde;es (Unified Diffs) do &man.ls.1;</title>
+	  <title>Criando uma Lista de Altera&ccedil;&otilde;es (Unified Diffs) do &man.ls.1;</title>
 
 	  <screen>&prompt.user; <userinput>setenv CVSROOT :pserver:anoncvs@anoncvs.FreeBSD.org:/home/ncvs</userinput>
 &prompt.user; <userinput>cvs login</userinput>
@@ -422,7 +423,7 @@
 	</example>
 
 	<example>
-	  <title>Procurando que outros nomes de programas podem ser usados:</title>
+	  <title>Procurando que Outros Nomes de M&oacute;dulos Podem Ser Usados:</title>
 
 	  <screen>&prompt.user; <userinput>setenv CVSROOT :pserver:anoncvs@anoncvs.FreeBSD.org:/home/ncvs</userinput>
 &prompt.user; <userinput>cvs login</userinput>
@@ -436,7 +437,7 @@
       </sect2>
 
       <sect2>
-	<title>Outras fontes para consulta</title>
+	<title>Outras Fontes para Consulta</title>
 
 	<para>As seguintes fontes de informa&ccedil;&atilde;o adicionais podem
           auxili&aacute;-lo no aprendizado do CVS:</para>
@@ -444,18 +445,18 @@
 	<itemizedlist>
 	  <listitem>
 	    <para><ulink 
-		url="http://www.csc.calpoly.edu/~dbutler/tutorials/winter96/cvs/">Tutorial CVS</ulink> por Cal Poly.</para>
+		url="http://www.csc.calpoly.edu/~dbutler/tutorials/winter96/cvs/">CVS Tutorial</ulink> por Cal Poly.</para>
 	  </listitem>
 
 	  <listitem>
 	    <para><ulink url="http://www.cvshome.org/">CVS Home</ulink>,
-	      Comunidade de desenvolvimento e suporte do CVS.</para>
+	      comunidade de desenvolvimento e suporte do CVS.</para>
 	  </listitem>
 
 	  <listitem>
 	    <para><ulink
 		url="http://www.FreeBSD.org/cgi/cvsweb.cgi">CVSweb</ulink> 
-	      Projeto FreeBSD de <foreignphrase>interface web</foreignphrase> para o CVS.</para>
+	      &eacute; a interface <foreignphrase>web</foreignphrase> para o CVS do Projeto FreeBSD.</para>
 	  </listitem>
 	</itemizedlist>
       </sect2>
