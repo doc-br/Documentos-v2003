@@ -253,37 +253,37 @@
           do sistema shell.</para>
 
 	<sect4 id="login-class">
-	  <title>Login Classes Method</title>
+	  <title>M&eacute;todo de classes de login</title>
 
-	  <para>This method allows environment variables needed for locale
-	    name and MIME character sets to be assigned once for every
-	    possible shell instead of adding specific shell assignments to
-	    each shell's startup file.  <link linkend="usr-setup">User
-	    Level Setup</link> can be done by an user himself and <link
-	    linkend="adm-setup">Administrator Level Setup</link> require
-	    superuser privileges.</para>
+	  <para>Este m&eacute;todo permite as vari&aacute;veis de ambientes necess&aacute;rias para o nome 
+	    do locale e o caracter do MIME ser configurador para ser atribu&iacute;do uma vez
+	    para cada shell poss&iacute;vel em vez de adicionar atribui&ccedil;&otilde;es espec&iacute;ficas da shell
+	    para cada arquivo de inicializa&ccedil;&atilde;o.  <link linkend="usr-setup">Configura&ccedil;&atilde;o
+	    a n&iacute;vel de usu&aacute;rio</link> pode ser feita pelo pr&oacute;prio usu&aacute;rio e <link
+	    linkend="adm-setup">configura&ccedil;&atilde;o a nivel de administrador</link> requer
+	    previl&eacute;gios de super usu&aacute;rio.</para>
 
 	  <sect5 id="usr-setup">
-	    <title>User Level Setup</title>
+	    <title>Configura&ccedil;&atilde;o a n&iacute;vel de usu&aacute;rio</title>
 
-	    <para>Here is a minimal example of a
-	      <filename>.login_conf</filename> file in user's home
-	      directory which has both variables set for Latin-1
-	      encoding:</para>
+	    <para>Aqui est&aacute; um pequeno exemplo do arquivo
+	      <filename>.login_conf</filename> no diret&oacute;rio home
+	      do usu&aacute;rio que tem ambas as vari&aacute;veis configurador para
+	      codifica&ccedil;&atilde;o Latin-1:</para>
 
 	    <programlisting>me:\
 	:charset=ISO-8859-1:\
 	:lang=de_DE.ISO8859-1:</programlisting>
 
-	    <indexterm><primary>Traditional Chinese</primary><secondary>BIG-5 encoding</secondary></indexterm>
-	    <para>Here is an example of a 
-	       <filename>.login_conf</filename> that sets the variables
-	       for Traditional Chinese in BIG-5 encoding.  Notice the many
-	       more variables set because some software does not respect
-	       locale variables correctly for Chinese, Japanese, and Korean.</para>
+	    <indexterm><primary>Chin&ecirc;s tradicional</primary><secondary>codifica&ccedil;&atilde;o BIG-5</secondary></indexterm>
+	    <para>Aqui est&aacute; um exemplo do
+	       <filename>.login_conf</filename> com vari&aacute;veis configuradas 
+	       para o chin&ecirc;s tradicional em codifica&ccedil;&atilde;o BIG-5.  Observer que h&aacute;
+	       muito mais vari&aacute;veis configuradas porque alguns programas n&atilde;o respeitam
+	       as vari&aacute;veis do locale corretamente para Chin&ecirc;s, Japon&ecirc;s, e Coreano.</para>
 
-	    <programlisting>#Users who do not wish to use monetary units or time formats
-#of Taiwan can manually change each variable
+	    <programlisting>#Us&aacute;rios que n&atilde;o desejam usar unidades monet&aacute;rias ou formato de hora
+#de Taiwan podem manualmente mudar cada vari&aacute;vel
 me:\
 	lang=zh_TW.Big5:\
 	lc_all=zh_TW.Big:\
@@ -296,103 +296,103 @@ me:\
 	charset=big5:\
 	xmodifiers="@im=xcin": #Setting the XIM Input Server</programlisting> 
 
-	    <para>See <link linkend="adm-setup">Administrator Level
-	      Setup</link> and &man.login.conf.5; for more details.</para>
+	    <para>Veja <link linkend="adm-setup">Configura&ccedil;&atilde;o a n&iacute;vel
+	      de administrador</link> e &man.login.conf.5; para mais detalhes.</para>
 	  </sect5>
 
 	  <sect5 id="adm-setup">
-	    <title>Administrator Level Setup</title>
+	    <title>Configura&ccedil;&atilde;o a n&iacute;vel de administrador</title>
 
-	    <para>Verify that the user's login class in
-	      <filename>/etc/login.conf</filename> sets the correct
-	      language.  Make sure these settings
-	      appear in <filename>/etc/login.conf</filename>:</para>
+	    <para>Verifique que a classe do login do usu&aacute;rio em
+	      <filename>/etc/login.conf</filename> configura a l&iacute;ngua
+	      correta.  Certifique-se que estas configura&ccedil;&otilde;es
+	      aparecem no <filename>/etc/login.conf</filename>:</para>
 
-	    <programlisting><replaceable>language_name</replaceable>:<replaceable>accounts_title</replaceable>:\
+	    <programlisting><replaceable>nome__da_l&iacute;ngua</replaceable>:<replaceable>t&iacute;tulo_da_conta</replaceable>:\
 	:charset=<replaceable>MIME_charset</replaceable>:\
-	:lang=<replaceable>locale_name</replaceable>:\
+	:lang=<replaceable>nome_do_locale</replaceable>:\
 	:tc=default:</programlisting>
 
-	    <para>So sticking with our previous example using Latin-1, it
-	      would look like this:</para>
+	    <para>Ent&atilde;o baseando em nosso exemplo anterior usandoLatin-1, isto
+	      deveria ficar assim:</para>
 
-	    <programlisting>german:German Users Accounts:\
+	    <programlisting>german:Conta de usu&aacute;rios alem&atilde;es:\
 	:charset=ISO-8859-1:\
 	:lang=de_DE.ISO8859-1:\
 	:tc=default:</programlisting>
 
-	    <bridgehead renderas=sect4>Changing Login Classes with &man.vipw.8;</bridgehead>
+	    <bridgehead renderas=sect4>Modificando classes de login com o &man.vipw.8;</bridgehead>
 
 	    <indexterm>
         <primary><command>vipw</command></primary>
       </indexterm>
-	    <para>Use <command>vipw</command> to add new users, and make
-	      the entry look like this:</para>
+	    <para>Use o <command>vipw</command> para adicionar novos usu&aacute;rios, e veja
+	      que foi criado uma entrada como esta:</para>
 
-	    <programlisting>user:password:1111:11:<replaceable>language</replaceable>:0:0:User Name:/home/user:/bin/sh</programlisting>
+	    <programlisting>usu&aacute;rio:senha:1111:11:<replaceable>l&iacute;ngua</replaceable>:0:0:Nome do usu&aacute;rio:/home/usu&aacute;rio:/bin/sh</programlisting>
 
-	    <bridgehead renderas=sect4>Changing Login Classes with &man.adduser.8;</bridgehead>
+	    <bridgehead renderas=sect4>Modificando claases de login com o &man.adduser.8;</bridgehead>
 
 	    <indexterm>
         <primary><command>adduser</command></primary>
       </indexterm>
-	    <indexterm><primary>login class</primary></indexterm>
-	    <para>Use <command>adduser</command> to add new users, and do
-	      the following:</para>
+	    <indexterm><primary>classes de login</primary></indexterm>
+	    <para>Use o <command>adduser</command> para adicionar novos usu&aacute;rios, e fa&ccedil;a
+	      o seguinte:</para>
 
 	    <itemizedlist>
 	      <listitem>
-		<para>Set <literal>defaultclass =
-		  <replaceable>language</replaceable></literal> in
-		  <filename>/etc/adduser.conf</filename>.  Keep in mind
-		  you must enter a <literal>default</literal> class for
-		  all users of other languages in this case.</para>
+		<para>Configure <literal>defaultclass =
+		  <replaceable>l&iacute;ngua</replaceable></literal> em
+		  <filename>/etc/adduser.conf</filename>.  Mantenha em mente
+		  que voc&ecirc; deve colocar uma classe <literal>padr&atilde;o</literal> para0
+		  todos usu&aacute;rios de outras l&iacute;nguas neste caso.</para>
 	      </listitem>
 
 	      <listitem>
-		<para>An alternative variant is answering the specified
-		  language each time that 
+		<para>Um variante alternativo &eacute; respondendo a l&iacute;ngua espec&iacute;fica
+		  cada vez 
 <screen><prompt>Enter login class: default []: </prompt></screen>
-		  appears from &man.adduser.8;.</para>
+		  aparece no &man.adduser.8;.</para>
 	      </listitem>
 
 	      <listitem>
-		<para>Another alternative is to use the following for each
-		  user of a different language that you wish to
-		  add:</para>
+		<para>Outra alternativa &eacute; usar o seguinte para cada
+		  usu&aacute;rio de l&iacute;ngua diferente que voc&ecirc; deseja
+		  adicionar:</para>
 
-		<screen>&prompt.root; <userinput>adduser -class <replaceable>language</replaceable></userinput></screen>
+		<screen>&prompt.root; <userinput>adduser -class <replaceable>l&iacute;ngua</replaceable></userinput></screen>
 	      </listitem>
 	    </itemizedlist>
 
-	    <bridgehead renderas=sect4>Changing Login Classes with &man.pw.8;</bridgehead>
+	    <bridgehead renderas=sect4>Modificando classes de login com o &man.pw.8;</bridgehead>
 	    <indexterm>
         <primary><command>pw</command></primary>
       </indexterm>
-	    <para>If you use &man.pw.8; for adding new users, call it in
-	      this form:</para>
+	    <para>Se voc&ecirc; usa o &man.pw.8; para adicionar novos usu&aacute;rios, rode-o 
+	      dessa forma:</para>
 
-	    <screen>&prompt.root; <userinput>pw useradd <replaceable>user_name</replaceable> -L <replaceable>language</replaceable></userinput></screen>
+	    <screen>&prompt.root; <userinput>pw useradd <replaceable>nome_do_usu&aacute;rio</replaceable> -L <replaceable>l&iacute;ngua</replaceable></userinput></screen>
 	  </sect5>
 	</sect4>
 
 	<sect4 id="startup-file">
-	  <title>Shell Startup File Method</title>
+	  <title>M&eacute;todo do arquivo de inicializa&ccedil;&atilde;o da shell</title>
 
 	  <note>
-	    <para>This method is not recommended because it requires a
-	      different setup for each possible shell program chosen.  Use
-	      the <link linkend="login-class">Login Class Method</link>
-	      instead.</para>
+	    <para>Este m&eacute;todo n&atilde;o &eacute; recomendado porque ele requer
+	      configura&ccedil;&otilde;es diferentes para cada poss&iacute;vel programa shell escolhido.  Use
+	      o <link linkend="login-class">M&eacute;todo de classes de Login</link>
+	      em vez disso.</para>
 	  </note>
 
 	  <indexterm><primary>MIME</primary></indexterm>
 	  <indexterm><primary>locale</primary></indexterm>
-	  <para>To add the locale name and MIME character set, just set
-	    the two environment variables shown below in the
-	    <filename>/etc/profile</filename> and/or
-	    <filename>/etc/csh.login</filename> shell startup files.  We
-	    will use the German language as an example below:</para>
+	  <para>Para adicionar o nome do locale e a configura&ccedil;&atilde;o do caracter  MIME, basta 
+	    configurar duas vari&aacute;veis de ambiente mostradas abaixo nos arquivos de 
+	    inicializa&ccedil;&atilde;o de shell <filename>/etc/profile</filename> e/ou
+	    <filename>/etc/csh.login</filename>.  N&oacute;s
+	    iremos usar a l&iacute;ngua alem&atilde; como exemplo abaixo:</para>
 
 	  <para>In <filename>/etc/profile</filename>:</para>
 
@@ -404,16 +404,15 @@ me:\
 	  <programlisting><envar>setenv LANG de_DE.ISO8859-1</envar>
 <envar>setenv MM_CHARSET ISO-8859-1</envar></programlisting>
 
-	  <para>Alternatively, you can add the above instructions to
-	    <filename>/usr/share/skel/dot.profile</filename> (similar to
-	    what was used in <filename>/etc/profile</filename> above), or
-	    <filename>/usr/share/skel/dot.login</filename> (similar to
-	    what was used in <filename>/etc/csh.login</filename>
-	    above).</para>
+	  <para>Alternativamente, voc&ecirc; pode adicionar as instru&ccedil;&otilde;es acima ao
+	    <filename>/usr/share/skel/dot.profile</filename> (similar ao
+	    que foi usado acima no <filename>/etc/profile</filename>), ou
+	    <filename>/usr/share/skel/dot.login</filename> (similar ao 
+	    que foi usado acima no <filename>/etc/csh.login</filename>.</para>
 
-	  <para>For X11:</para>
+	  <para>Para o X11:</para>
 
-	  <para>In <filename>$HOME/.xinitrc</filename>:</para>
+	  <para>No <filename>$HOME/.xinitrc</filename>:</para>
 
 	  <programlisting><envar>LANG=de_DE.ISO8859-1; export LANG</envar></programlisting>
 
@@ -421,102 +420,102 @@ me:\
 
 	  <programlisting><envar>setenv LANG de_DE.ISO8859-1</envar></programlisting>
 
-	  <para>Depending on your shell (see above).</para>
+	  <para>Dependendo de sua shell (veja acima).</para>
 
 	</sect4>
       </sect3>
     </sect2>
 
     <sect2 id="setting-console">
-      <title>Console Setup</title>
+      <title>Configura&ccedil;&atilde;o do Console</title>
 
-      <para>For all single C chars character sets, set the correct
-	console fonts in <filename>/etc/rc.conf</filename> for the
-	language in question with:</para>
+      <para>Para todos os caracteres C chars configurados, configure as fontes
+	corretas do console no <filename>/etc/rc.conf</filename> para a
+	l&iacute;ngua em quest&atilde;o com:</para>
 
-      <programlisting>font8x16=<replaceable>font_name</replaceable>
-font8x14=<replaceable>font_name</replaceable>
-font8x8=<replaceable>font_name</replaceable></programlisting>
+      <programlisting>font8x16=<replaceable>nome_da_fonte</replaceable>
+font8x14=<replaceable>nome_da_fonte</replaceable>
+font8x8=<replaceable>nome_da_fonte</replaceable></programlisting>
 
-      <para>The <replaceable>font_name</replaceable> here is taken from
-        the <filename>/usr/share/syscons/fonts</filename> directory,
-	without the <filename>.fnt</filename> suffix.</para>
+      <para>O <replaceable>nome_da_fonte</replaceable> aqui &eacute; pego do
+        diret&oacute;rio <filename>/usr/share/syscons/fonts</filename>,
+	sem o sufixo <filename>.fnt</filename>.</para>
 
       <indexterm>
         <primary><application>sysinstall</application></primary>
       </indexterm>
       <indexterm><primary>keymap</primary></indexterm>
       <indexterm><primary>screenmap</primary></indexterm>
-      <para>Also be sure to set the correct keymap and screenmap for your
-	single C chars character set through
+      <para>Tamb&eacute;m tenha certeza de ter configurado corretamente o keymap e screenmap para o seu
+	caracter C char &uacute;nico configurado atrav&eacute;s do
 	<filename>/stand/sysinstall</filename>.
-	Once inside <application>sysinstall</application>, choose <guimenuitem>Configure</guimenuitem>, then
-	<guimenuitem>Console</guimenuitem>.  Alternatively, you can add the
-	following to <filename>/etc/rc.conf</filename>:</para>
+	Dentro do <application>sysinstall</application>, escolha <guimenuitem>Configure</guimenuitem>, depois
+	<guimenuitem>Console</guimenuitem>.  Alternativamente, voc&ecirc; pode adicionar o
+	seguinte ao <filename>/etc/rc.conf</filename>:</para>
 
-      <programlisting>scrnmap=<replaceable>screenmap_name</replaceable>
-keymap=<replaceable>keymap_name</replaceable>
-keychange="<replaceable>fkey_number sequence</replaceable>"</programlisting>
+      <programlisting>scrnmap=<replaceable>nome_da_screenmap</replaceable>
+keymap=<replaceable>nome_da_keymap</replaceable>
+keychange="<replaceable>sequ&ecirc;ncia de n&uacute;mero_fkey</replaceable>"</programlisting>
 	
-      <para>The <replaceable>screenmap_name</replaceable> here is taken
-        from the <filename>/usr/share/syscons/scrnmaps</filename>
-	directory, without the <filename>.scm</filename> suffix.  A
-	screenmap with a corresponding mapped font is usually needed as a
-	workaround for expanding bit 8 to bit 9 on a VGA adapter's font
-	character matrix in pseudographics area, i.e., to move letters out
-	of that area if screen font uses a bit 8 column.</para>
+      <para>O <replaceable>screenmap_name</replaceable> aqui &eacute; pego
+        do diret&oacute;rio <filename>/usr/share/syscons/scrnmaps</filename>,
+	 sem o sufixo <filename>.scm</filename>.  O
+	screenmap com a correspondente fonte mapeada &eacute; necess&aacute;ria como
+	corre&ccedil;&atilde;o para expandir 8 bit para 9 bit em fontes de adaptadores VGA
+	com matrix de caracteres em &aacute;rea de gr&aacute;ficos pseudos, ex. para mover letras
+	fora da &aacute;rea se a fonte da tela usar uma coluna de 8 bit.</para>
 
-      <para>If you have the <application>moused</application> daemon
-	enabled by setting the following
-	in your <filename>/etc/rc.conf</filename>:</para>
+      <para>Se voc&ecirc; tem o daemon <application>moused</application> 
+	habilitado setando o seguinte
+	em seu <filename>/etc/rc.conf</filename>:</para>
 
 <programlisting>moused_enable="YES"</programlisting>
 
-      <para>then examine the mouse cursor information in the next
-	paragraph.</para>
+      <para>ent&atilde;o examina a informa&ccedil;&atilde;o do cursor do mouse no pr&oacute;ximo
+	par&aacute;grafo.</para>
 
       <indexterm>
         <primary><application>moused</application></primary>
       </indexterm>
-      <para>By default the mouse cursor of the &man.syscons.4; driver occupies the
-	0xd0-0xd3 range in the character set.  If your language uses this
-	range, you need to move the cursor's range outside of it.  To enable
-	the workaround for FreeBSD versions before 5.0, insert the following
-	line into your kernel configuration:</para>
+      <para>Por padr&atilde;o o cursor do mouse do driver &man.syscons.4; ocupado uma
+	escala 0xd0-0xd3 na configura&ccedil;&atilde;o de caracter.  Se sua l&iacute;ngua usa esta
+	escala, voc&ecirc; precisa mover a escala do cursor para fora dela.  Para habilitar
+	a corre&ccedil;&atilde;o disso para vers&otilde;es do FreeBSD antes da 5.0, insira a seguinte linha
+	em sua configura&ccedil;&atilde;o do kernel:</para>
 
       <programlisting>options		SC_MOUSE_CHAR=0x03</programlisting>
 
-      <para>For the FreeBSD versions 4.4 and up insert the following line
-	into <filename>/etc/rc.conf</filename>:</para>
+      <para>Para vers&otilde;es do FreeBSD 4.4 e acima, insira a seguinte linha
+	no <filename>/etc/rc.conf</filename>:</para>
 
       <programlisting>mousechar_start=3</programlisting>
 
-      <para>The <replaceable>keymap_name</replaceable> here is taken from
-        the <filename>/usr/share/syscons/keymaps</filename> directory,
-	without the <filename>.kbd</filename> suffix.  If you're
-	uncertain which keymap to use, you use can &man.kbdmap.1; to test
-	keymaps without rebooting.</para>
+      <para>O <replaceable>nome_da_keymap</replaceable> aqui &eacute; pego do
+        diret&oacute;rio <filename>/usr/share/syscons/keymaps</filename>,
+	sem o sufixo <filename>.kbd</filename>.  Se voc&ecirc; n&atilde;o tem
+	certeza que keymap usar, voc&ecirc; pode usar o &man.kbdmap.1; para testar
+	keymaps sem rebootar.</para>
 
-      <para>The <literal>keychange</literal> is usually needed to program
-        function keys to match the selected terminal type because
-	function key sequences cannot be defined in the key map.</para>
+      <para>O <literal>keychange</literal> &eacute; normalmente necess&aacute;rio para teclas
+        de fun&ccedil;&atilde;o de programas para achar o tipo de terminal selecionado porque
+	as sequ&ecirc;ncias de tecla de fun&ccedil;&otilde;es n&atilde;o podem ser definidas no mapa de teclado.</para>
 
-      <para>Also be sure to set the correct console terminal type in
-        <filename>/etc/ttys</filename> for all <literal>ttyv*</literal>
-	entries.  Current pre-defined correspondences are:</para>
+      <para>Esteja certo tamb&eacute;m de ter configurado corretamente o tipo de terminal
+        de console em <filename>/etc/ttys</filename> para todas entradas <literal>ttyv*</literal>.  
+	As correspond&ecirc;ncias pr&eacute; definidas atuais s&atilde;o:</para>
 
       <informaltable frame="none">
 	<tgroup cols="2">
 	  <thead>
 	    <row>
-	      <entry>Character Set</entry>
-	      <entry>Terminal Type</entry>
+	      <entry>Configura&ccedil;&atilde;o de caracter</entry>
+	      <entry>Tipo de terminal</entry>
 	    </row>
 	  </thead>
 
 	  <tbody>
 	    <row>
-	      <entry>ISO-8859-1 or ISO-8859-15</entry>
+	      <entry>ISO-8859-1 ou ISO-8859-15</entry>
 	      <entry><literal>cons25l1</literal></entry>
 	    </row>
 
@@ -541,7 +540,7 @@ keychange="<replaceable>fkey_number sequence</replaceable>"</programlisting>
 	    </row>
 
 	    <row>
-	      <entry>CP437 (VGA default)</entry>
+	      <entry>CP437 (padr&atilde;o VGA)</entry>
 	      <entry><literal>cons25</literal></entry>
 	    </row>
 
@@ -553,37 +552,37 @@ keychange="<replaceable>fkey_number sequence</replaceable>"</programlisting>
 	</tgroup>
       </informaltable>
 
-      <para>For wide or multibyte characters languages, use the correct
-	FreeBSD port in your
-	<filename>/usr/ports/<replaceable>language</replaceable></filename>
-	directory.  Some ports appear as console while the system sees it
-	as serial vtty's, hence you must reserve enough vtty's for both
-	X11 and the pseudo-serial console.  Here is a partial list of
-	applications for using other languages in console:</para>
+      <para>Para wide ou l&iacute;nguas de caracteres multibyte characters, use o port
+	do FreeBSD correto em seu diret&oacute;rio
+	<filename>/usr/ports/<replaceable>l&iacute;ngua</replaceable></filename>.  
+	Alguns ports aparecem como console enquanto o sistema os enxerga
+	como uma vtty serial, daqui voc&ecirc; deve reservar bastante vtty's para o
+	X11 e o console pseudo-serial.  Aqui est&aacute; a lista parcial de
+	aplica&ccedil;&otilde;es para usar outras l&iacute;nguas no console:</para>
 
       <informaltable frame="none">
 	<tgroup cols="2">
 	  <thead>
 	    <row>
-	      <entry>Language</entry>
-	      <entry>Location</entry>
+	      <entry>L&iacute;ngua</entry>
+	      <entry>Localiza&ccedil;&atilde;o</entry>
 	    </row>
 	  </thead>
 
 	  <tbody>
 	    <row>
-	      <entry>Traditional Chinese (BIG-5)</entry>
+	      <entry>Chin&ecirc;s tradicional(BIG-5)</entry>
 	      <entry><filename role="package">chinese/big5con</filename></entry>
 	    </row>
 
 	    <row>
-	      <entry>Japanese</entry>
+	      <entry>Japon&ecirc;s</entry>
 	      <entry><filename role="package">japanese/ja-kon2-*</filename> or
 	        <filename role="package">japanese/Mule_Wnn</filename></entry>
 	    </row>
 
 	    <row>
-	      <entry>Korean</entry>
+	      <entry>Coreano</entry>
 	      <entry><filename role="package">korean/ko-han</filename></entry>
 	    </row>
 	  </tbody>
@@ -592,68 +591,68 @@ keychange="<replaceable>fkey_number sequence</replaceable>"</programlisting>
     </sect2>
 
     <sect2>
-      <title>X11 Setup</title>
+      <title>Configura&ccedil;&atilde;o do X11</title>
 
-      <para>Although X11 is not part of the FreeBSD Project, we have
-	included some information here for FreeBSD users.  For more
-	details, refer to the <ulink url="http://www.xfree86.org/">&xfree86;
-	web site</ulink> or whichever X11 Server you use.</para>
+      <para>Embora o X11 n&atilde;o fa&ccedil;a parte do projeto FreeBSD, n&oacute;s 
+	incl&iacute;mos alguma informa&ccedil;&atilde;o arqui para os usu&aacute;rios do FreeBSD.  Para mais
+	detalhes, consulte o <ulink url="http://www.xfree86.org/">&xfree86;
+	site web</ulink> ou qualquer servidor X11 que voc&ecirc; usa.</para>
 
-      <para>In <filename>~/.Xresources</filename>, you can additionally
-	tune application specific I18N settings (e.g., fonts, menus,
+      <para>No <filename>~/.Xresources</filename>, voc&ecirc; pode adicionalmente
+	ajustar aplica&ccedil;&otilde;es espec&iacute;ficas a configura&ccedil;&atilde;o I18N settings (ex., fontes, menus,
 	etc.).</para>
 
       <sect3>
-	<title>Displaying Fonts</title>
-	<indexterm><primary>X11 True Type font server</primary></indexterm>
-	<para>Install the X11 &truetype; Common server (<filename role="package">x11-servers/XttXF86srv-common</filename>) and
-	  install the language &truetype; fonts.  Setting the correct
-	  locale should allow you to view your selected language in menus
-	  and such.</para>
+	<title>Mostrando fontes</title>
+	<indexterm>O <primary>servidor X11 de fonte True Type</primary></indexterm>
+	<para>Instale o servidor X11 &truetype; Common (<filename role="package">x11-servers/XttXF86srv-common</filename>) e
+	  instale as fontes de l&iacute;ngua &truetype;.  Configurando o locale
+	  correto, deve permitir voc&ecirc; visualizar sua l&iacute;ngua selecionada nos menus
+	  e semelhantes.</para>
       </sect3>
 
       <sect3>
-	<title>Inputting Non-English Characters</title>
-	<indexterm><primary>X11 Input Method (XIM)</primary></indexterm>
-	<para>The X11 Input Method (XIM) Protocol is a new standard for
-	  all X11 clients.  All X11 applications should be written as XIM
-	  clients that take input from XIM Input servers.  There are
-	  several XIM servers available for different languages.</para>
+	<title>Colocando caract&eacute;res n&atilde;o-ingl&ecirc;s</title>
+	<indexterm><primary>O m&eacute;todo de entrada do X11 (XIM)</primary></indexterm>
+	<para>O protocolo de m&eacute;todo de entrada do X11 (XIM) &eacute; um padr&atilde;o novo para
+	  todos clientes X11.  Todas aplica&ccedil;&otilde;es do X11 devem ser escritas como clientes
+	  XIM que fazem entrada do servidor XIM de entrada.  H&aacute; 
+	  diversoes servidores XIM dispon&iacute;veis para diferentes l&iacute;nguas.</para>
       </sect3>
     </sect2>
 
     <sect2>
-      <title>Printer Setup</title>
+      <title>Configura&ccedil;&atilde;o de impressora</title>
 
-      <para>Some single C chars character sets are usually hardware
-	coded into printers. Wide or multibyte
-	character sets require special setup and we recommend using
-	<application>apsfilter</application>.  You may also convert the
-	document to &postscript; or PDF formats using language specific
-	converters.</para>
+      <para>Alguns caracteres C chars &uacute;nicos configurados s&atilde;o geralmente c&oacute;digos
+	de hardware nas impressoras. Wide ou caracter multibyte
+	configurados requerem configura&ccedil;&atilde;o especial e n&oacute;s recomendamos usar o
+	<application>apsfilter</application>.  Voc&ecirc; pode tamb&eacute;m converter o
+	documento para &postscript; ou formato PDF usando convertor de
+	l&iacute;ngua espec&iacute;fica.</para>
     </sect2>
 
     <sect2>
-      <title>Kernel and File Systems</title>
+      <title>Kernel e Sistema de arquivos</title>
 
-      <para>The FreeBSD fast filesystem (FFS) is 8-bit clean, so it can be used
-	with any single C chars character set (see &man.multibyte.3;),
-	but there is no character set
-	name stored in the filesystem; i.e., it is raw 8-bit and does not
-	know anything about encoding order.  Officially, FFS does not
-	support any form of wide or multibyte character sets yet.  However, some
-	wide or multibyte character sets have independent patches for FFS
-	enabling such support.  They are only temporary unportable
-	solutions or hacks and we have decided to not include them in the
-	source tree.  Refer to respective languages' web sites for more
-	informations and the patch files.</para>
+      <para>O FreeBSD fast filesystem (FFS) &eacute; limpo 8-bit, ent&atilde;o ele pode ser usado
+	com qualquer caracter &uacute;nico C chars configurado (veja &man.multibyte.3;),
+	mas n&atilde;o h&aacute; nenhum nome de caracter
+	configurado armazenado no sistema de arquivos; ex., &eacute; 8-bitcr&uacute; e n&atilde;o
+	sabe nada sobre a ordem de codifica&ccedil;&atilde;o.  Oficialmente, o FFS n&atilde;o
+	suporta nenhuma forma de wide ou caracteres multibyte configurados ainda.  Por&eacute;mHowever, alguns
+	wide ou caracteres multibyte tem configurados patches independentes para o FFS
+	habilitando o suporte.  S&atilde;o somente solu&ccedil;&otilde;es import&aacute;veis
+	provis&oacute;rias ou hacks e n&oacute;s decidimos n&atilde;o inclu&iacute;-las na
+	&aacute;rvore de c&oacute;digo fonte.  Consulte web sites de l&iacute;nguas respectivas para mais
+	informa&ccedil;&otilde;es e arquivos de patch.</para>
 
       <indexterm><primary>DOS</primary></indexterm>
       <indexterm><primary>Unicode</primary></indexterm>
-      <para>The FreeBSD &ms-dos; filesystem has the configurable ability to
-	convert between &ms-dos;, Unicode character sets and chosen
-	FreeBSD filesystem character sets.  See &man.mount.msdos.8; for
-	details.</para>
+      <para>O sistema de arquivos &ms-dos; do FreeBSD tem a habilidade configur&aacute;vel de
+	converter-se entre o &ms-dos;, o Unicode caracter configurado e escolher a
+	configura&ccedil;&atilde;o de caracter no sistema de arquivos do FreeBSD.  Veja &man.mount.msdos.8; para
+	detalhes.</para>
     </sect2>
   </sect1>
 
@@ -677,7 +676,7 @@ keychange="<replaceable>fkey_number sequence</replaceable>"</programlisting>
   </sect1>
 
   <sect1 id="lang-setup">	
-    <title>Localizing FreeBSD to Specific Languages</title>
+    <title>Localizando o FreeBSD para l&iacute;nguas espec&iacute;ficas</title>
 
     <sect2 id="ru-localize">
       <sect2info>
