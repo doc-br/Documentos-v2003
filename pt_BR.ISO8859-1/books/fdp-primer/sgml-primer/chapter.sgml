@@ -110,7 +110,7 @@
       documento como se segue:</para>
     
     <programlisting><![ CDATA [
-<para>To remove <filename>/tmp/foo</filename> use &man.rm.1;.</para>
+<para>Para remover <filename>/tmp/foo</filename> utilize &man.rm.1;.</para>
 
 <screen>&prompt.user; <userinput>rm /tmp/foo</userinput></screen>]]></programlisting>
 
@@ -241,7 +241,7 @@
 	<literal>p</literal>.  Este elemento possui ambas as tags de
 	in&iacute;cio e de fim.</para>
       
-      <programlisting><![ CDATA [<p>Este &eacute; um paragrafo.  Ele inicia com a tag de inicio
+      <programlisting><![ RCDATA [<p>Este &eacute; um paragrafo.  Ele inicia com a tag de inicio
   do elemento 'p', e ir&aacute; terminar com a tag de fim para o elemento
   'p'.</p>
 
@@ -262,7 +262,7 @@
 	cont&eacute;m nenhum conte&uacute;do, assim ele possui apenas uma tag de
 	inicio.</para>
       
-      <programlisting><![ CDATA [<p>Este &eacute; um paragr&aacute;fo.</p>
+      <programlisting><![ RCDATA [<p>Este &eacute; um paragr&aacute;fo.</p>
 
 <hr>
 
@@ -333,7 +333,7 @@
     <example>
       <title>Utilizando um elemento com um atributo</title>
       
-      <programlisting><![ CDATA [<p align="left">A inclus&atilde;o de um atributo de alinhamento
+      <programlisting><![ RCDATA [<p align="left">A inclus&atilde;o de um atributo de alinhamento
   neste paragrafo foi sup&eacute;rfulo, uma vez que o alinhamento padr&atilde;o &eacute; left (esquerda).</p>
 
 <p align="center">Isto pode aparacer no centro.</p>]]></programlisting>
@@ -349,7 +349,7 @@
     <example>
       <title>Aspas simples envolta de atributos</title>
       
-      <programlisting><![ CDATA [<p align='right'>Eu estou a direita!</p>]]></programlisting>
+      <programlisting><![ RCDATA [<p align='right'>Eu estou a direita!</p>]]></programlisting>
     </example>
 
     <para>Algumas vezes voc&ecirc; n&atilde;o precisa utilizar aspas envolta de
@@ -432,7 +432,7 @@ setenv SGML_CATALOG_FILES /usr/doc/en_US.ISO8859-1/share/sgml/catalog:$SGML_CATA
 	<step>
 	  <para>Crie o arquivo <filename>example.sgml</filename>, e entre com o seguinte texto:</para>
 
-	  <programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	  <programlisting><![ RCDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
 <html>
   <head>	     
@@ -589,7 +589,7 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
       conformar-se com a vers&atilde;o 4.0 do DTD HTML se parece com
       esta:</para>
     
-    <programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN">]]></programlisting>
+    <programlisting><![ RCDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN">]]></programlisting>
 
     <para>Esta linha cont&eacute;m diferentes componentes.</para>
 
@@ -829,7 +829,7 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
       
       <para>A sintaxe para isto &eacute; ligeiramente diferente:</para>
       
-      <programlisting><![ CDATA [<!DOCTYPE html SYSTEM "/path/to/file.dtd">]]></programlisting>
+      <programlisting><![ RCDATA [<!DOCTYPE html SYSTEM "/path/to/file.dtd">]]></programlisting>
       
       <para>A palavra chave <literal>SYSTEM</literal> indica que o
 	processador SGML deve encontrar o DTD em um local espec&iacute;fico do
@@ -890,16 +890,16 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 
       <programlisting>&lt;!-- Teste de coment&aacute;rio --></programlisting>
       
-      <programlisting><![ CDATA [
-<!-- Este eh o interior do comentario -->
+      <programlisting><![ RCDATA [
+<!-- Este &eacute; o interior do coment&aacute;rios -->
 
-<!-- Este eh outro comentario    -->
+<!-- Este &eacute; outro coment&aacute;rio    -->
 
-<!-- Esta eh uma forma 
-     de fazer comentarios de varias linhas -->
+<!-- Esta &eacute; uma forma 
+     de fazer coment&aacute;rios de v&aacute;rias linhas -->
 
-<!-- Esta eh outra forma  --
-  -- de fazer comentarios de varias linhas -->]]></programlisting>
+<!-- Esta &eacute; outra forma  --
+  -- de fazer coment&aacute;rios de v&aacute;rias linhas -->]]></programlisting>
     </example>
 
     <![ %output.print; [
@@ -938,12 +938,12 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
     <example>
       <title>Coment&aacute;rios SGML errados</title>
 
-      <programlisting><![ CDATA [
-<!-- Este eh o comentario --
+      <programlisting><![ RCDATA [
+<!-- Este &eacute; o comant&aacute;rio --
 
-     Isto esta fora do comentario!
+     Isto est&aacute; fora do coment&aacute;rio!
 
-  -- de volta para dentro do comentario -->]]></programlisting>
+  -- de volta para dentro do coment&aacute;rio -->]]></programlisting>
 
       <para>O interpretador SGML ir&aacute; tratar isto como ele &eacute;
 	realmente;</para>
@@ -952,12 +952,12 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 
       <para>Isto n&atilde;o &eacute; um SGML v&aacute;lido, e pode dar mensagens de erro confusas.</para>
       
-      <programlisting><![ CDATA [<!--------------- Isto eh uma ideia muito ruim --------------->]]></programlisting>
+      <programlisting><![ RCDATA [<!--------------- Isto &eacute; uma id&eacute;ia muito ruim --------------->]]></programlisting>
 
       <para>E como o exemplo sugere, <emphasis>n&atilde;o escreva</emphasis>
       comentarios como esse.</para>
       
-      <programlisting><![ CDATA [<!--===================================================-->]]></programlisting>
+      <programlisting><![ RCDATA [<!--===================================================-->]]></programlisting>
 
       <para>Esta &eacute; uma abordagem (ligeiramente) melhor, mas ele ainda
       	&eacute; potencialmente confuso para as pessoas novas no uso do
@@ -1019,7 +1019,7 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	<literal>current.version</literal>, a qual expande para a
 	vers&atilde;o atual do seu produto.  Voc&ecirc; pode escrever;</para>
       
-      <programlisting><![ CDATA [<para>A vers&atilde;o atual do nosso produto &eacute; &current.version;.</para>]]></programlisting>
+      <programlisting><![ RCDATA [<para>A vers&atilde;o atual do nosso produto &eacute; &amp;current.version;.</para>]]></programlisting>
 
       <para>Quando o n&uacute;mero de vers&atilde;o mudar, voc&ecirc; pode simplesmente
 	alterar a defini&ccedil;&atilde;o do valor da entidade geral e reprocessar o
@@ -1045,7 +1045,7 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
       <example>
 	<title>Definindo um entidade geral</title>
 
-	<programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
+	<programlisting><![ RCDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
 <!ENTITY current.version    "3.0-RELEASE">
 <!ENTITY last.version       "2.2.7-RELEASE">
 ]>]]></programlisting>
@@ -1086,12 +1086,12 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
       <example>
 	<title>Definindo entidades de parametros</title>
 	
-	<programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
+	<programlisting><![ RCDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
 <!ENTITY % param.some "some">
 <!ENTITY % param.text "text">
 <!ENTITY % param.new  "%param.some more %param.text">
 
-<!-- %param.new agora contem "some more text" -->
+<!-- %param.new agora cont&eacute;m "some more text" -->
 ]>]]></programlisting>
       </example>
 	
@@ -1107,7 +1107,7 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	<step>
 	  <para>Adicione uma entidade geral ao <filename>example.sgml</filename>.</para>
 
-	  <programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" [
+	  <programlisting><![ RCDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" [
 <!ENTITY version "1.1">
 ]>	  
 
@@ -1116,7 +1116,7 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
     <title>Um exemplo de arquivo HTML</title>
   </head>
 
-  <!-- Voce pode ter alguns comentarios aqui tambem -->
+  <!-- Voc&ecirc; pode ter alguns coment&aacute;rios aqui tamb&eacute;m -->
 	  
   <body>	    
     <p>Este &eacute; um paragr&aacute;fo contendo algum texto.</p>
@@ -1125,7 +1125,7 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 
     <p align="right">Este paragrafo pode estar alinhado a direita.</p>
 
-    <p>A vers&atilde;o atual deste documento &eacute;: &version;</p>	  
+    <p>A vers&atilde;o atual deste documento &eacute;: &amp;version;</p>	  
   </body>	    
 </html>]]></programlisting>	  
 	</step>
@@ -1270,7 +1270,7 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	arquivo separado, chamado <filename>chapters.ent</filename>.
 	Este arquivo cont&eacute;m o seguinte;</para>
 	
-	<programlisting><![ CDATA [<!ENTITY chapter.1 SYSTEM "chapter1.sgml">
+	<programlisting><![ RCDATA [<!ENTITY chapter.1 SYSTEM "chapter1.sgml">
 <!ENTITY chapter.2 SYSTEM "chapter2.sgml">
 <!ENTITY chapter.3 SYSTEM "chapter3.sgml">]]></programlisting>
 
@@ -1280,7 +1280,7 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	  todas as entidades gerais dispon&iacute;veis para uso. Feito isso,
 	  utilize as entidades gerais como antes;</para>
 	
-	<programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
+	<programlisting><![ RCDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
 <!-- Define uma entidade de parametro para carregar as entidades gerais de capitulo -->
 <!ENTITY % chapters SYSTEM "chapters.ent">
 
@@ -1289,9 +1289,9 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 ]>
 
 <html>
-  &chapter.1;
-  &chapter.2;
-  &chapter.3;
+  &amp;chapter.1;
+  &amp;chapter.2;
+  &amp;chapter.3;
 </html>]]></programlisting>
       </example>
     </sect2>
@@ -1310,14 +1310,14 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 
 	    <para>Coloque um conte&uacute;do similar ao seguinte em cada arquivo;</para>
 
-	    <programlisting><![ CDATA [<p>Este &eacute; o primeiro paragrafo.</p>]]></programlisting>
+	    <programlisting><![ RCDATA [<p>Este &eacute; o primeiro paragrafo.</p>]]></programlisting>
 	  </step>
 
 	  <step>
 	    <para>Edite o arquivo <filename>example.sgml</filename>
 	      para que ele se pare&ccedil;a com este;</para>
 
-	    <programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
+	    <programlisting><![ RCDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
 <!ENTITY version "1.1">
 <!ENTITY para1 SYSTEM "para1.sgml">
 <!ENTITY para2 SYSTEM "para2.sgml">
@@ -1330,11 +1330,11 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
   </head>
 
   <body>
-    <p>A vers&atilde;o atual deste documento &eacute;: &version;</p>
+    <p>A vers&atilde;o atual deste documento &eacute;: &amp;version;</p>
 
-    &para1;
-    &para2;
-    &para3;
+    &amp;para1;
+    &amp;para2;
+    &amp;para3;
   </body>
 </html>]]></programlisting>
 	  </step>
@@ -1367,7 +1367,7 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	    <para>Edite o arquivo <filename>example.sgml</filename> para que ele se 
 	      pare&ccedil;a com este;</para>
 	    
-	    <programlisting><![ CDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
+	    <programlisting><![ RCDATA [<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN" [
 <!ENTITY % entities SYSTEM "entities.sgml"> %entities;
 ]>
 
@@ -1377,11 +1377,11 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
   </head>
 
   <body>
-    <p>A vers&atilde;o atual deste documento &eacute;: &version;</p>
+    <p>A vers&atilde;o atual deste documento &eacute;: &amp;version;</p>
 
-    &para1;
-    &para2;
-    &para3;
+    &amp;para1;
+    &amp;para2;
+    &amp;para3;
   </body>
 </html>]]></programlisting>
 	  </step>
@@ -1390,7 +1390,7 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	    <para>Crie um novo arquivo chamado <filename>entities.sgml</filename>, com 
 	      este conte&uacute;do:</para>
 
-	    <programlisting><![ CDATA [<!ENTITY version "1.1">
+	    <programlisting><![ RCDATA [<!ENTITY version "1.1">
 <!ENTITY para1 SYSTEM "para1.sgml">
 <!ENTITY para2 SYSTEM "para2.sgml">
 <!ENTITY para3 SYSTEM "para3.sgml">]]></programlisting>
@@ -1502,32 +1502,32 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 	    <literal>CDATA</literal>.</para>
         </note>
 
-	<!-- O assentamento de CDATA dentro do exemplo seguinte eh repugnante -->
+	<!-- O assentamento de CDATA dentro do exemplo seguinte &eacute; repugnante -->
 	
 	<example>
 	  <title>Utilizando uma sess&atilde;o marcada como CDATA</title>
 	  
-	  <programlisting>&lt;para>Aqui est&aacute; um exempli de como voc&ecirc;
+	  <programlisting>&lt;para>Aqui est&aacute; um exemplo de como voc&ecirc;
 	    incluiria algum texto que contenha muitos s&iacute;mbolos &amp;lt; 
 	    e &amp;amp;.  O texto de exemplo &eacute; um fragmento de HTML.  
 	    O texto circunvizinho (&lt;para> e &lt;programlisting>) &eacute; do
 	    DocBook.&lt;/para>
 	  
 &lt;programlisting>
-  &lt;![ CDATA [  <![ CDATA [
-    <p>Esta eh uma amostra que apresenta alguns elementos de HTML.
-       Uma vez que os simbolos de < e > sao utilizados muitas vezes,
-       eh mais facil dizer que o exemplo todo eh uma sessao marcada do
+  &lt;![ CDATA [  <![ RCDATA [
+    <p>Esta &eacute; uma amostra que apresenta alguns elementos de HTML.
+       Uma vez que os simbolos de < e > s&atilde;o utilizados muitas vezes, &eacute;
+       mais f&aacute;cil dizer que o exemplo todo &eacute; uma sess&atilde;o marcada do
        tipo CDATA, do que utilizar nomes de entidades para representar
        estes simbolos ao longo de todo o texto.</p>
 
     <ul>
-      <li>Este eh um item de lista</li>
-      <li>Este eh um segundo item de lista</li>
-      <li>Este eh um terceiro item de lista</li>
+      <li>Este &eacute; um item de lista</li>
+      <li>Este &eacute; um segundo item de lista</li>
+      <li>Este &eacute; um terceiro item de lista</li>
     </ul>
 
-    <p>Este eh o final do exemplo.</p>]]>
+    <p>Este &eacute; o final do exemplo.</p>]]>
   ]]&gt;
 &lt/programlisting></programlisting>
 
