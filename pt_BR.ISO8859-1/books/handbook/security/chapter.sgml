@@ -402,7 +402,7 @@
       <para>Uma maneira indireta de proteger contas do sistema, e
 	finalmente acesso <username>root</username> é usar um método 
 	de login de acesso alternativo e fazer o que é conhecido
-	como <quote>starring</quote> em senhas criptografadas para
+	como <quote>colocar estrela</quote> em senhas criptografadas para
 	as contas do sistema.  Usando o comando &man.vipw.8;, pode
 	substituir cada instância de uma senha criptografada com
 	um único carácter <quote><literal>*</literal></quote>.
@@ -419,53 +419,57 @@
       <programlisting>foobar:*:1000:1000::0:0:Foo Bar:/home/foobar:/usr/local/bin/tcsh</programlisting>
 
       <para>Esta mudança impedirá que logins normais ocorram,
-        since the encrypted password will never match
-        <quote><literal>*</literal></quote>.  With this done,
-	staff members must use
-        another mechanism to authenticate themselves such as
-        &man.kerberos.1; or &man.ssh.1; using a public/private key
-        pair.  When using something like Kerberos, one generally must
-        secure the machines which run the Kerberos servers and your
-        desktop workstation.  When using a public/private key pair
-        with ssh, one must generally secure
-        the machine used to login <emphasis>from</emphasis> (typically
-        one's workstation).  An additional layer of protection can be
-        added to the key pair by password protecting the key pair when
-        creating it with &man.ssh-keygen.1;.  Being able to
-        <quote>star</quote> out the passwords for staff accounts also
-        guarantees that staff members can only login through secure
-        access methods that you have set up.  This forces all staff
-        members to use secure, encrypted connections for all of their
-        sessions, which closes an important hole used by many
-        intruders: sniffing the network from an unrelated,
-        less secure machine.</para>
+        visto que que a senha criptografada nunca combina com 
+        <quote><literal>*</literal></quote>.  Com isto feito,
+	membros do sistema devem usar um outro mecanismo para
+        se autenticar tais como &man.kerberos.1; ou &man.ssh.1; 
+	usando um par de chaves pública/privada.  Quando usar algo
+	como o Kerberos, geralmente deve proteger as máquinas
+	que executam os servidores Kerberos e sua estação de trabalho
+	<foreignphrase>desktop</foreignphrase>.  Quando usar um par 
+	de chaves pública/privada com ssh, geralmente deve proteger
+        a máquina usada para fazer login <emphasis>de</emphasis> 
+	(tipicamente uma estação de trabalho).  Uma camada adicional
+	de proteção pode ser adicionada ao par de chaves pela senha
+	que protege o par de chaves ao criá-las com 
+	&man.ssh-keygen.1;.  Sendo capaz de
+        <quote>colocar estrela</quote> nas senhas para contas também
+	garantem que os membros do sistema podem apenas fazer login
+	através de métodos de acesso seguros que você criou.  Isto
+	força todos os membros do sistema a usar conexões seguras, 
+	criptografadas para todas as seções, que fecham um furo 
+	importante usado por muitos invasores: <foreignphrase>sniffing
+	</foreignphrase> na rede de uma máquina menos segura.</para>
 
-      <para>The more indirect security mechanisms also assume that you are
-	logging in from a more restrictive server to a less restrictive
-	server.  For example, if your main box is running all sorts of
-	servers, your workstation should not be running any.  In order for
-	your workstation to be reasonably secure you should run as few
-	servers as possible, up to and including no servers at all, and
-	you should run a password-protected screen blanker.  Of course,
-	given physical access to a workstation an attacker can break any
-	sort of security you put on it.  This is definitely a problem that
-	you should consider, but you should also consider the fact that the
-	vast majority of break-ins occur remotely, over a network, from
-	people who do not have physical access to your workstation or
-	servers.</para>
+      <para>Os mecanismos mais indiretos de proteção também assumem que
+	você esta logando de um servidor mais restritivo para um servidor
+	menos restritivo.  Por exemplo, se sua máquina principal esta
+	executando todos os tipos de servidores, sua estação de trabalho
+	não deve executar algum.  Para que sua estação de trabalho
+	seja razoalvelmente segura você deve executar o mínimo de 
+	servidores possíveis, até incluindo nenhum servidor, e
+	você deve executar uma proteção de tela protegida por senha.  
+	Naturalmente, dando acesso físico a uma estação de trabalho
+	para um atacante pode quebrar qualquer tipo de segurança
+	que você colocou.  Isto é definitivamente um problema que você
+	deve considerar, mas você também deve considerar o fato de que
+	a grande maioira da violações ocorre remotamente, através da
+	rede, de pessoas que não tem acesso físico a sua estação de
+	trabalho ou servidores.</para>
       <indexterm><primary>KerberosIV</primary></indexterm>
 
-      <para>Using something like Kerberos also gives you the ability to
-	disable or change the password for a staff account in one place,
-	and have it immediately effect all the machines on which the staff
-	member may have an account.  If a staff member's account gets
-	compromised, the ability to instantly change his password on all
-	machines should not be underrated.  With discrete passwords,
-	changing a password on N machines can be a mess.  You can also
-	impose re-passwording restrictions with Kerberos:  not only can a
-	Kerberos ticket be made to timeout after a while, but the Kerberos
-	system can require that the user choose a new password after a
-	certain period of time (say, once a month).</para>
+      <para>Usando algo como o Kerberos também te da a abilidade de
+	desativar ou trocar a senha para as contas do sistema em um
+	lugar, e ter efeito imediatamente em todas as máquinas em que
+	os membros do sistema podem ter uma conta.  Se uma conta de
+	um membro do sistema for comprometida, a abilidade de trocar
+	imediatamente sua senha em todas as máquinas não deve ser 
+	desconsiderada.  Com senhas separadas, trocar a senha em N 
+	máquinas pode ser um problema.  Você também pode impor
+	restrições de troca de senha com Kerberos:  não somente um
+	ticket Kerberos pode ser feito para timeout após um tempo, mas
+	o sistema Kerberos pode exigir que o usuário escolha uma nova
+	senha após um certo período de tempo (digamos, uma vez ao mês).</para>
     </sect2>
 
     <sect2>
