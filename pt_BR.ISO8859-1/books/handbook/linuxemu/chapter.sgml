@@ -10,7 +10,7 @@
       <author>
 	<firstname>Jim</firstname>
 	<surname>Mock</surname>
-	<contrib>Restructured and parts updated by </contrib>
+	<contrib>Reestruturado e partes atualizadas por </contrib>
       </author>
       <!-- 22 Mar 2000 -->
     </authorgroup>
@@ -18,7 +18,7 @@
       <author>
 	<firstname>Brian N.</firstname>
 	<surname>Handy</surname>
-	<contrib>Originally contributed by </contrib>
+	<contrib>Originalmente contribu&iacute;do por </contrib>
       </author>
       <author>
 	<firstname>Rich</firstname>
@@ -27,105 +27,113 @@
     </authorgroup>
   </chapterinfo>
 
-  <title>Linux Binary Compatibility</title>
+  <title>Compatibilidade Bin&aacute;ria Linux</title>
 
   <sect1 id="linuxemu-synopsis">
-    <title>Synopsis</title>
+    <title>Sinopse</title>
     <indexterm><primary>Linux binary compatibility</primary></indexterm>
     <indexterm>
       <primary>binary compatibility</primary>
       <secondary>Linux</secondary>
     </indexterm>
 
-    <para>FreeBSD provides binary compatibility with several other
-      &unix; like operating systems, including Linux.  At this point,
-      you may be asking yourself why exactly, does
-      FreeBSD need to be able to run Linux binaries?  The answer to that
-      question is quite simple.  Many companies and developers develop
-      only for Linux, since it is the latest <quote>hot thing</quote> in
-      the computing world.  That leaves the rest of us FreeBSD users
-      bugging these same companies and developers to put out native
-      FreeBSD versions of their applications.  The problem is, that most
-      of these companies do not really realize how many people would use
-      their product if there were FreeBSD versions too, and most continue
-      to only develop for Linux.  So what is a FreeBSD user to do?  This
-      is where the Linux binary compatibility of FreeBSD comes into
-      play.</para>
+    <para>FreeBSD oferece compatibilidade bin&aacute;ria com v&aacute;rios 
+      outros sistemas operacionais &unix. incluindo Linux.  Neste 
+      momento voc&ecirc; deve estar perguntando a voc&ecirc; mesmo, por que 
+      o FreeBSD necessita ser capaz de executar bin&aacute;rios Linux?
+      A resposta para esta quest&atilde;o &eacute; bem simples.  Muitas 
+      empresas e desenvolvedores desenvolvem apenas para Linux, uma vez 
+      que ele &eacute; a novidade <quote>mais quente</quote> no mundo da 
+      computa&ccedil;&atilde;o.  Isto nos deixa, usu&aacute;rios do FreeBSD, 
+      incomodando as mesmas empresas e desenvolvedores para disponibilizar 
+      vers&otilde;es nativas de suas aplica&ccedil;&otilde;es para FreeBSD.  
+      O problema &eacute;, a maioria destas empresas n&atilde;o se d&aacute; 
+      conta de que muitas pessoas usariam seus produtos se existisse uma 
+      vers&atilde;o para FreeBSD tamb&eacute;m, e muitas continuam 
+      desenvolvendo apenas para Linux.  Ent&atilde;o o que o usu&aacute;rio 
+      do FreeBSD faz?  A&iacute; &eacute; que a Compatibilidade bin&aacute;ria 
+      Linux do FreeBSD entra em cena.</para>
 
-    <para>In a nutshell, the compatibility allows FreeBSD users to run
-      about 90% of all Linux applications without modification.  This
-      includes applications such as <application>&staroffice;</application>,
-      the Linux version of <application>&netscape;</application>,
+    <para>Resumidamente, a compatibilidade permite aos usu&aacute;rios do FreeBSD
+      executar por volta de 90% de todas as aplica&ccedil;&otilde;es Linux sem 
+      modifica&ccedil;&atilde;o.  Isto inclui aplica&ccedil;&otilde;es tais como 
+      <application>&staroffice;</application>, a vers&atilde;o Linux do 
+      <application>&netscape;</application>,
       <application>&adobe;&nbsp;&acrobat;</application>,
       <application><trademark class="registered">RealPlayer</trademark></application>
-      5 and 7, <application><trademark>VMware</trademark></application>,
+      5 e 7, <application><trademark>VMware</trademark></application>,
       <application>&oracle;</application>,
       <application><trademark class="registered">WordPerfect</trademark></application>, <application>Doom</application>,
-      <application>Quake</application>, and more.  It is also reported
-      that in some situations, Linux binaries perform better on FreeBSD
-      than they do under Linux.</para>
+      <application>Quake</application>, e mais.  &Eacute; tamb&eacute;m sabido que 
+      em algumas situa&ccedil;&otilde;es, bin&aacute;rios do Linux t&ecirc;m 
+      melhor performance no FreeBSD do que no pr&oacute;prio Linux.</para>
     <indexterm>
       <primary>Linux</primary>
       <secondary><filename>/proc</filename> file system</secondary>
     </indexterm>
 
-    <para>There are, however, some Linux-specific operating system
-      features that are not supported under FreeBSD.  Linux binaries will
-      not work on FreeBSD if they overly use the Linux
-      <filename>/proc</filename> file system (which is different from
-      FreeBSD's <filename>/proc</filename> file system), or &i386; specific
-      calls, such as enabling virtual 8086 mode.</para>
+    <para>Existem, entretanto, algumas caracter&iacute;sticas de sistema 
+      operacional espec&iacute;ficas do Linux que n&atilde;o s&atilde;o 
+      suportadas no FreeBSD.  Bin&aacute;rios Linux n&atilde;o 
+      funcionar&atilde;o no FreeBSD se eles usarem excesivamente o 
+      sistema de arquivos <filename>/proc</filename> (que &eacute; 
+      diferente do sistema de arquivo <filename>/proc</filename> do 
+      FreeBSD), ou chamadas &i386 espec&iacute;ficas, tais como a 
+      habilita&ccedil;&atilde;o do modo virtual 8086.</para>
 
-    <para>After reading this chapter, you will know:</para>
+    <para>Ap&oacute;s ler este cap&iacute;tulo, voc&ecirc; saber&aacute;:</para>
     <itemizedlist>
       <listitem>
-	<para>How to enable Linux binary compatibility on your system.</para>
+	<para>Como habilitar a compatibilidade bin&aacute;ria Linux em 
+	  seu sistema.</para>
       </listitem>
 
       <listitem>
-	<para>How to install additional Linux shared
-	  libraries.</para>
+	<para>Como adicionar bibliotecas compartilhadas Linux adicionais.</para>
 	</listitem>
 
       <listitem>
-	<para>How to install Linux applications on your FreeBSD system.</para>
+	<para>Como instalar aplica&ccedil;&otilde;es Linux em seu sistema 
+	  FreeBSD.</para>
       </listitem>
 
       <listitem>
-	<para>The implementation details of Linux compatibility in FreeBSD.</para>
+	<para>Detalhes de implementa&ccedil;&atilde;o da compatibilidade Linux 
+	  no FreeBSD.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Before reading this chapter, you should:</para>
+    <para>Antes de ler este cap&iacute;tulo, voc&ecirc; deve:</para>
 
     <itemizedlist>
       <listitem>
-	<para>Know how to install additional third-party
-        software (<xref linkend="ports">).</para>
+	<para>Saber como instalar programas adicionais de terceiros 
+        (<xref linkend="ports">).</para>
       </listitem>
     </itemizedlist>
 
   </sect1>
 
   <sect1 id="linuxemu-lbc-install">
-    <title>Installation</title>
+    <title>Instala&ccedil;&atilde;o</title>
 
     <indexterm><primary>KLD (kernel loadable object)</primary></indexterm>
 
-    <para>Linux binary compatibility is not turned on by default.  The
-      easiest way to enable this functionality is to load the
-      <literal>linux</literal> KLD object (<quote>Kernel LoaDable
-      object</quote>).  You can load this module by simply typing
-      <command>linux</command> at the command prompt.</para>
+    <para>A compatibilidade Linux n&atilde;o &eacute; ligada por padr&atilde;o.  
+      A maneira mais f&aacute;cil de habilitar esta funcionalidade &eacute; 
+      carregando o objeto KLD <literal>linux</literal>(<quote>Kernel LoDable 
+      object</quote>).  Voc&ecirc; pode carregar este m&oacute;dulo 
+      simplesmente digitando <command>linux</command> na linha de 
+      comando.</para>
 
-    <para>If you would like Linux compatibility to always be enabled,
-      then you should add the following line to
-      <filename>/etc/rc.conf</filename>:</para>
+    <para>Se voc&ecirc; quer que a compatibilidade Linux esteja sempre 
+      habilitada, ent&atilde;o voc&ecirc; deve adicionar a seguinte 
+      linha no <filename>/etc/rc.conf</filename>:</para>
 
     <programlisting>linux_enable="YES"</programlisting>
 
-    <para>The &man.kldstat.8; command can be used to verify that the
-      KLD is loaded:</para>
+    <para>O comando &man.kldstat.8; pode ser usado para verificar se o 
+      KLD est&aacute; carregado:</para>
 
     <screen>&prompt.user; <userinput>kldstat</userinput>
 Id Refs Address    Size     Name
@@ -136,11 +144,12 @@ Id Refs Address    Size     Name
       <secondary>LINUX</secondary>
     </indexterm>
 
-    <para>If for some reason you do not want to or cannot load the KLD,
-      then you may statically link Linux binary compatibility into the kernel
-      by adding <literal>options LINUX</literal> to your kernel
-      configuration file.  Then install your new kernel as described in
-      <xref linkend="kernelconfig">.</para>
+    <para>Se, por alguma raz&atilde;o, voc&ecirc; n&atilde;o quer ou n&atilde;o 
+      pode carregar o KLD, ent&atilde;o voc&ecirc; pode ligar estaticamente a 
+      compatibilidade bin&aacute;ria Linux no kernel adicionando 
+      <literal>options LINUX</literal> ao seu arquivo de configura&ccedil;&atilde;o.  
+      Depois instale seu novo <foreignphrase>kernel</foreingphrase> como 
+      como descrito em <xref linkend="kernelconfig">.</para> 
 
     <sect2>
       <title>Installing Linux Runtime Libraries</title>
