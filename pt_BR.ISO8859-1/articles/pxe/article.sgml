@@ -77,8 +77,8 @@
       (netboot) &intel; PXE, e uma conex&atilde;o Ethernet.</para>
 
     <para>Por favor me deixe saber se voc&ecirc; vier a ter algum problema na
-      execu&ccedil;&atilde;o dos procedimentos descritos, ou se voc&ecirc; tiver alguma 
-      sugest&atilde;o para documenta&ccedil;&atilde;o adicional.</para>
+      execu&ccedil;&atilde;o dos procedimentos aqui descritos, ou se voc&ecirc; tiver alguma 
+      sugest&atilde;o para adicional ao documento.</para>
     
     <para>Se voc&ecirc; desejar alguma pessoa para dar treinamento e/ou implementar 
       um sistema de instala&ccedil;&atilde;o via rede para voc&ecirc;, por favor envie um
@@ -95,7 +95,7 @@
     <procedure>
       <step>
         <para>Instale o DHCP: Instale o <filename role="package">
-	  net/isc-dhcp3</filename>, voc&ecirc; pode utilizar este arquivo i
+	  net/isc-dhcp3</filename>, voc&ecirc; pode utilizar este arquivo 
 	  de configura&ccedil;&atilde;o <ulink url="dhcpd.conf"> <filename>dhcpd.conf
 	  </filename></ulink>, copie-o para <filename>/usr/local/etc/
 	  </filename>.</para>
@@ -164,7 +164,7 @@
 	
         <procedure>
           <step>
-            <para>Put pxeboot in the boot directory:</para>
+            <para>Coloque o pxeboot no diret&oacute;rio de boot:</para>
 	
 	    <screen>&prompt.root; <userinput>rm -rf /usr/obj/*</userinput>
 &prompt.root; <userinput>cd /usr/src/sys/boot</userinput>
@@ -173,56 +173,58 @@
           </step>
 
           <step>
-            <para>Using the vndevice mount the <filename>kern.flp</filename>
-	      file and copy its contents to
+            <para>Utilize um vndevice para montar o arquivo <filename>
+	      kern.flp</filename> e copie o seu conte&uacute;do para 
 	      <filename>/usr/tftpboot</filename>:</para>
 
-	    <screen>&prompt.root; <userinput>vnconfig vn0 kern.flp</userinput>    # associate a vndevice with the file
-&prompt.root; <userinput>mount /dev/vn0 /mnt</userinput>      # mount it
-&prompt.root; <userinput>cp -R /mnt /usr/tftpboot</userinput> # copy the contents to /usr/tftpboot
-&prompt.root; <userinput>umount /mnt</userinput>              # unmount it
-&prompt.root; <userinput>vnconfig -u vn0</userinput>          # disassociate the vndevice from the file</screen>
+	    <screen>&prompt.root; <userinput>vnconfig vn0 kern.flp</userinput>    # associa um vndevice com um arquivo
+&prompt.root; <userinput>mount /dev/vn0 /mnt</userinput>      # monta o vndevice
+&prompt.root; <userinput>cp -R /mnt /usr/tftpboot</userinput> # copia o conteudo para /usr/tftpboot
+&prompt.root; <userinput>umount /mnt</userinput>              # desmonta o vndevice 
+&prompt.root; <userinput>vnconfig -u vn0</userinput>          # desassocia o vndevice do arquivo</screen>
           </step>
         </procedure>
       </step>
 
       <step>
-        <para>Compile a custom kernel for the clients (particularly to avoid
-          the device config screen at boot) and stick it in
+        <para>Compile um kernel customizado para os clientes
+	  (especialmente para evitar a tela de configura&ccedil;&atilde;o de
+	  dispositivos no boot) e coloque-o no diret&oacute;rio
           <filename>/usr/tftpboot</filename>.</para>
       </step>
 
       <step>
-        <para>Make a special <filename>loader.rc</filename> to and install it
-          in <filename>/usr/tftpboot/boot/loader.rc</filename> so that it
-          does not prompt for the second disk, here is
-          <ulink url="loader.rc">mine</ulink>.</para>
+        <para>Crie um <filename>loader.rc</filename> especial 
+	  o qual n&atilde;o solicite a inser&ccedil;&atilde;o do segundo disco de boot, e o
+	  instale no <filename>/usr/tftpboot/boot/loader.rc</filename> 
+          , aqui est&aacute; o <ulink url="loader.rc">meu</ulink>.</para>
       </step>
 
       <step>
-        <para>Extract the installer and helper utilities from the mfsroot disk
-          and uncompress them, put them in <filename>/usr/tftpboot</filename>
-          as well:</para>
+        <para>Extraia o instalador e os utilit&aacute;rios de apoio do disco 
+	  mfsroot, descompacte-os e coloque-os no <filename>
+	  /usr/tftpboot</filename>:</para>
 
-	<screen>&prompt.root; <userinput>vnconfig vn0 mfsroot.flp</userinput>         # associate a vndevice with the file
-&prompt.root; <userinput>mount /dev/vn0 /mnt</userinput>              # mount it
-&prompt.root; <userinput>cp /mnt/mfsroot.gz /usr/tftpboot</userinput> # copy the contents to /usr/tftpboot
-&prompt.root; <userinput>umount /mnt</userinput>                      # unmount it
-&prompt.root; <userinput>vnconfig -u vn0</userinput>                  # disassociate the vndevice from the file
-&prompt.root; <userinput>cd /usr/tftpboot</userinput>                 # get into the pxeboot directory
-&prompt.root; <userinput>gunzip mfsroot.gz</userinput>                # uncompress the mfsroot</screen>
+	<screen>&prompt.root; <userinput>vnconfig vn0 mfsroot.flp</userinput>         # associa o vndevice ao arquivo
+&prompt.root; <userinput>mount /dev/vn0 /mnt</userinput>              # mounta o vndevice
+&prompt.root; <userinput>cp /mnt/mfsroot.gz /usr/tftpboot</userinput> # copia o conte&uacute;do para /usr/tftpboot
+&prompt.root; <userinput>umount /mnt</userinput>                      # desmonta o vndevice
+&prompt.root; <userinput>vnconfig -u vn0</userinput>                  # Desassocia o vndevice do arquivo
+&prompt.root; <userinput>cd /usr/tftpboot</userinput>                 # Entra no diret&oacute;rio do pxeboot
+&prompt.root; <userinput>gunzip mfsroot.gz</userinput>                # descompacta o mfsroot</screen>
       </step>
 
       <step>
-        <para>Make your sysinstall script <filename>install.cfg</filename>, you
-          can use
-          <ulink url="install.cfg">mine</ulink>
-          as a template, but you must edit it.</para>
+        <para>Crie o script <filename>install.cfg</filename> para ser
+	  utilizado em conjunto com o sysinstall, voc&ecirc; pode utilizar o
+          <ulink url="install.cfg">meu</ulink> como um template, mas
+	  voc&ecirc; precisa edit&aacute;-lo adequando-o as suas
+	  necessidades.</para>
       </step>
 
       <step>
-        <para>Copy the sysinstall script into the extracted and uncompressed
-          mfsroot image:</para>
+        <para>Copie o script do sysinstall para a imagem extraida e 
+	  descompactada do mfsroot:</para> 
 
 	<screen>&prompt.root; <userinput>cd /usr/tftpboot</userinput>
 &prompt.root; <userinput>vnconfig vn0 mfsroot</userinput>
@@ -235,15 +237,15 @@
   </sect1>
 
   <sect1 id="install-setup">
-    <title>Install Setup</title>
+    <title>Preparando a instala&ccedil;&atilde;o</title>
 
     <procedure>
       <step>
-        <para>Put the install files in an NFS accessible location on the
-	  Server. Make a directory corresponding the 'nfs' directive in the
-	  <filename> install.cfg</filename> file and mirror the FreeBSD
-	  install files there, you will want it to look somewhat like
-	  this:</para>
+        <para>Coloque os arquivos de instala&ccedil;&atilde;o em um local do
+	servidor acess&iacute;vel por NFS.  Crie um diret&oacute;rio que corresponda
+	a diretiva 'nfs' do seu arquivo <filename> install.cfg</filename> 
+	e espelhe os arquivos de instala&ccedil;&atilde;o do FreeBSD neste diret&oacute;rio,
+	voc&ecirc; ter&aacute; algo semelhante a isto:</para>
 
 	<screen>ABOUT.TXT       TROUBLE.TXT     compat20        floppies        ports
 ERRATA.TXT      UPGRADE.TXT     compat21        games           proflibs
@@ -255,47 +257,52 @@ RELNOTES.TXT    compat1x        doc             packages</screen>
       </step>
 
       <step>
-        <para>Copy the compressed packages into the packages/All directory
-          under <filename>nfs</filename>.</para>
+        <para>Copie os pacotes compactados para o diret&oacute;rio packages/All 
+	  debaixo do <filename>nfs</filename>.</para>
       </step>
 
       <step>
-        <para>Make sure you have an <filename>INDEX</filename> file prepared
-	  in the packages directory. You can make your own
-	  <filename>INDEX</filename> entries like so:</para>
+        <para>Certifique-se de que voc&ecirc; possui um arquivo
+	  <filename>INDEX</filename> preparado no diret&oacute;rio de
+	  pacotes.  Voc&ecirc; pode criar as suas pr&oacute;prias entradas 
+	  no <filename>INDEX</filename>, as quais seriam semelhantes 
+	  a esta:</para>
 
 	<programlisting>alfred-1.0||/|Alfred install bootstrap||alfred@FreeBSD.org||||</programlisting>
 
-        <para>Then you can install custom packages, particularly your own
-	  custom post-install package.</para>
+        <para>Desta forma voc&ecirc; poder&aacute; instalar pacotes customizados,
+	  particularmente o seu pr&oacute;prio pacote customizado de
+	  p&oacute;s-instala&ccedil;&atilde;o.</para>
       </step>
     </procedure>
   </sect1>
 
   <sect1 id="custom-postinst-package">
-    <title>Custom Post-Install Package</title>
+    <title>Pacote customizado de p&oacute;s-instala&ccedil;&atilde;o</title>
 
-    <para>You can use the script <ulink url="pkgmaker.sh"><filename>pkgmaker.sh
-      </filename></ulink> to create a
-      custom package for post install, the idea is to have it install and
-      configure any special things you may need done.
-      <filename>pkgmaker</filename> is run in the directory above the package
-      you wish to create with the single argument of the package (ie mypkg)
-      which will then create a mypkg.tgz for you to include in your sysinstall
-      package.</para>
+    <para>Voc&ecirc; pode utilizar o script <ulink url="pkgmaker.sh"><filename>
+      pkgmaker.sh</filename></ulink> para criar um pacote customizado
+      de p&oacute;s instala&ccedil;&atilde;o, a id&eacute;ia &eacute; mand&aacute;-lo instalar e configurar
+      todos os itens que voc&ecirc; necessitar/desejar.  O <filename>pkgmaker
+      </filename> deve ser executado no diret&oacute;rio acima do diret&oacute;rio
+      do pacote que voc&ecirc; deseja criar, utilizando como unico argumento 
+      o nome do diret&oacute;rio do pacote, por exemplo ao utilizar o argumento 
+      mypkg o script ir&aacute; criar um arquivo mypkg.tgz, o qual deve ser 
+      incluido no seu script do sysinstall</para>
 
-    <para>Inside your custom package dir you will want a file called
-      <filename>PLIST</filename> which contains all the files that you wish to
-      install and be incorporated into your package.</para>
-
-    <para>You will also want files called
-      <ulink url="pre"><filename>pre</filename></ulink> and
+    <para>Dentro do diret&oacute;rio do seu pacote customizado voc&ecirc; precisar&aacute;
+      de um arquivo chamado <filename>PLIST</filename> o qual cont&eacute;m
+      todos os arquivos a instalar e a serem incorporados no seu
+      pacote.</para>
+      
+    <para>Voc&ecirc; tamb&eacute;m ir&aacute; precisar dos arquivos chamados
+      <ulink url="pre"><filename>pre</filename></ulink> e
       <ulink url="post"><filename>post</filename></ulink>
-      in the directory, these are shell scripts
-      that you want to execute before and after your package is
-      installed.</para>
-
-    <para>Since this package is in your <filename>install.cfg</filename> file
-      it should be run and do the final configuration for you.</para>
+      no diret&oacute;rio, eles s&atilde;o scripts shell os quais voc&ecirc; deseja
+      executar antes e depois que o seu pacote ser instalado.</para>
+      
+    <para>Uma vez que este pacote esteja no seu <filename>install.cfg
+      </filename> ele ser&aacute; instalado e efetuando a configura&ccedil;&atilde;o final
+      para voc&ecirc;.</para>
   </sect1>
 </article>
