@@ -840,20 +840,17 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>maxproc</primary></indexterm>
         <indexterm>
-      <primary>limiting users</primary>
+      <primary>limitando usuários</primary>
       <secondary>maxproc</secondary>
     </indexterm>
-	  <para>This is the maximum number of processes a user may be
-	    running.  This includes foreground and background processes
-	    alike.  For obvious reasons, this may not be larger than the
-	    system limit specified by the <varname>kern.maxproc</varname>
-	    &man.sysctl.8;.  Also note that setting this 
-	    too small may hinder a
-	    user's productivity: it is often useful to be logged in
-	    multiple times or execute pipelines.  Some tasks, such as
-	    compiling a large program, also spawn multiple processes (e.g.,
-	    &man.make.1;, &man.cc.1;, and other intermediate
-	    preprocessors).</para>
+          <para>Este é o número máximo de processos que um usuário pode rodar.
+            Isto inclui processos foreground e background igualmente. Por razões
+            óbvias, isto não pode ser maior do que o limite do sistema especificado
+            por &man.sysctl.8; <varname>kern.maxproc</varname>. Note também que configurando
+            isso para um valor pequeno vai prejudicar a produtividade do usuário: é frequentemente
+            útil logar multiplas vezes e executar processos. Algumas tarefas, tais como 
+            compilar um programa grande, também geram multiplos processos (ex: &man.make.1;, 
+            &man.cc.1; e outros intermediários).</para>
 	</listitem>
       </varlistentry>
 
@@ -863,7 +860,7 @@ passwd: done</screen>
 	<listitem>
     <indexterm><primary>memorylocked</primary></indexterm>
     <indexterm>
-      <primary>limiting users</primary>
+      <primary>limitando usuários</primary>
       <secondary>memorylocked</secondary>
     </indexterm>
 	  <para>This is the maximum amount a memory a process may have
@@ -872,6 +869,10 @@ passwd: done</screen>
             &man.amd.8;, lock into main memory such that in the event
 	    of being swapped out, they do not contribute to
 	    a system's trashing in time of trouble.</para>
+          <para>Este é a quantidade máxima de memória quem um processo pode 
+            requerir para travar na memória principal (ex: veja &man.mlock.2;).
+            Alguns programas críticos do sistema, tais como &man.amd.8;, reserva
+            na memória principal como evento trocando para fora, 
 	</listitem>
       </varlistentry>
 
