@@ -1509,61 +1509,55 @@ pseudo-device   pty           # Pseudo-ttys (telnet etc)</programlisting>
 	  id="kernelconfig-noboot"></term>
 
 	<listitem>
-	  <para>Se seu kernel novo n&atilde;o carregar, ou falhar para
-	    reconhecer seus dispositivos, n&atilde;o se apavore! Felizmente, o &os; tem
-	    um excelente mecanismo para recuperar kernels incompat&iacute;veis.
-	    Escolha o kernel que voc&ecirc; deseja carregar no
-	    &os; e carregue ele. Voc&ecirc; pode acessar este quando o sistema
-	    de contagem regressiva estiver abaixo de 10. Tecle qualquer letra exceto a
-            tecla <keycap>Enter</keycap>, use o comando tipo <command>unload</command>
-            e entao o tipo
-	    <command>boot <replaceable>kernel.old</replaceable></command>,
-            ou o nome do arquivo de algum outro kernel correto que voc&ecirc; queira carregar.
-            Ao reconfigurar um kernel, &eacute; sempre uma boa id&eacute;ia manter
-            um kernel confi&aacute;vel, na m&atilde;o para trabalhar.</para>
+	  <para>Se o kernel novo n&atilde;o carregar, ou falhar no momento de
+	    reconhecer os dispositivos instalados em seu sistema, não se apavore!  Felizmente
+	    o &os; tem um excelente mecanismo de recuperação de kernel incompatível.  Escolha o
+	    kernel que você deseja carregar e inicie o &os; com ele.  Para fazer isso, quando o
+	    sistema de inicialização estiver na contagem regressiva de 10 segundos, aperte qualquer
+	    tecla, exceto a tecla <keycap>Enter</keycap>, use o comando <command>unload</command>
+            e então mande iniciar o kernel antigo, com o comando
+	    <command>boot <replaceable>kernel.old</replaceable></command>, ou o nome de
+	    qualquer outro kernel que você achar conveniente e que exista em seu &os;.  É sempre
+	    boa idéia manter um kernel confiável (ou uma cópia dele) quando começar o processo
+	    de recompilação e instalação de um novo.</para>
 
-	  <para>Depois de carregar um kernel confi&aacute;vel voc&ecirc; pode verificar o arquivo de configura&ccedil;&atilde;o do seu kernel e tentar 
-	    recompil&aacute;-lo novamente.
-	    Um recurso de ajuda &uacute;til &eacute; o arquivo
-	    <filename>/var/log/messages</filename> 
-	    que grava, entre outras coisas, todas as mensagens do kernel
-	    que s&atilde;o com sucesso carregados. Tamb&eacute;m, o comando &man.dmesg.8;
-	    imprimir&aacute; as mensagens do kernel que estiverem carregadas atualmente.</para>
+	  <para>Depois de carregar um kernel funcional, verifique o arquivo de configuração
+	    do seu kernel customizado (o que falhou), corrija as possíveis deficiências e recompile-o.
+	    Um recurso muito útil que pode ajudar, é o fato do arquivo
+	    <filename>/var/log/messages</filename> gravar, entre outras coisas, todas as mensagens dos
+	    kernel até o momento em que este foi carregado com sucesso.  O comando &man.dmesg.8;
+	    imprimirá sempre as últimas mensagens atualmente geradas pelo kernel.</para>
 
 	  <note>
-	    <para>Se voc&ecirc; estiver tendo problemas para compilar um kernel, certifique
-	      e guarde um <filename>GENERIC</filename>, ou algum outro kernel
-	      que funcione na m&atilde;o para trabalhar com um nome diferente que 
-	      n&atilde;o apagar&aacute; na pr&oacute;xima compila&ccedil;&atilde;o. Voc&ecirc; n&atilde;o pode confiar em
-	      <filename>kernel.old</filename> porque ao instalar um
-	      novo kernel, o <filename>kernel.old</filename> &eacute; sobscrevido
-	      com o &uacute;ltimo kernel instalado que pode n&atilde;o ser funcional.
-	      Tamb&eacute;m, o mais cedo poss&iacute;vel, realize a movimenta&ccedil;&atilde;o do kernel para a
-	      localiza&ccedil;&atilde;o apropriada <filename>kernel</filename> com comandos tal
-	      como &man.ps.1; n&atilde;o trabalhara corretamente. O comando apropriado 
-	      <quote>destrava</quote> o arquivo do kernel que
-	      <command>faz</command> a insta&ccedil;&atilde;o (a fim de mov&ecirc;-los permanentemente para
-	      uma outra parte traseira do kernel).</para>
+	    <para>Se voc&ecirc; estiver tendo problemas para compilar um kernel, tome uma precaução,
+	      e mantenha um <filename>GENERIC</filename>, ou qualquer outro kernel funcional, disponível.
+	      Você não pode confiar sempre no <filename>kernel.old</filename> pois no caso de um segundo
+	      kernel problemático ser instalado, o problemático anterior será o <filename>kernel.old</filename>,
+	      sobrescrevendo o arquivo funcional.  Lembre-se de corrigir o kernel e ter um novo kernel funcional
+	      o quanto antes, ou de mover o kernel de segurança para o nome original de <filename>kernel</filename>,
+	      pois comandos como o &man.ps.1; podem não funcionar corretamente.  O comando à seguir
+	      <quote>destrava</quote> as opções de imutabilidade do kernel, e possibilita que ele seja renomeado
+	      ou sobreposto.</para>
 
 	    <screen>&prompt.root; <userinput>chflags noschg /kernel</userinput></screen>
 
-	    <para>Se voc&ecirc; encontrar isto, voc&ecirc; estar&aacute; rodando provavelmente
-	      em &man.securelevel.8; mais exatamente em zero. Edite o
-	      <literal>kern_securelevel</literal> em
-	      <filename>/etc/rc.conf</filename> e ajuste isto para
-	      <literal>-1</literal>, ent&atilde;o reinicie. Voc&ecirc; pode mudar esta
-	      configura&ccedil;&atilde;o antes de voc&ecirc; instalar o seu novo
-	      kernel.</para>
+	    <para>Se você encontrar qualquer problema relacionado à esta etapa do procedimento
+	      de instalação, é provável que esteja usando o &os; em nível de segurança (&man.securelevel.8;)
+	      maior que zero.  Neste caso edite a linha
+	      <literal>kern_securelevel</literal> no arquivo
+	      <filename>/etc/rc.conf</filename> e ajuste seu valor para
+	      <literal>-1</literal>, depois reinicie o &os;.  Esta configuração pode ser
+		feita antes do início da configuração do novo kernel.</para>
 
-	    <para>E, se voc&ecirc; quiser <quote>travar</quote> seu novo kernel
-	      dentro de um local, ou algum arquivo para importa&ccedil;&atilde;o, de algum modo que n&atilde;o
-	      possa ser movido ou alterado:</para>
+	    <para>Se você quizer assegurar seu kernel e <quote>trava-lo</quote> em algum local,
+	      de forma que seu kernel funcional não possa ser modificado ou alterado, faça o
+	      seguinte:</para>
 
 	    <screen>&prompt.root; <userinput>chflags schg /kernel</userinput></screen>
 
-	    <para>No &os; 5.X, os kernels n&atilde;o s&atilde;o instalados com o
-	    sistema one a &aacute;rea de mem&oacute;ria n&atilde;o pode ser mudado, assim como esta &eacute; improvavel que seja a fonte 
-	    do problema que voc&ecirc; est&aacute; tentando.</para></note>
+	    <para>No &os; 5.X, o kernel n&atilde;o é instalado em uma região da memória
+	    que não pode ser modificado, de forma que este problema específicamente, 
+	    seja improvável como causa das dificuldades que você está tendo.</para></note>
 	</listitem>
       </varlistentry>
 
