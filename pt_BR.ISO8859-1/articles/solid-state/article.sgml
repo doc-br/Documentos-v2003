@@ -1,0 +1,680 @@
+<!-- Copyright (c) 2001 The FreeBSD Documentation Project
+
+     Redistribution and use in source (SGML DocBook) and 'compiled' forms
+     (SGML, HTML, PDF, PostScript, RTF and so forth) with or without
+     modification, are permitted provided that the following conditions
+     are met:
+
+      1. Redistributions of source code (SGML DocBook) must retain the above
+         copyright notice, this list of conditions and the following
+         disclaimer as the first lines of this file unmodified.
+
+      2. Redistributions in compiled form (transformed to other DTDs,
+         converted to PDF, PostScript, RTF and other formats) must reproduce
+         the above copyright notice, this list of conditions and the
+         following disclaimer in the documentation and/or other materials
+         provided with the distribution.
+
+     THIS DOCUMENTATION IS PROVIDED BY THE FREEBSD DOCUMENTATION PROJECT "AS
+     IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+     THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+     PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL NIK CLAYTON BE LIABLE FOR ANY
+     DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+     DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+     OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+     HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+     STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+     ANY WAY OUT OF THE USE OF THIS DOCUMENTATION, EVEN IF ADVISED OF THE
+     POSSIBILITY OF SUCH DAMAGE.
+
+     $FreeBSD: doc/en_US.ISO8859-1/articles/solid-state/article.sgml,v 1.11 2003/10/18 10:39:15 simon Exp $
+-->
+
+<!DOCTYPE article PUBLIC "-//FreeBSD//DTD DocBook V4.1-Based Extension//EN" [
+<!ENTITY % man PUBLIC "-//FreeBSD//ENTITIES DocBook Manual Page Entities//EN">
+%man;
+<!ENTITY legalnotice SYSTEM "../../share/sgml/legalnotice.sgml">
+
+<!ENTITY % trademarks PUBLIC "-//FreeBSD//ENTITIES DocBook Trademark Entities//EN">
+%trademarks;
+]>
+
+<article>
+  <articleinfo>
+    <title>FreeBSD e Dispositivos de Estado S&oacute;lido</title>
+
+    <authorgroup>
+      <author>
+	<firstname>John</firstname>
+	<surname>Kozubik</surname>
+
+	<affiliation>
+	  <address><email>john@kozubik.com</email></address>
+	</affiliation>
+      </author>
+    </authorgroup>
+    
+    <pubdate>$FreeBSD: doc/en_US.ISO8859-1/articles/solid-state/article.sgml,v 1.11 2003/10/18 10:39:15 simon Exp $</pubdate>
+
+    <copyright>
+      <year>2001</year>
+      <holder>The FreeBSD Documentation Project</holder>
+    </copyright>
+
+    <legalnotice id="trademarks" role="trademarks">
+      &tm-attrib.freebsd;
+      &tm-attrib.m-systems;
+      &tm-attrib.general;
+    </legalnotice>
+
+    &legalnotice;
+    
+    <abstract>
+      <para>Este artigo aborda o uso de dispositivos de armazenamento em 
+	estado s&oacute;lido na cria&ccedil;&atilde;o de sistemas embedded.</para>
+    
+      <para>Os sistemas Embedded possuem a vantagem de ter a sua
+	estabilidade aumentada devido a ausencia completa de partes
+	m&oacute;veis (Discos rigidos).  Entretanto &eacute; necess&aacute;rio levar em conta
+	que geralmente estes dispositivos possuem pouco espa&ccedil;o de
+	disco dispon&iacute;vel, al&eacute;m de terem na durabilidade da midia de
+	armazenamento outro fator cr&iacute;tico.</para>
+	
+      <para>Os t&oacute;picos especificos a serem abordados incluiem os tipos
+	atributos das midias de estado s&oacute;lido apropriadas para uso
+	como disco no FreeBSD, as op&ccedil;&otilde;es de kernel que s&atilde;o
+	interessantes neste tipo de ambiente, o funcionamento do
+	<filename>rc.diskless</filename> o qual &eacute; respons&aacute;vel por 
+	automatizar a a inicializa&ccedil;&atilde;o deste tipo de sistema e por
+	suprir as necessidades de sistemas de arquivos destinados
+	apenas ao modo de leitura, e a configura&ccedil;&atilde;o manual dos sistemas
+	de arquivo.  O artigo ir&aacute; concluir com algumas estrat&eacute;gias
+	gerais para pequenos ambientes FreeBSD que operam em modo de
+	apenas leitura.</para>
+    </abstract>
+  </articleinfo>
+
+  <sect1 id="intro">
+    <title>Dispositivos de disco em estado s&oacute;lido</title>
+
+    <para>O escopo deste artigo ir&aacute; se limitar aos dispositivos de
+      disco em estado s&oacute;lido baseados em mem&oacute;ria flash.  A mem&oacute;ria
+      flash &eacute; uma mem&oacute;ria em estado s&oacute;lido (sem nenhuma parte m&oacute;vel) a
+      qual n&atilde;o &eacute; vol&aacute;til (a memoria mant&eacute;m os dados mesmo depois que
+      todas as fontes de energia s&atilde;o desligadas).  A mem&oacute;ria flash
+      pode suportar um grandes choques fisicos (quedas, etc) e &eacute;
+      razoavelmente r&aacute;pida (a solu&ccedil;&atilde;o de mem&oacute;ria flash abordadas neste
+      artigo s&atilde;o ligeiramente mais lentas que um disco rigido EIDE
+      para as opera&ccedil;&otilde;es de escrita, e muito mais rapida para as
+      opera&ccedil;&otilde;es de leitura).  Um aspecto muito importante das mem&oacute;rias
+      flash, e que cada setor possui uma capacidade limitada de
+      reescrita.  Voc&ecirc; somente pode escrever, apagar, e escrever de
+      novo para um setor de uma mem&oacute;ria flash um certo numero de de
+      vezes antes que o setor se torne permanentemente inutilizado.  
+      Embora muitos dispositivos de mem&oacute;ria flash mapeiem
+      automaticamente os blocos ruins, e embora alguns deles
+      distribuam as opera&ccedil;&otilde;es de escrita atrav&eacute;s de toda a unidade,
+      permanece o fato de que existe um limite para o numero de
+      opera&ccedil;&otilde;es de escrita que se pode realizar no dispositivo.  As
+      unidades competitivas possuem em suas especifica&ccedil;&atilde;o uma vida
+      &uacute;til entre 1.000.000 e 10.000.000 de escritas por setor.  Esta
+      vida util &eacute; varia de acordo com a temperatura do
+      ambiente.</para>
+    
+    <para>Especificamente, n&oacute;s iremos estar discutindo sobre
+      unidades compact-flash compat&iacute;veis com o padr&atilde;o ATA e unidades
+      de mem&oacute;ria flash &diskonchip; da M-Systems.  Os cart&otilde;es
+      compact-flash compat&iacute;veis com o padr&atilde;o ATA s&atilde;o muito populares
+      como midias de armazenamento para cameras digitais.  O interesse
+      particular neste tipo de unidade reside no fato de que elas
+      podem ser conectadas ao barramento IDE, e por serem compativeis 
+      com a especifica&ccedil;&atilde;o ATA.  Consequentemente, com um adapatador 
+      muito simples e de baixo custo, estes dispositivos podem ser
+      conectados diretamente no barramento IDE de um computador.
+      Ao conectar o dispositivo desta forma, os sistemas operacionais
+      como o FreeBSD ir&atilde;o enxergar o dispositivo como um disco rigido
+      comum (apesar de pequeno).  O produto &diskonchip; da M-Systems
+      &eacute; baseado na mesma tecnologia de mem&oacute;ria flash utilizada nos cart&otilde;es
+      compact flash compativeis com o padr&atilde;o ATA, mas s&atilde;o
+      comercializados no formato de um DIP (um Circuito Integrado) e
+      n&atilde;o s&atilde;o compativeis com o padr&atilde;o ATA.  Para utilizar este tipo
+      de dispositivo, n&atilde;o basta instal&aacute;-lo em uma placa m&atilde;e que possua
+      um socket para &diskonchip;, voc&ecirc; tamb&eacute;m precisar&aacute; gerar um novo
+      kernel para o seu FreeBSD habilitando o suporte ao driver <quote>
+      fla</quote>.  E mais, e isso &eacute; critico, existem dados
+      especificos colocados pelo fabricante no setor de boot deste
+      dispositivo, desta forma voc&ecirc; deve ter o cuidado de n&atilde;o instalar
+      o boot loader do FreeBSD (e nenhum outro) quando estiver
+      utilizando um &diskonchip;.</para>
+      
+    <para>Existem outras solu&ccedil;&otilde;es de disco em estado s&oacute;lido, mas eles
+      s&atilde;o caros, obscuros e relativamente complicados para serem abordados 
+      dentro do no escopo deste artigo.</para>
+  </sect1>
+
+  <sect1 id="kernel">
+      <title>Op&ccedil;&otilde;es do Kernel</title>
+
+    <para>Existem poucas as op&ccedil;&otilde;es no kernel que sejam de interesse
+      especifico para a cria&ccedil;&atilde;o de um sistema FreeBSD embedded.</para>
+    
+    <para>Primeiro, todos os sistemas FreeBSD embedded que utilizam
+      unidades de mem&oacute;ria flash como sistema de disco estar&atilde;o
+      interessados em discos de mem&oacute;ria e sistemas de arquivos em
+      mem&oacute;ria.  Devido o limitado numero de opera&ccedil;&otilde;es de escrita que
+      pode ser realizados em uma unidade de memoria flash, o disco e o
+      sistema de arquivo no disco provavelmente ser&atilde;o montados em modo
+      de apenas leitura.  Neste ambiente, os sistemas de arquivo tais
+      como <filename>/tmp</filename> e <filename>/var</filename> ser&atilde;o
+      montados em um sistema de arquivos em mem&oacute;ria RAM, de forma a
+      permitir que o sistema possa criar os logs, atualizar os
+      contadores e os arquivos tempor&aacute;rios.  O sistema de arquivo em
+      mem&oacute;ria &eacute; um componente critico para o sucesso da implementa&ccedil;&atilde;o
+      de um sistema FreeBSD embedded.</para>
+    
+    <para>Voc&ecirc; deve certificar-se que as linhas abaixo existam em seu
+    arquivo de configura&ccedil;&atilde;o do kernel:</para>
+    
+    <programlisting>options         MFS             # Memory Filesystem
+options         MD_ROOT         # md device usable as a potential root device
+pseudo-device   md              # memory disk</programlisting>
+
+    <para>Segundo, se voc&ecirc; ir&aacute; utilizar dispositivos &diskonchip; da M-Systems, 
+      voc&ecirc; tamb&eacute;m ir&aacute; precisar incluir a linha abaixo:</para>
+
+    <programlisting>device          fla0    at isa?</programlisting>
+  </sect1>
+
+  <sect1 id="ro-fs">
+    <title>O <filename>rc.diskless</filename> e os sistemas de
+      arquivos de apenas leitura</title>
+
+    <para>A inicializa&ccedil;&atilde;o p&oacute;s boot em um sistema FreeBSD embedded &eacute;
+      controlada pelo <filename>/etc/rc.diskless2</filename> (o
+      <filename>/etc/rc.diskless1</filename> &eacute; para o boot diskless
+      usando BOOTP).  Este script &eacute; chamado atrav&eacute;s da inser&ccedil;&atilde;o de
+      uma linha no <filename>/etc/rc.conf</filename> como a
+      seguir:</para>
+    
+    <programlisting>diskless_mount=/etc/rc.diskless2</programlisting>
+
+    <para>O <filename>rc.diskless2</filename> monta o
+      <filename>/var</filename> em um sistema de arquivo em mem&oacute;ria
+      RAM, faz uma lista de diret&oacute;rios configur&aacute;veis no
+      <filename>/var</filename> com o comando &man.mkdir.1;, altera as
+      permiss&otilde;es de alguns destes diret&oacute;rios, e prepara uma c&oacute;pia das
+      entradas de dispositivo  tornando o /dev uma parti&ccedil;&atilde;o gravavel
+      (novamente um sistema de arquivo em mem&oacute;ria).  Na execu&ccedil;&atilde;o do
+      <filename>/etc/rc.diskless2</filename>, uma outra variavel do
+      <filename>rc.conf</filename> ir&aacute; ser consultada -
+      <literal>varsize</literal>.  O
+      <filename>/etc/rc.diskless2</filename> cria a parti&ccedil;&atilde;o
+      <filename>/var</filename> com um tamanho baseado no valor desta
+      variavel do <filename>rc.conf</filename>:</para>
+
+    <programlisting>varsize=8192</programlisting>
+
+    <para>Lembre-se que este valor est&aacute; em setores.  A cria&ccedil;&atilde;o da
+      parti&ccedil;&atilde;o <filename>/dev</filename> pelo
+      <filename>/etc/rc.diskless2</filename>, entretanto, &eacute; governada
+      por um valor pr&eacute;-definido de 4096 setores.  &Eacute; muito simples
+      alterar essa entrada no <filename>/etc/rc.diskless2</filename>,
+      embora voc&ecirc; n&atilde;o precise de mais espa&ccedil;o para o
+      <filename>/dev</filename>.</para>
+    
+    <para>&Eacute; imporante lembrar que o script
+      <filename>/etc/rc.diskless2</filename> assume que voc&ecirc; ja removeu
+      a sua parti&ccedil;&atilde;o <filename>/tmp</filename> convencional e que j&aacute; a
+      subistituiu por um link simb&oacute;lico para
+      <filename>/var/tmp</filename>.  Como o <filename>tmp</filename>
+      &eacute; um dos diret&oacute;rios criados no <filename>/var</filename> pelo
+      script <filename>/etc/rc.diskless2</filename>, e uma vez que o
+      <filename>/var</filename> &eacute; um sistema de arquivo em mem&oacute;ria (o
+      qual &eacute; montado com permiss&atilde;o para escrita e leitura), o
+      <filename>/tmp</filename> agora tamb&eacute;m ir&aacute; permitir opera&ccedil;&otilde;es de
+      leitura e escrita.</para>
+    
+    <para>O fato do <filename>/var</filename> e do
+      <filename>/dev</filename> serem sistemas de arquivos com
+      permiss&otilde;es de leitura e escrita &eacute; uma importante distin&ccedil;&atilde;o, uma
+      vez que a parti&ccedil;&atilde;o <filename>/</filename> (e qualquer outra que
+      voc&ecirc; tenha em sua midia flash) devem ser montadas em modo de
+      apenas leitura.  Lembre-se que na <xref linkend="intro"> n&oacute;s
+      detalhamos as limita&ccedil;&otilde;es da mem&oacute;ria flash - especificamente a
+      capacidade limitada de escrita por setor.  A import&acirc;ncia de n&atilde;o
+      montar os sistemas de arquivo da sua unidade flash em modo de
+      leitura e escrita, e a import&acirc;ncia de n&atilde;o utilizar uma area de
+      swap, n&atilde;o pode ser menosprezada. Uma area de swap em um sistema
+      de produ&ccedil;&atilde;o sob alta demanda, pode inutilizar uma unidade flash 
+      em menos de um ano de uso.  A gera&ccedil;&atilde;o intensa de arquivos de
+      logs, bem como a cria&ccedil;&atilde;o e remo&ccedil;&atilde;o de arquivos temporarios em
+      larga escala podem fazer o mesmo. Consequentemente, em
+      complemento a remo&ccedil;&atilde;o das entradas de <literal>swap</literal> e
+      do <literal>/proc</literal> do seu arquivo
+      <filename>/etc/fstab</filename>, voc&ecirc; deve alterar as op&ccedil;&otilde;es de
+      cada um dos sistemas de arquivos para <literal>ro</literal>
+      (apenas leitura) como mostrado a seguir:</para>
+    
+    <programlisting># Device                Mountpoint      FStype  Options         Dump    Pass#
+/dev/ad0s1a             /               ufs     ro              1       1</programlisting>
+
+    <para>Algumas aplica&ccedil;&otilde;es em um sistema m&eacute;dio ir&atilde;o come&ccedil;ar a
+      apresentar problemas imediatamente como resultado desta
+      altera&ccedil;&atilde;o.  Por exemplo, n&atilde;o ser&aacute; possivel instalar um port
+      apartir da arvore de ports porque o arquivo
+      <filename>/var/db/port.mkversion</filename> n&atilde;o existe, o cron
+      n&atilde;o ir&aacute; executar de forma correta como resultado da inexistencia
+      dos cron tabs no <filename>/var</filename> criado pelo
+      <filename>/etc/rc.diskless2</filename>, e o syslog e o dhcp ir&atilde;o
+      encontrar problemas como resultado do sistema de arquivo em modo
+      de apenas leitura  e da inexistencia de arquivos no
+      <filename>/var</filename> que o
+      <filename>/etc/rc.diskless2</filename> criou.  Estes s&atilde;o apenas
+      problemas tempor&aacute;rios, os quais j&aacute; est&atilde;o endere&ccedil;ados, juntamente
+      com outras solu&ccedil;&otilde;es para a execu&ccedil;&atilde;o de outros pacotes de
+      software comuns na sess&atilde;o <xref linkend="strategies">.</para>
+    
+    <para>Um conceito importante de set ter em mente &eacute; que um sistema
+      de arquivos foi montado como apenas leitura pelo
+      <filename>/etc/fstab</filename> pode ser alterado para o modo de
+      leitura e escrita a qualquer momento atrav&eacute;s do uso do seguinte
+      comando:</para>
+    
+    <screen>&prompt.root; <userinput>/sbin/mount -uw <replaceable>partition</replaceable></userinput></screen>
+
+    <para> e pode ser convertido de volta para o modo apenas de leitura com o comando:</para>
+
+    <screen>&prompt.root; <userinput>/sbin/mount -ur <replaceable>partition</replaceable></userinput></screen>
+  </sect1>
+
+  <sect1>
+    <title>Cria&ccedil;&atilde;o manual de um sistema de arquivos.</title>
+
+    <para>Devido a compatibilidade com o padr&atilde;o ATA os cart&otilde;es
+      Compact-Flash s&atilde;o vistos pelo FreeBSD como um disco rigido IDE
+      normal, assim como o ocorre com uma unidade &diskonchip; da
+      M-Systems (quando voc&ecirc; est&aacute; utilizando um kernel com suporte ao
+      driver fla habilitado), voc&ecirc; pode teoricamente instalar o FreeBSD
+      apartir da rede utilizando os disquetes de boot (kern e mfsroot)
+      ou apartir do CD.  Al&eacute;m do fato de que voc&ecirc; n&atilde;o deve instalar o
+      boot loader quando estiver usando um dispositivo M-Systems, n&atilde;o &eacute;
+      necess&aacute;rio nenhuma outra instru&ccedil;&atilde;o especial.</para>
+    
+    <para>Entretanto, ao instalar o FreeBSD pelos procedimentos
+      normais (mesmo para uma pequena instala&ccedil;&atilde;o), pode produzir um
+      sistema com um tamanho superior a 200 megabytes.  Como a maioria
+      das pessoas costumam utilizar dispositivos de memoria flash com
+      uma capacidade menor que esta (128 Mb &eacute; considerado muitas vezes
+      um exagero, sendo que unidades entre 16 e 32 s&atilde;o consideradas
+      normais) uma instala&ccedil;&atilde;o usando os mecanismos normais n&atilde;o &eacute;
+      possivel &mdash; pois simplesmente n&atilde;o existe espa&ccedil;o suficiente
+      nem mesmo para a instala&ccedil;&atilde;o minima do m&eacute;todo convencional.</para>
+    
+    <para>The easiest way to overcome this space limitation is to install
+      FreeBSD using conventional means to a normal hard disk.  After the
+      installation is complete, pare down the operating system to a size that
+      will fit onto your flash media, then tar the entire filesystem.  The
+      following steps will guide you through the process of preparing a piece
+      of flash memory for your tarred filesystem.  Remember, because a normal
+      installation is not being performed, operations such as partitioning,
+      labeling, file-system creation, etc. need to be performed by hand.  In
+      addition to the kern and mfsroot floppy disks, you will also need to use
+      the fixit floppy.  If you are using a M-Systems &diskonchip;, the kernel
+      on your kern floppy must have the <literal>fla</literal> option detailed
+      in <xref linkend="kernel"> compiled into it.  Please see
+      <xref linkend="kern.flp"> for instructions on creating a new kernel for
+      <filename>kern.flp</filename>.</para>
+
+    <procedure>
+      <step>
+	<title>Partitioning your flash media device</title>
+
+	<para>After booting with the kern and mfsroot floppies, choose
+	  <literal>custom</literal> from the installation menu.  In the custom
+	  installation menu, choose <literal>partition</literal>.  In the
+	  partition menu, you should delete all existing partitions using the
+	  <keycap>d</keycap> key.  After deleting all existing partitions,
+	  create a partition using the <keycap>c</keycap> key and accept the
+	  default value for the size of the partition.  When asked for the
+	  type of the partition, make sure the value is set to
+	  <literal>165</literal>.  Now write this partition table to the disk
+	  by pressing the <keycap>w</keycap> key (this is a hidden option on
+	  this screen).  When presented with a menu to choose a boot manager,
+	  take care to select <literal>None</literal> if you are using an
+	  M-Systems &diskonchip;.  If you are using an ATA compatible compact
+	  flash card, you should choose the FreeBSD Boot Manager.  Now press
+	  the <keycap>q</keycap> key to quit the partition menu.  You will be
+	  shown the boot manager menu once more - repeat the choice you made
+	  earlier.</para>
+      </step>
+
+      <step>
+	<title>Creating filesystems on your flash memory device</title>
+
+	<para>Exit the custom installation menu, and from the main
+	  installation menu choose the <literal>fixit</literal> option.  After
+	  entering the fixit environment, enter the following commands:</para>
+
+	<informaltable frame="none">
+	  <tgroup cols="2">
+	    <thead>
+	      <row>
+		<entry align="center">ATA compatible</entry>
+
+		<entry align="center">&diskonchip;</entry>
+	      </row>
+	    </thead>
+	    <tbody>
+	      <row>
+		<entry><para><screen>&prompt.root; <userinput>mknod /dev/ad0a c 116 0</userinput>
+&prompt.root; <userinput>mknod /dev/ad0c c 116 2</userinput>		      
+&prompt.root; <userinput>disklabel -e /dev/ad0c</userinput></screen></para></entry>
+
+		<entry><para><screen>&prompt.root; <userinput>mknod /dev/fla0a c 102 0</userinput>
+&prompt.root; <userinput>mknod /dev/fla0c c 102 2</userinput>
+&prompt.root; <userinput>disklabel -e /dev/fla0c</userinput></screen></para></entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+	</informaltable>
+
+	<para>At this point you will have entered the vi editor under the
+	  auspices of the disklabel command.  If you are using &diskonchip;,
+	  the first step will be to change the type value near the beginning
+	  of the file from <literal>ESDI</literal> to
+	  <literal>DOC2K</literal>.  Next, regardless of whether you are using
+	  &diskonchip; or ATA compatible compact flash media, you need to add
+	  an <literal>a:</literal> line at the end of the file.  This
+	  <literal>a:</literal> line should look like:</para>
+
+	<programlisting>a:      <replaceable>123456</replaceable>  0       4.2BSD  0       0</programlisting>
+
+	<para>Where <replaceable>123456</replaceable> is a number that is
+	  exactly the same as the number in the existing <literal>c:</literal>
+	  entry for size. Basically you are duplicating the existing
+	  <literal>c:</literal> line as an <literal>a:</literal> line, making
+	  sure that fstype is <literal>4.2BSD</literal>.  Save the file and
+	  exit.</para>
+
+	<informaltable frame="none">
+	  <tgroup cols="2">
+	    <thead>
+	      <row>
+		<entry align="center">ATA compatible</entry>
+
+		<entry align="center">&diskonchip;</entry>
+	      </row>
+	    </thead>
+	    <tbody>
+	      <row>
+		<entry><para><screen>&prompt.root; <userinput>disklabel -B -r /dev/ad0c</userinput>
+&prompt.root; <userinput>newfs /dev/ad0a</userinput></screen></para></entry>
+
+		<entry><para><screen>&prompt.root; <userinput>disklabel -B -r /dev/fla0c</userinput>
+&prompt.root; <userinput>newfs /dev/fla0a</userinput></screen></para></entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+	</informaltable>
+      </step>
+
+      <step>
+	<title>Placing your filesystem on the flash media</title>
+
+	<para>Mount the newly prepared flash media:</para>
+
+	<informaltable frame="none">
+	  <tgroup cols="2">
+	    <thead>
+	      <row>
+		<entry align="center">ATA compatible</entry>
+
+		<entry align="center">&diskonchip;</entry>
+	      </row>
+	    </thead>
+	    <tbody>
+	      <row>
+		<entry><para><screen>&prompt.root; <userinput>mount /dev/ad0a /flash</userinput></screen></para></entry>
+
+		<entry><para><screen>&prompt.root; <userinput>mount /dev/fla0a /flash</userinput></screen></para></entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+	</informaltable>
+	
+	<para>Bring this machine up on the network so we may transfer our tar
+	  file and explode it onto our flash media filesystem.  One example of
+	  how to do this is:</para>
+
+	<screen>&prompt.root; <userinput>ifconfig xl0 192.168.0.10 netmask 255.255.255.0</userinput>
+&prompt.root; <userinput>route add default 192.168.0.1</userinput></screen>
+
+	<para>Now that the machine is on the network, transfer your tar file.
+	  You may be faced with a bit of a dilemma at this point - if your
+	  flash memory part is 128 megabytes, for instance, and your tar file
+	  is larger than 64 megabytes, you cannot have your tar file on the
+	  flash media at the same time as you explode it - you will run out of
+	  space.  One solution to this problem, if you are using FTP, is to
+	  untar the file while it is transferred over FTP.  If you perform
+	  your transfer in this manner, you will never have the tar file and
+	  the tar contents on your disk at the same time:</para>
+
+	<screen><prompt>ftp></prompt> <userinput>get tarfile.tar "| tar xvf -"</userinput></screen>
+
+	<para>If your tarfile is gzipped, you can accomplish this as
+	  well:</para>
+
+	<screen><prompt>ftp></prompt> <userinput>get tarfile.tar "| zcat | tar xvf -"</userinput></screen>
+
+	<para>After the contents of your tarred filesystem are on your flash
+	  memory filesystem, you can unmount the flash memory and
+	  reboot:</para>
+
+	<screen>&prompt.root; <userinput>cd /</userinput>
+&prompt.root; <userinput>umount /flash</userinput>
+&prompt.root; <userinput>exit</userinput></screen>
+
+	<para>Assuming that you configured your filesystem correctly when it
+	  was built on the normal hard disk (with your filesystems mounted
+	  read-only, and with the necessary options compiled into the kernel)
+	  you should now be successfully booting your FreeBSD embedded
+	  system.</para>
+      </step>
+    </procedure>
+  </sect1>
+
+  <sect1 id="kern.flp">
+    <title>Building a <filename>kern.flp</filename> Installation Floppy with
+      the fla Driver</title>
+
+    <note>
+      <para>This section of the article is relevant only to those using
+	M-Systems &diskonchip; flash media.</para>
+    </note>
+
+    <para>It is possible that your <filename>kern.flp</filename> boot floppy
+      does not have a kernel with the <devicename>fla</devicename> driver
+      compiled into it necessary for the system to recognize the &diskonchip;.
+      If you have booted off of the installation floppies and are told that no
+      disks are present, then you are probably lacking the
+      <devicename>fla</devicename> driver in your kernel.</para>
+
+    <para>After you have built a kernel with <devicename>fla</devicename>
+      support that is smaller than 1.4 megabytes, you can create a custom
+      <filename>kern.flp</filename> floppy image with it by following these
+      instructions:</para>
+
+    <procedure>
+      <step>
+	<para>Obtain an existing kern.flp image file</para>
+      </step>
+
+      <step>
+	<para><screen>&prompt.root; <userinput>vnconfig vn0c kern.flp</userinput></screen></para>
+      </step>
+
+      <step>
+	<para><screen>&prompt.root; <userinput>mount /dev/vn0c /mnt</userinput></screen></para>
+      </step>
+      
+      <step>
+	<para>Place your kernel file into <filename>/mnt</filename>, replacing
+	  the existing one</para>
+      </step>
+
+      <step>
+	<para><screen>&prompt.root; <userinput>vnconfig -d vn0c</userinput></screen></para>
+      </step>
+    </procedure>
+
+    <para>Your <filename>kern.flp</filename> file now has your new kernel on it.</para>
+  </sect1>
+
+  <sect1 id="strategies">
+    <title>System Strategies for Small and Read Only Environments</title>
+
+    <para>In <xref linkend="ro-fs">, it was pointed out that the
+      <filename>/var</filename> filesystem constructed by
+      <filename>/etc/rc.diskless2</filename> and the presence of a read-only
+      root filesystem causes problems with many common software packages used
+      with FreeBSD.  In this article, suggestions for successfully running
+      cron, syslog, ports installations, and the Apache web server will be
+      provided.</para>
+
+    <sect2>
+      <title>cron</title>
+
+      <para>In <filename>/etc/rc.diskless2</filename> there is a variable
+	named <literal>var_dirs</literal>.  This variable consists of a
+	space-delimited list of directories that will be created inside of
+	<filename>/var</filename> after it is mounted as a memory filesystem.
+	<filename>cron</filename> and <filename>cron/tabs</filename> are not
+	in that list, and without those directories, cron will complain.  By
+	inserting <literal>cron</literal>, <literal>cron/tabs</literal>, and
+	perhaps even <literal>at</literal>, and <literal>at/jobs</literal> as
+	elements of that variable, you will facilitate the running of the
+	&man.cron.8; and &man.at.1; daemons.</para>
+
+      <para>However, this still does not solve the problem of maintaining cron
+	tabs across reboots.  When the system reboots, the
+	<filename>/var</filename> filesystem that is in memory will disappear
+	and any cron tabs you may have had in it will also disappear.
+	Therefore, one solution would be to create cron tabs for the users
+	that need them, mount your <filename>/</filename> filesystem as
+	read-write and copy those cron tabs to somewhere safe, like
+	<filename>/etc/tabs</filename>, then add a line to the end of
+	<filename>/etc/rc.diskless2</filename> that copies those crontabs into
+	<filename>/var/cron/tabs</filename> after that directory has been
+	created during system initialization.  You may also need to add a line
+	that changes modes and permissions on the directories you create and
+	the files you copy with <filename>/etc/rc.diskless2</filename>.</para>
+    </sect2>
+
+    <sect2>
+      <title>syslog</title>
+
+      <para><filename>syslog.conf</filename> specifies the locations of
+	certain log files that exist in <filename>/var/log</filename>.  These
+	files are not created by <filename>/etc/rc.diskless2</filename> upon
+	system initialization. Therefore, somewhere in
+	<filename>/etc/rc.diskless2</filename>, after the section that creates
+	the directories in <filename>/var</filename>, you will need to add
+	something like this:</para>
+
+      <screen>&prompt.root; <userinput>touch /var/log/security /var/log/maillog /var/log/cron /var/log/messages</userinput>
+&prompt.root; <userinput>chmod 0644 /var/log/*</userinput></screen>
+
+      <para>You will also need to add the log directory to the list of
+	directories that <filename>/etc/rc.diskless2</filename>
+	creates.</para>
+    </sect2>
+
+    <sect2>
+      <title>ports installation</title>
+
+      <para>Before discussing the changes necessary to successfully use the
+	ports tree, a reminder is necessary regarding the read-only nature of
+	your filesystems on the flash media.  Since they are read-only, you
+	will need to temporarily mount them read-write using the mount syntax
+	shown in <xref linkend="ro-fs">.  You should always remount those
+	filesystems read-only when you are done with any maintenance -
+	unnecessary writes to the flash media could considerably shorten its
+	lifespan.</para>
+
+      <para>To make it possible to enter a ports directory and successfully
+	run <command>make install</command>, it is necessary for the file
+	<filename>/var/db/port.mkversion</filename> to exist, and that it has
+	a correct date in it.  Further, we must create a packages directory on
+	a non-memory filesystem that will keep track of our packages across
+	reboots. Because it is necessary to mount your filesystems as
+	read-write for the installation of a package anyway, it is sensible to
+	assume that an area on the flash media can also be used for package
+	information to be written to.</para>
+
+      <para>First, create a package database directory.  This is normally in
+	<filename>/var/db/pkg</filename>, but we cannot place it there as it
+	will disappear every time the system is booted.</para>
+
+      <screen>&prompt.root; <userinput>mkdir /etc/pkg</userinput></screen>
+
+      <para>Now, add a line to <filename>/etc/rc.diskless2</filename> that
+	links the <filename>/etc/pkg</filename> directory to
+	<filename>/var/db/pkg</filename>.  An example:</para>
+
+      <screen>&prompt.root; <userinput>ln -s /etc/pkg /var/db/pkg</userinput></screen>
+      
+      <para>Add another line in <filename>/etc/rc.diskless2</filename> that
+	creates and populates
+	<filename>/var/db/port.mkversion</filename></para>
+
+      <screen>&prompt.root; <userinput>touch /var/db/port.mkversion</userinput>
+&prompt.root; <userinput>chmod 0644 /var/db/port.mkversion</userinput>
+&prompt.root; <userinput>echo <replaceable>20010412</replaceable> >> /var/db/port.mkversion</userinput></screen>
+
+      <para>where <replaceable>20010412</replaceable> is a date that is
+	appropriate for your particular release of FreeBSD</para>
+
+      <para>Now, any time that you mount your filesystems as read-write and
+	install a package, the <command>make install</command> will work
+	because it finds a suitable
+	<filename>/var/db/port.mkversion</filename>, and package information
+	will be written successfully to <filename>/etc/pkg</filename> (because
+	the filesystem will, at that time, be mounted read-write) which will
+	always be available to the operating system as
+	<filename>/var/db/pkg</filename>.</para>
+    </sect2>
+
+    <sect2>
+      <title>Apache Web Server</title>
+
+      <para>Apache keeps pid files and logs in
+	<filename><replaceable>apache_install</replaceable>/logs</filename>.
+	Since this directory doubtless exists on a read-only filesystem, this
+	will not work.  It is necessary to add a new directory to the
+	<filename>/etc/rc.diskless2</filename> list of directories to create
+	in <filename>/var</filename>, to link
+	<filename><replaceable>apache_install</replaceable>/logs</filename> to
+	<filename>/var/log/apache</filename>.  It is also necessary to set
+	permissions and ownership on this new directory.</para>
+
+      <para>First, add the directory <literal>log/apache</literal> to the list
+	of directories to be created in
+	<filename>/etc/rc.diskless2</filename>.</para>
+      
+      <para>Second, add these commands to
+	<filename>/etc/rc.diskless2</filename> after the directory creation
+	section:</para>
+
+      <screen>&prompt.root; <userinput>chmod 0774 /var/log/apache</userinput>
+&prompt.root; <userinput>chown nobody:nobody /var/log/apache</userinput></screen>
+
+      <para>Finally, remove the existing
+	<filename><replaceable>apache_install</replaceable>/logs</filename>
+	directory, and replace it with a link:</para>
+
+      <screen>&prompt.root; <userinput>rm -rf (apache_install)/logs</userinput>
+&prompt.root; <userinput>ln -s /var/log/apache (apache_install)/logs</userinput></screen>
+    </sect2>
+  </sect1>
+</article>
+
