@@ -634,7 +634,7 @@
 	ao arquivo <filename>/etc/make.conf</filename>.  Tenha em mente 
 	que qualquer coisa que voc&ecirc; adicione ao arquivo <filename>
 	/etc/make.conf</filename> tamb&eacute;m &eacute; usado sempre que voc&ecirc; executar 
-	o comando <command>make</make>, ent&atilde;o &eacute; uma boa id&eacute;ia configur&aacute;-lo 
+	o comando <command>make</command>, ent&atilde;o &eacute; uma boa id&eacute;ia configur&aacute;-lo 
 	para alguma coisa sens&iacute;vel para seu sistema.</para>
 
       <para>Um usu&aacute;rio t&iacute;pico provavelmente copiar&aacute; as linhas 
@@ -820,86 +820,87 @@ Script done, &hellip;</screen>
       </sect3>
 
       <sect3 id="make-buildworld">
-	<title>Compile the Base System</title>
+	<title>Compilando a Base do Sistema</title>
 
-	<para>You must be in the <filename>/usr/src</filename>
-	  directory:</para>
+	<para>Voc&ecirc; deve estar no diret&oacute;rio:<filename>/usr/src</filename>
+	  </para>
 
 	<screen>&prompt.root; <userinput>cd /usr/src</userinput></screen>
 
-	<para>(unless, of course, your source code is elsewhere, in which
-	  case change to that directory instead).</para>
+	<para>(a n&atilde;o ser que, claro, seu c&oacute;digo fonte esteja em outro lugar, 
+	  neste caso v&aacute; para este diret&oacute;rio).</para>
 	<indexterm><primary><command>make</command></primary></indexterm>
 
-	<para>To rebuild the world you use the &man.make.1; command.  This
-          command reads instructions from the <filename>Makefile</filename>,
-          which describes how the programs that comprise &os; should be
-          rebuilt, the order in which they should be built, and so on.</para>
+	<para>Para reconstruir todo o seu sistema use o comando &make.1.  Este 
+	  comando l&ecirc; as instru&ccedil;&otilde;es do arquivo <filename>Makefile</filename>, 
+	  que descreve como os programas que comp&otilde;em o &os; devem ser 
+	  recompilados, a ordem em que isto deve acontecer, e assim por 
+	  diante.</para>
 
-	<para>The general format of the command line you will type is as
-	  follows:</para>
+	<para>O formato geral da linha de comando que voc&ecirc; digitar&aacute; 
+	  &eacute; a seguinte:</para>
 
 	<screen>&prompt.root; <userinput>make -<replaceable>x</replaceable> -D<replaceable>VARIABLE</replaceable> <replaceable>target</replaceable></userinput></screen>
 
-	<para>In this example, <option>-<replaceable>x</replaceable></option>
-	  is an option that you would pass to &man.make.1;.  See the
-	  &man.make.1; manual page for an example of the options you can
-	  pass.</para>
+	<para>Neste exemplo, <option>-<replaceable>x</replaceable></option>
+	  &eacute; a op&ccedil;&atilde;o que voc&ecirc; deve passar para o &man.make.1;.  Veja a 
+	  p&aacute;gina de manual do &man.make.1; para exemplos de op&ccedil;&otilde;es que 
+	  voc&ecirc; pode passar.</para>
 
 	<para><option>-D<replaceable>VARIABLE</replaceable></option>
-	  passes a variable to the <filename>Makefile</filename>.  The
-	  behavior of the <filename>Makefile</filename> is controlled by
-	  these variables.  These are the same variables as are set in
-	  <filename>/etc/make.conf</filename>, and this provides another
-	  way of setting them.</para>
+	  passa uma vari&aacute;vel para o <filename>Makefile</filename>.  O
+	  comportamento do <filename>Makefile</filename> &eacute; controlado 
+	  por estas vari&aacute;veis.  Estas s&atilde;o as mesmas vari&aacute;veis configuradas 
+	  no <filename>/etc/make.conf</filename>, e isto &eacute; um outro modo 
+	  de configur&aacute;-las.</para>
 
 	<screen>&prompt.root; <userinput>make -DNOPROFILE <replaceable>target</replaceable></userinput></screen>
 
-	<para>is another way of specifying that profiled libraries should
-	  not be built, and corresponds with the</para>
+	<para>&eacute; outra maneira de especificar bibliotecas que n&atilde;o devem 
+	  ser compiladas, e &eacute; o mesmo que a linha</para>
 
 	<programlisting>NOPROFILE=    true 	#    Avoid compiling profiled libraries</programlisting>
 
-	<para>line in <filename>/etc/make.conf</filename>.</para>
+	<para>no arquivo <filename>/etc/make.conf</filename>.</para>
 
-	<para><replaceable>target</replaceable> tells &man.make.1; what
-	  you want to do.  Each <filename>Makefile</filename> defines a
-	  number of different <quote>targets</quote>, and your choice of
-	  target determines what happens.</para>
+	<para><replaceable>target</replaceable> diz ao &man.make.1; o que 
+	  voc&ecirc; quer fazer.  Cada <filename>Makefile</filename> define um 
+	  n&uacute;mero diferente de <quote>targets</quote>, e a sua escolha 
+	  determina o que acontece.</para>
 
-	<para>Some targets are listed in the
-	  <filename>Makefile</filename>, but are not meant for you to run.
-	  Instead, they are used by the build process to break out the
-	  steps necessary to rebuild the system into a number of
-	  sub-steps.</para>
+	<para>Alguns <quote>targets</quote> s&atilde;o listados no arquivo 
+	  <filename>Makefile</filename>, mas n&atilde;o foram feitos para que 
+	  voc&ecirc; os execute.  Eles s&atilde;o usados pelo processo de compila&ccedil;&atilde;o 
+	  nos passos necess&aacute;rios para recompilar o sistema em v&aacute;rios 
+	  sub passos.</para>
 
-	<para>Most of the time you will not need to pass any parameters to
-	    &man.make.1;, and so your command like will look like
-	    this:</para>
+	<para>Na maioria das vezes voc&ecirc; n&atilde;o vai precisar passar qualquer 
+	    par&acirc;metro para o &man.make.1;, ent&atilde;o sua linha de comando 
+	    deve ficar parecida com:</para>
 
 	<screen>&prompt.root; <userinput>make <replaceable>target</replaceable></userinput></screen>
 
-	<para>Beginning with version 2.2.5 of &os; (actually, it was
-	  first created on the &os.current; branch, and then retrofitted to
-	  &os.stable; midway between 2.2.2 and 2.2.5) the
-	  <maketarget>world</maketarget> target has been split in
-	  two: <maketarget>buildworld</maketarget> and
+	<para>Desde a vers&atilde;o 2.2.5 do &os; (na verdade, primeiro foi 
+	  criado na &aacute;rvore &os.current;, e depois reintroduzida no 
+	  &os.stable; entre a 2.2.2 e 2.2.5) o <quote>target</quote> 
+	  <maketarget>world</maketarget> foi dividido em dois: 
+	  <maketarget>buildworld</maketarget> e
 	  <maketarget>installworld</maketarget>.</para>
 
-	<para>As the names imply, <maketarget>buildworld</maketarget>
-	  builds a complete new tree under <filename>/usr/obj</filename>,
-	  and <maketarget>installworld</maketarget> installs this tree on
-	  the current machine.</para>
+	<para>Como implicam os nomes, <maketarget>buildworld</maketarget>
+	  compila uma nova &aacute;rvore debaixo de <filename>/usr/obj</filename>,
+	  e <maketarget>installworld</maketarget> instala esta &aacute;rvore na 
+	  m&aacute;quina.</para>
 
-	<para>This is very useful for 2 reasons.  First, it allows you
-	  to do the build safe in the knowledge that no components of
-	  your running system will be affected.  The build is
-	  <quote>self hosted</quote>.  Because of this, you can safely
-	  run <maketarget>buildworld</maketarget> on a machine running
-	  in multi-user mode with no fear of ill-effects.  It is still
-	  recommended that you run the
-	  <maketarget>installworld</maketarget> part in single user
-	  mode, though.</para>
+	<para>Isto &eacute; muito &uacute;til por duas raz&otilde;es.  Primeiro, permite 
+	  que voc&ecirc; fa&ccedil;a uma recompila&ccedil;&atilde;o segura, sabendo que os componentes 
+	  do sistema que est&atilde;o em execu&ccedil;&atilde;o n&atilde;o ser&atilde;o afetados. A 
+	  compila&ccedil;&atilde;o &eacute; <quote>self hosted</quote>.  Por causa disso, voc&ecirc; 
+	  pode seguramente executar o <maketarget>buildworld</maketarget> 
+	  em uma m&aacute;quina em execu&ccedil;&atilde;o em modo multi usu&aacute;rio sem medo de 
+	  efeitos colaterais.  Entretanto, ainda &eacute; recomend&aacute;vel que voc&ecirc;  
+	  execute o <maketarget>installworld</maketarget> em modo mono 
+	  usu&aacute;rio.</para>
 
 	<para>Secondly, it allows you to use NFS mounts to upgrade 
 	  multiple machines on your network.  If you have three machines,
