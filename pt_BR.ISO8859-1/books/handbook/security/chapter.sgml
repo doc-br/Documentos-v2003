@@ -704,50 +704,55 @@
 	é pretty much inútil (ou, pior, oferece a você um falso
 	senso de segurança) se você nao puder detectar invasões potenciais.  
 	A metade do trabalho da cebola é atrasar o atacante, 
-	preferêncialmente do que o parar, a fim de dar ao lado
+	preferêncialmente do que para-lo, a fim de dar ao lado
 	da detecção da equação uma oportunidade de pegá-lo no ato.</para>
 
       <para>A melhor maneira de detectar uma invasão é procurar por
-	arquivos modificados, perdidos ou inesperados.  The best way to look for modified
-	files is from another (often centralized) limited-access system.
-	Writing your security scripts on the extra-secure limited-access
-	system makes them mostly invisible to potential attackers, and this
-	is important.  In order to take maximum advantage you generally
-	have to give the limited-access box significant access to the
-	other machines in the business, usually either by doing a
-	read-only NFS export of the other machines to the limited-access
-	box, or by setting up ssh key-pairs to
-	allow the limited-access box to ssh to
-	the other machines.  Except for its network traffic, NFS is the
-	least visible method &ndash; allowing you to monitor the
-	filesystems on each client box virtually undetected.  If your
-	limited-access server is connected to the client boxes through a
-	switch, the NFS method is often the better choice.  If your
-	limited-access server is connected to the client boxes through a
-	hub, or through several layers of routing, the NFS method may be
-	too insecure (network-wise) and using
-	ssh may be the better choice even with
-	the audit-trail tracks that ssh
-	lays.</para>
+	arquivos modificados, perdidos ou inesperados.  A melhor maneira
+	de procurar por arquivos modificados é de outro sistema 
+	(frequentemente centralizado) com acesso limitado.
+	Escrevendo seus scripts de segurança no sistema com acesso 
+	limitado extra-seguro fá-los na maioria das vezes invisíveis 
+	para atacantes potenciais, e isto é importante.  A fim de
+	conseguir vantagem máxima você geralmente tem que dar a máquina 
+	com acesso limitado, acesso significante as outras
+	máquinas no local, geralmente fazendo a exportação NFS
+	apenas leitura das outras máquinas para a máquina com acesso limitado, 
+	ou criando o par de chaves ssh para permitir a máquina com acesso
+	limitado fazer ssh para outras máquinas.  A exceção do seu 
+	tráfego de rede, o NFS é o método menos visível &ndash; 
+	permitindo que você monitore o sistema de arquivos em cada
+	máquina cliente não detectada virtualmente.  Se seu
+	servidor com acesso limitado esta conectado as máquinas clientes
+	através de um <literal>switch</literal>, o método NFS é
+	frequentemente a melhor escolha.  Se seu servidor com acesso
+	limitado esta conectado as máquinas clientes através de um
+	<literal>hub<literal>, ou atrevés de diversas camadas de roteamento, 
+	o método NFS pode ser inseguro demais (network-wise) e usar
+	ssh pode ser a melhor escolha mesmo com	audit-trail tracks 
+	que o ssh coloca.</para>
 
-      <para>Once you give a limited-access box, at least read access to the
-	client systems it is supposed to monitor, you must write scripts
-	to do the actual monitoring.  Given an NFS mount, you can write
-	scripts out of simple system utilities such as &man.find.1; and
-	&man.md5.1;.  It is best to physically md5 the client-box files
-	at least once a day, and to test control files such as those
-	found in <filename>/etc</filename> and
-	<filename>/usr/local/etc</filename> even more often.  When
-	mismatches are found, relative to the base md5 information the
-	limited-access machine knows is valid, it should scream at a
-	sysadmin to go check it out.  A good security script will also
-	check for inappropriate suid binaries and for new or deleted files
-	on system partitions such as <filename>/</filename> and
+      <para>Uma vez que você da a máquina com acesso limitado, 
+	ao menos acesso leitura aos sistemas clientes supostos a
+	monitorar, você deve escrever scripts para fazer a monitoração
+	real.  Dado uma montagem NFS, você pode escrever scripts 
+	de simples utilitários do sistema tais como &man.find.1; e
+	&man.md5.1;.  É melhor fazer fisicamente o md5 dos arquivos
+	da máquina cliente ao menos uma vez por dia, e para testar
+	arquivos de controle tais como aqueles encontradas em
+	<filename>/etc</filename> e <filename>/usr/local/etc</filename> 
+	até mais frequentemente.  Quando mismatches são encontradas, 
+	relativo a base de informação md5 a máquina com acesso
+	limitado machine knows is valid, deve mostrar para um
+	administrador do sistema para verificar isso.  Um com script
+	de segurança verificará também por binários suid inapropriados
+	e por arquivos novos ou deletados em partições do sistema
+	tais como <filename>/</filename> e
 	<filename>/usr</filename>.</para>
 
-      <para>When using ssh rather than NFS,
-	writing the security script is much more difficult.   You
-	essentially have to <command>scp</command> the scripts to the client 
+      <para>Quanto usar ssh em vez de NFS,
+	escrever o script de segurança é muito mais difícil.  Você
+	essencialmente tem que <command>scp</command> the scripts to the client 
 	box in order to
 	run them, making them visible, and for safety you also need to
 	<command>scp</command> the binaries (such as find) that those
