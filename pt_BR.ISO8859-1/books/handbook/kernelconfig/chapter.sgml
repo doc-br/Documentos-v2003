@@ -1532,78 +1532,79 @@ pseudo-device   bpf           # Berkeley packet filter</programlisting>
       </varlistentry>
 
       <varlistentry>
-	<term>O kernel não carrega:<anchor
+	<term>O kernel n&atilde;o carrega:<anchor
 	  id="kernelconfig-noboot"></term>
 
 	<listitem>
-	  <para>Se seu kernel novo não carregar, ou falhar para
-	    reconhecer seus dispositivos, não se apavore! Felizmente, &os; tem
-	    um excelente mecanismo para recuperar kernels incompatíveis.
-	    Escolha o kernel que você deseja carregar no
-	    &os; e carregue ele. Você pode acessar este quando o sistema
-	    de contas estiver abaixo de 10. Hit e tecle exceto a
-            tecla <keycap>Enter</keycap>, type <command>unload</command>
-            and then type
+	  <para>Se seu kernel novo n&atilde;o carregar, ou falhar para
+	    reconhecer seus dispositivos, n&atilde;o se apavore! Felizmente, o &os; tem
+	    um excelente mecanismo para recuperar kernels incompat&iacute;veis.
+	    Escolha o kernel que voc&ecirc; deseja carregar no
+	    &os; e carregue ele. Voc&ecirc; pode acessar este quando o sistema
+	    de contagem regressiva estiver abaixo de 10. Tecle qualquer letra exceto a
+            tecla <keycap>Enter</keycap>, use o comando tipo <command>unload</command>
+            e entao o tipo
 	    <command>boot <replaceable>kernel.old</replaceable></command>,
-            or the filename of any other kernel that will boot properly.
-            Ao reconfigurar um kernel, é sempre uma boa idéia manter
-            um kernel confiável na mão para trabalhar.</para>
+            ou o nome do arquivo de algum outro kernel correto que voc&ecirc; queira carregar.
+            Ao reconfigurar um kernel, &eacute; sempre uma boa id&eacute;ia manter
+            um kernel confi&aacute;vel, na m&atilde;o para trabalhar.</para>
 
-	  <para>Depois de carregar um kernel confiável você pode verificar o arquivo de configuração do seu kernel e tentar recompilá-lo novamente.
-	    Um recurso de ajudo útil é o arquivo
+	  <para>Depois de carregar um kernel confi&aacute;vel voc&ecirc; pode verificar o arquivo de configura&ccedil;&atilde;o do seu kernel e tentar 
+	    recompil&aacute;-lo novamente.
+	    Um recurso de ajuda &uacute;til &eacute; o arquivo
 	    <filename>/var/log/messages</filename> 
 	    que grava, entre outras coisas, todas as mensagens do kernel
-	    que são com sucesso carregados. Também, o comando &man.dmesg.8;
-	    imprimirá as mesnagens do kernel que estiver carregado atualmente.</para>
+	    que s&atilde;o com sucesso carregados. Tamb&eacote;m, o comando &man.dmesg.8;
+	    imprimir&aacute; as mensagens do kernel que estiverem carregadas atualmente.</para>
 
 	  <note>
-	    <para>Se você estiver tendo problemas para compilar um kernel, certifique
+	    <para>Se voc&ecirc; estiver tendo problemas para compilar um kernel, certifique
 	      e guarde um <filename>GENERIC</filename>, ou algum outro kernel
-	      que seja conhecido na mão para trabalhar com um nome diferente que 
-	      não apagará na próxima compilação. Você não pode confiar em
+	      que funcione na m&atilde;o para trabalhar com um nome diferente que 
+	      n&atilde;o apagar&aacute; na pr&oacute;xima compila&ccedil;&atilde;o. Voc&ecirc; n&atilde;o pode confiar em
 	      <filename>kernel.old</filename> porque ao instalar um
-	      novo kernel, o <filename>kernel.old</filename> é sobscrevido
-	      com o último kernel instalado que pode não se funcional.
-	      Tambem, o mais cedo possivel, realize a movimentacao do kernel para a
-	      localizacao apropriada <filename>kernel</filename> com comandos tal
-	      como &man.ps.1; nao trabalhara corretamente. O comando apropriado 
+	      novo kernel, o <filename>kernel.old</filename> &eacute; sobscrevido
+	      com o &uacute;ltimo kernel instalado que pode n&atilde;o ser funcional.
+	      Tamb&eacute;m, o mais cedo poss&iacute;vel, realize a movimenta&ccedil;&atilde;o do kernel para a
+	      localiza&ccedil;&atilde;o apropriada <filename>kernel</filename> com comandos tal
+	      como &man.ps.1; n&atilde;o trabalhara corretamente. O comando apropriado 
 	      <quote>destrava</quote> o arquivo do kernel que
-	      <command>faz</command> a instacao (a fim de move-los permanentemente para
-	      uma outra parte traseira do kernel) e:</para>
+	      <command>faz</command> a insta&ccedil;&atilde;o (a fim de mov&ecirc;-los permanentemente para
+	      uma outra parte traseira do kernel).</para>
 
 	    <screen>&prompt.root; <userinput>chflags noschg /kernel</userinput></screen>
 
-	    <para>Se voce encontrar voce nao pode fazer isto, voce estara rodando provavelmente
-	      em um &man.securelevel.8; mais extremamente em zero. Edite o
+	    <para>Se voc&ecirc; encontrar isto, voc&ecirc; estar&aacute; rodando provavelmente
+	      em &man.securelevel.8; mais exatamente em zero. Edite o
 	      <literal>kern_securelevel</literal> em
 	      <filename>/etc/rc.conf</filename> e ajuste isto para
-	      <literal>-1</literal>, entao reinicie. Voce pode mudar isto para tras
-	      para esta configuracao anterior quando voce e feliz com seu novo
+	      <literal>-1</literal>, ent&atilde;o reinicie. Voc&ecirc; pode mudar esta
+	      configura&ccedil;&atilde;o antes de voc&ecirc; instalar o seu novo
 	      kernel.</para>
 
-	    <para>E, se voce quiser <quote>travar</quote> seu novo kernel
-	      dentro de um local, ou algum arquivo para importacao, de algum mod que nao
+	    <para>E, se voc&ecirc; quiser <quote>travar</quote> seu novo kernel
+	      dentro de um local, ou algum arquivo para importa&ccedil;&atilde;o, de algum modo que n&atilde;o
 	      possa ser movido ou alterado:</para>
 
 	    <screen>&prompt.root; <userinput>chflags schg /kernel</userinput></screen>
 
-	    <para>No &os; 5.X, o kernel nao sao instalados com o
-	    sistema one a area de memoria nao pode ser mudado, assim como esta e improvavel ser a fonte 
-	    do problema que voce esta experimentando.</para></note>
+	    <para>No &os; 5.X, os kernels n&atilde;o s&atilde;o instalados com o
+	    sistema one a &aacute;rea de mem&oacute;ria n&atilde;o pode ser mudado, assim como esta &eacute; improvavel que seja a fonte 
+	    do problema que voc&ecirc; est&aacute; tentando.</para></note>
 	</listitem>
       </varlistentry>
 
       <varlistentry>
-	<term>O trabalho do kernel, mas nao trabalha mais algum &man.ps.1;:</term>
+	<term>O trabalho do kernel, mas &man.ps.1;: n&atilde;o trabalha mais algum</term>
 
 	<listitem>
-	  <para>Se voce tiver instado uma versao diferente do kernel
-	    de um sistema de utilizades que estiveram sido construidas com,
+	  <para>Se voc&ecirc; tiver instado uma vers&atilde;o diferente do kernel
+	    de um sistema que estiver utilizando uma vers&atilde;o do kernel diferente da que tinha sido construida,
 	    por exemplo, um kernel 4.X em um sistema 3.X, muitos comandos de status do sistema
-	    como &man.ps.1; e &man.vmstat.8; nao funcionara
+	    como &man.ps.1; e &man.vmstat.8; n&atilde;o funcionaram
 	    mais. Voce deve recompilar a biblioteca <filename>libkvm</filename>
-	    como pode se util. Isto e uma razao que normalmente
-	    nao e uma boa ideia usar uma versao diferente do
+	    que pode ser &uacute;til. Isto &eacute; uma raz&atilde;o que normalmente
+	    n&atilde;o &eacute; uma boa id&eacute;ia usar uma vers&atilde;o diferente do
 	    kernel do resto do sistema operacional.</para>
 	</listitem>
       </varlistentry>
