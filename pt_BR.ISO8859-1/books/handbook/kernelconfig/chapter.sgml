@@ -765,40 +765,40 @@ options          CD9660_ROOT  #CD-ROM usable as root, CD9660 required</programli
       mountar em <filename>/proc</filename> que permite
       programas como &man.ps.1; para voc ter mais informações de qual
       processo está rodando. No &os; 5.X, o uso do <literal>PROCFS</literal>
-      não é mais requerido pela maioria de circunstâncias, as most
-      debugging and monitoring tools have been adapted to run without
-      <literal>PROCFS</literal>.  In addition, 5.X-CURRENT kernels
-      making use of <literal>PROCFS</literal> must now also include
-      support for <literal>PSEUDOFS</literal>:</para>
+      não é mais requerido pela maioria de circunstâncias, a maioria
+      erros e ferramentas de monitoramento tem que ser adaptado para rodar sobre
+      <literal>PROCFS</literal>. Em adição, 5.X-CURRENT kernels
+      que usam <literal>PROCFS</literal> devem agora também incluir
+      suporte para <literal>PSEUDOFS</literal>:</para>
 
     <programlisting>options          PSEUDOFS     #Pseudo-filesystem framework</programlisting>
 
-    <para><literal>PSEUDOFS</literal> is not available in &os; 4.X.
-      Unlike in &os; 4.X, new installations of &os; 5.X will not mount
-      the process file system by default.</para>
+    <para><literal>PSEUDOFS</literal> não está disponível nos &os; 4.X.
+      Ao contrário nos &os; 4.X, novas instalações do &os; 5.X não montará
+      o processo do sistema de arquivos por default.</para>
 
     <programlisting>options          COMPAT_43    #Compatible with BSD 4.3 [KEEP THIS!]</programlisting>
 
-    <para>Compatibility with 4.3BSD.  Leave this in; some programs will
-      act strangely if you comment this out.</para>
+    <para>Compatibilidade com 4.3BSD. Deixe isto dentro; alguns programas agirão
+      estranhamente se você comentar isto.</para>
 
     <programlisting>options          COMPAT_FREEBSD4     #Compatible with &os;4</programlisting>
 
-    <para>This option is required on &os;&nbsp;5.X &i386; and Alpha systems
-      to support applications compiled on older versions of &os;
-      that use older system call interfaces.  It is recommended that
-      this option be used on all &i386; and Alpha systems that may
-      run older applications; platforms that gained support only in
-      5.X, such as ia64 and &sparc64;, do not require this option.</para>
+    <para>Esta opção é requerida no &os;&nbsp;5.X &i386; e Sistemas Alpha
+      para suporte aplicativos compilados ou outras versões do &os;
+      que usam outro sistema de chamadas interfaces. Recomenda-se que esta opção
+      seja usada sobre todos &i386; e sistemas Alpha que podem
+      rodar outros aplicativos; plataformas que ganham suporte somente em
+      5.X, tal como ia64 e &sparc64;, não requer está opção.</para>
 
     <programlisting>options          SCSI_DELAY=15000    #Delay (in ms) before probing SCSI</programlisting>
 
-    <para>This causes the kernel to pause for 15 seconds before probing
-      each SCSI device in your system.  If you only have IDE hard drives,
-      you can ignore this, otherwise you will probably want to lower this
-      number, perhaps to 5 seconds, to speed up booting.  Of course, if
-      you do this, and &os; has trouble recognizing your SCSI devices,
-      you will have to raise it back up.</para>
+    <para>Isso faz com que o kernel pare por 15 segundos antes de experimentar
+      cada dispositivo SCSI em seu sistema. Se você somente tiver IDE hard drives,
+      você poderá ignorar isto, você provavelmente queira baixar este número,
+      talvez a 5 segundos, para acelerar a inicialização. Naturalmente, se
+      você fizer isto, e &os; tenha problema em reconhecer seus dispositivos SCSI,
+      você terá que levantá-lo de maneira alternativa.</para>
 
     <programlisting>options          UCONSOLE            #Allow users to grab the console</programlisting>
 
