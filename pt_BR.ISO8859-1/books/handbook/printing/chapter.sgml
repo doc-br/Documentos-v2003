@@ -4439,7 +4439,6 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 		</link> para mais detalhes.
 			</para>
             
----
 
         <para>There is another specialized way to limit job sizes from remote
           printers; see section <link
@@ -4865,15 +4864,19 @@ total                     337.00  154   $  6.74</screen>
       <primary>printers</primary>
       <secondary>usage</secondary>
    </indexterm>
-    <para>This section tells you how to use printers you have set up with
-      FreeBSD.  Here is an overview of the user-level commands:</para>
+		<para>
+			Essa se&ccedil;&atilde;o mostra &agrave; voc&ecirc; como utilizar 
+		as impressoras que voc&ecirc; configurou com o FreeBSD.  Aqui tem
+		uma vis&atilde;o geral dos comandos a n&iacute;vel de usu&aacute;rio:
+		</para>
 
     <variablelist>
       <varlistentry>
 	<term>&man.lpr.1;</term>
 
 	<listitem>
-	  <para>Print <foreignphrase>jobs</foreignphrase></para>
+	  <para>Imprime os trabalhos de impress&atilde;o
+		</para>
 	</listitem>
       </varlistentry>
       
@@ -4881,7 +4884,7 @@ total                     337.00  154   $  6.74</screen>
 	<term>&man.lpq.1;</term>
 
 	<listitem>
-	  <para>Check printer queues</para>
+	  <para>Verifica a fila da impressora</para>
 	</listitem>
       </varlistentry>
       
@@ -4889,31 +4892,44 @@ total                     337.00  154   $  6.74</screen>
 	<term>&man.lprm.1;</term>
 
 	<listitem>
-	  <para>Remove <foreignphrase>jobs</foreignphrase> from a printer's queue</para>
+	  <para>
+			Remove os trabalhos de impress&atilde;o da fila da impressora
+		</para>
 	</listitem>
       </varlistentry>
     </variablelist>
     
-    <para>There is also an administrative command, &man.lpc.8;, described in
-      the section <link linkend="printing-lpc">Administering the 
-	<application>LPD</application>
-	Spooler</link>, used to control printers and their queues.</para>
+		<para>
+			Existe tamb&eacute;m o comando administrativo, &man.lpc.8;, 
+		descrito na se&ccedil;&atilde;o 
+      <link linkend="printing-lpc">
+			Administrando o Sistema de Spooler <application>LPD</application>
+		</link>, usado para controlar as impressoras e suas filas.
+		</para>
 
-    <para>All three of the commands &man.lpr.1;, &man.lprm.1;, and &man.lpq.1;
-      accept an option <option>-P
-	<replaceable>printer-name</replaceable></option> to specify on which
-      printer/queue to operate, as listed in the
-      <filename>/etc/printcap</filename> file.  This enables you to submit,
-      remove, and check on <foreignphrase>jobs</foreignphrase> for various printers.  If you do not use the
-      <option>-P</option> option, then these commands use the printer
-      specified in the <envar>PRINTER</envar> environment variable.  Finally,
-      if you do not have a <envar>PRINTER</envar> environment variable, these
-      commands default to the printer named <literal>lp</literal>.</para>
 
-    <para>Hereafter, the terminology <emphasis>default printer</emphasis>
-      means the printer named in the <envar>PRINTER</envar> environment
-      variable, or the printer named <literal>lp</literal> when there is no
-      <envar>PRINTER</envar> environment variable.</para>
+		<para>
+			Todos esses tr&ecirc;s comandos &man.lpr.1;, &man.lprm.1;, e
+		 &man.lpq.1; aceitam a op&ccedil;&atilde;o <option>-P
+	<replaceable>Nome-da-Impressora</replaceable></option> para especificar
+	qual a impressora/fila ir&aacute; operar, como listado no arquivo
+	<filename>/etc/printcap</filename>.  Ele habilita que voc&ecirc; possa
+	enviar, remover e checar os trabalhos de impress&atilde;o para 
+	v&aacute;rias impressoras.  Se voc&ecirc; n&atilde;o usa a 
+	op&ccedil;&atilde;o <option>-P</option>, ent&atilde;o esses comandos
+	usam a impressoras especificada na vari&aacute;vel de ambiente
+   <envar>PRINTER</envar>.  Finalmente se voc&ecirc; n&atilde;o tiver 
+	a vari&aacute;vel de ambiente <envar>PRINTER</envar>, esses comandos
+	por padr&atilde;o usam a impressora <literal>lp</literal>.
+		</para>
+
+		<para>
+			No futuro, a terminologia <emphasis>impressora 
+	padr&atilde;o</emphasis> ser&aacute; o nome que estiver na vari&aacute;vel
+	de ambiente <envar>PRINTER</envar>, ou a impressora chamada de
+   <literal>lp</literal> quando n&atilde;o existir a vari&aacute;vel
+	de ambiente <envar>PRINTER</envar>.
+		</para>
     
     <sect2 id="printing-lpr">
 			<title>
@@ -4927,44 +4943,61 @@ total                     337.00  154   $  6.74</screen>
       <screen>&prompt.user; <userinput>lpr <replaceable>filename</replaceable> <replaceable>...</replaceable></userinput></screen>
 	    
       <indexterm><primary>printing</primary></indexterm>
-      <para>This prints each of the listed files to the default printer.  If
-	you list no files, &man.lpr.1; reads data to
-	print from standard input.  For example, this command prints some
-	important system files:</para>
+			<para>
+				Ele imprime cada arquivo listado na impressora padr&atilde;o.  Se
+		sua lista n&atilde;o cont&eacute;m, &man.lpr.1; l&ecirc; os dados
+		para serem impressos da entrada padr&atilde;o.  Por exemplo, esse
+		comando imprime alguns importantes arquivos do sistema:
+			</para>
 
       <screen>&prompt.user; <userinput>lpr /etc/host.conf /etc/hosts.equiv</userinput></screen>
 	    
-      <para>To select a specific printer, type:</para>
+			<para>
+				Para selecionar uma impressora espec&iacute;fica, digite:
+			</para>
 		    
-      <screen>&prompt.user; <userinput>lpr -P <replaceable>printer-name</replaceable> <replaceable>filename</replaceable> <replaceable>...</replaceable></userinput></screen>
+      <screen>&prompt.user; <userinput>lpr -P <replaceable>nome-da-impressora</replaceable> <replaceable>nome-do-arquivo</replaceable> <replaceable>...</replaceable></userinput></screen>
 
-      <para>This example prints a long listing of the current directory to the
-	printer named <literal>rattan</literal>:</para>
+			<para>
+				Esse exemplo imprime uma listagem do diret&oacute;rio
+		corrente para a impressora <literal>rattan</literal>:
+			</para>
 	    
       <screen>&prompt.user; <userinput>ls -l | lpr -P rattan</userinput></screen>
 	    
-      <para>Because no files were listed for the
-	  &man.lpr.1; command, <command>lpr</command> read the data to print
-	from standard input, which was the output of the <command>ls
-	  -l</command> command.</para>
+			<para>
+				Como n&atilde;o h&aacute; arquivos a serem impressos pelo comando
+	&man.lpr.1;, O comando <command>lpr</command> ir&aacute; ler da
+	entrada padr&atilde;o, a qual &eacute; sa&iacute;da do comando
+	<command>ls -l</command>.
+			</para>
       
-      <para>The &man.lpr.1; command can also accept a wide variety of options
-	to control formatting, apply file conversions, generate multiple
-	copies, and so forth. For more information, see the section <link
-	  linkend="printing-lpr-options">Printing Options</link>.</para>
+			<para>
+				O comando &man.lpr.1; tamb&eacute;m pode aceitar uma grande
+	variedade de op&ccedil;&otilde;es para controlar a formata&ccedil;&atilde;o,
+	aplicando convers&atilde;o de arquivos, gerando multiplas c&oacute;pias,
+	e muito mais.  Para mais informa&ccedil;&atilde;o, veja a 
+	se&ccedil;&atilde;o <link linkend="printing-lpr-options">
+			Op&ccedil;&otilde;es de Impress&atilde;o</link>.
+			</para>
     </sect2>
     
     <sect2 id="printing-lpq">
 		<title>Verificando a Impress&atilde;o</title>
       
-      <indexterm><primary>print <foreignphrase>jobs</foreignphrase></primary></indexterm>
-      <para>When you print with &man.lpr.1;, the data you wish to print is put
-	together in a package called a <quote>print job</quote>, which is sent
-	to the <application>LPD</application> spooling system.  Each printer 
-	has a queue of <foreignphrase>jobs</foreignphrase>, and
-	your job waits in that queue along with other <foreignphrase>jobs</foreignphrase> from yourself and
-	from other users.  The printer prints those <foreignphrase>jobs</foreignphrase> in a first-come,
-	first-served order.</para>
+      <indexterm><primary>print jobs</primary></indexterm>
+		<para>
+			Quando voc&ecirc; imprime com o comando &man.lpr.1;, os dados
+	que voc&ecirc; gostaria que saissem juntos em um pacote chamado de
+	<quote>trabalho de impress&atilde;o</quote>, o qual &eacute; enviado
+	para o sistema de spooling <application>LPD</application>.  Cada 
+	impressora tem sua pr&oacute;pria fila de impress&atilde;o para os 
+	trabalhos de impress&atilde;o, e seus trabalhos de impress&atilde;o
+	aguardam na fila a impress&atilde;o de outros trabalhos seus ou de outros
+	usu&aacute;rios.  A impressora imprime esses trabalhos de impress&atilde;o
+	na seguinte ordem (FIFP) primeiro a chegar &eacute; o primeiro a ser
+	impresso.
+		</para>
 
       <para>To display the queue for the default printer, type &man.lpq.1;.
 	For a specific printer, use the <option>-P</option> option.  For
