@@ -444,10 +444,10 @@
       <para>Os mecanismos mais indiretos de proteção também assumem que
 	você esta logando de um servidor mais restritivo para um servidor
 	menos restritivo.  Por exemplo, se sua máquina principal esta
-	executando todos os tipos de servidores, sua estação de trabalho
+	executando todos os tipos de serviços, sua estação de trabalho
 	não deve executar algum.  Para que sua estação de trabalho
 	seja razoalvelmente segura você deve executar o mínimo de 
-	servidores possíveis, até incluindo nenhum servidor, e
+	serviços possíveis, incluindo até nenhum serviço, e
 	você deve executar uma proteção de tela protegida por senha.  
 	Naturalmente, dando acesso físico a uma estação de trabalho
 	para um atacante pode quebrar qualquer tipo de segurança
@@ -473,7 +473,7 @@
     </sect2>
 
     <sect2>
-      <title>Securing Root-run Servers and SUID/SGID Binaries</title>
+      <title>Protegendo serviços que executam como root e Binários SUID/SGID</title>
 
       <indexterm>
         <primary><command>ntalk</command></primary>
@@ -500,31 +500,34 @@
         <primary><application>rlogind</application></primary>
       </indexterm>
 
-      <para>The prudent sysadmin only runs the servers he needs to, no
-	more, no less.  Be aware that third party servers are often the
-	most bug-prone.  For example, running an old version of
-	<application>imapd</application> or
-	<application>popper</application> is like giving a universal
-	<username>root</username> ticket out to the entire world.
-	Never run a server that you have not checked out carefully.
-	Many servers do not need to be run as <username>root</username>.
-	For example, the <application>ntalk</application>,
-	<application>comsat</application>, and
-	<application>finger</application> daemons can be run in special
-	user <firstterm>sandboxes</firstterm>.  A sandbox is not perfect,
-	unless you go through a large amount of trouble, but the onion
-	approach to security still stands: If someone is able to break
-	in through a server running in a sandbox, they still have to
-	break out of the sandbox.  The more layers the attacker must
-	break through, the lower the likelihood of his success.  Root
-	holes have historically been found in virtually every server
-	ever run as <username>root</username>, including basic system servers.
-	If you are running a machine through which people only login via
-	<application>sshd</application> and never login via
-	<application>telnetd</application> or
-	<application>rshd</application> or
-	<application>rlogind</application>, then turn off those
-	services!</para>
+      <para>O administrador de sistemas prudente somente executa serviços
+	que necessita, nem mais, nem menos.  Estaja previnido que serviços
+	de terçeiros são frequentemente os mais sujeitos a falhas.  Por 
+	exemplo, executando uma versão antiga do <application>imapd
+	</application> ou <application>popper</application> é como dar
+	um ticket <username>root</username> universal para o mundo inteiro.
+	Nunca execute um serviço que você não verificou com cuidado.
+	Muitos serviços não precisam ser executados como  <username>root
+	</username>.
+	Por exemplo, os daemons <application>ntalk</application>,
+	<application>comsat</application>, e
+	<application>finger</application> poden ser executados em 
+	<firstterm>sandboxes</firstterm> especiais de usuário.  Um sandbox
+	não é perfeito, a menos que você atravesse por uma quantidade 
+	grande de problemas, mas a aproximação da cebola à segurança
+	ainda permanece: Se alguém puder entrar através de um servidor
+	executando em um sandbox, ele ainda tem que quebrar o sandbox.  
+	Quanto mais camadas o atacante deve quebrar, mais baixa
+	a probabilidade de seu sucesso.  Furos envolvendo root foram
+	encontrados historicamente em todos os serviços que sempre 
+	executam como <username>root</username>, incluindo serviços 
+	básicos do sistema.
+	Se você esta usando uma máquina através da qual pessoas
+	somente fazem login via <application>sshd</application> 
+	e nunca via <application>telnetd</application> ou
+	<application>rshd</application> ou
+	<application>rlogind</application>, então desligue estes
+	serviços!</para>
       
       <para>FreeBSD now defaults to running
 	<application>ntalkd</application>,
