@@ -4156,49 +4156,66 @@ exec /usr/libexec/lpr/lpf "$@" | /usr/local/libexec/netprint scrivener 5100</pro
         <secondary>restricting access to</secondary>
       </indexterm>
 
----
-
-      <para>This section gives information on restricting printer usage. The
-        <application>LPD</application> system lets you control who can access
-	a printer, both locally or
-        remotely, whether they can print multiple copies, how large their <foreignphrase>jobs</foreignphrase>
-        can be, and how large the printer queues can get.</para>
+		<para>
+			Essa se&ccedil;&atilde;o d&aacute; informa&ccedil;&otilde;es de 
+		como restringir o uso da impressora.  O sistema 
+		<application>LPD</application> permite que voc&ecirc; controle quem
+		pode acessar a impressor localmente ( direto na m&aacute;quina) ou 
+		remotamente, eles podem imprimir multiplas c&oacute;pias, 
+		t&atilde;o grandes quando se queira os trabalhos de impress&atilde;o,
+		t&atilde;o grandes que podem ser as filas de impress&atilde;o.
+		</para>
       
       <sect3 id="printing-advanced-restricting-copies">
 			<title>
 				Restringindo Multiplas C&oacute;pias
 			</title>
 
-        <para>The <application>LPD</application> system makes it easy for
-	  users to print multiple copies
-          of a file.  Users can print <foreignphrase>jobs</foreignphrase> with <command>lpr -#5</command>
-          (for example) and get five copies of each file in the job.  Whether
-          this is a good thing is up to you.</para>
+			<para>
+				O sistema <application>LPD</application> faz isso com facilidade
+		para os usu&aacute;rios poderem imprimir multiplas c&oacute;pias de
+		um arquivo.  Os usu&aacute;rios podem imprimir trabalhos de 
+		impress&atilde;o com o comando <command>lpr -#5</command>, por 
+		exemplo e ter cinco c&oacute;pias de um mesmo arquivo em um 
+		trabalho de impres&atilde;o.  Isso ser&aacute; um boa ideia
+		se estiver habilidado.
+			</para>
             
-        <para>If you feel multiple copies cause unnecessary wear and tear on
-          your printers, you can disable the <option>-#</option> option to
-            &man.lpr.1; by adding the <literal>sc</literal> capability to the
-          <filename>/etc/printcap</filename> file.  When users submit <foreignphrase>jobs</foreignphrase>
-          with the <option>-#</option> option, they will see:</para>
+			<para>
+				Se voc&ecirc; perceber que isso pode causar um desgaste 
+		desnecess&aacute;rio da impressora, voc&ecirc; poder&aacute; 
+		desabilitar a op&ccedil;&atilde;o <option>-#</option> para 
+		&man.lpr.1;  apenas adicionando a op&ccedil;&atilde;o 
+		<literal>sc</literal> no arquivo <filename>/etc/printcap</filename>.
+		Quando os usu&aacute;rios utilizarem o comando com a op&ccedil;&atilde;o
+      <option>-#</option> para imprimir seus trabalhos de imopress&atilde;o,
+		ele ver&aacute;:
+			</para>
               
         <screen>lpr: multiple copies are not allowed</screen>
 
 
-        <para>Note that if you have set up access to a printer remotely (see
-          section <link linkend="printing-advanced-network-rm">Printers
-            Installed on Remote Hosts</link>), you need the
-          <literal>sc</literal> capability on the remote
-          <filename>/etc/printcap</filename> files as well, or else users will
-          still be able to submit multiple-copy <foreignphrase>jobs</foreignphrase> by using another
-          host.</para>
+			<para>
+				Note que se voc&egrave; tem configurado o acesso a 
+		impressora remota ( veja a se&ccedil;&atilde;o <link 
+		linkend="printing-advanced-network-rm">
+				Impressora Instaladas em M&aacute;quinas Remotas
+      </link>), voc&ecirc; necessitar&aacute; da op&ccedil;&atilde;o 
+		<literal>sc</literal> no arquivo <filename>/etc/printcap</filename> 
+		da m&aacute;quina remota, caso contr&aacute;rio, os usu&aacute;rios
+		poderiam enviar trabalhos de impress&atilde;o com multiplas
+		c&oacute;pias, usando uma outra m&aacute;quina na rede.
+			</para>
 
-        <para>Here is an example.  This is the
-          <filename>/etc/printcap</filename> file for the host
-          <hostid>rose</hostid>.  The printer <literal>rattan</literal> is
-          quite hearty, so we will allow multiple copies, but the laser
-          printer <literal>bamboo</literal> is a bit more delicate, so we will
-          disable multiple copies by adding the <literal>sc</literal>
-          capability:</para>
+			<para>
+				Aqui tem um exemplo.  Esse &eacute; um arquivo 
+		<filename>/etc/printcap</filename> para a m&aacute;quina
+		<hostid>rose</hostid>.  A impressora <literal>rattan</literal> 
+		parruda, que aguenta multiplas c&oacute;pias, mas a impressora &agrave; 
+		laser <literal>bamboo</literal> &eacute; um pouco mais delicada
+		,que n&atilde;o, ent&atilde;o ser&aacute; desabilidada a multiplas
+		c&oacute;pias, adicionando a op&ccedil;&atilde;o <literal>sc</literal> :
+			</para>
 
         <programlisting>#
 #  /etc/printcap for host rose - restrict multiple copies on bamboo
@@ -4214,11 +4231,13 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
         :if=/usr/local/libexec/psif:\
         :df=/usr/local/libexec/psdf:</programlisting>
             
-        <para>Now, we also need to add the <literal>sc</literal> capability on
-          the host <hostid>orchid</hostid>'s
-          <filename>/etc/printcap</filename> (and while we are at it, let us
-          disable multiple copies for the printer
-          <literal>teak</literal>):</para>
+			<para>
+				Agora, n&oacute;s necessitaremos de adicionar a 
+		op&ccedil;&atilde;o <literal>sc</literal> no 
+		arquivo <filename>/etc/printcap</filename> na m&aacute;quina
+		<hostid>orchid</hostid> para dessabilitar as c&oacute;pias
+		multiplas para a impressora <literal>teak</literal>):
+			</para>
 
         <programlisting>#
 #  /etc/printcap for host orchid - no multiple copies for local
@@ -4235,6 +4254,8 @@ rattan|line|diablo|lp|Diablo 630 Line Printer:\
 bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
         :lp=:rm=rose:rp=bamboo:sd=/var/spool/lpd/bamboo:sc:</programlisting>
             
+---
+
         <para>By using the <literal>sc</literal> capability, we prevent the
           use of <command>lpr -#</command>, but that still does not prevent
           users from running &man.lpr.1;
