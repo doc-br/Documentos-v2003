@@ -3497,7 +3497,7 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 		cabe&ccedil;alho for impressa e n&atilde;o pode diferenciar isto
 		do total para que possa fazer a estat&iacute;stica corretamente,
 		e isso n&atilde;o &eacute; fornecido por qualquer 
-		emphasis>usu&aacute;rio ou m&aacute;quina</emphasis> ou qualquer 
+		<emphasis>usu&aacute;rio ou m&aacute;quina</emphasis> ou qualquer 
 		arquivo de estat&iacute;stica, ent&atilde;o ele n&atilde;o tem 
 		ideia para quem contabilizar o uso da impressora.  E tamb&eacute;m
 		n&atilde;o &eacute; justo <quote>adcionar uma p&aacute;gina</quote>
@@ -3574,7 +3574,7 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 			poder&aacute; coloca-lo direto no c&oacute;digo do filtro de
 			sa&iacute;da.  Para facilitar o passo de an&aacute;lise, use a
 			op&ccedil;&atilde;o <literal>sh</literal> (p&aacute;gina curta)
-			do arquivo <filename>/etc/printcap</filename.  Ent&atilde;o 
+			do arquivo <filename>/etc/printcap</filename>.  Ent&atilde;o 
 			depois de tudo feito, os usu&aacute;rios ir&atilde;o apreciar
 			o qu&atilde;o generoso o administrador do sistema &eacute;, 
 			liberando das estat&iacute;sticas de utiliza&ccedil;&atilde;o a
@@ -3826,29 +3826,36 @@ done
 			<para>
 				Acessando a impressora conectada diretamente a rede.  A impressora
 		possui uma interface de rede, al&eacute;m da porta paralela ou serial.
-            Such a printer
-            might work as follows:</para>
+				Como a impressora que iremos utilizar a seguir:
+			</para>
           
           <itemizedlist>
             <listitem>
-              <para>It might understand the <application>LPD</application>
-		protocol and can even queue
-                <foreignphrase>jobs</foreignphrase> from remote hosts.  In this case, it acts just like a
-                regular host running <application>LPD</application>.  Follow 
-		the same procedure in
-                section <link linkend="printing-advanced-network-rm">Printers
-                  Installed on Remote Hosts</link> to set up such a
-                printer.</para>
+              <para>
+						Ela deve entender o protocolo <application>LPD</application>
+		e possa manipular filas de trabalhos de impress&atilde;o de uma 
+		m&aacute;quina remota.  Nesse caso, Ela age como uma m&aacute;quina
+		remota comum rodando <application>LPD</application>.  Seguindo os 
+		mesmos passos na se&ccedil;&atilde;o <link 
+		linkend="printing-advanced-network-rm">
+			Instalando Impressoras em M&aacute;quinas Remotas
+      </link> para configurar a impressora.
+					</para>
             </listitem>
             
             <listitem>
-              <para>It might support a data stream network connection. In this
-                case, you <quote>attach</quote> the printer to one host on the
-                network by making that host responsible for spooling <foreignphrase>jobs</foreignphrase> and
-                sending them to the printer. Section <link
-                  linkend="printing-advanced-network-net-if">Printers with
-                  Networked Data Stream Interfaces</link> gives some
-                suggestions on installing such printers.</para>
+              <para>
+						Ela deve suportar conex&atilde;o de rede do tipo 
+		<foreignphrase>stream</foreignphrase>.  Nesse caso, voc&ecirc; 
+		conecta a impressora em uma m&aacute;quina na rede que ficar&aacute;
+		respons&aacute;vel pelo <foreignphrase>spooling</foreignphrase>
+		dos trabalhos de impress&atilde;o e envia-los para a impressora.  Na
+		se&ccedil;&atilde;o <link
+		linkend="printing-advanced-network-net-if">
+			Impressoras com Interfaces de Rede do Tipo Data Stream
+		</link> D&aacute; suges&otilde;es de como instalar essas 
+		impressoras.
+				</para>
             </listitem>
           </itemizedlist>
         </listitem>
@@ -3859,14 +3866,18 @@ done
 				Impressoras Intaladas em um Computador Remoto
 			</title>
 
-        <para>The <application>LPD</application> spooling system has built-in
-	  support for sending <foreignphrase>jobs</foreignphrase> to
-          other hosts also running <application>LPD</application> (or are 
-	  compatible with <application>LPD</application>).  This
-          feature enables you to install a printer on one host and make it
-          accessible from other hosts.  It also works with printers that have
-          network interfaces that understand the 
-	  <application>LPD</application> protocol.</para>
+        <para>
+				O sistema <application>LPD</application> foi construido com
+		suporte para enviar trabalhos de impress&atilde;o para outras 
+		m&aacute;quinas na rede, rodando <application>LPD</application> ( ou
+		um algo compat&iacute;vel com ele ).  Essa caracteistica possibilita
+		a instala&ccedil;&atilde;o de impressoraqs em uma m&aacute;quina que
+		possa ser acessada por outras.  Isso tamb&eacute;m funciona para
+		impressora que possuem intefaces de rede capaz de compreender o 
+		protocolo <application>LPD</application>.
+			</para>
+
+---
             
         <para>To enable this kind of remote printing, first install a printer
           on one host, the <emphasis>printer host</emphasis>, using the simple
