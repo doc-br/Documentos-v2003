@@ -14,20 +14,20 @@
 <!ENTITY % authors PUBLIC "-//FreeBSD//ENTITIES DocBook Author Entities//EN"> %authors;
 <!ENTITY % teams PUBLIC "-//FreeBSD//ENTITIES DocBook Team Entities//EN">
 %teams;
-<!ENTITY % mailing-lists PUBLIC "-//FreeBSD//ENTITIES DocBook Mailing List Entities//EN">
+<!ENTITY % mailing-lists PUBLIC "-//FreeBSD//ENTITIES DocBook Mailing List Entities//PTBR">
 %mailing-lists;
 
 ]>
 
 <book>
   <bookinfo>
-    <title>FreeBSD Porter's Handbook</title>
+    <title>Manual do Porter do FreeBSD</title>
 
     <authorgroup>
-      <corpauthor>The FreeBSD Documentation Project</corpauthor>
+      <corpauthor>O Projeto de Documenta&ccedil;&atilde;o do FreeBSD</corpauthor>
     </authorgroup>
 
-    <pubdate>April 2000</pubdate>
+    <pubdate>Abril de 2000</pubdate>
 
     <copyright>
       <year>2000</year>
@@ -35,8 +35,8 @@
       <year>2002</year>
       <year>2003</year>
       <year>2004</year>
-      <holder role="mailto:doc@FreeBSD.org">The FreeBSD Documentation
-	Project</holder>
+      <holder role="mailto:doc@FreeBSD.org">O Projeto de Documenta&ccedil;&atilde;o do
+	FreeBSD</holder>
     </copyright>
 
     &bookinfo.trademarks;
@@ -46,12 +46,12 @@
 
 
     <chapter id="own-port">
-      <title>Fazendo um port si mesmo</title>
+      <title>Fazendo um port voc&ecirc; mesmo</title>
 
       <para>Assim, agora voc&ecirc; est&aacute; interessado em fazer seu pr&oacute;prio port ou
         melhorando existente? Otimo!</para>
 
-      <para>WO que segue s&atilde;o alguns guias para criar um novo port para
+      <para>O que segue s&atilde;o alguns guias para criar um novo port para
         o FreeBSD.  Se voc&ecirc; quiser melhorar um port existente, voc&ecirc; deve
 	ler isto e ent&atilde;o ler <xref linkend="port-upgrading">.</para>
 
@@ -59,7 +59,7 @@
         consultar o <filename>/usr/ports/Mk/bsd.port.mk</filename>, qual
 	todo port inclui Makefiles.  Mesmo se voc&ecirc; n&atilde;o hackeie Makefiles
 	diariamente, ele &eacute; bem comentado, e voc&ecirc; ainda ganhar&aacute; muito
-	conhecimento dele.  Adicionalmente, voc&ecirc; pode enviar perguntas especificas
+	conhecimento dele.  Adicionalmente, voc&ecirc; pode enviar perguntas espec&iacute;ficas
 	para the &a.ports;.</para>
 
       <note>
@@ -69,8 +69,8 @@
 	  est&atilde;o documentadas no inicio do <filename>bsd.port.mk</filename>.
 	  Este arquivo usa um n&atilde;o-padr&atilde;o conjunto de tab.
 	  <application>Emacs</application> e
-	  <application>Vim</application> deve reconhecer as defini&ccedil;&otilde;es on
-	  carregando o arquivo.  Ambos &man.vi.1; and
+	  <application>Vim</application> deve reconhecer as defini&ccedil;&otilde;es
+	  carregando o arquivo.  Ambos &man.vi.1; e
 	  &man.ex.1; podem ser definidos para usar o valor correto
 	  digitando <command>:set tabstop=4</command> uma vez arquivos tenham sido
 	  carregados.</para>
@@ -121,18 +121,18 @@ USE_IMAKE=     yes
 
 .include &lt;bsd.port.mk&gt;</programlisting>
 
-        <para>Veja se voc&ecirc; pode figure it out.  N&atilde;o se preocupe sobre os &iacute;ndices
+        <para>Veja se voc&ecirc; pode comprende-lo.  N&atilde;o se preocupe sobre os &iacute;ndices
           da linha <literal>&dollar;FreeBSD&dollar;</literal> , ser&aacute;
           preenchido automaticamente pelo CVS quando o port est&aacute; importado ao nossa arvore
           de ports principal.  Voc&ecirc; pode encontrar um exemplo mais detalhado na se&ccedil;&atilde;o <link
-            linkend="porting-samplem">Makefile de exemplo</link> .</para>
+            linkend="porting-samplem">Makefile de exemplo</link>.</para>
       </sect1>
 
       <sect1 id="porting-desc">
         <title>Escrevendo o arquivos de descri&ccedil;&atilde;o</title>
 
         <para>Existem dois arquivos de descri&ccedil;&atilde;o que s&atilde;o necess&aacute;rios para
-          qualquer port, se eles realmente package ou n&atilde;o. Eles s&atilde;o
+          qualquer port, se eles s&atilde;o realmente pacotes ou n&atilde;o. Eles s&atilde;o
           <filename>pkg-descr</filename> e
           <filename>pkg-plist</filename>.  Seus
           prefixos <filename>pkg-</filename> distingue-os de
@@ -147,8 +147,8 @@ USE_IMAKE=     yes
 
           <note>
             <para>Este <emphasis>n&atilde;o</emphasis> &eacute; um manual ou uma descri&ccedil;&atilde;o
-              aprofubdada em como usar ou compilar o port! <emphasis>Por favor
-              be careful se voc&ecirc; est&aacute; compiando do
+              aprofundada em como usar ou compilar o port! <emphasis>Por favor
+              tenha cautela se voc&ecirc; est&aacute; compiando do
               <filename>README</filename> ou manpage</emphasis>; t&atilde;o frequentemente
               eles n&atilde;o s&atilde;o uma descri&ccedil;&atilde;o concisa do port ou est&aacute; em um formato
               awkward format (ex., manpages tem espa&ccedil;amento justificado).  Se o
@@ -204,7 +204,7 @@ lib/X11/oneko/mouse.xpm
               apagado.</para>
 
             <para>&Eacute; recomendav&eacute;l que voc&ecirc; mantenha todos nomes de arquivos neste
-              arquivo sorted alfabeticamente.  Isto far&aacute; a verifica&ccedil;&atilde;o de mudan&ccedil;as
+              arquivo sortidos alfabeticamente.  Isto far&aacute; a verifica&ccedil;&atilde;o de mudan&ccedil;as
               quando voc&ecirc; upgrade o port muito mais f&aacute;cil.</para>
 
             <para>Cria&ccedil;&atilde;o de uma lista de empacotamento manualmente pode ser uma tarefa
@@ -287,7 +287,7 @@ lib/X11/oneko/mouse.xpm
 
         <para>Certifique-se que n&atilde;o ha quet&otilde;es avisos em nenhum dos est&aacute;gios
           <maketarget>package</maketarget> e
-          <maketarget>deinstall</maketarget>  .  Depois do passo 3, verifique para
+          <maketarget>deinstall</maketarget>.  Depois do passo 3, verifique para
           ver se todos os novos diret&oacute;rios est&atilde;o corretamente apagados.  Tamb&eacute;m, tente
           usando o software depois do passo 4, para assegurar que est&aacute; funciona corretamente
           quando instalado de um pacote.</para>
@@ -306,12 +306,12 @@ lib/X11/oneko/mouse.xpm
       </sect1>
 
       <sect1 id="porting-submitting">
-        <title>Submitting the port</title>
+        <title>Enviando o port</title>
 
         <para>Primeiro, certifique-se de ter lido a se&ccedil;&atilde;o <link
             linkend="porting-dads">FAZERes e N&Atilde;O-FAZERes</link>.</para>
 
-        <para>Agora que voc&ecirc; est&aacute; feliz com seu port, a unica coisa the remaining
+        <para>Agora que voc&ecirc; est&aacute; feliz com seu port, a unica coisa restante
           &eacute; coloca-lo na arvore do ports principal do FreeBSD e fazer todos else
           feliz sobre ele tamb&eacute;m.  N&oacute;s n&atilde;o necessitamos seu diret&oacute;rio <filename>work</filename>
           ou o pacote <filename>pkgname.tgz</filename>, assim apague-os
@@ -321,9 +321,9 @@ lib/X11/oneko/mouse.xpm
             Reports and General Commentary</ulink> para mais informa&ccedil;&otilde;es sobre
             &man.send-pr.1;).  Se o port descomprimido &eacute; maior que 20KB,
           voc&ecirc; deve comprimir ele dentro de um arquivo tar e usar &man.uuencode.1;
-          antes de inclui-lo no  bug report (uuencoded tarfiles are
-          acceptable even if the bug report is smaller than 20KB but are not
-          preferred).  Esteja certo ao classificar o bug report como a categoria
+          antes de inclui-lo no  bug report (uuencoded tarfiles s&atilde;o
+          aceit&aacute;veis mesmo se o bug report &eacute; menor que 20KB mas n&atilde;o s&atilde;o
+          preferidos).  Esteja certo ao classificar o bug report como a categoria
           <literal>ports</literal> e classe
           <literal>change-request</literal>  (N&atilde;o marque o report
           <literal>confidential</literal>!).
@@ -345,7 +345,7 @@ lib/X11/oneko/mouse.xpm
             grande quantidade de software pirata aparecendo l&aacute;.</para>
         </note>
 
-	<para>Depois que voc&ecirc; have submitted seu port, por favor seja paciente.
+	<para>Depois que voc&ecirc; have enviou seu port, por favor seja paciente.
 	  As vezes it pode levar a alguns meses antes que um port seja incluido
 	  no FreeBSD, embora possa somente levar alguns dias.  Voc&ecirc; pode
 	  ver a lista de ports <ulink
@@ -464,7 +464,7 @@ lib/X11/oneko/mouse.xpm
           </step>
         </procedure>
 
-        <para>Acimas s&atilde;o as a&ccedil;&otilde;es.  Adicionalmente, voc&ecirc; pode definir
+        <para>Acima s&atilde;o as a&ccedil;&otilde;es.  Adicionalmente, voc&ecirc; pode definir
           targets
           <maketarget>pre-<replaceable>something</replaceable></maketarget> ou
           <maketarget>post-<replaceable>something</replaceable></maketarget>,
@@ -478,7 +478,7 @@ lib/X11/oneko/mouse.xpm
           <filename>scripts</filename>, the <maketarget>post-extract</maketarget> target
           ser&aacute; chamado depois das a&ccedil;&otilde;es de extra&ccedil;&atilde;o regular, e o script
           <filename>pre-build</filename> ser&aacute; executado antes das
-          regras de constru&ccedil;&atilde;o default serem feitas.  It is recomendado que voc&ecirc; use
+          regras de constru&ccedil;&atilde;o default serem feitas.  &Eacute; recomendavel que voc&ecirc; use
           <filename>Makefile</filename> targets se as a&ccedil;&otilde;es s&atilde;o simples
           bastante, porque ser&aacute; mais f&aacute;cil para alguem compreender que tipo
           de a&ccedil;&atilde;o non-default o port necessita.</para>
@@ -493,9 +493,9 @@ lib/X11/oneko/mouse.xpm
           target em seu <filename>Makefile</filename>.</para>
 
         <note>
-          <para>The <quote>main</quote> targets (e.g.,
+          <para>As <quote>principais</quote> targets (ex.,
             <maketarget>extract</maketarget>,
-            <maketarget>configure</maketarget>, etc.) n&atilde;o faz nada mais que
+            <maketarget>configure</maketarget>, etc.) n&atilde;o fazem nada mais que
             certificar todos os est&aacute;gios acima daquele est&atilde;o completos e chama
             os targets ou scripts reais, e eles n&atilde;o intended a ser
             mudados.  Se voc&ecirc; quer consertar a extra&ccedil;&atilde;o, conserte
@@ -584,11 +584,11 @@ lib/X11/oneko/mouse.xpm
         <title>Patching</title>
 
         <para>Na prepara&ccedil;&atilde;o do port, arquivos que foram adicionados ou
-          mudados podem ser picked up with a recursive &man.diff.1;
-          for later feeding to &man.patch.1;.  Cada conjunto de patches que voc&ecirc;
+          mudados podem ser picked up com um recursivo &man.diff.1;
+          para depois feeding to &man.patch.1;.  Cada conjunto de patches que voc&ecirc;
           deseja aplicar deve ser coletado um arquivo chamado
           <filename>patch-<replaceable>*</replaceable></filename> onde
-          <replaceable>*</replaceable> denotes a sequencia em qual os
+          <replaceable>*</replaceable> denotas a sequencia em qual os
           patches ser&atilde;o aplicados &mdash; estes s&atilde;o feitos em
           <emphasis>ordem alfabetica</emphasis>, assim <literal>aa</literal>
           primeiro, <literal>ab</literal> segundo e assim por diante.  Se voc&ecirc; deseja,
@@ -614,7 +614,7 @@ lib/X11/oneko/mouse.xpm
         <para>Usando o recurso op&ccedil;&atilde;o (<option>-r</option>) para
           &man.diff.1; gerar patches &eacute; sutil, mas por favor de olhe
           a look at the resulting patches para certificar-se que voc&ecirc; n&atilde;o tem nada
-          desnecess&aacute;rio junk em l&aacute;.  Em particular, diffs between dois arquivos
+          desnecess&aacute;rio junk em l&aacute;.  Em particular, diffs entre dois arquivos
           backup, <filename>Makefile</filename>s quando o port usa
           <command>Imake</command> ou GNU <command>configure</command>, etc.,
           s&atilde;o desnecess&aacute;rios e devem ser apagados.  Se voc&ecirc; teve que editar
@@ -634,7 +634,7 @@ lib/X11/oneko/mouse.xpm
       <sect1 id="slow-configure">
         <title>Configurando</title>
 
-        <para>Inclui quaisquer comandos adicionais de customiza&ccedil;&otilde;es em seu
+        <para>Incluir quaisquer comandos adicionais de customiza&ccedil;&otilde;es em seu
           script <filename>configure</filename> e salva-o no subdiret&oacute;rio
           <filename>scripts</filename>.  Como mencionado acima, voc&ecirc;
           pode tamb&eacute;m fazer isto com <filename>Makefile</filename> targets e/ou
@@ -671,7 +671,7 @@ lib/X11/oneko/mouse.xpm
         ae se&ccedil;&otilde;es naquele template para fazer seu port facilmente para outros
         lerem.</para>
 
-      <para>Agora, considerando os seguintes problemas em sequence como voc&ecirc; design
+      <para>Agora, considerando os seguintes problemas em sequencia como voc&ecirc; design
         seu novo <filename>Makefile</filename>:</para>
 
       <sect1 id="makefile-source">
@@ -838,14 +838,14 @@ lib/X11/oneko/mouse.xpm
 	    detectado como fora de data): o novo numero de vers&atilde;o (ex.
 	    <literal>1.0,1</literal> no exemplo acima) &eacute; ainda
 	    numericamente menor que a vers&atilde;o anterior (2000801), mas
-	    ferramentas automatizadas e encontradas para ser maior que o implied
+	    ferramentas automatizadas e encontradas para ser maior que o implica
 	    sufixo <literal>,0</literal> no pacote anterior.</para>
 
 	  <para>&Eacute; esperado que <makevar>PORTEPOCH</makevar> n&atilde;o ser&aacute;
 	    usado pela maioria dos ports, e que sensivel
 	    uso do <makevar>PORTVERSION</makevar> pode frequentemente pre-empt
 	    ele tornando-se necess&aacute;rio se uma futura release do software
-	    deve mudar a estrutura da vers&atilde;o. However, care is
+	    deve mudar a estrutura da vers&atilde;o. Entretanto, cuidado &eacute;
 	    necess&aacute;rio pelos porters do FreeBSD quando um vendor release &eacute; feito
 	    sem um n&uacute;mero de vers&atilde;o oficial &mdash; como um c&oacute;digo
 	    <quote>snapshot</quote> release.  A tenta&ccedil;&atilde;o &eacute; rotular a
@@ -937,7 +937,7 @@ PORTEPOCH=	1</programlisting>
 	  <makevar>PORTVERSION</makevar> ao 
           form <makevar>PKGNAME</makevar> assim
           <literal>${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}-${PORTVERSION}</literal>.
-          Certifique-se que este conforms ao nossa orienta&ccedil;&atilde;o <link
+          Certifique-se que este conforme ao nossa orienta&ccedil;&atilde;o <link
           linkend="porting-pkgname"> para um bom nome de
           pacote</link>.  Em particular, voce n&atilde;o est&aacute; permitido a usar um
           h&iacute;fen (<literal>-</literal>) em
@@ -993,8 +993,8 @@ PORTEPOCH=	1</programlisting>
             prepending <literal>p5-</literal> e convertendo o separador
             dois-pontos a um h&iacute;fen; por exemplo, o
             m&oacute;dulo <literal>Data::Dumper</literal> torna-se
-            <literal>p5-Data-Dumper</literal>.  Se o software em question
-            tem n&uacute;meros, h&iacute;fens, ou underscores em seu nome, voce pode incluir-los
+            <literal>p5-Data-Dumper</literal>.  Se o software em quest&atilde;o
+            tem n&uacute;meros, h&iacute;fens, ou underscores em seu nome, voce pode inclui-los
             bem assim (como <literal>kinput2</literal>).</para>
         </listitem>
 
@@ -1012,10 +1012,10 @@ PORTEPOCH=	1</programlisting>
         </listitem>
 
         <listitem>
-          <para>A string davers&atilde;o deve seguir um dash
+          <para>A string da vers&atilde;o deve seguir um dash
             (<literal>-</literal>) e ser um separada-po-periodo lista de
             inteiros e single lowercase alphabetics.  Em particular,
-            it n&atilde;o &eacute; permissible ter um outro dash dentro da string
+            n&atilde;o &eacute; permissivel ter um outro dash dentro da string
             da vers&atilde;o.  A &uacute;nica exece&ccedil;&atilde;o &eacute; a string
             <literal>pl</literal> (meaning <quote>patchlevel</quote>), qual pode ser
             usada <emphasis>somente</emphasis> quando n&atilde;o h&aacute; numeros de vers&atilde;o
@@ -1026,8 +1026,8 @@ PORTEPOCH=	1</programlisting>
             numeros devem seguir o alfabeto somente sem um periodo extra
             entre eles.</para>
 
-          <para>A id&eacute;ia &eacute; faze-lo mais f&aacute;cil para sort os ports por looking
-            at a string da vers&atilde;o.  Em particular, certifique-se que o numero da vers&atilde;o
+          <para>A id&eacute;ia &eacute; faze-lo mais f&aacute;cil para sortir os ports considerando
+            a string da vers&atilde;o.  Em particular, certifique-se que o numero da vers&atilde;o
             dos componentes est&atilde;o sempre delimitados por um periodo, e
             se a data &eacute; parte  da string, use o formato
             <literal><replaceable>yyyy</replaceable>.<replaceable>mm</replaceable>.<replaceable>dd</replaceable></literal>
@@ -1182,9 +1182,9 @@ PORTEPOCH=	1</programlisting>
       </informaltable>
 
       <para>Se h&aacute; absolutamnete nenhum tra&ccedil;o da informa&ccedil;&atilde;o da vers&atilde;o no
-        fonte original e ele &eacute; unlikely original que o autor will ever
-        release uma outra vers&atilde;o, s&oacute; defina a string da vers&atilde;o a
-        <literal>1.0</literal> (como o <literal>piewm</literal> exemplo above).  Otherwise, pergunte
+        fonte original e ele &eacute; unlikely original que o autor sempre liberar&aacute;
+        uma outra vers&atilde;o, s&oacute; defina a string da vers&atilde;o a
+        <literal>1.0</literal> (como o <literal>piewm</literal> exemplo acima).  Caso contr&aacute;rio, pergunte
         o autor do original ou use a string da data
         (<literal><replaceable>yyyy</replaceable>.<replaceable>mm</replaceable>.<replaceable>dd</replaceable></literal>)
 	as the version.</para>
@@ -1197,42 +1197,42 @@ PORTEPOCH=	1</programlisting>
       <sect2>
         <title><makevar>CATEGORIES</makevar></title>
 
-        <para>When a package is created, it is put under
-          <filename>/usr/ports/packages/All</filename> and links are made from
-          one or more subdirectories of
-          <filename>/usr/ports/packages</filename>.  The names of these
-          subdirectories are specified by the variable
-          <makevar>CATEGORIES</makevar>.  It is intended to make life easier
-          for the user when he is wading through the pile of packages on the
-          FTP site or the CDROM.  Please take a look at the existing <link
+        <para>Quando um pacote &eacute; criado, ele &eacute; colocado baixo de
+          <filename>/usr/ports/packages/All</filename> e links s&atilde;o feitos de
+          um ou mais subdiret&oacute;rios do
+          <filename>/usr/ports/packages</filename>.  Os nomes destes
+          subdiret&oacute;rios s&atilde;o especificados pela vari&aacute;vel
+          <makevar>CATEGORIES</makevar>.  It is intended to fazer a vida mais f&aacute;cil
+          para os usu&aacute;rios quando ele est&aacute; andando na pilha de pacotes no
+          site FTP ou CDROM.  Por favor take a look at the existing <link
             linkend="porting-categories">categories</link> and pick the ones
-          that are suitable for your port.</para>
+          that are suitable para seu port.</para>
 
-        <para>This list also determines where in the ports tree the port is
-          imported.  If you put more than one category here, it is assumed
-          that the port files will be put in the subdirectory with the name in
-          the first category.  See the <link
-            linkend="porting-categories">categories</link> section for more
-          discussion about how to pick the right categories.</para>
+        <para>Esta lista tamb&eacute;m determina onde na arvore do ports o port  est&aacute;
+          importado.  Se voc&ecirc; colocar mais que uma categoria aqui, it &eacute; assumed
+          that os arquivos do port ser&atilde;o colocados no subdiret&oacute;rio com o nome na
+          primeira categoria.  Veja a se&ccedil;&atilde;o <link
+            linkend="porting-categories">categories</link> para mais
+          discuss&otilde;es sobre como escolher as categorias certas.</para>
 
-        <para>If your port truly belongs to something that is different from
-          all the existing ones, you can even create a new category name.  In
-          that case, please send mail to the &a.ports; to propose a new
-          category.</para>
+        <para>Se seu port realmente pertence a algo que &eacute; diferente de
+          todos os existentes, voc&ecirc; pode at&eacute; criar uma novo nome da categoria.  Nesse
+          caso, por favor envie um mail para os &a.ports; para propor uma nova
+          categoria.</para>
       </sect2>
 
       <sect2 id="porting-categories">
-        <title>Current list of categories</title>
+        <title>Lista atual das categorias</title>
 
-        <para>First, this is the current list of port categories.  Those
-          marked with an asterisk (<literal>*</literal>) are
-          <emphasis>virtual</emphasis> categories&mdash;those that do not have
-          a corresponding subdirectory in the ports tree.</para>
+        <para>Primeiro, esta &eacute; a lista atual de categorias dos ports.  Aquelas
+          marcadas com um asterisco (<literal>*</literal>) s&atilde;o
+          categorias&mdash; <emphasis>virtuais</emphasis> aquelas que n&atilde;o teem
+          um subdiret&oacute;rio correspondente na arvore do ports.</para>
 
         <note>
-          <para>For non-virtual categories, you will find a one-line
-            description in the <filename>pkg/COMMENT</filename> file in that
-            subdirectory (e.g.,
+          <para>Para categorias n&atilde;o-virtuais, voc&ecirc; encontrar&aacute; uma
+            descri&ccedil;&atilde;o de uma-linha no arquivo <filename>pkg/COMMENT</filename> naquele
+            subdiret'rrio (ex.,
             <filename>archivers/pkg/COMMENT</filename>).</para>
         </note>
 
@@ -1718,97 +1718,97 @@ PORTEPOCH=	1</programlisting>
       </sect2>
 
       <sect2>
-        <title>Choosing the right category</title>
+        <title>Escolhendo a categoria certa</title>
 
-        <para>As many of the categories overlap, you often have to choose
-          which of the categories should be the primary category of your port.
-          There are several rules that govern this issue.  Here is the list of
-          priorities, in decreasing order of precedence:</para>
+        <para>Como muitas das categorias coincidem, voc&ecirc; frequentemente tem que escolher
+          qual das categorias deve ser a categoria prim&aacute;ria de seu port.
+          H&aacute; v&aacute;rias regras que governam esta quest&atilde;o.  Aqui est&aacute; a lista de
+          prioridades, em diminuindo a ordem de precedencia:</para>
 
         <itemizedlist>
           <listitem>
-            <para>Language specific categories always come first.  For
-              example, if your port installs Japanese X11 fonts, then your
-              <makevar>CATEGORIES</makevar> line would read <filename>japanese
+            <para>Categorias espec&iacute;fica de lingua sempre vem primeiro.  Por
+              exemplo, se seu port instala fontes X11 Japonesas, ent&atilde;o sua
+              linha de <makevar>CATEGORIES</makevar> leria <filename>japanese
                 x11-fonts</filename>.</para>
           </listitem>
 
           <listitem>
-            <para>Specific categories win over less-specific ones.  For
-              instance, an HTML editor should be listed as <filename>www
-                editors</filename>, not the other way around.  Also, you do not
-              need to list <filename>net</filename> when the port belongs to
-              any of <filename>irc</filename>, <filename>mail</filename>,
+            <para>Categorias espec&iacute;ficas conquistam as menos-espec&iacute;ficas.  Para
+              instancia, um editor HTML deve ser listado como <filename>www
+                editors</filename>, n&atilde;o the other way around.  Tamb&eacute;m, voc&ecirc; n&atilde;o
+              precisa listar <filename>net</filename> quando o port pertence a
+              quaisquer do <filename>irc</filename>, <filename>mail</filename>,
               <filename>mbone</filename>, <filename>news</filename>,
-              <filename>security</filename>, or <filename>www</filename>.</para>
+              <filename>security</filename>, ou <filename>www</filename>.</para>
           </listitem>
 
           <listitem>
-            <para><filename>x11</filename> is used as a secondary category only
-              when the primary category is a natural language.  In particular,
-              you should not put <filename>x11</filename> in the category line
-              for X applications.</para>
+            <para><filename>x11</filename> &eacute; usado como uma categoria secund&aacute;ria somente
+              quando a categoria prim&aacute;ria &eacute; uma lingua natural.  Em particular,
+              voc&ecirc; n&atilde;o deve colocar <filename>x11</filename> na linha de categoria
+              para aplica&ccedil;&otilde;es do X.</para>
           </listitem>
 
           <listitem>
-            <para><application>Emacs</application> modes should be
-	      placed in the same ports category as the application
-	      supported by the mode, not in
-	      <filename>editors</filename>.  For example, an
-	      <application>Emacs</application> mode to edit source
-	      files of some programming language should go into
+            <para><application>Emacs</application> modes devem ser
+	      colocados na mesma categoria do ports como a aplica&ccedil;&atilde;o
+	      suportada pelo o mode, n&atilde;o em
+	      <filename>editors</filename>.  Por exemplo, um
+	      <application>Emacs</application> mode para editar arquivos
+	      fontes de algumas linguagens de programa&ccedil;&atilde;o deve entrar em
 	      <filename>lang</filename>.
               </para>
           </listitem>
 
           <listitem>
-            <para>If your port truly does not belong anywhere else, put it in
+            <para>Se seu port realmente n&atilde;o pertence a nenhum local mais, coloque-o em
               <filename>misc</filename>.</para>
           </listitem>
         </itemizedlist>
 
-        <para>If you are not sure about the category, please put a comment to
-          that effect in your &man.send-pr.1; submission so we can
-          discuss it before we import it.  If you are a committer, send a note
-          to the &a.ports; so we can discuss it first&mdash;too often new ports are
-          imported to the wrong category only to be moved right away.</para>
+        <para>Se voc&ecirc; n&atilde;o est&aacute; certo sobre que categoria, por favor coloque um coment&aacute;rio para
+          que effect em seu &man.send-pr.1; submission so n&oacute;s podemos
+          discut&iacute;-lo antes que n&oacute;s o importemos.  Se voc&ecirc; &eacute; um committer, envie uma nota
+          para o &a.ports; assim n&oacute;s podemos discut&iacute;-lo primeiro&mdash;muito frequentemente novos
+          ports s&atilde;o importados a categoria errada somente para ser movidos para certa.</para>
       </sect2>
     </sect1>
 
     <sect1 id="makefile-distfiles">
-      <title>The distribution files</title>
+      <title>Os arquivos de distribui&ccedil;&atilde;o</title>
 
-      <para>The second part of the <filename>Makefile</filename> describes the
-	files that must be downloaded in order to build the port, and where
-	they can be downloaded from.</para>
+      <para>A segunda parte do <filename>Makefile</filename> descreve os
+	arquivos que tem que ser obtidos em ordem para construir o port, e de onde
+	eles podem ser obtidos.</para>
 
       <sect2>
         <title><makevar>DISTNAME</makevar></title>
 
-        <para><makevar>DISTNAME</makevar> is the name of the port as
-          called by the authors of the software.
+        <para><makevar>DISTNAME</makevar> &eacute; o nome do port assim
+          chamado pelos autores do software.
           <makevar>DISTNAME</makevar> defaults to
-          <literal>${PORTNAME}-${PORTVERSION}</literal>, so override it if necessary.
-          <makevar>DISTNAME</makevar> is only used in two places.
-          First, the distribution file list
+          <literal>${PORTNAME}-${PORTVERSION}</literal>, so override it se necess&aacute;rio.
+          <makevar>DISTNAME</makevar> &eacute; somente usado em dois lugares.
+          Primeiro, a lista do arquivo de distribui&ccedil;&atilde;o
           (<makevar>DISTFILES</makevar>) defaults to
           <makevar>${DISTNAME}</makevar><makevar>${EXTRACT_SUFX}</makevar>.
-          Second, the distribution file is expected to extract into a
-          subdirectory named <makevar>WRKSRC</makevar>, which defaults
-          to <filename>work/<makevar>${DISTNAME}</makevar></filename>.</para>
+          Segundo, o arquivo de distribui&ccedil;&atilde;o &eacute; experado para extrair dentro de um
+          subdiret&oacute;rio chamado <makevar>WRKSRC</makevar>, qual defaults
+          a <filename>work/<makevar>${DISTNAME}</makevar></filename>.</para>
 
 	<note>
-          <para><makevar>PKGNAMEPREFIX</makevar> and
-            <makevar>PKGNAMESUFFIX</makevar> do not affect
-            <makevar>DISTNAME</makevar>.  Also note that when
-            <makevar>WRKSRC</makevar> is equal to
+          <para><makevar>PKGNAMEPREFIX</makevar> e
+            <makevar>PKGNAMESUFFIX</makevar> n&atilde;o afeta
+            <makevar>DISTNAME</makevar>.  Tamb&eacute;m note que quando
+            <makevar>WRKSRC</makevar> &eacute; igual ao
             <filename>work/<makevar>${PORTNAME}-${PORTVERSION}</makevar></filename>
-            while the original source archive is named something other than
+            while o arquivo fonte original &eacute; chamado algo outro que
             <makevar>${PORTNAME}-${PORTVERSION}${EXTRACT_SUFX}</makevar>,
-            you should probably leave <makevar>DISTNAME</makevar>
-            alone&mdash; you are better off defining
-            <makevar>DISTFILES</makevar> than having to set both
-            <makevar>DISTNAME</makevar> and <makevar>WRKSRC</makevar>
+            voc&ecirc; deve provavelmente deixar <makevar>DISTNAME</makevar>
+            alone&mdash; voc&ecirc; est&aacute; melhor definindo
+            <makevar>DISTFILES</makevar> que tendo que definir ambos
+            <makevar>DISTNAME</makevar> e <makevar>WRKSRC</makevar>
             (and possibly <makevar>EXTRACT_SUFX</makevar>).</para>
 	</note>
       </sect2>
@@ -1816,102 +1816,102 @@ PORTEPOCH=	1</programlisting>
       <sect2>
         <title><makevar>MASTER_SITES</makevar></title>
 
-        <para>Record the directory part of the FTP/HTTP-URL pointing at the
-          original tarball in <makevar>MASTER_SITES</makevar>.  Do not forget
+        <para>Record a parte do diret&oacute;rio do FTP/HTTP-URL apontando no
+          original tarball em <makevar>MASTER_SITES</makevar>.  N&atilde;o esque&ccedil;a
           the trailing slash (<filename>/</filename>)!</para>
 
-        <para>The <command>make</command> macros will try to use this
-          specification for grabbing the distribution file with
-          <makevar>FETCH</makevar> if they cannot find it already on the
-          system.</para>
+        <para>Os macros do <command>make</command> tentar&atilde;o usar esta
+          especifica&ccedil;&atilde;o para grabbing o arquivo de distribui&ccedil;&atilde;o com
+          <makevar>FETCH</makevar> se eles n&atilde;o podem encontra-lo j&aacute; no
+          sistema.</para>
 
-        <para>It is recommended that you put multiple sites on this list,
-          preferably from different continents.  This will safeguard against
-          wide-area network problems, and we are even planning to add support
-          for automatically determining the closest master site and fetching
-          from there!</para>
+        <para>It is recommended que voc&ecirc; coloque multiplos sites nesta lista,
+          preferencialmente de continentes diferentes.  Isto proteger&aacute; contra
+          problemas de rede de area-distantes, e n&oacute;s estamos at&eacute; planejando adicionar suporte
+          para determinar automaticamente o mais pr&oacute;ximo master site e fetching
+          de l&aacute;!</para>
 
-        <para>If the original tarball is part of one of the popular
-          archives such as X-contrib, GNU, or Perl CPAN, you may be able
-          refer to those sites in an easy compact form using
+        <para>Se o original tarball &eacute; parte de um dos arquivos populares
+          como X-contrib, GNU, ou Perl CPAN, voce pode ser capaz
+          referenciar a aqueles sites em uma forma f&aacute;cil e compacta usando
           <makevar>MASTER_SITE_<replaceable>*</replaceable></makevar>
-          (e.g., <makevar>MASTER_SITE_XCONTRIB</makevar> and
-          <makevar>MASTER_SITE_PERL_GNU</makevar>).  Simply set
-          <makevar>MASTER_SITES</makevar> to one of these variables and 
-          <makevar>MASTER_SITE_SUBDIR</makevar> to the path within the
-          archive.  Here is an example:</para>
+          (ex., <makevar>MASTER_SITE_XCONTRIB</makevar> e
+          <makevar>MASTER_SITE_PERL_GNU</makevar>).  Simplesmente defina
+          <makevar>MASTER_SITES</makevar> a uma dessas vari&aacute;veis e 
+          <makevar>MASTER_SITE_SUBDIR</makevar> ao path com o
+          arquivo.  Aqui est&aacute; um exemplo:</para>
 
         <programlisting>MASTER_SITES=         ${MASTER_SITE_XCONTRIB}
 MASTER_SITE_SUBDIR=   applications</programlisting>
 
-        <para>These variables are defined in
-          <filename>/usr/ports/Mk/bsd.sites.mk</filename>.  There are
-          new archives added all the time, so make sure to check the
-          latest version of this file before submitting a port.</para>
+        <para>Estas vari&aacute;veis s&atilde;o definidas em
+          <filename>/usr/ports/Mk/bsd.sites.mk</filename>.  H&aacute;
+          novos arquivos adicionados todo o tempo, assim certifique-se de verificar a
+          ultima vers&atilde;o deste arquivo antes do envio de um port.</para>
 
-        <para>The user can also set the <makevar>MASTER_SITE_*</makevar>
-          variables in <filename>/etc/make.conf</filename> to override our
-          choices, and use their favorite mirrors of these popular archives
-          instead.</para>
+        <para>O usu&aacute;rio pode tamb&eacute;m definir as vari&aacute;veis <makevar>MASTER_SITE_*</makevar>
+          em <filename>/etc/make.conf</filename> para override nossas
+          escolhas, e usar seus mirrors favoritos destes arquivos populares
+          ao inv&eacute;s.</para>
       </sect2>
 
       <sect2>
 	<title><makevar>EXTRACT_SUFX</makevar></title>
 
-	<para>If you have one distribution file, and it uses an odd suffix to
-	  indicate the compression mechanism, set
+	<para>Se voc&ecirc; tem um arquivo de ditribui&ccedil;&atilde;o, e ele usa um antigo sufixo para
+	  indicar o mecanismo de compress&atilde;o, defina
 	  <makevar>EXTRACT_SUFX</makevar>.</para>
 	
-	<para>For example, if the distribution file was named
-	  <filename>foo.tgz</filename> instead of the more normal
-	  <filename>foo.tar.gz</filename>, you would write:</para>
+	<para>Por exemplo, se o arquivo de distribui&ccedil;&atilde;o foi chamado
+	  <filename>foo.tgz</filename> ao inv&eacute;s do mais normal
+	  <filename>foo.tar.gz</filename>, voc&ecirc; escreveria:</para>
 
 	<programlisting>DISTNAME=      foo
 EXTRACT_SUFX=  .tgz</programlisting>
 
-	<para>The <makevar>USE_BZIP2</makevar> and <makevar>USE_ZIP</makevar>
-	  variables automatically set <makevar>EXTRACT_SUFX</makevar> to
-	  <literal>.bz2</literal> or <literal>.zip</literal> as necessary.  If
-	  neither of these are set then <makevar>EXTRACT_SUFX</makevar>
+	<para>As vari&aacute;veis <makevar>USE_BZIP2</makevar> e <makevar>USE_ZIP</makevar>
+	  automaticamente defina <makevar>EXTRACT_SUFX</makevar> a
+	  <literal>.bz2</literal> ou <literal>.zip</literal> como necess&aacute;rio.  Se
+	  neither destes s&atilde;o definidos ent&atilde;o <makevar>EXTRACT_SUFX</makevar>
 	  defaults to <literal>.tar.gz</literal>.</para>
 
-	<para>You never need to set both <makevar>EXTRACT_SUFX</makevar> and
+	<para>Voc&ecirc; nunca precisou definir ambos <makevar>EXTRACT_SUFX</makevar> e
 	  <makevar>DISTFILES</makevar>.</para>
       </sect2>
 
       <sect2>
 	<title><makevar>DISTFILES</makevar></title>
 
-	<para>Sometimes the names of the files to be downloaded have no
-	  resemblance to the name of the port.  For example, it might be
-	  called <filename>source.tar.gz</filename> or similar.  In other
-	  cases the application's source code might be in several different
-	  archives, all of which must be downloaded.</para>
+	<para>Algumas vezes os nomes dos arquivos para ser obtidos tem que n&atilde;o
+	  parecer com o nome do port.  Por exemplo, ele pode ser
+	  chamado <filename>source.tar.gz</filename> ou similar.  Em outros
+	  casos os c&oacute;digos fontes da aplica&ccedil;&atilde;o pode be em v&aacute;rios arquivos
+	  diferentes, todo do qual tem que ser obtido.</para>
 
-	<para>If this is the case, set <makevar>DISTFILES</makevar> to be a
-	  space separated list of all the files that must be
-	  downloaded.</para>
+	<para>Se este &eacute; o caso, defina <makevar>DISTFILES</makevar> para ser uma
+	  lista separada de espa&ccedil;o de todos os arquivos que tem que ser
+	  obtidos.</para>
 
 	<programlisting>DISTFILES=     source1.tar.gz source2.tar.gz</programlisting>
 
-	<para>If not explicitly set, <makevar>DISTFILES</makevar> defaults to
+	<para>Se n&atilde;o explicitamente definido, <makevar>DISTFILES</makevar> defaults to
 	  <literal>${DISTNAME}${EXTRACT_SUFX}</literal>.</para>
       </sect2>
 
       <sect2>
 	<title><makevar>EXTRACT_ONLY</makevar></title>
 
-	<para>If only some of the <makevar>DISTFILES</makevar> must be
-	  extracted&mdash;for example, one of them is the source code, while
-	  another is an uncompressed document&mdash;list the filenames that
-	  must be extracted in <makevar>EXTRACT_ONLY</makevar>.</para>
+	<para>Se somente alguns dos <makevar>DISTFILES</makevar> tem que ser
+	  extraidos&mdash;por exemplo, um deles &eacute; o c&oacute;digo fonte, enquanto
+	  um outro &eacute; um documento uncompressed&mdash;lista os nomes de arquivos que
+	  tem que ser extraido em <makevar>EXTRACT_ONLY</makevar>.</para>
 
 	<programlisting>DISTFILES=     source.tar.gz manual.html
 EXTRACT_ONLY=  source.tar.gz</programlisting>
 
-	<para>If <emphasis>none</emphasis> of the <makevar>DISTFILES</makevar>
-	  should be uncompressed then set <makevar>EXTRACT_ONLY</makevar> to
-	  the empty string.</para>
+	<para>Se <emphasis>nenhum</emphasis> dos <makevar>DISTFILES</makevar>
+	  deve ser uncompressed ent&atilde;o defina <makevar>EXTRACT_ONLY</makevar> a
+	  string vazia.</para>
 
 	<programlisting>EXTRACT_ONLY=</programlisting>
       </sect2>
@@ -1919,22 +1919,22 @@ EXTRACT_ONLY=  source.tar.gz</programlisting>
       <sect2 id="porting-patchfiles">
         <title><makevar>PATCHFILES</makevar></title>
 
-        <para>If your port requires some additional patches that are available
-          by FTP or HTTP, set <makevar>PATCHFILES</makevar> to the names of
-          the files and <makevar>PATCH_SITES</makevar> to the URL of the
-          directory that contains them (the format is the same as
+        <para>Se seu port precisa algums patches adicionais que est&atilde;o dispon&iacute;veis
+          por FTP ou HTTP, defina <makevar>PATCHFILES</makevar> aos nomes dos
+          arquivos e <makevar>PATCH_SITES</makevar> a URL do
+          diret&oacute;rio que os cont&eacute;m (o formato &eacute;  o mesmo assim
           <makevar>MASTER_SITES</makevar>).</para>
 
-        <para>If the patch is not relative to the top of the source tree
-          (i.e., <makevar>WRKSRC</makevar>) because it contains some extra
-          pathnames, set <makevar>PATCH_DIST_STRIP</makevar> accordingly. For
-          instance, if all the pathnames in the patch have an extra
-          <literal>foozolix-1.0/</literal> in front of the filenames, then set
+        <para>Se o patch n&atilde;o &eacute; relativo ao top da arvore do fonte
+          (i.e., <makevar>WRKSRC</makevar>) porque ele cont&eacute;m algums pathnames
+           extras, defina <makevar>PATCH_DIST_STRIP</makevar> accordingly. Para
+          inst&acirc;ncia, se todos os pathnames no patch tem um extra
+          <literal>foozolix-1.0/</literal> em frente dos nomes dos arquivos, ent&atilde;o defina
           <literal>PATCH_DIST_STRIP=-p1</literal>.</para>
 
-        <para>Do not worry if the patches are compressed; they will be
-          decompressed automatically if the filenames end with
-          <filename>.gz</filename> or <filename>.Z</filename>.</para>
+        <para>N&atilde;o se preocupe se os patches est&atilde;o compressed; eles ser&atilde;o
+          decompressed automaticamnte os nomes dos arquivos finalizados com
+          <filename>.gz</filename> ou <filename>.Z</filename>.</para>
 
         <para>If the patch is distributed with some other files, such as
           documentation, in a gzip'd tarball, you cannot just use
