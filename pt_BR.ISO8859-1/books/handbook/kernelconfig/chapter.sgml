@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.22 2003/12/10 10:18:41 surf Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.23 2003/12/10 16:21:19 surf Exp $
 -->
 
 <chapter id="kernelconfig">
@@ -1193,65 +1193,65 @@ device          sn0    at isa? port 0x300 irq 10
 # requerer suporte PCCARD (PCMCIA) para ser ativado
 #device         xe0    at isa?</programlisting>
 
-    <para>ISA Ethernet drivers.  See
-      <filename>/usr/src/sys/i386/conf/LINT</filename> for which cards are
-      supported by which driver.</para>
+    <para>ISA Ethernet drivers. Veja
+      <filename>/usr/src/sys/i386/conf/LINT</filename> os cartões suportados 
+      por este driver.</para>
 
     <programlisting>pseudo-device   ether         # Ethernet support</programlisting>
 
-    <para><literal>ether</literal> is only needed if you have an Ethernet
-      card.  It includes generic Ethernet protocol code.</para>
+    <para><literal>ether</literal> é somente necessário se você tem um cartão Ethernet.
+      Isto inclui o código generico do protocolo Ethernet.</para>
 
     <programlisting>pseudo-device   sl      1     # Kernel SLIP</programlisting>
 
-    <para><literal>sl</literal> is for SLIP support.  This has been almost
-      entirely supplanted by PPP, which is easier to set up, better suited
-      for modem-to-modem connection, and more powerful.  The
-      <replaceable>number</replaceable> after <literal>sl</literal>
-      specifies how many simultaneous SLIP sessions to support.</para>
+    <para><literal>sl</literal> é para suporte SLIP. Isto foi quase inteiramente
+      suplando por PPP, que é mais fácil para se ajustar, melhor adpatação
+      para conexão modem-a-modem, e mais poderoso. O
+      <replaceable>número</replaceable> depois <literal>sl</literal>
+      especifica quantas sessões simultaneas SLIP são suportadas.</para>
 
     <programlisting>pseudo-device   ppp     1     # Kernel PPP</programlisting>
 
-    <para>This is for kernel PPP support for dial-up connections.  There
-      is also a version of PPP implemented as a userland application that
-      uses <literal>tun</literal> and offers more flexibility and features
-      such as demand dialing.  The <replaceable>number</replaceable> after
-      <literal>ppp</literal> specifies how many simultaneous PPP
-      connections to support.</para>
+    <para>Isto é para suporte do  kernel a PPP para conexões dial-up. Há
+      também uma outra versão do PPP implementada executada como uma aplicação que
+      usa <literal>tun</literal> e oferece mais flexibilidade e características
+      tais como exige discagem. O <replaceable>número</replaceable> de conexões depois do
+      <literal>ppp</literal> especifica a quantidade de conexões simultaneas PPP
+      suporta.</para>
 
     <programlisting>pseudo-device   tun           # Packet tunnel.</programlisting>
 
-    <para>This is used by the userland PPP software.  A
-      <replaceable>number</replaceable> after <literal>tun</literal>
-      specifies the number of simultaneous PPP sessions to support.  See
-      the <link linkend="userppp">PPP</link> section of this book for more
-      information.</para>
+    <para>Isto é usado pelo software de PPP. Um
+      <replaceable>número</replaceable> depois <literal>tun</literal>
+      especificado é o número de sessões simultaneas PPP suportadas. Veja
+      a seção <link linkend="userppp">PPP</link> deste livro para maiores
+      informações.</para>
 
     <programlisting><anchor id="kernelconfig-ptys">
 pseudo-device   pty           # Pseudo-ttys (telnet etc)</programlisting>
 
-    <para>This is a <quote>pseudo-terminal</quote> or simulated login port.
-      It is used by incoming <command>telnet</command> and
-      <command>rlogin</command> sessions,
-      <application>xterm</application>, and some other applications such
-      as <application>Emacs</application>.  A
-      <replaceable>number</replaceable> after <literal>pty</literal> indicates the number of
-      <literal>pty</literal>s to create.  If you need more than the
-      default of 16 simultaneous <application>xterm</application> windows
-      and/or remote logins, be sure to increase this number accordingly,
-      up to a maximum of 256.</para>
+    <para>Isto é um <quote>pseudo-terminal</quote> que simula porta de login.
+      Isto é usado por entrada <command>telnet</command> e seções
+      <command>rlogin</command>,
+      <application>xterm</application>, e algumas outras aplicações como
+      <application>Emacs</application>. Um
+      <replaceable>número</replaceable> depois <literal>pty</literal> indica o número de
+      <literal>pty</literal>s para ser criado. Se você necessita mais que o
+      padrão de 16 simultaneas <application>xterm</application> windows
+      ou remote logins, seja certo aumentar este número,
+      para o máximo de 256.</para>
 
     <programlisting>pseudo-device   md            # Memory <quote>disks</quote></programlisting>
 
-    <para>Memory disk pseudo-devices.</para>
+    <para>Disco de memória pseudo-devices.</para>
 
     <programlisting>pseudo-device   gif</programlisting>
 
-    <para>or</para>
+    <para>ou</para>
 
     <programlisting>pseudo-device   gif     4     # IPv6 and IPv4 tunneling</programlisting>
 
-    <para>This implements IPv6 over IPv4 tunneling, IPv4 over IPv6 tunneling,
+    <para>Isto implementa IPv6 sobre IPv4 tunneling, IPv4 over IPv6 tunneling,
       IPv4 over IPv4 tunneling, and IPv6 over IPv6 tunneling.  Beginning with
       &os;&nbsp;4.4 the <literal>gif</literal> device is
       <quote>auto-cloning</quote>, and you should use the first example
