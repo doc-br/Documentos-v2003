@@ -4616,39 +4616,54 @@ madrigal.fishbaum.de</programlisting>
         <primary>accounting</primary>
         <secondary>printer</secondary>
       </indexterm>
-      <para>So, you need to charge for printouts.  And why not? Paper and ink
-        cost money.  And then there are maintenance costs&mdash;printers are
-        loaded with moving parts and tend to break down.  You have examined
-        your printers, usage patterns, and maintenance fees and have come up
-        with a per-page (or per-foot, per-meter, or per-whatever) cost.  Now,
-        how do you actually start accounting for printouts?</para>
+		<para>
+			Ent&atilde;o, voc&ecirc; precisa contabilizar as impress&otilde;es.
+		  Por que n&atilde;o?  Afinal papel e tinta custam dinheiro.  E 
+		tamb&eacute;m o custo de manuten&ccedil;&atilde;o da impressora com as
+		partes m&oacute;veis que podem quebrar.  Voc&ecirc; deve examinar suas
+		impressoras, use um padr&atilde;o e uma taxa de manuten&ccedil;&atilde;o
+		que deve conter o custo de uma p&aacute;gina ( ou por metro, por 
+		p&eacute;s, ou qualquer outra coisa ).  Agora como voc&ecirc; ir&aacute;
+		inicializar a contabilidade para as impress&otilde;es?
+		</para>
           
-      <para>Well, the bad news is the <application>LPD</application> spooling
-	system does not provide
-        much help in this department.  Accounting is highly dependent on the
-        kind of printer in use, the formats being printed, and
-        <emphasis>your</emphasis> requirements in charging for printer
-        usage.</para>
+      <para>
+			Bem, a m&aacute; not&iacute;cia &eacute; que o sistema de spooling
+		<application>LPD</application> n&atilde;o prov&ecirc; muita ajuda
+		nesse departamento.  A contabilidade &eacute; altamente dependente
+		da maneira de como a impressora &eacute; utilizadda, o formato que 
+		&eacute; impresso, como <emphasis>voc&ecirc;</emphasis> necessita
+		que a impressora seja contabilizada.
+		</para>
       
-      <para>To implement accounting, you have to modify a printer's text
-        filter (to charge for plain text <foreignphrase>jobs</foreignphrase>) and the conversion filters (to
-        charge for other file formats), to count pages or query the printer
-        for pages printed.  You cannot get away with using the simple output
-        filter, since it cannot do accounting.  See section <link
-          linkend="printing-advanced-filter-intro">Filters</link>.</para>
+      <para>
+			Para implantar a contabilidade, voc&ecirc; deve modificar o filtro 
+	para texto puro ( para contabilizar trabalhos de impress&atilde;o em 
+	texto puro) e os filtros de convers&atilde;o ( para contabilizar outros
+	formatos de impress&atilde;o), para contar as p&aacute;ginas ou as 
+	requisi&ccedil;&otilde;es para a impressora das p&aacute;ginas impressas.
+	  Voc&ecirc; n&atilde;o deve utilizar filtros simples, pos eles n&atilde;o
+	fornecem dados para a contabilidade.  Veja a se&ccedil;&atilde;o
+   <link linkend="printing-advanced-filter-intro">Filtros</link>.
+		</para>
           
-      <para>Generally, there are two ways to do accounting:</para>
+      <para>
+			Geralmente, existe duas maneiras para realizar a contabilidade:
+		</para>
       
       <itemizedlist>
         <listitem>
-          <para><emphasis>Periodic accounting</emphasis> is the more common
-            way, possibly because it is easier.  Whenever someone prints a
-            job, the filter logs the user, host, and number of pages to an
-            accounting file.  Every month, semester, year, or whatever time
-            period you prefer, you collect the accounting files for the
-            various printers, tally up the pages printed by users, and charge
-            for usage.  Then you truncate all the logging files, starting with
-            a clean slate for the next period.</para>
+			<para>
+				<emphasis>Contabilidade Peri&oacute;dica</emphasis> &eacute;
+	feita pela maneira mais simples.  A toda hora &eacute; impresso algo, e
+	o filtro armazena o usu&aacute;rio, a m&aacute;quina, e o n&uacute;mero de
+	p&aacute;gians impressas no arquivo de contabilidade.  A cada mes,
+	semestre, ano ou a qualquer per&oacute;do que voc&ecirc; preferir,
+	voc&ecirc; pode coletar a contagem de p&aacute;ginas, atrav&eacute;s
+	do arquivo de contabilidade para v&aacute;rias impressoras.  Ent&atilde;o
+	voc&ecirc; poder&aacute; zerar o arquivo de contabilidade para que se
+	fa&ccedil;a novo per&iacute;odo de  contabilidade.
+			</para>
         </listitem>
               
         <listitem>
@@ -4676,34 +4691,42 @@ madrigal.fishbaum.de</programlisting>
           
       <sect3>
 			<title>
-				Uma Comtabilidade R&aacute;pida e 
-				<foreignphrase>Dirty</foreignphrase>
+				Uma Comtabilidade R&aacute;pida e Rasteira
 			</title>
 
-        <para>FreeBSD comes with two programs that can get you set up with
-          simple periodic accounting right away.  They are the text filter
-          <command>lpf</command>, described in section <link
-            linkend="printing-advanced-lpf">lpf: a Text Filter</link>, and
-            &man.pac.8;, a program to gather and total
-          entries from printer accounting files.</para>
+			<para>
+				O FreeBSD vem com dos programas que podem ajuda-lo com uma 
+		contabilidade simples e periodica.  Eles s&atilde;o filtros texto
+		(<command>lpf</command>), descrito na se&ccedil;&atilde;o 
+		<link linkend="printing-advanced-lpf">lpf: um Filtro Texto</link>,
+		e  &man.pac.8;, um programa para recolher e totalizar as entradas do
+		arquivo de contabilidade das impressoras.
+			</para>
 
-        <para>As mentioned in the section on filters (<link
-            linkend="printing-advanced-filters">Filters</link>), 
-	  <application>LPD</application> starts
-          the text and the conversion filters with the name of the accounting
-          file to use on the filter command line.  The filters can use this
-          argument to know where to write an accounting file entry.  The name
-          of this file comes from the <literal>af</literal> capability in
-          <filename>/etc/printcap</filename>, and if not specified as an
-          absolute path, is relative to the spooling directory.</para>
+			<para>
+				Como mencionado na se&ccedil;&atilde;o sobre filtros 
+		(<link linkend="printing-advanced-filters">Filtros</link>), O
+		<application>LPD</application> inicia os filtros de texto e de 
+		convers&atilde;o com o nome do arquivo de contabilidade para ser 
+		utilizado na linha de comando do filtro.  Os filtros podem usar esse
+		argumento para saber onde escrever os dados da contabilidade.  O nome
+		desse arquivo deve ser colocado na op&ccedil;&atilde;o
+		<literal>af</literal> no arquivo <filename>/etc/printcap</filename>, e
+		se n&atilde;o estiver especificado com o diret&oacute;rio absoluto,
+		ser&aacute; utilizado de forma relativa ao diret&oacute;rio de 
+		spooling.
+			</para>
 
-        <para><application>LPD</application> starts <command>lpf</command>
-	  with page width and length
-          arguments (from the <literal>pw</literal> and <literal>pl</literal>
-          capabilities).  <command>lpf</command> uses these arguments to
-          determine how much paper will be used.  After sending the file to
-          the printer, it then writes an accounting entry in the accounting
-          file.  The entries look like this:</para>
+			<para>
+				O <application>LPD</application> inicia o <command>lpf</command>
+		com a largura e o comprimento da p&aacute;gina como os argumentos (
+		da op&ccedil;&atilde;&otilde;es <literal>pw</literal> e 
+		<literal>pl</literal>).  O <command>lpf</command> usa esses argumentos
+		para determinar quanto de papel ser&aacute; utiizado.  Depois do
+		envio do arquivo para impressora, ele ent&atilde;o escreve a entrada
+		da contabilidade para o arquivo de contabilidade.  Uma entrada seria
+		semelhante a essa:
+			</para>
 
         <programlisting>2.00 rose:andy
 3.00 rose:kelly
@@ -5043,19 +5066,22 @@ total                     337.00  154   $  6.74</screen>
 	trabalhos de impress&atilde;o, e seus trabalhos de impress&atilde;o
 	aguardam na fila a impress&atilde;o de outros trabalhos seus ou de outros
 	usu&aacute;rios.  A impressora imprime esses trabalhos de impress&atilde;o
-	na seguinte ordem (FIFP) primeiro a chegar &eacute; o primeiro a ser
+	na seguinte ordem (FIFO) primeiro a chegar &eacute; o primeiro a ser
 	impresso.
 		</para>
 
-      <para>To display the queue for the default printer, type &man.lpq.1;.
-	For a specific printer, use the <option>-P</option> option.  For
-	example, the command
+		<para>
+			Para visualizar a fila para a impressora padr&atilde;o, digite:
+	&man.lpq.1;.
+	Para especificar a impressora, use a op&ccedil;&atilde;o 
+	<option>-P</option>. option.  Por exemplo, o comando
 
 	<screen>&prompt.user; <userinput>lpq -P bamboo</userinput></screen>
 
-	shows the queue for the printer named <literal>bamboo</literal>.  Here
-	is an example of the output of the <command>lpq</command>
-	command:</para>
+	mostrar&aacute; a fila da impressora chamada de <literal>bamboo</literal>.
+	Aqui est&aacute; um exemplo da sa&iacute;da do comando 
+	<command>lpq</command>:
+		</para>
 	    
       <screen>bamboo is ready and printing
 Rank   Owner    Job  Files                              Total Size
@@ -5063,22 +5089,33 @@ active kelly    9    /etc/host.conf, /etc/hosts.equiv   88 bytes
 2nd    kelly    10   (standard input)                   1635 bytes
 3rd    mary     11   ...                                78519 bytes</screen>
 	    
-      <para>This shows three <foreignphrase>jobs</foreignphrase> in the queue for <literal>bamboo</literal>.
-	The first job, submitted by user kelly, got assigned <quote>job
-	number</quote> 9.  Every job for a printer gets a unique job number.
-	Most of the time you can ignore the job number, but you will need it
-	if you want to cancel the job; see section <link
-	  linkend="printing-lprm">Removing Jobs</link> for details.</para>
+		<para>
+			Ele mostra tr&ecirc;s trabalhos de impress&atilde;o na fila
+	da impressora <literal>bamboo</literal>.  O primeiro trabalho,
+	enviado pela usu&aacute;ria kelly, tem atribuido um <quote>n&uacute;mero de 
+	fila</quote> 9.  Cada trabalho de impress&atilde;o tem um n&uacute;mero
+	&uacute;nico.  A maioria das vezes voc&ecirc; pode ignorar este 
+	n&uacute;mero, mas voc&ecirc; ir&aacute; precisar dele se quizer cancelar 
+	o trabalho de impress&atilde;o; veja na se&ccedil;&atilde;o
+	<link linkend="printing-lprm">
+		Removendo Trabalhos de Impress&atilde;o
+	</link> para mais detalhes.
+		</para>
 	  
-      <para>Job number nine consists of two files; multiple files given on the
-	  &man.lpr.1; command line are treated as part of a single job.  It
-	is the currently active job (note the word <literal>active</literal>
-	under the <quote>Rank</quote> column), which means the printer should
-	be currently printing that job.  The second job consists of data
-	passed as the standard input to the &man.lpr.1; command.  The third
-	  job came from user <username>mary</username>; it is a much larger
-	  job. The pathname of the file she is trying to print is too long to
-	  fit, so the &man.lpq.1; command just shows three dots.</para>
+		<para>
+			O n&uacute;mero de trabalho de Impress&atilde;o 9 consiste em
+	dois arquivos; multiplos arquivos dado em um comando &man.lpr.1; &eacute;
+	tratado como parte de um simples trabalho de impress&atilde;o.  Ele 
+	&eacute; o trabalho de impress&atilde;o atual ( note a palavra 
+	<literal>active</literal na coluna <quote>Rank</quote>), a qual diz
+	qual deve ser o trabalho de impress&atilde;o ativo.  O segundo 
+	trabalho de impress&atilde;o consiste de dados passados pela entrada 
+	padr&atilde;o para o comando &man.lpr.1;.  O terceiro vem do 
+	usu&aacute;rio <username>mary</username>; o qual &eacute; um trabalho de 
+	impress&atilde;o muito grande.  O nome do diret&oacute;rio do seu
+	arquivo &eacute; t&atilde;o grande que n&atilde;o cabe, ent&atilde;o
+	o comando &man.lpq.1; mostra os pontos da &aacute;rvore.
+		</para>
 
       <para>The very first line of the output from &man.lpq.1; is also useful:
 	it tells what the printer is currently doing (or at least what 
