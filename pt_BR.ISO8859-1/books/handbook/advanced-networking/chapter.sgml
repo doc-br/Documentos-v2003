@@ -984,7 +984,7 @@ wi0: flags=8843&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
     <sect2>
       <title>Introdu&ccedil;&atilde;o</title>
       <para>Bluetooth &eacute; uma teconologia sem fio para criar redes
-      pessoais operando na na banda n&atilde;o licenciada de 2.4GHz , com um
+      pessoais operando na banda n&atilde;o licenciada de 2.4GHz , com um
       alcance de 10 metros.  Redes normalmente s&atilde;o formadas sob
       demanda por dispositivos port&aacute;teis, como telefones celulares,
       handhelds e laptops.  Diferente de outras populares tecnologias 
@@ -4482,14 +4482,14 @@ nis_client_flags="-S <replaceable>NIS domain</replaceable>,<replaceable>server</
 	<author>
 	  <firstname>Greg</firstname>
       	  <surname>Sutter</surname>
-	  <contrib>Written by </contrib>
+	  <contrib>Escrito por </contrib>
 	</author>
       </authorgroup>
     </sect1info>
     <title>DHCP</title>
 
     <sect2>
-      <title>What Is DHCP?</title>
+      <title>O Que &Eacute; DHCP?</title>
       <indexterm>
 	<primary>Dynamic Host Configuration Protocol</primary>
 	<see>DHCP</see>
@@ -4498,117 +4498,123 @@ nis_client_flags="-S <replaceable>NIS domain</replaceable>,<replaceable>server</
 	<primary>Internet Software Consortium (ISC)</primary>
       </indexterm>
 
-      <para>DHCP, the Dynamic Host Configuration Protocol, describes
-	the means by which a system can connect to a network and obtain the
-	necessary information for communication upon that network.  FreeBSD
-	uses the ISC (Internet Software Consortium) DHCP implementation, so
-	all implementation-specific information here is for use with the ISC
-	distribution.</para>
+      <para>DHCP, o Protocolo de Configura&ccedil;&atilde;o Din&acirc;mica de Servidor (Dynamic 
+      Host Configuration Protocol, Descreve os meios pelo qual um sistema 
+      pode se conectar a uma rede e obter a informa&ccedil;&atilde;o necess&aacute;ria para
+      comunica&ccedil;&atilde;o naquela rede.  O FreeBSD usa a implementa&ccedil;&atilde;o de DHCP
+      da ISC (Internet Systems Consortium), ent&atilde;o toda informa&ccedil;&atilde;o
+      dependente de implementa&ccedil;&atilde;o aqui dispon&iacute;vel &eacute; para ser utilizada com a
+      distribui&ccedil;&atilde;o da ISC.</para>
     </sect2>
 
     <sect2>
-      <title>What This Section Covers</title>
+      <title>O Que Esta Se&ccedil;&atilde;o Cobre</title>
 
-      <para>This section describes both the client-side and server-side
-	components of the ISC DHCP system.  The client-side program,
-	<command>dhclient</command>, comes integrated within FreeBSD, and
-	the server-side portion is available from the
-	<filename role="package">net/isc-dhcp3</filename> port.  The
-	&man.dhclient.8;, &man.dhcp-options.5;, and &man.dhclient.conf.5;
-	manual pages, in addition to the references below, are useful
-	resources.</para>
+      <para>Esta se&ccedil;&atilde;o descreve os componentes cliente e servidor do sistema 
+      DHCP da ISC.  O programa cliente, <command>dhclient</command>, j&aacute; vem 
+      integrado no FreeBSD e a parte servidor est&aacute; dispon&iacute;vel do port 
+      <filename role="package">net/isc-dhcp3</filename>.  As p&aacute;ginas
+      de manual &man.dhclient.8;, &man.dhcp-options.5;, e
+      &man.dhclient.conf.5;, adicionalmente &agrave;s refer&ecirc;ncias dispon&iacute;veis
+      abaixo, s&atilde;o recursos &uacute;teis.</para>
     </sect2>
 
     <sect2>
-      <title>How It Works</title>
+      <title>Como Funciona</title>
       <indexterm><primary>UDP</primary></indexterm>
-      <para>When <command>dhclient</command>, the DHCP client, is
-	executed on the client machine, it begins broadcasting
-	requests for configuration information.  By default, these
-	requests are on UDP port 68.  The server replies on UDP 67,
-	giving the client an IP address and other relevant network
-	information such as netmask, router, and DNS servers.  All of
-	this information comes in the form of a DHCP
-	<quote>lease</quote> and is only valid for a certain time
-	(configured by the DHCP server maintainer).  In this manner,
-	stale IP addresses for clients no longer connected to the
-	network can be automatically reclaimed.</para>
+      <para>Quando o <command>dhclient</command>, o cliente DHCP, &eacute;
+	executado na m&aacute;quina cliente, ele come&ccedil;a a transmiss&atilde;o por 
+	difus&atilde;o de requisi&ccedil;&otilde;es de informa&ccedil;&otilde;es de configura&ccedil;&atilde;o.  Por 
+	padr&atilde;o, estas solicita&ccedil;&otilde;es est&atilde;o s&atilde;o na porta UDP 68.  O
+	servidor responde na UDP 67, dando ao cliente um endere&ccedil;o IP e
+	outras informa&ccedil;&otilde;es de rede, como a m&aacute;scara de rede, roteador e
+	servidores DNS.  Toda esta informa&ccedil;&atilde;o &eacute; fornecida na forma de
+	um <quote>arrendamento (lease)</quote> e &eacute; v&aacute;lido somente por um
+	determinado per&iacute;odo (configurado pelo mantenedor do servidor
+	DHCP).  Desta forma, endere&ccedil;os IP atribu&iacute;dos a clientes
+	que n&atilde;o est&atilde;o mais conectados &agrave; rede, podem ser reaproveitados
+	automaticamente.<para>
 
-      <para>DHCP clients can obtain a great deal of information from
-	the server.  An exhaustive list may be found in
-	&man.dhcp-options.5;.</para>
+      <para>Clientes DHCP podem obter uma grande quantidade de
+      informa&ccedil;&otilde;es do servidor.  Uma lista completa pode ser encontrada
+      em &man.dhcp-options.5;.</para>
     </sect2>
 
     <sect2>
-      <title>FreeBSD Integration</title>
+      <title>Integra&ccedil;&atilde;o com o FreeBSD</title>
 
-      <para>FreeBSD fully integrates the ISC DHCP client,
-	<command>dhclient</command>.  DHCP client support is provided
-	within both the installer and the base system, obviating the need
-	for detailed knowledge of network configurations on any network
-	that runs a DHCP server.  <command>dhclient</command> has been
-	included in all FreeBSD distributions since 3.2.</para>
+      <para>O FreeBSD integra totalmente o cliente DHCP da ISC, o
+      <command>dhclient</command>.  O suporte ao cliente DHCP &eacute; 
+      fornecido tanto no instalador quanto no sistema base,
+      evitando a necessidade de conhecimento detalhado das
+      configura&ccedil;&otilde;es em qualquer rede que tenha um servidor
+      DHCP.  O <command>dhclient</command> foi inclu&iacute;do em todas as
+      distribui&ccedil;&otilde;es do FreeBSD, desde a vers&atilde;o 3.2</para>
 	<indexterm>
 	  <primary><application>sysinstall</application></primary>
 	</indexterm>
 
-	<para>DHCP is supported by
-	  <application>sysinstall</application>.  When configuring a
-	  network interface within sysinstall, the first question
-	  asked is, <quote>Do you want to try DHCP configuration of
-	  this interface?</quote> Answering affirmatively will execute
-	  <command>dhclient</command>, and if successful, will fill in
-	  the network configuration information automatically.</para>
+	<para>O DHCP &eacute; suportado pelo 
+	<application>sysinstall</application>.  Quando configurar
+	uma interface de rede atrav&eacute;s do sysinstall, a primeira
+	pergunta feita &eacute;, <quote>Do you want to try DHCP configuration
+	of this interface? ("Voc&ecirc; deseja tentar configura&ccedil;&atilde;o DHCP
+	nesta interface?")</quote> Respondendo afirmativamente, ser&aacute;
+	executado o <command>dhclient</command>, e se funcionar, as
+	informa&ccedil;&otilde;es da configura&ccedil;&atilde;o de rede ser&atilde;o preenchidas 
+	automaticamente.</para>
 
-	<para>There are two things you must do to have your system use
-	  DHCP upon startup:</para>
+	<para>Existem duas coisas que voc&ecirc; precisa fazer para ter seu
+	sistema usando DHCP na inicializa&ccedil;&atilde;o:</para>
 	<indexterm>
 	  <primary>DHCP</primary>
 	  <secondary>requirements</secondary>
 	</indexterm>
 	<itemizedlist>
 	  <listitem>
-	    <para>Make sure that the <devicename>bpf</devicename>
-	      device is compiled into your kernel.  To do this, add
-	      <literal>pseudo-device bpf</literal> to your kernel
-	      configuration file, and rebuild the kernel.  For more
-	      information about building kernels, see <xref
-	      linkend="kernelconfig">.</para>
-	    <para>The <devicename>bpf</devicename> device is already
-	      part of the <filename>GENERIC</filename> kernel that is
-	      supplied with FreeBSD, so if you do not have a custom
-	      kernel, you should not need to create one in order to get
-	      DHCP working.</para>
+	    <para>Certifique-se de que o dispositivo 
+	    <devicename>bpf</devicename> est&aacute; compilado no seu kernel.
+	    Para fazer isso, adicione o <literal>pseudo-device bpf</literal>
+	    no seu arquivo de configura&ccedil;&atilde;o do kernel e reconstrua o
+	    kernel.  Para maiores informa&ccedil;&otilde;es sobre constru&ccedil;&atilde;o de
+	    kernels, veja <xref linkend="kernelconfig">.</para>
+
+	    <para>O dispositivo<devicename>bpf</devicename> j&aacute; &eacute; parte
+	    do kernel <filename>GENERIC</filename> fornecido com o
+	    FreeBSD, desta forma, se voc&ecirc; n&atilde;o tem um kernel adaptado,
+	    voc&ecirc; n&atilde;o precisa criar um para ter o DHCP funcionando.</para>
 	    <note>
-	      <para>For those who are particularly security conscious,
-		you should be warned that <devicename>bpf</devicename>
-		is also the device that allows packet sniffers to work
-		correctly (although they still have to be run as
-		<username>root</username>).  <devicename>bpf</devicename>
-		<emphasis>is</emphasis> required to use DHCP, but if
-		you are very sensitive about security, you probably
-		should not add <devicename>bpf</devicename> to your
-		kernel in the expectation that at some point in the
-		future you will be using DHCP.</para>
+	      <para>Para os que s&atilde;o particularmente preocupados com
+	      seguran&ccedil;a, voc&ecirc; deve estar ciente de que o 
+	      <devicename>bpf</devicename> tamb&eacute;m &eacute; o dispositivo que
+	      permite o funcionamento correto de analizadores de pacotes
+	      (embora ainda precisem ser executados pelo usu&aacute;rio
+	      <username>root</username>).  O <devicename>bpf</devicename>
+	      <emphasis>&eacute;</emphasis> obrigat&oacute;rio para usar DHCP, mas
+	      se voc&ecirc; &eacute; muito sens&iacute;vel com rela&ccedil;&atilde;o a seguran&ccedil;a, voc&ecirc;
+	      provavelmente n&atilde;o deve adicionar o
+	      <devicename>bpf</devicename> ao seu kernel na
+	      expectativa de que em algum momento no futuro voc&ecirc; vai
+	      utilizar DHCP.</para>
 	    </note>
 	  </listitem>
 	  <listitem>
-	    <para>Edit your <filename>/etc/rc.conf</filename> to
-	      include the following:</para>
+	    <para>Edite o seu <filename>/etc/rc.conf</filename> para
+	    incluir o seguinte:</para>
 
 	    <programlisting>ifconfig_fxp0="DHCP"</programlisting>
 
 	    <note>
-	      <para>Be sure to replace <literal>fxp0</literal> with the
-		designation for the interface that you wish to dynamically
-		 configure, as described in
-		 <xref linkend="config-network-setup">.</para>
+	      <para>Certifique-se de substituir 
+	      <literal>fxp0</literal> pela designa&ccedil;&atilde;o da interface que
+	      voc&ecirc; deseja configurar automaticamente, como desccrito
+	      em <xref linkend="config-network-setup">.</para>
 	    </note>
 
-	    <para>If you are using a different location for
-	      <command>dhclient</command>, or if you wish to pass additional
-	      flags to <command>dhclient</command>, also include the
-	      following (editing as necessary):</para>
+	    <para>Se voc&ecirc; est&aacute; usando um local diferente para o
+	    <command>dhclient</command>, ou se voc&ecirc; deseja passar
+	    par&acirc;metros adicionais para o comando, inclua tamb&eacute;m o
+	    seguinte (editando, se necess&aacute;rio):</para>
 
 	    <programlisting>dhcp_program="/sbin/dhclient"
 dhcp_flags=""</programlisting>
@@ -4619,130 +4625,132 @@ dhcp_flags=""</programlisting>
 	  <primary>DHCP</primary>
 	  <secondary>server</secondary>
 	</indexterm>
-	<para>The DHCP server, <command>dhcpd</command>, is included
-	  as part of the <filename
-	  role="package">net/isc-dhcp3</filename> port in the ports
-	  collection.  This port contains the full ISC DHCP
-	  distribution, consisting of client, server, relay agent and
-	  documentation.
-</para>
+	<para>O servidor DHCP, <command>dhcpd</command>, &eacute; inclu&iacute;do
+	como parte do port 
+	<filename role="package">net/isc-dhcp3</filename> na cole&ccedil;&atilde;o
+	de ports.  Este port contem a distribui&ccedil;&atilde;o completa do DHCP da
+	ISC, contendo o cliente, servidor, agente de relay e
+	documenta&ccedil;&atilde;o.</para>
     </sect2>
 
     <sect2>
-      <title>Files</title>
+      <title>Arquivos</title>
       <indexterm>
 	<primary>DHCP</primary>
 	<secondary>configuration files</secondary>
       </indexterm>
       <itemizedlist>
 	<listitem><para><filename>/etc/dhclient.conf</filename></para>
-	  <para><command>dhclient</command> requires a configuration file,
-	    <filename>/etc/dhclient.conf</filename>.  Typically the file
-	    contains only comments, the defaults being reasonably sane.  This
-	    configuration file is described by the &man.dhclient.conf.5;
-	    manual page.</para>
+	  <para>O <command>dhclient</command> requer um arquivo de
+	  configura&ccedil;&atilde;o <filename>/etc/dhclient.conf</filename>.
+	  Tipicamente o arquivo contem somente coment&aacute;rios e o padr&otilde;es
+	  mais razo&aacute;veis definidos.  Este arquivo de configura&ccedil;&atilde;o &eacute;
+	  descrito pela p&aacute;gina de manual &man.dhclient.conf.5;
 	</listitem>
 
 	<listitem><para><filename>/sbin/dhclient</filename></para>
-	  <para><command>dhclient</command> is statically linked and
-	    resides in <filename>/sbin</filename>.  The &man.dhclient.8;
-	    manual page gives more information about
+	  <para>O <command>dhclient</command> &eacute; compilado estaticamente e
+	    reside em <filename>/sbin</filename>.  A p&aacute;gina de manual 
+	    &man.dhclient.8; fornece mais informa&ccedil;&otilde;es sobre o
 	    <command>dhclient</command>.</para>
 	</listitem>
 
 	<listitem><para><filename>/sbin/dhclient-script</filename></para>
-	  <para><command>dhclient-script</command> is the FreeBSD-specific
-	    DHCP client configuration script.  It is described in
-	    &man.dhclient-script.8;, but should not need any user
-	    modification to function properly.</para>
+	  <para>O <command>dhclient-script</command> &eacute; o script de
+	  configura&ccedil;&atilde;o do cliente DHCP espec&iacute;fico do FreeBSD.  &Eacute;
+	  descrito em &man.dhclient-script.8;, mas voc&ecirc; n&atilde;o deve
+	  precisar de qualquer modifica&ccedil;&atilde;o de usu&aacute;rio para seu
+	  funcionamento. 
 	</listitem>
 
 	<listitem><para><filename>/var/db/dhclient.leases</filename></para>
-	  <para>The DHCP client keeps a database of valid leases in this
-	    file, which is written as a log.  &man.dhclient.leases.5;
-	    gives a slightly longer description.</para>
+	  <para>O cliente DHCP mant&eacute;m uma base de dados de
+	  arrendamentos neste arquivo, que &eacute; gravado como um registro
+	  (log).  &man.dhclient.leases.5; oferece uma descri&ccedil;&atilde;o um
+	  pouco mais longa.</para>
 	</listitem>
       </itemizedlist>
     </sect2>
 
     <sect2>
-      <title>Further Reading</title>
+      <title>Leitura Complementar</title>
 
-      <para>The DHCP protocol is fully described in
-	<ulink url="http://www.freesoft.org/CIE/RFC/2131/">RFC 2131</ulink>.
-	An informational resource has also been set up at
-	<ulink url="http://www.dhcp.org/">dhcp.org</ulink>.</para>
+      <para>O protocolo DHCP &eacute; descrito totalmente na 
+      <ulink url="http://www.freesoft.org/CIE/RFC/2131/">RFC 2131</ulink>.
+      Um recurso de informa&ccedil;&otilde;es tamb&eacute;m foi montado em 
+      <ulink url="http://www.dhcp.org/">dhcp.org</ulink>.</para>
     </sect2>
 
     <sect2 id="network-dhcp-server">
-	<title>Installing and Configuring a DHCP Server</title>
+	<title>Instalando e Configurando um Servidor DHCP</title>
 
 	<sect3>
-	  <title>What This Section Covers</title>
+	  <title>O Que Esta Se&ccedil;&atilde;o Cobre</title>
 
-	  <para>This section provides information on how to configure
-	    a FreeBSD system to act as a DHCP server using the ISC
-	    (Internet Software Consortium) implementation of the DHCP
-	    suite.</para>
+	  <title>Esta se&ccedil;&atilde;o fornece informa&ccedil;&otilde;es sobre como configurar
+	  um sistema FreeBSD para atuar como servidor DHCP usando a
+	  implementa&ccedil;&atilde;o da ISC da su&iacute;te DHCP.</title>
 
-	  <para>The server portion of the suite is not provided as part of
-	    FreeBSD, and so you will need to install the
-	    <filename role="package">net/isc-dhcp3</filename>
-	    port to provide this service.  See <xref linkend="ports"> for
-	    more information on using the ports collection.</para>
+	  <para>A parte servidora da su&iacute;te n&atilde;o &eacute; fornecida no
+	  FreeBSD, ent&atilde;o voc&ecirc; vai precisar instalar o port 
+	  <filename role="package">net/isc-dhcp3</filename> para
+	  ativar este servi&ccedil;o.  Veja <xref linkend="ports"> para mais
+	  informa&ccedil;&otilde;es sobre uso da cole&ccedil;&atilde;o de ports.</para>
 	</sect3>
 
 	<sect3>
-	  <title>DHCP Server Installation</title>
+	  <title>Instala&ccedil;&atilde;o do Servidor DHCP</title>
 	  <indexterm>
 	    <primary>DHCP</primary>
 	    <secondary>installation</secondary>
 	  </indexterm>
-	  <para>In order to configure your FreeBSD system as a DHCP server,
-	    you will need to ensure that the &man.bpf.4;
-	    device is compiled into your kernel.  To do this, add
-	    <literal>pseudo-device bpf</literal> to your kernel
-	    configuration file, and rebuild the kernel.  For more
-	    information about building kernels, see <xref
-	    linkend="kernelconfig">.</para>
+	  <para>Para configurar seu sistema servidor FreeBSD como um
+	  um servidor DHCP, voc&ecirc; vai precisar garantir que o
+	  dispositivo &man.bpf.4; esst&aacute; compilado no seu kernel.  Para
+	  isto, adicione o <literal>pseudo-device bpf</literal> ao seu
+	  arquivo de configura&ccedil;&atilde;o do kernel e reconstrua o kernel.
+	  Para mais informa&ccedil;&otilde;es sobre constru&ccedil;&atilde;o de kernels, veja 
+	  <xref linkend="kernelconfig">.</para>
 
-	  <para>The <devicename>bpf</devicename> device is already
-	    part of the <filename>GENERIC</filename> kernel that is
-	    supplied with FreeBSD, so you do not need to create a custom
-	    kernel in order to get DHCP working.</para>
+	  <para>O dispositivo <devicename>bpf</devicename> j&aacute; &eacute; parte
+	  do kernel <filename>GENERIC</filename>, fornecido com o
+	  FreeBSD, assim voc&ecirc; n&atilde;o precisa criar um kenel adaptado
+	  para ter o DHCP funcionando.</para>
 
 	    <note>
-	      <para>Those who are particularly security conscious
-		should note that <devicename>bpf</devicename>
-		is also the device that allows packet sniffers to work
-		correctly (although such programs still need privileged
-		access).  <devicename>bpf</devicename>
-		<emphasis>is</emphasis> required to use DHCP, but if
-		you are very sensitive about security, you probably
-		should not include <devicename>bpf</devicename> in your
-		kernel purely because you expect to use DHCP at some
-		point in the future.</para>
+	      <para>Aqueles particularmente preocupados com
+	      seguran&ccedil;a, devem observar que o 
+	      <devicename>bpf</devicename> tamb&eacute;m &eacute; o dispositivo que
+	      permite aos analizadores de pacotes executarem seu
+	      trabalho (apesar de tais programas precisarem de acesso
+	      privilegiado).  O <devicename>bpf</devicename> 
+	      <emphasis>&eacute;</emphasis> exigido para uso do DHCP, mas se
+	      voc&ecirc; &eacute; muito preocupado com quest&otilde;es de seguran&ccedil;a, voc&ecirc;
+	      provavelmente n&atilde;o deve incluir o 
+	      <devicename>bpf</devicename>em seu kernel simplesmente
+	      por supor que vai usar DHCP em algum momento no futuro.</para>
 	    </note>
 
-	  <para>The next thing that you will need to do is edit the sample
-	    <filename>dhcpd.conf</filename> which was installed by the
-	    <filename role="package">net/isc-dhcp3</filename> port.
-	    By default, this will be
-	    <filename>/usr/local/etc/dhcpd.conf.sample</filename>, and you
-	    should copy this to
-	    <filename>/usr/local/etc/dhcpd.conf</filename> before proceeding
-	    to make changes.</para>
+	  <para>A pr&oacute;xima coisa que voc&ecirc; vai precisar fazer &eacute; editar o
+	  exemplo <filename>dhcpd.conf</filename> que foi inclu&iacute;do
+	  pelo port <filename role="package">net/isc-dhcp3</filename>.
+	  Por padr&atilde;o, este ser&aacute; o arquivo
+	  <filename>/usr/local/etc/dhcpd.conf.sample</filename>, e
+	  voc&ecirc; deve copiar este arquivo para
+	  <filename>/usr/local/etc/dhcpd.conf</filename> antes de
+	  modific&aacute;-lo.
+	  </para>
 	</sect3>
 
 	<sect3>
-	  <title>Configuring the DHCP Server</title>
+	  <title>Configurando o Servidor DHCP</title>
 	  <indexterm>
 	    <primary>DHCP</primary>
 	    <secondary>dhcpd.conf</secondary>
 	  </indexterm>
-	  <para><filename>dhcpd.conf</filename> is
-	    comprised of declarations regarding subnets and hosts, and is
-	    perhaps most easily explained using an example :</para>
+	  <para> O arquivo <filename>dhcpd.conf</filename> &eacute;
+	  composto de declara&ccedil;&otilde;es relativas a subredes e servidores, e
+	  &eacute;, talvez, melhor explicado usando um exemplo:</para>
 
 	  <programlisting>option domain-name "example.com";<co id="domain-name">
 option domain-name-servers 192.168.4.100;<co id="domain-name-servers">
@@ -4764,121 +4772,129 @@ host mailhost {
 
 	  <calloutlist>
 	    <callout arearefs="domain-name">
-	      <para>This option specifies the domain that will be provided
-		to clients as the default search domain.  See
-		&man.resolv.conf.5; for more information on what this
-		means.</para>
+	      <para>Esta op&ccedil;&atilde;o especifica o dom&iacute;nio que ser&aacute; fornecido
+	      aos clientes como o principal dom&iacute;nio de busca.  Veja
+	      &man.resolv.conf.5; para mais informa&ccedil;&otilde;es sobre o que
+	      isso significa.</para>
 	    </callout>
 
 	    <callout arearefs="domain-name-servers">
-	      <para>This option specifies a comma separated list of DNS
-		servers that the client should use.</para>
+	      <para>Esta op&ccedil;&atilde;o especifica uma lista separada por
+	      v&iacute;rgulas de servidores DNS que o clietne deve utilizar.</para>
 	    </callout>
 
 	    <callout arearefs="subnet-mask">
-	      <para>The netmask that will be provided to clients.</para>
+	      <para>A m&aacute;scara de rede que ser&aacute; fornecida aos clientes.</para>
 	    </callout>
 
 	    <callout arearefs="default-lease-time">
-	      <para>A client may request a specific length of time that a
-		lease will be valid.  Otherwise the server will assign
-		a lease with this expiry value (in seconds).</para>
+	      <para>Um cliente pode requerer um per&iacute;odo de tempo
+	      espec&iacute;fico v&aacute;lido para um arrendamento.  Sen&atilde;o o
+	      servidor dever&aacute; fazer um arrendamento com este prazo de
+	      expira&ccedil;&atilde;o (em segundos).</para>
 	    </callout>
 
 	    <callout arearefs="max-lease-time">
-	      <para>This is the maximum length of time that the server will
-		lease for.  Should a client request a longer lease, a lease
-		will be issued, although it will only be valid for
-		<literal>max-lease-time</literal> seconds.</para>
+	      <para>Este &eacute; o maior per&iacute;odo de tempo permitido que o
+	      servidor dever&aacute; permitir um arrendamento.  Se um cliente
+	      solicitar um per&iacute;odo maior, um arrendamento ser&aacute;
+	      efetuado, entretanto, ser&aacute; v&aacute;lido somente por 
+	      <literal>max-lease-time</literal> segundos.</para>
 	    </callout>
 
 	    <callout arearefs="ddns-update-style">
-	      <para>This option specifies whether the DHCP server should
-		attempt to update DNS when a lease is accepted or released.
-		In the ISC implementation, this option is
-		<emphasis>required</emphasis>.</para>
+	      <para>Esta op&ccedil;&atilde;o especifica se o servidor DHCP dever&aacute;
+	      tentar atualizar o DNS quando um arrendamento &eacute; aceito
+	      ou devolvido.   Na implementa&ccedil;&atilde;o da ISC, esta op&ccedil;&atilde;o &eacute; 
+	      <emphasis>obrigat&oacute;ria</emphasis>.</para>
 	    </callout>
 
 	    <callout arearefs="range">
-	      <para>This denotes which IP addresses should be used in
-		the pool reserved for allocating to clients.  IP
-		addresses between, and including, the ones stated are
-		handed out to clients.</para>
+	      <para>Isto estipula quais endere&ccedil;os IP devem ser usados
+	      no conjunto reservado para aloca&ccedil;&atilde;o aos clientes.
+	      Endere&ccedil;os IP dentro da faixa inclusive os discriminados
+	      s&atilde;o distribu&iacute;dos aos clientes.</para>
 	    </callout>
 
 	    <callout arearefs="routers">
-	      <para>Declares the default gateway that will be provided to
-		clients.</para>
+	      <para>Declara o gateway padr&atilde;o que ser&aacute; fornecido aos
+	      clientes.</para>
 	    </callout>
 
 	    <callout arearefs="hardware">
-	      <para>The hardware MAC address of a host (so that the DHCP server
-		can recognize a host when it makes a request).</para>
+	      <para>O endere&ccedil;o MAC de um sistema (de forma que o
+	      servidor DHCP possa reconhec&ecirc;-lo quando dele receber 
+	      uma solicita&ccedil;&atilde;o).</para>
 	    </callout>
 
 	    <callout arearefs="fixed-address">
-	      <para>Specifies that the host should always be given the same
-		IP address.  Note that a hostname is OK here, since the DHCP
-		server will resolve the hostname itself before returning the
-		lease information.</para>
+	      <para>Especifica que o sistema sempre deve receber o
+	      mesmo endere&ccedil;o IP.  Note que um hostname funciona aqui,
+	      desde que o servidor DHCP seja capaz de resolver o
+	      nome via DNS antes de responder &agrave; solicita&ccedil;&atilde;o com as 
+	      informa&ccedil;&otilde;es do arrendamento.</para>
 	    </callout>
 	  </calloutlist>
 
-	  <para>Once you have finished writing your
-	    <filename>dhcpd.conf</filename>, you can proceed to start the
-	    server by issuing the following command:</para>
+	  <para>Quando voc&ecirc; terminar de escrever o seu 
+	  <filename>dhcpd.conf</filename> voc&ecirc; pode dar
+	  prosseguimento, iniciando o servidor com o seguinte 
+	  comando:</para>
 
 	  <screen>&prompt.root; <userinput>/usr/local/etc/rc.d/isc-dhcpd.sh start</userinput></screen>
 
-	  <para>Should you need to make changes to the configuration of your
-	    server in the future, it is important to note that sending a
-	    <literal>SIGHUP</literal> signal to
-	    <application>dhcpd</application> does <emphasis>not</emphasis>
-	    result in the configuration being reloaded, as it does with most
-	    daemons.  You will need to send a <literal>SIGTERM</literal>
-	    signal to stop the process, and then restart it using the command
-	    above.</para>
+	  <para>Se futuramente voc&ecirc; precisar realizar altera&ccedil;&otilde;es na
+	  configura&ccedil;&atilde;o de seu servidor, &eacute; importante notar que enviar
+	  um sinal<literal>SIGHUP</literal> para o 
+	  <application>dhcpd</application> <emphasis>not</emphasis>
+	  vai recarregar as configura&ccedil;&otilde;es, como na maioria dos
+	  daemons.  Voc&ecirc; precisa enviar um sinal
+	  <literal>SIGTERM</literal> para parar o processo e ent&atilde;o
+	  reinici&aacute;-lo com o comando acima.</para>
 	</sect3>
 
 	<sect3>
-	  <title>Files</title>
+	  <title>Arquivos</title>
 	  <indexterm>
 	    <primary>DHCP</primary>
 	    <secondary>configuration files</secondary>
 	  </indexterm>
 	  <itemizedlist>
 	    <listitem><para><filename>/usr/local/sbin/dhcpd</filename></para>
-	      <para><application>dhcpd</application> is statically linked and
-		resides in <filename>/usr/local/sbin</filename>.  The
-		&man.dhcpd.8; manual page installed with the
-		port gives more information about
-		<application>dhcpd</application>.</para>
+	      <para>O <application>dhcpd</application> &eacute; 
+	      compilado estaticamente e reside em 
+	      <filename>/usr/local/sbin</filename>.  A p&aacute;gina de
+	      manual &man.dhcpd.8; instalada com o port fornece mais
+	      informa&ccedil;&otilde;es sobre o
+	      <application>dhcpd</application>.</para>
 	    </listitem>
 
 	    <listitem><para><filename>/usr/local/etc/dhcpd.conf</filename></para>
-	      <para><application>dhcpd</application> requires a configuration
-		file, <filename>/usr/local/etc/dhcpd.conf</filename> before it
-		will start providing service to clients.  This file needs to
-		contain all the information that should be provided to clients
-		that are being serviced, along with information regarding the
-		operation of the server.  This configuration file is described
-		by the &man.dhcpd.conf.5; manual page installed
-		by the port.</para>
+	      <para>O <application>dhcpd</application> requer um
+	      arquivo de configura&ccedil;&atilde;o,
+	      <filename>/usr/local/etc/dhcpd.conf</filename> antes de
+	      come&ccedil;ar a prestar servi&ccedil;os para os clientes.  O arquivo
+	      precisa conter todas as informa&ccedil;&otilde;es que devem ser
+	      fornecidas aos clientes sendo atendidos, jutamente com
+	      informa&ccedil;&otilde;es sobre a opera&ccedil;&atilde;o do servidor.  Este arquivo
+	      de configura&ccedil;&atilde;o &eacute; descrito pela p&aacute;gina de manual
+	      &man.dhcpd.conf.5;, instalada pelo port.</para>
 	    </listitem>
 
 	    <listitem><para><filename>/var/db/dhcpd.leases</filename></para>
-	      <para>The DHCP server keeps a database of leases it has issued
-		in this file, which is written as a log.  The manual page
-		&man.dhcpd.leases.5;, installed by the port
-		gives a slightly longer description.</para>
+	      <para>O servidor DHCP mant&eacute;m uma base de dados de
+	      arrendamentos que distribuiu neste arquivo, o qual &eacute;
+	      escrito como um arquivo de registro (log).  A p&aacute;gina de
+	      manual &man.dhcpd.leases.5;, instalada pelo port
+	      fornece uma descri&ccedil;&atilde;o um pouco mais longa.</para>
 	    </listitem>
 
 	    <listitem><para><filename>/usr/local/sbin/dhcrelay</filename></para>
-	      <para><application>dhcrelay</application> is used in advanced
-		environments where one DHCP server forwards a request from a
-		client to another DHCP server on a separate network.  The
-		&man.dhcrelay.8; manual page provided with the
-		port contains more detail.</para>
+	      <para>O <application>dhcrelay</application> &eacute; usado em
+	      ambientes avan&ccedil;ados onde um servidor DHCP repassa uma
+	      solicita&ccedil;&atilde;o de um cliente para outro servidor DHCP em
+	      uma rede separada.  A p&aacute;gina de manual &man.dhcrelay.8;
+	      fornecida com o port cont&eacute;m mais detalhes.</para>
 	    </listitem>
 	  </itemizedlist>
 	</sect3>
