@@ -514,21 +514,24 @@ pseudo-device   md              # memory disk</programlisting>
 	estiver utilizando uma unidade &diskonchip; da M-Systems.</para>
     </note>
 
-    <para>It is possible that your <filename>kern.flp</filename> boot floppy
-      does not have a kernel with the <devicename>fla</devicename> driver
-      compiled into it necessary for the system to recognize the &diskonchip;.
-      If you have booted off of the installation floppies and are told that no
-      disks are present, then you are probably lacking the
-      <devicename>fla</devicename> driver in your kernel.</para>
-
-    <para>After you have built a kernel with <devicename>fla</devicename>
-      support that is smaller than 1.4 megabytes, you can create a custom
-      <filename>kern.flp</filename> floppy image with it by following these
-      instructions:</para>
-
+    <para>Eh possivel que o seu disco de boot
+      <filename>kern.flp</filename> nao utilize um kernel com suporte ao
+      driver <devicename>fla</devicename> habilitado, o que eh
+      necessario para que op sistema reconheca um dispositivo
+      &diskonchip;.  Se voce deu boot no sistema com os disquetes de
+      instalacao padroes e foi informado pelo sistema de que nao
+      existe nenhum disco presente, entao eh muito provavel que o
+      driver <devicename>fla</devicename> nao exista no seu
+      kernel.</para>
+      
+    <para>Depois que voce tiver compilado um kernel com suporte ao driver
+      <devicename>fla</devicename>, que seja menor que 1.4 Mb, voce pode
+      criar uma imagem customizada do kern.flp com ele, seguindo as
+      seguintes instrucoes:</para>
+    
     <procedure>
       <step>
-	<para>Obtain an existing kern.flp image file</para>
+	<para>Obtenha uma copia do arquivo kern.flp</para>
       </step>
 
       <step>
@@ -540,8 +543,8 @@ pseudo-device   md              # memory disk</programlisting>
       </step>
       
       <step>
-	<para>Place your kernel file into <filename>/mnt</filename>, replacing
-	  the existing one</para>
+	<para>Coloque o seu kernel no diretorio <filename>/mnt</filename>
+	, substituindo o que ja existe.</para>
       </step>
 
       <step>
@@ -549,70 +552,79 @@ pseudo-device   md              # memory disk</programlisting>
       </step>
     </procedure>
 
-    <para>Your <filename>kern.flp</filename> file now has your new kernel on it.</para>
+    <para>O seu arquivo <filename>kern.flp</filename> agora possui um novo kernel.</para>
   </sect1>
 
   <sect1 id="strategies">
-    <title>System Strategies for Small and Read Only Environments</title>
+    <title>Estrategias para configuracao de sistemas reduzidos e com 
+      sistemas de arquivos em modo de apenas leitura</title>
 
-    <para>In <xref linkend="ro-fs">, it was pointed out that the
-      <filename>/var</filename> filesystem constructed by
-      <filename>/etc/rc.diskless2</filename> and the presence of a read-only
-      root filesystem causes problems with many common software packages used
-      with FreeBSD.  In this article, suggestions for successfully running
-      cron, syslog, ports installations, and the Apache web server will be
-      provided.</para>
-
+    <para>Na sessao <xref linkend="ro-fs">, foi mencionado que o
+      sistema de arquivos <filename>/var</filename> criado pelo
+      <filename>/etc/rc.diskless2</filename> e a presenca de uma
+      particao raiz em modo de apenas leitura causariam problemas com
+      muitos softwares utilizados normalmente com o FreeBSD.  Nesta
+      sessao vamos dar algumas sugestoes para rodar com sucesso o
+      cron, o syslogd, o web server apache, e a instalacao de 
+      aplicativos via ports.</para>
+    
     <sect2>
       <title>cron</title>
 
-      <para>In <filename>/etc/rc.diskless2</filename> there is a variable
-	named <literal>var_dirs</literal>.  This variable consists of a
-	space-delimited list of directories that will be created inside of
-	<filename>/var</filename> after it is mounted as a memory filesystem.
-	<filename>cron</filename> and <filename>cron/tabs</filename> are not
-	in that list, and without those directories, cron will complain.  By
-	inserting <literal>cron</literal>, <literal>cron/tabs</literal>, and
-	perhaps even <literal>at</literal>, and <literal>at/jobs</literal> as
-	elements of that variable, you will facilitate the running of the
-	&man.cron.8; and &man.at.1; daemons.</para>
+      <para>No <filename>/etc/rc.diskless2</filename> existe uma
+	variavel chamada <literal>var_dirs</literal>.  Esta variavel
+	consiste em uma lista de diretorios (separados por espaco em
+	branco) os quais serao criados dentro do
+	<filename>/var</filename> depois que ele for montado como um
+	sistema de arquivo em memoria.  O diretorio <filename>cron</filename>
+	e o <filename>cron/tabs</filename> nao estao nesta lista, e
+	sem estes diretorios, o cron nao ira executar.  Inserindo o 
+	<literal>cron</literal>, <literal>cron/tabs</literal>, e se
+	possivel tambem o <literal>at</literal>, e o 
+	<literal>at/jobs</literal> como elementos desta variavel, voce
+	ira possibilitar a execucao dos daemons &man.cron.8; and 
+	&man.at.1;.</para>
 
-      <para>However, this still does not solve the problem of maintaining cron
-	tabs across reboots.  When the system reboots, the
-	<filename>/var</filename> filesystem that is in memory will disappear
-	and any cron tabs you may have had in it will also disappear.
-	Therefore, one solution would be to create cron tabs for the users
-	that need them, mount your <filename>/</filename> filesystem as
-	read-write and copy those cron tabs to somewhere safe, like
-	<filename>/etc/tabs</filename>, then add a line to the end of
-	<filename>/etc/rc.diskless2</filename> that copies those crontabs into
-	<filename>/var/cron/tabs</filename> after that directory has been
-	created during system initialization.  You may also need to add a line
-	that changes modes and permissions on the directories you create and
-	the files you copy with <filename>/etc/rc.diskless2</filename>.</para>
+      <para>Entretanto, isto nao resolve o problema de manutencao das
+	tabs do cron entre um boot e outro.  Quando o sistema reseta,
+	o sistema de arquivos <filename>/var</filename> que esta em
+	memoria ira desaparecer, e qualquer tab do cron que voce tenha
+	nele ira desaparecer tambem.  Desta forma, uma solucao pode
+	ser criar as tabs do cron para os usuarios que precisam
+	delas, monte o seu <filename>/</filename> em modo de leitura e
+	esscrita e copie as tabs do cron para algum lugar seguro, como
+	por exemplo para <filename>/etc/tabs</filename>, e entao
+	adicione uma linha no final do <filename>/etc/rc.diskless2
+	</filename> que copie estas crontabs para o diretorio 
+	<filename>/var/cron/tabs</filename> depois que o diretorio
+	tiver sido criado durante a inicializacao do sistema.  Voce
+	pode precisar adicionaruma linha que altere as permissoes dos
+	diretorios que voce criou e dos arquivos que voce copiou com o 
+	<filename>/etc/rc.diskless2</filename>.</para>
     </sect2>
 
     <sect2>
       <title>syslog</title>
 
-      <para><filename>syslog.conf</filename> specifies the locations of
-	certain log files that exist in <filename>/var/log</filename>.  These
-	files are not created by <filename>/etc/rc.diskless2</filename> upon
-	system initialization. Therefore, somewhere in
-	<filename>/etc/rc.diskless2</filename>, after the section that creates
-	the directories in <filename>/var</filename>, you will need to add
-	something like this:</para>
+      <para>O <filename>syslog.conf</filename> specifiepecifica a 
+	localizacao de certos arquivos de log que precisam existir no
+	diretorio <filename>/var/log</filename>.  Estes arquivos nao
+	sao criados pelo <filename>/etc/rc.diskless2</filename>
+	durante a inicializacao do sistema.  Desta forma, em algum
+	lugar no <filename>/etc/rc.diskless2</filename>, depois da
+	sessao que cria os diretorios no <filename>/var</filename>, 
+	voce vai precisar criar algo como:</para>
 
       <screen>&prompt.root; <userinput>touch /var/log/security /var/log/maillog /var/log/cron /var/log/messages</userinput>
 &prompt.root; <userinput>chmod 0644 /var/log/*</userinput></screen>
 
-      <para>You will also need to add the log directory to the list of
-	directories that <filename>/etc/rc.diskless2</filename>
-	creates.</para>
+      <para>Voce tambem tera que adicionar o diretorio <literal>log
+	</literal> a lista de diretorios que o 
+	<filename>/etc/rc.diskless2</filename> cria.</para>
     </sect2>
 
     <sect2>
-      <title>ports installation</title>
+      <title>Instalacao de aplicativos via ports</title>
 
       <para>Before discussing the changes necessary to successfully use the
 	ports tree, a reminder is necessary regarding the read-only nature of
@@ -667,7 +679,7 @@ pseudo-device   md              # memory disk</programlisting>
     </sect2>
 
     <sect2>
-      <title>Apache Web Server</title>
+      <title>Web Server Apache</title>
 
       <para>Apache keeps pid files and logs in
 	<filename><replaceable>apache_install</replaceable>/logs</filename>.
@@ -699,5 +711,3 @@ pseudo-device   md              # memory disk</programlisting>
     </sect2>
   </sect1>
 </article>
-
-
