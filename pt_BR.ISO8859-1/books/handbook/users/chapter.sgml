@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/users/chapter.sgml,v 1.14 2003/12/10 11:00:37 gamk Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/users/chapter.sgml,v 1.15 2003/12/11 12:03:45 gamk Exp $
 -->
 
 <chapter id="users">
@@ -863,16 +863,11 @@ passwd: done</screen>
       <primary>limitando usuários</primary>
       <secondary>memorylocked</secondary>
     </indexterm>
-	  <para>This is the maximum amount a memory a process may have
-	    requested to be locked into main memory (e.g., see
-	    &man.mlock.2;).  Some system-critical programs, such as
-            &man.amd.8;, lock into main memory such that in the event
-	    of being swapped out, they do not contribute to
-	    a system's trashing in time of trouble.</para>
-          <para>Este é a quantidade máxima de memória quem um processo pode 
-            requerir para travar na memória principal (ex: veja &man.mlock.2;).
+	  <para>Este é a quantidade máxima de memória quem um processo pode 
+            requerir para reservar na memória principal (ex: veja &man.mlock.2;).
             Alguns programas críticos do sistema, tais como &man.amd.8;, reserva
-            na memória principal como evento trocando para fora, FALTAAAAAAAAAAAAA
+            na memória principal como evento troca, não contribuindo a uma degradação
+            do sistema em tempo de real.</para>
 	</listitem>
       </varlistentry>
 
@@ -999,80 +994,74 @@ passwd: done</screen>
       <primary><filename>/etc/groups</filename></primary>
     </indexterm>
     <indexterm>
-      <primary>accounts</primary>
-      <secondary>groups</secondary>
-    </indexterm>
-    <para>A group is simply a list of users.  Groups are identified by
-      their group name and GID (Group ID).  In FreeBSD (and most other &unix; like
-      systems), the two factors the kernel uses to decide whether a process
-      is allowed to do something is its user ID and list of groups it
-      belongs to.  Unlike a user ID, a process has a list of groups
-      associated with it.  You may hear some things refer to the <quote>group ID</quote>
-      of a user or process; most of the time, this just means the first
-      group in the list.</para>
+      <primary>contas</primary>
+      <secondary>grupos</secondary>
+    </indexterm>    
 
-    <para>The group name to group ID map is in
-      <filename>/etc/group</filename>.  This is a plain text file with four
-      colon-delimited fields.  The first field is the group name, the
-      second is the encrypted password, the third the group ID, and the
-      fourth the comma-delimited list of members.  It can safely be edited
-      by hand (assuming, of course, that you do not make any syntax
-      errors!).  For a more complete description of the syntax, see the
-      &man.group.5; manual page.</para>
+    <para>Um grupo é simplesmente uma lista de usuários. Os grupos são identificados
+      por nome e GID (grupo ID).  No FreeBSD (e na maioria de outros sistemas &unix),
+      os dois fatores que a kernel usa para decidir se um processo está permitido fazer
+      algo é seu usuário ID e a lista dos grupos que ele pertence. Ao contrário de um 
+      usuário ID, um processo tem uma lista dos grupos associados com ele. Você pode
+      ouvir algumas coisas, consultar o <quote>group ID</quote> de um usuário ou de um
+      processo; na maioria das vezes isto significa apenas o primeiro grupo da lista.</para>
 
-    <para>If you do not want to edit <filename>/etc/group</filename>
-      manually, you can use the &man.pw.8; command to add and edit groups.
-      For example, to add a group called <groupname>teamtwo</groupname> and
-      then confirm that it exists you can use:</para>
+   <para>O nome do grupo ao mapa do ID do grupo está em <filename>/etc/group</filename>.
+      Este é um arquivo de texto plano com quatro campos delimitadores. O primeiro campo é 
+      o nome do grupo, o segundo é a senha encriptada, o terceiro é o grupo ID, e o 
+      quarto é a lista dos membros delimitado por virgula. Pode com segurança ser editado 
+      na mão (que supõem naturalmente, que você não irá fazer nenhum erro de sintaxe!).
+      Para uma descrição mais completa da sintaze, veja a página de manual &man.group.5;.</para>
+
+    <para>Se você não quiser editar manualmente o <filename>/etc/group</filename>, 
+      você pode usar o comando &man.pw.8; para adicionar e editar grupos. Por exemplo,
+      para adicionar um grupo chamado <groupname>teamtwo</groupname> e confirmar então
+      que existe você pode usar:</para>
 
     <example>
-      <title>Adding a Group Using &man.pw.8;</title>
+      <title>Adicionando um grupo usando &man.pw.8;</title>
 
       <screen>&prompt.root; <userinput>pw groupadd teamtwo</userinput>
 &prompt.root; <userinput>pw groupshow teamtwo</userinput>
 teamtwo:*:1100:</screen>
     </example>
 
-    <para>The number <literal>1100</literal> above is the group ID of the
-      group <groupname>teamtwo</groupname>.  Right now,
-      <groupname>teamtwo</groupname> has no members, and is thus rather
-      useless.  Let's change that by inviting <username>jru</username> to
-      the <groupname>teamtwo</groupname> group.</para>
+    <para>O número <literal>1100</literal> acima está o grupo ID do grupo
+      <groupname>teamtwo</groupname>. Agora,
+      <groupname>teamtwo</groupname> não tem nenhum membro, e é por esta razão inútil.
+      Vamos mudar aquele convidado <username>jru</username> para o grupo 
+      <groupname>teamtwo</groupname>.</para>
 
     <example>
-      <title>Adding Somebody to a Group Using &man.pw.8;</title>
+      <title>Adicionando alguém a um grupo usando &man.pw.8;</title>
 
       <screen>&prompt.root; <userinput>pw groupmod teamtwo -M jru</userinput>
 &prompt.root; <userinput>pw groupshow teamtwo</userinput>
 teamtwo:*:1100:jru</screen>
     </example>
 
-    <para>The argument to the <option>-M</option> option is a
-      comma-delimited list of users who are members of the group.  From the
-      preceding sections, we know that the password file also contains a
-      group for each user.  The latter (the user) is automatically added to
-      the group list by the system; the user will not show up as a member
-      when using the <option>groupshow</option> command to &man.pw.8;,
-      but will show up when the information is queried via &man.id.1; or
-      similar tool.  In other words, &man.pw.8; only manipulates the
-      <filename>/etc/group</filename> file; it will never attempt to read
-      additionally data from <filename>/etc/passwd</filename>.</para>
+    <para>O argumento opção <option>-M</option> é uma lista de usuários que serão 
+     membros do grupo delimitados por virgula. Das seções precedentes, nós sabemos
+     que o arquivo de senha também contém um grupo para cada usuário.O último (o usuário)
+     é adicionado automaticamente à lista do grupo pelo sistema; o usuário não mostrará acima
+     como um membro ao usar o comando <option>groupshow</option> para &man.pw.8;,
+     ou ferramenta similar. Ou seja &man.pw.8; manupula somente o arquivo 
+     <filename>/etc/group</filename>; nunca tentará ler adicionalmente dados do
+     <filename>/etc/passwd</filename>.</para>
 
     <example>
-      <title>Using &man.id.1; to Determine Group Membership</title>
+      <title>Usando o &man.id.1; para determinar os grupos associados</title>
 
       <screen>&prompt.user; <userinput>id jru</userinput>
 uid=1001(jru) gid=1001(jru) groups=1001(jru), 1100(teamtwo)</screen>
     </example>
 
-    <para>As you can see, <username>jru</username> is a member of the
-      groups <groupname>jru</groupname> and
-      <groupname>teamtwo</groupname>.</para>
+    <para>Como você pode ver, <username>jru</username> é um membro dos grupos
+      <groupname>jru</groupname> e <groupname>teamtwo</groupname>.</para>
 
-    <para>For more information about &man.pw.8;, see its manual page, and
-      for more information on the format of
-      <filename>/etc/group</filename>, consult the &man.group.5; manual
-      page.</para>
+    <para>Para maiores informações sobre &man.pw.8;, veja está página de manual, e para
+      maiores informações sobre o formato do <filename>/etc/group</filename>, consulte a
+      página de manual &man.group.5;.</para>
   </sect1>
 </chapter>
 
