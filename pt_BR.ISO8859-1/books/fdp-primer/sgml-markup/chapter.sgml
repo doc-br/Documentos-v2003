@@ -237,10 +237,10 @@
 
 <blockquote>N&oacute;s, povo dos Estados Unidos, com o objetivo de
   fazer uma uni&atilde;o mais perfeita, estabelecer justi&ccedil;a,
-  garantir tranquilidade dom&eacute;stica, provide for the common
-  defence, promover bem estar geral, assegurar as ben&ccedil;&otilde;es da
-  liberdade para n&oacute;s mesmos e nossa posteridade, Ordene e
-  estabele&ccedil;a essa constitui&ccedil;&atilde;o para os estados Unidos
+  garantir tranquilidade dom&eacute;stica, promover uma defesa comum, promover 
+  bem estar geral, assegurar as ben&ccedil;&otilde;es da
+  liberdade para n&oacute;s mesmos e nossa posteridade, organizamos  e
+  estabelecemos essa constitui&ccedil;&atilde;o para os estados Unidos
   da Am&eacute;rica.</blockquote>]]></programlisting>
 	</example>
       </sect3>
@@ -948,40 +948,41 @@ O'Reilly & Associates como um DTD para escrever documenta&ccedil;&atilde;o t&eac
 	O <replaceable>n</replaceable> indica o n&uacute;mero da se&ccedil;&atilde;o
 	que identificam o n&iacute;vel da se&ccedil;&atilde;o.</para>
 
-	<para>The first <sgmltag>sect<replaceable>n</replaceable></sgmltag> is
-	  <sgmltag>sect1</sgmltag>.  You can have one or more of these in a
-	  chapter.  They can contain one or more <sgmltag>sect2</sgmltag>
-	  elements, and so on, down to <sgmltag>sect5</sgmltag>.</para>
+	<para>A primeira <sgmltag>sect<replaceable>n</replaceable></sgmltag> &eacute;
+	  <sgmltag>sect1</sgmltag>.  Voc&ecirc; pode ter uma ou mais desta em 
+	  um s&oacute; cap&iacute;tulo.  Elas podem conter um ou mais elementos 
+	  <sgmltag>sect2</sgmltag>, e assim por diante, at&eacute;  
+	  <sgmltag>sect5</sgmltag>.</para>
 
 	<example>
-	  <title>Sections in chapters</title>
+	  <title>Sess&otilde;es em cap&iacute;tulos</title>
 
 	  <programlisting><![ RCDATA [<chapter>
   <title>A sample chapter</title>
 
-  <para>Some text in the chapter.</para>
+  <para>Algum texto dentro do cap&iacute;tulo</para>
 
   <sect1>
-    <title>First section (1.1)</title>
+    <title>Primeira sess&atilde;o (1.1)</title>
 
     &hellip;
   </sect1>
 
   <sect1>
-    <title>Second section (1.2)</title>
+    <title>Seunda sess&atilde;o (1.2)</title>
 
     <sect2>
       <title>First sub-section (1.2.1)</title>
 
       <sect3>
-        <title>First sub-sub-section (1.2.1.1)</title>
+        <title>Primeira sub-sess&atilde;o (1.2.1)</title>
 
         &hellip;
       </sect3>
     </sect2>
 
     <sect2>
-      <title>Second sub-section (1.2.2)</title>
+      <title>Primeira sub-sub-sess&atilde;o (1.2.1.1)</title>
 
       &hellip;
     </sect2>
@@ -990,38 +991,40 @@ O'Reilly & Associates como um DTD para escrever documenta&ccedil;&atilde;o t&eac
 	</example>
 	
 	<note>
-	  <para>This example includes section numbers in the section titles.
-	    You should not do this in your documents.  Adding the section
-	    numbers is carried out by the stylesheets (of which more
-	    later), and you do not need to manage them yourself.</para>
+	  <para>Esse exemplo inclui n&uacute;meros de sess&otilde;es nos 
+	  t&iacute;tulos de sess&otilde;es. Voc&ecirc; n&atilde;o deve fazer 
+	  isso no seu documento.  O adicionamento dos n&uacute;meros
+          de sess&otilde;es &eacute; trabalho das folhas de estilo 
+	  (of which more later), e voc&ecirc; n&atilde;o precisa 
+	  gerencia-l&ocirc;s.</para>
 	</note>
       </sect3>
       
       <sect3>
-	<title>Subdividing using <sgmltag>part</sgmltag>s</title>
+	<title>Subdividindo usando <sgmltag>part</sgmltag>s</title>
 
-	<para>You can introduce another layer of organisation between
-	  <sgmltag>book</sgmltag> and <sgmltag>chapter</sgmltag> with one or
-	  more <sgmltag>part</sgmltag>s.  This cannot be done in an
+	<para>Voc&ecirc; pode introduzir outra camada de organiza&ccedil;&atilde;o 
+	entre <sgmltag>book</sgmltag> and <sgmltag>chapter</sgmltag> com uma ou 
+	mais  <sgmltag>part</sgmltag>s.  Isso n&atilde;o pode ser feito em um
 	  <sgmltag>article</sgmltag>.</para>
 
-	<programlisting><![ CDATA [<part>
-  <title>Introduction</title>
+	<programlisting><![ RCDATA [<part>
+  <title>Introdu&ccedil;&atilde;o</title>
 
   <chapter>
-    <title>Overview</title>
+    <title>Vis&atilde;o geral</title>
 
     ...
   </chapter>
 
   <chapter>
-    <title>What is FreeBSD?</title>
+    <title>O que &eacute; FreeBSD?</title>
 
     ...
   </chapter>
 
   <chapter>
-    <title>History</title>
+    <title>Hist&oacute;ria</title>
 
     ...
   </chapter>
@@ -1030,85 +1033,89 @@ O'Reilly & Associates como um DTD para escrever documenta&ccedil;&atilde;o t&eac
     </sect2>
     
     <sect2>
-      <title>Block elements</title>
+      <title>Elementos de blocos</title>
       
       <sect3>
-	<title>Paragraphs</title>
+	<title>Par&aacute;grafos</title>
 	
-	<para>DocBook supports three types of paragraphs:
+	<para>DocBook suporta tr&ecirc;s tipos de par&aacute;grafos:
 	  <sgmltag>formalpara</sgmltag>, <sgmltag>para</sgmltag>, and
 	  <sgmltag>simpara</sgmltag>.</para>
 	
-	<para>Most of the time you will only need to use
-	  <sgmltag>para</sgmltag>.  <sgmltag>formalpara</sgmltag> includes a
-	  <sgmltag>title</sgmltag> element, and <sgmltag>simpara</sgmltag>
-	  disallows some elements from within <sgmltag>para</sgmltag>.  Stick
-	  with <sgmltag>para</sgmltag>.</para>
+	<para>Na maioria das vezes voc&ecirc; s&oacute; vai precisar usar
+	  <sgmltag>para</sgmltag>.  <sgmltag>formalpara</sgmltag> inclui um 
+	  elemento <sgmltag>title</sgmltag>, e <sgmltag>simpara</sgmltag>
+	  desabilita alguns elementos dentro de <sgmltag>para</sgmltag>.  
+	  Fique com o <sgmltag>para</sgmltag>.</para>
 	  
 	<example>
 	  <title><sgmltag>para</sgmltag></title>
 	  
-	  <para>Use:</para>
+	  <para>Uso:</para>
 	  
-	  <programlisting><![ CDATA [<para>This is a paragraph.  It can contain just about any
-  other element.</para> ]]></programlisting>
+	  <programlisting><![ RCDATA [<para>Isso &eacute; um par&aacute;grafo.
+	  E pode conter quase qualquer outro elemento.</para> ]]></programlisting>
 
-	  <para>Appearance:</para>
+	  <para>Apar&ecirc;ncia:</para>
 	  
-	  <para>This is a paragraph.  It can contain just about any other
-	    element.</para>
+	  <para>Isso &eacute; um par&aacute;grafo. E pode conter quase qualquer 
+	  outro elemento.</para>
 	</example>
       </sect3>
       
       <sect3>
-	<title>Block quotations</title>
+	<title>Bloco de cita&ccedil;&otilde;es</title>
 	
-	<para>A block quotation is an extended quotation from another document
-	  that should not appear within the current paragraph.  You will
-	  probably only need it infrequently.</para>
+	<para>Um bloco de cita&ccedil;&atilde;o &eacute; uma longa cita&ccedil;&atilde;o
+          de um outro documento que n&atilde;o deveria aparecer no par&aacute;grafo
+	  corrente. N&atilde;o  &eacute; usado com muita frequ&ecirc;ncia.</para>
 	
-	<para>Blockquotes can optionally contain a title and an attribution
-	  (or they can be left untitled and unattributed).</para>
+	<para>Bloco de cita&ccedil;&atilde;o podem opcionalmente conter um 
+	t&iacute;tulo e uma atribui&ccedil;&atilde;o ((ou eles podem ser deixados sem 
+	atributos)</para>
 
 	<example>
-	  <title><sgmltag>blockquote</sgmltag></title>
+	  <title><sgmltag>bloco de cita&ccedil;&atilde;o</sgmltag></title>
 	  
-	  <para>Use:</para>
+	  <para>Uso:</para>
 	  
-	  <programlisting><![ CDATA [<para>A small excerpt from the US Constitution;</para>
+	  <programlisting><![ RCDATA [<para>A small excerpt from the US Constitution;</para>
 	      
 <blockquote>
-  <title>Preamble to the Constitution of the United States</title>
+  <title>Pre&acirc;mbulo da constitui&ccedil;&atilde;o dos Estados Unidos.</title>
 
-  <attribution>Copied from a web site somewhere</attribution>
+  <attribution>Copiado de um site qualquer</attribution>
 	    
-  <para>We the People of the United States, in Order to form a more perfect
-    Union, establish Justice, insure domestic Tranquility, provide for the
-    common defence, promote the general Welfare, and secure the Blessings
-    of Liberty to ourselves and our Posterity, do ordain and establish this
-    Constitution for the United States of America.</para>
+  <para>N&oacute;s, povo dos Estados Unidos, com o objetivo de
+  fazer uma uni&atilde;o mais perfeita, estabelecer justi&ccedil;a,
+  garantir tranquilidade dom&eacute;stica, promover uma defesa comum, promover 
+  bem estar geral, assegurar as ben&ccedil;&otilde;es da
+  liberdade para n&oacute;s mesmos e nossa posteridade, organizamos  e
+  estabelecemos essa constitui&ccedil;&atilde;o para os estados Unidos
+  da Am&eacute;rica.</para>
 </blockquote>]]></programlisting>
 
-	  <para>Appearance:</para>
+	  <para>Apar&ecirc;ncia:</para>
 	  
 	  <blockquote>
-	    <title>Preamble to the Constitution of the United States</title>
+	    <title>Pre&acirc;mbulo da constitui&ccedil;&atilde;o dos Estados Unidos.</title>
 	    
-	    <attribution>Copied from a web site somewhere</attribution>
+	    <attribution>Copiado de um site qualquer</attribution>
 	    
-	    <para>We the People of the United States, in Order to form a more
-	      perfect Union, establish Justice, insure domestic Tranquility,
-	      provide for the common defence, promote the general Welfare, and
-	      secure the Blessings of Liberty to ourselves and our Posterity,
-	      do ordain and establish this Constitution for the United States
-	      of America.</para>
+	    <para>N&oacute;s, povo dos Estados Unidos, com o objetivo de
+  fazer uma uni&atilde;o mais perfeita, estabelecer justi&ccedil;a,
+  garantir tranquilidade dom&eacute;stica, promover uma defesa comum, promover 
+  bem estar geral, assegurar as ben&ccedil;&otilde;es da
+  liberdade para n&oacute;s mesmos e nossa posteridade, organizamos  e
+  estabelecemos essa constitui&ccedil;&atilde;o para os estados Unidos
+  da Am&eacute;rica.</para>
 	  </blockquote>	  
 	</example>
       </sect3>
       
       <sect3>
-	<title>Tips, notes, warnings, cautions, important information and
-	  sidebars.</title>
+	<title>Dicas, notas, cuidados, informa&ccedil;&otilde;es importantes e 
+	sidebars.</title>
 	  
 	<para>You may need to include extra information separate from the
 	  main body of the text.  Typically this is <quote>meta</quote>
