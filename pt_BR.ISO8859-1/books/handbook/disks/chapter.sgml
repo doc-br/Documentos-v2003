@@ -269,51 +269,55 @@
 	    <userinput>W</userinput>.  Ignore quaisquer erros do 
 	    <application>sysinstall</application> que ele nao pode
 	    montar a nova particao.  Saia do Editor de Rotulo 
-	    e do <application>sysinstall</application> completely.</para>
+	    e do <application>sysinstall</application>.</para>
 	</step>
 
 	<step>
 	  <title>Finish</title>
 
-	  <para>The last step is to edit <filename>/etc/fstab</filename>
-	    to add an entry for your new disk.</para>
+	  <para>O ultimo passo e editar o <filename>/etc/fstab</filename>
+	    para adicionar uma entrada para seu novo disco.</para>
 	</step>
       </procedure>
     </sect2>
 
     <sect2>
-      <title>Using Command Line Utilities</title>
+      <title>Utilizando os Utilitarios de Linha de Comando</title>
 
       <sect3>
-	<title>Using Slices</title>
+	<title>Utilizando Slices</title>
 
-	<para>This setup will allow your disk to work correctly with
-	  other operating systems that might be installed on your
-	  computer and will not confuse other operating systems'
-	  <command>fdisk</command> utilities.  It is recommended
-	  to use this method for new disk installs.  Only use
-	  <literal>dedicated</literal> mode if you have a good reason
-	  to do so!</para>
+	<para>Este setup permitira que seu disco trabalhe corretamente
+	com outros sistemas operacionais que podem ser instalados no 
+	seu computador e nao confudirao outros utilitarios 
+	<command>fdisk</command> de outros sistemas operacionais.
+	    E recomendado utilizar este metodo para a instalacao de 
+	    novos discos. Somente utilize o modo 
+	    <literal>dedicado</literal> se voce tiver uma boa razao
+	    para isso!</para>
 
 	<screen>&prompt.root; <userinput>dd if=/dev/zero of=/dev/da1 bs=1k count=1</userinput>
-&prompt.root; <userinput>fdisk -BI da1</userinput> #Initialize your new disk
-&prompt.root; <userinput>disklabel -B -w -r da1s1 auto</userinput> #Label it.
-&prompt.root; <userinput>disklabel -e da1s1</userinput> # Edit the disklabel just created and add any partitions.
+&prompt.root; <userinput>fdisk -BI da1</userinput> #Inicializa seu
+novo disco
+&prompt.root; <userinput>disklabel -B -w -r da1s1 auto</userinput>
+#Rotula-o.
+&prompt.root; <userinput>disklabel -e da1s1</userinput> # Edita o rotulo do disco recem criado e adiciona novas particoes.
 &prompt.root; <userinput>mkdir -p /1</userinput>
-&prompt.root; <userinput>newfs /dev/da1s1e</userinput> # Repeat this for every partition you created.
-&prompt.root; <userinput>mount /dev/da1s1e /1</userinput> # Mount the partition(s)
-&prompt.root; <userinput>vi /etc/fstab</userinput> # Add the appropriate entry/entries to your <filename>/etc/fstab</filename>.</screen>
+&prompt.root; <userinput>newfs /dev/da1s1e</userinput> # Repete isso para cada particao que voce criou.
+&prompt.root; <userinput>mount /dev/da1s1e /1</userinput> # Monta a
+particao(s)
+&prompt.root; <userinput>vi /etc/fstab</userinput> # Adiciona a entrada(as) apropriadas para o seu <filename>/etc/fstab</filename>.</screen>
 
-	<para>If you have an IDE disk, substitute <filename>ad</filename>
-	  for <filename>da</filename>.  On pre-4.X systems use
+	<para>Se voce tem um disco ide, substitua <filename>ad</filename>
+	  for <filename>da</filename>.  Nos sistemas pre-4.X utilize
 	  <filename>wd</filename>.</para>
       </sect3>
       
       <sect3>
-	<title>Dedicated</title>
+	<title>Dedicado</title>
 	<indexterm><primary>OS/2</primary></indexterm>
 
-	<para>If you will not be sharing the new drive with another operating
+	<para>not be sharing the new drive with another operating
 	  system, you may use the <literal>dedicated</literal> mode.  Remember
 	  this mode can confuse Microsoft operating systems; however, no damage
 	  will be done by them.  IBM's &os2; however, will
@@ -360,14 +364,14 @@
 	    <author>
 	      <firstname>Christopher</firstname>
 	      <surname>Shumway</surname>
-	      <contrib>Original work by </contrib>
+	      <contrib>Trabalho original por</contrib>
 	    </author>
 	  </authorgroup>
 	  <authorgroup>
 	    <author>
 	      <firstname>Jim</firstname>
 	      <surname>Brown</surname>
-	      <contrib>Revised by </contrib>
+	      <contrib>Revisado por </contrib>
 	    </author>
 	  </authorgroup>
 	</sect3info>
@@ -3190,41 +3194,44 @@ Filesystem        Size   Used  Avail Capacity  Mounted on
       </procedure>
 
       <sect3>
-	<title>Automatically Mounting Encrypted Partitions</title>
+	<title>Montando Automaticamente Particoes Criptografadas</title>
 
-	<para>It is possible to create a script to automatically attach,
-	  check, and mount an encrypted partition, but for security reasons
-	  the script should not contain the &man.gbde.8; password. Instead,
-	  it is recommended that such scripts be run manually while
-	  providing the password via the console or &man.ssh.1;.</para>
+	<para>E possivel criar um script para automaticamente anexar,
+	checar e montar uma particao criptografada, mas por razoes de
+	seguranca, o script nao deve conter a senha do &man.gbde.8; . 
+	Ao inves disso, e recomendado que tais scripts sejam
+	executados manualmente, enquanto forneca a senha via console 
+	ou &man.ssh.1;.</para>
       </sect3>
     </sect2>
 
       <sect2>
-	<title>Cryptographic Protections Employed by gbde</title>
+	<title>Protecoes Criptograficas Empregadas pelo gbde</title>
 
-	<para>&man.gbde.8; encrypts the sector payload using 128-bit AES in
-	  CBC mode.  Each sector on the disk is encrypted with a different
-	  AES key. For more information on <application>gbde</application>'s
-	  cryptographic design, including how the sector keys are derived
-	  from the user-supplied passphrase, see &man.gbde.4;.</para>
+	<para>O &man.gbde.8; criptografa o setor de payload utilizando 
+	o AES no modo CBC.
+	   Cada setor no disco e criptografado com uma chave AES
+	   diferente. Para mais informacoes sobre o projeto criptografico
+	   do <application>gbde</application>, incluindo como as chaves
+	   dos setores sao derivadas de passphrases providas pelos 
+	   usuarios, veja &man.gbde.4;.</para>
       </sect2>
 
       <sect2>
-	<title>Compatibility Issues</title>
+	<title>Questoes de Compatibilidade</title>
 
-	<para>&man.sysinstall.8; is incompatible with
-	  <application>gbde</application>-encrypted devices. All
-	  <devicename><replaceable>*</replaceable>.bde</devicename> devices must be detached from the
-	  kernel before starting &man.sysinstall.8; or it will crash during
-	  its initial probing for devices. To detach the encrypted device
-	  used in our example, use the following command:</para>
+	<para>O &man.sysinstall.8; e incompativel com
+	  dispositivos <application>gbde</application>-criptografados. Todos
+	  os dispositivos <devicename><replaceable>*</replaceable>.bde</devicename> devices devem ser destacados do kernel antes de iniciar o 
+	  &man.sysinstall.8; ou ele crash durante sua varredura inicial dos
+          dispositivos. Para destacar o dispositivo criptografado utilizado
+          no nosso exemplo, utilize o seguinte comando:</para>
 	<screen>&prompt.root; <userinput>gbde detach /dev/ad4s1c</userinput></screen>
 
-      <para>Also note that, as &man.vinum.4; does not use the
-	&man.geom.4; subsystem, you cannot use
-	<application>gbde</application> with
-	<application>vinum</application> volumes.</para>
+      <para>Note tambem que , como o &man.vinum.4; nao utiliza o
+	subsistema man.geom.4; , voce nao pode utilizar o
+	<application>gbde</application> com volumes do
+	<application>vinum</application>.</para>
       </sect2>
 
   </sect1>
