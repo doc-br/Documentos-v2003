@@ -107,7 +107,7 @@
     </itemizedlist>
   </sect1>
 
-  <sect1 id="printing-intro-<foreignphrase>spooler</foreignphrase>">
+  <sect1 id="printing-intro-spooler">
     <title>Introdu&ccedil;&atilde;o</title>
 
     <para>
@@ -736,7 +736,7 @@
 	deve escolher entre o modo utilizando interrup&ccedil;&atilde;o
 	ou por <foreignphrase>polling</foreignphrase>.  Driver para o
 	dispositivo gen&eacute;rico de impressora (&man.lpt.4;) para
-	 FreeBSD&nvsp;4.X e 5.X usa o sistema &man.ppbus.4;, o qual 
+	 FreeBSD&nbsp;4.X e 5.X usa o sistema &man.ppbus.4;, o qual 
 	controla a porta do chipset com o driver &man.ppc.4; driver.
 	</para>
 
@@ -812,46 +812,63 @@
 
 		  <programlisting>hint.ppc.0.irq="<replaceable>N</replaceable>"</programlisting>
 
-		  <para>in the <filename>/boot/device.hints</filename> file
-		    and replace <replaceable>N</replaceable> with the right
-		    IRQ number.  The kernel configuration file must
-		    also contain the &man.ppc.4; driver:</para>
+		  <para>
+		No arquivo <filename>/boot/device.hints</filename> e troque 
+	<replaceable>N</replaceable> pelo n&uacute;mero correto da IRQ.  
+	O arquivo de configura&ccedil;&atilde;o do kernel tamb&eacute;m 
+	deve conter o driver &man.ppc.4; 
+		</para>
 
 		  <screen>device ppc</screen>
 
 		</listitem>
 
 		<listitem>
-		  <para>If you want polled mode, do not add the
-		    <literal>irq</literal> specifier:</para>
+		  <para>
+			Se voc&ecirc; for utilizar o modo
+	de <foreignphrase>polling</foreignphrase>, n&atilde;o adcione a 
+	especifica&ccedil;&atilde;o da <literal>irq</literal>:
+		</para>
 
-		  <para>For FreeBSD&nbsp;4.X, use the following line in
-		    your kernel configuration file:</para>
+		  <para>
+			Para o FreeBSD&nbsp;4.X, use a seguinte linha
+	no arquivo de configura&ccedil;&atilde;o do kernel:
+		    </para>
 
 		  <programlisting>device ppc0 at isa?</programlisting>
 
-		  <para>For FreeBSD&nbsp;5.X, simply remove in your
-		    <filename>/boot/device.hints</filename> file, the
-		    following line:</para>
+		  <para>
+			Para o FreeBSD&nbsp;5.X, simplesmente remova
+	em seu arquivo <filename>/boot/device.hints</filename>  a 
+	seguinte linha:
+		    <para>
 
 		  <programlisting>hint.ppc.0.irq="<replaceable>N</replaceable>"</programlisting>
 
-		  <para>In some cases, this is not enough to put the
-		    port in polled mode under FreeBSD&nbsp;5.X.  Most of
-		    time it comes from &man.acpi.4; driver, this latter
-		    is able to probe and attach devices, and therefore,
-		    control the access mode to the printer port.  You
-		    should check your &man.acpi.4; configuration to
-		    correct this problem.</para>
+		  <para>
+			Em alguns casos, isso n&atilde;o ser&aacute;
+	suficiente para colocar a porta em modo de 
+	<foreignphrase>polling</foreignphrase> no FreeBSD&nbsp;5.X.  
+	Na maior parte das vezes, isso &eacute; devido ao driver 
+	&man.acpi.4;, mas tarde habilita para detec&ccedil;&atilde;o e
+	<foreignphrase>atacha</foreignphrase> os dispositivos, e ent&atilde;o
+	controla o modo de acesso &agrave; porta da impressora.
+		Voc&ecirc; deve checar sua configuta&ccedil;&atilde;o
+   	&man.acpi.4; para corrigir esse problema.
+		    </para>
 		</listitem>
 	      </itemizedlist>
 	    </step>
 
 	    <step>
-	      <para>Save the file.  Then configure, build, and install the
-		kernel, then reboot.  See <link
-		linkend="kernelconfig">kernel configuration</link> for
-		more details.</para>
+	      <para>
+
+		Salve o arquivo.  Ent&atilde;o configure, compile
+	e instale o novo kernel, e aseguir reboot o seu sistema.
+	Veja <link 
+	linkend="kernelconfig">Configura&ccedil;&atilde;o do Kernel</link>
+	para maiores detalhes.
+		</para>
 	    </step>
 	  </procedure>
 
@@ -887,7 +904,7 @@
 	<sect4 id="printing-testing">
 	  <title>Checking Printer Communications</title>
 
-	  <para>Before proceeding to configure the spooling system, you
+	  <para>Before proceeding to configure the <foreignphrase>spooling</foreignphrase> system, you
 	    should make sure the operating system can successfully send
 	    data to your printer.  It is a lot easier to debug printer
 	    communication and the spooling system separately.</para>
