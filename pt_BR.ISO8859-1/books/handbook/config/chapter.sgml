@@ -10,92 +10,94 @@
       <author>
         <firstname>Chern</firstname>
 	<surname>Lee</surname>
-	<contrib>Written by </contrib>
+	<contrib>Escrito por </contrib>
       </author>
     </authorgroup>
     <authorgroup>
       <author>
         <firstname>Mike</firstname>
 	<surname>Smith</surname>
-	<contrib>Based on a tutorial written by </contrib>
+	<contrib>Baseado em um tutorial escrito por </contrib>
       </author>
     </authorgroup>
     <authorgroup>
       <author>
         <firstname>Matt</firstname>
 	<surname>Dillon</surname>
-	<contrib>Also based on tuning(7) written by </contrib>
+	<contrib>Tamb&eacute;m baseado em tuning(7) escrito por </contrib>
       </author>
     </authorgroup>
   </chapterinfo>
 
-  <title>Configuration and Tuning</title>
+  <title>Configura&ccedil;&atilde;o e Sintonia</title>
 
   <sect1 id="config-synopsis">
-    <title>Synopsis</title>
+    <title>Sinopse</title>
 
     <indexterm><primary>system configuration</primary></indexterm>
     <indexterm><primary>system optimization</primary></indexterm>
 
-    <para>One of the important aspects of &os; is system configuration.
-      Correct system configuration will help prevent headaches during future upgrades.
-      This chapter will explain much of the &os; configuration process,
-      including some of the parameters which
-      can be set to tune a &os; system.
+    <para>Um dos aspectos mais importantes do &os; &eacute; a configura&ccedil;&atilde;o do sistema.
+      A configura&ccedil;&atilde;o correta ajudar&aacute; a previnir dores de cabe&ccedil;a durante 
+      atualiza&ccedil;&otilde;es futuras.
+      Este cap&iacute;tulo explicar&aacute; muito do processo de configura&ccedil;&atilde;o do &os;,
+      incluindo alguns par&acirc;metros que podem ser configurados
+      para sintonizar um sistema &os;.
       </para>
 
-    <para>After reading this chapter, you will know:</para>
+    <para>Ap&oacute;s ler este cap&iacute;tulo, voc&ecirc; saber&aacute;:</para>
 
     <itemizedlist>
       <listitem>
-	<para>How to efficiently work with
-	  file systems and swap partitions.</para>
+	<para>Como trabalhar eficientemente com 
+	  sistemas de arquivos e parti&ccedil;&otilde;es de swap.</para>
       </listitem>
       <listitem>
-	<para>The basics of <filename>rc.conf</filename> configuration and
-	  <filename>/usr/local/etc/rc.d</filename> startup systems.</para>
+	<para>No&ccedil;&otilde;es de configura&ccedil;&atilde;o dos sistemas de
+          inicializa&ccedil;&atilde;o <filename>rc.conf</filename> e
+	  <filename>/usr/local/etc/rc.d</filename>.</para>
       </listitem>
       <listitem>
-	<para>How to configure and test a network card.</para>
+	<para>Como configurar e testar uma placa de rede.</para>
       </listitem>
       <listitem>
-	<para>How to configure virtual hosts on your network devices.</para>
+	<para>Como configurar servidores virtuais em seus dispositivos de rede.</para>
       </listitem>
       <listitem>
-	<para>How to use the various configuration files in
+	<para>Como usar os diversos arquivos de configura&ccedil;&atilde;o em 
 	  <filename>/etc</filename>.</para>
       </listitem>
       <listitem>
-        <para>How to tune &os; using <command>sysctl</command>
-          variables.</para>
+        <para>Como sintonizar o &os; usando as vari&aacute;veis do <command>sysctl</command>.
+          </para>
       </listitem>
       <listitem>
-	<para>How to tune disk performance and modify kernel
-	  limitations.</para>
+	<para>Como sintonizar a performance de disco e modificar 
+	  limita&ccedil;&otilde;es do kernel.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Before reading this chapter, you should:</para>
+    <para>Antes de ler este cap&iacute;tulo, voc&ecirc; dever&aacute;:</para>
 
     <itemizedlist>
       <listitem>
-	<para>Understand &unix; and &os; basics (<xref
+	<para>Compreender o b&aacute;sico de &unix; e &os;  (<xref
 	    linkend="basics">).</para>
       </listitem>
       <listitem>
-	<para>Be familiar with keeping &os; sources up to date
-	  (<xref linkend="cutting-edge">), and
-	  the basics of kernel configuration/compilation
+	<para>Estar familiarizado em manter os fontes do &os; atualizados
+	  (<xref linkend="cutting-edge">), e
+	  possuir no&ccedil;&otilde;es de configura&ccedil;&atilde;o/compila&ccedil;&atilde;o do kernel.
 	  (<xref linkend="kernelconfig">).</para>
       </listitem>
     </itemizedlist>
   </sect1>
 
   <sect1 id="configtuning-initial">
-    <title>Initial Configuration</title>
+    <title>Configura&ccedil;&atilde;o Inicial</title>
 
     <sect2>
-      <title>Partition Layout</title>
+      <title>Estrutura de Particioanmento</title>
 
       <indexterm><primary>partition layout</primary></indexterm>
       <indexterm>
@@ -109,110 +111,112 @@
       </indexterm>
 
       <sect3>
-	<title>Base Partitions</title>
+	<title>Parti&ccedil;&otilde;es Base</title>
 
-	<para>When laying out file systems with &man.disklabel.8;
-	  or &man.sysinstall.8;, remember that hard
-	  drives transfer data faster from the outer
-	  tracks to the inner.
-	  Thus smaller and heavier-accessed file systems
-	  should be closer to the outside of the drive  While
-	  larger partitions like <filename>/usr</filename> should be placed
-	  toward the inner.  It is a good idea to create
-	  partitions in a similar order to: root, swap,
+	<para>Ao configurar sistemas de arquivo com &man.disklabel.8;
+	  ou &man.sysinstall.8;, lembre-se que discos r&iacute;gidos
+	  transferem dados mais rapidamente das trilas mais externas
+	  para as internas.
+	  Desta forma, sistemas de arquivos menores e 
+	  mais acessados devem estar mais pr&oacute;ximos da parte de fora
+	  do disco, enquanto parti&ccedil;&otilde;es maiores como <filename>/usr</filename>
+          devem estar mais pr&oacute;ximas &agrave; parte de dentro.
+	  &Eacute; uma boa id&eacute;ia criar parti&ccedil;&otilde;es nesta ordem: root. swap,  
 	  <filename>/var</filename>, <filename>/usr</filename>.</para>
 
-	<para>The size of <filename>/var</filename>
-	  reflects the intended machine usage.
-	  <filename>/var</filename> is used to hold
-	  mailboxes, log files, and printer spools.  Mailboxes and log
-	  files can grow to unexpected sizes depending
-	  on how many users exist and how long log
-	  files are kept.  Most users would never require a gigabyte,
-	  but remember that <filename>/var/tmp</filename>
-	  must be large enough to contain packages.
+	<para>O tamanho de <filename>/var</filename>
+	  reflete na inten&ccedil;&atilde;o de uso da m&aacute;quina.  
+	  <filename>/var</filename> &eacute; usado para abrigar caixas de correio,
+	  arquivos de log e filas de impress&atilde;o. Caixas postais e 
+	  arquvos de log pode crescer em tamanhos n&atilde;o esperados 
+	  dependendo da quantidade de usu&aacute;rios e por quanto tempo 
+	  os arquivos de log s&atilde;o mantidos.  Muitos usu&aacute;rios 
+	  nunca precisar&atilde;o de um gigabyte, 
+	  mas lembre-se que <filename>/var/tmp</filename>
+	  deve ser grande o bastante para abrigar pacotes.
 	  </para>
 
-	<para>The <filename>/usr</filename> partition holds much
-	  of the files required to support the system, the &man.ports.7;
-	  collection (recommended) and the source code (optional).  Both
-	  of which are optional at install time.
-	  At least 2 gigabytes would be recommended for this partition.</para>
+	<para>A parti&ccedil;&atilde;o <filename>/usr</filename> abriga a maioria dos
+	  arquivos necess&aacute;rios ao sistema, a cole&ccedil;&atilde;o &man.ports.7;
+	  recomendada) e o c&oacute;digo fonte (opcional).  Ambos
+	  s&atilde;o opcionais no momento da instala&ccedil;&atilde;o. 
+	  Pelo menos 2 gigabytes s&atilde;o recomendados para esta parti&ccedil;&atilde;o.</para>
 
-	<para>When selecting partition sizes, keep the space
-	  requirements in mind.  Running out of space in
-	  one partition while barely using another can be a
-	  hassle.</para>
+	<para>Ao selecionar tamanhos de parti&ccedil;&otilde;es, tenha em mente
+	  os requisitos de tamanho. Ficar sem espa&ccedil;o em uma parti&ccedil;&atilde;o
+	  enquanto outra &eacute; pouco usada pode ser um pouco chato.
+	  </para>
 
-	<note><para>Some users have found that &man.sysinstall.8;'s
-	    <literal>Auto-defaults</literal> partition sizer will
-	    sometimes select smaller than adequate <filename>/var</filename>
-	    and <filename>/</filename> partitions.  Partition wisely and
-	    generously.</para></note>
+	<note><para>Alguns usu&aacute;rios perceberam que o 
+	    dimensionador padr&atilde;o <literal>Auto-defaults</literal> do &man.sysinstall.8; 
+	    algumas vezes selecionam parti&ccedil;&otilde;es <filename>/var</filename>
+	    e <filename>/</filename> em tamanhos menores que o necess&aacute;rio.  Particione 
+	    de maneira inteligente e generosa.</para></note>
 
       </sect3>
 
       <sect3 id="swap-design">
-	<title>Swap Partition</title>
+	<title>Parti&ccedil;&atilde;o de Swap</title>
 
 	<indexterm><primary>swap sizing</primary></indexterm>
 	<indexterm><primary>swap partition</primary></indexterm>
 
-	<para>As a rule of thumb, the swap partition should be
-	  about double the size of system memory (RAM).  For example,
-	  if the machine has 128&nbsp;megabytes of memory,
-	  the swap file should be 256&nbsp;megabytes.  Systems with
-	  less memory may perform better with more swap.
-	  Less than 256&nbsp;megabytes of swap is not recommended and
-	  memory expansion should be considered.
-	  The kernel's VM paging algorithms are tuned to
-	  perform best when the swap partition is at least two times the
-	  size of main memory.  Configuring too little swap can lead to
-	  inefficiencies in the VM page scanning code and might create
-	  issues later if more memory is added.</para>
+	<para>Como regra geral, a parti&ccedil;&atilde;o de swap deve ser
+	  mais ou menos o dobro do tamanho da mem&oacute;ria do sistema (RAM).  Por
+	  exemplo, se uma m&aacute;quina possui 128&nbsp;megabytes de mem&oacute;ria, 
+	  o arquivo de swap deveria ser de 256&nbsp;megabytes.  Sistemas 
+	  com pouca mem&oacute;ria podem obter melhor performance com mais
+	  swap.  Menos que 256&nbsp;megabytes de mem&oacute;ria n&atilde;o &eacute; recomendado 
+	  e uma expans&atilde;o deve ser considerada.  
+	  Os algoritmos de pagina&ccedil;&atilde;o da mem&oacute;ria virtual (VM) s&atilde;o sintonizados 
+	  para obter melhor desempenho quando a parti&ccedil;&atilde;o de swap 
+	  &eacute; pelo menos duas vezes o tamanho da mem&oacute;ria.  Configurar um 
+	  swap muito pequeno pode levar &agrave; inefici&ecirc;ncia no c&oacute;digo de procura 
+	  de p&aacute;gina da mem&oacute;ria virtual e pode criar problemas 
+	  se mais mem&oacute;ria for acidionada.</para>
 
-	<para>On larger systems with multiple SCSI disks (or
-	  multiple IDE disks operating on different controllers), it is
-	  recommend that a swap is configured on each drive (up
-	  to four drives).  The swap partitions should be
-	  approximately the same size.  The kernel can handle arbitrary
-	  sizes but internal data structures scale to 4 times the
-	  largest swap partition.  Keeping the swap partitions near the
-	  same size will allow the kernel to optimally stripe swap space
-	  across disks.
-	  Large swap sizes are fine, even if swap is not
-	  used much.  It might be easier to recover
-	  from a runaway program before being forced to reboot.</para>
+	<para>Em sistemas maiores com multiplos discos SCSI (ou 
+	  multiplos discos IDE operando em controladoras diferentes), 
+	  &eacute; recomendado que o swap seja configurado em cada disco (para 
+	  at&eacute; quatro discos).  As parti&ccedil;&otilde;es de swap devem ser aproximadamente 
+	  do mesmo tamanho.  O kernel pode manipular tamanhos arbitr&aacute;rios mas 
+	  estruturas de dados internas escalam &agrave; at&eacute; 4 vezes para a 
+	  maior parti&ccedil;&atilde;o.  Manter as parti&ccedil;&otilde;es de swap com aproximadamente 
+	  o mesmo tamanho permitir&aacute; ao <foreignphrase>kernel</foreignphrase> 
+	  otimizar a distribui&ccedil;&atilde;o do espa&ccedil;o de swap pelas parti&ccedil;&otilde;es.  
+	  N&atilde;o h&aacute; problemas em ter grades parti&ccedil;&otilde;es de swap, mesmo que 
+	  o swap n&atilde;o seja muito usado.  Isto pode facilitar a recupera&ccedil;&atilde;o 
+	  de dados de um programa antes de ser for&ccedil;ado a reinicializar a m&aacute;quina.
+	  </para>
       </sect3>
 
       <sect3>
-	<title>Why Partition?</title>
+	<title>Porque Particionar?</title>
 
-	<para>Several users think a single large partition will be fine,
-	  but there are several reasons why this is a bad idea.
-	  First, each partition has different operational
-	  characteristics and separating them allows the file system to
-	  tune accordingly.  For example, the root
-	  and <filename>/usr</filename> partitions are read-mostly, without
-	  much writing.  While a lot of reading and writing could
-	  occur in <filename>/var</filename> and
+	<para>Muitos usu&aacute;rios pensam que uma parti&ccedil;&atilde;o grade e &uacute;nica
+	  &eacute; suficiente mas, por v&aacute;rias raz&otilde;es, isto seria uma m&aacute; id&eacute;ia.
+	  Primeiro, cada parti&ccedil;&atilde;o possui caracter&iacute;sticas operacionais 
+	  diferentes e separ&aacute;-las permite ao sistema de arquivos uma
+	  sintonia de acordo. Por exemplo, as parti&ccedil;&otilde;es root 
+	  e <filename>/usr</filename> recebem mais acessos de leitura, e 
+	  pouca escrita.  Enquanto que muita leitura e escrita pode 
+	  ocorrer em <filename>/var</filename> e 
 	  <filename>/var/tmp</filename>.</para>
 
-	<para>By properly partitioning a system, fragmentation
-	  introduced in the smaller write heavy partitions
-	  will not bleed over into the mostly-read partitions.
-	  Keeping the write-loaded partitions closer to
-	  the disk's edge,
-	  will
-	  increase I/O performance in the partitions where it occurs
-	  the most.  Now while I/O
-	  performance in the larger partitions may be needed,
-	  shifting them more toward the edge of the disk will not
-	  lead to a significant performance improvement over moving
-	  <filename>/var</filename> to the edge.
-	  Finally, there are safety concerns.  A smaller, neater root
-	  partition which is mostly read-only has a greater
-	  chance of surviving a bad crash.</para>
+	<para>Atrav&eacute;s de um particionamento adequado, a fragmenta&ccedil;&atilde;o 
+	  introduzida em parti&ccedil;&otilde;es pequenas com muitos acessos de escrita 
+	  n&atilde;o prejudicar&aacute; pas parti&ccedil;&otilde;es com mais acessos de leitura.  Manter 
+	  as parti&ccedil;&otilde;es com mais acesso de escrito mais pr&oacute;ximas &agrave; borda do 
+	  disco proporcionar&aacute; melhora na performance de I/O nas 
+	  parti&ccedil;&otilde;es onde isto ocorre com mais freq&uuml;&ecirc;ncia.  Enquanto 
+	  a performance de I/O pode ser necess&aacute;ria em parti&ccedil;&otilde;es maiores, 
+	  coloc&aacute;-las mais na parte externa do disco n&atilde;o promover&aacute; uma 
+	  melhora de performance em rela&ccedil;&atilde;o &agrave; mover  
+	  <filename>/var</filename> para a borda do disco
+	  Finalmente, existem preocupa&ccedil;&otilde;es com a seguran&ccedil;a.  Uma parti&ccedil;&atilde;o 
+	  root menor, mais pura, que tem mais acesos de leitura, tem 
+	  uma chance maior de sobreviver &agrave; um <foreignphrase>crash</foreignphrase>.
+	  </para>
       </sect3>
     </sect2>
 
@@ -423,26 +427,27 @@ exit 0
         <author>
 	<firstname>Tom</firstname>
 	<surname>Rhodes</surname>
-	<contrib>Contributed by </contrib>
+	<contrib>Contribui&ccedil;&atilde;o de </contrib>
 	<!-- 20 May 2003 -->
 	</author>
       </authorgroup>
     </sect1info>
-    <title>Configuring the <command>cron</command> Utility</title>
+    <title>Configurando o Utilit&aacute;rio <command>cron</command></title>
 
     <indexterm><primary>cron</primary>
       <secondary>configuration</secondary></indexterm>
 
-    <para>One of the most useful utilities in &os; is &man.cron.8;.  The
-      <command>cron</command> utility runs in the background and constantly
-      checks the <filename>/etc/crontab</filename> file.  The <command>cron</command>
-      utility also checks the <filename>/var/cron/tabs</filename> directory, in
-      search of new <filename>crontab</filename> files.  These
-      <filename>crontab</filename> files store information about specific
-      functions which <command>cron</command> is supposed to perform at
-      certain times.</para>
+    <para>Uma das ferramentas mais &uacute;teis no &os; &eacute; o &man.cron.8;.  O 
+      utilit&aacute;rio <command>cron</command> roda em segundo plano e constantemente
+      verifica o arquivo <fliename>/etc/crontab</filename>. Ele tamb&eacute;m verifica
+      o diret&oacute;rio <filename>/var/cron/tabs</filename> na procura novos
+      arquivos do tipo <filename>crontab</filename>.  Estes arquivos
+      <filename>crontab</filename> armazenam informa&ccedil;&otilde;es espec&iacute;ficas sobre
+      fun&ccedil;&otilde;es que o <command>cron</command> &eacute; designado a desempenhar
+      em algumas ocasi&otilde;es.</para>
 
-    <para>Let us take a look at the <filename>/etc/crontab</filename> file:</para>
+
+    <para>Vamos dar uma olhada no arquivo <filename>/etc/crontab</filename>:</para>
 
 
     <programlisting># /etc/crontab - root's crontab for &os;
@@ -463,91 +468,89 @@ HOME=/var/log
 
     <calloutlist>
       <callout arearefs="co-comments">
-	<para>Like most &os; configuration files, the <literal>#</literal>
-	  character represents a comment.  A comment can be placed in
-	  the file as a reminder of what and why a desired action is performed.
-	  Comments cannot be on the same line as a command or else they will
-	  be interpreted as part of the command; they must be on a new line.
-	  Blank lines are ignored.</para>
+	<para>Como muitos arquivos de configura&ccedil;&atilde;o do &os;, o caracter <literal>#</literal>
+	  representa um coment&aacute;rio. Um coment&aacute;rio pode ser colocado em um
+	  arquivo como um lembrete de como e porque uma a&ccedil;&atilde;o desejada &eacute; executada. 
+	  Os coment&aacute;rios n&atilde;o podem estar na mesma linha que o comando sen&atilde;o ser&atilde;o
+          interpretados como parte do comando;  eles devem estar em uma nova linha.
+          Linhas em branco s&atilde;o ignoradas.</para>
       </callout>
 
       <callout arearefs="co-env">
-	<para>First, the environment must be defined.  The equals
-	  (<literal>=</literal>) character is used to define any environment
-	  settings, as with this example where it is used for the <envar>SHELL</envar>,
-	  <envar>PATH</envar>, and <envar>HOME</envar> options.  If the shell line is
-	  omitted, <command>cron</command> will use the default, which is
-	  <command>sh</command>.  If the <option>PATH</option> variable is
-	  omitted, no default will be used and file locations will need to
-	  be absolute.  If <option>HOME</option> is omitted, <command>cron</command>
-	  will use the invoking users home directory.</para>
+	<para>Primeiramente, o ambiente deve ser definido. Os caracteres
+	  (<literal>=</literal>) s&atilde;o usados para definir qualquer configura&ccedil;&atilde;o de
+	  ambiente, como neste exemplo que s&atilde;o usados para as op&ccedil;&otilde;es <envar>SHELL</envar>,
+	  <envar>PATH</envar>, e <envar>HOME</envar>.  Se a linha do shell for omitida, 
+	  o <command>cron</command> usar&aacute; o padr&atilde;o, que &eacute; o 
+	  <command>sh</command>.  Se a vari&aacute;vel <option>PATH</option> for omitida,
+          nenhum padr&atilde;o ser&aacute; usado e o caminho para os arquivos dever&aacute; ser absoluto.   
+	  Se o <option>HOME</option> for omitido, o <command>cron</command>
+	  usar&aacute; o diret&oacute;rio base do usu&aacute;rio que o invocou.</para>
       </callout>
 
       <callout arearefs="co-field-descr">
-	<para>This line defines a total of seven fields.  Listed here are the
+	<para>Esta linha define um total de sete campos. Aqui s&atilde;o listados os valores 
 	  values <literal>minute</literal>, <literal>hour</literal>,
 	  <literal>mday</literal>, <literal>month</literal>, <literal>wday</literal>,
-	  <literal>who</literal>, and <literal>command</literal>.  These
-	  are almost all self explanatory.  Minute is the time in minutes the
-	  command will be run.  Hour is similar to the minute option, just in
-	  hours.  Mday stands for day of the month.  Month is similar to hour
-	  and minute, as it designates the month.  The wday options stands for
-	  day of the week.  All these fields must be numeric values, and follow
-	  the twenty-four hour clock.  The <quote>who</quote> field is special,
-	  and only exists in the <filename>/etc/crontab</filename> file.
-	  This field specifies which user the command should be run as.
-	  When a user installs his or her <filename>crontab</filename> file, they
-	  will not have this option. Finally, the command option is listed.
-	  This is the last field, so naturally it should designate the command
-	  to be executed.</para>
+	  <literal>who</literal>, e <literal>command</literal>.  Estes s&atilde;o
+          praticamente autoexplicativos. Minute &eacute; o tempo em minutos em que o
+          comando ser&aacute; executado. Hours &eacute; similar &agrave; op&ccedil;&atilde;o Minute, em horas.
+          Month &eacute; similar &agrave; Minute e Hour, designando o m&ecirc;s. As op&ccedil;&otilde;es mday
+          vem de dia da semana. Todos estes campos devem ter valores num&eacute;ricos,
+          e obedecer ao rel&oacute;gio do tipo 24h. O campo <quote>who</quote> &eacute; especial,
+	  e existe apenas no arquivo <filename>/etc/crontab</filename>.
+	  Este arquivo especifica sob que usu&aacute;rio o comando deve ser executado.  
+	  Quando um usu&aacute;rio instala seu aquivo <filename>crontab</filename>, ele ou ela
+          n&atilde;o ter&aacute; esta op&ccedil;&atilde;o. Finalmente, op&ccedil;&otilde;es do comando s&atilde;o listadas.
+          Este &eacute; o &uacute;ltimo campo, sendo assim, naturalmente deve designar o comando
+	  a ser executado.</para>
       </callout>
 
       <callout arearefs="co-main">
-	<para>This last line will define the values discussed above.  Notice here
-	  we have a <literal>*/5</literal> listing, followed by several more
-	  <literal>*</literal> characters.  These <literal>*</literal> characters
-	  mean <quote>first-last</quote>, and can be interpreted as
-	  <emphasis>every</emphasis> time.  So, judging by this line,
-	  it is apparent that the <command>atrun</command> command is to be invoked by
-	  <username>root</username> every five minutes regardless of what
-	  day or month it is.  For more information on the <command>atrun</command>,
-	  see the &man.atrun.8; manual page.</para>
+	<para>Esta &uacute;ltima linha definir&aacute; os valores discutidos acima.  Note
+	  aqui que tempos a listagem <literal>*/5</literal>, seguida por v&aacute;rios caracteres
+	  <literal>*</literal>.  Estes caracteres <literal>*</literal> 
+	  significam <quote>primeiro-&uacute;ltimo</quote>, e podem ser interpretados como
+	  <emphasis>qualquer</emphasis> tempo.  Ent&atilde;o, julgando por esta linha,
+	  fica claro que o comando <command>atrun</command> ser&aacute; invocado pelo
+	  <username>root</username> a cada cinco minutos n&atilde;o importando o dia ou m&ecirc;s.  
+	  Para mais informa&ccedil;&otilde;es sobre o <command>atrun</command>,
+	  veja a p&aacute;gina de manual &man.atrun.8;.</para>
 
-	<para>Commands can have any number of flags passed to them; however,
-	  commands which extend to multiple lines need to be broken with the backslash
-	  <quote>\</quote> continuation character.</para>
+	<para>Comandos podem ter qualquer n&uacute;mero de par&acirc;metros passados &agrave; eles mesmos;
+	  entretando, comandos que se extendem &agrave; v&aacute;rias linhas devem ser quebrados
+	  com o caracter contrabarra <quote>\</quote>.</para>
       </callout>
     </calloutlist>
 
-    <para>This is the basic set up for every
-      <filename>crontab</filename> file, although there is one thing
-      different about this one.  Field number six, where we specified
-      the username, only exists in the system
-      <filename>/etc/crontab</filename> file.  This field should be
-      omitted for individual user <filename>crontab</filename>
-      files.</para>
+    <para>Esta &eacute; a configura&ccedil;&atilde;o b&aacute;sica para todo arquivo
+      <filename>crontab</filename>, embora exista algo diferente a respeito
+      deste.  O campo n&uacute;mero seis, onde &eacute; especificado o nome de usu&aacute;rio,
+      que existe somente no arquivo <filename>/etc/crontab</filename>.  Este arquivo 
+      deve ser omitido para arquivos <filename>crontab</filename> individuais de
+      usu&aacute;rios.</para>
 
 
     <sect2 id="configtuning-installcrontab">
-      <title>Installing a Crontab</title>
+      <title>Instalando a Crontab</title>
 
-      <para>To install your freshly written
-	<filename>crontab</filename>, just use the
-	<command>crontab</command> utility.  The most common usage
-	is:</para>
+      <para>Para instalar sua rec&eacute;m-escrita
+	<filename>crontab</filename>, basta usar o utilit&aacute;rio
+	<command>crontab</command>.  O uso mais comum
+	&eacute;:</para>
 
       <screen>&prompt.root; <userinput>crontab crontab</userinput></screen>
 
-      <para>There is also an option to list installed
-	<filename>crontab</filename> files, just pass the
-	<option>-l</option> to <command>crontab</command> and look
-	over the output.</para>
+      <para>Existe tamb&eacute;m uma op&ccedil;&atilde;o para listar os arquivos 
+	<filename>crontab</filename> instalados, basta passar a op&ccedil;&atilde;o 
+	<option>-l</option> para o <command>crontab</command> 
+	e observar a sa&iacute;da do comando.</para>
 
-      <para>Users who wish to begin their own crontab file from scratch,
-	without the use of a template, the <command>crontab -e</command>
-	option is available.  This will invoke the selected editor
-	with an empty file.  When the file is saved, it will be
-	automatically installed by the <command>crontab</command> command.
+      <para>Usu&aacute;rios que desejem come&ccedil;ar seu pr&oacute;prio arquivo crontab do zero, 
+	sem usar um exemplo, podem usar <command>crontab -e</command>.  Este
+	comando invocar&aacute; o editor com um arquivo vazio. Quando o arquivo for 
+	gravado ser&aacute; automaticamente instalado pelo comando 
+	<command>crontab</command>.
       </para>
 
     </sect2>
