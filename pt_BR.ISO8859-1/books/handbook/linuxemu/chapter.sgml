@@ -152,90 +152,99 @@ Id Refs Address    Size     Name
       como descrito em <xref linkend="kernelconfig">.</para> 
 
     <sect2>
-      <title>Installing Linux Runtime Libraries</title>
+      <title>Instalando Bibliotecas Linux de Tempo de Execu&ccedil;&atilde;o</title>
       <indexterm>
 	<primary>Linux</primary>
 	<secondary>installing Linux libraries</secondary>
       </indexterm>
 
-      <para>This can be done one of two ways, either by using the
-	<link linkend="linuxemu-libs-port">linux_base</link> port, or
-	by installing them <link
-	linkend="linuxemu-libs-manually">manually</link>.</para>
+      <para>Isto pode ser feito de duas maneiras, usando o port 
+	<link linkend="linuxemu-libs-port">linux_base</link>, ou
+	instalando as bibliotecas <link
+	linkend="linuxemu-libs-manually">manualmente</link>.</para>
 
       <sect3 id="linuxemu-libs-port">
-	<title>Installing Using the linux_base Port</title>
+	<title>Instalando o port linux_base</title>
 	<indexterm><primary>ports collection</primary></indexterm>
 
-	<para>This is by far the easiest method to use when installing the
-	  runtime libraries.  It is just like installing any other port
-	  from the <ulink type="html" url="file://localhost/usr/ports/">ports collection</ulink>.
-	  Simply do the following:</para>
+	<para>Este &eacute; de longe o m&eacute;todo mais f&aacute;cil para 
+	  instalar as bibliotecas de tempo de execu&ccedil;&atilde;o.  &Eacute; 
+	  como instalar qualquer outra aplica&ccedil;&atilde;o da &aacute;rvore 
+	  de alica&ccedil;&otilde;es <ulink type="html" url="file://localhost/usr/ports/">
+	  ports collection</ulink>.  Simplesmente fa&atilde&ccedil;a o seguinte:
+	  </para>
 
 	<screen>&prompt.root; <userinput>cd /usr/ports/emulators/linux_base</userinput>
 &prompt.root; <userinput>make install distclean</userinput></screen>
 
-	<para>You should now have working Linux binary compatibility.
-	  Some programs may complain about incorrect minor versions of the
-	  system libraries.  In general, however, this does not seem to be
-	  a problem.</para>
+	<para>Agora voc&ecirc; deve ter a compatibilidade bin&aacute;ria Linux 
+	  funcionando.  Alguns programas podem reclamar a respeito de pequenas 
+	  diferen&ccedil;as de vers&atilde;o das bibliotecas de sistema.  Em geral, 
+	  entretanto, isto n&atilde;o parece ser problema.</para>
 
-	<note><para>There may be multiple versions of the <filename
-	  role="package">emulators/linux_base</filename> port available,
-	  corresponding to different versions of various Linux distributions.
-	  You should install the port most closely resembling the
-	  requirements of the Linux applications you would like to
-	  install.</para></note>
+	<note><para>Podem existir multiplas vers&otilde;es do port <filename
+	  role="package">emulators/linux_base</filename> dispon&iacute;veis, 
+	  correspondendo a diferentes vers&otilde;es de v&aacute;rias 
+	  distribui&ccedil;&otilde;es Linux.  Voc&ecirc; deve instalar a 
+	  vers&atilde;o que mais se aproxima dos requisitos das 
+	  aplica&ccedil;&otilde;es Linux que voc&ecirc; deseja instalar.
+	  </para></note>
 
       </sect3>
 
       <sect3 id="linuxemu-libs-manually">
-	<title>Installing Libraries Manually</title>
+	<title>Instalando Manualmente as Bibliotecas</title>
 
-	<para>If you do not have the <quote>ports</quote> collection
-	  installed, you can install the libraries by hand instead.  You
-	  will need the Linux shared libraries that the program depends on
-	  and the runtime linker.  Also, you will need to create a
-	  <quote>shadow root</quote> directory,
-	  <filename>/compat/linux</filename>, for Linux libraries on your
-	  FreeBSD system.  Any shared libraries opened by Linux programs
-	  run under FreeBSD will look in this tree first.  So, if a Linux
-	  program loads, for example, <filename>/lib/libc.so</filename>,
-	  FreeBSD will first try to open
-	  <filename>/compat/linux/lib/libc.so</filename>, and if that does
-	  not exist, it will then try <filename>/lib/libc.so</filename>.
-	  Shared libraries should be installed in the shadow tree
-	  <filename>/compat/linux/lib</filename> rather than the paths
-	  that the Linux <command>ld.so</command> reports.</para>
+	<para>Se voc&ecirc; n&atilde;o possui a cole&ccedil;&atilde;o 
+	  <quote>ports</quote> instalada, voc&ecirc; pode instalar as 
+	  mesmas manualmente.  Voc&ecirc; precisar&aacute; das bibliotecas 
+	  compartilhadas Linux das quais o programa depende e um ligador 
+	  em tempo de execu&ccedil;&atilde;o.  Al&eacute;m disso, voc&ecirc; 
+	  precisa criar um diret&oacute;rio 
+	  <foreignphrase><quota>shadow root</quote></foreignphrase>, 
+	  <filename>/compat/linux</filename>, para as bibliotecas Linux 
+	  no seu sistema FreeBSD.  Qualquer biblioteca compartilhada 
+	  aberta por aplica&ccedil;&otilde;es Linux sob o FreeBSD 
+	  buscar&atilde;o este diret&oacute;rio primeiro.  Sendo assim, 
+	  se um programa Linux carrega, por exemplo, o arquivo 
+	  <filename>/lib/libc.so</filename>, o FreeBSD primeiro vai tentar 
+	  abrir <filename>/compat/linux/lib/libc.so</filename>, e se 
+	  n&atilde;o existir, ent&atilde;o tentar&aacute; <filename>/lib/libc.so</filename>.
+	  Bibliotecas compartilhadas devem ser instaladas na &aacute;rove 
+	  <filename>/compat/linux/lib</filename> ao inv&eacute;s dos 
+	  caminhos que a biblioteca Linux <command>ld.so</command> reporta.</para>
 
-	<para>Generally, you will need to look for the shared libraries
-	  that Linux binaries depend on only the first few times that you
-	  install a Linux program on your FreeBSD system.  After a while,
-	  you will have a sufficient set of Linux shared libraries on your
-	  system to be able to run newly imported Linux binaries without
-	  any extra work.</para>
+	<para>Geralmente, voc&ecirc; precisar&aacute; procurar pelas bibliotecas 
+	  compartilhadas das quais as bibliotecas Linux dependem apenas nas 
+	  primeiras vezes que voc&ecirc; instalar um programa Linux no seu 
+	  sistema FreeBSD.  Depois de um tempo, voc&ecirc; possuir&aacute; 
+	  um conjunto suficiente de bibliotecas Linux compartilhadas no seu 
+	  sistema que ser&atilde;o capazes de executar bin&aacute;rios Linux 
+	  recentemente importados sem qualquer trabalho extra.</para>
       </sect3>
 
       <sect3>
-	<title>How to Install Additional Shared Libraries</title>
+	<title>Como Instalar Bibliotecas Compartilhadas Adicionais</title>
 	<indexterm><primary>shared libraries</primary></indexterm>
 
-	<para>What if you install the <filename>linux_base</filename> port
-	  and your application still complains about missing shared
-	  libraries?  How do you know which shared libraries Linux
-	  binaries need, and where to get them?  Basically, there are 2
-	  possibilities (when following these instructions you will need
-	  to be <username>root</username> on your FreeBSD system).</para>
+	<para>E se voc&ecirc; instalar o <filename>linux_base</filename> 
+	  e sua aplica&ccedil;&atilde;o ainda reclamar que faltam 
+	  bibliotecas compartilhadas?  Como voc&Ccedil;e sabe quais 
+	  bibliotecas compartilhadas os bin&aacute;rios Linux precisam, 
+	  e onde obt&ecirc;-las?  Basicamente, existem duas possibilidades 
+	  (ao seguir estas instru&ccedil;&otilde;es voc&ecirc; precisar&aacute; 
+	  estar como <username>root</username> no seu sistema FreeBSD).</para>
 
-	<para>If you have access to a Linux system, see what shared
-	  libraries the application needs, and copy them to your FreeBSD
-	  system.  Look at the following example:</para>
+	<para>Se voc&ecirc; tem acesso a um sistema Linux, veja quais 
+	  bibliotecas compartilhadas a aplica&ccedil;&atilde;o necessita, e 
+	  copie-as para o seu sistema FreeBSD.  Veja o seguinte exemplo:</para>
 
 	<informalexample>
-	  <para>Let us assume you used FTP to get the Linux binary of
-	    <application>Doom</application>, and put it on a Linux system you have access to.  You
-	    then can check which shared libraries it needs by running
-	    <command>ldd linuxdoom</command>, like so:</para>
+	  <para>Vamos assumir que voc&ecirc; usou FTP para obter o bin&aacute;rio 
+	    Linux do <application>Doom</application>, e colocou em um sistema Linux 
+	    ao qual voc&ecirc; tem acesso.  Voc&ecirc; ent&atilde;o pode verificar 
+	    quais bibliotecas compartilhadas ele precisa executando 
+	    <command>ldd linuxdoom</command>, como:</para>
 
 	  <screen>&prompt.user; <userinput>ldd linuxdoom</userinput>
 libXt.so.3 (DLL Jump 3.1) =&gt; /usr/X11/lib/libXt.so.3.1.0
@@ -243,11 +252,12 @@ libX11.so.3 (DLL Jump 3.1) =&gt; /usr/X11/lib/libX11.so.3.1.0
 libc.so.4 (DLL Jump 4.5pl26) =&gt; /lib/libc.so.4.6.29</screen>
 
 	  <indexterm><primary>symbolic links</primary></indexterm>
-	  <para>You would need to get all the files from the last column,
-	    and put them under <filename>/compat/linux</filename>, with
-	    the names in the first column as symbolic links pointing to
-	    them.  This means you eventually have these files on your
-	    FreeBSD system:</para>
+	  <para>Voc&ecirc; precisar&aacute; pegar todos os arquivos na 
+	    &uacute;ltima coluna e coloc&aacute;-los em 
+	    <filename>/compat/linux</filename>, com os nomes da primeira 
+	    coluna como links simb&oacute;licos apontando para eles.  Isto 
+	    significa que eventualmente tem estes arquivos em seu sistema 
+	    FreeBSD:</para>
 
 	  <screen>/compat/linux/usr/X11/lib/libXt.so.3.1.0
 /compat/linux/usr/X11/lib/libXt.so.3 -&gt; libXt.so.3.1.0
@@ -258,32 +268,34 @@ libc.so.4 (DLL Jump 4.5pl26) =&gt; /lib/libc.so.4.6.29</screen>
 
 	  <blockquote>
 	    <note>
-	      <para>Note that if you already have a Linux shared library
-		with a matching major revision number to the first column
-		of the <command>ldd</command> output, you will not need to
-		copy the file named in the last column to your system, the
-		one you already have should work.  It is advisable to copy
-		the shared library anyway if it is a newer version,
-		though.  You can remove the old one, as long as you make
-		the symbolic link point to the new one.  So, if you have
-		these libraries on your system:</para>
+	      <para>Note que se voc&ecirc; j&aacute; possui uma biblioteca  
+		Linux compartilhada em que as vers&otilde;es principais 
+		batem com a da primeira coluna da sa&iacute;da do comando 
+		<command>ldd</command>, voc&ecirc; n&atilde;o precisar&aacute; 
+		copiar o arquivo com o nome da &uacute;ltima coluna para o 
+		seu sistema, a vers&atilde;o que voc&ecirc; tem deve funcionar.  
+		Entretanto, &eacute; aconselh&aacute;vel copiar a biblioteca compartilhada 
+		se a vers&atilde;o for mais nova.  Voc&ecirc; pode remover a 
+		antiga assim que voc&ecirc; o link simb&oacute;lico apontando 
+		para a mais nova.  Ent&atilde;o, se voc&ecirc; possuir estas 
+		bibliotecas em seu sistema:</para>
 
 	      <screen>/compat/linux/lib/libc.so.4.6.27
 /compat/linux/lib/libc.so.4 -&gt; libc.so.4.6.27</screen>
 
-	      <para>and you find a new binary that claims to require a
-		later version according to the output of
+	      <para>e voc&ecirc; tem um novo bin&aacute;rio que requer a 
+		&uacute;ltima vers&atilde;o, de acordo com a sa&iacute;da do 
 		<command>ldd</command>:</para>
 
 	      <screen>libc.so.4 (DLL Jump 4.5pl26) -&gt; libc.so.4.6.29</screen>
 
-	      <para>If it is only one or two versions out of date in the
-		in the trailing digit then do not worry about copying
-		<filename>/lib/libc.so.4.6.29</filename> too, because the
-		program should work fine with the slightly older version.
-		However, if you like, you can decide to replace the
-		<filename>libc.so</filename> anyway, and that should leave
-		you with:</para>
+	      <para>Se for apenas uma ou duas vers&otilde;es atrasadas no 
+		digito final ent&atilde;o n&atilde;o se preocupe em copiar o 
+		<filename>/lib/libc.so.4.6.29</filename> tamb&eacute;m, pois o 
+		programa deve funcionar bem com a vers&atilde;o ligeiramente mais 
+		antiga.  Entretanto, se voc&ecirc; quiser, voc&ecirc; pode decidir 
+		substituir o arquivo <filename>libc.so</filename> 
+		e isto far&aacute; com que voc&ecirc; fique com:</para>
 
 	      <screen>/compat/linux/lib/libc.so.4.6.29
 /compat/linux/lib/libc.so.4 -&gt; libc.so.4.6.29</screen>
@@ -292,11 +304,12 @@ libc.so.4 (DLL Jump 4.5pl26) =&gt; /lib/libc.so.4.6.29</screen>
 
 	  <blockquote>
 	    <note>
-	      <para>The symbolic link mechanism is
-		<emphasis>only</emphasis> needed for Linux binaries.  The
-		FreeBSD runtime linker takes care of looking for matching
-		major revision numbers itself and you do not need to worry
-		about it.</para>
+	      <para>O mecanismo de liga&ccedil;&atilde;o simb&oacute;lica 
+		<emphasis>somente</emphasis> &eacute; necess&aacute;rio para 
+		bin&aacute;rios Linux.  O ligador em tempo de execu&ccedil;&atilde;o 
+		do FreeBSD se encarrega de procurar pelos n&uacute;meros de 
+		vers&atilde;o mais recentes e voc&ecirc; n&atilde;o precisa 
+		se preocupar.</para>
 	    </note>
 	  </blockquote>
 	</informalexample>
@@ -304,55 +317,60 @@ libc.so.4 (DLL Jump 4.5pl26) =&gt; /lib/libc.so.4.6.29</screen>
     </sect2>
 
     <sect2>
-      <title>Installing Linux ELF Binaries</title>
+      <title>Instalando Bin&aacute;rios Linux ELF</title>
       <indexterm>
 	<primary>Linux</primary>
 	<secondary>ELF binaries</secondary>
       </indexterm>
 
-      <para>ELF binaries sometimes require an extra step of
-	<quote>branding</quote>.  If you attempt to run an unbranded ELF
-	binary, you will get an error message like the following:</para>
+      <para>Bin&aacute;rios ELF algumas vezes requerem um passo extra de 
+	<quote>marca&ccedil;&atilde;o</quote>.  Se voc&ecirc; tentar executar 
+	um bin&aacute;rio ELF n&atilde;o marcado, voc&ecirc; obter&aacute; 
+	uma mensagem de erro como a seguinte:</para>
 
       <screen>&prompt.user; <userinput>./my-linux-elf-binary</userinput>
 ELF binary type not known
 Abort</screen>
 
-      <para>To help the FreeBSD kernel distinguish between a FreeBSD ELF
-	binary from a Linux binary, use the &man.brandelf.1;
-	utility.</para>
+      <para>Para ajudar o <foreignphrase>kernel</foreignphrase> do FreeBSD 
+	a distinguir entre um bin&aacute;rio ELF do FreeBSD e um bin&aacute;rio 
+	Linux, use o utilit&aacute;rio &man.brandelf.1;.</para>
 
       <screen>&prompt.user; <userinput>brandelf -t Linux my-linux-elf-binary</userinput></screen>
 
       <indexterm><primary>GNU toolchain</primary></indexterm>
-      <para>The GNU toolchain now places the appropriate branding
-	information into ELF binaries automatically, so this step
-	should become increasingly unnecessary in the future.</para>
+      <para>O <quote>GNU toolchain</quote> agora coloca a informa&ccedil;&atilde;o 
+	de marca&ccedil;&atilde;o apropriada automaticamente nos bn&aacute;rios 
+	ELF, de maneira que este passo deve se tornar cada vez mais 
+	desnecess&aacute;rio no futuro.</para>
     </sect2>
 
     <sect2>
-      <title>Configuring the Hostname Resolver</title>
+      <title>Configurando o Resolvedor de nomes de Host</title>
 
-      <para>If DNS does not work or you get this message:</para>
+      <para>Se o DNS n&atilde;o funciona ou se voc&ecirc; recebe 
+	  esta mensagem:</para>
 
       <screen>resolv+: "bind" is an invalid keyword resolv+:
 "hosts" is an invalid keyword</screen>
 
-      <para>You will need to configure a
-	<filename>/compat/linux/etc/host.conf</filename> file
-	containing:</para>
+      <para>Voc&ecirc; precisar&aacute; configurar o arquivo 
+	<filename>/compat/linux/etc/host.conf</filename> 
+	com o conte&uacute;do:</para>
 
       <programlisting>order hosts, bind
 multi on</programlisting>
 
-      <para>The order here specifies that <filename>/etc/hosts</filename>
-	is searched first and DNS is searched second.  When
-	<filename>/compat/linux/etc/host.conf</filename> is not
-	installed, Linux applications find FreeBSD's
-	<filename>/etc/host.conf</filename> and complain about the
-	incompatible FreeBSD syntax.  You should remove
-	<literal>bind</literal> if you have not configured a name server
-	using the <filename>/etc/resolv.conf</filename> file.</para>
+      <para>O <foreignphrase><quote>order</quote></foreignphrase> aqui 
+	especifica que a procura &eacute; feita primeiro no 
+	arquivo <filename>/etc/hosts</filename> e depois no DNS. Quando 
+	o arquivo <filename>/compat/linux/etc/host.conf</filename> n&atilde;o 
+	est&aacute; instalado, as aplica&ccedil;&otilde;es Linux encontram o 
+	<filename>/etc/host.conf</filename> do FreeBSD e reclamam da sintaxe 
+	incompat&iacute;vel.  Voc&ecirc; deve remover o <foreignphrase>
+	<literal>bind</literal></foreignphrase> se voc&ecirc; n&atilde;o 
+	configurou um servidor de nomes usando o arquivo 
+	<filename>/etc/resolv.conf</filename>.</para>
     </sect2>
   </sect1>
 
