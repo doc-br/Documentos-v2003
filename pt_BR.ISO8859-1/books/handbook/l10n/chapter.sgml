@@ -684,7 +684,7 @@ keychange="<replaceable>sequ&ecirc;ncia de n&uacute;mero_fkey</replaceable>"</pr
 	  <author>
 	    <firstname>Andrey A.</firstname>
 	    <surname>Chernov</surname>
-	    <contrib>Originally contributed by </contrib>
+	    <contrib>Originalmente contribu&iacute;do por </contrib>
 	  </author>
 	</authorgroup>
       </sect2info>
@@ -694,42 +694,42 @@ keychange="<replaceable>sequ&ecirc;ncia de n&uacute;mero_fkey</replaceable>"</pr
 	<secondary>Russian</secondary>
       </indexterm>
 
-      <para>For more information about KOI8-R encoding, see the <ulink
-	url="http://koi8.pp.ru/">KOI8-R References
+      <para>Para mais informa&ccedil;&otilde;es sobre codifica&ccedil;&atilde;o KOI8-R , veja <ulink
+	url="http://koi8.pp.ru/">Refer&ecirc;ncias do KOI8-R
 	(Russian Net Character Set)</ulink>.</para>
 
       <sect3>
-	<title>Locale Setup</title>
+	<title>Configura&ccedil;&atilde;o do Locale</title>
 
-	<para>Put the following lines into your
-	  <filename>~/.login_conf</filename> file:</para>
+	<para>Coloque as seguintes linhas em seu arquivo
+	  <filename>~/.login_conf</filename>:</para>
 
-	<programlisting>me:My Account:\
+	<programlisting>me:Minha conta:\
 	:charset=KOI8-R:\
 	:lang=ru_RU.KOI8-R:</programlisting>
 
-	<para>See earlier in this chapter for examples of setting up the
+	<para>Veja anteriormente nesse cap&iacute;tulo para exemplos de configura&ccedil;&atilde;o do
 	  <link linkend="setting-locale">locale</link>.</para>
       </sect3>
 
       <sect3>
-	<title>Console Setup</title>
+	<title>Configura&ccedil;&atilde;o do console</title>
 
 	<itemizedlist>
 	  <listitem>
-	    <para>For the FreeBSD versions before 5.0 add the following line
-	      to your kernel configuration file:</para>
+	    <para>Para vers&otilde;es do FreeBSD antes da 5.0 adicione a seguinte linha
+	      em seu arquivo de configura&ccedil;&atilde;o do kernel:</para>
 
 	    <programlisting>options		SC_MOUSE_CHAR=0x03</programlisting>
 
-	    <para>For the FreeBSD versions 4.4 and up insert the following
-	      line into <filename>/etc/rc.conf</filename>:</para>
+	    <para>Para vers&otilde;es do FreeBSD 4.4 e acima, insira a seguinte
+	      linha no<filename>/etc/rc.conf</filename>:</para>
 
 	    <programlisting>mousechar_start=3</programlisting>
 	  </listitem>
 
 	  <listitem>
-	    <para>Use following settings in
+	    <para>Use a seguinte configura&ccedil;&atilde;o no
 	      <filename>/etc/rc.conf</filename>:</para>
 
 	    <programlisting>keymap="ru.koi8-r"
@@ -741,143 +741,141 @@ font8x8="cp866-8x8"</programlisting>
 	  </listitem>
 
 	  <listitem>
-	    <para>For each <literal>ttyv*</literal> entry in
-	      <filename>/etc/ttys</filename>, use
-	      <literal>cons25r</literal> as the terminal type.</para>
+	    <para>Para cada entrada <literal>ttyv*</literal> no
+	      <filename>/etc/ttys</filename>, use o
+	      <literal>cons25r</literal> como tipo de terminal.</para>
 	  </listitem>
 	</itemizedlist>
 
-	<para>See earlier in this chapter for examples of setting up the
+	<para>Veja anteriormente neste cap&iacute;tulo exemplos de configura&ccedil;&atilde;o do
 	  <link linkend="setting-console">console</link>.</para>
       </sect3>
 
       <sect3>
-	<title>Printer Setup</title>
-	<indexterm><primary>printers</primary></indexterm>
-	<para>Since most printers with Russian characters come with
-	  hardware code page CP866, a special output filter is needed
-	  to convert from KOI8-R to CP866.  Such a filter is installed by
-	  default as <filename>/usr/libexec/lpr/ru/koi2alt</filename>.
-	  A Russian printer <filename>/etc/printcap</filename> entry
-	  should look like:</para>
+	<title>Configura&ccedil;&atilde;o de impressora</title>
+	<indexterm><primary>impressoras</primary></indexterm>
+	<para>Desde que a maioria das impressoras com caracteres russo vem com
+	  a p&aacute;gina CP866 no c&oacute;digo de hardware, um filtro especial de sa&iacute;da &eacute; necess&aacute;rio
+	  para converter de KOI8-R para CP866.  Tal filtro &eacute; instalado por
+	  padr&atilde;o em <filename>/usr/libexec/lpr/ru/koi2alt</filename>.
+	  Uma entrada da impressora Russa no <filename>/etc/printcap</filename>
+	  deve ser assim:</para>
 
-	<programlisting>lp|Russian local line printer:\
+	<programlisting>lp|Linha local de impressora Russa:\
 	:sh:of=/usr/libexec/lpr/ru/koi2alt:\
 	:lp=/dev/lpt0:sd=/var/spool/output/lpd:lf=/var/log/lpd-errs:</programlisting>
 
-	<para>See &man.printcap.5; for a detailed description.</para>
+	<para>Veja o &man.printcap.5; para uma descri&ccedil;&atilde;o detalhada.</para>
       </sect3>
 
       <sect3>
-	<title>&ms-dos; FS and Russian Filenames</title>
+	<title>&ms-dos; FS e nome de arquivos Russos</title>
 
-	<para>The following example &man.fstab.5; entry enables support
-	  for Russian filenames in mounted &ms-dos; filesystems:</para>
+	<para>O seguinte exemplo de entrada do &man.fstab.5; habilita o suporte
+	  para nomes de arquivos Russos montados em um sistema de arquivos do &ms-dos;:</para>
 
 	<programlisting>/dev/ad0s2      /dos/c  msdos   rw,-Wkoi2dos,-Lru_RU.KOI8-R 0 0</programlisting>
 
-	<para>The option <option>-L</option> selects the locale name
-	  used, and <option>-W</option> sets the character conversion
-	  table.  To use the <option>-W</option> option, be sure to
-	  mount <filename>/usr</filename> before the &ms-dos; partition
-	  because the conversion tables are located in
-	  <filename>/usr/libdata/msdosfs</filename>.  For more
-	  informations, see the &man.mount.msdos.8; manual
-	  page.</para>
+	<para>A op&ccedil;&atilde;o <option>-L</option> selecional o nome local
+	  usado, e o <option>-W</option> configura a convers&atilde;o da tabela de
+	  caracter.  Para usar a op&ccedil;&atilde;o <option>-W</option>, certifique-se de
+	  montar o <filename>/usr</filename> antes da parti&ccedil;&atilde;o &ms-dos;
+	  porque a convers&atilde;o de tabelas est&atilde;o localizadas em
+	  <filename>/usr/libdata/msdosfs</filename>.  Para mais
+	  informa&ccedil;&otilde;es, veja a p&aacute;gina de manual do &man.mount.msdos.8;.</para>
       </sect3>
 
       <sect3>
-	<title>X11 Setup</title>
+	<title>Configura&ccedil;&atilde;o do X11</title>
 
 	<orderedlist>
 	  <listitem>
-	    <para>Do <link linkend="setting-locale">non-X locale
-	      setup</link> first as described.</para>
+	    <para>Fa&ccedil;a a primeiro<link linkend="setting-locale">a configura&ccedil;&atilde;o
+	      do X n&atilde;o locale</link> como descrito.</para>
 
 	    <note>
-	      <para><anchor id="russian-note">The Russian KOI8-R locale
-		may not work with old <application>&xfree86;</application> releases (lower than 3.3).
-		<application>&xfree86; 4.X</application> is now the default
-		version of the X Window System on FreeBSD.
-		This should not be an
-		issue unless you are using an old version of
+	      <para><anchor id="russian-note">O locale Russo KOI8-R
+		pode n&atilde;o funcionar com vers&otilde;es antigas do <application>&xfree86;</application> (abaixo da 3.3).
+		<application>&xfree86; 4.X</application> &eacute; agora a vers&atilde;o
+		padr&atilde;o do sistema de janelas X no FreeBSD.
+		Esta n&atilde;o deve ser a quest&atilde;o a menos
+		que voc&ecirc; esteja usando uma vers&atilde;o antiga do
 		FreeBSD.</para>
 	    </note>
 	  </listitem>
 
 	  <listitem>
-	    <para>Go to the
-	      <filename role="package">russian/X.language</filename> directory
-	      and issue the following command:</para>
+	    <para>V&aacute; para o diret&oacute;rio
+	      <filename role="package">russian/X.language</filename>
+	      e dee o seguinte comando:</para>
 
 	    <screen>&prompt.root; <userinput>make install</userinput></screen>
       
-	    <para>The above port installs the latest version of the KOI8-R
-	      fonts.  <application>&xfree86; 3.3</application> already has some KOI8-R fonts, but these
-	      are scaled better.</para>
+	    <para>O port acima instalar&aacute; a &uacute;ltima vers&atilde;o das fontes do
+	      KOI8-R.  <application>O &xfree86; 3.3</application> j&aacute; tem algumas fontes KOI8-R, mas estas 
+	      s&atilde;o melhor escaladas.</para>
 
-	    <para>Check the <literal>"Files"</literal> section
-	      in your <filename>/etc/XF86Config</filename> file.
-	      The following
-	      lines must be added <emphasis>before</emphasis> any other
-	      <literal>FontPath</literal> entries:</para>
+	    <para>Cheque a se&ccedil;&atilde;o <literal>"Files"</literal>
+	      em seu arquivo <filename>/etc/XF86Config</filename>.
+	      As seguintes
+	      linhas devem ser adicionadas<emphasis>antes</emphasis> antes de
+	      qualquer outra entrada <literal>FontPath</literal>:</para>
 
 	    <programlisting>FontPath   "/usr/X11R6/lib/X11/fonts/cyrillic/misc"
 FontPath   "/usr/X11R6/lib/X11/fonts/cyrillic/75dpi"
 FontPath   "/usr/X11R6/lib/X11/fonts/cyrillic/100dpi"</programlisting>
 
-	    <para>If you use a high resolution video mode, swap the 75 dpi
-	      and 100 dpi lines.</para>
+	    <para>Se voc&ecirc; usa um modo de resolu&ccedil;&atilde;o alta de v&iacute;deo, troque as linhas 75 dpi
+	      e 100 dpi.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>To activate a Russian keyboard, add the following to the
-	      <literal>"Keyboard"</literal> section of your
-	      <filename>XF86Config</filename> file.</para>
+	    <para>Para habilitar o teclado Russo, adicione o seguinte na se&ccedil;&atilde;o
+	      <literal>"Keyboard"</literal> do seu arquivo
+	      <filename>XF86Config</filename>.</para>
 
-	    <para>For <application>&xfree86; 3.X</application>:</para>
+	    <para>Para vers&otilde;es 3.X do <application>&xfree86;</application>:</para>
 
 	    <programlisting>XkbLayout  "ru"
 XkbOptions "grp:caps_toggle"</programlisting>
 
-	    <para>For <application>&xfree86; 4.X</application>:</para>
+	    <para>Para vers&otilde;es 4.X do <application>&xfree86;</application>:</para>
 
 	    <programlisting>Option "XkbLayout"   "ru"
 Option "XkbOptions"  "grp:caps_toggle"</programlisting>
 
-	    <para>Also make sure that <literal>XkbDisable</literal> is
-	      turned off (commented out) there.</para>
+	    <para>Tamb&eacute;m certifique-se que o <literal>XkbDisable</literal> est&aacute;
+	      desabilitado (comentando) l&aacute;.</para>
 
-	    <para>The RUS/LAT switch will be <keycap>CapsLock</keycap>.
-	    The old <keycap>CapsLock</keycap> function is still
-	    available via <keycombo action="simul"><keycap>Shift</keycap><keycap>CapsLock</keycap></keycombo> (in LAT mode
-	      only).</para>
+	    <para>O switch do RUS/LAT ser&aacute; o <keycap>CapsLock</keycap>.
+	    As fun&ccedil;&otilde;es antigas do <keycap>CapsLock</keycap> ainda estar&atilde;o
+	    dispon&iacute;veis atrav&eacute;s do <keycombo action="simul"><keycap>Shift</keycap><keycap>CapsLock</keycap></keycombo> (no modo LAT
+	      somente).</para>
 
-	    <para>If you have <quote>&windows;</quote> keys on your keyboard,
-	      and notice that some non-alphabetical keys are mapped
-	      incorrectly in RUS mode, add the following line in your
-	      <filename>XF86Config</filename> file.</para>
+	    <para>Se voc&ecirc; tem teclas <quote>&windows;</quote> em seu teclado,
+	      e observar que algumas teclas n&atilde;o alfab&eacute;ticas est&atilde;o sendo mapeadas
+	      incorretamente no modo RUS, adicione a seguinte linha em seu
+	      arquivo <filename>XF86Config</filename>.</para>
 
-	    <para>For <application>&xfree86; 3.X</application>:</para>
+	    <para>Para vers&otilde;es 3.X <application>&xfree86;</application>:</para>
 
 	<programlisting>XkbVariant "winkeys"</programlisting>
 
-	    <para>For <application>&xfree86; 4.X</application>:</para>
+	    <para>Para vers&otilde;es 4.X do <application>&xfree86;</application>:</para>
 
 	<programlisting>Option "XkbVariant" "winkeys"</programlisting>
 
 	    <note>
-	      <para>The Russian XKB keyboard may not work with old <application>&xfree86;</application>
-		versions, see the <link linkend="russian-note">above
-		note</link> for more information.  The Russian XKB
-		keyboard may also not work with non-localized
-		applications as well.  Minimally localized applications
-		should call a <function>XtSetLanguageProc (NULL, NULL,
-		NULL);</function> function early in the program.
-		See <ulink
+	      <para>O teclado Russo XKB pode n&atilde;o funcionar com vers&otilde;es antigas do<application>&xfree86;</application>,  
+	        veja a nota <link linkend="russian-note">acima</link> para mais informa&ccedil;&otilde;es.  O teclado
+		Russo XKB pode tamb&eacute;m n&atilde;o funcionar bem com aplica&ccedil;&otilde;es
+		n&atilde;o localizadas.  Aplica&ccedil;&otilde;es minimamente localizadas
+		devem chamar a fun&ccedil;&atilde;o <function>XtSetLanguageProc (NULL, NULL,
+		NULL);</function> no programa.
+		Veja <ulink
 		url="http://koi8.pp.ru/xwin.html">
-		KOI8-R for X Window</ulink> for more instructions on
-		localizing X11 applications.</para>
+		KOI8-R para X Window</ulink> para mais instru&ccedil;&otilde;es
+		de aplica&ccedil;&otilde;es localizadas do X11.</para>
 	    </note>
 	  </listitem>
 	</orderedlist>
@@ -885,72 +883,72 @@ Option "XkbOptions"  "grp:caps_toggle"</programlisting>
     </sect2>
 
     <sect2>
-      <title>Traditional Chinese Localization for Taiwan</title>
+      <title>Tradicional localiza&ccedil;&atilde;o Chin&ecirc;sa para Taiwan</title>
       <indexterm>
 	<primary>localization</primary>
 	<secondary>Traditional Chinese</secondary>
       </indexterm>
-      <para>The FreeBSD-Taiwan Project has an I18N/L10N tutorial for
-	FreeBSD at <ulink url="http://freebsd.sinica.edu.tw/~ncvs/zh-l10n-tut/"></ulink>
-	using many Chinese ports.
-	The editor for the <literal>zh-L10N-tut</literal> is Clive Lin
-	<email>Clive@CirX.org</email>.  You can also cvsup the following
-	collections at <hostid
+      <para>O projeto FreeBSD-Taiwan tem um tutorial I18N/L10N para o
+	FreeBSD em <ulink url="http://freebsd.sinica.edu.tw/~ncvs/zh-l10n-tut/"></ulink>
+	usando muitos ports Chin&ecirc;ses.
+	O editor para o <literal>zh-L10N-tut</literal> &eacute; o Clive Lin
+	<email>Clive@CirX.org</email>.  Voc&ecirc; pode tamb&eacute;m fazer o cvsup das seguintes
+	cole&ccedil;&otilde;es no endere&ccedil;o <hostid
 	role="fqdn">freebsd.sinica.edu.tw</hostid>:</para>
 
       <informaltable frame="none">
 	<tgroup cols="2">
 	  <thead>
 	    <row>
-	      <entry>Collection</entry>
-	      <entry>Description</entry>
+	      <entry>Cole&ccedil;&atilde;o</entry>
+	      <entry>Descri&ccedil;&atilde;o</entry>
 	    </row>
 	  </thead>
 
 	  <tbody>
 	    <row>
 	      <entry>outta-port tag=.</entry>
-	      <entry>Beta-quality ports collection for Chinese</entry>
+	      <entry>qualidade Beta de cole&ccedil;&atilde;o de ports para chin&ecirc;s</entry>
 	    </row>
 
 	    <row>
 	      <entry>zh-L10N-tut tag=.</entry>
-	      <entry>Localizing FreeBSD Tutorial in BIG-5 Traditional
-		Chinese</entry>
+	      <entry>Tutorial de localiza&ccedil;&atilde;o do tradicional BIG-5
+		Chin&ecirc;s</entry>
 	    </row>
 
 	    <row>
 	      <entry>zh-doc tag=.</entry>
-	      <entry>FreeBSD Documentation Translation to BIG-5 Traditional
-		Chinese</entry>
+	      <entry>Tradu&ccedil;&atilde;o de documenta&ccedil;&atilde;o do FreeBSD para o tradicional BIG-5
+		Chin&ecirc;s</entry>
 	    </row>
 	  </tbody>
 	</tgroup>
       </informaltable>
 
-      <para>Chuan-Hsing Shen <email>s874070@mail.yzu.edu.tw</email> has
-	created the <ulink url="http://cnpa.yzu.edu.tw/~cfc/">Chinese
-	FreeBSD Collection (CFC)</ulink> using FreeBSD-Taiwan's
-	<literal>zh-L10N-tut</literal>.  The packages and the script files
-	are available at <ulink url="ftp://ftp.csie.ncu.edu.tw/OS/FreeBSD/taiwan/CFC/"></ulink>.</para>
+      <para>Chuan-Hsing Shen <email>s874070@mail.yzu.edu.tw</email> 
+	criou o <ulink url="http://cnpa.yzu.edu.tw/~cfc/">Cole&ccedil;&atilde;o
+	Chin&ecirc;sa do FreeBSD (CFC)</ulink> usando o FreeBSD-Taiwan
+	<literal>zh-L10N-tut</literal>.  Os pacotes e os scripts de arquivos
+	est&atilde;o dispon&iacute;veis em <ulink url="ftp://ftp.csie.ncu.edu.tw/OS/FreeBSD/taiwan/CFC/"></ulink>.</para>
     </sect2>
 
     <sect2>
-      <title>German Language Localization (for All ISO 8859-1
-	Languages)</title>
+      <title>Localiza&ccedil;&atilde;o de l&iacute;ngua Alem&atilde; (para todas l&iacute;nguas
+	ISO 8859-1)</title>
       <indexterm>
 	<primary>localization</primary>
 	<secondary>German</secondary>
       </indexterm>
 
-      <para>Slaven Rezic <email>eserte@cs.tu-berlin.de</email> wrote a
-	tutorial how to use umlauts on a FreeBSD machine.  The tutorial
-	is written in German and available at
+      <para>Slaven Rezic <email>eserte@cs.tu-berlin.de</email> escreveu um
+	tutorial de como usar umlauts em uma m&aacute;quina FreeBSD.  O tutorial
+	est&aacute; escrito em alem&atilde;o e esta dispon&iacute;vel em
 	<ulink url="http://www.de.FreeBSD.org/de/umlaute/"></ulink>.</para>
     </sect2>
 
     <sect2>
-      <title>Japanese and Korean Language Localization</title>
+      <title>Localiza&ccedil;&atilde;o de l&iacute;ngua Japonesa e Coreana</title>
       <indexterm>
 	<primary>localization</primary>
 	<secondary>Japanese</secondary>
@@ -959,18 +957,18 @@ Option "XkbOptions"  "grp:caps_toggle"</programlisting>
 	<primary>localization</primary>
 	<secondary>Korean</secondary>
       </indexterm>
-      <para>For Japanese, refer to
+      <para>Para Japon&ecirc;s, consulte
         <ulink url="http://www.jp.FreeBSD.org/"></ulink>,
-	and for Korean, refer to
+	e para Coreano, consulte
 	<ulink url="http://www.kr.FreeBSD.org/"></ulink>.</para>
     </sect2>
 
     <sect2>
-      <title>Non-English FreeBSD Documentation</title>
+      <title>Documenta&ccedil;&atilde;o n&atilde;o inglesa do FreeBSD</title>
 
-      <para>Some FreeBSD contributors have translated parts of FreeBSD to
-	other languages.  They are available through links on the <ulink
-	url="../../../../index.html">main site</ulink> or in
+      <para>Alguns contribuidores do FreeBSD tem traduzido partes do FreeBSD para
+	outras l&iacute;nguas.  Eles est&atilde;o dispon&iacute;veis atrav&eacute;s dos links no <ulink
+	url="../../../../index.html">site principal</ulink> ou em
 	<filename>/usr/share/doc</filename>.</para>
     </sect2>
   </sect1>
