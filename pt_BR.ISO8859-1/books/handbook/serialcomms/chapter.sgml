@@ -1,7 +1,8 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/serialcomms/chapter.sgml,v 1.9 2003/12/10 19:10:48 ebrandi Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/serialcomms/chapter.sgml,v 
+     1.9 2003/12/10 19:10:48 ebrandi Exp $
 -->
 
 <chapter id="serialcomms">
@@ -115,7 +116,8 @@
         de dados, esta sess&atilde;o
 	n&atilde;o usa o termo <quote>baud</quote>.  Baud
         se refere ao
-	n&uacute;mero de estados de transi&ccedil;&atilde;o el&eacute;tricas
+	n&uacute;mero de estados de 
+        transi&ccedil;&atilde;o el&eacute;tricas
         que ocorrem em um
 	determinado periodo de tempo, enquanto <quote>bps</quote>
 	(bits por segundo) &eacute; o termo
@@ -338,28 +340,37 @@
 	      <para>As portas utilizadas para receber
               liga&ccedil;&otilde;es (<literal>
 	      call-in</literal>)s&atilde;o chamadas
-	      <filename>/dev/ttyd<replaceable>N</replaceable></filename>,
+	      <filename>/dev/ttyd<replaceable>N</replaceable>
+              </filename>,
 	      onde <replaceable>N</replaceable> &eacute; o
               numero da porta,
 	      iniciando-se em 0.  Geralmente, voc&ecirc; utiliza 
               as portas
 	      <literal>call-in</literal> para terminais.  As portas
-	      <literal>call-in</literal> necessitam que a linha serial
-	      estabele&ccedil;a o sinal de detec&ccedil;&atilde;o de
+	      <literal>call-in</literal> necessitam 
+              que a linha serial
+	      estabele&ccedil;a o sinal de 
+              detec&ccedil;&atilde;o de
               portadora de dados
 	      (DCD) para funcionar corretamente.</para>
 	    </listitem>
 
 	    <listitem>
-	      <para>As portas utilizadas para efetuar liga&ccedil;&otilde;es
-	      (<literal>Call-out</literal>), s&atilde;o chamadas
-	      <filename>/dev/cuaa<replaceable>N</replaceable></filename>.
-	      Voc&ecirc; normalmente n&atilde;o utiliza este tipo de
-              porta para
-	      terminais, usando-as apenas para modens.  Voc&ecirc; pode
-	      utilizar uma porta <literal>Call-out</literal> sempre
-	      que o cabo serial ou o terminal n&atilde;o suportar o sinal de
-	      detec&ccedil;&atilde;o de portadora.</para>
+	      <para>As portas utilizadas para efetuar 
+                liga&ccedil;&otilde;es
+ 	        (<literal>Call-out</literal>), s&atilde;o chamadas
+	        <filename>/dev/cuaa<replaceable>N</replaceable>
+                </filename>.
+	        Voc&ecirc; normalmente n&atilde;o 
+                utiliza este tipo de
+                porta para
+	        terminais, usando-as apenas para 
+                modens.  Voc&ecirc; pode
+	        utilizar uma porta 
+                <literal>Call-out</literal> sempre
+	        que o cabo serial ou o terminal n&atilde;o 
+                suportar o sinal de
+	        detec&ccedil;&atilde;o de portadora.</para>
 	    </listitem>
 	  </itemizedlist>
 
@@ -394,21 +405,26 @@
 	apenas as portas COM normais.</para>
 
       <para>Para verificar se o seu kernel reconhece alguma das suas
-	portas seriais, olhe as mensagens exibidas no console enquanto
+	portas seriais, olhe as mensagens 
+        exibidas no console enquanto
 	o kernel esta sendo carregado, ou ent&atilde;o utilize
         o comando
 	<command>/sbin/dmesg</command> para visualizar novamente as
-	mensagens exibidas durante o processo de boot do kernel.  Em
+	mensagens exibidas durante o 
+        processo de boot do kernel.  Em
 	particular, procure por mensagens que iniciem com os
 	caracteres <literal>sio</literal>.</para>
 
-      <tip><para>Para visualizar apenas as mensagens que contenham a palavra
+      <tip><para>Para visualizar apenas as 
+        mensagens que contenham a palavra
 	<literal>sio</literal>, use o comando:</para>
 
-      <screen>&prompt.root; <userinput>/sbin/dmesg | grep 'sio'</userinput></screen>
+      <screen>&prompt.root; <userinput>/sbin/dmesg | 
+grep 'sio'</userinput></screen>
       </tip>
 
-      <para>Por exemplo, em um sistema com 4 portas seriais, as mensagens
+      <para>Por exemplo, em um sistema com 4 
+        portas seriais, as mensagens
 	especificas do kernel para as portas seriais durante o
 	processo de boot seriam parecidas com essas:</para>
 
@@ -421,9 +437,12 @@ sio2: type 16550A
 sio3 at 0x2e8-0x2ef irq 9 on isa
 sio3: type 16550A</screen>
 
-      <para>Se o seu kernel n&atilde;o reconheceu todas as suas portas seriais,
-	voc&ecirc; provavelmente precisa de um kernel customizado para o seu
-	sistema FreeBSD.  Para informa&ccedil;&otilde;es detalhadas de como
+      <para>Se o seu kernel n&atilde;o reconheceu 
+        todas as suas portas seriais,
+	voc&ecirc; provavelmente precisa de um kernel 
+        customizado para o seu
+	sistema FreeBSD.  Para informa&ccedil;&otilde;es 
+        detalhadas de como
 	configurar o seu kernel, por favor consultexref 
 	linkend="kernelconfig">.</para>
 
@@ -448,30 +467,41 @@ device		sio3	at isa? port IO_COM4 irq 9</programlisting>
         FreeBSD&nbsp;5.X
 	voc&ecirc; tem que editar o seu arquivo
 	<filename>/boot/device.hints</filename> para configurar as
-	suas portas seriais.  Por favor consulte a p&aacute;gina de manual do
+	suas portas seriais.  Por favor consulte 
+        a p&aacute;gina de manual do
 	&man.sio.4; para maiores informa&ccedil;&otilde;es sobre a
         configura&ccedil;&atilde;o de
 	portas seriais e de placas muiltiseriais.  Tenha cuidado se
 	voc&ecirc; estiver utilizando um arquivo de
         configura&ccedil;&atilde;o usado
-	previamente em uma vers&atilde;o diferente do FreeBSD porque os
+	previamente em uma vers&atilde;o 
+        diferente do FreeBSD porque os
 	<literal>flags</literal> de dispositivo e a sintaxe mudou
 	entre as vers&otilde;es.</para>
 
       <note>
 	<para><literal>port IO_COM1</literal> &eacute; a
           subistitui&ccedil;&atilde;o para
-	  <literal>port 0x3f8</literal>, <literal>IO_COM2</literal> &eacute; 
-	  <literal>0x2f8</literal>, <literal>IO_COM3</literal> &eacute; 
-	  <literal>0x3e8</literal>, e <literal>IO_COM4</literal> &eacute;
-	  <literal>0x2e8</literal>, os quais s&atilde;o os endere&ccedil;os mais 
-	  comumente utilizados para as respectivas portas seriais.  As
-	  interrup&ccedil;&otilde;es 4, 3, 5, e 9 s&atilde;o as linhas
+	  <literal>port 0x3f8</literal>, <literal>IO_COM2</literal> 
+          &eacute; 
+	  <literal>0x2f8</literal>, <literal>IO_COM3</literal> 
+          &eacute; 
+	  <literal>0x3e8</literal>, e <literal>IO_COM4</literal> 
+          &eacute;
+	  <literal>0x2e8</literal>, os quais 
+          s&atilde;o os endere&ccedil;os mais 
+	  comumente utilizados para as respectivas 
+          portas seriais.  As
+	  interrup&ccedil;&otilde;es 4, 3, 5, e 9 s&atilde;o 
+          as linhas
           de interrup&ccedil;&atilde;o
-	  normalmente solicitadas. Observe tamb&eacute;m que as portas
-	  seriais comuns <emphasis>n&atilde;o podem</emphasis> compartilhar
+	  normalmente solicitadas. Observe tamb&eacute;m 
+          que as portas
+	  seriais comuns <emphasis>n&atilde;o podem</emphasis> 
+          compartilhar
 	  IRQ no barramento ISA (as placas multiseriais possuem
-	  componentes eletr&ocirc;nicos onboard que permitem que todos os
+	  componentes eletr&ocirc;nicos onboard que 
+          permitem que todos os
 	  chips 16550A da placa compartilhem 1 ou 2 IRQs).</para>
       </note>
 	  
@@ -480,80 +510,117 @@ device		sio3	at isa? port IO_COM4 irq 9</programlisting>
     <sect2>
       <title>Arquivos especiais de dispositivo</title>
       
-      <para>A maioria dos dispositivos no kernel s&atilde;o acessados
-      atrav&eacute;s
-      de <quote>arquivos especiais de dispositivos</quote>, que est&atilde;o
-      localizados no diret&oacute;rio <filename>/dev</filename>.  Os
-      dispositivos <devicename>sio</devicename> s&atilde;o acessados
-      atrav&eacute;s
-      dos dispositivos
-      <filename>/dev/ttyd<replaceable>N</replaceable></filename>
-      (dial-in) e
-      <filename>/dev/cuaa<replaceable>N</replaceable></filename> 
-      (call-out).  O FreeBSD tamb&eacute;m disponibiliza dispositivos de
-      inicializa&ccedil;&atilde;o
-      (<filename>/dev/ttyid<replaceable>N</replaceable></filename> 
-      e <filename>/dev/cuaia<replaceable>N</replaceable></filename>) e
-      dispositivos de <quote>fechamento</quote>
-      (<filename>/dev/ttyld<replaceable>N</replaceable></filename> e 
-      <filename>/dev/cuala<replaceable>N</replaceable></filename>).
-      Os dispositivos de inicializa&ccedil;&atilde;o s&atilde;o utilizados
-      para inicializar
-      os parametros das portas de comunica&ccedil;&atilde;o cada vez
-      que elas s&atilde;o
-      abertas, como por exemplo o <literal>crtscts</literal> para os
-      modens que utilizam a sinaliza&ccedil;&atilde;o <literal>RTS/CTS</literal>
-      para controle de fluxo.  Os dispositivos de fechamento s&atilde;o
-      utilizados para travar flags nas portas para prevenir que
-      usu&aacute;rios ou programas mudem certos parametros; veja 
-      as p&aacute;ginas
-      de manual do &man.termios.4; &man.sio.4;, and &man.stty.1; para
-      informa&ccedil;&otilde;es sobre a configura&ccedil;&atilde;o de
-      terminais, fechamento e
-      inicializa&ccedil;&atilde;o de dispositivos, e
-      configura&ccedil;&atilde;o das op&ccedil;&otilde;es de
-      terminal, respectivamente.</para>
+      <para>A maioria dos dispositivos no 
+        kernel s&atilde;o acessados
+        atrav&eacute;s
+        de <quote>arquivos especiais 
+        de dispositivos</quote>, que 
+        est&atilde;o
+        localizados no diret&oacute;rio 
+        <filename>/dev</filename>.  Os
+        dispositivos <devicename>sio</devicename> 
+        s&atilde;o acessados
+        atrav&eacute;s
+        dos dispositivos
+        <filename>/dev/ttyd<replaceable>N</replaceable>
+        </filename>
+        (dial-in) e
+        <filename>/dev/cuaa<replaceable>N</replaceable>
+        </filename> 
+        (call-out).  O FreeBSD tamb&eacute;m disponibiliza 
+        dispositivos de
+        inicializa&ccedil;&atilde;o
+        (<filename>/dev/ttyid<replaceable>N</replaceable>
+        </filename> 
+        e <filename>/dev/cuaia<replaceable>N</replaceable>
+        </filename>) e
+        dispositivos de <quote>fechamento</quote>
+        (<filename>/dev/ttyld<replaceable>N</replaceable>
+        </filename> e 
+        <filename>/dev/cuala<replaceable>N</replaceable></filename>).
+        Os dispositivos de inicializa&ccedil;&atilde;o 
+        s&atilde;o utilizados
+        para inicializar
+        os parametros das portas de 
+        comunica&ccedil;&atilde;o cada vez
+        que elas s&atilde;o
+        abertas, como por exemplo o 
+        <literal>crtscts</literal> para os
+        modens que utilizam a 
+        sinaliza&ccedil;&atilde;o <literal>RTS/CTS</literal>
+        para controle de fluxo.  Os 
+        dispositivos de fechamento s&atilde;o
+        utilizados para travar flags nas portas para prevenir que
+        usu&aacute;rios ou programas mudem certos parametros; veja 
+        as p&aacute;ginas
+        de manual do &man.termios.4; &man.sio.4;, 
+        and &man.stty.1; para
+        informa&ccedil;&otilde;es sobre a 
+        configura&ccedil;&atilde;o de
+        terminais, fechamento e
+        inicializa&ccedil;&atilde;o de dispositivos, e
+        configura&ccedil;&atilde;o das op&ccedil;&otilde;es de
+        terminal, respectivamente.</para>
       
       <sect3>
 	<title>Criando arquivos especiais de dispositivo</title>
 
 	<note><para>O FreeBSD&nbsp;5.0 inclui o sistema de arquivos
-	&man.devfs.5;, o qual cria automaticamente os <literal>device
-	nodes</literal> a medida que se fazem necess&aacute;rios.  Se voc&ecirc;
+	&man.devfs.5;, o qual cria automaticamente 
+        os <literal>device
+	nodes</literal> a medida que se fazem 
+        necess&aacute;rios.  Se voc&ecirc;
 	esta executando esta vers&atilde;o do FreeBSD com o
 	<literal>devfs</literal> habilitado, voc&ecirc; pode pular
 	tranquilamente esta sess&atilde;o.</para></note>
 	
 	<para>Um script shell chamado <command>MAKEDEV</command>
-	existente no diret&oacute;rio <filename>/dev</filename> ger&ecirc;ncia  os
+	existente no diret&oacute;rio 
+        <filename>/dev</filename> ger&ecirc;ncia  os
 	arquivos especiais de dispositivo.  Para utilizar o
-	<command>MAKEDEV</command> para criar os arquivos especiais de 
+	<command>MAKEDEV</command> para criar 
+        os arquivos especiais de 
 	dispositivos de dial-up para a porta <devicename>COM1</devicename> 
-	(porta 0), v&aacute; para o diret&oacute;rio <filename>/dev</filename> e
+	(porta 0), v&aacute; para o diret&oacute;rio 
+        <filename>/dev</filename> e
 	execute o comando <command>MAKEDEV ttyd0</command>.  Da mesma
 	forma, para criar os arquivos especiais de dispositivos
 	dial-up para a porta <devicename>COM2</devicename> (porta 1),
 	utilize o comando <command>MAKEDEV ttyd1</command>.</para>
 	
-	<para>O <command>MAKEDEV</command> n&atilde;o cria apenas os arquivos
-	especiais de dispositivo <devicename>/dev/ttyd<replaceable>N
-	</replaceable></devicename>, mas tamb&eacute;m os
-	  <devicename>/dev/cuaa<replaceable>N</replaceable></devicename>,
-	  <devicename>/dev/cuaia<replaceable>N</replaceable></devicename>,
-	  <devicename>/dev/cuala<replaceable>N</replaceable></devicename>,
-	  <devicename>/dev/ttyld<replaceable>N</replaceable></devicename>,
-	  e
-	  <devicename>/dev/ttyid<replaceable>N</replaceable></devicename>
+	<para>O <command>MAKEDEV</command> n&atilde;o 
+          cria apenas os arquivos
+	  especiais de dispositivo 
+          <devicename>/dev/ttyd<replaceable>N
+	  </replaceable></devicename>, mas tamb&eacute;m os
+	  <devicename>/dev/cuaa<replaceable>N</replaceable>
+          </devicename>,
+	  <devicename>/dev/cuaia<replaceable>N</replaceable>
+          </devicename>,
+	  <devicename>/dev/cuala<replaceable>N</replaceable>
+          </devicename>,
+	  <devicename>/dev/ttyld<replaceable>N</replaceable>
+          </devicename>, e
+	  <devicename>/dev/ttyid<replaceable>N</replaceable>
+          </devicename>
 	  .</para>
 	    
-	<para>Depois de criar os novos arquivos especiais de dispositivo,
-	certifique-se sobre as permiss&otilde;es dos arquivos (especialmente
-	os arquivos <filename>/dev/cua*</filename>), para ter certeza
-	de que apenas os usu&aacute;rios que precisam ter acesso a eles,
-	possuem permiss&atilde;o de escrita e de leitura nos mesmos &mdash;
-	voce provavelmente n&atilde;o deseja permitir que os seus usu&aacute;rios
-	m&eacute;dios utilizem seus modens para dial-out.  As permiss&otilde;es
-	padr&otilde;es nos arquivos <filename>/dev/cua*</filename> devem ser
+	<para>Depois de criar os novos arquivos 
+        especiais de dispositivo,
+	certifique-se sobre as permiss&otilde;es dos 
+        arquivos (especialmente
+	os arquivos <filename>/dev/cua*</filename>), para 
+        ter certeza
+	de que apenas os usu&aacute;rios que 
+        precisam ter acesso a eles,
+	possuem permiss&atilde;o de escrita e 
+        de leitura nos mesmos &mdash;
+	voce provavelmente n&atilde;o deseja permitir 
+        que os seus usu&aacute;rios
+	m&eacute;dios utilizem seus modens 
+        para dial-out.  As permiss&otilde;es
+	padr&otilde;es nos 
+        arquivos <filename>/dev/cua*</filename> devem ser
 	suficientes:</para>
 
 	<screen>crw-rw----    1 uucp     dialer    28, 129 Feb 15 14:38 /dev/cuaa1
@@ -1459,21 +1526,27 @@ ttyd5   "/usr/libexec/getty std.19200"  vt100  on  insecure
 	<sect4>
 	  <title>Configura&ccedil;&atilde;o de velocidade travada ou fixa</title>
 
-          <para>Se voc&ecirc; est&aacute; travando a velocidade de comunica&ccedil;&atilde;o de seu modem numa espec&iacute;fica,
-            voc&ecirc; provavelmente n&atilde;o precisar&aacute; fazer qualquer altera&ccedil;&atilde;o no arquivo <filename>/etc/gettytab</filename>.</para>
+          <para>Se voc&ecirc; est&aacute; travando a velocidade de 
+            comunica&ccedil;&atilde;o de seu modem numa espec&iacute;fica,
+            voc&ecirc; provavelmente n&atilde;o precisar&aacute; fazer qualquer 
+            altera&ccedil;&atilde;o no arquivo <filename>/etc/gettytab</filename>.</para>
 	</sect4>
 
 	<sect4>
 	  <title>Configura&ccedil;&atilde;o de velocidades compat&iacute;veis</title>
 
-          <para>Voc&ecirc; precisar&aacute; definir uma entrada no arquivo <filename>/etc/gettytab</filename> para
-            fornecer informa&ccedil;&otilde;es ao <command>getty</command> sobre velocidades que voc&ecirc; deseja
-            utilizar para seu modem. Se voc&ecirc; tiver um modem de 2400&nbsp;bps, voc&ecirc; provavelmente
-            poder&aacute; usar a entrada <literal>D2400</literal> existente.</para>
+          <para>Voc&ecirc; precisar&aacute; definir uma entrada 
+            no arquivo <filename>/etc/gettytab</filename> para
+            fornecer informa&ccedil;&otilde;es ao <command>getty</command> 
+            sobre velocidades que voc&ecirc; deseja
+            utilizar para seu modem. Se voc&ecirc; tiver um modem de 
+            2400&nbsp;bps, voc&ecirc; provavelmente
+            poder&aacute; usar a entrada <literal>D2400</literal> 
+            existente.</para>
 
 	  <programlisting>#
-# Terminais de conex&otilde;es discadas r&aacute;pidas, giram em torno de 2400/1200/300 (podendo inciar em um deles)
-#
+# Terminais de conex&otilde;es discadas r&aacute;pidas, 
+# giram em torno de 2400/1200/300 (podendo inciar em um deles)
 D2400|d2400|Fast-Dial-2400:\
         :nx=D1200:tc=2400-baud:
 3|D1200|Fast-Dial-1200:\
@@ -1481,7 +1554,8 @@ D2400|d2400|Fast-Dial-2400:\
 5|D300|Fast-Dial-300:\
         :nx=D2400:tc=300-baud:</programlisting>
 
-	  <para>Se voc&ecirc; possui um modem de alta velocidade, voc&ecirc; provavelmente precisar&aacute; adicionar
+	  <para>Se voc&ecirc; possui um modem de alta 
+            velocidade, voc&ecirc; provavelmente precisar&aacute; adicionar
             uma entrada no arquivo <filename>/etc/gettytab</filename>; temos aqui uma
             entrada que poderia ser utilizada para um modem de 14.4&nbsp;Kbps com
             uma interface de velocidade m&aacute;xima igual a 19.2&nbsp;Kbps:</para>
@@ -1500,20 +1574,30 @@ up|V9600|High Speed Modem at 9600,8-bit:\
 uq|V19200|High Speed Modem at 19200,8-bit:\
         :nx=V9600:tc=std.19200:</programlisting>
 
-	  <para>Isto resultar&aacute; em conex&otilde;es de 8 bits sem paridade.</para>
+	  <para>Isto resultar&aacute; em conex&otilde;es de 
+            8 bits sem paridade.</para>
 
-	  <para>O exemplo acima inicia as velocidade de comunica&ccedil;&atilde;o em 19.2&nbsp;Kbps
-	    (para conex&otilde;es V.32bis), ent&atilde;o girando em torno de 9600&nbsp;bps (para
-	    V.32), 2400&nbsp;bps, 1200&nbsp;bps, 300&nbsp;bps, e retornando para 19.2&nbsp;Kbps.
-	    Velocidades de comunica&ccedil;&atilde;o c&iacute;clicas s&atilde;o implementadas com a habilidade
+	  <para>O exemplo acima inicia as velocidade de 
+            comunica&ccedil;&atilde;o em 19.2&nbsp;Kbps
+	    (para conex&otilde;es V.32bis), ent&atilde;o girando 
+            em torno de 9600&nbsp;bps (para
+	    V.32), 2400&nbsp;bps, 1200&nbsp;bps, 300&nbsp;bps, e 
+            retornando para 19.2&nbsp;Kbps.
+	    Velocidades de comunica&ccedil;&atilde;o c&iacute;clicas 
+            s&atilde;o implementadas com a habilidade
 	    <literal>nx=</literal> (<quote>pr&oacute;xima tabela</quote>).
-            Cada uma das linhas usa uma entrada <literal>tc=</literal> (<quote>continua&ccedil;&atilde;o de tabela</quote>) para
-            a escolha do resto das configura&ccedil;&otilde;es <quote>padr&otilde;es</quote> para
+            Cada uma das linhas usa uma entrada <literal>tc=</literal>
+            (<quote>continua&ccedil;&atilde;o de tabela</quote>) para
+            a escolha do resto das configura&ccedil;&otilde;es
+            <quote>padr&otilde;es</quote> para
             uma velocidade em espec&iacute;fico.</para>
 
-	  <para>Se voc&ecirc; tem um modem de 28.8&nbsp;Kbps e voc&ecirc; quer fazer uso das vantagens de
-            compress&atilde;o dos modems de 14.4&nbsp;Kbps, voc&ecirc; precisa utilizar velocidades de conex&atilde;o
-            maiores que 19.2&nbsp;Kbps.  Aqui temos um exemplo de uma entrada no <filename>gettytab</filename> iniciando
+	  <para>Se voc&ecirc; tem um modem de 28.8&nbsp;Kbps e 
+            voc&ecirc; quer fazer uso das vantagens de
+            compress&atilde;o dos modems de 14.4&nbsp;Kbps, voc&ecirc; 
+            precisa utilizar velocidades de conex&atilde;o
+            maiores que 19.2&nbsp;Kbps.  Aqui temos um exemplo de 
+            uma entrada no <filename>gettytab</filename> iniciando
             em 57.6&nbsp;Kbps:</para>
 
 	  <programlisting>#
@@ -1531,8 +1615,10 @@ vp|VH9600|Very High Speed Modem at 9600,8-bit:\
 vq|VH57600|Very High Speed Modem at 57600,8-bit:\
         :nx=VH9600:tc=std.57600:</programlisting>
 
-	  <para>Caso voc&ecirc; tenha uma CPU lenta ou um sistema sobre altas cargas de utiliza&ccedil;&atilde;o
-            e n&atilde;o possua portas seriais basedas em 16550A, voc&ecirc; poder&aacute; receber erros <errorname>sio</errorname>
+	  <para>Caso voc&ecirc; tenha uma CPU lenta ou um sistema 
+            sobre altas cargas de utiliza&ccedil;&atilde;o
+            e n&atilde;o possua portas seriais basedas em 16550A, voc&ecirc; 
+            poder&aacute; receber erros <errorname>sio</errorname>
 	    <quote>silo</quote> em 57.6&nbsp;Kbps.</para>
 	</sect4>
       </sect3>
@@ -1543,54 +1629,84 @@ vq|VH57600|Very High Speed Modem at 57600,8-bit:\
 	  <primary><filename>/etc/ttys</filename></primary>
 	</indexterm>
 
-	<para>A configura&ccedil;&atilde;o do arquivo <filename>/etc/ttys</filename> &eacute; abordada no <xref linkend="ex-etc-ttys">. A
-          configura&ccedil;&atilde;o para modems &eacute; similar por&eacute;m temos que passar um argumento diferente
-          para o <command>getty</command> e especificar um tipo de terminal diferente. O formato
-          geral para ambas as configura&ccedil;&otilde;es, velocidade travada e velocidades compat&iacute;veis s&atilde;o:</para>
+	<para>A configura&ccedil;&atilde;o do arquivo <filename>/etc/ttys</filename> 
+          &eacute; abordada no <xref linkend="ex-etc-ttys">. A
+          configura&ccedil;&atilde;o para modems &eacute; similar 
+          por&eacute;m temos que passar um argumento diferente
+          para o <command>getty</command> e especificar um 
+          tipo de terminal diferente. O formato
+          geral para ambas as configura&ccedil;&otilde;es, velocidade 
+          travada e velocidades compat&iacute;veis s&atilde;o:</para>
 
 	<programlisting>ttyd0   "/usr/libexec/getty <replaceable>xxx</replaceable>"   dialup on</programlisting>
 
-	<para>O primeiro item da linha acima &eacute; o arquivo especial de dispositivo
-          para esta entrada &mdash; <literal>ttyd0</literal> significando que <filename>/dev/ttyd0</filename> &eacute;
-          o arquivo que este <command>getty</command> observar&aacute;.  O segundo item, <literal>"/usr/libexec/getty
+	<para>O primeiro item da linha acima &eacute; o 
+          arquivo especial de dispositivo
+          para esta entrada &mdash; <literal>ttyd0</literal> significando 
+          que <filename>/dev/ttyd0</filename> &eacute;
+          o arquivo que este <command>getty</command> observar&aacute;.  O segundo 
+          item, <literal>"/usr/libexec/getty
 	    <replaceable>xxx</replaceable>"</literal>
 	  (<replaceable>xxx</replaceable> ser&aacute; substitu¡do pela habilidade
-          inicial do <filename>gettytab</filename>) que ser&aacute; executado no dispositivo pelo
-          processo <command>init</command>.  O terceiro item, <literal>dialup</literal>, &eacute;
-          o tipo padr&atilde;o de terminal.  O quarto par&acirc;metro, <literal>on</literal>, diz ao <command>init</command> que
-          a linha &eacute; operacional.  Pode haver um quinto par&acirc;metro, <literal>secure</literal>, mas
-          deve ser utilizado somente para terminais fisicamente seguros (como a console do sistema).</para>
+          inicial do <filename>gettytab</filename>) que 
+          ser&aacute; executado no dispositivo pelo
+          processo <command>init</command>.  O terceiro 
+          item, <literal>dialup</literal>, &eacute;
+          o tipo padr&atilde;o de terminal.  O quarto 
+          par&acirc;metro, <literal>on</literal>, diz ao <command>init</command> que
+          a linha &eacute; operacional.  Pode haver um 
+          quinto par&acirc;metro, <literal>secure</literal>, mas
+          deve ser utilizado somente para terminais fisicamente 
+          seguros (como a console do sistema).</para>
 
-	<para>O tipo padr&atilde;o de terminal (no exemplo acima &eacute; um <literal>dialup</literal>)
-          poder&aacute; depender das configura&ccedil;&otilde;es nativas. O tipo <literal>dialup</literal>
-          &eacute; o padr&atilde;o para terminais de linhas de acesso discado, portanto, os usu&aacute;rios podem
-          personalizar seus scripts de login para que estes informem que o tipo do terminal
-          &eacute; <literal>dialup</literal> e automaticamente sejam feitos ajustes. Entretanto, o
-          autor deste acha mais f&aacute;cil para suas configura&ccedil;&otilde;es definir o tipo padr&atilde;o
-          como <literal>vt102</literal>, desde que os usu&aacute;rios somente usem a emula&ccedil;&atilde;o de
+	<para>O tipo padr&atilde;o de terminal (no exemplo 
+          acima &eacute; um <literal>dialup</literal>)
+          poder&aacute; depender das configura&ccedil;&otilde;es 
+          nativas. O tipo <literal>dialup</literal>
+          &eacute; o padr&atilde;o para terminais de linhas de 
+          acesso discado, portanto, os usu&aacute;rios podem
+          personalizar seus scripts de login para que 
+          estes informem que o tipo do terminal
+          &eacute; <literal>dialup</literal> e automaticamente 
+          sejam feitos ajustes. Entretanto, o
+          autor deste acha mais f&aacute;cil para suas 
+          configura&ccedil;&otilde;es definir o tipo padr&atilde;o
+          como <literal>vt102</literal>, desde que os usu&aacute;rios 
+          somente usem a emula&ccedil;&atilde;o de
           VT102 em seus sistemas.</para>
 
-	<para>Depois de realizar estas altera&ccedil;&otilde;es no <filename>/etc/ttys</filename>
-	  voc&ecirc; deve enviar um sinal <acronym>HUP</acronym> para o processo <command>init</command>
-          para que este releia o arquivo e aplique as altera&ccedil;&otilde;es.  Voc&ecirc; pode usar o comando
-	  <screen>&prompt.root; <userinput>kill -HUP 1</userinput></screen> para enviar o sinal. Caso
-          esta seja a primeira vez que voc&ecirc; configura o sistema, voc&ecirc; pode esperar at&eacute; que
-          seus modems estejam conectados e configurados corretamente para depois
+	<para>Depois de realizar estas altera&ccedil;&otilde;es no 
+          <filename>/etc/ttys</filename>
+	  voc&ecirc; deve enviar um sinal <acronym>HUP</acronym> para o 
+          processo <command>init</command>
+          para que este releia o arquivo e aplique as 
+          altera&ccedil;&otilde;es.  Voc&ecirc; pode usar o comando
+	  <screen>&prompt.root; <userinput>kill -HUP 1</userinput></screen> 
+          para enviar o sinal. Caso
+          esta seja a primeira vez que voc&ecirc; configura o 
+          sistema, voc&ecirc; pode esperar at&eacute; que
+          seus modems estejam conectados e configurados 
+          corretamente para depois
           sinalizar ao <command>init</command>.
 	  </para>
 
 	<sect4>
 	  <title>Configura&ccedil;&atilde;o de velocidade travada ou fixa</title>
 
-	  <para>Para configura&ccedil;&otilde;es de velocidade fixa sua entrada em <filename>ttys</filename>
-            precisa especificar ao <command>getty</command> a velocidade.  Para um modem
-            com a velociade da porta fixa em 19.2&nbsp;Kbps, a entrada em <filename>ttys</filename> deve ser algo como isso:</para>
+	  <para>Para configura&ccedil;&otilde;es de velocidade fixa 
+            sua entrada em <filename>ttys</filename>
+            precisa especificar ao <command>getty</command> a 
+            velocidade.  Para um modem
+            com a velociade da porta fixa em 19.2&nbsp;Kbps, a entrada 
+            em <filename>ttys</filename> deve ser algo como isso:</para>
 
 	  <programlisting>ttyd0   "/usr/libexec/getty std.19200"   dialup on</programlisting>
 
-	  <para>Caso seu modem esteja com a velocidade fixa diferente, substitua pelo valor apropriado
+	  <para>Caso seu modem esteja com a velocidade 
+            fixa diferente, substitua pelo valor apropriado
             utilizando <literal>std.<replaceable>velocidade</replaceable></literal>
-	    no lugar de <literal>std.19200</literal>. Certifique-se de utilizar um tipo v&aacute;lido
+	    no lugar de <literal>std.19200</literal>. Certifique-se 
+            de utilizar um tipo v&aacute;lido
             no arquivo <filename>/etc/gettytab</filename>.</para>
 	</sect4>
 
@@ -1598,10 +1714,14 @@ vq|VH57600|Very High Speed Modem at 57600,8-bit:\
 	  <title>Configura&ccedil;&atilde;o de velocidades compat&iacute;veis</title>
 
 	  <para>Na configura&ccedil;&atilde;o de velocidades compat&iacute;veis, sua entrada em
-	    <filename>ttys</filename> precisa referenciar o in&iacute;cio apropriado <quote>auto-baud</quote> (sic)
-            em <filename>/etc/gettytab</filename>.  Por exemplo, se voc&ecirc; adicionar acima a entrada sugerida para
-            iniciar em 19.2&nbsp;Kbps (a entrada em <filename>gettytab</filename> cont&eacute;m o ponto de in&iacute;cio
-            <literal>V19200</literal>), sua entrada em <filename>ttys</filename> deve parecer com isso:</para>
+	    <filename>ttys</filename> precisa referenciar o in&iacute;cio 
+            apropriado <quote>auto-baud</quote> (sic)
+            em <filename>/etc/gettytab</filename>.  Por exemplo, se voc&ecirc; adicionar 
+            acima a entrada sugerida para
+            iniciar em 19.2&nbsp;Kbps (a entrada em <filename>gettytab</filename> 
+            cont&eacute;m o ponto de in&iacute;cio
+            <literal>V19200</literal>), sua entrada em <filename>ttys</filename> 
+            deve parecer com isso:</para>
             <programlisting>ttyd0   "/usr/libexec/getty V19200"   dialup on</programlisting>
 	</sect4>
       </sect3>
@@ -1613,14 +1733,20 @@ vq|VH57600|Very High Speed Modem at 57600,8-bit:\
 	  <secondary><filename>rc.serial</filename></secondary>
 	</indexterm>
 
-	<para>Modems de alta velocidade como V.32, V.32bis, e V.34 precisam usar o controle f&iacute;sico
+	<para>Modems de alta velocidade como V.32, V.32bis, e V.34 
+          precisam usar o controle f&iacute;sico
           de fluxo (<filename>RTS/CTS</filename>). Voc&ecirc; pode acidicionar o
-          comando <command>stty</command> no arquivo <filename>/etc/rc.serial</filename> para
-          definir o controle f&iacute;sico de fluxo do kernel do FreeBSD na porta do modem.</para>
+          comando <command>stty</command> no arquivo 
+          <filename>/etc/rc.serial</filename> para
+          definir o controle f&iacute;sico de fluxo do 
+          kernel do FreeBSD na porta do modem.</para>
 
-	<para>Por exemplo, para definir a configura&ccedil;&atilde;o de <varname>crtscts</varname>, <literal>termios</literal>,
-        na primeira porta serial de dispositivos de discagem (<devicename>COM2</devicename>) as seguintes
-        linhas poderiam ser adicionadas ao <filename>/etc/rc.serial</filename>:</para>
+	<para>Por exemplo, para definir a configura&ccedil;&atilde;o de 
+        <varname>crtscts</varname>, <literal>termios</literal>,
+        na primeira porta serial de dispositivos de 
+        discagem (<devicename>COM2</devicename>) as seguintes
+        linhas poderiam ser adicionadas ao 
+        <filename>/etc/rc.serial</filename>:</para>
 	<programlisting># Configura&ccedil;&atilde;o de inicializa&ccedil;&atilde;o de porta serial
 stty -f /dev/ttyid1 crtscts
 stty -f /dev/cuaia1 crtscts</programlisting>
@@ -1631,11 +1757,17 @@ stty -f /dev/cuaia1 crtscts</programlisting>
     <sect2>
       <title>Configura&ccedil;&otilde;es do Modem</title>
 
-      <para>Caso voc&ecirc; possua um modem que possibilite que seus par&acirc;metros possam ser definidos
-        em RAM n&atilde;o vol&aacute;til, voc&ecirc; precisar&aacute; utilizar um programa de terminal (como o Telix sobre
-        &ms-dos; ou o <command>tip</command> sobre o FreeBSD) para definir os par&acirc;metros.  Conecte
-        ao modem utilizando como inicial a mesma velocidade de comunica&ccedil;&atilde;o que o
-	<command>getty</command> utilizar&aacute; e configure o modem com RAM n&atilde;o vol&aacute;til
+      <para>Caso voc&ecirc; possua um modem que possibilite 
+        que seus par&acirc;metros possam ser definidos
+        em RAM n&atilde;o vol&aacute;til, voc&ecirc; precisar&aacute; 
+        utilizar um programa de terminal (como o Telix sobre
+        &ms-dos; ou o <command>tip</command> sobre o FreeBSD) para 
+        definir os par&acirc;metros.  Conecte
+        ao modem utilizando como inicial 
+        a mesma velocidade de 
+        comunica&ccedil;&atilde;o que o
+	<command>getty</command> utilizar&aacute; e configure 
+        o modem com RAM n&atilde;o vol&aacute;til
         combinando com os seguintes requerimentos:</para>
 
       <itemizedlist>
@@ -1644,24 +1776,29 @@ stty -f /dev/cuaia1 crtscts</programlisting>
 	</listitem>
 
 	<listitem>
-	  <para><acronym>DTR</acronym> alertou quando em opera&ccedil;&atilde;o; apagando DTR
+	  <para><acronym>DTR</acronym> alertou quando em 
+            opera&ccedil;&atilde;o; apagando DTR
 	    e conectando a linha, e reinicia o modem</para>
 	</listitem>
 
 	<listitem>
-	  <para><acronym>CTS</acronym> alertou a transmiss&atilde;o do controle de fluxo</para>
+	  <para><acronym>CTS</acronym> alertou a transmiss&atilde;o 
+            do controle de fluxo</para>
 	</listitem>
 
 	<listitem>
-	  <para>Desativa o controle de fluxo <acronym>XON/XOFF</acronym></para>
+	  <para>Desativa o controle de 
+             fluxo <acronym>XON/XOFF</acronym></para>
 	</listitem>
 
 	<listitem>
-	  <para><acronym>RTS</acronym> controle de fluxo de dados recebidos</para>
+	  <para><acronym>RTS</acronym> controle de 
+             fluxo de dados recebidos</para>
 	</listitem>
 
 	<listitem>
-	  <para>Modo silencioso (n&atilde;o retorna c&oacute;digos)</para>
+	  <para>Modo silencioso (n&atilde;o 
+            retorna c&oacute;digos)</para>
 	</listitem>
 
 	<listitem>
@@ -1669,19 +1806,25 @@ stty -f /dev/cuaia1 crtscts</programlisting>
 	</listitem>
       </itemizedlist>
 
-      <para>Por favor, leia a documenta&ccedil;&atilde;o do seu modem para identificar quais comandos e configura&ccedil;&otilde;es
+      <para>Por favor, leia a documenta&ccedil;&atilde;o do seu modem para 
+       identificar quais comandos e configura&ccedil;&otilde;es
        de chaves DIP voc&ecirc; precisar&aacute; dar ao modem.</para>
 
-      <para>Por exemplo, para definir os par&acirc;metros acima num modem externo &usrobotics;
-	&sportster; 14,400 voc&ecirc; poderia dar estes comandos ao modem:</para>
+      <para>Por exemplo, para definir os par&acirc;metros 
+        acima num modem externo &usrobotics;
+	&sportster; 14,400 voc&ecirc; poderia dar 
+        estes comandos ao modem:</para>
 
       <programlisting>ATZ
 AT&amp;C1&amp;D2&amp;H1&amp;I0&amp;R2&amp;W</programlisting>
 
-      <para>Voc&ecirc; pode querer tamb&eacute;m usar esta oportunidade para fazer outros ajustes
-        na configura&ccedil;&atilde;o do modem, como por exemplo se este utilizar&aacute; compress&atilde;o V.42bis ou MNP5.</para>
+      <para>Voc&ecirc; pode querer tamb&eacute;m usar 
+        esta oportunidade para fazer outros ajustes
+        na configura&ccedil;&atilde;o do modem, como por exemplo se 
+        este utilizar&aacute; compress&atilde;o V.42bis ou MNP5.</para>
 
-      <para>O modem externo &usrobotics; &sportster; 14,400 tamb&eacute;m possui algumas chaves DIP
+      <para>O modem externo &usrobotics; &sportster; 14,400 
+        tamb&eacute;m possui algumas chaves DIP
         que necessitam ser configuradas; para outros modems talvez possa utilizar estas
         configura&ccedil;&otilde;es, por exemplo:</para>
 
@@ -1691,15 +1834,18 @@ AT&amp;C1&amp;D2&amp;H1&amp;I0&amp;R2&amp;W</programlisting>
 	</listitem>
 
 	<listitem>
-	  <para>Chave 2: N/D (C&oacute;digos verbais como resultado/C&oacute;digos num&eacute;ricos como resultado)</para>
+	  <para>Chave 2: N/D (C&oacute;digos verbais como resultado/C&oacute;digos 
+            num&eacute;ricos como resultado)</para>
 	</listitem>
 
 	<listitem>
-	  <para>Chave 3: PARA CIMA &mdash; Supress&atilde;o de c&oacute;digos de resultado</para>
+	  <para>Chave 3: PARA CIMA &mdash; Supress&atilde;o de 
+            c&oacute;digos de resultado</para>
 	</listitem>
 
 	<listitem>
-	  <para>Chave 4: PARA BAIXO &mdash; Sem emiss&atilde;o de comandos quando desconectado</para>
+	  <para>Chave 4: PARA BAIXO &mdash; Sem emiss&atilde;o de 
+            comandos quando desconectado</para>
 	</listitem>
 
 	<listitem>
@@ -1707,11 +1853,13 @@ AT&amp;C1&amp;D2&amp;H1&amp;I0&amp;R2&amp;W</programlisting>
 	</listitem>
 
 	<listitem>
-	  <para>Chave 6: PARA CIMA &mdash; Detec&ccedil;&atilde;o normal de portadora</para>
+	  <para>Chave 6: PARA CIMA &mdash; Detec&ccedil;&atilde;o 
+           normal de portadora</para>
 	</listitem>
 
 	<listitem>
-	  <para>Chave 7: PARA CIMA &mdash; Carregar padr&otilde;es da NVRAM</para>
+	  <para>Chave 7: PARA CIMA &mdash; Carregar 
+            padr&otilde;es da NVRAM</para>
 	</listitem>
 
 	<listitem>
@@ -1719,19 +1867,27 @@ AT&amp;C1&amp;D2&amp;H1&amp;I0&amp;R2&amp;W</programlisting>
 	</listitem>
       </itemizedlist>
 
-      <para>C&oacute;digos de resultados devem ser suprimidos para modems de discagem o que evitar&aacute; problemas
-        que podem ocorrer se erroneamente o <command>getty</command> dar um prompt de <prompt>login:</prompt>
-        para o modem que estiver em modo de comando e o modem neste estado retornaria o comando ou
-        o c&oacute;digo de resultado. Esta sequ&ecirc;ncia pode resultar numa conversa boba entre o
+      <para>C&oacute;digos de resultados devem ser suprimidos 
+        para modems de discagem o que evitar&aacute; problemas
+        que podem ocorrer se erroneamente o <command>getty</command> 
+        dar um prompt de <prompt>login:</prompt>
+        para o modem que estiver em modo de comando e o 
+        modem neste estado retornaria o comando ou
+        o c&oacute;digo de resultado. Esta sequ&ecirc;ncia pode 
+        resultar numa conversa boba entre o
  	<command>getty</command> e o modem.</para>
 
       <sect3>
 	<title>Configura&ccedil;&atilde;o de velocidade travada ou fixa</title>
 
-	<para>Para a configura&ccedil;&atilde;o de velocidade fixa ser&aacute; necess&aacute;rio definir no modem que este
-          mantenha constante a velocidade de comunica&ccedil;&atilde;o entre ele e o computador independente
-          da velocidade de comunica&ccedil;&atilde;o. Num modem externo &usrobotics; &sportster; 14,400 estes
-          comandos fixar&atilde;o a velocidade de comunica&ccedil;&atilde;o entre o modem e o computador na velocidade
+	<para>Para a configura&ccedil;&atilde;o de velocidade fixa 
+          ser&aacute; necess&aacute;rio definir no modem que este
+          mantenha constante a velocidade de comunica&ccedil;&atilde;o 
+          entre ele e o computador independente
+          da velocidade de comunica&ccedil;&atilde;o. Num modem 
+          externo &usrobotics; &sportster; 14,400 estes
+          comandos fixar&atilde;o a velocidade de comunica&ccedil;&atilde;o 
+          entre o modem e o computador na velocidade
           fornecida pelos comandos:</para>
 
 	<programlisting>ATZ
@@ -1741,11 +1897,16 @@ AT&amp;B1&amp;W</programlisting>
       <sect3>
 	<title>Configura&ccedil;&atilde;o de velocidades compat&iacute;veis</title>
 
-	<para>Para a configura&ccedil;&atilde;o de velocidades compat&iacute;veis ou vari&aacute;veis voc&ecirc; precisar&aacute; configurar
-          seu modem para que este ajuste sua velocidade de acordo com a velocidade que for percebida
-          na chamada. Num modem externo &usrobotics; &sportster; 14,400 estes comandos travar&atilde;o
-          a velocidade de corre&ccedil;&atilde;o de erros na mesma que for utilizada no envio dos comandos, por&eacute;m
-          permitir&aacute; que a porta serial varie em conex&otilde;es sem corre&ccedil;&atilde;o de erros:</para>
+	<para>Para a configura&ccedil;&atilde;o de velocidades 
+          compat&iacute;veis ou vari&aacute;veis voc&ecirc; precisar&aacute; configurar
+          seu modem para que este ajuste sua velocidade 
+          de acordo com a velocidade que for percebida
+          na chamada. Num modem externo &usrobotics; 
+          &sportster; 14,400 estes comandos travar&atilde;o
+          a velocidade de corre&ccedil;&atilde;o de erros 
+          na mesma que for utilizada no envio dos comandos, por&eacute;m
+          permitir&aacute; que a porta serial varie em 
+          conex&otilde;es sem corre&ccedil;&atilde;o de erros:</para>
 
 	<programlisting>ATZ
 AT&amp;B2&amp;W</programlisting>
@@ -1754,14 +1915,20 @@ AT&amp;B2&amp;W</programlisting>
       <sect3>
 	<title>Verificando a configura&ccedil;&atilde;o do modem</title>
 
-	<para>A maioria dos modems de alta velocidade disponibiliza comandos para verifica&ccedil;&atilde;o
-          dos par&acirc;metros correntes de opera&ccedil;&atilde;o numa forma humanamente leg&iacute;vel. Em um modem externo
-          &usrobotics; &sportster; 14,400 o comando <command>ATI5</command> lista as configura&ccedil;&otilde;es
-          armazenadas em RAM n&atilde;o vol&aacute;til. Para verificar as configura&ccedil;&otilde;es reais de opera&ccedil;&atilde;o do
-          modem (como determinadas nas configura&ccedil;&otilde;es das chaves DIP), use o
+	<para>A maioria dos modems de alta velocidade 
+          disponibiliza comandos para verifica&ccedil;&atilde;o
+          dos par&acirc;metros correntes de opera&ccedil;&atilde;o 
+          numa forma humanamente leg&iacute;vel. Em um modem externo
+          &usrobotics; &sportster; 14,400 o comando <command>ATI5</command> 
+          lista as configura&ccedil;&otilde;es
+          armazenadas em RAM n&atilde;o vol&aacute;til. Para verificar as 
+          configura&ccedil;&otilde;es reais de opera&ccedil;&atilde;o do
+          modem (como determinadas nas configura&ccedil;&otilde;es das 
+          chaves DIP), use o
           comando <command>ATZ</command> e ent&atilde;o <command>ATI4</command>.</para>
 
-	<para>Se voc&ecirc; tem um tipo diferente de modem verifique o manual para saber como rechecar
+	<para>Se voc&ecirc; tem um tipo diferente de modem 
+          verifique o manual para saber como rechecar
           as configura&ccedil;&otilde;es feitas.</para>
 
       </sect3>
@@ -1777,14 +1944,21 @@ AT&amp;B2&amp;W</programlisting>
 	<title>Checagem do sistema FreeBSD</title>
 
 	<para>Conecte fisicamente seu modem no seu sistema FreeBSD, inicie o sistema e
-          se seu modem tiver luzes que indicam seu estado, observe se a luz indicadora <acronym>DTR</acronym>
-          &eacute; sinalizada quando o prompt <prompt>login:</prompt> aparece no console do sistema
-          &mdash; se a luz acender, significa que o FreeBSD iniciou o processo <command>getty</command>
-          na porta correta de comunica&ccedil;&atilde;o e est&aacute; esperando pelo modem para aceitar uma chamada.</para>
+          se seu modem tiver luzes que indicam seu estado, observe 
+          se a luz indicadora <acronym>DTR</acronym>
+          &eacute; sinalizada quando o prompt <prompt>login:</prompt> 
+          aparece no console do sistema
+          &mdash; se a luz acender, significa que o FreeBSD 
+          iniciou o processo <command>getty</command>
+          na porta correta de comunica&ccedil;&atilde;o e est&aacute; 
+          esperando pelo modem para aceitar uma chamada.</para>
 
-	<para>Se a luz indicadora <acronym>DTR</acronym> n&atilde;o acender, execute login no sistema
-            FreeBSD no console e atrav&eacute;s do comando <command>ps ax</command> verifique se o FreeBSD
-            est&aacute; tentando executar o processo <command>getty</command> na porta correta. Voc&ecirc;
+	<para>Se a luz indicadora <acronym>DTR</acronym> n&atilde;o 
+            acender, execute login no sistema
+            FreeBSD no console e atrav&eacute;s do comando 
+            <command>ps ax</command> verifique se o FreeBSD
+            est&aacute; tentando executar o processo 
+            <command>getty</command> na porta correta. Voc&ecirc;
             deve ver uma linha como essa em meio aos processos listados:</para>
 
 	<screen>  114 ??  I      0:00.10 /usr/libexec/getty V19200 ttyd0
@@ -1794,60 +1968,91 @@ AT&amp;B2&amp;W</programlisting>
 
 	  <screen>  114 d0  I      0:00.10 /usr/libexec/getty V19200 ttyd0</screen>
 
-	<para>e o modem ainda n&atilde;o ter aceitado uma chamada, isso significa que o <command>getty</command>
-          completou a abertura das portas de comunica&ccedil;&atilde;o.  Isto pode indicar um problema com o cabo
-          ou uma mal configura&ccedil;&atilde;o do modem, devido ao <command>getty</command> n&atilde;o estar habilitado
-          a abrir a porta de comunica&ccedil;&atilde;o at&eacute; que o <acronym>CD</acronym> (detec&ccedil;&atilde;o de portadora) seja
+	<para>e o modem ainda n&atilde;o ter aceitado uma 
+          chamada, isso significa que o <command>getty</command>
+          completou a abertura das portas de comunica&ccedil;&atilde;o.  Isto 
+          pode indicar um problema com o cabo
+          ou uma mal configura&ccedil;&atilde;o do modem, devido 
+          ao <command>getty</command> n&atilde;o estar habilitado
+          a abrir a porta de comunica&ccedil;&atilde;o at&eacute; que 
+          o <acronym>CD</acronym> (detec&ccedil;&atilde;o de portadora) seja
           informado pelo modem.</para>
 
-	<para>Caso voc&ecirc; n&atilde;o veja nenhum processo <command>getty</command> indicado para abrir a porta
-	  <filename>ttyd<replaceable>N</replaceable></filename> designada, recheque suas entradas
-          no arquivo <filename>/etc/ttys</filename> para ver se n&atilde;o h&aacute; erros. Verifique tamb&eacute;m o arquivo
-          de log <filename>/var/log/messages</filename> para ver se n&atilde;o h&aacute; nenhuma mensagem de log
-          do <command>init</command> ou do <command>getty</command> relativa a um problema. Se houver
-          verifique novamente os arquivos de configura&ccedil;&atilde;o <filename>/etc/ttys</filename> e o
-          <filename>/etc/gettytab</filename>, assim como o arquivo especial de dispositivo
-          <filename>/dev/ttydN</filename>, buscando por qualquer erro, entradas erradas ou arquivos
+	<para>Caso voc&ecirc; n&atilde;o veja nenhum processo 
+          <command>getty</command> indicado para abrir a porta
+	  <filename>ttyd<replaceable>N</replaceable></filename> 
+          designada, recheque suas entradas
+          no arquivo <filename>/etc/ttys</filename> para ver se 
+          n&atilde;o h&aacute; erros. Verifique tamb&eacute;m o arquivo
+          de log <filename>/var/log/messages</filename> para 
+          ver se n&atilde;o h&aacute; nenhuma mensagem de log
+          do <command>init</command> ou do <command>getty</command> 
+          relativa a um problema. Se houver
+          verifique novamente os arquivos de configura&ccedil;&atilde;o 
+          <filename>/etc/ttys</filename> e o
+          <filename>/etc/gettytab</filename>, assim como o 
+          arquivo especial de dispositivo
+          <filename>/dev/ttydN</filename>, buscando por 
+          qualquer erro, entradas erradas ou arquivos
           especiais de dispositivos perdidos.</para>
       </sect3>
 
       <sect3>
 	<title>Tentando conectar-se ao sistema discando para ele</title>
 
-	<para>Tente discar para o sistema; tenha certeza de usar 8 bits, sem paridade, e 1 bit
-          de parada no sistema remoto. Se voc&ecirc; n&atilde;o conseguir um prompt correto, ou receber
-          caracteres impr&oacute;prios, tente pressionar <keycode>Enter</keycode> uma vez por segundo. Se ainda
-          assim voc&ecirc; n&atilde;o ver um prompt <prompt>login:</prompt> tente enviar um comando <command>BREAK</command>. Caso
-          voc&ecirc; esteja utilizando um modem de alta velocidade para a conex&atilde;o discada, tente discar novamente ap&oacute;s
-          o travamento da velocidade da interface para a linha de discagem(via o comando <command>AT&amp;B1</command> como num modem &usrobotics;
+	<para>Tente discar para o sistema; tenha certeza 
+          de usar 8 bits, sem paridade, e 1 bit
+          de parada no sistema remoto. Se voc&ecirc; n&atilde;o 
+          conseguir um prompt correto, ou receber
+          caracteres impr&oacute;prios, tente pressionar 
+          <keycode>Enter</keycode> uma vez por segundo. Se ainda
+          assim voc&ecirc; n&atilde;o ver um prompt <prompt>login:</prompt> 
+          tente enviar um comando <command>BREAK</command>. Caso
+          voc&ecirc; esteja utilizando um modem de alta velocidade para a 
+          conex&atilde;o discada, tente discar novamente ap&oacute;s
+          o travamento da velocidade da interface para a linha de 
+          discagem(via o comando <command>AT&amp;B1</command> 
+          como num modem &usrobotics;
           &sportster;, por exemplo).</para>
 
-	<para>Se voc&ecirc; ainda assim n&atilde;o conseguir um prompt <prompt>login:</prompt>, verifique novamente o
+	<para>Se voc&ecirc; ainda assim n&atilde;o conseguir 
+          um prompt <prompt>login:</prompt>, verifique novamente o
           <filename>/etc/gettytab</filename> e verifique que:</para>
 
 	<itemizedlist>
 	  <listitem>
-	    <para>O nome da capacidade inicial especificada no <filename>/etc/ttys</filename> para
-              a linha combina com o nome da capacidade em <filename>/etc/gettytab</filename></para>
+	    <para>O nome da capacidade inicial especificada 
+              no <filename>/etc/ttys</filename> para
+              a linha combina com o nome da capacidade 
+              em <filename>/etc/gettytab</filename></para>
 		</listitem>
 
 	  <listitem>
-	    <para>Cada entrada <literal>nx=</literal> combine com outro nome de capacidade <filename>gettytab</filename></para>
+	    <para>Cada entrada <literal>nx=</literal> combine com outro 
+              nome de capacidade <filename>gettytab</filename></para>
 	  </listitem>
 
 	  <listitem>
-	    <para>Cada entrada <literal>tc=</literal> combine com outro nome de capacidade <filename>gettytab</filename></para>
+	    <para>Cada entrada <literal>tc=</literal> combine com outro 
+              nome de capacidade <filename>gettytab</filename></para>
 	  </listitem>
 	</itemizedlist>
 
-	<para>Se voc&ecirc; disca mas o modem no sistema FreeBSD n&atilde;o responde, certifique-se de que o modem
-          est&aacute; configurado para responder a chamada telef&ocirc;nica quando <acronym>DTR</acronym> &eacute; informado. Se
-          o modem parecer estar configurado corretamente, verifique se o <acronym>DTR</acronym> da linha
-          &eacute; informado observando as luzes indicadoras do modem(se ele tiver alguma).</para>
+	<para>Se voc&ecirc; disca mas o modem no sistema FreeBSD n&atilde;o 
+          responde, certifique-se de que o modem
+          est&aacute; configurado para responder a chamada telef&ocirc;nica 
+          quando <acronym>DTR</acronym> &eacute; informado. Se
+          o modem parecer estar configurado corretamente, verifique 
+          se o <acronym>DTR</acronym> da linha
+          &eacute; informado observando as luzes indicadoras 
+          do modem(se ele tiver alguma).</para>
 
-	<para>Se voc&ecirc; tiver feito tudo isso diversas vezes e ainda assim n&atilde;o funcionar, descanse
-          e tente mais tarde. Se ainda assim n&atilde;o funcionar, voc&ecirc; pode, talvez, enviar um email
-          para &a.questions; descrevendo seu modem e seu problema e pessoal bom da lista tentar&aacute; te ajudar.</para>
+	<para>Se voc&ecirc; tiver feito tudo isso diversas vezes 
+          e ainda assim n&atilde;o funcionar, descanse
+          e tente mais tarde. Se ainda assim n&atilde;o 
+          funcionar, voc&ecirc; pode, talvez, enviar um email
+          para &a.questions; descrevendo seu modem e seu problema e 
+          pessoal bom da lista tentar&aacute; te ajudar.</para>
       </sect3>
     </sect2>
 
@@ -1857,38 +2062,58 @@ AT&amp;B2&amp;W</programlisting>
     <title>Servi&ccedil;o de Dial-out</title>
     <indexterm><primary>dial-out service</primary></indexterm>
 
-    <para>A seguir, dicas para que seu sistema conecte em outro computador atrav&eacute;s de um modem.  Isto
-      &eacute; apropriado para estabilizar uma sess&atilde;o de terminal com um sistema remoto.</para>
+    <para>A seguir, dicas para que seu sistema conecte 
+      em outro computador atrav&eacute;s de um modem.  Isto
+      &eacute; apropriado para estabilizar uma sess&atilde;o 
+      de terminal com um sistema remoto.</para>
 
     <para>Isto pode ser &uacute;til para logar em uma BBS.</para>
 
-    <para>Este tipo de conex&atilde;o pode ser de extremo aux&iacute;lio para conseguir um arquivo na Internet
-      caso voc&ecirc; tenha problemas com PPP. Caso voc&ecirc; precise de fazer FTP de algo e o PPP falhar, use
-      a sess&atilde;o de terminal para o FTP, ent&atilde;o use zmodem para tranferir o arquivo pra a sua m&aacute;quina.</para>
+    <para>Este tipo de conex&atilde;o pode ser de extremo 
+      aux&iacute;lio para conseguir um arquivo na Internet
+      caso voc&ecirc; tenha problemas com PPP. Caso 
+      voc&ecirc; precise de fazer FTP de algo e o PPP falhar, use
+      a sess&atilde;o de terminal para o FTP, ent&atilde;o use 
+      zmodem para tranferir o arquivo pra a sua m&aacute;quina.</para>
 
     <sect2>
-      <title>Meu modem Stock Hayes n&atilde;o &eacute; suportado, o que posso fazer?</title>
+      <title>Meu modem Stock Hayes n&atilde;o &eacute; 
+        suportado, o que posso fazer?</title>
 
-      <para>Atualmente, a p&aacute;gina de manual para o <command>tip</command> est&aacute; desatualizada. H&aacute; um discador
-        gen&eacute;rico para Hayes j&aacute; embutido. S&oacute; &eacute; necess&aacute;rio usar <literal>at=hayes</literal> no seu
+      <para>Atualmente, a p&aacute;gina de manual para o <command>tip</command> 
+        est&aacute; desatualizada. H&aacute; um discador
+        gen&eacute;rico para Hayes j&aacute; embutido. S&oacute; 
+        &eacute; necess&aacute;rio usar <literal>at=hayes</literal> no seu
         arquivo <filename>/etc/remote</filename>.</para>
 
-      <para>O driver Hayes n&atilde;o &eacute; inteligente o bastante para reconhecer algumas das avan&ccedil;adas funcionalidades
-        do modems modems&mdash;messages mais novos como <literal>BUSY</literal>, <literal>NO DIALTONE</literal>, ou
-        <literal>CONNECT 115200</literal>, estas apenas ir&atilde;o confund&iacute;-lo. Voc&ecirc; deve desativar estas mensagens
-        quando utilizar o <command>tip</command> (utilizando <command>ATX0&amp;W</command>).</para>
+      <para>O driver Hayes n&atilde;o &eacute; inteligente o bastante 
+        para reconhecer algumas das avan&ccedil;adas funcionalidades
+        do modems modems&mdash;messages mais novos como 
+        <literal>BUSY</literal>, <literal>NO DIALTONE</literal>, ou
+        <literal>CONNECT 115200</literal>, estas apenas ir&atilde;o 
+        confund&iacute;-lo. Voc&ecirc; deve desativar estas mensagens
+        quando utilizar o <command>tip</command> (utilizando 
+        <command>ATX0&amp;W</command>).</para>
 
-      <para>Al&eacute;m disso, o intervalo entre discagens do <command>tip</command> &eacute; de 60 segundos.
-	Seu modem deve utilizar um valor menor ou este achar&aacute; que h&aacute; um problema na comunica&ccedil;&atilde;o.  Tente
+      <para>Al&eacute;m disso, o intervalo entre discagens do 
+        <command>tip</command> &eacute; de 60 segundos.
+	Seu modem deve utilizar um valor menor ou este achar&aacute; 
+        que h&aacute; um problema na comunica&ccedil;&atilde;o.  Tente
         <command>ATS7=45&amp;W</command>.</para>
 
       <note>
-	<para>O <command>tip</command> ainda n&atilde;o tem suporte completo a modems Hayes.  A
-          solu&ccedil;&atilde;o &eacute; editar o arquivo <filename>tipconf.h</filename> no diret&oacute;rio <filename>/usr/src/usr.bin/tip/tip</filename>. Obviamente,
-          voc&ecirc; precisar&aacute; do c&oacute;digo fonte do sistema para fazer isso.</para>
+	<para>O <command>tip</command> ainda n&atilde;o tem suporte 
+          completo a modems Hayes.  A
+          solu&ccedil;&atilde;o &eacute; editar o arquivo 
+          <filename>tipconf.h</filename> no diret&oacute;rio 
+          <filename>/usr/src/usr.bin/tip/tip</filename>. Obviamente,
+          voc&ecirc; precisar&aacute; do c&oacute;digo fonte 
+          do sistema para fazer isso.</para>
 
-	<para>Altere a linha <literal>#define HAYES 0</literal> para <literal>#define HAYES 1</literal>. ent&atilde;o execute os comandos
-          <command>make</command> e <command>make install</command>.  Tudo funcionar&aacute;  bem ap&oacute;s isso.</para>
+	<para>Altere a linha <literal>#define HAYES 0</literal> para 
+          <literal>#define HAYES 1</literal>. ent&atilde;o execute os comandos
+          <command>make</command> e <command>make install</command>.  Tudo 
+          funcionar&aacute;  bem ap&oacute;s isso.</para>
       </note>
     </sect2>
 
@@ -1898,36 +2123,47 @@ AT&amp;B2&amp;W</programlisting>
       <indexterm>
         <primary><filename>/etc/remote</filename></primary>
       </indexterm>
-      <para>Fa&ccedil;a o que &eacute; chamada de entrada <quote>direta</quote> em seu arquivo <filename>/etc/remote</filename>.  Por exemplo,
-        se seu modem est&aacute; ligado fisicamente na primeira porta serial, a <filename>/dev/cuaa0</filename>,
+      <para>Fa&ccedil;a o que &eacute; chamada de entrada <quote>direta</quote> 
+        em seu arquivo <filename>/etc/remote</filename>.  Por exemplo,
+        se seu modem est&aacute; ligado fisicamente na primeira 
+        porta serial, a <filename>/dev/cuaa0</filename>,
 	ent&atilde;o insira a seguinte linha:</para>
 
       <programlisting>cuaa0:dv=/dev/cuaa0:br#19200:pa=none</programlisting>
 
       <para>Informe a maior velocidade suportada pelo seu modem na habilidade br.
-	ent&atilde;o, digite <command>tip cuaa0</command> e voc&ecirc; ser&aacute; conectado ao seu modem.</para>
+	ent&atilde;o, digite <command>tip cuaa0</command> e voc&ecirc; 
+        ser&aacute; conectado ao seu modem.</para>
 
-      <para>Caso n&atilde;o exista um <filename>/dev/cuaa0</filename> no seu sistema, fa&ccedil;a isso:</para>
+      <para>Caso n&atilde;o exista um <filename>/dev/cuaa0</filename> no 
+        seu sistema, fa&ccedil;a isso:</para>
 
       <screen>&prompt.root; <userinput>cd /dev</userinput>
 &prompt.root; <userinput>sh MAKEDEV cuaa0</userinput></screen>
 
-      <para>Ou ent&atilde;o, fa&ccedil;a uso do comando <command>cu</command> como usu&aacute;rio <username>root</username> com o seguinte
+      <para>Ou ent&atilde;o, fa&ccedil;a uso do comando <command>cu</command> 
+        como usu&aacute;rio <username>root</username> com o seguinte
         comando:</para>
 
       <screen>&prompt.root; <userinput>cu -l<replaceable>linha</replaceable> -s<replaceable>velocidade</replaceable></userinput></screen>
 
-      <para><replaceable>linha</replaceable> &eacute; a porta serial (<filename>/dev/cuaa0</filename>) e a <replaceable>velocidade</replaceable> &eacute;
-        a velocidade (<literal>57600</literal>).  Quando voc&ecirc; terminar de entrar com os comandos AT tecle <keycap>~.</keycap> para sair.</para>
+      <para><replaceable>linha</replaceable> &eacute; a porta serial
+        (<filename>/dev/cuaa0</filename>) e a <replaceable>velocidade</replaceable> &eacute;
+        a velocidade (<literal>57600</literal>).  Quando voc&ecirc; terminar de 
+        entrar com os comandos AT tecle <keycap>~.</keycap> para sair.</para>
     </sect2>
 
     <sect2>
       <title>O sinal <literal>@</literal> para a habilidade pn n&atilde;o funciona!</title>
 
-      <para>O sinal <literal>@</literal> no n&uacute;mero do telefone diz ao tip para que este verifique
-        o arquivo <filename>/etc/phones</filename> para buscar um n&uacute;mero telef&ocirc;nico. Mas o sinal
-        <literal>@</literal> tamb&eacute;m &eacute; um caractere especial com habilidades em arquivos
-        como o <filename>/etc/remote</filename>.  Fuja disso com um sinal <literal>/</literal>:</para>
+      <para>O sinal <literal>@</literal> no n&uacute;mero 
+        do telefone diz ao tip para que este verifique
+        o arquivo <filename>/etc/phones</filename> para buscar 
+        um n&uacute;mero telef&ocirc;nico. Mas o sinal
+        <literal>@</literal> tamb&eacute;m &eacute; um 
+        caractere especial com habilidades em arquivos
+        como o <filename>/etc/remote</filename>.  Fuja 
+        disso com um sinal <literal>/</literal>:</para>
 
       <programlisting>pn=\@</programlisting>
     </sect2>
@@ -1935,7 +2171,8 @@ AT&amp;B2&amp;W</programlisting>
     <sect2>
       <title>Como discar para um n&uacute;mero telef&ocirc;nico pela linha de comando?</title>
 
-      <para>Coloque o que &eacute; chamado de entrada <quote>gen&eacute;rica</quote> no seu arquivo <filename>/etc/remote</filename>.  Por exemplo:</para>
+      <para>Coloque o que &eacute; chamado de entrada <quote>gen&eacute;rica</quote> 
+        no seu arquivo <filename>/etc/remote</filename>.  Por exemplo:</para>
 
       <programlisting>tip115200|Disca para qualquer n&uacute;mero telef&ocirc;nico &agrave; 115200 bps:\
         :dv=/dev/cuaa0:br#115200:at=hayes:pa=none:du:
@@ -1946,7 +2183,8 @@ tip57600|Disca para qualquer n&uacute;mero telef&ocirc;nico &agrave; 57600 bps:\
 
       <screen>&prompt.root; <userinput>tip -115200 5551234</userinput></screen>
 
-      <para>Se voc&ecirc; preferir utilizar o comando <command>cu</command> ao inv&eacute;s do <command>tip</command>,
+      <para>Se voc&ecirc; preferir utilizar o comando <command>cu</command> 
+        ao inv&eacute;s do <command>tip</command>,
 	use uma entrada gen&eacute;rica para o comando <literal>cu</literal>:</para>
 
       <programlisting>cu115200|Use o comando cu para discar &agrave; 115200bps:\
@@ -1961,8 +2199,10 @@ tip57600|Disca para qualquer n&uacute;mero telef&ocirc;nico &agrave; 57600 bps:\
       <title>Toda vez que eu for fazer isso tenho que faz&ecirc;-lo na mesma velocidade?</title>
 
       <para>Coloque uma entrada para o <literal>tip1200</literal> ou <literal>cu1200</literal>, mas
-        v&aacute; em frente e utilize qualquer velocidade que seja condizente com a habilidade br. O <command>tip</command> acha
-        um bom padr&atilde;o 1200&nbsp;bps que &eacute; o motivo para a entrada <literal>tip1200</literal>.  Voc&ecirc;
+        v&aacute; em frente e utilize qualquer velocidade que seja 
+        condizente com a habilidade br. O <command>tip</command> acha
+        um bom padr&atilde;o 1200&nbsp;bps que &eacute; o motivo 
+        para a entrada <literal>tip1200</literal>.  Voc&ecirc;
         n&atilde;o &eacute; obrigado a usar 1200&nbsp;bps,
 	no entanto.</para>
     </sect2>
@@ -1970,8 +2210,10 @@ tip57600|Disca para qualquer n&uacute;mero telef&ocirc;nico &agrave; 57600 bps:\
     <sect2>
       <title>Eu acesso diversos computadores atrav&eacute;s de um servidor de terminais</title>
 
-      <para>Particularmente para quem fica esperando at&eacute; estar conectado digitando <command>CONNECT &lt;host&gt;</command> toda vez,
-        utilize a habilidade <literal>cm</literal> do tip. Por exemplo, estas entradas em <filename>/etc/remote</filename>:</para>
+      <para>Particularmente para quem fica esperando at&eacute; estar conectado 
+        digitando <command>CONNECT &lt;host&gt;</command> toda vez,
+        utilize a habilidade <literal>cm</literal> do tip. Por exemplo, estas 
+        entradas em <filename>/etc/remote</filename>:</para>
 
       <programlisting>pain|pain.deep13.com|Computador do Forrester:\
         :cm=CONNECT pain\n:tc=deep13:
@@ -1980,8 +2222,10 @@ muffin|muffin.deep13.com|Computador do Frank:\
 deep13:Servidor de Terminais do Instituo Gizmonics:\
         :dv=/dev/cuaa2:br#38400:at=hayes:du:pa=none:pn=5551234:</programlisting>
 
-      <para>permitir  que voc&ecirc; digite <command>tip pain</command> ou <command>tip muffin</command> para
-        conectar aos computadores pain ou muffin, e <command>tip deep13</command> para acessar o servidor de
+      <para>permitir  que voc&ecirc; digite <command>tip pain</command> 
+        ou <command>tip muffin</command> para
+        conectar aos computadores pain ou muffin, e <command>tip deep13</command> 
+        para acessar o servidor de
         terminais.</para>
     </sect2>
 
@@ -1991,7 +2235,8 @@ deep13:Servidor de Terminais do Instituo Gizmonics:\
       <para>Este problema ocorre com frequ&ecirc;ncia em universidades que possuem diversas
         linhas com modems e milhares de estudantes tentando utiliz&aacute;-los.</para>
 
-      <para>Fa&ccedil;a uma entrada para sua universidade em <filename>/etc/remote</filename> e use o <literal>@</literal> para
+      <para>Fa&ccedil;a uma entrada para sua universidade em <filename>/etc/remote</filename> 
+        e use o <literal>@</literal> para
         a habilidade <literal>pn</literal>:</para>
 
       <programlisting>big-university:\
@@ -1999,15 +2244,18 @@ deep13:Servidor de Terminais do Instituo Gizmonics:\
 dialout:\
         :dv=/dev/cuaa3:br#9600:at=courier:du:pa=none:</programlisting>
 
-      <para>ent&atilde;o, informe os n&uacute;meros da universidade no <filename>/etc/phones</filename>:</para>
+      <para>ent&atilde;o, informe os n&uacute;meros da universidade 
+         no <filename>/etc/phones</filename>:</para>
 
       <programlisting>big-university 5551111
 big-university 5551112
 big-university 5551113
 big-university 5551114</programlisting>
 
-      <para>O <command>tip</command> tentar&aacute; cada um dos n&uacute;meros em ordem e ent&atilde;o desistir&aacute;.  Se
-        voc&ecirc; desejar que outras tentativas senha feitas, execute o <command>tip</command> num
+      <para>O <command>tip</command> tentar&aacute; cada um dos n&uacute;meros em 
+        ordem e ent&atilde;o desistir&aacute;.  Se
+        voc&ecirc; desejar que outras tentativas senha 
+        feitas, execute o <command>tip</command> num
         la&ccedil;o de repeti&ccedil;&atilde;o como o <quote>while</quote>.</para>
     </sect2>
 
@@ -2016,36 +2264,51 @@ big-university 5551114</programlisting>
           <keycap>P</keycap></keycombo> duas vezes para enviar um <keycombo action="simul">
           <keycap>Ctrl</keycap><keycap>P</keycap></keycombo>?</title>
 
-      <para>A combina&ccedil;&atilde;o <keycombo action="simul"><keycap>Ctrl</keycap><keycap>P</keycap></keycombo> &eacute;
-        o padr&atilde;o para <quote>for&ccedil;ar</quote> um caractere, utilizado para dizer ao <command>tip</command>
-        que o pr&oacute;ximo caractere &eacute; um dado literal.  Voc&ecirc; pode utilizar o escape <command>~s</command>
-        para definir o caractere de for&ccedil;ar qualquer outro, o que significa <quote>definir uma vari&aacute;vel.</quote></para>
+      <para>A combina&ccedil;&atilde;o <keycombo action="simul">
+        <keycap>Ctrl</keycap><keycap>P</keycap></keycombo> &eacute;
+        o padr&atilde;o para <quote>for&ccedil;ar</quote> um 
+        caractere, utilizado para dizer ao <command>tip</command>
+        que o pr&oacute;ximo caractere &eacute; um dado 
+        literal.  Voc&ecirc; pode utilizar o escape <command>~s</command>
+        para definir o caractere de for&ccedil;ar qualquer outro, o que 
+        significa <quote>definir uma vari&aacute;vel.</quote></para>
 
-      <para>Digite <command>~sforce=<replaceable>caractere &uacute;nico</replaceable></command>
-	seguido pela nova linha. O <replaceable>caractere &uacute;nico</replaceable> &eacute; qualquer caractere. Se voc&ecirc;
-        Se voc&ecirc; n&atilde;o informar o <replaceable>caractere &uacute;nico</replaceable>, ent&atilde;o ser&aacute; for&ccedil;ado
-        o caractere nulo, que voc&ecirc; obtem com <keycombo action="simul"><keycap>Ctrl</keycap><keycap>2</keycap>
+      <para>Digite <command>~sforce=<replaceable>caractere 
+        &uacute;nico</replaceable></command>
+	seguido pela nova linha. O <replaceable>caractere 
+        &uacute;nico</replaceable> &eacute; qualquer caractere. Se voc&ecirc;
+        Se voc&ecirc; n&atilde;o informar o <replaceable>caractere 
+        &uacute;nico</replaceable>, ent&atilde;o ser&aacute; for&ccedil;ado
+        o caractere nulo, que voc&ecirc; obtem com 
+        <keycombo action="simul"><keycap>Ctrl</keycap><keycap>2</keycap>
 	</keycombo> ou <keycombo action="simul"><keycap>Ctrl</keycap><keycap>Space</keycap>
 	</keycombo>. Um bom valor para o <replaceable>caractere &uacute;nico</replaceable> &eacute;
 	<keycombo action="simul"><keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>6</keycap>
 	</keycombo>, que s&oacute; &eacute; utilizado em alguns servidores de terminais.</para>
 
-      <para>Voc&ecirc; pode ter o caractere que quiser especificando num arquivo em seu diret&oacute;rio pessoal, <filename>&#36;HOME/.tiprc</filename>:</para>
+      <para>Voc&ecirc; pode ter o caractere que quiser especificando 
+        num arquivo em seu diret&oacute;rio pessoal, <filename>&#36;HOME/.tiprc</filename>:</para>
 
       <programlisting>force=&lt;caractere &uacute;nico&gt;</programlisting>
     </sect2>
 
     <sect2>
-      <title>Repentinamente tudo que &eacute; digitado aparece em letra mai&uacute;scula??</title>
+      <title>Repentinamente tudo que &eacute; digitado 
+        aparece em letra mai&uacute;scula??</title>
 
       <para>Voc&ecirc; tem que pressionar <keycombo action="simul"><keycap>Ctrl</keycap>
-	<keycap>A</keycap></keycombo>, o <quote>caractere de levantamento</quote> do <command>tip</command>
-        especialmente designado para pessoas com a tecla caps-lock quebradas. Use o <command>~s</command> como
-        abaixo para definir algo cab&iacute;vel como <literal>raisechar</literal>(caractere de levantamento). De fato,
-        voc&ecirc; pode definir o mesmo que o caractere de for&ccedil;ar caso voc&ecirc; nunca venha a fazer uso destas
+	<keycap>A</keycap></keycombo>, o <quote>caractere de 
+        levantamento</quote> do <command>tip</command>
+        especialmente designado para pessoas com a tecla 
+        caps-lock quebradas. Use o <command>~s</command> como
+        abaixo para definir algo cab&iacute;vel como <literal>raisechar</literal>(caractere 
+        de levantamento). De fato,
+        voc&ecirc; pode definir o mesmo que o caractere de 
+        for&ccedil;ar caso voc&ecirc; nunca venha a fazer uso destas
         funcionalidades.</para>
 
-      <para>Temos aqui um exemplo, um simples arquivo .tiprc perfeito para usu&aacute;rios do
+      <para>Temos aqui um exemplo, um simples arquivo .tiprc 
+        perfeito para usu&aacute;rios do
         <application>Emacs</application> que necessitam digitar <keycombo action="simul">
 	  <keycap>Ctrl</keycap><keycap>2</keycap></keycombo> e <keycombo action="simul">
 	  <keycap>Ctrl</keycap><keycap>A</keycap></keycombo> diversas vezes:</para>
@@ -2053,7 +2316,8 @@ big-university 5551114</programlisting>
       <programlisting>force=^^
 raisechar=^^</programlisting>
 
-      <para>O ^^ &eacute; o <keycombo action="simul"><keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>6</keycap>
+      <para>O ^^ &eacute; o <keycombo action="simul">
+        <keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>6</keycap>
 	</keycombo>.</para>
 
     </sect2>
@@ -2061,9 +2325,12 @@ raisechar=^^</programlisting>
     <sect2>
       <title>Como transfiro arquivos com o <command>tip</command>?</title>
 
-      <para>Se voc&ecirc; estiver falando de um outro sistema &unix;, voc&ecirc; pode enviar e receber arquivos com
-        <command>~p</command> (put) e <command>~t</command> (take).  Estes comandos executam
-	<command>cat</command> e <command>echo</command> no sistema remoto para aceitar e enviar
+      <para>Se voc&ecirc; estiver falando de um outro sistema &unix;, voc&ecirc; 
+        pode enviar e receber arquivos com
+        <command>~p</command> (put) e <command>~t</command> (take).  Estes 
+        comandos executam
+	<command>cat</command> e <command>echo</command> no sistema 
+        remoto para aceitar e enviar
         arquivos.  A sintaxe &eacute;:</para>
 
       <cmdsynopsis>
@@ -2078,17 +2345,22 @@ raisechar=^^</programlisting>
 	<arg choice="opt">Arquivo-local</arg>
       </cmdsynopsis>
 
-      <para>n&atilde;o h&aacute; checagem de erro, ent&atilde;o voc&ecirc; deve utilizar um outro protocolo para isso, como zmodem.</para>
+      <para>n&atilde;o h&aacute; checagem de erro, ent&atilde;o voc&ecirc; deve 
+         utilizar um outro protocolo para isso, como zmodem.</para>
     </sect2>
 
     <sect2>
       <title>Como eu executo o zmodem com o <command>tip</command>?</title>
 
-      <para>Para receber um arquivo, inicie o programa de envio no sistema remoto.
-	ent&atilde;o, digite <command>~C rz</command> para iniciar o recebimento localmente.</para>
+      <para>Para receber um arquivo, inicie o 
+        programa de envio no sistema remoto.
+	ent&atilde;o, digite <command>~C rz</command> para iniciar 
+        o recebimento localmente.</para>
 
-      <para>Para enviar arquivos, inicie o programa de recebimento no sistema remoto.
-	ent&atilde;o, digite <command>~C sz <replaceable>arquivos</replaceable></command> para envi&aacute;-los
+      <para>Para enviar arquivos, inicie o programa 
+        de recebimento no sistema remoto.
+	ent&atilde;o, digite <command>~C sz <replaceable>arquivos</replaceable>
+        </command> para envi&aacute;-los
         para o sistema remoto.</para>
     </sect2>
   </sect1>
@@ -2116,18 +2388,27 @@ raisechar=^^</programlisting>
     <sect2 id="serialconsole-intro">
       <title>Introdu&ccedil;&atilde;o</title>
 
-      <para>O FreeBSD tem a habilidade de bootar em um sistema que possua somente um terminal burro
-        como console, conectado na porta serial.  Esta configura&ccedil;&atilde;o pode ser &uacute;til para duas classes
-        de pessoas: administradores de sistema que desejam instalar o FreeBSD em m&aacute;quinas
-        que n&atilde;o possuem teclado ou monitor conectados, e desenvolvedores que querem depurar o kernel
+      <para>O FreeBSD tem a habilidade de bootar em um sistema 
+        que possua somente um terminal burro
+        como console, conectado na porta serial.  Esta 
+        configura&ccedil;&atilde;o pode ser &uacute;til para duas classes
+        de pessoas: administradores de sistema que desejam 
+        instalar o FreeBSD em m&aacute;quinas
+        que n&atilde;o possuem teclado ou monitor conectados, e 
+        desenvolvedores que querem depurar o kernel
         ou drivers de dispositivos.</para>
 
-      <para>Como descrito em <xref linkend="boot">, o FreeBSD emprega em seu boot tr&ecirc;s est&aacute;gios.  Os
-        primeiros dois est&aacute;gios est&atilde;o no c&oacute;digo do bloco de boot que &eacute; armazenado no in&iacute;cio da parti&ccedil;&atilde;o
-        do disco de boot do FreeBSD. O bloco de boot carregar&aacute; e executar&aacute; o carregador de
-        boot (<filename>/boot/loader</filename>) como o terceiro est&aacute;gio de boot.</para>
+      <para>Como descrito em <xref linkend="boot">, o FreeBSD emprega em seu 
+        boot tr&ecirc;s est&aacute;gios.  Os
+        primeiros dois est&aacute;gios est&atilde;o no c&oacute;digo do 
+        bloco de boot que &eacute; armazenado no in&iacute;cio da parti&ccedil;&atilde;o
+        do disco de boot do FreeBSD. O bloco de boot 
+        carregar&aacute; e executar&aacute; o carregador de
+        boot (<filename>/boot/loader</filename>) como o terceiro 
+        est&aacute;gio de boot.</para>
 
-      <para>Visando iniciar a console serial voc&Ecirc; deve configurar o c&oacute;digo do bloco de boot, o carregador
+      <para>Visando iniciar a console serial voc&Ecirc; deve configurar 
+        o c&oacute;digo do bloco de boot, o carregador
         de boot e o kernel do sistema.</para>
 
     </sect2>
@@ -2140,43 +2421,65 @@ raisechar=^^</programlisting>
 	  <para>Prepare um cabo serial.</para>
 
 	  <indexterm><primary>null-modem cable</primary></indexterm>
-	  <para>Voc&ecirc; precisar&aacute; de um cabo serial para modem ou um cabo serial padr&atilde;o
-            e um conector para serial de modem. Visite <xref linkend="serial-cables-ports"> para
+	  <para>Voc&ecirc; precisar&aacute; de um cabo serial para 
+            modem ou um cabo serial padr&atilde;o
+            e um conector para serial de modem. Visite 
+            <xref linkend="serial-cables-ports"> para
             um debate sobre cabos seriais.</para>
 	</step>
 
 	<step>
 	  <para>Desconecte seu teclado.</para>
 
-	  <para>A maioria dos sistemas PC testa a exist&ecirc;ncia de um teclado durante o POST (Power-On
-	    Self-Test) e gerar&aacute; um erro se o teclado n&atilde;o for detectado. Algumas m&aacute;quinas reclamam
-            a falta de um teclado de maneira tal que n&atilde;o prosseguem para o boot at&eacute;
+	  <para>A maioria dos sistemas PC testa a exist&ecirc;ncia de 
+            um teclado durante o POST (Power-On
+	    Self-Test) e gerar&aacute; um erro se o teclado 
+            n&atilde;o for detectado. Algumas m&aacute;quinas reclamam
+            a falta de um teclado de maneira tal que n&atilde;o 
+            prosseguem para o boot at&eacute;
             que se tenha um teclado conectado.</para>
 
-	  <para>Se seu computador retorna este erro mas ainda assim prossegue com o boot ent&atilde;o
-            voc&ecirc; n&atilde;o ter&aacute; que fazer nada especial. (Algumas m&aacute;quinas que possuem a BIOS Phoenix
-            instalada apenas retornam <errorname>Keyboard failed</errorname> e continuam com
+	  <para>Se seu computador retorna este erro mas ainda 
+            assim prossegue com o boot ent&atilde;o
+            voc&ecirc; n&atilde;o ter&aacute; que fazer nada especial. (Algumas 
+            m&aacute;quinas que possuem a BIOS Phoenix
+            instalada apenas retornam <errorname>Keyboard failed</errorname> 
+            e continuam com
             o boot normalmente.)</para>
 
-	  <para>Se seu computador se recusa a continuar o boot sem ter um teclado conectado ent&atilde;o
-            voc&ecirc; ter&aacute; que configurar a BIOS para que este erro seja ignorado(se for poss&iacute;vel). Consulte
-            o manual da sua placa-m&atilde;e para verificar como fazer isso.</para>
+	  <para>Se seu computador se recusa a continuar o boot 
+            sem ter um teclado conectado ent&atilde;o
+            voc&ecirc; ter&aacute; que configurar a BIOS para 
+            que este erro seja ignorado(se for poss&iacute;vel). Consulte
+            o manual da sua placa-m&atilde;e para verificar 
+            como fazer isso.</para>
 
 	  <tip>
-	    <para>Configurar na BIOS que o teclado <quote>n&atilde;o foi instalado</quote> n&atilde;o
-              significa que voc&ecirc; n&atilde;o poder&aacute; fazer uso do seu teclado posteriormente. Isso &eacute; para dizer para
-              a BIOS que n&atilde;o cheque por um teclado quando a m&aacute;quina for ligada, o que
-              far&aacute; com que ela n&atilde;o reporte que o teclado n&atilde;o est&aacute; conectado. Voc&ecirc; pode deixar
-              o teclado conectado mesmo com esta configura&ccedil;&atilde;o feita e este funcionar&aacute; normalmente.</para>
+	    <para>Configurar na BIOS que o teclado <quote>n&atilde;o 
+              foi instalado</quote> n&atilde;o
+              significa que voc&ecirc; n&atilde;o poder&aacute; fazer uso 
+              do seu teclado posteriormente. Isso &eacute; para dizer para
+              a BIOS que n&atilde;o cheque por um teclado 
+              quando a m&aacute;quina for ligada, o que
+              far&aacute; com que ela n&atilde;o reporte que o teclado 
+              n&atilde;o est&aacute; conectado. Voc&ecirc; pode deixar
+              o teclado conectado mesmo com esta configura&ccedil;&atilde;o 
+              feita e este funcionar&aacute; normalmente.</para>
 	  </tip>
 
 	  <note>
-	    <para>Se seu sistema possue um mouse &ps2;, s&atilde;o grandes as chances de voc&ecirc; ter que desconectar
-              seu mouse assim como seu teclado. Isto devido a mouses &ps2; compartilharem dispositivos
-              f&iacute;sicos com teclados e deixando o mouse conectado pode resultar na detec&ccedil;&atilde;o de que
-              o teclado tamb&eacute;m est&aacute; conectado. Isto &eacute; reportado pelo sistema Gateway 2000 Pentium 90&nbsp;MHz
-              com a BIOS AMI, que se comporta desta maneira. No geral, isto n&atilde;o &eacute; um problema desde
-              que o mouse n&atilde;o &eacute; muito &uacute;til sem um teclado.</para>
+	    <para>Se seu sistema possue um mouse &ps2;, s&atilde;o 
+              grandes as chances de voc&ecirc; ter que desconectar
+              seu mouse assim como seu teclado. Isto devido a 
+              mouses &ps2; compartilharem dispositivos
+              f&iacute;sicos com teclados e deixando o mouse 
+              conectado pode resultar na detec&ccedil;&atilde;o de que
+              o teclado tamb&eacute;m est&aacute; conectado. Isto 
+              &eacute; reportado pelo sistema Gateway 2000 Pentium 90&nbsp;MHz
+              com a BIOS AMI, que se comporta desta maneira. No 
+              geral, isto n&atilde;o &eacute; um problema desde
+              que o mouse n&atilde;o &eacute; muito 
+              &uacute;til sem um teclado.</para>
 	  </note>
 	</step>
 
@@ -2184,21 +2487,34 @@ raisechar=^^</programlisting>
 	  <para>Conecte o terminal burro na <devicename>COM1</devicename>
 	    (<devicename>sio0</devicename>).</para>
 
-	  <para>Se voc&ecirc; n&atilde;o possui um terminal burro, &eacute; poss¡vel fazer uso de um PC/XT antigo
-            com um programa de modem, ou uma porta serial num outro sistema &unix;. Se voc&ecirc; n&atilde;o
+	  <para>Se voc&ecirc; n&atilde;o possui um terminal 
+            burro, &eacute; poss¡vel fazer uso de um PC/XT antigo
+            com um programa de modem, ou uma porta serial 
+            num outro sistema &unix;. Se voc&ecirc; n&atilde;o
             possui uma <devicename>COM1</devicename>
-            (<devicename>sio0</devicename>), consiga uma. Para o que se pretende n&atilde;o h&aacute; uma maneira de selecionar outra
-            porta que n&atilde;o a <devicename>COM1</devicename>, para ser utilizada com o bloco de boot sem recompil&aacute;-lo. Se
-            voc&ecirc; j&aacute; est&aacute; usando a <devicename>COM1</devicename> para outro dispositivo, voc&ecirc; ter&aacute; que remov&ecirc;-lo temporariamente para instalar um novo bloco de boot e kernel, uma vez que
-            seu FreeBSD esteja em execu&ccedil;&atilde;o. (&Eacute; assumido que a <devicename>COM1</devicename> estar&aacute;
-            dispon&iacute;vel neste servidor sem monitor e teclado; se voc&ecirc; realmente tem a necessidade
-            de usar a <devicename>COM1</devicename> para outra coisa (e voc&ecirc; n&atilde;o pode mudar a utiliza&ccedil;&atilde;o
-            da <devicename>COM1</devicename> para a <devicename>COM2</devicename> (<devicename>sio1</devicename>)),
-            ent&atilde;o provavelmente voc&ecirc; n&atilde;o tem que se pertubar com isso em primero lugar.)</para>
+            (<devicename>sio0</devicename>), consiga uma. Para o 
+            que se pretende n&atilde;o h&aacute; uma 
+            maneira de selecionar outra
+            porta que n&atilde;o a <devicename>COM1</devicename>, para 
+            ser utilizada com o bloco de boot sem recompil&aacute;-lo. Se
+            voc&ecirc; j&aacute; est&aacute; usando a <devicename>COM1</devicename> 
+            para outro dispositivo, voc&ecirc; ter&aacute; que remov&ecirc;-lo 
+            temporariamente para instalar um novo bloco de boot e kernel, uma vez que
+            seu FreeBSD esteja em execu&ccedil;&atilde;o. (&Eacute; 
+            assumido que a <devicename>COM1</devicename> estar&aacute;
+            dispon&iacute;vel neste servidor sem monitor 
+            e teclado; se voc&ecirc; realmente tem a necessidade
+            de usar a <devicename>COM1</devicename> para outra 
+            coisa (e voc&ecirc; n&atilde;o pode mudar a utiliza&ccedil;&atilde;o
+            da <devicename>COM1</devicename> para 
+            a <devicename>COM2</devicename> (<devicename>sio1</devicename>)),
+            ent&atilde;o provavelmente voc&ecirc; n&atilde;o 
+            tem que se pertubar com isso em primero lugar.)</para>
 	</step>
 
 	<step>
-	  <para>Certifique-se de que o arquivo de configura&ccedil;&atilde;o do seu kernel tem as configura&ccedil;&otilde;es
+	  <para>Certifique-se de que o arquivo de configura&ccedil;&atilde;o do 
+            seu kernel tem as configura&ccedil;&otilde;es
             apropriadas para a <devicename>COM1</devicename>
             (<devicename>sio0</devicename>).</para>
 
@@ -2209,9 +2525,17 @@ raisechar=^^</programlisting>
 	      <term><literal>0x10</literal></term>
 
 	      <listitem>
-		<para>Ativa o suporte a console nesta unidade. As outras configura&ccedil;&otilde;es ser&atilde;o ignoradas se esta
-                  for definida. Atualmente, pelo menos uma unidade tem que ter a configura&ccedil;&atilde;o de suporte a console; &eacute;
-                  desej&aacute;vel que seja a primeira (na ordem do arquivo de configura&ccedil;&atilde;o). Esta op&ccedil;&atilde;o sozinha n&atilde;o far&aacute; da porta serial uma porta para console. Defina a configura&ccedil;&atilde;o seguinte ou use a op&ccedil;&atilde;o <option>-h</option> descrita abaixo, junto com a configura&ccedil;&atilde;o de console.</para>
+		<para>Ativa o suporte a console nesta unidade. As 
+                  outras configura&ccedil;&otilde;es 
+                  ser&atilde;o ignoradas se esta
+                  for definida. Atualmente, pelo menos uma unidade tem que ter a 
+                  configura&ccedil;&atilde;o de suporte a console; &eacute;
+                  desej&aacute;vel que seja a primeira (na ordem do arquivo de 
+                  configura&ccedil;&atilde;o). Esta op&ccedil;&atilde;o sozinha 
+                  n&atilde;o far&aacute; da porta serial uma porta para console. Defina 
+                  a configura&ccedil;&atilde;o seguinte ou use a op&ccedil;&atilde;o 
+                  <option>-h</option> descrita abaixo, junto com a 
+                  configura&ccedil;&atilde;o de console.</para>
 	      </listitem>
 	    </varlistentry>
 
@@ -2219,9 +2543,14 @@ raisechar=^^</programlisting>
 	      <term><literal>0x20</literal></term>
 
 	      <listitem>
-		<para>For&ccedil;a que esta unidade seja uma console (a menos que exista uma outra com maior prioridade),
-                  sem levar em considera&ccedil;&atilde;o a op&ccedil;&atilde;o <option>-h</option> discutida abaixo.  Esta configura&ccedil;&atilde;o sobrep&otilde;e
-                  a op&ccedil;&atilde;o <literal>COMCONSOLE</literal> na vers&atilde;o 2 do FreeBSD 2.<replaceable>X</replaceable>.  O valor de configura&ccedil;&atilde;o <literal>0x20</literal>
+		<para>For&ccedil;a que esta unidade seja uma 
+                  console (a menos que exista uma outra com maior prioridade),
+                  sem levar em considera&ccedil;&atilde;o a op&ccedil;&atilde;o 
+                  <option>-h</option> discutida abaixo.  Esta 
+                  configura&ccedil;&atilde;o sobrep&otilde;e
+                  a op&ccedil;&atilde;o <literal>COMCONSOLE</literal> na 
+                  vers&atilde;o 2 do FreeBSD 2.<replaceable>X</replaceable>.  O valor 
+                  de configura&ccedil;&atilde;o <literal>0x20</literal>
                   deve ser usado junto com o valor <option>0x10</option>.</para>
 	      </listitem>
 	    </varlistentry>
@@ -2231,15 +2560,22 @@ raisechar=^^</programlisting>
 
 	      <listitem>
 		<para>Reserve esta unidade (em conjunto com <literal>0x10</literal>) e
-                  far&aacute; com que a unidade fique indispon&iacute;vel para acesso normal. Voc&ecirc; n&atilde;o deve configurar este valor para a unidade de porta serial que voc&ecirc; quer usar
-                  como console. A &uacute;nica utiliza&ccedil;&atilde;o deste valor &eacute; para designar a unidade para
+                  far&aacute; com que a unidade fique indispon&iacute;vel para 
+                  acesso normal. Voc&ecirc; n&atilde;o deve configurar este valor 
+                  para a unidade de porta serial que voc&ecirc; quer usar
+                  como console. A &uacute;nica utiliza&ccedil;&atilde;o deste 
+                  valor &eacute; para designar a unidade para
                   depura&ccedil;&atilde;o remota de kernel. Visite <ulink
                   url="../developers-handbook/index.html">The
-                  Developer's Handbook</ulink> para maiores informa&ccedil;&otilde;es sobre depura&ccedil;&atilde;o remota.</para>
+                  Developer's Handbook</ulink> para maiores informa&ccedil;&otilde;es 
+                  sobre depura&ccedil;&atilde;o remota.</para>
 
 		<note>
-		  <para>No FreeBSD&nbsp;4.0 ou acima a sem&acirc;ntica do valor <literal>0x40</literal>
-                    &eacute; ligeiramente diferente e h&aacute; um outro valor para especificar que a porta serial ser&aacute; utilizada para depura&ccedil;&atilde;o remota.</para>
+		  <para>No FreeBSD&nbsp;4.0 ou acima a sem&acirc;ntica 
+                    do valor <literal>0x40</literal>
+                    &eacute; ligeiramente diferente e h&aacute; um outro valor 
+                    para especificar que a porta serial ser&aacute; utilizada 
+                    para depura&ccedil;&atilde;o remota.</para>
 		</note>
 	      </listitem>
 	    </varlistentry>
@@ -2251,28 +2587,37 @@ raisechar=^^</programlisting>
 
 	  <para>Veja a p&aacute;gina de manual do &man.sio.4; para maiores detalhes.</para>
 
-	  <para>Se os valores n&atilde;o forem definidos, voc&ecirc; precisar&aacute; executar UserConfig (em um console diferente)
+	  <para>Se os valores n&atilde;o forem definidos, voc&ecirc; precisar&aacute; 
+            executar UserConfig (em um console diferente)
             ou recompilar o kernel.</para>
 	</step>
 
 	<step>
-	  <para>Crie o arquivo <filename>boot.config</filename> no diret&oacute;rio root da parti&ccedil;&atilde;o
+	  <para>Crie o arquivo <filename>boot.config</filename> no diret&oacute;rio 
+            root da parti&ccedil;&atilde;o
             <literal>a</literal> no disco de boot.</para>
 
-	  <para>Este arquivo instruir&aacute; o c&oacute;digo do bloco de boot do sistema. Visando ativar
-            a console serial, voc&ecirc; precisar&aacute; de uma ou mais da seguinte op&ccedil;&atilde;o options&mdash;
-            se voc&ecirc; quiser m&uacute;ltiplas op&ccedil;&otilde;es inclua todas na mesma linha:</para>
+	  <para>Este arquivo instruir&aacute; o c&oacute;digo do 
+            bloco de boot do sistema. Visando ativar
+            a console serial, voc&ecirc; precisar&aacute; de uma ou 
+            mais da seguinte op&ccedil;&atilde;o options&mdash;
+            se voc&ecirc; quiser m&uacute;ltiplas op&ccedil;&otilde;es 
+            inclua todas na mesma linha:</para>
 
 	  <variablelist>
 	    <varlistentry>
 	      <term><option>-h</option></term>
 
 	      <listitem>
-		<para>Alterna entre console interna e seriais.  Voc&ecirc; pode utilizar para
-		  alternar dispositivos de console.  Por exemplo, se voc&ecirc; iniciar o sistema com a console interna (monitor de v&iacute;deo)
-              voc&ecirc; pode utilizar <option>-h</option> para direcionar o carregamento do boot e o kernel para a porta
-              serial como um dispositivo de console. No contr&aacute;rio, com <option>-h</option> voc&ecirc; pode direcionar da console
-              da porta serial para a sua console do monitor de v&iacute;deo.</para>
+		<para>Alterna entre console interna e 
+                  seriais.  Voc&ecirc; pode utilizar para
+		  alternar dispositivos de console.  Por exemplo, se voc&ecirc; 
+                  iniciar o sistema com a console interna (monitor de v&iacute;deo)
+                  voc&ecirc; pode utilizar <option>-h</option> para direcionar 
+                  o carregamento do boot e o kernel para a porta
+                  serial como um dispositivo de console. No contr&aacute;rio, com 
+                  <option>-h</option> voc&ecirc; pode direcionar da console
+                  da porta serial para a sua console do monitor de v&iacute;deo.</para>
 	      </listitem>
 	    </varlistentry>
 
@@ -2280,13 +2625,21 @@ raisechar=^^</programlisting>
 	      <term><option>-D</option></term>
 
 	      <listitem>
-		<para>Alterna configura&ccedil;&otilde;es de console &uacute;nica ou dupla.  Numa configura&ccedil;&atilde;o de console &uacute;nica voc&ecirc; ter&aacute; unicamente
-              a console interna(monitor de v&iacute;deo) ou a console da porta serial, dependendo do que foi configurado na
-              op&ccedil;&atilde;o <option>-h</option>. Numa configura&ccedil;&atilde;o de console dupla, ambas, a console interna e a console serial
-              ser&atilde;o utiliz&aacute;veis simult&acirc;neamente, independente da configura&ccedil;&atilde;o do <option>-h</option>. Entretanto, a
-              configura&ccedil;&atilde;o de console dupla ter&aacute; efeito somente durante a execu&ccedil;&atilde;o do bloco de boot. Uma vez que o
-              controlador de boot assumir o controle, a console especificada pela op&ccedil;&atilde;o <option>-h</option> ser&aacute; a
-              &uacute;nica console.</para>
+		<para>Alterna configura&ccedil;&otilde;es de console &uacute;nica 
+                    ou dupla.  Numa configura&ccedil;&atilde;o de console 
+                    &uacute;nica voc&ecirc; ter&aacute; unicamente
+                    a console interna(monitor de v&iacute;deo) ou a console 
+                    da porta serial, dependendo do que foi configurado na
+                    op&ccedil;&atilde;o <option>-h</option>. Numa 
+                    configura&ccedil;&atilde;o de console dupla, ambas, a 
+                    console interna e a console serial
+                    ser&atilde;o utiliz&aacute;veis simult&acirc;neamente, independente 
+                    da configura&ccedil;&atilde;o do <option>-h</option>. Entretanto, a
+                    configura&ccedil;&atilde;o de console dupla ter&aacute; efeito somente 
+                    durante a execu&ccedil;&atilde;o do bloco de boot. Uma vez que o
+                    controlador de boot assumir o controle, a console especificada 
+                    pela op&ccedil;&atilde;o <option>-h</option> ser&aacute; a
+                    &uacute;nica console.</para>
 	      </listitem>
 	    </varlistentry>
 
@@ -2294,44 +2647,64 @@ raisechar=^^</programlisting>
 	      <term><option>-P</option></term>
 
 	      <listitem>
-		<para>Faz com que o bloco de boot tente detectar o teclado.  Caso n&atilde;o encontre, a op&ccedil;&atilde;o <option>-D</option> e <option>-h</option>
-              s&atilde;o ajustadas automaticamente.</para>
+		<para>Faz com que o bloco de boot tente detectar o teclado.  Caso 
+                   n&atilde;o encontre, a op&ccedil;&atilde;o <option>-D</option> e <option>-h</option>
+                   s&atilde;o ajustadas automaticamente.</para>
 
 		<note>
-		  <para>Devido as defini&ccedil;&otilde;es de espa&ccedil;o da vers&atilde;o atual dos blocos de boot a op&ccedil;&atilde;o <option>-P</option>
-                s&oacute; &eacute; capaz de detectar teclados extendidos.  Teclados com menos de 101 teclas (e sem as teclas F11 e F12)
-                n&atilde;o poderao ser detectados. Alguns tipos de teclados de computadores port&aacute;teis(laptops) n&atilde;o poder&atilde;o ser detectados
-                corretamente devido a esta limita&ccedil;&atilde;o.  Se este &eacute; o caso do seu sistema, voc&ecirc; ter&aacute; que abandonar o uso da
-                op&ccedil;&atilde;o <option>-P</option>. Infelizmente, n&atilde;o h&aacute; op&ccedil;&otilde;es para este problema.</para>
+		  <para>Devido as defini&ccedil;&otilde;es de espa&ccedil;o da vers&atilde;o 
+                     atual dos blocos de boot a op&ccedil;&atilde;o <option>-P</option>
+                     s&oacute; &eacute; capaz de detectar teclados extendidos.  Teclados com menos 
+                     de 101 teclas (e sem as teclas F11 e F12)
+                     n&atilde;o poderao ser detectados. Alguns tipos de teclados de computadores 
+                     port&aacute;teis(laptops) n&atilde;o poder&atilde;o ser detectados
+                     corretamente devido a esta limita&ccedil;&atilde;o.  Se este &eacute; o caso 
+                     do seu sistema, voc&ecirc; ter&aacute; que abandonar o uso da
+                     op&ccedil;&atilde;o <option>-P</option>. Infelizmente, n&atilde;o h&aacute; 
+                     op&ccedil;&otilde;es para este problema.</para>
 		</note>
 	      </listitem>
 	    </varlistentry>
 	  </variablelist>
 
-	  <para>Utilize uma op&ccedil;&atilde;o qualquer de <option>-P</option> para selecionar a console automaticamente, ou a op&ccedil;&atilde;o
-	    <option>-h</option> para ativar a console serial.</para>
+	  <para>Utilize uma op&ccedil;&atilde;o qualquer de <option>-P</option> para 
+               selecionar a console automaticamente, ou a op&ccedil;&atilde;o
+	       <option>-h</option> para ativar a console serial.</para>
 
-	  <para>Voc&ecirc; pode ainda incluir outras op&ccedil;&otilde;es como bem descrito em &man.boot.8;.</para>
+	  <para>Voc&ecirc; pode ainda incluir outras op&ccedil;&otilde;es 
+               como bem descrito em &man.boot.8;.</para>
 
-	  <para>As op&ccedil;&otilde;es, com exce&ccedil;&atilde;o da op&ccedil;&atilde;o <option>-P</option>, ser&atilde;o passadas ao carregador de boot (<filename>/boot/loader</filename>).  O
-          carregador de boot determinar&aacute; entre o v&iacute;deo ou a porta serial qual dever&aacute; ser utilizado para a console examinando
-          a configura&ccedil;&atilde;o da op&ccedil;&atilde;o <option>-h</option>. Isto significa que, se voc&ecirc; especificar a op&ccedil;&atilde;o <option>-D</option>
-          mas n&atilde;o a op&ccedil;&atilde;o <option>-h</option> no arquivo <filename>/boot.config</filename>, voc&ecirc; poder&aacute; utilizar a porta serial
-          como console apenas durante o bloco de boot;  o carregador de boot usar&aacute; o v&iacute;deo como console.</para>
+	  <para>As op&ccedil;&otilde;es, com exce&ccedil;&atilde;o da op&ccedil;&atilde;o 
+            <option>-P</option>, ser&atilde;o passadas ao carregador de 
+            boot (<filename>/boot/loader</filename>).  O
+            carregador de boot determinar&aacute; entre o v&iacute;deo 
+            ou a porta serial qual dever&aacute; ser utilizado para a console examinando
+            a configura&ccedil;&atilde;o da op&ccedil;&atilde;o <option>-h</option>. Isto 
+            significa que, se voc&ecirc; especificar a op&ccedil;&atilde;o <option>-D</option>
+            mas n&atilde;o a op&ccedil;&atilde;o <option>-h</option> no 
+            arquivo <filename>/boot.config</filename>, voc&ecirc; 
+            poder&aacute; utilizar a porta serial
+            como console apenas durante o bloco de boot;  o carregador de 
+            boot usar&aacute; o v&iacute;deo como console.</para>
 	</step>
 
 	<step>
 	  <para>Boot o computador.</para>
 
-	  <para>Quando voc&ecirc; iniciar o seu sistema FreeBSD, o bloco de boot listar&aacute; o conte&uacute;do de <filename>/boot.config</filename>
-          na console.  Por exemplo:</para>
+	  <para>Quando voc&ecirc; iniciar o seu sistema FreeBSD, o bloco de boot 
+            listar&aacute; o conte&uacute;do de <filename>/boot.config</filename>
+            na console.  Por exemplo:</para>
 
 	  <screen>/boot.config: -P
 Keyboard: no</screen>
 
-	  <para>A segunda linha aparece somente se voc&ecirc; colocar a op&ccedil;&atilde;o <option>-P</option> no <filename>/boot.config</filename> que
-          indicar&aacute; a presen&ccedil;a/aus&ecirc;ncia do teclado.  Estas mensagens ir&atilde;o tanto para a console serial, ou para a interna, ou ainda para ambas, depender&aacute;
-          das op&ccedil;&otilde;es em <filename>/boot.config</filename>.</para>
+	  <para>A segunda linha aparece somente se voc&ecirc; colocar a 
+            op&ccedil;&atilde;o <option>-P</option> no 
+            <filename>/boot.config</filename> que
+            indicar&aacute; a presen&ccedil;a/aus&ecirc;ncia do teclado.  Estas 
+            mensagens ir&atilde;o tanto para a console serial, ou 
+            para a interna, ou ainda para ambas, depender&aacute;
+            das op&ccedil;&otilde;es em <filename>/boot.config</filename>.</para>
 
 	  <informaltable frame="none">
 	    <tgroup cols="2">
@@ -2376,37 +2749,54 @@ Keyboard: no</screen>
 	    </tgroup>
 	  </informaltable>
 
-	  <para>Ap&oacute;s as mensagens acima haver&aacute; uma pequena pausa antes que bloco de boot continue o carregamento do boot
-          e antes que qualquer mensagem seja listada na console. Sob circunst&acirc;ncias normais, voc&ecirc; n&atilde;o precisar&aacute; interromper o
-          boot, mas voc&ecirc; pode querer fazer algo para certificar que tudo foi configurado corretamente.</para>
+	  <para>Ap&oacute;s as mensagens acima haver&aacute; uma pequena 
+            pausa antes que bloco de boot continue o carregamento do boot
+            e antes que qualquer mensagem seja listada na console. Sob 
+            circunst&acirc;ncias normais, voc&ecirc; n&atilde;o 
+            precisar&aacute; interromper o
+            boot, mas voc&ecirc; pode querer fazer algo para certificar 
+            que tudo foi configurado corretamente.</para>
 
-	  <para>Pressione qualquer tecla diferente de <keycode>Enter</keycode> na console para interromper o processo de boot.  O bloco
-          de boot apresentar&aacute; um prompt que permitir&aacute; fazer a&ccedil;&otilde;es adicionais.  Voc&ecirc; deve ver algo como:</para>
+	  <para>Pressione qualquer tecla diferente de <keycode>Enter</keycode> na 
+            console para interromper o processo de boot.  O bloco
+            de boot apresentar&aacute; um prompt que permitir&aacute; fazer 
+            a&ccedil;&otilde;es adicionais.  Voc&ecirc; deve ver algo como:</para>
 
 	  <screen>>> FreeBSD/i386 BOOT
 Default: 0:wd(0,a)/boot/loader
 boot:</screen>
 
-	  <para>Verifique se a mensagem acima aparece somente na serial ou na interna, ou ainda em ambas, de acordo como voc&ecirc; definiu
-          em <filename>/boot.config</filename>.  Se a mensagem aparece na console correta, pressione <keycode>Enter</keycode> para
-          continuar o processo de boot.</para>
+	  <para>Verifique se a mensagem acima aparece somente na serial ou 
+            na interna, ou ainda em ambas, de acordo como voc&ecirc; definiu
+            em <filename>/boot.config</filename>.  Se a mensagem aparece na 
+            console correta, pressione <keycode>Enter</keycode> para
+            continuar o processo de boot.</para>
 
-	  <para>Se voc&ecirc; quer usar a console serial mas voc&ecirc; n&atilde;o v&ecirc; o prompt no terminal serial, algo est&aacute; errado em suas
-          configura&ccedil;&otilde;es.  No momento certo, voc&ecirc; entrou com a op&ccedil;&atilde;o <option>-h</option> e pressionou
-          Enter/Return (se porss&iacute;vel) para dizer ao bloco de boot(e ent&atilde;o ao carregador de boot e ao kernel) para
-          escolher a porta serial para a console. Uma vez que o sistema estiver utiliz&aacute;vel, volte e verifique o que est&aacute; errado.</para>
+	  <para>Se voc&ecirc; quer usar a console serial mas voc&ecirc; 
+            n&atilde;o v&ecirc; o prompt no terminal serial, algo est&aacute; errado em suas
+            configura&ccedil;&otilde;es.  No momento certo, voc&ecirc; entrou 
+            com a op&ccedil;&atilde;o <option>-h</option> e pressionou
+            Enter/Return (se porss&iacute;vel) para dizer ao bloco de 
+            boot(e ent&atilde;o ao carregador de boot e ao kernel) para
+            escolher a porta serial para a console. Uma vez que o sistema 
+            estiver utiliz&aacute;vel, volte e verifique o que est&aacute; errado.</para>
 	</step>
       </procedure>
 
-      <para>Ap&oacute;s o carregamento do controlador de boot, voc&ecirc; estar&aacute; no terceiro est&aacute;gio
-      do processo de boot, voc&ecirc; pode ainda alternar entre a console interna e a serial configurando
-      as vari&aacute;veis de ambiente de maneira apropriada no carregador de boot. Consulte a <xref linkend="serialconsole-loader">.</para>
+      <para>Ap&oacute;s o carregamento do controlador de boot, voc&ecirc; 
+            estar&aacute; no terceiro est&aacute;gio
+            do processo de boot, voc&ecirc; pode ainda alternar entre 
+            a console interna e a serial configurando
+            as vari&aacute;veis de ambiente de maneira apropriada no 
+            carregador de boot. Consulte a <xref linkend="serialconsole-loader">.</para>
     </sect2>
 
   <sect2 id="serialconsole-summary">
     <title>Sum&aacute;rio</title>
 
-      <para>Temos aqui um sum&aacute;rio das v&aacute;rias configura&ccedil;&otilde;es discutidas nesta se&ccedil;&atilde;o e eventualmente a console selecionada.</para>
+      <para>Temos aqui um sum&aacute;rio das v&aacute;rias 
+         configura&ccedil;&otilde;es discutidas nesta 
+         se&ccedil;&atilde;o e eventualmente a console selecionada.</para>
 
       <sect3>
 	<title>Caso 1: Voc&ecirc; definiu o valor 0x10 para <devicename>sio0</devicename></title>
@@ -2541,44 +2931,62 @@ boot:</screen>
       <sect3>
 	<title>Configurante a mais r&aacute;pida velocidade da porta serial</title>
 
-	<para>Por padr&atilde;o, a porta serial est&aacute; configurada para: 9600 baud, 8
-	  bits, sem paridade, e 1 bit de parada.  Se voc&Ecirc; quiser alterar a velocidade ter&aacute; de recompilar
-        pelo menos o bloco de boot.  Adicione a seguinte linha ao <filename>/etc/make.conf</filename>
-        e compile o novo bloco de boot:</para>
+	<para>Por padr&atilde;o, a porta serial 
+          est&aacute; configurada para: 9600 baud, 8
+	  bits, sem paridade, e 1 bit de parada.  Se voc&Ecirc; 
+          quiser alterar a velocidade ter&aacute; de recompilar
+          pelo menos o bloco de boot.  Adicione a 
+          seguinte linha ao <filename>/etc/make.conf</filename>
+          e compile o novo bloco de boot:</para>
 
 	<programlisting>BOOT_COMCONSOLE_SPEED=19200</programlisting>
 
-	<para>Se a console serial est&aacute; configurada de maneira diferente de estar realizando o boot com <option>-h</option>, ou
-        se a console serial utilizada pelo kernel &eacute; diferente da utilizada pelo bloco de boot, ent&atilde;o
-        voc&ecirc; deve tamb&eacute;m adicionar a seguinte op&ccedil;&atilde;o no arquivo de configura&ccedil;&atilde;o do seu kernel e compilar um novo kernel:</para>
+	<para>Se a console serial est&aacute; configurada de maneira diferente 
+          de estar realizando o boot com <option>-h</option>, ou
+          se a console serial utilizada pelo kernel &eacute; diferente 
+          da utilizada pelo bloco de boot, ent&atilde;o
+          voc&ecirc; deve tamb&eacute;m adicionar a seguinte op&ccedil;&atilde;o 
+          no arquivo de configura&ccedil;&atilde;o do 
+          seu kernel e compilar um novo kernel:</para>
 
 	<programlisting>options CONSPEED=19200</programlisting>
       </sect3>
 
       <sect3 id="serialconsole-com2">
-	<title>Utilizando outra porta serial que n&atilde;o seja a <devicename>sio0</devicename> para a console</title>
+	<title>Utilizando outra porta serial que n&atilde;o seja 
+           a <devicename>sio0</devicename> para a console</title>
 
-	<para>Utilizar outra porta que n&atilde;o seja a <devicename>sio0</devicename> como a que a console usa necessitar&aacute; de
-        recompila&ccedil;&atilde;o. Se voc&ecirc; deseja utilizar uma outra porta serial por qualquer que seja a raz&atilde;o, recompile o
-        bloco de boot, o carregador de boot e o kernel como a seguir.</para>
+	<para>Utilizar outra porta que n&atilde;o seja a <devicename>sio0</devicename> 
+           como a que a console usa necessitar&aacute; de
+           recompila&ccedil;&atilde;o. Se voc&ecirc; deseja utilizar uma outra 
+           porta serial por qualquer que seja a raz&atilde;o, recompile o
+           bloco de boot, o carregador de boot e o kernel como a seguir.</para>
 
 	<procedure>
 	  <step>
-	    <para>Obtenha o c&oacute;digo fonte do kernel. (Visite o <xref linkend="cutting-edge">)</para>
+	    <para>Obtenha o c&oacute;digo fonte do 
+               kernel. (Visite o <xref linkend="cutting-edge">)</para>
 	  </step>
 
 	  <step>
-	    <para>Edite o <filename>/etc/make.conf</filename> e configure <literal>BOOT_COMCONSOLE_PORT</literal> para
-            o endere&ccedil;o da porta que voc&ecirc; quer utilizar(0x3F8, 0x2F8, 0x3E8 ou 0x2E8).  Somente de
-            <devicename>sio0</devicename> a <devicename>sio3</devicename> (<devicename>COM1</devicename>
-	      a <devicename>COM4</devicename>) podem ser utilizadas;  placas de multiseriais n&atilde;o funcionar&atilde;o. N&atilde;o &eacute; necess&aacute;ria
-            a configura&ccedil;&atilde;o de interrup&ccedil;&atilde;o.</para>
+	    <para>Edite o <filename>/etc/make.conf</filename> e 
+                configure <literal>BOOT_COMCONSOLE_PORT</literal> para
+                o endere&ccedil;o da porta que voc&ecirc; quer 
+                utilizar(0x3F8, 0x2F8, 0x3E8 ou 0x2E8).  Somente de
+                <devicename>sio0</devicename> a <devicename>sio3</devicename>
+                (<devicename>COM1</devicename>
+	        a <devicename>COM4</devicename>) podem ser utilizadas;  placas 
+                de multiseriais n&atilde;o funcionar&atilde;o. N&atilde;o &eacute; 
+                necess&aacute;ria
+                a configura&ccedil;&atilde;o de interrup&ccedil;&atilde;o.</para>
 	  </step>
 
 	  <step>
-	    <para>Crie um arquivo de configura&ccedil;&atilde;o de kernel personalizado e adicione as op&ccedil;&otilde;es apropriadas
-            para a porta serial que voc&ecirc; deseja utilizar.  Por exemplo, se voc&ecirc; quer usar a <devicename>sio1</devicename>
-	      (<devicename>COM2</devicename>) como console:</para>
+	    <para>Crie um arquivo de configura&ccedil;&atilde;o de kernel personalizado 
+             e adicione as op&ccedil;&otilde;es apropriadas
+             para a porta serial que voc&ecirc; deseja utilizar.  Por 
+             exemplo, se voc&ecirc; quer usar a <devicename>sio1</devicename>
+	     (<devicename>COM2</devicename>) como console:</para>
 
 	    <programlisting>device sio1 at isa? port IO_COM2 flags 0x10 irq 3</programlisting>
 
@@ -2586,7 +2994,8 @@ boot:</screen>
 
 	    <programlisting>device sio1 at isa? port IO_COM2 flags 0x30 irq 3</programlisting>
 
-	    <para>As op&ccedil;&otilde;es de console para as outras portas n&atilde;o devem ser definidas.</para>
+	    <para>As op&ccedil;&otilde;es de console para as outras 
+              portas n&atilde;o devem ser definidas.</para>
 	  </step>
 
 	  <step>
@@ -2602,7 +3011,8 @@ boot:</screen>
 	  </step>
 
 	  <step>
-	    <para>Grave o bloco de boot no disco de boot com &man.disklabel.8; e boot com este novo kernel.</para>
+	    <para>Grave o bloco de boot no disco de boot com 
+             &man.disklabel.8; e boot com este novo kernel.</para>
 	  </step>
 	</procedure>
       </sect3>
@@ -2610,9 +3020,13 @@ boot:</screen>
       <sect3>
 	<title>Entrando no DDB Debugger atrav&eacute;s da linha serial</title>
 
-	<para>Se voc&ecirc; deseja definir que as informa&ccedil;&otilde;es de depura&ccedil;&atilde;o do kernel sejam emitidas na console
-        serial (muito &uacute;til para diagn&oacute;sticos remotos, por&eacute;m tamb&eacute;m perigoso se houver
-        a gera&ccedil;&atilde;o de um BREAK falso na porta serial!) ent&atilde;o voc&Ecirc; deve compilar o seu kernel com as seguintes op&ccedil;&otilde;es:</para>
+	<para>Se voc&ecirc; deseja definir que as informa&ccedil;&otilde;es 
+           de depura&ccedil;&atilde;o do kernel sejam emitidas na console
+           serial (muito &uacute;til para diagn&oacute;sticos remotos, por&eacute;m 
+           tamb&eacute;m perigoso se houver
+           a gera&ccedil;&atilde;o de um BREAK falso na porta serial!) ent&atilde;o 
+           voc&Ecirc; deve compilar o seu kernel com as 
+           seguintes op&ccedil;&otilde;es:</para>
 
 	<programlisting>options BREAK_TO_DEBUGGER
 options DDB</programlisting>
@@ -2621,9 +3035,11 @@ options DDB</programlisting>
       <sect3>
 	<title>Obtendo um prompt de login na console serial</title>
 
-	<para>Enquanto isso n&atilde;o &eacute; requerido, voc&ecirc; pode desejar obter um prompt de <emphasis>login</emphasis>
-        atrav&eacute;s da linha serial, o que at&eacute; agora permitiria ver mensagens do boot e entrar em depura&ccedil;&atilde;o de kernel
-        atrav&eacute;s da console serial.  Veja aqui como fazer isso.</para>
+	<para>Enquanto isso n&atilde;o &eacute; requerido, voc&ecirc; pode desejar 
+          obter um prompt de <emphasis>login</emphasis>
+          atrav&eacute;s da linha serial, o que at&eacute; agora permitiria 
+          ver mensagens do boot e entrar em depura&ccedil;&atilde;o de kernel
+          atrav&eacute;s da console serial.  Veja aqui como fazer isso.</para>
 
 	<para>Abra o arquivo <filename>/etc/ttys</filename> com um editor de textos e localize as linhas:</para>
 
@@ -2632,41 +3048,59 @@ ttyd1 "/usr/libexec/getty std.9600" unknown off secure
 ttyd2 "/usr/libexec/getty std.9600" unknown off secure
 ttyd3 "/usr/libexec/getty std.9600" unknown off secure</programlisting>
 
-	<para>De <literal>ttyd0</literal> a <literal>ttyd3</literal> que corresponde da <devicename>COM1</devicename> a
-        <devicename>COM4</devicename>.  Altere onde est&aacute; <literal>off</literal> para <literal>on</literal> para
-        as portas que desejar.  Se voc&ecirc; tiver alterado a velocidade da porta serial, voc&ecirc; precisar&aacute; alterar <literal>std.9600</literal> para
-        a configura&ccedil;&atilde;o correspondente, como por exemplo <literal>std.19200</literal>.</para>
+	<para>De <literal>ttyd0</literal> a <literal>ttyd3</literal> que 
+           corresponde da <devicename>COM1</devicename> a
+           <devicename>COM4</devicename>.  Altere onde est&aacute; <literal>off</literal> 
+           para <literal>on</literal> para
+           as portas que desejar.  Se voc&ecirc; tiver alterado a velocidade 
+           da porta serial, voc&ecirc; precisar&aacute; alterar <literal>std.9600</literal> para
+           a configura&ccedil;&atilde;o correspondente, como por 
+           exemplo <literal>std.19200</literal>.</para>
 
-	<para>Voc&ecirc; pode tamb&eacute;m querer alterar o tipo do terminal de <literal>unknown</literal> para o tipo atual
-        do seu terminal serial.</para>
+	<para>Voc&ecirc; pode tamb&eacute;m querer alterar o tipo do 
+           terminal de <literal>unknown</literal> para o tipo atual
+           do seu terminal serial.</para>
 
-	<para>Ap&oacute;s editar o arquivo voc&ecirc; deve executar <command>kill -HUP 1</command>
-	  para que as altera&ccedil;&otilde;es realizadas tenham efeito.</para>
+	<para>Ap&oacute;s editar o arquivo voc&ecirc; deve 
+           executar <command>kill -HUP 1</command>
+	   para que as altera&ccedil;&otilde;es realizadas tenham efeito.</para>
       </sect3>
     </sect2>
   
     <sect2 id="serialconsole-loader">
       <title>Alterando a console atrav&eacute;s do carregador de boot</title>
 
-      <para>Se&ccedil;&otilde;es anteriores descreveram como configurar uma console no bloco de boot. Esta se&ccedil;&atilde;o demonstra que voc&ecirc;
-      pode especificar a console entrando com alguns comandos e configurando algumas vari&aacute;veis de ambiente no carregador de boot.  Como
-      o carregador de boot &eacute; executado como o terceiro est&aacute;gio do processo de boot, depois do bloco de boot, as configura&ccedil;&otilde;es
-      do carregador de boot ir&atilde;o sobrep&ocirc;r as configura&ccedil;&otilde;es definidas no bloco de boot.</para>
+      <para>Se&ccedil;&otilde;es anteriores descreveram como configurar 
+        uma console no bloco de boot. Esta se&ccedil;&atilde;o demonstra que voc&ecirc;
+        pode especificar a console entrando com alguns comandos e configurando 
+        algumas vari&aacute;veis de ambiente no carregador de boot.  Como
+        o carregador de boot &eacute; executado como o terceiro 
+        est&aacute;gio do processo de boot, depois do 
+        bloco de boot, as configura&ccedil;&otilde;es
+        do carregador de boot ir&atilde;o sobrep&ocirc;r as 
+        configura&ccedil;&otilde;es definidas no bloco de boot.</para>
 
       <sect3>
 	<title>Configurando a console serial</title>
 
-	<para>Voc&ecirc; pode facilmente especificar ao carregador de boot e ao kernel para que estes usem a console serial
-        adicionando apenas uma linha em <filename>/boot/loader.rc</filename>:</para>
+	<para>Voc&ecirc; pode facilmente especificar ao carregador de 
+           boot e ao kernel para que estes usem a console serial
+           adicionando apenas uma linha 
+           em <filename>/boot/loader.rc</filename>:</para>
 
 	<programlisting>set console=comconsole</programlisting>
 
-	<para>Isto ter&aacute; efeito apesar das configura&ccedil;&otilde;es feitas no bloco de boot, como discutido em se&ccedil;&otilde;es anteriores.</para>
+	<para>Isto ter&aacute; efeito apesar das configura&ccedil;&otilde;es 
+          feitas no bloco de boot, como discutido 
+          em se&ccedil;&otilde;es anteriores.</para>
 
-	<para>Prefira colocar a linha acima como a primeira linha do <filename>/boot/loader.rc</filename> pois
-        assim voc&ecirc; ver&aacute; as mensagens de boot na console serial o mais r&aacute;pido poss&iacute;vel.</para>
+	<para>Prefira colocar a linha acima como a 
+          primeira linha do <filename>/boot/loader.rc</filename> pois
+          assim voc&ecirc; ver&aacute; as mensagens de boot na console 
+          serial o mais r&aacute;pido poss&iacute;vel.</para>
 
-	<para>Da mesma maneira que voc&ecirc; pode especificar o uso da console interna com:</para>
+	<para>Da mesma maneira que voc&ecirc; pode especificar 
+          o uso da console interna com:</para>
 
 	<programlisting>set console=vidconsole</programlisting>
 
