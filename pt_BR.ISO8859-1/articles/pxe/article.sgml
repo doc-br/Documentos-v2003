@@ -14,7 +14,7 @@
 
 <article>
   <articleinfo>
-    <title>FreeBSD Jumpstart Guide</title>
+    <title>Guia de Jumpstart para o FreeBSD</title>
 
     <authorgroup>
       <author>
@@ -36,75 +36,81 @@
     </legalnotice>
 
     <abstract>
-      <para>This article details the method used to allow machines to install
-        FreeBSD using the &intel; PXE method of booting a machine over a network.
-        </para>
+      <para>Este artigo detalha o m&eacute;todo utilizado para permitir que
+	se instale o FreeBSD em equipamentos que utilizem o m&eacute;todo
+	&intel; PXE para dar boot no equipamento atrav&eacute;s da rede.</para>
     </abstract>
   </articleinfo>
 
   <sect1 id="introduction">
-    <title>Introduction</title>
+    <title>Introduc&atilde;o</title>
 
     <warning>
-      <para>This procedure will make the <quote>Server</quote> both insecure and dangerous,
-        it is best to just keep the <quote>Server</quote> on its own hub and not in any way
-        accessible by any machines other than the <quote>Clients</quote>.</para>
+      <para>Este procedimento torna ambos os <quote>servidores</quote> 
+      inseguros e perigosos, &eacute; melhor manter o <quote>servidor</quote> 
+      em seu pr&oacute;prio hub, de forma a garantir que ele n&atilde;o estar&aacute;
+      acess&iacute;vel de nenhuma forma a outros equipamentos que n&atilde;o o
+      <quote>cliente</quote>.</para>
     </warning>
 
-    <para>Terminology:</para>
+    <para>Terminologia:</para>
 
     <informaltable frame="none">
       <tgroup cols="2">
 
         <tbody>
           <row>
-            <entry>Server</entry>
-            <entry>The machine offering netboot and install options.</entry>
+            <entry>Servidor</entry>
+            <entry>O equipamento que est&aacute; oferecendo o netboot e as 
+	      op&ccedil;&otilde;es de instala&ccedil;&atilde;o.</entry>
           </row>
 
           <row>
-            <entry>Client</entry>
-            <entry>The machine that will have FreeBSD installed on it.</entry>
+            <entry>Cliente</entry>
+            <entry>O equipamento no qual o FreeBSD ser&aacute; instalado.</entry>
           </row>
         </tbody>
       </tgroup>
     </informaltable>
 
-    <para>Requires:
-      Clients supporting the &intel; PXE netboot option, an Ethernet connection.
-      </para>
+    <para>Requisitos:  Clientes que suportem a op&ccedil;&atilde;o de boot via rede 
+      (netboot) &intel; PXE, e uma conex&atilde;o Ethernet.</para>
 
-    <para>Please let me know if you come across anything you have problems with
-      or suggestions for additional documentation.</para>
-
-    <para>If you would like someone to train/implement a specific netinstall system
-      for you, please send email so that we can discuss terms.</para>
-
-    <para>I would also like to thank &a.ps; and &a.jhb; for doing most of the
-      programming work on pxeboot, the interface to the &intel; PXE (netboot)
-      system.</para>
+    <para>Por favor me deixe saber se voc&ecirc; vier a ter algum problema na
+      execu&ccedil;&atilde;o dos procedimentos descritos, ou se voc&ecirc; tiver alguma 
+      sugest&atilde;o para documenta&ccedil;&atilde;o adicional.</para>
+    
+    <para>Se voc&ecirc; desejar alguma pessoa para dar treinamento e/ou implementar 
+      um sistema de instala&ccedil;&atilde;o via rede para voc&ecirc;, por favor envie um
+      email para que possamos discutir os termos.</para>
+    
+    <para>Eu gostaria de agradecer ao &a.ps; e &a.jhb; por realizar a maior 
+      parte do trabalho de programa&ccedil;&atilde;o no pexboot, a interface para o
+      sistema &intel; PXE (netboot).</para>
   </sect1>
 
   <sect1 id="server-config">
-    <title>Server Configuration</title>
+    <title>Configura&ccedil;&atilde;o do Servidor</title>
 
     <procedure>
       <step>
-        <para>Install DHCP: Install <filename role="package">net/isc-dhcp3</filename> you can use this config file
-          <ulink url="dhcpd.conf">
-          <filename>dhcpd.conf</filename></ulink>, stick it in <filename>/usr/local/etc/</filename>.</para>
+        <para>Instale o DHCP: Instale o <filename role="package">
+	  net/isc-dhcp3</filename>, voc&ecirc; pode utilizar este arquivo i
+	  de configura&ccedil;&atilde;o <ulink url="dhcpd.conf"> <filename>dhcpd.conf
+	  </filename></ulink>, copie-o para <filename>/usr/local/etc/
+	  </filename>.</para>
       </step>
 
       <step>
-        <para>Enable tftp:</para>
+        <para>Habilite o tftp:</para>
 	
         <procedure>
           <step>
-            <para>Make a directory <filename>/usr/tftpboot</filename></para>
+            <para>Crie o diret&oacute;rio <filename>/usr/tftpboot</filename></para>
           </step>
 
           <step>
-            <para>Add this line to your
+            <para>Adicione esta linha ao seu 
               <filename>/etc/inetd.conf</filename>:</para>
 	
 <programlisting>tftp    dgram   udp     wait    nobody  /usr/libexec/tftpd    tftpd /usr/tftpboot</programlisting>
@@ -114,17 +120,17 @@
       </step>
 
       <step>
-        <para>Enable NFS:</para>
+        <para>Habilite o NFS:</para>
 	
         <procedure>
           <step>
-            <para>Add this to <filename>/etc/rc.conf</filename>:</para>
+            <para>Adicone est&aacute; linha ao <filename>/etc/rc.conf</filename>:</para>
 
 	    <programlisting>nfs_server_enable="YES"</programlisting>
           </step>
 
           <step>
-            <para>Add this to <filename>/etc/exports</filename>:</para>
+            <para> e esta ao <filename>/etc/exports</filename>:</para>
 
 	    <programlisting>/usr -alldirs -ro</programlisting>
           </step>
@@ -132,28 +138,29 @@
       </step>
 
       <step>
-        <para>Reboot to enable the new services or start them
-          manually.</para>
+        <para>De um reboot no servidor para habilitar os novos
+	servi&ccedil;os, ou inicialize-os manualmente.</para>
       </step>
     </procedure>
   </sect1>
 
   <sect1 id="bootstrap-config">
-    <title>Bootstrap Setup</title>
+    <title>Configura&ccedil;&atilde;o do Bootstrap</title>
 
     <procedure>
       <step>
-        <para>Download bootfiles: Download the
+        <para>Fa&ccedil;a download dos arquivos de boot: Fa&ccedil;a download das
+	  imagens de disquete 
           <ulink
 	  url="&snapshots.stable;/floppies/kern.flp">
-          kern.flp</ulink> and
+          kern.flp</ulink> e
           <ulink
 	  url="&snapshots.stable;/floppies/mfsroot.flp">
-          mfsroot.flp</ulink> floppy images.</para>
+          mfsroot.flp</ulink>.</para>
       </step>
 
       <step>
-        <para>Set up tftp/pxe-boot directory:</para>
+        <para>Configure o diret&oacute;rio tftp/pxe-boot:</para>
 	
         <procedure>
           <step>
