@@ -3006,128 +3006,122 @@ Shelmerg dc-slip       sl-helmerg      0xfffffc00      autocomp</programlisting>
 
 	  <screen>ed0   1500 &lt;Link&gt;0.2.c1.28.5f.4a	 191923	0   129457     0   116</screen>
 
-	  <para>This indicates that this particular system's Ethernet MAC
-	    address is <hostid role="mac">00:02:c1:28:5f:4a</hostid>
-	    &mdash; the periods in the Ethernet MAC address given by
-	    <command>netstat -i</command> must be changed to colons and
-	    leading zeros should be added to each single-digit hexadecimal
-	    number to convert the address into the form that &man.arp.8;
-	    desires; see the manual page on &man.arp.8; for complete
-	    information on usage.</para>
+	  <para>Isso indica que o endereço da placa de rede, o MAC address,
+	    é <hostid role="mac">00:02:c1:28:5f:4a</hostid> &mdash; 
+	    os pontos no endereço fornecido por <command>netstat -i</command>
+	    precisam ser trocados por dois pontos e devem ser adicionados
+	    zeros em qualquer número hexadecimal que tenha um só digito
+	    para converter para o formato que o &man.arp.8; deseja; veja
+	    a página manual do &man.arp.8; para informações completas
+	    de utilização.</para>
 
 	  <note>
-	    <para>When you create
-	      <filename>/etc/sliphome/slip.login</filename> and
-	      <filename>/etc/sliphome/slip.logout</filename>, the
-	      <quote>execute</quote> bit (<command>chmod 755
-	      /etc/sliphome/slip.login /etc/sliphome/slip.logout</command>)
-	      must be set, or <command>sliplogin</command> will be unable
-	      to execute it.</para>
+	    <para>Quando você cria o <filename>/etc/sliphome/slip.login</filename>
+	      e <filename>/etc/sliphome/slip.logout</filename>, o bit <quote>execute</quote>
+	      (<command>chmod 755 /etc/sliphome/slip.login /etc/sliphome/slip.logout</command>)
+	      precisa estar definida, ou <command>sliplogin</command> não conseguirá
+	      executá-los.</para>
 	  </note>
 	</sect4>
 
 	<sect4>
-	  <title><filename>slip.logout</filename> Configuration</title>
+	  <title>Configuração do <filename>slip.logout</filename></title>
 
-	  <para><filename>/etc/sliphome/slip.logout</filename> is not
-	    strictly needed (unless you are implementing <quote>proxy
-	    ARP</quote>), but if you decide to create it, this is an
-	    example of a basic
-	    <filename>slip.logout</filename> script:</para>
+	  <para>O <filename>/etc/sliphome/slip.logout</filename> não é
+	    estritamente necessário (a não ser que você esteja implementando
+	    <quote>proxy ARP</quote>), mas se você decidir criá-lo abaixo
+	    temos um exemplo básico do script:</para>
 
 	  <programlisting>#!/bin/sh -
 #
 #       slip.logout
 
 #
-# logout file for a slip line.  sliplogin invokes this with
-# the parameters:
+# arquivo de login generico para uma linha slip. sliplogin invoca
+# isso com os seguintes parametros:
 #      1	2	 3	4	  5	 6     7-n
 #   slipunit ttyspeed loginname local-addr remote-addr mask opt-args
 #
 /sbin/ifconfig sl$1 down</programlisting>
 
-	  <para>If you are using <quote>proxy ARP</quote>, you will want to
-	    have <filename>/etc/sliphome/slip.logout</filename> remove the
-	    ARP entry for the SLIP client:</para>
+	  <para>Se você estiver utilizando <quote>proxy ARP</quote> irá querer
+	    que o <filename>/etc/sliphome/slip.logout</filename> remova a
+	    entrada ARP do cliente SLIP:</para>
 
 	  <programlisting>#!/bin/sh -
 #
 #       @(#)slip.logout
 
 #
-# logout file for a slip line.  sliplogin invokes this with
-# the parameters:
+# arquivo de login generico para uma linha slip. sliplogin invoca
+# isso com os seguintes parametros:
 #      1	2	 3	4	  5	 6     7-n
 #   slipunit ttyspeed loginname local-addr remote-addr mask opt-args
 #
 /sbin/ifconfig sl$1 down
-# Quit answering ARP requests for the SLIP client
+# Para de responder requisições ARP para o cliente SLIP
 /usr/sbin/arp -d $5</programlisting>
 
-	  <para>The <command>arp -d &#36;5</command> removes the ARP entry
-	    that the <quote>proxy ARP</quote>
-	    <filename>slip.login</filename> added when the SLIP client
-	    logged in.</para>
+	  <para>O comando <command>arp -d &#36;5</command> remove a entrada ARP
+	    que o <filename>slip.login</filename> adicionou quando o cliente SLIP
+	    se conectou.</para>
 
-	  <para>It bears repeating: make sure
-	    <filename>/etc/sliphome/slip.logout</filename> has the execute
-	    bit set after you create it (ie, <command>chmod 755
+	  <para>É necessário repetir: tenha certeza de que o 
+	    <filename>/etc/sliphome/slip.logout</filename> tem o bit de execução
+	    definido depois que você criá-lo (por exemplo, <command>chmod 755 
 	    /etc/sliphome/slip.logout</command>).</para>
 	</sect4>
       </sect3>
 
       <sect3>
-	<title>Routing Considerations</title>
+	<title>Considerações de Roteamento</title>
 	<indexterm>
     <primary>SLIP</primary>
     <secondary>routing</secondary>
   </indexterm>
-	<para>If you are not using the <quote>proxy ARP</quote> method for
-	  routing packets between your SLIP clients and the rest of your
-	  network (and perhaps the Internet), you will probably
-	  have to add static routes to your closest default router(s) to
-	  route your SLIP client subnet via your SLIP server.</para>
+  	<para>Se você não está utilizando <quote>proxy ARP</quote> para
+	rotear os pacotes entre seus clientes SLIP e o resto de sua
+	rede (e talvez a Internet), você deve provavelmente ter
+	rotas estáticas para seus roteadores para rotear a sub-rede
+	dos seus clientes SLIP via seu servidor SLIP.</para>
 
 	<sect4>
-	  <title>Static Routes</title>
+	  <title>Rotas Estáticas</title>
 	  <indexterm><primary>static routes</primary></indexterm>
 
-	  <para>Adding static routes to your nearest default routers
-	    can be troublesome (or impossible if you do not have
-	    authority to do so...).  If you have a multiple-router
-	    network in your organization, some routers, such as those
-	    made by Cisco and Proteon, may not only need to be
-	    configured with the static route to the SLIP subnet, but
-	    also need to be told which static routes to tell other
-	    routers about, so some expertise and
-	    troubleshooting/tweaking may be necessary to get
-	    static-route-based routing to work.</para>
-	</sect4>
+	  <para>Adicionar rotas estáticas para seus roteadores mais
+	    próximos pode ser problemático (ou impossível se você
+	    não tem autoridade para isso). Se você tem uma rede 
+	    com diversos roteadores, alguns deles, como os
+	    feitos pela Cisco e Proteon, podem não apenas precisar
+	    ter as rotas configuradas mas também precisam saber
+	    sobre quais rotas eles devem informar os outros roteadores,
+	    portanto alguma experiência e certos ajustes podem
+	    ser necessários para fazer com que sua rede baseada
+	    em rotas estáticas funcione.</para>
 
 	<sect4>
-	  <title>Running <command>gated</command></title>
+	  <title>Executando o <command>gated</command></title>
 	  <indexterm>
       <primary><application>gated</application></primary>
     </indexterm>
 
 	<note>
-	  <para><command>gated</command> is proprietary software now and
-	    will not be available as source code to the public anymore
-	    (more info on the <ulink
-	    url="http://www.gated.org/">gated</ulink> website).  This
-	    section only exists to ensure backwards compatibility for
-	    those that are still using an older version.</para>
+	  <para>O <command>gated</command> é um programa proprietário que
+	    não tem seu código disponível para o público mais (mais
+	    informações no site do <ulink url="http://www.gated.org/">gated</ulink>).
+	    Essa seção só existe para manter compatibilidade para as
+	    pessoas que ainda estão utilizando a versão antiga.</para>
 	</note>
 
-	  <para>An alternative to the headaches of static routes is to
-	    install <command>gated</command> on your FreeBSD SLIP server
-	    and configure it to use the appropriate routing protocols
-	    (RIP/OSPF/BGP/EGP) to tell other routers about your SLIP
-	    subnet.
-	    You'll need to write a <filename>/etc/gated.conf</filename>
-	    file to configure your gated; here is a sample, similar to
-	    what the author used on a FreeBSD SLIP server:</para>
+	  <para>Uma alternativa para as dores de cabeça com rotas estáticas
+	    é instalar o <command>gated</command> no seu servidor SLIP
+	    e configurar ele para usar os protocolos de roteamento 
+	    apropriado (RIP/OSPF/BGP/EGP) para dizer aos outros roteadores
+	    sobre sua rede SLIP. Você precisará editar um arquivo 
+	    <filename>/etc/gated.conf</filename> para configurar seu
+	    gated; aqui está um exemplo, similar ao que o autor utilizou
+	    em um servidor SLIP FreeBSD:</para>
 
 	  <programlisting>#
 # gated configuration file for dc.dsu.edu; for gated version 3.5alpha5
@@ -3168,32 +3162,29 @@ import proto rip interface ed {
 } ;</programlisting>
 
 	  <indexterm><primary>RIP</primary></indexterm>
-	  <para>The above sample <filename>gated.conf</filename> file
-	    broadcasts routing information regarding the SLIP subnet
-	    <replaceable>xxx.xxx.yy</replaceable> via RIP onto the
-	    Ethernet; if you are using a different Ethernet driver than
-	    the <devicename>ed</devicename> driver, you will need to
-	    change the references to the <devicename>ed</devicename>
-	    interface appropriately.  This sample file also sets up
-	    tracing to <filename>/var/tmp/gated.output</filename> for
-	    debugging <command>gated</command>'s activity; you can
-	    certainly turn off the tracing options if
-	    <command>gated</command> works OK for you.  You will need to
-	    change the <replaceable>xxx.xxx.yy</replaceable>'s into the
-	    network address of your own SLIP subnet (be sure to change the
-	    net mask in the <literal>proto direct</literal> clause as
-	    well).</para>
+	  <para>O exemplo acima de um arquivo <filename>gated.conf</filename>
+	    envia informação de roteamento sobre a sub-rede SLIP
+	    <replaceable>xxx.xxx.yy</replaceable> via RIP por 
+	    Ethernet; se você está utilizando um driver Ethernet
+	    diferente do <devicename>ed</devicename> você precisará
+	    trocar as referencias a <devicename>ed</devicename> pela
+	    interface apropriada.  Esse exemplo também configura a
+	    gravação de informações de <literal>debug</literal> sobre
+	    a atividade do gated/ você pode certamente desligar isso 
+	    se o <command>gated</command> funciona OK para você.  Você precisará
+	    trocar o <replaceable>xxx.xxx.yy</replaceable> pelo
+	    endereço da sua rede SLIP (tenha certeza de trocar
+	    a máscara de rede na cláusula <literal>proto direct</literal>
+	    também).</para>
 
-	  <para>Once you have installed and configured
-	    <command>gated</command> on your system, you will need to
-	    tell the FreeBSD startup scripts to run
-	    <command>gated</command> in place of
-	    <command>routed</command>.  The easiest way to accomplish
-	    this is to set the <varname>router</varname> and
-	    <varname>router_flags</varname> variables in
-	    <filename>/etc/rc.conf</filename>.  Please see the manual
-	    page for <command>gated</command> for information on
-	    command-line parameters.</para>
+	  <para>Uma vez que você instalou e configurou o <command>gated</command>
+	    no seu sistema você precisará dizer aos script de inicialização
+	    do FreeBSD para rodarem o <command>gated</command> no lugar
+	    do <command>routed</command>.  A maneira mais fácil
+	    é definir as variáveis <varname>router</varname> e
+	    <varname>router_flags</varname> no <filename>/etc/rc.conf</filename>.
+	    Por favor veja a página manual do <command>gated</command>
+	    para mais informações.</para>
 	</sect4>
       </sect3>
     </sect2>
