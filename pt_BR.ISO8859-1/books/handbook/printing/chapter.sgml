@@ -289,6 +289,7 @@
 		<link linkend="printing-hardware">
 			Configura&ccedil;&atilde;o de Hardware
 	    	</link> 
+		<para>
 		D&aacute; algumas dicas na conex&atilde;o da impressora
 	com a porta do seu computador.
 	    </para>
@@ -2156,6 +2157,7 @@ $%&amp;'()*+,-./01234567
                   <term><replaceable>arquivo-estatistica</replaceable></term>
                   
                   <listitem>
+							<para>
 								&Eacute; o nome do arquivo onde ser&aacute; armazenada
 							a estat&iacute;stica da impress&atilde;o, este valor 
 							&eacute; atribuido &agrave; op&ccedil;&atilde;o
@@ -2164,7 +2166,6 @@ $%&amp;'()*+,-./01234567
                   </listitem>
                 </varlistentry>
               </variablelist>
-            </para>
           </listitem>
 
 	  <indexterm>
@@ -2944,26 +2945,30 @@ exit 2</programlisting>
 			<command>dvilj2p</command> ler da entrada padr&atilde;o.
 				</para>
               
----
-
-          <para>The only other fly in the ointment is the fact that we cannot
-            use <filename>/tmp</filename> for the temporary link. Symbolic
-            links are owned by user and group <username>bin</username>.  The
-            filter runs as user <username>daemon</username>.  And the
-            <filename>/tmp</filename> directory has the sticky bit set. The
-            filter can create the link, but it will not be able clean up when
-            done and remove it since the link will belong to a different
-            user.</para>
+			<para>
+				Outro ponto importante &eacute; que n&atilde;o podemos utilizar
+			o diret&oacute;rio <filename>/tmp</filename> para um link 
+			tempor&aacute;rio.  Links simb&oacute;licos s&atilde;o propriedade do
+			usu&aacute;rio e grupo <username>bin</username>.  O filtro executa
+			como o usu&aacute;rio <username>daemon</username>.  E o filtro 
+			n&atilde;o conseguir&aacute; criar o link, mas tamb&eacute;m ele
+			n&atilde;o estar&aacute; apto quando terminar, de remove-lo como
+			um usu&aacute;rio diferente.
+			</para>
               
-          <para>Instead, the filter will make the symbolic link in the current
-            working directory, which is the spooling directory (specified by
-            the <literal>sd</literal> capability in
-            <filename>/etc/printcap</filename>).  This is a perfect place for
-            filters to do their work, especially since there is (sometimes)
-            more free disk space in the spooling directory than under
-            <filename>/tmp</filename>.</para>
+			<para>
+				Uma vez que o filtro ir&aacute; criar um link simb&oacute;lico 
+			no diret&oacute;rio de trabalho corrente, que &eacute; o 
+			diret&oacute;rio de spooling ( especificado na op&ccedil;&atilde;o
+			<literal>sd</literal> no arquivo <filename>/etc/printcap</filename>).
+			  Este &eacute; um lugar perfeito par os filtros realizarem o seu
+			trabalho, especialmente porque na maioraia das vezes possui mais 
+			espa&ccedil;o do que o diret&oacute;rio <filename>/tmp</filename>.
+			</para>
               
-          <para>Here, finally, is the filter:</para>
+			<para>
+				Aqui, finalmente, o filtro:
+			</para>
 
           <programlisting>#!/bin/sh
 #
@@ -3032,23 +3037,29 @@ exit 0</programlisting>
 				de Convers&atilde;o
             </title>
               
-          <para>All these conversion filters accomplish a lot for your
-            printing environment, but at the cost forcing the user to specify
-            (on the &man.lpr.1; command line) which one to use.
-            If your users are not particularly computer literate, having to
-            specify a filter option will become annoying.  What is worse,
-            though, is that an incorrectly specified filter option may run a
-            filter on the wrong type of file and cause your printer to spew
-            out hundreds of sheets of paper.</para>
+			<para>
+				Todos esses filtros de convers&atilde;o completam o seu ambiente 
+			de impress&atilde;o, mas a um custo de for&ccedil;ar seu 
+			usua&aacute;rio a especificar ( no comando de linha &man.lpr.1; )
+			Qual ele ir&acute; usar.
+				Se seus usu&aacute;rios n&atilde;o est&atilde;o familiarizados, ou
+			n&aatilde;o tiverem uma literatura particular, eles acharam isso 
+			muito chato.  O que &eacute; ruim, entretanto, &eacute; a escolha
+			de uma op&ccedil;&atilde;o errada, que poder&aacute; gerar muitas
+			p&aacute;ginas de lixo.
+			</para>
               
-          <para>Rather than install conversion filters at all, you might want
-            to try having the text filter (since it is the default filter)
-            detect the type of file it has been asked to print and then
-            automatically run the right conversion filter.  Tools such as
-            <command>file</command> can be of help here.  Of course, it will
-            be hard to determine the differences between
-            <emphasis>some</emphasis> file types&mdash;and, of course, you can
-            still provide conversion filters just for them.</para>
+			<para>
+				De prefer&ecirc;ncia quando for instalar um filtro de 
+			convers&atilde;o, voc&ecirc; poder&aacute; tentar deixar como 
+			padr&atilde;o um filtro texto, que detecte o tipo de arquivo e 
+			execute o filtro adequado para convers&atilde;o.  ferramentas como
+			<command>file</command> poder&aacute; ajuda-lo a resolver isto.
+			  Claro que voc&ecirc; ter&aacute; dificultades de diferenciar entre
+			<emphasis>alguns</emphasis> tipos de arquivos e &eacute; claro que 
+			voc&ecirc; estar&aacute; providenciando o filtro correto para 
+			converte-lo.
+			</para>
               
           <indexterm><primary>apsfilter</primary></indexterm>
           <indexterm>
@@ -3056,6 +3067,8 @@ exit 0</programlisting>
             <secondary>filters</secondary>
             <tertiary>apsfilter</tertiary>
           </indexterm>
+---
+
           <para>The FreeBSD Ports Collection has a text filter that performs
             automatic conversion called <command>apsfilter</command>.  It can
             detect plain text, &postscript;, and DVI files, run the proper
