@@ -1299,10 +1299,10 @@ O'Reilly & Associates como um DTD para escrever documenta&ccedil;&atilde;o t&eac
 	<example>
 	  <title><sgmltag>programlisting</sgmltag></title>
 	    
-	  <para>Use:</para>
+	  <para>Uso:</para>
 	    
-	  <programlisting><![ CDATA[<para>When you have finished, your program should look like
-  this;</para>
+	  <programlisting><![ RCDATA[<para>Quando voc&ecirc; tivert terminado, seu prograva deve
+	    estar assim;</para>
 
 <programlisting>#include &lt;stdio.h&gt;
 
@@ -1312,14 +1312,13 @@ main(void)
     printf("hello, world\n");
 }</programlisting>]]></programlisting>
 
-	  <para>Notice how the angle brackets in the
-	    <literal>#include</literal> line need to be referenced by their
-	    entities instead of being included literally.</para>
+	  <para>Note como angle brackets na linha <literal>#include</literal> precisam ser 
+	    escritas atrav&eacute;s de suas entidades ao inv&eacute;s de incluidas 
+	    literalmente.</para>
+	  
+	  <para>Apar&ecirc;ncia:</para>
 	    
-	  <para>Appearance:</para>
-	    
-	  <para>When you have finished, your program should look like
-	    this;</para>
+	  <para>Quando voc&ecirc; tivert terminado, seu prograva deve estar assim;</para>
 	    
 	  <programlisting>#include &lt;stdio.h&gt;
 
@@ -1332,26 +1331,25 @@ main(void)
       </sect3>
 
       <sect3>
-	<title>Callouts</title>
+	<title>Chamadaa</title>
 
-	<para>A callout is a mechanism for referring back to an earlier piece
-	  of text or specific position within an earlier example without
-	  linking to it within the text.</para>
+	<para>Uma chamada &eacute; um mecanismo para fazr refer&ecirc;ncia a um
+	  peda&ccedil;o de texto ou uma posi&ccedil;&atilde;o espec&iacute;fica
+	  de um exemplo anterior sem ligar a ele no texto.</para>
 
-	<para>To do this, mark areas of interest in your example
-	  (<sgmltag>programlisting</sgmltag>,
-	  <sgmltag>literallayout</sgmltag>, or whatever) with the
-	  <sgmltag>co</sgmltag> element.  Each element must have a unique
-	  <literal>id</literal> assigned to it.  After the example include a
-	  <sgmltag>calloutlist</sgmltag> that refers back to the example and
-	  provides additional commentary.</para>
-	
+	<para>Para fazer isso, marque as &aacute;reas de interesse no seu exemplo
+	  (<sgmltag>programlisting</sgmltag>, <sgmltag>literallayout</sgmltag>, ou o que for)
+	  com o elemento <sgmltag>co</sgmltag>. Cada elemento deve ter um &uacute;nico
+	  <literal>id</literal> atribuido a ele, Ap&oacute;s o exemplo inclua um
+	  <sgmltag>calloutlist</sgmltag> que fa&ccedil;a a refer&ecirc;ncia e d&ecirc;
+	  um coment&aacute;rio adicional.</para>
+	  	
 	<example>
-	  <title><sgmltag>co</sgmltag> and
+	  <title><sgmltag>co</sgmltag> e
 	    <sgmltag>calloutlist</sgmltag></title>
 
-	  <programlisting><![ CDATA[<para>When you have finished, your program should look like
-  this;</para>
+	  <programlisting><![ RCDATA[<para><para>Quando voc&ecirc; tivert terminado, seu prograva deve
+	    estar assim;</para>
 
 <programlisting>#include &lt;stdio.h&gt; <co id="co-ex-include">
 
@@ -1363,24 +1361,23 @@ main(void)
 
 <calloutlist>
   <callout arearefs="co-ex-include">
-    <para>Includes the standard IO header file.</para>
+    <para>Inclui o arquivo padr&atilde;o de IO.</para>
   </callout>
 
   <callout arearefs="co-ex-return">
-    <para>Specifies that <function>main()</function> returns an
-      int.</para>
+    <para>Especifica que <function>main()</function> retorna um inteiro.</para>
   </callout>
 
   <callout arearefs="co-ex-printf">
-    <para>The <function>printf()</function> call that writes
-      <literal>hello, world</literal> to standard output.</para>
+    <para>A chamada <function>printf()</function> que escreve <literal>hello, world</literal>
+      na sa&iacute;da padr&atilde;o.</para>
   </callout>
 </calloutlist>]]></programlisting>
 
-	  <para>Appearance:</para>
+	  <para>Apar&ecirc;ncia:</para>
 
-	  <para>When you have finished, your program should look like
-	    this;</para>
+	  <para>Quando voc&ecirc; tivert terminado, seu prograva deve
+	    estar assim;</para>
 
 	  <programlisting>#include &lt;stdio.h&gt; <co id="co-ex-include">
 
@@ -1392,12 +1389,12 @@ main(void)
 
 	  <calloutlist>
 	    <callout arearefs="co-ex-include">
-	      <para>Includes the standard IO header file.</para>
+	      <para>Inclui o arquivo padr&atilde;o de IO.</para>
 	    </callout>
 	    
 	    <callout arearefs="co-ex-return">
-	      <para>Specifies that <function>main()</function> returns an
-		int.</para>
+              <para>Especifica que <function>main()</function> retorna um inteiro.</para>
+
 	    </callout>
 	    
 	    <callout arearefs="co-ex-printf">
@@ -1409,7 +1406,7 @@ main(void)
       </sect3>
       
       <sect3>
-	<title>Tables</title>
+	<title>Tabelas</title>
 	
 	<para>Unlike HTML, you do not need to use tables for layout purposes,
 	  as the stylesheet handles those issues for you.  Instead, just use
