@@ -10,10 +10,10 @@
       <author>
 	<firstname>Neil</firstname>
 	<surname>Blakey-Milner</surname>
-	<contrib>Contributed by </contrib>
+	<contrib>Contrição de </contrib>
       </author>
     </authorgroup>
-    <!-- Feb 2000 -->
+    <!-- Fev 2000 -->
   </chapterinfo>
 
   <title>Usu&aacute;rios e Administra&ccedil;&atilde;o B&aacute;sica de contas</title>
@@ -25,10 +25,10 @@
       Obviamente, somente um daqueles usu&aacute;rios pode sentar-se na frente da tela e
       do teclado ao mesmo tempo.
       <footnote>
-	<para>Bem, ao menos que voc&ecirc; enganchar acima dos terminais m&uacute;ltiplos, mas n&oacute;s iremos
-	guardar isso para <xref linkend="serialcomms">.</para>
-      </footnote>, mas qualquer n&uacute;mero de usu&aacute;rios podem logar atrav&eacute;z de uma rede.
-      Para usar o sistema qualquer usu&aacute;rio deve ter uma conta.</para>
+	<para>Bem, a não ser que você conectar múltiplos terminais ao sistema, mas iremos
+	abordar isso no <xref linkend="serialcomms">.</para>
+      </footnote>, mas qualquer n&uacute;mero de usu&aacute;rios pode logar-se atrav&eacute;z de uma rede.
+      Para usar o sistema, cada usu&aacute;rio deve ter uma conta.</para>
 
     <para>Depois de ler este cap&iacute;tulo, voc&ecirc; ir&aacute; saber:</para>
 
@@ -47,13 +47,13 @@
 
       <listitem>
 	<para>Como alterar os detalhes de uma conta de usu&aacute;rio, como o nome
-	completo do usu&aacute;rio, ou a shell preferida.</para>
+	completo do usu&aacute;rio, ou a <foreignphrase>shell</foreignphrase> preferida.</para>
       </listitem>
 
       <listitem>
-	<para>Como se ajustar os limites b&aacute;sicos por conta, para controlar os
-	recursos tais como mem&oacute;ria e tempo de uso do CPU que usu&aacute;rios e grupos
-	de contas podem acessar.</para>
+	<para>Como ajustar os limites b&aacute;sicos de cada conta, para controlar os
+	recursos tais como mem&oacute;ria e tempo de uso da CPU, à que usu&aacute;rios e grupos
+	de podem acessar.</para>
       </listitem>
 
       <listitem>
@@ -61,7 +61,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>Antes de ler este cap&iacute;tulo, voc&ecirc; deve::</para>
+    <para>Antes de ler este cap&iacute;tulo, voc&ecirc; deve:</para>
 
     <itemizedlist>
       <listitem>
@@ -74,24 +74,24 @@
   <sect1 id="users-introduction">
     <title>Introdu&ccedil;&atilde;o</title>
 
-    <para>Todo o acesso ao sistema &eacute; conseguido atrav&eacute;z das contas, e
-      todos os processos s&atilde;o executados por usu&aacute;rios, assim usu&aacute;rios e
-      administra&ccedil;&atilde;o de contas s&atilde;o integralmente importantes em sistemas FreeBSD.</para>
+    <para>Todo o acesso ao sistema &eacute; feito atrav&eacute;z das contas, e
+      todos os processos s&atilde;o executados por usu&aacute;rios, dessa forma, administra&ccedil;&atilde;o
+	de contas e usuários s&atilde;o integralmente importantes em sistemas FreeBSD.</para>
 
     <para>Todas as contas em um sistema FreeBSD tem determinadas informa&ccedil;&otilde;es
-       associada a ela para indentificar a conta.</para>
+       associada à mesma, de forma à identifica-la.</para>
 
     <variablelist>
       <varlistentry>
 	<term>Nome do usu&aacute;rio</term>
 
 	<listitem>
-	  <para>O nome do usu&aacute;rio ser&aacute; digitado no prompt <prompt>login:</prompt>.
-	    Os nomes de usu&aacute;rios devem ser unicos em um computador, voc&ecirc; n&atilde;o pode
-	    ter dois usu&aacute;rios com o mesmo nome.  H&aacute; um n&uacute;mero de regras para criar
-	    nomes v&aacute;lidos de usu&aacute;rios, documentadas em &man.passwd.5;; voc&ecirc; usuaria
-	    tipicamente nomes de usu&aacute;rios que consistem em oito ou poucos caracteres
-	    todos minusculos.</para>
+	  <para>O nome do usu&aacute;rio ser&aacute; digitado no terminal de <prompt>login:</prompt>.
+	    Os nomes de usu&aacute;rios devem ser unicos em um computador, n&atilde;o podendo
+	    haver dois usu&aacute;rios com o mesmo nome.  H&aacute; uma série de regras para criar
+	    nomes v&aacute;lidos de usu&aacute;rios, documentadas na &man.passwd.5;; voc&ecirc; normalmente
+	    poderiam ser utilizados nomes de usu&aacute;rios com oito caracteres
+	    todos minúsculos.</para>
 	</listitem>
       </varlistentry>
 
@@ -102,36 +102,36 @@
 	<listitem>
 	  <para>Cada conta tem uma senha associada com ela.  A Senha pode ser
 	     vazia, neste caso nenhuma senha ser&aacute; solicitada para acessar o
-	     sistema.  Isso &eacute; normalmente uma id&eacute;ia muito ruim; todas as contas
+	     sistema.  Isso normalmente &eacute; uma id&eacute;ia muito ruim; todas as contas
 	     devem ter uma senha.</para>
 	 </listitem>
       </varlistentry>
 
       <varlistentry>
-	<term>Usu&aacute;rio ID (UID)</term>
+	<term>ID do Usu&aacute;rio (UID)</term>
 
 	<listitem>
-	  <para>O UID &eacute; um n&uacute;mero de 0 at&eacute; 65536 usado para identificar de forma
-	    &uacute;nica os usu&aacute;rios no sistema.  Internamento o FreeBSD usa o UID
+	  <para>O UID &eacute; um n&uacute;mero que varia de 0 à 65536 usado para identificar de forma
+	    &uacute;nica os usu&aacute;rios no sistema.  Internamento, o FreeBSD usa o UID
 	    para identificar usu&aacute;rios&mdash; qualquer comando do FreeBSD ser&aacute;
 	    liberado para um usu&aacute;rio espec&iacute;fico convertendo seu UID depois de
-	    utilizar o comando.  Isso que dizer que voc&ecirc; pode ter contas com
-	    diferentes nomes de usu&aacute;rios com o mesmo UID.  Tanto quanto para
-	    o FreeBSD s&atilde;o um usu&aacute;rio apenas. &Eacute; improv&aacute;vel que voc&ecirc; necessitar&aacute;
-	    sempre fazer isto.</para>
+	    utilizar o comando.  Isso significa que voc&ecirc; pode ter contas com
+	    diferentes nomes de usu&aacute;rios mas com o mesmo UID.  Ambos, para
+	    o FreeBSD s&atilde;o um só usu&aacute;rio. &Eacute; improv&aacute;vel que voc&ecirc; tenha necessidade
+	    de fazer isso um dia.</para>
 	</listitem>
       </varlistentry>
 
 
       <varlistentry>
-	<term>Grupo ID (GID)</term>
+	<term>ID de Grupo (GID)</term>
 
 	<listitem>
-	  <para>O GID &eacute; um n&uacute;mero de 0 at&eacute; 65536 usado para identificar de forma
-	    &uacute;nica o grupo prim&aacute;rio que o usu&aacute;rio pertence.  Os grupos s&atilde;o um mecanismo
+	  <para>O GID &eacute; um n&uacute;mero que varia de 0 à 65536, usado para identificar de forma
+	    &uacute;nica o grupo prim&aacute;rio ao qual o usu&aacute;rio pertence.  Os grupos s&atilde;o um mecanismo
 	    para controlar o acesso aos recursos baseados em GID ao inv&eacute;z de UID.
-	    Isto pode significativamente reduzir o tamanho de arquivos de configura&ccedil;&otilde;es.
-	    Um usu&aacute;rio pode tamb&eacute;m estar em mais de um grupo.</para>
+	    Isto pode reduzir significativamente o tamanho de arquivos de configura&ccedil;&otilde;es.
+	    Um usu&aacute;rio pode tamb&eacute;m pertencer a mais de um grupo.</para>
 	</listitem>
       </varlistentry>
 
