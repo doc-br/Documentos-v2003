@@ -10,15 +10,23 @@
   <sect1 id="serial-synopsis">
     <title>Sin&oacute;pse</title>
 
-    <indexterm><primary>Comunica&ccedil;&otilde;es Seriais</primary></indexterm>
+    <indexterm><primary>Comunica&ccedil;&otilde;es 
+    Seriais</primary></indexterm>
 
-    <para>O &unix; sempre possuiu suporte a comunica&ccedil;&otilde;es seriais.  De
-    fato, as primeiras maquinas &unix; disponibilizavam linhas
-    seriais para as opera&ccedil;&otilde;es de entrada e de sa&iacute;da realizada pelos
-    usu&aacute;rios.  As coisas mudaram muito desde os dias em que a m&eacute;dia
-    dos <quote>terminais</quote> consistiam-se em uma impressora serial de
-    10 caracteres por segundo e um teclado.  Este cap&iacute;tulo ir&aacute; abordar
-    algumas das formas como o FreeBSD utiliza comunica&ccedil;&otilde;es
+    <para>O &unix; sempre possuiu suporte a 
+    comunica&ccedil;&otilde;es seriais.  De
+    fato, as primeiras maquinas &unix; 
+    disponibilizavam linhas
+    seriais para as opera&ccedil;&otilde;es de entrada 
+    e de sa&iacute;da realizada pelos
+    usu&aacute;rios.  As coisas mudaram 
+    muito desde os dias em que a m&eacute;dia
+    dos <quote>terminais</quote> consistiam-se 
+    em uma impressora serial de
+    10 caracteres por segundo e um 
+    teclado.  Este cap&iacute;tulo ir&aacute; abordar
+    algumas das formas como o FreeBSD 
+    utiliza comunica&ccedil;&otilde;es
     seriais.</para>
 
     <para>Ap&oacute;s ler este capitulo voc&ecirc; ir&aacute; conhecer:</para>
@@ -2332,19 +2340,29 @@ ttyd3 "/usr/libexec/getty std.9600" unknown off secure</programlisting>
 
 	<programlisting>set console=vidconsole</programlisting>
 
-	<para>Se voc&ecirc; n&atilde;o configurou a vari&aacute;vel de ambiente <envar>console</envar> no carregador de boot, este, e posteriormente o kernel,
-        utilizar&atilde;o qualquer console indicada pela op&ccedil;&atilde;o <option>-h</option> no bloco de boot.</para>
+	<para>Se voc&ecirc; n&atilde;o configurou a
+         vari&aacute;vel de ambiente <envar>console</envar> no
+         carregador de boot, este, e posteriormente o kernel,
+         utilizar&atilde;o qualquer console indicada pela
+         op&ccedil;&atilde;o <option>-h</option> no
+         bloco de boot.</para>
 
-	<para>Nas vers&otilde;es 3.2 ou posteriores, voc&ecirc; pode especificar a console em
+	<para>Nas vers&otilde;es 3.2 ou posteriores, voc&ecirc;
+          pode especificar a console em
 	  <filename>/boot/loader.conf.local</filename> ou
-	  <filename>/boot/loader.conf</filename>, assim tamb&eacute;m como no
-	  <filename>/boot/loader.rc</filename>.  Neste m&eacute;todo, seu
-	  <filename>/boot/loader.rc</filename> deve apresentar algo como:</para>
+	  <filename>/boot/loader.conf</filename>, assim
+          tamb&eacute;m como no
+	  <filename>/boot/loader.rc</filename>.  Neste 
+          m&eacute;todo, seu
+	  <filename>/boot/loader.rc</filename> deve
+          apresentar algo como:</para>
 
 	<programlisting>include /boot/loader.4th
 start</programlisting>
 
-	<para>ent&atilde;o, crie o <filename>/boot/loader.conf.local</filename> e coloque a seguinte linha nele.</para>
+	<para>ent&atilde;o, crie o 
+        <filename>/boot/loader.conf.local</filename>
+        e coloque a seguinte linha nele.</para>
 
 	<programlisting>console=comconsole</programlisting>
 
@@ -2352,35 +2370,65 @@ start</programlisting>
 
 	<programlisting>console=vidconsole</programlisting>
 
-	<para>Visite a &man.loader.conf.5; para mais informa&ccedil;&otilde;es.</para>
+	<para>Visite a &man.loader.conf.5; para mais
+          informa&ccedil;&otilde;es.</para>
 
 	<note>
-	  <para>Neste momento, o carregador de boot n&atilde;o tem equivalente para a op&ccedil;&atilde;o <option>-P</option> como
-          no bloco de boot, e n&atilde;o h&aacute; o fornecimento de uma sele&ccedil;&atilde;o autom&aacute;tica de console interna ou serial baseadas
+	  <para>Neste momento, o carregador de boot
+          n&atilde;o tem equivalente para a
+          op&ccedil;&atilde;o <option>-P</option> como
+          no bloco de boot, e n&atilde;o h&aacute; o
+          fornecimento de uma sele&ccedil;&atilde;o
+          autom&aacute;tica de console interna ou
+          serial baseadas
           na presen&ccedil;a do teclado.</para>
 	</note>
       </sect3>
 
       <sect3>
-	<title>Utilizando outra porta serial que n&atilde;o seja a <devicename>sio0</devicename> para a console</title>
+	<title>Utilizando outra porta serial que 
+        n&atilde;o seja a <devicename>sio0</devicename> 
+        para a console</title>
 
-	<para>Voc&ecirc; precisa recompilar o carregador de boot para poder utilizar outra porta serial que n&atilde;o seja a <devicename>sio0</devicename>
-        como console. Siga os procedimentos descritos na <xref linkend="serialconsole-com2">.</para>
+	<para>Voc&ecirc; precisa recompilar o 
+        carregador de boot para poder utilizar outra 
+        porta serial que n&atilde;o seja 
+        a <devicename>sio0</devicename>
+        como console. Siga os procedimentos descritos 
+        na <xref linkend="serialconsole-com2">.</para>
       </sect3>
     </sect2>
 
     <sect2 id="serialconsole-caveats">
       <title>Advert&ecirc;ncias</title>
 
-      <para>A id&eacute;ia aqui &eacute; a de permitir que pessoas configurem servidores dedicados que n&atilde;o requerem dispositivos gr&aacute;ficos
-      ou teclados conectados. Desafornutadamente, enquanto a maioria dos sistemas permitir&aacute; que seja feito o boot sem um
-      teclado, h&aacute; um pequeno grupo de equipamentos que n&atilde;o permitir&atilde;o o boot sem um adaptador gr&aacute;fico(placa de v&iacute;deo). Computadores
-      com AMI BIOS podem ser configurados para que fa&ccedil;am o boot sem um adaptador gr&aacute;fico instalado simplesmente definindo na configura&ccedil;&atilde;o da CMOS
-      que o <quote>adaptador gr&aacute;fico n&atilde;o foi instalado</quote>.</para>
+      <para>A id&eacute;ia aqui &eacute; a de permitir 
+      que pessoas configurem servidores dedicados que 
+      n&atilde;o requerem dispositivos gr&aacute;ficos
+      ou teclados conectados. Desafornutadamente, enquanto 
+      a maioria dos sistemas permitir&aacute; que seja 
+      feito o boot sem um
+      teclado, h&aacute; um pequeno grupo de equipamentos 
+      que n&atilde;o permitir&atilde;o o boot sem um 
+      adaptador gr&aacute;fico(placa de 
+      v&iacute;deo). Computadores
+      com AMI BIOS podem ser configurados para 
+      que fa&ccedil;am o boot sem um adaptador 
+      gr&aacute;fico instalado simplesmente definindo 
+      na configura&ccedil;&atilde;o da CMOS
+      que o <quote>adaptador gr&aacute;fico 
+      n&atilde;o foi instalado</quote>.</para>
 
-      <para>Entretanto, diversas m&aacute;quinas n&atilde;o disponibilizar&atilde;o esta op&ccedil;&atilde;o e se negar&atilde;o a continuarem at&eacute; o boot sem um
-      adaptador gr&aacute;fico conectado ao equipamento. Com estas m&aacute;quinas voc&ecirc; ter&aacute; que ter alguma placa gr&aacute;fica conectada ao
-      equipamento(mesmo que esta for uma p&eacute;ssima placa monocrom&aacute;tica) ainda que voc&ecirc; n&atilde;o conectar&aacute; o monitor. Voc&ecirc; tamb&eacute;m
+      <para>Entretanto, diversas m&aacute;quinas n&atilde;o 
+      disponibilizar&atilde;o esta op&ccedil;&atilde;o e 
+      se negar&atilde;o a continuarem at&eacute; o boot sem um
+      adaptador gr&aacute;fico conectado ao equipamento. Com 
+      estas m&aacute;quinas voc&ecirc; ter&aacute; que ter 
+      alguma placa gr&aacute;fica conectada ao
+      equipamento(mesmo que esta for uma 
+      p&eacute;ssima placa monocrom&aacute;tica) ainda 
+      que voc&ecirc; n&atilde;o conectar&aacute; 
+      o monitor. Voc&ecirc; tamb&eacute;m
       pode tentar instalar uma AMI BIOS.</para>
     </sect2>
   </sect1>
