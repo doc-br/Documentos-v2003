@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.20 2003/12/09 17:31:17 surf Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/kernelconfig/chapter.sgml,v 1.21 2003/12/09 19:35:07 surf Exp $
 -->
 
 <chapter id="kernelconfig">
@@ -1039,11 +1039,11 @@ device          sc0          at isa?</programlisting>
     <para><literal>sc0</literal> é o driver padrão da console, que
       se assemelha a console de um SCO. Desde a maioria de acessos a console de programas tela cheia a
       console através de um terminal base de dados como biblioteca
-      <filename>termcap</filename>, it should not matter whether you use
-      this or <literal>vt0</literal>, the <literal>VT220</literal>
-      compatible console driver.  When you log in, set your
-      <envar>TERM</envar> variable to <literal>scoansi</literal> if
-      full-screen programs have trouble running under this console.</para>
+      <filename>termcap</filename>, isto não deve importar se você usar
+      isto <literal>vt0</literal>, o driver compatível com a console <literal>VT220</literal>.
+      Quando você logar, você seta a variável
+      <envar>TERM</envar> para <literal>scoansi</literal> se
+      programas de tela cheia tiver irritação rodando sobre esta console.</para>
 
     <programlisting># Enable this and PCVT_FREEBSD for pcvt vt220 compatible console driver
 #device          vt0     at isa?
@@ -1052,28 +1052,28 @@ device          sc0          at isa?</programlisting>
 # If you have a ThinkPAD, uncomment this along with the rest of the PCVT lines
 #options         PCVT_SCANSET=2   # IBM keyboards are non-std</programlisting>
 
-    <para>This is a VT220-compatible console driver, backward compatible to
-      VT100/102.  It works well on some laptops which have hardware
-      incompatibilities with <literal>sc0</literal>.  Also set your
-      <envar>TERM</envar> variable to <literal>vt100</literal> or
-      <literal>vt220</literal> when you log in.  This driver might also
-      prove useful when connecting to a large number of different machines
-      over the network, where <filename>termcap</filename> or
-      <filename>terminfo</filename> entries for the <literal>sc0</literal>
-      device are often not available &mdash; <literal>vt100</literal>
-      should be available on virtually any platform.</para>
+    <para>Isto é um driver VT220-compatível com console, compatível para
+      VT100/102. Isto trabalha bem em laptops que tenham hardware
+      incompatível com <literal>sc0</literal>. Ajuste também a variável do seu
+      <envar>TERM</envar> para <literal>vt100</literal> ou
+      <literal>vt220</literal> quando você logar. Este driver pode ser usado
+      para conectar um grande número de diferentes máquinas
+      sobre a rede, onde <filename>termcap</filename> ou
+      <filename>terminfo</filename> entradas para o dispositivo <literal>sc0</literal>
+      não esteja muitas vezes disponível &mdash; <literal>vt100</literal>
+      deve estar virtualmente disponível para toda plataforma.</para>
 
     <programlisting># Power management support (see LINT for more options)
 device          apm0     at nexus? disable flags 0x20  # Advanced Power Management</programlisting>
 
-    <para>Advanced Power Management support.  Useful for laptops.</para>
+    <para>Suporte a Avançado Gerenciamento de Energia. Usado para laptops.</para>
 
     <programlisting># PCCARD (PCMCIA) support
 device          card
 device          pcic0    at isa? irq 10 port 0x3e0 iomem 0xd0000
 device          pcic1    at isa? irq 11 port 0x3e2 iomem 0xd4000 disable</programlisting>
 
-    <para>PCMCIA support.  You want this if you are using a
+    <para>Suporte PCMCIA. Se você estiver usando um
       laptop.</para>
 
     <programlisting># Serial (COM) ports
@@ -1082,60 +1082,59 @@ device          sio1     at isa? port IO_COM2 irq 3
 device          sio2     at isa? disable port IO_COM3 irq 5
 device          sio3     at isa? disable port IO_COM4 irq 9</programlisting>
 
-    <para>These are the four serial ports referred to as COM1 through COM4
-      in the &ms-dos/&windows; world.</para>
+    <para>Essas 4 portas seriais são referentes a COM1 até COM4
+      como são no mundo &ms-dos/&windows;.</para>
 
     <note>
-      <para>If you have an internal modem on COM4 and a serial port at
-	COM2, you will have to change the IRQ of the modem to 2 (for
-	obscure technical reasons, IRQ2 = IRQ 9) in order to access it
-	from &os;.  If you have a multiport serial card, check the
-	manual page for &man.sio.4; for more information on the proper
-	values for these lines.  Some video cards (notably those based on
-	S3 chips) use IO addresses in the form of
-	<literal>0x*2e8</literal>, and since many cheap serial cards do
-	not fully decode the 16-bit IO address space, they clash with
-	these cards making the COM4 port practically unavailable.</para>
+      <para>Se você tiver um modem interno na COM4 e uma porta serial na
+	COM2, você terá que mudar a IRQ do modem para 2 (pelas
+	razões técnicas IRQ2 = IRQ 9) em ordem para acessar isto
+	do &os;. Se você tiver um cartão multiport serial, verifique a
+	página do manual para &man.sio.4; para maiores informações nos valores apropriados
+	para esta linha. Alguns cartões de video (notavelmente aqueles baseados no chip
+	S3) usam endereço IO em forma de
+	<literal>0x*2e8</literal>, e desde que muitos cartões seriais baratos não façam
+	completamente decodificação de espaços no endereço 16-bit IO, eles confrontam com
+	estes cartões macados para porta  COM4 praticamente não disponível.</para>
 
-      <para>Each serial port is required to have a unique IRQ (unless you
-        are using one of the multiport cards where shared interrupts are
-	supported), so the default IRQs for COM3 and COM4 cannot be
-	used.</para>
+      <para>Cara porta serial é requerido ter uma IRQ exclusiva (ao menos que você
+        esteja usando um cartão multiport onde as interrupções compartilhadas são
+	suportadas), sendo assim o padrão IRQs para COM3 e COM4 não podem ser
+	usadas.</para>
     </note>
 
     <programlisting># Parallel port
 device          ppc0    at isa? irq 7</programlisting>
 
-    <para>This is the ISA-bus parallel port interface.</para>
+    <para>Esta é a porta paralela para interface ISA-bus.</para>
 
     <programlisting>device          ppbus      # Parallel port bus (required)</programlisting>
 
-    <para>Provides support for the parallel port bus.</para>
+    <para>Fornece suporte para a porta paralela bus.</para>
 
     <programlisting>device          lpt        # Printer</programlisting>
 
-    <para>Support for parallel port printers.</para>
+    <para>Suporte para porta paralela de impressoras.</para>
 
     <note>
-      <para>All three of the above are required to enable parallel printer
-	support.</para>
+      <para>Todos os três acima são requeridos para habilitar suporte a impressoras paralela.</para>
     </note>
 
     <programlisting>device          plip       # TCP/IP over parallel</programlisting>
 
-    <para>This is the driver for the parallel network interface.</para>
+    <para>Este é o driver para a interface de rede paralela.</para>
 
     <programlisting>device          ppi        # Parallel port interface device</programlisting>
 
-    <para>The general-purpose I/O (<quote>geek port</quote>) + IEEE1284
+    <para>O propósito geral de I/O (<quote>geek port</quote>) + IEEE1284
       I/O.</para>
 
     <programlisting>#device         vpo        # Requires scbus and da</programlisting>
 
     <indexterm><primary>zip drive</primary></indexterm>
-    <para>This is for an Iomega Zip drive.  It requires
-      <literal>scbus</literal> and <literal>da</literal> support.  Best
-      performance is achieved with ports in EPP 1.9 mode.</para>
+    <para>Isto é para Iomega Zip drive. Isto requere suporte
+      <literal>scbus</literal> e do <literal>da</literal>. Melhor
+      performance é conseguidos com portas em modo EPP 1.9.</para>
 
     <programlisting># PCI Ethernet NICs.
 device          de         # DEC/Intel DC21x4x (<quote>Tulip</quote>)
@@ -1144,8 +1143,8 @@ device          tx         # SMC 9432TX (83c170 <quote>EPIC</quote>)
 device          vx         # 3Com 3c590, 3c595 (<quote>Vortex</quote>)
 device          wx         # Intel Gigabit Ethernet Card (<quote>Wiseman</quote>)</programlisting>
 
-    <para>Various PCI network card drivers.  Comment out or remove any of
-      these not present in your system.</para>
+    <para>Varios cartões de drivers PCI de rede. O comentário ou remover alguma das
+      não presentes em seu sistema.</para>
 
     <programlisting># PCI Ethernet NICs that use the common MII bus controller code.
 device          miibus     # MII bus support</programlisting>
