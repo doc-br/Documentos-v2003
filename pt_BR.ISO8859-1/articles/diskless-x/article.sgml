@@ -69,14 +69,16 @@
   <sect1>
     <title>Criando o diskete de boot (No sistema diskless)</title>
     
-    <para>Since the network boot loaders will not work with some of the TSR's
-      and such that &ms-dos; uses, it is best to create a dedicated boot floppy
-      or, if you can, create an &ms-dos; menu that will (via the
-      <filename>config.sys</filename>/<filename>autoexec.bat</filename> files)
-      ask what configuration to load when the system starts.  The later is the
-      method that I use and it works great. My &ms-dos; (6.x) menu is
-      below.</para>
-    
+    <para>Uma vez que os carregadores de boot via rede podem n&atilde;o
+      funcionar corretamente com alguns dos TSRs (programas residentes
+      em mem&oacute;ria) que o &ms-dos;
+      utiliza, &eacute; melhor criar um disco de boot dedicado ou, se voc&ecirc;
+      puder, crie um menu &ms-dos; (atrav&eacute;s dos arquivos
+      <filename>config.sys</filename>/<filename>autoexec.bat</filename>)
+      o qual ir&aacute; perguntar qual configura&ccedil;&atilde;o carregar quando o sistema
+      iniciar.  Este &uacute;ltimo &eacute; o m&eacute;todo que eu utilizo e ele funciona
+      muito bem.  O meu menu &ms-dos; (6.x) est&aacute; abaixo.</para>
+      
     <example>
       <title><filename>config.sys</filename></title>
 
@@ -111,39 +113,47 @@ nb8390.com
   </sect1>
   
   <sect1>
-    <title>Getting the network boot programs (On the server)</title>
+    <title>Obtendo o programa de boot via rede (No servidor)</title>
     
-    <para>Compile the <quote>net-boot</quote> programs that are located in
-      <filename>/usr/src/sys/i386/boot/netboot</filename>.  You should read
-      the comments at the top of the <filename>Makefile</filename>.  Adjust as
-      required.  Make a backup of the original in case something goes wrong.  When
-      the build is done, there should be 2 &ms-dos; executables,
-      <filename>nb8390.com</filename> and <filename>nb3c509.com</filename>.
-      One of these two programs will be what you need to run on the diskless
-      server.  It will load the kernel from the boot server.  At this point,
-      put both programs on the &ms-dos; boot floppy created earlier.</para>
+    <para>Compile os programas de <quote>net-boot</quote> os quais
+      est&atilde;o localizados no diret&oacute;rio
+      <filename>/usr/src/sys/i386/boot/netboot</filename>.  Voc&ecirc; deve
+      ler os coment&aacute;rios no topo do arquivo <filename>Makefile</filename>.  
+      Ajuste-o como necess&aacute;rio.  Fa&ccedil;a backup do original para o caso de
+      algo sair errado.  Quando a compila&ccedil;&atilde;o terminar, dever&aacute; haver 2
+      execut&aacute;veis &ms-dos;, <filename>nb8390.com</filename> e
+      <filename>nb8390.com</filename> no diret&oacute;rio.  Um desdes 2 arquivos 
+      ser&aacute; o que voc&ecirc; vai necessitar para executar na esta&ccedil;&atilde;o Diskless.  Ele
+      ir&aacute; carregar o kernel a partir do servidor de boot.  Neste
+      momento, copie ambos os programas para o diskete de boot &ms-dos; 
+      criado anteriormente.</para>
+      
   </sect1>
   
   <sect1>
-    <title>Determine which program to run (On the diskless system)</title>
+    <title>Determinando qual programa executar (No sistema diskless)</title>
     
-    <para>If you know the chipset that your Ethernet adapter uses, this is
-      easy.  If you have the NS8390 chipset, or a NS8390 based chipset, use
-      <filename>nb8390.com</filename>.  If you have a &tm.3com; 509 based chipset,
-      use the <filename>nb3C509.com</filename> boot program.  If you are not
-      sure which you have, try using one, if it says <errorname>No adapter
-	found</errorname>, try the other.  Beyond that, you are pretty much on
-      your own.</para>
+    <para>Se voc&ecirc; sabe qual o chipset da sua placa de rede ethernet,
+      isto &eacute; f&aacute;cil.  Se voc&ecirc; possui um chipset NS8390 ou um chipset
+      baseado no chipset NS8390, utilize o <filename>nb8390.com</filename>.  
+      Se possui um chipset baseado no &tm.3com; 509, utilize o
+      programa de boot <filename>nb3C509.com</filename>.  Se voc&ecirc; n&atilde;o
+      estiver certo sobre qual voc&ecirc; possui, tente um deles, se ele
+      exibir a mensagem <errorname>No adapter found</errorname>, tente
+      o outro. <literal>Beyond that, you are pretty much on your
+      own</literal>.</para>
+
   </sect1>
 
   <sect1>
-    <title>Booting across the network</title>
+    <title>Dando boot atrav&eacute;s da rede</title>
     
-    <para>Boot the diskless system with out any config.sys/autoexec.bat
-      files.  Try running the boot program for your Ethernet adapter.</para>
-
-    <para>My Ethernet adapter is running in WD8013 16bit mode so I run
-      <filename>nb8390.com</filename></para>
+    <para>De boot no sistema diskless sem utilizar o arquivo config.sys
+      e o autoexec.bat.  Tente executar o programa de boot para o
+      sua placa de rede.</para>
+    
+    <para>A minha placa de rede &eacute; uma WD8013 mode 16 bit, logo eu
+      utilizo o arquivo <filename>nb8390.com</filename></para>
     
     <screen><prompt>C:&gt;</prompt> <userinput>cd \netboot</userinput>
 <prompt>C:&gt;</prompt> <userinput>nb8390</userinput>
@@ -157,17 +167,20 @@ WD8013EBT base 0x0300, memory 0x000D8000, addr 00:40:01:43:26:66
 
 Searching for server...</screen>
 
-    <para>At this point, my diskless system is trying to find a machine to act
-      as a boot server.  Make note of the <literal>addr</literal> line above,
-      you will need this number later.  Reset the diskless system and modify
-      your <filename>config.sys</filename> and
-      <filename>autoexec.bat</filename> files to do these steps automatically
-      for you.  Perhaps in a menu.  If you had to run
-      <command>nb3c509.com</command> instead of <command>nb8390.com</command>
-      the output is the same as above.  If you got <errorname>No adapter
-	found</errorname> at the <literal>Searching for adapter...</literal>
-      message, verify that you did indeed set the compile time defines in the
-      <filename>Makefile</filename> correctly.</para>
+    <para>Neste momento, o meu sistema diskless est&aacute; tentando
+      encontrar uma maquina para atuar como um servidor de boot.
+      Observe a linha de endere&ccedil;o (addr) acima, voc&ecirc; vai precisar deste
+      numero mais tarde.  Resete o sistema diskless e modifique os seus
+      arquivos <filename>config.sys</filename> e
+      <filename>autoexec.bat</filename> para que eles executem estes
+      passos automaticamente para voc&ecirc;.  Talvez em um menu.  Se voc&ecirc;
+      tiver que executar o <command>nb3c509.com</command> ao inv&eacute;s do
+      <command>nb8390.com</command> o output ser&aacute; o mesmo que o mostrado acima
+      Se voc&ecirc; receber a mensagem <errorname>No adapter found</errorname> 
+      como retorno ap&oacute;s a mensagem <literal>Searching for adapter...</literal>,
+      verifique se voc&ecirc; ajustou corretamente as defini&ccedil;&otilde;es de tempo de
+      compila&ccedil;&atilde;o no arquivo <filename>Makefile</filename>.</para>
+  
   </sect1>
   
   <sect1>
@@ -175,7 +188,7 @@ Searching for server...</screen>
     
     <para>Certifique-se que o arquivo <filename>/etc/inetd.conf</filename> 
       Possui as entradas para os servi&ccedil;os de tftp e bootps. As minhas entradas 
-	est&atilde;o listadas abaixo:</para>
+      est&atilde;o listadas abaixo:</para>
     
     <programlisting>tftp	dgram	udp	wait	nobody	/usr/libexec/tftpd	tftpd /tftpboot
 bootps  dgram  udp  wait  root  /usr/libexec/bootpd bootpd /etc/bootptab</programlisting>
@@ -190,7 +203,7 @@ bootps  dgram  udp  wait  root  /usr/libexec/bootpd bootpd /etc/bootptab</progra
     
     <para>Voc&ecirc; se lembrou de anotar a linha de <literal>endere&ccedil;o
       </literal> do output do boot loader no sistema diskless?
-      Descubra qual &eacute;, pois aqui voc&ecirc; vai precisar dele.</para>
+      Se n&atilde;o, descubra qual &eacute;, pois voc&ecirc; vai precisar dele agora.</para>
     
     <para>Adicione uma entrada ao arquivo <filename>/etc/bootptab</filename> (
       Voc&ecirc; pode precisar criar o arquivo).  Ele deve ser id&ecirc;ntico a
@@ -206,7 +219,7 @@ bootps  dgram  udp  wait  root  /usr/libexec/bootpd bootpd /etc/bootptab</progra
         :gw=199.246.76.1:\
         :vm=rfc1048:</programlisting>
     
-    <para>As linhas s&atilde;o as seguintes:</para>
+    <para>O significado das linhas &eacute; o seguintes:</para>
 
     <informaltable frame="none">
       <tgroup cols="2">
@@ -254,8 +267,8 @@ bootps  dgram  udp  wait  root  /usr/libexec/bootpd bootpd /etc/bootptab</progra
 	  </row>
 
 	  <row>
-	    <entry><literal>vm=...</literal></entry>
-	    <entry>Apenas deixe ele aqui<entry>
+	    <entry><literal>vm=rfc1048</literal></entry>
+	    <entry>Apenas deixe ele aqui, n&atilde;o se preocupe com ele agora<entry>
 	  </row>
 	</tbody>
       </tgroup>
@@ -263,18 +276,18 @@ bootps  dgram  udp  wait  root  /usr/libexec/bootpd bootpd /etc/bootptab</progra
 
     <note>
       <para>Certifique-se de configurar o seu endere&ccedil;o IP corretamente, 
-	o endere&ccedil;o acima &eacute; o meu pr&oacute;prio.</para>
+	o endere&ccedil;o acima &eacute; o meu ;) .</para>
     </note>
 
     <para>Crie o diret&oacute;rio <filename>/tftpboot</filename> no servidor
-      o qual ir&aacute; conter os arquivos de configura&ccedil;&atilde;o do sistema
+      que ir&aacute; conter os arquivos de configura&ccedil;&atilde;o do sistema
       diskless ao qual o servidor ir&aacute; servir.  Estes arquivos ser&atilde;o
       nomeados <filename>cfg.<replaceable>ip</replaceable></filename>
       onde <replaceable>ip</replaceable> &eacute; o endere&ccedil;o IP do sistema
       diskless.  O arquivo de configura&ccedil;&atilde;o para o host
       <hostid>altair</hostid> &eacute; o
       <filename>/tftpboot/cfg.199.246.76.2</filename>. E o seu
-      conte&uacute;do &eacute;:</para>
+      conte&uacute;do &eacute; o seguinte:</para>
     
     <programlisting>rootfs 199.246.76.1:/DiskLess/rootfs/altair
 hostname altair.example.com</programlisting>
@@ -292,11 +305,10 @@ hostname altair.example.com</programlisting>
 	apenas leitura</emphasis>.
     </note>
     
-    <para>Se for preciso a hierarquia para o sistema diskless pode ser re-montado
+    <para>Se for preciso a hierarquia de diret&oacute;rios do sistema diskless pode ser re-montada
     permitindo opera&ccedil;&otilde;es de leitura e escrita.</para>
     
-    <para>Eu utilizo o meu 386DX-40 reserva como um terminal X
-      dedicado.</para>
+    <para>Eu utilizo o meu 386DX-40 reserva como um terminal X dedicado.</para>
 
     <para>A hierarquia para o host <hostid>altair</hostid> &eacute;:</para>
 
