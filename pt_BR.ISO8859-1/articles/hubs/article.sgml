@@ -337,60 +337,72 @@
 		encontramos dispon&iacute;veis no tHttpd.</para>
             </listitem>
           </itemizedlist>
-        </para>
+      
       </sect3>
       <sect3 id="mirror-serv-cvsup">
         <title>CVSup (desejado para reposit&oacute;rios CVS)</title>
-        <para>
-          <application>CVSup</application> is a very efficient way of distributing files.
-          It works similar to <application>rsync</application>, but was specially designed for
-          use with CVS repositories. If you want to offer the
-          FreeBSD CVS repository, you really want to consider
-          offering it via <application>CVSup</application>. It is possible to offer
-          the CVS repository via <application>AnonCVS</application>, FTP,
-          <application>Rsync</application> or HTTP, but
-          people would benefit much more from <application>CVSup</application> access. 
-          <application>CVSup</application> was developed by &a.jdp;.
-          It is a bit tricky to install on non-FreeBSD platforms, 
-          since it is written in Modula-3 and therefore requires
-          a Modula-3 environment. John Polstra has built a 
-          stripped down version of M3 that is sufficient to
-          run <application>CVSup</application>, and can be installed much easier. 
-          See <ulink url="http://www.polstra.com/projects/freeware/ezm3/">Ezm3</ulink>
-          for details. Related ports are:
+
+        <para>O <application>CVSup</application> &eacute; um meio muito
+	  eficiente de distribui&ccedil;&atilde;o de arquivos.  Ele trabalha de
+	  forma semelhante ao <application>rsync</application>, por&eacute;m
+	  foi desenvolvido para uso com reposit&oacute;rios CVS.  Se voc&ecirc;
+	  desejar disponibilizar um reposit&oacute;rio CVS do FreeBSD, voc&ecirc;
+	  deve considerar fortemente faz&ecirc;-lo via <application>CVSup
+	  </application>.  &Eacute; poss&iacute;vel oferecer acesso a um reposit&oacute;rio
+	  CVS via <application>AnonCVS</application>, FTP, <application>
+	  Rsync</application> ou HTTP, mas as pessoas v&atilde;o se
+	  beneficiar muito mais de um acesso via <application>CVSup
+	  </application>.  O <application>CVSup</application> foi
+	  desenvolvido pelo &a.jdp;.  &Eacute; um pouco complicado instal&aacute;-lo
+	  em uma plataforma diferente do FreeBSD, uma vez que ele foi
+	  escrito em Modula-3 e consequentemente necessita de um
+	  ambiente Modula-3.  O John Polstra  preparaou uma vers&atilde;o
+	  simplificada do M3 a qual &eacute; suficiente para executar o 
+	  <application>CVSup</application>, a qual pode ser facilmente
+	  instalada.  Consulte <ulink 
+	  url="http://www.polstra.com/projects/freeware/ezm3/">Ezm3</ulink>
+          para maiores detalhes. Os ports relacionados s&atilde;o:</para>
 
           <itemizedlist>
             <listitem>
-              <para><filename role="package">net/cvsup</filename>: The native CVSup port (client and server)
-                which requires <filename role="package">lang/ezm3</filename> now.</para>
+              <para><filename role="package">net/cvsup</filename>: 
+		O port nativo do CVSup (cliente e servidor) o qual
+		requer a instala&ccedil;&atilde;o do <filename role="package">lang/ezm3
+		</filename>.</para>
             </listitem>
+
             <listitem>
-              <para><filename role="package">net/cvsup-mirror</filename>: The CVSup mirror kit, which requires
-                 <filename role="package">net/cvsup</filename>, and configures it mirror-ready. Some
-                 site administrators may want a different setup though.
-              </para>
+              <para><filename role="package">net/cvsup-mirror</filename>: 
+		O kit de espelhamento do CVSup, o qual requer o 
+                <filename role="package">net/cvsup</filename>, e que o
+		configura para atuar no espelhamento dos servi&ccedil;os.
+		Alguns administradores de sistema podem preferir uma
+		forma diferente de configurar um site espelho.</para>
             </listitem>
           </itemizedlist>
+	  
+	  <para>Existem alguns outros, como o <filename role="package">
+	    net/cvsup-without-gui</filename> o qual voc&ecirc; pode desejar
+	    olhar.  Se voc&ecirc; preferir um pacote bin&aacute;rio, compilado
+	    estaticamente, de uma olhada 
+	    <ulink url="http://people.FreeBSD.org/~jdp/s1g/">
+	    aqui</ulink>.  Esta pagina continua mencionando o erro SG1
+	    o qual esteve presente no <application>CVSup</application>.	  
+	    Pode ser que o John venha a definir no futuro um site 
+	    gen&eacute;rico para download de bin&aacute;rios est&aacute;ticos para v&aacute;rias
+	    plataformas.</para>
+        
+	 <para>&Eacute; possivel utilizar o <application>CVSup</application>
+	   para disponibilizar qualquer tipo de arquivo, e n&atilde;o apenas
+	   reposit&oacute;rios CVS, mas a configura&ccedil;&atilde;o ser&aacute; mais complexa.
+           O <application>CVSup</application> &eacute; conhecido por comer
+	   um pouco de CPU tanto no servidor quanto no cliente, o que
+	   ocorre porque ele precisa comparar muitos arquivos.</para>
 
-          There are a few more like
-          <filename role="package">net/cvsup-without-gui</filename> you might want to have
-          a look at. If you prefer a static binary package, take a look 
-          <ulink url="http://people.FreeBSD.org/~jdp/s1g/">here</ulink>.
-          This page still refers to the S1G bug that was present
-          in <application>CVSup</application>. Maybe
-          John will set up a generic download-site to get
-          static binaries for various platforms.
-        </para>
-        <para> 
-          It is possible to use <application>CVSup</application> to offer
-          any kind of fileset, not just CVS repositories, 
-          but configuration can be complex.
-          <application>CVSup</application> is known to eat some CPU on both the server and the 
-          client, since it needs to compare lots of files.
-        </para>
       </sect3>
       <sect3 id="mirror-anoncvs">
-        <title>AnonCVS (optional for CVS repository)</title>
+        <title>AnonCVS (Opcional para um reposit&oacute;rio CVS)</title>
+
         <para>
           If you have the CVS repository, you may want to offer
           anonymous CVS access. A short warning first:
