@@ -875,87 +875,94 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
   <sect1 id="sgml-primer-comments">
     <title>Coment&aacute;rios</title>
     
-    <para>Comments are an SGML construction, and are normally only valid
-      inside a DTD.  However, as <xref linkend="sgml-primer-sgml-escape">
-      shows, it is possible to use SGML syntax within your document.</para>
+    <para>Coment&aacute;rios s&atilde;o uma constru&ccedil;&atilde;o SGML, e s&atilde;o normalmente
+      v&aacute;lidos apenas dentro de um DTD.  Entretanto, como mostrou a 
+      <xref linkend="sgml-primer-sgml-escape">, &eacute; possivel utilizar
+      sintaxe SGML com os seus documentos.</para>
 
-    <para>The delimiter for SGML comments is the string
-      <quote><literal>--</literal></quote>.  The first occurrence of this string
-      opens a comment, and the second closes it.</para>
-
+    <para>O delimitador para um coment&aacute;rio SGML &eacute; o conjunto de
+      caracteres <quote><literal>--</literal></quote>.  A primeira
+      ocorr&ecirc;ncia deste conjunto de caracteres abre um coment&aacute;rio e a
+      segunda fecha.</para>
+      
     <example>
-      <title>SGML generic comment</title>
+      <title>Coment&aacute;rio SGML gen&eacute;rico</title>
 
-      <programlisting>&lt;!-- test comment --></programlisting>
+      <programlisting>&lt;!-- Teste de coment&aacute;rio --></programlisting>
       
       <programlisting><![ CDATA [
-<!-- This is inside the comment -->
+<!-- Este &eacute; o interior do coment&aacute;rios -->
 
-<!-- This is another comment    -->
+<!-- Este &eacute; outro coment&aacute;rio    -->
 
-<!-- This is one way
-     of doing multiline comments -->
+<!-- Esta &eacute; uma forma 
+     de fazer coment&aacute;rios de v&aacute;rias linhas -->
 
-<!-- This is another way of   --
-  -- doing multiline comments -->]]></programlisting>
+<!-- Esta &eacute; outra forma  --
+  -- de fazer coment&aacute;rios de v&aacute;rias linhas -->]]></programlisting>
     </example>
 
     <![ %output.print; [
     <important>
-      <title>Use 2 dashes</title>
+      <title>Utilize 2 tra&ccedil;os</title>
 
-      <para>There is a problem with producing the Postscript and PDF versions
-	of this document.  The above example probably shows just one hyphen
-	symbol, <literal>-</literal> after the <literal>&lt;!</literal> and
-	before the <literal>&gt;</literal>.</para>
+      <para>Existe um problema com a produ&ccedil;&atilde;o de vers&otilde;es Postscript e
+	PDF deste documento.  O exemplo acima provavelmente mostra
+	apenas um s&iacute;mbolo de h&iacute;fen, <literal>-</literal> depois do 
+	<literal>&lt;!</literal> e antes do <literal>&gt;</literal>.</para>
 
-      <para>You <emphasis>must</emphasis> use two <literal>-</literal>,
-	<emphasis>not</emphasis> one.  The Postscript and PDF versions have
-	translated the two <literal>-</literal> in the original to a longer,
-	more professional <emphasis>em-dash</emphasis>, and broken this
-	example in the process.</para>
-
-      <para>The HTML, plain text, and RTF versions of this document are not
-	affected.</para>
+      <para>Voc&ecirc; <emphasis>deve</emphasis> utilizar dois
+      	<literal>-</literal> e <emphasis>n&atilde;o</emphasis> um.  As vers&otilde;es
+	Postscript e PDF traduzem os dois <literal>-</literal> do
+	original para um mais longo, e mais profissional
+	<emphasis>em-dash</emphasis>, e quebra este exemplo no
+	processo.</para>
+      
+      <para>As vers&otilde;es HTML, texto plano, e RTF deste documento n&atilde;o
+	s&atilde;o afetadas.</para>
     </important>
     ]]>
     
-    <para>If you have used HTML before you may have been shown different rules
-      for comments.  In particular, you may think that the string
-      <literal>&lt;!--</literal> opens a comment, and it is only closed by
+    <para>Se voc&ecirc; ja utilizou HTML antes, voc&ecirc; pode ter sido exposto a
+      regras diferentes para coment&aacute;rios.  Em particular, voc&ecirc; pode
+      pensar que o conjunto de caracteres <literal>&lt;!--</literal> 
+      abre um coment&aacute;rio e que ele apenas &eacute; fechado por um 
       <literal>--&gt;</literal>.</para>
 
-    <para>This is <emphasis>not</emphasis> the case.  A lot of web browsers
-      have broken HTML parsers, and will accept that as valid.  However, the
-      SGML parsers used by the Documentation Project are much stricter, and
-      will reject documents that make that error.</para>
-
+    <para>Este <emphasis>n&atilde;o</emphasis> &eacute; o caso.  Muitos dos
+      navegadores web possuem interpretadores HTML quebrados, e ir&atilde;o
+      aceitar isso como v&aacute;lido.  Entretanto, os interpretadores SGML
+      utilizados pelo projeto de documenta&ccedil;&atilde;o s&atilde;o muito mais rig&iacute;dos,
+      e ir&atilde;o rejeitar os documentos que contiverem este erro.</para>
+    
     <example>
-      <title>Erroneous SGML comments</title>
+      <title>Coment&aacute;rios SGML errados</title>
 
       <programlisting><![ CDATA [
-<!-- This is in the comment --
+<!-- Este &eacute; o comant&aacute;rio --
 
-     THIS IS OUTSIDE THE COMMENT!
+     Isto est&aacute; fora do coment&aacute;rio!
 
-  -- back inside the comment -->]]></programlisting>
+  -- de volta para dentro do coment&aacute;rio -->]]></programlisting>
 
-      <para>The SGML parser will treat this as though it were actually;</para>
+      <para>O interpretador SGML ir&aacute; tratar isto como ele &eacute;
+	realmente;</para>
+      
+      <programlisting>&lt;!Isto est&aacute; fora do coment&aacute;rio&gt;</programlisting>
 
-      <programlisting>&lt;!THIS IS OUTSIDE THE COMMENT&gt;</programlisting>
+      <para>Isto n&atilde;o &eacute; um SGML v&aacute;lido, e pode dar mensagens de erro confusas.</para>
+      
+      <programlisting><![ CDATA [<!--------------- Isto &eacute; uma id&eacute;ia muito ruim --------------->]]></programlisting>
 
-      <para>This is not valid SGML, and may give confusing error
-	messages.</para>
-
-      <programlisting><![ CDATA [<!--------------- This is a very bad idea --------------->]]></programlisting>
-
-      <para>As the example suggests, <emphasis>do not</emphasis> write
-	comments like that.</para>
-
+      <para>E como o exemplo sugere, <emphasis>n&atilde;o escreva</emphasis>
+      comentarios como esse.</para>
+      
       <programlisting><![ CDATA [<!--===================================================-->]]></programlisting>
 
-      <para>That is a (slightly) better approach, but it still potentially
-	confusing to people new to SGML.</para>
+      <para>Esta &eacute; uma abordagem (ligeiramente) melhor, mas ele ainda
+      	&eacute; potencialmente confuso para as pessoas novas no uso do
+	SGML.</para>
+      
     </example>
 
     <sect2>
@@ -963,14 +970,16 @@ nsgmls:example.sgml:6:8:E: end tag for "HEAD" which is not finished</screen>
 
       <procedure>
 	<step>
-	  <para>Add some comments to <filename>example.sgml</filename>, and
-	    check that the file still validates using &man.nsgmls.1;</para>
+	  <para>Adicione alguns coment&aacute;rios ao arquivo
+	  <filename>example.sgml</example> e verifique se ele continua
+	  v&aacute;lido usando o &man.nsgmls.1;</para>
 	</step>
 
 	<step>
-	  <para>Add some invalid comments to
-	    <filename>example.sgml</filename>, and see the error messages that
-	    &man.nsgmls.1; gives when it encounters an invalid comment.</para>
+	  <para>Adicione alguns coment&aacute;rios inv&aacute;lidos ao
+	    <filename>example.sgml</example> e veja as mensagens de erro
+	    que o &man.nsgmls.1; emite quando encontra um coment&aacute;rio
+	    inv&aacute;lido.</para>
 	</step>
       </procedure>
     </sect2>
