@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/config/chapter.sgml,v 1.10 2003/12/09 14:17:32 alexandrev Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/config/chapter.sgml,v 1.11 2003/12/09 16:20:24 alexandrev Exp $
 -->
 
 <chapter id="config-tuning">
@@ -1536,10 +1536,10 @@ kern.maxfiles: 2088 -> 5000</screen>
   </sect1>
 
   <sect1 id="configtuning-disk">
-    <title>Tuning Disks</title>
+    <title>Sintonizando Discos</title>
 
     <sect2>
-      <title>Sysctl Variables</title>
+      <title>Vari&aacute;veis Sysctl</title>
 
       <sect3>
 	<title><varname>vfs.vmiodirenable</varname></title>
@@ -1548,26 +1548,28 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <primary><varname>vfs.vmiodirenable</varname></primary>
 	</indexterm>
 
-	<para>The <varname>vfs.vmiodirenable</varname> sysctl variable
-	  may be set to either 0 (off) or 1 (on); it is 1 by default.
-	  This variable controls how directories are cached by the
-	  system.  Most directories are small, using just a single
-	  fragment (typically 1&nbsp;K) in the file system and less
-	  (typically 512&nbsp;bytes) in the buffer cache.
-	  However, when operating in the default mode the buffer
-	  cache will only cache a fixed number of directories even if
-	  you have a huge amount of memory.  Turning on this sysctl
-	  allows the buffer cache to use the VM Page Cache to cache the
-	  directories, making all the memory available for caching
-	  directories.  However,
-	  the minimum in-core memory used to cache a directory is the
-	  physical page size (typically 4&nbsp;K) rather than 512&nbsp;
-	  bytes.  We recommend turning this option on if you are running
-	  any services which manipulate large numbers of files.  Such
-	  services can include web caches, large mail systems, and news
-	  systems.  Turning on this option will generally not reduce
-	  performance even with the wasted memory but you should
-	  experiment to find out.</para>
+	<para>A vari&aacute;vel sysctl <varname>vfs.vmiodirenable</varname> pode 
+	  ser configurada tanto para 0 (desligada) ou 1 (ligada);  onde 
+	  o padr&atilde;o &eacute; 1.  Esta vari&aacute;vel como os diret&oacute;rios s&atilde;o guardados 
+	  pelo sistema.  Muitos diret&oacute;rios s&atilde;o pequenos, utilizando apenas 
+	  um fragmento (tipicamente 1&nbsp;K) no sistema de arquivos 
+	  e menos no cache do <foreignphrase>buffer</foreignphrase> 
+	  (tipicamente 512&nbsp;bytes).  Entretanto, ao operar em modo 
+	  padr&atilde;o o cache do <foreignphrase>buffer</foreingphrase> guardar&aacute; 
+	  apenas um n&uacute;mero fixo de diret&oacute;rio ainda que voc&ecirc; tenha uma grande 
+	  quantidade de mem&oacute;ria.  Ligar este sysctl permite que o cache do 
+	  <foreignphrase>buffer</foreignphrase> use o 
+	  <literal>VM Page Cache</literal> para guardar os diret&oacute;rios, 
+	  fazendo que toda mem&oacute;ria dispon&iacute;vel possa ser usada para 
+	  guardar diret&oacute;rios.  Entretanto, o m&iacute;nimo de mem&oacute;ria usada 
+	  para guardar um diret&oacute;rio &eacute; o tamanho de uma p&aacute;gina f&iacute;sica 
+	  (tipicamente 4&nbsp;K) ao inv&eacute;s de 512&nbsp;bytes.  Recomendamos 
+	  que esta vari&aacute;vel seja ligada se voc&ecirc; estiver usando servi&ccedil;os 
+	  que manipulem um grande n&uacute;mero de arquivos.  Servi&ccedil;os como web 
+	  caches, grandes sistemas de correio eletr&ocirc;nico, e sistemas de 
+	  not&iacute;cias.  Ligar esta vari&aacute;vel geralmente n&atilde;o reduzir&aacute; a 
+	  performance, mesmo com a mem&oacute;ria desperdi&ccedil;ada, mas voc&ecirc; 
+	  deve tentar para descobrir.</para> 
       </sect3>
 
      <sect3>
@@ -1577,14 +1579,16 @@ kern.maxfiles: 2088 -> 5000</screen>
  	  <primary><varname>vfs.write_behind</varname></primary>
  	</indexterm>
 
- 	<para>The <varname>vfs.write_behind</varname> sysctl variable
- 	  defaults to <literal>1</literal> (on).  This tells the file system
- 	  to issue media writes as full clusters are collected, which
- 	  typically occurs when writing large sequential files.  The idea
- 	  is to avoid saturating the buffer cache with dirty buffers when
- 	  it would not benefit I/O performance.  However, this may stall
- 	  processes and under certain circumstances you may wish to turn it
- 	  off.</para>
+ 	<para>A vari&aacute;vel sysctl <varname>vfs.write_behind</varname> possui 
+ 	  valor padr&atilde;o <literal>1</literal> (ligada).  Isto diz para que o 
+	  sistema de arquivos fa&ccedil;a uma escrita completa assim que uma 
+	  seq&uuml;&ecirc;ncia de <literal>clusters</literal> seja coletada, 
+	  isto tipicamente ocorre numa escrita de grandes arquivos 
+	  sequenciais.  A id&eacute;ia e evitar a satura&ccedil;&atilde;o do cache do  
+	  <foreignphrase>buffer</foreignphrase> com <foreignphrase>buffers</foreignphrase> 
+	  sujos quando isto n&atilde;o beneficiar a performance de E/S.  Entretanto, 
+	  isto pode paralizar processos, e sob algumas circunst&acirc;ncias voc&ecirc; 
+	  pode querer desligar esta vari&aacute;vel.</para>
        </sect3>
 
        <sect3>
@@ -1594,21 +1598,23 @@ kern.maxfiles: 2088 -> 5000</screen>
  	  <primary><varname>vfs.hirunningspace</varname></primary>
  	</indexterm>
 
- 	<para>The <varname>vfs.hirunningspace</varname> sysctl variable
- 	  determines how much outstanding write I/O may be queued to disk
- 	  controllers system-wide at any given instance.  The default is
- 	  usually sufficient but on machines with lots of disks you may
- 	  want to bump it up to four or five <emphasis>megabytes</emphasis>.
- 	  Note that setting too high a value (exceeding the buffer cache's
- 	  write threshold) can lead to extremely bad clustering
- 	  performance.  Do not set this value arbitrarily high!  Higher
- 	  write values may add latency to reads occurring at the same time.
- 	</para>
+ 	<para>A vari&aacute;vel sysctl <varname>vfs.hirunningspace</varname> 
+ 	  determina a quantidade excedente de escrita de I/O pode ser 
+	  enfileirada nos controladores de disco globais do sistema 
+	  em qualquer ocasi&atilde;o.  O padr&atilde;o normalmente &eacute; suficiente mas 
+	  em m&aacute;quinas com muitos discos voc&ecirc; pode querer aumentar para 
+	  quatro ou cinco <emphasis>megabytes</emphasis>.  Note que 
+	  configurar um valor alto (excedendo o gatilho do buffer de 
+	  escrita do cache) pode levar a uma performance de 
+	  <foreignphrase>clustering</foreignphrase> degradante.  N&atilde;o 
+	  configure esta vari&aacute;vel com um valor arbitrariamente alto!  
+	  Valores altos de escrita podem adicionar lat&ecirc;ncia em 
+	  leituras ocorridas simultaneamente.</para>
 
- 	<para>There are various other buffer-cache and VM page cache
- 	  related sysctls.  We do not recommend modifying these values.  As
- 	  of &os; 4.3, the VM system does an extremely good job of
- 	  automatically tuning itself.</para>
+ 	<para>Existem outras vari&aacute;veis sysctl de cache de buffer e 
+	  p&aacute;gina VM.  N&atilde;o recomendamos a modifica&ccedil;&atilde;o de seus valores.  
+	  Assim como no &os; 4.3, o sistema VM realiza um excelente 
+	  trabalho sintonizando-se automaticamente.</para>
        </sect3>
 
        <sect3>
@@ -1618,23 +1624,27 @@ kern.maxfiles: 2088 -> 5000</screen>
  	  <primary><varname>vm.swap_idle_enabled</varname></primary>
  	</indexterm>
 
- 	<para>The <varname>vm.swap_idle_enabled</varname> sysctl variable
- 	  is useful in large multi-user systems where you have lots of
- 	  users entering and leaving the system and lots of idle processes.
- 	  Such systems tend to generate a great deal of continuous pressure
- 	  on free memory reserves.  Turning this feature on and tweaking
- 	  the swapout hysteresis (in idle seconds) via
- 	  <varname>vm.swap_idle_threshold1</varname> and
- 	  <varname>vm.swap_idle_threshold2</varname> allows you to depress
- 	  the priority of memory pages associated with idle processes more
- 	  quickly then the normal pageout algorithm.  This gives a helping
- 	  hand to the pageout daemon.  Do not turn this option on unless
- 	  you need it, because the tradeoff you are making is essentially
- 	  pre-page memory sooner rather than later; thus eating more swap
- 	  and disk bandwidth.  In a small system this option will have a
- 	  determinable effect but in a large system that is already doing
- 	  moderate paging this option allows the VM system to stage whole
- 	  processes into and out of memory easily.</para>
+ 	<para>A vari&aacute;vel sysctl <varname>vm.swap_idle_enabled</varname> 
+ 	  &eacute; &uacute;til em grandes sistemas multi-usu&aacute;rio onde voc&ecirc; tem muitos 
+	  usu&aacute;rios entrando e saindo do sistema e muitos processos 
+	  ociosos.  Estes sistemas tendem a gerar uma press&atilde;o 
+	  consider&aacute;vel e cont&iacute;nua nas reservas de mem&oacute;ria livre.  
+	  Sintonizar esta caracter&iacute;stica e ajustar a histeria de 
+	  <literal>swapout</literal> (em segundos fora de uso) atrav&eacute;s de 
+ 	  <varname>vm.swap_idle_threshold1</varname> e
+ 	  <varname>vm.swap_idle_threshold2</varname> permite que voc&ecirc; 
+	  diminua mais rapidamente a prioridade das p&aacute;ginas de 
+	  mem&oacute;ria associadas &agrave; processos ociosos do o algoritmo 
+	  padr&atilde;o de <literal>pageout</literal>.  Isto d&aacute; uma ajuda ao 
+	  <literal>daemon de pageout</literal>.  N&atilde;o ligue esta op&ccedil;&atilde;o 
+	  a menos que voc&ecirc; precise, pois a troca que voc&ecirc; est&aacute; fazendo 
+	  &eacute; essencialmente mem&oacute;ria de pr&eacute;-p&aacute;gina antes ao inv&eacute;s de 
+	  tardia; consumindo mais <literal>swap</literal> e banda de 
+	  disco.  Em um sistema pequeno esta op&ccedil;&atilde;o ter&aacute; um efeito 
+	  determin&aacute;vel, mas em um sistema maior que j&aacute; est&aacute; fazendo 
+	  uma pagina&ccedil;&atilde;o moderada esta op&ccedil;&atilde;o permite ao sistema VM 
+	  organizar os processos que entram e saem da mem&oacute;ria mais 
+	  facilmente.</para>  
        </sect3>
 
       <sect3>
@@ -1644,26 +1654,28 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <primary><varname>hw.ata.wc</varname></primary>
 	</indexterm>
 
-	<para>&os;&nbsp;4.3 flirted with turning off IDE write caching.
-	  This reduced write bandwidth to IDE disks but was considered
-	  necessary due to serious data consistency issues introduced
-	  by hard drive vendors.  The problem is that IDE
-	  drives lie about when a write completes.  With IDE write
-	  caching turned on, IDE hard drives not only write data
-	  to disk out of order, but will sometimes delay writing some
-	  blocks indefinitely when under heavy disk loads.  A crash or
-	  power failure may cause serious file system corruption.
-	  &os;'s default was changed to be safe.  Unfortunately, the
-	  result was such a huge performance loss that we changed
-	  write caching back to on by default after the release.  You
-	  should check the default on your system by observing the
-	  <varname>hw.ata.wc</varname> sysctl variable.  If IDE write
-	  caching is turned off, you can turn it back on by setting
-	  the kernel variable back to 1.  This must be done from the
-	  boot loader at boot time.  Attempting to do it after the
-	  kernel boots will have no effect.</para>
+	<para>O &os;&nbsp;4.3 flertou com o desligamento do cache de escrita IDE.  
+	  Isto reduziu a largura de banda de escrita em discos IDE e 
+	  foi considerado necess&aacute;rio devido a s&eacute;rias quest&otilde;es de consist&ecirc;ncia 
+	  de dados introduzidas pelos fabricantes de discos r&iacute;gidos.  O 
+	  problema &eacute; que discos IDE mentem quando se uma escrita &eacute; 
+	  completada.  Com o cache de escrita de IDE ligado, estes discos 
+	  n&atilde;o somente escrevem dados no disco fora de ordem, mas algumas 
+	  vezes atrasar&aacute; a escrita de alguns blocos indefinidamente quando 
+	  estiver sob grande carga.  Um problema ou uma falha de energia 
+	  pode causar corrup&ccedil;&otilde;es s&eacute;rias no sistema de arquivos.  O padr&atilde;o 
+	  do &os; foi modificado para ser seguro.  Infelizmente, o resultado 
+	  foi uma grande perda de performance, e voltamos a ligar o cache 
+	  de escrita por padr&atilde;o.  Voc&ecirc; pode checar o padr&atilde;o do seu sistema 
+	  observando a vari&aacute;vel sysctl <varname>hw.ata.wc</varname>.  Se 
+	  o cache de escrita IDE estiver desligado, voc&ecirc; pode liga-lo de 
+	  volta configurando a vari&aacute;vel de <foreignphrase>kernel</foreignphrase>
+	  de volta para 1.  Isto 
+	  deve ser feito pelo carregador de inicializa&ccedil;&atilde;o durante a 
+	  inicializa&ccedil;&atilde;o.  Tentar fazer isso depois da inicializa&ccedil;&atilde;o do 
+	  <foreignphrase>kernel</foreignphrase> n&atilde;o surtir&aacute; efeito.</para>
 
-	<para>For more information, please see &man.ata.4;.</para>
+	<para>Para mais informa&ccedil;&otilde;es veja &man.ata.4;.</para>
       </sect3>
 
       <sect3>
@@ -1675,15 +1687,16 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <secondary><varname>kern.cam.scsi_delay</varname></secondary>
 	</indexterm>
 
-	<para>The <option>SCSI_DELAY</option> kernel config may be used to
-	  reduce system boot times.  The defaults are fairly high and can be
-	  responsible for <literal>15+</literal> seconds of delay in the
-	  boot process.  Reducing it to <literal>5</literal> seconds usually
-	  works (especially with modern drives).  Newer versions of &os;
-	  (5.0+) should use the <varname>kern.cam.scsi_delay</varname>
-	  boot time tunable.  The tunable, and kernel config option accept
-	  values in terms of <emphasis>milliseconds</emphasis> and
-	  <emphasis>not</emphasis> <emphasis>seconds</emphasis>.</para>
+	<para>A configura&ccedil;&atilde;o de kernel <option>SCSI_DELAY</option> pode ser 
+	  usada para reduzir o tempo de inicializa&ccedil;&atilde;o.  O padr&atilde;o &eacute; um pouco 
+	  alto e pode ser respons&aacute;vel <literal>15+</literal> segundos de 
+	  espera no processo de inicializa&ccedil;&atilde;o.  Reduzir para 
+	  <literal>5</literal> segundos funciona bem (especialmente para 
+	  drives modernos).  Vers&otilde;es mais novas do &os; (5.0+) podem 
+	  ajustar a vari&aacute;vel <varname>kern.cam.scsi_delay</varname>.  As 
+	  op&ccedil;&otilde;es de configura&ccedil;&atilde;o de kernel e ajuste de vari&aacute;vel aceitam 
+	  valores em <emphasis>milisegundos</emphasis> e 
+	  <emphasis>n&atilde;o</emphasis> em <emphasis>seconds</emphasis>.</para>
       </sect3>
     </sect2>
 
@@ -1693,188 +1706,221 @@ kern.maxfiles: 2088 -> 5000</screen>
       <indexterm><primary>Soft Updates</primary></indexterm>
       <indexterm><primary>tunefs</primary></indexterm>
 
-      <para>The &man.tunefs.8; program can be used to fine-tune a
-	file system.  This program has many different options, but for
-	now we are only concerned with toggling Soft Updates on and
-	off, which is done by:</para>
+      <para>O programa &man.tunefs.8; pode ser usado para fazer uma 
+	sintonia fina no sistema de arquivos.  Este programa possui 
+	muitas op&ccedil;&otilde;es, mas por enquanto vamos nos preocupar apenas 
+	em ligar e desligar o <foreignphrase>Soft Upatades</foreignphrase> 
+	da seguinte maneira:</para>
 
       <screen>&prompt.root; <userinput>tunefs -n enable /filesystem</userinput>
 &prompt.root; <userinput>tunefs -n disable /filesystem</userinput></screen>
 
-      <para>A filesystem cannot be modified with &man.tunefs.8; while
-	it is mounted.  A good time to enable Soft Updates is before any
-	partitions have been mounted, in single-user mode.</para>
+      <para>Um sistema de arquivos n&atilde;o pode ser modificado com o 
+	&man.tunefs.8; enquanto estiver montado.  Uma boa hora para 
+	habilitar o <foreignphrase>Soft Updates</foreignphrase> &eacute; antes 
+	que qualquer parti&ccedil;&atilde;o seja montada, em modo mono-usu&aacute;rio.</para>
 
-      <note><para>As of &os;&nbsp;4.5, it is possible to enable Soft Updates
-	at filesystem creation time, through use of the <literal>-U</literal>
-	option to &man.newfs.8;.</para></note>
+      <note><para>Assim como no &os;&nbsp;4.5, &eacute; poss&iacute;vel habilitar o 
+	<foreignphrase>Soft Updates</foreignphrase> no momento da 
+	cria&ccedil;&atilde;o do sistema de arquivos, atrav&eacute;s da op&ccedil;&atilde;o 
+	<literal>-U</literal> do &man.newfs.8;.</para></note>
 
-      <para>Soft Updates drastically improves meta-data performance, mainly
-        file creation and deletion, through the use of a memory cache.  We
-        recommend to use Soft Updates on all of your file systems.  There
-        are two downsides to Soft Updates that you should be aware of:  First,
-        Soft Updates guarantees filesystem consistency in the case of a crash
-        but could very easily be several seconds (even a minute!) behind
-        updating the physical disk.  If your system crashes you may lose more
-        work than otherwise.  Secondly, Soft Updates delays the freeing of
-        filesystem blocks.  If you have a filesystem (such as the root
-	filesystem) which is almost full, performing a major update, such as
-        <command>make installworld</command>, can cause the filesystem to run
-	out of space and the update to fail.</para>
+      <para><foreignphrase>Soft Updates</foreignphrase> melhora 
+	drasticamente a performance do <foreignphrase>meta-data</foreignphrase>, 
+	principalmente a cria&ccedil;&atilde;o e elimina&ccedil;&atilde;o de arquivos, atrav&eacute;s do 
+	uso de um cache de mem&oacute;ria.  Recomendamos o uso do 
+	<foreignphrase>Soft Updates</foreignphrase> em todos os seus 
+	sistemas de arquivos.  Existem dois pequenos problemas no seu 
+	uso, que voc&ecirc; deve estar ciente: Primeiro, o 
+	<foreignphrase>Soft Updates</foreignphrase> garante a consist&ecirc;ncia 
+	no sistema de arquivos no caso de problemas, mas pode ficar alguns 
+	segundos (at&eacute; mesmo minuto!) atualizando o disco f&iacute;sico em 
+	segundo plano.  Se seu sistema der problema voc&ecirc; pode perder mais 
+	dados do que da outra maneira.  Segundo, o 
+	<foreignphrase>Soft Updates</foreignphrase> atrasa a libera&ccedil;&atilde;o de 
+	blocos de sistema de arquivo.  Se voc&ecirc; possui um sistema de 
+	arquivo (como o root) que est&aacute; praticamente lotado, fazer uma 
+	atualiza&ccedil;&atilde;o geral tipo <command>make installworld</command>, pode 
+	fazer com que o sistema de arquivos fique sem espa&ccedil;o e falhe a 
+	atualiza&ccedil;&atilde;o.</para>
 
       <sect3>
-	<title>More Details about Soft Updates</title>
+	<title>Mais detalhes sobre o Soft Updates</title>
 
 	<indexterm>
 	  <primary>Soft Updates</primary>
 	  <secondary>details</secondary>
 	</indexterm>
 
-	<para>There are two traditional approaches to writing a file
-	  systems meta-data back to disk.  (Meta-data updates are
-	  updates to non-content data like inodes or
-	  directories.)</para>
+	<para>Existe duas maneiras tradicionais de escrever meta-dados 
+	  de sistemas de arquivos de volta para o disco.  
+	  (Atualiza&ccedil;&atilde;o de meta-dados s&atilde;o atualiza&ccedil;&otilde;es para dados 
+	  que n&atilde;o sejam de conte&uacute;do, como inodos ou 
+	  diret&oacute;rios.)</para>
 
-	<para>Historically, the default behavior was to write out
-	  meta-data updates synchronously.  If a directory had been
-	  changed, the system waited until the change was actually
-	  written to disk.  The file data buffers (file contents) were
-	  passed through the buffer cache and backed up
-	  to disk later on asynchronously.  The advantage of this
-	  implementation is that it operates safely.  If there is
-	  a failure during an update, the meta-data are always in a
-	  consistent state.  A file is either created completely
-	  or not at all.  If the data blocks of a file did not find
-	  their way out of the buffer cache onto the disk by the time
-	  of the crash, &man.fsck.8; is able to recognize this and
-	  repair the filesystem by setting the file length to
-	  0.  Additionally, the implementation is clear and simple.
-	  The disadvantage is that meta-data changes are slow.  An
-	  <command>rm -r</command>, for instance, touches all the files
-	  in a directory sequentially, but each directory
-	  change (deletion of a file) will be written synchronously
-	  to the disk.  This includes updates to the directory itself,
-	  to the inode table, and possibly to indirect blocks
-	  allocated by the file.  Similar considerations apply for
-	  unrolling large hierarchies (<command>tar -x</command>).</para>
+	<para>Historicamente, o comportamento padr&atilde;o era o de 
+	  escrever atualiza&ccedil;&otilde;es de meta-dados sincronamente.  Se 
+	  um diret&oacute;rio foi modificado, o sistema esperou at&eacute; que 
+	  a mudan&ccedil;a fosse realmente feita no disco.  Os buffers de 
+	  dados de arquivo (conte&uacute;do do arquivo) foram passados 
+	  atrav&eacute;s do buffer de cache e guardados mais tarde em disco 
+	  assincronamente.  A vantagem desta implementa&ccedil;&atilde;o &eacute; a 
+	  seguran&ccedil;a na opera&ccedil;&atilde;o.  Se existir uma falha durante 
+	  uma atualiza&ccedil;&atilde;o, os meta-dados sempre estar&atilde;o em um 
+	  estado consistente.  Um arquivo &eacute; criado de forma 
+	  completa ou n&atilde;o de qualquer forma.  Se os blocos de 
+	  dados de um arquivo n&atilde;o encontrar seu caminho do 
+	  cache de buffer no disco na hora do problema, &man.fsck.8; 
+	  ser&aacute; capaz de reconhecer e reparar o sistema de arquivos 
+	  configurando o tamanho de arquivo para 0.  Al&eacute;m disso, 
+	  a implementa&ccedil;&atilde;o &eacute; clara e simples.  A disvantagem &eacute; que 
+	  as mudan&ccedil;as de meta-dados s&atilde;o lentas.  O comando 
+	  <command>rm -r</command>, por exemplo, toca em todos os 
+	  arquivos em um diret&oacute;rio sequencialmente, mas cada 
+	  mudan&ccedil;a de diret&oacute;rio (exclus&atilde;o de um arquivo) ser&aacute; 
+	  escrita sincronamente no disco.  Isto inclui atualiza&ccedil;&otilde;es 
+	  no pr&oacute;prio diret&oacute;rio, na tabela de inodo, e poss&iacute;velmente 
+	  nos blocos indiretamente alocados pelo arquivo.  
+	  Considera&ccedil;&otilde;es similares s&atilde;o aplic&aacute;veis no 
+	  desenrolar de hierarquias grandes 
+	  (<command>tar -x</command>).</para>
 
-	<para>The second case is asynchronous meta-data updates.  This
-  	  is the default for Linux/ext2fs and
-  	  <command>mount -o async</command> for *BSD ufs.  All
-  	  meta-data updates are simply being passed through the buffer
-  	  cache too, that is, they will be intermixed with the updates
-  	  of the file content data.  The advantage of this
-  	  implementation is there is no need to wait until each
-  	  meta-data update has been written to disk, so all operations
-  	  which cause huge amounts of meta-data updates work much
-  	  faster than in the synchronous case.  Also, the
-  	  implementation is still clear and simple, so there is a low
-  	  risk for bugs creeping into the code.  The disadvantage is
-  	  that there is no guarantee at all for a consistent state of
-  	  the filesystem.  If there is a failure during an operation
-  	  that updated large amounts of meta-data (like a power
-  	  failure, or someone pressing the reset button),
-	  the filesystem
-  	  will be left in an unpredictable state.  There is no opportunity
-  	  to examine the state of the filesystem when the system
-  	  comes up again; the data blocks of a file could already have
-  	  been written to the disk while the updates of the inode
-  	  table or the associated directory were not.  It is actually
-  	  impossible to implement a <command>fsck</command> which is
-  	  able to clean up the resulting chaos (because the necessary
-  	  information is not available on the disk).  If the
-	  filesystem has been damaged beyond repair, the only choice
-	  is to use &man.newfs.8; on it and restore it from backup.
+	<para>O segundo caso &eacute; o de atualiza&ccedil;&otilde;es assincronas de 
+	  meta-dados.  Isto &eacute; o padr&atilde;o para Linux/ext2fs e 
+  	  <command>mount -o async</command> para ufs nos *BSD.  Todas 
+	  as atualiza&ccedil;&otilde;es de meta-dados s&atilde;o simplesmente passadas 
+	  pelo cache de buffer tamb&eacute;m, eles ser&atilde;o misturados com as 
+	  atualiza&ccedil;&otilde;es de conte&uacute;do de dados de arquivo.  A vantagem 
+	  desta implementa&ccedil;&atilde;o &eacute; que n&atilde;o existe a necessidade de 
+	  esperar at&eacute; que cada atualiza&ccedil;&atilde;o de meta-dados tenha sido 
+	  escrita em disco, uma vez que todas as opera&ccedil;&otilde;es que causam 
+	  grandes quantidades de atualiza&ccedil;&atilde;o de meta-dados trabalhem 
+	  mais r&aacute;pido que no caso sincrono.  Al&eacute;m disso, a 
+	  implementa&ccedil;&atilde;o &eacute; simples e limpa, possuindo um baixo risco 
+	  de falhas na codifica&ccedil;&atilde;o. A disvantagem &eacute; que n&atilde;o existe 
+	  garantia para um estado consistente do sistema de 
+	  arquivos.  Se ocorrer uma falha durante uma opera&ccedil;&atilde;o que 
+	  atualizou grandes quantidades de meta-dados (como uma 
+	  falta de energia, ou algu&eacute;m pressionar o bot&atilde;o de 
+	  reinicializa&ccedil;&atilde;o), o sistema de arquivos ficar&aacute; em um 
+	  estado imprevis&iacute;vel.  N&atilde;o existe uma oportunidade para 
+	  examinar o estado do sistema de arquivos quando o sistema 
+	  voltar para o ar novamente; os blocos de dados de um 
+	  arquivo j&aacute; podem ter sido escritos no disco enquanto as 
+	  atualiza&ccedil;&otilde;es na tabela de inodo, ou diret&oacute;rio 
+	  associado, ainda n&atilde;o foram.  Na verdade &eacute; imposs&iacute;vel 
+	  implementar um <command>fsck</command> que seja capaz 
+	  de limpar todo o caos resultante (pelo fato de que a 
+	  informa&ccedil;&atilde;o necess&aacute;ria n&atilde;o est&aacute; dispon&iacute;vel no disco).  Se 
+	  o sistema de arquivos foi danificado al&eacute;m das 
+	  possibilidades de repara&ccedil;&atilde;o, a &uacute;nica escolha &eacute; 
+	  utilizar o &man.newfs.8; e restaurar um backup.
 	  </para>
 
-	<para>The usual solution for this problem was to implement
-	  <emphasis>dirty region logging</emphasis>, which is also
-	  referred to as <emphasis>journaling</emphasis>, although that
-	  term is not used consistently and is occasionally applied
-	  to other forms of transaction logging as well.  Meta-data
-	  updates are still written synchronously, but only into a
-	  small region of the disk.  Later on they will be moved
-	  to their proper location.  Because the logging
-	  area is a small, contiguous region on the disk, there
-	  are no long distances for the disk heads to move, even
-	  during heavy operations, so these operations are quicker
-	  than synchronous updates.
-	  Additionally the complexity of the implementation is fairly
-	  limited, so the risk of bugs being present is low.  A disadvantage
-	  is that all meta-data are written twice (once into the
-	  logging region and once to the proper location) so for
-	  normal work, a performance <quote>pessimization</quote>
-	  might result.  On the other hand, in case of a crash, all
-	  pending meta-data operations can be quickly either rolled-back
-	  or completed from the logging area after the system comes
-	  up again, resulting in a fast filesystem startup.</para>
+	<para>A solu&ccedil;&atilde;o normal para este problema foi a 
+	  implementa&ccedil;&atilde;o de uma <emphasis>regi&atilde;o suja de 
+	  <foreignphrase>logging</foreignphrase></emphasis>, 
+	  tamb&eacute;m conhecida como <emphasis>journaling</emphasis>, 
+	  embora este termo n&atilde;o seja usado consistentemente e &eacute; 
+	  ocasionalmente aplicado &agrave; outras formas de transa&ccedil;&atilde;o 
+	  de <foreignphrase>logging</foreignphrase>.  Atualiza&ccedil;&otilde;es 
+	  de meta-dados ainda s&atilde;o escritas sincronamente, mas 
+	  apenas em uma pequena regi&atilde;o do disco.  Posteriormente 
+	  ser&atilde;o movidos para a localiza&ccedil;&atilde;o apropriada.  Devido ao 
+	  pequeno tamanho da &aacute;rea de <foreignphrase>logging<foreignphrase>, 
+	  a regi&atilde;o cont&iacute;gua do disco, n&atilde;o existem grandes 
+	  dist&acirc;ncias a serem percorridas pela cabe&ccedil;a do disco, 
+	  mesmo durante opera&ccedil;&otilde;es pesadas, fazendo com que estas 
+	  opera&ccedil;&otilde;es mais r&aacute;pidas do que as atualiza&ccedil;&otilde;es 
+	  sincronas.  Al&eacute;m disso, a complexidade de implementa&ccedil;&atilde;o 
+	  &eacute; um tanto quanto limitada, fazendo com que o risco 
+	  de exist&ecirc;ncia de falhas na codifica&ccedil;&atilde;o sejam menors.  A 
+	  disvantagem &eacute; que todos os meta-dados s&atilde;o escritos 
+	  duas vezes (uma vez na regi&atilde;o de 
+	  <foreignphrase>logging</foreignphrase> e outra 
+	  no local apropriado) causando perda de performance 
+	  em condi&ccedil;&otilde;es normais.  Por outro lado, no caso de 
+	  pane, todas as opera&ccedil;&otilde;es de meta-dados pendentes 
+	  podem ser rapidamente desfeitas ou completadas da 
+	  &aacute;rea de <foreignphrase>logging</foreignphrase> depois 
+	  que o sistema retornar ao ar novamente, resultando 
+	  uma inicializa&ccedil;&atilde;o r&aacute;pida de sistema de arquivos.
+	  </para>
 
-	<para>Kirk McKusick, the developer of Berkeley FFS,
-	   solved this problem with Soft Updates: all pending
-	   meta-data updates are kept in memory and written out to disk
-	   in a sorted sequence (<quote>ordered meta-data
-	   updates</quote>).  This has the effect that, in case of
-	   heavy meta-data operations, later updates to an item
-	   <quote>catch</quote> the earlier ones if the earlier ones are still in
-	   memory and have not already been written to disk.  So all
-	   operations on, say, a directory are generally performed in
-	   memory before the update is written to disk (the data
-	   blocks are sorted according to their position so
-	   that they will not be on the disk ahead of their meta-data).
-	   If the system crashes, this causes an implicit <quote>log
-	   rewind</quote>: all operations which did not find their way
-	   to the disk appear as if they had never happened.  A
-	   consistent filesystem state is maintained that appears to
-	   be the one of 30 to 60 seconds earlier.  The
-	   algorithm used guarantees that all resources in use
-	   are marked as such in their appropriate bitmaps: blocks and inodes.
-	   After a crash, the only resource allocation error
-	   that occurs is that resources are
-	   marked as <quote>used</quote> which are actually <quote>free</quote>.
-	   &man.fsck.8; recognizes this situation,
-	   and frees the resources that are no longer used.  It is safe to
-	   ignore the dirty state of the filesystem after a crash by
-	   forcibly mounting it with <command>mount -f</command>.  In
-	   order to free resources that may be unused, &man.fsck.8;
-	   needs to be run at a later time.  This is the idea behind
-	   the <emphasis>background fsck</emphasis>: at system startup
-	   time, only a <emphasis>snapshot</emphasis> of the
-	   filesystem is recorded.  The <command>fsck</command> can be
-	   run later on.  All file systems can then be mounted
-	   <quote>dirty</quote>, so the system startup proceeds in
-	   multiuser mode.  Then, background <command>fsck</command>s
-	   will be scheduled for all file systems where this is required, to free
-	   resources that may be unused.  (File systems that do not use
-	   Soft Updates still need the usual foreground
-	   <command>fsck</command> though.)</para>
+	<para>Kirk McKusick, desenvolvedor do Berkeley FFS,
+	   resolveu este problema com o Soft Updates: todas 
+	   as atualiza&ccedil;&otilde;es de meta-dados pendentes s&atilde;o mantidas 
+	   em mem&oacute;ria e escritas no disco numa seq&uuml;&ecirc;ncia ordenada 
+	   (<quote>ordered meta-data updates</quote>).  Isto causa o 
+	   seguinte efeito, no caso de opera&ccedil;&otilde;es pesadas de 
+	   meta-dados, atualiza&ccedil;&otilde;es posteriores em um item 
+	   <quote>pegam</quote> as primeiras que ainda est&atilde;o 
+	   em mem&oacute;ria e n&atilde;o foram escritas no disco.  Ent&atilde;o 
+	   todas as opera&ccedil;&otilde;es em, digamos, um diret&oacute;rio, geralmente 
+	   s&atilde;o feitas em mem&oacute;ria antes que a atualiza&ccedil;&atilde;o seja 
+	   escrita no disco (os blocos de dados s&atilde;o ordenado de 
+	   acordo com seu posicionamento, assim n&atilde;o podem estar 
+	   no disco antes de seus meta-dados).  Se o sistema der 
+	   pane, a conseq&uuml;&ecirc;ncia ser&aacute; um <quote>log rewind</quote>: 
+	   todas as opera&ccedil;&otilde;es que n&atilde;o encotraram seu caminho para 
+	   o disco parecem nunca ter ocorrido.  Um estado consistente 
+	   de sistema de arquivo &eacute; mantido como se fosse de 30 a 
+	   60 segundos antes.  O algoritmo utilizado garante que 
+	   todos os recursos em uso sejam marcados como seus mapas 
+	   de bits apropriados: blocos e inodos.  Depois de uma pane, 
+	   a &uacute;nica aloca&ccedil;&atilde;o de erros de recursos que ocorre s&atilde;o os 
+	   marcados como <quote>used</quote> que na verdade s&atilde;o 
+	   <quote>free</quote>.  &man.fsck.8; reconhece esta 
+	   situa&ccedil;&atilde;o, e libera os recursos que n&atilde;o estejam em 
+	   uso.  &Eacute; seguro ignorar o estado sujo do sistema de arquivo 
+	   ap&oacute;s uma pane for&ccedil;ando mont&aacute;-lo com <command>
+	   mount -u</command>.  Para liberar recursos que podem 
+	   estar ociosos, &man.fsck.8; necessita ser executado 
+	   posteriormente.  Esta &eacute; a id&eacute;ia atr&aacute;s do <emphasis>
+	   background fsck</emphasis>: no momento da inicializa&ccedil;&atilde;o 
+	   do sistema, apenas um <foreignphrase>snapshot</foreignphrase> 
+	   do sistema de arquivo &eacute; gravada.  O <command>fsck</command> 
+	   pode ser executado depois.  Todos os sistemas de arquivo 
+	   podem ser montados <quote>sujos</quote>, para que a 
+	   inicializa&ccedil;&atilde;o do sistema prossiga em modo multi-usu&aacute;rio.  
+	   Ent&atilde;o o <command>fsck</command> em segundo plano ser&aacute; 
+	   agendado para ser executado em todos os sistemas de 
+	   arquivo onde for necess&aacute;rio, para liberar recursos que 
+	   podem estar ociosos.  (Sistemas de arquivos que 
+	   n&atilde;o usam Soft Updates ainda necessitam do 
+	   <command>fsck</command> em primeiro plano.)</para>
 
-	 <para>The advantage is that meta-data operations are nearly as
-	   fast as asynchronous updates (i.e. faster than with
-	   <emphasis>logging</emphasis>, which has to write the
-	   meta-data twice).  The disadvantages are the complexity of
-	   the code (implying a higher risk for bugs in an area that
-	   is highly sensitive regarding loss of user data), and a
-	   higher memory consumption.  Additionally there are some
-	   idiosyncrasies one has to get used to.
-	   After a crash, the state of the filesystem appears to be
-	   somewhat <quote>older</quote>.  In situations where
-	   the standard synchronous approach would have caused some
-	   zero-length files to remain after the
-	   <command>fsck</command>, these files do not exist at all
-	   with a Soft Updates filesystem because neither the meta-data
-	   nor the file contents have ever been written to disk.
-	   Disk space is not released until the updates have been
-	   written to disk, which may take place some time after
-	   running <command>rm</command>.  This may cause problems
-	   when installing large amounts of data on a filesystem
-	   that does not have enough free space to hold all the files
-	   twice.</para>
+	 <para>A vantagem &eacute; que as opera&ccedil;&otilde;es de meta-dados 
+	   s&atilde;o quase t&atilde;o r&aacute;pidas quando as atualiza&ccedil;&otilde;es 
+	   assincronas (mais r&aacute;pidas do que com <emphasis>
+	   logging</emphasis>, que precisa escrever os 
+	   meta-dados duas vezes).  As desvantagem s&atilde;o a 
+	   complexidade do c&oacute;digo (implicando em um alto 
+	   rico de falhas de c&oacute;digo em uma &aacute;rea extremamente 
+	   sens&iacute;vel no que diz respeito a perda de dados do 
+	   usu&aacute;rio), e um alto consumo de mem&oacute;ria.  Al&eacute;m disso 
+	   existem algumas peculiaridades que temos que lidar.  Depois  
+	   de uma pane, o estado do sistema de arquivos parece 
+	   estar algo como <quote>antigo</quote>.  Em situa&ccedil;&otilde;es 
+	   onde a op&ccedil;&atilde;o sincrona pode ter causado alguns 
+	   arquivos de tamanho zero ap&oacute;s o <command>fsck</command>, 
+	   estes arquivos n&atilde;o existem em um sistema de arquivo 
+	   com Soft Update, pois nem os meta-dados e os conte&uacute;dos 
+	   dos arquivos foram escritos no disco.  O espa&ccedil;o em 
+	   disco n&atilde;o &eacute; liberado at&eacute; que as atualiza&ccedil;&otilde;es tenham 
+	   sido escritas no disco, que pode acontecer algum 
+	   tempo depois de executar o comando 
+	   <command>rm</command>.  Isto pode causar problemas 
+	   ao introduzir grandes quantidades de dados em um 
+	   sistema de arquivo que n&atilde;o possui espa&ccedil;o livre 
+	   suficiente para abrigar todos os arquivos duas 
+	   vezes.</para>
       </sect3>
     </sect2>
   </sect1>
 
   <sect1 id="configtuning-kernel-limits">
-    <title>Tuning Kernel Limits</title>
+    <title>Sintonizando Limites do Kernel</title>
 
     <indexterm>
       <primary>tuning</primary>
@@ -1882,7 +1928,7 @@ kern.maxfiles: 2088 -> 5000</screen>
     </indexterm>
 
     <sect2 id="file-process-limits">
-      <title>File/Process Limits</title>
+      <title>Limites de Arquivo/Processo</title>
 
       <sect3 id="kern-maxfiles">
 	<title><varname>kern.maxfiles</varname></title>
@@ -1891,34 +1937,41 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <primary><varname>kern.maxfiles</varname></primary>
 	</indexterm>
 
-	<para><varname>kern.maxfiles</varname> can be raised or
-	  lowered based upon your system requirements.  This variable
-	  indicates the maximum number of file descriptors on your
-	  system.  When the file descriptor table is full,
-	  <errorname>file: table is full</errorname> will show up repeatedly
-	  in the system message buffer, which can be viewed with the
-	  <command>dmesg</command> command.</para>
+	<para>A vari&aacute;vel <varname>kern.maxfiles</varname> pode 
+	  ter seu valor aumentado ou diminuido baseado nos 
+	  requisitos do sistema.  Esta vari&aacute;vel indica o 
+	  n&uacute;mero m&aacute;ximo de descritores de arquivos no seu 
+	  sistema.  Quanto a tabela de descritores de arquivos 
+	  est&aacute; cheia, a mensagem <errorname>file: table is 
+	  full</errorname> aparecer&aacute; v&aacute;rias vezes no buffer de 
+	  mensagens do sistema, que pode ser visualizado atrav&eacute;s 
+	  do comando <command>dmesg</command>.</para>
 
-	<para>Each open file, socket, or fifo uses one file
-	  descriptor.  A large-scale production server may easily
-	  require many thousands of file descriptors, depending on the
-	  kind and number of services running concurrently.</para>
+	<para>Cara arquivo aberto, socket, ou fifo usa um 
+	  descritor de arquivo.  Um servidor de produ&ccedil;&atilde;o de 
+	  larga escala pode facilmente requerer muitos milhares 
+	  de descritores de arquivos, dependendo do tipo e do 
+	  n&uacute;mero de servi&ccedil;os sendo executados concorrentemente.
+	  </para>
 
-	<para><varname>kern.maxfile</varname>'s default value is
-	  dictated by the <option>MAXUSERS</option> option in your
-          kernel configuration file.  <varname>kern.maxfiles</varname> grows
-          proportionally to the value of <option>MAXUSERS</option>.  When
-          compiling a custom kernel, it is a good idea to set this kernel
-          configuration option according to the uses of your system.  From
-          this number, the kernel is given most of its pre-defined limits.
-          Even though a production machine may not actually have 256 users
-          connected at once, the resources needed may be similar to a
-          high-scale web server.</para>
+	<para>O valor padr&atilde;o da vari&aacute;vel <varname>kern.maxfile</varname> 
+	  &eacute; definido pela op&ccedil;&atilde;o <option>MAXUSERS</option> no seu 
+	  arquivo de configura&ccedil;&atilde;o de kernel.  <varname>
+	  kern.max.files</varname> cresce proporcionalmente ao valor 
+	  de <option>MAXUSERS</option>.  Ao compilar um kernel 
+	  customizado, &eacute; uma boa id&eacute;ia modificar esta configura&ccedil;&atilde;o 
+	  de acordo com o uso do seu sistema.  A partir deste n&uacute;mero, 
+	  o kernel toma base para  muitos limites pr&eacute;-definidos.  Embora 
+	  uma m&aacute;quina em produ&ccedil;&atilde;o n&atilde;o tenha 256 usu&aacute;rios conectados 
+	  ao mesmo tempo, os recursos requeridos podem ser similares aos 
+	  de um servidor de ponta.</para>
 
-	<note><para>As of &os;&nbsp;4.5, setting <option>MAXUSERS</option> to
-	  <literal>0</literal> in your kernel configuration file will choose
-	  a reasonable default value based on the amount of RAM present in
-	  your system.</para></note>
+	<note><para>Assim como no &os;&nbsp;4.5, configurar a 
+	  op&ccedil;&atilde;o <option>MAXUSERS</option> para 
+	  <literal>0</literal> no seu arquivo de configura&ccedil;&atilde;o de kernel 
+	  faz com que um valor padr&atilde;o razo&aacute;vel seja configurado 
+	  de acordo com a mem&oacute;ria RAM presente no seu sistema.</para>
+	  </note>
 
       </sect3>
 
@@ -1929,60 +1982,68 @@ kern.maxfiles: 2088 -> 5000</screen>
 	  <primary><varname>kern.ipc.somaxconn</varname></primary>
 	</indexterm>
 
-	<para>The <varname>kern.ipc.somaxconn</varname> sysctl variable
-	  limits the size of the listen queue for accepting new TCP
-	  connections.  The default value of <literal>128</literal> is
-	  typically too low for robust handling of new connections in a
-	  heavily loaded web server environment.  For such environments, it
-	  is recommended to increase this value to <literal>1024</literal> or
-	  higher.  The service daemon may itself limit the listen queue size
-	  (e.g. &man.sendmail.8;, or <application>Apache</application>) but
-	  will often have a directive in its configuration file to adjust
-	  the queue size.  Large listen queues also do a better job of
-	  avoiding Denial of Service (<abbrev>DoS</abbrev>) attacks.</para>
+	<para>A vari&aacute;vel sysctl <varname>kern.ipc.somaxconn</varname> 
+	  limita o tamanho da fila de escuta para aceita&ccedil;&atilde;o de novas 
+	  conex&otilde;es TCP.  O valor padr&atilde;o de <literal>128</literal> &eacute; 
+	  tipicamente baixo para uma manipula&ccedil;&atilde;o robusta de novas 
+	  conex&otilde;es em um ambiente de servidor web com alta carga.  Para 
+	  tais ambientes o aumento deste valor para <literal>
+	  1024</literal> ou mais &eacute; recomendado.  O servi&ccedil;o de daemon pode 
+	  por si s&oacute; limitar o tamanho d fila (por exemplo, 
+	  &man.sendmail.8;, ou <application>Apache</application>) mas 
+	  na maioria das vezes existir&aacute; uma diretiva em seus arquivos 
+	  de configura&ccedil;&atilde;o para ajustar o tamanho da fila.  Filas de 
+	  escuta grandes tamb&eacute;m podem fazer um bom trabalho evitando 
+	  ataques de Nega&ccedil;&atilde;o de Servi&ccedil;o (<abbrev>DoS</abbrev>).</para>
       </sect3>
 
     </sect2>
     <sect2>
-      <title>Network Limits</title>
+      <title>Limites de Rede</title>
 
-      <para>The <option>NMBCLUSTERS</option> kernel configuration
-	option dictates the amount of network Mbufs available to the
-	system.  A heavily-trafficked server with a low number of Mbufs
-	will hinder &os;'s ability.  Each cluster represents
-	approximately 2&nbsp;K of memory, so a value of 1024 represents 2
-	megabytes of kernel memory reserved for network buffers.  A
-	simple calculation can be done to figure out how many are
-	needed.  If you have a web server which maxes out at 1000
-	simultaneous connections, and each connection eats a 16&nbsp;K receive
-	and 16&nbsp;K send buffer, you need approximately 32&nbsp;MB worth of
-	network buffers to cover the web server.  A good rule of thumb is
-	to multiply by 2, so 2x32&nbsp;MB&nbsp;/&nbsp;2&nbsp;KB&nbsp;=
-	64&nbsp;MB&nbsp;/&nbsp;2&nbsp;kB&nbsp;= 32768.  We recommend
-	values between 4096 and 32768 for machines with greater amounts
-	of memory.  Under no circumstances should you specify an
-	arbitrarily high value for this parameter as it could lead to a
-	boot time crash.  The <option>-m</option> option to
-	&man.netstat.1; may be used to observe network cluster
-	use.</para>
+      <para>A op&ccedil;&atilde;o de configura&ccedil;&atilde;o de kernel <option>NMBCLUSTERS</option> 
+	dita a quantidade de <literal>Mbufs</literal> de rede 
+	dispon&iacute;vel para o sistema.  Um servidor com muito tr&aacute;fego e um 
+	n&uacute;mero pequeno de <literal>Mbufs</literal> limitar&atilde;o a habilidade 
+	do &os;.  Cada cluster representa aproximadamente 2&nbsp;K de 
+	mem&oacute;ria, ent&atilde;o um valor de 1024 representa 2 megabytes de 
+	mem&oacute;ria de kernel reservada para buffers de rede.  Um 
+	c&aacute;lculo simples pode ser feito para saber quantos s&atilde;o 
+	necess&aacute;rios.  Se voc&ecirc; possui um servidor web que chega a um 
+	m&aacute;ximo de 1000 conex&otilde;es simult&acirc;neas, e cada conex&atilde;o 
+	consome 16&nbsp;K de buffer de envio e 16&nbsp;K de recep&ccedil;&atilde;o, 
+	voc&ecirc; precisa de aproximadamente 32&nbsp;MB de buffers de rede 
+	para cobrir seu servidor web.  Uma boa regra geral &eacute; 
+	multiplicar por 2, ent&atilde;o 2x&nbsp;MB&nbsp;/&nbsp;2&nbsp;KB&nbsp;=
+	64&nbsp;MB&nbsp;/&nbsp;2&nbsp;kB&nbsp;= 32768.  Recomendamos 
+	valores entre 4096 e 32768 para m&aacute;quinas com grandes 
+	quantidades de mem&oacute;ria. Sob nenhuma circunst&acirc;ncia voc&ecirc; deve 
+	especificar valores arbitrariamente altos para este 
+	par&acirc;metro, pois pode causar para durante a inicializa&ccedil;&atilde;o.  A 
+	op&ccedil;&atilde;o <option>-m</option> do &man.netstat.1; pode ser 
+	usada para observar o uso do cluster de rede.</para>
 
-      <para><varname>kern.ipc.nmbclusters</varname> loader tunable should
-        be used to tune this at boot time.  Only older versions of &os;
-        will require you to use the <option>NMBCLUSTERS</option> kernel
-        &man.config.8; option.</para>
+      <para><varname>kern.ipc.nmbclusters</varname> pode ser usado para 
+	sintonizar isto no momento da inicializa&ccedil;&atilde;o.  Somente vers&otilde;es 
+	antigas do &os; requerer&atilde;o o uso da op&ccedil;&atilde;o &man.config.8; 
+        de kernel <option>NMBCLUSTERS</option>. 
+        </para>
 
-      <para>For busy servers that make extensive use of the
-	&man.sendfile.2; system call, it may be necessary to increase
-	the number of &man.sendfile.2; buffers via the
-	<option>NSFBUFS</option> kernel configuration option or by
-	setting its value in <filename>/boot/loader.conf</filename>
-	(see &man.loader.8; for details).  A common indicator that
-	this parameter needs to be adjusted is when processes are seen
-	in the <errorname>sfbufa</errorname> state.  The sysctl
-	variable <varname>kern.ipc.nsfbufs</varname> is a read-only
-	glimpse at the kernel configured variable.  This parameter
-	nominally scales with <varname>kern.maxusers</varname>,
-	however it may be necessary to tune accordingly.</para>
+      <para>Para servidores mais ocupados que fazem uso extensivo da 
+	chamada de sistema &man.sendfile.2;, pode ser necess&aacute;rio 
+	aumentar o n&uacute;mero de buffers &man.sendfile.2; atrav&eacute;s da 
+	op&ccedil;&atilde;o de configura&ccedil;&atilde;o de <foreignphrase>kernel
+	</foreignphrase> <option>NSFBUFS</option> colocando seu 
+	valor no arquivo <filename>/boot/loader.conf</filename> 
+	(veja &man.loader.8; para mais detalhes).  Um indicador 
+	comum que indica que este par&acirc;metro precisa ser ajustado 
+	&eacute; quando processos s&atilde;o vistos no estado <errorname>sfbufa
+	</errorname>.  A vari&aacute;vel sysctl <varname>kern.ipc.nsfbufs
+	</varname> oferece uma vis&atilde;o apenas de leitura de como esta 
+	vari&aacute;vel est&aacute; configurada no <foreignphrase>kernel
+	</foreignphrase>.  Este par&acirc;metro aumenta nominalmente com 
+	<varname>kern.maxusers</varname>, entretanto pode ser 
+	necess&aacute;rio ajustar de acordo com a necessidade.</para>
 
       <important>
 	<para>Even though a socket has been marked as non-blocking,
