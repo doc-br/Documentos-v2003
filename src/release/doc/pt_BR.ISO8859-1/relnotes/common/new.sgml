@@ -1,9 +1,9 @@
 <articleinfo>
-  <title>&os;/&arch; &release.current; Release Notes</title>
+  <title>&os;/&arch; &release.current; Notas de lançamento</title>
 
   <pubdate>$FreeBSD: src/release/doc/en_US.ISO8859-1/relnotes/common/new.sgml,v 1.22.2.391 2004/01/10 18:15:44 bmah Exp $</pubdate>
 
-  <corpauthor>The FreeBSD Project</corpauthor>
+  <corpauthor>Projeto FreeBSD</corpauthor>
 
   <copyright>
     <year>2000</year>
@@ -90,7 +90,7 @@
   <sect2 id="security">
     <title>Consultas de Segurança</title>
 
-    <para>Uma potencial negação de serviço (<foreignphrase>denial of service</foreignphrase>) no
+    <para>Uma negação de serviço em potencial (<foreignphrase>denial of service</foreignphrase>) no
       <application>BIND</application> foi corrigida.  Para mais
       informação, veja a consulta de segurança
       <ulink url="ftp://ftp.FreeBSD.org/pub/FreeBSD/CERT/advisories/FreeBSD-SA-03:19.bind.asc">FreeBSD-SA-03:19</ulink>.</para>
@@ -166,7 +166,7 @@
   </sect2>
 
   <sect2 id="userland">
-    <title>Mudanças a níveis de usuário</title>
+    <title>Mudanças de nível de usuário</title>
 
     <para>&man.ifconfig.8; now supports a <option>staticarp</option>
       option for an interface, which disables the sending of ARP
@@ -176,11 +176,12 @@
       do &man.fsck.8; é agora <literal>0700</literal> em vez 
       de <literal>01777</literal>.</para>
 
-    <para>The <filename>libalias</filename> library,
-      &man.natd.8;, and &man.ppp.8; now support Cisco Skinny Station protocol,
-      which is the protocol used by Cisco IP phones to talk to Cisco Call
-      Managers.  Note that currently having the Call Manager behind
-      the NAT gateway is not supported.</para>
+    <para>A biblioteca <filename>libalias</filename>,
+      &man.natd.8;, e &man.ppp.8; agora suporta o protocolo Cisco Skinny Station,
+      que é o protocolo de telefonia IP da Cisco usado para falar com gerenciadores
+      de chamadas (<foreignphrase>Call Managers</foreignphrase>) Cisco. Note
+      que atualmente. Note que atualmente o uso do Call Manager atrás de <acronym>NAT</acronym>
+      não é suportado.
 
     <para>&man.makewhatis.1;, anteriormente como <literal>script</literal> Perl, foi
       reimplementado C.</para>
@@ -216,7 +217,7 @@
   </sect2>
 
   <sect2 id="releng">
-    <title>Release Engineering and Integration</title>
+    <title>Engenharia de Integração de versões</title>
 
     <para></para>
 
@@ -224,60 +225,60 @@
 </sect1>
 
 <sect1 id="upgrade">
-  <title>Upgrading from previous releases of &os;</title>
+  <title>Atualização de versões anteriores do &os;</title>
 
-  <para>If you're upgrading from a previous release of &os;, you
-    generally will have three options:
+  <para>Se você está atualizando versões anteriores do &os;, você
+    geralemente terá três opções:
 
     <itemizedlist>
       <listitem>
-	<para>Using the binary upgrade option of &man.sysinstall.8;.
-	  This option is perhaps the quickest, although it presumes
-	  that your installation of &os; uses no special compilation
-	  options.</para>
+	<para>Usando a opção de atualização dos binários do &man.sysinstall.8;.
+          Esta opção é talvez a mais rápida, embora presuma
+          que sua instalação do &os; não usa opções especiais de
+          compilação.</para>
       </listitem>
       <listitem>
-	<para>Performing a complete reinstall of &os;.  Technically,
-	  this is not an upgrading method, and in any case is usually less
-	  convenient than a binary upgrade, in that it requires you to
-	  manually backup and restore the contents of
-	  <filename>/etc</filename>.  However, it may be useful in
-	  cases where you want (or need) to change the partitioning of
-	  your disks.
+	<para>Executando a reinstalação completa do &os;. Esta técnica,
+          não é um método de atualização, e em todo caso é geralmente menos
+          conveniente que a atualização dos binários, e requer que você faça
+          uma cópia de segurança manualmente e restaure o conteúdo do
+	  <filename>/etc</filename>.  Entretanto, pode ser útil em 
+          casos onde você quer (ou precisa) mudar o particionamento de
+          seus discos.
       </listitem>
       <listitem>
-	<para>From source code in <filename>/usr/src</filename>.  This
-	  route is more flexible, but requires more disk space, time,
-	  and technical expertise.  More information can be found
-	  in the <ulink
-	  url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/makeworld.html"><quote>Using
-	  <command>make world</command></quote></ulink> section of the <ulink
+	<para>Do código fonte em <filename>/usr/src</filename>. Este
+          caminho é mais flexível, mas requer mais espaço em disco, tempo,
+          e perícia técnica. Mais informações podem ser encontradas
+	  em <ulink
+	  url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/makeworld.html"><quote>Usando
+	  <command>make world</command></quote></ulink> seção <ulink
 	  url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/">FreeBSD
-	  Handbook</ulink>.  Upgrading from very old
-	  versions of &os; may be problematic; in cases like this, it
-	  is usually more effective to perform a binary upgrade or a
-	  complete reinstall.</para>
+	  Handbook</ulink>.  Atualização de versões
+          mais velhas do &os; pode ser problemática; nesses cassos, é
+          mais eficaz executar a atualização dos binários ou uma reinstalação
+          completa.</para>
       </listitem>
     </itemizedlist>
   </para>
 
-  <para>Please read the <filename>INSTALL.TXT</filename> file for more
-    information, preferably <emphasis>before</emphasis> beginning an
-    upgrade.  If you are upgrading from source, please be sure to read
-    <filename>/usr/src/UPDATING</filename> as well.</para>
+  <para>Por favor leia o arquivo <filename>INSTALL.TXT</filename> para mais
+    informação, preferivelmente <emphasis>antes</emphasis> de começar uma
+    atualização. Se você está atualizando o código fonte, esteja certo em ler
+    também o <filename>/usr/src/UPDATING</filename>.</para>
 
-  <para>Finally, if you want to use one of various means to track the
-    -STABLE or -CURRENT branches of &os;, please be sure to consult
-    the <ulink
+  <para>Finalmente, se você quiser usar uma das séries a seguir
+    -STABLE ou -CURRENT do &os;, esteja certo em consultar
+    o <ulink
     url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/current-stable.html"><quote>-CURRENT
-    vs. -STABLE</quote></ulink> section of the <ulink
+    vs. -STABLE</quote></ulink> seção <ulink
     url="http://www.FreeBSD.org/doc/en_US.ISO8859-1/books/handbook/">FreeBSD
     Handbook</ulink>.</para>
 
   <important>
-    <para>Upgrading &os; should, of course, only be attempted after
-      backing up <emphasis>all</emphasis> data and configuration
-      files.</para>
+    <para>Atualização &os; deverá, é claro, ser tentada apenas depois 
+      de fazer cópia de segurança de <emphasis>todos</emphasis> arquivos de
+      dados e configuração.</para>
   </important>
 </sect1>
 
