@@ -912,8 +912,8 @@
 	operações como permissivas, sem comprometer suas portas baixas.  
 	Também tome nota que o FreeBSD permit você controlar o range de
 	portas usado por conexões dinâmicas, através de varios 
-	<command>sysctl</command>'s
-	<varname>net.inet.ip.portrange</varname>  
+	<varname>net.inet.ip.portrange</varname> do
+ 	<command>sysctl</command>
 	(<command>sysctl -a | fgrep
 	portrange</command>), que pode também facilitar a complexidade
 	da configuração do seu firewall.  Por exemplo, você pode
@@ -938,107 +938,108 @@
 	<foreignphrase>spoofed</foreignphrase> para saturar a vítima, 
 	especialmente quando o atacante usa o mesmo truque em
 	diferentes dúzias de endereços broadcast em cima de diferentes
-	dúzias de redes de uma vez.  Broadcast attacks of over a hundred
-	and twenty megabits have been measured.  A second common
-	springboard attack is against the ICMP error reporting system.
-	By constructing packets that generate ICMP error responses, an
-	attacker can saturate a server's incoming network and cause the
-	server to saturate its outgoing network with ICMP responses.  This
-	type of attack can also crash the server by running it out of
-	mbuf's, especially if the server cannot drain the ICMP responses
-	it generates fast enough.  The FreeBSD kernel has a new kernel
-	compile option called <option>ICMP_BANDLIM</option>
-	which limits the effectiveness
-	of these sorts of attacks.  The last major class of springboard
-	attacks is related to certain internal 
-	<application>inetd</application> services such as the
-	udp echo service.  An attacker simply spoofs a UDP packet with the
-	source address being server A's echo port, and the destination
-	address being server B's echo port, where server A and B are both
-	on your LAN.  The two servers then bounce this one packet back and
-	forth between each other.  The attacker can overload both servers
-	and their LANs simply by injecting a few packets in this manner.
-	Similar problems exist with the internal 
-	<application>chargen</application> port.  A
-	competent sysadmin will turn off all of these inetd-internal test
-	services.</para>
+	dúzias de redes de uma vez.  Ataques de broadcast sobre cento
+	e vinte megabits foram medidos.  Um segundo ataque springboard 
+	comum é contra os sistemas de relátorios de erro do ICMP.
+	construindo pacotes que geram respostas de erro ICMP, um
+	atacante pode saturar a rede de entrada do servidor e fazer 
+	com que o servidor sature sua rede de saída com respostas ICMP.  
+	Este tipo de ataque pode também derrubar o servidor executando
+	mbuf's, especialmente se o servidor não pode tratar as respostas
+	ICMP geradas rápidas o bastante.  O kernel do FreeBSD kernel tem
+	uma nova opção de compilação chamada <option>ICMP_BANDLIM</option>
+	que limita a eficácia destes tipos de ataques.  A última 
+	classe principal de ataques springboard esta relacionada a
+	certos serviços <application>inetd</application> internos
+	tais como o serviço echo udp.  Um atacante simplesmente 
+	falsifica <foreignphrase>spoofs</foreignphrase> um pacote
+	UDP com o endereço de origem sendo a porta echo do servidor A, 
+	e o endereço de destino sendo a porta acho do servidor B, 
+	onde o servidor A e B estão ambos em sua LAN.  Os dois
+	servidores então lançam este pacote para frente e para 
+	trás entre si.  O atacante pode sobrecarregar ambos os
+	servidores e suas LANs simplesmente injetando alguns
+	pacotes nesta maneira.
+	Problemas silimares existem com a porta 
+	<application>chargen</application> interna.  Um administrador
+	de sistemas competente desligará todos estes serviços internos de
+	teste do inetd.</para>
 
-      <para>Spoofed packet attacks may also be used to overload the kernel
-	route cache.  Refer to the <varname>net.inet.ip.rtexpire</varname>,
-	<varname>rtminexpire</varname>, and <varname>rtmaxcache</varname>
-	<command>sysctl</command> parameters.  A spoofed packet attack
-	that uses a random source IP will cause the kernel to generate a
-	temporary cached route in the route table, viewable with
-	<command>netstat -rna | fgrep W3</command>.  These routes
-	typically timeout in 1600 seconds or so.  If the kernel detects
-	that the cached route table has gotten too big it will dynamically
-	reduce the <varname>rtexpire</varname> but will never decrease it 
-	to less than <varname>rtminexpire</varname>.  There are two 
-	problems:</para>
+      <para>Ataques de pacotes falsificados 
+	<foreignphrase>spoofed</foreignphrase> podem também ser usados
+	para sobrecarregar o cache de rotas do kernel.  Consulte os
+	parâmetros <varname>net.inet.ip.rtexpire</varname>,
+	<varname>rtminexpire</varname> e <varname>rtmaxcache</varname>
+	do <command>sysctl</command>.  Um ataque de pacotes falsificados
+	que usa uma origem IP aleatório fara o kernel gerar
+	um cache de rotas temporário na tabela de rotas, visível com
+	<command>netstat -rna | fgrep W3</command>.  Estas rotas
+	tipicamente terminam em 1600 segundos ou menos.  Se o kernel 
+	detectar que a tabela de rotas cacheadas começou a crescer 
+	ele dinâmicamente reduz o <varname>rtexpire</varname> 
+	mas nunca diminui menos do que o <varname>rtminexpire</varname>.  
+	Há dois problemas:</para>
 	
       <orderedlist>
 	<listitem>
-	  <para>The kernel does not react quickly enough when a lightly
-	    loaded server is suddenly attacked.</para>
+	  <para>O kernel não reage rápido o suficiente quando um
+	     servidor levemente carregado é atacado repentinamente.</para>
 	</listitem>
 	
 	<listitem>
-	  <para>The <varname>rtminexpire</varname> is not low enough for
-	    the kernel to survive a sustained attack.</para>
+	  <para>O <varname>rtminexpire</varname> não é baixo o bastante
+	    para o kernel sobreviver a um ataque prolongado.</para>
 	</listitem>
       </orderedlist>
       
-      <para>If your servers are connected to the Internet iva a T3 or
-        better, it may be prudent to manually override both
-	<varname>rtexpire</varname> and <varname>rtminexpire</varname>
-	via &man.sysctl.8;.  Never set either parameter to zero (unless
-	you want to crash the machine).  Setting both
-	parameters to 2 seconds should be sufficient to protect the route
-	table from attack.</para>
+      <para>Se seus servidores estiveram conectados a Internet via um T3 ou
+        melhor, pode ser prudente cancelar manualmente o 
+	<varname>rtexpire</varname> e <varname>rtminexpire</varname>
+	via &man.sysctl.8;.  Nunce ajuste o parâmetro de um dos dois
+	para zero (a menos que você queira derrubar a máquina).  Ajustar
+	ambos os parâmetros para 2 segundos deve ser suficiente para
+	proteger a tabela de rotas de um ataque.</para>
     </sect2>
 
     <sect2>
-      <title>Access Issues with Kerberos and SSH</title>
+      <title>Casos de Acesso com Kerberos e SSH</title>
       <indexterm><primary><command>ssh</command></primary></indexterm>
       <indexterm><primary>KerberosIV</primary></indexterm>
 
-      <para>There are a few issues with both Kerberos and
-	ssh that need to be addressed if
-	you intend to use them.  Kerberos V is an excellent
-	authentication protocol, but there are bugs in the kerberized
-	<application>telnet</application> and
-	<application>rlogin</application> applications that make them
-	unsuitable for dealing with binary streams.  Also, by default
-	Kerberos does not encrypt a session unless you use the
-	<option>-x</option> option.  <application>ssh</application>
-	encrypts everything by default.</para>
+      <para>Há alguns casos com Kerberos e ssh que precisam ser 
+	dirigidos se você pretente usa-los.  Kerberos V é um 
+	protocolo excelente de autenticação, mas há falhas nas 
+	aplicações kerberizadas	<application>telnet</application> e
+	<application>rlogin</application> que as fazem inadequadas
+	para relacionamento com streams binários.  Também, por
+	padrão o Kerberos não criptografa uma sessão a menos que
+	você use a opção <option>-x</option>.  O <application>ssh</application>
+	criptografa tudo por padrão.</para>
 
-      <para>ssh works quite well in every
-	respect except that it forwards encryption keys by default.  What
-	this means is that if you have a secure workstation holding keys
-	that give you access to the rest of the system, and you
-	ssh to an insecure machine, your keys
-	are usable.  The actual keys themselves are not exposed, but
-	ssh installs a forwarding port for the
-	duration of your login, and if an attacker has broken
-	<username>root</username> on the
-	insecure machine he can utilize that port to use your keys to gain
-	access to any other machine that your keys unlock.</para>
+      <para>O ssh funciona perfeitamente bem em cada respect exceto que
+	ele envia chaves criptografadas por padrão.  O que
+	isto significa é que se você tiver uma estação de trabalho segura
+	guardando chaves que lhe dão acesso ao resto do sistema, e você
+	faz ssh para uma máquina insegura, suas chaves são aproveitadas.  
+	As chaves reais não são expostas, mas o ssh instala uma porta
+	de envio para o duração do seu login, e se um atacante violar o
+	<username>root</username> na máquina insegura ele pode utilizar
+	essa porta para usar suas chaves para ganhar acesso a qualquer
+	outra máquina que suas chaves abrem.</para>
 
-      <para>We recommend that you use ssh in
-	combination with Kerberos whenever possible for staff logins.
-	<application>ssh</application> can be compiled with Kerberos
-	support.  This reduces your reliance on potentially exposable
-	ssh keys while at the same time
-	protecting passwords via Kerberos.  ssh
-	keys should only be used for automated tasks from secure machines
-	(something that Kerberos is unsuited to do).  We also recommend that
-	you either turn off key-forwarding in the
-	ssh configuration, or that you make use
-	of the <literal>from=IP/DOMAIN</literal> option that
-	ssh allows in its
-	<filename>authorized_keys</filename> file to make the key only
-	usable to entities logging in from specific machines.</para>
+      <para>Nós recomendamos que você use o ssh em combinação com
+	Kerberos sempre que for possível para logins do sistema.
+	O <application>ssh</application> pode ser compilado com suporte a
+	Kerberos.  Isto reduz sua segurança em chaves ssh potênciamente 
+	expostas enquanto ao mesmo tempo protege senhas via Kerberos.  
+	Chaves ssh devem somente ser usadas para tarefas automatizadas
+	de máquinas seguras (algo que o Kerberos é adequado a fazer).  
+	Nós também recomendamos que você desligue o envio de chaves
+	na configuração do ssh, ou que você faça uso da opção
+	<literal>from=IP/DOMAIN</literal> que o ssh permite em seu
+	arquivo <filename>authorized_keys</filename> fazer a chave
+	somente	aproveitaveis a entidades que fazem login de
+	máquinas específicas.</para>
     </sect2>
   </sect1>
 
