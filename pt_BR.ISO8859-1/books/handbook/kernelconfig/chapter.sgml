@@ -1137,9 +1137,9 @@ device          ppc0    at isa? irq 7</programlisting>
     <programlisting>#device         vpo        # Requires scbus and da</programlisting>
 
     <indexterm><primary>zip drive</primary></indexterm>
-    <para>Isto é para Iomega Zip drive. Isto requere suporte
-      <literal>scbus</literal> e do <literal>da</literal>. Melhor
-      performance é conseguidos com portas em modo EPP 1.9.</para>
+    <para>Isto &eacute; para Iomega Zip drive. Isto requere suporte a
+      <literal>scbus</literal> e <literal>da</literal>. Melhor
+      performance &eacute; conseguidos com portas em modo EPP 1.9.</para>
 
     <programlisting># PCI Ethernet NICs.
 device          de         # DEC/Intel DC21x4x (<quote>Tulip</quote>)
@@ -1148,18 +1148,18 @@ device          tx         # SMC 9432TX (83c170 <quote>EPIC</quote>)
 device          vx         # 3Com 3c590, 3c595 (<quote>Vortex</quote>)
 device          wx         # Intel Gigabit Ethernet Card (<quote>Wiseman</quote>)</programlisting>
 
-    <para>Varios cartões de drivers PCI de rede. O comentário ou remover alguma das
-      não presentes em seu sistema.</para>
+    <para>Varios cart&otilde;es de drivers PCI de rede. Pode comentar ou remover alguma das
+      n&atilde;o presentes em seu sistema.</para>
 
     <programlisting># PCI Ethernet NICs that use the common MII bus controller code.
 device          miibus     # MII bus support</programlisting>
 
-    <para>O suporte a MII bus é requerido para algumas Placas de Rede PCI 10/100 NICs,
+    <para>O suporte a MII bus &eacute; requerido para algumas Placas de Rede PCI 10/100 NICs,
       ou seja aqueles que usam transceivers MII-compliant ou implementam
       controle de interface transceiver o operam como um MII. Adicionando
-      <literal>dispositivo miibus</literal> para a configuração do kernel puxam 
-      suporte para um genérico miibus API e todos drivers de PHY,
-      incluindo um genérico para PHYs que não são specificados na negociação
+      <literal>dispositivo miibus</literal> para a configura&ccedil;&atilde;o do kernel puxam 
+      suporte para um gen&eacute;rico miibus API e todos drivers de PHY,
+      incluindo um gen&eacute;rico para PHYs que n&atilde;o s&atilde;o especificados na negocia&ccedil;&atilde;o
       por um driver individual.</para>
 
     <programlisting>device          dc         # DEC/Intel 21143 and various workalikes
@@ -1172,83 +1172,83 @@ device          vr         # VIA Rhine, Rhine II
 device          wb         # Winbond W89C840F
 device          xl         # 3Com 3c90x (<quote>Boomerang</quote>, <quote>Cyclone</quote>)</programlisting>
 
-    <para>Drivers que usam o código do controlador MII bus.</para>
+    <para>Drivers que usam o c&oacute;digo do controlador MII bus.</para>
 
     <programlisting># ISA Ethernet NICs.
 device          ed0    at isa? port 0x280 irq 10 iomem 0xd8000
 device          ex
 device          ep
-# WaveLAN/IEEE 802.11 wireless NICs. Nota: o WaveLAN/IEEE really
-# existe somente como um dispositivo PCMCIA, assim não há acessório ISA necesário
-# e recursos serão atribuídos dinamicamente pelo código do pccard.
+# WaveLAN/IEEE 802.11 wireless NICs. Note: the WaveLAN/IEEE really
+# exists only as a PCMCIA device, so there is no ISA attachment needed
+# and resources will always be dynamically assigned by the pccard code.
 device          wi
-# Aironet 4500/4800 802.11 wireless NICs. Nota: a declaração abaixo trabalhará
-# para cartões PCMCIA e PCI, bem como um cartão ISA seta para modo ISA PnP
-# (o padrão de fábrica). Se você ajustar os jumpers no seu cartão ISA
-# para um endereço de I/O e IRQ manualmente, você deve especificar
-# os parametros aqui.
+# Aironet 4500/4800 802.11 wireless NICs. Note: the declaration below will
+# work for PCMCIA and PCI cards, as well as ISA cards set to ISA PnP
+# mode (the factory default). If you set the switches on your ISA
+# card for a manually chosen I/O address and IRQ, you must specify
+# those parameters here.
 device          an
-# A ordem experimentada está presente e determinado por i386/isa/isa_compat.c.
+# The probe order of these is presently determined by i386/isa/isa_compat.c.
 device          ie0    at isa? port 0x300 irq 10 iomem 0xd0000
 device          fe0    at isa? port 0x300
 device          le0    at isa? port 0x300 irq 5 iomem 0xd0000
 device          lnc0   at isa? port 0x280 irq 10 drq 0
 device          cs0    at isa? port 0x300
 device          sn0    at isa? port 0x300 irq 10
-# requerer suporte PCCARD (PCMCIA) para ser ativado
+# requires PCCARD (PCMCIA) support to be activated
 #device         xe0    at isa?</programlisting>
 
     <para>ISA Ethernet drivers. Veja
-      <filename>/usr/src/sys/i386/conf/LINT</filename> os cartões suportados 
+      <filename>/usr/src/sys/i386/conf/LINT</filename> os cart&otilde;es suportados 
       por este driver.</para>
 
     <programlisting>pseudo-device   ether         # Ethernet support</programlisting>
 
-    <para><literal>ether</literal> é somente necessário se você tem um cartão Ethernet.
-      Isto inclui o código generico do protocolo Ethernet.</para>
+    <para><literal>ether</literal> &eacute; somente necess&aacute;rio se voc&ecirc; tem um cart&atilde;o Ethernet.
+      Isto inclui o c&oacute;digo gen&eacute;rico do protoc&oacute;lo Ethernet.</para>
 
     <programlisting>pseudo-device   sl      1     # Kernel SLIP</programlisting>
 
-    <para><literal>sl</literal> é para suporte SLIP. Isto foi quase inteiramente
-      suplando por PPP, que é mais fácil para se ajustar, melhor adpatação
-      para conexão modem-a-modem, e mais poderoso. O
-      <replaceable>número</replaceable> depois <literal>sl</literal>
-      especifica quantas sessões simultaneas SLIP são suportadas.</para>
+    <para><literal>sl</literal> &eacute; para suporte SLIP. Isto foi quase inteiramente
+      suplando por PPP, que &eacute; mais f&aacute;cil para se ajustar, melhor adpata&ccedil;&atilde;o
+      para conex&atilde;o modem-a-modem, e mais poderoso. O
+      <replaceable>n&uacute;mero</replaceable> depois <literal>sl</literal>
+      espec&iacute;fica quantas sess&otilde;es simult&acirc;neas SLIP s&atilde;o suportadas.</para>
 
     <programlisting>pseudo-device   ppp     1     # Kernel PPP</programlisting>
 
-    <para>Isto é para suporte do  kernel a PPP para conexões dial-up. Há
-      também uma outra versão do PPP implementada executada como uma aplicação que
-      usa <literal>tun</literal> e oferece mais flexibilidade e características
-      tais como exige discagem. O <replaceable>número</replaceable> de conexões depois do
-      <literal>ppp</literal> especifica a quantidade de conexões simultaneas PPP
+    <para>Isto &eacute; para suporte do  kernel a PPP para conex&otilde;es dial-up. H&aacute;
+      tamb&eacute;m uma outra vers&atilde;o do PPP implementada executada como uma aplica&ccedil;&atilde;o que
+      usa <literal>tun</literal> e oferece mais flexibilidade e caracter&iacute;sticas
+      tais como exige discagem. O <replaceable>n&uacute;mero</replaceable> de conex&otilde;es depois do
+      <literal>ppp</literal> especifica a quantidade de conex&otilde;es simult&acirc;neas PPP
       suporta.</para>
 
     <programlisting>pseudo-device   tun           # Packet tunnel.</programlisting>
 
-    <para>Isto é usado pelo software de PPP. Um
-      <replaceable>número</replaceable> depois <literal>tun</literal>
-      especificado é o número de sessões simultaneas PPP suportadas. Veja
-      a seção <link linkend="userppp">PPP</link> deste livro para maiores
-      informações.</para>
+    <para>Isto &eacute; usado pelo software de PPP. Um
+      <replaceable>n&uacute;mero</replaceable> depois <literal>tun</literal>
+      especificado &eacute; o n&uacute;mero de sess&otilde;es simultaneas PPP suportadas. Veja
+      a se&ccedil;&atilde;o <link linkend="userppp">PPP</link> deste livro para maiores
+      informa&ccedil;&otilde;es.</para>
 
     <programlisting><anchor id="kernelconfig-ptys">
 pseudo-device   pty           # Pseudo-ttys (telnet etc)</programlisting>
 
-    <para>Isto é um <quote>pseudo-terminal</quote> que simula porta de login.
-      Isto é usado por entrada <command>telnet</command> e seções
+    <para>Isto &eacute; um <quote>pseudo-terminal</quote> que simula porta de login.
+      Isto &eacute; usado para entrada <command>telnet</command> e se&ccedil;&otilde;es
       <command>rlogin</command>,
-      <application>xterm</application>, e algumas outras aplicações como
+      <application>xterm</application>, e algumas outras aplica&ccedil;&otilde;es como
       <application>Emacs</application>. Um
-      <replaceable>número</replaceable> depois <literal>pty</literal> indica o número de
-      <literal>pty</literal>s para ser criado. Se você necessita mais que o
-      padrão de 16 simultaneas <application>xterm</application> windows
-      ou remote logins, seja certo aumentar este número,
-      para o máximo de 256.</para>
+      <replaceable>n&uacute;mero</replaceable> depois <literal>pty</literal> indica o n&uacute;mero de
+      <literal>pty</literal>s para ser criado. Se voc&ecirc; necessita mais que o
+      padr&atilde;o de 16 simult&acirc;neas <application>xterm</application> windows
+      ou remote logins, &eacute; certo aumentar este n&uacute;mero,
+      para o m&aacute;ximo de 256.</para>
 
     <programlisting>pseudo-device   md            # Memory <quote>disks</quote></programlisting>
 
-    <para>Disco de memória pseudo-devices.</para>
+    <para>Disco de mem&oacute;ria pseudo-devices.</para>
 
     <programlisting>pseudo-device   gif</programlisting>
 
@@ -1256,31 +1256,31 @@ pseudo-device   pty           # Pseudo-ttys (telnet etc)</programlisting>
 
     <programlisting>pseudo-device   gif     4     # IPv6 and IPv4 tunneling</programlisting>
 
-    <para>Isto implementa IPv6 sobre IPv4 tunneling, IPv4 over IPv6 tunneling,
+    <para>Isto implementa IPv6 sobre IPv4 tunneling,
       IPv4 sobre IPv4 tunneling, e IPv6 sobre IPv6 tunneling. Começando com
-      &os;&nbsp;4.4 o <literal>gif</literal> dispositivo é
-      <quote>auto-cloning</quote>, e você deve usar o primeiro exemplo
-      (sem o número depois do <literal>gif</literal>). Versões mais avançadas do
-      &os; requerem o número.</para>
+      &os;&nbsp;4.4 o <literal>gif</literal> dispositivo &eacute;
+      <quote>auto-cloning</quote>, e voc&ecirc; deve usar o primeiro exemplo
+      (sem o n&uacute;mero depois do <literal>gif</literal>). Vers&otilde;es mais avan&ccedil;adas do
+      &os; requerem o n&uacute;mero.</para>
 
     <programlisting>pseudo-device   faith   1     # IPv6-to-IPv4 relaying (translation)</programlisting>
 
-    <para>Esta pseudo-device captura os pacotes que são emitidos e
-      desvía-os ao daemon da tradução IPv4/IPv6.</para>
+    <para>Esta pseudo-device captura os pacotes que s&atilde;o emitidos e
+      desvía-os ao daemon da tradu&ccedil;&atilde;o IPv4/IPv6.</para>
 
     <programlisting># O `bpf' pseudo-device permite o filtro de pacotes Berkeley.
 # Esteja ciente das consequencias administrativas ao habilitar isto!
 pseudo-device   bpf           # Berkeley packet filter</programlisting>
 
-    <para>Este é o filtro de pacotes  Berkeley. Esta pseudo-device permite
+    <para>Este &eacute; o filtro de pacotes Berkeley. Esta pseudo-device permite
       que as interfaces da rede sejam colocadas em modo promiscuous, capturando cada
       pacote sobre um broadcast da rede (por exemplo uma Ethernet). Estes pacotes
       podem ser capturados para disco e ou examinados com o programa &man.tcpdump.1;.</para>
 
     <note>
-      <para>O <literal>bpf pseudo-device</literal> é usado também por
-	&man.dhclient.8; para obter o endereço IP de roteador padrão
-	(gateway) e assim por diante. Se você usa DHCP, deixe isto
+      <para>O <literal>bpf pseudo-device</literal> &eacute; usado tamb&eacute;m por
+	&man.dhclient.8; para obter o endereço IP de roteador padr&atilde;o
+	(gateway) e assim por diante. Se voc&ecirc; usa DHCP, deixe isto
 	descomentado.</para>
     </note>
 
@@ -1299,20 +1299,20 @@ pseudo-device   bpf           # Berkeley packet filter</programlisting>
 #device         cue           # CATC USB ethernet
 #device         kue           # Kawasaki LSI USB ethernet</programlisting>
 
-    <para>Suporte para varios dispositivos USB.</para>
+    <para>Suporte para v&aacute;rios dispositivos USB.</para>
 
-    <para>Para maiores e adicionais informações sobre dispositivos suportados pelo 
+    <para>Para maiores e adicionais informa&ccedil;&otilde;es sobre dispositivos suportados pelo 
       &os;, veja
       <filename>/usr/src/sys/i386/conf/LINT</filename>.</para>
 
       <sect2>
-        <title>Grandes Configurações de Memória (<acronym>PAE</acronym>)</title>
+        <title>Grandes Configura&ccedil;&otilde;es de Mem&oacute;ria (<acronym>PAE</acronym>)</title>
 	<indexterm>
 	  <primary>
-	    Extensões Físicas do endereço (<acronym>PAE</acronym>)
+	    Extens&otilde;es F&iacute;sicas do endereço (<acronym>PAE</acronym>)
 	  </primary>
 	  <secondary>
-	    Grandes Configurações de Memória
+	    Grandes Configura&ccedil;&otilde;es de Mem&oacute;ria
 	  </secondary>
 	</indexterm>
 
