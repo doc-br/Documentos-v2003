@@ -1981,7 +1981,7 @@ para ver o tr&aacute;fego na rede.</para>]]></programlisting>
 	</note>
 
 	<para>Quando estiver falando de dispositivos, voc&ecirc; tem duas
-	  escolhas. Voc&ecir; pode se referir ao dispositivo como aparece
+	  escolhas. Voc&ecirc; pode se referir ao dispositivo como aparece
 	  no <filename>/dev</filename>, ou usar o nome do dispositivo como
 	  ele aparece no kernel. No segundo caso, use 
 	  <sgmltag>devicename</sgmltag>.
@@ -2295,113 +2295,133 @@ muitas vari&aacute;veis, incluindo <makevar>CLOBBER</makevar> e
       
       <sect3>
 	<title>Texto literal</title>
-	
-	<para>You will often need to include <quote>literal</quote> text in the
-	  Handbook.  This is text that is excerpted from another file, or
-	  which should be copied from the Handbook into another file
-	  verbatim.</para>
 
-	<para>Some of the time, <sgmltag>programlisting</sgmltag> will be
-	  sufficient to denote this text.  <sgmltag>programlisting</sgmltag>
-	  is not always appropriate, particularly when you want to include a
-	  portion of a file <quote>in-line</quote> with the rest of the
-	  paragraph.</para>
+	<para>Com frequ&ecirc;ncia voc&ecirc; ir&aacute; precisar incluir
+	  texto <quote>literal</quote> no Handbook. Este texto &eacute;
+	  retirado de outro arquivo, or que deve ser copiado do Handbook 
+	  para outro arquivo palavra-por-palavra.
+	</para>	
 
-	<para>On these occasions, use <sgmltag>literal</sgmltag>.</para>
+	<para>&Agrave;s vezes, <sgmltag>programlisting</sgmltag>
+	  ser&aacute; suficiente. <sgmltag>programlisting</sgmltag>
+	  nem sempre &eacute; apropriado, particularmente quando
+	  voc&ecirc; quer incluir uma parte de um arquivo 
+	  <quote>in-line</quote> com todos os par&aacute;grafos.
+	</para>
+
+	<para>Nestas ocasi&otilde;es, use <sgmltag>literal</sgmltag>.
+	</para>
 	
 	<example>
 	  <title><sgmltag>literal</sgmltag></title>
 	  
-	  <para>Use:</para>
+	  <para>Uso:</para>
 	  
-	  <programlisting><![ CDATA [<para>The <literal>maxusers 10</literal> line in the kernel
-  configuration file determines the size of many system tables, and is
-  a rough guide to how many simultaneous logins the system will
-  support.</para>]]></programlisting>
+	  <programlisting><![ RCDATA [
+<para>A linha <literal>maxusers 10</literal> no arquivo de 
+configura&ccedil;&atilde;o do kernel determina o tamanho de muitas tabelas 
+do sistema, e diz aproximadamente quantos logins simultaneos
+o sistema ir&aacute; suportar.
+</para>
+]]></programlisting>
 
-	  <para>Appearance:</para>
+	  <para>Apar&ecirc;ncia:</para>
+	  <para>A linha <literal>maxusers 10</literal> no arquivo de 
+	    configura&ccedil;&atilde;o do kernel determina o tamanho de 
+	    muitas tabelas do sistema, e diz aproximadamente quantos 
+	    logins simultaneos o sistema ir&aacute; suportar.
+	  </para>
 	  
-	  <para>The <literal>maxusers 10</literal> line in the kernel
-	    configuration file determines the size of many system tables, and
-	    is a rough guide to how many simultaneous logins the system will
-	    support.</para>
 	</example>
       </sect3>
 	
       <sect3>
-	<title>Showing items that the user <emphasis>must</emphasis> fill
-	  in</title>
-	
-	<para>There will often be times when you want to show the user what to
-	  do, or refer to a file, or command line, or similar, where the user
-	  cannot simply copy the examples that you provide, but must instead
-	  include some information themselves.</para>
-	
-	<para><sgmltag>replaceable</sgmltag> is designed for this eventuality.
-	  Use it <emphasis>inside</emphasis> other elements to indicate parts
-	  of that element's content that the user must replace.</para>
-	
+        <title>Mostrando itens que o usu&aacute;rio <emphasis>deve</emphasis>
+	preencher</title>
+
+	<para>Ir&aacute; acontecer muitas vezes que voc&ecirc; quer mostrar
+	  ao usu&aacute;rio o que fazer, ou se referir ao um arquivo, uma
+	  linha de comando ou coisa parecida, onde ele n&atilde;o pode
+	  simplesmente copiar o exemplo que voc&ecirc; forneceu, mas
+	  deve dar alguma informa&ccedil;&atilde;o por ele mesmo.
+	</para>	
+
+	<para><sgmltag>replaceable</sgmltag> &eacute; feita para estas
+	  eventualidades. Use <emphasis>inside</emphasis> dentro de
+	  outros elementos para indicar partes do conte&uacute;do do
+	  elemento que o usu&aacute;rio deve substituir.
+	</para>
+
 	<example>
 	  <title><sgmltag>replaceable</sgmltag></title>
 	  
-	  <para>Use:</para>
+	  <para>Uso:</para>
 	  
 	  <programlisting><![ CDATA [<informalexample>
-  <screen>&prompt.user; <userinput>man <replaceable>command</replaceable></userinput></screen>
+  <screen>&prompt.user; <userinput>man <replaceable>comando</replaceable></userinput></screen>
 </informalexample>]]></programlisting>
 
-	  <para>Appearance:</para>
+	  <para>Apar&ecirc;ncia:</para>
 	  
 	  <informalexample>
-	    <screen>&prompt.user; <userinput>man <replaceable>command</replaceable></userinput></screen>
+	    <screen>&prompt.user; <userinput>man <replaceable>comando</replaceable></userinput></screen>
 	  </informalexample>
 	  
-	  <para><sgmltag>replaceable</sgmltag> can be used in many different
-	    elements, including <sgmltag>literal</sgmltag>.  This example also
-	    shows that <sgmltag>replaceable</sgmltag> should only be wrapped
-	    around the content that the user <emphasis>is</emphasis> meant to
-	    provide.  The other content should be left alone.</para>
+	  <para><sgmltag>replaceable</sgmltag> pode ser usada em muitos 
+	    elementos diferentes, incluindo <sgmltag>literal</sgmltag>.
+	    Este exemplo tamb&eacute;m mostra que 
+	    <sgmltag>replaceable</sgmltag> s&oacute; deve envolver o
+	    conte&uacute;do que o o usu&aacute;rio <emphasis>deve</emphasis>
+	    fornecer. O outro conte&uacute;do n&atilde;o deve ser 
+	    alterado. 
+	  </para>
 	    
-	  <para>Use:</para>
+	  <para>Uso:</para>
 	    
-	  <programlisting><![ CDATA [<para>The <literal>maxusers <replaceable>n</replaceable></literal>
-  line in the kernel configuration file determines the size of many system
-  tables, and is a rough guide to how many simultaneous logins the system will
-  support.</para>
+	  <programlisting><![ RCDATA [
+<para>A linha <literal>maxusers <replaceable>n</replaceable></literal> 
+no arquivo de configura&ccedil;&atilde;o do kernel determina o tamanho de muitas 
+tabelas  do sistema, e diz aproximadamente quantos logins simult&acirc;neos
+o sistema ir&aacute; suportar.
+</para>
 
-<para>For a desktop workstation, <literal>32</literal> is a good value
-  for <replaceable>n</replaceable>.</para>]]></programlisting>
+<para>Para uma esta&ccedil;&atilde;o de trabalho, <literal>32</literal> &eacute; um
+bom valor para <replaceable>n</replaceable>.</para>
+]]></programlisting>
 
-	  <para>Appearance:</para>
-	  
-	  <para>The <literal>maxusers <replaceable>n</replaceable></literal>
-	    line in the kernel configuration file determines the size of many
-	    system tables, and is a rough guide to how many simultaneous
-	    logins the system will support.</para>
+	  <para>Apar&ecirc;ncia:</para>
+	  <para>A linha <literal>maxusers 
+	    <replaceable>n</replaceable></literal> 
+	    no arquivo de configura&ccedil;&atilde;o do kernel determina 
+	    o tamanho de muitas tabelas do sistema, e diz aproximadamente 
+	    quantos logins simultaneos o sistema ir&aacute; suportar.
+	    </para>
 
-	  <para>For a desktop workstation, <literal>32</literal> is a good
-	    value for <replaceable>n</replaceable>.</para>	  
+	    <para>Para uma esta&ccedil;&atilde;o de trabalho, 
+	    <literal>32</literal> &eacute; um bom valor para 
+	    <replaceable>n</replaceable>.
+	  </para>	  
 	</example>
       </sect3>
 
       <sect3>
-        <title>Quoting system errors</title>
+        <title>Citando erros do sistema</title>
 
-        <para>You might want to show errors generated by FreeBSD.
-          Mark these with <sgmltag>errorname</sgmltag>.  This
-          indicates the exact error that appears.</para>
-
+	<para>Voc&ecirc; pode querer mostrar erros gerados pelo
+	  FreeBSD. Marque-os com <sgmltag>errorname</sgmltag>.
+	  Isto indica o exato erro que aparece.
+	</para>
         <example>
           <title><sgmltag>errorname</sgmltag></title>
 
-          <para>Use:</para>
+          <para>Uso:</para>
 
-	  <programlisting><![ CDATA [ 
+	  <programlisting><![ RCDATA [ 
 <screen><errorname>Panic: cannot mount root</errorname></screen> ]]>
 </programlisting>
 
 
-          <para>Appearance:</para>
+          <para>Apar&ecirc;ncia:</para>
 
           <informalexample>
             <screen><errorname>Panic: cannot mount root</errorname></screen>
@@ -2411,103 +2431,126 @@ muitas vari&aacute;veis, incluindo <makevar>CLOBBER</makevar> e
     </sect2>
 
     <sect2>
-      <title>Images</title>
+      <title>Imagens</title>
 
       <important>
-	<para>Image support in the documentation is currently extremely
-	  experimental.  I think the mechanisms described here are unlikely to
-	  change, but that is not guaranteed.</para>
+        <para>Suporte a imagem na documenta&ccedil;&atilde;o ainda 
+	  &eacute; extremamente experiemental. Acredito que seja pouco 
+	  prov&aacute;vel que o mecanismo apresentado aqui mude, mas isto 
+	  n&atilde;o &eacute; garantido.
+	</para>
 
-	<para>You will also need to install the
-	  <filename role="package">graphics/ImageMagick</filename> port, which is used to
-	  convert between the different image formats.  This is a big port,
-	  and most of it is not required.  However, while we are working on the
-	  <filename>Makefile</filename>s and other infrastructure it makes
-	  things easier.  This port is <emphasis>not</emphasis> in the
-	  <filename role="package">textproc/docproj</filename> meta port, you must install it
-	  by hand.</para>
+	<para>Voc&ecirc; precisar&aacute; instalar o port
+	  <filename role="package">graphics/ImageMagick</filename>
+	  que &eacute; usado para converter entre os diferentes formatos de
+	  imagens. Ele &eacute; grande e sua maior parte n&atilde;o &eacute;
+	  necess&aacute;ria. Entretanto, ainda trabalhamos nos
+	  <filename>Makefile</filename>s e na infraestrutura para tornar as
+	  coisas mais f&aacute;ceis. Este port <emphasis>n&atilde;o</emphasis>
+	  est&aacute; no meta port
+	  <filename role="package">textproc/docproj</filename>, voc&ecirc;
+	  deve instala-lo manualmente.
+	</para>
 
-	<para>The best example of what follows in practice is the
-	  <filename>doc/en_US.ISO8859-1/articles/vm-design/</filename> document.
-	  If you are unsure of the description that follows, take a look at the
-	  files in that directory to see how everything hangs together.
-	  Experiment with creating different formatted versions of the
-	  document to see how the image markup appears in the formatted
-	  output.</para>
+	<para>O melhor exemplo do que acontece na pr&aacute;tica &eacute; o
+	  documento 
+	  <filename>doc/en_US.ISO8859-1/articles/vm-design/</filename>.
+	  Se voc&ecirc; se sentir inseguro na descri&ccedil;&atilde;o que
+	  segue, d&ecirc; uma olhada nos arquivos naquele diret&oacute;rio
+	  e veja como tudo se encaixa. Experimente criar vers&otilde;es
+	  com diferentes formatos do documento para ver como a 
+	  marca&ccedil;&atilde;o de imagem aparece na sa&iacute;da.
+	</para>
       </important>
 
       <sect3>
-	<title>Image formats</title>
+	<title>Formatos de imagens</title>
 
-	<para>We currently support two formats for images.  The format you
-	  should use will depend on the nature of your image.</para>
+	<para>Atualmente suportamos dois formatos de imagens. O formato
+	  que voc&ecirc; deve usar depende da natureza da sua imagem.
+	</para>
 
-	<para>For images that are primarily vector based, such as network
-	  diagrams, time lines, and similar, use Encapsulated Postscript, and
-	  make sure that your images have the <filename>.eps</filename>
-	  extension.</para>
+	<para>Para imagens vetoriais, tais como diagramas de rede, 
+	  linhas temporais e similares, use Encapsulated Postscript, 
+	  e certifique-se que suas imagens tenham a extens&atilde;o
+	  <filename>.eps</filename>.
+	</para>
 
-	<para>For bitmaps, such as screen captures, use the Portable Network
-	  Graphic format, and make sure that your images have the
-	  <filename>.png</filename> extension.</para>
+	<para>Para bitmaps, tais como a captura de uma tela, use o
+	  formato Portable Network Graphic, e certifique-se que suas 
+	  imagens tenham a extens&atilde;o <filename>.png</filename>.
+	</para>
 
-	<para>These are the <emphasis>only</emphasis> formats in which images
-	  should be committed to the CVS repository.</para>
+	<para>Estes s&atilde;o os <emphasis>&uacute;nicos</emphasis>
+	  que podem ser gravados no reposit&oacute;rio CVS
+	</para>
 
-	<para>Use the right format for the right image.  It is to be expected
-	  that your documentation will have a mix of EPS and PNG images.  The
-	  <filename>Makefile</filename>s ensure that the correct format image
-	  is chosen depending on the output format that you use for your
-	  documentation.  <emphasis>Do not commit the same image to the
-	    repository in two different formats</emphasis>.</para>
+	<para>Use o formato correto para a imagem correta. Espera-se
+	  que a sua documenta&ccedil;&atilde;o tenha tanto imagens
+	  EPS quanto PNG. Os <filename>Makefile</filename>s 
+	  asseguram que o formato correto seja escolhido dependendo
+	  do formato de sa&iacute;da da sua documenta&ccedil;&atilde;o.
+	  <emphasis>N&atilde;o grave a mesma imagem nos dois formatos 
+	  diferentes no reposit&oacute;rio</emphasis>.
+	</para>
 
 	<important>
-	  <para>It is anticipated that the Documentation Project will switch to
-	    using the Scalable Vector Graphic (SVG) format for vector images.
-	    However, the current state of SVG capable editing tools makes this
-	    impractical.</para>
+	  <para>Foi antecipado que o projeto de documenta&ccedil;&atilde;o
+	    ir&aacute; mudar para o formato Scalable Vector Graphic (SVG)
+	    para imagens vetoriais. Entretanto, o atual estado das ferramentas
+	    de edi&ccedil;&atilde;o tornam isto impratic&aacute;vel.
+	  </para>
 	</important>
       </sect3>
 
       <sect3>
-	<title>Markup</title>
+	<title>Marca&ccedil;&atilde;o</title>
 
-	<para>The markup for an image is relatively simple.  First, markup a
-	  <sgmltag>mediaobject</sgmltag>.  The <sgmltag>mediaobject</sgmltag>
-	  can contain other, more specific objects.  We are concerned with
-	  two, the <sgmltag>imageobject</sgmltag> and the
-	  <sgmltag>textobject</sgmltag>.</para>
+	<para>A marca&ccedil;&atilde;o para uma imagem &eacute;
+	  relativamente simples. Primeiro, marque 
+	  <sgmltag>mediaobject</sgmltag>. O <sgmltag>mediaobject</sgmltag>
+	  pode conter outros objetos mais espec&iacute;ficos. Estamos
+	  interessandos em dois, o <sgmltag>imageobject</sgmltag> e o
+	  <sgmltag>textobject</sgmltag>.
+	</para>
 
-	<para>You should include one <sgmltag>imageobject</sgmltag>, and two
-	  <sgmltag>textobject</sgmltag> elements.  The
-	  <sgmltag>imageobject</sgmltag> will point to the name of the image
-	  file that will be used (without the extension).  The
-	  <sgmltag>textobject</sgmltag> elements contain information that will
-	  be presented to the user as well as, or instead of, the
-	  image.</para>
+	<para>Voc&ecirc; deve incluir um <sgmltag>imageobject</sgmltag>,
+	  e dois elementos <sgmltag>textobject</sgmltag>. O
+	  <sgmltag>imageobject</sgmltag> ir&aacute; apontar para o nome do
+	  arquivo da imagem que ser&aacute; usada (sem a extens&atilde;o).
+	  Os elementos <sgmltag>textobject</sgmltag> cont&eacute;m
+	  informa&ccedil;&atilde;o que ser&aacute; apresentada ao 
+	  usu&aacute;rio junto, ou n&atilde;o, com a imagem.
+	</para>
 
-	<para>There are two circumstances where this can happen.</para>
+	<para>H&aacute; duas circunst&acirc;ncias em que isso pode
+	  ocorrer.
+	</para>
 
 	<itemizedlist>
 	  <listitem>
-	    <para>When the reader is viewing the documentation in HTML.  In
-	      this case, each image will need to have associated alternate
-	      text to show the user, typically whilst the image is loading, or
-	      if they hover the mouse pointer over the image.</para>
+	    <para>Quando o leitor estiver vendo a documenta&ccedil;&atilde;o
+	      em HTML. Neste caso, cada imagem precisar&aacute; ter um
+	      texto alternativo associado para mostrar ao usu&aacute;rio,
+	      tipicamente enquanto a imagem estiver sendo carregada, ou
+	      se ele parar o ponteiro do mouse sobre a imagem.
+	    </para>
 	  </listitem>
 
 	  <listitem>
-	    <para>When the reader is viewing the documentation in plain text.
-	      In this case, each image should have an ASCII art equivalent to
-	      show the user.</para>
+	    <para>Quando o leitor estiver vendo a documenta&ccedil;&atilde;o
+	      em modo texto. Neste caso, cada imagem deve ter uma ASCII art
+	      equivalente para mostrar ao usu&aacute;rio.
+	    </para>
 	  </listitem>
 	</itemizedlist>
 
-	<para>An example will probably make things easier to understand.
-	  Suppose you have an image, called <filename>fig1</filename>, that
-	  you want to include in the document.  This image is of a rectangle
-	  with an A inside it.  The markup for this would be as
-	  follows.</para>
+	<para>Um exemplo provavelmente ir&aacute; tornas as coisas mais
+	  f&aacute;ceis de se entender. Suponha que voc&ecirc; tenha uma
+	  imagem, chamada <filename>fig1</filename>, que voc&ecirc; queira
+	  incluir no documento. Esta imagem &eacute; um ret&acirc;ngulo
+	  com um A dentro dele. A marca&ccedil;&atilde;o para isso ser&aacute;
+	</para>
 
 	<programlisting>&lt;mediaobject>
   &lt;imageobject>
@@ -2521,39 +2564,45 @@ muitas vari&aacute;veis, incluindo <makevar>CLOBBER</makevar> e
   &lt;/textobject>
 
   &lt;textobject>
-    &lt;phrase>A picture&lt;/phrase> <co id="co-image-phrase">
+    &lt;phrase>Uma figura&lt;/phrase> <co id="co-image-phrase">
   &lt;/textobject>
 &lt;/mediaobject></programlisting>
 
 	<calloutlist>
 	  <callout arearefs="co-image-ext">
-	    <para>Include an <sgmltag>imagedata</sgmltag> element inside the
-	      <sgmltag>imageobject</sgmltag> element.  The
-	      <literal>fileref</literal> attribute should contain the filename
-	      of the image to include, without the extension.  The stylesheets
-	      will work out which extension should be added to the filename
-	      automatically.</para>
+	    <para>Inclua um elemento <sgmltag>imagedata</sgmltag> dentro
+	      do elemento <sgmltag>imageobject</sgmltag>. O atributo
+	      <literal>fileref</literal> deve conter o nome da imagem a
+	      ser incluida, sem a extens&atilde;o. As folhas de estilo
+	      ir&atilde;o decidir qual a extens&atilde;o deve ser adicionada
+	      ao nome do arquivo automaticamente.
+	    </para>
 	  </callout>
 
 	  <callout arearefs="co-image-literal">
-	    <para>The first <sgmltag>textobject</sgmltag> should contain a
-	      <sgmltag>literallayout</sgmltag> element, where the
-	      <literal>class</literal> attribute is set to
-	      <literal>monospaced</literal>.  This is your opportunity to
-	      demonstrate your ASCII art skills.  This content will be used if
-	      the document is converted to plain text.</para>
+	    <para>O primeiro <sgmltag>textobject</sgmltag> deve conter 
+	      um elemento <sgmltag>literallayout</sgmltag>, onde o atributo
+	      <literal>class</literal> &eacute; ajustado para
+	      <literal>monospaced</literal>. Esta  &eacute; a oportunidade
+	      para voc&ecirc; demonstrar suas habilidades ASCII art.
+	      O conte&uacute;do ser&aacute; usado se o documento for 
+	      convertido para texto.
+	    </para>
 
-	    <para>Notice how the first and last lines of the content of the
-	      <sgmltag>literallayout</sgmltag> element butt up next to the
-	      element's tags.  This ensures no extraneous white space is
-	      included.</para>
+	    <para>Veja como as primeras e &uacute;ltimas linhas do 
+	      conte&uacute;do do elemento <sgmltag>literallayout</sgmltag>
+	      fica pr&oacute;ximo a tag do elemento. Isso assegura que 
+	      n&atilde;o seja incluido espa&ccedil;os extras.
+	    </para>
 	  </callout>
 
 	  <callout arearefs="co-image-phrase">
-	    <para>The second <sgmltag>textobject</sgmltag> should contain a
-	      single <sgmltag>phrase</sgmltag> element.  The contents of this
-	      will become the <literal>alt</literal> attribute for the image
-	      when this document is converted to HTML.</para>
+	    <para>O segundo <sgmltag>textobject</sgmltag> deve conter um
+	      &uacute;nico elemento <sgmltag>phrase</sgmltag>. O
+	      conte&uacute;do deste se tornar&aacute; o atributo
+	      <literal>alt</literal> para as imagens quando o este
+	      documento for convertido para HTML.
+	    </para>
 	  </callout>
 	</calloutlist>
       </sect3>
