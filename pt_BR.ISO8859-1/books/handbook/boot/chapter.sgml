@@ -257,50 +257,49 @@ boot:</screen>
       de bootstrap, e e localizado no sistema de arquivos, usualmente como
       <filename>/boot/loader</filename>.</para>
       
-    <para>The loader is intended as a user-friendly method for
-      configuration, using an easy-to-use built-in command set,
-      backed up by a more powerful interpreter, with a more complex
-      command set.</para> 
+    <para>A inicializacao e usada como um metodo amigavel para
+      configuracao, usando um jogo de comandos internos facil-para-usar,
+      voltado por um interpretador mais poderoso, com um jogo de comandos mais complexo.</para> 
 
     <sect3 id="boot-loader-flow">
-      <title>Loader Program Flow</title>
+      <title>Fluxo de programa do carregador</title>
       
-      <para>During initialization, the loader will probe for a
-	console and for disks, and figure out what disk it is
-	booting from.  It will set variables accordingly, and an
-	interpreter is started where user commands can be passed from
-	a script or interactively.</para>
-      <indexterm><primary>loader</primary></indexterm>
-      <indexterm><primary>loader configuration</primary></indexterm>
+      <para>Durante a initializacao, o carregador sodara para uma
+	console e para discos, e figura de saida de que os discos sao 
+	carregados. Isto setara variaveis conformemente, e um
+	interpretador e iniciado onde os comandos do usuario podem ser passados de 
+        um script ou interativamente.</para>
+      <indexterm><primary>carregados</primary></indexterm>
+      <indexterm><primary>carregados na configuracao</primary></indexterm>
 
-      <para>The loader will then read
-	<filename>/boot/loader.rc</filename>, which by default reads
-	in <filename>/boot/defaults/loader.conf</filename> which
-	sets reasonable defaults for variables and reads
-	<filename>/boot/loader.conf</filename> for local changes to
-	those variables.  <filename>loader.rc</filename> then acts
-	on these variables, loading whichever modules and kernel are
-	selected.</para>
+      <para>Entao o carregador lera entao o
+	<filename>/boot/loader.rc</filename>, que por padrao le
+	dentro de  <filename>/boot/defaults/loader.conf</filename> que
+	seta padroes para variaveis e leen em 
+	<filename>/boot/loader.conf</filename> para mudanca destas variaveis locais.
+	<filename>loader.rc</filename> eles atuam
+	sobre estas variaveis, carregando qualquer modulo e kernel que sao
+	selecionados.</para>
 
-      <para>Finally, by default, the loader issues a 10 second wait
-	for key presses, and boots the kernel if it is not interrupted.
-	If interrupted, the user is presented with a prompt which
-	understands the easy-to-use command set, where the user may
-	adjust variables, unload all modules, load modules, and then
-	finally boot or reboot.</para>
+      <para>Finalmente, por padrao, o carregador emite uma espera de  10 segundos
+	para precionar alguma tecla, e carregar o kernel se este nao for interrompido.
+	Se interrompido, ao usuario e apresentado um alerta no prompt que e para
+	entender o facil-para-usar o comando setado, onde o usuario pode
+	ajustar variaveis, descarregar todos os modulos, carregar modulos, e eles
+	finalmente carregar ou reiniciar.</para>
 
     </sect3>
     
     <sect3 id="boot-loader-commands">
-      <title>Loader Built-In Commands</title>
+      <title>Comandos Carregando e Compilando</title>
       
-      <para>These are the most commonly used loader commands.  For a
-        complete discussion of all available commands, please see
+      <para>Estes sao os comandos mais comum usados na carga do sistema. Para uma
+        completa discussao de todas avaliacoes dos comandos, por favor veja
         &man.loader.8;.</para>
 
       <variablelist>
 	<varlistentry>
-	  <term>autoboot <replaceable>seconds</replaceable></term>
+	  <term>auto carregamento <replaceable>segundos</replaceable></term>
 
 	  <listitem>
 	    <para>Proceeds to boot the kernel if not interrupted
