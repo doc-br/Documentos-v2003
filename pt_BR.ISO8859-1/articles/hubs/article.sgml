@@ -861,106 +861,108 @@ cvspserver stream tcp nowait root /usr/bin/cvs cvs -f -l -R -T /anoncvstmp --all
   </sect1>
   <sect1 id="mirror-where">
     <title>De onde espelhar</title>
-    <para>
-      This is an important issue. So this section will
-      spend some effort to explain the backgrounds.  We will say this
-      several times: under no circumstances should you mirror from
-      <hostid role="fqdn">ftp.FreeBSD.org</hostid>.
-    </para>
+    
+    <para>Este &eacute; um ponto importante.  Assim esta sess&atilde;o ir&aacute; gastar
+      algum esfor&ccedil;o para explicar os detalhes.  N&oacute;s iremos mencionar
+      isto diversas vezes:  Sob nenhuma circunst&acirc;ncia voc&ecirc; deve
+      espelhar o seu servidor apartir do <hostid role="fqdn">
+      ftp.FreeBSD.org</hostid>.</para>
+      
     <sect2 id="mirror-where-organization">
-      <title>A few words about the organization</title>
-      <para>
-        Mirrors are organized by country. All
-        official mirrors have a DNS entry of the form
-        <hostid role="fqdn">ftpN.CC.FreeBSD.org</hostid>.
-        <emphasis>CC</emphasis> (i.e. country code) is the
-        <emphasis>top level domain</emphasis> (TLD)
-        of the country where this mirror is located.
-        <emphasis>N</emphasis> is a number,
-        telling that the host would be the <emphasis>Nth</emphasis>
-        mirror in that country.
-        (Same applies to <hostid>cvsupN.CC.FreeBSD.org</hostid>,
-        <hostid>wwwN.CC.FreeBSD.org</hostid>, etc.)
-        There are mirrors with no <emphasis>CC</emphasis> part.
-        These are the mirror sites that are very well connected and
-        allow a large number of concurrent users.
-        <hostid role="fqdn">ftp.FreeBSD.org</hostid> is actually two machines, one currently
-        located in Denmark and the other in the United States.
-        It is <emphasis>NOT</emphasis> a master site and should never be
-        used to mirror from.  Lots of online documentation leads
-        <quote>interactive</quote>users to
-        <hostid role="fqdn">ftp.FreeBSD.org</hostid> so automated mirroring
-        systems should find a different machine to mirror from.
-      </para>
-      <para>
-        Additionally there exists a hierarchy of mirrors, which
-        is described in terms of <emphasis>tiers</emphasis>. 
-        The master sites are not referred to but can be
-        described as <emphasis>Tier-0</emphasis>. Mirrors
-        that mirror from these sites can be considered
-        <emphasis>Tier-1</emphasis>, mirrors of <emphasis>Tier-1</emphasis>-mirrors,
-        are <emphasis>Tier-2</emphasis>, etc. 
-        Official sites are encouraged to be of a low <emphasis>tier</emphasis>,
-        but the lower the tier the higher the requirements in 
-        terms as described in <xref linkend="mirror-requirements">.
-        Also access to low-tier-mirrors may be restricted, and
-        access to master sites is definitely restricted.
-        The <emphasis>tier</emphasis>-hierarchy is not reflected
-        by DNS and generally not documented anywhere except
-        for the master sites. However, official mirrors with low numbers
-        like 1-4, are usually <emphasis>Tier-1</emphasis>
-        (this is just a rough hint, and there is no rule).
-      </para>
+      <title>Algumas palavras sobre a organiza&ccedil;&atilde;o</title>
+
+      <para>O site espelhos s&atilde;o organizados por pa&iacute;s.  Todos os site
+        espelhos oficiais possuem uma entrada DNS do tipo
+        <hostid role="fqdn">ftpN.CC.FreeBSD.org</hostid>.  Onde
+        <emphasis>CC</emphasis> (i.e. c&oacute;digo do pa&iacute;s) &eacute; o 
+        <emphasis>dominio de primeiro n&iacute;vel</emphasis> (TLD) do pa&iacute;s
+	no qual o site espelho est&aacute; localizado. O <emphasis>N</emphasis> 
+	&eacute; um numero, o qual diz que o servidor &eacute; o de numero N naquele
+	p&aacute;is.  (o mesmo se apliva para <hostid>cvsupN.CC.FreeBSD.org</hostid>,
+        <hostid>wwwN.CC.FreeBSD.org</hostid>, etc.)  Existem sites
+	espelhos que n&atilde;o possuem componentes <emphasis>CC</emphasis> em suas
+	entradas de DNS.  Estes s&atilde;o os sites espelhos que est&atilde;o muito
+	bem conectados e que permitem um grande numero de usu&aacute;rios
+	simult&acirc;neos.  O <hostid role="fqdn">ftp.FreeBSD.org</hostid> &eacute; 
+	composto atualmente por duas m&aacute;quinas , uma atualmente est&aacute;
+	localizada na Dinamarca e a outra nos Estados Unidos.  Ele n&atilde;o
+	&eacute; um servidor mestre e n&atilde;o deve ser utilizado como fonte para
+	um espelhamento.  Diversos documentos online, conduzem de
+	forma interativa o usu&aacute;rio para <hostid role="fqdn">
+	ftp.FreeBSD.org</hostid>, assim os sistemas de espelhamento
+	autom&aacute;tico devem procurar uma m&aacute;quina diferente como fonte
+	para se espelhar.</para>
+	
+      <para>Adicionalmente existe uma hierarquia para os site
+        espelhos, a qual &eacute; descrita em termos de
+        <emphasis>tiers</emphasis>.  Os sites mestres n&atilde;o s&atilde;o
+	referenciados, mas eles poderiam ser descritos como sendo um
+	<emphasis>Tier-0</emphasis>.  Os sites espelhos construidos
+	a partir destes servidores podem ser considerados <emphasis>
+	Tier-1</emphasis>, os espelhos dos espelhos-<emphasis>Tier-1
+	</emphasis> s&atilde;o <emphasis>Tier-2</emphasis>, etc.  Os sites
+	oficiais s&atilde;o encorajados  a serem um tier baixo, por&eacute;m quanto
+	mais baixo o tier, maiores as exig&ecirc;ncias nos termos descritos
+	na <xref linkend="mirror-requirements">.  O acesso aos site
+	espelhos de baixo tier podem ser restito, e o acesso aos sites
+	mestre s&atilde;o definitivamente restritos.  A hierarquia de
+	<emphasis>tier</emphasis> n&atilde;o &eacute; refletida no pelo DNS, e
+	igeralmente n&atilde;o &eacute; documentado em nenhum lugar exceto para os
+	sites mestre.  Entretanto os sites espelhos com numeros
+	baixos, s&atilde;o usualmente <emphasis>Tier-1</emphasis> (esta &eacute;
+	apenas uma sugest&atilde;o aproximada, e n&atilde;o &eacute; uma regra).</para>
     </sect2>
+
     <sect2 id="mirror-where-where">
-      <title>Ok, but where should I get the stuff now?</title>
-      <para>
-        Under no circumstances should you mirror from <hostid
-        role="fqdn">ftp.FreeBSD.org</hostid>.
-        The short answer is: from the
-        site that is closest to you in Internet terms, or gives you
-        the fastest access. 
-      </para>
+      <title>Ok, mas de onde eu devo obter o material agora?</title>
+
+      <para>Sob nenhuma circunst&acirc;ncia voce deve montar seu site
+	espelho apartir do <hostid role="fqdn">ftp.FreeBSD.org</hostid>.
+	A resposta curta &eacute;:  Apartir do site que for mais pr&oacute;ximo de
+	voc&ecirc; em termos de conex&atilde;o internet, ou ent&atilde;o do que lhe
+	disponibilizar o acesso mais r&aacute;pido.</para>
+      
       <sect3 id="mirror-where-simple">
-        <title>I just want to mirror from somewhere!</title>
-        <para>
-          If you have no special intentions or
-          requirements, the statement in <xref linkend="mirror-where-where">
-          applies.  This means:
-        </para>
+
+        <title>Eu quero apenas espelhar a partir de algum lugar!</title>
+	
+        <para>Se voc&ecirc; n&atilde;o possui nenhuma inten&ccedil;&atilde;o ou necessidade especial,
+	  a indica&ccedil;&atilde;o da <xref linkend="mirror-where-where"> se
+	  aplica.  Isto significa:</para>
+
         <procedure>
           <step>
-            <para>
-              Look at available mirrors in your country.
-              The <ulink url="http://www.freebsdmirrors.org/FBSDsites.php3">FreeBSD
-              Mirror Database</ulink> can help you with this.
-            </para>
+            <para>Verifique os sites espelhos dispon&iacute;veis no seu pa&iacute;s.
+	      O <ulink url="http://www.freebsdmirrors.org/FBSDsites.php3">
+	      Banco de dados de sites espelho do FreeBSD</ulink> pode
+	      ajud&aacute;-lo com isso.</para>
           </step>
+
           <step>
-            <para>
-              Check for those which provide fastest access
-              (number of hops, round-trip-times)
-              and offer the services you intend to
-              use (like <application>rsync</application>
-              or <application>CVSup</application>).
-            </para>
+            <para>Verifique qual deles prov&ecirc; o acesso mais r&aacute;pido
+	      (numero de hops, tempo de lat&ecirc;ncia, etc) e que oferece
+	      os servi&ccedil;os que voc&ecirc; pretende utilizar (tal como 
+	      <application>rsync</application> ou <application>CVSup
+	      </application>).</para>
           </step>
+
           <step>
-            <para>
-              Contact the administrators of your chosen site stating your
-              request, and asking about their terms and
-              policies.
-            </para>
+            <para>Entre em contato com o administrador do site que
+	      voc&ecirc; escolheu, mencione sua inten&ccedil;&atilde;o e pergunte
+	      sobre os termos e regras para uso do servidor.</para>
           </step>
+
           <step>
-            <para>
-              Set up your mirror as described above.
-            </para>
+            <para>Configure o seu site espelho como descrito
+	    anteriormente.</para>
           </step>
         </procedure>
       </sect3>
+
       <sect3 id="mirror-where-official">
-        <title>I'm an official mirror, what is the right site for me?</title>
+        <title>Eu sou um site espelho oficial, qual &eacute; o site 
+	  correto para mim?</title>
+
         <para>
           In general the description in <xref linkend="mirror-where-simple">
           still applies. Of course you may want to put some
