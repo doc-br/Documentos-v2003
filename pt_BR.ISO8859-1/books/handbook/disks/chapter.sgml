@@ -11,39 +11,42 @@
     <title>Sinopse</title>
 
 
-    <para>Este capitulo cobre a utilizacao de discos no FreeBSD.  Isto
+    <para>Este cap&iacute;tulo cobre a utiliza&ccedil;&atilde;o de discos no FreeBSD.  Isto
       inclui discos memory-backed , discos atachados de rede, e
       dispositivos de armazenamento padrao SCSI/IDE .</para>
 
-    <para>Apos a leitura deste capitulo , voce sabera:</para>
+    <para>Ap&oacute;s a leitura deste cap&iacute;tulo, voc&ecirc; saber&aacute;:</para>
     <itemizedlist>
-      <listitem><para>A terminologia que o FreeBSD utiliza para descrever a
-      organizacao dos dados em um disco fisico (particoes e slices).</para>
+      <listitem><para>A terminologia que o FreeBSD
+	  utiliza para descrever a
+      organiza&ccedil;&atilde;o dos dados em um disco f&iacute;sico (parti&ccedil;&otilde;es e slices).</para>
       </listitem>
-      <listitem><para>Como conectar discos rigidos adicionais para seu sistema.</para>
+      <listitem><para>Como conectar discos r&iacute;gidos
+	  adicionais para seu sistema.</para>
       </listitem>
-      <listitem><para>Como configurar sistemas de arquivo virtuais, tais como
-      discos de memoria.</para></listitem>
+      <listitem><para>Como configurar sistemas de arquivos
+	  virtuais, tais como
+      discos de mem&oacute;ria.</para></listitem>
       <listitem>
-	<para>Como utilizar cotas para limitar o uso de espaco do disco.</para>
+	<para>Como utilizar cotas para limitar o uso de espa&ccedil;o do disco.</para>
       </listitem>
       <listitem>
-	<para>Como cifrar discos para protege-los contra atacantes.</para>
+	<para>Como cifrar discos para proteg&ecirc;-los contra atacantes.</para>
       </listitem>
       <listitem>
 	<para>Como criar e queimar CDs e DVDs no FreeBSD.</para>
       </listitem>
       <listitem>
-        <para>As diversas opcoes de midias de armazenamento para backups.</para>
+        <para>As diversas op&ccedil;&otilde;es de m&iacute;dias de armazenamento para backups.</para>
       </listitem>
       <listitem>
-        <para>Como utilizar programas de backup disponiveis pelo FreeBSD.</para>
+        <para>Como utilizar programas de backup dispon&iacute;veis pelo FreeBSD.</para>
       </listitem>
       <listitem>
-        <para>Como backupear floppies.</para>
+        <para>Como realizar c&oacute;pias de seguran&ccedil;a de disquetes.</para>
       </listitem>
       <listitem>
-        <para>O que sao snapshots e como utiliza-los eficientemente.</para>	
+        <para>O que s&atilde;o snapshots e como utiliz&aacute;-los eficientemente.</para>
       </listitem>
     </itemizedlist>
   </sect1>
@@ -51,12 +54,12 @@
   <sect1 id="disks-naming">
     <title>Nomes de Dispositivos</title>
 
-    <para>A seguir esta uma lista dos dispositivos de armazenamento 
-      suportados pelo FreeBSD, e os nomes de dispositivos associados 
+    <para>A seguir temos uma lista dos dispositivos de armazenamento
+      suportados pelo FreeBSD, e os nomes de dispositivos associados
       a eles.</para>
 
     <table id="disk-naming-physical-table">
-      <title>Convencoes de nomes fisicos de discos</title>
+      <title>Conven&ccedil;&otilde;es de nomes f&iacute;sicos de discos</title>
 
       <tgroup cols="2">
 	<thead>
@@ -67,7 +70,7 @@
 	</thead>
 	<tbody>
 	  <row>
-	    <entry>Discos rigidos IDE</entry>
+	    <entry>Discos r&iacute;gidos IDE</entry>
 	    <entry><literal>ad</literal></entry>
 	  </row>
 	  <row>
@@ -75,7 +78,7 @@
 	    <entry><literal>acd</literal></entry>
 	  </row>
 	  <row>
-	    <entry>Discos rigidos SCSI e dispositivos de armazenamento
+	    <entry>Discos r&iacute;gidos SCSI e dispositivos de armazenamento
                    de massa USB</entry>
 	    <entry><literal>da</literal></entry>
 	  </row>
@@ -91,9 +94,9 @@
 		<footnote>
 		  <para>O driver &man.matcd.4; foi removido
 		    no branch FreeBSD&nbsp;4.X desde 5 de outubro de
-		    2002 e nao existe nos releases do  FreeBSD&nbsp;5.0 e
-		    5.1 .  Contudo, este driver esta de volta no branch
-		    FreeBSD&nbsp;5.X desde o dia 16 de Junho de 
+		    2002 e n&atilde;o existe nos releases do  FreeBSD&nbsp;5.0 e
+		    5.1 .  Contudo, este driver est&aacute; de volta no branch
+		    FreeBSD&nbsp;5.X desde o dia 16 de Junho de
 		    2003.</para>
 		</footnote>
 	    </entry>
@@ -111,7 +114,7 @@
 	    <entry><literal>ast</literal></entry>
 	  </row>
 	  <row>
-	    <entry>Drives de Flash </entry>
+	    <entry>Drives de Flash</entry>
 	    <entry><literal>fla</literal> para &diskonchip; dispositivo Flash </entry>
 	  </row>
 	  <row>
@@ -127,7 +130,7 @@
       </tgroup>
     </table>
   </sect1>
-    
+
   <sect1 id="disks-adding">
     <sect1info>
       <authorgroup>
@@ -147,45 +150,51 @@
       <secondary>adicionando</secondary>
     </indexterm>
 
-    <para>Vamos dizer que queremos adicionar um novo disco SCSI para 
-          uma maquina que possui apenas um unico disco.
+    <para>Vamos dizer que queremos adicionar um novo disco SCSI para
+          uma m&aacute;quina que possui apenas um &uacute;nico disco.
      Primeiro, desligue o computador
-      e instale o disco no computador seguindo as instrucoes
+      e instale o disco no computador seguindo as instru&ccedil;&otilde;es
       do computador, controladora e, do fabricante do disco.  Devido
-      as grandes variacoes dos procedimentos para fazer isso, os
-      detalhes estao lame do escopo deste documento.</para>
+      as grandes varia&ccedil;&otilde;es dos procedimentos para fazer isso, os
+      detalhes est&atilde;o al&eacute;m do escopo deste documento.</para>
 
-    <para>Logue como usuario <username>root</username>. Depois de
-      instalado o disco, inspecione <filename>/var/run/dmesg.boot</filename>          para confirmar que o novo disco foi encontrado.
-      Continuando com nosso exemplo, o disco recentemente adicionado 
-      sera <devicename>da1</devicename> e queremos monta-lo em 
-      <filename>/1</filename> (se voce esta adicionando um disco IDE,                 o nome do dispositivo sera <devicename>wd1</devicename> nos sistemas            pre-4.0 , ou
+    <para>Logue como usu&aacute;rio <username>root</username>. Depois de
+      instalado o disco, inspecione <filename>/var/run/dmesg.boot</filename>
+	  para confirmar que o novo disco foi encontrado.
+      Continuando com nosso exemplo, o disco recentemente adicionado
+      ser&aacute; <devicename>da1</devicename> e queremos mont&aacute;-lo em
+      <filename>/1</filename> (se voce est&aacute; adicionando um disco IDE,
+	  o nome do dispositivo ser&aacute; <devicename>wd1</devicename>
+	  nos sistemas pre-4.0, ou
       <devicename>ad1</devicename> na maioria dos sistemas 4.X ).</para>
 
-    <indexterm><primary>particoes</primary></indexterm>
+    <indexterm><primary>parti&ccedil;&otilde;es</primary></indexterm>
     <indexterm><primary>slices</primary></indexterm>
     <indexterm>
       <primary><command>fdisk</command></primary>
     </indexterm>
 
-    <para>Pelo fato do FreeBSD rodar em computadores compativeis com
-      IBM-PC , it must
-      take into account as particoes da BIOS do PC.  Estes sao
-      diferentes das tradicionais particoes BSDs. 
-      Um disco do PC tem at&eacute; no maximo 4 entradas de particoes na
-      BIOS.  Se o disco for totalmente dedicado ao FreeBSD, voce pode 
-      utilizar o modo <emphasis>dedicado</emphasis>.  Do contrario,                   o FreeBSD tera de localizar-se dentro de uma das particoes da                   BIOS do PC.  O FreeBSD chama as particoes da BIOS do PC como                    <emphasis>slices</emphasis> de forma
-      a nao confundir com as particoes tradicionais do BSD.  Voce pode
-      tambem utilizar slices em um disco que esta dedicado para o
-      FreeBSD, mas utilizando em um computador que tambem tenha outro
+    <para>Pelo fato do FreeBSD rodar em computadores compat&iacute;veis com
+      IBM-PC, este levar&aacute; em conta as particoes da BIOS do PC.  Estas s&atilde;o
+      diferentes das tradicionais parti&ccedil;&otilde;es BSDs.
+      Um disco de PC tem at&eacute; no m&aacute;ximo 4 entradas de parti&ccedil;&otilde;es na
+      BIOS.  Se o disco for totalmente dedicado ao FreeBSD, voce pode
+      utilizar o modo <emphasis>dedicado</emphasis>.  Do contr&aacute;rio,
+	  o FreeBSD ter&aacute; de localizar-se dentro de uma das parti&ccedil;&otilde;es da
+	  BIOS do PC.  O FreeBSD chama as parti&ccedil;&otilde;es da BIOS do PC como
+	  <emphasis>slices</emphasis> de forma
+      a n&atilde;o confundir com as partic&otilde;es tradicionais do BSD.  Voc&ecirc; pode
+      tamb&eacute;m utilizar slices em um disco que est&aacute; dedicado para o
+      FreeBSD, mas utilizando em um computador que tamb&eacute;m tenha outro
       sistema operacional instalado.
-      Isto &eacute; para nao confundir com o utilitario <command>fdisk</command> 
+      Isto &eacute; para n&aacute;o confundir com o utilit&aacute;rio <command>fdisk</command>
       de outros sistemas operacionais.</para>
 
-    <para>No caso do slice, o disco sera adicionado como  
-      <filename>/dev/da1s1e</filename>.  E lido como: disco SCSI ,
-      unidade numero 1 (segundo disco  SCSI ), slice 1 (particao 1 da BIOS            do PC ),
-      e particao BSD <filename>e</filename>.  No caso dedicado,                       o disco sera adicionado simplesmente como
+    <para>No caso do slice, o disco ser&aacute; adicionado como
+      <filename>/dev/da1s1e</filename>.  E lido como: disco SCSI,
+      unidade numero 1 (segundo disco SCSI ), slice 1 (parti&ccedil;&atilde;o 1 da BIOS do PC ),
+      e parti&ccedil;&atilde;o BSD <filename>e</filename>.  No caso dedicado,
+	  o disco ser&aacute; adicionado simplesmente como
       <filename>/dev/da1e</filename>.</para>
 
     <sect2>
@@ -201,48 +210,48 @@
 	<step>
 	  <title>Navegando pelo <application>Sysinstall</application></title>
 
-	  <para>Voce pode utilizar o <command>/stand/sysinstall</command> para 
+	  <para>Voc&ecirc; pode utilizar o <command>/stand/sysinstall</command> para
 	    particionar e rotular um novo disco facilmente utilizando os menus.
-	    Logue como usuario <username>root</username> or utilize o 
+	    Logue como usu&aacute;rio <username>root</username> ou utilize o
 	    comando <command>su</command>.  Execute
 	    <command>/stand/sysinstall</command> e entre no menu
-	    <literal>Configure</literal> .  Dentro do 
+	    <literal>Configure</literal> .  Dentro do
 	    <literal>Menu FreeBSD Configuration </literal>, tecle
-	    para abaixo e selecione a opcao <literal>Fdisk</literal>.</para>
+	    para abaixo e selecione a op&ccedil;&atilde;o <literal>Fdisk</literal>.</para>
 	</step>
 
 	<step>
-	  <title><application>fdisk</application> Editor de Particoes</title>
-	  <para>Dentro da <application>fdisk</application>, 
-	  nos podemos digitar <userinput>A</userinput> para
+	  <title><application>fdisk</application> Editor de Parti&ccedil;&otilde;es</title>
+	  <para>Dentro da <application>fdisk</application>,
+	    n&aacute;s podemos digitar <userinput>A</userinput> para
 	    utilizar o disco inteiro para o FreeBSD.  Quando
-	    perguntado se voce quer <quote>manter cooperacao com 
+	    perguntado se voc&ecirc; quer <quote>manter coopera&ccedil;&atilde;o com
 	    qualquer sistema operacional no futuro,
-	    </quote>, responda <literal>YES</literal>. Grave as  
-	    mudancas para o disco utilizando o <userinput>W</userinput>.  
-	    Agora, saia do editor do FDISK digitando <userinput>q</userinput>.  
-	    cwA seguir, sera perguntado sobre o Registro Mestre de
-	    Boot. Desde que estamos adicionando um disco em um sistema 
-	    ja em funcionando , escolha <literal>None</literal>.</para>
+	    </quote>, responda <literal>YES</literal>. Grave as
+	    mudan&ccedil;as para o disco utilizando o <userinput>W</userinput>.
+	    Agora, saia do editor do FDISK digitando <userinput>q</userinput>.
+	    &Agrave; seguir, ser&aacute; perguntado sobre o <quote>Registro Mestre de
+	    Boot</quote>. Desde que estamos adicionando um disco em um sistema
+	    j&aacute; em funcionando, escolha <literal>None</literal>.</para>
 	</step>
 
 	<step>
-	  <title>Editor de Rotulo do Disco</title>
-	  <indexterm><primary>Particoes BSD </primary></indexterm>
+	  <title>Editor de R&oacute;tulo do Disco</title>
+	  <indexterm><primary>Parti&ccedil;&otilde;es BSD </primary></indexterm>
 
-	  <para>A seguir, voce precisa sair do <application>sysinstall                    </application>
-            e reinicia-lo.  Siga as orientacoes acima, embora desta 
-            vez escolha a opcao <literal>Label</literal>. Entrara
-	    no <literal> Editor de Rotulo do Disco</literal>.  Este 
-	    e o lugar onde serao criados as tradicionais particoes BSD.
-	    Um disco pode ter no maximo 8 particoes, rotuladas de 
+	  <para>&Agrave; seguir, voc&ecirc; precisa sair do <application>sysinstall</application>
+        e reinici&aacute;-lo.  Siga as orientacoes acima, embora desta
+        vez escolha a op&ccedil;&atilde;o <literal>Label</literal>. Entrar&aacute;
+	    no <literal>Editor de R&oacute;tulo do Disco</literal>.  Este
+	    &eacute; o lugar onde ser&atilde;o criados as tradicionais parti&ccedil;&otilde;es BSD.
+	    Um disco pode ter no m&aacute;ximo 8 parti&ccedil;&otilde;es, rotuladas de
 	    <literal>a-h</literal>.
-	    Alguns rotulos de particoes tem utilizacoes especiais.A
-	    particao <literal>a</literal> e utilizada para representar 
-	    a particao root(<filename>/</filename>).  
-	    Assim, somente seu disco de sistema (por exemplo, 
+	    Alguns r&oacute;tulos de particoes tem utilizacoes especiais.A
+	    particao <literal>a</literal> e utilizada para representar
+	    a particao root(<filename>/</filename>).
+	    Assim, somente seu disco de sistema (por exemplo,
 	    o disco do qual e dado o boot) deve possuir uma particao
-	    <literal>a</literal>.  A particao  <literal>b</literal> 
+	    <literal>a</literal>.  A particao  <literal>b</literal>
 	    e utilizada para identificar as particoes de swap, e voce
 	    pode ter muitos discos com particoes de swap.
 	    A particao <literal>c</literal> partition endereca todo o
@@ -252,21 +261,21 @@
 	  <para>o editor de Rotulos do <application>sysinstall</application>
 	    favors a particao <literal>e</literal>
 	    para particoes nao-swap. Dentro do editor de Rotulo,
-	    crie um unico sistema de arquivos digitando  
+	    crie um unico sistema de arquivos digitando
 	    <userinput>C</userinput>.  Quando perguntado se este sera
 	    um FS(sistema de arquivo) ou swap, escolha
 	    <literal>FS</literal> e digite um ponto de montagem
 	    (por exemplo, <filename>/mnt</filename>).  Quando
-	    adicionar um disco no modo post-install, 
+	    adicionar um disco no modo post-install,
 	     <application>sysinstall</application>
-	    nao criara as entradas 
+	    nao criara as entradas
 	    no <filename>/etc/fstab</filename> para voce, entao
 	    especificar o ponto de montagem nao e tao importante.</para>
 
 	  <para>Agora voce esta pronto para escrever o novo rotulo para o
 	  disco e criar um sistema de arquivos nele.
 	    Faca isso digitando
-	    <userinput>W</userinput>.  Ignore quaisquer erros do 
+	    <userinput>W</userinput>.  Ignore quaisquer erros do
 	    <application>sysinstall</application> que ele nao pode
 	    montar a nova particao.  Saia do Editor de Rotulo 
 	    e do <application>sysinstall</application>.</para>
