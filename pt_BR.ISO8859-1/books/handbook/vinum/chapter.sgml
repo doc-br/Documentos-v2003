@@ -613,19 +613,13 @@
       <para>O espelhamento do volume no exemplo anterior é mais
       resistente a falha do que o volume não espelhado, mas sua
       performance é menor: cada escrita no volume requer a escrita em
-      dois discos, usando assim duas vezes mais largura de banda de
-      disco
+      dois discos, usando assim mais largura de banda de disco.  
+      Quando se quer considerar a peformance é indicado uma aproximação
+      diferente: ao invés de espelhar, os dados são striped entre o
+      maior numero de partições possíveis.  A configuração seguinte
+      mostra um volume com um plex striped entre quatro
+      partições:</para>
       
-      The mirrored volume in the previous example is more
-	resistant to failure than an unmirrored volume, but its
-	performance is less: each write to the volume requires a write
-	to both drives, using up a greater proportion of the total
-	disk bandwidth.  Performance considerations demand a different
-	approach: instead of mirroring, the data is striped across as
-	many disk drives as possible.  The following configuration
-	shows a volume with a plex striped across four disk
-	drives:</para>
-
 	<programlisting>
 	drive c device /dev/da5h
 	drive d device /dev/da6h
@@ -636,10 +630,10 @@
 	  sd length 128m drive c
 	  sd length 128m drive d</programlisting>
 
-      <para>As before, it is not necessary to define the drives which are
-	already known to Vinum.  After processing this definition, the
-	configuration looks like:</para>
-
+      <para>Como antes, não é necessário definir as partições que ja são
+      conhecidas pelo vinum.  Depois de processar essa definição, a
+      configuração se parece com:</para>
+      
       <programlisting>
 	Drives:         4 (4 configured)
 	Volumes:        3 (4 configured)
@@ -670,26 +664,25 @@
 
       <para>
 	<figure id="vinum-striped-vol">
-	  <title>A Striped Vinum Volume</title>
+	  <title>Um volume de vinum Striped</title>
 	  <graphic fileref="vinum/vinum-striped-vol">
 	</figure>
       </para>
 
-      <para>This volume is represented in
-	<xref linkend="vinum-striped-vol">.  The darkness of the stripes
-	indicates the position within the plex address space: the lightest stripes
-	come first, the darkest last.</para>
+      <para>Esse volume é representado em
+	<xref linkend="vinum-striped-vol">.  A escuridão dos stripes
+	indica a porção junto ao espaço endereçado do plex: os stripes
+	mais claros vem primeiro, os mais escuros por último.</para>
     </sect2>
 
     <sect2>
-      <title>Resilience and Performance</title>
+      <title>Estabilidade e performance</title>
 
-      <para><anchor id="vinum-resilience">With sufficient hardware, it
-	is possible to build volumes which show both increased
-	resilience and increased performance compared to standard
-	&unix; partitions.  A typical configuration file might
-	be:</para>
-
+      <para><anchor id="vinum-resilience">Com o hardware necessário, é
+      possível construir volumes que apresentam tanto acréscimo de
+      performance quanto de estabilidade quando comparado as partições &unix;
+      comuns.  Um típico arquivo de configuração pode ser:</para>
+      
       <programlisting>
 	volume raid10
       plex org striped 512k
@@ -705,16 +698,18 @@
         sd length 102480k drive a
         sd length 102480k drive b</programlisting>
 
-      <para>The subdisks of the second plex are offset by two drives from those
-	of the first plex: this helps ensure that writes do not go to the same
-	subdisks even if a transfer goes over two drives.</para>
-
-      <para><xref linkend="vinum-raid10-vol"> represents the structure
-	of this volume.</para>
+      <para>Os subdiscos do segundo plex estão offset por duas partições
+      daquela do primeiro plex: isso ajuda a garantir que não acontecerá
+      escrita no mesmo subdisco, mesmo que a transferência aconteça
+      sobre dois discos.</para>
+      
+      
+      <para><xref linkend="vinum-raid10-vol"> representa a estrutura
+	desse volume.</para>
 
       <para>
 	<figure id="vinum-raid10-vol">
-	  <title>A Mirrored, Striped Vinum Volume</title>
+	  <title>Um volume de vinum striped espelhado</title>
 	  <graphic fileref="vinum/vinum-raid10-vol">
         </figure>
       </para>
@@ -1175,7 +1170,7 @@ sd name bigraid.p0.s4 drive e plex bigraid.p0 state initializing len 4194304b dr
 	  
 	  <para><command>vinum l -rv root</command></para>
 
-	  <para>note que em Vinum, os offsets e tamanhos são medidos em
+	  <para>Note que em Vinum, os offsets e tamanhos são medidos em
 	  bytes.  Eles precisam ser divididos por 512 para obter o
 	  número de blocos que irão, por sua vez, ser usados no comando
 	  <command>disklabel</command>.</para> 
