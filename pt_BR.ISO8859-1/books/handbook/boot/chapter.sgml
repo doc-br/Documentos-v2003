@@ -197,27 +197,27 @@ label=FreeBSD</programlisting>
       <para>Eles sao encontrados no setor de inicializacao, 
 	que e onde <link
 	  linkend="boot-boot0">boot0</link>, ou alguns outros programas na
-	<abbrev>MBR</abbrev> expects to find the program to run to
-	continue the boot process.  The files in the
-	<filename>/boot</filename> directory are copies of the real files,
-	which are stored outside of the FreeBSD file system.</para>
+	<abbrev>MBR</abbrev> espera encontrar um programa para rodar
+	continuar o processo de carga. O arquivo no diretorio
+	<filename>/boot</filename> sao copiados dos arquivos reais,
+	que sao armazenados fora do sistema de arquivos do FreeBSD.</para>
 
-      <para><filename>boot1</filename> is very simple, since it too 
-	can only be 512 bytes
-	in size, and knows just enough about the FreeBSD
-	<firstterm>disklabel</firstterm>, which stores information
-	about the slice, to find and execute <filename>boot2</filename>.</para>
+      <para><filename>boot1</filename> e muito simples, desde tambem possa
+	somente ser 512 bytes
+	de tamanho, e sabemos justamente para o
+	<firstterm>disklabel</firstterm> do FreeBSD, com informacoes armazenadas
+	no silindro, para procurar e executar o <filename>boot2</filename>.</para>
       
-      <para><filename>boot2</filename> is slightly more sophisticated, and understands
-	the FreeBSD file system enough to find files on it, and can
-	provide a simple interface to choose the kernel or loader to
-	run.</para>
+      <para><filename>boot2</filename> e ligeiramente mais sofisticado, e compreende
+	bastante o sistema de arquivos do FreeBSD para procurar arquivos nele, e pode
+	fornecer uma simples interface para escolher o kernel ou o carregador para
+	executar.</para>
 
-      <para>Since the <link linkend="boot-loader">loader</link> is
-	much more sophisticated, and provides a nice easy-to-use
-	boot configuration, <filename>boot2</filename> usually runs
-	it, but previously it
-	was tasked to run the kernel directly.</para>
+      <para>Desde o <link linkend="boot-loader">carregador</link> e
+	mais sofisticado, e forncecido um boa facil-para-usar
+	configuracao de inicializacao, <filename>boot2</filename> usualmente executa
+	isto, mas previamente isto
+	era tarefa para executar diretamente no kernel.</para>
 
       <example id="boot-boot2-example">
 	<title><filename>boot2</filename> Screenshot</title>
@@ -227,18 +227,18 @@ Default: 0:ad(0,a)/kernel
 boot:</screen>
       </example>
 
-      <para>If you ever need to replace the installed
-	<filename>boot1</filename> and <filename>boot2</filename> use
+      <para>Se voce precisar sempre substituir a instalacao
+	<filename>boot1</filename> e <filename>boot2</filename> use
 	&man.disklabel.8;.</para>
       
       <screen>&prompt.root; <userinput>disklabel -B <replaceable>diskslice</replaceable></userinput></screen>
 
-      <para>Where <replaceable>diskslice</replaceable> is the disk and slice
-	you boot from, such as <devicename>ad0s1</devicename> for the first
-	slice on the first IDE disk.</para>
+      <para>Onde <replaceable>diskslice</replaceable> e o disco e silindro
+	da sua inicializacao, tal como <devicename>ad0s1</devicename> para o primeiro
+	HD sobre a IDE.</para>
 
       <warning>
-	<title>Dangerously Dedicated Mode</title>
+	<title>Modalidade Perigosamente Dedicada</title>
 
 	<para>If you use just the disk name, such as
 	  <devicename>ad0</devicename>, in the &man.disklabel.8; command you
