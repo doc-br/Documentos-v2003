@@ -5,28 +5,28 @@
 -->
 
 <chapter id="boot">
-  <title>O processo de inicialização do FreeBSD</title>
+  <title>O processo de inicializa&ccedil;&atilde;o do FreeBSD</title>
 
   <sect1 id="boot-synopsis">
     <title>Sinópse</title>
     <indexterm><primary>booting</primary></indexterm>
     <indexterm><primary>bootstrap</primary></indexterm>
 
-    <para>O processo de inicialização e carregamento de um computador com sistema operacional
+    <para>O processo de inicializa&ccedil;&atilde;o e carregamento de um computador com sistema operacional
       refere-se a um <quote>processo de inicializar</quote>, ou simplesmente
-      <quote>carregar</quote>. O processo de inicialização do FreeBSD fornece uma grande flexibilidade 
-      que acontece quando você inicia o sistema,
-      permitindo que você selecione das diferentes operações no sistema instalado no mesmo
-      computador, ou igualar diferentes versões do mesmo sistema operacional
+      <quote>carregar</quote>. O processo de inicializa&ccedil;&atilde;o do FreeBSD fornece uma grande flexibilidade 
+      que acontece quando voc&ecirc; inicia o sistema,
+      permitindo que voc&ecirc; selecione diferentes opera&ccedil;&otilde;es no sistema instalado no
+      computador, ou igualar diferentes vers&otilde;es do mesmo sistema operacional
       ou do kernel instalado.</para>
 
-    <para>Este capítulo detalha as opções de configuração que você pode ajustar e
-      personalizar o processo de inicialização do FreeBSD. Isto inclui tudo o que 
+    <para>Este cap&iacute;tulo detalha as op&ccedil;&otilde;es de configura&ccedil;&atilde;o que voc&ecirc; pode ajustar e
+      personalizar o processo de inicializa&ccedil;&atilde;o do FreeBSD. Isto inclui tudo o que 
       acontece desde a hora do kernel do FreeBSD carregar, testar os dispositivos, e
-      inicializar &man.init.8;. Se voce nao estiver totalmente certo de quando isso acontece, isto
+      inicializar &man.init.8;. Se voc&ecirc; n&atilde;o souber quando isso acontece, isto
       acontece quando a cor do texto muda de branco brilhante para cinza.</para>
 
-    <para>Depois de ler este capitulo, voce sabera:</para>
+    <para>Depois de ler este cap&iacute;tulo, voc&ecirc; saber&aacute;:</para>
 
     <itemizedlist>
       <listitem>
@@ -35,97 +35,97 @@
       </listitem>
 
       <listitem>
-	<para>A opcoes que voce pode dar a componentes no FreeBSD
-	  colocando ou tirando para controlar o processo de inicializacao.</para>
+	<para>As op&ccedil;&otilde;es que voc&ecirc; pode dar a componentes no FreeBSD
+	  colocando ou tirando para controlar o processo de inicializa&ccedil;&atilde;o.</para>
       </listitem>
       
       <listitem>
-        <para>O basico de &man.device.hints.5;.</para>
+        <para>O b&aacute;sico do &man.device.hints.5;.</para>
       </listitem>
     </itemizedlist>
 
     <note>
       <title>Somente x86</title>
 
-      <para>Este capitulo somente descreve o processo de inicializacao para FreeBSD rodando
+      <para>Este cap&iacute;tulo somente descreve o processo de inicializa&ccedil;&atilde;o para FreeBSD rodando
 	em sistemas Intel x86.</para>
     </note>
   </sect1>
 
   <sect1 id="boot-introduction">
-    <title>O problema na inicializacao</title>
+    <title>Problema na inicializa&ccedil;&atilde;o</title>
 
-    <para>Voltando a um computador inicializando o sistema operacional a atitude e um
-      dilema interessante. Por definicao, o computador nao sabe qualquer
+    <para>Voltando a um computador inicializando o sistema operacional a atitude &eacute; um
+      dilema interessante. Por defini&ccedil;&atilde;o, o computador n&atilde;o sabe qualquer
       coisa antes que o sistema operacional esteja iniciando. isto inclui
-      rodar programas do disco. Assim se o computador nao pode rodar um
+      rodar programas do disco. Assim se o computador n&atilde;o pode rodar um
       programa do disco sem o sistema operacional, e os programas do sistema operacional
-      estao no disco, como o sistema operacional foi inicializado?</para>
+      est&atilde;o no disco, como o sistema operacional foi inicializado?</para>
 
-    <para>Este problema paralelo um estao no livro <citetitle>As aventuras de
+    <para>Este problema paralelo est&atilde;o no livro <citetitle>As aventuras de
       Baron Munchausen</citetitle>. Um caracter teve afastado parte way down a
       manhole, and pulled himself out by grabbing his bootstraps, and
-      lifting.  Nos dias de computacao o termo
+      lifting.  Nos dias de computa&ccedil;&atilde;o o termo
       <firstterm>colocar e tirar</firstterm> foi aplicado no mecanismo usado para
       carregar o sistema operacional, que se tornou compacto para
       <quote>carregar</quote>.</para>
 
-    <para>No hardware x86 o Sistema Basico de Entrada/Saida (BIOS) e responsavel
+    <para>No hardware x86 o Sistema B&aacute;sico de Entrada/Saida (BIOS) &eacute; respons&aacute;vel
       por carregar o sistema operacional. Para fazer isto, na BIOS aparece o
       hard disk para o Master Boot Record (MBR), que deve ser alocado sobre um
-      local especifico do disco. A BIOS tem bastante mudancas que podem ser feitas para carregar e
-      rodar a MBR, e assume que a MBR pode entao carregar a saida do resto das
-      tarefas involvidas na inicializacao do sistema operacional.</para>
+      local espec&iacute;fico do disco. A BIOS tem bastante mudan&ccedil;as que podem ser feitas para carregar e
+      rodar a MBR, e assume que a MBR pode ent&atilde;o carregar a saida do resto das
+      tarefas involvidas na inicializa&ccedil;&atilde;o do sistema operacional.</para>
 
     <indexterm>
       <primary>BIOS</primary>
-      <secondary>Basic Input/Output System</secondary>
+      <secondary>Basic Input/Output System - BIOS</secondary>
     </indexterm>
 
-    <para>Se voce tiver somente um sistema operacional instalado no seu disco entao
-      MBR padrao sera suficiente. Esta MBR procurara pela primeira particao inicializavel
-      no disco, e entao roda o codigo nesta particao para carregar o
+    <para>Se voc&Ecirc; tiver somente um sistema operacional instalado no seu disco ent&atilde;o
+      MBR padr&atilde;o ser&aacute; suficiente. Esta MBR procurar&aacute; pela primeira parti&ccedil;&atilde;o inicializ&aacute;vel
+      no disco, e entao roda o c&oacute;digo nesta parti&ccedil;&atilde;o para carregar o
       restante do sistema operacional.</para>
 
-    <para>Se voce tiver instalado varios sistemas operacionais em seus discos entao
-      voce pode instalar uma MBR diferente, um que pode mostrar uma lista de
-      diferentes sistemas operacionais, e permite a voce escolher um para carregar.
+    <para>Se voc&ecirc; tiver instalado v&aacute;rios sistemas operacionais em seus discos ent&atilde;o
+      voc&ecirc; pode instalar uma MBR diferente, um que pode mostrar uma lista de
+      diferentes sistemas operacionais, e permite a voc&ecirc; escolher um para carregar.
       FreeBSD vem com um MBR que pode ser instalado, e outros
       sistemas operacionais vendidos fornecem MBRs alternativos.</para>
 
-    <para>O restante do sistema bootstrap do FreeBSD e divido em tres
-      estagios. O primeiro estagio e executado pela MBR, que sabe apenas iniciar
-      o computador em um estado especifico e rodar o segundo estagio. O
-      segundo estagio pode fazer mais um pedaco em pouco tempo, depois roda o terceiro estagio.
-      O terceiro estagio terminara a tarefa de carregar o sistema operacional. O
-      trabalho e dividido dentro destes tres estagios porque o padrao do PC impoe
-      limites sobre o tamanho dos programas que podem ser rodados nos estagios 1 e
-      2. Encadear as tarefas permite que o FreeBSD forneca um carregador mais
-      flexivel.</para>
+    <para>O restante do sistema bootstrap do FreeBSD e divido em tr&ecirc;s
+      est&aacute;gios. O primeiro est&aacute;gio e executado pela MBR, que sabe apenas iniciar
+      o computador em um estado espec&iacute;fico e rodar o segundo est&aacute;gio. O
+      segundo est&aacute;gio pode fazer mais um peda&ccedil;o em pouco tempo, depois roda o terceiro est&aacute;gio.
+      O terceiro est&aacute;gio terminar&aacute; a tarefa de carregar o sistema operacional. O
+      trabalho e dividido dentro destes tr&ecirc;s est&aacute;gios porque o padr&atilde;o do PC imp&otilde;e
+      limites sobre o tamanho dos programas que podem ser rodados nos est&aacute;gios 1 e
+      2. Encadear as tarefas permite que o FreeBSD forne&ccedil;a um carregador mais
+      flex&iacute;vel.</para>
 
     <indexterm><primary>kernel</primary></indexterm>
     <indexterm><primary><command>init</command></primary></indexterm>
 
-    <para>O kernel entao e inicializado e esta inicializacao testa os dispositivos
-      e entao inicializa estes para o uso. Uma vez que o processo de inicializacao do kernel
+    <para>O kernel ent&atilde;o e inicializado &eacute; esta inicializa&ccedil;&atilde;o testa os dispositivos,
+      e ent&atilde;o inicializa estes para o uso. Uma vez que o processo de inicializa&ccedil;&atilde;o do kernel
       e terminado, o kernel passa o controle do processo para
-      &man.init.8;, qual se certifica que os discos estao em um estado aproveitavel.
-      &man.init.8; comeca entao a configuracao user-level que
-      mounta o sistema de arquivos, seta e levanta drivers de rede para comunicacao com
-      a rede, e normalmente inicia todos os processos que normalmente
-      sao rodados sobre um sistema FreeBSD na inicializacao.</para>
+      &man.init.8;, qual se certifica que os discos est&atilde;o em um estado aproveitavel.
+      &man.init.8; come&ccedil;a ent&atilde;o a configura&ccedil;&atilde;o user-level que
+      mounta o sistema de arquivos, seta e levanta drivers de rede para comunica&ccedil;&atilde;o com
+      a mesma, e normalmente inicia todos os processos que
+      s&atilde;o rodados sobre um sistema FreeBSD na inicializa&ccedil;&atilde;o.</para>
   </sect1>
 
   <sect1 id="boot-blocks">
-    <title>A MBR, e estagios da inicializacao Um, Dois, e Tres</title>
+    <title>A MBR, e est&aacute;gios da inicializa&ccedil;&atilde;o Um, Dois, e Tr&ecirc;s</title>
 
     <sect2 id="boot-boot0">
       <title>MBR, <filename>/boot/boot0</filename></title>
       <indexterm><primary>Master Boot Record (MBR)</primary></indexterm>
 
-      <para>A MBR do FreeBSD e localizado no <filename>/boot/boot0</filename>.
-	Este e uma <emphasis>copia</emphasis> do MBR, por que a real MBR deve
-	ficar em uma parte especial do disco, fora da area do FreeBSD.</para>
+      <para>A MBR do FreeBSD &eacute; localizada no <filename>/boot/boot0</filename>.
+	Esta &eacute; uma <emphasis>copia</emphasis> do MBR, por que a real MBR deve
+	ficar em uma parte especial do disco, fora da &aacute;rea do FreeBSD.</para>
 
       <para><filename>boot0</filename> e muito simples, visto que o
 	programa dentro da <abbrev>MBR</abbrev> pode ter no maximo o tamanho de 512 bytes.
