@@ -240,37 +240,37 @@ DOC_PREFIX?= ${.CURDIR}/../../..
   <sect1 id="make-includes">
     <title>Includes do make do projeto de documenta&ccedil;&atilde;o do FreeBSD</title>
 
-    <para>This is best explained by inspection of the code.  Here are
-      the system include files:</para>
+    <para>Isto &eacute; melhor explicado pela inspe&ccedil;&atilde;o no c&oacute;digo. Aqui est&atilde;o
+      os arquivos include do sistema:</para>
 
     <itemizedlist>
       <listitem>
-	<para><filename>doc.project.mk</filename> is the main project
-	  include file, which includes all the following include files, as
-	  necessary.</para>
+	<para><filename>doc.project.mk</filename> &eacute; o principal arquivo
+	  include do projeto, que inclue todos os arquivos includes
+	  necess&aacute;rios.</para>
       </listitem>
 
       <listitem>
-	<para><filename>doc.subdir.mk</filename> handles traversing of
-	  the document tree during the build and install processes.</para>
+	<para><filename>doc.subdir.mk</filename> segura sair da &aacute;rvore de
+	  documenta&ccedil;&atilde;o durante o processo de constru&ccedil;&atilde;o e instala&ccedil;&atilde;o.</para>
       </listitem>
 
       <listitem>
-	<para><filename>doc.install.mk</filename> provides variables
-	  that affect ownership and installation of documents.</para>
+	<para><filename>doc.install.mk</filename> forcene as vari&aacute;veis
+	  que afetam a posse e a instala&ccedil;&atilde;o de documentos.</para>
       </listitem>
 
       <listitem>
-	<para><filename>doc.docbook.mk</filename> is included if
-	  <makevar>DOCFORMAT</makevar> is <literal>docbook</literal>
-	  and <makevar>DOC</makevar> is set.</para>
+	<para><filename>doc.docbook.mk</filename> &eacute; inclu&iacute;do se o
+	  <makevar>DOCFORMAT</makevar> for <literal>docbook</literal>
+	  e o <makevar>DOC</makevar> estiver configurado.</para>
       </listitem>
     </itemizedlist>
 
     <sect2>
       <title>doc.project.mk</title>
 
-      <para>By inspection:</para>
+      <para>Por inspe&ccedil;&atilde;o:</para>
 
       <programlisting>DOCFORMAT?=	docbook
 MAINTAINER?=	doc@FreeBSD.org
@@ -289,77 +289,76 @@ PRI_LANG?=	en_US.ISO8859-1
 
       <sect3>
 
-	<title>Variables</title>
+	<title>Vari&aacute;veis</title>
 
-	<para><makevar>DOCFORMAT</makevar> and <makevar>MAINTAINER</makevar>
-	  are assigned default values, if these are not set by the
-	  document make file.</para>
+	<para><makevar>DOCFORMAT</makevar> e <makevar>MAINTAINER</makevar>
+	  ser&atilde;o atribu&iacute;dos valores padr&atilde;o, se estes n&atilde;o forem configuradores pelo
+	  arquivo de documento do  make.</para>
 
-	<para><makevar>PREFIX</makevar> is the prefix under which the
-	  <link linkend="tools">documentation building tools</link> are
-	  installed.  For normal package and port installation, this is
+	<para><makevar>PREFIX</makevar> &eacute; o caminho que os 
+	  <link linkend="tools">aplicativos de constru&ccedil;&atilde;o da documenta&ccedil;&atilde;o</link> est&atilde;o
+	  instalados.  Para uma instala&ccedil;&atilde;o normal de pacotes e port, este caminho tamb&eacute;m &eacute;
 	  <filename>/usr/local</filename>.</para>
 
-	<para><makevar>PRI_LANG</makevar> should be set to whatever
-	  language and encoding is natural amongst users these documents are
-	  being built for.  US English is the default.</para>
+	<para><makevar>PRI_LANG</makevar> deve ser configurado para qualquer
+	  linguagem e codificar &eacute; natural entre usu&aacute;rios destes documentos
+	  em sua constru&ccedil;&atilde;o.  US English (Ingl&ecirc;s) &eacute; o padr&atilde;o.</para>
 
 	<note>
-	  <para><makevar>PRI_LANG</makevar> in no way affects what documents
-	    can, or even will, be built.  Its main use is creating links to
-	    commonly referenced documents into the FreeBSD documentation
-	    install root.</para>
+	  <para><makevar>PRI_LANG</makevar> de maneira alguma pode afetar 
+	    os documentos, ou se forem, &eacute; para serem criados.  Seu uso principal &eacute; criar links 
+	    de refer&ecirc;ncias comuns aos documentos no projeto de documenta&ccedil;&atilde;o do FreeBSD
+	    instalado na ra&iacute;z.</para>
 	</note>
       </sect3>
 
       <sect3>
-	<title>Conditionals</title>
+	<title>Condicionais</title>
        
-	<para>The <literal>.if defined(DOC)</literal> line is an example of
-	  a <application>make</application> conditional which, like in
-	  other programs, defines behavior if some condition is true or
-	  if it is false.  <literal>defined</literal> is a function which
-	  returns whether the variable given is defined or not.</para>
+	<para>A linha <literal>.if defined(DOC)</literal> &eacute; um exemplo da 
+	  condicional do <application>make</application>, como em
+	  outros programas, define o comportamento se algumas condi&ccedil;&otilde;es &eacute; verdadeira
+	  ou se &eacute; falsa.  <literal>defined</literal> &eacute; a fun&ccedil;&atilde;o que 
+	  retorna se a vari&aacute;vel passada est&aacute; definida ou n&atilde;o.</para>
 
-	<para><literal>.if ${DOCFORMAT} == "docbook"</literal>, next,
-	  tests whether the <makevar>DOCFORMAT</makevar> variable is
-	  <literal>"docbook"</literal>, and in this case, includes
+	<para>A seguir, <literal>.if ${DOCFORMAT} == "docbook"</literal>, 
+	  teste se a vari&aacute;vel <makevar>DOCFORMAT</makevar> &eacute;
+	  <literal>"docbook"</literal>, e neste caso, inclue o
 	  <filename>doc.docbook.mk</filename>.</para>
 
-	<para>The two <literal>.endif</literal>s close the two above
-	  conditionals, marking the end of their application.</para>
+	<para>Os dois <literal>.endif</literal>s fecham as duas condi&ccedil;&otilde;es 
+	  anteriores, marcando o fim da sua aplica&ccedil;&atilde;o.</para>
       </sect3>
     </sect2>
 
     <sect2>
       <title>doc.subdir.mk</title>
 
-      <para>This is too long to explain by inspection, you should be
-	able to work it out with the knowledge gained from the previous
-	chapters, and a little help given here.</para>
+      <para>Isto &eacute; muito longo para ser explicado por inspe&ccedil;&atilde;o, voc&ecirc; dever&aacute; estar
+	apto a trabalhar com isto com o conhecimento adquirido nos cap&iacute;tulos
+	anteriores, e uma pequena ajuda ser&aacute; dada aqui.</para>
 
       <sect3>
-	<title>Variables</title>
+	<title>Vari&aacute;veis</title>
 
 	<itemizedlist>
 	  <listitem>
-	    <para><makevar>SUBDIR</makevar> is a list of subdirectories 
-	      that the build process should go further down
-	      into.</para>
+	    <para><makevar>SUBDIR</makevar> &eacute; a lista de subdiret&oacute;rios
+	      em que o processo de constru&ccedil;&atilde;o deve feito 
+	      abaixo.</para>
 	  </listitem>
 
 	  <listitem>
-	    <para><makevar>ROOT_SYMLINKS</makevar> is the name of
-	      directories that should be linked to the document
-	      install root from their actual locations, if the current
-	      language is the primary language (specified by
+	    <para><makevar>ROOT_SYMLINKS</makevar> &eacute; o nome dos
+	      diret&oacute;rios que devem ser linkados a ra&iacute;z de instala&ccedil;&atilde;o 
+	      do documento em sua localiza&ccedil;&atilde;o atual, se a linguagem
+	      atual &eacute; a linguagem prim&aacute;ria (especificado por
 	      <makevar>PRI_LANG</makevar>).</para>
 	  </listitem>
 
 	  <listitem>
-	    <para><makevar>COMPAT_SYMLINK</makevar> is described in the
-	      <link linkend="sub-make">Subdirectory Makefile</link>
-	      section.</para>
+	    <para><makevar>COMPAT_SYMLINK</makevar> &eacute; descrito na se&ccedil;&atilde;o
+	      <link linkend="sub-make">Subdiret&oacute;rio Makefiles</link>.</para>
 	  </listitem>
 	</itemizedlist>
       </sect3>
