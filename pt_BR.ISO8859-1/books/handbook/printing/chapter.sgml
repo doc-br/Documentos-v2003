@@ -3700,11 +3700,14 @@ showpage
 EOF</programlisting>
 
 
----
-        <para>Now, each of the conversion filters and the text filter can call
-          this script to first generate the header page, and then print the
-          user's job.  Here is the DVI conversion filter from earlier in this
-          document, modified to make a header page:</para>
+		<para>
+			Agora, cada chamada aos filtros de convers&atilde;o e aos filtros
+		de texto, ir&aacute; ser gerada uma p&aacute;gina de cabe&ccedil;alho
+		e ent&atilde;o ser&aacute; impresso o trabalho de impress&atilde;o do 
+		usu&aacute;rio.  Segue um exemplo de um filtro de convers&atilde;o de 
+		DVI, mostrado anteriormente neste documento, modificado para poder
+		imprimir a p&aacute;gina de cabe&ccedil;alho.
+		</para>
 
         <programlisting>#!/bin/sh
 #
@@ -3738,36 +3741,53 @@ done
 ( /usr/local/libexec/make-ps-header $login $host "DVI File"
   /usr/local/bin/dvips -f ) | eval /usr/local/libexec/lprps $orig_args</programlisting>
 
-        <para>Notice how the filter has to parse the argument list in order to
-          determine the user and host name.  The parsing for the other
-          conversion filters is identical.  The text filter takes a slightly
-          different set of arguments, though (see section <link
-            linkend="printing-advanced-filters">How      Filters
-            Work</link>).</para>
+		<para>
+			Observe como o filtro faz a an&aacute;lise da lista de argumentos
+		para que possa determinar os nomes de m&aacute;quina e de
+		usu&aacute;rio.  A an&aacute;lise para os outros filtros de 
+		convers&atilde;o &eacute; identica.  O filtro de texto possui uma
+		sutil diferen&ccedil;a no conjunte de argumentos passados ( veja
+		a se&ccedil;&atilde;o <link
+            linkend="printing-advanced-filters"> Como os filtros 
+		funcionam </link>).
+		</para>
             
-        <para>As we have mentioned before, the above scheme, though fairly
-          simple, disables the <quote>suppress header page</quote> option (the
-          <option>-h</option> option) to <command>lpr</command>.  If users
-          wanted to save a tree (or a few pennies, if you charge for header
-          pages), they would not be able to do so, since every filter's going
-          to print a header page with every job.</para>
+		<para>
+			Como foi mencionado, o esquema acima &eacute; muito simples, 
+		desabilita a op&ccedil;&atilde;o <quote>supress&atilde;o da 
+		p&aacute;gina de cabe&ccedil;alho</quote> ( a op&ccedil;&atilde;o
+		<option>-h</option> ) para o comando <command>lpr</command>.  Se os
+		usu&aacute;rios quizerem econimizar &aacute;rvores ( ou dinheiro,
+		caso seja cobrada a impress&atilde;o da p&aacute;ginas de 
+		cabe&ccedil;alho). ele n&atilde;o poderam faze-lo, uma vez que os
+		pr&oacute;rpios filtros se encarregam deste servi&ccedil;o.
+		</para>
             
-        <para>To allow users to shut off header pages on a per-job basis, you
-          will need to use the trick introduced in section <link
-            linkend="printing-advanced-header-pages-accounting">Accounting for
-            Header Pages</link>: write an output filter that parses the
-          LPD-generated header page and produces a &postscript; version.  If the
-          user submits the job with <command>lpr -h</command>, then 
-	  <application>LPD</application> will
-          not generate a header page, and neither will your output filter.
-          Otherwise, your output filter will read the text from 
-	  <application>LPD</application> and send
-          the appropriate header page &postscript; code to the printer.</para>
+		<para>
+			Para permitir os usu&aacute;rios desligarem as p&aacute;ginas de 
+		cabe&ccedil;alho, voc&ecirc; dever&aacute; usar o truque mostrado na
+		se&ccedil;&atilde;o <link
+		linkend="printing-advanced-header-pages-accounting">
+			Contabilizando as P&aacute;ginas de Cabe&ccedil;alho
+      </link>: para escrever um filtro de sa&iacute;da que analise a 
+		p&aacute;gina de cabe&ccedil;alho gerada pelo LPD e produzir uma
+		vers&atilde;o em &postscript;.  Se o usu&aacute;rio enviar o trabalho
+		de impress&atilde;o com o comando <command>lpr -h</command>, ent&atilde;o
+		o  <application>LPD</application> n&atilde;o ir&aacute; gerar a 
+		p&aacute;gina de cabe&ccedil;alho, e nada ira para o seu filtro de 
+		sa&iacute;da.  Caso contrario, seu filtro de sa&iacute;da ira ler o 
+		texto que o <application>LPD</application> gerou e ir&aacute; enviar
+		a p&aacute;gina de cabe&ccedil;alho apropriada em c&oacute;digo
+		&postscript;.
+		</para>
             
-        <para>If you have a &postscript; printer on a serial line, you can make
-          use of <command>lprps</command>, which comes with an output filter,
-          <command>psof</command>, which does the above.  Note that
-          <command>psof</command> does not charge for header pages.</para>
+		<para>
+			Se voce tiver uma impressora &postscript; na porta serial, voc&ecirc;
+		pode utilizar o comando <command>lprps</command>, o qual vem com um
+		filtro da sa&iacute;da, <command>psof</command>,  Note que o
+		<command>psof</command> n&atilde;o contabiliza as p&aacute;ginas de
+		cabe&ccedil;alho
+		</para>
       </sect3>
     </sect2>
     
@@ -3781,25 +3801,32 @@ done
         <secondary>network</secondary>
       </indexterm>
       <indexterm><primary>network printing</primary></indexterm>
-      <para>FreeBSD supports networked printing: sending <foreignphrase>jobs</foreignphrase> to remote
-        printers.  Networked printing generally refers to two different
-        things:</para>
+      <para>
+			O FreeBSD suporta impress&atilde;o via rede; enviando trabalhos
+		de impress&atilde;o para impressoras remotas.  Impress&atilde;o em rede 
+		geralmente nos conduz a duas coisas diferentes:
+		</para>
       
       <itemizedlist>
         <listitem>
-          <para>Accessing a printer attached to a remote host.  You install a
-            printer that has a conventional serial or parallel interface on
-            one host.  Then, you set up <application>LPD</application> to 
-	    enable access to the printer
-            from other hosts on the network. Section <link
-              linkend="printing-advanced-network-rm">Printers Installed on
-              Remote Hosts</link> tells how to do this.</para>
+			<para>
+				Acessando a impressora conectada a uma m&aacute;quina remota.  
+		Voc&ecirc; instala a impressora normalmente como se fosse uma 
+		impressora serial ou paralela na m&aacute;quina.  Ent&atilde;o, 
+		voc&ecirc; configura o <application>LPD</application para habilitar
+		o acesso a impressora de outras m&aacute;quinas na rede.  Veja a 
+		se&ccedil;&atilde;o <link
+		linkend="printing-advanced-network-rm">Impressoras Instaladas
+		em M&aacute;quinas Remotas
+              </link> mostra como faze-lo.
+			</para>
         </listitem>
 
         <listitem>
-          <para>Accessing a printer attached directly to a network.  The
-            printer has a network interface in addition (or in place of) a
-            more conventional serial or parallel interface.  Such a printer
+			<para>
+				Acessando a impressora conectada diretamente a rede.  A impressora
+		possui uma interface de rede, al&eacute;m da porta paralela ou serial.
+            Such a printer
             might work as follows:</para>
           
           <itemizedlist>
