@@ -634,73 +634,69 @@ pseudo-device   loop          # Network loopback</programlisting>
     <programlisting>options          MATH_EMULATE      #Support for x87 emulation</programlisting>
 
     <para>Esta linha permite que o kernel simule um co-processador matem&aacute;tico se
-      seu computador n&atilde;o for um (386 ou 486SX). Se voc&ecirc; tiver um
+      seu computador n&atilde;o tiver um disponível (386 ou 486SX). Caso seu PC seja um
       486DX, ou um 386 ou 486SX (com um chip 387 ou 487 separado), ou
-      superior (&pentium;, &pentium;&nbsp;II, etc.), voc&ecirc; poder&aacute; comentar esta linha.</para>
+      superior (&pentium;, &pentium;&nbsp;II, etc.), esta opção poderá ser comentada.</para>
 
     <note>
-      <para>As rotinas normais matem&aacute;ticas do co-processador para emula&ccedil;&atilde;o vem com o
-	&os; <emphasis>n&atilde;o</emphasis> s&atilde;o muito precisas. Se voc&ecirc; quer fazer e n&atilde;o tem
-	um co-processador matem&aacute;tico, e voc&ecirc; precisa de melhor precis&atilde;o, &eacute;
-	recomendado que voc&ecirc; mude esta op&ccedil;&atilde;o para
-	<literal>GPL_MATH_EMULATE</literal> para usar o GNU suporte matem&aacute;tico,
-	qual n&atilde;o &eacute; incluso por padr&atilde;o por raz&otilde;es licenciais.</para>
+      <para>As rotinas normais para emulação matem&aacute;ticas do co-processador que vem com o
+	&os; <emphasis>n&atilde;o</emphasis> s&atilde;o muito precisas.  Se você não dispõe de um co-processador
+	matemático mas tem necessidade de uma emulação mais precisa, substituia a opção anterior por
+	<literal>GPL_MATH_EMULATE</literal>, de forma a usar o suporte à co-processamento matemático GNU que
+	não é habilitado por padrão em razão de questões legais da licença <acronym>GPL</acronym>.</para>
 
       <para>No &os; 5.X, a emula&ccedil;&atilde;o matem&aacute;tica &eacute; desabilitada por padr&atilde;o,
-      em outras CPUs que n&atilde;o tem suporte a ponto flotuante matem&aacute;tico nativo
-      s&atilde;o menos comuns, e em muitos casos n&atilde;o suportados pelo kernel
-      <filename>GENERIC</filename> sem outras op&ccedil;&otilde;es adicionais.</para></note>
+      em outras CPUs que n&atilde;o tem suporte a ponto flutuante matem&aacute;tico nativo, a emulação é
+	menos comum, e em muitos casos não são sequer suportados pelo kernel
+      <filename>GENERIC</filename> sem que outras op&ccedil;&otilde;es adicionais sejam incluídas.</para></note>
 
     <programlisting>options          INET          #InterNETworking</programlisting>
 
-    <para>Suporte a Rede. Deixe isto dentro, mesmo se voc&ecirc; n&atilde;o planeja ser
-      ser conectado a uma rede. Muitos programas requerem ao menos loopback
-      rede (isto &eacute;, fazendo conex&otilde;es de rede dentro do seu PC), assim
-      este &eacute; essencialmente imposto.</para>
+    <para>Suporte a Rede.  Mantenha esta opção ainda que você não planeje
+	se conectar a uma rede.  Muitos programas tem necessidade mínimas que necessitam de suporte
+	à rede, como o uso da interface de <foreignphrase>loopbacl</foreignphrase> (isto é, conexões internas
+	de rede), de forma que esta opção é mandatória.</para>
 
     <programlisting>options          INET6          #IPv6 communications protocols</programlisting>
 
-    <para>Isto &eacute; protoc&oacute;lo de comunica&ccedil;&atilde;o IPv6.</para>
+    <para>Trata-se do protoc&oacute;lo de comunica&ccedil;&atilde;o IPv6.</para>
 
     <programlisting>options          FFS          #Berkeley Fast Filesystem
 options          FFS_ROOT     #FFS usable as root device [keep this!]</programlisting>
 
-    <para>Isto &eacute; o sistema de arquivos b&aacute;sico do HD. Deixe isto dentro se voc&ecirc; quiser carregar o HD.
-      </para>
+    <para>Trata-se do sistema de arquivos essencial do &os;. Mantenha esta opção se você planeja controlar algum disco
+	rígido.</para>
 
-    <note><para>Em &os; 5.X, <literal>FFS_ROOT</literal> n&atilde;o &eacute; mais    
-    requerido.</para></note>
+    <note><para>À partir do &os; 5.X, <literal>FFS_ROOT</literal> não é mais necessário.</para></note>
 
     <programlisting>options          UFS_ACL      #Support for access control lists</programlisting>
 
-    <para>Esta op&ccedil;&atilde;o, somente est&aacute; presente no &os;&nbsp;5.X, habilita o suporte do kernel
-      a lista de controle de acesso. Isto conta com o uso de atributos extendidos
-      e <acronym>UFS2</acronym>, e os detalhes s&atilde;o descritas no
+    <para>Esta op&ccedil;&atilde;o, est&aacute; presente apenas no &os;&nbsp;5.X; ela habilita o suporte do kernel
+      à listas de controle de acesso.  Seu uso requer as opções de atributos extendidos
+      e <acronym>UFS2</acronym>, e os detalhes s&atilde;o descritos na
       <xref linkend="fs-acl">. <acronym>ACL</acronym>s s&atilde;o habilitadas por padr&atilde;o, e n&atilde;o devem
-      ser desabilitadas no kernel se tiverem usado previamente no sistema de arquivos,
-      pois remover&aacute; a lista de controle de acessos mudando os
-      arquivos protegidos de forma imprevis&iacute;vel.</para>
+      ser desabilitadas no kernel se tiverem sido previamente utilizadas no sistema de arquivos,
+      pois remover&aacute; a lista de controle de acessos, modificando os atributos dos
+      arquivos protegidos para valores imprevis&iacute;veis.</para>
 
     <programlisting>options          UFS_DIRHASH  #Improve performance on big directories</programlisting>
 
-    <para>Est&aacute; op&ccedil;&atilde;o inclui funcionalidades para aumentar velocidade de opera&ccedil;&otilde;es de disco em diret&oacute;rios grandes,
-      a custo de usar
-      mem&oacute;ria adicional. Voc&ecirc; deseja normalmente guardar isto para um grande
-      servidor, ou interagir com esta&ccedil;&otilde;es de trabalho, e remova isto se voc&ecirc; estiverem
-      usando &os; em um pequeno sistema onde mem&oacute;ria &eacute; um pr&ecirc;mio e
+    <para>Est&aacute; op&ccedil;&atilde;o inclui recursos para aumentar a velocidade de opera&ccedil;&otilde;es de disco em diret&oacute;rios grandes,
+      ao custo de usar um pouco de
+      mem&oacute;ria adicional.  Normalmente é interessante usufruir desta opção em um grande
+      servidor, ou em situações onde haja grande demanda de interação com esta&ccedil;&otilde;es de trabalho; remova esta opção
+	quando estiver usando o &os; em um pequeno sistema onde mem&oacute;ria a &eacute; é prioritária e
       velocidade de acesso a disco &eacute; menos importante, como um firewall.</para>
 
     <programlisting>options          SOFTUPDATES  #Enable FFS Soft Updates support</programlisting>
 
-    <para>Esta op&ccedil;&atilde;o habilita Soft Updates no kernel, isto ir&aacute;
-      ajudar a aumentar a velocidade de escrita no acesso ao disco. Mesmo que est&aacute;
-      funcionalidade seja fornecida pelo kernel, isto deve ser voltado para
-      especificar discos. Reveja o &man.mount.8; para ver
-      se Soft Updates est&aacute; habilitado para seu sistema de discos. Se voc&ecirc; n&atilde;o      
-      vendo a op&ccedil;&atilde;o do 
-<literal>soft-updates</literal> ent&atilde;o voc&ecirc; necessitar&aacute; para ativar isto usando o &man.tunefs.8; (para o sistema de 
-      arquivos existente) ou &man.newfs.8; (para novo sistema de arquivos)
-      comandos.</para>
+    <para>Esta op&ccedil;&atilde;o habilita o método <emphasis>Soft Updates</emphasis> no kernel, isto ir&aacute;
+      ajudar a aumentar a velocidade de escrita ao disco.  Mesmo sendo habilitada no kernel, estes recursos
+	ainda precisam ser atribuídos à cada partição de disco.  Revise a saída do comando
+	&man.mount.8; para obter detalhes sobre que sistemas de arquivos estão com
+	<emphasis>Soft Updates</emphasis> habilitados.  Caso não esteja observando a opção, é necessário ativa-la
+	usando o &man.tunefs.8; (para sistemas de 
+      arquivos existentes) ou &man.newfs.8; (para novo sistema de arquivos).</para>
 
     <programlisting>options          MFS          #Memory Filesystem
 options          MD_ROOT      #MD is a potential root device</programlisting>
