@@ -403,7 +403,7 @@
 	finalmente acesso <username>root</username> é usar um método 
 	de login de acesso alternativo e fazer o que é conhecido
 	como <quote>colocar estrela</quote> em senhas criptografadas para
-	as contas do sistema.  Usando o comando &man.vipw.8;, pode
+	as contas do sistema.  Usando o comando &man.vipw.8;, pode-se
 	substituir cada instância de uma senha criptografada com
 	um único carácter <quote><literal>*</literal></quote>.
 	Este comando atualizará o arquivo <filename>/etc/master.passwd
@@ -419,12 +419,12 @@
       <programlisting>foobar:*:1000:1000::0:0:Foo Bar:/home/foobar:/usr/local/bin/tcsh</programlisting>
 
       <para>Esta mudança impedirá que logins normais ocorram,
-        visto que que a senha criptografada nunca combina com 
+        visto que a senha criptografada nunca combina com 
         <quote><literal>*</literal></quote>.  Com isto feito,
-	membros do sistema devem usar um outro mecanismo para
+	os membros do sistema devem usar um outro mecanismo para
         se autenticar tais como &man.kerberos.1; ou &man.ssh.1; 
 	usando um par de chaves pública/privada.  Quando usar algo
-	como o Kerberos, geralmente deve proteger as máquinas
+	como o Kerberos, geralmente deve-se proteger as máquinas
 	que executam os servidores Kerberos e sua estação de trabalho
 	<foreignphrase>desktop</foreignphrase>.  Quando usar um par 
 	de chaves pública/privada com ssh, geralmente deve proteger
@@ -434,7 +434,7 @@
 	que protege o par de chaves ao criá-las com 
 	&man.ssh-keygen.1;.  Sendo capaz de
         <quote>colocar estrela</quote> nas senhas para contas também
-	garantem que os membros do sistema podem apenas fazer login
+	garante que os membros do sistema podem apenas fazer login
 	através de métodos de acesso seguros que você criou.  Isto
 	força todos os membros do sistema a usar conexões seguras, 
 	criptografadas para todas as seções, que fecham um furo 
@@ -507,7 +507,7 @@
 	</application> ou <application>popper</application> é como dar
 	um ticket <username>root</username> universal para o mundo inteiro.
 	Nunca execute um serviço que você não verificou com cuidado.
-	Muitos serviços não precisam ser executados como  <username>root
+	Muitos serviços não precisam ser executados como <username>root
 	</username>.
 	Por exemplo, os daemons <application>ntalk</application>,
 	<application>comsat</application>, e
@@ -529,14 +529,14 @@
 	<application>rlogind</application>, então desligue estes
 	serviços!</para>
       
-      <para>FreeBSD agora por padrão executa 
+      <para>O FreeBSD agora por padrão executa 
 	<application>ntalkd</application>,
 	<application>comsat</application>, e
 	<application>finger</application> em um sandbox.  Um outro
 	programa que pode ser candidato para executar em um sandbox
-	é &man.named.8;.
+	é o &man.named.8;. O
 	<filename>/etc/defaults/rc.conf</filename> inclui os argumentos
-	necessários para executar <application>named</application> em um
+	necessários para executar o <application>named</application> em um
 	sandbox em um formulário comentado.  Dependendo se você esta
 	instalando um sistema novo ou atualizando um sistema existente,
 	contas especiais de usuário usadas por estes sandboxes podem 
@@ -583,9 +583,9 @@
 	ler o <filename>/dev/kmem</filename> e assim ler o arquivo
 	de senhas criptografadas, comprometendo potencialmente
 	qualquer conta com senha.  Alternativamente um intruso que
-	viole o grupo <literal>kmem</literal> pode monitorar keystrokes 
-	enviadas através dos terminais <literal>pty</literal>, incluindo
-	<literal>pty's</literal> usados por usuários que fazem login 
+	viole o grupo <literal>kmem</literal> pode monitorar as teclas
+	pressionadas enviadas através dos terminais <literal>pty</literal>, 
+	incluindo <literal>pty's</literal> usados por usuários que fazem login 
 	através de métodos seguros.  Um intruso que viole o grupo 
 	<groupname>tty</groupname> pode escrever para quase todos os
 	tty de usuário.  Se um usuário estiver executando um programa ou 
@@ -606,7 +606,7 @@
 	usuário que você pode ter.  Se você tiver controle suficiente,
 	então você pode	conseguir e ser capaz de proteger as contas
 	de usuário corretamente.  Se não, você simplesmente tem que
-	ser mais vigilante na sua monitoração daquelas contas.  O uso
+	ser mais vigilante na monitoração daquelas contas.  O uso
 	do ssh e Kerberos para contas de usuário é mais problematica,
 	devido a administração extra e suporte técnico requeridos, 
 	mas ainda uma solução muito boa comparada a um arquivo de senhas
@@ -616,7 +616,7 @@
     <sect2>
       <title>Protegendo o Arquivo de Senhas</title>
 
-      <para>The only sure fire way is to <literal>*</literal> out 
+      <para>A única maneira certa é colocar <literal>*</literal> 
 	em quantas senhas você puder e usar ssh ou Kerberos para
 	o acesso daquelas contas.  Mesmo que o arquivo de senhas
 	criptografadas (<filename>/etc/spwd.db</filename>) possa
@@ -672,7 +672,7 @@
 	flags especiais <command>chflags</command>, tais 
 	como <literal>schg</literal>,
 	serão reforçadas.  Você deve também assegurar que a
-	flag <literal>schg</literal> eseja ajustada em binários
+	flag <literal>schg</literal> esteja ajustada em binários
 	criticos de inicialização, diretórios, e arquivos 
 	<literal>script</literal> &ndash; tudo que começa a executar
 	até o ponto onde o <literal>securelevel</literal> é ajustado.  
@@ -681,17 +681,17 @@
 	Você pode acertar e executar o sistema em um nível de
 	segurança elevado mas não ajustar a flag
 	<literal>schg</literal> para cada arquivo e diretório do sistema
-	under the sun.  Outra possibilidade é  simplesmente
+	.  Outra possibilidade é simplesmente
 	montar o <filename>/</filename> e <filename>/usr</filename> apenas
 	leitura.
-	Deve ser notado que ser Draconiano demais no que você tenta
+	Deve-se notar que ser Draconiano demais no que você tenta
 	proteger pode impedir toda importante detecção de uma invasão.</para>
     </sect2>
 
     <sect2 id="security-integrity">
       <title>Verificando Integridade de Arquivo: Binários, Arquivos de Configuração, Etc.</title>
 
-      <para>Quando comes right down to it, você pode somente proteger
+      <para>Quando vier abaixo, você pode somente proteger
  	sua configuração core do sistema e arquivos de controle
 	muito antes do fator conveniência elevar-se a sua cabeça.  Por
 	exemplo, usando <command>chflags</command> para ajustar o 
@@ -700,9 +700,9 @@
 	improdutivo, porque enquanto pode proteger os arquivos, 
 	fecha também uma janela de detecção.
 	A última camada de sua cebola de segurança é talvez a mais
-	importante &ndash; detecção.  O rest da sua segurança
-	é pretty much inútil (ou, pior, oferece a você um falso
-	senso de segurança) se você nao puder detectar invasões potenciais.  
+	importante &ndash; detecção.  O resto da sua segurança
+	é inútil (ou, pior, oferece a você um falso
+	senso de segurança) se você não puder detectar invasões potenciais.  
 	A metade do trabalho da cebola é atrasar o atacante, 
 	preferêncialmente do que para-lo, a fim de dar ao lado
 	da detecção da equação uma oportunidade de pegá-lo no ato.</para>
@@ -727,7 +727,7 @@
 	através de um <literal>switch</literal>, o método NFS é
 	frequentemente a melhor escolha.  Se seu servidor com acesso
 	limitado esta conectado as máquinas clientes através de um
-	<literal>hub</literal>, ou atrevés de diversas camadas de roteamento, 
+	<literal>hub</literal>, ou através de diversas camadas de roteamento, 
 	o método NFS pode ser inseguro demais (network-wise) e usar
 	ssh pode ser a melhor escolha mesmo com	audit-trail tracks 
 	que o ssh coloca.</para>
@@ -741,10 +741,10 @@
 	da máquina cliente ao menos uma vez por dia, e para testar
 	arquivos de controle tais como aqueles encontradas em
 	<filename>/etc</filename> e <filename>/usr/local/etc</filename> 
-	até mais frequentemente.  Quando mismatches são encontradas, 
+	até mais frequentemente.  Quando diferenças são encontradas, 
 	relativo a base de informação md5 a máquina com acesso
-	limitado machine knows is valid, deve mostrar para um
-	administrador do sistema para verificar isso.  Um com script
+	limitado sabe, e deve mostrar para um
+	administrador do sistema para verificar isso.  Um bom script
 	de segurança verificará também por binários suid inapropriados
 	e por arquivos novos ou deletados em partições do sistema
 	tais como <filename>/</filename> e
@@ -753,8 +753,8 @@
       <para>Quanto usar ssh em vez do NFS,
 	escrever o script de segurança é muito mais difícil.  Você
 	essencialmente tem que copiar com <command>scp</command> os
-	scripts para a máquina clientea fim de executar eles, fazendo-os
-	visíveis, e por segurança você necessita também de copiar com
+	scripts para a máquina cliente a fim de executar eles, fazendo-os
+	visíveis, e por segurança você necessita também copiar com
 	<command>scp</command> os binários (tais como find) que aqueles
 	scripts usam.  O cliente <application>ssh</application> 
 	na máquina cliente pode já estar comprometido.  De modo geral, 
@@ -770,9 +770,9 @@
 	<literal>MD5</literal>.</para>
 
       <para>Se você tiver uma grande quantidade de espaço em disco, 
-	isto pode demorar muito para executar através em cada
+	isto pode demorar muito para executar em cada
 	arquivo naquela partição.  Neste caso, ajustando as
-	flags do montagem para desabilitar binários
+	flags da montagem para desabilitar binários
 	suid e dispositivos naquelas partições são uma boa idéia.  
 	As opções <literal>nodev</literal> e
 	<literal>nosuid</literal> (veja &man.mount.8;) são as que
@@ -794,7 +794,7 @@
 	em maneira tão segura como for possível &ndash; syslog remoto 
 	pode ser muito útil.  Um intruso tenta cobrir seus rastros, e
 	o arquivos de log são críticos ao administrador do sistema
-	que tentat rastrear a hora e método da invasão inicial.  
+	que tentam rastrear a hora e método da invasão inicial.  
 	Uma maneira de manter um registro permanente do arquivo de
 	log é excecutar o console do sistema em uma porta serial
 	e coletar as informações em uma base continua através
@@ -897,7 +897,7 @@
 	<username>root</username> baseado em rede.
 	Configure sempre um firewall exclusivo, isto é,
 	<quote>firewall em tudo <emphasis>exceto</emphasis> nas 
-	portas A, B, C, D, e M-Z</quote>.  Esta maneira você pode
+	portas A, B, C, D, e M-Z</quote>.  Desta maneira você pode usar
 	firewall em todas as suas portas baixas exceto para determinados
 	serviços específicos tais como <application>named</application> 
 	(se você é primario para uma zona),
@@ -906,11 +906,11 @@
 	via Internet.  Se você tentar configurar o firewall de outra
 	maneira &ndash; como um firewall inclusivo ou permissivo, 
 	há uma boa possibilidade que você esqueça de <quote>fechar</quote> 
-	um par de serviços, ou que você adicioine um novo serviço interno
+	um par de serviços, ou que você adicione um novo serviço interno
 	e esqueça de atualizar o firewall.  Você pode ainda abrir
 	um range de portas altas no firewall, para permitir 
 	operações como permissivas, sem comprometer suas portas baixas.  
-	Também tome nota que o FreeBSD permit você controlar o range de
+	Também tome nota que o FreeBSD permite você controlar o range de
 	portas usado por conexões dinâmicas, através de varios 
 	<varname>net.inet.ip.portrange</varname> do
  	<command>sysctl</command>
@@ -919,7 +919,7 @@
 	da configuração do seu firewall.  Por exemplo, você pode
 	usar um range normal first/last de 4000 a 5000, e
 	um range hiport de 49152 a 65535, e bloquear tudo abaixo de 4000
-	no seu firewall (exceto para determinados portas de acesso 
+	no seu firewall (exceto para determinadas portas de acesso 
 	específicas a Internet, naturalmente).</para>
 
       <indexterm><primary>ICMP_BANDLIM</primary></indexterm>
@@ -941,7 +941,7 @@
 	dúzias de redes de uma vez.  Ataques de broadcast sobre cento
 	e vinte megabits foram medidos.  Um segundo ataque springboard 
 	comum é contra os sistemas de relátorios de erro do ICMP.
-	construindo pacotes que geram respostas de erro ICMP, um
+	Construindo pacotes que geram respostas de erro ICMP, um
 	atacante pode saturar a rede de entrada do servidor e fazer 
 	com que o servidor sature sua rede de saída com respostas ICMP.  
 	Este tipo de ataque pode também derrubar o servidor executando
@@ -954,13 +954,13 @@
 	tais como o serviço echo udp.  Um atacante simplesmente 
 	falsifica <foreignphrase>spoofs</foreignphrase> um pacote
 	UDP com o endereço de origem sendo a porta echo do servidor A, 
-	e o endereço de destino sendo a porta acho do servidor B, 
+	e o endereço de destino sendo a porta echo do servidor B, 
 	onde o servidor A e B estão ambos em sua LAN.  Os dois
 	servidores então lançam este pacote para frente e para 
 	trás entre si.  O atacante pode sobrecarregar ambos os
 	servidores e suas LANs simplesmente injetando alguns
 	pacotes nesta maneira.
-	Problemas silimares existem com a porta 
+	Problemas similares existem com a porta 
 	<application>chargen</application> interna.  Um administrador
 	de sistemas competente desligará todos estes serviços internos de
 	teste do inetd.</para>
@@ -971,7 +971,7 @@
 	parâmetros <varname>net.inet.ip.rtexpire</varname>,
 	<varname>rtminexpire</varname> e <varname>rtmaxcache</varname>
 	do <command>sysctl</command>.  Um ataque de pacotes falsificados
-	que usa uma origem IP aleatório fara o kernel gerar
+	que usa uma origem IP aleatória fara o kernel gerar
 	um cache de rotas temporário na tabela de rotas, visível com
 	<command>netstat -rna | fgrep W3</command>.  Estas rotas
 	tipicamente terminam em 1600 segundos ou menos.  Se o kernel 
@@ -995,7 +995,7 @@
       <para>Se seus servidores estiveram conectados a Internet via um T3 ou
         melhor, pode ser prudente cancelar manualmente o 
 	<varname>rtexpire</varname> e <varname>rtminexpire</varname>
-	via &man.sysctl.8;.  Nunce ajuste o parâmetro de um dos dois
+	via &man.sysctl.8;.  Nunca ajuste o parâmetro de um dos dois
 	para zero (a menos que você queira derrubar a máquina).  Ajustar
 	ambos os parâmetros para 2 segundos deve ser suficiente para
 	proteger a tabela de rotas de um ataque.</para>
@@ -1065,9 +1065,9 @@
     <indexterm><primary>DES</primary></indexterm>
     <indexterm><primary>MD5</primary></indexterm>
 
-    <para>Cada usuário em um sistema &unix; tem sua senha assiciada com
+    <para>Cada usuário em um sistema &unix; tem sua senha associada com
       sua conta.  Parece óbvio que estas senhas precisam ser
-      conhecidas apenas peloo usuário e o sistema operacional atual.  A
+      conhecidas apenas pelo usuário e o sistema operacional atual.  A
       fim de manter estas senhas em segredo, são criptografadas 
       com o que é conhecido como <quote>one-way hash</quote>, isto é, 
       podem somente ser criptografadas fácilmente mas não 
@@ -1083,7 +1083,7 @@
       senhas foi quando &unix; veio a ser baseado em DES,
       Data Encryption Standard.  Este não era um problema para
       usuários residentes nos EUA, mas desde que o código fonte
-      para o DES não podesse ser exportado para fora dos EUA, 
+      para o DES não pudesse ser exportado para fora dos EUA, o 
       FreeBSD teve que encontrar uma maneira para cumprir com 
       as leis dos EUA e manter compatibilidade com todos as outras
       variantes do &unix; que ainda usam DES.</para>
@@ -1101,7 +1101,7 @@
 
       <para>Antes do FreeBSD&nbsp;4.4 a <filename>libcrypt.a</filename> 
 	era um link simbólico apontando para a biblioteca que era usada
-	para criptografia.  FreeBSD&nbsp;4.4 mudou a
+	para criptografia.  O FreeBSD&nbsp;4.4 mudou a
 	<filename>libcrypt.a</filename> para fornecer uma biblioteca hash 
 	configuravel para autenticação de senha.
 	Atualmente a biblioteca suporta as funções hash DES, MD5 e Blowfish.
@@ -1142,14 +1142,14 @@
       <secondary>senhas de uso único</secondary>
     </indexterm>
 
-    <para>S/Key é um esquema de senha se uso único baseado em uma função
+    <para>S/Key é um esquema de senha de uso único baseado em uma função
       hash de one-way.  O FreeBSD usa o hash MD4 para compatibilidade
-      mas outros sistemas tem usado MD5 e DES-MAC.  S/Key foi parte da
+      mas outros sistemas tem usado MD5 e DES-MAC.  O S/Key foi parte da
       base do sistema FreeBSD desde a versão 1.1.5 e é também usado
       em um número crescende  de outros sistemas operacionais.  S/Key é	
       marca registrada da Bell Communications Research, Inc.</para>
 
-    <para>Da versão 5.0 do FreeBSD, S/Key foi substituído com o
+    <para>Da versão 5.0 do FreeBSD, o S/Key foi substituído com o
       funcionalmente equivalente OPIE (One-time Passwords In
       Everything).  OPIE usa o hash MD5 por padrão.</para>
 
@@ -1161,7 +1161,7 @@
       &man.opiekey.1; e acertada pelos programas  
       <command>keyinit</command> ou &man.opiepasswd.1; e o prompt de
       login; nós chamaremos isto uma <quote>senha de uso único</quote>.  
-      O tipo final de senha é senha secreta que você dá aos programas
+      O tipo final de senha é a senha secreta que você dá aos programas
       <command>key</command>/<command>opiekey</command> (e às veses
       aos programas <command>keyinit</command>/
       <command>opiepasswd</command>) que se usa para gerar senhas de uso
@@ -1174,16 +1174,16 @@
       &unix; <footnote><para>Sob &os; as senhas de login padrão
       podem ter até 128 carácteres de comprimento.</para></footnote>,
       podem ser tão longas o quanto você gostar.  Senhas de seis ou
-      sete word long phrases são razoavelmente comuns.  Para a maior
+      sete frases longas são razoavelmente comuns.  Para a maior
       parte, os sistema S/Key ou OPIE operam completamente independentes
       do sistema de senhas &unix;.</para>
 
     <para>Além da senha, há outras duas partes de dados que são
       importantes para S/Key e OPIE.  Um que é conhecido como 
-      <quote>seed</quote> ou <quote>key</quote>, consistindo em duas
+      <quote>semente</quote> ou <quote>key</quote>, consistindo em duas
       letras e cinco dígitos.  O outro que é chamado <quote>iteration
-      count</quote>, um número entre 1 e 100.  S/Key cria a senha
-      de uso único concatenando o seed e a senha secreta,
+      count</quote>, um número entre 1 e 100.  O S/Key cria a senha
+      de uso único concatenando a semente e a senha secreta,
       então aplicando o hash MD4/MD5 tantas vezes como especificadas pela
       iteration count e voltando o resultado em seis palavras curtas em 
       inglês. Estas seis palavras em inglês é sua senha de uso único.  
@@ -1194,29 +1194,29 @@
       é impossível gerar senhas de uso único futuras se uma usada com
       sucesso for capturada; o iteration count é decrementado após
       cada login bem sucedido para manter o usuário e o programa de login
-      em sincronizmo.  Quando o iteration count passar de 1, S/Key e OPIE 
+      em sincronismo.  Quando o iteration count passar de 1, S/Key e OPIE 
       devem ser reinicializados.</para>
 
     <para>Há três programas envolvidos em cada sistema que nós
       discutiremos abaixo.  Os programas 
       <command>key</command> e <command>opiekey</command> aceitam um
-      iteration count, um seed, e uma senha secreta, e geram uma senha
-      de usu único ou uma lista consecutiva de senhas de uso único.  Os
+      iteration count, uma semente, e uma senha secreta, e geram uma senha
+      de uso único ou uma lista consecutiva de senhas de uso único.  Os
       programas <command>keyinit</command> e <command>opiepasswd</command>
-      são usados para inicializar S/Key e OPIE respectivamente,
-      e trocar senhas, iteration counts, ou seeds; aceitam
-      um passphrase secreto, ou um iteration count, seed, e senha de
+      são usados para inicializar o S/Key e OPIE respectivamente,
+      e trocar senhas, iteration counts, ou sementes; aceitam
+      um passphrase secreto, ou um iteration count, semente, e senha de
       uso único.  Os programas <command>keyinfo</command>
       e <command>opieinfo</command> examinam os arquivos relevantes
       as credenciais (<filename>/etc/skeykeys</filename> ou
       <filename>/etc/opiekeys</filename>) e imprimem invocando a
-      iteration count atual do usuário e o seed.</para>
+      iteration count atual do usuário e a semente.</para>
 
     <para>Há quatro tipos diferentes de operações que nós cobriremos.  O
       primeiro é usando <command>keyinit</command> ou
       <command>opiepasswd</command> sobre uma conexão segura para criar
-      senhas de usu único pela primeira vez,  ou para trocar sua senha
-      ou seed.  A segunda operação é usando <command>keyinit</command>
+      senhas de uso único pela primeira vez,  ou para trocar sua senha
+      ou semente.  A segunda operação é usando <command>keyinit</command>
       ou <command>opiepasswd</command> sobre uma conexão insegura, em
       conjunto com <command>key</command> ou <command>opiekey</command>
       sbore uma conexão segura,  para fazer o mesmo.  O terceiro é
@@ -1230,8 +1230,8 @@
     <sect2>
       <title>Inicialização de Conexão Segura</title>
 
-      <para>Para inicializar S/Key pela primeira vez, troque sua senha,
-	ou troque seu seed enquanto logado sobre uma conexão segura
+      <para>Para inicializar o S/Key pela primeira vez, troque sua senha,
+	ou troque sua semente enquanto logado sobre uma conexão segura
 	(e.g., no console de uma máquina ou via 
 	<application>ssh</application>), use o comando
 	<command>keyinit</command> sem nenhum parâmetro enquanto
@@ -1264,11 +1264,11 @@ MOS MALL GOAT ARM AVID COED
 
       <para>Nos prompts <prompt>Enter new secret pass phrase:</prompt> ou
         <prompt>Enter secret password:</prompt>, você deve entrar
-	uma senha ou frase.  Lembre-se, este não é a senha que
+	uma senha ou frase.  Lembre-se, isto não é a senha que
         você usará para fazer login, é usada para gerar suas chaves
         login de uso único.  A linha <quote>ID</quote> dá os
-	parâmetros da sua instância particular: seu nome de login name, 
-        o iteration count, e seed.  Ao logar o sistema recordará
+	parâmetros da sua instância particular: seu nome de login, 
+        o iteration count, e semente.  Ao logar o sistema recordará
 	estes parâmetros e apresenta-os para você assim você não tem
         que lembra-los.  A última linha dá a senha de uso único particular
         que corresponde a estes parâmetros e sua senha secreta; se
