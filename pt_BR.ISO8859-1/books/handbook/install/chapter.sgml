@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: doc/en_US.ISO8859-1/books/handbook/install/chapter.sgml,v 1.273 2003/11/23 17:52:11 ceri Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/install/chapter.sgml,v 1.1.1.1 2003/11/28 01:13:14 ebrandi Exp $
 -->
 
 <chapter id="install">
@@ -10,8 +10,8 @@
       <author>
         <firstname>Jim</firstname>
 	<surname>Mock</surname>
-	<contrib>Restructured, reorganized, and parts
-	  rewritten by </contrib>
+	<contrib>Restruturado, reorganizado e parcialmente
+	  rescrito por </contrib>
       </author>
     </authorgroup>
 
@@ -19,100 +19,109 @@
       <author>
 	<firstname>Randy</firstname>
 	<surname>Pratt</surname>
-	<contrib>The sysinstall walkthrough, screenshots, and general
-	  copy by </contrib>
+	<contrib>A travessia do sysinstall, imagens da tela, e cópia geral
+	pory </contrib>
       </author>
     </authorgroup>
-    <!-- January 2000 -->
+    <!-- Janeiro 2000 -->
   </chapterinfo>
 
-  <title>Installing FreeBSD</title>
+  <title>Instalando FreeBSD</title>
 
   <sect1 id="install-synopsis">
     <title>Synopsis</title>
 
-    <indexterm><primary>installation</primary></indexterm>
+    <indexterm><primary>instalação</primary></indexterm>
 
-    <para>FreeBSD is provided with a text-based, easy to use installation
-      program called <application>sysinstall</application>.  This is the
-      default installation program for FreeBSD, although vendors are free to
-      provide their own installation suite if they wish.  This chapter
-      describes how to use <application>sysinstall</application> to install
-      FreeBSD.</para>
+    <para>FreeBSD é composto de um programa de fácil utilização,
+	em modo texto, chamado de <application>sysinstall</application>.
+	Este é o programa padrão de instalação para o FreeBSD, apesar
+	de que os distribuídores tem liberdade para oferecer sua
+	própria suíte de instalação, se for desejável.  Este capítulo
+	descreve a utilização do <application>sysinstall</application>
+	para realizar a instalação do FreeBSD.</para>
 
-    <para>After reading this chapter, you will know:</para>
+    <para>Após a leitura deste capítulo, você saberá:</para>
 
     <itemizedlist>
       <listitem>
-	<para>How to create the FreeBSD installation disks.</para>
+	<para>Como criar os discos de instalação do FreeBSD.</para>
       </listitem>
       
       <listitem>
-	<para>How FreeBSD refers to, and subdivides, your hard disks.</para>
+	<para>Como FreeBSD se refere e faz as subdivisões dos discos rígidos.</para>
       </listitem>
 
       <listitem>
-	<para>How to start <application>sysinstall</application>.</para>
+	<para>Como iniciar o <application>sysinstall</application>.</para>
       </listitem>
 
       <listitem>
-	<para>The questions <application>sysinstall</application> will ask
-	  you, what they mean, and how to answer them.</para>
+	<para>As perguntas que o <application>sysinstall</application> fará
+	  durante sua utilização, o que cada uma significa, e como
+	  respondê-las.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Before reading this chapter, you should:</para>
+    <para>Antes de ler este capítulo, você é aconselhado:</para>
 
     <itemizedlist>
       <listitem>
-	<para>Read the supported hardware list that shipped with the version
-	  of FreeBSD you are installing, and verify that your hardware is
-	  supported.</para>
+	<para>Ler a lista de <foreignphrase>hardware</foreignphrase> suportado
+	  que acompanha a versão do FreeBSD que você está instalando, e verificar
+	  se os seus equipamentos são suportados.</para>
       </listitem>
     </itemizedlist>
 
     <note>
-      <para>In general, these installation instructions are written
-        for &i386; (<quote>PC compatible</quote>) architecture
-        computers.  Where applicable, instructions specific to other
-        platforms (for example, Alpha) will be listed.  Although this
-	guide is kept as up to date as possible, you may find minor
-	differences between the installer and what is shown here.  It is
-	suggested that you use this chapter as a general guide rather 
-	than a literal installation manual.</para>
+      <para>Em geral, estas instruções de instalação são escritas
+	para computadores de arquitetura &i386; (<quote>compatíveis PC
+	</quote>).  Onde necessário, serão listadas instruções 
+	específicas para outras plataformas (por exemplo, Alpha).
+	Embora este guia é mantido o mais atualizado o possível, 
+	poderão ser encontradas algumas pequenas diferenças entre
+	a aplicação instaladora e o que é apresentado neste
+	documento.  É aconselhável que este capítulo seja utilizado
+	como um guia geral ao invés de um manual literal de
+	de instalação.</para>
     </note>
 
   </sect1>
 
   <sect1 id="install-pre">
-    <title>Pre-installation Tasks</title>
+    <title>Tarefas de pré instalação</title>
 
     <sect2 id="install-inventory">
-      <title>Inventory Your Computer</title>
+      <title>Inventário de seu computador</title>
 
-      <para>Before installing FreeBSD you should attempt to inventory the
-	components in your computer.  The FreeBSD installation routines will
-	show you the components (hard disks, network cards, CDROM drives, and
-	so forth) with their model number and manufacturer.  FreeBSD will also
-	attempt to determine the correct configuration for these devices,
-	which includes information about IRQ and IO port usage.  Due to the
-	vagaries of PC hardware this process is not always completely
-	successful, and you may need to correct FreeBSD's determination of
-	your configuration.</para>
+      <para>Antes de instalar o FreeBSD, é aconselhável tentar levantar
+	todas as informações sobre os componentes presentes em
+	seu computador.  As rotinas de instalação do FreeBSD mostrarão
+	estes componentes (discos rígidos, placas de rede, dispositivos
+	de CDROM, e vários outros) com seus respectivos números de modelo
+	e fabricação.  O FreeBSD tentarará também determinar a
+	configuração correta para estes dispositivos, o que inclui
+	informações sobre IRQ e utilização de endereços de E/S.  Devido
+	aos caprichos em alguns equipamentos para PC, esse processo
+	não é sempre realizado com sucesso, e pode ser necessário
+	corrigir as definições do FreeBSD na sua configuração.</para>
 
-      <para>If you already have another operating system installed, such as
-	&windows; or Linux, it is a good idea to use the facilities provided
-	by those operating systems to see how your hardware is already
-	configured.  If you are not sure what settings an expansion
-	card is using, you may find it printed on the card itself.  Popular IRQ
-	numbers are 3, 5, and 7, and IO port addresses are normally written as
-	hexadecimal numbers, such as 0x330.</para>
+      <para>Caso tenha um outro sistema operacional instalado, como
+	&windows; ou Linux, é uma boa idéia utilizar os recursos
+	oferecidos por estes sistemas para saber como seu equipamento
+	já está configurado.  Caso não esteja certo das configurações
+	de alguma placa de expansão, pode ser possível encontra-las
+	impressas na própria placa. Valores populares para endereços
+	de interrupção (IRQ) são 3, 5 e 7, e o endereçamento de E/S
+	normalmente é definido em números hexadecimais, como
+	0x330.</para>
 
-      <para>We recommend you print or write down this information before
-	installing FreeBSD.  It may help to use a table, like this:</para>
+      <para>Recomendamos que você imprima ou escreva estas informações
+	antes de iniciar o processo de instalação do FreeBSD.
+	A utilização de uma tabela pode ajudar, como esta:</para>
 
       <table pgwide="1" frame="none">
-	<title>Sample Device Inventory</title>
+	<title>Modelo de Inventário de Dispositivos</title>
 
 	<tgroup cols="4">
           <colspec colwidth="2*">
@@ -121,25 +130,25 @@
           <colspec colwidth="4*">
 	  <thead>
 	    <row>
-	      <entry>Device Name</entry>
+	      <entry>Nome do dispositivo</entry>
 
 	      <entry>IRQ</entry>
 
-	      <entry>IO port(s)</entry>
+	      <entry>Endereço(s) de E/S</entry>
 
-	      <entry>Notes</entry>
+	      <entry>Notas</entry>
 	    </row>
 	  </thead>
 
 	  <tbody>
 	    <row>
-	      <entry>First hard disk</entry>
+	      <entry>Primeiro disco rígido</entry>
 
 	      <entry>N/A</entry>
 
 	      <entry>N/A</entry>
 
-	      <entry>40&nbsp;GB, made by Seagate, first IDE master</entry>
+	      <entry>Disco de 40&nbsp;GB, marca Seagate, primeira IDE primária</entry>
 	    </row>
 
 	    <row>
@@ -149,21 +158,21 @@
 
 	      <entry>N/A</entry>
 
-	      <entry>First IDE slave</entry>
+	      <entry>Primeira IDE secundária</entry>
 	    </row>
 
 	    <row>
-	      <entry>Second hard disk</entry>
+	      <entry>Segundo disco rígido</entry>
 
 	      <entry>N/A</entry>
 
 	      <entry>N/A</entry>
 
-	      <entry>20&nbsp;GB, made by IBM, second IDE master</entry>
+	      <entry>Disco de 20&nbsp;GB, marca IBM, segunda IDE primária</entry>
 	    </row>
 
 	    <row>
-	      <entry>First IDE controller</entry>
+	      <entry>Primeira controladora IDE</entry>
 
 	      <entry>14</entry>
 
@@ -173,7 +182,7 @@
 	    </row>
 
 	    <row>
-	      <entry>Network card</entry>
+	      <entry>Placa de rede</entry>
 
 	      <entry>N/A</entry>
 
@@ -189,7 +198,7 @@
 
 	      <entry>N/A</entry>
 
-	      <entry>&tm.3com; 56K faxmodem, on COM1</entry>
+	      <entry>&tm.3com; 56K faxmodem, na COM1</entry>
 	    </row>
 
 	    <row>
@@ -201,134 +210,148 @@
     </sect2>
 
     <sect2>
-      <title>Backup Your Data</title>
+      <title>Faça cópias de segurança de seus dados</title>
       
-      <para>If the computer you will be installing FreeBSD on contains
-	valuable data, then ensure you have it backed up, and that you have
-	tested the backups before installing FreeBSD.  The FreeBSD
-	installation routine will prompt you before writing any
-	data to your disk, but once that process has started it cannot be
-	undone.</para>
+      <para>Caso a estação onde você instalará o FreeBSD contenha
+	dados relevantes, garanta que você tenha cópias de
+	segurança (<foreignphrase>backup</foreignphrase>) destes dados,
+	e que as cópias de segurança tenham sido testadas antes
+	de iniciar a instalação do FreeBSD.  A rotina de instalação
+	do FreeBSD pedirá confirmação antes de escrever
+	quaisquer dados no seu disco, mas uma vez iniciado, este
+	processo não pode ser desfeito.</para>
     </sect2>
 
     <sect2 id="install-where">
-      <title>Decide Where to Install FreeBSD</title>
+      <title>Decida onde instalar o FreeBSD</title>
 
-      <para>If you want FreeBSD to use your entire hard disk, then there is nothing
-	more to concern yourself with at this point &mdash; you can skip this
-	section.</para>
+      <para>Se você deseja que o FreeBSD utilize todo o seu disco rígido,
+	então não há com o que se preocupar neste momento &mdash; você pode
+	pular esta seção.</para>
 
-      <para>However, if you need FreeBSD to co-exist with other operating
-	systems then you need to have a rough understanding of how data is
-	laid out on the disk, and how this affects you.</para>
+      <para>Contudo, se você precisa que o FreeBSD co-exista com outro
+	sistema operacional, então é necessário uma certa compreensão
+	sobre como os dados são dispostos em disco, e como isso pode
+	afetar você.</para>
 
       <sect3 id="install-where-i386">
-	<title>Disk Layouts for the &i386;</title>
+	<title>Disposições de disco no &i386;</title>
 
-      <para>A PC disk can be divided into discrete chunks.  These chunks are
-	called <firstterm>partitions</firstterm>.  By design, the PC only
-	supports four partitions per disk.  These partitions are called
-	<firstterm>primary partitions</firstterm>.  To work around this
-	limitation and allow more than four partitions, a new partition type
-	was created, the <firstterm>extended partition</firstterm>.  A disk
-	may contain only one extended partition.  Special partitions, called
-	<firstterm>logical partitions</firstterm>, can be created inside this
-	extended partition.</para>
+      <para>Um disco de PC pode ser dividido em parcelas discretas.  Tais
+	parcelas são chamadas de <firstterm>partições</firstterm>.  A forma
+	como o PC é projetado possibilita que apenas quatro partições
+	sejam suportadas por disco.  Estas partições são chamadas de
+	<firstterm>partições primárias</firstterm>.  Como paleativo
+	para esta limitação foi criado um novo tipo de partições, chamado
+	de <firstterm>partições extendidas</firstterm>.  Um disco pode
+	conter apenas uma partição extendida.  Partições especiais, chamadas
+	de <firstterm>partições lógicas</firstterm> podem ser criadas
+	dentro destas partições extendidas.</para>
 
-      <para>Each partition has a <firstterm>partition ID</firstterm>, which is
-	a number used to identify the type of data on the partition.  FreeBSD
-	partitions have the partition ID of <literal>165</literal>.</para>
+      <para>Cada partição possui um identificador único, chamado de <firstterm>
+	<foreignphrase>partition ID</foreignphrase></firstterm>, que é um
+	número utilizado para identificar o tipo de dado naquela partição.
+	Partições FreeBSD tem o ID de identificação número <literal>165
+	</literal>.</para>
 
-      <para>In general, each operating system that you use will identify
-	partitions in a particular way.  For example, DOS, and its
-	descendants, like &windows;, assign each primary and logical partition a
-	<firstterm>drive letter</firstterm>, starting with
+      <para>De forma geral, cada sistema operacional utilizado identificará
+	as partições de forma particular.  Por exemplo, DOS e seus descendentes
+	como &windows; atribuem a cada partição primária e lógica uma
+	<firstterm>letra de dispositivo</firstterm>, começando a partir do
 	<devicename>C:</devicename>.</para>
 
-      <para>FreeBSD must be installed into a primary partition.  FreeBSD can
-	keep all its data, including any files that you create, on this one
-	partition.  However, if you have multiple disks, then you can create a
-	FreeBSD partition on all, or some, of them.  When you install FreeBSD,
-	you must have one partition available.  This might be a blank
-	partition that you have prepared, or it might be an existing partition
-	that contains data that you no longer care about.</para>
+      <para>FreeBSD deve obrigatóriamente ser instalado em uma partição
+	primária.  FreeBSD pode manter todos seus dados, incluindo qualquer
+	arquivo que você crie nesta única partição.  Contudo, se você
+	possuir múltiplos discos, você pode criar uma partição
+	FreeBSD em cada um deles, ou apenas em alguns.  Quando
+	instalar o FreeBSD, ao menos uma partição deve estar
+	disponível.  Pode ser uma partição vazia, que você preparou,
+	ou então pode ser uma partição já existente contendo
+	dados com os quais você não importa.</para>
 
-      <para>If you are already using all the partitions on all your disks, then
-	you will have to free one of them for FreeBSD using the tools
-	provided by the other operating systems you use (e.g.,
-	<command>fdisk</command> on DOS or &windows;).</para>
+      <para>Caso esteja utilizando todas as partições primárias
+	de todos seus discos, então será necessário liberar uma
+	delas para o FreeBSD, utilizando as ferramentas
+	pelo sistema operacional que você utiliza (por exemplo, 
+	<command>fdisk</command> no DOS ou &windows;).</para>
 
-      <para>If you have a spare partition then you can use that.  However, you
-	may need to shrink one or more of your existing partitions
-	first.</para>
+      <para>Se você tem uma partição sobressalente, pode 
+	utiliza-la. Contudo, pode ser necessário modificar
+	primeiro uma ou mais das suas partições atuais.</para>
 
-      <para>A minimal installation of FreeBSD takes as little as 100&nbsp;MB of disk
-	space.  However, that is a <emphasis>very</emphasis> minimal install,
-	leaving almost no space for your own files.  A more realistic minimum
-	is 250&nbsp;MB without a graphical environment, and 350&nbsp;MB or more if you
-	want a graphical user interface.  If you intend to install a lot of
-	third party software as well, then you will need more space.</para>
+      <para>A instalação mínima do FreeBSD ocupa apenas 100&nbsp;MB de espaço
+	em disco.  Contudo, esta é uma instalação <emphasis>extremamente</emphasis>
+	mínima, não deixando quase espaço algum para seus próprios
+	arquivos.  Um valor mínimo mais realista é 250&nbsp;MB sem ambiente
+	gráfico, ou 350 MB (ou até mais) se deseja o ambiente gráfico.
+	Se você planeja instalar muitas aplicações de terceiros
+	também, então será necessário mais espaço.</para>
 
-      <para>You can use a commercial tool such as <application>&partitionmagic;</application>
-	to resize your partitions to make space for
-	FreeBSD.  The <filename>tools</filename> directory on the CDROM
-	contains two free software tools which can carry out this task, namely
-	<application>FIPS</application> and
+      <para>Você pode utilizar alguma ferramenta comercial como <application>
+	&partitionmagic;</application> para redimensionar suas
+	partições de forma a criar algum espaço para o FreeBSD.  O
+	diretório <filename>tools</filename> no CDROM contém dois programas
+	gratuítos que podem realizar esta tarefa, chamados de
+	<application>FIPS</application> e
 	<application>PResizer</application>.  
 	<application>FIPS</application>,
-	<application>PResizer</application>, and
-	<application>&partitionmagic;</application> can resize
-	<acronym>FAT16</acronym> and <acronym>FAT32</acronym>
-	partitions &mdash; used in &ms-dos; through &windows; ME.
-	<application>&partitionmagic;</application> is the only known
-	application that can resize <acronym>NTFS</acronym>.
-	Documentation for both of these
-	is available in the same directory.</para>
+	<application>PResizer</application>, e
+	<application>&partitionmagic;</application> pode redimensionar
+	partições <acronym>FAT16</acronym> e <acronym>FAT32</acronym>
+	&mdash; usadas do &ms-dos; ao &windows; ME.
+	<application>&partitionmagic;</application> é a única ferramenta
+	capaz de redimensionar sistema de arquivos <acronym>NTFS</acronym>.
+	Documentações sobre ambas aplicações estão disponíveis no mesmo
+	diretório.</para>
 
       <warning>
-	<para>Incorrect use of these tools can delete the data on your disk.
-	  Be sure that you have recent, working backups before using
-	  them.</para>
+	<para>O uso incorreta destas ferramentas podem apagar os dados
+	  em seu disco.  Garanta que existam cópias de seguranças recentes
+	  e funcionais antes de utiliza-las.</para>
       </warning>
 
       <example>
-	<title>Using an Existing Partition Unchanged</title>
+	<title>Utilizando uma partição já existente intocada</title>
 
-	<para>Suppose that you have a computer with a single 4&nbsp;GB disk that
-	  already has a version of &windows; installed, and you have split the
-	  disk into two drive letters, <devicename>C:</devicename> and
-	  <devicename>D:</devicename>, each of which is 2&nbsp;GB in size.  You have
-	  1&nbsp;GB of data on <devicename>C:</devicename>, and 0.5&nbsp;GB of data on
-	  <devicename>D:</devicename>.</para>
+	<para>Suponha que você tenha um computador com um único
+	disco rígido de 4&nbsp;GB que já tem uma versão do &windows;
+	instalada, e você separou separou o disco em dois dispositivos,
+	o dispositivo <devicename>C:</devicename> e o <devicename>D:</devicename>
+	cada qual com 2 GB de tamanho.  Você dispõe de 1GB de dados no
+	<devicename>C:</devicename> e 0.5&nbsp;GB de dados no
+	<devicename>D:</devicename>.</para>
 
-	<para>This means that your disk has two partitions on it, one per
-	  drive letter.  You can copy all your existing data from
-	  <devicename>D:</devicename> to <devicename>C:</devicename>, which
-	  will free up the second partition, ready for FreeBSD.</para>
+	<para>Isto significa que seu disco tem duas partições,
+	uma por letra de dispositivo.  Você pode copiar todos os dados
+	atuais da <devicename>D:</devicename> na <devicename>C:</devicename>
+	o que liberará a segunda partição, que estará pronta
+	para o FreeBSD.</para>
       </example>
 
       <example>
-	<title>Shrinking an Existing Partition</title>
+	<title>Redimensionando uma partição existente</title>
 
-	<para>Suppose that you have a computer with a single 4&nbsp;GB disk that
-	  already has a version of &windows; installed.  When you installed
-	  &windows; you created one large partition, giving you a
-	  <devicename>C:</devicename> drive that is 4&nbsp;GB in size.  You are
-	  currently using 1.5&nbsp;GB of space, and want FreeBSD to have 2&nbsp;GB of
-	  space.</para>
+	<para>Suponha que você tem um computador com um único disco	
+	rígido de 4&nbsp;GB que já tem uma versão do &windows; instalada.
+	Ao instalar o &windows; você criou uma única partição,
+	atribuindo ao seu dispositivo <devicename>C:</devicename> o
+	tamanho de 4&nbsp;G.  Atualmente tem 1.5GB de espaço em uso
+	e você deseja alocar 2 GB de espaço para o FreeBSD.</para>
 
-	<para>In order to install FreeBSD you will need to either:</para>
+	<para>Para instalar o FreeBSD será preciso:</para>
 
 	<orderedlist>
 	  <listitem>
-	    <para>Backup your &windows; data, and then reinstall &windows;,
-	      asking for a 2&nbsp;GB partition at install time.</para>
+	    <para>Fazer cópia de segurança dos dados de seu &windows; e reinstalar
+		o &windows; definindo uma partição de 2 GB de espaço no
+		momento da instalação,</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>Use one of the tools such as <application>&partitionmagic;</application>,
-	      described above, to shrink your &windows;
-		partition.</para>
+	    <para>Utilizar uma das ferramentas como o <application>&partitionmagic;
+		</application>, descrito anteriormente para redimensionar sua
+		partição &windows;.</para>
 	  </listitem>
 	</orderedlist>
       </example>
@@ -336,24 +359,26 @@
       </sect3>
 
       <sect3>
-	<title>Disk Layouts for the Alpha</title>
+	<title>Disposições de Disco no Alpha</title>
 
 	<indexterm><primary>Alpha</primary></indexterm>
 
-	<para>You will need a dedicated disk for FreeBSD on the
-	  Alpha.  It is not possible to share a disk with another
-	  operating system at this time.  Depending on the specific
-	  Alpha machine you have, this disk can either be a SCSI disk
-	  or an IDE disk, as long as your machine is capable of
-	  booting from it.</para>
+	<para>Será necessário um disco dedicado para o FreeBSD
+	  em um Alpha.  Não é possível compartilhar o disco
+	  com outro sistema operacional hoje.  Dependendo da 
+	  máquina Alpha específica que você tem em mãos, o
+	  disco pode ser SCSI ou IDE, com tanto que sua
+	  máquina seja capaz de inicializar por meio
+	  deste.</para>
 
-	<para>Following the conventions of the Digital / Compaq
-	  manuals all SRM input is shown in uppercase.  SRM is case
-	  insensitive.</para>
+	<para>Seguindo as convenções do manual da Digital / Compaq
+	  todas as entradas referentes ao SRM serão apresentadas
+	  em letras maiúsculas.  SRM é não faz distinção entre
+	  maiúsculas e minúsculas.</para>
 
-	<para>To find the names and types of disks in your machine, use
-	  the <literal>SHOW DEVICE</literal> command from the SRM
-	  console prompt:</para>
+	<para>Para encontrar os nomes e tipos de discos
+	  disponíveis na máquina, use o comando <literal>SHOW DEVICE
+	  </literal> na tela do console SRM:</para>
 
 	<screen>&gt;&gt;&gt;<userinput>SHOW DEVICE</userinput>
 dka0.0.0.4.0               DKA0           TOSHIBA CD-ROM XM-57  3476
@@ -365,158 +390,167 @@ pkc0.7.0.1009.0            PKC0                  SCSI Bus ID 7  5.27
 pqa0.0.0.4.0               PQA0                       PCI EIDE
 pqb0.0.1.4.0               PQB0                       PCI EIDE</screen>
 
-	<para>This example is from a Digital Personal Workstation
-	  433au and shows three disks attached to the machine.  The
-	  first is a CDROM drive called <devicename>DKA0</devicename> and
-	  the other two are disks and are called
-	  <devicename>DKC0</devicename> and
-	  <devicename>DKC100</devicename> respectively.</para>
+	<para>Este exemplo é de uma <foreignphrase>Digital Personal
+	  Workstation</foreignphrase> modelo 433au e apresenta
+	  três discos ligados na estação.  O primeiro é um CDROM chamado
+	  de <devicename>DKA0</devicename> e os outros dois são 
+	  discos rígidos, e são chamados <devicename>DKC0</devicename> e
+	  <devicename>DKC100</devicename> respectivamente.</para>
 
-	<para>Disks with names of the form <devicename>DKx</devicename>
-	  are SCSI disks.  For example <devicename>DKA100</devicename>
-	  refers to a SCSI disk with SCSI target ID 1 on the first SCSI bus (A), 
-	  whereas <devicename>DKC300</devicename> refers to a SCSI disk
-	  with SCSI ID 3 on the third SCSI bus (C).  Devicename <devicename>
-	  PKx</devicename> refers to the SCSI host bus adapter.  As
-	  seen in the <literal>SHOW DEVICE</literal> output SCSI
-	  CDROM drives are treated as any other SCSI hard disk drive.</para>
+	<para>Discos cujos nomes estão dispostos no formato <devicename>DKx</devicename>
+	  são discos SCSI.  Por exemplo, <devicename>DKA100</devicename>
+	  se refere ao disco SCSI com ID SCSI número 1 no primeiro barramento SCSI
+	  (A), enquanto <devicename>DKC300</devicename> se refere a um disco SCSI
+	  com ID SCSI número 3 no terceiro barramento SCASI (C).  O dispositivo
+	  <devicename>
+	  PKx</devicename> se refere à controladora SCASI.  Como foi visto
+	  na saída do comando <literal>SHOW DEVICE</literal>, dispositivos de
+	  CDROM SCSI são tratados como disco rígido SCSI qualquer.</para>
 
-	<para>IDE disks have names similar to <devicename>DQx</devicename>,
-	  while <devicename>PQx</devicename> is the associated IDE
-	  controller.</para>
+	<para>Discos IDE tem nomes similares a <devicename>DQx</devicename>,
+	  enquanto <devicename>PQx</devicename> é a controladora IDE
+	  associada.</para>
 
       </sect3>
     </sect2>
 
     <sect2>
-      <title>Collect Your Network Configuration Details</title>
+      <title>Obtenha detalhes de configuração da interface de rede</title>
 
-      <para>If you intend to connect to a network as part of your FreeBSD
-	installation (for example, if you will be installing from an FTP
-	site or an
-	NFS server), then you need to know your network configuration.  You
-	will be prompted for this information during the installation so that
-	FreeBSD can connect to the network to complete the install.</para>
+      <para>Caso você pretenda se conectar em rede como parte do processo
+	de instalação de seu FreeBSD (por exemplo, caso a realização
+	seja feita a partir de um sítio FTP ou servidor NFS), então 
+	é necessário conhecer a configuração de sua rede.  Você
+	será indagado por estas informações durante a instalação do FreeBSD,
+	de forma que o sistema possa se conectar à rede e concluir
+	a instalação.</para>
 
       <sect3>
-	<title>Connecting to an Ethernet Network or Cable/DSL Modem</title>
+	<title>Conectando-se a uma rede <literal>Ethernet</literal> ou um modem DSL ou cabo.</title>
 
-	<para>If you connect to an Ethernet network, or you have an Internet
-	  connection using an Ethernet adapter via cable or DSL, then you will need the following
-	  information:</para>
+	<para>Se você se conecta à uma rede Ethernet, ou tem uma conexão
+	Internet com uma placa de rede via cabo ou DSL, então será necessário
+	saber as seguintes informações:</para>
 
 	<orderedlist>
 	  <listitem>
-	    <para>IP address</para>
+	    <para>Endereço IP</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>IP address of the default gateway</para>
+	    <para>Endereço IP do <foreignphrase>gateway</foreignphrase> padrão</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>Hostname</para>
+	    <para>Nome da estação (<literal>hostname</literal>)</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>DNS server IP addresses</para>
+	    <para>Endereço IP do servidor DNS</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>Subnet Mask</para>
+	    <para>Máscara de subrede</para>
 	  </listitem>
 	</orderedlist>
 
-	<para>If you do not know this information, then ask your system
-	  administrator or service provider.  They may say that this
-	  information is assigned automatically, using
-	  <firstterm>DHCP</firstterm>.  If so, make a note of this.</para>
+	<para>Caso não saiba tais informações, pergunte ao seu
+	  administrador de sistemas ou provedor de serviços.  Eles
+	  podem dizer que tais informações são atribuídas
+	  automaticamente, usando <firstterm>DHCP</firstterm>.
+	  Se for o caso, anote isto.</para>
       </sect3>
 
       <sect3>
-	<title>Connecting Using a Modem</title>
+	<title>Conectando-se por meio de um modem</title>
 
-	<para>If you dial up to an ISP using a regular modem then you can
-	  still install FreeBSD over the Internet, it will just take a very
-	  long time.</para>
+	<para>Se você disca para um provedor de serviços Internet (<acronym>
+	  ISP</acronym>) utilizando um modem convencional, ainda é
+	  possível instalar o FreeBSD na internet, contudo isso demandará
+	  algum tempo a mais.</para>
 
-	<para>You will need to know:</para>
+	<para>Será necessário saber:</para>
 
 	<orderedlist>
 	  <listitem>
-	    <para>The phone number to dial for your ISP</para>
+	    <para>O número de telefone do seu ISP</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>The COM: port your modem is connected to</para>
+	    <para>A porta COM onde seu modem está ligado</para>
 	  </listitem>
 
 	  <listitem>
-	    <para>The username and password for your ISP account</para>
+	    <para>Usuário e senha da conta no seu provedor</para>
 	  </listitem>
 	</orderedlist>
       </sect3>
     </sect2>
     <sect2>
-      <title>Check for FreeBSD Errata</title>
+      <title>Verifique a Errata do FreeBSD</title>
       
-      <para>Although the FreeBSD project strives to ensure that each release
-	of FreeBSD is as stable as possible, bugs do occasionally creep into
-	the process.  On very rare occasions those bugs affect the
-	installation process.  As these problems are discovered and fixed, they
-	are noted in the <ulink url="http://www.freebsd.org/releases/&rel.current;R/errata.html">FreeBSD Errata</ulink>, which is found on the FreeBSD web site.  You
-	should check the errata before installing to make sure that there are
-	no late-breaking problems which you should be aware of.</para>
+      <para>Mesmo considerando que o projeto FreeBSD se esmera para
+	garantir que cada versão do FreeBSD seja tão estável
+	quanto for possível, falhas ocasionalmente podem
+	abalar este processo.  Em situações extremamente raras
+	tais falhas podem afetar o processo de instalação do
+	FreeBSD.  Conforme estes problemas são descobertos
+	e corrigidos, eles são anotados na <ulink
+	url="http://www.freebsd.org/releases/&rel.current;R/errata.html">
+	Errata do FreeBSD</ulink>, que pode ser encontrada no sítio WWW
+	do FreeBSD.  Você deve verificar esta errata antes de iniciar a
+	instalação para saber se existem problemas com os quais você
+	deve ficar atento.</para>
 
-      <para>Information about all the releases, including the errata for each
-	release, can be found on the 
+      <para>Informações sobre todas as versões, incluindo
+	a errata para cada uma, podem ser encontradas na
+	seção de <ulink
+	url="../../../../releases/index.html">informação de
+	versões</ulink> do 
 	<ulink
-	url="../../../../releases/index.html">release
-	information</ulink> section of the 
-	<ulink
-	  url="../../../../index.html">FreeBSD web site</ulink>.</para>
+	  url="../../../../index.html">sítio WWW do FreeBSD</ulink>.</para>
     </sect2>
 
     <sect2>
-      <title>Obtain the FreeBSD Installation Files</title>
+      <title>Ontenha os arquivos de instalação do FreeBSD</title>
 
-      <para>The FreeBSD installation process can install FreeBSD from files
-	located in the any of the following places:</para>
+      <para>O processo de instalação do FreeBSD pode instalar o sistema
+	à partir de arquivos armazenados nos seguintes locais:</para>
 
       <itemizedlist>
-	<title>Local Media</title>
+	<title>Mídia Local</title>
 	
 	<listitem>
-	  <para>A CDROM or DVD</para>
+	  <para>Um CDROM ou DVD</para>
 	</listitem>
 
 	<listitem>
-	  <para>A DOS partition on the same computer</para>
+	  <para>Uma partição DOS no mesmo computador</para>
 	</listitem>
 
 	<listitem>
-	  <para>A SCSI or QIC tape</para>
+	  <para>Fita SCSI ou QIC</para>
 	</listitem>
 
 	<listitem>
-	  <para>Floppy disks</para>
+	  <para>Disquetes</para>
 	</listitem>
       </itemizedlist>
 
       <itemizedlist>
-	<title>Network</title>
+	<title>Rede</title>
 
 	<listitem>
-	  <para>An FTP site, going through a firewall, or using an HTTP proxy,
-	    as necessary</para>
+	  <para>Sítio FTP atrás de um firewall, ou usando um <foreignphrase>
+	   proxy</foreignphrase> HTTP, se necessário</para>
 	</listitem>
 
 	<listitem>
-	  <para>An NFS server</para>
+	  <para>Servidor NFS</para>
 	</listitem>
 
 	<listitem>
-	  <para>A dedicated parallel or serial connection</para>
+	  <para>Conexão paralela ou serial dedicada</para>
 	</listitem>
       </itemizedlist>
 
