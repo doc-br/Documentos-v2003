@@ -3187,48 +3187,66 @@ exit 0</programlisting>
 			<literal>SIGCONT</literal> para ele.
 			</para>
             
----
-
 			<para>
-				If there is an output filter but <emphasis>no</emphasis> text
-          filter and <application>LPD</application> is working on a plain
-	  text job, <application>LPD</application> uses the output
-          filter to do the job.  As stated before, the output filter will
-          print each file of the job in sequence with no intervening form
-          feeds or other paper advancement, and this is probably
-          <emphasis>not</emphasis> what you want.  In almost all cases, you
-          need a text filter.</para>
+				Se existir um filtro de sa&iacute;da mas
+			 <emphasis>n&atilde;o</emphasis> um filtro texto e o
+          <application>LPD</application> estiver trabalhando em um trabalho 
+			de impress&atilde;o de texto puro, o <application>LPD</application> 
+			utiliza o filtro de sa&iacute;da para realizar a tarefa de 
+			impress&atilde;o.  Como dito antes, o filtro de sa&iacute;da 
+			ir&aacute; imprimir cada arquivo do trabalho de impress&atilde;o
+			na sequ&ecirc;ncia sem o intervalo de alimenta&ccedil;&atilde;o
+			de folha ou outro avan&ccedil;o de papel, e isso voc&ecirc;
+			provavelmente <emphasis>n&atilde;o</emphasis> deseja.  Na maioria dos
+			casos voc&ecirc; necessitara de um filtro de texto.
+			</para>
             
-        <para>The program <command>lpf</command>, which we introduced earlier
-          as a text filter, can also run as an output filter.  If you need a
-          quick-and-dirty output filter but do not want to write the byte
-          detection and signal sending code, try <command>lpf</command>.  You
-          can also wrap <command>lpf</command> in a shell script to handle any
-          initialization codes the printer might require.</para>
+			<para>
+				O programa <command>lpf</command>, o qual nos introduzimos 
+			recentemente como um filtro texto, pode tamb&eacute;m ser executado
+			como um filtro de sa&iacute;da.  Se voc&ecirc; necessitar de um 
+			filtro de sa&iacute;da r&aacute;pido e sem muita qualidade, mas 
+			n&atilde;o quer ter o trabalho de escrever um detector de byte e
+			um c&oacute;digo para enviar sinais, tente o <command>lpf</command>.  
+			Voc&ecirc; tamb&eacute;m pode colocar o <command>lpf</command> dentro
+			de um script em shell para manipular os c&oacute;digos de 
+			inicializa&ccedil;&atilde;o que a impressora pode necessitar.
+			</para>
       </sect3>
       
       <sect3 id="printing-advanced-lpf">
         <title><command>lpf</command>: Um Filtro de Texto</title>
 
-        <para>The program <filename>/usr/libexec/lpr/lpf</filename> that comes
-          with FreeBSD binary distribution is a text filter (input filter)
-          that can indent output (job submitted with <command>lpr
-            -i</command>), allow literal characters to pass (job submitted
-          with <command>lpr -l</command>), adjust the printing position for
-          backspaces and tabs in the job, and account for pages printed.  It
-          can also act like an output filter.</para>
+			<para>
+				O programa <filename>/usr/libexec/lpr/lpf</filename>  que 
+			vem com a distribui&ccedil;&atilde;o do FreeBSD &eacute; um 
+			filtro de texto ( filtro de entrada )e pode identar a sa&iacute;da 
+			( o trabalho de impress&atilde;o enviado com o comando <command>lpr
+          -i</command>), permitindo que caracteres literais possam ser 
+			enviados (trabalho de impress&atilde;o enviado com o comando
+         <command>lpr -l</command>), ajustar a posi&ccedil;&atilde;o de 
+			impress&atilde;o para caracteres de retorno (backspace) e 
+			tabula&ccedil;&otilde;es no trabalho de imress&atilde;o, e fazer 
+			a contabilidade das p&aacute;ginas impressas.  Tamb&eacute;m pode
+			agir como um filtro de sa&iacute;da.
+			</para>
             
-        <para><command>lpf</command> is suitable for many printing
-          environments.  And although it has no capability to send
-          initialization sequences to a printer, it is easy to write a shell
-          script to do the needed initialization and then execute
-          <command>lpf</command>.</para>
+			<para>
+				O comando <command>lpf</command> &eacute; adequado para a 
+			maioria dos ambientes de impress&atilde;o.  E ainda que n&atilde;o
+			possua capacidade para enviar sequ&ecirc;ncias de
+			inicializa&ccedil;&atilde;o para as impressoras, isto &eacute; 
+			f&aacute;cil ser escrito em  script de shell para fazer as 
+			inicializa&ccedil;&otilde;es necess&aacute;rias e ent&atilde;o
+			executar o <command>lpf</command>.
+			</para>
             
         <indexterm><primary>page accounting</primary></indexterm>
         <indexterm>
           <primary>accounting</primary>
           <secondary>printer</secondary>
         </indexterm>
+---
         <para>In order for <command>lpf</command> to do page accounting
           correctly, it needs correct values filled in for the
           <literal>pw</literal> and <literal>pl</literal> capabilities in the
