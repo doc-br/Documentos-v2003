@@ -30,11 +30,11 @@
     <indexterm><primary>email</primary></indexterm>
     <indexterm><primary>correio eletr&ocirc;nico</primary></indexterm>
 
-    <para><quote>Correio eletr&ocirc;nico</quote>, mais conhecido como email, &eacute; uma das formas mais usadas de comunica&ccedil;&atilde;o atualmente.  
-      Este cap&iacute;tulo descreve uma introdu&ccedil;&atilde;o b&aacute;sica da execu&ccedil;&atilde;o de um servidor de correio eletr&ocirc;nico no FreeBSD.  
-      No entanto, esta n&atilde;o &eacute; uma refer&ecirc;ncia completa e de fato v&aacute;rias considera&ccedil;&otilde;es importantes s&atilde;o omitidas.  
-      Para uma abrang&ecirc;ncia mais completa sobre esse assunto, leia a lista de refer&ecirc;ncias de excelentes livros 
-      listados em <xref linkend="bibliography">.  </para>
+    <para><quote>Correio eletr&ocirc;nico</quote>, mais conhecido como email, &eacute; uma das formas mais usadas de comunica&ccedil;&atilde;o atualmente.
+      Este cap&iacute;tulo descreve uma introdu&ccedil;&atilde;o b&aacute;sica da execu&ccedil;&atilde;o de um servidor de correio eletr&ocirc;nico no FreeBSD.
+      No entanto, esta n&atilde;o &eacute; uma refer&ecirc;ncia completa e de fato v&aacute;rias considera&ccedil;&otilde;es importantes s&atilde;o omitidas.
+      Para uma abrang&ecirc;ncia mais completa sobre esse assunto, leia a lista de refer&ecirc;ncias de excelentes livros
+      listados em <xref linkend="bibliography">.</para>
 
     <para>Ap&oacute;s ler este cap&iacute;tulo voc&ecirc; saber&aacute;:</para>
 
@@ -58,7 +58,7 @@
       <listitem>
 	<para>Como resolver problemas comuns no seu servidor de correio eletr&ocirc;nico.</para>
       </listitem>
-      
+
       <listitem>
 	<para>Como usar SMTP com UUCP.</para>
       </listitem>
@@ -68,7 +68,7 @@
       </listitem>
 
       <listitem>
-        <para>Como configurar uma autentica&ccedil;&atilde;o SMTP para melhorar a seguran&ccedil;a.</para>
+	<para>Como configurar uma autentica&ccedil;&atilde;o SMTP para melhorar a seguran&ccedil;a.</para>
       </listitem>
     </itemizedlist>
 
@@ -97,23 +97,23 @@
     <indexterm><primary>IMAP</primary></indexterm>
     <indexterm><primary>DNS</primary></indexterm>
 
-    <para>Existe cinco principais partes envolvidas na troca de email.  Elas s&atilde;o:  
+    <para>Existe cinco principais partes envolvidas na troca de email.  Elas s&atilde;o:
       <link linkend="mail-mua">O programa do usu&aacute;rio</link>, <link
       linkend="mail-mta">O daemon do servidor</link>, <link
-      linkend="mail-dns">DNS</link>, <link linkend="mail-receive">o POP ou 
-      o daemon do IMAP </link>, e &eacute; claro, <link linkend="mail-host">o 
+      linkend="mail-dns">DNS</link>, <link linkend="mail-receive">o POP ou
+      o daemon do IMAP </link>, e &eacute; claro, <link linkend="mail-host">o
       pr&oacute;rio servidor de email</link>.</para>
 
     <sect2 id="mail-mua">
       <title>O programa de usu&aacute;rio</title>
 
       <para>Isto inclue programas de linha de comando como
-        <application>mutt</application>, <application>pine</application>,
+	<application>mutt</application>, <application>pine</application>,
 	<application>elm</application>, e
 	<application>mail</application>, e programas GUI como
 	<application>balsa</application>,
-	<application>xfmail</application> para falar de alguns, e muito 
-	mais <quote>sofisticados</quote> como o navegador WWW.  Estes 
+	<application>xfmail</application> para falar de alguns, e muito
+	mais <quote>sofisticados</quote> como o navegador WWW.  Estes
 	programas simplesmente passam as transa&ccedil;&otilde;es de email para o <link linkend="mail-host"><quote>servidor de email</quote></link> local,
 	chamando qualquer um dos <link linkend="mail-mta">daemons do servidor</link> dispon&iacute;vel ou entregando atrav&eacute;s de TCP.</para>
     </sect2>
@@ -121,36 +121,36 @@
     <sect2 id="mail-mta">
       <title>Daemon do servidor de email</title>
       <indexterm>
-        <primary>daemons do servidor de email</primary>
-        <secondary><application>sendmail</application></secondary>
+	<primary>daemons do servidor de email</primary>
+	<secondary><application>sendmail</application></secondary>
       </indexterm>
       <indexterm>
-        <primary>daemons do servidor de email</primary>
-        <secondary><application>postfix</application></secondary>
+	<primary>daemons do servidor de email</primary>
+	<secondary><application>postfix</application></secondary>
       </indexterm>
       <indexterm>
-        <primary>daemons do servidor de correio</primary>
-        <secondary><application>qmail</application></secondary>
+	<primary>daemons do servidor de correio</primary>
+	<secondary><application>qmail</application></secondary>
       </indexterm>
       <indexterm>
-        <primary>daemons do servidor de email</primary>
-        <secondary><application>exim</application></secondary>
+	<primary>daemons do servidor de email</primary>
+	<secondary><application>exim</application></secondary>
       </indexterm>
 
       <para>Geralmente &eacute; o <application>sendmail</application> (por
-        padr&atilde;o no FreeBSD) ou um dos outros daemons de servidores de emails como
+	padr&atilde;o no FreeBSD) ou um dos outros daemons de servidores de emails como
 	<application>qmail</application>,
 	<application>postfix</application>, ou
 	<application>exim</application>.  Existem outros por&eacute;m estes s&atilde;o os mais usados.</para>
 
       <para>O servidor daemon normalmente tem duas fun&ccedil;&otilde;es&mdash;ele olha
-        depois de receber um mail que chegou e entrega a mensagem.  Ele n&atilde;o
-	permite que voc&ecirc; conecte a ele via POP ou IMAP para ler sua mensagem.  
+	depois de receber um mail que chegou e entrega a mensagem.  Ele n&atilde;o
+	permite que voc&ecirc; conecte a ele via POP ou IMAP para ler sua mensagem.
 	Voc&ecirc; precisa de um <link linkend="mail-receive">daemon</link> adicional
 	para isso.</para>
 
       <para>Esteja ciente de que algumas vers&otilde;es antigas do
-        <application>sendmail</application> tem s&eacute;rios problemas de
+	<application>sendmail</application> tem s&eacute;rios problemas de
 	seguran&ccedil;a, entretanto se voc&ecirc; manter rodando uma vers&atilde;o sempre atual,
 	voc&ecirc; n&atilde;o dever&aacute; ter problemas.  &Eacute; uma boa id&eacute;ia sempre manter atualizado
 	qualquer aplicativo que voc&ecirc; rode.</para>
@@ -160,45 +160,45 @@
       <title>Email e DNS</title>
 
       <para>O sistema de nome de dom&iacute;nios (DNS) e seu daemon
-        <command>named</command> tem um grande papel na entrega de
+	<command>named</command> tem um grande papel na entrega de
 	email.  Em orderm para entregar a mensagem do seu site para outro, o
 	servidor daemon ir&aacute; consultar no DNS para determinar o host que ir&aacute; receber o destino da mensagem.</para>
 
       <para>Isso funciona da mesma forma quando &eacute; enviado uma mensagem para voc&ecirc;.  O DNS
-        cont&eacute;m o banco de dados com mapeamento de nomes para o endere&ccedil;o IP, e o nome do host 
-	para o servidor de email.  O endere&ccedil;o IP &eacute; especificado no registro A. 
+	cont&eacute;m o banco de dados com mapeamento de nomes para o endere&ccedil;o IP, e o nome do host
+	para o servidor de email.  O endere&ccedil;o IP &eacute; especificado no registro A.
 	O registro MX (Mail eXchanger) especifica o servidor de email que ir&aacute;
 	receber a mensagem para voc&ecirc;.  Se voc&ecirc; n&atilde;o tiver um registro MX para seu hostname,
-	sua mensagem ser&aacute; entregue diretamente para seu host.  </para>
+	sua mensagem ser&aacute; entregue diretamente para seu host.</para>
     </sect2>
 
     <sect2 id="mail-receive">
       <title>Recebendo mensagem</title>
       <indexterm>
-        <primary>email</primary>
-        <secondary>recebendo</secondary>
+	<primary>email</primary>
+	<secondary>recebendo</secondary>
       </indexterm>
 
       <para>O recebimento de mensagens para o seu dom&iacute;nio &eacute; feito pelo servidor de correio.  Ele
-        ir&aacute; coletar a mensagem enviada para voc&ecirc; e armazen&aacute;-la para leitura ou pega-la.  
-	Para puxar a mensagem armazenada no servidor, voc&ecirc; ir&aacute; precisar conectar no servidor de email.  
+	ir&aacute; coletar a mensagem enviada para voc&ecirc; e armazen&aacute;-la para leitura ou pega-la.
+	Para puxar a mensagem armazenada no servidor, voc&ecirc; ir&aacute; precisar conectar no servidor de email.
 	Isto &eacute; feito usando POP ou IMAP.  Se voc&ecirc; quer ler mensagens diretamente no servidor de email,
 	ent&atilde;o o POP ou IMAP n&atilde;o &eacute; necess&aacute;rio.</para>
 
       <indexterm><primary>POP</primary></indexterm>
       <indexterm><primary>IMAP</primary></indexterm>
       <para>Se voc&ecirc; quer rodar um servidor POP ou IMAP, h&aacute; duas coisas que
-        voc&ecirc; deve fazer:</para>
+	voc&ecirc; deve fazer:</para>
 
       <procedure>
-        <step>
+	<step>
 	  <para>Pegue o daemon do POP ou IMAP da <ulink
 	    url="../../../../ports/mail.html">cole&ccedil;&atilde;o de ports</ulink> e instale
 	    em seu sistema.</para>
 	</step>
 
 	<step>
-	  <para>Modifique o <filename>/etc/inetd.conf</filename> para carregar o 
+	  <para>Modifique o <filename>/etc/inetd.conf</filename> para carregar o
 	    servidor POP ou IMAP.</para>
 	</step>
       </procedure>
@@ -209,18 +209,18 @@
       <indexterm><primary>mail host</primary></indexterm>
 
       <para>O servidor de correio &eacute; o nome dado ao servidor que &eacute; respons&aacute;vel pela
-        entrega e recebimento de mensagens do seu host, e possivelmente de sua rede.</para>
+	entrega e recebimento de mensagens do seu host, e possivelmente de sua rede.</para>
     </sect2>
   </sect1>
 
   <sect1 id="sendmail">
     <sect1info>
       <authorgroup>
-        <author>
-          <firstname>Christopher</firstname>
-          <surname>Shumway</surname>
-          <contrib>Contribu&iacute;do por </contrib>
-        </author>
+	<author>
+	  <firstname>Christopher</firstname>
+	  <surname>Shumway</surname>
+	  <contrib>Contribu&iacute;do por </contrib>
+	</author>
       </authorgroup>
     </sect1info>
     <title>Configura&ccedil;&atilde;o do <application>sendmail</application></title>
@@ -230,15 +230,15 @@
     </indexterm>
 
     <para>&man.sendmail.8; &eacute; o agente de transfer&ecirc;ncia de mensagens (MTA) padr&atilde;o no
-      FreeBSD. A fun&ccedil;&atilde;o do <application>sendmail</application> &eacute; aceitar mensagens
+      FreeBSD.  A fun&ccedil;&atilde;o do <application>sendmail</application> &eacute; aceitar mensagens
       a partir de um agente de usu&aacute;rio de mensagens (MUA) e entreg&aacute;-la ao mailer
-      apropriado como definido pelo arquivo de configura&ccedil;&atilde;o. 
-      <application>sendmail</application> pode tamb&eacute;m aceitar conex&otilde;es de rede e entregar 
+      apropriado como definido pelo arquivo de configura&ccedil;&atilde;o.
+      <application>sendmail</application> pode tamb&eacute;m aceitar conex&otilde;es de rede e entregar
       as mensagens em caixas de mensagens locais ou entreg&aacute;-las para outro programa.</para>
-      
+
 
     <para>O <application>sendmail</application> usa os seguintes
-      arquivos de configura&ccedil;&atilde;o:  </para>
+      arquivos de configura&ccedil;&atilde;o:</para>
 
     <indexterm>
       <primary><filename>/etc/mail/access</filename></primary>
@@ -274,7 +274,7 @@
 	    <entry>
 	      <filename>/etc/mail/access</filename>
 	    </entry>
-	    <entry><application>sendmail</application> acessa o arquivo da base de 
+	    <entry><application>sendmail</application> acessa o arquivo da base de
  	      dados</entry>
 	  </row>
 	  <row>
@@ -325,29 +325,29 @@
     <para>A banco de dados de acesso que define quais host(s) ou endere&ccedil;o IP
       tem acesso local ao servidor de email e qual tipo de acesso eles tem.
       Os hosts podem ser listados com <option>OK</option>,
-      <option>REJECT</option>, <option>RELAY</option> ou simplesmente passar 
-      para o <application>sendmail</application> segurar erros de rotina dado pelo encarregado 
-      do envio de mensagens.  Os hosts que s&atilde;o listados como <option>OK</option>, s&atilde;o por padr&atilde;o 
+      <option>REJECT</option>, <option>RELAY</option> ou simplesmente passar
+      para o <application>sendmail</application> segurar erros de rotina dado pelo encarregado
+      do envio de mensagens.  Os hosts que s&atilde;o listados como <option>OK</option>, s&atilde;o por padr&atilde;o
       permitidos enviar mensagens para este host assim como enviar mensagens atrav&eacute;s da maquina local para
-      destinat&aacute;rios finais.  Os hosts que s&atilde;o listados com <option>REJECT</option> s&atilde;o rejeitados 
-      por qualquer conex&atilde;o de email no servidor. Os hosts que tem a op&ccedil;&atilde;o <option>RELAY</option> 
-      para seu hostname, s&atilde;o permitidos para enviar mensagens para qualquer destino atrav&eacute;s desse 
+      destinat&aacute;rios finais.  Os hosts que s&atilde;o listados com <option>REJECT</option> s&atilde;o rejeitados
+      por qualquer conex&atilde;o de email no servidor.  Os hosts que tem a op&ccedil;&atilde;o <option>RELAY</option>
+      para seu hostname, s&atilde;o permitidos para enviar mensagens para qualquer destino atrav&eacute;s desse
       servidor de correio.</para>
 
       <example>
 	<title>Configurando o banco de dados de acesso do <application>sendmail</application>
   	 </title>
 
-    <programlisting>cyberspammer.com                550 N&oacute;s n&atilde;o aceitamos mensagens de spammers
-FREE.STEALTH.MAILER@            550 N&oacute;s n&atilde;o aceitamos mensagens de spammers
-another.source.of.spam          REJECT
-okay.cyberspammer.com           OK
-128.32                          RELAY</programlisting>
+    <programlisting>cyberspammer.com		550 N&oacute;s n&atilde;o aceitamos mensagens de spammers
+FREE.STEALTH.MAILER@	    550 N&oacute;s n&atilde;o aceitamos mensagens de spammers
+another.source.of.spam	  REJECT
+okay.cyberspammer.com	   OK
+128.32			  RELAY</programlisting>
       </example>
 
    <para>Neste exemplo n&oacute;s temos cinco entradas.  Remetentes de mensagens que
      s&atilde;o encontrados do lado esquerdo da tabela s&atilde;o afetados pela a&ccedil;&atilde;o
-     do lado direito da tabela.  Os primeiros dois exemplos d&atilde;o um 
+     do lado direito da tabela.  Os primeiros dois exemplos d&atilde;o um
      erro de c&oacute;digo para a rotina do <application>sendmail</application>
      A mensagem &eacute; emitida para o host remoto quando &eacute; encontrado o email do lado
      esquerdo da tabela.  A pr&oacute;xima entrada, rejeita mensagens vindo de um host
@@ -358,11 +358,11 @@ okay.cyberspammer.com           OK
      <literal>relaying</literal> de correio eletr&ocirc;nico vindo dos hosts com endere&ccedil;o IP que
      come&ccedil;am com <hostid>128.32</hostid>.  Estes hosts est&atilde;o aptos a
      enviar mensagens atrav&eacute;s desse servidor de correio que s&atilde;o destinados para outros
-     servidores de correio.  </para>
+     servidores de correio.</para>
 
    <para>Quando este arquivo &eacute; atualizado, voc&ecirc; precisa executar o comando
      <command>make</command> no diret&oacute;rio <filename>/etc/mail/</filename> para
-     atualizar a base de dados.  </para>
+     atualizar a base de dados.</para>
 
    </sect2>
    <sect2>
@@ -384,17 +384,17 @@ procmail: "|/usr/local/bin/procmail"</programlisting>
       <para>O formato do arquivo &eacute; simples; O nome da caixa de mensagens(e-mail) &eacute; indicado do lado esquerdo
 	dos dois pontos e depois do lado direito &eacute; o destino da mensagens para onde ser&atilde;o direcionadas.
 	O primeiro exemplo simplesmente direciona a caixa de correio de mensagens que chegam para o usu&aacute;rio
-	<username>root</username> para a caixa de correio do usu&aacute;rio <username>localuser</username>, 
-        que &eacute; olhada novamente na base de dados de apelidos.  Se nada for encontrado, ent&atilde;o a mensagem &eacute; entregue,
-	ao usu&aacute;rio local <username>localuser</username>.  O pr&oacute;ximo exemplo mostra uma lista de emails.  
+	<username>root</username> para a caixa de correio do usu&aacute;rio <username>localuser</username>,
+	que &eacute; olhada novamente na base de dados de apelidos.  Se nada for encontrado, ent&atilde;o a mensagem &eacute; entregue,
+	ao usu&aacute;rio local <username>localuser</username>.  O pr&oacute;ximo exemplo mostra uma lista de emails.
 	Mensagens para a caixa de correio <username>ftp-bugs</username> &eacute;
 	direcionada para tr&ecirc;s caixas de mensagem local, <username>joe</username>,
 	<username>eric</username>, e <username>paul</username>.  Note que uma caixa de mensagens
 	remota pode ser especificada como <literal>usu&aacute;rio@exemplo.com.br</literal>.  O pr&oacute;ximo
 	exemplo mostra escrevendo uma mensagem para um arquivo, neste caso
-	<filename>/dev/null</filename>.  O &uacute;ltimo exemplo mostra enviando mensagens para 
+	<filename>/dev/null</filename>.  O &uacute;ltimo exemplo mostra enviando mensagens para
 	um programa, neste caso a mensagem &eacute; escrita para uma entrada padr&atilde;o do
-	<filename>/usr/local/bin/procmail</filename> atrav&eacute;s  do &unix; pipe.</para>
+	<filename>/usr/local/bin/procmail</filename> atrav&eacute;s do &unix; pipe.</para>
 
    <para>Quando este arquivo &eacute; atualizado, voc&ecirc; precisa executar o comando
    <command>make</command> no <filename>/etc/mail/</filename> para
@@ -416,7 +416,7 @@ procmail: "|/usr/local/bin/procmail"</programlisting>
 mail.example.com</programlisting>
 
     <para>Quando este arquivo &eacute; atualizado, O &man.sendmail.8; precisa ser
-    reiniciado para ativar as mudan&ccedil;as.  </para>
+    reiniciado para ativar as mudan&ccedil;as.</para>
 
   </sect2>
 
@@ -425,22 +425,22 @@ mail.example.com</programlisting>
 
     <para>O <application>sendmail</application> tem como arquivo de configura&ccedil;&atilde;o
       principal, o <filename>sendmail.cf</filename> que controla o comportamento total
-      do <application>sendmail</application>, incluindo tudo de 
-      reescrita de endere&ccedil;os de mensagens &agrave; impress&atilde;o de mensagens rejei&ccedil;&atilde;o 
+      do <application>sendmail</application>, incluindo tudo de
+      reescrita de endere&ccedil;os de mensagens &agrave; impress&atilde;o de mensagens rejei&ccedil;&atilde;o
       aos servidores remotos de correio.  Naturalmente, com um papel t&atilde;o diverso, este
-      arquivo de configura&ccedil;&atilde;o &eacute; completamente complexo e os detalhes fogem do escopo desta se&ccedil;&atilde;o.  
+      arquivo de configura&ccedil;&atilde;o &eacute; completamente complexo e os detalhes fogem do escopo desta se&ccedil;&atilde;o.
       Felizmente, este arquivo de configura&ccedil;&atilde;o raramente precisa ser modificado por servidores
-      de correio padr&atilde;o.  </para>
+      de correio padr&atilde;o.</para>
 
-    <para>O arquivo de configura&ccedil;&atilde;o principal do <application>sendmail</application> 
+    <para>O arquivo de configura&ccedil;&atilde;o principal do <application>sendmail</application>
       pode ser construido a partir dos macros &man.m4.1; que define as caracter&iacute;sticas
-      e comportamento do <application>sendmail</application>.  Por favor veja o 
+      e comportamento do <application>sendmail</application>.  Por favor veja o
       <filename>/usr/src/contrib/sendmail/cf/README</filename> para maiores
-      detalhes.  </para>
+      detalhes.</para>
 
     <para>Quando mudan&ccedil;as neste arquivo s&atilde;o feitas, o
       <application>sendmail</application> precisa ser reiniciado para
-      que as mudan&ccedil;as tenham efeito.  </para>
+      que as mudan&ccedil;as tenham efeito.</para>
 
   </sect2>
   <sect2>
@@ -454,13 +454,13 @@ mail.example.com</programlisting>
     <example>
 	<title>Exemplo de mapeamento de dom&iacute;nio virtual de mensagens</title>
 
-    <programlisting>root@exemplo.com                root
-postmaster@exemplo.com          postmaster@noc.exemplo.net
-@exemplo.com                    joe</programlisting>
+    <programlisting>root@exemplo.com		root
+postmaster@exemplo.com	  postmaster@noc.exemplo.net
+@exemplo.com		    joe</programlisting>
       </example>
 
     <para>No exemplo acima, n&oacute;s temos um mapeamento para o dom&iacute;nio
-      <hostid role="domainname">exemplo.com</hostid>.  O arquivos &eacute; processado 
+      <hostid role="domainname">exemplo.com</hostid>.  O arquivos &eacute; processado
       de cima pra baixo, ordenado na busca da primeira constata&ccedil;&atilde;o da entrada.  O primeiro &iacute;tem mapeia
       <literal>root@exemplo.com</literal> para a caixa de mensagens local do usu&aacute;rio <username>root</username>.  A pr&oacute;xima entrada mapeia
       <literal>postmaster@exemplo.com</literal> para a caixa de mensagens do usu&aacute;rio <username>postmaster</username> do host
@@ -475,18 +475,18 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
   <sect1 id="mail-changingmta">
     <sect1info>
       <authorgroup>
-        <author>
-          <firstname>Andrew</firstname>
-          <surname>Boothman</surname>
-          <contrib>Escrito por </contrib>
-        </author>
+	<author>
+	  <firstname>Andrew</firstname>
+	  <surname>Boothman</surname>
+	  <contrib>Escrito por </contrib>
+	</author>
       </authorgroup>
       <authorgroup>
-        <author>
-          <firstname>Gregory</firstname>
-          <surname>Neil Shapiro</surname>
-          <contrib>Informa&ccedil;&otilde;es obtidas a partir do email escrito por </contrib>
-        </author>
+	<author>
+	  <firstname>Gregory</firstname>
+	  <surname>Neil Shapiro</surname>
+	  <contrib>Informa&ccedil;&otilde;es obtidas a partir do email escrito por </contrib>
+	</author>
       </authorgroup>
     </sect1info>
     <title>Trocando seu agente de transfer&ecirc;ncia de mensagens</title>
@@ -495,7 +495,7 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
       <secondary>trocando o mta</secondary>
     </indexterm>
 
-    <para>Como mencionado, o FreeBSD vem com o 
+    <para>Como mencionado, o FreeBSD vem com o
       <application>sendmail</application> j&aacute; instalado como seu
       MTA (Agente de transfer&ecirc;ncia de mensagens).  Consequentemente por padr&atilde;o sua
       carga est&aacute; na sa&iacute;da e entrada de mensagens.</para>
@@ -511,15 +511,15 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
       <title>Instalando um novo MTA</title>
 
       <para>Voc&ecirc; tem uma variedade de escolhas de MTAs dispon&iacute;veis.  Um bom
-	ponto de partida &eacute; a 
+	ponto de partida &eacute; a
 	<link linkend="ports">Cole&ccedil;&atilde;o de Ports do FreeBSD</link> onde voc&ecirc;
 	poder&aacute; encontrar muitos deles.  &Eacute; claro que voc&ecirc; est&aacute; livre para usar
 	qualquer MTA que voc&ecirc; quiser em qualquer localidade, assim como rod&aacute;-lo
 	no FreeBSD.</para>
 
       <para>Come&ccedil;e instalando seu novo MTA.  Uma vez que ele est&aacute; instalado,
-	ele lhe dar&aacute; a oportuniade de decidir se ele cumprir&aacute; suas necessidades, 
-	e tamb&eacute;m lhe d&aacute; a oportunidade de configurar seu novo aplicativo antes 
+	ele lhe dar&aacute; a oportuniade de decidir se ele cumprir&aacute; suas necessidades,
+	e tamb&eacute;m lhe d&aacute; a oportunidade de configurar seu novo aplicativo antes
 	de desabilitar o <application>sendmail</application>.  Ao se fazer isso, voc&ecirc;
 	deve certificar-se que a instala&ccedil;&atilde;o do novo aplicativo n&atilde;o tentar&aacute;
 	sobreescrever os bin&aacute;rios do sistema como
@@ -535,7 +535,7 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
     <sect2>
       <title>Desabilitando o <application>sendmail</application></title>
 
-      <para>O processo de inicializa&ccedil;&atilde;o do 
+      <para>O processo de inicializa&ccedil;&atilde;o do
 	<application>sendmail</application> mudou significativamente
 	entre o 4.5-RELEASE e 4.6-RELEASE.  Portanto, o procedimento
 	usado para desabilit&aacute;-lo &eacute; subtamente diferente.</para>
@@ -559,7 +559,7 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
 	<title>FreeBSD 4.5-STABLE depois de 2002/4/4
 	  (Incluindo o 4.6-RELEASE e mais recentes)</title>
 
-	<para>Para desabilitar completamente o 
+	<para>Para desabilitar completamente o
 	  <application>sendmail</application> voc&ecirc; deve usar</para>
 
 	  <programlisting>sendmail_enable="NONE"</programlisting>
@@ -572,17 +572,17 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
 	    substitua com um sistema totalmente alternativo no servi&ccedil;o de entrega
 	    de mensagens.  Se voc&ecirc; escolher n&atilde;o faze-lo, fun&ccedil;&otilde;es do sistema como
 	    &man.periodic.8; ser&atilde;o incapaz de entregar seus resultados por
-	    e-mail que eles esperariam normalmente.  V&aacute;rias partes do seu 
+	    e-mail que eles esperariam normalmente.  V&aacute;rias partes do seu
 	    sistema pode esperar que tenham sistema
 	    <application>sendmail</application>-compat&iacute;vel funcional.  Se
 	    as aplica&ccedil;&otilde;es continuarem a usar os bin&aacute;rios do
-	    <application>sendmail</application> para tentar enviar mensagens 
+	    <application>sendmail</application> para tentar enviar mensagens
 	    ap&oacute;s desabilitar, a mensagem ficar&aacute; inativa na fila
 	    do <application>sendmail</application>, e nunca ser&aacute; entregue.</para>
 	</warning>
 
 	<para>Se voc&ecirc; quer desabilitar o servi&ccedil;co de chegada do
-	  <application>sendmail</application> vo&ecirc; deve configurar, </para>
+	  <application>sendmail</application> vo&ecirc; deve configurar,</para>
 
 	  <programlisting>sendmail_enable="NO"</programlisting>
 
@@ -595,7 +595,7 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
     <sect2>
       <title>Executando seu novo MTA na inicializa&ccedil;&atilde;o do sistema</title>
 
-      <para>Voc&ecirc; pode ter dois m&eacute;todos para escolher de como rodar 
+      <para>Voc&ecirc; pode ter dois m&eacute;todos para escolher de como rodar
 	seu novo MTA na inicializa&ccedil;&atilde;o do sistema, dependendo da vers&atilde;o do FreeBSD
 	que voc&ecirc; est&aacute; rodando.</para>
 
@@ -604,7 +604,7 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
 	  (Incluindo o 4.5-RELEASE e mais recentes)</title>
 
 	<para>Adicione um script em
-	  <filename>/usr/local/etc/rc.d/</filename> com 
+	  <filename>/usr/local/etc/rc.d/</filename> com
 	  extens&atilde;o <filename>.sh</filename> e execut&aacute;vel pelo usu&aacute;rio
 	  <username>root</username>.  Este script deve ser aceito os par&acirc;metrost <literal>start</literal> e
 	  <literal>stop</literal>.  Na hora da inicializa&ccedil;&atilde;o, os scripts do sistema
@@ -648,8 +648,8 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
 	como aplicativo padr&atilde;o na maioria dos sistemas &unix; que alguns aplicativos
 	assumem que ele j&aacute; esteja instalado e configurado.
 	Por esta raz&atilde;o, muitos dos MTAs anternativos fornece sua pr&oacute;pria implementa&ccedil;&atilde;o
-	de compatibilidade da interface de linha de comando do <application>sendmail</application>; 
-        isto facilita <quote>coloc&aacute;-los</quote> como substitutos do <application>sendmail</application>.</para>
+	de compatibilidade da interface de linha de comando do <application>sendmail</application>;
+	isto facilita <quote>coloc&aacute;-los</quote> como substitutos do <application>sendmail</application>.</para>
 
       <para>Consequentemente, se voc&ecirc; est&aacute; usando um servidor de correio alternativo,
 	voc&ecirc; precisar&aacute; certificar-se de que o aplicativo que tenta executar executar bin&aacute;rios
@@ -672,14 +672,14 @@ purgestat	/usr/libexec/sendmail/sendmail</programlisting>
 
       <para>Isto significa que quando alguns desses comandos
 	(tais como o pr&oacute;prio <filename>sendmail</filename>) est&atilde;o funcionando,
-	o sistema invoca realmente uma c&oacute;pia do <filename>sendmail</filename> nomeado mailwrapper, que 
+	o sistema invoca realmente uma c&oacute;pia do <filename>sendmail</filename> nomeado mailwrapper, que
 	checa o <filename>mailer.conf</filename> e
 	executa <filename>/usr/libexec/sendmail/sendmail</filename>
 	instead.  Este sistema faz com que seja f&aacute;cil de mudar quais bin&aacute;rios
 	s&atilde;o atualmente executados quando estas func&ccedil;&otilde;es padr&atilde;o do <filename>sendmail</filename>
 	s&atilde;o invocadas.</para>
 
-      <para>Consequentemente se voc&ecirc; quisesse que 
+      <para>Consequentemente se voc&ecirc; quisesse que
 	<filename>/usr/local/supermailer/bin/sendmail-compat</filename>
 	seja executado em vez do <application>sendmail</application>, voc&ecirc; pode mudar o
 	<filename>/etc/mail/mailer.conf</filename> para ler:</para>
@@ -715,7 +715,7 @@ purgestat	/usr/local/supermailer/bin/purgestat-compat</programlisting>
 
     <qandaset>
       <qandaentry>
-        <question>
+	<question>
 	<para>Porque eu tenho que usar o FQDN para hosts no meu site?</para>
 	</question>
 
@@ -734,27 +734,27 @@ purgestat	/usr/local/supermailer/bin/purgestat-compat</programlisting>
 	  Entretanto a vers&atilde;o atual do <application>BIND</application>
 	  que vem com o FreeBSD n&atilde;o fornece mais abreviaturas para
 	  nomes de dom&iacute;nios n&atilde;o totalmente qualificados com excess&atilde;o do dom&iacute;nio que voc&ecirc;
-	  est&aacute; dentro. Ent&atilde;o o host <hostid>mumble</hostid> n&atilde;o qualificado deve
+	  est&aacute; dentro.  Ent&atilde;o o host <hostid>mumble</hostid> n&atilde;o qualificado deve
 	  ser encontrado como <hostid
 	  role="fqdn">mumble.foo.bar.edu</hostid>, ou ir&aacute; ser procurado
 	  no dom&iacute;nio raiz.</para>
 
-        <para>Isto &eacute; diferente do comportamente anterior, onde a 
+	<para>Isto &eacute; diferente do comportamente anterior, onde a
 	  busca continuou atrav&eacute;s do <hostid
 	  role="domainname">mumble.bar.edu</hostid>, e <hostid
-	  role="domainname">mumble.edu</hostid>. Veja na RFC 1535
+	  role="domainname">mumble.edu</hostid>.  Veja na RFC 1535
 	  porque isso foi considerado uma m&aacute; pr&aacute;tica, ou mesmo um furo de
 	  seguran&ccedil;a.</para>
 
-        <para>Como uma boa solu&ccedil;&atilde;o, voc&ecirc; pode colocar a linha:
+	<para>Como uma boa solu&ccedil;&atilde;o, voc&ecirc; pode colocar a linha:
 
-          <programlisting>search foo.bar.edu bar.edu</programlisting>
+	  <programlisting>search foo.bar.edu bar.edu</programlisting>
 
-          em vez do precedente:
+	  em vez do precedente:
 
-          <programlisting>domain foo.bar.edu</programlisting>
+	  <programlisting>domain foo.bar.edu</programlisting>
 
-          no seu <filename>/etc/resolv.conf</filename>.  No entando, certifique-se
+	  no seu <filename>/etc/resolv.conf</filename>.  No entando, certifique-se
 	  que a ordem de busca n&atilde;o vai al&eacute;m do
 	  <quote>limite entre a administra&ccedil;&atilde;o p&uacute;blica e local</quote>,
 	  como a RFC 1535 chama isto.</para>
@@ -771,21 +771,21 @@ purgestat	/usr/local/supermailer/bin/purgestat-compat</programlisting>
 	<para>Esta quest&atilde;o &eacute; respondida no FAQ do
 	<application>sendmail</application> como segue:</para>
 
-        <programlisting>Eu estou tendo mensagens de <quote>erros de configura&ccedil;&atilde;o local</quote> como:
+	<programlisting>Eu estou tendo mensagens de <quote>erros de configura&ccedil;&atilde;o local</quote> como:
 
 553 relay.domain.net config error: mail loops back to myself
-554 &lt;user@domain.net&gt;... Local configuration error
+554 &lt;user@domain.net&gt;...  Local configuration error
 
 Como eu resolvo este problema?
 
 Voc&ecirc; pediu que o correio do dom&iacute;nio (ex., domain.net) para ser
 enviado para um host espec&iacute;fico (neste caso, relay.domain.net)
 usando um registro MX, mas a m&aacute;quina de relay n&atilde;o se reconhece
-como domain.net. Adicione domain.net ao /etc/mail/local-host-names
+como domain.net.  Adicione domain.net ao /etc/mail/local-host-names
 (se voc&ecirc; estiver usando FEATURE(use_cw_file)) ou adicione <quote>Cw domain.net</quote>
 ao /etc/mail/sendmail.cf.</programlisting>
 
-        <para>O FAQ do <application>sendmail</application> pode ser encontrado em
+	<para>O FAQ do <application>sendmail</application> pode ser encontrado em
 	  <ulink URL="http://www.sendmail.org/faq/"></ulink> e &eacute; recomendado
 	  que voc&ecirc; o leia caso queira fazer algum
 	  <quote>ajuste</quote> da configura&ccedil;&atilde;o do seu correio.</para>
@@ -794,7 +794,7 @@ ao /etc/mail/sendmail.cf.</programlisting>
 
       <indexterm><primary>PPP</primary></indexterm>
       <qandaentry>
-        <question>
+	<question>
 	<para>Como eu posso rodar um servidor de correio em um host com conex&atilde;o discada?</para>
 	</question>
 
@@ -810,12 +810,12 @@ ao /etc/mail/sendmail.cf.</programlisting>
 
 	<para>A outra maneira &eacute; contratar um servidor internet conectado o tempo todo para fornecer o servi&ccedil;o
 	  de MX secund&aacute;rio para seu dom&iacute;nio.  Por exemplo, se o dom&iacute;nio da sua empresa &eacute;
-	  <hostid role="domainname">exemplo.com</hostid> e seu provedor de servi&ccedil;os internet 
+	  <hostid role="domainname">exemplo.com</hostid> e seu provedor de servi&ccedil;os internet
 	  configurou <hostid role="domainname">exemplo.net</hostid> para fornecer servi&ccedil;o de MX secund&aacute;rio
 	  para seu dom&iacute;nio:</para>
 
-	<programlisting>exemplo.com.          MX        10      exemplo.com.
-                      MX        20      exemplo.net.</programlisting>
+	<programlisting>exemplo.com.	  MX	10      exemplo.com.
+		      MX	20      exemplo.net.</programlisting>
 
 	<para>Somente um host deve ser espec&iacute;fico como recepiente final
 	  (adicione <literal>Cw example.com</literal> em
@@ -824,12 +824,12 @@ ao /etc/mail/sendmail.cf.</programlisting>
 	<para>Quando o envio do <command>sendmail</command> est&aacute; tentando
 	  entregar a mensagem ele ir&aacute; tentar conectar pra voc&ecirc; (<hostid role="domainname">exemplo.com</hostid>) sobre o link
 	  do modem.  Isto na maioria das vezes provavalmente ir&aacute; dar tempo excedido porque voc&ecirc; est&aacute; conectado.
-	  O programa <application>sendmail</application> ir&aacute; automaticamente entreg&aacute;-lo ao site MX secund&aacute;rio, 
-          ex., seu provedor internet (<hostid role="domainname">exemplo.net</hostid>).  O site MX secund&aacute;rio
+	  O programa <application>sendmail</application> ir&aacute; automaticamente entreg&aacute;-lo ao site MX secund&aacute;rio,
+	  ex., seu provedor internet (<hostid role="domainname">exemplo.net</hostid>).  O site MX secund&aacute;rio
 	  ir&aacute; periodicamente ent&atilde;o tentar conectar ao seu host
 	  e entregar as mensagens ao host MX prim&aacute;rio (<hostid role="domainname">exemplo.com</hostid>).</para>
 
-	<para>Voc&ecirc; pode querer usar algo assim para um script 
+	<para>Voc&ecirc; pode querer usar algo assim para um script
 	  de login:</para>
 
 	<programlisting>#!/bin/sh
@@ -837,47 +837,47 @@ ao /etc/mail/sendmail.cf.</programlisting>
 ( sleep 60 ; /usr/sbin/sendmail -q ) &amp;
 /usr/sbin/ppp -direct pppmyisp</programlisting>
 
-	<para>Se voc&ecirc; criar um script de login separado para um 
+	<para>Se voc&ecirc; criar um script de login separado para um
 	  usu&aacute;rio voc&ecirc; poderia usar o comando <command>sendmail -qRexemplo.com</command>
-	  preferivelmente no script acima. Isto ir&aacute; for&ccedil;ar todas as mensagens em sua
+	  preferivelmente no script acima.  Isto ir&aacute; for&ccedil;ar todas as mensagens em sua
 	  fila para <hostid role="domainname">exemplo.com</hostid> serem processadas imediatamente.</para>
 
 	<para>Um refinamento adicional da situa&ccedil;&atilde;o segue abaixo:</para>
 
 	<para>Mensagem retirado da &a.isp;.</para>
 
-	<programlisting>&gt; N&oacute;s fornecemos a um cliente um MX secund&aacute;rio. O cliente conecta ao
-&gt; nosso servi&ccedil;o diversas vezes ao dia automaticamente para puxar as mensagens 
+	<programlisting>&gt; N&oacute;s fornecemos a um cliente um MX secund&aacute;rio.  O cliente conecta ao
+&gt; nosso servi&ccedil;o diversas vezes ao dia automaticamente para puxar as mensagens
 &gt; do seu MX prim&aacute;rio (N&oacute;s n&atilde;o chamamos o seu site quando uma mensagem para seu dom&iacute;nio
-&gt; chegou). Nosso sendmail envia para a fila de mensagens a cada 30 minutos.  Neste 
+&gt; chegou).  Nosso sendmail envia para a fila de mensagens a cada 30 minutos.  Neste
 &gt; momento ele tem que permanecer 30 minutos conectado para certificar-se que todas as mensagens
 &gt; est&atilde;o indo para o MX prim&aacute;rio.
 &gt;
 &gt; H&aacute; algum comando que inicie o sendmail para enviar todas as mensagens
-&gt; agora? &Eacute; claro que o usu&aacute;rio n&atilde;o tem previl&eacute;gios de root em nossa m&aacute;quina.  
+&gt; agora? &Eacute; claro que o usu&aacute;rio n&atilde;o tem previl&eacute;gios de root em nossa m&aacute;quina.
 
-Na se&ccedil;&atilde;o <quote>privacy flags</quote> do sendmail.cf, h&aacute; a 
+Na se&ccedil;&atilde;o <quote>privacy flags</quote> do sendmail.cf, h&aacute; a
 defini&ccedil;&atilde;o Opgoaway,restrictqrun
 
 Retire o restrictqrun para permitir que usu&aacute;rios que n&atilde;o sejam root iniciem o processamento de fila.
 Voc&ecirc; pode querer tamb&eacute;m rearrumar os MXs.  N&oacute;s somos o 1o MX para nossos
 clientes como estes, e n&oacute;s definimos:
 
-# Se n&oacute;s formos o melhor MX para o host, tente uma vez diretamente gerar 
+# Se n&oacute;s formos o melhor MX para o host, tente uma vez diretamente gerar
 # um erro de configura&ccedil;&atilde;o local.
 OwTrue
 
-Essa maneira que o site remoto ir&aacute; entregar diretamente pra voc&ecirc;, sem ficar tentando 
+Essa maneira que o site remoto ir&aacute; entregar diretamente pra voc&ecirc;, sem ficar tentando
 conex&atilde;o com o cliente.  Voc&ecirc; entao envia para seu cliente.  Somente funciona para
 <quote>hosts</quote>, ent&atilde;o voc&ecirc; precisa obter o nome da m&aacute;quina de correio do seu
 cliente <quote>cliente.com</quote> assim como
 <quote>hostname.cliente.com</quote> no DNS.  Soemnte coloque um registro A no
 DNS para <quote>cliente.com</quote>.</programlisting>
-        </answer>
+	</answer>
       </qandaentry>
 
       <qandaentry>
-        <question>
+	<question>
 	  <para>Por que eu recebo o erro <errorname>Relaying
 	    Denied</errorname> quando envio mensagens a partir de outros
 	    hosts?</para>
@@ -889,14 +889,14 @@ DNS para <quote>cliente.com</quote>.</programlisting>
  	    enviar mensagem a partir de hosts em que o MTA est&aacute; rodando.  Por exemplo, se
  	    um servidor POP3 est&aacute; instalado, ent&atilde;o usu&aacute;rios estar&atilde;o aptos a
  	    checar mensagens da escola, trabalho, ou outros locais remotos
- 	    mas eles ainda n&atilde;o est&atilde;o aptos a enviar mensagens 
+ 	    mas eles ainda n&atilde;o est&atilde;o aptos a enviar mensagens
  	    a partir de outras localidades de fora.  Tipicamente, em alguns momentos depois
  	    da tentativa, um email ser&aacute; enviado do
  	    <application>MAILER-DAEMON</application> com a mensagem de erro
  	    <errorname>5.7 Relaying Denied</errorname>.</para>
 
 	  <para>H&aacute; diversas maneiras para contornar isso.  A solu&ccedil;&atilde;o mais
- 	    direta &eacute; colocar o endere&ccedil;o do seu provedor de servi&ccedil;os internet 
+ 	    direta &eacute; colocar o endere&ccedil;o do seu provedor de servi&ccedil;os internet
  	    no arquivo relay-domains em
  	    <filename>/etc/mail/relay-domains</filename>.  Uma maneira r&aacute;pida
  	    de fazer isso pode ser:</para>
@@ -920,7 +920,7 @@ www.exemplo.org</programlisting>
 
 	  <para>Agora toda mensagem enviada atrav&eacute;s do seu sistema, por qualquer um dos hosts
 	    nesta lista (desde que o usu&aacute;rio tenha uma conta em seu sistema)
-	    , ser&aacute; sucedida.  Esta &eacute; uma maneira muito agrad&aacute;vel de permitir aos 
+	    , ser&aacute; sucedida.  Esta &eacute; uma maneira muito agrad&aacute;vel de permitir aos
 	    usu&aacute;rios o envio de mensagens remotamente a partir de seu sistema sem
 	    permitir que outras pessoas enviem SPAM atrav&eacute;s do seu sistema.</para>
 
@@ -938,54 +938,54 @@ www.exemplo.org</programlisting>
     <sect2 id="mail-config">
       <title>Configura&ccedil;&atilde;o b&aacute;sica</title>
       <indexterm>
-        <primary>email</primary>
-        <secondary>configura&ccedil;&atilde;o</secondary>
+	<primary>email</primary>
+	<secondary>configura&ccedil;&atilde;o</secondary>
       </indexterm>
 
       <para>Fora da m&aacute;quina, voc&ecirc; deve poder enviar mensagens para hosts externos
-        como voc&ecirc; configurou no
+	como voc&ecirc; configurou no
 	<filename>/etc/resolv.conf</filename> ou rodou o seu pr&oacute;prio
 	servidor de nomes.  Se voc&ecirc; gostaria de receber mensagens em seu host
 	entregue ao MTA (ex., <application>sendmail</application>) em seu pr&oacute;prio host FreeBSD, h&aacute; dois m&eacute;todos:</para>
 
       <itemizedlist>
-        <listitem>
-          <para>Rode seu pr&oacute;prio servidor de nomes e tenham seu pr&oacute;prio dom&iacute;nio.  Por
+	<listitem>
+	  <para>Rode seu pr&oacute;prio servidor de nomes e tenham seu pr&oacute;prio dom&iacute;nio.  Por
 	    exemplo, <hostid
 	    role="domainname">FreeBSD.org</hostid></para>
-        </listitem>
+	</listitem>
 
-        <listitem>
-          <para>Puxe as mensagens entregue diretamente a seu host.  Isto &eacute; feito 
+	<listitem>
+	  <para>Puxe as mensagens entregue diretamente a seu host.  Isto &eacute; feito
 	    entregando o correio diretamente ao nome atual do DNS da sua
 	    m&aacute;quina.  Por exemplo, <hostid
 	    role="fqdn">exemplo.FreeBSD.org</hostid>.</para>
-        </listitem>
+	</listitem>
       </itemizedlist>
 
       <indexterm><primary>SMTP</primary></indexterm>
       <para>Indiferente quais dos m&eacute;todos acima voc&ecirc; escolha, a fim de ter
-        o correio entregando diretamente para seu host, deve ter um endere&ccedil;o 
-        IP est&aacute;tico (n&atilde;o um endere&ccedil;o din&acirc;mico, como a maioria das conex&otilde;es discadas).  Se voc&ecirc; est&aacute; atr&aacute;s
-        de um firewall, ele deve permitir tr&aacute;fego SMTP para voc&ecirc;.  Se voc&ecirc; quiser 
-        receber mensagens diretamentes em seu host, voc&ecirc; precisa certificar-se de qualquer uma dessas
-        duas coisas:</para>
+	o correio entregando diretamente para seu host, deve ter um endere&ccedil;o
+	IP est&aacute;tico (n&atilde;o um endere&ccedil;o din&acirc;mico, como a maioria das conex&otilde;es discadas).  Se voc&ecirc; est&aacute; atr&aacute;s
+	de um firewall, ele deve permitir tr&aacute;fego SMTP para voc&ecirc;.  Se voc&ecirc; quiser
+	receber mensagens diretamentes em seu host, voc&ecirc; precisa certificar-se de qualquer uma dessas
+	duas coisas:</para>
 
       <itemizedlist>
-        <indexterm><primary>registro MX</primary></indexterm>
-        <listitem>
-          <para>Certifique-se que o registro MX (com o menor valor) em seu DNS aponte para o
+	<indexterm><primary>registro MX</primary></indexterm>
+	<listitem>
+	  <para>Certifique-se que o registro MX (com o menor valor) em seu DNS aponte para o
 	   endere&ccedil;o IP do seu host.</para>
-        </listitem>
+	</listitem>
 
-        <listitem>
-          <para>Certifique-se que n&atilde;o h&aacute; entrada MX em seu DNS para seu
+	<listitem>
+	  <para>Certifique-se que n&atilde;o h&aacute; entrada MX em seu DNS para seu
 	    host.</para>
-        </listitem>
+	</listitem>
       </itemizedlist>
 
       <para>Qualquer uma das coisas acima ir&aacute; permitir que voc&ecirc; receba mensagens diretamente
-        em seu host.</para>
+	em seu host.</para>
 
       <para>Tente isto:</para>
 
@@ -995,9 +995,9 @@ exemplo.FreeBSD.org
 exemplo.FreeBSD.org has address 204.216.27.XX</screen>
 
       <para>Se isto for o que voc&ecirc; ver, mensagens diretamente para
-        <email>seulogin@exemplo.FreeBSD.org</email> deve funcionar sem 
-        problemas (presumindo que o <application>sendmail</application> est&aacute;
-        rodando corretamente em <hostid role="fqdn">exemplo.FreeBSD.org</hostid>).</para>
+	<email>seulogin@exemplo.FreeBSD.org</email> deve funcionar sem
+	problemas (presumindo que o <application>sendmail</application> est&aacute;
+	rodando corretamente em <hostid role="fqdn">exemplo.FreeBSD.org</hostid>).</para>
 
       <para>Se preferivelmente voc&ecirc; ver algo assim:</para>
 
@@ -1006,19 +1006,19 @@ exemplo.FreeBSD.org has address 204.216.27.XX
 exemplo.FreeBSD.org mail is handled (pri=10) by hub.FreeBSD.org</screen>
 
       <para>Toda mensegam enviada para seu host (<hostid
-        role="fqdn">exemplo.FreeBSD.org</hostid>) terminar&aacute;
+	role="fqdn">exemplo.FreeBSD.org</hostid>) terminar&aacute;
 	coletada na <hostid>hub</hostid> sob o mesmo nome de usu&aacute;rio em vez da
 	emiss&atilde;o diretamente ao seu host.</para>
 
       <para>A informa&ccedil;&atilde;o acima &eacute; segurada por seu servidor DNS.  O registro DNS
-        que cont&eacute;m a informa&ccedil;&atilde;o de roteamento de correio &eacute; a entrada
-        <emphasis>M</emphasis>ail e<emphasis>X</emphasis>.  Se
-        n&atilde;o existir registro MX, as mensagens ser&atilde;o entregues diretamente para o host 
-        pelo endere&ccedil;o IP.</para>
+	que cont&eacute;m a informa&ccedil;&atilde;o de roteamento de correio &eacute; a entrada
+	<emphasis>M</emphasis>ail e<emphasis>X</emphasis>.  Se
+	n&atilde;o existir registro MX, as mensagens ser&atilde;o entregues diretamente para o host
+	pelo endere&ccedil;o IP.</para>
 
       <para>A entrada MX para <hostid
-        role="fqdn">freefall.FreeBSD.org</hostid> est&aacute; algo
-        assim:</para>
+	role="fqdn">freefall.FreeBSD.org</hostid> est&aacute; algo
+	assim:</para>
 
       <programlisting>freefall		MX	30	mail.crl.net
 freefall		MX	40	agora.rdrop.com
@@ -1026,51 +1026,51 @@ freefall		MX	10	freefall.FreeBSD.org
 freefall		MX	20	who.cdrom.com</programlisting>
 
       <para>Como voc&ecirc; pode ver, <hostid>freefall</hostid> tem v&aacute;rias entradas MX.
-        O menor n&uacute;mero MX &eacute; o host que recebe mensagens diretamente se estiver
-        dispon&iacute;vel; se ele n&atilde;o estiver acess&iacute;vel por alguma raz&atilde;o, os outros
-        (as vezes chamado de <quote>backups MXs</quote>) aceitam mensagens
-        temporariamente, e passa quando um host de n&uacute;mero menor se torna
-        dispon&iacute;vel, eventualmente ao host de menor n&uacute;mero.</para>
+	O menor n&uacute;mero MX &eacute; o host que recebe mensagens diretamente se estiver
+	dispon&iacute;vel; se ele n&atilde;o estiver acess&iacute;vel por alguma raz&atilde;o, os outros
+	(as vezes chamado de <quote>backups MXs</quote>) aceitam mensagens
+	temporariamente, e passa quando um host de n&uacute;mero menor se torna
+	dispon&iacute;vel, eventualmente ao host de menor n&uacute;mero.</para>
 
       <para>Sites MX alternativos devem ter conex&otilde;es de internet separadas
-        de voc&ecirc; pr&oacute;prio a fim de ser mais &uacute;teis. Seu provedor de internet ou outro
-        local amig&aacute;vel n&atilde;o devem ter problema de fornecer esse servi&ccedil;o para
-        voc&ecirc;.</para>
+	de voc&ecirc; pr&oacute;prio a fim de ser mais &uacute;teis.  Seu provedor de internet ou outro
+	local amig&aacute;vel n&atilde;o devem ter problema de fornecer esse servi&ccedil;o para
+	voc&ecirc;.</para>
     </sect2>
 
     <sect2 id="mail-domain">
       <title>Mensagens de correio para seu dom&iacute;nio</title>
 
-      <para>A fim de configurar um <quote>mailhost</quote> (chamado servidor de 
-        correio) voc&ecirc; precisa ter todo o correio emitidos a varias esta&ccedil;&otilde;es 
+      <para>A fim de configurar um <quote>mailhost</quote> (chamado servidor de
+	correio) voc&ecirc; precisa ter todo o correio emitidos a varias esta&ccedil;&otilde;es
 	dirigidas a ele.  Basicamente, voc&ecirc; quer <quote>solicitar</quote> qualquer
 	mensagem para qualquer hostname no seu dom&iacute;nio (neste caso <hostid
 	role="fqdn">*.FreeBSD.org</hostid>) e desvi&aacute;-la para seu servidor de correio
-	para que ent&atilde;o seus usu&aacute;rios podem receber suas mensagens 
+	para que ent&atilde;o seus usu&aacute;rios podem receber suas mensagens
 	no servidor de correio principal.</para>
 
       <indexterm><primary>DNS</primary></indexterm>
       <para>Para facilitar as coisas, uma conta de usu&aacute;rio com o mesmo
-        <emphasis>nome de usu&aacute;rio</emphasis> deve existir em ambas as m&aacute;quinas.  Use o
+	<emphasis>nome de usu&aacute;rio</emphasis> deve existir em ambas as m&aacute;quinas.  Use o
 	&man.adduser.8; para fazer isto.</para>
 
       <para>O host de correio que voc&ecirc; estar&aacute; usando deve ser o entregador de correio
-        designado para cada esta&ccedil;&atilde;o na rede.  Isto &eacute; feito na
+	designado para cada esta&ccedil;&atilde;o na rede.  Isto &eacute; feito na
 	sua configura&ccedil;&atilde;o de DNS, dessa forma:</para>
 
       <programlisting>exemplo.FreeBSD.org	A	204.216.27.XX		; esta&ccedil;&atilde;o
 			MX	10 hub.FreeBSD.org	; host de correio</programlisting>
 
       <para>Isto ir&aacute; direcionar&aacute; mensagens para cada esta&ccedil;&atilde;o de trabalho no host de correio
-        n&atilde;o importando onde est&atilde;o os pontos de registro A.  A mensagem &eacute; enviada para o host
+	n&atilde;o importando onde est&atilde;o os pontos de registro A.  A mensagem &eacute; enviada para o host
 	MX.</para>
 
       <para>Voc&ecirc; n&atilde;o pode fazer isso voc&ecirc; mesmo, ao menos que voc&ecirc; esteja rodando um
-        servidor DNS.  Se voc&ecirc; n&atilde;o tem, ou n&atilde;o pode rodar seu pr&oacute;prio servidor DNS, fale
+	servidor DNS.  Se voc&ecirc; n&atilde;o tem, ou n&atilde;o pode rodar seu pr&oacute;prio servidor DNS, fale
 	com seu provedor de servi&ccedil;os internet ou com algu&eacute;m que possa lhe fornecer seu DNS.</para>
 
       <para>Se voc&ecirc; estiver hospedando emails virtuais, a seguinte informa&ccedil;&atilde;o
-        vir&aacute; em boa hora.  Por exemplo, n&oacute;s 
+	vir&aacute; em boa hora.  Por exemplo, n&oacute;s
 	iremos assumir que voc&ecirc; tem um cliente com seu pr&oacute;prio dom&iacute;nio, neste
 	caso <hostid role="domainname">cliente1.org</hostid>, e voc&ecirc; quer que todas
 	mensagens para <hostid role="domainname">cliente1.org</hostid>
@@ -1081,7 +1081,7 @@ freefall		MX	20	who.cdrom.com</programlisting>
       <programlisting>cliente1.org		MX	10	mail.meuhost.com</programlisting>
 
       <para>Voc&ecirc; <emphasis>n&atilde;o</emphasis> precisa de um registro A para <hostid role="domainname">cliente1.org</hostid> se voc&ecirc; quiser
-        somente gerenciar emails para este dom&iacute;nio.</para>
+	somente gerenciar emails para este dom&iacute;nio.</para>
 
       <note>
 	<para>Esteja ciente que o ping para o <hostid
@@ -1090,15 +1090,15 @@ freefall		MX	20	who.cdrom.com</programlisting>
       </note>
 
       <para>A &uacute;ltima coisa que voc&ecirc; deve fazer &eacute; dizer ao
-        <application>sendmail</application> no seu host de correio, quais dom&iacute;nios
-	e/ou hostnames devem aceitar mensagens.  H&aacute; algumas maneiras 
+	<application>sendmail</application> no seu host de correio, quais dom&iacute;nios
+	e/ou hostnames devem aceitar mensagens.  H&aacute; algumas maneiras
 	diferentes que isto pode ser feito.  Qualquer uma das seguintes formas ir&atilde;o
 	funcionar:</para>
 
       <itemizedlist>
-        <listitem>
+	<listitem>
 	  <para>Adicione os hosts no seu arquivo
-	  <filename>/etc/mail/local-host-names</filename> se voc&ecirc; estiver usando o 
+	  <filename>/etc/mail/local-host-names</filename> se voc&ecirc; estiver usando o
 	  <literal>FEATURE(use_cw_file)</literal>.  Se voc&ecirc; estiver usando uma vers&atilde;o do
 	  <application>sendmail</application> anterior a 8.10, o arquivo &eacute;
 	  <filename>/etc/sendmail.cw</filename>.</para>
@@ -1113,7 +1113,7 @@ freefall		MX	20	who.cdrom.com</programlisting>
       </itemizedlist>
     </sect2>
   </sect1>
-  
+
   <sect1 id="SMTP-UUCP">
   <title>SMTP com UUCP</title>
 
@@ -1123,14 +1123,14 @@ freefall		MX	20	who.cdrom.com</programlisting>
       arquivo de configura&ccedil;&atilde;o do sendmail.</para>
 
     <para>Ajustar o <filename>/etc/mail/sendmail.cf</filename> manualmente &eacute;
-      um t&oacute;pico avan&ccedil;ado. O <application>sendmail</application> na vers&atilde;o 8 gera os arquivos de
+      um t&oacute;pico avan&ccedil;ado.  O <application>sendmail</application> na vers&atilde;o 8 gera os arquivos de
       configura&ccedil;&atilde;o pelo &man.m4.1; atrav&eacute;s de pr&eacute;-processamento, onde a configura&ccedil;&atilde;o atual ocorre
-      em um n&iacute;vel mais alto de abstra&ccedil;&atilde;o. Os arquivos de configura&ccedil;&atilde;o do  &man.m4.1
+      em um n&iacute;vel mais alto de abstra&ccedil;&atilde;o.  Os arquivos de configura&ccedil;&atilde;o do &man.m4.1
       podem ser encontradas sob
       <filename>/usr/src/usr.sbin/sendmail/cf</filename>.</para>
 
-    <para>Se voc&ecirc; n&atilde;o tiver instalado seu sistema com todos os fontes, a configura&ccedil;&atilde;o 
-      do sendmail vai estar quebrado em um arquivo de fonte separado na distribui&ccedil;&atilde;o.  
+    <para>Se voc&ecirc; n&atilde;o tiver instalado seu sistema com todos os fontes, a configura&ccedil;&atilde;o
+      do sendmail vai estar quebrado em um arquivo de fonte separado na distribui&ccedil;&atilde;o.
       Assumindo que voc&ecirc; tem o c&oacute;digo fonte do FreeBSD
       montando em CDROM, fa&ccedil;a:</para>
 
@@ -1146,8 +1146,8 @@ freefall		MX	20	who.cdrom.com</programlisting>
       <literal>mailertable</literal>.  Isto cria uma base de dados
       que o <application>sendmail</application> pode usar para tomar decis&otilde;es de roteamento.</para>
 
-    <para>Primeiro, voc&ecirc; deve criar seu arquivo <filename>.mc</filename>  
-      O diret&oacute;rio <filename>/usr/src/usr.sbin/sendmail/cf/cf</filename> cont&eacute;m 
+    <para>Primeiro, voc&ecirc; deve criar seu arquivo <filename>.mc</filename>
+      O diret&oacute;rio <filename>/usr/src/usr.sbin/sendmail/cf/cf</filename> cont&eacute;m
       alguns exemplos.  Assumindo que voc&ecirc; nomeou seu arquivo como
       <filename>foo.mc</filename>, tudo que voc&ecirc; precisa fazer &eacute;
       converte-lo em um <filename>sendmail.cf</filename> v&aacute;lido:</para>
@@ -1156,8 +1156,8 @@ freefall		MX	20	who.cdrom.com</programlisting>
 &prompt.root; <userinput>make foo.cf</userinput>
 &prompt.root; <userinput>cp foo.cf /etc/mail/sendmail.cf</userinput></screen>
 
-    <para>Um t&iacute;pico arquivo <filename>.mc</filename> pode ser 
-        dessa forma:</para>
+    <para>Um t&iacute;pico arquivo <filename>.mc</filename> pode ser
+	dessa forma:</para>
 
     <programlisting>VERSIONID(`<replaceable>O n&uacute;mero de sua vers&atilde;o</replaceable>') OSTYPE(bsd4.4)
 
@@ -1181,19 +1181,19 @@ Cw    <replaceable>seunomeuucp.UUCP</replaceable></programlisting>
       <literal>nocanonify</literal>, e
       <literal>confDONT_PROBE_INTERFACES</literal> impedir&atilde;o
       todo o uso do DNS durante a entrega de mensagens.  A op&ccedil;&atilde;o
-      <literal>UUCP_RELAY</literal> &eacute; necess&aacute;ria suportar entrega 
+      <literal>UUCP_RELAY</literal> &eacute; necess&aacute;ria suportar entrega
       UUCP.  Coloque simplesmente um hostname da internet l&aacute; que esteja apto a
-      gerenciar. Endere&ccedil;os do pseudo-dom&iacute;nio do UUCP; muito prov&aacute;vel que, voc&ecirc; ir&aacute;
+      gerenciar.  Endere&ccedil;os do pseudo-dom&iacute;nio do UUCP; muito prov&aacute;vel que, voc&ecirc; ir&aacute;
       entrar l&aacute; no relay de mensagens do seu provedor de servi&ccedil;os internet.</para>
 
     <para>Uma vez que voc&ecirc; tenha isto, voc&ecirc; precisa do arquivo
-      <filename>/etc/mail/mailertable</filename>.  Se voc&ecirc; tem 
+      <filename>/etc/mail/mailertable</filename>.  Se voc&ecirc; tem
       somente um link para fora que estar&aacute; sendo usada para todos os seu emails,
       a seguinte linha ser&aacute; suficiente:</para>
 
     <programlisting>#
 # makemap hash /etc/mail/mailertable.db &lt; /etc/mail/mailertable
-.                             uucp-dom:<replaceable>seu.uucp.relay</replaceable></programlisting>
+.			     uucp-dom:<replaceable>seu.uucp.relay</replaceable></programlisting>
 
     <para>Um exemplo mais complexo pode ser como este:</para>
 
@@ -1201,75 +1201,75 @@ Cw    <replaceable>seunomeuucp.UUCP</replaceable></programlisting>
 # makemap hash /etc/mail/mailertable.db &lt; /etc/mail/mailertable
 #
 horus.interface-business.de   uucp-dom:horus
-.interface-business.de        uucp-dom:if-bus
-interface-business.de         uucp-dom:if-bus
-.heep.sax.de                  smtp8:%1
-horus.UUCP                    uucp-dom:horus
-if-bus.UUCP                   uucp-dom:if-bus
-.                             uucp-dom:</programlisting>
+.interface-business.de	uucp-dom:if-bus
+interface-business.de	 uucp-dom:if-bus
+.heep.sax.de		  smtp8:%1
+horus.UUCP		    uucp-dom:horus
+if-bus.UUCP		   uucp-dom:if-bus
+.			     uucp-dom:</programlisting>
 
 
     <para>As primeiras tr&ecirc;s linhas gerenciam especialmente casos onde
       o dom&iacute;nio endere&ccedil;ado de mensagens n&atilde;o pode ser enviado para fora pela rota
       padr&atilde;o, mas preferivelmente ser entregue por algum
-      <quote>atalho</quote> vizinho UUCP. As pr&oacute;ximas linhas gerencia
+      <quote>atalho</quote> vizinho UUCP.  As pr&oacute;ximas linhas gerencia
       para o dom&iacute;nio ethernet local que pode ser entregue usando
-      SMTP. Finalmente, os vizinhos UUCP s&atilde;o mencionados na nota&ccedil;&atilde;o 
+      SMTP.  Finalmente, os vizinhos UUCP s&atilde;o mencionados na nota&ccedil;&atilde;o
       do pseudo-dom&iacute;nio .UUCP, para permitir um
       <literal><replaceable>uucp-vizinho de
       </replaceable>!<replaceable>recipiente</replaceable></literal>
-      sobreescreva as regras padr&otilde;es. A &uacute;ltima linha &eacute; sempre somente um
-      ponto &uacute;nico, colocando tudo mais, com a entrega UUCP a um vizinho 
+      sobreescreva as regras padr&otilde;es.  A &uacute;ltima linha &eacute; sempre somente um
+      ponto &uacute;nico, colocando tudo mais, com a entrega UUCP a um vizinho
       do UUCP que sirva como gateway de correio universal para o
-      mundo. Todos os nomes de esta&ccedil;&atilde;o atr&aacute;s 
-      <literal>uucp-dom:</literal> palavra chave deve ser um vizinho UUCP 
+      mundo.  Todos os nomes de esta&ccedil;&atilde;o atr&aacute;s
+      <literal>uucp-dom:</literal> palavra chave deve ser um vizinho UUCP
       v&aacute;lido como voc&ecirc; pode verificar usando o comando
       <literal>uuname</literal>.</para>
 
-    <para>Como lembrete, este arquivo necessita ser convertido em uma 
-      base de dados DBM antes de ser usado.  A linha de comando para realizar isto &eacute; 
+    <para>Como lembrete, este arquivo necessita ser convertido em uma
+      base de dados DBM antes de ser usado.  A linha de comando para realizar isto &eacute;
       colocada como coment&aacute;rio no alto do mailertable.
       Voc&ecirc; sempre tem que executar esse comando cada vez que voc&ecirc; modificar
       seu mailertable.</para>
 
     <para>Sugest&atilde;o final: se voc&ecirc; estiver incerto de algum roteamento particular
       que o correio deveria funcionar, lembre da op&ccedil;ao  <option>-bt</option>
-      do <application>sendmail</application>. Isto inicia o <application>sendmail</application> em <emphasis> modo 
+      do <application>sendmail</application>.  Isto inicia o <application>sendmail</application> em <emphasis> modo
       de teste de endere&ccedil;os</emphasis>; simplesmente entre com <literal>3,0</literal>, seguido pelo
       endere&ccedil;o que voc&ecirc; deseja testar para roteamento de correio.  A &uacute;ltima
       linha fala o agente de correio interno usado, o host de destino
-      que esse agente estar&aacute; chamando, e o (possivelmente 
-      traduzindo) endere&ccedil;o. Saia deste modo digitando <keycombo
+      que esse agente estar&aacute; chamando, e o (possivelmente
+      traduzindo) endere&ccedil;o.  Saia deste modo digitando <keycombo
       action="simul"><keycap>Ctrl</keycap><keycap>D</keycap></keycombo>.</para>
 
     <screen>&prompt.user; <userinput>sendmail -bt</userinput>
 ADDRESS TEST MODE (ruleset 3 NOT automatically invoked)
 Enter &lt;ruleset&gt; &lt;address&gt;
 <prompt>&gt;</prompt> <userinput>3,0 foo@exemplo.com</userinput>
-canonify           input: foo @ exemplo . com
+canonify	   input: foo @ exemplo .  com
 ...
-parse            returns: $# uucp-dom $@ <replaceable>seu.relay.uucp</replaceable> $: foo &lt; @ exemplo . com . &gt;
+parse	    returns: $# uucp-dom $@ <replaceable>seu.relay.uucp</replaceable> $: foo &lt; @ exemplo .  com . &gt;
 <prompt>&gt;</prompt> <userinput>^D</userinput></screen>
   </sect1>
 
   <sect1 id="SMTP-dialup">
-    <title>Usando o correio com uma conex&atilde;o discada</title> 
+    <title>Usando o correio com uma conex&atilde;o discada</title>
 
     <para>Se voc&ecirc; tiver um endere&ccedil;o IP est&aacute;tico, voc&ecirc; n&atilde;o deve necessitar fazer
-      nenhum ajuste na configura&ccedil;&atilde;o padr&atilde;o.  Coloque o nome atribu&iacute;do a sua esta&ccedil;&atilde;o internet 
+      nenhum ajuste na configura&ccedil;&atilde;o padr&atilde;o.  Coloque o nome atribu&iacute;do a sua esta&ccedil;&atilde;o internet
       e o <application>sendmail</application> far&aacute; o resto.</para>
 
     <para>Se voc&ecirc; tem um endere&ccedil;o IP din&acirc;mico e usa uma conex&atilde;o
       discada para se conectar a internet, voc&ecirc; provavelmente tem uma conta de
-      correio no servidor do seu provedor. Vamos assumir que o dom&iacute;nio do seu provedor 
-      &eacute; <hostid role="domainname">exemplo.net</hostid>, e seu nome de 
-      usu&aacute;rio &eacute; <username>usario</username>, voc&ecirc; chamou sua 
-      m&aacute;quina de <hostid role="fqdn">bsd.casa</hostid>, e seu provedor 
+      correio no servidor do seu provedor.  Vamos assumir que o dom&iacute;nio do seu provedor
+      &eacute; <hostid role="domainname">exemplo.net</hostid>, e seu nome de
+      usu&aacute;rio &eacute; <username>usario</username>, voc&ecirc; chamou sua
+      m&aacute;quina de <hostid role="fqdn">bsd.casa</hostid>, e seu provedor
       falou pra voc&ecirc; que pode ser usado <hostid
       role="fqdn">relay.exemplo.net</hostid> como relay de correio.</para>
 
     <para>A fim de puxar suas mensagems de sua conta de correio no provedor, voc&ecirc; deve
-      instalar um agente, puxe as mensagens. O utilit&aacute;rio <application>fetchmail</application> 
+      instalar um agente, puxe as mensagens.  O utilit&aacute;rio <application>fetchmail</application>
       &eacute; uma boa escolha que suporta v&aacute;rios tipos diferentes de protocolos.
       Normalmente, seu provedor de internet ir&aacute; fornecer POP3.  Se voc&ecirc; est&aacute; usando PPP no modo usu&aacute;rio,
       voc&ecirc; pode automaticamente baixar seus emails quando a conex&atilde;o
@@ -1282,7 +1282,7 @@ parse            returns: $# uucp-dom $@ <replaceable>seu.relay.uucp</replaceabl
     <para>Se voc&ecirc; estiver usando o <application>sendmail</application> (como
       mostrado abaixo) para entregar mensagens para contas n&atilde;o locais, voc&ecirc; provavelmente
       quer mandar o <application>sendmail</application> processar sua
-      fila de mensagens assim que sua conex&atilde;o da internet for estabelecida. 
+      fila de mensagens assim que sua conex&atilde;o da internet for estabelecida.
       Para fazer isso, coloque este comando depois do comando do
       <command>fetchmail</command> em
       <filename>/etc/ppp/ppp.linkup</filename>.</para>
@@ -1291,7 +1291,7 @@ parse            returns: $# uucp-dom $@ <replaceable>seu.relay.uucp</replaceabl
 
     <para>Assumindo que voc&ecirc; tem uma conta para
       <username>usuario</username> em <hostid
-      role="fqdn">bsd.casa</hostid>. No diret&oacute;rio home do
+      role="fqdn">bsd.casa</hostid>.  No diret&oacute;rio home do
       <username>usuario</username> em <hostid
       role="fqdn">bsd.casa</hostid>, crie o arquivo
       <filename>.fetchmailrc</filename>:</para>
@@ -1306,9 +1306,9 @@ parse            returns: $# uucp-dom $@ <replaceable>seu.relay.uucp</replaceabl
       <literal>from:</literal>, voc&ecirc; deve dizer ao
       <application>sendmail</application> para usar
       <literal>usuario@exemplo.net</literal> em vez de
-      <literal>usuario@bsd.casa</literal>. Voc&ecirc; pode tamb&eacute;m desejar dizer ao
+      <literal>usuario@bsd.casa</literal>.  Voc&ecirc; pode tamb&eacute;m desejar dizer ao
       <application>sendmail</application> para enviar todas as mensagens por <hostid
-      role="fqdn">relay.exemplo.net</hostid>, permitindo a transmiss&atilde;o mais r&aacute;pida 
+      role="fqdn">relay.exemplo.net</hostid>, permitindo a transmiss&atilde;o mais r&aacute;pida
       de mensagens.</para>
 
     <para>O seguinte arquivo <filename>.mc</filename> deve ser
@@ -1340,10 +1340,10 @@ define(`confDELIVERY_MODE',`deferred')dnl</programlisting>
 
   <sect1 id="SMTP-Auth">
     <title>Autentica&ccedil;&atilde;o SMTP</title>
-    
-    <para>Ter uma autentica&ccedil;&atilde;o <acronym>SMTP</acronym> em seu 
+
+    <para>Ter uma autentica&ccedil;&atilde;o <acronym>SMTP</acronym> em seu
       servidor de correio tr&aacute;s v&aacute;rios benef&iacute;cios.
-      Autentica&ccedil;&atilde;o <acronym>SMTP</acronym> pode adicionar uma outra camada 
+      Autentica&ccedil;&atilde;o <acronym>SMTP</acronym> pode adicionar uma outra camada
       de seguran&ccedil;a ao <application>sendmail</application>, e tr&aacute;s o benef&iacute;cio de dar aos
       usu&aacute;rios m&oacute;veis que alternam seus hosts a possibilidade de usar o mesmo servidor de correio
       sem a necessidade de reconfigurar seu cliente de correio
@@ -1352,7 +1352,7 @@ define(`confDELIVERY_MODE',`deferred')dnl</programlisting>
     <procedure>
       <step>
 	<para>Instale o <filename role="package">security/cyrus-sasl</filename>
-	  a partir do ports. Voc&ecirc; pode achar este port em
+	  a partir do ports.  Voc&ecirc; pode achar este port em
 	  <filename role="package">security/cyrus-sasl</filename>.
 	  <filename role="package">security/cyrus-sasl</filename> tem
 	  v&aacute;rias op&ccedil;&otilde;es na hora da compila&ccedil;&atilde;o para serem escolhidas, para
@@ -1370,10 +1370,10 @@ define(`confDELIVERY_MODE',`deferred')dnl</programlisting>
 	<programlisting>pwcheck_method: passwd</programlisting>
 
 	<para>Este m&eacute;todo ir&aacute; habilitar o <application>sendmail</application>
-	  para autenticar na base de dados <filename>passwd</filename> do 
-	  seu FreeBSD.  Isto resolve o problema de criar um novo usu&aacute;rio 
+	  para autenticar na base de dados <filename>passwd</filename> do
+	  seu FreeBSD.  Isto resolve o problema de criar um novo usu&aacute;rio
 	  e senha para cada usu&aacute;rio que necessitar a autentica&ccedil;&atilde;o
-	  <acronym>SMTP</acronym>, e mant&eacute;m o login e senha 
+	  <acronym>SMTP</acronym>, e mant&eacute;m o login e senha
 	  e email iguais.</para>
       </step>
 
@@ -1411,7 +1411,7 @@ SENDMAIL_LDADD=-lsasl</programlisting>
 	<para>Depois do <application>sendmail</application> ter sido compilado
 	  e reinstalado, edite o seu arquivo <filename>/etc/mail/freebsd.mc</filename>
 	  (ou qualquer arquivo que voc&ecirc; use como arquivo <filename>.mc</filename>.  Muitos administradores
-	  escolhem usar a sa&iacute;da do &man.hostname.1; como nome do arquivo <filename>.mc</filename>).  
+	  escolhem usar a sa&iacute;da do &man.hostname.1; como nome do arquivo <filename>.mc</filename>).
 	  Adicione estas linhas a ele:</para>
 
 	<programlisting>dnl set SASL options
@@ -1429,12 +1429,12 @@ define(`confDEF_AUTH_INFO', `/etc/mail/auth-info')dnl</programlisting>
       <step>
 	<para>Finalmente, execute &man.make.1; dentro do <filename>/etc/mail</filename>.
 	  Isto ir&aacute; gerar seu novo arquivo <filename>.mc</filename> e criar um arquivo <filename>.cf</filename> chamado
-	  <filename>freebsd.cf</filename> (ou algum outro nome que voc&ecirc; usou 
-	  para seu arquivo <filename>.mc</filename>).  Ent&atilde;o use o 
+	  <filename>freebsd.cf</filename> (ou algum outro nome que voc&ecirc; usou
+	  para seu arquivo <filename>.mc</filename>).  Ent&atilde;o use o
 	  comando <command>make install restart</command>, que ir&aacute;
 	  copiar o arquivo para o <filename>sendmail.cf</filename>, e ir&aacute;
 	  reiniciar corretamente o <application>sendmail</application>.
-	  Para mais informa&ccedil;&otilde;es sobre este processo, voc&ecirc; deve consultar 
+	  Para mais informa&ccedil;&otilde;es sobre este processo, voc&ecirc; deve consultar
 	  o <filename>/etc/mail/Makefile</filename>.</para>
       </step>
     </procedure>
