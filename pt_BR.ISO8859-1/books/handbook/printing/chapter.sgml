@@ -252,7 +252,7 @@
       <listitem>
 	<para>Veja a se&ccedil;&atilde;o 
 		<link linkend="printing-simple">Configura&ccedil;&atilde;o Simples de Impressora</link> para aprender como conectar a impressora, informar ao 
-	  <application>LPD</application> como se cominicar com as impressoras,
+	  <application>LPD</application> como se comunicar com as impressoras,
 	  e imprimir arquivo em texto puro nelas.
 	  </para>
       </listitem>
@@ -398,7 +398,7 @@
 	que as paralelas.  Interfaces paralelas normalmente s&atilde;o 
 	disponibilizadas em uma &uacute;nica dire&ccedil;&atilde;o para
 	comunica&ccedil;&atilde;o ( do computador para a impresora)
-	enquanto que a serial proporciona uma cominica&ccedil;&atilde;o
+	enquanto que a serial proporciona uma comunica&ccedil;&atilde;o
 	bi-direcional.  As novas portas paralelas (EPP e ECP) e as
 	impressoras podendo comunicar em ambas as dire&ccedil;&otilde;es sob
 	o FreeBSD quando um cabo padr&atilde;o IEEE1284 estiver sendo usado.
@@ -530,11 +530,14 @@
       </sect3>
 
       <sect3 id="printing-software">
-	<title>Software Setup</title>
+	<title>
+		Configura&ccedil;&atilde;o de Programa
+	</title>
 
-	<para>Essa se&ccedil;&atilde;o descreve as configura&ccedil;&otilde;es
-	necess&aacute;rias para imprimir com o sistema de 
-	<foreignphrase>spooling</foreignphrase> no FreeBSD.
+	<para>
+		Essa se&ccedil;&atilde;o descreve as 
+	configura&ccedil;&otilde;es necess&aacute;rias para imprimir com 
+	o sistema de <foreignphrase>spooling</foreignphrase> no FreeBSD.
 	</para>
 
 	<para>
@@ -543,24 +546,26 @@
 
 	<procedure>
 	  <step>
-	    <para>
+		<para>
 		Configure o seu kernel, se necess&aacute;rio, para
 	utilizar a porta que voc&ecirc; deseja conectar a sua impressora.
-	      A se&ccedil;&atilde;o <link
-	      linkend="printing-kernel">Configura&ccedil;&atilde;o do Kernel</link> informa
-		&agrave; voc&ecirc; o que &eacute; necess&aacute;rio fazer.
-	      </para>
+	A se&ccedil;&atilde;o <link linkend="printing-kernel">
+		Configura&ccedil;&atilde;o do Kernel</link> informa
+	&agrave; voc&ecirc; o que &eacute; necess&aacute;rio fazer.
+		</para>
 	  </step>
 
 	  <step>
-	    <para>
+
+		<para>
 		Configure o modo de comunica&ccedil;&atilde;o da porta
 	paralela, se voc&ecirc; est&aacute; usando a porta paralela
 	se&ccedil;&atilde;o
-	      <link linkend="printing-parallel-port-mode">
-		Configure o Modo de Comunica&ccedil;&atilde;o para a 
-		Porta Paralela
-	      </link> para ter mais detalhes.</para>
+	<link linkend="printing-parallel-port-mode"> Configure o Modo de 
+		Comunica&ccedil;&atilde;o para a Porta Paralela
+	</link> para ter mais detalhes.
+		</para>
+
 	  </step>
 
 	  <step>
@@ -574,84 +579,87 @@
 	  </step>
 
 	  <step>
-	    <para>
+		<para>
 		Configure o <application>LPD</application> para a
 	utiliza&ccedil;&atilde;o da impressora, modificando o arquivo
 	<filename>/etc/printcap</filename>.  Voc&ecirc; ir&aacute; 
 	o que fazer mais tarde neste cap&iacute;tulo.
-	</para>
+		</para>
 	  </step>
 	</procedure>
 
 	<sect4 id="printing-kernel">
-	  <title>Configura&ccedil;&atilde;o do Kernel</title>
+	<title>
+		Configura&ccedil;&atilde;o do Kernel
+	</title>
 
-	  <para>
+	<para>
 		O kernel do sistema operacional &eacute; compilado para
 	trabalhar com um determinado conjunto de dispositivos.  As interfaces
 	serial e paralela para a utiliza&ccedil;&atilde;o da impressora 
 	fazem parte deste conjunto.  Entrtanto, pode ser necess&aacute;rio
 	adcionar o suporte para uma porta serial ou paralela caso o seu
 	kernel n&atilde;o esteja configurado.
-	    </para>
+	</para>
 
-	  <para>
+	<para>
 		Para saber se seu kernel j&aacute; possui o suporte
 	para interface serial, digite:
-	    </para>
+	</para>
 
 	  <screen>&prompt.root; <userinput>grep sio<replaceable>N</replaceable> /var/run/dmesg.boot</userinput></screen>
 
-	  <para>
+	<para>
 		Onde <replaceable>N</replaceable> &eacute; o n&uacute;mero
 	da porta serial, iniciando do zero.  Se voc&ecirc; ver algo 
 	semelhante &agrave;:
-	    </para>
+	</para>
 
 	  <screen>
 		sio2 at port 0x3e8-0x3ef irq 5 on isa
 		sio2: type 16550A
 	</screen>
 
-	  <para>
+	<para>
 		Ent&atilde;o o kernel suporta a porta.
-		</para>
+	</para>
 
-	  <para>
+	<para>
 		Para saber se seu kernel j&aacute; possui o suporte
 	para interface paralela, digite:
-	    </para>
+	</para>
 
 	  <screen>&prompt.root; <userinput>grep ppc<replaceable>N</replaceable> /var/run/dmesg.boot</userinput></screen>
 
-	  <para>
+	<para>
 		Onde <replaceable>N</replaceable> &eacute; o n&uacute;mero
 	da porta paralela, iniciando do zero.  Se voc&ecirc; ver algo 
 	semelhante &agrave;:
-	    </para>
+	</para>
 	    
 	    <screen>
 		ppc0: &lt;Parallel port&gt; at port 0x378-0x37f irq 7 on isa0
 		ppc0: SMC-like chipset (ECP/EPP/PS2/NIBBLE) in COMPATIBLE mode
 		ppc0: FIFO with 16/16/8 bytes threshold</screen>
 	    
-	  <para>
+	<para>
 		Ent&atilde;o o kernel suporta a porta.
-		</para>
+	</para>
 
-	  <para>
+	<para>
 		Voc&ecirc; pode ter que reconfigurar o seu kernel para
 	que o sistema operacional possa reconhecer e usar as portas
 	paralela e/ou serial, para que voc&ecirc; possa utilizar a
 	impressora.
-	    </para>
+	</para>
 
-	  <para>
+	<para>
 		Para adcionar suporte a porta serial, consulte a 
 	se&ccedil;&atilde;o de configura&ccedil;&atilde;o do kernel.  Para
 	adcionar suporte a porta paralela consulte esta se&ccedil;&atilde;o
 	<emphasis>e</emphasis> a se&ccedil;&atilde;o a seguir.
-	    </para>
+	</para>
+
 	</sect4>
       </sect3>
 
@@ -862,7 +870,6 @@
 
 	    <step>
 	      <para>
-
 		Salve o arquivo.  Ent&atilde;o configure, compile
 	e instale o novo kernel, e aseguir reboot o seu sistema.
 	Veja <link 
@@ -911,7 +918,7 @@
 		Testanto a Comunica&ccedil;&atilde;o com a Impressora
 	</title>
 
-	  <para>
+	<para>
 		Antes de procequir com a configura&ccedil;&atilde;o do 
 	sistema	<foreignphrase>spooling</foreignphrase>, voc&egrave;
 	deve ter certeza que o seu sistema operaional teve sucesso
@@ -920,16 +927,16 @@
 	<foreignphrase>spooling</foreignphrase> separadamente.
 	</para>
 
-	  <para>
+	<para>
 		Para fazer o teste da impressora, nos precisamos enviar
 	algum testo para a impressora.  Para impressoras que podem imprimir
 	caracteres diretamente, o programa &man.lptest.1; &eacute; perfeito: 
 	ele gera todos os 96 caracteres imprim&iacute;veis da tabela ASCII 
 	em 96 linhas.
-	    </para>
+	</para>
 
-	  <indexterm><primary>PostScript</primary></indexterm>
-	  <para>
+	<indexterm><primary>PostScript</primary></indexterm>
+	<para>
 		Para a impressora &postscript; (ou outra linguagem )
 	nos iremos precisar de algo mais sofisticado para testar.  Um 
 	pequeno programa &postscript; como o que segue, &eacute; o 
@@ -942,15 +949,15 @@
 (Is this thing working?) show
 showpage</programlisting>
 
-	  <para>
+	<para>
 		O c&oacute;digo &postscript; acima pode ser colocado
 	em um arquivo e usado como mostra os exemplos nas sec&ccedil;&otilde;es
 	a seguir.
-	    </para>
+	</para>
 
 	  <indexterm><primary>PCL</primary></indexterm>
 	  <note>
-	    <para>
+		<para>
 		Quando esse documento refere-se a linguagem da
 	impressora,  &eacute; assumido que a linguagem &eacute; 
 	semelhante ao &postscript;,  e n&atilde;o o PCL da Hewlett 
@@ -960,11 +967,11 @@ showpage</programlisting>
 	diretamente em impressoras de texto puro, e para impressoras que
 	necessitem de outra linguagem para imprimir, ser&aacute; 
 	necess&aacute;rio acomoda&ccedil;&otilde;es.
-	      </para>
+		</para>
 	  </note>
 
 	  <sect5 id="printing-checking-parallel">
-	    <title>
+		<title>
 			Verificando a Impressora Paralela
 		</title>
 
@@ -972,35 +979,42 @@ showpage</programlisting>
         <primary>printers</primary>
         <secondary>parallel</secondary>
       </indexterm>
-	    <para>Essa se&ccedil;&atilde;o informa &agrave; voc&ecirc;
+	<para>
+		Essa se&ccedil;&atilde;o informa &agrave; voc&ecirc;
 	como verificar se o FreeBSD pode comunicar-se com a impressora
 	conectata na porta paralela.
-	      </para>
+	</para>
 
-	    <para>
+	<para>
 		<emphasis>Para testa a impressora na porta paralela:
-	      </emphasis></para>
+	</emphasis>
+	</para>
 
 	    <procedure>
 	      <step>
-		<para>Torne-se <username>root</username> com  &man.su.1;.</para>
+		<para>
+			Torne-se <username>root</username> com  &man.su.1;.
+		</para>
 	      </step>
 
 	      <step>
-		<para>Envie Dados para a impressora.
+		<para>
+			Envie Dados para a impressora.
 		</para>
 
 		<itemizedlist>
 		  <listitem>
-		    <para>
+			<para>
 			Se a impressora poder imprimir texto puro, use
-		      &man.lptest.1;.  Digite:</para>
+	&man.lptest.1;.  Digite:
+			</para>
 
 		    <screen>&prompt.root; <userinput>lptest &gt; /dev/lpt<replaceable>N</replaceable></userinput></screen>
 
-		    <para>Onde <replaceable>N</replaceable> &eacute; o 
-		n&uacute;mero da porta paralela, iniciando em 0
-		      </para>
+			<para>
+			Onde <replaceable>N</replaceable> &eacute; o 
+	n&uacute;mero da porta paralela, iniciando em 0
+			</para>
 		  </listitem>
 
 		  <listitem>
@@ -1832,9 +1846,12 @@ $%&amp;'()*+,-./01234567
 		Configura&ccedil;&atilde;o Avan&ccedil;ada de Impressora
 	</title>
     
-    <para>This section describes filters for printing specially formatted
-      files, header pages, printing across networks, and restricting and
-      accounting for printer usage.</para>
+	<para>
+		Essa se&ccedil;&atilde;o descreve filtros para formatos
+	especiais de impress&atilde;o de arquivos, p&aacute;ginas de 
+	cabe&ccedil;a&ccedil;lho, impress&atilde;o atraves da rede, e 
+	restringir acesso ao uso da impressora.
+	</para>
 
     <sect2 id="printing-advanced-filter-intro">
       <title>Filters</title>
@@ -1843,85 +1860,118 @@ $%&amp;'()*+,-./01234567
 	<secondary>filters</secondary>
       </indexterm>
       
-      <para>Although <application>LPD</application> handles network protocols,
-	queuing, access control,
-        and other aspects of printing, most of the <emphasis>real</emphasis>
-        work happens in the <emphasis>filters</emphasis>.  Filters are
-        programs that communicate with the printer and handle its device
-        dependencies and special requirements.  In the simple printer setup,
-        we installed a plain text filter&mdash;an extremely simple one that
-        should work with most printers (section <link
-          linkend="printing-textfilter">Installing the Text
-          Filter</link>).</para>
+	<para>
+		Atraves do <application>LPD</application> podemos acessar
+	o protocolos de rede, filas, acesso de controle, e outros aspectos
+	da impres&atilde;o, a maioria dos trabalhos <emphasis>reais</emphasis>
+        ocorre nos <emphasis>filters</emphasis>.  Os filtros s&atilde;o
+	programas que se comunicam com a impressora e manipula as 
+	dependencias do dispositivo e necessidades especiais.  Na 
+	se&ccedil;&atilde;o configira&ccedil;&atilde;o simples da impressora, 
+	n&oacute;s instalamos um filtro&mdash;an texto puro extremamente
+	simples que deve funcionar na maioria das impressoras 
+	( se&ccedil;&atilde;o <link
+          linkend="printing-textfilter">Instalando o Filtro de Texto
+          </link>).
+	</para>
           
-      <para>However, in order to take advantage of format conversion, printer
-        accounting, specific printer quirks, and so on, you should understand
-        how filters work.  It will ultimately be the filter's responsibility
-        to handle these aspects.  And the bad news is that most of the time
-        <emphasis>you</emphasis> have to provide filters yourself.  The good
-        news is that many are generally available; when they are not, they are
-        usually easy to write.</para>
+	<para>
+		Entretando, se quizermos tirar vantagens de convers&atilde;o
+	de formatos, relat&oacute;rio de uso da impressora, especificar
+	uma configura&ccedil;&atilde;o especial da impressora, entre outras 
+	coisas, vo&ecirc; dever&aacute; compreender como funciona os filtros.
+	  Ultimamente a responsabidade do filtro &eacute; tratar desses
+	aspectos.  E a m&aacute; not&iacute;cia &eacute; que a maior
+	parte do tempo <emphasis>voc&ecirc;</emphasis> ter&aacute; que 
+	providenciar os seus pr&oacute;prios filtros.  A boa not&iacute;cia
+	&eacute; que muitos j&aacute; es&atilde;o dispon&iacute;veis; e se
+	n&atilde;o encontrar, voc&ecirc; facilmente poder&aacute; escreve-los.
+	</para>
           
-      <para>Also, FreeBSD comes with one,
-        <filename>/usr/libexec/lpr/lpf</filename>, that works with many
+	<para>
+		Tamb&eacute;m, o FreeBSD vem com um 
+        <filename>/usr/libexec/lpr/lpf</filename>, que funciona com a maioria
+	das impressoras que podem imprimir texto puro.  
+		( Ele that works with many
         printers that can print plain text.  (It handles backspacing and tabs
         in the file, and does accounting, but that is about all it does.)
-        There are also several filters and filter components in the FreeBSD
-        Ports Collection.</para>
+	Existem v&aacute;rios filtros e componentes de filtro na 
+	cole&ccedil;&atilde;o de Ports do FessBSD.
+	</para>
           
-      <para>Here is what you will find in this section:</para>
+	<para>
+		Aqui est&aacute; o que voc&ecirc; ir&aacute; encontrar
+	nessa se&ccedil;&atilde;o:
+	</para>
       
       <itemizedlist>
         <listitem>
-          <para>Section <link linkend="printing-advanced-filters">How Filters
-              Work</link>, tries to give an overview of a filter's role in the
-            printing process.  You should read this section to get an
-            understanding of what is happening <quote>under the hood</quote>
-            when <application>LPD</application> uses filters.  This knowledge
-	    could help you anticipate
-            and debug problems you might encounter as you install more and
-            more filters on each of your printers.</para>
+		<para>
+			Se&ccedil;&atilde;o
+	 <link linkend="printing-advanced-filters">Como os Filtros 
+	funcionam</link>, tenta dar um panorama geral da fun&ccedil;&atilde;o
+	de um filtro no processo de impress&atilde;o.  Voc&ecirc; devera ler 
+	esta se&ccedil;&atilde;opara compreender o que acontece <quote>
+	por baixo dos panos</quote> quando <application>LPD</application> 
+	utiliza os filtros.  Esse conhecimento poder&aacute; ajuda-lo
+	antecipadamente e livra-lo dos defeitos que poderam encontrar 
+	na instala&ccedil;&atilde;o de v&aacute;rios filtros para suas
+	impressoras.
+		</para>
         </listitem>
               
         <listitem>
-          <para><application>LPD</application> expects every printer to be 
-	    able to print plain text by
-            default.  This presents a problem for &postscript; (or other
-            language-based printers) which cannot directly print plain text.
-            Section <link
-              linkend="printing-advanced-if-conversion">Accommodating
-              Plain Text Jobs on &postscript; Printers</link> tells you what you
-            should do to overcome this problem.  You should read this
-            section if you have a &postscript; printer.</para>
+		<para>
+			<application>LPD</application> Espera que cada
+	impressora esteja habilidada para imprimir texto puro por 
+	padr&atilde;o.  &Eacute; um problema presente para impressoras
+	&postscript; ( ou outra impressora baseada em liguagem) a qual 
+	n&atilde;o pode imprimir diretamente texto puro.  A se&ccedil;&atilde;o
+	<link linkend="printing-advanced-if-conversion">
+	Acomodando Impress&atilde;o em Texto Puro em Impressoras
+	&postscript;</link> mostra &agrave; voc&ecirc; como proceder
+	para resolver este problema.  Voc&ecirc; deve ler essa 
+	se&ccedil;&atilde;o caso voc&ecirc; tenha uma impressora &postscript;
+		</para>
         </listitem>
 
         <listitem>
-          <para>&postscript; is a popular output format for many programs. Even
-            some people (myself included) write &postscript; code directly.  But
-            &postscript; printers are expensive.  Section <link
-              linkend="printing-advanced-ps">Simulating &postscript; on
-              Non &postscript; Printers</link> tells how you can further modify
-            a printer's text filter to accept and print &postscript; data on a
-            <emphasis>non &postscript;</emphasis> printer.  You should read
-            this section if you do not have a &postscript; printer.</para>
+		<para>
+			&postscript; &eacute; o formato mais comum para a
+	maioria dos programas.  Mesmo que algumas pessoas (incluindo eu
+	mesmo) escreve c&oacute;digo &postscript; diretamente, mas impressoras
+	&postscript; s&atilde;o caras.  Na se&ccedil;&atilde;o
+        <link linkend="printing-advanced-ps">Simulando &postscript; em 
+	impressora n&atilde;o &postscript;</link> informa como voc&ecirc;
+	pode modificar os filtros para aceitar e imprimir dados &postscript;
+	em uma impressora <emphasis>n&atilde;o &postscript;</emphasis>.  
+	voc&ecirc; dever&aacute; ler essa se&ccedil;&atilde;o se voc&ecirc; 
+	n&atilde;o possiuir uma impressora &postscript;.
+		</para>
         </listitem>
               
         <listitem>
-          <para>Section <link
-              linkend="printing-advanced-convfilters">Conversion
-              Filters</link> tells about a way you can automate the conversion
-            of specific file formats, such as graphic or typesetting data,
-            into formats your printer can understand.  After reading this
-            section, you should be able to set up your printers such that
-            users can type <command>lpr -t</command> to print troff data, or
-            <command>lpr -d</command> to print &tex; DVI data, or <command>lpr
-              -v</command> to print raster image data, and so forth.  I
-            recommend reading this section.</para>
+          <para>A se&ccedil;&atilde;o <link
+              linkend="printing-advanced-convfilters">Filtro de 
+	Convers&atilde;o </link> informa sobre o meio que voc&ecirc; pode
+	automatizar a convers&atilde;o especificando o formato do arquivo,
+	tais como gr&aacute;fico ou dados de <foreignphrase>typesetting
+	</foreignphrase>, para formatos que a impressora possa endenter.
+	  Depos de lida esta se&ccedil;&atilde;o, voc&ecirc; est&aacute; 
+	apto a configurar sua impressora para que os usu&aacute;rios 
+	possam digitar <command>lpr -t</command> para imprimit dados
+	de troff, ou <command>lpr -d</command> para imprimir dados &tex; 
+	DVI data, ou <command>lpr -v</command> para imprimir dados de 
+	imagem rasterisadas, e por ai vai, recomendamos a leitura
+	desta se&ccedil;&atilde;o.
+		</para>
         </listitem>
               
         <listitem>
-          <para>Section <link linkend="printing-advanced-of">Output
-              Filters</link> tells all about a not often used feature of 
+		<para>
+			A se&ccedil;&atilde;o 
+	<link linkend="printing-advanced-of"> Filtros de sa&iacute;da </link> 
+	Informa sobre tells all about a not often used feature of 
 	    <application>LPD</application>:
             output filters.  Unless you are printing header pages (see <link
               linkend="printing-advanced-header-pages">Header Pages</link>),
