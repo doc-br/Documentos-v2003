@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: pt_BR.ISO8859-1/books/handbook/mail/chapter.sgml,v 1.6 2003/12/11 15:25:26 jmelo Exp $
+     $FreeBSD: pt_BR.ISO8859-1/books/handbook/mail/chapter.sgml,v 1.7 2003/12/11 20:42:31 jmelo Exp $
 -->
 
 <chapter id="mail">
@@ -40,44 +40,44 @@
 
     <itemizedlist>
       <listitem>
-	<para>Quais componentes de software est&atilde;o envolvidos no envio e recebimento do correio eletr&ocirc;nico.  </para>
+	<para>Quais componentes de software est&atilde;o envolvidos no envio e recebimento do correio eletr&ocirc;nico.</para>
       </listitem>
 
       <listitem>
-	<para>Onde a configura&ccedil;&atilde;o b&aacute;sica do <application>sendmail</application> est&aacute; no localizada no FreeBSD.  </para>
+	<para>Onde a configura&ccedil;&atilde;o b&aacute;sica do <application>sendmail</application> est&aacute; no localizada no FreeBSD.</para>
       </listitem>
 
       <listitem>
-	<para>Como bloquear <literal>spammer</literal> de usar ilegalmente seu servidor de correio como relay.  </para>
+	<para>Como bloquear <literal>spammer</literal> de usar ilegalmente seu servidor de correio como relay.</para>
       </listitem>
 
       <listitem>
-	<para>Como instalar e configurar um servidor de correio alternativo em seu sistema, substituindo o  <application>sendmail</application>.  </para>
+	<para>Como instalar e configurar um servidor de correio alternativo em seu sistema, substituindo o <application>sendmail</application>.</para>
       </listitem>
 
       <listitem>
-	<para>Como resolver problemas comuns no seu servidor de correio eletr&ocirc;nico.  </para>
+	<para>Como resolver problemas comuns no seu servidor de correio eletr&ocirc;nico.</para>
       </listitem>
       
       <listitem>
-	<para>Como usar SMTP com UUCP.  </para>
+	<para>Como usar SMTP com UUCP.</para>
       </listitem>
 
       <listitem>
-	<para>Como usar o correio com uma conex&acirc;o dialup.  </para>
+	<para>Como usar o correio com uma conex&acirc;o dialup.</para>
       </listitem>
 
       <listitem>
-        <para>Como configurar uma autentica&ccedil;&atilde;o SMTP para melhorar a seguran&ccedil;a.  </para>
+        <para>Como configurar uma autentica&ccedil;&atilde;o SMTP para melhorar a seguran&ccedil;a.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Antes de ler este cap&iacute;tulo voc&ecirc; deve ter:  </para>
+    <para>Antes de ler este cap&iacute;tulo voc&ecirc; deve ter:</para>
 
     <itemizedlist>
       <listitem>
 	<para>Configurado corretamente sua conex&atilde;o de rede
-	  (<xref linkend="advanced-networking">).  </para>
+	  (<xref linkend="advanced-networking">).</para>
       </listitem>
 
       <listitem>
@@ -87,7 +87,7 @@
 
       <listitem>
 	<para>Saber como instalar software adicional de terceiros
-	  (<xref linkend="ports">).  </para></listitem>
+	  (<xref linkend="ports">).</para></listitem>
     </itemizedlist>
   </sect1>
 
@@ -115,7 +115,7 @@
 	<application>xfmail</application> para falar de alguns, e muito 
 	mais <quote>sofisticados</quote> como o navegador WWW.  Estes 
 	programas simplesmente passam as transa&ccedil;&otilde;es de email para o <link linkend="mail-host"><quote>servidor de email</quote></link> local,
-	chamando qualquer um dos <link linkend="mail-mta">daemons do servidor</link> dispon&iacute;vel ou entregando atrav&eacute;s de TCP.  </para>
+	chamando qualquer um dos <link linkend="mail-mta">daemons do servidor</link> dispon&iacute;vel ou entregando atrav&eacute;s de TCP.</para>
     </sect2>
 
     <sect2 id="mail-mta">
@@ -141,7 +141,7 @@
         padr&atilde;o no FreeBSD) ou um dos outros daemons de servidores de emails como
 	<application>qmail</application>,
 	<application>postfix</application>, ou
-	<application>exim</application>.  Existem outros por&eacute;m estes s&atilde;o os mais usados.  </para>
+	<application>exim</application>.  Existem outros por&eacute;m estes s&atilde;o os mais usados.</para>
 
       <para>O servidor daemon normalmente tem duas fun&ccedil;&otilde;es&mdash;ele olha
         depois de receber um mail que chegou e entrega a mensagem.  Ele n&atilde;o
@@ -153,7 +153,7 @@
         <application>sendmail</application> tem s&eacute;rios problemas de
 	seguran&ccedil;a, entretanto se voc&ecirc; manter rodando uma vers&atilde;o sempre atual,
 	voc&ecirc; n&atilde;o dever&aacute; ter problemas.  &Eacute; uma boa ideia sempre manter atualizado
-	qualquer aplicativo que voc&ecirc; rode.  </para>
+	qualquer aplicativo que voc&ecirc; rode.</para>
     </sect2>
 
     <sect2 id="mail-dns">
@@ -162,7 +162,7 @@
       <para>O sistema de nome de dom&iacute;nios (DNS) e seu daemon
         <command>named</command> tem um grande papel na entrega de
 	email.  Em orderm para entregar a mensagem do seu site para outro, o
-	servidor daemon ir&aacute; consultar no DNS para determinar o host que ir&aacute; receber o destino da mensagem.  </para>
+	servidor daemon ir&aacute; consultar no DNS para determinar o host que ir&aacute; receber o destino da mensagem.</para>
 
       <para>Isso funciona da mesma forma quando &eacute; enviado uma mensagem para voc&ecirc;.  O DNS
         cont&eacute;m o banco de dados com mapeamento de nomes para o endere&ccedil;o IP, e o nome do host 
@@ -183,23 +183,23 @@
         ir&aacute; coletar a mensagem enviada para voc&ecirc; e armazen&aacute;-la para leitura ou pega-la.  
 	Para puxar a mensagem armazenada no servidor, voc&ecirc; ir&aacute; precisar conectar no servidor de email.  
 	Isto &eacute; feito usando POP ou IMAP.  Se voc&ecirc; quer ler mensagens diretamente no servidor de email,
-	ent&atilde;o o POP ou IMAP n&atilde;o &eacute; necess&aacute;rio.  </para>
+	ent&atilde;o o POP ou IMAP n&atilde;o &eacute; necess&aacute;rio.</para>
 
       <indexterm><primary>POP</primary></indexterm>
       <indexterm><primary>IMAP</primary></indexterm>
       <para>Se voc&ecirc; quer rodar um servidor POP ou IMAP, h&aacute; duas coisas que
-        voc&ecirc; deve fazer:  </para>
+        voc&ecirc; deve fazer:</para>
 
       <procedure>
         <step>
 	  <para>Pegue o daemon do POP ou IMAP da <ulink
 	    url="../../../../ports/mail.html">cole&ccedil;&atilde;o de ports</ulink> e instale
-	    em seu sistema.  </para>
+	    em seu sistema.</para>
 	</step>
 
 	<step>
 	  <para>Modifique o <filename>/etc/inetd.conf</filename> para carregar o 
-	    servidor POP ou IMAP.  </para>
+	    servidor POP ou IMAP.</para>
 	</step>
       </procedure>
     </sect2>
@@ -209,7 +209,7 @@
       <indexterm><primary>mail host</primary></indexterm>
 
       <para>O servidor de correio &eacute; o nome dado ao servidor que &eacute; respons&aacute;vel pela
-        entrega e recebimento de mensagens do seu host, e possivelmente de sua rede.  </para>
+        entrega e recebimento de mensagens do seu host, e possivelmente de sua rede.</para>
     </sect2>
   </sect1>
 
@@ -234,7 +234,7 @@
       a partir de um agente de usu&aacute;rio de mensagens (MUA) e entreg&aacute;-la ao mailer
       apropriado como definido pelo arquivo de configura&ccedil;&atilde;o. 
       <application>sendmail</application> pode tamb&eacute;m aceitar conex&otilde;es de rede e entregar 
-      as mensagens em caixas de mensagens locais ou entreg&aacute;-las para outro programa.  </para>
+      as mensagens em caixas de mensagens locais ou entreg&aacute;-las para outro programa.</para>
       
 
     <para>O <application>sendmail</application> usa os seguintes
@@ -332,7 +332,7 @@
       destinat&aacute;rios finais.  Os hosts que s&atilde;o listados com <option>REJECT</option> s&atilde;o rejeitados 
       por qualquer conex&atilde;o de email no servidorar. Os hosts que tem a op&ccedil;&atilde;o <option>RELAY</option> 
       para seu hostname, s&atilde;o permitidos para enviar mensagens para qualquer destino atrav&eacute;s desse 
-      servidor de correio.  </para>
+      servidor de correio.</para>
 
       <example>
 	<title>Configurando o banco de dados de acesso do <application>sendmail</application>
@@ -398,7 +398,7 @@ procmail: "|/usr/local/bin/procmail"</programlisting>
 
    <para>Quando este arquivo &eacute; atualizado, voc&ecirc; precisa executar o comando
    <command>make</command> no <filename>/etc/mail/</filename> para
-   atualizar a base de dados.  </para>
+   atualizar a base de dados.</para>
   </sect2>
   <sect2>
     <title><filename>/etc/mail/local-host-names</filename></title>
@@ -505,80 +505,79 @@ postmaster@exemplo.com          postmaster@noc.exemplo.net
       variam simplesmente em querer testar outro MTA at&eacute; a necessidade
       de fun&ccedil;&otilde;es espec&iacute;ficas ou confia em outro pacote respons&aacute;vel pelo envio de
       mensagens.  Felizmente, por qualquer raz&atilde;o, o FreeBSD faz com que
-      essa mudan&ccedil;a seja simples de ser realizada.  </para>
+      essa mudan&ccedil;a seja simples de ser realizada.</para>
 
     <sect2>
       <title>Instalando um novo MTA</title>
 
-      <para>You have a wide choice of MTAs available.  A good
-	starting point is the
-	<link linkend="ports">FreeBSD Ports Collection</link> where
-	you will be able to find many.  Of course you are free to use
-	any MTA you want from any location, as long as you can make
-	it run under FreeBSD.</para>
+      <para>Voc&ecirc; tem uma variedade de escolhas de MTAs dispon&iacute;veis.  Um bom
+	ponto de partida &eacute; a 
+	<link linkend="ports">Cole&ccedil;&atilde;o de Ports do FreeBSD</link> onde voc&ecirc;
+	poder&aacute; encontrar muitos deles.  &Eacute; claro que voc&ecirc; est&aacute; livre para usar
+	qualquer MTA que voc&ecirc; quiser em qualquer localidade, assim como rod&aacute;-lo
+	no FreeBSD.</para>
 
-      <para>Start by installing your new MTA.  Once it is installed
-	it gives you a chance to decide if it really fulfills your
-	needs, and also gives you the opportunity to configure your
-	new software before getting it to take over from
-	<application>sendmail</application>.  When doing this, you
-	should be sure that installing the new software will not attempt
-	to overwrite system binaries such as
-	<filename>/usr/bin/sendmail</filename>.  Otherwise, your new
-	mail software has essentially been put into service before
-	you have configured it.</para>
+      <para>Come&ccedil;e instalando seu novo MTA.  Uma vez que ele est&aacute; instalado,
+	ele lhe dar&aacute; a oportuniade de decidir se ele cumprir&aacute; suas necessidades, 
+	e tamb&eacute;m lhe d&aacute; a oportunidade de configurar seu novo aplicativo antes 
+	de desabilitar o <application>sendmail</application>.  Ao se fazer isso, voc&ecirc;
+	deve certifica-rse que a instala&ccedil;&atilde;o do novo aplicativo n&atilde;o tentar&aacute;
+	sobreescrever os bin&aacute;rios do sistema como
+	<filename>/usr/bin/sendmail</filename>.  Se n&atilde;o, seu novo
+	aplicativo de mensagens ser&aacute; posto fazendo o servi&ccedil;o antes que
+	voc&ecirc; tenha configurado-o.</para>
 
-      <para>Please refer to your chosen MTA's documentation for
-	information on how to configure the software you have
-	chosen.</para>
+      <para>Por favor consulte a documenta&ccedil;&atilde;o do seu MTA para
+	informa&ccedil;&otilde;es sobre como configurar seu aplicativo que voc&ecirc;
+	escolheu.</para>
     </sect2>
 
     <sect2>
-      <title>Disable <application>sendmail</application></title>
+      <title>Desabilitando o <application>sendmail</application></title>
 
-      <para>The procedure used to start
-	<application>sendmail</application> changed significantly
-	between 4.5-RELEASE and 4.6-RELEASE.  Therefore, the procedure
-	used to disable it is subtly different.</para>
+      <para>O processo de inicializa&ccedil;&atilde;o do 
+	<application>sendmail</application> mudou significativamente
+	entre o 4.5-RELEASE e 4.6-RELEASE.  Portanto, o procedimento
+	usado para desabilit&aacute;-lo &eacute; subtamente diferente.</para>
 
       <sect3>
-	<title>FreeBSD 4.5-STABLE before 2002/4/4 and Earlier
-	  (Including 4.5-RELEASE and Earlier)</title>
+	<title>FreeBSD 4.5-STABLE antes de 2002/4/4 e antes
+	  (incluindo o 4.5-RELEASE e antes disso)</title>
 
-	<para>Enter:</para>
+	<para>Entre com a op&ccedil;&atilde;o:</para>
 
 	  <programlisting>sendmail_enable="NO"</programlisting>
 
-	  <para>into <filename>/etc/rc.conf</filename>.  This will disable
-	  <application>sendmail</application>'s incoming mail service,
-	  but if <filename>/etc/mail/mailer.conf</filename> (see below)
-	  is not changed, <application>sendmail</application> will
-	  still be used to send e-mail.</para>
+	  <para>no <filename>/etc/rc.conf</filename>.  Isto ir&aacute; desabilitar o
+	  <application>sendmail</application> como servi&ccedil;o de chegada de mensagens,
+	  mas se o <filename>/etc/mail/mailer.conf</filename> (veja abaixo)
+	  n&atilde;o for alterado, o <application>sendmail</application> ainda
+	  continuar&aacute; sendo usado para enviar mensagens.</para>
       </sect3>
 
       <sect3>
-	<title>FreeBSD 4.5-STABLE after 2002/4/4
-	  (Including 4.6-RELEASE and Later)</title>
+	<title>FreeBSD 4.5-STABLE depois de 2002/4/4
+	  (Incluindo o 4.6-RELEASE e mais recentes)</title>
 
-	<para>In order to completely disable
-	  <application>sendmail</application> you must use</para>
+	<para>Para desabilitar completamente o 
+	  <application>sendmail</application> voc&ecirc; deve usar</para>
 
 	  <programlisting>sendmail_enable="NONE"</programlisting>
 
-	  <para>in <filename>/etc/rc.conf.</filename></para>
+	  <para>no <filename>/etc/rc.conf.</filename></para>
 
 	<warning>
-	  <para>If you disable <application>sendmail</application>'s
-	    outgoing mail service in this way, it is important that you
-	    replace it with a fully working alternative mail delivery
-	    system.  If you choose not to, system functions such as
-	    &man.periodic.8; will be unable to deliver their results by
-	    e-mail as they would normally expect to.  Many parts of your
-	    system may expect to have a functional
-	    <application>sendmail</application>-compatible system.  If
-	    applications continue to use
-	    <application>sendmail</application>'s binaries to try and send
-	    e-mail after you have disabled them, mail could go into an
+	  <para>Se voc&ecirc; desabilitar o <application>sendmail</application>
+	    como servi&ccedil;o de sa&iacute;da de mensagens, &eacute; importante que voc&ecirc; o
+	    substitua com um sistema totalmente alternativo no servi&ccedil;o de entrega
+	    de mensagens.  Se voc&ecirc; escolher n&atilde;o fazero, fun&ccedil;&otilde;es do sistema como
+	    &man.periodic.8; ser&atilde;o incapazer de entregar seus resultados por
+	    e-mail que eles esperariam normalmente.  V&aacute;rias partes do seu 
+	    sistema pode esperar que tenham sistema
+	    <application>sendmail</application>-compat&iacute;vel funcional.  Se
+	    as aplica&ccedil;&otilde;es continuarem a usar os bin&aacute;rios do
+	    <application>sendmail</application> para tentar enviar mensagens 
+	    ap&oacute;s desabilitadoe-mail after you have disabled them, mail could go into an
 	    inactive <application>sendmail</application> queue, and never be delivered.</para>
 	</warning>
 
