@@ -3153,19 +3153,21 @@ STATUS=OK (had status ERROR)
       <sect3 id="textenvincalid">
         <title><errorname>TEXTENV_INVALID</errorname> durante o <command>R3SETUP</command>, RFC ou SAPgui Start</title>
 
-        <para>If this error is encountered, the correct locale is
-	  missing.  &sap; Note 0171356 lists the necessary RPMs that need
-	  be installed (e.g. <filename>saplocales-1.0-3</filename>,
-	  <filename>saposcheck-1.0-1</filename> for RedHat 6.1). In case
-	  you ignored all the related errors and set the corresponding
-	  <literal>STATUS</literal> from <literal>ERROR</literal> to <literal>OK</literal> (in <filename>CENTRDB.R3S</filename>) every time <command>R3SETUP</command>
-	  complained and just restarted <command>R3SETUP</command>, the <application>&sap;</application> system will not
-	  be properly configured and you will then not be able to
-	  connect to the system with a
-	  <application>SAPgui</application>, even though the system
-	  can be started. Trying to connect with the old Linux
-	  <application>SAPgui</application> gave the following
-	  messages:</para>
+        <para>Se este erro for encontrado, o local correto est&aacute; 
+	  faltando.  A nota 0171356 do &sap; lista os RPMs que precisam 
+	  ser instalados (e.g. <filename>saplocales-1.0-3</filename>,
+	  <filename>saposcheck-1.0-1</filename> para o RedHat 6.1).  Caso 
+	  voc&ecirc; tenha ignorado todos os erros relacionados e 
+	  e configurou o <literal>STATUS</literal> correspondente de 
+	  <literal>ERROR</literal> para <literal>OK</literal> (em 
+	  <filename>CENTRDB.R3S</filename>) e todas as vezes o <command>R3SETUP</command>
+	  reclamou e simplesmente reiniciou o <command>R3SETUP</command>, o 
+	  sistema <application>&sap;</application> n&atilde;o ser&aacute; 
+	  configurado corretamente e incapaz de conectar-se a um sistema 
+	  com <application>SAPgui</application>, mesmo que o sistema possa 
+	  ser inicializado.  Tentar conectar com o antigo 
+	  <application>SAPgui</application> para Linux retornou as 
+	  seguintes mensagens:</para>
 
         <programlisting>Sat May 5 14:23:14 2001
 *** ERROR => no valid userarea given [trgmsgo. 0401]
@@ -3176,49 +3178,52 @@ Sat May 5 14:23:22 2001
 *** ERROR => no socket operation allowed [trxio.c 3363]
 Speicherzugriffsfehler</programlisting>
 
-        <para>This behavior is due to <application>&sap.r3;</application> being unable to correctly
-	  assign a locale and also not being properly configured itself
-	  (missing entries in some database tables). To be able to connect
-	  to <application>&sap;</application>, add the following entries to file 
-	  <filename>DEFAULT.PFL</filename> (see Note 0043288):</para>
+        <para>Este comportamento &eacute; devido ao <application>&sap.r3;</application> 
+	  ser incapaz de determinar corretamente o local e tamb&eacute;m de 
+	  n&atilde;o estar corretamente configurado (entradas faltando em 
+	  algumas tabelas do banco de dados).  Para ser capaz de conectar ao 
+	  <application>&sap;</application>, adicione as seguintes entradas ao 
+	  arquivo <filename>DEFAULT.PFL</filename> (veja Nota 0043288):</para>
 
 	<programlisting>abap/set_etct_env_at_new_mode = 0
 install/collate/active = 0
 rscp/TCP0B = TCP0B</programlisting>
 
-        <para>Restart the <application>&sap;</application> system. Now you can connect to the
-          system, even though country-specific language settings might
-          not work as expected.  After correcting country settings
-          (and providing the correct locales), these entries can be
-          removed from <filename>DEFAULT.PFL</filename> and the <application>&sap;</application>
-	  system can be restarted.</para>
+        <para>Reinicie o Sistema <application>&sap;</application>.  Agora 
+	  voc&ecirc; pode conectar-se ao sistema, embora a l&iacute;ngua 
+	  espec&iacute;fica do pa&iacute;s n&atilde;o funcionar como 
+	  esperado.  Ap&oacute;s corrigir as configura&ccedil;&otilde;es de 
+	  pa&iacute;s (e oferecer os locais corretos), estas entradas 
+          podem ser removidas de <filename>DEFAULT.PFL</filename> e o sistema 
+	  <application>&sap;</application> pode ser reinicializado.</para>
 
       </sect3>
 
       <sect3 id="ora-00001">
 	<title><errorcode>ORA-00001</errorcode></title>
-	<para>This error only happened with 
-	  <application>&oracle; 8.1.7</application> on FreeBSD&nbsp;4.5.
-	  The reason was that the <application>&oracle;</application> database could not initialize itself
-	  properly and crashed, leaving semaphores and shared memory on the
-	  system. The next try to start the database then returned
-	  <errorcode>ORA-00001</errorcode>.</para>
+	<para>Este erro ocorreu apenas com o 
+	  <application>&oracle; 8.1.7</application> no FreeBSD&nbsp;4.5.
+	  A raz&atilde;o foi que a base de dados <application>&oracle;</application> 
+	  n&atilde;o inicializou corretamente e falhou, deixando 
+	  sem&aacute;foros e mem&oacute;ria compartilhada no sistema.  A 
+	  pr&oacute;xima tentativa de inicializar o banco de dados 
+	  retornou o erro <errorcode>ORA-00001</errorcode>.</para>
 
-	<para>Find them with <command>ipcs -a</command> and remove them
-	  with <command>ipcrm</command>.</para>
+	<para>Encontre-os com <command>ipcs -a</command> e remova-os 
+	  com <command>ipcrm</command>.</para>
       </sect3>
 
       <sect3 id="ora-00445pmon">
 	<title><errorcode>ORA-00445</errorcode> (Background Process PMON Did Not Start)</title>
-	<para>This error happened with <application>&oracle; 8.1.7</application>.
-	  This error is reported if the database is started with
-	  the usual <command>startsap</command> script (for example
-	  <command>startsap_majestix_00</command>) as user 
+	<para>Este erro aconteceu com o <application>&oracle; 8.1.7</application>.
+	  Este erro &eacute; reportado se o banco de dados &eacute; 
+	  inicializado com o <literal>script</literal> <command>startsap</command> 
+	  (por exemplo <command>startsap_majestix_00</command>) como o usu&aacute;rio 
 	  <username>prdadm</username>.</para>
 
-	<para>A possible workaround is to start the database as user 
-	  <username>oraprd</username> instead
-	  with <command>svrmgrl</command>:</para>
+	<para>Uma solu&ccedil;&atilde;o tempor&aacute;ria &eacute; 
+	  inicializar o banco de dados com o usu&aacute;rio <username>oraprd</username> 
+	  ao inv&eacute;s de <command>svrmgrl</command>:</para>
 
 	<screen>&prompt.user; <userinput>svrmgrl</userinput>
 SVRMGR&gt; <userinput>connect internal;</userinput>
@@ -3230,46 +3235,49 @@ SVRMGR&gt; <userinput>exit</userinput></screen>
       <sect3 id="ora-12546">
         <title><errorcode>ORA-12546</errorcode> (Start Listener with Correct Permissions)</title>
 
-        <para>Start the <application>&oracle;</application> listener as user
-          <username>oraids</username> with the following commands:</para>
+        <para>Inicie o <application>&oracle;</application> <literal>listener</literal> 
+          como o usu&aacute;rio <username>oraids</username> com os seguintes comandos:</para>
 
         <screen>&prompt.root; <userinput>umask 0; lsnrctl start</userinput></screen>
 
-        <para>Otherwise you might get <errorcode>ORA-12546</errorcode> as the sockets will not
-          have the correct permissions. See &sap; Note 0072984.</para>
+        <para>Caso contr&aacute;rio voc&ecirc; pode ter o erro 
+	  <errorcode>ORA-12546</errorcode>, pois os <literal>sockets</literal> 
+          n&atilde;o possuir&atilde;o as permiss&otilde;es corretas.  Veja a 
+	  Nota &sap; 0072984.</para>
       </sect3>
 
       <sect3 id="ora-27102">
 	<title><errorcode>ORA-27102</errorcode> (Out of Memory)</title>
 
-	<para>This error happened whilst trying to use values for
-	  <literal>MAXDSIZ</literal> and <literal>DFLDSIZ</literal>
-	  greater than 1&nbsp;GB (1024x1024x1024). Additionally, we got 
+	<para>Este erro aconteceu enquanto se tentava usar valores 
+	  maiores que 1&nbsp;GB (1024x1024x1024) para <literal>MAXDSIZ</literal> 
+	  e <literal>DFLDSIZ</literal>.  Adicionalmente, obtivemos o erro 
 	  <errorname>Linux Error 12: Cannot allocate memory</errorname>.</para>
       </sect3>
 
       <sect3 id="dipgntabindind">
-        <title>[DIPGNTAB_IND_IND] during <command>R3SETUP</command></title>
+        <title>[DIPGNTAB_IND_IND] durante o <command>R3SETUP</command></title>
 
-        <para>In general, see &sap; Note 0130581 (<command>R3SETUP</command> step 
-	  <literal>DIPGNTAB</literal> terminates).  During the
-	  IDES-specific installation, for some reasons the installation
-	  process was not using the proper <application>&sap;</application> system name <quote>IDS</quote>, but
-	  the empty string <literal>""</literal> instead. This lead to some minor problems
-	  with accessing directories, as the paths are generated
-	  dynamically using <replaceable>SID</replaceable> (in this case IDS).  So instead
-	  of accessing:</para>
+        <para>Em geral, veja Nota &sap; 0130581 (o passo <literal>DIPGNTAB</literal> 
+	  do <command>R3SETUP</command> &eacute; terminado).  Durante instala&ccedil;&atilde;o 
+	  espec&iacute;fica do IDES, por algumas raz&otilde;es o processo de 
+	  instala&ccedil;&atilde;o n&atilde;o estava usando o nome 
+	  apropriado do sistema <quote>IDS</quote> do <application>&sap;</application>>, 
+	  mas estava usando uma <literal>string ""</literal>.  Isto leva a alguns 
+	  pequenos problemas, pois os caminhos s&atilde;o gerados dinamicamente 
+	  usando <replaceable>SID</replaceable> (IDES neste cas ).  Ent&atilde;o 
+	  ao inv&eacute;s de acessar:</para>
 
         <programlisting>/usr/sap/IDS/SYS/...
 /usr/sap/IDS/DVMGS00</programlisting>
 
-        <para>the following paths were used:</para>
+        <para>os seguintes caminhos foram usados:</para>
 
         <programlisting>/usr/sap//SYS/...
 /usr/sap/D00</programlisting>
 
-        <para>To continue with the installation, we created a link and an
-          additional directory:</para>
+        <para>Para continuar com a instala&ccedil;&atilde;o, 
+	  criamos uma liga&ccedil;&atilde;o e um diret&oacute;rio adicional:</para>
 
         <screen>&prompt.root; <userinput>pwd</userinput>
 /compat/linux/usr/sap
@@ -3281,67 +3289,74 @@ lrwxr-xr-x 1  root   sapsys 7 May 5 11:35 SYS -> IDS/SYS
 drwxrwxr-x 2  idsadm sapsys 512 May 5 13:00 tmp
 drwxrwxr-x 11 idsadm sapsys 512 May 4 14:20 trans</screen>
    
-        <para>We also found &sap; Notes (0029227 and 0008401) describing
-        this behavior. We did not encounter any of these problems with
-	the <application>&sap; 4.6C</application> installation.</para>
+        <para>N&oacute;s tamb&eacute;m encontramos as notas &sap; (0029227 e 0008401) 
+	descrevendo este comportamento.  N&atilde;o encontramos este tipo 
+	de problema na instala&ccedil;&atilde;o do <application>&sap; 4.6C</application>.</para>
       </sect3>
 
       <sect3 id="rfcrswboiniindind">
-        <title>[RFCRSWBOINI_IND_IND] during <command>R3SETUP</command></title>
+        <title>[RFCRSWBOINI_IND_IND] durante o <command>R3SETUP</command></title>
 
-	<para>During installation of <application>&sap; 4.6C</application>,
-          this error was just the result of another error happening
-	  earlier during installation. In this case, you have to look
-	  through the corresponding logfiles and correct the real
-	  problem.</para>
+	<para>Durante a instla&ccedil;&atilde;o do <application>&sap; 4.6C</application>,
+          este error foi apenas o resultado de outro erro acontecido antes, durante 
+	  a instala&ccedil;&atilde;o.  Neste caso, voc&ecirc; precisa olhar os 
+	  arquivos de log correspondentes e corrigir o problema real.</para>
 
-        <para>If after looking through the logfiles this error is
-	  indeed the correct one (check the &sap; Notes), you can set 
-	  <literal>STATUS</literal> of the offending step from <literal>ERROR</literal> to <literal>OK</literal> (file
-	  <filename>CENTRDB.R3S</filename>) and restart <command>R3SETUP</command>. After
-	  installation, you have to execute the report
-	  <literal>RSWBOINS</literal> from transaction SE38. See &sap;
-	  Note 0162266 for additional information about phase
-	  <literal>RFCRSWBOINI</literal> and
+        <para>Se depois de olhar os arquivos de log, este erro for o correto 
+	  (verifique as Notas &sap;), voc&ecirc; pode configurar o 
+	  <literal>STATUS</literal> do passo problem&aacute;tico de 
+	  <literal>ERROR</literal> para <literal>OK</literal> (arquivo 
+	  <filename>CENTRDB.R3S</filename>) e reiniciar o <command>R3SETUP</command>.  
+	  Ap&oacute;s a instala&ccedil;&atilde;o, voc&ecirc; tem que 
+	  executar o relat&oacute;rio <literal>RSWBOINS</literal> da 
+	  transa&ccedil;&atilde;o SE38.  Veja a Nota &sap;
+	  0162266 para informa&ccedil;&otilde;es adicionais a respeito da fase 
+	  <literal>RFCRSWBOINI</literal> e
 	  <literal>RFCRADDBDIF</literal>.</para>
       </sect3>
 
       <sect3 id="rfcraddbdifindind">
-        <title>[RFCRADDBDIF_IND_IND] during <command>R3SETUP</command></title>
-	<para>Here the same restrictions apply: make sure by looking
-	  through the logfiles, that this error is not caused by some
-	  previous problems.</para>
+        <title>[RFCRADDBDIF_IND_IND] durante o <command>R3SETUP</command></title>
+	<para>Aqui as mesmas restri&ccedil;&otilde;es se aplicam: verifique  
+	  os arquivos de log, este erro n&atilde;o &eacute; causado por 
+	  problemas anteriores.</para>
 
-        <para>If you can confirm that &sap; Note 0162266 applies, just 
-	  set <literal>STATUS</literal> of the offending step from <literal>ERROR</literal> to <literal>OK</literal> (file
-	  <filename>CENTRDB.R3S</filename>) and restart <command>R3SETUP</command>. After
-	  installation, you have to execute the report
-	  <literal>RADDBDIF</literal> from transaction SE38.</para>
+        <para>Se voc&ecirc; puder confirmar que a Nota &sap; 0162266 se aplica, 
+	  configure o <literal>STATUS</literal> do passo problem&aacute;tico de 
+	  <literal>ERROR</literal> para <literal>OK</literal> (arquivo 
+	  <filename>CENTRDB.R3S</filename>) e reinicie o <command>R3SETUP</command>.  
+	  Ap&oacute;s a instala&ccedil;&atilde;o, voc&ecirc; tem que executar 
+	  o relat&oacute;rio <literal>RADDBDIF</literal> da transa&ccedil;&atilde;o SE38.</para>
       </sect3>
 
       <sect3 id="sigactionsig31">
         <title><errorcode>sigaction sig31: File size limit exceeded</errorcode></title>
 
-	<para>This error occurred during start of <application>&sap;</application> processes
-	  <emphasis>disp+work</emphasis>. If starting <application>&sap;</application> with the
-	  <command>startsap</command> script, subprocesses are then started which
-	  detach and do the dirty work of starting all other <application>&sap;</application>
-          processes. As a result, the script itself will not notice
-	  if something goes wrong.</para>
+	<para>Este erro ocorreu durante a inicializa&ccedil;&atilde;o dos processos  
+	  <emphasis>disp+work</emphasis> do <application>&sap;</application>.  Se 
+	  inicializarmos o <application>&sap;</application> com o <literal>script</literal> 
+	  <command>startsap</command>, ent&atilde;o os subprocessos s&atilde;o inicializados 
+	  sem acoplamento e fazem o trabalho sujo de inicializar todos os outros processos 
+	  do <application>&sap;</application>.  Como resultado, o <literal>script</literal> 
+	  por si s&oacute; n&atilde;o reportar&aacute; nada se algo der errado.</para>
 
-	<para>To check whether the <application>&sap;</application> processes did start properly,
-	  have a look at the process status with 
-	  <command>ps ax | grep <replaceable>SID</replaceable></command>, which will give
-	  you a list of all <application>&oracle;</application> and <application>&sap;</application> processes. If it looks like
-	  some processes are missing or if you cannot connect to the <application>&sap;</application> system,
-	  look at the corresponding logfiles which can be found
-	  at <filename>/usr/sap/<replaceable>SID</replaceable>/DVEBMGS<replaceable>nr</replaceable>/work/</filename>.
-	  The files to look at are <filename>dev_ms</filename> and 
+	<para>Para verificar se os processos do <application>&sap;</application> incializaram 
+	  corretamente, voc&ecirc; tem que olhar a situa&ccedil;&atilde;o dos processos com 
+	  <command>ps ax | grep <replaceable>SID</replaceable></command>, que lhe dar&aacute; 
+	  uma lista de todos os processos <application>&oracle;</application> e 
+	  <application>&sap;</application>. Se parecer que alguns processos est&atilde;o 
+	  faltando ou se voc&ecirc; n&atilde;o conseguir conectar ao sistema 
+	  <application>&sap;</application>, verifique os arquivos de log correspondentes, 
+	  que podem ser encontrados em 
+	  <filename>/usr/sap/<replaceable>SID</replaceable>/DVEBMGS<replaceable>nr</replaceable>/work/</filename>.
+	  Os arquivos a serem verificados s&atilde;o <filename>dev_ms</filename> e 
 	  <filename>dev_disp</filename>.</para>
 
-	<para>Signal 31 happens here if the amount of shared memory used by
-	  <application>&oracle;</application> and <application>&sap;</application> exceed the one defined within the kernel configuration
-	  file and could be resolved by using a larger value:</para>
+	<para><quote>Signal 31</quote> acontece aqui se a quantidade de mem&oacute;ria 
+	  compartilhada usada pelo <application>&oracle;</application> e pelo 
+	  <application>&sap;</application> excederem o que foi definido no arquivo 
+	  de configura&ccedil;&atilde;o de <foreignphrase>kernel</foreignphrase>, 
+	  podendo ser resolvido usando-se um valor maior:</para>
 
         <programlisting># larger value for 46C production systems:
 options SHMMAXPGS=393216
@@ -3351,42 +3366,45 @@ options SHMMAXPGS=393216
       </sect3>
 
       <sect3 id="saposcolfails">
-        <title>Start of <command>saposcol</command> Failed</title>
-	<para>There are some problems with the program <command>saposcol</command> (version 4.6D).
-	  The <application>&sap;</application> system is using <command>saposcol</command> to collect data about the 
-	  system performance. This program is not needed to use the <application>&sap;</application> system,
-	  so this problem can be considered a minor one. The older versions
-	  (4.6B) does work, but does not collect all the data (many calls will
-	  just return 0, for example for CPU usage).</para>
+        <title>A inicializa&ccedil;&atilde;o do <command>saposcol</command> Falhou</title>
+	<para>Existem alguns problemas com o programa <command>saposcol</command> (vers&atilde;o 4.6D).
+	  O sistema <application>&sap;</application> est&aacute; usando o <command>saposcol</command> 
+	  para colher dados sobre a performance do sistema.  Este programa n&atilde;o &eacute; 
+	  necess&aacute;rio no uso do sistema <application>&sap;</application>, assim este 
+	  problema pode ser considerado pequeno.  As vers&otilde;es antigas (4.6B)
+	  funcionam, mas n&atilde;o colhem todos os dados (algumas chamadas 
+	  retornar&atilde;o apenas 0, por exemplo o uso da CPU).</para>
       </sect3>
     </sect2>
   </sect1>
 
   <sect1 id="linuxemu-advanced">
-    <title>Advanced Topics</title>
+    <title>T&oacute;picos Anva&ccedil;ados</title>
 
-    <para>If you are curious as to how the Linux binary compatibility
-      works, this is the section you want to read.  Most of what follows
-      is based heavily on an email written to &a.chat; by Terry Lambert
+    <para>Se voc&ecirc; est&aacute; curioso para saber como a compatibilidade 
+      bin&aacute;ria Linux funciona, esta &eacute; a se&ccedil;&atilde;o que 
+      voc&ecirc; quer ler.  Muito do que se segue &eacute; pesadamente baseado 
+      em um mensagem de correio escrita para &a.chat; por Terry Lambert 
       <email>tlambert@primenet.com</email> (Message ID:
       <literal>&lt;199906020108.SAA07001@usr09.primenet.com&gt;</literal>).</para>
 
     <sect2>
-      <title>How Does It Work?</title>
+      <title>Como Funciona?</title>
       <indexterm><primary>execution class loader</primary></indexterm>
 
-      <para>FreeBSD has an abstraction called an <quote>execution class
-	loader</quote>.  This is a wedge into the &man.execve.2; system
-	call.</para>
+      <para>O FreeBSD possui uma abstra&ccedil;&atilde;o chamada 
+	<quote>execution class loader</quote>.  Isto &eacute; uma 
+	esp&eacute;cie de cunha na chamada de sistema &man.execve.2;.</para>
 
-      <para>What happens is that FreeBSD has a list of loaders, instead of
-	a single loader with a fallback to the <literal>#!</literal>
-	loader for running any shell interpreters or shell scripts.</para>
+      <para>Acontece que o FreeBSD possui uma lista de carregadores, 
+	ao inv&eacute;s de apenas um carregador que volta para o 
+	carregador <literal>#!</literal> para executar qualquer interpretador 
+	de linha de comando ou <literal>shell scripts</literal>.</para>
 
-      <para>Historically, the only loader on the &unix; platform examined
-	the magic number (generally the first 4 or 8 bytes of the file) to
-	see if it was a binary known to the system, and if so, invoked the
-	binary loader.</para>
+      <para>Historicamente, o &uacute;nico carregador na plataforma &unix; 
+	que examinou o n&uacute;mero m&aacute;gico (geralmente os primeiros 
+	4 ou 8 bytes do arquivo) para ver se era um bin&aacute;rio conhecido 
+	do sistema, e se fosse, invocaria o carregador do bin&aacute;rio.</para>
 
       <para>If it was not the binary type for the system, the
 	&man.execve.2; call returned a failure, and the shell attempted to
