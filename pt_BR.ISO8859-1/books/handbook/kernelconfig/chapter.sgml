@@ -669,104 +669,103 @@ options          FFS_ROOT     #FFS usable as root device [keep this!]</programli
 
     <programlisting>options          UFS_ACL      #Support for access control lists</programlisting>
 
-    <para>This option, present only in &os;&nbsp;5.X, enables kernel support
-      for access control lists.  This relies on the use of extended
-      attributes and <acronym>UFS2</acronym>, and the feature is described in detail
-      in the <xref linkend="fs-acl">.  <acronym>ACL</acronym>s are enabled by default, and should not be
-      disabled in the kernel if they have been used previously on a file
-      system, as this will remove the access control lists changing the
-      way files are protected in unpredictable ways.</para>
+    <para>Esta opção, somente está presente na &os;&nbsp;5.X, habilita o suporte do kernel
+      a lista de controle de acesso. Isto conta com o uso de atributos extendidos
+      e <acronym>UFS2</acronym>, e os detalhes são descritas no
+      <xref linkend="fs-acl">.  <acronym>ACL</acronym>s são habilitadas por padrão, e não devem
+      ser desabilitadas no kernel se tiverem usado previamente no sistema de arquivos,
+      pois removerá a lista de controle de acessos mudando os
+      arquivos protegidos de forma imprevisível.</para>
 
     <programlisting>options          UFS_DIRHASH  #Improve performance on big directories</programlisting>
 
-    <para>This option includes functionality to speed up disk
-      operations on large directories, at the expense of using
-      additional memory.  You would normally keep this for a large
-      server, or interactive workstation, and remove it if you are
-      using &os; on a smaller system where memory is at a premium and
-      disk access speed is less important, such as a firewall.</para>
+    <para>Está opção inclui funcionalidades para aumentar velocidade de operações de disco em diretórios grandes,
+      a custo de usar
+      memória adicional. Você deseja normalmente guardar isto para um grande
+      servidor, ou interagir com estações de trabalho, e remova isto se você estiverem
+      usando &os; em um pequeno sistema onde memória é um prêmio e
+      velocidade de acesso a disco é menos importante, como um firewall.</para>
 
     <programlisting>options          SOFTUPDATES  #Enable FFS Soft Updates support</programlisting>
 
-    <para>This option enables Soft Updates in the kernel, this will
-      help speed up write access on the disks.  Even when this
-      functionality is provided by the kernel, it must be turned on
-      for specific disks.  Review the output from &man.mount.8; to see
-      if Soft Updates is enabled for your system disks.  If you do not
-      see the <literal>soft-updates</literal> option then you will
-      need to activate it using the &man.tunefs.8; (for existing
-      filesystems) or &man.newfs.8; (for new filesystems)
-      commands.</para>
+    <para>Esta opção habilita Soft Updates no kernel, isto irá
+      ajudar a aumentar a velocidade de escrita no acesso ao disco. Mesmo que está
+      funcionalidade seja fornecida pelo kernel, isto deve ser voltado para
+      especificar discos. Reveja a saída do &man.mount.8; para ver
+      se Soft Updates está habilitado para seu sistema de discos. Se você não      
+      vendo a opção do 
+<literal>soft-updates</literal> então você necessitará para ativar isto usando o &man.tunefs.8; (para o sistema de 
+      arquivos existente) ou &man.newfs.8; (para novo sistema de arquivos)
+      comandos.</para>
 
     <programlisting>options          MFS          #Memory Filesystem
 options          MD_ROOT      #MD is a potential root device</programlisting>
 
-    <para>This is the memory-mapped Filesystem.  This is basically a RAM
-      disk for fast storage of temporary files, useful if you have a lot
-      of swap space that you want to take advantage of.  A perfect place
-      to mount an MFS partition is on the <filename>/tmp</filename>
-      directory, since many programs store temporary data here.  To mount
-      an MFS RAM disk on <filename>/tmp</filename>, add the following line
-      to <filename>/etc/fstab</filename>:</para>
+    <para>Isto é o mapeamento da memória do Sistema de arquivos. Este é basicamente um disco de RAM
+      para armazenamento rápido de arquivos temporários, útil se você tiver um grande
+      espaço de troca que você queira para ter vantagem. Um lugar perfeito 
+      para mountar uma partição  MFS é no diretório <filename>/tmp</filename>,
+      desde que muitos programas e dados temporários sejam armazenados aqui. Para mountar
+      uma MFS RAM disk no <filename>/tmp</filename>, adicione a seguinte linha no
+      <filename>/etc/fstab</filename>:</para>
 
     <informalexample>
       <programlisting>/dev/ad1s2b	/tmp mfs rw 0 0</programlisting>
     </informalexample>
 
-    <para>Now you simply need to either reboot, or run the command
+    <para>Agora você necessita simplesmente reiniciar, ou rodar o comando
       <command>mount /tmp</command>.</para>
 
-    <note><para>In &os; 5.X, &man.md.4;-backed UFS file systems are
-      used for memory file systems rather than MFS.  Information on
-      configuring memory-backed file systems may be found in the manual pages
-      for &man.mdconfig.8; and &man.mdmfs.8;, and in <xref linkend="disks-virtual">.  As a result, the
-      <literal>MFS</literal> option is no longer supported.</para></note>
+    <note><para>No &os; 5.X, &man.md.4;-backed UFS sistema de arquivos são
+      usados para sistema de arquivos de memória melhor que MFS. Informação  
+      configurando sistema de arquivos memória-suportandos pode ser encontrada nas páginas de manual
+      para &man.mdconfig.8; e &man.mdmfs.8;, e no <xref linkend="disks-virtual">. Em consequência, a
+      <literal>MFS</literal> a opção não é mais suportada.</para></note>
 
     <indexterm>
-      <primary>kernel options</primary>
+      <primary>Opções do kernel options</primary>
       <secondary>NFS</secondary>
     </indexterm>
     <indexterm>
-      <primary>kernel options</primary>
+      <primary>Opções do kernel</primary>
       <secondary>NFS_ROOT</secondary>
     </indexterm>
     <programlisting>options          NFS          #Network Filesystem
 options          NFS_ROOT     #NFS usable as root device, NFS required</programlisting>
 
-    <para>The network Filesystem.  Unless you plan to mount partitions
-      from a &unix; file server over TCP/IP, you can comment these
-      out.</para>
+    <para>O sistema de arquivos de rede. A menos que você planeje mountar partições
+      do Unix &unix; arquivo do servidor sobre TCP/IP, você pode comentar esta
+      linha.</para>
 
     <indexterm>
-      <primary>kernel options</primary>
+      <primary>opções do kernel</primary>
       <secondary>MSDOSFS</secondary>
     </indexterm>
     <programlisting>options          MSDOSFS      #MSDOS Filesystem</programlisting>
 
-    <para>The &ms-dos; Filesystem.  Unless you plan to mount a DOS formatted
-      hard drive partition at boot time, you can safely comment this out.
-      It will be automatically loaded the first time you mount a DOS
-      partition, as described above.  Also, the excellent
-      <application>mtools</application> software (in the ports collection)
-      allows you to access DOS floppies without having to mount and
-      unmount them (and does not require <literal>MSDOSFS</literal> at
-      all).</para>
+    <para>O sistema de arquivos &ms-dos;. A menos que você planeje mountar uma partição no seu disco formatada em DOS
+      na hora da inicialização, você pode com segurança comentar isto.
+      Isto será carregado automaticamente na primeira vez que você mountar uma partição DOS,
+      como descrito acima. Também, o excelente software
+      <application>mtools</application> (na coleção do ports)
+      permite que você acesse disquetes DOS sem ter que mountá-los e
+      desmontá-los (e não é requer <literal>MSDOSFS</literal>).</para>
 
     <programlisting>options          CD9660       #ISO 9660 Filesystem
 options          CD9660_ROOT  #CD-ROM usable as root, CD9660 required</programlisting>
 
-    <para>The ISO 9660 Filesystem for CDROMs.  Comment it out if you do
-      not have a CDROM drive or only mount data CDs occasionally (since it
-      will be dynamically loaded the first time you mount a data CD).
-      Audio CDs do not need this Filesystem.</para>
+    <para>O sistema de arquivos ISO 9660 para CDROMs. COmentando isto se você 
+      não tiver um drive de CDROM ou somente montar dados de CDs ocasionalmente (desde que
+      seja carregado dinamicamente na primeira vez que você montar um CD dados).
+      CDs de audio não necessitam desde Sistema de Arquivos.</para>
 
     <programlisting>options          PROCFS       #Process filesystem</programlisting>
 
-    <para>The process filesystem.  This is a <quote>pretend</quote>
-      filesystem mounted on <filename>/proc</filename> which allows
-      programs like &man.ps.1; to give you more information on what
-      processes are running.  In &os; 5.X, use of <literal>PROCFS</literal>
-      is not required under most circumstances, as most
+    <para>O sistema de arquivos process. Este sistema de arquivo é <quote>pretendido</quote>
+      mountar em <filename>/proc</filename> que permite
+      programas como &man.ps.1; para voc ter mais informações de qual
+      processo está rodando. No &os; 5.X, o uso do <literal>PROCFS</literal>
+      não é mais requerido pela maioria de circunstâncias, as most
       debugging and monitoring tools have been adapted to run without
       <literal>PROCFS</literal>.  In addition, 5.X-CURRENT kernels
       making use of <literal>PROCFS</literal> must now also include
