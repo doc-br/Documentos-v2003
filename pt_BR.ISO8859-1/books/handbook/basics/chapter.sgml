@@ -2240,38 +2240,41 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
 
   <sect1 id="editors">
     <title>Editores de Texto</title>
-    <indexterm><primary>text editors</primary></indexterm>
-    <indexterm><primary>editors</primary></indexterm>
+    <indexterm><primary>editores de texto</primary></indexterm>
+    <indexterm><primary>editores</primary></indexterm>
 
-    <para>A lot of configuration in FreeBSD is done by editing text files.
-      Because of this, it would be a good idea to become familiar
-      with a text editor.  FreeBSD comes with a few as part of the base
-      system, and many more are available in the ports collection.</para>
+    <para>Uma série de configurações no FreeBSD são feitas à partir
+	da edição de arquivos de texto.  Por tal motivo, seria uma boa
+	idéia se tornar familiar com algum editor de texto.  FreeBSD
+	vem com alguns editores, como parte de seu sistema base, e muitos	
+	outros editores estão disponíveis na coleção de
+	<literal>ports</literal>.</para>
 
     <indexterm>
       <primary><command>ee</command></primary>
     </indexterm>
-    <para>The easiest and simplest editor to learn is an editor called
-      <application>ee</application>, which stands for easy editor.  To
-      start <application>ee</application>, one would type at the command
-      line <command>ee <replaceable>filename</replaceable></command> where
-      <replaceable>filename</replaceable> is the name of the file to be edited.
-      For example, to edit <filename>/etc/rc.conf</filename>, type in
-      <command>ee /etc/rc.conf</command>.  Once inside of 
-      <command>ee</command>, all of the
-      commands for manipulating the editor's functions are listed at the
-      top of the display. The caret <literal>^</literal> character represents
-      the <keycap>Ctrl</keycap> key on the keyboard, so <literal>^e</literal> expands to the key combination
-      <keycombo action="simul"><keycap>Ctrl</keycap><keycap>e</keycap></keycombo>.  To leave
-      <application>ee</application>, hit the <keycap>Esc</keycap> key, then choose leave
-      editor.  The editor will prompt you to save any changes if the file
-      has been modified.</para>
+    <para>O editor mais simples e mais fácil para de aprender, é um editor chamado
+	<application>ee</application>, que significa <foreignphrase>easy
+	editor</foreignphase> (<quote>editor fácil</quote>).  Para iniciar o
+	<application>ee</application>, basta digitar na minha de comando
+	<command>ee <replaceable>nomedoarquivo</replaceable></command> onde
+	<replaceable>nomedoarquivo</replaceable> é o nome do arquivo que deve
+	ser editado.  Por exemplo, para editar o <filename>/etc/rc.conf</filename>,
+	digite <command>ee /etc/rc.conf</command>.  Uma vez dentro do
+	<command>ee</command>, todos os comandos para manipular as funções do
+	editor estão listadas no topo da tela.  O caracter <literal>^</literal> representa
+	a tecla <keycap>Ctrl</keycap> do teclado, de forma que <literal>^e</literal>
+	implica na combinação de teclas <keycombo action="simul"><keycap>Ctrl</keycap><keycap>e</keycap></keycombo>.
+	Para sair do <application>ee</application>, aperte a tecla <keycap>Esc</keycap>, depois
+	escolha <foreignphrase>leave editor</foreignphrase> (sair do editor).  O editor 
+	irá perguntar se você deseja salvar as modificações no arquivo, caso ele tenha sido
+	alterado.</para>
 
     <indexterm>
       <primary><command>vi</command></primary>
     </indexterm>
     <indexterm>
-      <primary>editors</primary>
+      <primary>editores</primary>
       <secondary><command>vi</command></secondary>
     </indexterm>
     <indexterm>
@@ -2281,216 +2284,241 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
       <primary>editors</primary>
       <secondary><command>emacs</command></secondary>
     </indexterm>
-    <para>FreeBSD also comes with more powerful text editors such as
-      <command>vi</command> as part of the base system, while other editors, like
-      <command>emacs</command> and <command>vim</command>,
-      are part of the FreeBSD Ports Collection.  These editors offer much
-      more functionality and power at the expense of being a little more
-      complicated to learn.  However if you plan on doing a lot of text
-      editing, learning a more powerful editor such as
-      <command>vim</command> or <command>emacs</command>
-      will save you much more time in the long run.</para>
+    <para>FreeBSD também oferece editores de texto mais poderosos, como o
+	<command>vi</command>, como parte da base do sistema, enquanto
+	outros editores como <command>emacs</command> e <command>vim</command>,
+	estão disponívels na Coleção de <literal>Ports</literal> do FreeBSD.
+	Estes editores oferecem muitas funcionalidades e são extramente
+	poderosos, ao custo de serem um pouco mais difíceis de aprender.  Contudo
+	se você planeja editar muitos textos, aprender algum editor de texto
+	mais poderoso como <command>vim</command> ou <command>emacs</command>
+	economizará a você mais tempo, à longo prazo.</para>
   </sect1>
 
   <sect1 id="basics-devices">
-    <title>Devices and Device Nodes</title>
+    <title>Dispositivos e Nós de Dispositivos</title>
 
-    <para>A device is a term used mostly for hardware-related
-      activities in a system, including disks, printers, graphics
-      cards, and keyboards.  When FreeBSD boots, the majority
-      of what FreeBSD displays are devices being detected.
-      You can look through the boot messages again by viewing
-      <filename>/var/run/dmesg.boot</filename>.</para>
+    <para>Um dispositivo é um termo usado em sua maioria para
+	fazer menção à atividades relacionadas à equipamentos
+	físicos no sistema, incluindo discos, impressoras,
+	placas de vídeo e teclados.  Quando o FreeBSD é iniciado,
+	a maioria dos dados que o sistema apresenta são referentes
+	à detecção de dispositivos.  É possível reavaliar as
+	mensagens de inicialização, analisando o arquivo
+	<filename>/var/run/dmesg.boot</filename>.</para>
 
-    <para>For example, <devicename>acd0</devicename> is the
-      first IDE CDROM drive, while <devicename>kbd0</devicename>
-      represents the keyboard.</para>
+    <para>Por exemplo, o dispositivo <devicename>acd0</devicename> é o
+	primeiro CDROM IDE disponível, enquanto <devicename>kbd0</devicename>
+	representa o teclado.</para>
 
-    <para>Most of these devices in a &unix; operating system must be
-      accessed through special files called device nodes, which are
-      located in the <filename>/dev</filename> directory.</para>
+    <para>A maioria destes dispositivos em um sistema operacional
+	&unix; devem ser acessados por intermédio de arquivos especiais, 
+	chamados nós de dispositivos, ou <foreignphrase>device nodes</foreignphrase>,
+	que estão dispostos sob o diretório <filename>/dev</filename>.</para>
 
     <sect2>
-      <title>Creating Device Nodes</title>
-      <para>When adding a new device to your system, or compiling
-	in support for additional devices, you may need to create one or
-	more device nodes for the new devices.</para>
+      <title>Criando Nós de Dispositivos</title>
+      <para>Ao adicionar um novo dispositivo em seu sistema, ou compilar 
+	suporte à dispositivos adicionais, pode ser necessário criar um ou mais
+	nós de dispositivos para controlar os recém adicionados.</para>
 
       <sect3>
 	<title>MAKEDEV Script</title>
-	<para>On systems without <literal>DEVFS</literal> (this concerns all FreeBSD versions before 5.0), device nodes are created
-	  using the &man.MAKEDEV.8; script as shown below:</para>
+	<para>Em sistemas sem <literal>DEVFS</literal> (isso diz respeito à todas versões do
+	FreeBSD antes da 5.0), nós de dispositivos são criados utilizando a rotina
+	&man.MAKEDEV.8; como apresentado à seguir:</para>
 
 	<screen>&prompt.root; <userinput>cd /dev</userinput>
 &prompt.root; <userinput>sh MAKEDEV ad1</userinput>
 	</screen>
 
-	<para>This example would make the proper device nodes
-	  for the second IDE drive when installed.</para>
+	<para>Este exemplo cria os nós de dispositivos apropriados para
+	o segundo dispositivo IDE, quando o mesmo for instalado.</para>
       </sect3>
 
       <sect3>
 	<title><literal>DEVFS</literal> (DEVice File System)</title>
 
-	<para> The device file system, or <literal>DEVFS</literal>, provides access to
-	  kernel's device namespace in the global file system namespace.
-	  Instead of having to create and modify device nodes,
-	  <literal>DEVFS</literal> maintains this particular file system for you.</para>
+	<para>O sistema de arquivo de dispositivos, ou simplesmente
+	  <literal>DEVFS</literal>, oferece acesso ao espaço em kernel
+	  para os dados referentes aos nomes de dispositivos, no
+	  sistema de arquivos global.  Ao invés de ter que criar e modificar
+	  os nós de dispositivos, <literal>DEVFS</literal> mantém este
+	  sistema de arquivos particular.</para>
 
-	<para>See the &man.devfs.5; manual page for more
-	  information.</para>
+	<para>Veja a página de manual do &man.devfs.5; para
+	  obter mais informações.</para>
 
-	<para><literal>DEVFS</literal> is used by default in FreeBSD&nbsp;5.0 and above.</para>
+	<para><literal>DEVFS</literal> é utilizado por padrão no FreeBSD&nbsp;5.0 e posteriores.</para>
       </sect3>
     </sect2>
   </sect1>
 
   <sect1 id="binary-formats">
-    <title>Binary Formats</title>
+    <title>Formatos Binário</title>
 
-    <para>To understand why FreeBSD uses the <acronym>ELF</acronym>
-      format, you must first know a little about the three currently
-      <quote>dominant</quote> executable formats for &unix;:</para>
+    <para>Para entender o motivo pelo qual o FreeBSD usa o formato <acronym>ELF</acronym>
+	você deve saber primeiro um pouco mais sobre os três formados
+	atualmente <quote>dominantes</quote> de arquivos executáveis &unix;:</para>
 
     <itemizedlist>
       <listitem>
         <para>&man.a.out.5;</para>
 
-        <para>The oldest and <quote>classic</quote> &unix; object
-          format.  It uses a short and compact header with a magic
-          number at the beginning that is often used to characterize
-          the format (see &man.a.out.5; for more details).  It
-          contains three loaded segments: .text, .data, and .bss plus
-          a symbol table and a string table.</para>
+        <para>O mais antigo e <quote>clássico</quote> formato de
+	  objetos &unix;.  Utiliza um cabeçalho curto e compacto
+	  com um número mágico (<foreignphrase>magic number</foreignphrase>)
+	  no início do mesmo, que geralmente é usado para caracterizar
+	  seu formato (veja &man.a.out.5; para mais detalhes).  Contém
+	  três segmentos carregados: .text, .data e .bss, acrecidos de
+	  uma tabela de símbolos e uma tabela de conjunto caracteres.</para>
       </listitem>
 
       <listitem>
         <para><acronym>COFF</acronym></para>
 
-        <para>The SVR3 object format.  The header now comprises a
-          section table, so you can have more than just .text, .data,
-          and .bss sections.</para>
+        <para>O formato de objetivos SVR3.  Seu cabeçalho compreende
+	  uma tabela de seções, de forma que é possível ter mais
+	  seções do que apenas .text, .data e .bss.</para>
       </listitem>
 
       <listitem>
         <para><acronym>ELF</acronym></para>
 
-        <para>The successor to <acronym>COFF</acronym>, featuring
-          multiple sections and 32-bit or 64-bit possible values.  One
-          major drawback: <acronym>ELF</acronym> was also designed
-          with the assumption that there would be only one ABI per
-          system architecture.  That assumption is actually quite
-          incorrect, and not even in the commercial SYSV world (which
-          has at least three ABIs: SVR4, Solaris, SCO) does it hold
-          true.</para>
+        <para>O sucessor direto do <acronym>COFF</acronym>, oferecendo
+	  múltiplas seções e valores possíveis de 32-bit ou 64-bit.
+	  Uma grande desvantagem: <acronym>ELF</acronym> foi
+	  projetado assumindo-se que haveria possilvemente apenas
+	  uma ABI por arquitetura de sistema.  Essa consideração
+	  contudo é levemanete incorreta hoje em dia, e nem mesmo no
+	  mundo comercial do SYSV (onde existem ao penos três
+	  ABIs: SVR4, Solaris e SCO) ela é real.</para>
 
-        <para>FreeBSD tries to work around this problem somewhat by
-          providing a utility for <emphasis>branding</emphasis> a
-          known <acronym>ELF</acronym> executable with information
-          about the ABI it is compliant with.  See the manual page for
-          &man.brandelf.1; for more information.</para>
+        <para>FreeBSD tenta amenizar este problema por meio de um
+	  utilitário que reconhece um executável <acronym>ELF</acronym>
+	  e obtém informações sobre a ABI compilada neste. O utilitário
+	  em questão é o <command>brandelf</command>.  Veja a página de
+	  manual do &man.brandelf.1; para obter mais informações.</para>
       </listitem>
     </itemizedlist>
 
-    <para>FreeBSD comes from the <quote>classic</quote> camp and used
-      the &man.a.out.5; format, a technology tried and proven through
-      many generations of BSD releases, until the beginning of the 3.X
-      branch. Though it was possible to build and run native
-      <acronym>ELF</acronym> binaries (and kernels) on a FreeBSD
-      system for some time before that, FreeBSD initially resisted the
-      <quote>push</quote> to switch to <acronym>ELF</acronym> as the
-      default format. Why?  Well, when the Linux camp made their
-      painful transition to <acronym>ELF</acronym>, it was not so much
-      to flee the <filename>a.out</filename> executable format as it
-      was their inflexible jump-table based shared library mechanism,
-      which made the construction of shared libraries very difficult
-      for vendors and developers alike. Since the
-      <acronym>ELF</acronym> tools available offered a solution to the
-      shared library problem and were generally seen as <quote>the way
-      forward</quote> anyway, the migration cost was accepted as
-      necessary and the transition made.  FreeBSD's shared library
-      mechanism is based more closely on Sun's
-      &sunos; style shared library mechanism
-      and, as such, is very easy to use.</para>
+    <para>FreeBSD vem do campo <quote>clássico</quote> e durate muito
+	tempo usou o formato &man.a.out.5;, uma tecnologia utilizada
+	e aprovada por muitos gerações de versões de sistemas BSD,
+	até o ramo 3.X do FreeBSD.  Apesar de ser possível gerar
+	binários (e mesmo o kernel) no formato <acronym>ELF</acronym>
+	bem antes do FreeBSD 3.X, o sistema inicialmente resistiu
+	à <quote>pressão</quote> de mudar para o formato
+	<acronym>ELF</acronym> como formato padrão.  Por quê?  Bem,
+	quando o pessoal do campo Linux fez sua dolorosa transição
+	para <acronym>ELF</acronym>, os executáveis <filename>a.out</filename>
+	não podiam ser utilizados pois sua tabela de salto era consideradavelmente
+	inflexível, e a construção de bibliotecas compartilhadas parecia
+	ser complexa demais no novo formato, para os fabricantes e
+	desenvolvedores em geral.  Depois que algumas ferramentas
+	<acronym>ELF</acronym> ofereceram soluções ao problema de
+	bibliotecas compartilhadas, o formato passou a ser visto
+	como <quote>o caminho a ser seguido</quote>, os custos de
+	migração para este formato já eram então aceitáveis, e a
+	transição foi feita.  O mecanismo de bibliotecas
+	compartilhadas do FreeBSD é baseado com maior proximidade
+	ao estilo de bibliotecas compartilhadas do &sunos; da Sun,
+	e como tal, é muito fácil de ser utilizado.</para>
 
-    <para>So, why are there so many different formats?</para>
+    <para>Então, por que existem tantos formatos distintos?</para>
 
-    <para>Back in the dim, dark past, there was simple hardware.  This
-      simple hardware supported a simple, small system. <filename>a.out</filename> was
-      completely adequate for the job of representing binaries on this
-      simple system (a PDP-11). As people ported &unix; from this simple
-      system, they retained the <filename>a.out</filename> format because it was sufficient
-      for the early ports of &unix; to architectures like the Motorola
-      68k, VAXen, etc.</para>
+    <para>De voltao ao sombrio, gélido e distante passado, existiam
+	apenas equipamentos simples de computação.  Estes equipamentos
+	simples, suportavam sistemas simples e pequenos. 
+	O formato <filename>a.out</filename> era completamente adequado
+	às tarefas apresentadas pelos binários nestes sistemas simplistas
+	(como PDP-11).  Conforme o &unix; passou a ser convertido
+	com base nestes sistemas simples, mantiveram o formado <filename>a.out</filename>
+	pois era suficiente para as primeiras conversões do &unix;, para
+	arquiteturas como Motorola 68k, VAXen, etc.</para>
 
-    <para>Then some bright hardware engineer decided that if he could
-      force software to do some sleazy tricks, then he would be able
-      to shave a few gates off the design and allow his CPU core to
-      run faster. While it was made to work with this new kind of
-      hardware (known these days as <acronym>RISC</acronym>), <filename>a.out</filename>
-      was ill-suited for this hardware, so many formats were developed
-      to get to a better performance from this hardware than the
-      limited, simple <filename>a.out</filename> format could
-      offer. Things like <acronym>COFF</acronym>,
-      <acronym>ECOFF</acronym>, and a few obscure others were invented
-      and their limitations explored before things seemed to settle on
-      <acronym>ELF</acronym>.</para>
+    <para>Depois algum engenheiro de <literal>hardware</literal> iluminado
+	decidiu que ele poderia forçar os programas a realizarem algumas
+	tarefas mais simples, de forma que ele poderia retirar alguns
+	ítens de seu projeto de equipamento e permitir que o núcleo
+	de sua CPU processasse de forma mais rápida. Mesmo tendo sido
+	projetado para funcionar com este novo tipo de hardware
+	(conhecido hoje em dia como <acronym>RISC</acronym>),
+	o formato <filename>a.out</filename> não se encaixava
+	funcionalmente para o novo equipamento, então vários formatos foram
+	desenvolvedores para tentar garantir melhor performance deste
+	novo equipamento, quando comparado ao que o limitado formato
+	<filename>a.out</filename> poderia oferecer.  Algumas coisas como
+	<acronym>COFF</acronym>, <acronym>ECOFF</acronym>, e alguns
+	outros formatos obscuros foram inventados e suas limitaçòes
+	exploradas antes que as coisas pudessem se estabilizar
+	no formato <acronym>ELF</acronym>.</para>
 
-    <para>In addition, program sizes were getting huge and disks (and
-      physical memory) were still relatively small so the concept of a
-      shared library was born. The VM system also became more
-      sophisticated. While each one of these advancements was done
-      using the <filename>a.out</filename> format, its usefulness was
-      stretched more and more with each new feature.  In addition,
-      people wanted to dynamically load things at run time, or to junk
-      parts of their program after the init code had run to save in
-      core memory and swap space. Languages became more sophisticated
-      and people wanted code called before main automatically. Lots of
-      hacks were done to the <filename>a.out</filename> format to
-      allow all of these things to happen, and they basically worked
-      for a time. In time, <filename>a.out</filename> was not up to
-      handling all these problems without an ever increasing overhead
-      in code and complexity. While <acronym>ELF</acronym> solved many
-      of these problems, it would be painful to switch from the system
-      that basically worked. So <acronym>ELF</acronym> had to wait
-      until it was more painful to remain with
-      <filename>a.out</filename> than it was to migrate to
-      <acronym>ELF</acronym>.</para>
+    <para>Em adição, o tamanho dos programas estavam se tornando
+	grandes, e os discos (bem como memória física) continuavam
+	relativamente pequenos, então o conceito de bibliotecas
+	compartilhadas nasceu.  O sistema de memória virtual também se
+	tornou mais sofisticado.  Enquanto cada um desses avanços
+	foram feitos utilizando o formato <filename>a.out</filename>,
+	sua usabilidade foi se tornando cada vez mais duvidosa, na
+	proporção que novas características eram adicionadas.  Em
+	adição, as pessoas queriam poder carregar as coisas de forma
+	dinâmica, no momento de execussão do sistema, ou então
+	dispensar trechos de seus programas depois que o código
+	inicial tivesse sido executado, para economizar memória
+	e espaço de troca (<foreignphrase>swap</foreignphrase>)
+	As linguagens se tornaram mais sofisticadas, e as pessoas queriam
+	que códigos fossem carregados antes do programa principal de
+	forma automática.  Uma série de modificações foram feitas
+	no formato <filename>a.out</filename> para permitir que esse
+	tipo de coisa pudesse acontecer, e basicamente tudo funcionou
+	bem por um tempo.  Em determinado momento, o <filename>a.out</filename>
+	não podia mais contornar estes problemas sem sobrecarregar seu
+	código e aumentar sua complexidade.  O formato <acronym>ELF</acronym>
+	resolvia a maioria desses problemas, mas seria doloroso migrar
+	de um sistema que, basicamente, funcionava.  Então o formato
+	<acronym>ELF</acronym> teve que esperar até que fosse mais
+	penoso continuar com o <filename>a.out</filename>, do que migrar
+	para o <acronym>ELF</acronym>.</para>
 
-    <para>However, as time passed, the build tools that FreeBSD
-      derived their build tools from (the assembler and loader
-      especially) evolved in two parallel trees. The FreeBSD tree
-      added shared libraries and fixed some bugs. The GNU folks that
-      originally write these programs rewrote them and added simpler
-      support for building cross compilers, plugging in different
-      formats at will, and so on. Since many people wanted to build cross
-      compilers targeting FreeBSD, they were out of luck since the
-      older sources that FreeBSD had for <application>as</application> and <application>ld</application> were not up to the
-      task. The new GNU tools chain (<application>binutils</application>) does support cross
-      compiling, <acronym>ELF</acronym>, shared libraries, C++
-      extensions, etc. In addition, many vendors are releasing
-      <acronym>ELF</acronym> binaries, and it is a good thing for
-      FreeBSD to run them.</para>
+    <para>Contudo, com o passar do tempo, as ferramentas de construção
+	de onde o FreeBSD derivou suas próprias ferramentas de construção
+	(o montador <foreignphrase>assembly</foreignphrase> e o
+	carregador, especialmente) se envolveram em duas árvores
+	paralelas.  A árvore FreeBSD adicionou bibliotecas compartilhadas
+	e corrigiu algumas falhas.  O pessoal GNU que originalmente
+	escreviam esses programas, rescreveram os mesmos de adicionaram
+	suporte simples à compilação cruzada, podendo adicionar formatos
+	diferentes à bel prazer, e assim por diante.  Partindo do princípio
+	que muitas pessoas desejavam criar compiladores cruzados para
+	o FreeBSD, tiveram problemas pois os fontes antigos do FreeBSD
+	faziam chamadas ao <application>as</application> e <application>ld</application>
+	o que não possibilitava tal tarefa.  A nova corrente de ferramentas GNU
+	(<application>binutils</application>) suporta compilação cruzada,
+	<acronym>ELF</acronym>, bibliotecas compartilhadas, extensões C++, etc.
+	Além disso, muitos fabricantes passaram a lançar binários
+	<acronym>ELF</acronym>, e era bom que o FreeBSD pudesse rodá-los.</para>
 
-    <para><acronym>ELF</acronym> is more expressive than <filename>a.out</filename> and
-      allows more extensibility in the base system. The
-      <acronym>ELF</acronym> tools are better maintained, and offer
-      cross compilation support, which is important to many people.
-      <acronym>ELF</acronym> may be a little slower than <filename>a.out</filename>, but
-      trying to measure it can be difficult. There are also numerous
-      details that are different between the two in how they map
-      pages, handle init code, etc. None of these are very important,
-      but they are differences. In time support for
-      <filename>a.out</filename> will be moved out of the <filename>GENERIC</filename>
-      kernel, and eventually removed from the kernel once the need to
-      run legacy <filename>a.out</filename> programs is past.</para>
+    <para><acronym>ELF</acronym> é mais expressivo que <filename>a.out</filename> e
+	oferece mais extensibilidade no sistema base.  As ferramentas
+	<acronym>ELF</acronym> são melhor mantidas, e oferecem suporte
+	à compilação cruzada, que é importante para muita gente.
+	O formato <acronym>ELF</acronym> pode ser um pouco mais lento do que
+	<filename>a.out</filename>, mas tentar medir esta diferença é
+	bem difícil.  Existem ainda vários detalhes distintos entre ambos, em
+	relação à como eles mapeiam páginas, tratam código de inicialização,
+	carregamento das instruções, etc.  Nenhum destes fatores são
+	muito relevantes, mas são diferentes.  Futuramente, o suporte
+	à <filename>a.out</filename> será retirado do kernel <filename>GENERIC</filename>,
+	e eventualmente removido do sistema quando a necessidade de executar
+	programas <filename>a.out</filename> for passado.</para>
   </sect1>
 
   <sect1 id="basics-more-information">
-    <title>For More Information</title>
+    <title>Para mais informações</title>
 
     <sect2 id="basics-man">
-      <title>Manual Pages</title>
+      <title>Páginas de Manuais</title>
       <indexterm><primary>manual pages</primary></indexterm>
 
       <para>The most comprehensive documentation on FreeBSD is in the form
