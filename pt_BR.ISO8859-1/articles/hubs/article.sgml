@@ -469,96 +469,107 @@ cvspserver stream tcp nowait root /usr/bin/cvs cvs -f -l -R -T /anoncvstmp --all
   <sect1 id="mirror-howto">
     <title>Como espelhar o FreeBSD</title>
     
-    <para>
-      Ok, now you know the requirements and how to offer
-      the services, but not how to get it. :-)
-      This section explains how to actually mirror
-      the various parts of FreeBSD, what tools to use,
-      and where to mirror from.
-    </para>
+    <para>Ok, agora voc&ecirc; conhece os requisitos e sabe como oferecer os
+      servi&ccedil;os, mas n&atilde;o como come&ccedil;ar.  Esta sess&atilde;o explica como
+      realizar realmente o espelhamento de v&aacute;rias partes do FreeBSD,
+      que ferramentas utilizar e apartir de onde espelhar.</para>
+    
     <sect2 id="mirror-ftp">
     <title>FTP</title>
+
       <para>
-        The FTP area is the largest amount of data that
-        needs to be mirrored. It includes the <emphasis>distribution
-        sets</emphasis> required for network installation, the 
-        <emphasis>branches</emphasis> which are actually snapshots
-        of checked-out source trees, the <emphasis>ISO Images</emphasis>
-        to write CD-ROMs with the installation distribution,
-        a live file system, lots of packages, the ports tree,
-        distfiles, and a huge amount of packages. All of course
-        for various FreeBSD versions,
-        and various architectures.
-      </para>
+	A &aacute;rea de FTP representa o maior volume de dados a serem
+	espelhados.  Ele inclui os <emphasis>conjuntos de
+	distribui&ccedil;&atilde;o</emphasis> os quais s&atilde;o requeridos para as
+	instala&ccedil;&otilde;es via rede, os <emphasis>ramos</emphasis> (branches) 
+	do sistema dos quais se tira snapshots a partir da &aacute;rvore
+	de c&oacute;digo fonte, as <emphasis>imagens ISO</emphasis> para
+	gravar CDs de instala&ccedil;&atilde;o do sistema, um sistema de arquivos
+	vivo, a &aacute;rvore do ports, os distifiles (c&oacute;digo fonte 
+	necess&aacute;rios para compilar o ports) e uma quantidade enorme de
+	pacotes.  Tudo naturalmente para as v&aacute;rias vers&otilde;es do FreeBSD,
+	e para as v&aacute;rias arquiteturas.</para>
+	
       <sect3 id="mirror-ftp-ftp">
-        <title>With FTP mirror</title>
-        <para>
-          You can use a <application>FTP mirror</application>
-          program to get the files. There are a lot around and
-          widely used, like:
+        <title>Espelhando com FTP</title>
+
+        <para>Voc&ecirc; pode utilizar um programa de
+	  <application>espelhamento de FTP</application> para obter os
+	  arquivos.  Existem muitos programas dispon&iacute;veis, os quais
+	  s&atilde;o amplamente utilizados tais como:</para>
+	  
           <itemizedlist>
             <listitem><para><filename role="package">ftp/mirror</filename></para></listitem>
             <listitem><para><filename role="package">ftp/ftpmirror</filename></para></listitem>
             <listitem><para><filename role="package">ftp/emirror</filename></para></listitem>
             <listitem><para><filename role="package">ftp/spegla</filename></para></listitem>
             <listitem><para><filename role="package">ftp/omi</filename></para></listitem>
-            <listitem><para>some even use <filename role="package">ftp/wget</filename></para></listitem>
+            <listitem><para>alguns usam mesmo o <filename role="package">ftp/wget</filename></para></listitem>
           </itemizedlist>
 
-          <filename role="package">ftp/mirror</filename> was very popular, but seemed
-          to have some drawbacks, as it is written in &man.perl.1;,
-          and had real problems with mirroring large
-          directories like a FreeBSD site. There are rumors that
-          the current version has fixed this by allowing
-          a different algorithm for comparing
-          the directory structure to be specified.
-        </para>
-        <para>
-          In general FTP is not really good for mirroring.  It transfers
-          the whole file if it has changed, and does
-          not create a single data stream which would benefit from
-          a large TCP congestion window. 
-        </para>
+	<para>O <filename role="package">ftp/mirror</filename> &eacute; muito 
+	  popular, mas parece ter alguns inconvenientes, ele &eacute; escrito
+	  em &man.perl.1;, e possui alguns problemas reais para
+	  espelhar grandes diret&oacute;rios como o site FreeBSD.  Existem
+	  rumores de que a vers&atilde;o atual corrigiu isso ao permitir que
+	  seja especificado um algoritimo diferente para comparar a
+	  estrutura de diret&oacute;rios.</para>
+
+        <para>Em geral o FTP n&atilde;o &eacute; bom para tarefas de espelhamento.
+	  Ele transfere o arquivo inteiro se ele for alterado, e n&atilde;o
+	  cria um &uacute;nico stream de dados o qual o beneficiaria  de uma
+	  grande janela de congest&atilde;o TCP.</para>
+
       </sect3>
       <sect3 id="mirror-ftp-rsync">
-        <title>With RSYNC</title>
-        <para>
-          A better way to mirror the FTP area is <application>rsync</application>.
-          You can install the port <filename role="package">net/rsync</filename> and then use
-          rsync to sync with your upstream host. 
-          <application>rsync</application> is already mentioned
-          in <xref linkend="mirror-serv-rsync">.
-          Since <application>rsync</application> access is not 
-          required, your preferred upstream site may not allow it.
-          You may need to hunt around a little bit to find a site
-          that allows <application>rsync</application> access.
+        <title>Espelhando com RSYNC</title>
+
+        <para>Uma forma melhor de espelhar uma area FTP &eacute; atrav&eacute;s do
+	  uso do <application>rsync</application>.  Voc&ecirc; pode instalar
+	  o port <filename role="package">net/rsync</filename> e ent&atilde;o
+	  utiliz&aacute;-lo para sincronizar com o seu servidor de upstream.
+	  O <application>rsync</application> j&aacute; foi mencionado na
+	  <xref linkend="mirror-serv-rsync">.  Uma vez que a
+	  disponibiliza&ccedil;&atilde;o de acesso via rsync n&atilde;o &eacute; obrigat&oacute;ria, o
+	  seu site preferido de upstream pode n&atilde;o adot&aacute;-lo.  Voc&ecirc; pode
+	  ter um pouco de trabalho para encontrar um servidor que
+	  permita o acesso via
+	  <application>rsync</application>.</para>
+
           <note>
-            <para>
-              Since the number of <application>rsync</application> 
-              clients will have a significant impact on the server
-              machine, most admins impose limitations on their
-              server. For a mirror, you should ask the site maintainer
-              you are syncing from about their policy, and maybe
-              an exception for your host (since you are a mirror).
-            </para>
-          </note>
-          A command line to mirror FreeBSD could look like that:
+            <para>Uma vez que o n&uacute;mero de clientes <application>rsync
+	      </application> ter&atilde;o um impacto significativo no
+	      servidor, muitos administradores imp&otilde;e limita&ccedil;&otilde;es no
+	      numero de acessos simult&acirc;neos aos seus servidores.  Para
+	      um espelhamento, voc&ecirc; deve consultar o respons&aacute;vel pelo
+	      servidor de upstream que voc&ecirc; est&aacute; utilizando, sobre as
+	      regras do servidor, e se ele poderia abrir uma excess&atilde;o
+	      para o seu servidor (uma vez que voc&ecirc; &eacute; um site
+	      espelho).</para>
+	  </note> 
+	       
+          </para>A linha de comando para espelhar o FreeBSD pode ser
+	    parecida com essa:</para>
+
           <screen>&prompt.user; <userinput>rsync -vaz --delete ftp4.de.FreeBSD.org::FreeBSD/ /pub/FreeBSD/</userinput>
           </screen>
-          Consult the documentation for <application>rsync</application>,
-          which is also available at
-          <ulink url="http://rsync.samba.org/">http://rsync.samba.org/</ulink>
-          about the various options to be used with rsync.
-		  If you sync the whole module (unlike subdirectories),
-		  be aware that the module-directory (here "FreeBSD")
-		  will not be created, so you cannot omit the target directory.
-          Also you might
-          want to set up a script framework that calls such a command
-          via &man.cron.8;.
-        </para>
+
+	  <para>Consulte a documenta&ccedil;&atilde;o do <application>rsync</application>, 
+	    a qual est&aacute; dispon&iacute;vel em <ulink url="http://rsync.samba.org/">
+	    http://rsync.samba.org/</ulink>, sobre as v&aacute;rias op&ccedil;&otilde;es
+	    que podem ser utilizadas com o rsync.  Se voc&ecirc; sincronizar
+	    o m&oacute;dulo inteiro (ao contr&aacute;rio de apenas alguns
+	    subdiret&oacute;rios),  esteja ciente de que o m&oacute;dulo-diret&oacute;rio
+	    (normalmente "FreeBSD") n&atilde;o ser&aacute; criado, assim voc&ecirc; n&atilde;o
+	    deve omitir o diret&oacute;rio alvo.  Voc&ecirc; tamb&eacute;m pode desejar
+	    configurar um script de trabalho o qual seria executado
+	    como um comando pelo &man.cron.8;, para automatizar o
+	    processo.</para>
       </sect3>
+
       <sect3 id="mirror-ftp-cvsup">
-        <title>With CVSup</title>
+        <title>Espelhando com o CVSup</title>
+
         <para>
           A few sites, including the one-and-only <hostid role="fqdn">ftp-master.FreeBSD.org</hostid>
           even offer <application>CVSup</application> to mirror the contents of 
