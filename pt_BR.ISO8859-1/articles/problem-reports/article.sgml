@@ -11,7 +11,7 @@
   <articleinfo>
     <title>Escrevendo relat&oacute;rios de problema no FreeBSD</title>
 
-    <pubdate>$FreeBSD: articles/problem-reports/article.sgml,v 1.13 2003/12/12 02:09:35 ebrandi Exp $</pubdate>
+    <pubdate>$FreeBSD: articles/problem-reports/article.sgml,v 1.14 2003/12/12 02:51:55 ebrandi Exp $</pubdate>
 
     <legalnotice id="trademarks" role="trademarks">
       &tm-attrib.freebsd;
@@ -43,8 +43,7 @@
   <section id="pr-intro">
     <title>Introdu&ccedil;&atilde;o</title>
 
-    <para>
-      Uma das experi&ecirc;ncias mais frustrantes que algu&eacute;m pode ter como
+    <para> Uma das experi&ecirc;ncias mais frustrantes que algu&eacute;m pode ter como
       um usu&aacute;rio de programa &eacute; submeter um relat&oacute;rio de problema
       apenas para v&ecirc;-lo ser sumariamente fechado com uma informa&ccedil;&atilde;o
       curta e inutil como <quote>n&atilde;o &eacute; um bug</quote> ou <quote>PR
@@ -55,20 +54,17 @@
       contenham pouca ou nenhuma informa&ccedil;&atilde;o sobre como o problema
       ocorre e como reproduzi-lo.</para>
     
-    <para>
-      Este documento procura descrever como escrever bons relat&oacute;rios
+    <para> Este documento procura descrever como escrever bons relat&oacute;rios
       de problema. O que, voc&ecirc; pergunta, &eacute; um bom relat&oacute;rio de
       problema?  Bem, indo direto ao final, um bom relat&oacute;rio de
       problemas &eacute; aquele que se pode analisar e tratar rapidamente,
       para a satisfa&ccedil;&atilde;o mutua do usu&aacute;rio e do desenvolvedor.</para> 
     
-    <para>
-      Embora o foco prim&aacute;rio deste artigo seja a elabora&ccedil;&atilde;o de
+    <para> Embora o foco prim&aacute;rio deste artigo seja a elabora&ccedil;&atilde;o de
       relat&oacute;rios de problemas no FreeBSD, a maior parte dele pode ser
       aplicada tranquilamente a outros projetos de software.</para>
     
-    <para>
-      Observe que este artigo esta organizado de forma tem&aacute;tica, e n&atilde;o
+    <para> Observe que este artigo esta organizado de forma tem&aacute;tica, e n&atilde;o
       de forma cronol&oacute;gica, desta forma voc&ecirc; deve ler o documento todo
       antes de enviar um relat&oacute;rio de problema, &eacute; melhor trata-lo como
       um tutorial passo-a-passo.</para>
@@ -78,8 +74,7 @@
   <section id="pr-when">
     <title>Quando enviar um relat&oacute;rio de problema</title>
 
-    <para>
-      Existem muitos tipos de problemas, e n&atilde;o s&atilde;o todos que devem
+    <para> Existem muitos tipos de problemas, e n&atilde;o s&atilde;o todos que devem
       originar um relat&oacute;rio de problemas. Naturalmente, ningu&eacute;m &eacute;
       perfeito e haver&aacute; ocasi&otilde;es onde voc&ecirc; estar&aacute; certo de que
       encontrou um bug em um programa quando de fato voc&ecirc; entendeu
@@ -95,8 +90,7 @@
       detreminado bug ou ent&atilde;o sobre pedido de nova funcionalidade, por
       exemplo.</para>
       
-    <para>
-      Sendo assim como voc&ecirc; ir&aacute; determinar o que &eacute; um bug e o que n&atilde;o
+    <para> Sendo assim como voc&ecirc; ir&aacute; determinar o que &eacute; um bug e o que n&atilde;o
       &eacute; ?  Porque existe uma regra simples que diz que se o seu
       problema n&atilde;o &eacute; um bug se ele puder ser expressado com uma
       pergunta (normalmente na forma <quote>Como eu fa&ccedil;o X?</quote> ou
@@ -106,30 +100,26 @@
       considere enviar a sua pergunta para a lista
       &a.questions;.</para>
     
-    <para>
-      Em alguns casos pode ser apropriado enviar um relat&oacute;rio de
+    <para> Em alguns casos pode ser apropriado enviar um relat&oacute;rio de
       problema para algo que n&atilde;o &eacute; realmente um bug, como por
       exemplo:</para>
     
     <itemizedlist>
       <listitem>
-        <para>
-	  Solicita&ccedil;&atilde;o de adi&ccedil;&atilde;o de novos recursos. Geralmente &eacute; uma
+        <para> Solicita&ccedil;&atilde;o de adi&ccedil;&atilde;o de novos recursos. Geralmente &eacute; uma
 	  boa id&eacute;ia circular estas propostas nas listas de discuss&atilde;o
 	  antes de envia-la em um relat&oacute;rio de problema.</para>
       </listitem>
 
       <listitem>
-        <para>
-	  Notifica&ccedil;&otilde;es de atualiza&ccedil;&otilde;es de softwares mantidos
+        <para> Notifica&ccedil;&otilde;es de atualiza&ccedil;&otilde;es de softwares mantidos
 	  externamente (principalmente do ports, mas tamb&eacute;m sobre
 	  componentes do sistema b&aacute;sico mantidos externamente, como por
 	  exemplo o BIND e varios outros utilit&aacute;rios GNU).</para>
       </listitem>
     </itemizedlist>
 
-    <para>
-      Um outro ponto &eacute; que o sistema onde voc&ecirc; observou o bug n&atilde;o
+    <para> Um outro ponto &eacute; que o sistema onde voc&ecirc; observou o bug n&atilde;o
       estiver razo&aacute;velmente atualizado, voc&ecirc; deve considerar
       seriamente uma atualiza&ccedil;&atilde;o e ap&oacute;s voc&ecirc; deve tentar reproduzir 
       o problema no sistema atualizado antes de enviar o relat&oacute;rio de
@@ -137,8 +127,7 @@
       que receber um relat&oacute;rio de problema para um bug que ele ja
       corrigiu.</para>
 
-    <para>
-      Finalmente, um bug que n&atilde;o pode ser reproduzido raramente poder&aacute;
+    <para> Finalmente, um bug que n&atilde;o pode ser reproduzido raramente poder&aacute;
       ser corrigido.  Se o erro ocorrer somente uma vez e voc&ecirc; n&atilde;o
       puder o reproduzir, e tudo indicar que n&atilde;o ocorre mais nigu&eacute;m,
       as chances de que nenhum dos desenvolvedores poder&aacute; reproduzi-lo 
@@ -152,8 +141,7 @@
   <section id="pr-prep">
     <title>Prepara&ccedil;&atilde;o</title>
 
-    <para>
-      Uma boa regra a ser seguida sempre &eacute; realizar uma busca a
+    <para> Uma boa regra a ser seguida sempre &eacute; realizar uma busca a
       respeito do assunto, antes de enviar um relat&oacute;rio de problema.
       Pode ser que o seu problema j&aacute; tenha sido reportado; pode ser
       que ele esteja sendo debatido nas listas de discuss&atilde;o, ou que o
@@ -179,8 +167,7 @@
       </listitem>
 
       <listitem>
-        <para>As 
-          <ulink
+        <para>As <ulink
             URL="../../books/handbook/eresources.html#ERESOURCES-MAIL">
 	    listas de discuss&atilde;o</ulink>&mdash; se voc&ecirc; n&atilde;o participar da 
 	    lista desejada, utilize o <ulink
@@ -193,8 +180,7 @@
       </listitem>
 
       <listitem>
-        <para>
-	  Opcionalmente, utilize o seu mecanismo de busca preferido
+        <para> Opcionalmente, utilize o seu mecanismo de busca preferido
 	  para fazer uma consulta a internet em geral de refer&ecirc;ncias
 	  sobre o seu problema. Voc&ecirc; pode se deparar refer&ecirc;ncias a
 	  arquivos de listas de discuss&atilde;o ou de grupos de noticias nos
@@ -202,8 +188,7 @@
       </listitem>
 
       <listitem>
-        <para>
-	  Na sequ&ecirc;ncia, verifique o <ulink
+        <para> Na sequ&ecirc;ncia, verifique o <ulink
 	  URL="http://www.FreeBSD.org/cgi/query-pr-summary.cgi?query">banco
 	  de dados de relat&oacute;rios de problema do FreeBSD</ulink>
 	  (GNATS).  A menos que o seu problema seja recente ou muito
@@ -212,8 +197,7 @@
       </listitem>
 
       <listitem>
-        <para>
-	  Finalmente, se voce estiver atualizando de uma vers&atilde;o para
+        <para> Finalmente, se voce estiver atualizando de uma vers&atilde;o para
 	  outra &mdash; e especialmente se voc&ecirc; estiver atualizando
 	  para o ramo <literal>-current</literal> voc&ecirc; deve estudar
 	  cuidadosamente o conteudo do arquivo
@@ -228,8 +212,7 @@
     <para>Agora, voc&ecirc; precisa ter certeza que o seu relat&oacute;rio de
       problema ir&aacute; chegar at&eacute; as pessoas corretas.</para>
 
-    <para>
-      O primeiro ponto a ser verificado &eacute; se o problema &eacute; um bug em um
+    <para> O primeiro ponto a ser verificado &eacute; se o problema &eacute; um bug em um
       software de terceiros (um port ou um package que voc&ecirc; tenha
       instalado), se for, voc&ecirc; deve reportar o bug ao autor original e
       n&atilde;o ao Projeto FreeBSD.  Existem 2 exce&ccedil;&otilde;es a essa regra:
@@ -240,8 +223,7 @@
       seu software, e o port para o FreeBSD n&atilde;o tiver sido atualizado
       ainda.</para>
       
-    <para>
-      O segundo ponto a ser verificado &eacute; que o sistema de rastreamento
+    <para> O segundo ponto a ser verificado &eacute; que o sistema de rastreamento
       de bugs do FreeBSD ordena os relat&oacute;rios de problemas de acordo
       com a categoria que o usu&aacute;rio selecionou.  Desta forma, se voc&ecirc;
       selecionar a categoria errada quando enviar o seu relat&oacute;rio de
@@ -252,8 +234,7 @@
   <section id="pr-writing">
     <title>Escrevendo o relat&oacute;rio de problemas</title>
 
-    <para>
-      Agora que voc&ecirc; j&aacute; decidiu que o seu assunto merece um relat&oacute;rio
+    <para> Agora que voc&ecirc; j&aacute; decidiu que o seu assunto merece um relat&oacute;rio
       de problema, e que ele &eacute; um problema do FreeBSD, &eacute; hora de
       escrever o relat&oacute;rio sobre o seu problema atual.  Antes de
       entrarmos na mecanica do programa utilizado para gerar e enviar
@@ -396,14 +377,12 @@
     <section>
       <title>Antes de voc&ecirc; iniciar</title>
 
-      <para>
-	Antes de executar o programa &man.send-pr.1;, tenha certeza
+      <para> Antes de executar o programa &man.send-pr.1;, tenha certeza
 	que a sua vari&aacute;vel de ambiente <envar>VISUAL</envar> (ou a
 	<envar>EDITOR</envar> se a <envar>VISUAL</envar> n&atilde;o estiver
 	definida) est&aacute; setada para alguma coisa sensivel.</para>
       
-      <para>
-	Voc&ecirc; tamb&eacute;m deve se certificar de que o sistema de entrega de
+      <para> Voc&ecirc; tamb&eacute;m deve se certificar de que o sistema de entrega de
 	emails esteja funcionando corretamente.  O &man.send-pr.1;
 	utiliza mensagens de email para enviar e rastrear um relat&oacute;rio
 	de problemas.  Se voc&ecirc; n&atilde;o pode enviar mensagens de email
@@ -420,8 +399,7 @@
     <section>
       <title>Anexando pachs ou arquivos</title>
 
-      <para>
-	O programa &man.send-pr.1; tem a capacidade de anexar arquivos
+      <para> O programa &man.send-pr.1; tem a capacidade de anexar arquivos
 	a um relat&oacute;rio de problema.  Voce pode anexar tantos arquivos
 	quantos voc&ecirc; desejar, desde que cada um possua um nome &uacute;nico.
 	(por ex. por exemplo o nome pr&oacute;prio do arquivo, sem o caminho
@@ -431,13 +409,11 @@
       
 <screen>&prompt.user; <userinput>send-pr -a /var/run/dmesg -a /tmp/errors</userinput></screen>
 
-      <para>
-	N&atilde;o se preocupe com os arquivos bin&aacute;rios, eles ser&atilde;o
+      <para> N&atilde;o se preocupe com os arquivos bin&aacute;rios, eles ser&atilde;o
 	automaticamente codificados de forma a n&atilde;o interferir com o
 	seu agente de correio.</para>
       
-      <para>
-	Se voc&ecirc; anexar um patch, tenha certeza de utilizar a op&ccedil;&atilde;o
+      <para> Se voc&ecirc; anexar um patch, tenha certeza de utilizar a op&ccedil;&atilde;o
 	<option>-c</option> ou <option>-u</option> no &man.diff.1;
 	para criar um diff contextual ou um diff unificado (o formato
 	unificado &eacute; preferido),  e tenha certeza de especificar os
@@ -449,16 +425,14 @@
 	de testes apropriados e significativos, o c&oacute;digo ser&aacute;
 	combinado/migrado para ao ramo STABLE.</para>
       
-      <para>
-	Se voc&ecirc; juntar um patch no corpo do email, em vez envia-lo como 
+      <para> Se voc&ecirc; juntar um patch no corpo do email, em vez envia-lo como 
 	um arquivo anexo, voc&ecirc; pode ficar sujeito a ocorr&ecirc;ncia de um problema
 	bastante comum ocasionado pela tend&ecirc;ncia de alguns programas de 
 	email de converter tabs em espa&ccedil;os, o qual ir&aacute; arruinar
 	completamente qualquer coisa cuja inten&ccedil;&atilde;o &eacute; a de ser parte de um 
 	Makefile.</para>
       
-      <para>
-	Observe tamb&eacute;m que incluir pequenos patchs em um PR &eacute;
+      <para> Observe tamb&eacute;m que incluir pequenos patchs em um PR &eacute;
 	normalmente a coisa certa &mdash; particularmente quando ele
 	corrige o problema descrito no PR &mdash; grandes patches e
 	especialmente c&oacute;digo novo, que normalmente requerem uma
@@ -472,8 +446,7 @@
 	a necessidade de reenviar o patch completo em uma continua&ccedil;&atilde;o
 	do PR original.</para>
       
-      <para>
-	Voce deve observar que a menos que voc&ecirc; especifique
+      <para> Voce deve observar que a menos que voc&ecirc; especifique
 	explicitamente no seu PR ou diretamente no patch, qualquer
 	corre&ccedil;&atilde;o que voc&ecirc; envie ser&aacute; considerada como estando licenciada
 	sob os mesmos termos que o arquivo original que voc&ecirc;
@@ -483,8 +456,7 @@
     <section>
       <title>Preenchendo o template</title>
 
-      <para>
-	Quando voc&ecirc; executa o programa &man.send-pr.1;, voc&ecirc; ser&aacute; 
+      <para> Quando voc&ecirc; executa o programa &man.send-pr.1;, voc&ecirc; ser&aacute; 
 	apresentado a um template.  O template consiste em uma lista
 	de campos,  alguns dos quais estar&atilde;o pr&eacute; preenchidos, e alguns
 	ir&atilde;o possuir coment&aacute;rios explicando o seu prop&oacute;sito ou ent&atilde;o
@@ -492,8 +464,7 @@
 	coment&aacute;rios, eles ser&atilde;o removidos automaticamente se voc&ecirc; n&atilde;o
 	moficic&aacute;-los ou retir&aacute;-los voc&ecirc; mesmo.</para>
       
-      <para>
-	Na parte superior do template, logo abaixo das linhas
+      <para> Na parte superior do template, logo abaixo das linhas
 	<literal>SEND-PR:</literal>, est&aacute; o cabe&ccedil;alho do email.  Voc&ecirc;
 	normalmente n&atilde;o necessita modific&aacute;-lo, a menos que voc&ecirc; esteja
 	enviando o relat&oacute;rio de problema apartir de uma m&aacute;quina ou de
@@ -759,8 +730,7 @@
     <section>
       <title>Enviando o relat&oacute;rio de problemas</title>
 
-      <para>
-	Uma vez que voc&ecirc; tenha preenchido o template, salve-o, e saia
+      <para> Uma vez que voc&ecirc; tenha preenchido o template, salve-o, e saia
 	do editor de texto, ao fazer isso o  &man.send-pr.1; ir&aacute;
 	perguntar de voc&ecirc; deseja<prompt>s)end, e)dit or
 	a)bort?</prompt>.  Voc&ecirc; pode pressionar
@@ -787,8 +757,7 @@
   <section id="pr-followup">
     <title>Acompanhamento</title>
 
-    <para>
-      Uma vez que o relat&oacute;rio de problemas foi enviado, voc&ecirc; ir&aacute;
+    <para> Uma vez que o relat&oacute;rio de problemas foi enviado, voc&ecirc; ir&aacute;
       receber um email de confirma&ccedil;&atilde;o o qual ir&aacute; incluir um numero de
       controle, o qual foi atribuido ao seu relat&oacute;rio de problema e
       uma URL que voc&ecirc; pode consultar para verificar o seu status.
@@ -800,8 +769,7 @@
       coment&aacute;rio ou pacth que enviarem como complemento ao seu
       relat&oacute;rio de problema.</para>
     
-    <para>
-      Se alguem solicitar alguma informa&ccedil;&atilde;o adicional a voc&ecirc;, ou se
+    <para> Se alguem solicitar alguma informa&ccedil;&atilde;o adicional a voc&ecirc;, ou se
       voc&ecirc; lembrar ou descobrir algo que voc&ecirc; n&atilde;o mencinou no
       relat&oacute;rio inicial, apenas envie as novas informa&ccedil;&otilde;es para
       <email>bug-followup@FreeBSD.org</email>, tendo certeza de que o
@@ -810,8 +778,7 @@
       saber a qual relat&oacute;rio de problema ele deve anexar o
       email.</para>
 
-    <para>
-      Se o relat&oacute;rio de problema permanecer aberto depois que o
+    <para> Se o relat&oacute;rio de problema permanecer aberto depois que o
       problema j&aacute; tiver sido solucionado, apenas envie um
       <literal>follow-up</literal> (da forma mencionada acima) dizendo
       que o relat&oacute;rio d eproblema pode ser fechado, e, se possivel,
@@ -821,8 +788,7 @@
   <section id="pr-further">
     <title>Leituras futuras</title>
 
-    <para>
-      Esta &eacute; a lista de recursos relevantes sobre a maneira apropriada
+    <para> Esta &eacute; a lista de recursos relevantes sobre a maneira apropriada
       de escrever e processar relat&oacute;rios de problema. Esta lista n&atilde;o
       est&aacute; de forma alguma completa.</para>
 
