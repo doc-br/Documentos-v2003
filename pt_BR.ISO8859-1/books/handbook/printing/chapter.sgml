@@ -28,7 +28,7 @@
 
   <sect1 id="printing-synopsis">
     <title>Sinopse</title>
-    <indexterm><primary>Sistema de spool LPD </primary></indexterm>
+    <indexterm><primary>Sistema de <foreignphrase>spool</foreignphrase> LPD </primary></indexterm>
     <indexterm><primary>Impress&atilde;o</primary></indexterm>
 
     <para>
@@ -40,13 +40,13 @@
     </para>
 
     <para>
-	Ap&oacute;s de ler este cap&iacute;tulo, voc&ecirc; estar&aacute; sabendo:
+	Ap&oacute;s a leitura deste cap&iacute;tulo, voc&ecirc; estar&aacute; sabendo:
     </para>
 
     <itemizedlist>
       <listitem>
 	<para>
-		Como configurar o FreeBSD como um servidor de imprss&atilde;o
+		Como configurar o FreeBSD como um servidor de impress&atilde;o
 	</para>
       </listitem>
 
@@ -107,11 +107,11 @@
     </itemizedlist>
   </sect1>
 
-  <sect1 id="printing-intro-spooler">
+  <sect1 id="printing-intro-<foreignphrase>spooler</foreignphrase>">
     <title>Introdu&ccedil;&atilde;o</title>
 
     <para>
-	Para usar impressoras no FreeBSD, voc&eacute; ir&aacute; precisar configurar-lo para trabalhar com o sistema de impress&atilde;o da Barkeley, tamb&eacute; conhecido como sistema de spool <application>LPD</application>.
+	Para usar impressoras no FreeBSD, voc&eacute; ir&aacute; precisar configurar-lo para trabalhar com o sistema de impress&atilde;o da Barkeley, tamb&eacute; conhecido como sistema de <foreignphrase>spool</foreignphrase> <application>LPD</application>.
 	Ele tamb&eacute;m &eacute; o sistema padr&atilde;o de controle do FreeBSD.  Esse cap&iacute;tulo introduz ao sistema de spooling <application>LPD</application>, frequentimente chamado de <application>LPD</application>, e ir&aacute; guia-lo atrav&eacute;s de sua configura&ccedil;&atilde;o.
 	</para>
 
@@ -136,7 +136,7 @@
 	<para>
 		Ele abilita os usu&aacute;rios a enviar arquivos para serem 
 	impressos; Esses envios s&atilde;o chamados de 
-	<emphasis>jobs</emphasis>.
+	<emphasis><foreignphrase>jobs</foreignphrase></emphasis>.
 	</para>
       </listitem>
 
@@ -149,133 +149,170 @@
       </listitem>
 
       <listitem>
-	<para>It can print <emphasis>header pages</emphasis> (also known
-	  as <emphasis>banner</emphasis> or <emphasis>burst</emphasis>
-	  pages) so users can easily find jobs they have printed in a
-	  stack of printouts.</para>
+	<para>
+		Ele pode imprimir <emphasis>cabe&ccedil;alhos</emphasis> (tamb&eacute;m
+		conechido como <emphasis>banner</emphasis> ou 
+		<emphasis>burst</emphasis> ent&atilde;o os usu&aacute;rios
+		podem com facilidade encontrar seus <foreignphrase>jobs</foreignphrase> que foram impressos
+		na pilha de impressos.
+	  </para>
       </listitem>
 
       <listitem>
-	<para>It takes care of communications parameters for printers
-	  connected on serial ports.</para>
+	<para>
+		Ele se encarrega dos par&acirc;metros das conex&otilde;es
+	de impressoras seriais.
+	  </para>
       </listitem>
 
       <listitem>
-	<para>It can send jobs over the network to a 
-	  <application>LPD</application> spooler on another host.</para>
+	<para>
+		Ele pode enviar <foreignphrase>jobs</foreignphrase> atrav&eacute;s da rede para 
+	outro <foreignphrase>spooler</foreignphrase> <application>LPD</application> em um outro
+	servidor.
+	</para>
       </listitem>
 
       <listitem>
-	<para>It can run special filters to format jobs to be printed for
-	  various printer languages or printer capabilities.</para>
+	<para>
+	Ele pode executar filtros especiais para formatar <foreignphrase>jobs</foreignphrase> para
+	serem impressos em v&aacute;rias linguagens de impressora ou para
+	compatibilizar as impressoras.
+	</para>
       </listitem>
 
       <listitem>
-	<para>It can account for printer usage.</para>
+	<para>Ele pode gerenciar o uso da impressora.
+	</para>
       </listitem>
     </itemizedlist>
 
-    <para>Through a configuration file
-      (<filename>/etc/printcap</filename>), and by providing the special
-      filter programs, you can enable the <application>LPD</application>
-      system to do all or some
-      subset of the above for a great variety of printer hardware.</para>
+    <para>Atraves do arquivo de configura&ccedil;&atilde;o
+      (<filename>/etc/printcap</filename>), e por providenciar
+	programas especiais de filtro, voc&ecirc; pode abilitar o
+	systema <application>LPD</application> para fazer tudo ou
+	alguma parte do conjunto das fun&ccedil;&atilde;o de uma grande 
+	variedade de impressoras.
+	</para>
 
     <sect2 id="printing-intro-why">
-      <title>Why You Should Use the Spooler</title>
+      <title>Como Voc&ecirc; Deve Utilizar o Spooler</title>
 
-      <para>If you are the sole user of your system, you may be wondering
-        why you should bother with the spooler when you do not need access
-	control, header pages, or printer accounting.  While it is
-	possible to enable direct access to a printer, you should use the
-	spooler anyway since:</para>
+      <para>
+	Se voc&ecirc; &eacute; um usu&aacute;rio &uacute;nico do sistema
+	 you may be wondering 
+	Porque voc&ecirc; deveria should bother com o <foreignphrase>spooler</foreignphrase> quando voc&eacute;	nao necessita de controle de acesso, cabe&ccedil;alho de p&aacute;ginas
+	ou controle de impress&atilde;o.  Mesmo que fosse possivel habilitar
+	o acesso direto a impressora, voc&ecirc; dever&aacute; usar o <foreignphrase>spooler</foreignphrase>
+	de qualquer maneira.
+	</para>
 
       <itemizedlist>
 	<listitem>
-	  <para><application>LPD</application> prints jobs in the background;
-	    you do not have to wait
-	    for data to be copied to the printer.</para>
+	  <para><application>LPD</application> imprime o <foreignphrase>jobs</foreignphrase> em segundo plano
+	voc&ecirc; n&atilde;o precisa aguardar os dados serem enviados para
+	a impressora.
+	    </para>
 	</listitem>
 
 	<indexterm><primary>&tex;</primary></indexterm>
 	<listitem>
-	  <para><application>LPD</application> can conveniently run a job 
-	    to be printed through
-	    filters to add date/time headers or convert a special file
-	    format (such as a &tex; DVI file) into a format the printer will
-	    understand.  You will not have to do these steps
-	    manually.</para>
+	  <para><application>LPD</application> pode convinientemente executar 
+		um job para ser impresso atraves de filtros para adicionar 
+		cabe&ccedil;alhos com data/hota ou converter formatos
+		especiais de arquivo ( como o arquivos &tex; DVI )
+		em formatos que as impressoras poder&atilde;o entender.
+		  Voc&ecirc; n&atilde;o precisar&aacute; fazer manualmente.
+	    </para>
 	</listitem>
 
 	<listitem>
-	  <para>Many free and commercial programs that provide a print
-	    feature usually expect to talk to the spooler on your system.
-	    By setting up the spooling system, you will more easily
-	    support other software you may later add or already
-	    have.</para>
+	  <para>
+		Muitos programas gratuitos e comercias preve a impress&atilde;o 
+	    atraves da funcionalidade de conversar com o <foreignphrase>spooler</foreignphrase> do seu
+	    sistema.  Pela configura&ccedil;&atilde;o do sistema de <foreignphrase>spooler</foreignphrase>,
+	    voc&ecirc; ir&aacute; mais facilmente suportar outros programas 
+	    que voc&ecirc; poder&aacute; adcionar ou j&aacute; ter.
+	    </para>
 	</listitem>
       </itemizedlist>
     </sect2>
   </sect1>
 
   <sect1 id="printing-intro-setup">
-    <title>Basic Setup</title>
+    <title>Configura&ccedil;&atilde;o B&aacute;sica</title>
 
-    <para>To use printers with the <application>LPD</application> spooling
-      system, you will need to
-      set up both your printer hardware and the 
-      <application>LPD</application> software.  This
-      document describes two levels of setup:</para>
+    <para>Para usar as impressoras com o  sistema <application>LPD</application>       de spooling, voc&ecirc; ir&aacute; precisar de configurar
+	tanto a impressora quanto o programa  
+      <application>LPD</application>.  Esse documento descreve dois n&iacute;
+	de configura&ccedil;&atilde;:
 
+      </para>
     <itemizedlist>
       <listitem>
-	<para>See section <link linkend="printing-simple">Simple Printer
-	  Setup</link> to learn how to connect a printer, tell 
-	  <application>LPD</application> how to
-	  communicate with it, and print plain text files to the
-	  printer.</para>
+	<para>Veja a se&ccedil;&atilde;o 
+		<link linkend="printing-simple">Configura&ccedil;&atilde;o Simples de Impressora</link> para aprender como conectar a impressora, informar ao 
+	  <application>LPD</application> como se cominicar com as impressoras,
+	  e imprimir arquivo em texto puro nelas.
+	  </para>
       </listitem>
 
       <listitem>
-	<para>See section <link linkend="printing-advanced">Advanced
-	  Printer Setup</link> to find out how to print a variety of
-	  special file formats, to print header pages, to print across a
-	  network, to control access to printers, and to do printer
-	  accounting.</para>
+	<para>Veja a se&ccedil;&atilde;o <link linkend="printing-advanced">
+	Configura&ccedil;&atilde;o Avan&ccedil;ada de Impressora
+	  </link> para encontrar como imprimir uma variedade de formatos
+	especiais de arquivo, para imprimir cabe&ccedil;alhos nas p&aacute;ginas
+	para imprimir atraves da rede, para controlar o acesso &agrave; 
+	impressoras, e fazer o balan&ccedil;o de utiliza&ccedi;&atilde;o
+	da impressora.
+	  </para>
       </listitem>
     </itemizedlist>
 
     <sect2 id="printing-simple">
-      <title>Simple Printer Setup</title>
+    <title>Configura&ccedil;&atilde;o B&aacute;sica</title>
 
-      <para>This section tells how to configure printer hardware and the
-	<application>LPD</application> software to use the printer.  
-	It teaches the basics:</para>
+      <para>Essa se&ccedil;&atilde;o mostra como configurar a impressora
+	e o programa <application>LPD</application> para usar a
+	impressora.
+	Ele ir&aacute; ensinar o b&aacute;sico:
+	</para>
 
       <itemizedlist>
 	<listitem>
-	  <para>Section <link linkend="printing-hardware">Hardware
-	    Setup</link> gives some hints on connecting the printer to a
-	    port on your computer.</para>
+	  <para>Se&ccedil;&atilde;o 
+		<link linkend="printing-hardware">
+			Configura&ccedil;&atilde;o de Hardware
+	    	</link> 
+		D&aacute; algumas dicas na conex&atilde;o da impressora
+	com a porta do seu computador.
+	    </para>
 	</listitem>
 
 	<listitem>
-	  <para>Section <link linkend="printing-software">Software
-	    Setup</link> shows how to set up the 
-	    <application>LPD</application> spooler configuration
-	    file (<filename>/etc/printcap</filename>).</para>
+	  <para>Se&ccedil;&atilde;o 
+		<link linkend="printing-software">Configura&ccedil;&atilde;o
+	de Programa</link> mostra como configurar o arquivo de configura&ccedil;&atilde;o   
+	    (<filename>/etc/printcap</filename>) do </para>
+	    <application>LPD</application> <foreignphrase>spooler</foreignphrase> 
 	</listitem>
       </itemizedlist>
 
-      <para>If you are setting up a printer that uses a network protocol
-	to accept data to print instead of a serial or parallel interface,
-	see <link linkend="printing-advanced-network-net-if">Printers With
-	Networked Data Stream Interfaces</link>.</para>
+      <para>
+	Se voc&ecirc; estiver configurando a impressora para usar o
+	protocolo de rede para aceitar dados para imprimir ao inv&eacute;s
+	de uma porta paralela ou serial, veja
+	<link linkend="printing-advanced-network-net-if">
+	Impressoras com Interfaces de Dados Atrav&eacute;s da Rede
+	</link>.</para>
 
-      <para>Although this section is called <quote>Simple Printer
-	Setup</quote>, it is actually fairly complex.  Getting the printer
+      <para>
+	Apesar desta se&ccedil;&atilde;o ser chamada de
+	<quote>Configura&ccedil;&atilde;o Simples de Impressora
+	</quote>, ela &eacute; um pouco complexa.
+	Getting the printer
 	to work with your computer and the <application>LPD</application>
-	spooler is the hardest
+	<foreignphrase>spooler</foreignphrase> is the hardest
 	part.  The advanced options like header pages and accounting are
 	fairly easy once you get the printer working.</para>
 
@@ -346,7 +383,7 @@
 	  <indexterm><primary>PostScript</primary></indexterm>
 	  <para>Usually, the only time you need two-way communication with
 	    the printer is if the printer speaks &postscript;.  &postscript;
-	    printers can be very verbose.  In fact, &postscript; jobs are
+	    printers can be very verbose.  In fact, &postscript; <foreignphrase>jobs</foreignphrase> are
 	    actually programs sent to the printer; they need not produce
 	    paper at all and may return results directly to the computer.
 	    &postscript; also uses two-way communication to tell the
@@ -928,7 +965,7 @@ showpage</programlisting>
 	<para>You configure <application>LPD</application> by editing the file
 	  <filename>/etc/printcap</filename>.  The 
 	  <application>LPD</application> spooling system
-	  reads this file each time the spooler is used, so updates to the
+	  reads this file each time the <foreignphrase>spooler</foreignphrase> is used, so updates to the
 	  file take immediate effect.</para>
 
 	<indexterm>
@@ -943,7 +980,7 @@ showpage</programlisting>
 	  <filename>/etc/remote</filename>.  For complete information
 	  about the format, see the &man.cgetent.3;.</para>
 
-	<para>The simple spooler configuration consists of the following
+	<para>The simple <foreignphrase>spooler</foreignphrase> configuration consists of the following
 	  steps:</para>
 
 	<procedure>
@@ -1011,8 +1048,8 @@ showpage</programlisting>
 	  to <application>LPD</application> to do their printing usually
 	  make the same assumption.
 	  If you are installing such a printer and want to be able to
-	  print jobs in the printer language <emphasis>and</emphasis>
-	  print plain text jobs, you are strongly urged to add an
+	  print <foreignphrase>jobs</foreignphrase> in the printer language <emphasis>and</emphasis>
+	  print plain text <foreignphrase>jobs</foreignphrase>, you are strongly urged to add an
 	  additional step to the simple setup outlined above: install an
 	  automatic plain-text-to-&postscript; (or other printer language)
 	  conversion program.  The section entitled <link
@@ -1111,12 +1148,12 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 	<sect4 id="printing-spooldir">
 	  <title>Making the Spooling Directory</title>
 	  <indexterm><primary>printer spool</primary></indexterm>
-	  <indexterm><primary>print jobs</primary></indexterm>
+	  <indexterm><primary>print <foreignphrase>jobs</foreignphrase></primary></indexterm>
 
-	  <para>The next step in the simple spooler setup is to make a
+	  <para>The next step in the simple <foreignphrase>spooler</foreignphrase> setup is to make a
 	    <emphasis>spooling directory</emphasis>, a directory where
-	    print jobs reside until they are printed, and where a number
-	    of other spooler support files live.</para>
+	    print <foreignphrase>jobs</foreignphrase> reside until they are printed, and where a number
+	    of other <foreignphrase>spooler</foreignphrase> support files live.</para>
 
 	  <para>Because of the variable nature of spooling directories, it
 	    is customary to put these directories under
@@ -1143,7 +1180,7 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 &prompt.root; <userinput>mkdir /var/spool/lpd/bamboo</userinput></screen>
 
 	  <note>
-	    <para>If you are concerned about the privacy of jobs that
+	    <para>If you are concerned about the privacy of <foreignphrase>jobs</foreignphrase> that
 	      users print, you might want to protect the spooling
 	      directory so it is not publicly accessible.  Spooling
 	      directories should be owned and be readable, writable, and
@@ -1317,7 +1354,7 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 
 	  <para>We are now ready to tell <application>LPD</application>
 	    what text filter to use to
-	    send jobs to the printer.  A <emphasis>text filter</emphasis>,
+	    send <foreignphrase>jobs</foreignphrase> to the printer.  A <emphasis>text filter</emphasis>,
 	    also known as an <emphasis>input filter</emphasis>, is a
 	    program that <application>LPD</application> runs when it 
 	    has a job to print.  When <application>LPD</application>
@@ -1795,7 +1832,7 @@ $%&amp;'()*+,-./01234567
       
       <sect3 id="printing-advanced-if-conversion">
         <title>Accommodating Plain Text Jobs on &postscript; Printers</title>
-        <indexterm><primary>print jobs</primary></indexterm>
+        <indexterm><primary>print <foreignphrase>jobs</foreignphrase></primary></indexterm>
 
         <para>If you are the only user of your computer and &postscript; (or
           other language-based) printer, and you promise to never send plain
@@ -1804,9 +1841,9 @@ $%&amp;'()*+,-./01234567
           need to worry about this section at all.</para>
             
         <para>But, if you would like to send both &postscript; and plain text
-          jobs to the printer, then you are urged to augment your printer
+          <foreignphrase>jobs</foreignphrase> to the printer, then you are urged to augment your printer
           setup.  To do so, we have the text filter detect if the arriving job
-          is plain text or &postscript;.  All &postscript; jobs must start with
+          is plain text or &postscript;.  All &postscript; <foreignphrase>jobs</foreignphrase> must start with
           <literal>%!</literal> (for other printer languages, see your printer
           documentation).  If those are the first two characters in the job,
           we have &postscript;, and can pass the rest of the job directly.  If
@@ -2543,11 +2580,11 @@ exit 0</programlisting>
       </indexterm>
       <indexterm><primary>header pages</primary></indexterm>
       <para>Header pages, also known as <emphasis>banner</emphasis> or
-        <emphasis>burst pages</emphasis> identify to whom jobs belong after
+        <emphasis>burst pages</emphasis> identify to whom <foreignphrase>jobs</foreignphrase> belong after
         they are printed.  They are usually printed in large, bold letters,
         perhaps with decorative borders, so that in a stack of printouts they
-        stand out from the real documents that comprise users' jobs.  They
-        enable users to locate their jobs quickly.  The obvious drawback to a
+        stand out from the real documents that comprise users' <foreignphrase>jobs</foreignphrase>.  They
+        enable users to locate their <foreignphrase>jobs</foreignphrase> quickly.  The obvious drawback to a
         header page is that it is yet one more sheet that has to be printed
         for every job, their ephemeral usefulness lasting not more than a few
         minutes, ultimately finding themselves in a recycling bin or rubbish
@@ -2604,7 +2641,7 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
         :vf=/usr/local/libexec/hpvf:\
         :of=/usr/local/libexec/hpof:</programlisting>
             
-        <para>Now, when users print jobs to <literal>teak</literal>, they get
+        <para>Now, when users print <foreignphrase>jobs</foreignphrase> to <literal>teak</literal>, they get
           a header page with each job.  If users want to spend time searching
           for their printouts, they can suppress header pages by submitting
           the job with <command>lpr -h</command>; see the <link
@@ -2752,9 +2789,9 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
             <para>Write a <emphasis>smart</emphasis> output filter. Normally,
               an output filter is not meant to do anything more than
               initialize a printer or do some simple character conversion.  It
-              is suited for header pages and plain text jobs (when there is no
+              is suited for header pages and plain text <foreignphrase>jobs</foreignphrase> (when there is no
               text (input) filter).  But, if there is a text filter for the
-              plain text jobs, then <application>LPD</application> will start
+              plain text <foreignphrase>jobs</foreignphrase>, then <application>LPD</application> will start
 	      the output filter only for
               the header pages.  And the output filter can parse the header
               page text that <application>LPD</application> generates to
@@ -2788,7 +2825,7 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
           filter and the text filter generate the header page. The filters
           should use the user and host arguments to generate a suitable
           header page.  The drawback of this method is that users will always
-          get a header page, even if they submit jobs with <command>lpr
+          get a header page, even if they submit <foreignphrase>jobs</foreignphrase> with <command>lpr
             -h</command>.</para>
             
         <para>Let us explore this method.  The following script takes three
@@ -2953,7 +2990,7 @@ done
         <secondary>network</secondary>
       </indexterm>
       <indexterm><primary>network printing</primary></indexterm>
-      <para>FreeBSD supports networked printing: sending jobs to remote
+      <para>FreeBSD supports networked printing: sending <foreignphrase>jobs</foreignphrase> to remote
         printers.  Networked printing generally refers to two different
         things:</para>
       
@@ -2978,7 +3015,7 @@ done
             <listitem>
               <para>It might understand the <application>LPD</application>
 		protocol and can even queue
-                jobs from remote hosts.  In this case, it acts just like a
+                <foreignphrase>jobs</foreignphrase> from remote hosts.  In this case, it acts just like a
                 regular host running <application>LPD</application>.  Follow 
 		the same procedure in
                 section <link linkend="printing-advanced-network-rm">Printers
@@ -2989,7 +3026,7 @@ done
             <listitem>
               <para>It might support a data stream network connection. In this
                 case, you <quote>attach</quote> the printer to one host on the
-                network by making that host responsible for spooling jobs and
+                network by making that host responsible for spooling <foreignphrase>jobs</foreignphrase> and
                 sending them to the printer. Section <link
                   linkend="printing-advanced-network-net-if">Printers with
                   Networked Data Stream Interfaces</link> gives some
@@ -3003,7 +3040,7 @@ done
         <title>Printers Installed on Remote Hosts</title>
 
         <para>The <application>LPD</application> spooling system has built-in
-	  support for sending jobs to
+	  support for sending <foreignphrase>jobs</foreignphrase> to
           other hosts also running <application>LPD</application> (or are 
 	  compatible with <application>LPD</application>).  This
           feature enables you to install a printer on one host and make it
@@ -3064,7 +3101,7 @@ done
           <listitem>
             <para>Make a spooling directory and specify its location in the
               <literal>sd</literal> capability.  <application>LPD</application>
-	      will store jobs here
+	      will store <foreignphrase>jobs</foreignphrase> here
               before they get sent to the printer host.</para>
           </listitem>
           
@@ -3109,7 +3146,7 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
         :of=/usr/local/libexec/ofhp:
 
 #
-#  rattan is connected to rose; send jobs for rattan to rose:
+#  rattan is connected to rose; send <foreignphrase>jobs</foreignphrase> for rattan to rose:
 #
 rattan|line|diablo|lp|Diablo 630 Line Printer:\
         :lp=:rm=rose:rp=rattan:sd=/var/spool/lpd/rattan:
@@ -3149,7 +3186,7 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
         <title>Printers with Networked Data Stream Interfaces</title>
 
         <para>Often, when you buy a network interface card for a printer, you
-          can get two versions: one which emulates a spooler (the more
+          can get two versions: one which emulates a <foreignphrase>spooler</foreignphrase> (the more
           expensive version), or one which just lets you send data to it as if
           you were using a serial or parallel port (the cheaper version).
           This section tells how to use the cheaper version. For the more
@@ -3225,7 +3262,7 @@ exec /usr/libexec/lpr/lpf "$@" | /usr/local/libexec/netprint scrivener 5100</pro
       <para>This section gives information on restricting printer usage. The
         <application>LPD</application> system lets you control who can access
 	a printer, both locally or
-        remotely, whether they can print multiple copies, how large their jobs
+        remotely, whether they can print multiple copies, how large their <foreignphrase>jobs</foreignphrase>
         can be, and how large the printer queues can get.</para>
       
       <sect3 id="printing-advanced-restricting-copies">
@@ -3233,14 +3270,14 @@ exec /usr/libexec/lpr/lpf "$@" | /usr/local/libexec/netprint scrivener 5100</pro
 
         <para>The <application>LPD</application> system makes it easy for
 	  users to print multiple copies
-          of a file.  Users can print jobs with <command>lpr -#5</command>
+          of a file.  Users can print <foreignphrase>jobs</foreignphrase> with <command>lpr -#5</command>
           (for example) and get five copies of each file in the job.  Whether
           this is a good thing is up to you.</para>
             
         <para>If you feel multiple copies cause unnecessary wear and tear on
           your printers, you can disable the <option>-#</option> option to
             &man.lpr.1; by adding the <literal>sc</literal> capability to the
-          <filename>/etc/printcap</filename> file.  When users submit jobs
+          <filename>/etc/printcap</filename> file.  When users submit <foreignphrase>jobs</foreignphrase>
           with the <option>-#</option> option, they will see:</para>
               
         <screen>lpr: multiple copies are not allowed</screen>
@@ -3251,7 +3288,7 @@ exec /usr/libexec/lpr/lpf "$@" | /usr/local/libexec/netprint scrivener 5100</pro
             Installed on Remote Hosts</link>), you need the
           <literal>sc</literal> capability on the remote
           <filename>/etc/printcap</filename> files as well, or else users will
-          still be able to submit multiple-copy jobs by using another
+          still be able to submit multiple-copy <foreignphrase>jobs</foreignphrase> by using another
           host.</para>
 
         <para>Here is an example.  This is the
@@ -3368,15 +3405,15 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
       <sect3 id="printing-advanced-restricting-sizes">
         <title>Controlling Sizes of Jobs Submitted</title>
 
-        <indexterm><primary>print jobs</primary></indexterm>
+        <indexterm><primary>print <foreignphrase>jobs</foreignphrase></primary></indexterm>
         <para>If you have many users accessing the printers, you probably need
           to put an upper limit on the sizes of the files users can submit to
           print.  After all, there is only so much free space on the
           filesystem that houses the spooling directories, and you also need
-          to make sure there is room for the jobs of other users.</para>
+          to make sure there is room for the <foreignphrase>jobs</foreignphrase> of other users.</para>
             
         <indexterm>
-          <primary>print jobs</primary>
+          <primary>print <foreignphrase>jobs</foreignphrase></primary>
           <secondary>controlling</secondary>
         </indexterm>
         <para><application>LPD</application> enables you to limit the maximum
@@ -3447,7 +3484,7 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 
         <para>The <application>LPD</application> spooling system provides 
 	  several ways to restrict print
-          jobs submitted from remote hosts:</para>
+          <foreignphrase>jobs</foreignphrase> submitted from remote hosts:</para>
             
         <variablelist>
           <varlistentry>
@@ -3498,7 +3535,7 @@ madrigal.fishbaum.de</programlisting>
                     
               <para>This lets you insure that remote users will not fill your
                 filesystem.  You can also use it to give a certain priority to
-                local users: they will be able to queue jobs long after the
+                local users: they will be able to queue <foreignphrase>jobs</foreignphrase> long after the
                 free disk space has fallen below the amount specified in the
                 <filename>minfree</filename> file.</para>
                     
@@ -3517,7 +3554,7 @@ madrigal.fishbaum.de</programlisting>
               <para>The spooling directory is given in the <literal>sd</literal>
                 capability.  We will make three megabytes (which is 6144 disk blocks)
                 the amount of free disk space that must exist on the filesystem for
-                <application>LPD</application> to accept remote jobs:</para>
+                <application>LPD</application> to accept remote <foreignphrase>jobs</foreignphrase>:</para>
                   
               <screen>&prompt.root; <userinput>echo 6144 &gt; /var/spool/lpd/bamboo/minfree
               </userinput></screen>
@@ -3533,7 +3570,7 @@ madrigal.fishbaum.de</programlisting>
                 <filename>/etc/printcap</filename>.  When
                 <literal>rs</literal> appears in the entry for a
                 locally-attached printer, <application>LPD</application> will
-		accept jobs from remote
+		accept <foreignphrase>jobs</foreignphrase> from remote
                 hosts <emphasis>if</emphasis> the user submitting the job also
                 has an account of the same login name on the local host.
                 Otherwise, <application>LPD</application> refuses the job.</para>
@@ -3575,7 +3612,7 @@ madrigal.fishbaum.de</programlisting>
         usage.</para>
       
       <para>To implement accounting, you have to modify a printer's text
-        filter (to charge for plain text jobs) and the conversion filters (to
+        filter (to charge for plain text <foreignphrase>jobs</foreignphrase>) and the conversion filters (to
         charge for other file formats), to count pages or query the printer
         for pages printed.  You cannot get away with using the simple output
         filter, since it cannot do accounting.  See section <link
@@ -3800,7 +3837,7 @@ total                     337.00  154   $  6.74</screen>
           to be able to determine how much paper a job uses.  This is the
           essential problem of printer accounting.</para>
             
-        <para>For plain text jobs, the problem is not that hard to solve: you
+        <para>For plain text <foreignphrase>jobs</foreignphrase>, the problem is not that hard to solve: you
           count how many lines are in a job and compare it to how many lines
           per page your printer supports.  Do not forget to take into account
           backspaces in the file which overprint lines, or long logical lines
@@ -3859,7 +3896,7 @@ total                     337.00  154   $  6.74</screen>
 	<term>&man.lpr.1;</term>
 
 	<listitem>
-	  <para>Print jobs</para>
+	  <para>Print <foreignphrase>jobs</foreignphrase></para>
 	</listitem>
       </varlistentry>
       
@@ -3875,7 +3912,7 @@ total                     337.00  154   $  6.74</screen>
 	<term>&man.lprm.1;</term>
 
 	<listitem>
-	  <para>Remove jobs from a printer's queue</para>
+	  <para>Remove <foreignphrase>jobs</foreignphrase> from a printer's queue</para>
 	</listitem>
       </varlistentry>
     </variablelist>
@@ -3890,7 +3927,7 @@ total                     337.00  154   $  6.74</screen>
 	<replaceable>printer-name</replaceable></option> to specify on which
       printer/queue to operate, as listed in the
       <filename>/etc/printcap</filename> file.  This enables you to submit,
-      remove, and check on jobs for various printers.  If you do not use the
+      remove, and check on <foreignphrase>jobs</foreignphrase> for various printers.  If you do not use the
       <option>-P</option> option, then these commands use the printer
       specified in the <envar>PRINTER</envar> environment variable.  Finally,
       if you do not have a <envar>PRINTER</envar> environment variable, these
@@ -3939,13 +3976,13 @@ total                     337.00  154   $  6.74</screen>
     <sect2 id="printing-lpq">
       <title>Checking Jobs</title>
       
-      <indexterm><primary>print jobs</primary></indexterm>
+      <indexterm><primary>print <foreignphrase>jobs</foreignphrase></primary></indexterm>
       <para>When you print with &man.lpr.1;, the data you wish to print is put
 	together in a package called a <quote>print job</quote>, which is sent
 	to the <application>LPD</application> spooling system.  Each printer 
-	has a queue of jobs, and
-	your job waits in that queue along with other jobs from yourself and
-	from other users.  The printer prints those jobs in a first-come,
+	has a queue of <foreignphrase>jobs</foreignphrase>, and
+	your job waits in that queue along with other <foreignphrase>jobs</foreignphrase> from yourself and
+	from other users.  The printer prints those <foreignphrase>jobs</foreignphrase> in a first-come,
 	first-served order.</para>
 
       <para>To display the queue for the default printer, type &man.lpq.1;.
@@ -3964,7 +4001,7 @@ active kelly    9    /etc/host.conf, /etc/hosts.equiv   88 bytes
 2nd    kelly    10   (standard input)                   1635 bytes
 3rd    mary     11   ...                                78519 bytes</screen>
 	    
-      <para>This shows three jobs in the queue for <literal>bamboo</literal>.
+      <para>This shows three <foreignphrase>jobs</foreignphrase> in the queue for <literal>bamboo</literal>.
 	The first job, submitted by user kelly, got assigned <quote>job
 	number</quote> 9.  Every job for a printer gets a unique job number.
 	Most of the time you can ignore the job number, but you will need it
@@ -4027,7 +4064,7 @@ mary: 3rd                                [job 011rose]
 	  <term>lprm -</term>
 
 	  <listitem>
-	    <para>Removes all jobs (for the default printer) belonging to
+	    <para>Removes all <foreignphrase>jobs</foreignphrase> (for the default printer) belonging to
 	      you.</para>
 	  </listitem>
 	</varlistentry>
@@ -4036,9 +4073,9 @@ mary: 3rd                                [job 011rose]
 	  <term>lprm <replaceable>user</replaceable></term>
 	  
 	  <listitem>
-	    <para>Removes all jobs (for the default printer) belonging to
+	    <para>Removes all <foreignphrase>jobs</foreignphrase> (for the default printer) belonging to
 	      <replaceable>user</replaceable>.  The superuser can remove other
-	      users' jobs; you can remove only your own jobs.</para>
+	      users' <foreignphrase>jobs</foreignphrase>; you can remove only your own <foreignphrase>jobs</foreignphrase>.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -4057,15 +4094,15 @@ mary: 3rd                                [job 011rose]
       
       <para>Just use the <option>-P</option> option with the above shortcuts
 	to operate on a specific printer instead of the default. For example,
-	the following command removes all jobs for the current user in the
+	the following command removes all <foreignphrase>jobs</foreignphrase> for the current user in the
 	queue for the printer named <literal>rattan</literal>:</para>
 	  
       <screen>&prompt.user; <userinput>lprm -P rattan -</userinput></screen>
 	  
       <note>
 	<para>If you are working in a networked environment, &man.lprm.1; will
-	  let you remove jobs only from the
-	  host from which the jobs were submitted, even if the same printer is
+	  let you remove <foreignphrase>jobs</foreignphrase> only from the
+	  host from which the <foreignphrase>jobs</foreignphrase> were submitted, even if the same printer is
 	  available from other hosts. The following command sequence
 	  demonstrates this:</para>
 	      
@@ -4110,7 +4147,7 @@ cfA013rose dequeued
 	      
 	<para>These options apply to every file in the job, so you cannot mix
 	  (say) DVI and ditroff files together in a job. Instead, submit the
-	  files as separate jobs, using a different conversion option for each
+	  files as separate <foreignphrase>jobs</foreignphrase>, using a different conversion option for each
 	  job.</para>
 
 	<note>
@@ -4234,9 +4271,9 @@ cfA013rose dequeued
 	  &man.ls.1; manual page and passes it to the &man.troff.1;
 	  command, which formats that source and makes GNU troff
 	  output and passes it to &man.lpr.1;, which submits the job
-	  to the <application>LPD</application> spooler.  Because we 
+	  to the <application>LPD</application> <foreignphrase>spooler</foreignphrase>.  Because we 
 	  used the <option>-t</option>
-	  option to &man.lpr.1;, the spooler will convert the GNU
+	  option to &man.lpr.1;, the <foreignphrase>spooler</foreignphrase> will convert the GNU
 	  troff output into a format the default printer can
 	  understand when it prints the job.</para>
       </sect3>
@@ -4394,21 +4431,21 @@ cfA013rose dequeued
 	</listitem>
 
 	<listitem>
-	  <para>Rearrange the order of the jobs in each queue.</para>
+	  <para>Rearrange the order of the <foreignphrase>jobs</foreignphrase> in each queue.</para>
 	</listitem>
       </itemizedlist>
       
       <para>First, a note about terminology: if a printer is
 	<emphasis>stopped</emphasis>, it will not print anything in its queue.
-	Users can still submit jobs, which will wait in the queue until the
+	Users can still submit <foreignphrase>jobs</foreignphrase>, which will wait in the queue until the
 	printer is <emphasis>started</emphasis> or the queue is
 	cleared.</para>
 	  
       <para>If a queue is <emphasis>disabled</emphasis>, no user (except
-	<username>root</username>) can submit jobs for the printer.  An
-	<emphasis>enabled</emphasis> queue allows jobs to be submitted.  A
+	<username>root</username>) can submit <foreignphrase>jobs</foreignphrase> for the printer.  An
+	<emphasis>enabled</emphasis> queue allows <foreignphrase>jobs</foreignphrase> to be submitted.  A
 	printer can be <emphasis>started</emphasis> for a disabled queue, in
-	which case it will continue to print jobs in the queue until the queue
+	which case it will continue to print <foreignphrase>jobs</foreignphrase> in the queue until the queue
 	is empty.</para>
 	  
       <para>In general, you have to have <username>root</username> privileges
@@ -4428,7 +4465,7 @@ cfA013rose dequeued
 
 	  <listitem>
 	    <para>Cancel the current job and stop the printer.  Users can
-	      still submit jobs if the queue is enabled.</para>
+	      still submit <foreignphrase>jobs</foreignphrase> if the queue is enabled.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -4452,15 +4489,15 @@ cfA013rose dequeued
 	      <replaceable>printer-name</replaceable></command></term>
 	  
 	  <listitem>
-	    <para>Disable queuing of new jobs.  If the printer is running, it
-	      will continue to print any jobs remaining in the queue.  The
-	      superuser (<username>root</username>) can always submit jobs,
+	    <para>Disable queuing of new <foreignphrase>jobs</foreignphrase>.  If the printer is running, it
+	      will continue to print any <foreignphrase>jobs</foreignphrase> remaining in the queue.  The
+	      superuser (<username>root</username>) can always submit <foreignphrase>jobs</foreignphrase>,
 	      even to a disabled queue.</para>
 		  
 	    <para>This command is useful while you are testing a new printer
-	      or filter installation: disable the queue and submit jobs as
+	      or filter installation: disable the queue and submit <foreignphrase>jobs</foreignphrase> as
 	      <username>root</username>.  Other users will not be able to submit
-	      jobs until you complete your testing and re-enable the queue with
+	      <foreignphrase>jobs</foreignphrase> until you complete your testing and re-enable the queue with
 	      the <command>enable</command> command.</para>
 	  </listitem>
 	</varlistentry>
@@ -4484,7 +4521,7 @@ cfA013rose dequeued
 	      <replaceable>printer-name</replaceable></command></term>
 		
 	  <listitem>
-	    <para>Enable the queue for a printer.  Users can submit jobs but
+	    <para>Enable the queue for a printer.  Users can submit <foreignphrase>jobs</foreignphrase> but
 	      the printer will not print anything until it is started.</para>
 	  </listitem>
 	</varlistentry>
@@ -4522,7 +4559,7 @@ cfA013rose dequeued
 	      <replaceable>printer-name</replaceable></command></term>
 		
 	  <listitem>
-	    <para>Start the printer.  The printer will print jobs in its
+	    <para>Start the printer.  The printer will print <foreignphrase>jobs</foreignphrase> in its
 	      queue.</para>
 	  </listitem>
 	</varlistentry>
@@ -4534,7 +4571,7 @@ cfA013rose dequeued
 	  <listitem>
 	    <para>Stop the printer.  The printer will finish the current job
 	      and will not print anything else in its queue.  Even though the
-	      printer is stopped, users can still submit jobs to an enabled
+	      printer is stopped, users can still submit <foreignphrase>jobs</foreignphrase> to an enabled
 	      queue.</para>
 	  </listitem>
 	</varlistentry>
@@ -4545,8 +4582,8 @@ cfA013rose dequeued
 		
 	  <listitem>
 	    <para>Rearrange the queue for
-	      <replaceable>printer-name</replaceable> by placing the jobs with
-	      the listed <replaceable>job</replaceable> numbers or the jobs
+	      <replaceable>printer-name</replaceable> by placing the <foreignphrase>jobs</foreignphrase> with
+	      the listed <replaceable>job</replaceable> numbers or the <foreignphrase>jobs</foreignphrase>
 	      belonging to <replaceable>username</replaceable> at the top of
 	      the queue. For this command, you cannot use
 	      <literal>all</literal> as the
@@ -4613,7 +4650,7 @@ cfA013rose dequeued
 
 	  <para><application>CUPS</application> uses the Internet Printing
 	    Protocol (<acronym>IPP</acronym>) as the basis for managing
-	    print jobs and queues.  The Line Printer Daemon
+	    print <foreignphrase>jobs</foreignphrase> and queues.  The Line Printer Daemon
 	    (<acronym>LPD</acronym>) Server Message Block
 	    (<acronym>SMB</acronym>), and AppSocket (a.k.a. JetDirect)
 	    protocols are also supported with reduced functionality.  CUPS
