@@ -137,13 +137,14 @@
     <indexterm><primary>ISA</primary></indexterm>
     <indexterm><primary>Placas de som</primary></indexterm>
 
-    <para>Before you begin, you should know the model of the card you
-      have, the chip it uses, and whether it is a PCI or ISA card.
-      FreeBSD supports a wide variety of both PCI and ISA cards.  If
-      you do not see your card in the following list, check the
-      &man.pcm.4; manual page.  This is not a complete list; however,
-      it does list some of the most common cards.</para>
-
+    <para>Antes de voc&ecirc; come&ccedil;ar, voc&ecirc; deve saber qual o modelo da
+      placa que voc&ecirc; possui, qual chipset ela utiliza, e se ela &eacute; uma
+      placa PCI ou ISA.  O FreeBSD suporta uma larga variedade de
+      placas PCI e ISA.  Se voc&ecirc; n&atilde;o localizar a sua placa na lista
+      seginte, verifique a pagina de manual &man.pcm.4;.  Esta n&atilde;o &eacute;
+      uma lista completa; entretando ela lista algumas das placas mais
+      comuns.</para>
+    
     <itemizedlist>
       <listitem>
 	<para>Crystal 4237, 4236, 4232, 4231</para>
@@ -196,126 +197,135 @@
 
     <indexterm>
       <primary>kernel</primary>
-      <secondary>configuration</secondary>
+      <secondary>configura&ccedil;&atilde;o</secondary>
     </indexterm>
 
-    <para>To use your sound device, you will need to load the proper
-      device driver.  This may be accomplished in one of two ways.
-      The easiest way is to simply load a kernel module for your sound
-      card with &man.kldload.8; which can either be done from the
-      command line:</para>
-
+    <para>Para utilizar o seu dispositivo de som, voc&ecirc; ir&aacute; precisar
+      carregar o driver de dispositivo apropriado.  Isto pode ser
+      efetuado de duas formas.  A forma mais simples consiste-se em
+      carregar o m&oacute;dulo de kernel apropriado para sua placa de som com 
+      o comando &man.kldload.8; o que pode ser feito a partir da linha
+      de comando:
+    
     <screen>&prompt.root; <userinput>kldload snd_emu10k1.ko</userinput></screen>
-    <para>or by adding the appropriate line to the file
-      <filename>/boot/loader.conf</filename> like this:</para>
+
+    <para>ou atrav&eacute;s da adi&ccedil;&atilde;o de uma linha apropriada no arquivo 
+      <filename>/boot/loader.conf</filename>, tal como o exemplo abaixo:</para>
 
     <programlisting>snd_emu10k1_load="YES"</programlisting>
 
-    <para>These examples are for a Creative &soundblaster; Live! sound
-      card.  Other available loadable sound modules are listed in
+    <para>Estes exemplos s&atilde;o para uma placa de som Creative
+      &soundblaster; Live!.  Outros m&oacute;dulos de som carreg&aacute;veis
+      dispon&iacute;veis s&atilde;o listados no
       <filename>/boot/defaults/loader.conf</filename>.</para>
-
-    <para>Alternatively, you may statically
-      compile in support for your sound card in your kernel.  The
-      sections below provide the information you need to add support
-      for your hardware in this manner.  For more information about
-      recompiling your kernel, please see <xref
-      linkend="kernelconfig">.</para>
-
+    
+    <para>Alternativamente, voc&ecirc; pode compilar de forma est&aacute;tica o 
+      suporte &agrave; sua placa de som no seu kernel.  A sess&atilde;o abaixo
+      fornece as informa&ccedil;&otilde;es que voc&ecirc; precisa para adicionar o suporte
+      ao seu hardware desta maneira.  Para maiores informa&ccedil;&otilde;es sobre a
+      recompila&ccedil;&atilde;o do seu kernel, por favor consulte 
+      <xref linkend="kernelconfig">.</para>
+    
     <sect3>
       <title>Placas de som Creative, Advance, e ESS</title>
 
-      <para>If you have one of the above cards, you will need to
-	add:</para>
-	
+      <para>Se voc&ecirc; possui uma das placas abaixo, voc&ecirc; ir&aacute; precisar
+	adicionar:</para>
+      
       <programlisting>device pcm</programlisting>
 
-      <para>to your kernel configuration file.  If you have a PnP ISA
-	card, you will also need to add:</para>
-
+      <para>Ao seu arquivo de configura&ccedil;&atilde;o do kernel.  Se voc&ecirc; possui
+      uma placa ISA PnP, voc&ecirc; tamb&eacute;m ter&aacute; que adicionar:</para>
+      
       <programlisting>device sbc</programlisting>
 
-      <para>For a non-PnP ISA card, add:</para>
-
+      <para>Para uma plana n&atilde;o-PnP, adicione:</para>
+      
       <programlisting>device pcm
 device sbc0 at isa? port 0x220 irq 5 drq 1 flags 0x15</programlisting>
 
-      <para>to your kernel configuration file.  The settings shown
-	above are the defaults.  You may need to change the IRQ or the
-	other settings to match your card.  See the &man.sbc.4; manual
-	page for more information.</para>
-
+      <para>Ao seu arquivo de configura&ccedil;&atilde;o do kernel.  A configura&ccedil;&atilde;o
+	mostrada acima &eacute; a padr&atilde;o.  Voc&ecirc; pode precisar alterar o IRQ
+	ou outras configura&ccedil;&otilde;es para adaptar-se a sua placa.  Consulte
+	a pagina de manual &man.sbc.4; para maiores
+	informa&ccedil;&otilde;es.</para>
+      
       <note>
-	<para>The Sound Blaster Live is not supported under FreeBSD&nbsp;4.0
-	  without a patch, which this section will not cover.  It is
-	  recommended that you update to the latest -STABLE before
-	  trying to use this card.</para>
+	<para>A placa de som Sound Blaster Live n&atilde;o &eacute; suportada no
+	  FreeBSD FreeBSD&nbsp;4.0 sem um <literal>patch</literal>, o
+	  qual esta sess&atilde;o n&atilde;o ir&aacute; abranger.  &Eacute; recomendado que voc&ecirc;
+	  atualize seu sistema para a ultima vers&atilde;o -STABLE antes de
+	  tentar utilizar esta placa.</para>
       </note>
     </sect3>
 
     <sect3>
       <title>Placas Gravis UltraSound</title>
 
-      <para>For a PnP ISA card, you will need to add:</para>
+      <para>Para um placa ISA PnP, voc&ecirc; ir&aacute; precisar adicionar:</para>
 
       <programlisting>device pcm
 device gusc</programlisting>
 
-      <para>to your kernel configuration file.  If you have a non-PnP
-	ISA card, you will need to add:</para>
+      <para>Ao seu arquivo de configura&ccedil;&atilde;o do kernel.  se voc&ecirc; possui 
+	uma placa ISA n&atilde;o-PnP, voc&ecirc; ir&aacute; precisar adicionar:</para>
 
       <programlisting>device pcm
 device gus0 at isa? port 0x220 irq 5 drq 1 flags 0x13</programlisting>
 
-      <para>to your kernel configuration file.  You may need to change
-	the IRQ or the other settings to match your card. See the
-	&man.gusc.4; manual page for more information.</para>
+      <para>Ao seu arquivo de configura&ccedil;&atilde;o do kernel.  A configura&ccedil;&atilde;o 
+        mostrada acima &eacute; a padr&atilde;o.  Voc&ecirc; pode precisar alterar o IRQ 
+        ou outras configura&ccedil;&otilde;es para adaptar-se a sua placa.  Consulte 
+        a pagina de manual &man.gusc.4; para maiores informa&ccedil;&otilde;es.</para>
     </sect3>
 
     <sect3>
       <title>Placas de som Crystal</title>
 
-      <para>For Crystal cards, you will need to add:</para>
+      <para>Para placas Crystal, voc&ecirc; ir&aacute; precisar adicionar:</para>
 
       <programlisting>device pcm
 device csa</programlisting>
 
-      <para>to your kernel configuration file.</para>
+      <para>Ao seu arquivo de configura&ccedil;&atilde;o do kernel.</para>
     </sect3>
 
     <sect3>
       <title>Suporte Gen&eacute;rico</title>
 
-      <para>For PnP ISA or PCI cards, you will need to add:</para>
+      <para>Para placas PCI ou ISa PnP, voc&ecirc; ir&aacute; precisar adicionar:</para>
 
       <programlisting>device pcm</programlisting>
 
-      <para>to your kernel configuration file.  If you have a non-PnP
-	ISA sound card that does not have a bridge driver, you will
-	need to add:</para>
-
+      <para>Ao seu arquivo de configura&ccedil;&atilde;o do kernel.  Se voc&ecirc; possui
+	uma placa de som ISA n&atilde;o-PnP a qual n&atilde;o possui um
+	<literal>bridge driver</literal>, voc&ecirc; ir&aacute; precisar
+	adicionar:</para>
+      
       <programlisting>device pcm0 at isa? irq 10 drq 1 flags 0x0</programlisting>
 
-      <para>to your kernel configuration file.  You may need to change
-	the IRQ or the other settings to match your card.</para>
-
+      <para>Ao seu arquivo de configura&ccedil;&atilde;o do kernel.  A configura&ccedil;&atilde;o 
+        mostrada acima &eacute; a padr&atilde;o.  Voc&ecirc; pode precisar alterar o IRQ 
+        ou outras configura&ccedil;&otilde;es para adaptar-se a sua placa.</para>
     </sect3>
 
     <sect3>
       <title>Som Onboard</title>
 
-      <para>Some systems with built-in motherboard sound devices may
-	require the following option in your kernel
-	configuration:</para>
-
+      <para>Alguns sistemas com idispositivos de som embutidos na
+	placa m&atilde;e podem precisar que a seguinte op&ccedil;&atilde;o esteja presente em
+	seu arquivo de configura&ccedil;&atilde;o do kernel:</para>
+      
       <programlisting>options PNPBIOS</programlisting>
     </sect3>
+
   </sect2>
 
   <sect2 id="sound-devicenodes">
     <title>Criando e testando os n&oacute;s de dispositivos (Device Nodes)</title>
 
-    <indexterm><primary>device nodes</primary></indexterm>
+    <indexterm><primary>n&oacute;s de dispositivo</primary></indexterm>
+
     <para>After you reboot, log in and check for the device in the
       <filename>/var/run/dmesg.boot</filename> file, as shown below:</para>
 
