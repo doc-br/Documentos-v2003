@@ -702,7 +702,6 @@ passwd: done</screen>
 	os outros comandos apresentados aqui.</para>
     </sect2>
 
-
   </sect1>
 
   <sect1 id="users-limiting">
@@ -739,29 +738,30 @@ passwd: done</screen>
       <primary><filename>/etc/login.conf</filename></primary>
     </indexterm>
     <para>As classes de login s&atilde;o definidas em <filename>/etc/login.conf</filename>.  A
-      sem&acirc;ntica precisa &eacute; al&eacute;m do espa&ccedil;o desta se&ccedil;&atilde;o, mas &eacute; descrita em detalhe na p&aacute;gina
-      de manual &man.login.conf.5;. &Eacute; suficiente dizer que cada usu&aacute;rio est&aacute; atribu&iacute;do a uma
-      classe do in&iacute;cio de uma sess&atilde;o (<literal>default</literal> por padr&atilde;o), e que cada classe
-      do in&iacute;cio de uma sess&atilde;o tem um jogo das potencialidades do in&iacute;cio de uma sess&atilde;o associadas
-      com ela.  Uma potencialidade do in&iacute;cio de uma sess&atilde;o &eacute; um par <literal><replaceable>nome</replaceable>
-      =<replaceable>valor</replaceable></literal>, onde <replaceable>nome</replaceable> &eacute;
-      previamente conhecido e <replaceable>valor</replaceable> &eacute; uma string arbitr&aacute;ria processada
-      conformente dependendo do nome.  Ajustando classe de login e as potencialidades s&atilde;o
-      descritas tamb&eacute;m em &man.login.conf.5;</para>
+	sem&acirc;ntica precisa está além do escopo abordado nesta seção, mas &eacute; descrita em detalhe na p&aacute;gina
+	de manual do &man.login.conf.5;. &Eacute; suficiente dizer que cada usu&aacute;rio é relacionado a uma classe
+	de contas, a partir do início de sua sess&atilde;o (<literal>default</literal>, por padr&atilde;o), e que cada classe
+	dispõe de um conjunto de recursos que são associados a ela.  Uma definição de recurso por seção
+	é composta de um par de opções, no formato <literal><replaceable>nome</replaceable>
+	=<replaceable>valor</replaceable></literal>, onde <replaceable>nome</replaceable> &eacute; um valor
+	previamente conhecido e <replaceable>valor</replaceable> &eacute; um conjunto de caracteres arbitr&aacute;rio processada
+	de acordo com o <replaceable>nome</replaceable>.  O ajuste das classe de <literal>login</literal> bem como
+	cada um dos recursos que pode ser controlados, são detalhadamente descritos
+	na página de manual do &man.login.conf.5;</para>
 
-    <para>Os limites de recurso s&atilde;o diferentes das potencialidades de login de uma
-     sess&atilde;o do vanilla em duas maneiras.  Primeira, para cada limite, h&aacute; um limite macio
-    (atual) e duro.  Um limite macio pode ser ajustado pelo usu&aacute;rio ou pela aplica&ccedil;&atilde;o, mas pode
-    ser n&atilde;o mais altamente do que o limite duro.  O &uacute;ltimo pode ser abaixado pelo usu&aacute;rio, mas
-    nunca ser levantado.  Em segundo, a maioria de limites de recursos aplicam-se por processo
-    a um usu&aacute;rio espec&iacute;fico, n&atilde;o usu&aacute;rio ao todo.  Nota, entretanto, que estas diferen&ccedil;as est&atilde;o
-    exijidas pela manipula&ccedil;&atilde;o espec&iacute;fica dos limites, n&atilde;o pela execu&ccedil;&atilde;o da estrutura da potencialidade
-    no login de uma sess&atilde;o (isto &eacute;, n&atilde;o s&atilde;o <emphasis>realmente</emphasis> um exemplo especial
-    de potencialidades de login).</para>
+    <para>Os limites de recurso s&atilde;o distintos de cada definição de <quote>login</quote>
+	de uma sessão tradicional em dois pontos.  Primeiro, para cada limite existe o limite
+	suave (o atual) e o árduo.  O limite suave pode ser definido pelo usuário ou pela aplicação,
+	mas nunca poderá ser maior que o limite árduo.  O segundo, pode ser revogado pelo usuário e ter
+	seu valor diminuído, mas nunca pode ser aumentado.  Segundo ponto, a maioria destes limites é contada
+	por processo, e não pelo usuário como um todo.  Note que, apesar destas diferenças entre
+	a estrutura de recursos e limitações por sessão, este exemplo limitado não ilustra
+	<emphasis>realmente</emphasis> o uso efetivo das caracterísitcas de limitação por
+	classe de login.</para>
 
-    <para>E assim, sem mais nada adicional, est&atilde;o abaixo os limites mais comums
-      usando limite de recursos (o resto, junto com todas as potencialidades restantes
-      de login de uma sess&atilde;o, podem ser encontradas em &man.login.conf.5;).</para>
+    <para>Dessa forma, seguem abaixo os limites mais comuns, normalmente
+	utilizados em classes de utilização de recursos (as outras opções podem ser
+	encontradas na página de manual do &man.login.conf.5;).</para>
 
     <variablelist>
       <varlistentry>
@@ -774,14 +774,14 @@ passwd: done</screen>
       <secondary>coredumpsize</secondary>
     </indexterm>
 
-	  <para>O limite em tamanho de um arquivo core gerado pelo um programa, por
-	    raz&otilde;es &oacute;bvias, subordinado a outros limites no uso do disco (ex:
+	  <para>Trata-se do limite de tamanho de um arquivo <literal>core</literal> gerado por um programa,
+	    por raz&otilde;es &oacute;bvias, subordinado a outros limites no uso do disco (ex:
 	    <literal>filesize</literal>, ou quota de disco).  N&atilde;o obstante, &eacute; usado
 	    frequentemente como um m&eacute;todo menos severo de controlar o consumo do espa&ccedil;o
-	    de disco: uma vez que usu&aacute;rios n&atilde;o geram os arquivos de core eles mesmo, e logo
-	    n&atilde;o os deletam (por n&atilde;o saber que existem) fazer esta configura&ccedil;&atilde;o pode evitar
-	    que eles fiquem sem espa&ccedil;o em disco devido o crash de uma aplica&ccedil;&atilde;o com grande
-	    consumo de mem&oacute;ria por exemplo o (ex: <application>emacs</application>).</para>
+	    de disco: uma vez que usu&aacute;rios n&atilde;o geram os arquivos de core conta própria, e logo,
+	    também n&atilde;o os deletam (por n&atilde;o saber que existem) configurar esta opção pode evitar
+	    que fiquem sem espa&ccedil;o em disco, devido à falha de alguma aplica&ccedil;&atilde;o com grande
+	    demanda por mem&oacute;ria por exemplo (ex: <application>emacs</application>).</para>
 
 	</listitem>
       </varlistentry>
@@ -795,16 +795,17 @@ passwd: done</screen>
       <primary>limitando usu&aacute;rios</primary>
       <secondary>cputime</secondary>
     </indexterm>
-	  <para>Esta &eacute; a quantidade m&aacute;xima de tempo do processador central
+	  <para>Indica a quantidade m&aacute;xima de tempo do processador central
 	   que o processo de um usu&aacute;rio pode consumir.  Os processos que
-	   desrespeitarem ser&atilde;o matados pelo kernel.
+	   desrespeitarem ser&atilde;o mortos pelo kernel.
 	    <note>
 	
 	      <para>Este &eacute; um limite de <emphasis>tempo</emphasis> no processador central,
-	      n&atilde;o porcentagem do processador central como indicado em alguns campos por &man.top.1;
-	      e &man.ps.1;.  Um limite no &uacute;ltimo &eacute;, na altura deste documento, n&atilde;o poss&iacute;vel, e seria
-	      in&uacute;til: um compilador&mdash; pode legitamente usar facilmente quase 100% de um
-	      processador central por algum tempo.</para>
+		n&atilde;o porcentagem do processador central como indicado do &man.top.1;
+		e &man.ps.1;.  Limitação por porcentagem, no momento que este documento
+		foi escrito, não é possível, e seria inviável limitar o fato de que
+		um compilador pode facilmente consumir quase 100% de um processador por
+		algum tempo.</para>
 	    </note>
 	</para>
 	</listitem>
@@ -819,10 +820,10 @@ passwd: done</screen>
       <primary>limitando usu&aacute;rios</primary>
       <secondary>filesize</secondary>
     </indexterm>
-	  <para>Este &eacute; o tamanho m&aacute;ximo de um arquivo que um usu&aacute;rio pode
+	  <para>É o tamanho m&aacute;ximo de um arquivo que um usu&aacute;rio pode
 	   possuir.  Ao contr&aacute;rio da  <link linkend="quotas">quota de disco</link>,
-	   este limite &eacute; refor&ccedil;ado em arquivos individuais, n&atilde;o de todo o conjunto
-	   de arquivos que um usu&aacute;rio possui.
+	   este limite &eacute; imposto a arquivos individuais, e n&atilde;o a todo o conjunto
+	   de arquivos que o usu&aacute;rio possui.
 	</listitem>
       </varlistentry>
 
@@ -835,14 +836,14 @@ passwd: done</screen>
       <primary>limitando usu&aacute;rios</primary>
       <secondary>maxproc</secondary>
     </indexterm>
-	  <para>Este &eacute; o n&uacute;mero m&aacute;ximo de processos que um usu&aacute;rio pode rodar.
-	    Isto inclui processos foreground e background igualmente.  Por raz&otilde;es
-	    &oacute;bvias, isto n&atilde;o pode ser maior do que o limite do sistema especificado
-	    por &man.sysctl.8; <varname>kern.maxproc</varname>.  Note tamb&eacute;m que configurando
-	    isso para um valor pequeno vai prejudicar a produtividade do usu&aacute;rio: &eacute; frequentemente
-	    &uacute;til logar multiplas vezes e executar processos.  Algumas tarefas, tais como
-	    compilar um programa grande, tamb&eacute;m geram multiplos processos (ex: &man.make.1;,
-	    &man.cc.1; e outros intermedi&aacute;rios).</para>
+	  <para>Este &eacute; o n&uacute;mero m&aacute;ximo de processos que um usu&aacute;rio executar
+	    simultâneamente.  Isto inclui processos e primeiro plano e segundo plano.  Por raz&otilde;es
+	    &oacute;bvias, este valor n&atilde;o pode ser maior do que o limite do sistema, especificado 
+	    pela variável &man.sysctl.8; <varname>kern.maxproc</varname>.  Note tamb&eacute;m que configurar
+	    este ítem para um valor pequeno vai prejudicar a produtividade do usu&aacute;rio: &eacute;
+	    frequentemente &uacute;til logar-se em múltiplos terminais e executar processos.
+	    Algumas tarefas, tais como compilar um programa grande, tamb&eacute;m geram multiplos processos
+	   (ex: &man.make.1;, &man.cc.1; e outros intermedi&aacute;rios).</para>
 	</listitem>
       </varlistentry>
 
@@ -855,11 +856,11 @@ passwd: done</screen>
       <primary>limitando usu&aacute;rios</primary>
       <secondary>memorylocked</secondary>
     </indexterm>
-	  <para>Este &eacute; a quantidade m&aacute;xima de mem&oacute;ria quem um processo pode
-	    requerir para reservar na mem&oacute;ria principal (ex: veja &man.mlock.2;).
-	    Alguns programas cr&iacute;ticos do sistema, tais como &man.amd.8;, reserva
-	    na mem&oacute;ria principal como evento troca, n&atilde;o contribuindo a uma degrada&ccedil;&atilde;o
-	    do sistema em tempo real.</para>
+	  <para>Trata-se da quantidade m&aacute;xima de mem&oacute;ria que um processo pode
+	    solicitar que seja reservado - veja &man.mlock.2;.
+	    Alguns programas cr&iacute;ticos do sistema, tais como &man.amd.8;, reservam esta
+	    memória em espaço de troca (<acronym>SWAP</acronym>) não contribuindo
+	    com a degradação do sistema em tempo real.</para>
 	</listitem>
       </varlistentry>
 
@@ -872,10 +873,10 @@ passwd: done</screen>
       <primary>limitando usu&aacute;rios</primary>
       <secondary>memoryuse</secondary>
     </indexterm>
-	  <para>Esta &eacute; a quantidade m&aacute;xima de mem&oacute;ria que um processo pode
-	    consumir durante todo o tempo.  Isso inclue o uso da mem&oacute;ria principal e a
-	    <foreignphrase>swap</foreignphrase>.  Isto n&atilde;o &eacute; um controle total de restri&ccedil;&atilde;o de
-	    consumo de mem&oacute;ria, mas &eacute; um bom come&ccedil;o</para>
+	  <para>Trata-se da quantidade m&aacute;xima de mem&oacute;ria que um processo pode
+	    consumir durante todo seu tempo de execussão.  Inclui o uso da mem&oacute;ria principal e a
+	    <foreignphrase>swap</foreignphrase>.  Não trata-se de controle total de restri&ccedil;&atilde;o
+	    de consumo de mem&oacute;ria, mas &eacute; um bom come&ccedil;o</para>
 	</listitem>
       </varlistentry>
 
@@ -888,11 +889,11 @@ passwd: done</screen>
       <primary>limitando usu&aacute;rios</primary>
       <secondary>openfiles</secondary>
     </indexterm>
-	  <para>Esta &eacute; a quantidade m&aacute;xima de arquivos que um processo pode ter
+	  <para>Trata-se da quantidade m&aacute;xima de arquivos que um processo pode ter
 	    aberto.  No FreeBSD, arquivos s&atilde;o usados tamb&eacute;m para representar
-	    <foreignphrase>sockets</foreignphrase> e canais IPC; tenha assim cuidado
-	    para n&atilde;o ajustar este demasiadamente baixo.  O limite para este &eacute; definido
-	    por &man.sysctl.8; <varname>kern.maxfiles</varname>.</para>
+	    <foreignphrase>sockets</foreignphrase> e canais IPC; portanto tenha cuidado
+	    para n&atilde;o ajustar este valor demasiadamente baixo.  O limite aqui &eacute; definido
+	    pela &man.sysctl.8; <varname>kern.maxfiles</varname>.</para>
 	</listitem>
       </varlistentry>
 
@@ -905,10 +906,10 @@ passwd: done</screen>
       <primary>limitando usu&aacute;rios</primary>
       <secondary>sbsize</secondary>
     </indexterm>
-	  <para>Esta &eacute; a quantidade m&aacute;xima de mem&oacute;ria da rede, e assim os mbufs,
-	    um usu&aacute;rio podem consumir.  Isto originado como uma resposta a um ataque
-	    velho de DoS criando muitos dos <foreignphrase>sockets</foreignphrase>,
-	    mas pode geralmente ser usado para limitar a comunica&ccedil;&atilde;o da rede.</para>
+	  <para>Esta &eacute; a quantidade m&aacute;xima de mem&oacute;ria a ser utilizada em rede,
+	    somatizados em quantos mbufs um usu&aacute;rio pode consumir.  Foi originalmente
+	    criado em resposta a um velho ataque DoS que criava muitos <foreignphrase>sockets</foreignphrase>,
+	    mas pode usualmente ser usado para limitar a comunica&ccedil;&atilde;o da rede.</para>
 	</listitem>
       </varlistentry>
 
@@ -921,16 +922,16 @@ passwd: done</screen>
       <primary>limitando usu&aacute;rios</primary>
       <secondary>stacksize</secondary>
     </indexterm>
-	  <para>Este &eacute; o tamanho m&aacute;ximo que uma pilha dos processos pode vir.
-	    Este sozinho n&atilde;o &eacute; suficiente para limitar a quantidade de mem&oacute;ria que
+	  <para>Trata-se do tamanho m&aacute;ximo que uma pilha de processos pode vir a ter.
+	    Sozinho, este valor n&atilde;o &eacute; suficiente para limitar a quantidade de mem&oacute;ria que
 	    um programa pode usar, consequentemente, deve ser usado em conjunto com
 	    outros limites.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
 
-    <para>Existem outras coisas para recordar ao ajustar limites de recurso.
-      Logo em seguinda est&atilde;o alguns pontos gerais, sugest&otilde;es, e coment&aacute;rios variados.</para>
+    <para>Existem outros pontos que devem ser lembrados ao ajustar limites de recursos.
+      A seguir serão apresentados alguns pontos gerais, sugest&otilde;es, e coment&aacute;rios variados.</para>
 
     <itemizedlist>
       <listitem>
@@ -940,18 +941,18 @@ passwd: done</screen>
       </listitem>
 
       <listitem>
-	<para>Embora o <filename>/etc/login.conf</filename> que vem com o
-	  sistema &eacute; uma fonte boa de valores razo&aacute;veis para a maioria dos limites,
+	<para>Embora o <filename>/etc/login.conf</filename> que acompanha o sistema
+	  seja uma fonte boa de valores razo&aacute;veis para a maioria dos limites,
 	  apenas voc&ecirc;, administrador, pode saber o que &eacute; apropriado para o seu
 	  sistema.  Ajustar um limite demasiadamente elevado pode abrir seu sistema
-	  at&eacute; o abuso, quando o ajustar demasiadamente baixo pode p&ocirc;r uma tens&atilde;o sobre
-	  a produtividade.
+	  at&eacute; o abuso, enquanto o ajustar demasiadamente baixo pode colocar 
+	  a produtividade em tensão.
       </listitem>
 
       <listitem>
-	<para>Os usu&aacute;rios do sistema de janela X (X11) devem provavelmente ser
-	  concedidos mais recursos do que outros usu&aacute;rios.  X11 por si s&oacute; usa poucos
-	  recursos, mas incentiva tamb&eacute;m usu&aacute;rios &agrave; rodar programas simultaneos.</para>
+	<para>Os usu&aacute;rios do sistema de janela X (X11) devem provavelmente ter
+	  direito de utilizarem mais recursos que outros usu&aacute;rios.  O X11 por si s&oacute; usa poucos
+	  recursos, mas incentiva os usu&aacute;rios &agrave; rodarem programas simultâneos.</para>
       </listitem>
 
       <listitem>
@@ -964,8 +965,8 @@ passwd: done</screen>
       </listitem>
     </itemizedlist>
 
-    <para>Para uma informa&ccedil;&atilde;o adicional sobre limites de recursos e classes de login
-      e capacidades em geral, consulte por favor as p&aacute;ginas de manuais relevantes:
+    <para>Para mais informações sobre limites de recursos e classes de login
+      em geral, consulte por favor as p&aacute;ginas de manuais relevantes:
       &man.cap.mkdb.1;, &man.getrlimit.2;, &man.login.conf.5;.</para>
   </sect1>
 
@@ -973,7 +974,7 @@ passwd: done</screen>
     <title>Personalizando usu&aacute;rios</title>
 
     <para>A localiza&ccedil;&atilde;o &eacute; um ambiente ajustado pelo administrador ou pelo usu&aacute;rio
-      do sistema para acomodar l&iacute;nguas diferentes, conjunto de caracteres, data e padr&otilde;es
+      do sistema para oferecer l&iacute;nguas diferentes, conjunto de caracteres, data e padr&otilde;es
       de tempo diferentes, e assim por diante.  Isto &eacute; discutido no cap&iacute;tulo sobre
       <link linkend="l10n">localiza&ccedil;&atilde;o</link>.</para>
   </sect1>
@@ -991,68 +992,68 @@ passwd: done</screen>
     </indexterm>
 
     <para>Um grupo &eacute; simplesmente uma lista de usu&aacute;rios.  Os grupos s&atilde;o identificados
-      por nome e GID (grupo ID).  No FreeBSD (e na maioria de outros sistemas &unix),
-      os dois fatores que o kernel usa para decidir se um processo est&aacute; permitido fazer
-      algo &eacute; seu usu&aacute;rio ID e a lista dos grupos que ele pertence.  Ao contr&aacute;rio de um
-      usu&aacute;rio ID, um processo tem uma lista dos grupos associados com ele.  Voc&ecirc; pode
-      ouvir algumas coisas, consultar o <quote>group ID</quote> de um usu&aacute;rio ou de um
-      processo; na maioria das vezes isto significa apenas o primeiro grupo da lista.</para>
+      por nome e GID (ID de Grupo).  No FreeBSD (e na maioria de outros sistemas &unix),
+      os dois fatores que o kernel usa para decidir se um processo est&aacute; tem permissão para
+      algo &eacute; seu ID de usu&aacute;rio e a lista dos grupos à que ele pertence.  Diferente
+      de um ID de usu&aacute;rio, um processo tem uma lista dos grupos associados à ele.  Voc&ecirc; 
+      eventualmente pode precisar consultar o <quote>ID de grupo</quote> de um usu&aacute;rio ou de um
+      processo; na maioria das vezes seus direitos implicam apenas no primeiro grupo da lista.</para>
 
-   <para>O nome do grupo ao mapa do ID do grupo est&aacute; em <filename>/etc/group</filename>.
-      Este &eacute; um arquivo de texto plano com quatro campos delimitadores.  O primeiro campo &eacute;
-      o nome do grupo, o segundo &eacute; a senha encriptada, o terceiro &eacute; o grupo ID, e o
-      quarto &eacute; a lista dos membros delimitado por virgula.  Pode com seguran&ccedil;a ser editado
-      na m&atilde;o (que sup&otilde;em naturalmente, que voc&ecirc; n&atilde;o ir&aacute; fazer nenhum erro de sintaxe!).
+   <para>O nome do grupo para ser identificado no mapa de ID de grupos está em <filename>/etc/group</filename>.
+      Trata-se de um arquivo de texto plano com quatro campos delimitadores.  O primeiro campo &eacute;
+      o nome do grupo, o segundo &eacute; a senha encriptada, o terceiro &eacute; o ID de grupo, e o
+      quarto &eacute; a lista de membros daquele grupo, delimitado por vírgula.  Pode seguramente ser editado
+      na m&atilde;o (supondo naturalmente, que voc&ecirc; n&atilde;o vá cometer erros de sintaxe!).
       Para uma descri&ccedil;&atilde;o mais completa da sintaxe, veja a p&aacute;gina de manual &man.group.5;.</para>
 
     <para>Se voc&ecirc; n&atilde;o quiser editar manualmente o <filename>/etc/group</filename>,
-      voc&ecirc; pode usar o comando &man.pw.8; para adicionar e editar grupos.  Por exemplo,
-      para adicionar um grupo chamado <groupname>teamtwo</groupname> e confirmar ent&atilde;o
-      que existe voc&ecirc; pode usar:</para>
+      pode utilizar o comando &man.pw.8; para adicionar e editar grupos.  Por exemplo,
+      para adicionar um grupo chamado <groupname>timedois</groupname> e em seguida confirmar que
+      ele foi criado, voc&ecirc; pode usar:</para>
 
     <example>
-      <title>Adicionando um grupo usando &man.pw.8;</title>
+      <title>Adicionando um grupo por meio do &man.pw.8;</title>
 
-      <screen>&prompt.root; <userinput>pw groupadd teamtwo</userinput>
-&prompt.root; <userinput>pw groupshow teamtwo</userinput>
-teamtwo:*:1100:</screen>
+      <screen>&prompt.root; <userinput>pw groupadd timedois</userinput>
+&prompt.root; <userinput>pw groupshow timedois</userinput>
+timedois:*:1100:</screen>
     </example>
 
-    <para>O n&uacute;mero <literal>1100</literal> acima est&aacute; o grupo ID do grupo
-      <groupname>teamtwo</groupname>.  Agora,
-      <groupname>teamtwo</groupname> n&atilde;o tem nenhum membro, e &eacute; por esta raz&atilde;o in&uacute;til.
-      Vamos mudar aquele convidado <username>jru</username> para o grupo
-      <groupname>teamtwo</groupname>.</para>
+    <para>O n&uacute;mero <literal>1100</literal> acima identifica o ID do grupo
+      <groupname>timedois</groupname>.  Agora,
+      <groupname>timedois</groupname> n&atilde;o tem nenhum membro, e portanto é in&uacute;til.
+      Vamos modificar aquele usuário <username>jua</username> e coloca-lo no grupo
+      <groupname>timedois</groupname>.</para>
 
     <example>
-      <title>Adicionando algu&eacute;m a um grupo usando &man.pw.8;</title>
+      <title>Adicionando algu&eacute;m a um determinado grupo por meio do &man.pw.8;</title>
 
-      <screen>&prompt.root; <userinput>pw groupmod teamtwo -M jru</userinput>
-&prompt.root; <userinput>pw groupshow teamtwo</userinput>
-teamtwo:*:1100:jru</screen>
+      <screen>&prompt.root; <userinput>pw groupmod timedois -M jua</userinput>
+&prompt.root; <userinput>pw groupshow timedois</userinput>
+timedois:*:1100:jua</screen>
     </example>
 
-    <para>O argumento op&ccedil;&atilde;o <option>-M</option> &eacute; uma lista de usu&aacute;rios que ser&atilde;o
-     membros do grupo delimitados por virgula.  Das se&ccedil;&otilde;es precedentes, n&oacute;s sabemos
-     que o arquivo de senha tamb&eacute;m cont&eacute;m um grupo para cada usu&aacute;rio.O &uacute;ltimo (o usu&aacute;rio)
-     &eacute; adicionado automaticamente &agrave; lista do grupo pelo sistema; o usu&aacute;rio n&atilde;o mostrar&aacute; acima
-     como um membro ao usar o comando <option>groupshow</option> para &man.pw.8;,
-     ou ferramenta similar.  Ou seja &man.pw.8; manipula somente o arquivo
-     <filename>/etc/group</filename>; nunca tentar&aacute; ler adicionalmente dados do
+    <para>A op&ccedil;&atilde;o <option>-M</option> deve ser uma lista de usuários que ser&atilde;o
+     membros do grupo em questão, delimitados por vírgula.  Com base nas outras seções deste capítulo,
+     sabemos que o arquivo de senha também contém o grupo de cada usuário. Se o usuário fizer parte apenas
+     de um grupo, o valor identificado no campo em questão é valido. Do contrário o sistema inclui automaticamente
+     o usuário à lista de membro de cada grupo, e o grupo primário não será apresentado com o argumento
+     <option>groupshow</option> do &man.pw.8;, ou qualquer ferramenta similar.  Ou seja &man.pw.8; manipula somente
+     o arquivo <filename>/etc/group</filename>; nunca tentar&aacute; ler também dados do
      <filename>/etc/passwd</filename>.</para>
 
     <example>
-      <title>Usando o &man.id.1; para determinar os grupos associados</title>
+      <title>Usando o &man.id.1; para determinar grupos associados aos usuários</title>
 
-      <screen>&prompt.user; <userinput>id jru</userinput>
-uid=1001(jru) gid=1001(jru) groups=1001(jru), 1100(teamtwo)</screen>
+      <screen>&prompt.user; <userinput>id jua</userinput>
+uid=1001(jua) gid=1001(jua) groups=1001(jua), 1100(timedois)</screen>
     </example>
 
-    <para>Como voc&ecirc; pode ver, <username>jru</username> &eacute; um membro dos grupos
-      <groupname>jru</groupname> e <groupname>teamtwo</groupname>.</para>
+    <para>Como pode-se notar, <username>jua</username> &eacute; membro dos grupos
+      <groupname>jua</groupname> e <groupname>timedois</groupname>.</para>
 
-    <para>Para maiores informa&ccedil;&otilde;es sobre &man.pw.8;, veja est&aacute; p&aacute;gina de manual, e para
-      maiores informa&ccedil;&otilde;es sobre o formato do <filename>/etc/group</filename>, consulte a
+    <para>Para maiores informa&ccedil;&otilde;es sobre o &man.pw.8;, consulte sua página de manual
+	e para maiores informa&ccedil;&otilde;es sobre o formato do <filename>/etc/group</filename>, consulte a
       p&aacute;gina de manual &man.group.5;.</para>
   </sect1>
 </chapter>
