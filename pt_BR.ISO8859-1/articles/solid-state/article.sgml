@@ -334,37 +334,44 @@ pseudo-device   md              # memory disk</programlisting>
       <step>
 	<title>Particionando o seu dispositivo de mem&oacute;ria flash</title>
 
-	<para>After booting with the kern and mfsroot floppies, choose
-	  <literal>custom</literal> from the installation menu.  In the custom
-	  installation menu, choose <literal>partition</literal>.  In the
-	  partition menu, you should delete all existing partitions using the
-	  <keycap>d</keycap> key.  After deleting all existing partitions,
-	  create a partition using the <keycap>c</keycap> key and accept the
-	  default value for the size of the partition.  When asked for the
-	  type of the partition, make sure the value is set to
-	  <literal>165</literal>.  Now write this partition table to the disk
-	  by pressing the <keycap>w</keycap> key (this is a hidden option on
-	  this screen).  When presented with a menu to choose a boot manager,
-	  take care to select <literal>None</literal> if you are using an
-	  M-Systems &diskonchip;.  If you are using an ATA compatible compact
-	  flash card, you should choose the FreeBSD Boot Manager.  Now press
-	  the <keycap>q</keycap> key to quit the partition menu.  You will be
-	  shown the boot manager menu once more - repeat the choice you made
-	  earlier.</para>
+	<para>Apos dar o boot com os disquetes do kernel e do mfsroot,
+	  escolha a opcao <literal>custom</literal> no menu de
+	  instalacao.  No menu de instalacao customizada, escolha a
+	  opcao <literal>partition</literal>.  No menu de particoes,
+	  voce deve deletar todas as particoes existentes utilizando a
+	  tecla <keycap>d</keycap>.  Depois de deletar todas as
+	  particoes, crie uma particao utilizando a tecla
+	  <keycap>c</keycap> e aceite o valor padrao para o tamanho da
+	  particao.  Quando lhe for indagado qual o tipo da particao,
+	  certifique-se que o valor esta definido como
+	  <literal>165</literal>.  Agora grave a tabela de
+	  particionamento para o disco pressionando a tecla
+	  <keycap>w</keycap> (esta e' uma opcao oculta nesta tela).
+	  Quando for apresentado o menu para que voce escolha o
+	  gerenciador de boot, tenha o cuidado de selecionar
+	  <literal>None</literal> se voce estiver utilizando um
+	  dispositivo &diskonchip; da M-Systems.  Se voce estiver
+	  utilizando um cartao de memoria flash compativel com o
+	  padrao ATA, voce deve escolher a opcao "FreeBSD Boot
+	  Manager".  Agora pressione a tecla <keycap>q</keycap> para
+	  sair do menu de particoes.  O menu de escolha do boot
+	  manager sera exibido novamente - repita a escolha que voce
+	  fez anteriormente.</para>
       </step>
 
       <step>
 	<title>Criando o sistema de arquivo no seu dispositivo de memoria flash.</title>
 
-	<para>Saida the custom installation menu, and from the main
-	  installation menu choose the <literal>fixit</literal> option.  After
-	  entering the fixit environment, enter the following commands:</para>
-
+	<para>Saia do menu de instalacao customizada, e no menu
+	  principal da instalacao, escolha a opcao
+	  <literal>fixit</literal>.  Depois de entrar no ambiente de
+	  recuperacao, execute os seguintes comandos:</para>
+	
 	<informaltable frame="none">
 	  <tgroup cols="2">
 	    <thead>
 	      <row>
-		<entry align="center">ATA compatible</entry>
+		<entry align="center">Compativeis com ATA</entry>
 
 		<entry align="center">&diskonchip;</entry>
 	      </row>
@@ -383,29 +390,31 @@ pseudo-device   md              # memory disk</programlisting>
 	  </tgroup>
 	</informaltable>
 
-	<para>At this point you will have entered the vi editor under the
-	  auspices of the disklabel command.  If you are using &diskonchip;,
-	  the first step will be to change the type value near the beginning
-	  of the file from <literal>ESDI</literal> to
-	  <literal>DOC2K</literal>.  Next, regardless of whether you are using
-	  &diskonchip; or ATA compatible compact flash media, you need to add
-	  an <literal>a:</literal> line at the end of the file.  This
-	  <literal>a:</literal> line should look like:</para>
-
+	<para>Neste ponto voce tera entrado no editor vi o qual esta
+	  sob controle do comando disklabel.  Se voce esta utilizando
+	  um &diskonchip;, o primeiro passo sera alterar o valor do
+	  tipo proximo do inicio do arquivo de <literal>EDSI</literal>
+	  para <literal>DOC2K</literal>.  Em seguida,
+	  independentemente se voce esta utilizando um &diskonchip; ou
+	  um dispositivo de memoria flash compativel com o padrao ATA,
+	  voce precisara adicionar uma linha <literal>a:</literal> 
+	  no final do arquivo.  Esta linha <literal>a:</literal> deve
+	  se paracer com a linha abaixo:</para>
+	  
 	<programlisting>a:      <replaceable>123456</replaceable>  0       4.2BSD  0       0</programlisting>
 
-	<para>Where <replaceable>123456</replaceable> is a number that is
-	  exactly the same as the number in the existing <literal>c:</literal>
-	  entry for size. Basically you are duplicating the existing
-	  <literal>c:</literal> line as an <literal>a:</literal> line, making
-	  sure that fstype is <literal>4.2BSD</literal>.  Save the file and
-	  exit.</para>
-
+	<para>Onde <replaceable>123456</replaceable> e um numero que 
+	  e exatamente o mesmo que existe na linha <literal>c:</literal> 
+	  referente ao tamanho.  Basicamente voce esta duplicando a
+	  linha <literal>c:</literal> existente para a linha
+	  <literal>a:</literal>, certifique-se de que o fstaype e
+	  <literal>4.2BSD</literal>.  Salve o arquivo e saia.</para> 
+	  
 	<informaltable frame="none">
 	  <tgroup cols="2">
 	    <thead>
 	      <row>
-		<entry align="center">ATA compatible</entry>
+		<entry align="center">Compativeis com ATA</entry>
 
 		<entry align="center">&diskonchip;</entry>
 	      </row>
@@ -424,15 +433,17 @@ pseudo-device   md              # memory disk</programlisting>
       </step>
 
       <step>
-	<title>Placing your filesystem on the flash media</title>
+	<title>Colocando o seu sistema de arquivos no seu dispositivo
+	de memopria flash.</title>
 
-	<para>Mount the newly prepared flash media:</para>
+	<para>Monte a sua unidade de memoria flash recem
+	preparada:</para>
 
 	<informaltable frame="none">
 	  <tgroup cols="2">
 	    <thead>
 	      <row>
-		<entry align="center">ATA compatible</entry>
+		<entry align="center">Compativeis com ATA</entry>
 
 		<entry align="center">&diskonchip;</entry>
 	      </row>
@@ -447,54 +458,60 @@ pseudo-device   md              # memory disk</programlisting>
 	  </tgroup>
 	</informaltable>
 	
-	<para>Bring this machine up on the network so we may transfer our tar
-	  file and explode it onto our flash media filesystem.  One example of
-	  how to do this is:</para>
-
+	<para>Coloque a maquina acessivel na rede de forma que possamos
+	  transferir o nosso arquivo tar para ela e para 
+	  que possamos descompacta-lo no sistema de arquivos da 
+	  unidade de memoria flash.  Um exemplo de como fazer 
+	  isso e:</para>
+	
 	<screen>&prompt.root; <userinput>ifconfig xl0 192.168.0.10 netmask 255.255.255.0</userinput>
 &prompt.root; <userinput>route add default 192.168.0.1</userinput></screen>
 
-	<para>Now that the machine is on the network, transfer your tar file.
-	  You may be faced with a bit of a dilemma at this point - if your
-	  flash memory part is 128 megabytes, for instance, and your tar file
-	  is larger than 64 megabytes, you cannot have your tar file on the
-	  flash media at the same time as you explode it - you will run out of
-	  space.  One solution to this problem, if you are using FTP, is to
-	  untar the file while it is transferred over FTP.  If you perform
-	  your transfer in this manner, you will never have the tar file and
-	  the tar contents on your disk at the same time:</para>
-
+	<para>Agora que a maquina ja esta acessivel na rede, transfira
+	  o seu arquivo tar para ela.  Neste momento voce pode se ver
+	  diante de um pequeno dilema - Se a sua unidade de memoria
+	  flash possui 128 Mb, por exemplo, e o seu arquito tar eh
+	  maior que 64 Mb, voce nao pode ter o arquivo na sua unidade
+	  flash ao mesmo tempo em que esta descompactando-o - voce ira
+	  ficar sem espaco.  Uma solucao para este problema, se voce
+	  estiver utilizando FTP, eh descompactar o arquivo enquanto
+	  ele eh transferido por FTP.  Se voce realizar a sua
+	  transferencia desta forma, voce nunca ira ter o arquivo tar
+	  e o conteudo do arquivo tar no seu disco ao mesmo
+	  tempo:</para>
+	
 	<screen><prompt>ftp></prompt> <userinput>get tarfile.tar "| tar xvf -"</userinput></screen>
 
-	<para>If your tarfile is gzipped, you can accomplish this as
-	  well:</para>
+	<para>Se o seu arquivo tar estiver gzipado, voce podera fazer
+	  o mesmo procedimento, bastando um pequeno ajuste:</para>
 
 	<screen><prompt>ftp></prompt> <userinput>get tarfile.tar "| zcat | tar xvf -"</userinput></screen>
 
-	<para>After the contents of your tarred filesystem are on your flash
-	  memory filesystem, you can unmount the flash memory and
-	  reboot:</para>
+	<para>Depois que o conteudo do seu sistema de 
+	  arquivos targeado tiver sido descompactado sobre o 
+	  sistema de arquivos da sua unidade de memoria flash, 
+	  voce pode desmontar a unidade e rebootar:</para>
 
 	<screen>&prompt.root; <userinput>cd /</userinput>
 &prompt.root; <userinput>umount /flash</userinput>
 &prompt.root; <userinput>exit</userinput></screen>
 
-	<para>Assuming that you configured your filesystem correctly when it
-	  was built on the normal hard disk (with your filesystems mounted
-	  read-only, and with the necessary options compiled into the kernel)
-	  you should now be successfully booting your FreeBSD embedded
-	  system.</para>
+	<para>Assumindo que voce configurou corretamente o seu sistema
+	  de arquivos no seu HD normal (com os sistemas de arquivos
+	  sendo montados em modo de apenas leitura, e com as opcoes
+	  necessarias compiladas no Kernel) voce deve estar bootando
+	  com sucesso o seu sistema FreeBSD embedded.</para>
       </step>
     </procedure>
   </sect1>
 
   <sect1 id="kern.flp">
-    <title>Building a <filename>kern.flp</filename> Installation Floppy with
-      the fla Driver</title>
+    <title>Preparando um disquete de boot (<filename>kern.flp
+      </filename>) com o driver fla habilitado</title>
 
     <note>
-      <para>This section of the article is relevant only to those using
-	M-Systems &diskonchip; flash media.</para>
+      <para>Esta sessao do artigo eh relevante apenas para quem
+	estiver utilizando uma unidade &diskonchip; da M-Systems.</para>
     </note>
 
     <para>It is possible that your <filename>kern.flp</filename> boot floppy
@@ -682,4 +699,5 @@ pseudo-device   md              # memory disk</programlisting>
     </sect2>
   </sect1>
 </article>
+
 
