@@ -12,15 +12,14 @@
 
 
     <para>Este cap&iacute;tulo demonstra como fazer uso de discos no FreeBSD.
-	  Incluindo discos de mem&oacute;ria, conectados atrav&eacute;s da rede e os
+	  Incluindo discos de mem&oacute;ria, discos conectados atrav&eacute;s da rede e os
 	  dispositivos de armazenamento dos padr&otilde;es SCSI/IDE.</para>
 
     <para>Ap&oacute;s ler este cap&iacute;tulo voc&ecirc; saber&aacute;:</para>
     <itemizedlist>
       <listitem><para>A terminologia utilizada pelo FreeBSD para descrever
 	  a organiza&ccedil;&atilde;o dos dados num disco r&iacute;gido
-	  (parti&ccedil;&otilde;es, e slices ou
-	  fatias).</para>
+	  (parti&ccedil;&otilde;es e slices.</para>
       </listitem>
       <listitem><para>Como adicionar um disco r&iacute;gido ao seu sistema.</para>
       </listitem>
@@ -42,11 +41,11 @@
       <listitem>
         <para>As v&aacute;rias op&ccedil;&otilde;es de
 		m&iacute;dias para c&oacute;pias
-		de seguran&ccedil;a(Backup).</para>
+		de seguran&ccedil;a (Backup).</para>
       </listitem>
       <listitem>
         <para>Como utilizar os programas dispon&iacute;veis no FreeBSD para
-		realizar c&oacute;pias de seguran&ccedil;a(Backup).</para>
+		realizar c&oacute;pias de seguran&ccedil;a (Backup).</para>
       </listitem>
       <listitem>
         <para>Como fazer c&oacute;pias de seguran&ccedil;a em disquetes.</para>
@@ -192,17 +191,17 @@
 	  ter&aacute; de viver como uma das parti&ccedil;&otilde;es da BIOS do PC.  O FreeBSD
       chama as parti&ccedil;&otilde;es da BIOS do PC de <emphasis>slices</emphasis>
 	  ou <emphasis>fatias</emphasis>, ent&atilde;o n&atilde;o as confunda com as
-	  parti&ccedil;&otilde;es BSD tradicionaiso.  Voc&ecirc; tamb&eacute;m pode usar fatias num
-	  disco dedicado ao FreeBSD, mas us&aacute;-las em um computador que
+	  parti&ccedil;&otilde;es BSD tradicionais.  Voc&ecirc; tamb&eacute;m pode usar slices num
+	  disco dedicado ao FreeBSD, mas us&aacute;-los em um computador que
 	  possua um outro sistema operacional instalado. Isso para n&atilde;o
       causar confus&otilde;es com o utilit&aacute;rio <command>fdisk</command>
-	  de outros sistemas operativos.</para>
+	  de outros sistemas operacionais.</para>
 
-    <para>In the slice case the drive will be added as
-      <filename>/dev/da1s1e</filename>.  This is read as: SCSI disk,
-      unit number 1 (second SCSI disk), slice 1 (PC BIOS partition 1),
-      and <filename>e</filename> BSD partition.  In the dedicated
-      case, the drive will be added simply as
+    <para>No caso do slice a unidade ser&aacute; adicionada como
+      <filename>/dev/da1s1e</filename>.  Isto &eacute; lido como: disco SCSI,
+      unidade n&uacute;mero 1 (segundo disco SCSI), slice 1 (Parti&ccedil;&atilde;o 1 da BIOS do PC),
+      e <filename>e</filename> &eacute; uma parti&ccedil;&atilde;o BSD.  Em um caso dedicado,  
+      a unidade ser&aacute; adicionada simplesmente como
       <filename>/dev/da1e</filename>.</para>
 
     <sect2>
@@ -220,14 +219,14 @@
 	  <para>Voc&ecirc; pode utilizar o <command>/stand/sysinstall</command>
 	    para particionar e definir os r&oacute;tulos ou
 		<foreignphrase>label</foreignphrase>
-	    que ser&atilde;o utilizados no novo disco de maneira facilitada
+	    que ser&atilde;o utilizados no novo disco de maneira f&aacute;cil
 		atrav&eacute;s de seus menus.  Estando logado como usu&aacute;rio
 		<username>root</username> ou utilizando o comando
 	    <command>su</command>.  Execute
 	    <command>/stand/sysinstall</command> e entre no menu
-	    <literal>Configure</literal>.  Estando em
+	    <literal>Configure</literal>.  Dentro do 
 	    <literal>FreeBSD Configuration Menu</literal>, v&aacute; descendo nas
-		op&ccedil;&otilde;es e abaixo selecione a op&ccedil;&atilde;o <literal>Fdisk</literal>.</para>
+		op&ccedil;&otilde;es e selecione a op&ccedil;&atilde;o <literal>Fdisk</literal>.</para>
 	</step>
 	<step>
 	  <title><application>fdisk</application> Editor de Parti&ccedil;&otilde;es</title>
@@ -257,12 +256,12 @@
 		(Editor de R&oacute;tulos de Discos).  Onde s&atilde;o criadas as
 		parti&ccedil;&otilde;es BSD tradicionais.  Um disco pode ter oito
 		parti&ccedil;&otilde;es, rotuladas de
-	    <literal>a-h</literal>.
+	    <foreignphrase>a-h</foreignphrase>.
 	    Alguns r&oacute;tulos de parti&ccedil;&otilde;es tem um uso especial.  A
 	    parti&ccedil;&atilde;o <literal>a</literal> &eacute; utilizada para a parti&ccedil;&atilde;o
 		raiz ou root (<filename>/</filename>).  Somente o disco
-		do sistema (e.g, o disco de onde seu sistema realiza o boot)
-	    deve ter uma parti&ccedil;&atilde;o<literal>a</literal>.
+		do sistema (ex, o disco de onde seu sistema realiza o boot)
+	    deve ter uma parti&ccedil;&atilde;o <literal>a</literal>.  
 	    A parti&ccedil;&atilde;o <literal>b</literal> &eacute; utilizada para parti&ccedil;&otilde;es
 		de mem&oacute;ria virtual(swap), e voc&ecirc; pode ter v&aacute;rios discos com
 		parti&ccedil;&otilde;es swap.  A parti&ccedil;&atilde;o <literal>c</literal> endere&ccedil;a todo
@@ -273,12 +272,12 @@
 	    <application>sysinstall</application>
 	    prefere usar a parti&ccedil;&atilde;o <literal>e</literal> quando esta
 		n&atilde;o for uma parti&ccedil;&atilde;o raiz ou swap.  Uma vez no Editor de
-		R&oacute;tulos, crie um sistema de arquivos simples teclando
+		R&oacute;tulos, crie um sistema de arquivos &uacute;nico teclando
         <userinput>C</userinput>.  Quando perguntado se
-		este ser&aacute; um Sistema de Arquivos(FS, file system) ou
+		este ser&aacute; um Sistema de Arquivos (FS, file system) ou
 		swap, escolha <literal>FS</literal> e digite um
-		ponto de montagem (e.g, <filename>/mnt</filename>).  Quando
-		voc&ecirc; estiver adicionando um disco ap&oacute;s ter instalado,
+		ponto de montagem (ex, <filename>/mnt</filename>).  Quando
+		voc&ecirc; estiver adicionando um disco ap&oacute;s a insta&ccedil;&atilde;o do sistema,
 	    o <application>sysinstall</application> n&atilde;o criar&aacute; as entradas
 		no <filename>/etc/fstab</filename> para voc&ecirc;, ent&atilde;o o ponto
 		de montagem definido n&atilde;o tem muita import&acirc;ncia.</para>
@@ -301,7 +300,7 @@
     </sect2>
 
     <sect2>
-      <title>Utilizando utilit&aacute;rios da linha de comando</title>
+      <title>Utilizando utilit&aacute;rios de linha de comando</title>
 
       <sect3>
 	<title>Utilizando Slices ou Fatias</title>
@@ -337,7 +336,7 @@
 	  sistemas operacionais, voc&ecirc; poder&aacute; usar o modo
 	  <literal>dedicated</literal> ou dedicado.  Lembre-se que
 	  este modo pode causar confus&atilde;o nos sistemas operacionais
-	  Microsoft; entretanto, este n&atilde;o causar&aacute; danos.  O &os2;
+	  Microsoft; entretanto, nenhum dano ser&aacute; causado por ele.  O &os2;
 	  da IBM, entretanto, ir&aacute; tornar qualquer parti&ccedil;&atilde;o que ele
 	  n&atilde;o entenda numa parti&ccedil;&atilde;o <quote>apropriada</quote>.</para>
 
@@ -361,7 +360,7 @@
 	<note><para>Desde o &os;&nbsp;5.1-RELEASE, o utilit&aacute;rio
 	  &man.bsdlabel.8; substitui o velho programa
 	  &man.disklabel.8;.  No &man.bsdlabel.8; algumas op&ccedil;&otilde;es
-	  e par&acirc;metros obsoletos foram retirados; no exemplo abaixo
+	  e par&acirc;metros obsoletos foram retirados; no exemplo anterior
 	  temos a op&ccedil;&atilde;o <option>-r</option> que deve ser removida
 	  com o &man.bsdlabel.8;.
 	  Para ter mais informa&ccedil;&otilde;es, por favor, visite a p&aacute;gina de manual
