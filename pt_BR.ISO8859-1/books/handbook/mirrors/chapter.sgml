@@ -1002,7 +1002,7 @@
 	</listitem>
 
 	<listitem>
-	  <para><anchor id="cvsup-config-vers">Quais vers&otilde;es dele voc&ecirc; quer ?</para>
+	  <para><anchor id="cvsup-config-vers">Quais vers&otilde;es desses arquivos voc&ecirc; quer ?</para>
 
 	  <para>Com o <application>CVSup</application>, voc&ecirc; pode receber
 	  praticamente qualquer vers&atilde;o dos fontes que j&aacute; tenha existido.
@@ -1016,40 +1016,43 @@
 	    <literal>tag=</literal>.  Alguns <foreignphrase>tags</foreignphrase> s&atilde;o 
 	    v&aacute;lidos somente para alguns <foreignphrase>collections</foreignphrase>.
 	     Se voc&ecirc; especificar uma <foreignphrase>tag</foreignphrase> incorreta, o
-	      <application>CVSup</application> deletar&aacute; arquivos que voc&ecirc; 
-	  provavelmente n&atilde;o queria deletar.  Use <foreignphrase>tag=.</foreignphrase>
+	      <application>CVSup</application> remover&aacute; arquivos que voc&ecirc; 
+	  provavelmente n&atilde;o queria remover.  Especialmente, use <foreignphrase>tag=.</foreignphrase>
 	  somente para os <literal>ports-*</literal> <foreignphrase>collections</foreignphrase>
 	  .</para>
 	  </warning>
 
-	  <para>O campo <literal>tag=</literal> aponta para uma indicador
-	    no reposit&oacute;rio.  Existem duas esp&eacute;cies de indicadores, 
-	    indicadores de revis&atilde;o e de estado.  Um indicador de revis&atilde;o
+	  <para>O campo <literal>tag=</literal> aponta para uma etiqueta
+	    no reposit&oacute;rio.  Existem duas esp&eacute;cies de etiquetas, 
+	    <foreignphrase>revision tags</foreignphrase> e <foreignphrase>branch tags</foreignphrase>.
+            Uma <foreignphrase>revision tag</foreignphrase> (etiqueta de revis&atilde;o)
 	    refere-se a uma revis&atilde;o espec&iacute;fica.  Isso significa que  ela
 	    ser&aacute; a mesma dia ap&oacute;s dia.
-	    Por outro lado, um indicador de estado refere-se sempre a &uacute;ltima 
-	    vers&atilde;o numa dada linha de desenvolvimento e pode ser diferente
+	    Por outro lado, uma <foreignphrase>branch tag</foreignphrase> (etiqueta de ramo de desenvolvimento)
+            refere-se sempre a &uacute;ltima 
+	    vers&atilde;o numa dada linha de desenvolvimento e pode ser alterada
 	    de hoje para amanh&atilde;.</para>
 	  
-	  <para><xref linkend="cvs-tags"> cont&eacute;m indicadores de estado que
-	   podem interess&aacute;-lo.  Quando especificando um indicador
-	   num arquivo de configura&ccedil;&atilde;o <application>CVSup</application>',
-	   ele deve ser precedido de <literal>tag=</literal> 
+	  <para><xref linkend="cvs-tags"> cont&eacute;m <foreignphrase>branch tags</foreignphrase> que
+	   podem interess&aacute;-lo.  Ao especificar uma etiqueta
+	   num arquivo de configura&ccedil;&atilde;o <application>CVSup</application>,
+	   ela deve ser precedido de <literal>tag=</literal> 
 	    (<literal>RELENG_4</literal> como <literal>tag=RELENG_4</literal>).
-	    Lembre-se que somente o <literal>tag=.</literal> &eacute; relevante 
+	    Lembre-se que o <literal>tag=.</literal> somente &eacute; relevante 
 	    para o <foreignphrase>ports collection</foreignphrase>.</para>
 
 	  <warning>
-	    <para>Tome cuidado para digitar um indicador exatamente como mostrado.
+	    <para>Tome cuidado para digitar o nome da etiqueta exatamente como &eacute; mostrada.
 	      O <application>CVSup</application> n&atilde;o pode distinguir
 	      entre um <foreignphrase>tag</foreignphrase> v&aacute;lido ou n&atilde;o.
 	      Se voc&ecirc; informa ao <application>CVSup</application> um 
 	      <foreignphrase>tag</foreignphrase> errado, ele trabalhar&aacute; como se
 	       voc&ecirc; tivesse informado um <foreignphrase>tag</foreignphrase>
-	       v&aacute;lido que aponta para <emphasis>nada</emphasis>.</para>
+	       v&aacute;lido que aponta para <emphasis>nenhum</emphasis> arquivo. Neste caso, os
+               fontes que voc&ecirc; j&aacute; possui ser&atilde;o removidos.</para>
 	  </warning>
 
-	  <para>Quando voc&ecirc; especifica um indicador de estado, voc&ecirc;
+	  <para>Quando voc&ecirc; especifica um <foreignphrase>branch tag</foreignphrase>, voc&ecirc;
 	    normalmente receber&aacute; a &uacute;ltima vers&atilde;o dos arquivos
 	    naquela linha de desenvolvimento.
 	    Se voc&ecirc; quer alguma vers&atilde;o mais antiga, voc&ecirc; pode
@@ -1062,7 +1065,7 @@
 	  
 	  <programlisting>*default tag=.</programlisting>
 
-	  <para>Esse &eacute; um caso especial, onde voc&ecirc;
+	  <para>Existe um caso especial, onde voc&ecirc;
 	    não especifica nada no campo <literal>tag=</literal> nem no campo
 	    <literal>date=</literal>.  Nesse caso, voc&ecirc; receber&aacute;
 	    os atuais arquivos <emphasis>RCS</emphasis> do reposit&oacute;rio CVS,
@@ -1072,7 +1075,7 @@
 	    eles tem a facilidade de pesquisar o hist&oacute;rico das revis&otilde;es, 
 	    bem como, examinar vers&otilde;es anteriores dos arquivos.  Entretanto, esta 
 	    facilidade implica numa grande ocupa&ccedil;&atilde;o de espa&ccedil;o em
-	    Disco.</para>
+	    disco.</para>
 	</listitem>
 
 	<listitem>
