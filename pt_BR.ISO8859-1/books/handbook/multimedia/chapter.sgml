@@ -28,82 +28,90 @@
       arquivos de audio, a adi&ccedil;&atilde;o de efeitos sonoros, e o controle de
       dispositivos MIDI conectados ao seu computador.</para>
 
-    <para>
+    <para>Com alguma disposi&ccedil;&atilde;o para experimentar, o FreeBSD pode
+      reproduzir arquivos de video e DVD's.  O numero de aplica&ccedil;&otilde;es
+      para codificar, converter, e reproduzir as v&aacute;rias midias de video 
+      &eacute; mais limitada do que o numero de aplica&ccedil;&otilde;es para som.  Por
+      exemplo, enquanto este capitulo est&aacute; sendo escrito, n&atilde;o existe
+      uma boa aplica&ccedil;&atilde;o de
+      <phoreignphrase>re-encoding</phoreingphrase> na cole&ccedil;&atilde;o de ports
+      do FreeBSD, a qual possa ser utilizada para converter arquivos
+      de um formato para outro, da mesma forma que podemos fazer com
+      arquivos de audio utilizando o <filename role="package">audio/sox
+      </filename>.  Entretando, o cen&aacute;rio nesta &aacute;rea de software esta
+      mudando rapidamente.</para>
     
-    With some willingness to experiment, FreeBSD can support
-      playback of video files and DVD's.  The number of applications
-      to encode, convert, and playback various video media is more
-      limited than the number of sound applications.  For example as
-      of this writing, there is no good re-encoding application in the
-      FreeBSD Ports Collection, which could be use to convert
-      between formats, as there is with <filename
-      role="package">audio/sox</filename>.  However, the software
-      landscape in this area is changing rapidly.</para>
-
-    <para>This chapter will describe the necessary steps to configure
-      your sound card.  The configuration and installation of <application>&xfree86;</application>
-      (<xref linkend="x11">) has already taken care of the
-      hardware issues for your video card, though there may be some
-      tweaks to apply for better playback.</para>
-
-    <para>After reading this chapter, you will know:</para>
+    <para>Este capitulo ir&aacute; descrever os passos necess&aacute;rios para
+      configurar a sua placa de som.  A instala&ccedil;&atilde;o e configura&ccedil;&atilde;o do
+      <application>&xfree86;</application> (<xref linkend="x11">) j&aacute;
+      foi abordada, e na ocasi&atilde;o foram tomados todos os cuidados
+      necess&aacute;rios em rela&ccedil;&atilde;o a correta configura&ccedil;&atilde;o da sua placa de video,
+      embora possam existir alguns ajustes a serem aplicados para uma
+      melhor reprodu&ccedil;&atilde;o de videos.</para>
+    
+    <para>Ap&oacute;s a leitura deste capitulo, voce saber&aacute;:</para>
 
     <itemizedlist>
       <listitem>
-        <para>How to configure your system so that your sound card is
-          recognized.</para>
+        <para>Como configurar o seu sistema de forma que a sua placa
+	  de som seja reconhecida.</para>
       </listitem>
 
       <listitem>
-        <para>Methods to test that your card is working using
-          sample applications.</para>
+        <para>M&eacute;todos para testar se sua placa de som esta
+	  funcionando, utilizando aplicativos de exemplo.</para>
       </listitem>
 
       <listitem>
-        <para>How to troubleshoot your sound setup.</para>
+        <para>Como realizar uma pesquisa de defeitos em sua
+	  configura&ccedil;&atilde;o som.</para>
       </listitem>
 
       <listitem>
-        <para>How to playback and encode MP3s and other audio.</para>
+        <para>Como reproduzir e encodar arquivos de audio MP3 e em 
+	  outros formatos.</para>
       </listitem>
 
       <listitem>
-        <para>How video is supported by <application>&xfree86;</application>.</para>
+        <para>Como o video &eacute; suportado pelo <application>&xfree86;</application>.</para>
       </listitem>
 
       <listitem>
-        <para>Some video player/encoder ports which give good results.</para>
+        <para>Alguns ports de reprodutores/codificadores os quais
+	  apresentam bons resultados.</para>
       </listitem>
 
       <listitem>
-        <para>How to playback DVD's, <filename>.mpg</filename> and <filename>.avi</filename> files.</para>
+        <para>Como reproduzir DVD's, e arquivos <filename>.mpg</filename> e 
+	  <filename>.avi</filename>.</para>
       </listitem>
 
       <listitem>
-        <para>How to rip CD and DVD information into files.</para>
+        <para>Como ripar informa&ccedil;&otilde;es de CDs e DVDs para arquivos.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Before reading this chapter, you should:</para>
+    <para>Antes de ler este capitulo, voc&ecirc; deve:</para>
 
     <itemizedlist>
-      <listitem><para>Know how to configure and install a new kernel (<xref
-        linkend="kernelconfig">).</para></listitem>
+      <listitem><para>Conhecer como configurar e instalar um novo kernel
+	(<xref linkend="kernelconfig">).</para></listitem>
     </itemizedlist>
 
-    <para>For the video sections, it is assumed that <application>&xfree86; 4.X</application>
-      (<filename role='package'>x11/XFree86-4</filename>) has been
-      installed.  <application>&xfree86; 3.X</application> may work, but it has not been tested
-      with what is described in this chapter.  If you find that
-      something described here does work with <application>&xfree86; 3.X</application> please
-      let us know.</para>
-
+    <para>Para as sess&otilde;es de video,  assumimos que o <application>&xfree86; 
+      4.X</application> (<filename role='package'>x11/XFree86-4</filename>) j&aacute; est&aacute;
+      instalado.  O <application>&xfree86; 3.X</application> pode
+      funcionar, mas ele n&atilde;o foi testado com o que &eacute; descrito neste
+      capitulo.  Se voc&ecirc; constatar que algo descrito aqui, funciona
+      com o <application>&xfree86; 3.X</application>, por favor nos
+      informe.</para>
+      
     <warning>
-      <para>Trying to mount an audio CD
-        or a video DVD with the &man.mount.8; command will
-        result in an error, at least, and a <emphasis>kernel
-        panic</emphasis>, at worst.  These media have specialized
-        encodings which differ from the usual ISO-filesystem.</para>
+      <para>Tentar montar um CD de audio ou um DVD de video com o comando
+	&man.mount.8; ir&aacute; resultar ao menos em um erro, e no pior dos
+	casos em um <emphasis>kernel panic</emphasis>.  Estas midias
+	possuem uma codifica&ccedil;&atilde;o especializada, a qual difere do
+	sistema de arquivos ISO usual.</para>
     </warning>
 
   </sect1>
@@ -114,7 +122,7 @@
         <author>
 	 <firstname>Moses</firstname>
 	 <surname>Moore</surname>
-	 <contrib>Contributed by </contrib>
+	 <contrib>Contriuido por</contrib>
 	 <!-- 20 November 2000 -->
         </author>
       </authorgroup>
@@ -127,7 +135,8 @@
 
     <indexterm><primary>PCI</primary></indexterm>
     <indexterm><primary>ISA</primary></indexterm>
-    <indexterm><primary>sound cards</primary></indexterm>
+    <indexterm><primary>Placas de som</primary></indexterm>
+
     <para>Before you begin, you should know the model of the card you
       have, the chip it uses, and whether it is a PCI or ISA card.
       FreeBSD supports a wide variety of both PCI and ISA cards.  If
