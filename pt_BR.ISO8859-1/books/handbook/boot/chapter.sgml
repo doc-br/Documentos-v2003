@@ -152,60 +152,60 @@ Default: F2</screen>
 
       <screen>&prompt.root; <userinput>fdisk -B -b /boot/boot0 <replaceable>device</replaceable></userinput></screen>
 
-      <para>Como <replaceable>dispositivo</replaceable> e o dispositivo de que voce
+      <para>Como <replaceable>dispositivo</replaceable> que voc&ecirc;
 	carrega, como <devicename>ad0</devicename> para o primeiro disco IDE,
 	<devicename>ad2</devicename> para o primeiro disco IDE da segunda
 	controladora IDE, <devicename>da0</devicename> para o primeiro disco SCSI,
 	e assim por diante.</para>
 
-      <para>Se voce for um usuario Linux, entretanto, e preferir que o
-	<application>LILO</application> controle o processo de inicializacao, voce pode
+      <para>Se voc&ecirc; for um usuario Linux, entretanto, e preferir que o
+	<application>LILO</application> controle o processo de inicializa&ccedil;&atilde;o, voc&ecirc; pode
 	editar o arquivo <filename>/etc/lilo.conf</filename> para FreeBSD, ou
 	selecionar <option>Leave The Master Boot Record Untouched</option>
-	durante o processo de instalacao do FreeBSD. Se voce tiver instalado o
-	gerenciador de boot do FreeBSD, voce pode carregar dentro do Linux e modificar o
-	<application>LILO</application> no arquivo de configuracao
+	durante o processo de instala&ccedil;&atilde;o do FreeBSD. Se voc&ecirc; tiver instalado o
+	gerenciador de boot do FreeBSD, voc&ecirc; pode carregar dentro do Linux e modificar o
+	<application>LILO</application> no arquivo de configura&ccedil;&atilde;o
 	<filename>/etc/lilo.conf</filename> e adicionar a seguinte
-	opcao:</para>
+	op&ccedil;&atilde;o:</para>
 
       <programlisting>other=/dev/hdXY
 table=/dev/hdb
 loader=/boot/chain.b
 label=FreeBSD</programlisting>
 
-      <para>Qual permitira a inicializacao do FreeBSD e Linux via
-	<application>LILO</application>. Em outro exemplo, nos usamos
-	<replaceable>XY</replaceable> para determinar o numero do drive e
-	particao. Se estiver usando um drive <acronym>SCSI</acronym>, voce
-	ira querer mudar o <replaceable>/dev/hdXY</replaceable> para leitura
-	algo similar a <replaceable>/dev/sdXY</replaceable>, com
+      <para>Qual permitir&aacute; a inicializa&ccedil;&atilde;o do FreeBSD e Linux via
+	<application>LILO</application>. Em outro exemplo, n&oacute;s usamos
+	<replaceable>XY</replaceable> para determinar o n&uacute;mero do drive e da
+	parti&ccedil;&atilde;o. Se estiver usando um drive <acronym>SCSI</acronym>, voc&ecirc;
+	ir&aacute; querer mudar o <replaceable>/dev/hdXY</replaceable> para leitura
+	algo similar a <replaceable>/dev/sdXY</replaceable>,
 	novamente usando a sintase <replaceable>XY</replaceable>. O
-	<option>loader=/boot/chain.b</option> pode ser omitido se voce tiver
-	ambos os sistemas operacionais na mesma particao. Voce pode agora rodar
-	<command>/sbin/lilo -v</command> para executar suas novas alteracoes no
+	<option>loader=/boot/chain.b</option> pode ser omitido se voc&ecirc; tiver
+	ambos os sistemas operacionais na mesma parti&ccedil;&atilde;o. Voc&ecirc; pode agora rodar
+	<command>/sbin/lilo -v</command> para executar suas novas altera&ccedil;&otilde;es no
 	sistema, este deve ser verificado com messagens na tela.</para>
     </sect2>
   
     <sect2 id="boot-boot1">
-      <title>Estagio Um, <filename>/boot/boot1</filename>, e Estagio Dois,
+      <title>Est&aacute;gio Um, <filename>/boot/boot1</filename>, e Est&aacute;gio Dois,
 	<filename>/boot/boot2</filename></title>
       
-      <para>Conceitual o primeiro e segundo estagios sao parte do mesmo
-	programa, sobre a mesma area do disco. Por que do espaco contido
-	eles foram divididos em duas partes, mas voce deve instala-los juntos.</para>
+      <para>Conceitual o primeiro e segundo est&aacute;gios s&atilde;o parte do mesmo
+	programa, sobre a mesma &aacute;rea do disco. Por que do espa&ccedil;o contido
+	eles foram divididos em duas partes, mas voc&ecirc; deve instal&aacute;-los juntos.</para>
 
-      <para>Eles sao encontrados no setor de inicializacao, 
+      <para>Eles s&atilde;o encontrados no setor de inicializa&ccedil;&atilde;o, 
 	que e onde <link
 	  linkend="boot-boot0">boot0</link>, ou alguns outros programas na
 	<abbrev>MBR</abbrev> espera encontrar um programa para rodar
-	continuar o processo de carga. O arquivo no diretorio
-	<filename>/boot</filename> sao copiados dos arquivos reais,
-	que sao armazenados fora do sistema de arquivos do FreeBSD.</para>
+	continuar o processo de carga. O arquivo no diret&oacute;rio
+	<filename>/boot</filename> s&atilde;o copiados dos arquivos reais,
+	que s&atilde;o armazenados fora do sistema de arquivos do FreeBSD.</para>
 
-      <para><filename>boot1</filename> e muito simples, desde tambem possa
-	somente ser 512 bytes
-	de tamanho, e sabemos justamente para o
-	<firstterm>disklabel</firstterm> do FreeBSD, com informacoes armazenadas
+      <para><filename>boot1</filename> &eacute; muito simples, este tamb&eacute;m pode
+	somente ter o tamanho m&aacute;ximo de 512 bytes,
+	e sabemos que justamente para o
+	<firstterm>disklabel</firstterm> do FreeBSD, com informa&ccedil;&otilde;es armazenadas
 	no silindro, para procurar e executar o <filename>boot2</filename>.</para>
       
       <para><filename>boot2</filename> e ligeiramente mais sofisticado, e compreende
@@ -213,8 +213,8 @@ label=FreeBSD</programlisting>
 	fornecer uma simples interface para escolher o kernel ou o carregador para
 	executar.</para>
 
-      <para>Desde o <link linkend="boot-loader">carregador</link> e
-	mais sofisticado, e forncecido um boa facil-para-usar
+      <para>Desde o <link linkend="boot-loader">carregador</link>
+	mais sofisticado, &eacute; forncecido uma boa ajuda na
 	configuracao de inicializacao, <filename>boot2</filename> usualmente executa
 	isto, mas previamente isto
 	era tarefa para executar diretamente no kernel.</para>
@@ -227,65 +227,65 @@ Default: 0:ad(0,a)/kernel
 boot:</screen>
       </example>
 
-      <para>Se voce precisar sempre substituir a instalacao
+      <para>Se voc&ecirc; precisar sempre substituir a instala&ccedil;&atilde;o
 	<filename>boot1</filename> e <filename>boot2</filename> use
 	&man.disklabel.8;.</para>
       
       <screen>&prompt.root; <userinput>disklabel -B <replaceable>diskslice</replaceable></userinput></screen>
 
-      <para>Onde <replaceable>diskslice</replaceable> e o disco e silindro
-	da sua inicializacao, tal como <devicename>ad0s1</devicename> para o primeiro
+      <para>Onde <replaceable>diskslice</replaceable> &eacute; o disco e silindro
+	da sua inicializa&ccedil;&atilde;o, tal como <devicename>ad0s1</devicename> para o primeiro
 	HD sobre a IDE.</para>
 
       <warning>
 	<title>Modalidade Perigosamente Dedicada</title>
 
-	<para>Se voce usar apenas o nome do disco, tal como
-	  <devicename>ad0</devicename>, no &man.disklabel.8; comando voce
-	  ira criar um disco perigosamente dedicado, sem particoes.  Isto nao
-	  devera ser o que voce quer fazer, assim que voce verificar o dobro
-	  do &man.disklabel.8; depois voce devera pressionar
+	<para>Se voc&ecirc; usar apenas o nome do disco, tal como
+	  <devicename>ad0</devicename>, no &man.disklabel.8; comando voc&ecirc;
+	  ira criar um disco perigosamente dedicado, sem parti&ccedil;&otilde;es. Isto n&atilde;o
+	  devera ser o que voc&ocirc; quer fazer, assim que voc&ecirc; verificar o dobro
+	  do &man.disklabel.8; depois voc&ecirc; dever&aacute; pressionar
 	  <keycap>Return</keycap>.</para>
       </warning>
     </sect2>
 
   <sect2 id="boot-loader">
-    <title>Estagio tres, <filename>/boot/loader</filename></title>
+    <title>Est&aacute;gio tres, <filename>/boot/loader</filename></title>
 
     <indexterm><primary>boot-loader</primary></indexterm>
-    <para>A inicializacao e o estagio final dos tres-estagios
-      de bootstrap, e e localizado no sistema de arquivos, usualmente como
+    <para>A inicializa&ccedil;&atilde;o e o est&aacute;gio final dos tres-est&aacute;gios
+      de bootstrap, &eacute; localizado no sistema de arquivos, usualmente como
       <filename>/boot/loader</filename>.</para>
       
-    <para>A inicializacao e usada como um metodo amigavel para
-      configuracao, usando um jogo de comandos internos facil-para-usar,
+    <para>A inicializacao e usada como um metodo amig&aacute;vel para
+      configura&ccedil;&atilde;o, usando um jogo de comandos internos f&aacute;cil-para-usar,
       voltado por um interpretador mais poderoso, com um jogo de comandos mais complexo.</para> 
 
     <sect3 id="boot-loader-flow">
       <title>Fluxo de programa do carregador</title>
       
-      <para>Durante a initializacao, o carregador sodara para uma
-	console e para discos, e figura de saida de que os discos sao 
-	carregados. Isto setara variaveis conformemente, e um
-	interpretador e iniciado onde os comandos do usuario podem ser passados de 
+      <para>Durante a initializa&ccedil;&atilde;o, o carregador sodar&aacute; para uma
+	console e para discos, e figura de saida de que os discos s&atilde;o 
+	carregados. Isto setar&aacute; vari&aacute;veis conformemente, e um
+	interpretador e iniciado onde os comandos do usu&aacute;rio podem ser passados de 
         um script ou interativamente.</para>
       <indexterm><primary>carregados</primary></indexterm>
-      <indexterm><primary>carregados na configuracao</primary></indexterm>
+      <indexterm><primary>carregados na configura&ccedil;&atilde;o</primary></indexterm>
 
-      <para>Entao o carregador lera entao o
-	<filename>/boot/loader.rc</filename>, que por padrao le
+      <para>Ent&atilde;o o carregador ler&aacute; ent&atilde;o o
+	<filename>/boot/loader.rc</filename>, que por padr&atilde;o le
 	dentro de  <filename>/boot/defaults/loader.conf</filename> que
-	seta padroes para variaveis e leen em 
-	<filename>/boot/loader.conf</filename> para mudanca destas variaveis locais.
+	seta padr&otilde;es para vari&aacute;veis e leen em 
+	<filename>/boot/loader.conf</filename> as mudan&ccedil;a destas vari&aacute;veis locais.
 	<filename>loader.rc</filename> eles atuam
-	sobre estas variaveis, carregando qualquer modulo e kernel que sao
+	sobre estas vari&aacute;veis, carregando qualquer m&oacute;dulo e kernel que s&atilde;o
 	selecionados.</para>
 
-      <para>Finalmente, por padrao, o carregador emite uma espera de  10 segundos
-	para precionar alguma tecla, e carregar o kernel se este nao for interrompido.
-	Se interrompido, ao usuario e apresentado um alerta no prompt que e para
-	entender o facil-para-usar o comando setado, onde o usuario pode
-	ajustar variaveis, descarregar todos os modulos, carregar modulos, e eles
+      <para>Finalmente, por padr&atilde;o, o carregador emite uma espera de  10 segundos
+	para precionar alguma tecla, e carregar o kernel se este n&atilde;o for interrompido.
+	Se interrompido, ao usu&aacute;rio &eacute; apresentado um alerta no prompt que e para
+	entender o help do comando setado, onde o usu&aacute;rio pode
+	ajustar vari&aacute;veis, descarregar todos os m&oacute;dulos, carregar m&oacute;dulos, e eles
 	finalmente carregar ou reiniciar.</para>
 
     </sect3>
@@ -293,8 +293,8 @@ boot:</screen>
     <sect3 id="boot-loader-commands">
       <title>Comandos Carregando e Compilando</title>
       
-      <para>Estes sao os comandos mais comum usados na carga do sistema. Para uma
-        completa discussao de todas avaliacoes dos comandos, por favor veja
+      <para>Estes s&atilde;o os comandos mais comum usados na carga do sistema. Para uma
+        completa discuss&atilde;o de todas avalia&ccedil;&otilde;es dos comandos, por favor veja
         &man.loader.8;.</para>
 
       <variablelist>
@@ -302,9 +302,9 @@ boot:</screen>
 	  <term>auto carregamento <replaceable>segundos</replaceable></term>
 
 	  <listitem>
-	    <para>O processo de carregamento do kernel nao e interrompido
+	    <para>O processo de carregamento do kernel n&atilde;o &eacute; interrompido
 	      durante o tempo concedido, em segundos. Isto mostra uma
-	      contagem regrassiva, e o tempo padrao concedido e 10
+	      contagem regrassiva, e o tempo padr&atilde;o concedido e 10
 	      segundos.</para>
 	  </listitem>
 	</varlistentry>
@@ -316,7 +316,7 @@ boot:</screen>
 
 	  <listitem>
 	    <para>Imediatamente o processo de carregamento do kernel, com as
-	      opcoes dadas, se existir, e com o nome do kernel dado,
+	      op&ccedil;&otilde;es dadas, se existir, e com o nome do kernel dado,
 	      se isto for.</para>
 	  </listitem>
 	</varlistentry>
@@ -325,23 +325,23 @@ boot:</screen>
 	  <term>boot-conf</term>
 
 	  <listitem>
-	    <para>Ir atraves da mesma configuracao automatica dos
-	      modulos baseados em variaveis como que acontece no boot.
-	      Isto somente faz sentido se voce primeiramente
+	    <para>Ir atrav&eacute;s da mesma configura&ccedil;&atilde;o autom&aacute;tica dos
+	      m&oacute;dulos baseados em vari&aacute;veis como que acontece no boot.
+	      Isto somente faz sentido se voc&ecirc; primeiramente
 	      <command>descarregar</command>, e alterar algumas
-	      variaveis, do <envar>kernel</envar> mais frequente.</para>
+	      vari&aacute;veis, do <envar>kernel</envar> mais frequente.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
 	  <term>help
-	    <optional><replaceable>topico</replaceable></optional></term>
+	    <optional><replaceable>t&oacute;pico</replaceable></optional></term>
 
 	  <listitem>
 	    <para>Mensagens de ajuda soa lidas em
-	      <filename>/boot/loader.help</filename>. Se o topico
-	      dado for <literal>index</literal>, entao a lista de
-	      topicos disponiveis e dada.</para>
+	      <filename>/boot/loader.help</filename>. Se o t&oacute;pico
+	      dado for <literal>index</literal>, ent&atilde;o a lista de
+	      t&oacute;picos dispon&iacute;veis e dada.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -351,8 +351,8 @@ boot:</screen>
 
 	  <listitem>
 	    <para>Processa o arquivo com o nome dado ao mesmo. O
-	      arquivos e lido, e interpretado linha por linha. Um
-	      erro immediatamente para o comando de inclusao.</para>
+	      arquivos &eacute; lido, e interpretado linha por linha. Um
+	      erro immediatamente para o comando de inclus&atilde;o.</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
@@ -363,7 +363,7 @@ boot:</screen>
 	  <listitem>
 	    <para>Carregar o kernel, kernel modular, ou arquivo do
 	      tipo preparado, com o nome dado. Alguns argumentos
-	      depois do nome do arquivo sao passados para o arquivo.</para>
+	      depois do nome do arquivo s&atilde;o passados para o arquivo.</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
@@ -372,18 +372,18 @@ boot:</screen>
 
 	  <listitem>
 	    <para>Mostra uma lista de arquivos dentro dos caminhos dados, ou
-	      o diretorio do root, se o caminho nao e especificado. Se e especificado
-	      <option>-l</option>, tamanho do arquivo sera
-	      mostrado tambem.</para>
+	      o diret&oacute;rio do root, se o caminho n&atilde;o &eacute; especificado. Se &eacute; especificado
+	      <option>-l</option>, tamanho do arquivo ser&aacute;
+	      mostrado tamb&eacute;m.</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term>lsdev <optional><option>-v</option></optional></term>
 
 	  <listitem>
-	    <para>Lista todos os dispositivos que pode ser possivel
-	      para carregar modulos. Se <option>-v</option> e
-	      especificado, mais detalhes serao mostrados.</para>
+	    <para>Lista todos os dispositivos que pode ser poss&iacute;vel
+	      para carregar m&oacute;dulos. Se <option>-v</option> for
+	      especificado, mais detalhes ser&atilde;o mostrados.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -391,8 +391,8 @@ boot:</screen>
 	  <term>lsmod <optional><option>-v</option></optional></term>
 
 	  <listitem>
-	    <para>Mostra modulos carregados. Se <option>-v</option> e
-	      especificado, mais detalhes serao mostrados.</para>
+	    <para>Mostra m&oacute;dulos carregados. Se <option>-v</option> for
+	      especificado, mais detalhes ser&atilde;o mostrados.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -409,7 +409,7 @@ boot:</screen>
 	  <term>reboot</term>
 
 	  <listitem>
-	    <para>Imediatamente reiniciara o sistema.</para>
+	    <para>Imediatamente reiniciar&aacute; o sistema.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -419,7 +419,7 @@ boot:</screen>
 	    <replaceable>variable</replaceable>=<replaceable>value</replaceable></term>
 
 	  <listitem>
-	    <para>Seta as variaveis do ambiente do carregador.</para>
+	    <para>Seta as vari&aacute;veis do ambiente carregado.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -427,7 +427,7 @@ boot:</screen>
 	  <term>unload</term>
 
 	  <listitem>
-	    <para>Remove todos modulos carregados.</para>
+	    <para>Remove todos m&oacute;dulos carregados.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
@@ -436,7 +436,7 @@ boot:</screen>
     <sect3 id="boot-loader-examples">
       <title>Exemplos de carregador</title>
 
-      <para>Estao aqui alguns exemplos praticos do uso do carregador:</para>
+      <para>Est&atilde;o aqui alguns exemplos pr&aacute;ticos do uso do carregador:</para>
 
       <itemizedlist>
 	<indexterm><primary>single-user mode</primary></indexterm>
@@ -447,7 +447,7 @@ boot:</screen>
 	</listitem>
 
 	<listitem>
-	  <para>Para descarregar seu kernel e modulos usuais, e entao
+	  <para>Para descarregar seu kernel e m&oacute;dulos usuais, e ent&atilde;o
 	    carregar apenas seu kernel velho (ou outro):</para>
     <indexterm>
       <primary><filename>kernel.old</filename></primary>
@@ -456,14 +456,14 @@ boot:</screen>
 	  <screen><userinput>unload</userinput>
 <userinput>load <replaceable>kernel.old</replaceable></userinput></screen>
 
-	  <para>Voce pode usar o <filename>kernel.GENERIC</filename> para
-	    referir ao kernel generico que vem no disco instalado,
+	  <para>Voc&ecirc; pode usar o <filename>kernel.GENERIC</filename> para
+	    referir ao kernel gen&eacute;rico que vem no disco de instala&ccedil;&atilde;o,
 	    ou <filename>kernel.old</filename> para consultar 
-	    seu kernel previamente instalado (quando voce tiver atualizado
+	    seu kernel previamente instalado (quando voc&ecirc; tiver atualizado
 	    ou configurado seu kernel, por exemplo).</para>
 
 	  <note>
-	    <para>Use o seguinte para carregar seus modulos usuais com
+	    <para>Use o seguinte para carregar seus m&oacute;dulos usuais com
 	      outro kernel:</para>
 
 	    <screen><userinput>unload</userinput>
@@ -472,9 +472,9 @@ boot:</screen>
 	</listitem>
 
 	<listitem>
-	  <para>Para carregar um script de configuracao do kernel (um script automatizado
-	    qual faca as coisas que voce faria normalmente dentro do
-	    kernel na configuracao do boot-time):</para>
+	  <para>Para carregar um script de configura&ccedil;&atilde;o do kernel (um script automatizado
+	    qual fa&ccedil;a as coisas que voc&ecirc; faria normalmente dentro do
+	    kernel na configura&ccedil;&atilde;o do boot-time):</para>
 
 	  <screen><userinput>load -t userconfig_script <replaceable>/boot/kernel.conf</replaceable></userinput></screen>
 	</listitem>
@@ -484,17 +484,17 @@ boot:</screen>
   </sect1>
 
   <sect1 id="boot-kernel">
-    <title>Interacao do Kernel durante o boot</title>
+    <title>Intera&ccedil;&atilde;o do Kernel durante o boot</title>
     <indexterm>
       <primary>kernel</primary>
-      <secondary>interacao do boot</secondary>
+      <secondary>intera&ccedil;&atilde;o do boot</secondary>
     </indexterm>
     
     <para>Uma vez que o kernel e carregado pelo either <link
 	linkend="boot-loader">loader</link> (como usado) ou <link
 	linkend="boot-boot1">boot2</link> (passando o carregador), isto
       examina suas boot flags, se existir, e ajusta seu comportamento como
-      necessario.</para>
+      necess&aacute;rio.</para>
 
     <sect2 id="boot-kernel-bootflags">
       <indexterm>
@@ -503,14 +503,14 @@ boot:</screen>
       </indexterm>
       <title>Kernel Boot Flags</title>
 
-      <para>Estao aqui as boot flags mais comuns:</para>
+      <para>Est&atilde;o aqui as boot flags mais comuns:</para>
 
       <variablelist id="boot-kernel-bootflags-list">
 	<varlistentry>
 	  <term><option>-a</option></term>
 
 	  <listitem>
-	    <para>durante a inicializacao do kernel, pede para o dispositivo
+	    <para>durante a inicializa&ccedil;&atilde;o o kernel, pede para o dispositivo
 	      para montar um arquivo de sistema do root.</para>
 	  </listitem>
 	</varlistentry>
@@ -543,14 +543,14 @@ boot:</screen>
 	  <term><option>-v</option></term>
 
 	  <listitem>
-	    <para>seja mais verbose durante a inicializacao do kernel</para>
+	    <para>seja mais detalhado durante a inicializa&ccedil;&atilde;o do kernel</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
 
       <note>
 	<para>Existem outras boot flags, leia &man.boot.8; para maiores
-	  informacoes sobre elas.</para></note>
+	  informa&ccedil;&otilde;es sobre elas.</para></note>
     </sect2>
 
 <!--    <sect2 id="boot-kernel-userconfig">
@@ -566,7 +566,7 @@ boot:</screen>
 	<author>
 	  <firstname>Tom</firstname>
 	  <surname>Rhodes</surname>
-	  <contrib>Contribuido por </contrib>
+	  <contrib>Contribu&iacute;do por </contrib>
 	</author>
       </authorgroup>
       <!-- 18 OCT 2002 -->
@@ -576,13 +576,13 @@ boot:</screen>
     </indexterm>
     <title>Dispositivos Hints</title>
 
-    <note><para>Esta e uma caracteristica do FreeBSD&nbsp;5.0 e posteriores que nao 
-      existe em versoes atrasadas.</para></note>
+    <note><para>Esta &eacute; uma caracter&iacute;stica do FreeBSD&nbsp;5.0 e posteriores que n&atilde;o 
+      existe em vers&otilde;es anteriores.</para></note>
 
-    <para>Durante a inicializacao do sistema, o boot &man.loader.8; ira ler o arquivo
-      &man.device.hints.5;. Este arquivo armazena informacoes do boot do kernel 
-      conhecidas como variaveis, sobretudo referenciando as vezes <quote>device hints</quote>.
-      Estas <quote>device hints</quote> sao usadas pelos drivers do dispositivo para configuraracao
+    <para>Durante a inicializa&ccedil;&atilde;o do sistema, o boot &man.loader.8; ir&aacute; ler o arquivo
+      &man.device.hints.5;. Este arquivo armazena informa&ccedil;&otilde;es do boot do kernel 
+      conhecidas como vari&aacute;veis, sobretudo referenciando as vezes <quote>device hints</quote>.
+      Estas <quote>device hints</quote> s&atilde;o usadas pelos drivers do dispositivo para configurara&ccedil;&atilde;o
       do dispositivo.</para>
       
     <para>Device hints podem tambem ser especificados no <link linkend="boot-loader">
