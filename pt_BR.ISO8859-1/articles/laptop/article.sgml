@@ -8,7 +8,7 @@
 <!ENTITY % authors PUBLIC "-//FreeBSD//ENTITIES DocBook Author Entities//EN">
 %authors;
 
-<!ENTITY % mailing-lists PUBLIC "-//FreeBSD//ENTITIES DocBook Mailing List Entities//PTBR">
+<!ENTITY % mailing-lists PUBLIC "-//FreeBSD//ENTITIES DocBook Mailing List Entities//EN">
 %mailing-lists;
 
 <!ENTITY % trademarks PUBLIC "-//FreeBSD//ENTITIES DocBook Trademark Entities//EN">
@@ -17,16 +17,15 @@
 
 <article>
   <articleinfo>
-    <title>Utilizando o FreeBSD em Laptops</title>
+    <title>FreeBSD em Laptops</title>
 
     <pubdate>$FreeBSD: doc/en_US.ISO8859-1/articles/laptop/article.sgml,v 1.19 2003/09/14 11:29:06 simon Exp $</pubdate>
-   
+
     <abstract>
-      <para>O FreeBSD funciona muito bem na maioria dos notebooks, com
-	poucas advert&ecirc;ncias.  Alguns assuntos espec&iacute;ficos &agrave; execu&ccedil;&atilde;o
-	do FreeBSD em notebooks, relacionados &agrave;s diferentes exig&ecirc;ncias
-	de hardware em rela&ccedil;&atilde;o aos desktops, s&atilde;o discutidas
-	abaixo.</para>
+      <para>FreeBSD trabalha bem em muitos laptops, com algumas
+        advertências. Algumas questões específicas para rodar o
+	&os; em laptops, relacionando diferentes requerimentos de
+	hardwares de desktops, são discutidos abaixo.</para>
     </abstract>
 
     <legalnotice id="trademarks" role="trademarks">
@@ -38,125 +37,132 @@
     </legalnotice>
   </articleinfo>
 
-    <para>FreeBSD is often thought of as a server operating system, but
-      it works just fine on the desktop, and if you want to use it on
-      your laptop you can enjoy all the usual benefits: systematic
-      layout, easy administration and upgrading, the ports/packages
-      system for adding software, and so on.  (Its other benefits,
-      such as stability, network performance, and performance under
-      a heavy load, may not be obvious on a laptop, of course.)
-      However, installing it on laptops often involves problems which
-      are not encountered on desktop machines and are not commonly
-      discussed (laptops, even more than desktops, are fine-tuned for
-      &microsoft.windows;).  This article aims to discuss some of these
-      issues.  Several people have also documented their experiences
-      with &os; on specific laptop models on webpages which are not
-      part of the &os; documentation.  You might very well find some
-      information if you type the name of your laptop model and the
-      word <quote>&os;</quote> into a search engine of your
-      choice.  Additionally there is a &os;-specific online database
-      which aims to give information on hardware issues with laptops,
-      <ulink url="http://gerda.univie.ac.at/freebsd-laptops/">The &os;
-      Laptop Compatibility List</ulink>.</para>
+    <para>FreeBSD é frequentemente utilizado como um sistema
+      operacional para servidores, mas ele também trabalha bem em
+      desktops, e se você quiser utilizá-lo em seu laptop você também
+      poderá aproveitar todos os benefícios usuais: layout sistemático
+      , de fácil administração e upgrading, o sistema ports/packages
+      para adicionar software, e mais.  (Outros benefícios,
+      como estabilidade, performance de rede, e performance dentro
+      de um carregamento pesado, podem não ser tão óbvio em um laptop,
+      claro.) Entretanto, instalando isto em laptops geralmente
+      involve problemas nos quais não são encontrados em máquinas
+      desktop e não são comummente discutidos (laptops, even more
+      than desktops, are fine-tuned for &microsoft.windows;).  Este
+      artigo aponta para discutir mais dessas questões.  Muitas
+      pessoas têm também documentado suas experiências com &os;
+      em modelos específicos de laptop em páginas da web na qual
+      não fazem parte da documentação do &os;.  Você pode muito bem
+      achar mais informações se digitar o nome do modelo do seu laptop
+      e a palavra <quote>&os;</quote> num mecanismo de busca de sua
+      escolha.  Adicionalmente este é um específico banco-de-dados
+      on-line do &os; na qual aponta para pegar informações de
+      edições do hardware com laptops,
+      <ulink url="http://gerda.univie.ac.at/freebsd-laptops/">
+      A lista de Compatibilidade de Laptop do FreeBSD</ulink>
 
-    <para>For communications with other &os; laptop users, check out
-      the &a.mobile.name; list.</para>
 
-  <sect1>    
+    <para>Para comunicação com outros usuários do &os; em laptop ,
+      verifique a lista &a.mobile.name;.</para>
+
+  <sect1>
     <title>&xfree86;</title>
-      
-    <para>Recent versions of <application>&xfree86;</application> work with most display adapters
-      available on laptops these days.  Acceleration may not be
-      supported, but a generic SVGA configuration should work.</para>
 
-    <para>Check your laptop documentation for which card you have,
-      and check in the <application>&xfree86;</application> documentation or
-      the <ulink
-      url="http://www.xfree86.org/current/Status.html">Driver Status for
-      &xfree86;</ulink> page
-      to see whether it is specifically supported.  If it is not, use
-      a generic device (do not go for a name which just looks
-      similar).  In <application>&xfree86;</application> version 4, you can try your luck
-      with the command <userinput>XFree86 -configure</userinput>
-      which auto-detects a lot of configurations.</para>
+    <para>Versões recentes do <application>&xfree86;</application>
+      trabalham com muitos adaptadores gráficos disponíveis em
+      laptops nos dias de hoje. A aceleração pode não ser suportada,
+      mas uma configuração genérica SVGA deve trabalhar.<para>
 
-    <para>The problem often is configuring the monitor.  Common
-      resources for <application>&xfree86;</application> focus on CRT monitors; getting a
+    <para>Verifique a documentação do seu laptop para a placa
+      que você possui e verifique na documentação do
+      <application>&xfree86;</application> ou na página <ulink
+      url="http://www.xfree86.org/current/Status.html">Status de
+      Drives para &xfree86;</ulink> para ver se ela é especificamente
+      suportada.  Se não, use um dispositivo genérico (não vá para um
+      nome que apenas pareça similar).  No <application>&xfree86;
+      </application> versão 4, você pode tentar sua sorte
+      com o comando <userinput>XFree86 -configure</userinput>
+      que auto-detecta várias configurações.</para>
+
+    <para>O problema geralmente &eacute; a configura&ccedil;&atilde;o do monitor.  Recursos
+      comuns para <application>&xfree86;</application> t&ecirc;m seu foco em monitores CRT; getting a
       suitable modeline for an LCD display may be tricky.  You may
       be lucky and not need to specify a modeline, or just need to
       specify suitable <literal>HorizSync</literal> and <literal>VertRefresh</literal> ranges.  If that
       does not work, the best option is to check web resources
       devoted to configuring X on laptops (these are often
       Linux oriented sites but it does not matter because both systems
-      use <application>&xfree86;</application>) and copy a modeline posted by someone for similar 
+      use <application>&xfree86;</application>) and copy a modeline posted by someone for similar
       hardware.</para>
 
-    <para>Most laptops come with two buttons on their pointing
-      devices, which is rather problematic in X (since the middle 
-      button is commonly used to paste text); you can map a 
-      simultaneous left-right click in your X configuration to 
-      a middle button click with the line</para>
+    <para>Muitos laptops v&ecirc;m com dois but&otilde;es on their pointing
+      devices, which is rather problematic in X (since the middle
+      button &eacute; comunmente usado para colar texto); vo&ecirc; pode mapear um
+      clique esquerdo-direito simultâneo na configura&ccedil;&atilde;o do seu X para
+      para servir como um clique do bot&atilde;o do meio with the line</para>
 
     <programlisting>
       Option "Emulate3Buttons"
     </programlisting>
 
-    <para>in the <filename>XF86Config</filename> file in the <literal>InputDevice</literal> 
-      section (for <application>&xfree86;</application> version 4; for version 3, put just the line 
-      <literal>Emulate3Buttons</literal>, without the quotes, in the 
+    <para>in the <filename>XF86Config</filename> file in the <literal>InputDevice</literal>
+      section (for <application>&xfree86;</application> version 4; for version 3, put just the line
+      <literal>Emulate3Buttons</literal>, without the quotes, in the
       <literal>Pointer</literal> section.)</para>
-  </sect1> 
+  </sect1>
 
-  <sect1> 
+  <sect1>
     <title>Modems</title>
-    <para> 
-      Laptops usually come with internal (on-board) modems.
-      Unfortunately, this almost always means they are 
+    <para>
+      Laptops normalmente v&ecirc;m com modems internos (on-board).
+      Unfortunately, this almost always means they are
       <quote>winmodems</quote> whose
       functionality is implemented in software, for which only &windows;
-      drivers are normally available (though a few drivers are beginning 
+      drivers are normally available (though a few drivers are beginning
       to show up for other operating systems; for example, if your modem has a Lucent LT chipset it might be supported by the <filename role="package">comms/ltmdm</filename> port).  If that is the case, you
       need to buy an external modem: the most compact option is
-      probably a PC Card (PCMCIA) modem, discussed below, but 
-      serial or USB modems may be cheaper.  Generally, regular 
-      modems (non-winmodems) should work fine.   
-    </para>
+      probably a PC Card (PCMCIA) modem, discussed below, but
+      serial or USB modems may be cheaper.  Geralmente, modems
+      normais (n&atilde;o-winmodems) devem trabalhar bem.
+</para>
 
-  </sect1> 
+  </sect1>
 
-  <sect1> 
-    <title>PCMCIA (PC Card) devices</title>
+  <sect1>
+    <title>Dispositivos PCMCIA (PC Card)</title>
 
-    <para> Most laptops come with PCMCIA (also called PC Card)
-      slots; these are supported fine under FreeBSD.  Look through
-      your boot-up messages (using &man.dmesg.8;) and see whether these were
-      detected correctly (they should appear as
+    <para>Muitos laptops v&ecirc;m com slots PCMCIA (tamb&eacute;m chamado PC Card)
+      ; estes s&atilde;o bem suportados dentro do FreeBSD.  Olhe atrav&eacute;s
+      das suas menssagens de boot-up (usando &man.dmesg.8;) e veja se esses foram
+      detectados corretamente (eles podem aparecer como
       <devicename>pccard0</devicename>,
       <devicename>pccard1</devicename> etc on devices like
       <devicename>pcic0</devicename>).</para>
 
-    <para>&os;&nbsp;4.X supports 16-bit PCMCIA cards, and
-      &os;&nbsp;5.X supports both 16-bit and
-      32-bit (<quote>CardBus</quote>) cards.   A database of supported 
-      cards is in the file <filename>/etc/defaults/pccard.conf</filename>.  
-      Look through it, and preferably buy cards listed there.  Cards not
-      listed may also work as <quote>generic</quote> devices: in 
-      particular most modems (16-bit) should work fine, provided they 
-      are not winmodems (these do exist even as PC Cards, so watch out).  
-      If your card is recognised as a generic modem, note that the
-      default <filename>pccard.conf</filename> file specifies a delay time of 10 seconds
-      (to avoid freezes on certain modems); this may well be
+    <para>&os;&nbsp;4.X suporta 16-bit PCMCIA cards, e
+      &os;&nbsp;5.X suporta ambos 16-bit and
+      32-bit (<quote>CardBus</quote>) cards.   O banco de dados de cart&otilde;es suportados
+      est&aacute; no arquivo <filename>/etc/defaults/pccard.conf</filename>.
+      Olhe atrav&eacute;s disso, e de prefer&ecirc;ncia compre cart&otilde;es listados nele.  Cart&otilde;es n&atilde;o
+      listados podem tamb&eacute;m trabalhar
+
+como dispositivos <quote>gen&eacute;ricos</quote>: em
+      particular muitos modems (16-bit) devem trabalhar bem, se ele
+      n&atilde;o for um winmodem (these do exist even as PC Cards, so watch out).
+      Se seu &eacute; reconhecido como um modem gen&eacute;rico, note que o
+      arquivo default <filename>pccard.conf</filename> especifica um tempo delay de 10 segundos
+      (to avoid freezes on certain modems); Isto may well be
       over-cautious for your modem, so you may want to play with it,
       reducing it or removing it totally.</para>
 
-    <para>Some parts of <filename>pccard.conf</filename> may need 
-      editing.  Check the irq line, and be sure to remove any number 
-      already being used: in particular, if you have an on board sound 
-      card, remove irq 5 (otherwise you may experience hangs when you 
-      insert a card).  Check also the available memory slots; if your 
-      card is not being detected, try changing it to one of the other 
+    <para>Some parts of <filename>pccard.conf</filename> may need
+      editing.  Check the irq line, and be sure to remove any number
+      already being used: in particular, if you have an on board sound
+      card, remove irq 5 (otherwise you may experience hangs when you
+      insert a card).  Check also the available memory slots; if your
+      card is not being detected, try changing it to one of the other
       allowed values (listed in the manual page &man.pccardc.8;).
-    </para>
+</para>
 
     <para>If it is not running already, start the &man.pccardd.8; daemon.
       (To enable it at boot time, add
@@ -169,30 +175,30 @@
       (including ISA routing of interrupts, for machines where
       &os; is not able to use the PCI BIOS) before the &os;&nbsp;4.4
       release.  If you have problems, try upgrading your system.</para>
- 
-  </sect1> 
 
-  <sect1> 
+  </sect1>
 
-    <title>Power management</title>
+  <sect1>
+
+    <title>Gerenciamento de energia</title>
 
     <para>Unfortunately, this is not very reliably supported under
       FreeBSD.  If you are lucky, some functions may work reliably;
       or they may not work at all.</para>
 
-    <para>To make things a little more complex, there are two existing
-      standards for power management: APM and ACPI, the latter
+    <para>Para tornar as coisas um pouco mais complexa, there are two existing
+      standards for power management: APM e ACPI, o latter
       superseding the former and including more features, but also
       introducing more problems.</para>
 
-    <para>Some laptops support both APM and ACPI (to a certain
-      degree), others just support one of them, so chances are that
-      you have to experiment with both of them to have reliable power
-      management on your laptop.</para>
+    <para>Muitos laptops suportam ambos APM e ACPI (to a certain
+      degree), outros somente suportam um deles, ent&atilde;o as chances que
+      voc&ecirc; tem para experimentar with both of them to have reliable power
+      management no seu laptop.</para>
 
     <note>
-      <para>You cannot have APM and ACPI enabled at the same time,
-	even if your laptop has support for both of them.</para>
+      <para>Voc&ecirc; n&atilde;o pode ter APM e ACPI habilitados ao mesmo tempo,
+	mesmo se o seu laptop tenha suporte para ambos eles.</para>
     </note>
 
     <sect2>
@@ -200,7 +206,7 @@
 
       <para>The APM (Advanced Power Management) BIOS provides support
 	for various power management features like standby, suspend,
-	hibernation, CPU clock slow down etc. and is available
+	hibernation, CPU clock slow down etc.  and is available
 	under &os;&nbsp;4.X and &os;&nbsp;5.X.</para>
 
       <para>To enable APM support, you can compile a kernel with power
@@ -241,7 +247,7 @@
 	SC_NO_SUSPEND_VTYSWITCH</literal>
 	in your kernel configuration file and recompile your kernel.
 	Another workaround is to switch to a virtual console (using
-        <keycombo
+	<keycombo
 	action="simul"><keycap>Ctrl</keycap><keycap>Alt</keycap><keycap>F1</keycap></keycombo>
 	or another function key) and then execute &man.apm.8;.
 	You can automate this with &man.vidcontrol.1;, if you are
@@ -298,18 +304,18 @@ apm_event NORMRESUME, STANDBYRESUME {
 	booting an ACPI enabled machine.  &os;&nbsp;5.1-RELEASE and
 	later come with a boot-time menu that controls how &os; is
 	booted.  One of the proposed options is to turn off ACPI.  So
-	to disable ACPI just select <guimenuitem>2. Boot &os; with ACPI
+	to disable ACPI just select <guimenuitem>2.  Boot &os; with ACPI
 	disabled</guimenuitem> in the menu.</para>
     </sect2>
 
     <sect2>
-      <title>Display Power Management</title>
+      <title>Display de Gerenciamento de Energia</title>
 
-    <para>The X window system (<application>&xfree86;</application>) also includes display power
-      management (look at the &man.xset.1; manual page, and search for
-      <quote>dpms</quote> there).  You may want to investigate this.  However, this, 
-      too, works inconsistently on laptops: it
-      often turns off the display but does not turn off the
+    <para>O sistema X window (<application>&xfree86;</application>) tamb&eacute;m inclui um display de
+      gerenciamento de energia (olhe na p&aacute;gina do manual &man.xset.1;, e procure por
+      <quote>dpms</quote> nele).  Voc&ecirc; pode querer invertigar isso.  Entretanto,isso
+      tamb&eacute;m trabalha inconsistentemente em laptops: isso
+      geramlente desliga o display mas n&atilde;o desliga o
       backlight.</para>
     </sect2>
 
