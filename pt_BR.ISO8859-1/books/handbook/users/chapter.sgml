@@ -118,71 +118,73 @@
             utilizar o comando. Isso que dizer que você pode ter contas com 
             diferentes nomes de usuários com o mesmo UID. Tanto quanto para 
             o FreeBSD são um usuário apenas. É improvável que você necessitará 
-            sempre fazer isto. 
+            sempre fazer isto.</para> 
 	</listitem>
       </varlistentry>
 
 
       <varlistentry>
-	<term>Group ID (GID)</term>
+	<term>Grupo ID (GID)</term>
 
 	<listitem>
-	  <para>The GID is a number from 0 to 65536 used to uniquely identify
-	    the primary group that the user belongs to.  Groups are a
-	    mechanism for controlling access to resources based on a user's
-	    GID rather than their UID.  This can significantly reduce the size
-	    of some configuration files.  A user may also be in more than one
-	    group.</para>
+	  <para>O GID é um número de 0 até 65536 usado para identificar de forma
+            única o grupo primário que o usuário pertence. Os grupos são um mecanismo
+            para controlar o acesso aos recursos baseados em GID ao invéz de UID.
+            Isto pode significativamente reduzir o tamanho de arquivos de configurações.
+            Um usuário pode também estar em mais de um grupo.</para>
 	</listitem>
       </varlistentry>
 
       <varlistentry>
-	<term>Login class</term>
+	<term>Classe de Login</term>
+
+        <listitem>
+	  <para>Classe de login são uma extenção para o mecanismo de grupos que
+            fornecem a flexibilidade adicional à adaptar o sistema aos usuários
+            diferentes.</para>
+	</listitem>
+      </varlistentry>
+
+
+      <varlistentry>
+	<term>Tempo de alteração da senha</term>
 
 	<listitem>
-	  <para>Login classes are an extension to the group mechanism that
-	    provide additional flexibility when tailoring the system to
-	    different users.</para>
+	  <para>Por padrão o FreeBSD não força os usuários a trocar as suas senhas
+            periodicamente. Você pode fazer isto baseado por usuário, forçando alguns
+            ou todos seus usuários para mudar suas senhas depois de um determinado 
+            tempo.</para> 
 	</listitem>
       </varlistentry>
 
+
       <varlistentry>
-	<term>Password change time</term>
+	<term>Tempo de expiração da conta</term>
 
 	<listitem>
-	  <para>By default FreeBSD does not force users to change their
-	    passwords periodically.  You can enforce this on a per-user basis,
-	    forcing some or all of your users to change their passwords after
-	    a certain amount of time has elapsed.</para>
-	</listitem>
+	  <para>Por padrão o FreeBSD não expira as contas. Se você estiver
+            criando uma conta que você sabe que tem um tempo limitado de uso,
+            por exemplo, em uma escolha onde você tem contas para os estudantes,
+            você pode especificar quando a conta expira. Após a expiração do tempo
+            o cliente não poderá logar no sistema, embora diretórios e arquivos do 
+            cliente permanecerão.</para>
+         </listitem>
       </varlistentry>
 
+
       <varlistentry>
-	<term>Account expiry time</term>
+	<term>Nome completo dos usuários</term>
 
 	<listitem>
-	  <para>By default FreeBSD does not expire accounts.  If you are
-	    creating accounts that you know have a limited lifespan, for
-	    example, in a school where you have accounts for the students,
-	    then you can specify when the account expires.  After the expiry
-	    time has elapsed the account cannot be used to log in to the
-	    system, although the account's directories and files will
-	    remain.</para>
+	  <para>O nome único do usuário identifica a conta para o FreeBSD, mas
+            não reflete necessariamente o nome real do usuário. Esta informação
+            pode ser associada com a conta.</para>
 	</listitem>
       </varlistentry>
+ 
 
       <varlistentry>
-	<term>User's full name</term>
-
-	<listitem>
-	  <para>The user name uniquely identifies the account to FreeBSD, but
-	    does not necessarily reflect the user's real name.  This
-	    information can be associated with the account.</para>
-	</listitem>
-      </varlistentry>
-
-      <varlistentry>
-	<term>Home directory</term>
+	<term>Diretório <foreignphrase>Home</foreignphrase></term>
 
 	<listitem>
 	  <para>The home directory is the full path to a directory on the
@@ -195,6 +197,14 @@
 	    and any directories they may create in there.</para>
 	</listitem>
       </varlistentry>
+
+	<listitem>
+	  <para>O Diretório <foreignphrase>Home</foreignphrase> é o caminho completo
+            para o diretório do sistema 
+	</listitem>
+      </varlistentry>
+
+
 
       <varlistentry>
 	<term>User shell</term>
