@@ -28,7 +28,9 @@
       arquivos de audio, a adi&ccedil;&atilde;o de efeitos sonoros, e o controle de
       dispositivos MIDI conectados ao seu computador.</para>
 
-    <para>With some willingness to experiment, FreeBSD can support
+    <para>
+    
+    With some willingness to experiment, FreeBSD can support
       playback of video files and DVD's.  The number of applications
       to encode, convert, and playback various video media is more
       limited than the number of sound applications.  For example as
@@ -118,10 +120,10 @@
       </authorgroup>
     </sect1info>
 
-    <title>Setting Up the Sound Card</title>
+    <title>Configurando a placa de som</title>
     
   <sect2 id="sound-device">
-    <title>Locating the Correct Device</title>
+    <title>Localizando o dispositivo correto</title>
 
     <indexterm><primary>PCI</primary></indexterm>
     <indexterm><primary>ISA</primary></indexterm>
@@ -212,7 +214,7 @@
       linkend="kernelconfig">.</para>
 
     <sect3>
-      <title>Creative, Advance, and ESS Sound Cards</title>
+      <title>Placas de som Creative, Advance, e ESS</title>
 
       <para>If you have one of the above cards, you will need to
 	add:</para>
@@ -243,7 +245,7 @@ device sbc0 at isa? port 0x220 irq 5 drq 1 flags 0x15</programlisting>
     </sect3>
 
     <sect3>
-      <title>Gravis UltraSound Cards</title>
+      <title>Placas Gravis UltraSound</title>
 
       <para>For a PnP ISA card, you will need to add:</para>
 
@@ -262,7 +264,7 @@ device gus0 at isa? port 0x220 irq 5 drq 1 flags 0x13</programlisting>
     </sect3>
 
     <sect3>
-      <title>Crystal Sound Cards</title>
+      <title>Placas de som Crystal</title>
 
       <para>For Crystal cards, you will need to add:</para>
 
@@ -273,7 +275,7 @@ device csa</programlisting>
     </sect3>
 
     <sect3>
-      <title>Generic Support</title>
+      <title>Suporte Gen&eacute;rico</title>
 
       <para>For PnP ISA or PCI cards, you will need to add:</para>
 
@@ -291,7 +293,7 @@ device csa</programlisting>
     </sect3>
 
     <sect3>
-      <title>Onboard Sound</title>
+      <title>Som Onboard</title>
 
       <para>Some systems with built-in motherboard sound devices may
 	require the following option in your kernel
@@ -302,7 +304,7 @@ device csa</programlisting>
   </sect2>
 
   <sect2 id="sound-devicenodes">
-    <title>Creating and Testing the Device Nodes</title>
+    <title>Criando e testando os n&oacute;s de dispositivos (Device Nodes)</title>
 
     <indexterm><primary>device nodes</primary></indexterm>
     <para>After you reboot, log in and check for the device in the
@@ -412,7 +414,7 @@ pcm0: &lt;SB16 DSP 4.11&gt; on sbc0</screen>
       MP3 audio files.</para>
 
     <sect3 id="troubleshooting">
-      <title>Common Problems</title>
+      <title>Problemas Comuns</title>
 
       <indexterm><primary>device nodes</primary></indexterm>
       <indexterm><primary>I/O port</primary></indexterm>
@@ -475,7 +477,7 @@ pcm0: &lt;SB16 DSP 4.11&gt; on sbc0</screen>
       </author>
      </authorgroup>
     </sect2info>
-    <title>Utilizing Multiple Sound Sources</title>
+    <title>Utilizando multiplas fontes de som</title>
 
     <para>It is often desirable to have multiple sources of sound that
       are able to play simultaneously, such as when
@@ -526,14 +528,14 @@ pcm0: &lt;SB16 DSP 4.11&gt; on sbc0</screen>
       <!-- 11 Sept 2001 -->
     </sect1info>
 
-    <title>MP3 Audio</title>
+    <title>Audio MP3</title>
 
     <para>MP3 (MPEG Layer 3 Audio) accomplishes near CD-quality sound,
       leaving no reason to let your FreeBSD workstation fall short of
       its offerings.</para>
 
     <sect2 id="mp3-players">
-      <title>MP3 Players</title>
+      <title>Reprodutores de MP3</title>
 
       <para>By far, the most popular <application>&xfree86;</application> MP3 player is
 	<application>XMMS</application> (X Multimedia System).  
@@ -579,7 +581,7 @@ MPEG 1.0 layer III, 128 kbit/s, 44100 Hz joint-stereo
     </sect2>
 
     <sect2 id="rip-cd">
-      <title>Ripping CD Audio Tracks</title>
+      <title>Ripando trilhas de um CD de audio</title>
 
       <para>Before encoding a CD or CD track to MP3, the audio data on
 	the CD must be ripped onto the hard drive.  This is done by
@@ -627,7 +629,7 @@ MPEG 1.0 layer III, 128 kbit/s, 44100 Hz joint-stereo
     </sect2>
 
     <sect2 id="mp3-encoding">
-      <title>Encoding MP3s</title>
+      <title>Codificando arquivos MP3</title>
 
       <para>Nowadays, the mp3 encoder of choice is
 	<application>lame</application>.
@@ -660,7 +662,7 @@ MPEG 1.0 layer III, 128 kbit/s, 44100 Hz joint-stereo
     </sect2>
 
     <sect2 id="mp3-decoding">
-      <title>Decoding MP3s</title>
+      <title>Decodificando arquivos MP3</title>
 
       <para>In order to burn an audio CD from MP3s, they must be
 	converted to a non-compressed WAV format.  Both
@@ -758,7 +760,7 @@ MPEG 1.0 layer III, 128 kbit/s, 44100 Hz joint-stereo
     <!-- 5 June 2002 -->
   </sect1info>
 
-  <title>Video Playback</title>
+  <title>Assistindo Video</title>
 
     <para>Video playback is a very new and rapidly developing application
       area.  Be patient.  Not everything is going to work as smoothly as
@@ -815,7 +817,7 @@ option USER_LDT</programlisting>
 kern.ipc.shmall=32768</programlisting>
 
   <sect2 id="video-interface">
-    <title>Determining Video Capabilities</title>
+    <title>Determinando as Capacidades de Video</title>
 
     <indexterm><primary>XVideo</primary></indexterm>
     <indexterm><primary>SDL</primary></indexterm>
@@ -978,7 +980,7 @@ no adaptors present</screen>
     </sect3>
 
     <sect3 id="video-interface-SDL">
-    <title>Simple Directmedia Layer</title>
+    <title>Camada simples directmedia (Simple Directmedia Layer)</title>
 
     <para>The Simple Directmedia Layer, SDL, was intended to be a
       porting layer between &microsoft.windows;, BeOS, and &unix;,
@@ -992,7 +994,7 @@ no adaptors present</screen>
     </sect3>
 
     <sect3 id="video-interface-DGA">
-    <title>Direct Graphics Access</title>
+    <title>Acesso gr&aacute;fico direto</title>
 
     <para>Direct Graphics Access is an <application>&xfree86;</application> extension which allows
       a program to bypass the X server and directly alter the
@@ -1010,7 +1012,7 @@ no adaptors present</screen>
   </sect2>
 
   <sect2 id="video-ports">
-    <title>Ports and Packages Dealing with Video</title>
+    <title>Ports e Pacotes para lidar com video</title>
 
     <indexterm><primary>video ports</primary></indexterm>
     <indexterm><primary>video packages</primary></indexterm>
@@ -1109,7 +1111,7 @@ no adaptors present</screen>
         controls, it works very well.</para>
 
       <sect4 id="video-mplayer-building">
-        <title>Building MPlayer</title>
+        <title>Compilando o MPlayer</title>
         <indexterm><primary>MPlayer</primary>
 	           <secondary>making</secondary></indexterm>
 
@@ -1165,7 +1167,7 @@ You can enable XAnim DLL support by defining WITH_XANIM.
       </sect4>
 
       <sect4 id="video-mplayer-using">
-        <title>Using MPlayer</title>
+        <title>Utilizando o MPlayer</title>
         <indexterm><primary>MPlayer</primary>
 	           <secondary>use</secondary></indexterm>
 
@@ -1280,7 +1282,7 @@ zoom=yes</programlisting>
     </sect3>
 
     <sect3 id="video-xine">
-    <title>The xine Video Player</title>
+    <title>iReprodutor de video xine</title>
 
     <para>The <application>xine</application> video player is a project of wide scope aiming not only at being an
      all in one video solution, but also in producing a reusable base
@@ -1318,7 +1320,7 @@ zoom=yes</programlisting>
     </sect3>
 
     <sect3 id="video-ports-transcode">
-    <title>The transcode Utilities</title>
+    <title>Utilit&aacute;rios de transcodifica&ccedil;&atilde;o</title>
 
     <para>The software <application>transcode</application> is not a player, but a suite of tools for
       re-encoding <filename>.avi</filename> and <filename>.mpg</filename> files.  With <application>transcode</application>, one has the
@@ -1372,7 +1374,7 @@ zoom=yes</programlisting>
   </sect2>
 
   <sect2 id="video-further-reading">
-    <title>Further Reading</title>
+    <title>Refer&ecirc;ncias para leitura adicional</title>
 
     <para>The various video software packages for FreeBSD are
       developing rapidly.  It is quite possible that in the near
