@@ -674,49 +674,43 @@ crw-rw----    1 uucp     dialer    28, 193 Feb 15 14:38 /dev/cuala1</screen>
         e que voc&ecirc; tenha feito a conex&atilde;o f&iacute;sica do terminal na porta serial.</para> 
       
 
-      <para>Recall from <xref linkend="boot"> that the
-	<command>init</command> process is responsible for all process
-	control and initialization at system startup.  One of the
-	tasks performed by <command>init</command> is to read the
-	<filename>/etc/ttys</filename> file and start a
-	<command>getty</command> process on the available terminals.
-	The <command>getty</command> process is responsible for
-	reading a login name and starting the <command>login</command>
-	program.</para>
+      <para>Relembrando o <xref linkend="boot"> que descreve que o processo
+        <command>init</command> é responsável pelo controle e inícialização 
+        de todos os processos ao iniciar o sistema.  Uma das atividades executadas
+        pelo <command>init</command> é ler o arquivo <filename>/etc/ttys</filename>
+        e iniciar o processo <command>getty</command> nos terminais disponibilizados.
+	O processo <command>getty</command> é responsável pela leitura do nome de <foreignphrase>login</foreignphrase>
+	e pela inicialização do programa <command>login</command>.</para>
 	  
-      <para>Thus, to configure terminals for your FreeBSD system the
-	following steps should be taken as <username>root</username>:</para>
+      <para>Assim, para configurar os terminais para o seu sistema FreeBSD 
+	os seguintes passos devem ser realizados como <username>root</username>:</para>
 
       <procedure>
 	<step>
-	  <para>Add a line to <filename>/etc/ttys</filename> for the entry in
-	    the <filename>/dev</filename> directory for the serial port if it
-	    is not already there.</para>
+	  <para>Adicione uma linha no arquivo <filename>/etc/ttys</filename> para a entrada
+	    do diretório <filename>/dev</filename> indicando a porta serial caso esta não esteja 
+            descrita no arquivo.</para>
 	</step>
 
 	<step>
-	  <para>Specify that <command>/usr/libexec/getty</command> be run on
-	    the port, and specify the appropriate
-	    <replaceable>getty</replaceable> type from the
-	    <filename>/etc/gettytab</filename> file.</para>
+	  <para>Especifique que o <command>/usr/libexec/getty</command> deve ser executado
+            na porta, e indique um tipo apropriado de <replaceable>getty</replaceable> no arquivo <filename>/etc/gettytab</filename>.</para>
 	</step>
 
 	<step>
-	  <para>Specify the default terminal type.</para>
+	  <para>Especifique o tipo padrão do terminal.</para>
 	</step>
 
 	<step>
-	  <para>Set the port to <quote>on.</quote></para>
+	  <para>Configure a porta como <quote><foreignphrase>on</foreignphrase>.</quote></para>
 	</step>
 	      
 	<step>
-	  <para>Specify whether the port should be
-	    <quote>secure.</quote></para>
+	  <para>Especifique se a porta deve ser <quote>segura.</quote></para>
 	</step>
 
 	<step>
-	  <para>Force <command>init</command> to reread the
-	    <filename>/etc/ttys</filename> file.</para>
+	  <para>Force o <command>init</command> a reler o arquivo<filename>/etc/ttys</filename>.</para>
 	</step>
       </procedure>
       
