@@ -942,7 +942,7 @@ www.exemplo.org</programlisting>
         <secondary>configura&ccedil;&atilde;o</secondary>
       </indexterm>
 
-      <para>Fora da m&aacute;quina, voc&ecirc; deve pode enviar mensagens para hosts externos
+      <para>Fora da m&aacute;quina, voc&ecirc; deve poder enviar mensagens para hosts externos
         como voc&ecirc; configurou no
 	<filename>/etc/resolv.conf</filename> ou rodou o seu pr&oacute;prio
 	servidor de nomes.  Se voc&ecirc; gostaria de receber mensagens em seu host
@@ -964,7 +964,7 @@ www.exemplo.org</programlisting>
       </itemizedlist>
 
       <indexterm><primary>SMTP</primary></indexterm>
-      <para>Indiferente quais dos m&eacute;todos acima voc&ecirc; escolha, a fim de ter o
+      <para>Indiferente quais dos m&eacute;todos acima voc&ecirc; escolha, a fim de ter
         o correio entregando diretamente para seu host, deve ter um endere&ccedil;o 
         IP est&aacute;tico (n&atilde;o um endere&ccedil;o din&acirc;mico, como a maioria das conex&otilde;es discadas).  Se voc&ecirc; est&aacute; atr&aacute;s
         de um firewall, ele deve permitir tr&aacute;fego SMTP para voc&ecirc;.  Se voc&ecirc; quiser 
@@ -987,7 +987,7 @@ www.exemplo.org</programlisting>
       <para>Qualquer uma das coisas acima ir&aacute; permitir que voc&ecirc; receba mensagens diretamente
         em seu host.</para>
 
-      <para>Try this:</para>
+      <para>Tente isto:</para>
 
       <screen>&prompt.root; <userinput>hostname</userinput>
 exemplo.FreeBSD.org
@@ -1130,7 +1130,7 @@ freefall		MX	20	who.cdrom.com</programlisting>
       <filename>/usr/src/usr.sbin/sendmail/cf</filename>.</para>
 
     <para>Se voc&ecirc; n&atilde;o tiver instalado seu sistema com todos os fontes, a configura&ccedil;&atilde;o 
-      do sendmail vai estar quebrado em um arquivo de fonte separado na distribui&ccedil;&atilde;o  
+      do sendmail vai estar quebrado em um arquivo de fonte separado na distribui&ccedil;&atilde;o.  
       Assumindo que voc&ecirc; tem o c&oacute;digo fonte do FreeBSD
       montando em CDROM, fa&ccedil;a:</para>
 
@@ -1150,7 +1150,7 @@ freefall		MX	20	who.cdrom.com</programlisting>
       O diret&oacute;rio <filename>/usr/src/usr.sbin/sendmail/cf/cf</filename> cont&eacute;m 
       alguns exemplos.  Assumindo que voc&ecirc; nomeou seu arquivo como
       <filename>foo.mc</filename>, tudo que voc&ecirc; precisa fazer &eacute;
-      convert&eacute;-lo em um <filename>sendmail.cf</filename> v&aacute;lido:</para>
+      converte-lo em um <filename>sendmail.cf</filename> v&aacute;lido:</para>
 
     <screen>&prompt.root; <userinput>cd /usr/src/usr.sbin/sendmail/cf/cf</userinput>
 &prompt.root; <userinput>make foo.cf</userinput>
@@ -1183,7 +1183,7 @@ Cw    <replaceable>seunomeuucp.UUCP</replaceable></programlisting>
       todo o uso do DNS durante a entrega de mensagens.  A op&ccedil;&atilde;o
       <literal>UUCP_RELAY</literal> &eacute; necess&aacute;ria suportar entrega 
       UUCP.  Coloque simplesmente um hostname da internet l&aacute; que esteja apto a
-      gerenciar .Endere&ccedil;&otilde;s do pseudo-dom&iacute;nio do UUCP; muito prov&aacute;vel que, voc&ecirc; ir&aacute;
+      gerenciar. Endere&ccedil;os do pseudo-dom&iacute;nio do UUCP; muito prov&aacute;vel que, voc&ecirc; ir&aacute;
       entrar l&aacute; no relay de mensagens do seu provedor de servi&ccedil;os internet.</para>
 
     <para>Uma vez que voc&ecirc; tenha isto, voc&ecirc; precisa do arquivo
@@ -1222,8 +1222,8 @@ if-bus.UUCP                   uucp-dom:if-bus
       ponto &uacute;nico, colocando tudo mais, com a entrega UUCP a um vizinho 
       do UUCP que sirva como gateway de correio universal para o
       mundo. Todos os nomes de esta&ccedil;&atilde;o atr&aacute;s 
-      <literal>uucp-dom:</literal> palavrachave deve ser um vizinho UUCP 
-      v&aacute;lidom como voc&ecirc; pode verificar usando o comando
+      <literal>uucp-dom:</literal> palavra chave deve ser um vizinho UUCP 
+      v&aacute;lido como voc&ecirc; pode verificar usando o comando
       <literal>uuname</literal>.</para>
 
     <para>Como lembrete, este arquivo necessita ser convertido em uma 
@@ -1235,11 +1235,11 @@ if-bus.UUCP                   uucp-dom:if-bus
     <para>Sugest&atilde;o final: se voc&ecirc; estiver incerto de algum roteamento particular
       que o correio deveria funcionar, lembre da op&ccedil;ao  <option>-bt</option>
       do <application>sendmail</application>. Isto inicia o <application>sendmail</application> em <emphasis> modo 
-      de teste de endere&ccedil;os</emphasis>; simplemesnte entre com <literal>3,0</literal>, seguido pelo
-      endere&ccedil;o que voc&ecirc; deseja testar para roteamento de correio.  O ultima
+      de teste de endere&ccedil;os</emphasis>; simplesmente entre com <literal>3,0</literal>, seguido pelo
+      endere&ccedil;o que voc&ecirc; deseja testar para roteamento de correio.  A &uacute;ltima
       linha fala o agente de correio interno usado, o host de destino
       que esse agente estar&aacute; chamando, e o (possivelmente 
-      traduzindo) endere&ccedil;o. Saida deste modo digitando <keycombo
+      traduzindo) endere&ccedil;o. Saia deste modo digitando <keycombo
       action="simul"><keycap>Ctrl</keycap><keycap>D</keycap></keycombo>.</para>
 
     <screen>&prompt.user; <userinput>sendmail -bt</userinput>
@@ -1269,9 +1269,9 @@ parse            returns: $# uucp-dom $@ <replaceable>seu.relay.uucp</replaceabl
       role="fqdn">relay.exemplo.net</hostid> como relay de correio.</para>
 
     <para>A fim de puxar suas mensagems de sua conta de correio no provedor, voc&ecirc; deve
-      instalar um agente puxe essa mensagens. O utilit&aacute;rio <application>fetchmail</application> 
+      instalar um agente, puxe as mensagens. O utilit&aacute;rio <application>fetchmail</application> 
       &eacute; uma boa escolha que suporta v&aacute;rios tipos diferentes de protocolos.
-      Normalmente, seu provedor internet ir&aacute; fornecer POP3.  Se voc&ecirc; est&aacute; usando PPP no modo usu&aacute;rio,
+      Normalmente, seu provedor de internet ir&aacute; fornecer POP3.  Se voc&ecirc; est&aacute; usando PPP no modo usu&aacute;rio,
       voc&ecirc; pode automaticamente baixar seus emails quando a conex&atilde;o
       internet estiver estabilizada com a seguinte entrada no seu
       <filename>/etc/ppp/ppp.linkup</filename>:</para>
@@ -1403,15 +1403,15 @@ SENDMAIL_LDADD=-lsasl</programlisting>
 &prompt.root; <userinput>make install</userinput></screen>
 
 	<para>A compila&ccedil;&atilde;o do <application>sendmail</application> n&atilde;o deve ter qualquer problema
-	  se o <filename>/usr/src</filename> n&atilde;o foi alterado bastantehas not been changed bastante
-	  e as bibliotecas compartilhadas necess&aacute;rias est&atilde;o dispon&iacute;veis.</para>
+	  se o <filename>/usr/src</filename> n&atilde;o foi alterado bastando ter
+	  e as bibliotecas compartilhadas necess&aacute;rias estarem dispon&iacute;veis.</para>
       </step>
 
       <step>
 	<para>Depois do <application>sendmail</application> ter sido compilado
 	  e reinstalado, edite o seu arquivo <filename>/etc/mail/freebsd.mc</filename>
 	  (ou qualquer arquivo que voc&ecirc; use como arquivo <filename>.mc</filename>.  Muitos administradores
-	  escolhem usar a sa&iacute;da do &man.hostname.1; como como nome do arquivo <filename>.mc</filename>).  
+	  escolhem usar a sa&iacute;da do &man.hostname.1; como nome do arquivo <filename>.mc</filename>).  
 	  Adicione estas linhas a ele:</para>
 
 	<programlisting>dnl set SASL options
