@@ -6335,117 +6335,124 @@ natd_flags=""</programlisting>
       <hostid>B</hostid> na rede local possuem endere&ccedil;os IP
       <hostid role="ipaddr">192.168.0.2</hostid> e 
       <hostid role="ipaddr">192.168.0.3</hostid>, enquanto a 
-      interface de rede local da m&aacute;quina natd</para>
-      <para>For example, client <hostid>A</hostid> and
-	<hostid>B</hostid> behind the LAN have IP addresses of <hostid
-	role="ipaddr">192.168.0.2</hostid> and <hostid
-	role="ipaddr">192.168.0.3</hostid>, while the natd machine's
-	LAN interface has an IP address of <hostid
-	role="ipaddr">192.168.0.1</hostid>.  Client <hostid>A</hostid>
-	and <hostid>B</hostid>'s default gateway must be set to that
-	of the <application>natd</application> machine, <hostid
-	role="ipaddr">192.168.0.1</hostid>.  The <application>natd</application> machine's
-	external, or Internet interface does not require any special
-	modification for &man.natd.8; to work.</para>
+      interface de rede local da m&aacute;quina executando o natd possui o
+      endere&ccedil;o IP <hostid role="ipaddr">192.168.0.1</hostid>.  O 
+      gateway padr&atilde;o dos clientes <hostid>A</hostid> e
+      <hostid>B</hostid> precisa ser o da m&aacute;quina com natd, <hostid
+      role="ipaddr">192.168.0.1</hostid>.  A interface externa, ou
+      Internet, da m&aacute;quina com natd n&atilde;o requer nenhuma modifica&ccedil;&atilde;o
+      especial para o funcionamento do &man.natd.8;.</para>
     </sect2>
 
     <sect2 id="network-natdport-redirection">
-      <title>Port Redirection</title>
+      <title>Redirecionamento de Porta</title>
 
-      <para>The drawback with &man.natd.8; is that the LAN clients are not accessible
-	from the Internet.  Clients on the LAN can make outgoing connections to
-	the world but cannot receive incoming ones.  This presents a problem
-	if trying to run Internet services on one of the LAN client machines.
-	A simple way around this is to redirect selected Internet ports on the
-	<application>natd</application> machine to a LAN client.
-</para>
+      <para>A desvantagem do &man.natd.8; &eacute; que os clientes da rede
+      local n&atilde;o s&atilde;o diretamente acess&iacute;veis a partir da Internet.  Os
+      clientes dentro da rede local podem fazer conex&otilde;es saindo para o
+      mundo, mas n&atilde;o podem receber conex&otilde;es vindas de fora.  Isto
+      apresenta um problema ao se tentar executar servi&ccedil;os Internet em
+      uma das m&aacute;quinas cliente da rede local.  Uma forma simples de
+      contornar isto &eacute; redirecionando certas portas Internet na
+      m&aacute;quina com <application>natd</application> para um cliente da
+      rede local.</para>
 
-      <para>For example, an IRC server runs on client <hostid>A</hostid>, and a web server runs
-	on client <hostid>B</hostid>.  For this to work properly, connections received on ports
-	6667 (IRC) and 80 (web) must be redirected to the respective machines.
-</para>
+      <para>Por exemplo, um servidor IRC roda em um cliente 
+      <hostid>A</hostid>, e um servidor web em um cliente 
+      <hostid>B</hostid>.  Para que isto funcione corretamente, as conex&otilde;es
+      recebidas nas portas 6667 (IRC) e 80 (web) precisam ser
+      redirecionadas para as respectivas m&aacute;quinas.</para>
 
-      <para>The <option>-redirect_port</option> must be passed to
-	&man.natd.8; with the proper options.  The syntax is as follows:</para>
+      <para>Um <option>-redirect_port</option> precisa ser passado ao
+      &man.natd.8; com as op&ccedil;&otilde;es adequadas.  A sintaxe &eacute; a seguinte:</para>
       <programlisting>     -redirect_port proto targetIP:targetPORT[-targetPORT]
 		 [aliasIP:]aliasPORT[-aliasPORT]
 		 [remoteIP[:remotePORT[-remotePORT]]]</programlisting>
 
-      <para>In the above example, the argument should be:</para>
+      <para>No exemplo acima, o argumento deve ser:</para>
 
 	<programlisting>    -redirect_port tcp 192.168.0.2:6667 6667
     -redirect_port tcp 192.168.0.3:80 80</programlisting>
 
-      <para>
-	This will redirect the proper <emphasis>tcp</emphasis> ports to the
-	LAN client machines.
-</para>
+      <para>Isto ir&aacute; direcionar as portas <emphasis>tcp</emphasis> 
+      corretas para as m&aacute;quinas clientes da rede local.</para>
 
-      <para>The <option>-redirect_port</option> argument can be used to indicate port
-	ranges over individual ports.  For example, <replaceable>tcp
-	192.168.0.2:2000-3000 2000-3000</replaceable> would redirect
-	all connections received on ports 2000 to 3000 to ports 2000
-	to 3000 on client <hostid>A</hostid>.</para>
+      <para>Um argumento <option>-redirect_port</option> pode ser
+      usado para indicar faixas de portas al&eacute;m de portas individuais.
+      Por exemplo, <replaceable>tcp 192.168.0.2:2000-3000 
+      2000-3000</replaceable> redirecionaria todas as conex&otilde;es
+      recebidas nas portas 2000 a 3000 para portas 2000 a 3000 no
+      cliente <hostid>A</hostid>.</para>
 
-      <para>These options can be used when directly running
-	&man.natd.8; or placed within the
-	<literal>natd_flags=""</literal> option in
-	<filename>/etc/rc.conf</filename>.</para>
+      <para>Estas op&ccedil;&otilde;es podem ser usadas executando diretamente o 
+      &man.natd.8;, ou inseridas na op&ccedil;&atilde;o 
+      <literal>natd_flags=""</literal> em 
+      <filename>/etc/rc.conf</filename>.</para>
 
-      <para>For further configuration options, consult &man.natd.8;</para>
+      <para>Para mais op&ccedil;&otilde;es de configura&ccedil;&atilde;o, consulte &man.natd.8;.</para>
     </sect2>
 
     <sect2 id="network-natdaddress-redirection">
-      <title>Address Redirection</title>
+      <title>Redirecionamento de Endere&ccedil;o</title>
       <indexterm><primary>address redirection</primary></indexterm>
-      <para>Address redirection is useful if several IP addresses are
-	available, yet they must be on one machine.  With this,
-	&man.natd.8; can assign each LAN client its own external IP address.
-	&man.natd.8; then rewrites outgoing packets from the LAN clients
-	with the proper external IP address and redirects
-	all traffic incoming on that particular IP address back to
-	the specific LAN client.  This is also known as static NAT.
-	For example, the IP addresses <hostid role="ipaddr">128.1.1.1</hostid>,
-	<hostid role="ipaddr">128.1.1.2</hostid>, and
-	<hostid role="ipaddr">128.1.1.3</hostid> belong to the <application>natd</application> gateway
-	machine.  <hostid role="ipaddr">128.1.1.1</hostid> can be used
-	as the <application>natd</application> gateway machine's external IP address, while
-	<hostid role="ipaddr">128.1.1.2</hostid> and
-	<hostid role="ipaddr">128.1.1.3</hostid> are forwarded back to LAN
-	clients <hostid>A</hostid> and <hostid>B</hostid>.</para>
+      <para>Redirecionamento de endere&ccedil;o &eacute; &uacute;til se v&aacute;rios endere&ccedil;os IP
+      est&atilde;o dispon&iacute;veis, mesmo que eles precisem estar em uma m&aacute;quina.
+      Com isto, o &man.natd.8; pode designar cada cliente da rede local
+      com seu pr&oacute;prio endere&ccedil;o externo.  O &man.natd.8; ent&atilde;o
+      reescreve os pacotes de sa&iacute;da dos clientes da rede local com o
+      endere&ccedil;o IP externo apropriado e redireciona todo o tr&aacute;fego de
+      entrada para aquele endere&ccedil;o IP de volta ao cliente da rede
+      local espec&iacute;fico.  Isto tamb&eacute;m &eacute; conhecido como NAT est&aacute;tico.
+      Por exemplo, os endere&ccedil;os IP 
+      <hostid role="ipaddr">128.1.1.1</hostid>,
+      <hostid role="ipaddr">128.1.1.2</hostid> e
+      <hostid role="ipaddr">128.1.1.3</hostid> pertencem &agrave; maquina
+      gateway com <application>natd</application>.  O <hostid
+      role="ipaddr">128.1.1.1</hostid> pode ser usado como o o
+      endere&ccedil;o IP externo da m&aacute;quina gateway, enquanto 
+      <hostid role="ipaddr">128.1.1.2</hostid> e 
+      <hostid role="ipaddr">128.1.1.3</hostid> s&atilde;o repassados de volta
+      aos clientes <hostid>A</hostid> e <hostid>B</hostid> da rede 
+      local.</para>
 
-      <para>The <option>-redirect_address</option> syntax is as follows:</para>
+      <para>A sintaxe de <option>-redirect_address</option> &eacute; a
+      seguinte:</para>
 
-      <programlisting>-redirect_address localIP publicIP</programlisting>
+      <programlisting>-redirect_address IPlocal IPp&uacute;blico</programlisting>
 
 
       <informaltable frame="none">
 	<tgroup cols="2">
 	  <tbody>
 	    <row>
-	      <entry>localIP</entry>
-	      <entry>The internal IP address of the LAN client.</entry>
+	      <entry>IPlocal</entry>
+	      <entry>O endere&ccedil;o IP interno do cliente da rede local.</entry>
 	    </row>
 	    <row>
-	      <entry>publicIP</entry>
-	      <entry>The external IP address corresponding to the LAN client.</entry>
+	      <entry>IPp&uacute;blico</entry>
+	      <entry>O endere&ccedil;o IP externo correspondente ao cliente 
+	      da rede local.</entry>
 	    </row>
 	  </tbody>
 	</tgroup>
       </informaltable>
 
-      <para>In the example, this argument would read:</para>
+      <para>No exemplo, este argumento seria escrito:</para>
 
       <programlisting>-redirect_address 192.168.0.2 128.1.1.2
 -redirect_address 192.168.0.3 128.1.1.3</programlisting>
 
-      <para>Like <option>-redirect_port</option>, these arguments are also placed within
-	the <literal>natd_flags=""</literal> option of <filename>/etc/rc.conf</filename>.  With address
-	redirection, there is no need for port redirection since all data
-	received on a particular IP address is redirected.</para>
+      <para>Como <option>-redirect_port</option>, estes argumentos
+      tamb&eacute;m s&atilde;o inseridos na op&ccedil;&atilde;o <literal>natd_flags=""</literal> do
+      <filename>/etc/rc.conf</filename>.  Com redirecionamento de
+      endere&ccedil;o, n&atilde;o h&aacute; necessidade de redirecionamento de porta, uma
+      vez que todos os dados recebidos em um endere&ccedil;o IP em particular
+      s&atilde;o redirecionados.</para>
 
-      <para>The external IP addresses on the <application>natd</application> machine must be active and aliased
-	to the external interface.  Look at &man.rc.conf.5; to do so.</para>
+      <para>Os endere&ccedil;os IP externos na m&aacute;quina com 
+      <application>natd</application> precisam ser ativos como
+      secund&aacute;rios na interface externa.  Veja como fazer em
+      &man.rc.conf.5;.</para>
 
     </sect2>
   </sect1>
