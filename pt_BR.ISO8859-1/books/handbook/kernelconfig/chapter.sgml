@@ -79,22 +79,22 @@
     <para>Tradicionalmente, o &os; teve o que foi chamado de <literal>kernel</literal>
       <quote>monol&iacute;tico</quote>. Isto significa que o <literal>kernel</literal> era um
       grande programa, contendo uma lista fixa de dispositivos suportados, e se voc&ecirc; quisesse
-      alterar o comportamento do <literal>kernel</literal> ent&atilde;o seria necess&aacute;rio compilar um novo <literal>kernel</literal>,
+      alterar seu comportamento ent&atilde;o seria necess&aacute;rio compilar um novo <literal>kernel</literal>,
       e da&iacute; reiniciar seu computador com ele.</para>
 
     <para>Hoje, o &os; est&aacute; movendo-se rapidamente para um modelo onde muitas das funcionalidades do
-      <literal>kernel</literal> est&atilde;o contidas em m&oacute;dulos que s&atilde;o carregados e descarregados din&acirc;micamente do <literal>kernel</literal> conforme eles s&atilde;o necess&aacute;rios.
-      Isto permite que o <literal>kernel</literal> se adapte a um novo <foreignphrase>hardware</foreignphrase> subitamente
+      <literal>kernel</literal> est&atilde;o contidas em m&oacute;dulos que s&atilde;o carregados e descarregados din&acirc;micamente conforme eles s&atilde;o necess&aacute;rios.
+      Isto permite que o <literal>kernel</literal> imediatamente se adapte a um novo <foreignphrase>hardware</foreignphrase>
       tornando-o dispon&iacute;vel (tais como cart&otilde;es PCMCIA para <foreignphrase>laptop</foreignphrase>), ou a
       novas funcionalidades a serem inseridas no <literal>kernel</literal> que n&atilde;o eram
       necess&aacute;rias quando o ele foi originalmente compilado. Isso
       &eacute; conhecido como <literal>kernel</literal> modular. Coloquialmente eles s&atilde;o chamados KLDs.</para>
 
     <para>Apesar disto, ainda &eacute necess&aacute;rio carregar algumas configura&ccedil;&otilde;es est&aacute;ticas no <literal>kernel</literal>. Em alguns casos 
-      isto est&aacute; assim porque a funcionalidades est&atilde;o t&atilde;o amarradas ao <literal>kernel</literal> que elas n&atilde;o podem ser carregadas din&acirc;micamente. 
+      isto est&aacute; assim porque estas funcionalidades est&atilde;o t&atilde;o amarradas ao <literal>kernel</literal> que elas n&atilde;o podem ser carregadas din&acirc;micamente. 
       Em outros casos, isto pode simplesmente estar assim porque ningu&eacute;m ainda conseguiu tempo para escrever
 um m&oacute;dulo de 
-carga din&acirc;mico do <literal>kernel</literal> para essas funcionalidades.</para>
+carga din&acirc;mico do <literal>kernel</literal> para elas.</para>
 
     <para>Compilar um <literal>kernel</literal> personalizado &eacute; um dos rituais mais importantes que cada usu&aacute;rio de
       &unix; deve enfrentar. Este processo, embora consuma tempo, trar&aacute; muitos benef&iacute;cios para o seu sistema &os;.
@@ -179,23 +179,23 @@ organiza&ccedil;&atilde;o
 
     <para>Tradicionalmente, este nome tem todas letras em mai&uacute;sculas, se voc&ecirc;
       mant&eacute;m m&uacute;ltiplas m&aacute;quinas &os; com diferentes <foreignphrase>hardware</foreignphrase>,
-      &Eacute; uma boa id&eacute;ia nome&aacute;-lo prefixando o <foreignphrase>hostname</foreignphrase> da sua m&aacute;quina. Para a finalidade deste
+      &eacute; uma boa id&eacute;ia nome&aacute;-lo prefixando o <foreignphrase>hostname</foreignphrase> da sua m&aacute;quina. Para a finalidade deste
       exemplo, ser&aacute; usado o nome <filename>MYKERNEL</filename>.</para> 
 
     <tip>
-      <para>Guardar os arquivos de configura&ccedil;&atilde;o do seu <literal>kernel</literal> abaixo do directly
-	<filename>/usr/src</filename> pode ser uma m&aacute; id&eacute;ia. Se voc&ecirc; sentir problemas
-	para apenas ajustar delete o
-	<filename>/usr/src</filename> e comece novamente. Cinco segundos depois
-	que voc&ecirc; realizou que voc&ecirc; teve que deletar seu arquivo de configura&ccedil;&atilde;o de <literal>kernel</literal> personalizado. N&atilde;o 
-        edite 
+      <para>Guardar os arquivos de configura&ccedil;&atilde;o do seu <literal>kernel</literal> diretamente abaixo do
+	<filename>/usr/src</filename> pode ser uma m&aacute; id&eacute;ia. Se voc&ecirc; tiver problemas
+	poder&aacute; ser tentado a apenas apagar o
+	<filename>/usr/src</filename> e iniciar tudo novamente. Cinco segundos depois disto feito,
+	voc&ecirc; poder&aacute; perceber que removeu o seu arquivo de configura&ccedil;&atilde;o de <literal>kernel</literal> personalizado.
+        N&atilde;o edite 
         diretamente o arquivo <filename>GENERIC</filename>,
-	pois da pr&oacute;xima vez que voc&ecirc;s forem 
-	<link linkend="cutting-edge">atualizar seu c&oacute;digo da &aacute;rvore</link>, 
-	as suas antigas modifica&ccedil;&otilde;es do <literal>kernel</literal> ser&atilde;o perdidas.</para>
+	pois ele pode ser sobrescrito da pr&oacute;xima vez que voc&ecirc; for
+	<link linkend="cutting-edge">atualizar a &aacute;rvore do c&oacute;digo fonte</link>, 
+	as suas modifica&ccedil;&otilde;es do <literal>kernel</literal> ser&atilde;o perdidas.</para>
 
-      <para>Voc&ecirc; querer manter em outro local seu arquivo de configura&ccedil;&atilde;o do <literal>kernel</literal>, e ent&atilde;o
-	criar um link simb&oacute;lico do arquivo para o diret&oacute;rio <filename>i386</filename>.</para>
+      <para>Voc&ecirc; pode querer manter em outro local seu arquivo de configura&ccedil;&atilde;o do <literal>kernel</literal>, e ent&atilde;o
+	criar um link simb&oacute;lico deste arquivo para o diret&oacute;rio <filename>i386</filename>.</para>
 
       <para>Por exemplo:</para>
 
@@ -206,12 +206,12 @@ organiza&ccedil;&atilde;o
     </tip>
 
     <note>
-      <para>Voc&ecirc; deve executar todos estes comandos sobre
-	a conta do <username>root</username> sen&atilde;o voc&ecirc; dar&aacute; erros
+      <para>Voc&ecirc; dever&aacute; executar todos estes comandos sob
+	a conta do <username>root</username> sen&atilde;o ocorrer&atilde;o erros de
         <errortype>permiss&atilde;o negada</errortype>.</para>
     </note>
 
-    <para>Agora, edite <filename>MYKERNEL</filename> com seu editor de texto favorito. Se voc&ecirc; for come&ccedil;ar a configurar, 
+    <para>Agora, edite o <filename>MYKERNEL</filename> com seu editor de texto favorito. Se voc&ecirc; for come&ccedil;ar a configurar, 
     provavelmente somente o 
     <application>vi</application> esteja dispon&iacute;vel, o qual &eacute; muito complexo para
       explicar aqui, mas &eacute; coberto em muitos livros de <link
