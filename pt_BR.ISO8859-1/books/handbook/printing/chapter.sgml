@@ -28,68 +28,88 @@
 
   <sect1 id="printing-synopsis">
     <title>Sinopse</title>
-    <indexterm><primary>Sistema de <foreignphrase>spool</foreignphrase> LPD </primary></indexterm>
+    <indexterm>
+		<primary>
+			Sistema de <foreignphrase>spool</foreignphrase> LPD 
+		</primary></indexterm>
     <indexterm><primary>Impress&atilde;o</primary></indexterm>
 
-    <para>
-	O FreeBSD pode ser usado para imprimir em uma grande variedade de impressoras, deste as antigas impressoras matricias at&eacute; as modernas laser, permitindo produzir trabalhos de alta qualidade em seus aplicativos preferido.
-    </para>
+	<para>
+		O FreeBSD pode ser usado para imprimir em uma grande variedade de 
+	impressoras, deste as antigas impressoras matricias at&eacute; as 
+	modernas laser, permitindo produzir trabalhos de alta qualidade em 
+	seus aplicativos preferido.
+   </para>
 
-    <para>
-	O FreeBSD pode tamb&eacute;m ser utilizado como servidor fr impress&atilde;o em uma rede; Com isso, o FreeBSD pode receber trabalhos de impress&atilde;o de uma grande variedade de outros computadores, inclusive de outros FreeBSD, &windows; e &macos;, FreeBSD assegura que apenas um pedido ser&aacute; impresso por vez, e mant&eacute;m a estat&iacute;sticas de cada usu&aacute;rio e de cada m&aacute;quina que fez uso do recurso de impress&atilde;o, produzindo p&aacute;ginas de <quote>banner</quote>, mostrando de quem &eacute; a impress&atilde;o na impressora.
-    </para>
+   <para>
+		O FreeBSD pode tamb&eacute;m ser utilizado como servidor de 
+	impress&atilde;o em rede; com isso, o FreeBSD pode receber trabalhos 
+	de impress&atilde;o de uma grande variedade de outros computadores, 
+	inclusive de outros FreeBSD, &windows; e &macos;, o FreeBSD assegura 
+	que apenas um pedido ser&aacute; impresso por vez, e mant&eacute;m a 
+	estat&iacute;sticas de cada usu&aacute;rio e de cada m&aacute;quina 
+	que fez uso do recurso de impress&atilde;o, produzindo p&aacute;ginas 
+	de <quote>rosto</quote>, mostrando de quem &eacute; a impress&atilde;o 
+	na impressora.
+   </para>
 
-    <para>
-	Ap&oacute;s a leitura deste cap&iacute;tulo, voc&ecirc; estar&aacute; sabendo:
-    </para>
+   <para>
+		Ap&oacute;s a leitura deste cap&iacute;tulo, voc&ecirc; estar&aacute; 
+	sabendo:
+   </para>
 
     <itemizedlist>
       <listitem>
-	<para>
+			<para>
 		Como configurar o FreeBSD como um servidor de impress&atilde;o
-	</para>
+			</para>
       </listitem>
 
       <listitem>
-	<para>
-		Como Instalar filtros de impress&atilde;o, para gerenciar trabalhos de impress&atilde;o especiais diferentemente, incluindo conversores de formatos para o formato padr&atilde;o da sua impressora.
-	</para>
+			<para>
+		Como instalar filtros de impress&atilde;o, para gerenciar trabalhos 
+	de impress&atilde;o especiais diferentemente, incluindo conversores de 
+	formatos para o formato padr&atilde;o da sua impressora.
+			</para>
       </listitem>
 
       <listitem>
-	<para>
-		Como habilitar cabe&ccedil;alhos ou p&aacute;gina de banner &agrave; sua impress&atilde;o.
-	</para>
+			<para>
+		Como habilitar cabe&ccedil;alhos ou p&aacute;gina de rosto &agrave; 
+	sua impress&atilde;o.
+			</para>
       </listitem>
 
       <listitem>
-	<para>
+			<para>
 	Como imprimir em impressoras conectadas em outros computadores.
-	</para>
+			</para>
       </listitem>
 
       <listitem>
-	<para>
+			<para>
 	Como imprimir em impressoras conectadas diretamente na rede
-	</para>
+			</para>
       </listitem>
 
       <listitem>
-	<para>
-	Como controlar restri&ccedil;&otilde;es para impressora, incluindo limita&ccedil;&atilde;o de tamanho dos trabalhos de impress&atilde;o e impedindo certos usu&aacute;rios de utilizarem a(s) impressora(s).
-	</para>
+			<para>
+		Como controlar restri&ccedil;&otilde;es para impressora, incluindo 
+	limita&ccedil;&atilde;o de tamanho dos trabalhos de impress&atilde;o e 
+	impedindo certos usu&aacute;rios de utilizarem a(s) impressora(s).
+			</para>
       </listitem>
 
       <listitem>
-	<para>
-	Como mater estat&iacute;sticas de impress&atilde; e de usu&aacute;rios
-	</para>
+			<para>
+	Como manter estat&iacute;sticas de impress&atilde; e de usu&aacute;rios
+			</para>
       </listitem>
 
       <listitem>
-	<para>
+			<para>
 	Como resolver problemas de impress&atilde;o
-	</para>
+			</para>
       </listitem>
     </itemizedlist>
 
@@ -99,10 +119,10 @@
 
     <itemizedlist>
       <listitem>
-	<para>
+			<para>
 	Saber como confingurar e instalar um novo kernel
 	  (<xref linkend="kernelconfig">).
-	</para>
+			</para>
       </listitem>
     </itemizedlist>
   </sect1>
@@ -112,21 +132,22 @@
 
     <para>
 		Para usar impressoras no FreeBSD, voc&eacute; ir&aacute; precisar 
-	configurar-lo para trabalhar com o sistema de impress&atilde;o da 
+	configura-lo para trabalhar com o sistema de impress&atilde;o da 
 	Barkeley, tamb&eacute; conhecido como sistema de 
 	<foreignphrase>spool</foreignphrase> <application>LPD</application>.
 	Ele tamb&eacute;m &eacute; o sistema padr&atilde;o de controle do FreeBSD.  
-	Esse cap&iacute;tulo introduz ao sistema de spooling 
-	<application>LPD</application>, frequentemente chamado de 
-	<application>LPD</application>, e ir&aacute; guia-lo atrav&eacute;s de 
-	sua configura&ccedil;&atilde;o.
+	Esse cap&iacute;tulo introduz ao sistema de 
+	<foreignphrase>spooling</foreignphrase> <application>LPD</application>, 
+	frequentemente chamado de <application>LPD</application>, e ir&aacute; 
+	guia-lo atrav&eacute;s de sua configura&ccedil;&atilde;o.
 		</para>
 
 		<para>
 			Se voc&ecirc; j&aacute; est&aacute; familiarizado com o
 		<application>LPD</application> ou com outro sistema de impress&atilde;o, 
-		voc&ecirc; poder&aacute; pular esta se&ccedil;&atilde;o <link
-      linkend="printing-intro-setup">Configurando o sistema de spooling
+		voc&ecirc; poder&aacute; pular esta se&ccedil;&atilde;o 
+		<link linkend="printing-intro-setup">
+			Configurando o sistema de <foreignphrase>spooling</foreignphrase>
       </link>.
 		</para>
 
@@ -138,17 +159,17 @@
 
     <itemizedlist>
       <listitem>
-	<para>
-	Ele controla o acesso as impressoras locais e impressoras
+			<para>
+		Ele controla o acesso as impressoras locais e impressoras
 	remotas em outras m&aacute;quinas e impressoras conectadas diretamente
 	&agrave; rede.
-	</para>
+			</para>
       </listitem>
 
       <indexterm><primary>Trabalho de Impress&atilde;o</primary></indexterm>
       <listitem>
 	<para>
-		Ele abilita os usu&aacute;rios a enviar arquivos para serem 
+		Ele habilita os usu&aacute;rios a enviar arquivos para serem 
 	impressos; Esses envios s&atilde;o chamados de 
 	<emphasis><foreignphrase>jobs</foreignphrase></emphasis> ( trabalhos de
 	impress&atilde;o ).
@@ -156,16 +177,16 @@
       </listitem>
 
       <listitem>
-	<para>
-		Ele permite v&aacute;rios usu&aacute;rios acessando uma &uacute;nica
+			<para>
+		Ele permite que v&aacute;rios usu&aacute;rios acessem uma &uacute;nica
 	impressora ao mesmo tempo, mantendo uma <emphasis>queue</emphasis> 
 	(fila de impress&atilde;o) para cada impressora.
-	</para>
+			</para>
       </listitem>
 
       <listitem>
-	<para>
-		Ele pode imprimir <emphasis>cabe&ccedil;alhos</emphasis> (tamb&eacute;m
+			<para>
+		Ele pode imprimir <emphasis>folhas de rosto</emphasis> (tamb&eacute;m
 		conechido como <emphasis>banner</emphasis> ou 
 		<emphasis>burst</emphasis> ent&atilde;o os usu&aacute;rios
 		podem com facilidade encontrar seus trabalhos de impress&atilde;o
@@ -197,14 +218,16 @@
       </listitem>
 
       <listitem>
-	<para>Ele pode gerenciar o uso da impressora.
+	<para>
+		Ele pode gerenciar o uso da impressora.
 	</para>
       </listitem>
     </itemizedlist>
 
-    <para>Atrav&eacute;s do arquivo de configura&ccedil;&atilde;o
+	<para>
+		Atrav&eacute;s do arquivo de configura&ccedil;&atilde;o
       (<filename>/etc/printcap</filename>), e por providenciar
-	programas especiais de filtro, voc&ecirc; pode abilitar o
+	programas especiais de filtro, voc&ecirc; pode habilitar o
 	sistema <application>LPD</application> para fazer tudo ou
 	alguma parte do conjunto das fun&ccedil;&atilde;o de uma grande 
 	variedade de impressoras.
@@ -218,12 +241,11 @@
 	voc&ecirc; deve se surpreender. 
 	Porque voc&ecirc; deveria se preocupar com o 
 	<foreignphrase>spooler</foreignphrase> quando voc&eacute; n&atilde;o 
-	necessita de controle de acesso, cabe&ccedil;alho de p&aacute;ginas
-	ou controle de impress&atilde;o.  Mesmo que fosse possivel habilitar
+	necessita de controle de acesso, p&aacute;ginas de cabe&ccedil;alho
+	ou controle de impress&atilde;o.  Mesmo que fosse possivel habilitar 
 	o acesso direto a impressora, voc&ecirc; dever&aacute; usar o 
-	<foreignphrase>spooler</foreignphrase>
-	de qualquer maneira.
-	</para>
+	spooler de qualquer maneira.  Veja algumas vantagens:
+		</para>
 
       <itemizedlist>
 	<listitem>
@@ -249,10 +271,10 @@
 	<listitem>
 	  <para>
 		Muitos programas gratuitos e comercias preveem a impress&atilde;o 
-	    atravatraveseacute;s da funcionalidade de conversar com o <foreignphrase>spooler</foreignphrase> do seu
-	    sistema.  Pela configura&ccedil;&atilde;o do sistema de <foreignphrase>spooler</foreignphrase>,
-	    voc&ecirc; ir&aacute; mais facilmente suportar outros programas 
-	    que voc&ecirc; poder&aacute; adcionar ou j&aacute; ter.
+		atrav&eacute;s da funcionalidade de conversar com o spooler do seu
+		sistema.  Pela configura&ccedil;&atilde;o do sistema de spooler,
+		voc&ecirc; ir&aacute; mais facilmente suportar outros programas 
+		que voc&ecirc; poder&aacute; adcionar ou j&aacute; ter.
 	    </para>
 	</listitem>
       </itemizedlist>
@@ -262,10 +284,11 @@
   <sect1 id="printing-intro-setup">
     <title>Configura&ccedil;&atilde;o B&aacute;sica</title>
 
-    <para>Para usar as impressoras com o  sistema <application>LPD</application>       de spooling, voc&ecirc; ir&aacute; precisar de configurar
-	tanto a impressora quanto o programa  
-      <application>LPD</application>.  Esse documento descreve dois n&iacute;
-	de configura&ccedil;&atilde;:
+    <para>
+		Para usar as impressoras com o sistema <application>LPD</application>
+	de spooling, voc&ecirc; ir&aacute; precisar de configurar tanto a 
+	impressora quanto o programa <application>LPD</application>.  Esse 
+	documento descreve dois n&iacute;veis de configura&ccedil;&atilde;o:
 
       </para>
     <itemizedlist>
@@ -280,12 +303,13 @@
       </listitem>
 
       <listitem>
-	<para>Veja a se&ccedil;&atilde;o <link linkend="printing-advanced">
+	<para>
+		Veja a se&ccedil;&atilde;o <link linkend="printing-advanced">
 	Configura&ccedil;&atilde;o Avan&ccedil;ada de Impressora
 	  </link> para encontrar como imprimir uma variedade de formatos
 	especiais de arquivo, para imprimir cabe&ccedil;alhos nas p&aacute;ginas
-	para imprimir atravatraveseacute;s da rede, para controlar o acesso &agrave; 
-	impressoras, e fazer o balan&ccedil;o de utiliza&ccedil;&atilde;o
+	para imprimir atrav&eacute;s da rede, para controlar o acesso &agrave;s 
+	impressoras, e fazer o balan&ccedil;o da utiliza&ccedil;&atilde;o
 	da impressora.
 	  </para>
       </listitem>
@@ -294,21 +318,22 @@
     <sect2 id="printing-simple">
     <title>Configura&ccedil;&atilde;o B&aacute;sica</title>
 
-      <para>Essa se&ccedil;&atilde;o mostra como configurar a impressora
-	e o programa <application>LPD</application> para usar a
-	impressora.
-	Ele ir&aacute; ensinar o b&aacute;sico:
+		<para>
+			Essa se&ccedil;&atilde;o mostra como configurar a impressora
+	e o programa <application>LPD</application> para usar a impressora.
+	Ela ir&aacute; ensinar o b&aacute;sico:
 	</para>
 
       <itemizedlist>
 	<listitem>
-	  <para>Se&ccedil;&atilde;o 
-		<link linkend="printing-hardware">
+	  <para>
+			Se&ccedil;&atilde;o <link linkend="printing-hardware">
 			Configura&ccedil;&atilde;o de Hardware
 	    	</link> 
+		</para>
 		<para>
-		D&aacute; algumas dicas na conex&atilde;o da impressora
-	com a porta do seu computador.
+		D&aacute; algumas dicas na conex&atilde;o da impressora com a 
+	porta do seu computador.
 	    </para>
 	</listitem>
 
@@ -318,7 +343,7 @@
 	Configura&ccedil;&atilde;o de Programa</link> mostra como configurar 
 	o arquivo de configura&ccedil;&atilde;o 
 	(<filename>/etc/printcap</filename>) do <application>LPD</application> 
-	<foreignphrase>spooler</foreignphrase> 
+	spooler. 
 		</para>
 	</listitem>
       </itemizedlist>
@@ -329,18 +354,18 @@
 	de uma porta paralela ou serial, veja
 	<link linkend="printing-advanced-network-net-if">
 	Impressoras com Interfaces de Dados Atrav&eacute;s da Rede
-	</link>.</para>
+	</link>.
+		</para>
 
       <para>
 	Apesar desta se&ccedil;&atilde;o ser chamada de
 	<quote>Configura&ccedil;&atilde;o Simples de Impressora
 	</quote>, ela &eacute; um pouco complexa.
 	Fazer com que a impressora funcione com seu computador e o
-	 <application>LPD</application> <foreignphrase>spooler</foreignphrase>
-	&eacute; uma parte dificil da configura&ccedil;&atilde;o.
-	As op&ccedil;&otilde;s avan&ccedil;adas como cabe&ccedil;alhos de 
-	p&aacute;ginas e gerenciamento s&atilde;o facilmente  configu&aacute;
-	veis para funcionar na impressora.
+	 <application>LPD</application> spooler &eacute; uma parte dificil da 
+	configura&ccedil;&atilde;o.  As op&ccedil;&otilde;s avan&ccedil;adas 
+	como cabe&ccedil;alhos de p&aacute;ginas e gerenciamento s&atilde;o 
+	facilmente configur&aacute;veis para funcionar na impressora.
 	</para> 
 
       <sect3 id="printing-hardware">
@@ -368,7 +393,7 @@
 
 	<para>
 	A grande maioria de impressoras que voc&egrave; pode ter
-	para usar em um PC possui suporte a pelo menos uma das interfaces
+	para usar em um PC, possui suporte a pelo menos uma das interfaces
 	abaixo:
 	</para>
 
@@ -379,10 +404,10 @@
       </indexterm>
 	    <listitem>
 	      <para>
-		Interface <emphasis>serial</emphasis> usa a porta serial
+		Interface <emphasis>serial</emphasis>: usa a porta serial
 		do seu computador para enviar dados para a impressora.  
 		A interface serial s&atilde;o encontradas comumente em 
-		computadores industriais e os cabos estao dispon&iacute;veis e 
+		computadores industriais e os cabos est&atilde;o dispon&iacute;veis e 
 		tamb&eacute;m s&atilde;o de f&aacute;cil 
 		constru&ccedil;&atilde;o.  Interfaces serial algumas vezes 
 		necessitam de cabos especiais e normalmente requer que 
@@ -397,7 +422,7 @@
       </indexterm>
 	    <listitem>
 	      <para>
-		Interface <emphasis>paralela</emphasis> usa a porta paralela
+		Interface <emphasis>paralela</emphasis>: usa a porta paralela
 		do seu computador para enviar dados para a impressora.
 		Interface paralela &eacute; mais comum em PC.  Os cabos 
 		s&atilde;o disponibilizados mais facilmente, mas s&atilde;o 
@@ -408,7 +433,7 @@
 	      </para>
 	      <indexterm>
 	        <primary>centronics</primary>
-		<see>parallel printers</see>
+		<see>Impressoras Paralelas</see>
 	      </indexterm>
 	      <para>
 		Interfaces paralela s&atilde;o normalmente conhecidas como
@@ -452,11 +477,11 @@
 		com uma impressora &postscript; requer que a 
 		cominuca&ccedil;&atilde;o seja bi-direcional: voc&ecirc; 
 		pergunta a impressora sobre a contagem de p&aacute;ginas
-		(quantas p&aacute;gians ela j&aacute; imprimiu durante
+		(quantas p&aacute;ginas ela j&aacute; imprimiu durante
 		seu uso, vida &uacute;til), ent&atilde;o envia o 
 		<foreignphrase>job</foreignphrase> do usu&aacute;rio
 		faz novamente a pergunta &agrave; impressora sobre
-		o total de p&aacute;gians impressas e ent&atilde;o faz
+		o total de p&aacute;ginas impressas e ent&atilde;o faz
 		a subtra&ccedil;ao dos valores para saber o valor exato
 		de p&aacute;ginas impressa pelo usu&aacute;rio.
 	    </para>
@@ -1768,7 +1793,7 @@ bamboo|ps|PS|S|panasonic|Panasonic KX-P4455 PostScript v51.4:\
 	  <title>Ligando o <application>LPD</application></title>
 
 	<para>
-		&man.lpd.8; Ele &eacute; executado atravatraveseacute;s do arquivo
+		&man.lpd.8; Ele &eacute; executado atrav&eacute;s do arquivo
 	<filename>/etc/rc</filename>, controlado pela vari&aacute;vel
 	<literal>lpd_enable</literal>.  O valor padr&atilde;o para esta
 	vari&aacute;vel &eacute; <literal>NO</literal>.  Se voc&ecirc; ainda
@@ -1875,7 +1900,7 @@ $%&amp;'()*+,-./01234567
 	<para>
 		Essa se&ccedil;&atilde;o descreve filtros para formatos
 	especiais de impress&atilde;o de arquivos, p&aacute;ginas de 
-	cabe&ccedil;a&ccedil;lho, impress&atilde;o atravatraveseacute;s da rede, e 
+	cabe&ccedil;a&ccedil;lho, impress&atilde;o atrav&eacute;s da rede, e 
 	restringir acesso ao uso da impressora.
 	</para>
 
@@ -1887,7 +1912,7 @@ $%&amp;'()*+,-./01234567
       </indexterm>
       
 	<para>
-		Atraves do <application>LPD</application> podemos acessar
+		Atrav&eacute;s application>LPD</application> podemos acessar
 	o protocolos de rede, filas, acesso de controle, e outros aspectos
 	da impres&atilde;o, a maioria dos trabalhos <emphasis>reais</emphasis>
         ocorre nos <emphasis>filters</emphasis>.  Os filtros s&atilde;o
@@ -2612,15 +2637,16 @@ exit 2</programlisting>
                 
 			<para>
 				Nos informamos o <application>LPD</application> para converter 
-			o arquivo DVI atravatraveseacute;s da op&ccedil;&atilde;o <option>-d</option>. 
-				Veja a se&ccedil;&atilde;o <link
-			linkend="printing-lpr-options-format">
+			o arquivo DVI atrav&eacute;s da op&ccedil;&atilde;o 
+			<option>-d</option>. Veja a se&ccedil;&atilde;o 
+			<link linkend="printing-lpr-options-format">
 			Op&ccedil;&otilde;es de Formata&ccedil;&atilde;o e Convers&atilde;o
-			</link> mostra uma listar de op&ccedil;&otilde;es de convers&atilde;o
+			</link> 
+			mostra uma listar de op&ccedil;&otilde;es de convers&atilde;o
 			</para>
               
 			<para>
-				Para Cada op&ccedil;&atilde;o de convers&atilde;o que voc&ecirc;
+				Para cada op&ccedil;&atilde;o de convers&atilde;o que voc&ecirc;
 			deseja que sua impressora suporte, deve instalar um 
 			<emphasis>Filtro Conversor</emphasis> e especificar o diret&oacute;rio
 			no arquivo <filename>/etc/printcap</filename>.  Um filtro conversor
@@ -2641,10 +2667,10 @@ exit 2</programlisting>
 			<para>
 				Voc&ecirc; deve instalar o filtro conversor que voc&ecirc; espera
 			utilizar.  Se voc&ecirc; imprime uma grande quantidade de dados
-			no formato DVI, ent&atilde;o voc&ecirc; deve term um filtro para 
-			converte-lo.  Se voc&ecirc; deseja imprimir saidas atrav&eacute;s de 
-			troff, ent&atilde;o provavelmente voc&ecirc; ter&aacute; um filtro
-			troff.
+			no formato DVI, ent&atilde;o voc&ecirc; deve ter um filtro para 
+			converte-lo.  Se voc&ecirc; deseja imprimir sa&iacute;das 
+			atrav&eacute;s de troff, ent&atilde;o provavelmente voc&ecirc; 
+			ter&aacute; um filtro troff.
 			</para>
               
 			<para>
@@ -2733,7 +2759,7 @@ exit 2</programlisting>
 			FORTRAN e plot s&atilde;o provavelmente obsoleto.  No seu 
 			s&iacute;tio, voc&ecirc; pode dar novas op&ccedil;&otilde;es de 
 			formata&ccedil;&atilde;o para esses ou qualquer outra 
-			formata&ccedil;&atilde;o apenas instalando novos filtros ajustados
+			op&ccedil;&atilde;o apenas instalando novos filtros ajustados
 			para o seu uso.  Por exemplo, suponhamos que seja necess&aacute;rio
 			imprimir diretamente arquivos Printerleaf ( arquivos vindos do
 			do programa de pubica&ccedil;&atilde;o Interleaf ), mas voc&ecirc; 
@@ -2763,7 +2789,7 @@ exit 2</programlisting>
 			</para>
               
 			<para>
-				Para habilitar dum filtro conversor, especifique o diret&oacute;rio
+				Para habilitar um filtro conversor, especifique o diret&oacute;rio
 			no qual ele se encontra, na op&ccedil;&atilde;o espec&iacute;fica
 			do arquivo <filename>/etc/printcap</filename>.
 			</para>
@@ -3285,7 +3311,7 @@ exit 0</programlisting>
 		<para>
 			Se voc&ecirc; tiver <emphasis>muitos</emphasis> usu&aacute;rios,
 		todos eles usuando v&aacute;rias impressoras, voc&ecirc; provavelmente
-		dever&aacute; considerar as <emphasis>p&aacute;gians de 
+		dever&aacute; considerar as <emphasis>p&aacute;ginas de 
 		cabe&ccedil;alho</emphasis> como um mal necess&aacute;rio.
 		</para>
           
@@ -3382,7 +3408,7 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 		impressora <literal>teak</literal>, eles ter&atilde;o uma 
 		p&aacute;gina de cabe&ccedil;alho para cada job impresso.  Se os 
 		usu&aacute;rios querem perder tempo procurando os seus trabalhos de
-		impressora, eles podem suprimir essas p&aacute;gians com o comando
+		impressora, eles podem suprimir essas p&aacute;ginas com o comando
 		<command>lpr -h</command>; veja a se&ccedil;&atilde;o <link
             linkend="printing-lpr-options-misc">
 			Op&ccedil;&atilde;oes de P&aacute;ginas de Cabe&ccedil;alho
@@ -3501,7 +3527,7 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 			<para>
 				Usando o <application>LPD</application> para imprimir as 
 			p&aacute;ginas de cabe&ccedil;alho, leva-nos a um paradigma,
-			nos devemos contar as p&aacute;gians de cabe&ccedil;alho para fazer
+			nos devemos contar as p&aacute;ginas de cabe&ccedil;alho para fazer
 			as estat&iacute;stica, ou devemos 
           <emphasis>deix-la de fora</emphasis>.
 			</para>
@@ -3575,7 +3601,7 @@ teak|hp|laserjet|Hewlett Packard LaserJet 3Si:\
 			<emphasis>inteligente</emphasis>.  Normalmente um filtro de
 			sa&iacute;da n&atilde;o precisa de muita coisa a al&eacute;m de 
 			inicializar a impressora ou fazer algumas convers&otilde;es de 
-			caracteres.  Ele der&aacute; que se adaptar para p&aacute;gians de 
+			caracteres.  Ele der&aacute; que se adaptar para p&aacute;ginas de 
 			cabe&ccedil;alho ou para trabalhos de impress&atilde;o em texto 
 			puro ( quando ele n&atilde;o for um filtro de texto (entrada)).  Mas, 
 			se existir um filtro de texto para trabalhos de impress&atilde;o
@@ -4662,7 +4688,7 @@ madrigal.fishbaum.de</programlisting>
 				<emphasis>Contabilidade Peri&oacute;dica</emphasis> &eacute;
 	feita pela maneira mais simples.  A toda hora &eacute; impresso algo, e
 	o filtro armazena o usu&aacute;rio, a m&aacute;quina, e o n&uacute;mero de
-	p&aacute;gians impressas no arquivo de contabilidade.  A cada mes,
+	p&aacute;ginas impressas no arquivo de contabilidade.  A cada mes,
 	semestre, ano ou a qualquer per&oacute;do que voc&ecirc; preferir,
 	voc&ecirc; pode coletar a contagem de p&aacute;ginas, atrav&eacute;s
 	do arquivo de contabilidade para v&aacute;rias impressoras.  Ent&atilde;o
@@ -4891,7 +4917,7 @@ total                     337.00  154   $  6.74</screen>
       
       <sect3>
 			<title>
-				Como Contar P&aacute;gians Impressas?
+				Como Contar P&aacute;ginas Impressas?
 			</title>
 
         <para>In order to perform even remotely accurate accounting, you need
